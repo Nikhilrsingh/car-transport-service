@@ -1,0 +1,138 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+/* Header Styling */
+header {
+  position: relative;
+  height: 60px; /* Adjust height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:10px;
+  background-color: #f0f0f0; /* Optional: Background color */
+}
+
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background: #ffffff00;
+  color: rgb(10, 10, 10);
+}
+
+/* Logo Container */
+.logo-container {
+  width: 200px; /* Adjust width as needed */
+}
+
+.left-logo {
+  padding-left: 300px;
+  width: 90px;
+  position: absolute;
+  left: 20px; /* Adjust spacing */
+  mix-blend-mode: color-burn;
+}
+
+.right-logo {
+  width: 130px;
+  position: absolute;
+  right: 290px; /* Adjust spacing */
+  mix-blend-mode: color-burn;
+}
+
+.logo-container img {
+  width: 100%; /* Make the logo fit the container */
+  height: auto; /* Keep the aspect ratio */
+}
+
+header nav ul {
+  display: flex;
+  gap:15px;
+  justify-content:center;
+  align-items: center;
+  list-style: none;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #ff5733;
+}
+
+/* Hero Section */
+/* .hero {
+
+} */
+
+.hero h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.hero .btn {
+  background: #ff5733;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.hero .btn:hover {
+  background: #e14e24;
+}
+
+/* Section Styles */
+section {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+#about, #services, #contact {
+  background: #f9f9f9;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+.service-box {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  display: inline-block;
+}
+
+.Contact-box {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  display: bottom;
+}
