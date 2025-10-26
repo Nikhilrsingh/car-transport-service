@@ -1,4 +1,4 @@
-# Car Transport Service 🚗
+> 🚘 **Fast • Safe • Reliable Car Transport Services Across India**�
 
 [![Open Source Love](https://img.shields.io/badge/Contributions-Welcome-brightgreen)](https://github.com/your-username/car-transport-website)  
 [![GitHub issues](https://img.shields.io/github/issues/your-username/car-transport-service)](https://github.com/your-username/car-transport-website/issues)  
@@ -19,6 +19,13 @@ Currently, the website has basic structure and design. Contributors are encourag
 - Adding additional pages (Services, About, Contact, etc.)  
 - Optimizing images, fonts, and other assets  
 
+## 📑 Table of Contents
+- [About the Project](#about-the-project)
+- [Tech Stack](#-tech-stack)
+- [Features](#features)
+- [Roadmap](#️-project-roadmap)
+- [How to Contribute](#how-to-contribute)
+- [Contact](#contact)
 ---
 
 ## 📁 Project Structure
@@ -80,6 +87,14 @@ git push origin feature-name
 
 ---
 
+### ✅ Contribution Guidelines
+- Follow clean & readable code practices  
+- Write proper commit messages  
+- Add comments if required  
+- Respect Code of Conduct
+
+> ⭐ Don’t forget to **star** the repo if you like this project!
+
 ## 📝 Issues
 
 If you find bugs or have ideas for new features, please open an **issue** on GitHub.  
@@ -87,12 +102,12 @@ Use labels like `bug`, `enhancement`, or `help wanted` to help contributors.
 
 ---
 
-## ⚡ Technology Stack
+## 🛠 Tech Stack
 
-- **HTML5** – Markup language  
-- **CSS3** – Styling and layout  
-- **JavaScript (Vanilla)** – Interactivity  
-- Optional: **Bootstrap / jQuery** for additional features  
+- Markup language ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)    
+- ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) Styling and layout  
+- Interactivity ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)   
+- Optional: **Bootstrap / jQuery / Api** for additional features
 
 ---
 
@@ -108,3 +123,26 @@ Contributions are always welcome!
 Feel free to **fork, create issues, submit PRs**, or even suggest ideas.  
 
 > Let’s build this website together and make it the best Car Transport website possible! 🚗💨
+
+Thanks to all wonderful contributors ❤️
+
+<!-- <a href="https://github.com/Nikhilrsingh/car-transport-service/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Nikhilrsingh/car-transport-service" />
+</a> -->
+
+> ## 🗺️ Project Roadmap
+
+✅ Initial UI & Page Structure  
+✅ Basic Navigation  
+✅ Service Information Pages  
+
+🚧 Coming Soon:
+- ✅ Mobile Responsive Design
+- ✅ Contact & Booking Form
+- ✅ Google Maps Pickup & Drop Integration
+- ✅ Smooth Scroll & Basic Animations
+- ✅ Customer Testimonials Section
+- ✅ Footer Redesign
+- ✅ Theme Optimization & Accessibility
+
+✨ Open for Suggestions!
