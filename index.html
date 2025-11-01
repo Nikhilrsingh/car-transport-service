@@ -25,7 +25,7 @@
           <li><a href="about.html">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="contact.html">Contact</a></li>
           <li><a href="#enquiry">Enquiry</a></li>
           <li><a href="#blog">Blog</a></li>
           <li><a href="#login" class="login-link">Login</a></li>
@@ -325,22 +325,136 @@
         });
     </script>
 
-    <!-- Contact Section -->
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <div class="Contact-box">
-        <h3>Phone Number</h3>
-        <p>xxxxxxxxxx, xxxxxxxxxx</p>
-      </div>
-      <div class="Contact-box">
-        <h3>Email</h3>
-        <p>xxxxxxxxxx@gmail.com</p>
-      </div>
-      <div class="Contact-box">
-        <h3>Address</h3>
-        <p>NAGPUR</p>
-      </div>
+       <!-- Contact CTA Section -->
+    <section class="contact-cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Have Any Questions About Vehicle Transport?</h2>
+                    <p>Our expert team is here to help you with all your car transportation needs. Get instant quotes, schedule pickups, or ask any questions.</p>
+                    <div class="cta-features">
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>24/7 Customer Support</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-truck"></i>
+                            <span>Instant Quote</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Insurance Covered</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta-form-box">
+                    <div class="form-header">
+                        <h3>Get In Touch</h3>
+                        <p>Quick response guaranteed</p>
+                    </div>
+                    <form class="contact-form" id="contactForm">
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <select required>
+                                <option value="">Select Vehicle Type</option>
+                                <option value="hatchback">Hatchback</option>
+                                <option value="sedan">Sedan</option>
+                                <option value="suv">SUV</option>
+                                <option value="luxury">Luxury Car</option>
+                                <option value="bike">Bike</option>
+                                <option value="commercial">Commercial Vehicle</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Get Free Quote</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                    <div class="form-footer">
+                        <p>Or contact us directly</p>
+                        <a href="contact.html" class="contact-link">
+                            <i class="fas fa-headset"></i>
+                            <span>Visit Contact Page</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+
+     <script>
+        // Contact Form Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(contactForm);
+                const name = contactForm.querySelector('input[type="text"]').value;
+                const phone = contactForm.querySelector('input[type="tel"]').value;
+                const email = contactForm.querySelector('input[type="email"]').value;
+                const vehicleType = contactForm.querySelector('select').value;
+                
+                // Simulate form submission
+                const submitBtn = contactForm.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Show success message
+                    alert(`Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`);
+                    
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            });
+
+            // Add input animations
+            const inputs = document.querySelectorAll('.input-group input, .input-group select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+
+            // Phone number formatting
+            const phoneInput = contactForm.querySelector('input[type="tel"]');
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    value = value.match(/.{1,5}/g).join(' ');
+                }
+                e.target.value = value;
+            });
+        });
+    </script>
 
     <!-- Footer Section -->
     <footer class="footer">
