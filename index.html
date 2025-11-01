@@ -147,6 +147,14 @@
                             <span>24/7 Customer Support<br>Emergency Services Available</span>
                         </li>
                     </ul>
+
+                    <div class="newsletter-form">
+                        <p>Subscribe for updates & offers</p>
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Enter your email">
+                            <button type="submit">Subscribe</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,6 +206,22 @@
                 top: 0,
                 behavior: 'smooth'
             });
+        });
+
+          // Newsletter Form Submission
+        const newsletterForm = document.querySelector('.newsletter-input');
+        const emailInput = newsletterForm.querySelector('input');
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = emailInput.value.trim();
+            
+            if (email) {
+                alert(`Thank you for subscribing with: ${email}`);
+                emailInput.value = '';
+            } else {
+                alert('Please enter a valid email address');
+            }
         });
 
     </script>
