@@ -1,97 +1,143 @@
 @font-face {
-  font-family: 'Poppins';
-  src: url('../assets/fonts/Poppins-Regular.woff2') format('woff2'),
-       url('../assets/fonts/Poppins-Regular.woff') format('woff');
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
+    url("../assets/fonts/Poppins-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('../assets/fonts/Poppins-Bold.woff2') format('woff2'),
-       url('../assets/fonts/Poppins-Bold.woff') format('woff');
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Bold.woff2") format("woff2"),
+    url("../assets/fonts/Poppins-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* General Reset */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    height: 100%;
-    width: 100%;
-    background-color: #2b2b2b;
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #2b2b2b;
 }
 /* Navbar Styles */
-.navbar{
-    height: 5rem;
-    width: 60%;
-    background-color: #333333b5;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    justify-self: center;
-    padding: 0 20px;
-    margin-top: 30px;
+.navbar {
+  height: 5rem;
+  width: 98%;
+  background: rgba(44, 44, 44, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  justify-self: center;
+  padding: 0 20px;
+  margin-top: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
-nav ul{
-    list-style: none;
-    display: flex;
-    gap: 20px;
+/* sticky state styles */
+.navbar.sticky {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px; /* change to the max width you want */
+  padding: 10px 20px;
+  z-index: 9999;
+  background-color: rgba(51, 51, 51, 0.95); /* a bit darker when stuck */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
-nav ul li a{
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    transition: color 0.3s;
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 82px;
+  padding-left: 0;
+  font-size: 20px;
 }
 
-nav ul li a:hover{
-    color: #ff6347;
+/* nicer hover underline + color transition */
+nav ul li a {
+  position: relative;
+  padding: 6px 2px;
+  color: white;
+  text-decoration: none;
+  transition: color 0.25s ease;
 }
 
-.login-link{
-    background-color: #ff6347;
-    padding: 8px 12px;
-    border-radius: 4px;
+/* animated underline */
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0%;
+  background-color: #ff6347;
+  transition: width 0.25s ease;
 }
 
-.login-link:hover{
-    background-color: #ff4500;
+nav ul li a:hover {
+  color: #ff6347;
 }
 
-.logo-container{
-    width: 100px;
+nav ul li a:hover::after {
+  width: 100%;
 }
 
-.logo-container img{
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
+nav ul li a.active {
+  color: #000;
+  background: #ff6347;
+  padding: 8px 12px;
+  border-radius: 4px;
 }
 
-.left-logo{
+.login-link {
+  background-color: #ff6347;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.login-link:hover {
+  background-color: #ff4500;
+}
+
+.logo-container {
+  width: 100px;
+}
+
+.logo-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.left-logo {
   height: 70px;
-    order: 1;
+  order: 1;
 }
 
-.right-logo{
+.right-logo {
   height: 90px;
-    order: 3;
+  order: 3;
 }
 
-nav{
-    order: 2;
+nav {
+  order: 2;
 }
 
 /* Hero Section */
@@ -104,8 +150,8 @@ nav{
   margin-bottom: 10px;
 }
 
-.home-btn{
-  width:8%;
+.home-btn {
+  width: 8%;
   height: 2rem;
   display: flex;
   justify-content: center;
