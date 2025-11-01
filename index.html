@@ -16,20 +16,17 @@
       <div class="logo-container left-logo">
         <img src="assets/images/left-logo.jpg" alt="Logo 1" />
       </div>
-      <div class="logo-container right-logo">
-        <img src="assets/images/right-logo.jpg" alt="Logo 2" />
-      </div>
       <nav aria-label="Main navigation">
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="booking.html">Booking</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="#enquiry">Enquiry</a></li>
           <li><a href="#blog">Blog</a></li>
           <li><a href="#login" class="login-link">Login</a></li>
-          <li><a href="#quote" class="login-link">Get Quotation</a></li>
         </ul>
       </nav>
     </div>
@@ -477,193 +474,204 @@
     </section>
 
     <script>
-        // Testimonial Slider Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const sliderContainer = document.getElementById('sliderContainer');
-            const slides = document.querySelectorAll('.testimonial-card');
-            const dots = document.querySelectorAll('.dot');
-            const prevBtn = document.querySelector('.prev-btn');
-            const nextBtn = document.querySelector('.next-btn');
-            
-            let currentSlide = 0;
-            const totalSlides = slides.length;
+      // Testimonial Slider Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const sliderContainer = document.getElementById("sliderContainer");
+        const slides = document.querySelectorAll(".testimonial-card");
+        const dots = document.querySelectorAll(".dot");
+        const prevBtn = document.querySelector(".prev-btn");
+        const nextBtn = document.querySelector(".next-btn");
 
-            // Update slider position
-            function updateSlider() {
-                sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-                
-                // Update dots
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentSlide);
-                });
-            }
+        let currentSlide = 0;
+        const totalSlides = slides.length;
 
-            // Next slide
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                updateSlider();
-            }
+        // Update slider position
+        function updateSlider() {
+          sliderContainer.style.transform = `translateX(-${
+            currentSlide * 100
+          }%)`;
 
-            // Previous slide
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                updateSlider();
-            }
+          // Update dots
+          dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentSlide);
+          });
+        }
 
-            // Event listeners
-            nextBtn.addEventListener('click', nextSlide);
-            prevBtn.addEventListener('click', prevSlide);
+        // Next slide
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % totalSlides;
+          updateSlider();
+        }
 
-            // Dot click events
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentSlide = index;
-                    updateSlider();
-                });
-            });
+        // Previous slide
+        function prevSlide() {
+          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+          updateSlider();
+        }
 
-            // Auto slide every 5 seconds
-            setInterval(nextSlide, 5000);
+        // Event listeners
+        nextBtn.addEventListener("click", nextSlide);
+        prevBtn.addEventListener("click", prevSlide);
 
-            // Pause auto-slide on hover
-            const slider = document.querySelector('.testimonial-slider');
-            slider.addEventListener('mouseenter', () => {
-                clearInterval(autoSlide);
-            });
-
-            let autoSlide = setInterval(nextSlide, 5000);
+        // Dot click events
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            currentSlide = index;
+            updateSlider();
+          });
         });
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Pause auto-slide on hover
+        const slider = document.querySelector(".testimonial-slider");
+        slider.addEventListener("mouseenter", () => {
+          clearInterval(autoSlide);
+        });
+
+        let autoSlide = setInterval(nextSlide, 5000);
+      });
     </script>
 
-       <!-- Contact CTA Section -->
+    <!-- Contact CTA Section -->
     <section class="contact-cta">
-        <div class="container">
-            <div class="cta-content">
-                <div class="cta-text">
-                    <h2>Have Any Questions About Vehicle Transport?</h2>
-                    <p>Our expert team is here to help you with all your car transportation needs. Get instant quotes, schedule pickups, or ask any questions.</p>
-                    <div class="cta-features">
-                        <div class="feature">
-                            <i class="fas fa-clock"></i>
-                            <span>24/7 Customer Support</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-truck"></i>
-                            <span>Instant Quote</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Insurance Covered</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="cta-form-box">
-                    <div class="form-header">
-                        <h3>Get In Touch</h3>
-                        <p>Quick response guaranteed</p>
-                    </div>
-                    <form class="contact-form" id="contactForm">
-                        <div class="input-group">
-                            <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="input-group">
-                            <i class="fas fa-phone"></i>
-                            <input type="tel" placeholder="Phone Number" required>
-                        </div>
-                        <div class="input-group">
-                            <i class="fas fa-envelope"></i>
-                            <input type="email" placeholder="Email Address" required>
-                        </div>
-                        <div class="input-group">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <select required>
-                                <option value="">Select Vehicle Type</option>
-                                <option value="hatchback">Hatchback</option>
-                                <option value="sedan">Sedan</option>
-                                <option value="suv">SUV</option>
-                                <option value="luxury">Luxury Car</option>
-                                <option value="bike">Bike</option>
-                                <option value="commercial">Commercial Vehicle</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="submit-btn">
-                            <span>Get Free Quote</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </form>
-                    <div class="form-footer">
-                        <p>Or contact us directly</p>
-                        <a href="contact.html" class="contact-link">
-                            <i class="fas fa-headset"></i>
-                            <span>Visit Contact Page</span>
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="cta-content">
+          <div class="cta-text">
+            <h2>Have Any Questions About Vehicle Transport?</h2>
+            <p>
+              Our expert team is here to help you with all your car
+              transportation needs. Get instant quotes, schedule pickups, or ask
+              any questions.
+            </p>
+            <div class="cta-features">
+              <div class="feature">
+                <i class="fas fa-clock"></i>
+                <span>24/7 Customer Support</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-truck"></i>
+                <span>Instant Quote</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <span>Insurance Covered</span>
+              </div>
             </div>
+          </div>
+          <div class="cta-form-box">
+            <div class="form-header">
+              <h3>Get In Touch</h3>
+              <p>Quick response guaranteed</p>
+            </div>
+            <form class="contact-form" id="contactForm">
+              <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Your Name" required />
+              </div>
+              <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" placeholder="Phone Number" required />
+              </div>
+              <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email Address" required />
+              </div>
+              <div class="input-group">
+                <i class="fas fa-map-marker-alt"></i>
+                <select required>
+                  <option value="">Select Vehicle Type</option>
+                  <option value="hatchback">Hatchback</option>
+                  <option value="sedan">Sedan</option>
+                  <option value="suv">SUV</option>
+                  <option value="luxury">Luxury Car</option>
+                  <option value="bike">Bike</option>
+                  <option value="commercial">Commercial Vehicle</option>
+                </select>
+              </div>
+              <button type="submit" class="submit-btn">
+                <span>Get Free Quote</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </form>
+            <div class="form-footer">
+              <p>Or contact us directly</p>
+              <a href="contact.html" class="contact-link">
+                <i class="fas fa-headset"></i>
+                <span>Visit Contact Page</span>
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
-     <script>
-        // Contact Form Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contactForm');
-            
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form data
-                const formData = new FormData(contactForm);
-                const name = contactForm.querySelector('input[type="text"]').value;
-                const phone = contactForm.querySelector('input[type="tel"]').value;
-                const email = contactForm.querySelector('input[type="email"]').value;
-                const vehicleType = contactForm.querySelector('select').value;
-                
-                // Simulate form submission
-                const submitBtn = contactForm.querySelector('.submit-btn');
-                const originalText = submitBtn.innerHTML;
-                
-                // Show loading state
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
-                submitBtn.disabled = true;
-                
-                // Simulate API call
-                setTimeout(() => {
-                    // Show success message
-                    alert(`Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`);
-                    
-                    // Reset form
-                    contactForm.reset();
-                    
-                    // Reset button
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }, 2000);
-            });
+    <script>
+      // Contact Form Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contactForm");
 
-            // Add input animations
-            const inputs = document.querySelectorAll('.input-group input, .input-group select');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.style.transform = 'scale(1.02)';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.style.transform = 'scale(1)';
-                });
-            });
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
 
-            // Phone number formatting
-            const phoneInput = contactForm.querySelector('input[type="tel"]');
-            phoneInput.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 0) {
-                    value = value.match(/.{1,5}/g).join(' ');
-                }
-                e.target.value = value;
-            });
+          // Get form data
+          const formData = new FormData(contactForm);
+          const name = contactForm.querySelector('input[type="text"]').value;
+          const phone = contactForm.querySelector('input[type="tel"]').value;
+          const email = contactForm.querySelector('input[type="email"]').value;
+          const vehicleType = contactForm.querySelector("select").value;
+
+          // Simulate form submission
+          const submitBtn = contactForm.querySelector(".submit-btn");
+          const originalText = submitBtn.innerHTML;
+
+          // Show loading state
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+          submitBtn.disabled = true;
+
+          // Simulate API call
+          setTimeout(() => {
+            // Show success message
+            alert(
+              `Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`
+            );
+
+            // Reset form
+            contactForm.reset();
+
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          }, 2000);
         });
+
+        // Add input animations
+        const inputs = document.querySelectorAll(
+          ".input-group input, .input-group select"
+        );
+        inputs.forEach((input) => {
+          input.addEventListener("focus", function () {
+            this.parentElement.style.transform = "scale(1.02)";
+          });
+
+          input.addEventListener("blur", function () {
+            this.parentElement.style.transform = "scale(1)";
+          });
+        });
+
+        // Phone number formatting
+        const phoneInput = contactForm.querySelector('input[type="tel"]');
+        phoneInput.addEventListener("input", function (e) {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length > 0) {
+            value = value.match(/.{1,5}/g).join(" ");
+          }
+          e.target.value = value;
+        });
+      });
     </script>
 
     <!-- Footer Section -->
