@@ -58,7 +58,6 @@
         justify-content: space-between;
         justify-self: center;
         padding: 0 20px;
-        margin-top: 30px;
         position: sticky;
         top: 0;
         z-index: 999;
@@ -629,34 +628,18 @@
     </style>
   </head>
   <body>
-    <!-- Header & Navigation -->
-    <div class="navbar" class="sticky">
-      <div class="logo-container left-logo">
-        <img
-          src="assets/images/left-logo.jpg"
-          alt="Harihar Car Carriers Logo"
-        />
-      </div>
-      <nav aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="testimonials.html">Testimonials</a></li>
-          <li><a href="contact.html" class="active">Contact</a></li>
-          <li><a href="#enquiry">Enquiry</a></li>
-          <li><a href="#login" class="login-link">Login</a></li>
-          <li><a href="#quote" class="login-link">Get Quotation</a></li>
-        </ul>
-      </nav>
-      <div class="logo-container right-logo">
-        <img
-          src="assets/images/right-logo.jpg"
-          alt="Harihar Car Carriers Logo"
-        />
-      </div>
-    </div>
+   <!-- Header Section -->
+      <div id="navbar-container"></div>
+    
+    <script>
+        // Load navigation component
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
 
     <!-- Hero Section -->
     <section class="contact-hero">
@@ -930,6 +913,19 @@
         </div>
       </div>
     </section>
+
+      <!-- Footer Section -->
+<div id="footer-container"></div>
+
+<script>
+  // Load shared footer dynamically
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error loading footer:', error));
+</script>
 
     <script>
       // Contact Form Functionality

@@ -9,14 +9,36 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
-      body {
-        font-family: "Poppins", sans-serif;
-        height: 100%;
-        width: 100%;
-        background-color: #2b2b2b;
-        color: white;
-        line-height: 1.6;
-      }
+        @font-face {
+            font-family: "Poppins";
+            src: url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
+                url("./assets/fonts/Poppins-Regular.woff") format("woff");
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Poppins";
+            src: url("./assets/fonts/Poppins-Bold.woff2") format("woff2"),
+                url("./assets/fonts/Poppins-Bold.woff") format("woff");
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            height: 100%;
+            width: 100%;
+            background-color: #2b2b2b;
+            color: white;
+            line-height: 1.6;
+        }
 
       .container {
         max-width: 1200px;
@@ -24,52 +46,54 @@
         padding: 0 20px;
       }
 
-      /* Navbar Styles */
-      .navbar {
-        width: 98%;
-        background: rgba(44, 44, 44, 0.4);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        justify-self: center;
-        padding: 0 20px;
-        position: sticky;
-        top: 0;
-        z-index: 999;
-      }
+        /* Navbar Styles */
+        .navbar {
+            height: 5rem;
+            width: 98%;
+            background: rgba(44, 44, 44, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            justify-self: center;
+            padding: 0 20px;
+            margin-top: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
 
-      /* sticky state styles */
-      .navbar.sticky {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 1200px;
-        padding: 0 20px;
-        z-index: 9999;
-        background-color: rgba(51, 51, 51, 0.95);
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-      }
+        /* sticky state styles */
+        .navbar.sticky {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1200px;
+            padding: 10px 20px;
+            z-index: 9999;
+            background-color: rgba(51, 51, 51, 0.95);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+        }
 
-      nav ul {
-        list-style: none;
-        display: flex;
-        gap: 82px;
-        padding-left: 0;
-        font-size: 18px;
-      }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 82px;
+            padding-left: 0;
+            font-size: 20px;
+        }
 
-      /* nicer hover underline + color transition */
-      nav ul li a {
-        position: relative;
-        padding: 6px 2px;
-        color: white;
-        text-decoration: none;
-        transition: color 0.25s ease;
-      }
+        /* nicer hover underline + color transition */
+        nav ul li a {
+            position: relative;
+            padding: 6px 2px;
+            color: white;
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
 
       /* animated underline */
       nav ul li a::after {
@@ -527,37 +551,30 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="./css/components/footer.css" />
-  </head>
-  <body>
+</head>
+<body>
     <!-- Header & Navigation -->
-    <header class="navbar" class="sticky">
-      <div class="logo-container left-logo">
-        <img
-          src="assets/images/left-logo.jpg"
-          alt="Harihar Car Carriers Logo"
-        />
-      </div>
-      <nav aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" class="active">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#enquiry">Enquiry</a></li>
-          <li><a href="#blog">Blog</a></li>
-          <li><a href="#login" class="login-link">Login</a></li>
-          <li><a href="#quote" class="login-link">Get Quotation</a></li>
-        </ul>
-      </nav>
-      <div class="logo-container right-logo">
-        <img
-          src="assets/images/right-logo.jpg"
-          alt="Harihar Car Carriers Logo"
-        />
-      </div>
-    </header>
+    <div class="navbar" class="sticky">
+        <div class="logo-container left-logo">
+            <img src="assets/images/left-logo.jpg" alt="Harihar Car Carriers Logo" />
+        </div>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#enquiry">Enquiry</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#login" class="login-link">Login</a></li>
+                <li><a href="#quote" class="login-link">Get Quotation</a></li>
+            </ul>
+        </nav>
+        <div class="logo-container right-logo">
+            <img src="assets/images/right-logo.jpg" alt="Harihar Car Carriers Logo" />
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -767,170 +784,6 @@
         <a href="#quote" class="cta-btn fade-in delay-2">Get Quotation</a>
       </div>
     </section>
-
-    <!-- Footer Section -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <!-- Company Info Column -->
-          <div class="footer-column footer-about">
-            <div class="footer-logo">
-              <img
-                src="assets/images/left-logo.jpg"
-                alt="Harihar Car Carriers"
-              />
-              <span class="footer-logo-text">Harihar Car Carriers</span>
-            </div>
-            <p>
-              Your trusted partner for safe and reliable vehicle transportation
-              across India. With over 12 years of experience, we ensure your
-              vehicles reach their destination securely and on time.
-            </p>
-
-            <div class="social-links">
-              <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-              <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="#" title="LinkedIn"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-              <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-            </div>
-          </div>
-
-          <!-- Quick Links Column -->
-          <div class="footer-column">
-            <h3>Quick Links</h3>
-            <ul class="footer-links">
-              <li>
-                <a href="index.html"><i class="fas fa-home"></i> Home</a>
-              </li>
-              <li>
-                <a href="about.html"
-                  ><i class="fas fa-info-circle"></i> About Us</a
-                >
-              </li>
-              <li>
-                <a href="#services"
-                  ><i class="fas fa-truck-moving"></i> Services</a
-                >
-              </li>
-              <li>
-                <a href="#gallery"><i class="fas fa-images"></i> Gallery</a>
-              </li>
-              <li>
-                <a href="#contact"><i class="fas fa-phone"></i> Contact</a>
-              </li>
-              <li>
-                <a href="#enquiry"
-                  ><i class="fas fa-question-circle"></i> Enquiry</a
-                >
-              </li>
-              <li>
-                <a href="#blog"><i class="fas fa-blog"></i> Blog</a>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Services Column -->
-          <div class="footer-column">
-            <h3>Our Services</h3>
-            <ul class="footer-links">
-              <li>
-                <a href="#door-to-door"
-                  ><i class="fas fa-door-open"></i> Door-to-Door Transport</a
-                >
-              </li>
-              <li>
-                <a href="#nationwide"
-                  ><i class="fas fa-map-marked-alt"></i> Nationwide Coverage</a
-                >
-              </li>
-              <li>
-                <a href="#commercial"
-                  ><i class="fas fa-truck"></i> Commercial Vehicles</a
-                >
-              </li>
-              <li>
-                <a href="#personal"
-                  ><i class="fas fa-car"></i> Personal Vehicles</a
-                >
-              </li>
-              <li>
-                <a href="#luxury"><i class="fas fa-gem"></i> Luxury Cars</a>
-              </li>
-              <li>
-                <a href="#bikes"
-                  ><i class="fas fa-motorcycle"></i> Bike Transport</a
-                >
-              </li>
-              <li>
-                <a href="#insurance"
-                  ><i class="fas fa-shield-alt"></i> Insurance Coverage</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Contact & Newsletter Column -->
-          <div class="footer-column">
-            <h3>Contact Info</h3>
-            <ul class="contact-info">
-              <li>
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Nagpur, Maharashtra, India - 440001</span>
-              </li>
-              <li>
-                <i class="fas fa-phone"></i>
-                <span>+91 XXXXX XXXXX</span>
-              </li>
-              <li>
-                <i class="fas fa-envelope"></i>
-                <span>info@hariharcarcarriers.com</span>
-              </li>
-              <li>
-                <i class="fas fa-clock"></i>
-                <span
-                  >24/7 Customer Support<br />Emergency Services Available</span
-                >
-              </li>
-            </ul>
-
-            <div class="newsletter-form">
-              <p>Subscribe for updates & offers</p>
-              <div class="newsletter-input">
-                <input type="email" placeholder="Enter your email" />
-                <button type="submit">Subscribe</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer Bottom -->
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="footer-bottom-content">
-            <div class="copyright">
-              &copy; 2024 Harihar Car Carriers. All rights reserved.
-            </div>
-
-            <div class="footer-bottom-links">
-              <a href="pages/privacy-policy.html">Privacy Policy</a>
-              <a href="pages/Terms of Services.html">Terms of Service</a>
-              <a href="#sitemap">Sitemap</a>
-            </div>
-
-            <div class="payment-methods">
-              <i class="fab fa-cc-visa" title="Visa"></i>
-              <i class="fab fa-cc-mastercard" title="MasterCard"></i>
-              <i class="fab fa-cc-paypal" title="PayPal"></i>
-              <i class="fas fa-university" title="Net Banking"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
 
     <script>
       // Animation on scroll
