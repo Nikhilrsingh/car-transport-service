@@ -474,6 +474,83 @@
             transform: translateY(-2px);
         }
 
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: #2b2b2b;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #ff6347;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 350px;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast.hide {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+            color: #ff6347;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .toast-message {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .toast-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
             nav ul {
@@ -525,6 +602,16 @@
             .form-row,
             .date-time-row {
                 grid-template-columns: 1fr;
+            }
+
+            .toast-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+            }
+
+            .toast {
+                max-width: 100%;
             }
         }
 
@@ -770,6 +857,9 @@
         </div>
     </div>
 
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
       <!-- Footer Section -->
 <div id="footer-container"></div>
 
@@ -784,6 +874,66 @@
 </script>
 
     <script>
+        // Toast Notification System
+        function showToast(title, message, type = 'success', duration = 5000) {
+            const toastContainer = document.getElementById('toastContainer');
+            const toastId = 'toast-' + Date.now();
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.id = toastId;
+            
+            // Set icon based on type
+            let icon = 'fa-check-circle';
+            if (type === 'error') icon = 'fa-exclamation-circle';
+            if (type === 'warning') icon = 'fa-exclamation-triangle';
+            if (type === 'info') icon = 'fa-info-circle';
+            
+            toast.innerHTML = `
+                <div class="toast-icon">
+                    <i class="fas ${icon}"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="removeToast('${toastId}')">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Show toast with animation
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            // Auto remove after duration
+            if (duration > 0) {
+                setTimeout(() => {
+                    removeToast(toastId);
+                }, duration);
+            }
+            
+            return toastId;
+        }
+        
+        function removeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+                
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }
+        }
+
         // Form Validation and Submission
         document.addEventListener('DOMContentLoaded', function() {
             const bookingForm = document.getElementById('bookingForm');
@@ -913,6 +1063,14 @@
                         const reference = generateBookingRef();
                         bookingRef.textContent = reference;
 
+                        // Show success toast
+                        showToast(
+                            'Booking Confirmed!', 
+                            `Your booking reference is ${reference}. Our team will contact you shortly.`,
+                            'success',
+                            5000
+                        );
+
                         // Show success modal
                         successModal.style.display = 'flex';
                         
@@ -923,6 +1081,14 @@
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Confirm Booking</span>';
                     }, 2000);
+                } else {
+                    // Show error toast if validation fails
+                    showToast(
+                        'Form Validation Error', 
+                        'Please check all required fields and try again.',
+                        'error',
+                        5000
+                    );
                 }
             });
 
