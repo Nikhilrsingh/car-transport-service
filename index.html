@@ -11,6 +11,11 @@
 </head>
 
 <body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
+
   <!-- Header Section -->
   <div id="navbar-container"></div>
 
@@ -881,6 +886,62 @@
           }, 2000);
         });
 
+
+      // Phone number formatting
+      const phoneInput = contactForm.querySelector('input[type="tel"]');
+      phoneInput.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 0) {
+          value = value.match(/.{1,5}/g).join(" ");
+        }
+        e.target.value = value;
+      });
+    });
+  </script>
+
+  <!-- Footer Section -->
+  <div id="footer-container"></div>
+
+  <script>
+    // Load shared footer dynamically
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading footer:', error));
+  </script>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Preloader fade-out script -->
+  <script>
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      setTimeout(() => {
+        preloader.classList.add("fade-out");
+
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 600); 
+      }, 1500); 
+    });
+  </script>
+
+  <script>
+    // Back to Top Functionality
+    const backToTopButton = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add("visible");
+      } else {
+        backToTopButton.classList.remove("visible");
+      }
+    });
         // Add input animations
         const inputs = document.querySelectorAll(
           ".input-group input, .input-group select"
