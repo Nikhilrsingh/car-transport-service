@@ -706,11 +706,14 @@
           );
           if (!response.ok) throw new Error("Failed to load contributors");
 
+          const contributors = await response.json(); // ✅ Added this line
+
+          // ✅ Filter out repository owner
           const filteredContributorsList = contributors.filter(
             (c) => c.login.toLowerCase() !== GITHUB_OWNER.toLowerCase()
           );
 
-          // Fetch extra info, PR counts, and calculate points
+          // ✅ Fetch extra info, PR counts, and calculate points
           allContributors = await Promise.all(
             filteredContributorsList.map(async (c) => {
               const userResponse = await fetch(
