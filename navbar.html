@@ -1,753 +1,777 @@
 <!-- Enhanced Navigation Component -->
 <header class="header">
-    <div class="navbar-container">
-        <div class="navbar">
-            <!-- Left Logo -->
-            <div class="logo-container left-logo">
-                <img src="assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
-            </div>
+  <div class="navbar-container">
+    <div class="navbar">
+      <!-- Left Logo -->
+      <div class="logo-container left-logo">
+        <img
+          src="assets/images/left-logo.jpg"
+          alt="Harihar Car Carriers"
+          class="logo-img"
+        />
+      </div>
 
-            <!-- Desktop Navigation -->
-            <nav class="desktop-nav" aria-label="Main navigation">
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link active" data-page="home">
-                            <i class="fas fa-home"></i>
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link" data-page="about">
-                            <i class="fas fa-info-circle"></i>
-                            <span>About</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#services" class="nav-link" data-page="services">
-                            <i class="fas fa-truck-moving"></i>
-                            <span>Services</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="booking.html" class="nav-link" data-page="booking">
-                            <i class="fas fa-calendar-check"></i>
-                            <span>Booking</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#gallery" class="nav-link" data-page="gallery">
-                            <i class="fas fa-images"></i>
-                            <span>Gallery</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contact.html" class="nav-link" data-page="contact">
-                            <i class="fas fa-phone"></i>
-                            <span>Contact</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active" data-page="home">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link" data-page="about">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link" data-page="services">
+              <i class="fas fa-truck-moving"></i>
+              <span>Services</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="booking.html" class="nav-link" data-page="booking">
+              <i class="fas fa-calendar-check"></i>
+              <span>Booking</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#gallery" class="nav-link" data-page="gallery">
+              <i class="fas fa-images"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link" data-page="contact">
+              <i class="fas fa-phone"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
 
-            <!-- Right Actions -->
-            <div class="nav-actions">
-                <a href="#enquiry" class="nav-link enquiry-link">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Enquiry</span>
-                </a>
-                <a href="#blog" class="nav-link blog-link">
-                    <i class="fas fa-blog"></i>
-                    <span>Blog</span>
-                </a>
-                <a href="#login" class="login-btn">
-                    <i class="fas fa-user"></i>
-                    <span>Login</span>
-                </a>
-                <a href="booking.html" class="cta-btn">
-                    <i class="fas fa-truck"></i>
-                    <span>Book Now</span>
-                </a>
-            </div>
+         <!-- Right Actions -->
+      <div class="nav-actions">
+        <a href="#enquiry" class="nav-link enquiry-link">
+          <i class="fas fa-question-circle"></i>
+          <span>Enquiry</span>
+        </a>
+        <a href="#blog" class="nav-link blog-link">
+          <i class="fas fa-blog"></i>
+          <span>Blog</span>
+        </a>
+        <a href="#login" class="login-btn">
+          <i class="fas fa-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="booking.html" class="cta-btn">
+          <i class="fas fa-truck"></i>
+          <span>Book Now</span>
+        </a>
+      </div>
+      </nav>
 
-            <!-- Mobile Menu Button -->
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-                <span class="menu-bar"></span>
-                <span class="menu-bar"></span>
-                <span class="menu-bar"></span>
-            </button>
-        </div>
+     
 
-        <!-- Mobile Navigation -->
-        <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-            <div class="mobile-nav-header">
-                <div class="mobile-logo">
-                    <img src="assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-                    <span>Harihar Car Carriers</span>
-                </div>
-                <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <ul class="mobile-nav-list">
-                <li class="mobile-nav-item">
-                    <a href="index.html" class="mobile-nav-link active">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li class="mobile-nav-item">
-                    <a href="about.html" class="mobile-nav-link">
-                        <i class="fas fa-info-circle"></i>
-                        <span>About</span>
-                    </a>
-                </li>
-                <li class="mobile-nav-item">
-                    <a href="#services" class="mobile-nav-link">
-                        <i class="fas fa-truck-moving"></i>
-                        <span>Services</span>
-                    </a>
-                </li>
-                <li class="mobile-nav-item">
-                    <a href="booking.html" class="mobile-nav-link">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Booking</span>
-                    </a>
-                </li>
-                <li class="mobile-nav-item">
-                    <a href="#gallery" class="mobile-nav-link">
-                        <i class="fas fa-images"></i>
-                        <span>Gallery</span>
-                    </a>
-                </li>
-                <li class="mobile-nav-item">
-                    <a href="contact.html" class="mobile-nav-link">
-                        <i class="fas fa-phone"></i>
-                        <span>Contact</span>
-                    </a>
-                </li>
-                <li class="mobile-nav-item">
-                    <a href="#enquiry" class="mobile-nav-link">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Enquiry</span>
-                    </a>
-                </li>
-                <li class="mobile-nav-item">
-                    <a href="#blog" class="mobile-nav-link">
-                        <i class="fas fa-blog"></i>
-                        <span>Blog</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="mobile-nav-actions">
-                <a href="#login" class="mobile-login-btn">
-                    <i class="fas fa-user"></i>
-                    <span>Login</span>
-                </a>
-                <a href="booking.html" class="mobile-cta-btn">
-                    <i class="fas fa-truck"></i>
-                    <span>Book Instantly</span>
-                </a>
-            </div>
-            <div class="mobile-contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+91 98765 43210</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>info@hariharcarcarriers.com</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-clock"></i>
-                    <span>24/7 Support</span>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Navigation Overlay -->
-        <div class="nav-overlay" id="navOverlay"></div>
+      <!-- Mobile Menu Button -->
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        aria-label="Toggle mobile menu"
+      >
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
     </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <div class="mobile-nav-header">
+        <div class="mobile-logo">
+          <img src="assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+          <span>Harihar Car Carriers</span>
+        </div>
+        <button
+          class="mobile-close-btn"
+          id="mobileCloseBtn"
+          aria-label="Close mobile menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <a href="index.html" class="mobile-nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="about.html" class="mobile-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="#services" class="mobile-nav-link">
+            <i class="fas fa-truck-moving"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="booking.html" class="mobile-nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Booking</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="#gallery" class="mobile-nav-link">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="contact.html" class="mobile-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="#enquiry" class="mobile-nav-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="#blog" class="mobile-nav-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="#login" class="mobile-login-btn">
+          <i class="fas fa-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="booking.html" class="mobile-cta-btn">
+          <i class="fas fa-truck"></i>
+          <span>Book Instantly</span>
+        </a>
+      </div>
+      <div class="mobile-contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 98765 43210</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@hariharcarcarriers.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>24/7 Support</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+  </div>
 </header>
 
 <style>
-    /* Enhanced Navigation Styles */
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        background: rgba(43, 43, 43, 0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-    }
+  /* Enhanced Navigation Styles */
 
-    .navbar-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
+  body {
+    padding-top: 50px;
+  }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(43, 43, 43, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
 
-    .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 0;
-        position: relative;
-        gap: 30px;
-    }
+  .navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
-    /* Logo Styles - Fixed to be first element */
-    .logo-container {
-        flex-shrink: 0;
-        order: 1; /* Ensures logo is first */
-    }
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    position: relative;
+    gap: 30px;
+  }
 
-    .left-logo {
-        width: 120px;
-        height: 60px;
-    }
+  /* Logo Styles - Fixed to be first element */
+  .logo-container {
+    flex-shrink: 0;
+    order: 1; /* Ensures logo is first */
+  }
 
-    .logo-img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        transition: transform 0.3s ease;
-    }
+  .left-logo {
+    width: 120px;
+    height: 60px;
+  }
 
-    .left-logo:hover .logo-img {
-        transform: scale(1.05);
-    }
+  .logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
 
-    /* Desktop Navigation */
-    .desktop-nav {
-        display: flex;
-        align-items: center;
-        order: 2; /* Navigation comes after logo */
-        flex: 1;
-        justify-content: center;
-    }
+  .left-logo:hover .logo-img {
+    transform: scale(1.05);
+  }
 
+  /* Desktop Navigation */
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    order: 2; /* Navigation comes after logo */
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .nav-link i {
+    font-size: 1rem;
+    width: 18px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .nav-link:hover::before {
+    left: 100%;
+  }
+
+  .nav-link:hover {
+    color: #ff6347;
+    background: rgba(255, 99, 71, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .nav-link:hover i {
+    transform: scale(1.2);
+  }
+
+  .nav-link.active {
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+  }
+
+  .nav-link.active:hover {
+    background: linear-gradient(135deg, #ff4500, #ff6347);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
+  }
+
+  /* Right Actions */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    order: 3; /* Actions come last */
+    flex-shrink: 0;
+  }
+
+  .enquiry-link,
+  .blog-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .enquiry-link:hover,
+  .blog-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ff6347;
+  }
+
+  .login-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    color: white;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+  }
+
+  .login-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ff6347;
+    transform: translateY(-2px);
+  }
+
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+    font-size: 0.9rem;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
+    background: linear-gradient(135deg, #ff4500, #ff6347);
+  }
+
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    gap: 4px;
+    order: 4;
+  }
+
+  .menu-bar {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-btn.active .menu-bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  .mobile-menu-btn.active .menu-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-btn.active .menu-bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* Mobile Navigation */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-nav.active {
+    right: 0;
+  }
+
+  .mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 20px;
+    border-bottom: 1px solid #444;
+    background: rgba(43, 43, 43, 0.9);
+  }
+
+  .mobile-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .mobile-logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+  }
+
+  .mobile-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-close-btn:hover {
+    color: #ff6347;
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .mobile-nav-item {
+    border-bottom: 1px solid #333;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 25px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .mobile-nav-link i {
+    width: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #ff6347;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link.active {
+    background: rgba(255, 99, 71, 0.1);
+    color: #ff6347;
+    padding-left: 30px;
+  }
+
+  .mobile-nav-actions {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-top: 1px solid #444;
+  }
+
+  .mobile-login-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    border: 2px solid #444;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    justify-content: center;
+    font-weight: 500;
+  }
+
+  .mobile-login-btn:hover {
+    border-color: #ff6347;
+    color: #ff6347;
+  }
+
+  .mobile-cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  .mobile-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+  }
+
+  .mobile-contact-info {
+    padding: 20px;
+    border-top: 1px solid #444;
+    background: rgba(43, 43, 43, 0.8);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    color: #ccc;
+    font-size: 0.9rem;
+  }
+
+  .contact-item i {
+    color: #ff6347;
+    width: 16px;
+    text-align: center;
+  }
+
+  /* Navigation Overlay */
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
     .nav-list {
-        display: flex;
-        list-style: none;
-        gap: 5px;
-        margin: 0;
-        padding: 0;
-    }
-
-    .nav-item {
-        position: relative;
+      gap: 3px;
     }
 
     .nav-link {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 18px;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        font-size: 0.95rem;
-        position: relative;
-        overflow: hidden;
-        white-space: nowrap;
+      padding: 8px 15px;
+      font-size: 0.9rem;
     }
 
-    .nav-link i {
-        font-size: 1rem;
-        width: 18px;
-        text-align: center;
-        transition: transform 0.3s ease;
-    }
-
-    .nav-link::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.5s ease;
-    }
-
-    .nav-link:hover::before {
-        left: 100%;
-    }
-
-    .nav-link:hover {
-        color: #ff6347;
-        background: rgba(255, 99, 71, 0.1);
-        transform: translateY(-2px);
-    }
-
-    .nav-link:hover i {
-        transform: scale(1.2);
-    }
-
-    .nav-link.active {
-        background: linear-gradient(135deg, #ff6347, #ff4500);
-        color: white;
-        box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
-    }
-
-    .nav-link.active:hover {
-        background: linear-gradient(135deg, #ff4500, #ff6347);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
-    }
-
-    /* Right Actions */
     .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        order: 3; /* Actions come last */
-        flex-shrink: 0;
+      gap: 8px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .desktop-nav {
+      display: none;
     }
 
-    .enquiry-link, .blog-link {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 15px;
-        color: white;
-        text-decoration: none;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        font-size: 0.9rem;
+    .nav-actions {
+      display: none;
     }
 
-    .enquiry-link:hover, .blog-link:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: #ff6347;
-    }
-
-    .login-btn {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 16px;
-        color: white;
-        text-decoration: none;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        backdrop-filter: blur(10px);
-        font-size: 0.9rem;
-    }
-
-    .login-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: #ff6347;
-        transform: translateY(-2px);
-    }
-
-    .cta-btn {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 20px;
-        background: linear-gradient(135deg, #ff6347, #ff4500);
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
-        font-size: 0.9rem;
-    }
-
-    .cta-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
-        background: linear-gradient(135deg, #ff4500, #ff6347);
-    }
-
-    /* Mobile Menu Button */
     .mobile-menu-btn {
-        display: none;
-        flex-direction: column;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 8px;
-        gap: 4px;
-        order: 4;
+      display: flex;
     }
 
-    .menu-bar {
-        width: 25px;
-        height: 3px;
-        background: white;
-        border-radius: 2px;
-        transition: all 0.3s ease;
+    .navbar {
+      justify-content: space-between;
+      gap: 0;
     }
 
-    .mobile-menu-btn.active .menu-bar:nth-child(1) {
-        transform: rotate(45deg) translate(6px, 6px);
+    .logo-container {
+      margin-right: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-container {
+      padding: 0 15px;
     }
 
-    .mobile-menu-btn.active .menu-bar:nth-child(2) {
-        opacity: 0;
+    .left-logo {
+      width: 100px;
+      height: 50px;
     }
 
-    .mobile-menu-btn.active .menu-bar:nth-child(3) {
-        transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    /* Mobile Navigation */
     .mobile-nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 320px;
-        height: 100vh;
-        background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
-        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1001;
-        display: flex;
-        flex-direction: column;
+      width: 100%;
     }
 
-    .mobile-nav.active {
-        right: 0;
-    }
-
-    .mobile-nav-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 25px 20px;
-        border-bottom: 1px solid #444;
-        background: rgba(43, 43, 43, 0.9);
-    }
-
-    .mobile-logo {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: white;
-        font-weight: 600;
-        font-size: 1.1rem;
-    }
-
-    .mobile-logo img {
-        width: 45px;
-        height: 45px;
-        object-fit: contain;
-    }
-
-    .mobile-close-btn {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 5px;
-        transition: color 0.3s ease;
-    }
-
-    .mobile-close-btn:hover {
-        color: #ff6347;
-    }
-
-    .mobile-nav-list {
-        list-style: none;
-        padding: 20px 0;
-        margin: 0;
-        flex: 1;
-        overflow-y: auto;
-    }
-
-    .mobile-nav-item {
-        border-bottom: 1px solid #333;
-    }
-
-    .mobile-nav-link {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 18px 25px;
-        color: white;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        font-size: 1rem;
-    }
-
-    .mobile-nav-link i {
-        width: 20px;
-        text-align: center;
-        font-size: 1.1rem;
-        color: #ff6347;
-    }
-
-    .mobile-nav-link:hover,
-    .mobile-nav-link.active {
-        background: rgba(255, 99, 71, 0.1);
-        color: #ff6347;
-        padding-left: 30px;
-    }
-
-    .mobile-nav-actions {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        border-top: 1px solid #444;
-    }
-
-    .mobile-login-btn {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 15px;
-        color: white;
-        text-decoration: none;
-        border: 2px solid #444;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        justify-content: center;
-        font-weight: 500;
-    }
-
-    .mobile-login-btn:hover {
-        border-color: #ff6347;
-        color: #ff6347;
-    }
-
-    .mobile-cta-btn {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 15px;
-        background: linear-gradient(135deg, #ff6347, #ff4500);
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        justify-content: center;
-        font-weight: 600;
-    }
-
-    .mobile-cta-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
-    }
-
-    .mobile-contact-info {
-        padding: 20px;
-        border-top: 1px solid #444;
-        background: rgba(43, 43, 43, 0.8);
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 0;
-        color: #ccc;
-        font-size: 0.9rem;
-    }
-
-    .contact-item i {
-        color: #ff6347;
-        width: 16px;
-        text-align: center;
-    }
-
-    /* Navigation Overlay */
-    .nav-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(5px);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .nav-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    /* Main content spacing to account for fixed navbar */
     .main-content {
-        margin-top: 80px; /* Adjust based on your navbar height */
+      margin-top: 70px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 10px 0;
     }
 
-    /* Responsive Design */
-    @media (max-width: 1200px) {
-        .nav-list {
-            gap: 3px;
-        }
-        
-        .nav-link {
-            padding: 8px 15px;
-            font-size: 0.9rem;
-        }
-        
-        .nav-actions {
-            gap: 8px;
-        }
+    .left-logo {
+      width: 90px;
+      height: 45px;
     }
 
-    @media (max-width: 1024px) {
-        .desktop-nav {
-            display: none;
-        }
-
-        .nav-actions {
-            display: none;
-        }
-
-        .mobile-menu-btn {
-            display: flex;
-        }
-
-        .navbar {
-            justify-content: space-between;
-            gap: 0;
-        }
-        
-        .logo-container {
-            margin-right: auto;
-        }
+    .main-content {
+      margin-top: 65px;
     }
+  }
 
-    @media (max-width: 768px) {
-        .navbar-container {
-            padding: 0 15px;
-        }
-
-        .left-logo {
-            width: 100px;
-            height: 50px;
-        }
-
-        .mobile-nav {
-            width: 100%;
-        }
-        
-        .main-content {
-            margin-top: 70px;
-        }
+  /* Animation for page load */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
     }
-
-    @media (max-width: 480px) {
-        .navbar {
-            padding: 10px 0;
-        }
-        
-        .left-logo {
-            width: 90px;
-            height: 45px;
-        }
-        
-        .main-content {
-            margin-top: 65px;
-        }
+    to {
+      transform: translateY(0);
+      opacity: 1;
     }
+  }
 
-    /* Animation for page load */
-    @keyframes slideDown {
-        from {
-            transform: translateY(-100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-
-    .header {
-        animation: slideDown 0.5s ease-out;
-    }
+  .header {
+    animation: slideDown 0.5s ease-out;
+  }
 </style>
 
 <script>
-    // Enhanced Navigation Functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const header = document.querySelector('.header');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileCloseBtn = document.getElementById('mobileCloseBtn');
-        const mobileNav = document.getElementById('mobileNav');
-        const navOverlay = document.getElementById('navOverlay');
-        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  // Enhanced Navigation Functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.querySelector(".header");
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileCloseBtn = document.getElementById("mobileCloseBtn");
+    const mobileNav = document.getElementById("mobileNav");
+    const navOverlay = document.getElementById("navOverlay");
+    const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
 
-        // Add main content spacing
-        function addContentSpacing() {
-            const navbarHeight = header.offsetHeight;
-            document.body.style.paddingTop = navbarHeight + 'px';
+    // Add main content spacing
+    function addContentSpacing() {
+      const navbarHeight = header.offsetHeight;
+      document.body.style.paddingTop = navbarHeight + "px";
+    }
+
+    // Mobile menu functionality
+    function openMobileMenu() {
+      mobileNav.classList.add("active");
+      navOverlay.classList.add("active");
+      mobileMenuBtn.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileMenu() {
+      mobileNav.classList.remove("active");
+      navOverlay.classList.remove("active");
+      mobileMenuBtn.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    // Set active page based on current URL
+    function setActivePage() {
+      const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
+      navLinks.forEach((link) => {
+        const linkPage = link.getAttribute("href");
+        if (
+          linkPage === currentPage ||
+          (currentPage === "index.html" && linkPage === "/") ||
+          (linkPage.includes(currentPage.replace(".html", "")) &&
+            currentPage !== "index.html")
+        ) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
         }
+      });
+    }
 
-        // Mobile menu functionality
-        function openMobileMenu() {
-            mobileNav.classList.add('active');
-            navOverlay.classList.add('active');
-            mobileMenuBtn.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+    // Event listeners
+    mobileMenuBtn.addEventListener("click", openMobileMenu);
+    mobileCloseBtn.addEventListener("click", closeMobileMenu);
+    navOverlay.addEventListener("click", closeMobileMenu);
 
-        function closeMobileMenu() {
-            mobileNav.classList.remove('active');
-            navOverlay.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // Set active page based on current URL
-        function setActivePage() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            navLinks.forEach(link => {
-                const linkPage = link.getAttribute('href');
-                if (linkPage === currentPage || 
-                    (currentPage === 'index.html' && linkPage === '/') ||
-                    (linkPage.includes(currentPage.replace('.html', '')) && currentPage !== 'index.html')) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
-
-        // Event listeners
-        mobileMenuBtn.addEventListener('click', openMobileMenu);
-        mobileCloseBtn.addEventListener('click', closeMobileMenu);
-        navOverlay.addEventListener('click', closeMobileMenu);
-
-        // Close mobile menu when clicking on links
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-
-        // Initialize
-        addContentSpacing();
-        setActivePage();
-
-        // Recalculate on resize
-        window.addEventListener('resize', addContentSpacing);
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeMobileMenu();
-            }
-        });
+    // Close mobile menu when clicking on links
+    document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
     });
+
+    // Initialize
+    addContentSpacing();
+    setActivePage();
+
+    // Recalculate on resize
+    window.addEventListener("resize", addContentSpacing);
+
+    // Keyboard navigation
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closeMobileMenu();
+      }
+    });
+  });
 </script>
