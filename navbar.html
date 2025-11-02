@@ -38,15 +38,16 @@
               <span>Booking</span>
             </a>
           </li>
-
           <li class="nav-item">
             <a
               href="contributors.html"
               class="nav-link"
               data-page="contributors"
             >
-              <i class="fas fa-calendar-check"></i>
+              <i class="fas fa-users"></i>
               <span>Contributors</span>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="pricing.html" class="nav-link" data-page="pricing">
               <i class="fas fa-tags"></i>
@@ -86,10 +87,6 @@
           <a href="#login" class="login-btn">
             <i class="fas fa-user"></i>
             <span>Login</span>
-          </a>
-          <a href="quote.html" class="cta-btn">
-             <i class="fas fa-file-invoice"></i>
-             <span>Get Quote</span>
           </a>
         </div>
       </nav>
@@ -144,6 +141,12 @@
           <a href="booking.html" class="mobile-nav-link">
             <i class="fas fa-calendar-check"></i>
             <span>Booking</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="contributors.html" class="mobile-nav-link">
+            <i class="fas fa-users"></i>
+            <span>Contributors</span>
           </a>
         </li>
         <li class="mobile-nav-item">
@@ -235,9 +238,9 @@
   }
 
   .navbar-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 5px;
   }
 
   .navbar {
@@ -249,16 +252,16 @@
     gap: 30px;
   }
 
-  /* Logo Styles - Fixed to be first element */
+  /* Logo Styles - Fixed alignment */
   .logo-container {
     flex-shrink: 0;
-    order: 1;
-    /* Ensures logo is first */
+    display: flex;
+    align-items: center;
   }
 
-  .left-logo {
-    width: 120px;
-    height: 60px;
+ .left-logo {
+    width: 110px;
+    height: 55px;
   }
 
   .logo-img {
@@ -272,22 +275,22 @@
     transform: scale(1.05);
   }
 
-  /* Desktop Navigation */
+  /* Desktop Navigation - Fixed alignment */
   .desktop-nav {
     display: flex;
     align-items: center;
-    order: 2;
-    /* Navigation comes after logo */
     flex: 1;
-    justify-content: center;
+    justify-content: space-between;
+    margin-left: 20px;
   }
 
   .nav-list {
     display: flex;
     list-style: none;
-    gap: 3px;
+    gap: 8px;
     margin: 0;
     padding: 0;
+    align-items: center;
   }
 
   .nav-item {
@@ -298,7 +301,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 9px 12px;
+    padding: 10px 14px;
     color: white;
     text-decoration: none;
     border-radius: 6px;
@@ -308,6 +311,8 @@
     position: relative;
     overflow: hidden;
     white-space: nowrap;
+    height: 40px;
+    box-sizing: border-box;
   }
 
   .nav-link i {
@@ -359,13 +364,11 @@
     box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
   }
 
-  /* Right Actions */
+  /* Right Actions - Fixed alignment */
   .nav-actions {
     display: flex;
     align-items: center;
     gap: 12px;
-    order: 3;
-    /* Actions come last */
     flex-shrink: 0;
     margin-left: 15px;
     padding-left: 15px;
@@ -385,6 +388,8 @@
     font-weight: 500;
     font-size: 0.85rem;
     white-space: nowrap;
+    height: 36px;
+    box-sizing: border-box;
   }
 
   .enquiry-link:hover,
@@ -407,6 +412,8 @@
     backdrop-filter: blur(10px);
     font-size: 0.85rem;
     white-space: nowrap;
+    height: 36px;
+    box-sizing: border-box;
   }
 
   .login-btn:hover {
@@ -431,6 +438,7 @@
     font-size: 0.9rem;
     white-space: nowrap;
     min-height: 36px;
+    box-sizing: border-box;
   }
 
   .cta-btn:hover {
@@ -448,7 +456,6 @@
     cursor: pointer;
     padding: 8px;
     gap: 4px;
-    order: 4;
   }
 
   .menu-bar {
@@ -656,7 +663,7 @@
   /* Responsive Design */
   @media (max-width: 1200px) {
     .nav-list {
-      gap: 2px;
+      gap: 6px;
     }
 
     .nav-link {
