@@ -680,8 +680,8 @@
 
       // Points mapping based on PR labels
       const POINTS_MAPPING = {
-        level1: 3,
-        level2: 7,
+        level1: 2,
+        level2: 5,
         level3: 11,
       };
 
@@ -706,11 +706,13 @@
           );
           if (!response.ok) throw new Error("Failed to load contributors");
 
-          const contributors = await response.json();
+          const filteredContributorsList = contributors.filter(
+            (c) => c.login.toLowerCase() !== GITHUB_OWNER.toLowerCase()
+          );
 
           // Fetch extra info, PR counts, and calculate points
           allContributors = await Promise.all(
-            contributors.map(async (c) => {
+            filteredContributorsList.map(async (c) => {
               const userResponse = await fetch(
                 `https://api.github.com/users/${c.login}`,
                 { headers }
