@@ -179,7 +179,7 @@
           }
         };
         window.requestAnimationFrame(step);
-      };
+    }});
 
       // Start counters when hero section is in view
       const heroObserver = new IntersectionObserver((entries) => {
@@ -264,7 +264,6 @@
           document.querySelector('.hero-fallback').style.display = 'block';
         });
       }
-    });
   </script>
 
   <!-- Services Section -->
@@ -283,7 +282,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Door-to-Door Transport</h3>
-          <p>Convenient pickup from your location and delivery to your destination. We handle everything from start to
+          <p>Convenient pickup from your location and delivery to your destination. We handle everything from start
+            to
             finish.</p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Home pickup & delivery</li>
@@ -307,7 +307,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Nationwide Coverage</h3>
-          <p>Transport your vehicle to any corner of India with our extensive network of trusted partners and carriers.
+          <p>Transport your vehicle to any corner of India with our extensive network of trusted partners and
+            carriers.
           </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> 500+ cities covered</li>
@@ -330,7 +331,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Safe & Secure Transport</h3>
-          <p>Your vehicle's safety is our top priority. We use advanced equipment and follow strict safety protocols.
+          <p>Your vehicle's safety is our top priority. We use advanced equipment and follow strict safety
+            protocols.
           </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Full insurance coverage</li>
@@ -353,7 +355,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Luxury Car Transport</h3>
-          <p>Specialized handling for luxury and high-value vehicles with extra care and premium service standards.</p>
+          <p>Specialized handling for luxury and high-value vehicles with extra care and premium service standards.
+          </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Climate-controlled carriers</li>
             <li><i class="fas fa-check"></i> White-glove service</li>
@@ -375,7 +378,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Bike Transportation</h3>
-          <p>Safe and secure transportation for motorcycles and bikes with specialized handling and secure mounting.</p>
+          <p>Safe and secure transportation for motorcycles and bikes with specialized handling and secure mounting.
+          </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Special bike carriers</li>
             <li><i class="fas fa-check"></i> Secure mounting</li>
@@ -397,7 +401,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Commercial Vehicles</h3>
-          <p>Transportation solutions for commercial vehicles including trucks, vans, and other business vehicles.</p>
+          <p>Transportation solutions for commercial vehicles including trucks, vans, and other business vehicles.
+          </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Heavy vehicle carriers</li>
             <li><i class="fas fa-check"></i> Business solutions</li>
@@ -411,92 +416,105 @@
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Service Stats -->
-      <div class="service-stats">
-        <div class="stat-item">
-          <div class="stat-number" data-target="5000">0</div>
-          <div class="stat-label">Vehicles Transported</div>
+        <!-- Service Stats -->
+        <div class="service-stats">
+          <div class="stat-item">
+            <div class="stat-number" data-target="5000">0</div>
+            <div class="stat-label">Vehicles Transported</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="50">0</div>
+            <div class="stat-label">Cities Covered</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-label">% Satisfaction</div>
+          </div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="50">0</div>
-          <div class="stat-label">Cities Covered</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="12">0</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="98">0</div>
-          <div class="stat-label">% Satisfaction</div>
+
+        <!-- Pricing CTA -->
+        <div class="pricing-cta-section">
+          <div class="pricing-cta-content">
+            <h3>Compare Our Pricing Plans</h3>
+            <p>Transparent pricing for every transportation need. Choose the perfect plan that fits your budget and
+              requirements.</p>
+            <a href="pricing.html" class="cta-btn primary">
+              <i class="fas fa-tags"></i>
+              <span>View Pricing Plans</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <script>
-    // Services Section Functionality
-    document.addEventListener('DOMContentLoaded', function () {
-      // Service button clicks
-      const serviceButtons = document.querySelectorAll('.service-btn');
-      serviceButtons.forEach(button => {
-        button.addEventListener('click', function () {
-          const service = this.getAttribute('data-service');
-          const serviceName = this.closest('.service-card').querySelector('h3').textContent;
+      // Services Section Functionality
+      document.addEventListener('DOMContentLoaded', function () {
+        // Service button clicks
+        const serviceButtons = document.querySelectorAll('.service-btn');
+        serviceButtons.forEach(button => {
+          button.addEventListener('click', function () {
+            const service = this.getAttribute('data-service');
+            const serviceName = this.closest('.service-card').querySelector('h3').textContent;
 
-          // Show service modal or redirect
-          alert(`Thank you for your interest in our ${serviceName} service! Our team will contact you shortly.`);
+            // Show service modal or redirect
+            alert(`Thank you for your interest in our ${serviceName} service! Our team will contact you shortly.`);
 
-          // You can replace this with actual modal or redirect logic
-          // window.location.href = `contact.html?service=${service}`;
+            // You can replace this with actual modal or redirect logic
+            // window.location.href = `contact.html?service=${service}`;
+          });
         });
-      });
 
-      // Animated counter for stats
-      const statNumbers = document.querySelectorAll('.stat-number');
+        // Animated counter for stats
+        const statNumbers = document.querySelectorAll('.stat-number');
 
-      const animateValue = (element, start, end, duration) => {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-          if (!startTimestamp) startTimestamp = timestamp;
-          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-          const value = Math.floor(progress * (end - start) + start);
-          element.textContent = value + (element.getAttribute('data-target') === '98' ? '%' : '+');
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          }
+        const animateValue = (element, start, end, duration) => {
+          let startTimestamp = null;
+          const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.textContent = value + (element.getAttribute('data-target') === '98' ? '%' : '+');
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            }
+          };
+          window.requestAnimationFrame(step);
         };
-        window.requestAnimationFrame(step);
-      };
 
-      // Intersection Observer for stats animation
-      const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            statNumbers.forEach(stat => {
-              const target = parseInt(stat.getAttribute('data-target'));
-              animateValue(stat, 0, target, 2000);
-            });
-            statsObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
+        // Intersection Observer for stats animation
+        const statsObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                animateValue(stat, 0, target, 2000);
+              });
+              statsObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
 
-      statsObserver.observe(document.querySelector('.service-stats'));
+        statsObserver.observe(document.querySelector('.service-stats'));
 
-      // Hover effects for service cards
-      const serviceCards = document.querySelectorAll('.service-card');
-      serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', function () {
-          this.style.zIndex = '10';
-        });
+        // Hover effects for service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+          card.addEventListener('mouseenter', function () {
+            this.style.zIndex = '10';
+          });
 
-        card.addEventListener('mouseleave', function () {
-          this.style.zIndex = '1';
+          card.addEventListener('mouseleave', function () {
+            this.style.zIndex = '1';
+          });
         });
       });
-    });
   </script>
 
   <!-- Testimonials Section -->
@@ -652,63 +670,63 @@
 
 
   <script>
-    // Testimonial Slider Functionality
-    document.addEventListener("DOMContentLoaded", function () {
-      const sliderContainer = document.getElementById("sliderContainer");
-      const slides = document.querySelectorAll(".testimonial-card");
-      const dots = document.querySelectorAll(".dot");
-      const prevBtn = document.querySelector(".prev-btn");
-      const nextBtn = document.querySelector(".next-btn");
+      // Testimonial Slider Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const sliderContainer = document.getElementById("sliderContainer");
+        const slides = document.querySelectorAll(".testimonial-card");
+        const dots = document.querySelectorAll(".dot");
+        const prevBtn = document.querySelector(".prev-btn");
+        const nextBtn = document.querySelector(".next-btn");
 
-      let currentSlide = 0;
-      const totalSlides = slides.length;
+        let currentSlide = 0;
+        const totalSlides = slides.length;
 
-      // Update slider position
-      function updateSlider() {
-        sliderContainer.style.transform = `translateX(-${currentSlide * 100
-          }%)`;
+        // Update slider position
+        function updateSlider() {
+          sliderContainer.style.transform = `translateX(-${currentSlide * 100
+            }%)`;
 
-        // Update dots
-        dots.forEach((dot, index) => {
-          dot.classList.toggle("active", index === currentSlide);
-        });
-      }
+          // Update dots
+          dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentSlide);
+          });
+        }
 
-      // Next slide
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateSlider();
-      }
-
-      // Previous slide
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateSlider();
-      }
-
-      // Event listeners
-      nextBtn.addEventListener("click", nextSlide);
-      prevBtn.addEventListener("click", prevSlide);
-
-      // Dot click events
-      dots.forEach((dot, index) => {
-        dot.addEventListener("click", () => {
-          currentSlide = index;
+        // Next slide
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % totalSlides;
           updateSlider();
+        }
+
+        // Previous slide
+        function prevSlide() {
+          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+          updateSlider();
+        }
+
+        // Event listeners
+        nextBtn.addEventListener("click", nextSlide);
+        prevBtn.addEventListener("click", prevSlide);
+
+        // Dot click events
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            currentSlide = index;
+            updateSlider();
+          });
         });
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Pause auto-slide on hover
+        const slider = document.querySelector(".testimonial-slider");
+        slider.addEventListener("mouseenter", () => {
+          clearInterval(autoSlide);
+        });
+
+        let autoSlide = setInterval(nextSlide, 5000);
       });
-
-      // Auto slide every 5 seconds
-      setInterval(nextSlide, 5000);
-
-      // Pause auto-slide on hover
-      const slider = document.querySelector(".testimonial-slider");
-      slider.addEventListener("mouseenter", () => {
-        clearInterval(autoSlide);
-      });
-
-      let autoSlide = setInterval(nextSlide, 5000);
-    });
   </script>
 
   <!-- Contact CTA Section -->
@@ -784,6 +802,31 @@
       </div>
     </div>
   </section>
+  <section class="features" id="features">
+  <h2 class="section-title">Our Features</h2>
+  <div class="features-container">
+    <div class="feature-box">
+      🚗
+      <h3>Fast Delivery</h3>
+      <p>We ensure timely and safe transport of your vehicle to the destination.</p>
+    </div>
+    <div class="feature-box">
+      💰
+      <h3>Affordable Rates</h3>
+      <p>Get the best service at budget-friendly prices without hidden charges.</p>
+    </div>
+    <div class="feature-box">
+      🛡️
+      <h3>Full Insurance</h3>
+      <p>Your vehicle is fully insured during the entire transport process.</p>
+    </div>
+    <div class="feature-box">
+      📞
+      <h3>24/7 Support</h3>
+      <p>Our support team is available anytime to assist with your queries.</p>
+    </div>
+  </div>
+</section>
   <!-- Footer Section -->
 <div id="footer-container"></div>
 
@@ -803,71 +846,46 @@
       <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script>
-      // Back to Top Functionality
-      const backToTopButton = document.getElementById("backToTop");
-
-      window.addEventListener("scroll", () => {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add("visible");
-        } else {
-          backToTopButton.classList.remove("visible");
-        }
-      });
-
   <script>
-    // Contact Form Functionality
-    document.addEventListener("DOMContentLoaded", function () {
-      const contactForm = document.getElementById("contactForm");
+      // Contact Form Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contactForm");
 
-      contactForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
 
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = contactForm.querySelector('input[type="text"]').value;
-        const phone = contactForm.querySelector('input[type="tel"]').value;
-        const email = contactForm.querySelector('input[type="email"]').value;
-        const vehicleType = contactForm.querySelector("select").value;
+          // Get form data
+          const formData = new FormData(contactForm);
+          const name = contactForm.querySelector('input[type="text"]').value;
+          const phone = contactForm.querySelector('input[type="tel"]').value;
+          const email = contactForm.querySelector('input[type="email"]').value;
+          const vehicleType = contactForm.querySelector("select").value;
 
-        // Simulate form submission
-        const submitBtn = contactForm.querySelector(".submit-btn");
-        const originalText = submitBtn.innerHTML;
+          // Simulate form submission
+          const submitBtn = contactForm.querySelector(".submit-btn");
+          const originalText = submitBtn.innerHTML;
 
-        // Show loading state
-        submitBtn.innerHTML =
-          '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
-        submitBtn.disabled = true;
+          // Show loading state
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+          submitBtn.disabled = true;
 
-        // Simulate API call
-        setTimeout(() => {
-          // Show success message
-          alert(
-            `Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`
-          );
+          // Simulate API call
+          setTimeout(() => {
+            // Show success message
+            alert(
+              `Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`
+            );
 
-          // Reset form
-          contactForm.reset();
+            // Reset form
+            contactForm.reset();
 
-          // Reset button
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }, 2000);
-      });
-
-      // Add input animations
-      const inputs = document.querySelectorAll(
-        ".input-group input, .input-group select"
-      );
-      inputs.forEach((input) => {
-        input.addEventListener("focus", function () {
-          this.parentElement.style.transform = "scale(1.02)";
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          }, 2000);
         });
 
-        input.addEventListener("blur", function () {
-          this.parentElement.style.transform = "scale(1)";
-        });
-      });
 
       // Phone number formatting
       const phoneInput = contactForm.querySelector('input[type="tel"]');
@@ -924,30 +942,31 @@
         backToTopButton.classList.remove("visible");
       }
     });
+        // Add input animations
+        const inputs = document.querySelectorAll(
+          ".input-group input, .input-group select"
+        );
+        inputs.forEach((input) => {
+          input.addEventListener("focus", function () {
+            this.parentElement.style.transform = "scale(1.02)";
+          });
 
-    backToTopButton.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
+          input.addEventListener("blur", function () {
+            this.parentElement.style.transform = "scale(1)";
+          });
+        });
+
+        // Phone number formatting
+        const phoneInput = contactForm.querySelector('input[type="tel"]');
+        phoneInput.addEventListener("input", function (e) {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length > 0) {
+            value = value.match(/.{1,5}/g).join(" ");
+          }
+          e.target.value = value;
+        });
       });
-    });
-
-    // Newsletter Form Submission
-    const newsletterForm = document.querySelector(".newsletter-input");
-    const emailInput = newsletterForm.querySelector("input");
-
-    newsletterForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = emailInput.value.trim();
-
-      if (email) {
-        alert(`Thank you for subscribing with: ${email}`);
-        emailInput.value = "";
-      } else {
-        alert("Please enter a valid email address");
-      }
-    });
-  </script>
+      </script>
 
   <script src="./js/script.js"></script>
 </body>
