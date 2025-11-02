@@ -199,6 +199,15 @@
         quickQuoteForm.addEventListener('submit', function (e) {
           e.preventDefault();
 
+
+      // Quick quote form functionality
+      const quickQuoteForm = document.getElementById('quickQuoteForm');
+      const quoteResult = document.getElementById('quoteResult');
+
+      if (quickQuoteForm) {
+        quickQuoteForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+
           const fromCity = document.getElementById('fromCity').value;
           const toCity = document.getElementById('toCity').value;
           const vehicleType = document.getElementById('vehicleType').value;
@@ -250,6 +259,26 @@
           }
         });
       });
+
+      // Video fallback for mobile
+      const video = document.querySelector('.hero-video');
+      if (video) {
+        video.addEventListener('error', function () {
+          this.style.display = 'none';
+          document.querySelector('.hero-fallback').style.display = 'block';
+        });
+      }
+    });
+  </script>
+
+  <!-- Services Section -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Premium Services</h2>
+        <p>Comprehensive vehicle transportation solutions tailored to your needs</p>
+      </div>
+
 
       // Video fallback for mobile
       const video = document.querySelector('.hero-video');
@@ -402,11 +431,22 @@
             <span class="price">Custom Pricing</span>
             <button class="service-btn" data-service="commercial">
               <span>Get Quote</span>
+          </div>
+          <h3>Bike Transportation</h3>
+          <p>Safe and secure transportation for motorcycles and bikes with specialized handling and secure mounting.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Special bike carriers</li>
+            <li><i class="fas fa-check"></i> Secure mounting</li>
+            <li><i class="fas fa-check"></i> Affordable rates</li>
+          </ul>
+          <div class="service-cta">
+            <span class="price">Starting at ₹2,000</span>
+            <button class="service-btn" data-service="bike">
+              <span>Learn More</span>
               <i class="fas fa-arrow-right"></i>
             </button>
           </div>
         </div>
-      </div>
 
       <!-- Service Stats -->
       <div class="service-stats">
@@ -438,6 +478,46 @@
             <i class="fas fa-tags"></i>
             <span>View Pricing Plans</span>
           </a>
+        <!-- Service 6 -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-truck"></i>
+            <div class="icon-bg"></div>
+          </div>
+          <h3>Commercial Vehicles</h3>
+          <p>Transportation solutions for commercial vehicles including trucks, vans, and other business vehicles.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Heavy vehicle carriers</li>
+            <li><i class="fas fa-check"></i> Business solutions</li>
+            <li><i class="fas fa-check"></i> Bulk discounts</li>
+          </ul>
+          <div class="service-cta">
+            <span class="price">Custom Pricing</span>
+            <button class="service-btn" data-service="commercial">
+              <span>Get Quote</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Stats -->
+      <div class="service-stats">
+        <div class="stat-item">
+          <div class="stat-number" data-target="5000">0</div>
+          <div class="stat-label">Vehicles Transported</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="50">0</div>
+          <div class="stat-label">Cities Covered</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="12">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="98">0</div>
+          <div class="stat-label">% Satisfaction</div>
         </div>
       </div>
     </div>
@@ -992,11 +1072,278 @@
             <i class="fab fa-cc-mastercard" title="MasterCard"></i>
             <i class="fab fa-cc-paypal" title="PayPal"></i>
             <i class="fas fa-university" title="Net Banking"></i>
+
+      // Update slider position
+      function updateSlider() {
+        sliderContainer.style.transform = `translateX(-${currentSlide * 100
+          }%)`;
+
+        // Update dots
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === currentSlide);
+        });
+      }
+
+      // Next slide
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+      }
+
+      // Previous slide
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      }
+
+      // Event listeners
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+
+      // Dot click events
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          currentSlide = index;
+          updateSlider();
+        });
+      });
+
+      // Auto slide every 5 seconds
+      setInterval(nextSlide, 5000);
+
+      // Pause auto-slide on hover
+      const slider = document.querySelector(".testimonial-slider");
+      slider.addEventListener("mouseenter", () => {
+        clearInterval(autoSlide);
+      });
+
+      let autoSlide = setInterval(nextSlide, 5000);
+    });
+  </script>
+
+  <!-- Contact CTA Section -->
+  <section class="contact-cta">
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h2>Have Any Questions About Vehicle Transport?</h2>
+          <p>
+            Our expert team is here to help you with all your car
+            transportation needs. Get instant quotes, schedule pickups, or ask
+            any questions.
+          </p>
+          <div class="cta-features">
+            <div class="feature">
+              <i class="fas fa-clock"></i>
+              <span>24/7 Customer Support</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-truck"></i>
+              <span>Instant Quote</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-shield-alt"></i>
+              <span>Insurance Covered</span>
+            </div>
+          </div>
+        </div>
+        <div class="cta-form-box">
+          <div class="form-header">
+            <h3>Get In Touch</h3>
+            <p>Quick response guaranteed</p>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Your Name" required />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-phone"></i>
+              <input type="tel" placeholder="Phone Number" required />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email Address" required />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-map-marker-alt"></i>
+              <select required>
+                <option value="">Select Vehicle Type</option>
+                <option value="hatchback">Hatchback</option>
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV</option>
+                <option value="luxury">Luxury Car</option>
+                <option value="bike">Bike</option>
+                <option value="commercial">Commercial Vehicle</option>
+              </select>
+            </div>
+            <button type="submit" class="submit-btn">
+              <span>Get Free Quote</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
+          <div class="form-footer">
+            <p>Or contact us directly</p>
+            <a href="contact.html" class="contact-link">
+              <i class="fas fa-headset"></i>
+              <span>Visit Contact Page</span>
+              <i class="fas fa-external-link-alt"></i>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script>
+    // Back to Top Functionality
+    const backToTopButton = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add("visible");
+      } else {
+        backToTopButton.classList.remove("visible");
+      }
+    });
+
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+  </section>
+  <!-- Footer Section -->
+<div id="footer-container"></div>
+
+<script>
+  // Load shared footer dynamically
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error loading footer:', error));
+</script>
+
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+      // Back to Top Functionality
+      const backToTopButton = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add("visible");
+        } else {
+          backToTopButton.classList.remove("visible");
+        }
+      });
+    });
+
+    // Newsletter Form Submission
+    const newsletterForm = document.querySelector(".newsletter-input");
+    const emailInput = newsletterForm.querySelector("input");
+
+    newsletterForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+
+      if (email) {
+        alert(`Thank you for subscribing with: ${email}`);
+        emailInput.value = "";
+      } else {
+        alert("Please enter a valid email address");
+      }
+    });
+  </script>
+
+  <script>
+    // Contact Form Functionality
+    document.addEventListener("DOMContentLoaded", function () {
+      const contactForm = document.getElementById("contactForm");
+
+      contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = contactForm.querySelector('input[type="text"]').value;
+        const phone = contactForm.querySelector('input[type="tel"]').value;
+        const email = contactForm.querySelector('input[type="email"]').value;
+        const vehicleType = contactForm.querySelector("select").value;
+
+        // Simulate form submission
+        const submitBtn = contactForm.querySelector(".submit-btn");
+        const originalText = submitBtn.innerHTML;
+
+        // Show loading state
+        submitBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+        submitBtn.disabled = true;
+
+        // Simulate API call
+        setTimeout(() => {
+          // Show success message
+          alert(
+            `Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`
+          );
+
+          // Reset form
+          contactForm.reset();
+
+          // Reset button
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 2000);
+      });
+
+      // Add input animations
+      const inputs = document.querySelectorAll(
+        ".input-group input, .input-group select"
+      );
+      inputs.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.style.transform = "scale(1.02)";
+        });
+
+        input.addEventListener("blur", function () {
+          this.parentElement.style.transform = "scale(1)";
+        });
+      });
+
+      // Phone number formatting
+      const phoneInput = contactForm.querySelector('input[type="tel"]');
+      phoneInput.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 0) {
+          value = value.match(/.{1,5}/g).join(" ");
+        }
+        e.target.value = value;
+      });
+    });
+  </script>
+
+  <!-- Footer Section -->
+  <div id="footer-container"></div>
+
+  <script>
+    // Load shared footer dynamically
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading footer:', error));
+  </script>
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">
