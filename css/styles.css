@@ -35,8 +35,10 @@ body {
 /* Enhanced Hero Section Styles */
 .hero {
   position: relative;
-  min-height: 100vh; /* use min-height instead of fixed height */
-  overflow: visible; /* allow next sections (like slider) to show */
+  min-height: 100vh;
+  /* use min-height instead of fixed height */
+  overflow: visible;
+  /* allow next sections (like slider) to show */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,12 +77,10 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(43, 43, 43, 0.9) 0%,
-    rgba(255, 99, 71, 0.2) 50%,
-    rgba(43, 43, 43, 0.8) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(43, 43, 43, 0.9) 0%,
+      rgba(255, 99, 71, 0.2) 50%,
+      rgba(43, 43, 43, 0.8) 100%);
   z-index: 2;
 }
 
@@ -130,19 +130,24 @@ body {
   position: relative;
   z-index: 4;
   width: 100%;
-  max-width: 1200px; /* ✅ Keeps content centered within a nice width */
+  max-width: 1200px;
+  /* ✅ Keeps content centered within a nice width */
   color: white;
-  margin: 0 auto; /* ✅ Centers content horizontally */
+  margin: 0 auto;
+  /* ✅ Centers content horizontally */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  display: flex; /* ✅ Changed from grid to flex for better alignment */
-  flex-direction: row; /* ✅ Keeps text and form side-by-side on desktop */
+  display: flex;
+  /* ✅ Changed from grid to flex for better alignment */
+  flex-direction: row;
+  /* ✅ Keeps text and form side-by-side on desktop */
   align-items: center;
-  justify-content: space-between; /* ✅ Centers and balances layout */
+  justify-content: space-between;
+  /* ✅ Centers and balances layout */
   gap: 60px;
 }
 
@@ -262,12 +267,10 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
   transition: left 0.5s ease;
 }
 
@@ -309,11 +312,9 @@ body {
 }
 
 .quote-card {
-  background: linear-gradient(
-    145deg,
-    rgba(43, 43, 43, 0.95),
-    rgba(51, 51, 51, 0.95)
-  );
+  background: linear-gradient(145deg,
+      rgba(43, 43, 43, 0.95),
+      rgba(51, 51, 51, 0.95));
   padding: 30px;
   border-radius: 20px;
   border: 1px solid rgba(255, 99, 71, 0.2);
@@ -474,16 +475,19 @@ body {
 
 /* Animations */
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-20px) rotate(180deg);
   }
 }
 
 @keyframes bounce {
+
   0%,
   20%,
   50%,
@@ -491,9 +495,11 @@ body {
   100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-10px);
   }
+
   60% {
     transform: translateY(-5px);
   }
@@ -504,6 +510,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -590,6 +597,7 @@ body {
   .hero-video {
     display: none;
   }
+
   .hero-fallback {
     display: block;
   }
@@ -638,8 +646,7 @@ h2 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
-    center/cover;
+  background: url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") center/cover;
   opacity: 0.1;
 }
 
@@ -850,6 +857,7 @@ h2 {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -929,8 +937,7 @@ h2 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
-    center/cover;
+  background: url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") center/cover;
   opacity: 0.05;
 }
 
@@ -1148,8 +1155,10 @@ h2 {
   border-radius: 20px;
   border: 1px solid rgba(255, 99, 71, 0.2);
   width: 100%;
-  max-width: 1200px; /* centers stats properly */
-  margin: 0 auto; /* centers inside page */
+  max-width: 1200px;
+  /* centers stats properly */
+  margin: 0 auto;
+  /* centers inside page */
   box-sizing: border-box;
 }
 
@@ -1226,6 +1235,7 @@ h2 {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1240,18 +1250,23 @@ h2 {
 .service-card:nth-child(1) {
   animation-delay: 0.1s;
 }
+
 .service-card:nth-child(2) {
   animation-delay: 0.2s;
 }
+
 .service-card:nth-child(3) {
   animation-delay: 0.3s;
 }
+
 .service-card:nth-child(4) {
   animation-delay: 0.4s;
 }
+
 .service-card:nth-child(5) {
   animation-delay: 0.5s;
 }
+
 .service-card:nth-child(6) {
   animation-delay: 0.6s;
 }
@@ -1549,7 +1564,71 @@ h2 {
   }
 }
 
+/* Pricing CTA Section */
+.pricing-cta-section {
+  margin-top: 60px;
+  padding: 50px 40px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  border-radius: 20px;
+  text-align: center;
+  animation: slideUp 0.8s ease-out;
+}
+
+.pricing-cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pricing-cta-content h3 {
+  font-size: 2em;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.pricing-cta-content p {
+  font-size: 1.05em;
+  color: #cccccc;
+  max-width: 500px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.pricing-cta-section .cta-btn {
+  margin-top: 10px;
+  padding: 14px 40px;
+  font-size: 1.05em;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 768px) {
+  .pricing-cta-section {
+    padding: 30px 20px;
+    margin-top: 40px;
+  }
+
+  .pricing-cta-content h3 {
+    font-size: 1.5em;
+  }
+
+  .pricing-cta-content p {
+    font-size: 0.95em;
+  }
+
   .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;
