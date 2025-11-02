@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Harihar Car Carriers</title>
-  <link rel="icon" type="image/png" href="classic-car.png">
   <link rel="stylesheet" href="./css/styles.css" />
   <link rel="stylesheet" href="./css/testimonial.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -260,7 +259,6 @@
           document.querySelector('.hero-fallback').style.display = 'block';
         });
       }
-    });
   </script>
 
   <!-- Services Section -->
@@ -279,7 +277,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Door-to-Door Transport</h3>
-          <p>Convenient pickup from your location and delivery to your destination. We handle everything from start to
+          <p>Convenient pickup from your location and delivery to your destination. We handle everything from start
+            to
             finish.</p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Home pickup & delivery</li>
@@ -303,7 +302,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Nationwide Coverage</h3>
-          <p>Transport your vehicle to any corner of India with our extensive network of trusted partners and carriers.
+          <p>Transport your vehicle to any corner of India with our extensive network of trusted partners and
+            carriers.
           </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> 500+ cities covered</li>
@@ -326,7 +326,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Safe & Secure Transport</h3>
-          <p>Your vehicle's safety is our top priority. We use advanced equipment and follow strict safety protocols.
+          <p>Your vehicle's safety is our top priority. We use advanced equipment and follow strict safety
+            protocols.
           </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Full insurance coverage</li>
@@ -349,7 +350,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Luxury Car Transport</h3>
-          <p>Specialized handling for luxury and high-value vehicles with extra care and premium service standards.</p>
+          <p>Specialized handling for luxury and high-value vehicles with extra care and premium service standards.
+          </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Climate-controlled carriers</li>
             <li><i class="fas fa-check"></i> White-glove service</li>
@@ -371,7 +373,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Bike Transportation</h3>
-          <p>Safe and secure transportation for motorcycles and bikes with specialized handling and secure mounting.</p>
+          <p>Safe and secure transportation for motorcycles and bikes with specialized handling and secure mounting.
+          </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Special bike carriers</li>
             <li><i class="fas fa-check"></i> Secure mounting</li>
@@ -393,7 +396,8 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Commercial Vehicles</h3>
-          <p>Transportation solutions for commercial vehicles including trucks, vans, and other business vehicles.</p>
+          <p>Transportation solutions for commercial vehicles including trucks, vans, and other business vehicles.
+          </p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Heavy vehicle carriers</li>
             <li><i class="fas fa-check"></i> Business solutions</li>
@@ -407,92 +411,105 @@
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Service Stats -->
-      <div class="service-stats">
-        <div class="stat-item">
-          <div class="stat-number" data-target="5000">0</div>
-          <div class="stat-label">Vehicles Transported</div>
+        <!-- Service Stats -->
+        <div class="service-stats">
+          <div class="stat-item">
+            <div class="stat-number" data-target="5000">0</div>
+            <div class="stat-label">Vehicles Transported</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="50">0</div>
+            <div class="stat-label">Cities Covered</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-label">% Satisfaction</div>
+          </div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="50">0</div>
-          <div class="stat-label">Cities Covered</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="12">0</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="98">0</div>
-          <div class="stat-label">% Satisfaction</div>
+
+        <!-- Pricing CTA -->
+        <div class="pricing-cta-section">
+          <div class="pricing-cta-content">
+            <h3>Compare Our Pricing Plans</h3>
+            <p>Transparent pricing for every transportation need. Choose the perfect plan that fits your budget and
+              requirements.</p>
+            <a href="pricing.html" class="cta-btn primary">
+              <i class="fas fa-tags"></i>
+              <span>View Pricing Plans</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <script>
-    // Services Section Functionality
-    document.addEventListener('DOMContentLoaded', function () {
-      // Service button clicks
-      const serviceButtons = document.querySelectorAll('.service-btn');
-      serviceButtons.forEach(button => {
-        button.addEventListener('click', function () {
-          const service = this.getAttribute('data-service');
-          const serviceName = this.closest('.service-card').querySelector('h3').textContent;
+      // Services Section Functionality
+      document.addEventListener('DOMContentLoaded', function () {
+        // Service button clicks
+        const serviceButtons = document.querySelectorAll('.service-btn');
+        serviceButtons.forEach(button => {
+          button.addEventListener('click', function () {
+            const service = this.getAttribute('data-service');
+            const serviceName = this.closest('.service-card').querySelector('h3').textContent;
 
-          // Show service modal or redirect
-          alert(`Thank you for your interest in our ${serviceName} service! Our team will contact you shortly.`);
+            // Show service modal or redirect
+            alert(`Thank you for your interest in our ${serviceName} service! Our team will contact you shortly.`);
 
-          // You can replace this with actual modal or redirect logic
-          // window.location.href = `contact.html?service=${service}`;
+            // You can replace this with actual modal or redirect logic
+            // window.location.href = `contact.html?service=${service}`;
+          });
         });
-      });
 
-      // Animated counter for stats
-      const statNumbers = document.querySelectorAll('.stat-number');
+        // Animated counter for stats
+        const statNumbers = document.querySelectorAll('.stat-number');
 
-      const animateValue = (element, start, end, duration) => {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-          if (!startTimestamp) startTimestamp = timestamp;
-          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-          const value = Math.floor(progress * (end - start) + start);
-          element.textContent = value + (element.getAttribute('data-target') === '98' ? '%' : '+');
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          }
+        const animateValue = (element, start, end, duration) => {
+          let startTimestamp = null;
+          const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.textContent = value + (element.getAttribute('data-target') === '98' ? '%' : '+');
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            }
+          };
+          window.requestAnimationFrame(step);
         };
-        window.requestAnimationFrame(step);
-      };
 
-      // Intersection Observer for stats animation
-      const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            statNumbers.forEach(stat => {
-              const target = parseInt(stat.getAttribute('data-target'));
-              animateValue(stat, 0, target, 2000);
-            });
-            statsObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
+        // Intersection Observer for stats animation
+        const statsObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                animateValue(stat, 0, target, 2000);
+              });
+              statsObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
 
-      statsObserver.observe(document.querySelector('.service-stats'));
+        statsObserver.observe(document.querySelector('.service-stats'));
 
-      // Hover effects for service cards
-      const serviceCards = document.querySelectorAll('.service-card');
-      serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', function () {
-          this.style.zIndex = '10';
-        });
+        // Hover effects for service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+          card.addEventListener('mouseenter', function () {
+            this.style.zIndex = '10';
+          });
 
-        card.addEventListener('mouseleave', function () {
-          this.style.zIndex = '1';
+          card.addEventListener('mouseleave', function () {
+            this.style.zIndex = '1';
+          });
         });
       });
-    });
   </script>
 
   <!-- Testimonials Section -->
@@ -648,63 +665,63 @@
 
 
   <script>
-    // Testimonial Slider Functionality
-    document.addEventListener("DOMContentLoaded", function () {
-      const sliderContainer = document.getElementById("sliderContainer");
-      const slides = document.querySelectorAll(".testimonial-card");
-      const dots = document.querySelectorAll(".dot");
-      const prevBtn = document.querySelector(".prev-btn");
-      const nextBtn = document.querySelector(".next-btn");
+      // Testimonial Slider Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const sliderContainer = document.getElementById("sliderContainer");
+        const slides = document.querySelectorAll(".testimonial-card");
+        const dots = document.querySelectorAll(".dot");
+        const prevBtn = document.querySelector(".prev-btn");
+        const nextBtn = document.querySelector(".next-btn");
 
-      let currentSlide = 0;
-      const totalSlides = slides.length;
+        let currentSlide = 0;
+        const totalSlides = slides.length;
 
-      // Update slider position
-      function updateSlider() {
-        sliderContainer.style.transform = `translateX(-${currentSlide * 100
-          }%)`;
+        // Update slider position
+        function updateSlider() {
+          sliderContainer.style.transform = `translateX(-${currentSlide * 100
+            }%)`;
 
-        // Update dots
-        dots.forEach((dot, index) => {
-          dot.classList.toggle("active", index === currentSlide);
-        });
-      }
+          // Update dots
+          dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentSlide);
+          });
+        }
 
-      // Next slide
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateSlider();
-      }
-
-      // Previous slide
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateSlider();
-      }
-
-      // Event listeners
-      nextBtn.addEventListener("click", nextSlide);
-      prevBtn.addEventListener("click", prevSlide);
-
-      // Dot click events
-      dots.forEach((dot, index) => {
-        dot.addEventListener("click", () => {
-          currentSlide = index;
+        // Next slide
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % totalSlides;
           updateSlider();
+        }
+
+        // Previous slide
+        function prevSlide() {
+          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+          updateSlider();
+        }
+
+        // Event listeners
+        nextBtn.addEventListener("click", nextSlide);
+        prevBtn.addEventListener("click", prevSlide);
+
+        // Dot click events
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            currentSlide = index;
+            updateSlider();
+          });
         });
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Pause auto-slide on hover
+        const slider = document.querySelector(".testimonial-slider");
+        slider.addEventListener("mouseenter", () => {
+          clearInterval(autoSlide);
+        });
+
+        let autoSlide = setInterval(nextSlide, 5000);
       });
-
-      // Auto slide every 5 seconds
-      setInterval(nextSlide, 5000);
-
-      // Pause auto-slide on hover
-      const slider = document.querySelector(".testimonial-slider");
-      slider.addEventListener("mouseenter", () => {
-        clearInterval(autoSlide);
-      });
-
-      let autoSlide = setInterval(nextSlide, 5000);
-    });
   </script>
 
   <!-- Contact CTA Section -->
@@ -780,115 +797,212 @@
       </div>
     </div>
   </section>
-  <!-- Footer Section -->
-<div id="footer-container"></div>
-
-<script>
-  // Load shared footer dynamically
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    })
-    .catch(error => console.error('Error loading footer:', error));
-</script>
-
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
-      <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <script>
-      // Back to Top Functionality
-      const backToTopButton = document.getElementById("backToTop");
-
-      window.addEventListener("scroll", () => {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add("visible");
-        } else {
-          backToTopButton.classList.remove("visible");
-        }
-      });
 
   <script>
-    // Contact Form Functionality
-    document.addEventListener("DOMContentLoaded", function () {
-      const contactForm = document.getElementById("contactForm");
+      // Contact Form Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contactForm");
 
-      contactForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
 
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = contactForm.querySelector('input[type="text"]').value;
-        const phone = contactForm.querySelector('input[type="tel"]').value;
-        const email = contactForm.querySelector('input[type="email"]').value;
-        const vehicleType = contactForm.querySelector("select").value;
+          // Get form data
+          const formData = new FormData(contactForm);
+          const name = contactForm.querySelector('input[type="text"]').value;
+          const phone = contactForm.querySelector('input[type="tel"]').value;
+          const email = contactForm.querySelector('input[type="email"]').value;
+          const vehicleType = contactForm.querySelector("select").value;
 
-        // Simulate form submission
-        const submitBtn = contactForm.querySelector(".submit-btn");
-        const originalText = submitBtn.innerHTML;
+          // Simulate form submission
+          const submitBtn = contactForm.querySelector(".submit-btn");
+          const originalText = submitBtn.innerHTML;
 
-        // Show loading state
-        submitBtn.innerHTML =
-          '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
-        submitBtn.disabled = true;
+          // Show loading state
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+          submitBtn.disabled = true;
 
-        // Simulate API call
-        setTimeout(() => {
-          // Show success message
-          alert(
-            `Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`
-          );
+          // Simulate API call
+          setTimeout(() => {
+            // Show success message
+            alert(
+              `Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`
+            );
 
-          // Reset form
-          contactForm.reset();
+            // Reset form
+            contactForm.reset();
 
-          // Reset button
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }, 2000);
-      });
-
-      // Add input animations
-      const inputs = document.querySelectorAll(
-        ".input-group input, .input-group select"
-      );
-      inputs.forEach((input) => {
-        input.addEventListener("focus", function () {
-          this.parentElement.style.transform = "scale(1.02)";
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          }, 2000);
         });
 
-        input.addEventListener("blur", function () {
-          this.parentElement.style.transform = "scale(1)";
+        // Add input animations
+        const inputs = document.querySelectorAll(
+          ".input-group input, .input-group select"
+        );
+        inputs.forEach((input) => {
+          input.addEventListener("focus", function () {
+            this.parentElement.style.transform = "scale(1.02)";
+          });
+
+          input.addEventListener("blur", function () {
+            this.parentElement.style.transform = "scale(1)";
+          });
+        });
+
+        // Phone number formatting
+        const phoneInput = contactForm.querySelector('input[type="tel"]');
+        phoneInput.addEventListener("input", function (e) {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length > 0) {
+            value = value.match(/.{1,5}/g).join(" ");
+          }
+          e.target.value = value;
         });
       });
-
-      // Phone number formatting
-      const phoneInput = contactForm.querySelector('input[type="tel"]');
-      phoneInput.addEventListener("input", function (e) {
-        let value = e.target.value.replace(/\D/g, "");
-        if (value.length > 0) {
-          value = value.match(/.{1,5}/g).join(" ");
-        }
-        e.target.value = value;
-      });
-    });
   </script>
 
   <!-- Footer Section -->
-  <div id="footer-container"></div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <!-- Company Info Column -->
+        <div class="footer-column footer-about">
+          <div class="footer-logo">
+            <img src="assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+            <span class="footer-logo-text">Harihar Car Carriers</span>
+          </div>
+          <p>
+            Your trusted partner for safe and reliable vehicle transportation
+            across India. With over 12 years of experience, we ensure your
+            vehicles reach their destination securely and on time.
+          </p>
 
-  <script>
-    // Load shared footer dynamically
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-container').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading footer:', error));
-  </script>
+          <div class="social-links">
+            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links Column -->
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li>
+              <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+            </li>
+            <li>
+              <a href="#services"><i class="fas fa-truck-moving"></i> Services</a>
+            </li>
+            <li>
+              <a href="#gallery"><i class="fas fa-images"></i> Gallery</a>
+            </li>
+            <li>
+              <a href="#contact"><i class="fas fa-phone"></i> Contact</a>
+            </li>
+            <li>
+              <a href="#enquiry"><i class="fas fa-question-circle"></i> Enquiry</a>
+            </li>
+            <li>
+              <a href="#blog"><i class="fas fa-blog"></i> Blog</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Services Column -->
+        <div class="footer-column">
+          <h3>Our Services</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="#door-to-door"><i class="fas fa-door-open"></i> Door-to-Door Transport</a>
+            </li>
+            <li>
+              <a href="#nationwide"><i class="fas fa-map-marked-alt"></i> Nationwide Coverage</a>
+            </li>
+            <li>
+              <a href="#commercial"><i class="fas fa-truck"></i> Commercial Vehicles</a>
+            </li>
+            <li>
+              <a href="#personal"><i class="fas fa-car"></i> Personal Vehicles</a>
+            </li>
+            <li>
+              <a href="#luxury"><i class="fas fa-gem"></i> Luxury Cars</a>
+            </li>
+            <li>
+              <a href="#bikes"><i class="fas fa-motorcycle"></i> Bike Transport</a>
+            </li>
+            <li>
+              <a href="#insurance"><i class="fas fa-shield-alt"></i> Insurance Coverage</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact & Newsletter Column -->
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Nagpur, Maharashtra, India - 440001</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>+91 XXXXX XXXXX</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>info@hariharcarcarriers.com</span>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>24/7 Customer Support<br />Emergency Services Available</span>
+            </li>
+          </ul>
+
+          <div class="newsletter-form">
+            <p>Subscribe for updates & offers</p>
+            <div class="newsletter-input">
+              <input type="email" placeholder="Enter your email" />
+              <button type="submit">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-content">
+          <div class="copyright">
+            &copy; 2024 Harihar Car Carriers. All rights reserved.
+          </div>
+
+          <div class="footer-bottom-links">
+            <a href="pages/privacy-policy.html">Privacy Policy</a>
+            <a href="pages/Terms of Services.html">Terms of Service</a>
+            <a href="#sitemap">Sitemap</a>
+          </div>
+
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa" title="Visa"></i>
+            <i class="fab fa-cc-mastercard" title="MasterCard"></i>
+            <i class="fab fa-cc-paypal" title="PayPal"></i>
+            <i class="fas fa-university" title="Net Banking"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">

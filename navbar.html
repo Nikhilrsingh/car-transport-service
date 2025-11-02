@@ -34,15 +34,10 @@
               <span>Booking</span>
             </a>
           </li>
-
-            <li class="nav-item">
-            <a
-              href="contributors.html"
-              class="nav-link"
-              data-page="contributors"
-            >
-              <i class="fas fa-calendar-check"></i>
-              <span>Contributors</span>
+          <li class="nav-item">
+            <a href="pricing.html" class="nav-link" data-page="pricing">
+              <i class="fas fa-tags"></i>
+              <span>Pricing</span>
             </a>
           </li>
           <li class="nav-item">
@@ -130,6 +125,12 @@
           <a href="booking.html" class="mobile-nav-link">
             <i class="fas fa-calendar-check"></i>
             <span>Booking</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="pricing.html" class="mobile-nav-link">
+            <i class="fas fa-tags"></i>
+            <span>Pricing</span>
           </a>
         </li>
         <li class="mobile-nav-item">
@@ -265,7 +266,7 @@
   .nav-list {
     display: flex;
     list-style: none;
-    gap: 5px;
+    gap: 3px;
     margin: 0;
     padding: 0;
   }
@@ -277,14 +278,14 @@
   .nav-link {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
+    gap: 6px;
+    padding: 9px 12px;
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.3s ease;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -341,10 +342,13 @@
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     order: 3;
     /* Actions come last */
     flex-shrink: 0;
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .enquiry-link,
@@ -352,13 +356,14 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 15px;
+    padding: 8px 12px;
     color: white;
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.3s ease;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 
   .enquiry-link:hover,
@@ -371,19 +376,20 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 16px;
+    padding: 8px 14px;
     color: white;
     text-decoration: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 99, 71, 0.5);
     border-radius: 6px;
     transition: all 0.3s ease;
     font-weight: 500;
     backdrop-filter: blur(10px);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 
   .login-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 107, 53, 0.1);
     border-color: #ff6347;
     transform: translateY(-2px);
   }
@@ -391,16 +397,19 @@
   .cta-btn {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 18px;
     background: linear-gradient(135deg, #ff6347, #ff4500);
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
     font-size: 0.9rem;
+    white-space: nowrap;
+    min-height: 36px;
   }
 
   .cta-btn:hover {
@@ -626,16 +635,41 @@
   /* Responsive Design */
   @media (max-width: 1200px) {
     .nav-list {
-      gap: 3px;
+      gap: 2px;
     }
 
     .nav-link {
-      padding: 8px 15px;
-      font-size: 0.9rem;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      gap: 4px;
+    }
+
+    .nav-link i {
+      font-size: 0.95rem;
+      width: 16px;
     }
 
     .nav-actions {
       gap: 8px;
+      margin-left: 10px;
+      padding-left: 10px;
+    }
+
+    .enquiry-link,
+    .blog-link {
+      padding: 7px 10px;
+      font-size: 0.8rem;
+    }
+
+    .login-btn {
+      padding: 7px 10px;
+      font-size: 0.8rem;
+    }
+
+    .cta-btn {
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      gap: 4px;
     }
   }
 
