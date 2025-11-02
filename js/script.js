@@ -160,7 +160,7 @@
       });
 
        // Load shared footer dynamically
-  fetch('footer.html')
+  fetch('pages/footer.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('footer-container').innerHTML = data;
@@ -219,7 +219,7 @@
     });
 
     // Load shared footer dynamically
-    fetch('footer.html')
+    fetch('pages/footer.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('footer-container').innerHTML = data;

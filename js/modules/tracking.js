@@ -115,5 +115,5 @@
     };
     xhr.send();
   }
-  includeHTML('navbar-include', 'navbar.html');
-  includeHTML('footer-include', 'footer.html');
+  includeHTML('navbar-include', '../pages/navbar.html');
+  includeHTML('footer-include', '../pages/footer.html');

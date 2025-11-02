@@ -12,7 +12,7 @@
             alert(`Thank you for your interest in our ${serviceName} service! Our team will contact you shortly.`);
 
             // You can replace this with actual modal or redirect logic
-            // window.location.href = `contact.html?service=${service}`;
+            // window.location.href = `pages/contact.html?service=${service}`;
           });
         });
 
