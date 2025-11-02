@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Car - Harihar Car Carriers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Header Navigation - Placeholder */
+        .nav-placeholder {
+            height: 80px;
+            background: #2d2d2d;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            padding: 80px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .page-header h1 i {
+            color: #ff6b35;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.3em;
+            color: #cccccc;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .breadcrumb a {
+            color: #ff6b35;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.8;
+        }
+
+        .breadcrumb span {
+            color: #666;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: -50px auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: #2d2d2d;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            border: 1px solid #3d3d3d;
+        }
+
+        .back-button:hover {
+            background: #3d3d3d;
+            transform: translateX(-5px);
+            border-color: #ff6b35;
+        }
+
+        .back-button i {
+            color: #ff6b35;
+        }
+
+        /* Tracking Form Card */
+        .tracking-card {
+            background: #2d2d2d;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            border: 1px solid #3d3d3d;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card-header h2 {
+            color: #ffffff;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .card-header p {
+            color: #aaaaaa;
+            font-size: 1.1em;
+        }
+
+        .tracking-form {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cccccc;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        label i {
+            color: #ff6b35;
+            margin-right: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #3d3d3d;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #ff6b35;
+            background: #252525;
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: #666666;
+        }
+
+        .btn-track {
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-track:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+            background: linear-gradient(135deg, #ff8c5a 0%, #ff6b35 100%);
+        }
+
+        .btn-track:active {
+            transform: translateY(0);
+        }
+
+        /* Sample IDs */
+        .sample-ids {
+            background: #252525;
+            border-left: 4px solid #ff6b35;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #3d3d3d;
+        }
+
+        .sample-ids strong {
+            color: #ff6b35;
+        }
+
+        .sample-ids .id-code {
+            display: inline-block;
+            background: #1a1a1a;
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin: 5px 5px 5px 0;
+            font-family: monospace;
+            color: #ff6b35;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #3d3d3d;
+        }
+
+        .sample-ids .id-code:hover {
+            background: #ff6b35;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Tracking Info */
+        .tracking-info {
+            background: #252525;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            border: 1px solid #3d3d3d;
+        }
+
+        .tracking-info.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tracking-info h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .tracking-info h2 i {
+            color: #ff6b35;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #ff6b35;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-item h3 {
+            font-size: 0.85em;
+            color: #aaaaaa;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item h3 i {
+            color: #ff6b35;
+            margin-right: 5px;
+        }
+
+        .info-item p {
+            font-size: 1.1em;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .status-in-transit {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid #22c55e;
+        }
+
+        .status-pickup {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border: 1px solid #f59e0b;
+        }
+
+        .status-delivered {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid #3b82f6;
+        }
+
+        /* Map Container */
+        .map-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            background: #1a1a1a;
+            border: 1px solid #3d3d3d;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .route-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #2d2d2d;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            border-left: 4px solid #ff6b35;
+            border: 1px solid #3d3d3d;
+        }
+
+        .route-info h3 {
+            font-size: 0.9em;
+            color: #aaaaaa;
+            margin-bottom: 5px;
+        }
+
+        .route-info p {
+            font-size: 1.1em;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 30px;
+            padding: 30px;
+            background: #2d2d2d;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3d3d3d;
+        }
+
+        .timeline h2 {
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-size: 1.8em;
+        }
+
+        .timeline h2 i {
+            color: #ff6b35;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 45px;
+            width: 2px;
+            height: calc(100% - 25px);
+            background: #3d3d3d;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3d3d3d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            border: 2px solid #4d4d4d;
+        }
+
+        .timeline-dot.completed {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+            border-color: #ff6b35;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-top: 5px;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .timeline-content p {
+            color: #aaaaaa;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .timeline-content .time {
+            color: #666666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .timeline-content .time i {
+            color: #ff6b35;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2em;
+            }
+
+            .page-header .subtitle {
+                font-size: 1.1em;
+            }
+
+            .tracking-form {
+                flex-direction: column;
+            }
+
+            .btn-track {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+
+            .route-info {
+                position: static;
+                margin-bottom: 10px;
+            }
+
+            .tracking-card {
+                padding: 25px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Placeholder -->
+    <div class="nav-placeholder"></div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <h1><i class="fas fa-map-marker-alt"></i> Track Your Car</h1>
+            <p class="subtitle">Monitor your vehicle's journey in real-time</p>
+            <p class="subtitle" style="margin-top:10px;font-size:1em;color:#dddddd;">You'll find your tracking ID in the
+                booking confirmation email or SMS sent after placing your order.</p>
+            <div class="breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <span>/</span>
+                <span>Track Your Car</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+
+        <div class="tracking-card">
+            <div class="card-header">
+                <h2>Enter Your Tracking Details</h2>
+                <p>Get real-time updates on your vehicle's location and delivery status</p>
+            </div>
+
+            <form class="tracking-form" id="trackingForm">
+                <div class="form-group">
+                    <label for="trackingId">
+                        <i class="fas fa-barcode"></i> Tracking ID
+                    </label>
+                    <input type="text" id="trackingId" placeholder="Enter your tracking ID" required>
+                </div>
+                <button type="submit" class="btn-track">
+                    <i class="fas fa-search"></i>
+                    Track Vehicle
+                </button>
+            </form>
+
+            <div class="sample-ids">
+                <strong><i class="fas fa-lightbulb"></i> Try Sample IDs:</strong>
+                <span class="id-code" onclick="setTrackingId('TRK12345')">TRK12345</span>
+                <span class="id-code" onclick="setTrackingId('TRK67890')">TRK67890</span>
+                <span class="id-code" onclick="setTrackingId('TRK11111')">TRK11111</span>
+            </div>
+
+            <div class="tracking-info" id="trackingInfo">
+                <h2><i class="fas fa-info-circle"></i> Shipment Details</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3><i class="fas fa-hashtag"></i> Tracking ID</h3>
+                        <p id="displayTrackingId">-</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-car"></i> Vehicle</h3>
+                        <p id="displayVehicle">-</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-map-pin"></i> Current Location</h3>
+                        <p id="displayLocation">-</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-tasks"></i> Status</h3>
+                        <p><span class="status-badge" id="displayStatus">-</span></p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-calendar-check"></i> Estimated Delivery</h3>
+                        <p id="displayETA">-</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-road"></i> Distance Remaining</h3>
+                        <p id="displayDistance">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <div class="route-info">
+                    <h3>Route Information</h3>
+                    <p id="routeDisplay">Enter tracking ID to view route</p>
+                </div>
+                <iframe id="mapFrame" src="https://www.google.com/maps?q=India&output=embed" allowfullscreen=""
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <div class="timeline" id="timeline" style="display: none;">
+                <h2><i class="fas fa-history"></i> Tracking Timeline</h2>
+                <div id="timelineContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dummy tracking data
+        const trackingData = {
+            'TRK12345': {
+                vehicle: 'Toyota Innova Crysta',
+                currentLocation: 'Nagpur, Maharashtra',
+                status: 'In Transit',
+                statusClass: 'status-in-transit',
+                eta: '5 Nov 2025',
+                distance: '320 km',
+                route: 'Mumbai, MH → Nagpur, MH',
+                mapUrl: 'https://www.google.com/maps?q=Mumbai+to+Nagpur&output=embed',
+                timeline: [
+                    { step: 1, title: 'Order Placed', description: 'Your vehicle transport order has been confirmed', time: '1 Nov 2025, 10:00 AM', completed: true },
+                    { step: 2, title: 'Vehicle Picked Up', description: 'Vehicle picked up from Mumbai, MH', time: '1 Nov 2025, 2:00 PM', completed: true },
+                    { step: 3, title: 'In Transit', description: 'Currently in Nagpur, MH', time: '3 Nov 2025, 11:30 AM', completed: true },
+                    { step: 4, title: 'Out for Delivery', description: 'Vehicle will be delivered soon', time: 'Pending', completed: false },
+                    { step: 5, title: 'Delivered', description: 'Vehicle to be delivered to Nagpur, MH', time: 'Pending', completed: false }
+                ]
+            },
+            'TRK67890': {
+                vehicle: 'Honda City',
+                currentLocation: 'Hyderabad, Telangana',
+                status: 'Awaiting Pickup',
+                statusClass: 'status-pickup',
+                eta: '4 Nov 2025',
+                distance: '1,280 km',
+                route: 'Hyderabad, TS → Kolkata, WB',
+                mapUrl: 'https://www.google.com/maps?q=Hyderabad+to+Kolkata&output=embed',
+                timeline: [
+                    { step: 1, title: 'Order Placed', description: 'Your vehicle transport order has been confirmed', time: '2 Nov 2025, 9:00 AM', completed: true },
+                    { step: 2, title: 'Awaiting Pickup', description: 'Driver assigned, pickup scheduled', time: '3 Nov 2025, 8:00 AM', completed: false },
+                    { step: 3, title: 'In Transit', description: 'Vehicle on the way', time: 'Pending', completed: false },
+                    { step: 4, title: 'Out for Delivery', description: 'Vehicle will be delivered soon', time: 'Pending', completed: false },
+                    { step: 5, title: 'Delivered', description: 'Vehicle to be delivered to Kolkata, WB', time: 'Pending', completed: false }
+                ]
+            },
+            'TRK11111': {
+                vehicle: 'Tata Harrier',
+                currentLocation: 'Chennai, Tamil Nadu',
+                status: 'Delivered',
+                statusClass: 'status-delivered',
+                eta: 'Delivered',
+                distance: '0 km',
+                route: 'Pune, MH → Chennai, TN',
+                mapUrl: 'https://www.google.com/maps?q=Pune+to+Chennai&output=embed',
+                timeline: [
+                    { step: 1, title: 'Order Placed', description: 'Your vehicle transport order has been confirmed', time: '28 Oct 2025, 11:00 AM', completed: true },
+                    { step: 2, title: 'Vehicle Picked Up', description: 'Vehicle picked up from Pune, MH', time: '28 Oct 2025, 3:00 PM', completed: true },
+                    { step: 3, title: 'In Transit', description: 'Vehicle transported across states', time: '30 Oct 2025', completed: true },
+                    { step: 4, title: 'Out for Delivery', description: 'Final delivery in progress', time: '1 Nov 2025, 9:00 AM', completed: true },
+                    { step: 5, title: 'Delivered', description: 'Vehicle delivered to Chennai, TN', time: '1 Nov 2025, 2:30 PM', completed: true }
+                ]
+            }
+        };
+
+        // Set tracking ID from sample
+        function setTrackingId(id) {
+            document.getElementById('trackingId').value = id;
+            document.getElementById('trackingForm').dispatchEvent(new Event('submit'));
+        }
+
+        document.getElementById('trackingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const trackingId = document.getElementById('trackingId').value.trim().toUpperCase();
+            const data = trackingData[trackingId];
+
+            if (data) {
+                document.getElementById('trackingInfo').classList.add('active');
+                document.getElementById('displayTrackingId').textContent = trackingId;
+                document.getElementById('displayVehicle').textContent = data.vehicle;
+                document.getElementById('displayLocation').textContent = data.currentLocation;
+
+                const statusBadge = document.getElementById('displayStatus');
+                statusBadge.textContent = data.status;
+                statusBadge.className = 'status-badge ' + data.statusClass;
+
+                document.getElementById('displayETA').textContent = data.eta;
+                document.getElementById('displayDistance').textContent = data.distance;
+                document.getElementById('routeDisplay').textContent = data.route;
+                document.getElementById('mapFrame').src = data.mapUrl;
+
+                const timeline = document.getElementById('timeline');
+                const timelineContent = document.getElementById('timelineContent');
+                timelineContent.innerHTML = '';
+
+                data.timeline.forEach(item => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.className = 'timeline-item';
+                    timelineItem.innerHTML = `
+                        <div class="timeline-dot ${item.completed ? 'completed' : ''}">${item.step}</div>
+                        <div class="timeline-content">
+                            <h3>${item.title}</h3>
+                            <p>${item.description}</p>
+                            <div class="time"><i class="fas fa-clock"></i> ${item.time}</div>
+                        </div>
+                    `;
+                    timelineContent.appendChild(timelineItem);
+                });
+
+                timeline.style.display = 'block';
+                document.getElementById('trackingInfo').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                alert('❌ Tracking ID not found!\n\nPlease try one of these sample IDs:\n• TRK12345\n• TRK67890\n• TRK11111');
+            }
+        });
+    </script>
+</body>
+
+</html>
