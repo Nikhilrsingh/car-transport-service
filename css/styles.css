@@ -1255,4 +1255,52 @@ h2 {
 .service-card:nth-child(6) {
   animation-delay: 0.6s;
 }
+.features {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+  text-align: center;
+}
 
+.features .section-title {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  justify-items: center;
+  padding: 0 20px;
+}
+
+.feature-box {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.feature-box h3 {
+  margin: 15px 0 10px;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.feature-box p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.feature-box {
+  font-size: 2rem;
+}
