@@ -530,8 +530,14 @@
 </head>
 
 <body>
+    <!-- ...................jagrati................. -->
     <!-- Navigation Placeholder -->
-    <div class="nav-placeholder"></div>
+    <!-- <div class="nav-placeholder"></div> -->
+     <div id="navbar-include"></div>
+
+    <!-- ...................jagrati................. -->
+
+
 
     <!-- Page Header -->
     <header class="page-header">
@@ -734,7 +740,26 @@
                 alert('❌ Tracking ID not found!\n\nPlease try one of these sample IDs:\n• TRK12345\n• TRK67890\n• TRK11111');
             }
         });
+
+// ...................jagrati.....................
+ 
+  function includeHTML(id, file) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', file, true);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        document.getElementById(id).innerHTML = this.responseText;
+      }
+    };
+    xhr.send();
+  }
+  includeHTML('navbar-include', 'navbar.html');
+  includeHTML('footer-include', 'footer.html');
     </script>
+
+
+    <div id="footer-include"></div>
+
 </body>
 
 </html>
