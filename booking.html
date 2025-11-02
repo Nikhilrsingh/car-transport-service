@@ -55,7 +55,6 @@
             justify-content: space-between;
             justify-self: center;
             padding: 0 20px;
-            margin-top: 30px;
             position: sticky;
             top: 0;
             z-index: 999;
@@ -571,24 +570,18 @@
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <div class="navbar" class="sticky">
-        <div class="logo-container left-logo">
-            <img src="assets/images/left-logo.jpg" alt="Harihar Car Carriers Logo" />
-        </div>
-        <nav aria-label="Main navigation">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="booking.html" class="active">Book Now</a></li>
-                <li><a href="#login" class="login-link">Login</a></li>
-            </ul>
-        </nav>
-    </div>
+   <!-- Header Section -->
+      <div id="navbar-container"></div>
+    
+    <script>
+        // Load navigation component
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
 
     <!-- Hero Section -->
     <section class="booking-hero">
