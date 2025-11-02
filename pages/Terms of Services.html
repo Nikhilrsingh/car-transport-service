@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Services | Car Transport Service</title>
+  <style>
+    /* ===== Global Styles ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0a3d62;
+      color: #fff;
+      text-align: center;
+      padding: 1rem 2rem;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #0a3d62;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      background: #0a3d62;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: #f1c40f;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.5rem;
+      }
+      .container {
+        padding: 1.2rem;
+      }
+    }
+
+    /* Scroll Fade Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <header>Terms of Services</header>
+
+  <div class="container">
+    <section class="fade-in">
+      <h2>1. Service Terms and Conditions</h2>
+      <p>
+        By accessing and using our car transport services, you agree to abide by the terms and conditions
+        outlined herein. Our services are designed to facilitate the safe and reliable transport of vehicles.
+        Misuse of the platform, false information, or unlawful activity is strictly prohibited.
+      </p>
+    </section>
+
+    <section class="fade-in">
+      <h2>2. Payment and Refund Policy</h2>
+      <p>
+        Payments must be completed through the accepted payment gateways listed on our platform.
+        Refunds will only be processed for cancellations made within the specified timeframe and according
+        to company policy. Delayed payments or disputes may result in service interruption.
+      </p>
+    </section>
+
+    <section class="fade-in">
+      <h2>3. User Responsibilities</h2>
+      <p>
+        Users are responsible for providing accurate details during booking and ensuring vehicle readiness
+        for pickup. Users must comply with local regulations and refrain from using the service for any
+        illegal purposes. Any misuse may result in suspension of services.
+      </p>
+    </section>
+
+    <section class="fade-in">
+      <h2>4. Privacy and Data Usage</h2>
+      <p>
+        Your personal data is handled as per our <a href="privacy-policy.html">Privacy Policy</a>.
+        We collect and use data only for providing and improving our services, and never share personal
+        details with third parties without consent unless required by law.
+      </p>
+    </section>
+
+    <section class="fade-in">
+      <h2>5. Contact Information for Queries</h2>
+      <p>
+        For any questions or concerns regarding these terms, please contact us at:<br>
+        📧 <a href="info@hariharcarcarriers.com">info@hariharcarcarriers.com</a>
+      </p>
+    </section>
+  </div>
+
+  <footer>
+    © 2025 Car Transport Service | <a href="../index.html">Back to Home</a>
+  </footer>
+
+  <script>
+    // Scroll fade-in animation
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
