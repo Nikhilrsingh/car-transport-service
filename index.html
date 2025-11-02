@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Harihar Car Carriers</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/testimonial.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -31,15 +32,134 @@
       </nav>
     </div>
 
-    <!-- Hero Section -->
+   <!-- Enhanced Hero Section -->
     <section id="home" class="hero">
-      <div>
-        <img src="assets/images/bmw.jpg" alt="" />
-        <h1>Welcome to Harihar Car Carriers</h1>
-        <p>Reliable and fast car transport services across India.</p>
-      </div>
+        <div class="hero-background">
+            <!-- Background Video -->
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-white-sports-car-driving-fast-on-a-curved-road-34555-large.mp4" type="video/mp4">
+            </video>
+            <!-- Fallback Image -->
+            <img src="assets/images/bmw.jpg" alt="Car Transportation" class="hero-fallback">
+            
+            <!-- Gradient Overlay -->
+            <div class="hero-overlay"></div>
+            
+            <!-- Animated Elements -->
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-main">
+                    <!-- Badge -->
+                    <div class="hero-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Trusted by 5000+ Customers</span>
+                    </div>
+                    
+                    <!-- Main Heading -->
+                    <h1 class="hero-title">
+                        <span class="title-line">Premium Vehicle</span>
+                        <span class="title-line highlight">Transportation</span>
+                        <span class="title-line">Across India</span>
+                    </h1>
+                    
+                    <!-- Description -->
+                    <p class="hero-description">
+                        Experience safe, reliable, and insured car transportation services with real-time tracking and door-to-door delivery.
+                    </p>
+                    
+                    <!-- Stats -->
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number" data-target="5000">0</div>
+                            <div class="stat-label">Vehicles Transported</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" data-target="50">0</div>
+                            <div class="stat-label">Cities Covered</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" data-target="98">0</div>
+                            <div class="stat-label">% Satisfaction</div>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="hero-actions">
+                        <a href="booking.html" class="cta-btn primary">
+                            <i class="fas fa-truck-moving"></i>
+                            <span>Book Instantly</span>
+                            <div class="btn-shine"></div>
+                        </a>
+                        <a href="#quote" class="cta-btn secondary">
+                            <i class="fas fa-calculator"></i>
+                            <span>Get Free Quote</span>
+                        </a>
+                        <a href="#services" class="cta-btn outline">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Watch How It Works</span>
+                        </a>
+                    </div>
+                  
+                </div>
+                
+                <!-- Quick Quote Form -->
+                <div class="hero-quote">
+                    <div class="quote-card">
+                        <div class="quote-header">
+                            <h3>Get Instant Quote</h3>
+                            <p>Quick & accurate pricing in 30 seconds</p>
+                        </div>
+                        <form class="quote-form" id="quickQuoteForm">
+                            <div class="form-group">
+                                <label for="fromCity"><i class="fas fa-map-marker-alt"></i> From</label>
+                                <input type="text" id="fromCity" placeholder="Pickup City" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="toCity"><i class="fas fa-flag-checkered"></i> To</label>
+                                <input type="text" id="toCity" placeholder="Drop City" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
+                                <select id="vehicleType" required>
+                                    <option value="">Select Vehicle</option>
+                                    <option value="hatchback">Hatchback</option>
+                                    <option value="sedan">Sedan</option>
+                                    <option value="suv">SUV</option>
+                                    <option value="luxury">Luxury Car</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="quote-submit">
+                                <span>Calculate Price</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        <div class="quote-result" id="quoteResult">
+                            <div class="result-price">
+                                <span class="amount">₹5,800</span>
+                                <span class="label">Estimated Cost</span>
+                            </div>
+                            <a href="booking.html" class="result-book">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-text">Scroll to Explore</div>
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
     </section>
-    <li><a href="#quote" class="login-link home-btn">Get Quotation</a></li>
 
     <!-- Services Section -->
     <section class="services-section" id="services">
@@ -271,207 +391,171 @@
     </script>
 
     <!-- Testimonials Section -->
-    <section class="testimonials-section" id="testimonials">
-      <div class="container">
-        <div class="section-title">
-          <h2>What Our Customers Say</h2>
-          <p>
-            Don't just take our word for it. Read genuine reviews from our
-            satisfied customers.
+   <section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-title">
+      <h2>What Our Customers Say</h2>
+      <p>
+        Don't just take our word for it. Read genuine reviews from our
+        satisfied customers.
+      </p>
+    </div>
+
+    <!-- Slider Section -->
+    <div class="testimonial-slider">
+      <div class="slider-container" id="sliderContainer">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">
+            "I was extremely worried about shipping my BMW from Delhi to
+            Bangalore, but Harihar Car Carriers made the process seamless.
+            Their professional handling and timely delivery exceeded my
+            expectations. Highly recommended!"
           </p>
-        </div>
-
-        <div class="testimonial-slider">
-          <div class="slider-container" id="sliderContainer">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card">
-              <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "I was extremely worried about shipping my BMW from Delhi to
-                Bangalore, but Harihar Car Carriers made the process seamless.
-                Their professional handling and timely delivery exceeded my
-                expectations. Highly recommended!"
-              </p>
-              <div class="client-info">
-                <div class="client-avatar">
-                  <img
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                    alt="Rajesh Kumar"
-                  />
-                </div>
-                <div class="client-details">
-                  <h4>Rajesh Kumar</h4>
-                  <p>Delhi to Bangalore</p>
-                </div>
-              </div>
+          <div class="client-info">
+            <div class="client-avatar">
+              <img
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1000&q=80"
+                alt="Rajesh Kumar"
+              />
             </div>
-
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card">
-              <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "As a car dealer, I regularly use transport services. Harihar
-                Car Carriers stands out with their punctuality and care. My
-                luxury cars always arrive in perfect condition. Trustworthy
-                service!"
-              </p>
-              <div class="client-info">
-                <div class="client-avatar">
-                  <img
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                    alt="Priya Sharma"
-                  />
-                </div>
-                <div class="client-details">
-                  <h4>Priya Sharma</h4>
-                  <p>Car Dealer, Mumbai</p>
-                </div>
-              </div>
+            <div class="client-details">
+              <h4>Rajesh Kumar</h4>
+              <p>Delhi to Bangalore</p>
             </div>
-
-            <!-- Testimonial 3 -->
-            <div class="testimonial-card">
-              <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-              <p class="testimonial-text">
-                "Transported my vintage car from Chennai to Pune. The team was
-                very careful and provided regular updates throughout the
-                journey. My classic car arrived without a scratch. Excellent
-                service!"
-              </p>
-              <div class="client-info">
-                <div class="client-avatar">
-                  <img
-                    src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                    alt="Vikram Singh"
-                  />
-                </div>
-                <div class="client-details">
-                  <h4>Vikram Singh</h4>
-                  <p>Chennai to Pune</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slider Controls -->
-          <div class="slider-controls">
-            <button class="slider-btn prev-btn">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-
-            <div class="slider-dots">
-              <span class="dot active" data-slide="0"></span>
-              <span class="dot" data-slide="1"></span>
-              <span class="dot" data-slide="2"></span>
-            </div>
-
-            <button class="slider-btn next-btn">
-              <i class="fas fa-chevron-right"></i>
-            </button>
           </div>
         </div>
 
-        <!-- Testimonials Grid -->
-        <div class="testimonials-grid">
-          <div class="grid-testimonial">
-            <div class="grid-rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">
+            "As a car dealer, I regularly use transport services. Harihar
+            Car Carriers stands out with their punctuality and care. My
+            luxury cars always arrive in perfect condition. Trustworthy
+            service!"
+          </p>
+          <div class="client-info">
+            <div class="client-avatar">
+              <img
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1000&q=80"
+                alt="Priya Sharma"
+              />
             </div>
-            <p class="testimonial-text">
-              "Door-to-door service was amazing! They picked up my car from home
-              and delivered it right to my new address. No hassle at all."
-            </p>
-            <div class="grid-client-info">
-              <div class="grid-client-avatar">
-                <img
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Anjali Mehta"
-                />
-              </div>
-              <div class="client-details">
-                <h4>Anjali Mehta</h4>
-                <p>Relocation Service</p>
-              </div>
+            <div class="client-details">
+              <h4>Priya Sharma</h4>
+              <p>Car Dealer, Mumbai</p>
             </div>
           </div>
+        </div>
 
-          <div class="grid-testimonial">
-            <div class="grid-rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-            <p class="testimonial-text">
-              "Best pricing in the market with premium service. My SUV was
-              transported safely from Hyderabad to Kolkata. Will definitely use
-              again."
-            </p>
-            <div class="grid-client-info">
-              <div class="grid-client-avatar">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Amit Patel"
-                />
-              </div>
-              <div class="client-details">
-                <h4>Amit Patel</h4>
-                <p>Hyderabad to Kolkata</p>
-              </div>
-            </div>
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star-half-alt"></i>
           </div>
-
-          <div class="grid-testimonial">
-            <div class="grid-rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+          <p class="testimonial-text">
+            "Transported my vintage car from Chennai to Pune. The team was
+            very careful and provided regular updates throughout the journey.
+            My classic car arrived without a scratch. Excellent service!"
+          </p>
+          <div class="client-info">
+            <div class="client-avatar">
+              <img
+                src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=80"
+                alt="Vikram Singh"
+              />
             </div>
-            <p class="testimonial-text">
-              "24/7 customer support is fantastic! They answered all my queries
-              and provided real-time tracking. Very professional team."
-            </p>
-            <div class="grid-client-info">
-              <div class="grid-client-avatar">
-                <img
-                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Neha Gupta"
-                />
-              </div>
-              <div class="client-details">
-                <h4>Neha Gupta</h4>
-                <p>Regular Customer</p>
-              </div>
+            <div class="client-details">
+              <h4>Vikram Singh</h4>
+              <p>Chennai to Pune</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+
+      <!-- Slider Controls -->
+      <div class="slider-controls">
+        <button class="slider-btn prev-btn">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="slider-dots">
+          <span class="dot active" data-slide="0"></span>
+          <span class="dot" data-slide="1"></span>
+          <span class="dot" data-slide="2"></span>
+        </div>
+        <button class="slider-btn next-btn">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="testimonials-grid">
+      <div class="grid-testimonial">
+        <div class="grid-rating">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i
+          ><i class="fas fa-star"></i><i class="fas fa-star"></i
+          ><i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">
+          "Door-to-door service was amazing! They picked up my car from home
+          and delivered it right to my new address. No hassle at all."
+        </p>
+        <div class="grid-client-info">
+          <div class="grid-client-avatar">
+            <img
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
+              alt="Anjali Mehta"
+            />
+          </div>
+          <div class="client-details">
+            <h4>Anjali Mehta</h4>
+            <p>Relocation Service</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-testimonial">
+        <div class="grid-rating">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i
+          ><i class="fas fa-star"></i><i class="fas fa-star"></i
+          ><i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">
+          "Best pricing in the market with premium service. My SUV was
+          transported safely from Hyderabad to Kolkata. Will definitely use
+          again."
+        </p>
+        <div class="grid-client-info">
+          <div class="grid-client-avatar">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80"
+              alt="Amit Patel"
+            />
+          </div>
+          <div class="client-details">
+            <h4>Amit Patel</h4>
+            <p>Hyderabad to Kolkata</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <script>
       // Testimonial Slider Functionality
