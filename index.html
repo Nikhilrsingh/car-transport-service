@@ -11,6 +11,11 @@
 </head>
 
 <body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
+
   <!-- Header Section -->
   <div id="navbar-container"></div>
 
@@ -893,6 +898,20 @@
   <button class="back-to-top" id="backToTop">
     <i class="fas fa-chevron-up"></i>
   </button>
+
+  <!-- Preloader fade-out script -->
+  <script>
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      setTimeout(() => {
+        preloader.classList.add("fade-out");
+
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 600); 
+      }, 1500); 
+    });
+  </script>
 
   <script>
     // Back to Top Functionality
