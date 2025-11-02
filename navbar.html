@@ -46,12 +46,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pricing.html" class="nav-link" data-page="pricing">
-              <i class="fas fa-tags"></i>
-              <span>Pricing</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="tracking.html" class="nav-link" data-page="tracking">
               <i class="fas fa-map-marker-alt"></i>
               <span>Track Your Car</span>
@@ -136,12 +130,6 @@
           <a href="booking.html" class="mobile-nav-link">
             <i class="fas fa-calendar-check"></i>
             <span>Booking</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="pricing.html" class="mobile-nav-link">
-            <i class="fas fa-tags"></i>
-            <span>Pricing</span>
           </a>
         </li>
         <li class="mobile-nav-item">
@@ -277,7 +265,7 @@
   .nav-list {
     display: flex;
     list-style: none;
-    gap: 3px;
+    gap: 5px;
     margin: 0;
     padding: 0;
   }
@@ -289,14 +277,14 @@
   .nav-link {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 9px 12px;
+    gap: 8px;
+    padding: 10px 18px;
     color: white;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 8px;
     transition: all 0.3s ease;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -353,13 +341,10 @@
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     order: 3;
     /* Actions come last */
     flex-shrink: 0;
-    margin-left: 15px;
-    padding-left: 15px;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .enquiry-link,
@@ -367,14 +352,13 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 12px;
+    padding: 8px 15px;
     color: white;
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.3s ease;
     font-weight: 500;
-    font-size: 0.85rem;
-    white-space: nowrap;
+    font-size: 0.9rem;
   }
 
   .enquiry-link:hover,
@@ -387,20 +371,19 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 14px;
+    padding: 8px 16px;
     color: white;
     text-decoration: none;
-    border: 2px solid rgba(255, 99, 71, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     transition: all 0.3s ease;
     font-weight: 500;
     backdrop-filter: blur(10px);
-    font-size: 0.85rem;
-    white-space: nowrap;
+    font-size: 0.9rem;
   }
 
   .login-btn:hover {
-    background: rgba(255, 107, 53, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-color: #ff6347;
     transform: translateY(-2px);
   }
@@ -408,19 +391,16 @@
   .cta-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 9px 18px;
+    gap: 8px;
+    padding: 10px 20px;
     background: linear-gradient(135deg, #ff6347, #ff4500);
     color: white;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
     font-size: 0.9rem;
-    white-space: nowrap;
-    min-height: 36px;
   }
 
   .cta-btn:hover {
@@ -646,41 +626,16 @@
   /* Responsive Design */
   @media (max-width: 1200px) {
     .nav-list {
-      gap: 2px;
+      gap: 3px;
     }
 
     .nav-link {
-      padding: 8px 10px;
-      font-size: 0.85rem;
-      gap: 4px;
-    }
-
-    .nav-link i {
-      font-size: 0.95rem;
-      width: 16px;
+      padding: 8px 15px;
+      font-size: 0.9rem;
     }
 
     .nav-actions {
       gap: 8px;
-      margin-left: 10px;
-      padding-left: 10px;
-    }
-
-    .enquiry-link,
-    .blog-link {
-      padding: 7px 10px;
-      font-size: 0.8rem;
-    }
-
-    .login-btn {
-      padding: 7px 10px;
-      font-size: 0.8rem;
-    }
-
-    .cta-btn {
-      padding: 8px 14px;
-      font-size: 0.85rem;
-      gap: 4px;
     }
   }
 
