@@ -1,6 +1,21 @@
 # Contributing to Car Transport Service
 
-Thank you for considering contributing!
+Thank you for considering contributing! 
+We appreciate your time and effort in improving this project. Please read this guide before starting to contribute.
+
+---
+
+## 🐞 Before You Start – Create an Issue First
+Before you make any changes or start coding:
+1. **Check existing issues** to ensure your problem or idea isn’t already being discussed.
+2. If not found, **create a new issue** describing:
+   - What you want to fix or add
+   - Steps to reproduce the issue (if it’s a bug)
+   - Screenshots or references (if available)
+3. Wait for the maintainers to review and approve the issue before submitting a PR.  
+   This helps keep contributions organized and avoids duplicate work.
+
+---
 
 ## How to Contribute
 - Star the repo ⭐
