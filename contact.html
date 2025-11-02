@@ -86,12 +86,12 @@
         bottom: -4px;
         height: 2px;
         width: 0%;
-        background-color: #ff6347;
+        background-color: var(--accent);
         transition: width 0.25s ease;
       }
 
       nav ul li a:hover {
-        color: #ff6347;
+        color: var(--accent);
       }
 
       nav ul li a:hover::after {
@@ -100,19 +100,19 @@
 
       nav ul li a.active {
         color: #000;
-        background: #ff6347;
+        background: var(--accent);
         padding: 8px 12px;
         border-radius: 4px;
       }
 
       .login-link {
-        background-color: #ff6347;
+        background-color: var(--accent);
         padding: 8px 12px;
         border-radius: 4px;
       }
 
       .login-link:hover {
-        background-color: #ff4500;
+        background-color: var(--accent-600);
       }
 
       .logo-container {
@@ -178,7 +178,7 @@
       .section-title h2 {
         font-size: 2.5rem;
         margin-bottom: 15px;
-        color: #ff6347;
+        color: var(--accent);
       }
 
       .section-title p {
@@ -205,7 +205,7 @@
         background: #2b2b2b;
         padding: 30px;
         border-radius: 15px;
-        border-left: 4px solid #ff6347;
+        border-left: 4px solid var(--accent);
         transition: all 0.3s ease;
       }
 
@@ -224,7 +224,7 @@
       .info-icon {
         width: 60px;
         height: 60px;
-        background: #ff6347;
+        background: var(--accent);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -244,7 +244,7 @@
       }
 
       .info-content strong {
-        color: #ff6347;
+        color: var(--accent);
       }
 
       /* Operating Hours */
@@ -268,7 +268,7 @@
       }
 
       .hours-list .time {
-        color: #ff6347;
+        color: var(--accent);
         font-weight: 600;
       }
 
@@ -289,7 +289,7 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, #ff6347, #ff4500);
+        background: linear-gradient(90deg, var(--accent), var(--accent-600));
       }
 
       .form-header {
@@ -304,7 +304,7 @@
       }
 
       .form-header p {
-        color: #ff6347;
+        color: var(--accent);
         font-size: 1rem;
       }
 
@@ -353,8 +353,8 @@
       .input-group select:focus,
       .input-group textarea:focus {
         outline: none;
-        border-color: #ff6347;
-        box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
         background: #222;
       }
 
@@ -364,7 +364,7 @@
       }
 
       .submit-btn {
-        background: linear-gradient(135deg, #ff6347, #ff4500);
+        background: linear-gradient(135deg, var(--accent), var(--accent-600));
         color: white;
         border: none;
         padding: 18px 30px;
@@ -379,13 +379,13 @@
         gap: 10px;
         transition: all 0.3s ease;
         margin-top: 10px;
-        box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+        box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.3);
       }
 
       .submit-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
-        background: linear-gradient(135deg, #ff4500, #ff6347);
+        box-shadow: 0 8px 25px rgba(var(--accent-rgb), 0.4);
+        background: linear-gradient(135deg, var(--accent-600), var(--accent));
       }
 
       /* Map Section */
@@ -417,7 +417,7 @@
       .map-placeholder i {
         font-size: 3rem;
         margin-bottom: 20px;
-        color: #ff6347;
+        color: var(--accent);
       }
 
       /* FAQ Section */
@@ -436,12 +436,12 @@
         background: #2b2b2b;
         border-radius: 10px;
         overflow: hidden;
-        border-left: 4px solid #ff6347;
+        border-left: 4px solid var(--accent);
       }
 
       .faq-question {
         padding: 20px;
-        background: rgba(255, 99, 71, 0.1);
+        background: rgba(var(--accent-rgb), 0.1);
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -450,7 +450,7 @@
       }
 
       .faq-question:hover {
-        background: rgba(255, 99, 71, 0.2);
+        background: rgba(var(--accent-rgb), 0.18);
       }
 
       .faq-question h4 {
@@ -459,7 +459,7 @@
       }
 
       .faq-question i {
-        color: #ff6347;
+        color: var(--accent);
         transition: transform 0.3s ease;
       }
 
@@ -522,14 +522,14 @@
       }
 
       .cta-btn.primary {
-        background: #ff6347;
+        background: var(--accent);
         color: white;
       }
 
       .cta-btn.secondary {
         background: transparent;
-        color: #ff6347;
-        border: 2px solid #ff6347;
+        color: var(--accent);
+        border: 2px solid var(--accent);
       }
 
       .cta-btn:hover {

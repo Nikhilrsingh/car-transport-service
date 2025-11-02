@@ -53,6 +53,81 @@
     </div>
 
     <div class="hero-content">
+      <!-- Settings toggle moved here so it appears near the hero title -->
+      <div class="settings-toggle" id="settingsToggle" title="Change accent color" aria-label="Open color settings" role="button" tabindex="0"
+           onclick="(function(){const p=document.getElementById('settingsPanel'); if(!p) return; p.classList.toggle('open'); p.setAttribute('aria-hidden', p.classList.contains('open') ? 'false' : 'true');})();">
+        <i class="fas fa-cog"></i>
+      </div>
+
+      <!-- Small hint bubble shown briefly to indicate the settings feature -->
+      <div class="settings-hint" id="settingsHint" role="status" aria-hidden="true">
+        <span class="hint-dot" aria-hidden="true"></span>
+        <span class="hint-text">Try color themes — click the gear</span>
+      </div>
+
+      <div class="settings-panel" id="settingsPanel" role="dialog" aria-label="Accent color settings" aria-hidden="true">
+        <h4>Accent color</h4>
+        <div class="settings-swatches" id="settingsSwatches">
+          <button class="swatch" data-color="#ff6347" title="Orange" aria-label="Orange" style="background:#ff6347" onclick="(function(btn){const c=btn.dataset.color;document.documentElement.style.setProperty('--accent',c);try{localStorage.setItem('siteAccentColor',c);}catch(e){}const hex=c.replace('#','');const r=parseInt(hex.substring(0,2),16),g=parseInt(hex.substring(2,4),16),b=parseInt(hex.substring(4,6),16);document.documentElement.style.setProperty('--accent-rgb', r+','+g+','+b);btn.parentElement.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));btn.classList.add('active');})(this)"></button>
+          <button class="swatch" data-color="#1976d2" title="Blue" aria-label="Blue" style="background:#1976d2" onclick="(function(btn){const c=btn.dataset.color;document.documentElement.style.setProperty('--accent',c);try{localStorage.setItem('siteAccentColor',c);}catch(e){}const hex=c.replace('#','');const r=parseInt(hex.substring(0,2),16),g=parseInt(hex.substring(2,4),16),b=parseInt(hex.substring(4,6),16);document.documentElement.style.setProperty('--accent-rgb', r+','+g+','+b);btn.parentElement.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));btn.classList.add('active');})(this)"></button>
+          <button class="swatch" data-color="#2ecc71" title="Green" aria-label="Green" style="background:#2ecc71" onclick="(function(btn){const c=btn.dataset.color;document.documentElement.style.setProperty('--accent',c);try{localStorage.setItem('siteAccentColor',c);}catch(e){}const hex=c.replace('#','');const r=parseInt(hex.substring(0,2),16),g=parseInt(hex.substring(2,4),16),b=parseInt(hex.substring(4,6),16);document.documentElement.style.setProperty('--accent-rgb', r+','+g+','+b);btn.parentElement.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));btn.classList.add('active');})(this)"></button>
+        </div>
+        <div class="settings-footer">Saved to your browser</div>
+      </div>
+      <script>
+        // Ensure saved accent is applied on load and active swatch is highlighted (works even if external JS hasn't run)
+        (function(){
+          try{
+            const saved = localStorage.getItem('siteAccentColor');
+            if(saved){
+              document.documentElement.style.setProperty('--accent', saved);
+              const hex = saved.replace('#','');
+              const r = parseInt(hex.substring(0,2),16), g = parseInt(hex.substring(2,4),16), b = parseInt(hex.substring(4,6),16);
+              document.documentElement.style.setProperty('--accent-rgb', r+','+g+','+b);
+              const swatches = document.querySelectorAll('#settingsSwatches .swatch');
+              swatches.forEach(s=> s.classList.toggle('active', s.dataset.color.toLowerCase()===saved.toLowerCase()));
+            }
+          }catch(e){/* ignore */}
+        })();
+      
+        // Show a short hint and an attention animation for the settings toggle
+        (function settingsHint() {
+          try {
+            const HINT_KEY = 'settingsHintShown';
+            const hintEl = document.getElementById('settingsHint');
+            const toggle = document.getElementById('settingsToggle');
+            if(!hintEl || !toggle) return;
+
+            // Add pulse initially to draw attention
+            toggle.classList.add('pulse');
+
+            // If hint was shown before, show a shorter attention then stop
+            const shownBefore = localStorage.getItem(HINT_KEY);
+            const hintDuration = shownBefore ? 1800 : 3600; // ms
+            const pulseDuration = 5200; // how long the pulse runs
+
+            // Show hint only once (persisted), but still pulse each visit briefly
+            if(!shownBefore) {
+              // reveal hint
+              hintEl.classList.add('show');
+              hintEl.setAttribute('aria-hidden', 'false');
+              // hide after hintDuration
+              setTimeout(() => {
+                hintEl.classList.remove('show');
+                hintEl.setAttribute('aria-hidden', 'true');
+              }, hintDuration);
+              try { localStorage.setItem(HINT_KEY, '1'); } catch(e){}
+            }
+
+            // stop pulsing after pulseDuration
+            setTimeout(() => toggle.classList.remove('pulse'), pulseDuration);
+
+            // If user focuses or opens settings, stop the pulse and hide hint immediately
+            toggle.addEventListener('focus', () => { toggle.classList.remove('pulse'); hintEl.classList.remove('show'); });
+            toggle.addEventListener('click', () => { toggle.classList.remove('pulse'); hintEl.classList.remove('show'); });
+          } catch (e) { console.warn('settingsHint error', e); }
+        })();
+      </script>
       <div class="container">
         <div class="hero-main">
           <!-- Badge -->
@@ -831,11 +906,22 @@
 <div id="footer-container"></div>
 
 <script>
-  // Load shared footer dynamically
+  // Load shared footer dynamically and ensure external footer scripts run
   fetch('footer.html')
     .then(response => response.text())
     .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
+      const container = document.getElementById('footer-container');
+      container.innerHTML = data;
+
+      // Scripts added via innerHTML won't execute automatically. Load the settings module explicitly.
+      try {
+        const settingsScript = document.createElement('script');
+        settingsScript.src = 'js/modules/settings.js';
+        settingsScript.defer = true;
+        document.body.appendChild(settingsScript);
+      } catch (e) {
+        console.error('Failed to load settings script:', e);
+      }
     })
     .catch(error => console.error('Error loading footer:', error));
 </script>

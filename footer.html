@@ -101,12 +101,13 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
+
   <style>
-    /* Footer Styles */
+    /* Footer Styles (uses CSS variables for theming) */
 .footer {
   background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
   padding: 70px 0 0;
-  border-top: 3px solid #ff6347;
+  border-top: 3px solid var(--accent);
   position: relative;
   overflow: hidden;
 }
@@ -118,7 +119,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #ff6347, transparent);
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
 .container {
@@ -137,7 +138,7 @@
 .footer-column h3 {
   font-size: 1.4rem;
   margin-bottom: 25px;
-  color: #ff6347;
+  color: var(--accent);
   position: relative;
   padding-bottom: 10px;
 }
@@ -149,7 +150,7 @@
   left: 0;
   width: 40px;
   height: 2px;
-  background-color: #ff6347;
+  background-color: var(--accent);
   transition: width 0.3s ease;
 }
 
@@ -178,7 +179,7 @@
 .footer-logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ff6347;
+  color: var(--accent);
 }
 
 .social-links {
@@ -202,10 +203,10 @@
 }
 
 .social-links a:hover {
-  background: #ff6347;
+  background: var(--accent);
   transform: translateY(-3px);
-  border-color: #ff6347;
-  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+  border-color: var(--accent);
+  box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.28);
 }
 
 .footer-links {
@@ -226,14 +227,14 @@
 }
 
 .footer-links a:hover {
-  color: #ff6347;
+  color: var(--accent);
   padding-left: 5px;
 }
 
 .footer-links a i {
   width: 20px;
   text-align: center;
-  color: #ff6347;
+  color: var(--accent);
 }
 
 .contact-info {
@@ -249,7 +250,7 @@
 }
 
 .contact-info i {
-  color: #ff6347;
+  color: var(--accent);
   margin-top: 2px;
   width: 20px;
   text-align: center;
@@ -282,12 +283,12 @@
 
 .newsletter-input input:focus {
   outline: none;
-  border-color: #ff6347;
-  box-shadow: 0 0 10px rgba(255, 99, 71, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.18);
 }
 
 .newsletter-input button {
-  background: #ff6347;
+  background: var(--accent);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -299,9 +300,9 @@
 }
 
 .newsletter-input button:hover {
-  background: #ff4500;
+  background: var(--accent-600);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+  box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.28);
 }
 
 .footer-bottom {
@@ -334,7 +335,7 @@
 }
 
 .footer-bottom-links a:hover {
-  color: #ff6347;
+  color: var(--accent);
 }
 
 .payment-methods {
@@ -350,7 +351,7 @@
 }
 
 .payment-methods i:hover {
-  color: #ff6347;
+  color: var(--accent);
 }
 
 /* Back to Top Button */
@@ -360,7 +361,7 @@
   right: 30px;
   width: 50px;
   height: 50px;
-  background: #ff6347;
+  background: var(--accent);
   color: white;
   border: none;
   border-radius: 50%;
@@ -373,7 +374,7 @@
   opacity: 0;
   visibility: hidden;
   z-index: 1000;
-  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+  box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.28);
 }
 
 .back-to-top.visible {
@@ -382,9 +383,9 @@
 }
 
 .back-to-top:hover {
-  background: #ff4500;
+  background: var(--accent-600);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
+  box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.42);
 }
 
 /* Responsive Footer */
@@ -433,4 +434,5 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
+
 </footer>
