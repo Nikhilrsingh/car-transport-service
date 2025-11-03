@@ -5,8 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Harihar Car Carriers</title>
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
   <link rel="stylesheet" href="./css/styles.css" />
-  <link rel="stylesheet" href="./css/testimonial.css">
+  <link rel="stylesheet" href="./css/components/testimonial.css">
+  <link rel="stylesheet" href="./css/components/tracking.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/footer.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
@@ -18,16 +22,6 @@
 
   <!-- Header Section -->
   <div id="navbar-container"></div>
-
-  <script>
-    // Load navigation component
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-container').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading navigation:', error));
-  </script>
 
   <!-- Enhanced Hero Section -->
   <section id="home" class="hero">
@@ -167,7 +161,7 @@
 
           <!-- CTA Buttons -->
           <div class="hero-actions">
-            <a href="booking.html" class="cta-btn primary">
+            <a href="pages/booking.html" class="cta-btn primary">
               <i class="fas fa-truck-moving"></i>
               <span>Book Instantly</span>
               <div class="btn-shine"></div>
@@ -220,7 +214,7 @@
                 <span class="amount">₹5,800</span>
                 <span class="label">Estimated Cost</span>
               </div>
-              <a href="booking.html" class="result-book">Book Now</a>
+              <a href="pages/booking.html" class="result-book">Book Now</a>
             </div>
           </div>
         </div>
@@ -234,112 +228,7 @@
         <i class="fas fa-chevron-down"></i>
       </div>
     </div>
-  </section>
-
-  <script>
-    // Enhanced Hero Section Functionality
-    document.addEventListener('DOMContentLoaded', function () {
-      // Animated counters for stats
-      const statNumbers = document.querySelectorAll('.stat-number');
-
-      const animateValue = (element, start, end, duration) => {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-          if (!startTimestamp) startTimestamp = timestamp;
-          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-          const value = Math.floor(progress * (end - start) + start);
-          element.textContent = value + (element.getAttribute('data-target') === '98' ? '%' : '+');
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          }
-        };
-        window.requestAnimationFrame(step);
-    }});
-
-      // Start counters when hero section is in view
-      const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            statNumbers.forEach(stat => {
-              const target = parseInt(stat.getAttribute('data-target'));
-              animateValue(stat, 0, target, 2000);
-            });
-            heroObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
-
-      heroObserver.observe(document.querySelector('.hero'));
-
-      // Quick quote form functionality
-      const quickQuoteForm = document.getElementById('quickQuoteForm');
-      const quoteResult = document.getElementById('quoteResult');
-
-      if (quickQuoteForm) {
-        quickQuoteForm.addEventListener('submit', function (e) {
-          e.preventDefault();
-
-          const fromCity = document.getElementById('fromCity').value;
-          const toCity = document.getElementById('toCity').value;
-          const vehicleType = document.getElementById('vehicleType').value;
-
-          if (fromCity && toCity && vehicleType) {
-            // Simulate price calculation
-            const basePrice = 5000;
-            const distanceMultiplier = 1.2;
-            const vehicleMultipliers = {
-              hatchback: 1.0,
-              sedan: 1.2,
-              suv: 1.5,
-              luxury: 2.0
-            };
-
-            const calculatedPrice = Math.floor(basePrice * distanceMultiplier * (vehicleMultipliers[vehicleType] || 1));
-            const formattedPrice = calculatedPrice.toLocaleString('en-IN');
-
-            document.querySelector('.amount').textContent = `₹${formattedPrice}`;
-            quoteResult.style.display = 'block';
-
-            // Smooth scroll to result
-            quoteResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        });
-      }
-
-      // Parallax effect for background
-      window.addEventListener('scroll', function () {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
-        const video = document.querySelector('.hero-video');
-
-        if (video) {
-          video.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-      });
-
-      // Smooth scroll for CTA buttons
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
-      });
-
-      // Video fallback for mobile
-      const video = document.querySelector('.hero-video');
-      if (video) {
-        video.addEventListener('error', function () {
-          this.style.display = 'none';
-          document.querySelector('.hero-fallback').style.display = 'block';
-        });
-      }
-  </script>
+  </section> 
 
   <!-- Services Section -->
   <section class="services-section" id="services">
@@ -518,7 +407,7 @@
             <h3>Compare Our Pricing Plans</h3>
             <p>Transparent pricing for every transportation need. Choose the perfect plan that fits your budget and
               requirements.</p>
-            <a href="pricing.html" class="cta-btn primary">
+            <a href="pages/pricing.html" class="cta-btn primary">
               <i class="fas fa-tags"></i>
               <span>View Pricing Plans</span>
             </a>
@@ -527,70 +416,6 @@
       </div>
     </div>
   </section>
-
-  <script>
-      // Services Section Functionality
-      document.addEventListener('DOMContentLoaded', function () {
-        // Service button clicks
-        const serviceButtons = document.querySelectorAll('.service-btn');
-        serviceButtons.forEach(button => {
-          button.addEventListener('click', function () {
-            const service = this.getAttribute('data-service');
-            const serviceName = this.closest('.service-card').querySelector('h3').textContent;
-
-            // Show service modal or redirect
-            alert(`Thank you for your interest in our ${serviceName} service! Our team will contact you shortly.`);
-
-            // You can replace this with actual modal or redirect logic
-            // window.location.href = `contact.html?service=${service}`;
-          });
-        });
-
-        // Animated counter for stats
-        const statNumbers = document.querySelectorAll('.stat-number');
-
-        const animateValue = (element, start, end, duration) => {
-          let startTimestamp = null;
-          const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            const value = Math.floor(progress * (end - start) + start);
-            element.textContent = value + (element.getAttribute('data-target') === '98' ? '%' : '+');
-            if (progress < 1) {
-              window.requestAnimationFrame(step);
-            }
-          };
-          window.requestAnimationFrame(step);
-        };
-
-        // Intersection Observer for stats animation
-        const statsObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              statNumbers.forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-target'));
-                animateValue(stat, 0, target, 2000);
-              });
-              statsObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.5 });
-
-        statsObserver.observe(document.querySelector('.service-stats'));
-
-        // Hover effects for service cards
-        const serviceCards = document.querySelectorAll('.service-card');
-        serviceCards.forEach(card => {
-          card.addEventListener('mouseenter', function () {
-            this.style.zIndex = '10';
-          });
-
-          card.addEventListener('mouseleave', function () {
-            this.style.zIndex = '1';
-          });
-        });
-      });
-  </script>
 
   <!-- Testimonials Section -->
   <section class="testimonials-section" id="testimonials">
@@ -743,67 +568,6 @@
     </div>
   </section>
 
-
-  <script>
-      // Testimonial Slider Functionality
-      document.addEventListener("DOMContentLoaded", function () {
-        const sliderContainer = document.getElementById("sliderContainer");
-        const slides = document.querySelectorAll(".testimonial-card");
-        const dots = document.querySelectorAll(".dot");
-        const prevBtn = document.querySelector(".prev-btn");
-        const nextBtn = document.querySelector(".next-btn");
-
-        let currentSlide = 0;
-        const totalSlides = slides.length;
-
-        // Update slider position
-        function updateSlider() {
-          sliderContainer.style.transform = `translateX(-${currentSlide * 100
-            }%)`;
-
-          // Update dots
-          dots.forEach((dot, index) => {
-            dot.classList.toggle("active", index === currentSlide);
-          });
-        }
-
-        // Next slide
-        function nextSlide() {
-          currentSlide = (currentSlide + 1) % totalSlides;
-          updateSlider();
-        }
-
-        // Previous slide
-        function prevSlide() {
-          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-          updateSlider();
-        }
-
-        // Event listeners
-        nextBtn.addEventListener("click", nextSlide);
-        prevBtn.addEventListener("click", prevSlide);
-
-        // Dot click events
-        dots.forEach((dot, index) => {
-          dot.addEventListener("click", () => {
-            currentSlide = index;
-            updateSlider();
-          });
-        });
-
-        // Auto slide every 5 seconds
-        setInterval(nextSlide, 5000);
-
-        // Pause auto-slide on hover
-        const slider = document.querySelector(".testimonial-slider");
-        slider.addEventListener("mouseenter", () => {
-          clearInterval(autoSlide);
-        });
-
-        let autoSlide = setInterval(nextSlide, 5000);
-      });
-  </script>
-
   <!-- Contact CTA Section -->
   <section class="contact-cta">
     <div class="container">
@@ -867,7 +631,7 @@
           </form>
           <div class="form-footer">
             <p>Or contact us directly</p>
-            <a href="contact.html" class="contact-link">
+            <a href="pages/contact.html" class="contact-link">
               <i class="fas fa-headset"></i>
               <span>Visit Contact Page</span>
               <i class="fas fa-external-link-alt"></i>
@@ -877,8 +641,9 @@
       </div>
     </div>
   </section>
-  <section class="features" id="features">
-  <h2 class="section-title">Our Features</h2>
+
+<section class="features" id="features">
+  <h2 class="section-title h1">Our Features</h2>
   <div class="features-container">
     <div class="feature-box">
       🚗
@@ -895,13 +660,9 @@
       <h3>Full Insurance</h3>
       <p>Your vehicle is fully insured during the entire transport process.</p>
     </div>
-    <div class="feature-box">
-      📞
-      <h3>24/7 Support</h3>
-      <p>Our support team is available anytime to assist with your queries.</p>
-    </div>
   </div>
 </section>
+
   <!-- Footer Section -->
 <div id="footer-container"></div>
 
@@ -1003,57 +764,12 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <!-- Preloader fade-out script -->
-  <script>
-    window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
-      setTimeout(() => {
-        preloader.classList.add("fade-out");
-
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 100); 
-      }, 100); 
-    });
-  </script>
-
-  <script>
-    // Back to Top Functionality
-    const backToTopButton = document.getElementById("backToTop");
-
-    window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add("visible");
-      } else {
-        backToTopButton.classList.remove("visible");
-      }
-    });
-        // Add input animations
-        const inputs = document.querySelectorAll(
-          ".input-group input, .input-group select"
-        );
-        inputs.forEach((input) => {
-          input.addEventListener("focus", function () {
-            this.parentElement.style.transform = "scale(1.02)";
-          });
-
-          input.addEventListener("blur", function () {
-            this.parentElement.style.transform = "scale(1)";
-          });
-        });
-
-        // Phone number formatting
-        const phoneInput = contactForm.querySelector('input[type="tel"]');
-        phoneInput.addEventListener("input", function (e) {
-          let value = e.target.value.replace(/\D/g, "");
-          if (value.length > 0) {
-            value = value.match(/.{1,5}/g).join(" ");
-          }
-          e.target.value = value;
-        });
-      </script>
-
   <script src="./js/script.js"></script>
+  <script src="./js/modules/Services.js"></script>
+  <script src="./js/modules/tracking.js"></script>
+  <script src="./js/modules/footer.js"></script>
+  <script src="./js/modules/navbar.js"></script>
+  
 </body>
 
 </html>

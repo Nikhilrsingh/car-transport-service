@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | Harihar Car Carriers</title>
+  <link rel="icon" type="image/png" href="classic-car.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --orange: #ff6347;
+      --bg: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #aaaaaa;
+      --card-bg: #2b2b2b;
+      --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      --radius: 12px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* HERO SECTION */
+    .gallery-hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: linear-gradient(135deg, rgba(255, 99, 71, 0.15), rgba(0, 0, 0, 0.9));
+    }
+
+    .gallery-hero h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #ff6347, #ff4500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .gallery-hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* GALLERY SECTION */
+    .gallery-section {
+      padding: 60px 5%;
+    }
+
+    .gallery-section h2 {
+      text-align: center;
+      color: var(--orange);
+      margin-bottom: 40px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      background: var(--card-bg);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 2100;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .gallery-item img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+  <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("navbar-container").innerHTML = html;
+        const galleryLink = document.querySelector('a[href="gallery.html"]');
+        if (galleryLink) galleryLink.classList.add("active-link");
+      })
+      .catch(err => console.error("Navbar load error:", err));
+  </script>
+
+  <!-- HERO SECTION -->
+  <section class="gallery-hero">
+    <h1>Our Gallery</h1>
+    <p>Explore real images from our car transport services, delivery operations, and happy customers.</p>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section class="gallery-section">
+    <h2>Transport Highlights</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="../assets/gallery/gal1.png" alt="Car Carrier" /></div>
+      <div class="gallery-item"><img src="../assets/gallery/gal2.png" alt="Vehicle Loading" /></div>
+      <div class="gallery-item"><img src="../assets/gallery/gal3.png" alt="Customer Delivery" /></div>
+      <div class="gallery-item"><img src="../assets/gallery/gal4.png" alt="Fleet" /></div>
+      <div class="gallery-item"><img src="../assets/gallery/gal5.png" alt="Safe Delivery" /></div>
+      <div class="gallery-item"><img src="../assets/gallery/gal6.png" alt="Transport Operations" /></div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" id="closeLightbox">&times;</span>
+    <img id="lightboxImage" src="" alt="Expanded View" />
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("footer-container").innerHTML = html)
+      .catch(err => console.error("Footer load error:", err));
+  </script>
+
+  <!-- JS: Lightbox -->
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImage");
+    const closeBtn = document.getElementById("closeLightbox");
+    const galleryItems = document.querySelectorAll(".gallery-item img");
+
+    galleryItems.forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      lightbox.classList.remove("active");
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) lightbox.classList.remove("active");
+    });
+  </script>
+</body>
+</html>
