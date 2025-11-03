@@ -31,6 +31,106 @@ body {
   background-color: #2b2b2b;
 }
 
+/* 🌟 Enhanced Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #470202, #020d24) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.preloader-content {
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.preloader-logo {
+  width: 100px;
+  height: auto;
+  animation: bounce 1.5s infinite ease-in-out;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 3px;
+  background-color: #3498db;
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+.dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.progress-bar {
+  width: 550px;
+  height: 5px;
+  background: #d0d0d0;
+  border-radius: 10px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  border-radius: 10px;
+  animation: progressAnim 2.5s forwards;
+}
+
+/* ✨ Animations */
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+}
+
+@keyframes progressAnim {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Fade-out animation when preloader hides */
+#preloader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+
 /* Enhanced Hero Section Styles */
 .hero {
   position: relative;
