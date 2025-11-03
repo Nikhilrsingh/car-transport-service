@@ -5,12 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Harihar Car Carriers</title>
-  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
   <link rel="stylesheet" href="./css/styles.css" />
   <link rel="stylesheet" href="./css/components/testimonial.css">
   <link rel="stylesheet" href="./css/components/tracking.css">
-  <link rel="stylesheet" href="css/components/navbar.css">
-  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="./css/components/navbar.css">
+  <link rel="stylesheet" href="./css/components/footer.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
@@ -19,8 +19,7 @@
 <div id="preloader">
   <div class="preloader-content">
     <div class="logo-container">
-      <!-- Optional: Replace with your logo -->
-      <img   src="/car-transport-service/assets/images/left-logo.jpg" />
+      <img src="./assets/images/left-logo.jpg" alt="Harihar Car Carriers"/>
     </div>
     <div class="loading-text">Loading</div>
     <div class="dots">
@@ -32,9 +31,220 @@
   </div>
 </div>
 
+<!-- Enhanced Navigation Component -->
+<header class="header">
+  <div class="navbar-container">
+    <div class="navbar">
+      <!-- Left Logo -->
+      <div class="logo-container left-logo">
+        <img
+          src="./assets/images/left-logo.jpg"
+          alt="Harihar Car Carriers"
+          class="logo-img"
+        />
+      </div>
 
-  <!-- Header Section -->
-  <div id="navbar-container"></div>
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="./index.html" class="nav-link active" data-page="home">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pages/about.html" class="nav-link" data-page="about">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link" data-page="services">
+              <i class="fas fa-truck-moving"></i>
+              <span>Services</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pages/booking.html" class="nav-link" data-page="booking">
+              <i class="fas fa-calendar-check"></i>
+              <span>Booking</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pages/contributors.html" class="nav-link" data-page="contributors">
+              <i class="fas fa-users"></i>
+              <span>Contributors</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pages/pricing.html" class="nav-link" data-page="pricing">
+              <i class="fas fa-tags"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pages/tracking.html" class="nav-link" data-page="tracking">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Track Your Car</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pages/gallery.html" class="nav-link" data-page="gallery">
+              <i class="fas fa-images"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pages/contact.html" class="nav-link" data-page="contact">
+              <i class="fas fa-phone"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Right Actions -->
+        <div class="nav-actions">
+          <a href="./pages/enquiry.html" class="nav-link enquiry-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+          <a href="./pages/blog.html" class="nav-link blog-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+          <a href="#login" class="login-btn">
+            <i class="fas fa-user"></i>
+            <span>Login</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        aria-label="Toggle mobile menu"
+      >
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <div class="mobile-nav-header">
+        <div class="mobile-logo">
+          <img src="./assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+          <span>Harihar Car Carriers</span>
+        </div>
+        <button
+          class="mobile-close-btn"
+          id="mobileCloseBtn"
+          aria-label="Close mobile menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <a href="./index.html" class="mobile-nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/about.html" class="mobile-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="#services" class="mobile-nav-link">
+            <i class="fas fa-truck-moving"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/booking.html" class="mobile-nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Booking</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/contributors.html" class="mobile-nav-link">
+            <i class="fas fa-users"></i>
+            <span>Contributors</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/pricing.html" class="mobile-nav-link">
+            <i class="fas fa-tags"></i>
+            <span>Pricing</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/tracking.html" class="mobile-nav-link">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Track Your Car</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/gallery.html" class="mobile-nav-link">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/contact.html" class="mobile-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/enquiry.html" class="mobile-nav-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/blog.html" class="mobile-nav-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="#login" class="mobile-login-btn">
+          <i class="fas fa-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="./pages/booking.html" class="mobile-cta-btn">
+          <i class="fas fa-truck"></i>
+          <span>Book Instantly</span>
+        </a>
+      </div>
+      <div class="mobile-contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 98765 43210</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@hariharcarcarriers.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>24/7 Support</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+  </div>
+</header>
 
   <!-- Theme widget (floating top-left) -->
   <div class="theme-widget" id="themeWidget" aria-hidden="false">
@@ -58,7 +268,7 @@
           type="video/mp4">
       </video>
       <!-- Fallback Image -->
-      <img src="assets/images/bmw.jpg" alt="Car Transportation" class="hero-fallback">
+      <img src="./assets/images/bmw.jpg" alt="Car Transportation" class="hero-fallback">
 
       <!-- Gradient Overlay -->
       <div class="hero-overlay"></div>
@@ -111,7 +321,7 @@
 
           <!-- CTA Buttons -->
           <div class="hero-actions">
-            <a href="pages/booking.html" class="cta-btn primary">
+            <a href="./pages/booking.html" class="cta-btn primary">
               <i class="fas fa-truck-moving"></i>
               <span>Book Instantly</span>
               <div class="btn-shine"></div>
@@ -164,7 +374,7 @@
                 <span class="amount">₹5,800</span>
                 <span class="label">Estimated Cost</span>
               </div>
-              <a href="pages/booking.html" class="result-book">Book Now</a>
+              <a href="./pages/booking.html" class="result-book">Book Now</a>
             </div>
           </div>
         </div>
@@ -196,9 +406,7 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Door-to-Door Transport</h3>
-          <p>Convenient pickup from your location and delivery to your destination. We handle everything from start
-            to
-            finish.</p>
+          <p>Convenient pickup from your location and delivery to your destination. We handle everything from start to finish.</p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Home pickup & delivery</li>
             <li><i class="fas fa-check"></i> No extra charges</li>
@@ -221,9 +429,7 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Nationwide Coverage</h3>
-          <p>Transport your vehicle to any corner of India with our extensive network of trusted partners and
-            carriers.
-          </p>
+          <p>Transport your vehicle to any corner of India with our extensive network of trusted partners and carriers.</p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> 500+ cities covered</li>
             <li><i class="fas fa-check"></i> Pan-India network</li>
@@ -245,9 +451,7 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Safe & Secure Transport</h3>
-          <p>Your vehicle's safety is our top priority. We use advanced equipment and follow strict safety
-            protocols.
-          </p>
+          <p>Your vehicle's safety is our top priority. We use advanced equipment and follow strict safety protocols.</p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Full insurance coverage</li>
             <li><i class="fas fa-check"></i> GPS tracking</li>
@@ -269,8 +473,7 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Luxury Car Transport</h3>
-          <p>Specialized handling for luxury and high-value vehicles with extra care and premium service standards.
-          </p>
+          <p>Specialized handling for luxury and high-value vehicles with extra care and premium service standards.</p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Climate-controlled carriers</li>
             <li><i class="fas fa-check"></i> White-glove service</li>
@@ -292,8 +495,7 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Bike Transportation</h3>
-          <p>Safe and secure transportation for motorcycles and bikes with specialized handling and secure mounting.
-          </p>
+          <p>Safe and secure transportation for motorcycles and bikes with specialized handling and secure mounting.</p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Special bike carriers</li>
             <li><i class="fas fa-check"></i> Secure mounting</li>
@@ -315,8 +517,7 @@
             <div class="icon-bg"></div>
           </div>
           <h3>Commercial Vehicles</h3>
-          <p>Transportation solutions for commercial vehicles including trucks, vans, and other business vehicles.
-          </p>
+          <p>Transportation solutions for commercial vehicles including trucks, vans, and other business vehicles.</p>
           <ul class="service-features">
             <li><i class="fas fa-check"></i> Heavy vehicle carriers</li>
             <li><i class="fas fa-check"></i> Business solutions</li>
@@ -355,9 +556,8 @@
         <div class="pricing-cta-section">
           <div class="pricing-cta-content">
             <h3>Compare Our Pricing Plans</h3>
-            <p>Transparent pricing for every transportation need. Choose the perfect plan that fits your budget and
-              requirements.</p>
-            <a href="pages/pricing.html" class="cta-btn primary">
+            <p>Transparent pricing for every transportation need. Choose the perfect plan that fits your budget and requirements.</p>
+            <a href="./pages/pricing.html" class="cta-btn primary">
               <i class="fas fa-tags"></i>
               <span>View Pricing Plans</span>
             </a>
@@ -372,10 +572,7 @@
     <div class="container">
       <div class="section-title">
         <h2>What Our Customers Say</h2>
-        <p>
-          Don't just take our word for it. Read genuine reviews from our
-          satisfied customers.
-        </p>
+        <p>Don't just take our word for it. Read genuine reviews from our satisfied customers.</p>
       </div>
 
       <!-- Slider Section -->
@@ -384,19 +581,14 @@
           <!-- Testimonial 1 -->
           <div class="testimonial-card">
             <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             </div>
             <p class="testimonial-text">
-              "I was extremely worried about shipping my BMW from Delhi to
-              Bangalore, but Harihar Car Carriers made the process seamless.
-              Their professional handling and timely delivery exceeded my
-              expectations. Highly recommended!"
+              "I was extremely worried about shipping my BMW from Delhi to Bangalore, but Harihar Car Carriers made the process seamless. Their professional handling and timely delivery exceeded my expectations. Highly recommended!"
             </p>
             <div class="client-info">
               <div class="client-avatar">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1000&q=80"
-                  alt="Rajesh Kumar" />
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1000&q=80" alt="Rajesh Kumar" />
               </div>
               <div class="client-details">
                 <h4>Rajesh Kumar</h4>
@@ -408,19 +600,14 @@
           <!-- Testimonial 2 -->
           <div class="testimonial-card">
             <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             </div>
             <p class="testimonial-text">
-              "As a car dealer, I regularly use transport services. Harihar
-              Car Carriers stands out with their punctuality and care. My
-              luxury cars always arrive in perfect condition. Trustworthy
-              service!"
+              "As a car dealer, I regularly use transport services. Harihar Car Carriers stands out with their punctuality and care. My luxury cars always arrive in perfect condition. Trustworthy service!"
             </p>
             <div class="client-info">
               <div class="client-avatar">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1000&q=80"
-                  alt="Priya Sharma" />
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1000&q=80" alt="Priya Sharma" />
               </div>
               <div class="client-details">
                 <h4>Priya Sharma</h4>
@@ -432,18 +619,14 @@
           <!-- Testimonial 3 -->
           <div class="testimonial-card">
             <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
             </div>
             <p class="testimonial-text">
-              "Transported my vintage car from Chennai to Pune. The team was
-              very careful and provided regular updates throughout the journey.
-              My classic car arrived without a scratch. Excellent service!"
+              "Transported my vintage car from Chennai to Pune. The team was very careful and provided regular updates throughout the journey. My classic car arrived without a scratch. Excellent service!"
             </p>
             <div class="client-info">
               <div class="client-avatar">
-                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=80"
-                  alt="Vikram Singh" />
+                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=80" alt="Vikram Singh" />
               </div>
               <div class="client-details">
                 <h4>Vikram Singh</h4>
@@ -473,17 +656,14 @@
       <div class="testimonials-grid">
         <div class="grid-testimonial">
           <div class="grid-rating">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-              class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
           </div>
           <p class="testimonial-text">
-            "Door-to-door service was amazing! They picked up my car from home
-            and delivered it right to my new address. No hassle at all."
+            "Door-to-door service was amazing! They picked up my car from home and delivered it right to my new address. No hassle at all."
           </p>
           <div class="grid-client-info">
             <div class="grid-client-avatar">
-              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
-                alt="Anjali Mehta" />
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80" alt="Anjali Mehta" />
             </div>
             <div class="client-details">
               <h4>Anjali Mehta</h4>
@@ -494,18 +674,14 @@
 
         <div class="grid-testimonial">
           <div class="grid-rating">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-              class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
           </div>
           <p class="testimonial-text">
-            "Best pricing in the market with premium service. My SUV was
-            transported safely from Hyderabad to Kolkata. Will definitely use
-            again."
+            "Best pricing in the market with premium service. My SUV was transported safely from Hyderabad to Kolkata. Will definitely use again."
           </p>
           <div class="grid-client-info">
             <div class="grid-client-avatar">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80"
-                alt="Amit Patel" />
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80" alt="Amit Patel" />
             </div>
             <div class="client-details">
               <h4>Amit Patel</h4>
@@ -515,7 +691,6 @@
         </div>
       </div>
     </div>
-    </div>
   </section>
 
   <!-- Contact CTA Section -->
@@ -524,11 +699,7 @@
       <div class="cta-content">
         <div class="cta-text">
           <h2>Have Any Questions About Vehicle Transport?</h2>
-          <p>
-            Our expert team is here to help you with all your car
-            transportation needs. Get instant quotes, schedule pickups, or ask
-            any questions.
-          </p>
+          <p>Our expert team is here to help you with all your car transportation needs. Get instant quotes, schedule pickups, or ask any questions.</p>
           <div class="cta-features">
             <div class="feature">
               <i class="fas fa-clock"></i>
@@ -581,7 +752,7 @@
           </form>
           <div class="form-footer">
             <p>Or contact us directly</p>
-            <a href="pages/contact.html" class="contact-link">
+            <a href="./pages/contact.html" class="contact-link">
               <i class="fas fa-headset"></i>
               <span>Visit Contact Page</span>
               <i class="fas fa-external-link-alt"></i>
@@ -592,34 +763,48 @@
     </div>
   </section>
 
-<section class="features" id="features">
-  <h2 class="section-title h1">Our Features</h2>
-  <div class="features-container">
-    <div class="feature-box">
-      🚗
-      <h3>Fast Delivery</h3>
-      <p>We ensure timely and safe transport of your vehicle to the destination.</p>
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2 class="section-title h1">Our Features</h2>
+    <div class="features-container">
+      <div class="feature-box">
+        🚗
+        <h3>Fast Delivery</h3>
+        <p>We ensure timely and safe transport of your vehicle to the destination.</p>
+      </div>
+      <div class="feature-box">
+        💰
+        <h3>Affordable Rates</h3>
+        <p>Get the best service at budget-friendly prices without hidden charges.</p>
+      </div>
+      <div class="feature-box">
+        🛡️
+        <h3>Full Insurance</h3>
+        <p>Your vehicle is fully insured during the entire transport process.</p>
+      </div>
     </div>
-    <div class="feature-box">
-      💰
-      <h3>Affordable Rates</h3>
-      <p>Get the best service at budget-friendly prices without hidden charges.</p>
-    </div>
-    <div class="feature-box">
-      🛡️
-      <h3>Full Insurance</h3>
-      <p>Your vehicle is fully insured during the entire transport process.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- Footer Section -->
-<div id="footer-container"></div>
+  <div id="footer-container"></div>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
-      <i class="fas fa-chevron-up"></i>
-    </button>
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Load Footer -->
+  <script>
+    // Load footer
+    fetch('./footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading footer:', error);
+        });
+  </script>
 
   <script src="./js/script.js"></script>
   <script src="./js/modules/themes.js"></script>
@@ -629,19 +814,17 @@
   <script src="./js/modules/navbar.js"></script>
 
   <script>
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
 
-  // Small delay for smooth fade-out
-  setTimeout(() => {
-    preloader.classList.add("fade-out");
-    setTimeout(() => {
-      preloader.style.display = "none";
-    }, 800);
-  }, 1000); // delay before hiding
-});
-</script>
-  
+      // Small delay for smooth fade-out
+      setTimeout(() => {
+        preloader.classList.add("fade-out");
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 800);
+      }, 1000); // delay before hiding
+    });
+  </script>
 </body>
-
 </html>
