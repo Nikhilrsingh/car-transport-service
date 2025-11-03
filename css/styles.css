@@ -18,6 +18,15 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+:root {
+  /* Accent color variables (user-switchable) */
+  --accent: #ff6347; /* default tomato */
+  --accent-600: #ff4500;
+  --accent-400: #ff8a65;
+  --accent-100: rgba(255, 99, 71, 0.08);
+  --accent-rgb: 255, 99, 71;
+}
+
 /* General Reset */
 * {
   margin: 0;
@@ -1763,56 +1772,18 @@ html {
   .newsletter-input {
     flex-direction: column;
   }
+.feature-box {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
- .features {
-    background: linear-gradient(135deg, #8888880f, #88888819);
-    padding: 80px 20px;
-    text-align: center;
-  }
 
-  .section-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #df0808;
-    margin-bottom: 50px;
-    position: relative;
-  }
-
-  .h1{
-    color:#f3efef !important
-  }
-
-  .section-title::after {
-    content: "";
-    width: 80px;
-    height: 3px;
-    background: #007bff;
-    display: block;
-    margin: 10px auto 0;
-    border-radius: 5px;
-  }
-
-  .features-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 25px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .feature-box {
-    background: #a72704;
-    padding: 35px 25px;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    font-size: 2rem;
-  }
-
-  .feature-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  }
+.feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
 
   .feature-box h3 {
     margin: 15px 0 10px;
@@ -1840,3 +1811,199 @@ html {
       font-size: 1.2rem;
     }
   }
+
+.feature-box {
+  font-size: 2rem;
+}};
+
+/* Accent-aware overrides (placed near end so they win over earlier hard-coded values) */
+.cta-btn.primary,
+.quote-submit,
+.submit-btn,
+.result-book,
+.service-btn,
+.service-badge,
+.trust-item i,
+.hero-badge i,
+.stat-number,
+.feature i,
+.footer-column h3,
+.footer-logo-text,
+.newsletter-input button,
+.back-to-top {
+  background: linear-gradient(135deg, var(--accent), var(--accent-600)) !important;
+  color: white !important;
+  border-color: transparent !important;
+}
+
+.cta-btn.primary {
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.cta-btn.outline,
+.feature:hover,
+.service-card.featured {
+  border-color: var(--accent) !important;
+}
+
+.stat-number,
+.amount,
+.service-badge {
+  color: var(--accent) !important;
+}
+
+/* Wider accent overrides to cover more elements that had hard-coded colors */
+/* Use --accent and --accent-600 for gradients, and --accent-rgb for rgba backgrounds */
+.title-line.highlight {
+  background: linear-gradient(135deg, var(--accent), var(--accent-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-badge {
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.12), rgba(var(--accent-rgb), 0.06));
+  border-color: rgba(var(--accent-rgb), 0.22);
+}
+.hero-badge i { color: var(--accent); }
+
+.trust-item i, .feature i, .service-icon i, .hero-badge i { color: var(--accent); }
+
+.feature { background: rgba(var(--accent-rgb), 0.06); border-left-color: var(--accent); }
+
+.service-card::before { background: linear-gradient(90deg, var(--accent), var(--accent-600)); }
+.service-badge { background: linear-gradient(135deg, var(--accent), var(--accent-600)); }
+
+.service-icon .icon-bg { background: rgba(var(--accent-rgb), 0.08); }
+.service-icon i { color: var(--accent); }
+
+.cta-btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-600)) !important; }
+.cta-btn.primary .btn-shine { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); }
+
+.quote-submit, .submit-btn, .result-book, .newsletter-input button, .back-to-top { background: linear-gradient(135deg, var(--accent), var(--accent-600)); color: white; }
+
+.nav-link.active { background: linear-gradient(135deg, var(--accent), var(--accent-600)); color: white; }
+
+.footer-column h3, .footer-logo-text { color: var(--accent); }
+
+/* subtle box-shadow tint where used previously */
+.cta-btn.primary, .submit-btn { box-shadow: 0 10px 30px rgba(0,0,0,0.25), 0 6px 20px rgba(var(--accent-rgb), 0.18); }
+
+/* ensure icons that used the accent color update */
+.icon-accent { color: var(--accent) !important; }
+
+/* Settings UI styles */
+.settings-toggle {
+  position: absolute; /* positioned inside hero-content */
+  left: 16px;
+  top: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  background: #222;
+  color: var(--accent);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  cursor: pointer;
+  z-index: 1200;
+  border: 2px solid rgba(255,255,255,0.04);
+}
+
+/* Attention-grabbing animation for the settings toggle */
+@keyframes settings-pulse {
+  0% { transform: scale(1); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+  50% { transform: scale(1.08) rotate(-6deg); box-shadow: 0 14px 30px rgba(0,0,0,0.45); }
+  100% { transform: scale(1); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+}
+
+.settings-toggle.pulse {
+  animation: settings-pulse 1.6s ease-in-out infinite;
+}
+
+/* Small temporary hint popup that appears near the settings toggle */
+.settings-hint {
+  position: absolute;
+  left: 72px;
+  top: 18px;
+  background: linear-gradient(180deg, rgba(30,30,30,0.98), rgba(20,20,20,0.98));
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms ease;
+  z-index: 1250;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.settings-hint.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.settings-hint .hint-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(var(--accent-rgb),0.3);
+}
+
+/* Make hint responsive on small screens */
+@media (max-width: 480px) {
+  .settings-hint { left: 12px; top: 72px; }
+}
+
+.settings-panel {
+  position: absolute; /* positioned inside hero-content, opens beneath toggle */
+  left: 16px;
+  top: 64px;
+  width: 240px;
+  background: linear-gradient(180deg, rgba(20,20,20,0.98), rgba(30,30,30,0.98));
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+  z-index: 1199;
+  display: none;
+}
+
+.settings-panel.open { display: block; }
+.settings-panel h4 { margin: 0 0 8px; font-size: 0.95rem; }
+.settings-swatches { display:flex; gap:8px; align-items:center; }
+.swatch { width: 36px; height: 36px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; box-shadow: 0 6px 18px rgba(0,0,0,0.35); }
+.swatch:focus { outline: 3px solid rgba(255,255,255,0.12); }
+.swatch.active { transform: translateY(-3px); border-color: #fff; }
+.settings-footer { font-size: 0.8rem; color: #bbb; margin-top: 8px; }
+
+/* small responsive tweak */
+@media (max-width: 480px) { .settings-panel { right: 12px; left: 12px; width: auto; top: 72px; } .settings-toggle { left: 18px; top: 18px; } }
+
+/* Final accent overrides to catch leftover hard-coded uses */
+/* These are intentionally specific and use !important so the theme applies site-wide */
+.hero-overlay, .hero-overlay * { background-image: none !important; }
+.hero-overlay { background: linear-gradient(135deg, rgba(43,43,43,0.9) 0%, rgba(var(--accent-rgb),0.18) 50%, rgba(43,43,43,0.8) 100%) !important; }
+.shape { background: linear-gradient(45deg, var(--accent), transparent) !important; }
+.hero-badge { background: rgba(var(--accent-rgb),0.12) !important; border-color: rgba(var(--accent-rgb),0.22) !important; }
+.hero-badge i, .trust-item i, .feature i, .service-icon i, .stat-number, .amount { color: var(--accent) !important; }
+.title-line.highlight { background: linear-gradient(135deg, var(--accent), var(--accent-600)) !important; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cta-btn.primary, .quote-submit, .submit-btn, .result-book, .newsletter-input button, .back-to-top, .service-btn, .service-badge { background: linear-gradient(135deg, var(--accent), var(--accent-600)) !important; color: white !important; }
+.cta-btn.outline, .service-card.featured, .contact-link, .feature { border-color: var(--accent) !important; }
+.result-book, .contact-link, .footer-logo-text, .footer-column h3, .footer-links a:hover, .footer-bottom-links a:hover { color: var(--accent) !important; }
+.result-book:hover, .submit-btn:hover, .newsletter-input button:hover, .back-to-top:hover { background: var(--accent-600) !important; }
+.quote-card, .service-stats, .feature { background: rgba(var(--accent-rgb), 0.06) !important; }
+.service-card::before, .cta-form-box::before, .service-badge { background: linear-gradient(90deg, var(--accent), var(--accent-600)) !important; }
+.service-icon .icon-bg, .icon-accent { background: rgba(var(--accent-rgb),0.08) !important; color: var(--accent) !important; }
+.footer { border-top-color: var(--accent) !important; }
+.footer::before { background: linear-gradient(90deg, transparent, var(--accent), transparent) !important; }
+.social-links a:hover, .payment-methods i:hover { background: var(--accent) !important; color: white !important; border-color: var(--accent) !important; }
+.back-to-top { background: var(--accent) !important; box-shadow: 0 5px 15px rgba(var(--accent-rgb),0.3) !important; }
+.service-cta .price, .stat-number { color: var(--accent) !important; }
+
+/* end final overrides */

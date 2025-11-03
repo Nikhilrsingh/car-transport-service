@@ -123,8 +123,8 @@
   }
 
   .nav-link:hover {
-    color: #ff6347;
-    background: rgba(255, 99, 71, 0.1);
+    color: var(--accent);
+    background: rgba(var(--accent-rgb), 0.1);
     transform: translateY(-2px);
   }
 
@@ -133,15 +133,15 @@
   }
 
   .nav-link.active {
-    background: linear-gradient(135deg, #ff6347, #ff4500);
+    background: linear-gradient(135deg, var(--accent), var(--accent-600));
     color: white;
-    box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+    box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
   }
 
   .nav-link.active:hover {
-    background: linear-gradient(135deg, #ff4500, #ff6347);
+    background: linear-gradient(135deg, var(--accent-600), var(--accent));
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
+    box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.4);
   }
 
   /* Right Actions - Fixed alignment */
@@ -175,7 +175,7 @@
   .enquiry-link:hover,
   .blog-link:hover {
     background: rgba(255, 255, 255, 0.1);
-    color: #ff6347;
+    color: var(--accent);
   }
 
   .login-btn {
@@ -197,8 +197,8 @@
   }
 
   .login-btn:hover {
-    background: rgba(255, 107, 53, 0.1);
-    border-color: #ff6347;
+    background: rgba(var(--accent-rgb), 0.1);
+    border-color: var(--accent);
     transform: translateY(-2px);
   }
 
@@ -208,7 +208,7 @@
     justify-content: center;
     gap: 6px;
     padding: 9px 18px;
-    background: linear-gradient(135deg, #ff6347, #ff4500);
+    background: linear-gradient(135deg, var(--accent), var(--accent-600));
     color: white;
     text-decoration: none;
     border-radius: 6px;
@@ -223,8 +223,8 @@
 
   .cta-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
-    background: linear-gradient(135deg, #ff4500, #ff6347);
+    box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.4);
+    background: linear-gradient(135deg, var(--accent-600), var(--accent));
   }
 
   /* Mobile Menu Button */
@@ -312,7 +312,7 @@
   }
 
   .mobile-close-btn:hover {
-    color: #ff6347;
+    color: var(--accent);
   }
 
   .mobile-nav-list {
@@ -343,13 +343,13 @@
     width: 20px;
     text-align: center;
     font-size: 1.1rem;
-    color: #ff6347;
+    color: var(--accent);
   }
 
   .mobile-nav-link:hover,
   .mobile-nav-link.active {
-    background: rgba(255, 99, 71, 0.1);
-    color: #ff6347;
+    background: rgba(var(--accent-rgb), 0.1);
+    color: var(--accent);
     padding-left: 30px;
   }
 
@@ -376,8 +376,8 @@
   }
 
   .mobile-login-btn:hover {
-    border-color: #ff6347;
-    color: #ff6347;
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   .mobile-cta-btn {
@@ -385,7 +385,7 @@
     align-items: center;
     gap: 12px;
     padding: 15px;
-    background: linear-gradient(135deg, #ff6347, #ff4500);
+    background: linear-gradient(135deg, var(--accent), var(--accent-600));
     color: white;
     text-decoration: none;
     border-radius: 8px;
@@ -396,7 +396,7 @@
 
   .mobile-cta-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+    box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.3);
   }
 
   .mobile-contact-info {
@@ -415,7 +415,7 @@
   }
 
   .contact-item i {
-    color: #ff6347;
+    color: var(--accent);
     width: 16px;
     text-align: center;
   }
