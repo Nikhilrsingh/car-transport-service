@@ -272,6 +272,22 @@
           e.target.value = value;
         });
 
+    
+    //Keypress-Activated Easter Egg 
+    document.addEventListener("DOMContentLoaded", () => {
+      const car = document.querySelector(".car");
+      if (!car) return; 
+
+      document.addEventListener("keydown", (event) => {
+        if (event.ctrlKey && event.shiftKey && (event.key === "?" || event.key === "/")) {
+          car.classList.remove("animate");
+          void car.offsetWidth; 
+          car.classList.add("animate");
+        }
+      });
+    });
+
+
         // <!-- Load Footer -->
     // Load footer
     fetch('./footer.html')
@@ -294,3 +310,4 @@
       }, 800);
     }, 1000); // delay before hiding
   });
+

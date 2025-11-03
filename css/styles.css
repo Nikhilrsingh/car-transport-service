@@ -2045,3 +2045,31 @@ html[data-theme="glass"] {
   .theme-widget { left: 8px; top: 8px; }
 }
 
+
+/* Keypress-Activated Easter Egg */
+.car {
+  position: fixed;
+  top: 50%;
+  right: -300px;
+  transform: translateY(-50%);
+  font-size: 12rem;
+  opacity: 1;
+  filter: drop-shadow(0 0 30px red) drop-shadow(0 0 50px orange);
+  z-index: 9999; 
+  pointer-events: none; 
+}
+
+.car.animate {
+  animation: drive 4s ease-in-out forwards;
+}
+
+@keyframes drive {
+  0% {
+    right: -300px;
+    opacity: 1;
+  }
+  100% {
+    right: 110vw; 
+    opacity: 1; 
+  }
+}
