@@ -486,7 +486,7 @@
 
     <script>
       // Load navigation component
-      fetch('navbar.html')
+      fetch("navbar.html")
         .then((response) => response.text())
         .then((data) => {
           document.getElementById("navbar-container").innerHTML = data;
@@ -612,70 +612,139 @@
         </div>
       </section>
 
-<!-- How to Contribute -->
-<section class="contribute-section" style="padding: 50px 0; text-align: center;">
-  <div class="container" style="max-width: 1200px; margin: auto;">
-    <div class="section-header" style="margin-bottom: 40px;">
-      <h2>Want to Contribute?</h2>
-      <p>Join our community and help improve Harihar Car Carriers</p>
-    </div>
+      <!-- How to Contribute -->
+      <section
+        class="contribute-section"
+        style="padding: 50px 0; text-align: center"
+      >
+        <div class="container" style="max-width: 1200px; margin: auto">
+          <div class="section-header" style="margin-bottom: 40px">
+            <h2>Want to Contribute?</h2>
+            <p>Join our community and help improve Harihar Car Carriers</p>
+          </div>
 
-    <div class="contribute-steps" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 25px;">
-      
-      <!-- 🆕 New Step: Create an Issue -->
-      <div class="step-card" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 200px; text-align: center;">
-        <div class="step-icon" style="font-size: 36px; margin-bottom: 10px;">
-          <i class="fas fa-clipboard-list"></i>
+          <div
+            class="contribute-steps"
+            style="
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+              gap: 25px;
+            "
+          >
+            <!-- 🆕 New Step: Create an Issue -->
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
+                <i class="fas fa-clipboard-list"></i>
+              </div>
+              <h3>Create an Issue</h3>
+              <p>
+                Start by creating an issue describing your change and wait for
+                it to be assigned before forking the repo.
+              </p>
+            </div>
+
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
+                <i class="fab fa-github"></i>
+              </div>
+              <h3>Fork the Repository</h3>
+              <p>Start by forking the main repository to your GitHub account</p>
+            </div>
+
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
+                <i class="fas fa-code-branch"></i>
+              </div>
+              <h3>Create a Branch</h3>
+              <p>Create a feature branch for your changes</p>
+            </div>
+
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
+                <i class="fas fa-code"></i>
+              </div>
+              <h3>Make Changes</h3>
+              <p>Implement your features or bug fixes</p>
+            </div>
+
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
+                <i class="fas fa-upload"></i>
+              </div>
+              <h3>Submit PR</h3>
+              <p>Create a pull request for review</p>
+            </div>
+          </div>
         </div>
-        <h3>Create an Issue</h3>
-        <p>Start by creating an issue describing your change and wait for it to be assigned before forking the repo.</p>
-      </div>
+      </section>
 
-      <div class="step-card" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 200px; text-align: center;">
-        <div class="step-icon" style="font-size: 36px; margin-bottom: 10px;">
-          <i class="fab fa-github"></i>
-        </div>
-        <h3>Fork the Repository</h3>
-        <p>Start by forking the main repository to your GitHub account</p>
-      </div>
-
-      <div class="step-card" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 200px; text-align: center;">
-        <div class="step-icon" style="font-size: 36px; margin-bottom: 10px;">
-          <i class="fas fa-code-branch"></i>
-        </div>
-        <h3>Create a Branch</h3>
-        <p>Create a feature branch for your changes</p>
-      </div>
-
-      <div class="step-card" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 200px; text-align: center;">
-        <div class="step-icon" style="font-size: 36px; margin-bottom: 10px;">
-          <i class="fas fa-code"></i>
-        </div>
-        <h3>Make Changes</h3>
-        <p>Implement your features or bug fixes</p>
-      </div>
-
-      <div class="step-card" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 200px; text-align: center;">
-        <div class="step-icon" style="font-size: 36px; margin-bottom: 10px;">
-          <i class="fas fa-upload"></i>
-        </div>
-        <h3>Submit PR</h3>
-        <p>Create a pull request for review</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Font Awesome -->
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-/>
-
-
-</main>
-
+      <!-- Font Awesome -->
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      />
+    </main>
 
     <!-- Footer Section -->
     <div id="footer-container"></div>
@@ -1048,6 +1117,19 @@
       }
 
       loadContributors();
+
+      // Ensure page always starts from top on load or reload
+      window.addEventListener("beforeunload", () => {
+        window.scrollTo(0, 0);
+      });
+
+      window.addEventListener("load", () => {
+        window.scrollTo(0, 0);
+      });
+
+       window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
+  });
     </script>
   </body>
 </html>
