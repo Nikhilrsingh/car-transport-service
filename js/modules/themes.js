@@ -55,10 +55,10 @@
     document.body.appendChild(widget);
 
     // also apply inline positioning to be resilient against CSS containing blocks
-    widget.style.position = 'fixed';
-    widget.style.top = '14px';
-    widget.style.left = '14px';
-    widget.style.zIndex = '2147483647';
+    // widget.style.position = 'fixed';
+    // widget.style.top = '14px';
+    // widget.style.left = '14px';
+    // widget.style.zIndex = '2147483647';
 
     return select;
   }

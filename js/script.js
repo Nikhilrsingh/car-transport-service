@@ -271,6 +271,7 @@
           }
           e.target.value = value;
         });
+
     
     //Keypress-Activated Easter Egg 
     document.addEventListener("DOMContentLoaded", () => {
@@ -285,3 +286,28 @@
         }
       });
     });
+
+
+        // <!-- Load Footer -->
+    // Load footer
+    fetch('./footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading footer:', error);
+        });
+
+  window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    
+    // Small delay for smooth fade-out
+    setTimeout(() => {
+      preloader.classList.add("fade-out");
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 800);
+    }, 1000); // delay before hiding
+  });
+
