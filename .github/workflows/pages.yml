@@ -1,9 +1,9 @@
-name: Deploy GitHub Pages (no build)
+name: Deploy static website to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main   # deploy whenever you push to main branch
 
 permissions:
   contents: read
@@ -18,16 +18,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload website files
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: .   # publish repository root as site
+          path: .   # 👈 this means: use everything in your repo root (index.html, css/, js/ etc.)
 
-  deploy-pages:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        id: deployment
+        uses: actions/deploy-pages@v4
