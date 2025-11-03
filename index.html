@@ -798,38 +798,11 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <!-- Load Footer -->
-  <script>
-    // Load footer
-    fetch('./footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer-container').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error loading footer:', error);
-        });
-  </script>
-
-  <script src="./js/script.js"></script>
-  <script src="./js/modules/themes.js"></script>
-  <script src="./js/modules/Services.js"></script>
-  <script src="./js/modules/tracking.js"></script>
-  <script src="./js/modules/footer.js"></script>
-  <script src="./js/modules/navbar.js"></script>
-
-  <script>
-    window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
-
-      // Small delay for smooth fade-out
-      setTimeout(() => {
-        preloader.classList.add("fade-out");
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 800);
-      }, 1000); // delay before hiding
-    });
-  </script>
+<script src="./js/script.js"></script>
+<script src="./js/modules/themes.js"></script>
+<script src="./js/modules/Services.js"></script>
+<script src="./js/modules/tracking.js"></script>
+<script src="./js/modules/footer.js"></script>
+<script src="./js/modules/navbar.js"></script>
 </body>
 </html>
