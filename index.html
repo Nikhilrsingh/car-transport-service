@@ -23,6 +23,18 @@
   <!-- Header Section -->
   <div id="navbar-container"></div>
 
+  <!-- Theme widget (floating top-left) -->
+  <div class="theme-widget" id="themeWidget" aria-hidden="false">
+    <label for="themeWidgetSelect" class="sr-only">Choose theme</label>
+    <select id="themeWidgetSelect" aria-label="Choose theme">
+      <option value="auto">Theme</option>
+      <option value="default">Default</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="glass">Glass</option>
+    </select>
+  </div>
+
   <!-- Enhanced Hero Section -->
   <section id="home" class="hero">
     <div class="hero-background">
@@ -597,6 +609,7 @@
     </button>
 
   <script src="./js/script.js"></script>
+  <script src="./js/modules/themes.js"></script>
   <script src="./js/modules/Services.js"></script>
   <script src="./js/modules/tracking.js"></script>
   <script src="./js/modules/footer.js"></script>

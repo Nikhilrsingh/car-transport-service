@@ -1840,3 +1840,157 @@ html {
       font-size: 1.2rem;
     }
   }
+
+/* ------------------------- */
+/* Theme variables & widget */
+/* ------------------------- */
+
+:root {
+  /* core tokens (can be extended) */
+  --bg: #0f1720;
+  --surface: #1a1a1a;
+  --card: rgba(255,255,255,0.03);
+  --text: #eaeef2;
+  --muted: #bfc5ca;
+  --primary: #ff6347;
+  --primary-2: #ff4500;
+  --glass-bg: rgba(255,255,255,0.06);
+  --accent: #007bff;
+  --transition: 240ms ease;
+}
+
+/* Smooth transition helper (temporary while switching) */
+.theme-transition * {
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition) !important;
+}
+
+/* Base elements use tokens so themes can override them */
+html, body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* Buttons and primary accents should pick up token values */
+.cta-btn.primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-2)) !important;
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--primary) 30%, black) !important;
+}
+
+.cta-btn.secondary {
+  background: rgba(255,255,255,0.04);
+  color: var(--text) !important;
+  border-color: color-mix(in srgb, var(--text) 14%, transparent) !important;
+}
+
+.service-card, .quote-card, .cta-form-box, .pricing-cta-section, .footer, .back-to-top {
+  background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--surface) 90%, black));
+}
+
+.service-card h3, .section-header h2, .hero-title, .feature-box h3 {
+  color: var(--text) !important;
+}
+
+.stat-number, .price, .amount {
+  color: var(--primary) !important;
+}
+
+.hero-description, .stat-label, p, .footer-links a, .contact-info li {
+  color: var(--muted) !important;
+}
+
+/* Theme widget (floating top-left) */
+.theme-widget {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 12000;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.theme-widget select {
+  background: transparent;
+  color: var(--text);
+  border: none;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+}
+
+/* Improve select visuals to look like a compact pill */
+.theme-widget select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-width: 90px;
+  height: 36px;
+  background: rgba(0,0,0,0.5);
+  border: 2px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+.theme-widget select:focus {
+  outline: none;
+  border-color: rgba(255,255,255,0.16);
+}
+
+/* hide the native dropdown arrow on IE/Edge */
+.theme-widget select::-ms-expand { display: none; }
+
+.theme-widget .sr-only { position: absolute; left: -9999px; }
+
+/* Theme presets */
+html[data-theme="default"] {
+  --bg: linear-gradient(180deg,#0b1220 0%, #121826 100%);
+  --surface: #121419;
+  --text: #eef2f6;
+  --muted: #bfc5ca;
+  --primary: #ff6347;
+  --primary-2: #ff4500;
+}
+
+html[data-theme="light"] {
+  --bg: #f7f9fb;
+  --surface: #ffffff;
+  --card: #f4f6f8;
+  --text: #111827;
+  --muted: #6b7280;
+  --primary: #0b76ff;
+  --primary-2: #0066ff;
+  --glass-bg: rgba(255,255,255,0.6);
+}
+
+html[data-theme="dark"] {
+  --bg: #0b0f12;
+  --surface: #0f1417;
+  --card: rgba(255,255,255,0.02);
+  --text: #e6eef6;
+  --muted: #97a0ab;
+  --primary: #ff9b6b;
+  --primary-2: #ff6b35;
+}
+
+html[data-theme="glass"] {
+  --bg: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  --surface: rgba(255,255,255,0.04);
+  --card: rgba(255,255,255,0.03);
+  --text: #f5f7fb;
+  --muted: #c7cdd3;
+  --primary: #8bd3ff;
+  --primary-2: #4aa3ff;
+  --glass-bg: rgba(255,255,255,0.06);
+}
+
+/* small-screen adjustments so widget doesn't overlap content */
+@media (max-width: 480px) {
+  .theme-widget { left: 8px; top: 8px; }
+}
+
