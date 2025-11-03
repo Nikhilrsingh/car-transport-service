@@ -15,10 +15,23 @@
 </head>
 
 <body>
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="spinner"></div>
+ <!-- 🌟 Enhanced Preloader -->
+<div id="preloader">
+  <div class="preloader-content">
+    <div class="logo-container">
+      <!-- Optional: Replace with your logo -->
+      <img   src="/car-transport-service/assets/images/left-logo.jpg" />
+    </div>
+    <div class="loading-text">Loading</div>
+    <div class="dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
   </div>
+</div>
+
 
   <!-- Header Section -->
   <div id="navbar-container"></div>
@@ -614,6 +627,20 @@
   <script src="./js/modules/tracking.js"></script>
   <script src="./js/modules/footer.js"></script>
   <script src="./js/modules/navbar.js"></script>
+
+  <script>
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+
+  // Small delay for smooth fade-out
+  setTimeout(() => {
+    preloader.classList.add("fade-out");
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 800);
+  }, 1000); // delay before hiding
+});
+</script>
   
 </body>
 
