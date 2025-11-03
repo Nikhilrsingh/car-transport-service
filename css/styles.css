@@ -2001,18 +2001,22 @@ html, body {
 /* Theme widget (floating top-left) */
 .theme-widget {
   position: fixed;
-  top: 14px;
-  left: 14px;
+  top: 20px;
+  left: 1300px;
   z-index: 12000;
+  color: white;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(6px);
+  border: 2px solid rgba(255, 99, 71, 0.5);
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    height: 36px;
+    box-sizing: border-box;
 }
 
 .theme-widget select {
@@ -2023,6 +2027,12 @@ html, body {
   font-size: 0.9rem;
 }
 
+  .theme-widget:hover {
+    background: rgba(255, 107, 53, 0.1);
+    border-color: #ff6347;
+    transform: translateY(-2px);
+  }
+
 /* Improve select visuals to look like a compact pill */
 .theme-widget select {
   -webkit-appearance: none;
@@ -2032,7 +2042,6 @@ html, body {
   padding: 8px 12px;
   min-width: 90px;
   height: 36px;
-  background: rgba(0,0,0,0.5);
   border: 2px solid rgba(255,255,255,0.08);
   box-shadow: 0 6px 18px rgba(0,0,0,0.45);
 }
