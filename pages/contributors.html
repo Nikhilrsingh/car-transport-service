@@ -10,9 +10,8 @@
     />
     <style>
       :root {
-        /* prefer site-wide accent variables set by the settings UI; fall back to the original values */
-        --primary: var(--accent, #ff6347);
-        --primary-dark: var(--accent-600, #ff4500);
+        --primary: #ff6347;
+        --primary-dark: #ff4500;
         --dark: #2b2b2b;
         --dark-light: #333;
         --text: #ffffff;
@@ -493,52 +492,6 @@
           document.getElementById("navbar-container").innerHTML = data;
         })
         .catch((error) => console.error("Error loading navigation:", error));
-    </script>
-
-    <script>
-      // Apply saved accent color (fallback) so this page respects the settings even
-      // if the settings module hasn't been loaded yet (or when fetched HTML scripts
-      // don't execute). Mirrors logic from js/modules/settings.js.
-      (function applySavedAccentFallback() {
-        try {
-          const key = "siteAccentColor";
-          const saved = localStorage.getItem(key);
-          if (!saved) return;
-
-          function hexToRgb(hex) {
-            const h = hex.replace('#', '').trim();
-            if (h.length === 3) {
-              return h.split('').map((c) => parseInt(c + c, 16));
-            }
-            return [parseInt(h.substring(0, 2), 16), parseInt(h.substring(2, 4), 16), parseInt(h.substring(4, 6), 16)];
-          }
-
-          function darkenHex(hex, amount = 20) {
-            try {
-              const [r, g, b] = hexToRgb(hex);
-              const clamp = (v) => Math.max(0, Math.min(255, v));
-              const factor = (100 - amount) / 100;
-              return `#${[clamp(Math.round(r * factor)), clamp(Math.round(g * factor)), clamp(Math.round(b * factor))]
-                .map((n) => n.toString(16).padStart(2, '0'))
-                .join('')}`;
-            } catch (e) {
-              return hex;
-            }
-          }
-
-          const root = document.documentElement;
-          root.style.setProperty('--accent', saved);
-          root.style.setProperty('--accent-600', darkenHex(saved, 12));
-          const rgb = hexToRgb(saved).join(', ');
-          root.style.setProperty('--accent-rgb', rgb);
-
-          // also expose --primary variables used by this page (keeps compatibility)
-          root.style.setProperty('--primary', saved);
-          root.style.setProperty('--primary-dark', darkenHex(saved, 12));
-        } catch (e) {
-          console.warn('Could not apply saved accent fallback', e);
-        }
-      })();
     </script>
 
     <!-- Main Content -->
