@@ -410,6 +410,21 @@
         position: relative;
       }
 
+      .map-embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .map-actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px;
+      }
+
       .map-placeholder {
         width: 100%;
         height: 100%;
@@ -614,6 +629,10 @@
           width: 100%;
           max-width: 300px;
           justify-content: center;
+        }
+
+        .map-container {
+          height: 300px;
         }
       }
 
@@ -828,11 +847,26 @@
           <p>Visit our office or schedule a meeting with our team</p>
         </div>
         <div class="map-container fade-in">
-          <div class="map-placeholder">
-            <i class="fas fa-map-marked-alt"></i>
-            <h3>Nagpur Office Location</h3>
-            <p>123 Transport Nagar, Sitabuldi, Nagpur - 440001</p>
-          </div>
+          <iframe
+            class="map-embed"
+            title="Harihar Car Carriers - Dummy Location"
+            src="https://www.google.com/maps?q=21.1458,79.0882&z=14&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="Map showing dummy location in Nagpur"
+          ></iframe>
+        </div>
+        <div class="map-actions">
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=21.1458%2C79.0882"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-btn secondary"
+            aria-label="Open directions to our location in Google Maps"
+          >
+            <i class="fas fa-directions"></i>
+            <span>View on Google Maps</span>
+          </a>
         </div>
       </div>
     </section>
