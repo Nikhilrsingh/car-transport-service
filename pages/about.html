@@ -4,23 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us | Harihar Car Carriers</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
     <style>
       @font-face {
         font-family: "Poppins";
-        src: url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
-          url("./assets/fonts/Poppins-Regular.woff") format("woff");
+        src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
+          url("../assets/fonts/Poppins-Regular.woff") format("woff");
         font-weight: 400;
         font-style: normal;
       }
 
       @font-face {
         font-family: "Poppins";
-        src: url("./assets/fonts/Poppins-Bold.woff2") format("woff2"),
-          url("./assets/fonts/Poppins-Bold.woff") format("woff");
+        src: url("../assets/fonts/Poppins-Bold.woff2") format("woff2"),
+          url("../assets/fonts/Poppins-Bold.woff") format("woff");
         font-weight: 700;
         font-style: normal;
       }
@@ -38,6 +37,7 @@
         background-color: #2b2b2b;
         color: white;
         line-height: 1.6;
+        padding-top: 80px; /* Add padding for fixed navbar */
       }
 
       .container {
@@ -46,118 +46,11 @@
         padding: 0 20px;
       }
 
-      /* Navbar Styles */
-      .navbar {
-        height: 5rem;
-        width: 98%;
-        background: rgba(44, 44, 44, 0.4);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        justify-self: center;
-        padding: 0 20px;
-
-        position: sticky;
-        top: 0;
-        z-index: 999;
-      }
-
-      /* sticky state styles */
-      .navbar.sticky {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 1200px;
-        padding: 10px 20px;
-        z-index: 9999;
-        background-color: rgba(51, 51, 51, 0.95);
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-      }
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        gap: 82px;
-        padding-left: 0;
-        font-size: 20px;
-      }
-
-      nav ul li a {
-        position: relative;
-        padding: 6px 2px;
-        color: white;
-        text-decoration: none;
-        transition: color 0.25s ease;
-      }
-
-      /* animated underline */
-      nav ul li a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        height: 2px;
-        width: 0%;
-        background-color: #ff6347;
-        transition: width 0.25s ease;
-      }
-
-      nav ul li a:hover {
-        color: #ff6347;
-      }
-
-      nav ul li a:hover::after {
-        width: 100%;
-      }
-
-      nav ul li a.active {
-        color: #000;
-        background: #ff6347;
-        padding: 8px 12px;
-        border-radius: 4px;
-      }
-
-      .login-link {
-        background-color: #ff6347;
-        padding: 8px 12px;
-        border-radius: 4px;
-      }
-
-      .login-link:hover {
-        background-color: #ff4500;
-      }
-
-      .logo-container {
-        width: 100px;
-      }
-
-      .logo-container img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-      }
-
-      .left-logo {
-        height: 70px;
-        order: 1;
-      }
-
-      .right-logo {
-        height: 90px;
-        order: 3;
-      }
-
-      nav {
-        order: 2;
-      }
+      /* REMOVED DUPLICATE NAVBAR STYLES - They are in navbar.css */
 
       /* Hero Section */
       .hero {
-        padding: 150px 0 80px;
+        padding: 100px 0 80px;
         background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
           url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
         background-size: cover;
@@ -510,37 +403,9 @@
         .hero h1 {
           font-size: 2.8rem;
         }
-
-        nav ul {
-          gap: 40px;
-          font-size: 18px;
-        }
       }
 
       @media (max-width: 768px) {
-        .navbar {
-          flex-direction: column;
-          height: auto;
-          padding: 15px;
-        }
-
-        .left-logo,
-        .right-logo {
-          order: 0;
-          margin-bottom: 15px;
-        }
-
-        nav {
-          order: 3;
-          width: 100%;
-        }
-
-        nav ul {
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-
         .hero h1 {
           font-size: 2.2rem;
         }
@@ -548,22 +413,27 @@
         .section-title h2 {
           font-size: 2rem;
         }
+        
+        body {
+          padding-top: 70px; /* Adjust for mobile navbar */
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Header Section -->
+    <!-- Navbar Container -->
     <div id="navbar-container"></div>
 
     <script>
-      // Load navigation component
-      fetch('navbar.html')
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("navbar-container").innerHTML = data;
-        })
-        .catch((error) => console.error("Error loading navigation:", error));
+        // Load navigation component - NOTE: ../ for going up one level
+        fetch('../navbar.html')
+            .then((response) => response.text())
+            .then((data) => {
+                document.getElementById("navbar-container").innerHTML = data;
+            })
+            .catch((error) => console.error("Error loading navigation:", error));
     </script>
+
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
@@ -769,22 +639,16 @@
         <p class="fade-in delay-1">
           Get a free, no-obligation quote for your vehicle transportation needs.
         </p>
-        <a href="#quote" class="cta-btn fade-in delay-2">Get Quotation</a>
+        <a href="../pages/booking.html" class="cta-btn fade-in delay-2">Get Quotation</a>
       </div>
     </section>
 
-      <!-- Footer Section -->
-<div id="footer-container"></div>
+ 
 
-<script>
-  // Load shared footer dynamically
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    })
-    .catch(error => console.error('Error loading footer:', error));
-</script>
+   
+
+    <script src="../js/modules/themes.js"></script>
+    <script src="../js/script.js"></script>
 
     <script>
       // Animation on scroll
@@ -808,18 +672,6 @@
 
         // Check on scroll
         window.addEventListener("scroll", fadeInOnScroll);
-
-        // Team member hover effect
-        const teamMembers = document.querySelectorAll(".team-member");
-        teamMembers.forEach((member) => {
-          member.addEventListener("mouseenter", function () {
-            this.style.transform = "translateY(-15px)";
-          });
-
-          member.addEventListener("mouseleave", function () {
-            this.style.transform = "translateY(-10px)";
-          });
-        });
 
         // Stats counter animation
         const statItems = document.querySelectorAll(".stat-item h3");
@@ -869,6 +721,5 @@
         window.addEventListener("scroll", animateStats);
       });
     </script>
-    <script src="../js/modules/themes.js"></script>
   </body>
 </html>
