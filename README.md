@@ -1,7 +1,7 @@
 > 🚘 **Fast • Safe • Reliable Car Transport Services Across India**�
 
 [![Open Source Love](https://img.shields.io/badge/Contributions-Welcome-brightgreen)](https://github.com/your-username/car-transport-website)  
-[![GitHub issues](https://img.shields.io/github/issues/your-username)](https://github.com/your-username/car-transport-website/issues)  
+[![GitHub issues](https://img.shields.io/github/issues/your-username/car-transport-service)](https://github.com/your-username/car-transport-website/issues)  
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
@@ -74,7 +74,7 @@ Once assigned, follow the steps below:
 1. **Fork** the repository  
 2. **Clone** your fork:
 ```bash
-git clone https://github.com/your-username.git
+git clone https://github.com/your-username/car-transport-service.git
 ```
 3. Create a **feature branch**:
 ```bash
@@ -131,8 +131,8 @@ Feel free to **fork, create issues, submit PRs**, or even suggest ideas.
 
 Thanks to all wonderful contributors ❤️
 
-<!-- <a href="https://github.com/Nikhilrsingh/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Nikhilrsingh" />
+<!-- <a href="https://github.com/Nikhilrsingh/car-transport-service/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Nikhilrsingh/car-transport-service" />
 </a> -->
 
 > ## 🗺️ Project Roadmap
@@ -160,8 +160,8 @@ Thanks to all wonderful contributors ❤️
 
 #### Thanks to all the wonderful contributors 💖
 
-<a href="https://github.com/Nikhilrsingh/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Nikhilrsingh" />
+<a href="https://github.com/Nikhilrsingh/car-transport-service/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Nikhilrsingh/car-transport-service" />
 </a>
 
-#### See full list of contributors [Contribution Graph](https://github.com/Nikhilrsingh/graphs/contributors)  
+#### See full list of contributors [Contribution Graph](https://github.com/Nikhilrsingh/car-transport-service/graphs/contributors)  
