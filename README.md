@@ -66,6 +66,11 @@ car-transport-service/
 We welcome **all types of contributions**, from fixing typos to adding features. 
 
 Your Star ⭐️ makes a difference! Star ⭐️ this repo to help us reach more developers.
+
+🪄 **Before you start:**  
+Please **create an issue** first and wait for the project admin to **assign it to you**.  
+Once assigned, follow the steps below:
+
 1. **Fork** the repository  
 2. **Clone** your fork:
 ```bash
@@ -159,4 +164,4 @@ Thanks to all wonderful contributors ❤️
   <img src="https://contrib.rocks/image?repo=Nikhilrsingh/car-transport-service" />
 </a>
 
-#### See full list of contributor contribution [Contribution Graph](https://github.com/Nikhilrsingh/car-transport-service/graphs/contributors)  
+#### See full list of contributors [Contribution Graph](https://github.com/Nikhilrsingh/car-transport-service/graphs/contributors)  

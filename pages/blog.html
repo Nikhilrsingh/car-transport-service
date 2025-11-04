@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Blog | Harihar Car Carriers</title>
+  <link rel="icon" type="image/png" href="classic-car.png" />
+  <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="../css/components/floating-call-button.css">
+  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css">
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
+  <link rel="stylesheet" href="../css/components/quote-modal.css">
+  <link rel="stylesheet" href="../css/components/chatbot-modal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --orange: #ff6347;
+      --bg: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #aaaaaa;
+      --card-bg: #2b2b2b;
+      --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      --radius: 12px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* HERO */
+    .blog-hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: linear-gradient(135deg, rgba(255, 99, 71, 0.15), rgba(0, 0, 0, 0.9));
+    }
+
+    .blog-hero h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #ff6347, #ff4500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .blog-hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* BLOG GRID */
+    .blog-main {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .blog-grid {
+      display: grid;
+      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(255, 99, 71, 0.25);
+    }
+
+    .card-figure img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .card-meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .card-excerpt {
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn.ghost {
+      border: 1px solid var(--orange);
+      color: var(--orange);
+    }
+
+    .btn.ghost:hover {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #ff6347, #ff4500);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .blog-hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../css/components/floating-button.css">
+</head>
+
+<body>
+  <!-- Enhanced Navigation Component -->
+  <header class="header">
+    <div class="navbar-container">
+      <div class="navbar">
+        <!-- Left Logo -->
+        <div class="logo-container left-logo">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./about.html" class="nav-link" data-page="about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../index.html#services" class="nav-link" data-page="services">
+                <i class="fas fa-truck-moving"></i>
+                <span>Services</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./booking.html" class="nav-link" data-page="booking">
+                <i class="fas fa-calendar-check"></i>
+                <span>Booking</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contributors.html" class="nav-link" data-page="contributors">
+                <i class="fas fa-users"></i>
+                <span>Contributors</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./pricing.html" class="nav-link" data-page="pricing">
+                <i class="fas fa-tags"></i>
+                <span>Pricing</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./tracking.html" class="nav-link" data-page="tracking">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Track Your Car</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./gallery.html" class="nav-link" data-page="gallery">
+                <i class="fas fa-images"></i>
+                <span>Gallery</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contact.html" class="nav-link" data-page="contact">
+                <i class="fas fa-phone"></i>
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Right Actions -->
+          <div class="nav-actions">
+            <a href="./enquiry.html" class="nav-link enquiry-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+            <a href="./blog.html" class="nav-link blog-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+            <a href="#login" class="login-btn">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <div class="mobile-nav-header">
+          <div class="mobile-logo">
+            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+            <span>Harihar Car Carriers</span>
+          </div>
+          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <ul class="mobile-nav-list">
+          <li class="mobile-nav-item">
+            <a href="../index.html" class="mobile-nav-link active">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./about.html" class="mobile-nav-link">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="../index.html#services" class="mobile-nav-link">
+              <i class="fas fa-truck-moving"></i>
+              <span>Services</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./booking.html" class="mobile-nav-link">
+              <i class="fas fa-calendar-check"></i>
+              <span>Booking</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./contributors.html" class="mobile-nav-link">
+              <i class="fas fa-users"></i>
+              <span>Contributors</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./pricing.html" class="mobile-nav-link">
+              <i class="fas fa-tags"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./tracking.html" class="mobile-nav-link">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Track Your Car</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./gallery.html" class="mobile-nav-link">
+              <i class="fas fa-images"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./contact.html" class="mobile-nav-link">
+              <i class="fas fa-phone"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./enquiry.html" class="mobile-nav-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./blog.html" class="mobile-nav-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <a href="#login" class="mobile-login-btn">
+            <i class="fas fa-user"></i>
+            <span>Login</span>
+          </a>
+          <a href="./booking.html" class="mobile-cta-btn">
+            <i class="fas fa-truck"></i>
+            <span>Book Instantly</span>
+          </a>
+        </div>
+        <div class="mobile-contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@hariharcarcarriers.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <span>24/7 Support</span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Navigation Overlay -->
+      <div class="nav-overlay" id="navOverlay"></div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="blog-hero">
+    <h1>Our Blog</h1>
+    <p>Explore updates, transport tips, and expert insights from Harihar Car Carriers.</p>
+  </section>
+
+  <!-- BLOG GRID -->
+  <main class="blog-main">
+    <section class="blog-grid" id="blog-grid"></section>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("footer-container").innerHTML = html)
+      .catch(err => console.error("Footer load error:", err));
+  </script>
+
+  <script>
+    const BLOG_POSTS = [
+      {
+        id: 1,
+        title: "Tips for Safe Car Transport",
+        date: "October 18, 2025",
+        readtime: "5 min read",
+        image: "../assets/images/car1.png",
+        excerpt: "Preparing your vehicle before transit reduces risk and speeds up delivery. Learn the top checks to perform before handover."
+      },
+      {
+        id: 2,
+        title: "How to Choose the Right Carrier",
+        date: "September 10, 2025",
+        readtime: "6 min read",
+        image: "../assets/images/car2.png",
+        excerpt: "Choosing a carrier means balancing price, reliability and safety. Here’s a quick checklist to select the right one."
+      },
+      {
+        id: 3,
+        title: "Why Choose Our Car Transport Service",
+        date: "August 02, 2025",
+        readtime: "4 min read",
+        image: "../assets/images/car3.png",
+        excerpt: "From pickup to delivery, our service focuses on safety, timely updates and competitive pricing. Here’s how we stand out."
+      },
+      {
+        id: 4,
+        title: "The Future of Vehicle Transport: Trends and Technologies",
+        date: "November 1, 2025",
+        readtime: "7 min read",
+        image: "https://th.bing.com/th/id/R.aa0c3587e562e6c91c36f8fad94c459d?rik=usDMJxGXKuoZtQ&riu=http%3a%2f%2ftechsouls.co.uk%2fwp-content%2fuploads%2f2024%2f03%2fFuture-of-Mobility-Tech-Innovations-in-Transportation-1024x574.png&ehk=eVQJSTMibrJNk2b82Jg5LClpkcfHzIhwACz4zklS54Q%3d&risl=&pid=ImgRaw&r=0",
+        excerpt: "Discover how AI, IoT, and electric vehicles are revolutionizing vehicle transportation, making it safer, faster, and more eco-friendly."
+      },
+      {
+        id: 5,
+        title: "Essential Tips for Preparing Your Vehicle for Transport",
+        date: "October 10, 2025",
+        readtime: "6 min read",
+        image: "https://tse2.mm.bing.net/th/id/OIP.gT5n9pq2unukUGLVamJsSAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
+        excerpt: "Properly preparing your car before shipment can prevent damage and delays. Learn how to prep your vehicle for a smooth transport experience."
+      },
+      {
+        id: 6,
+        title: "Green Transport Initiatives in the Logistics Industry",
+        date: "September 15, 2025",
+        readtime: "5 min read",
+        image: "https://tse4.mm.bing.net/th/id/OIP.TPHlJt5IJQyCZyX7fx4BhwHaEO?rs=1&pid=ImgDetMain&o=7&rm=3",
+        excerpt: "Sustainability is driving changes in the transport sector. Explore eco-friendly innovations and how logistics companies are reducing their carbon footprint."
+      }
+    ];
+
+    const grid = document.getElementById("blog-grid");
+    BLOG_POSTS.forEach(post => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-figure">
+          <img src="${post.image}" alt="${post.title}">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">${post.date} • ${post.readtime}</div>
+          <h3 class="card-title">${post.title}</h3>
+          <p class="card-excerpt">${post.excerpt}</p>
+          <div class="card-actions">
+            <a href="blog-post.html?id=${post.id}" class="btn ghost">Read More →</a>
+            <a href="contact.html" class="btn primary">Get Quote</a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+  <script src="../js/modules/themes.js"></script>
+  <script src="../js/modules/floating-book-button.js"></script>
+  <script src="../js/modules/floating-call-button.js"></script>
+  <script src="../js/modules/floating-whatsapp-button.js"></script>
+  <script src="../js/modules/quote-modal.js"></script>
+  <script src="../js/modules/sticky-quote-button.js"></script>
+  <script src="../js/modules/floating-chatbot-button.js"></script>
+  <script src="../js/modules/chatbot-modal.js"></script>
+</body>
+
+</html>
