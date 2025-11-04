@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us - Harihar Car Carriers</title>
+    <link rel="stylesheet" href="../css/components/navbar.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -232,6 +233,13 @@
         font-size: 1.5rem;
       }
 
+      .info-icon img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        display: block;
+      }
+
       .info-header h3 {
         font-size: 1.4rem;
         color: white;
@@ -401,6 +409,21 @@
         height: 400px;
         background: #444;
         position: relative;
+      }
+
+      .map-embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .map-actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px;
       }
 
       .map-placeholder {
@@ -608,6 +631,10 @@
           max-width: 300px;
           justify-content: center;
         }
+
+        .map-container {
+          height: 300px;
+        }
       }
 
       /* Animation */
@@ -628,18 +655,220 @@
     </style>
   </head>
   <body>
-   <!-- Header Section -->
-      <div id="navbar-container"></div>
-    
-    <script>
-        // Load navigation component
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading navigation:', error));
-    </script>
+        <!-- Enhanced Navigation Component -->
+<header class="header">
+  <div class="navbar-container">
+    <div class="navbar">
+      <!-- Left Logo -->
+      <div class="logo-container left-logo">
+        <img
+          src="../assets/images/left-logo.jpg"
+          alt="Harihar Car Carriers"
+          class="logo-img"
+        />
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../index.html" class="nav-link active" data-page="home">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./about.html" class="nav-link" data-page="about">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link" data-page="services">
+              <i class="fas fa-truck-moving"></i>
+              <span>Services</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./booking.html" class="nav-link" data-page="booking">
+              <i class="fas fa-calendar-check"></i>
+              <span>Booking</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./contributors.html" class="nav-link" data-page="contributors">
+              <i class="fas fa-users"></i>
+              <span>Contributors</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pricing.html" class="nav-link" data-page="pricing">
+              <i class="fas fa-tags"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./tracking.html" class="nav-link" data-page="tracking">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Track Your Car</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./gallery.html" class="nav-link" data-page="gallery">
+              <i class="fas fa-images"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact.html" class="nav-link" data-page="contact">
+              <i class="fas fa-phone"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Right Actions -->
+        <div class="nav-actions">
+          <a href="./enquiry.html" class="nav-link enquiry-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+          <a href="./blog.html" class="nav-link blog-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+          <a href="#login" class="login-btn">
+            <i class="fas fa-user"></i>
+            <span>Login</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        aria-label="Toggle mobile menu"
+      >
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <div class="mobile-nav-header">
+        <div class="mobile-logo">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+          <span>Harihar Car Carriers</span>
+        </div>
+        <button
+          class="mobile-close-btn"
+          id="mobileCloseBtn"
+          aria-label="Close mobile menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <a href="../index.html" class="mobile-nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./about.html" class="mobile-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="#services" class="mobile-nav-link">
+            <i class="fas fa-truck-moving"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./booking.html" class="mobile-nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Booking</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./contributors.html" class="mobile-nav-link">
+            <i class="fas fa-users"></i>
+            <span>Contributors</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pricing.html" class="mobile-nav-link">
+            <i class="fas fa-tags"></i>
+            <span>Pricing</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./tracking.html" class="mobile-nav-link">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Track Your Car</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./gallery.html" class="mobile-nav-link">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./contact.html" class="mobile-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./enquiry.html" class="mobile-nav-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./blog.html" class="mobile-nav-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="#login" class="mobile-login-btn">
+          <i class="fas fa-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="./booking.html" class="mobile-cta-btn">
+          <i class="fas fa-truck"></i>
+          <span>Book Instantly</span>
+        </a>
+      </div>
+      <div class="mobile-contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 98765 43210</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@hariharcarcarriers.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>24/7 Support</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+  </div>
+</header>
 
     <!-- Hero Section -->
     <section class="contact-hero">
@@ -668,7 +897,7 @@
             <div class="info-card">
               <div class="info-header">
                 <div class="info-icon">
-                  <i class="fas fa-phone"></i>
+                  <img src="../assets/images/telephone.png" alt="Phone" />
                 </div>
                 <h3>Phone & WhatsApp</h3>
               </div>
@@ -682,7 +911,7 @@
             <div class="info-card fade-in delay-1">
               <div class="info-header">
                 <div class="info-icon">
-                  <i class="fas fa-envelope"></i>
+                  <img src="../assets/images/email.png" alt="Email" />
                 </div>
                 <h3>Email Address</h3>
               </div>
@@ -704,7 +933,7 @@
             <div class="info-card fade-in delay-2">
               <div class="info-header">
                 <div class="info-icon">
-                  <i class="fas fa-map-marker-alt"></i>
+                  <img src="../assets/images/location.png" alt="Location" />
                 </div>
                 <h3>Office Address</h3>
               </div>
@@ -821,11 +1050,26 @@
           <p>Visit our office or schedule a meeting with our team</p>
         </div>
         <div class="map-container fade-in">
-          <div class="map-placeholder">
-            <i class="fas fa-map-marked-alt"></i>
-            <h3>Nagpur Office Location</h3>
-            <p>123 Transport Nagar, Sitabuldi, Nagpur - 440001</p>
-          </div>
+          <iframe
+            class="map-embed"
+            title="Harihar Car Carriers - Dummy Location"
+            src="https://www.google.com/maps?q=21.1458,79.0882&z=14&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="Map showing dummy location in Nagpur"
+          ></iframe>
+        </div>
+        <div class="map-actions">
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=21.1458%2C79.0882"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-btn secondary"
+            aria-label="Open directions to our location in Google Maps"
+          >
+            <i class="fas fa-directions"></i>
+            <span>View on Google Maps</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1006,5 +1250,6 @@
         });
       });
     </script>
+    <script src="../js/modules/themes.js"></script>
   </body>
 </html>

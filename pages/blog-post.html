@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Post | Harihar Car Carriers</title>
+  <link rel="icon" type="image/png" href="classic-car.png" />
+  <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --orange: #ff6347;
+      --bg: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #aaaaaa;
+      --card-bg: #2b2b2b;
+      --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      --radius: 12px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .post-page {
+      padding: 100px 20px 60px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .post-article {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .post-meta h1 {
+      color: var(--orange);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .meta-row {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .post-figure img {
+      width: 100%;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+
+    .post-body p {
+      line-height: 1.7;
+      color: #ddd;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn.ghost {
+      border: 1px solid var(--orange);
+      color: var(--orange);
+    }
+
+    .btn.ghost:hover {
+      background: var(--orange);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+       <!-- Enhanced Navigation Component -->
+<header class="header">
+  <div class="navbar-container">
+    <div class="navbar">
+      <!-- Left Logo -->
+      <div class="logo-container left-logo">
+        <img
+          src="../assets/images/left-logo.jpg"
+          alt="Harihar Car Carriers"
+          class="logo-img"
+        />
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../index.html" class="nav-link active" data-page="home">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./about.html" class="nav-link" data-page="about">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link" data-page="services">
+              <i class="fas fa-truck-moving"></i>
+              <span>Services</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./booking.html" class="nav-link" data-page="booking">
+              <i class="fas fa-calendar-check"></i>
+              <span>Booking</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./contributors.html" class="nav-link" data-page="contributors">
+              <i class="fas fa-users"></i>
+              <span>Contributors</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pricing.html" class="nav-link" data-page="pricing">
+              <i class="fas fa-tags"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./tracking.html" class="nav-link" data-page="tracking">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Track Your Car</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./gallery.html" class="nav-link" data-page="gallery">
+              <i class="fas fa-images"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact.html" class="nav-link" data-page="contact">
+              <i class="fas fa-phone"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Right Actions -->
+        <div class="nav-actions">
+          <a href="./enquiry.html" class="nav-link enquiry-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+          <a href="./blog.html" class="nav-link blog-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+          <a href="#login" class="login-btn">
+            <i class="fas fa-user"></i>
+            <span>Login</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        aria-label="Toggle mobile menu"
+      >
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <div class="mobile-nav-header">
+        <div class="mobile-logo">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+          <span>Harihar Car Carriers</span>
+        </div>
+        <button
+          class="mobile-close-btn"
+          id="mobileCloseBtn"
+          aria-label="Close mobile menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <a href="../index.html" class="mobile-nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./about.html" class="mobile-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="#services" class="mobile-nav-link">
+            <i class="fas fa-truck-moving"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./booking.html" class="mobile-nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Booking</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./contributors.html" class="mobile-nav-link">
+            <i class="fas fa-users"></i>
+            <span>Contributors</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pricing.html" class="mobile-nav-link">
+            <i class="fas fa-tags"></i>
+            <span>Pricing</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./tracking.html" class="mobile-nav-link">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Track Your Car</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./gallery.html" class="mobile-nav-link">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./contact.html" class="mobile-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./enquiry.html" class="mobile-nav-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./blog.html" class="mobile-nav-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="#login" class="mobile-login-btn">
+          <i class="fas fa-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="./booking.html" class="mobile-cta-btn">
+          <i class="fas fa-truck"></i>
+          <span>Book Instantly</span>
+        </a>
+      </div>
+      <div class="mobile-contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 98765 43210</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@hariharcarcarriers.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>24/7 Support</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+  </div>
+</header>
+
+  <main class="post-page">
+    <article class="post-article" id="post-article">
+      <div class="post-meta">
+        <h1 id="post-title">Loading...</h1>
+        <div class="meta-row">
+          <time id="post-date"></time>
+          <span id="post-readtime"></span>
+        </div>
+      </div>
+      <figure class="post-figure">
+        <img id="post-image" alt="Post image" />
+      </figure>
+      <section id="post-body" class="post-body">
+        <p>Loading post...</p>
+      </section>
+      <div class="post-actions">
+        <a href="blog.html" class="btn ghost">← Back to Blog</a>
+      </div>
+    </article>
+  </main>
+
+  <div id="footer-container"></div>
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("footer-container").innerHTML = html)
+      .catch(err => console.error("Footer load error:", err));
+  </script>
+
+  <script>
+    const BLOG_POSTS = [
+      {
+        id: 1,
+        title: "Tips for Safe Car Transport",
+        date: "October 18, 2025",
+        readtime: "5 min read",
+        image: "../assets/images/car1.png",
+        contentHTML: `
+          <p>Transporting a car safely starts before it leaves your driveway. Follow these checks to reduce risk:</p>
+          <ul>
+            <li><strong>Wash & inspect:</strong> Note existing scratches or dents.</li>
+            <li><strong>Remove personal items:</strong> Avoid loose items inside.</li>
+            <li><strong>Check fluids & battery:</strong> Prevent leaks and dead batteries.</li>
+            <li><strong>Tire pressure & keys:</strong> Maintain pressure and hand over spare keys.</li>
+          </ul>
+        `
+      },
+      {
+        id: 2,
+        title: "How to Choose the Right Carrier",
+        date: "September 10, 2025",
+        readtime: "6 min read",
+        image: "../assets/images/car2.png",
+        contentHTML: `
+          <p>Choosing the right carrier ensures your car’s safety and timely delivery:</p>
+          <ol>
+            <li><strong>Check licensing & reviews.</strong></li>
+            <li><strong>Compare insurance coverage.</strong></li>
+            <li><strong>Choose open or enclosed transport wisely.</strong></li>
+            <li><strong>Ask for tracking & delivery estimates.</strong></li>
+          </ol>
+        `
+      },
+      {
+        id: 3,
+        title: "Why Choose Our Car Transport Service",
+        date: "August 02, 2025",
+        readtime: "4 min read",
+        image: "../assets/images/car3.png",
+        contentHTML: `
+          <p>We pride ourselves on offering reliability, safety, and transparency at every step of your car’s journey.</p>
+          <p>Our carriers are vetted professionals, and our service is built around customer trust.</p>
+        `
+      }
+    ];
+
+    const id = new URLSearchParams(window.location.search).get("id");
+    const post = BLOG_POSTS.find(p => String(p.id) === String(id));
+
+    if (!post) {
+      document.getElementById("post-article").innerHTML = "<h2>Post not found</h2><p>This article does not exist.</p>";
+    } else {
+      document.getElementById("post-title").textContent = post.title;
+      document.getElementById("post-date").textContent = post.date;
+      document.getElementById("post-readtime").textContent = ` • ${post.readtime}`;
+      document.getElementById("post-image").src = post.image;
+      document.getElementById("post-body").innerHTML = post.contentHTML;
+    }
+  </script>
+  <script src="../js/modules/themes.js"></script>
+</body>
+</html>

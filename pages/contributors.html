@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contributors | Harihar Car Carriers</title>
+    <link rel="stylesheet" href="../css/components/navbar.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -339,6 +340,19 @@
         transform: translateY(-3px);
       }
 
+      /* Points System */
+      .points-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: var(--primary);
+        color: white;
+        padding: 0.3rem 0.7rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+
       /* Loading States */
       .loading {
         text-align: center;
@@ -468,19 +482,220 @@
     </style>
   </head>
   <body>
+        <!-- Enhanced Navigation Component -->
+<header class="header">
+  <div class="navbar-container">
+    <div class="navbar">
+      <!-- Left Logo -->
+      <div class="logo-container left-logo">
+        <img
+          src="../assets/images/left-logo.jpg"
+          alt="Harihar Car Carriers"
+          class="logo-img"
+        />
+      </div>
 
-     <!-- Header Section -->
-  <div id="navbar-container"></div>
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../index.html" class="nav-link active" data-page="home">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./about.html" class="nav-link" data-page="about">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link" data-page="services">
+              <i class="fas fa-truck-moving"></i>
+              <span>Services</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./booking.html" class="nav-link" data-page="booking">
+              <i class="fas fa-calendar-check"></i>
+              <span>Booking</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./contributors.html" class="nav-link" data-page="contributors">
+              <i class="fas fa-users"></i>
+              <span>Contributors</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./pricing.html" class="nav-link" data-page="pricing">
+              <i class="fas fa-tags"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./tracking.html" class="nav-link" data-page="tracking">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Track Your Car</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./gallery.html" class="nav-link" data-page="gallery">
+              <i class="fas fa-images"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact.html" class="nav-link" data-page="contact">
+              <i class="fas fa-phone"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
 
-  <script>
-    // Load navigation component
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-container').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading navigation:', error));
-  </script>
+        <!-- Right Actions -->
+        <div class="nav-actions">
+          <a href="./enquiry.html" class="nav-link enquiry-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+          <a href="./blog.html" class="nav-link blog-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+          <a href="#login" class="login-btn">
+            <i class="fas fa-user"></i>
+            <span>Login</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        aria-label="Toggle mobile menu"
+      >
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <div class="mobile-nav-header">
+        <div class="mobile-logo">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+          <span>Harihar Car Carriers</span>
+        </div>
+        <button
+          class="mobile-close-btn"
+          id="mobileCloseBtn"
+          aria-label="Close mobile menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <a href="../index.html" class="mobile-nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./about.html" class="mobile-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="#services" class="mobile-nav-link">
+            <i class="fas fa-truck-moving"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./booking.html" class="mobile-nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Booking</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./contributors.html" class="mobile-nav-link">
+            <i class="fas fa-users"></i>
+            <span>Contributors</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pricing.html" class="mobile-nav-link">
+            <i class="fas fa-tags"></i>
+            <span>Pricing</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./tracking.html" class="mobile-nav-link">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Track Your Car</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./gallery.html" class="mobile-nav-link">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./contact.html" class="mobile-nav-link">
+            <i class="fas fa-phone"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./enquiry.html" class="mobile-nav-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./blog.html" class="mobile-nav-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="#login" class="mobile-login-btn">
+          <i class="fas fa-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="./booking.html" class="mobile-cta-btn">
+          <i class="fas fa-truck"></i>
+          <span>Book Instantly</span>
+        </a>
+      </div>
+      <div class="mobile-contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 98765 43210</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@hariharcarcarriers.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>24/7 Support</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+  </div>
+</header>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -517,6 +732,10 @@
               <span class="stat-label">Total Commits</span>
             </div>
             <div class="stat-card">
+              <span class="stat-number" id="totalPoints">0</span>
+              <span class="stat-label">Total Points</span>
+            </div>
+            <div class="stat-card">
               <span class="stat-number" id="activeContributors">0</span>
               <span class="stat-label">Active This Month</span>
             </div>
@@ -543,6 +762,9 @@
               </button>
               <button class="filter-btn" data-filter="new">
                 New Contributors
+              </button>
+              <button class="filter-btn" data-filter="top-points">
+                Top Points
               </button>
             </div>
           </div>
@@ -594,37 +816,124 @@
       </section>
 
       <!-- How to Contribute -->
-      <section class="contribute-section">
-        <div class="container">
-          <div class="section-header">
+      <section
+        class="contribute-section"
+        style="padding: 50px 0; text-align: center"
+      >
+        <div class="container" style="max-width: 1200px; margin: auto">
+          <div class="section-header" style="margin-bottom: 40px">
             <h2>Want to Contribute?</h2>
             <p>Join our community and help improve Harihar Car Carriers</p>
           </div>
-          <div class="contribute-steps">
-            <div class="step-card">
-              <div class="step-icon">
+
+          <div
+            class="contribute-steps"
+            style="
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+              gap: 25px;
+            "
+          >
+            <!-- 🆕 New Step: Create an Issue -->
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
+                <i class="fas fa-clipboard-list"></i>
+              </div>
+              <h3>Create an Issue</h3>
+              <p>
+                Start by creating an issue describing your change and wait for
+                it to be assigned before forking the repo.
+              </p>
+            </div>
+
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
                 <i class="fab fa-github"></i>
               </div>
               <h3>Fork the Repository</h3>
               <p>Start by forking the main repository to your GitHub account</p>
             </div>
-            <div class="step-card">
-              <div class="step-icon">
+
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
                 <i class="fas fa-code-branch"></i>
               </div>
               <h3>Create a Branch</h3>
               <p>Create a feature branch for your changes</p>
             </div>
-            <div class="step-card">
-              <div class="step-icon">
+
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
                 <i class="fas fa-code"></i>
               </div>
               <h3>Make Changes</h3>
               <p>Implement your features or bug fixes</p>
             </div>
-            <div class="step-card">
-              <div class="step-icon">
-                <i class="fas fa-pull-request"></i>
+
+            <div
+              class="step-card"
+              style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 20px;
+                width: 200px;
+                text-align: center;
+              "
+            >
+              <div
+                class="step-icon"
+                style="font-size: 36px; margin-bottom: 10px"
+              >
+                <i class="fas fa-upload"></i>
               </div>
               <h3>Submit PR</h3>
               <p>Create a pull request for review</p>
@@ -632,20 +941,26 @@
           </div>
         </div>
       </section>
+
+      <!-- Font Awesome -->
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      />
     </main>
 
-     <!-- Footer Section -->
-<div id="footer-container"></div>
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
 
-<script>
-  // Load shared footer dynamically
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    })
-    .catch(error => console.error('Error loading footer:', error));
-</script>
+    <script>
+      // Load shared footer dynamically
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-container").innerHTML = data;
+        })
+        .catch((error) => console.error("Error loading footer:", error));
+    </script>
 
     <script>
       const GITHUB_OWNER = "Nikhilrsingh";
@@ -658,6 +973,13 @@
       let currentSearch = "";
       let currentPage = 1;
       const contributorsPerPage = 9;
+
+      // Points mapping based on PR labels
+      const POINTS_MAPPING = {
+        level1: 2,
+        level2: 5,
+        level3: 11,
+      };
 
       async function loadContributors() {
         const grid = document.getElementById("contributorsGrid");
@@ -680,25 +1002,84 @@
           );
           if (!response.ok) throw new Error("Failed to load contributors");
 
-          const contributors = await response.json();
+          const contributors = await response.json(); // ✅ Added this line
 
-          // Fetch extra info and PR counts
+          // ✅ Filter out repository owner
+          const filteredContributorsList = contributors.filter(
+            (c) => c.login.toLowerCase() !== GITHUB_OWNER.toLowerCase()
+          );
+
+          // ✅ Fetch extra info, PR counts, and calculate points
           allContributors = await Promise.all(
-            contributors.map(async (c) => {
+            filteredContributorsList.map(async (c) => {
               const userResponse = await fetch(
                 `https://api.github.com/users/${c.login}`,
                 { headers }
               );
               const userData = userResponse.ok ? await userResponse.json() : {};
 
-              // Fetch PR count
+              // Fetch merged PRs with labels
               const prResponse = await fetch(
-                `https://api.github.com/search/issues?q=type:pr+repo:${GITHUB_OWNER}/${GITHUB_REPO}+author:${c.login}`,
+                `https://api.github.com/search/issues?q=type:pr+repo:${GITHUB_OWNER}/${GITHUB_REPO}+author:${c.login}+is:merged&per_page=100`,
                 { headers }
               );
               const prData = prResponse.ok
                 ? await prResponse.json()
-                : { total_count: 0 };
+                : { items: [] };
+
+              // Calculate points based on PR labels
+              let points = 0;
+              const prDetails = [];
+
+              if (prData.items && prData.items.length > 0) {
+                for (const pr of prData.items) {
+                  let prPoints = 0;
+                  let highestLevel = null;
+
+                  if (pr.labels && pr.labels.length > 0) {
+                    for (const label of pr.labels) {
+                      const labelName = label.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "");
+                      if (
+                        labelName.includes("level1") ||
+                        labelName.includes("level:1") ||
+                        labelName.includes("level-1")
+                      ) {
+                        prPoints = Math.max(prPoints, POINTS_MAPPING.level1);
+                        highestLevel = "level1";
+                      } else if (
+                        labelName.includes("level2") ||
+                        labelName.includes("level:2") ||
+                        labelName.includes("level-2")
+                      ) {
+                        prPoints = Math.max(prPoints, POINTS_MAPPING.level2);
+                        highestLevel = "level2";
+                      } else if (
+                        labelName.includes("level3") ||
+                        labelName.includes("level:3") ||
+                        labelName.includes("level-3")
+                      ) {
+                        prPoints = Math.max(prPoints, POINTS_MAPPING.level3);
+                        highestLevel = "level3";
+                      }
+                    }
+                  }
+
+                  // Add to total points
+                  points += prPoints;
+
+                  // Store PR details
+                  prDetails.push({
+                    title: pr.title,
+                    number: pr.number,
+                    url: pr.html_url,
+                    points: prPoints,
+                    level: highestLevel,
+                    labels: pr.labels ? pr.labels.map((l) => l.name) : [],
+                  });
+                }
+              }
 
               let type = "new";
               if (c.contributions > 100) type = "core";
@@ -712,12 +1093,21 @@
                 blog: userData.blog || "",
                 twitter_username: userData.twitter_username || "",
                 type,
-                prCount: prData.total_count,
+                prCount: prData.total_count || 0,
+                points: points,
+                prDetails: prDetails,
               };
             })
           );
 
-          allContributors.sort((a, b) => b.contributions - a.contributions);
+          // Sort by points first, then by contributions
+          allContributors.sort((a, b) => {
+            if (b.points !== a.points) {
+              return b.points - a.points;
+            }
+            return b.contributions - a.contributions;
+          });
+
           updateStats();
           applyFilters();
           setupEventListeners();
@@ -732,6 +1122,8 @@
           allContributors.length;
         document.getElementById("totalCommits").textContent =
           allContributors.reduce((sum, c) => sum + c.contributions, 0);
+        document.getElementById("totalPoints").textContent =
+          allContributors.reduce((sum, c) => sum + c.points, 0);
         const activeCount = allContributors.filter(
           (c) => c.contributions > 5
         ).length;
@@ -740,14 +1132,22 @@
 
       function applyFilters() {
         let result = [...allContributors];
-        if (currentFilter !== "all")
-          result = result.filter((c) => c.type === currentFilter);
-        if (currentSearch)
+
+        if (currentFilter !== "all") {
+          if (currentFilter === "top-points") {
+            result = result.filter((c) => c.points > 0);
+          } else {
+            result = result.filter((c) => c.type === currentFilter);
+          }
+        }
+
+        if (currentSearch) {
           result = result.filter(
             (c) =>
               c.login.toLowerCase().includes(currentSearch.toLowerCase()) ||
               c.name.toLowerCase().includes(currentSearch.toLowerCase())
           );
+        }
 
         filteredContributors = result;
         currentPage = 1;
@@ -776,6 +1176,7 @@
           .map(
             (c) => `
     <div class="contributor-card" data-type="${c.type}">
+      <div class="points-badge">${c.points} pts</div>
       <div class="contributor-avatar">
         <img src="${c.avatar_url}" alt="${c.login}" />
       </div>
@@ -790,6 +1191,10 @@
           <div class="contributor-stat">
             <span class="contributor-stat-number">${c.prCount}</span>
             <span class="contributor-stat-label">PRs</span>
+          </div>
+          <div class="contributor-stat">
+            <span class="contributor-stat-number">${c.points}</span>
+            <span class="contributor-stat-label">Points</span>
           </div>
         </div>
         <div class="contributor-social">
@@ -807,6 +1212,40 @@
               : ""
           }
         </div>
+        ${
+          c.prDetails && c.prDetails.length > 0
+            ? `
+        <details style="margin-top: 1rem; text-align: left;">
+          <summary style="cursor: pointer; color: var(--primary);">PR Details (${
+            c.prDetails.length
+          })</summary>
+          <div style="margin-top: 0.5rem; max-height: 150px; overflow-y: auto;">
+            ${c.prDetails
+              .map(
+                (pr) => `
+              <div style="padding: 0.5rem; border-bottom: 1px solid #444;">
+                <a href="${
+                  pr.url
+                }" target="_blank" style="color: var(--primary); text-decoration: none;">
+                  #${pr.number}: ${pr.title}
+                </a>
+                <div style="font-size: 0.8rem; color: var(--text-light);">
+                  Points: ${pr.points} | Level: ${pr.level || "None"}
+                  ${
+                    pr.labels && pr.labels.length > 0
+                      ? `| Labels: ${pr.labels.join(", ")}`
+                      : ""
+                  }
+                </div>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        </details>
+        `
+            : ""
+        }
       </div>
     </div>`
           )
@@ -881,6 +1320,20 @@
       }
 
       loadContributors();
+
+      // Ensure page always starts from top on load or reload
+      window.addEventListener("beforeunload", () => {
+        window.scrollTo(0, 0);
+      });
+
+      window.addEventListener("load", () => {
+        window.scrollTo(0, 0);
+      });
+
+       window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
+  });
     </script>
+    <script src="../js/modules/themes.js"></script>
   </body>
 </html>
