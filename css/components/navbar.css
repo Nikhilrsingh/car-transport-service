@@ -1,3 +1,4 @@
+<<<<<<< HEAD:navbar.html
 <!-- Enhanced Navigation Component -->
 <header class="header">
   <div class="navbar-container">
@@ -219,6 +220,9 @@
 
 <style>
   /* Enhanced Navigation Styles */
+=======
+/* Enhanced Navigation Styles */
+>>>>>>> 864fa415bc83cf5e2935d54a4774ca2bb6c24207:css/components/navbar.css
 
   body {
     padding-top: 50px;
@@ -774,80 +778,61 @@
   .header {
     animation: slideDown 0.5s ease-out;
   }
-</style>
 
-<script>
-  // Enhanced Navigation Functionality
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.querySelector(".header");
-    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-    const mobileCloseBtn = document.getElementById("mobileCloseBtn");
-    const mobileNav = document.getElementById("mobileNav");
-    const navOverlay = document.getElementById("navOverlay");
-    const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
+  /* Theme widget (floating top-left) */
+.theme-widget {
+  position: fixed;
+  top: 20px;
+  left: 1300px;
+  z-index: 12000;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid rgba(255, 99, 71, 0.5);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    height: 36px;
+    box-sizing: border-box;
+}
 
-    // Add main content spacing
-    function addContentSpacing() {
-      const navbarHeight = header.offsetHeight;
-      document.body.style.paddingTop = navbarHeight + "px";
-    }
+.theme-widget select {
+  background: transparent;
+  color: var(--text);
+  border: none;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+}
 
-    // Mobile menu functionality
-    function openMobileMenu() {
-      mobileNav.classList.add("active");
-      navOverlay.classList.add("active");
-      mobileMenuBtn.classList.add("active");
-      document.body.style.overflow = "hidden";
-    }
+  .theme-widget:hover {
+    background: rgba(255, 107, 53, 0.1);
+    border-color: #ff6347;
+    transform: translateY(-2px);
+  }
 
-    function closeMobileMenu() {
-      mobileNav.classList.remove("active");
-      navOverlay.classList.remove("active");
-      mobileMenuBtn.classList.remove("active");
-      document.body.style.overflow = "";
-    }
+/* Improve select visuals to look like a compact pill */
+.theme-widget select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-width: 90px;
+  height: 36px;
+  border: 2px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
 
-    // Set active page based on current URL
-    function setActivePage() {
-      const currentPage =
-        window.location.pathname.split("/").pop() || "index.html";
-      navLinks.forEach((link) => {
-        const linkPage = link.getAttribute("href");
-        if (
-          linkPage === currentPage ||
-          (currentPage === "index.html" && linkPage === "/") ||
-          (linkPage.includes(currentPage.replace(".html", "")) &&
-            currentPage !== "index.html")
-        ) {
-          link.classList.add("active");
-        } else {
-          link.classList.remove("active");
-        }
-      });
-    }
+.theme-widget select:focus {
+  outline: none;
+  border-color: rgba(255,255,255,0.16);
+}
 
-    // Event listeners
-    mobileMenuBtn.addEventListener("click", openMobileMenu);
-    mobileCloseBtn.addEventListener("click", closeMobileMenu);
-    navOverlay.addEventListener("click", closeMobileMenu);
+/* hide the native dropdown arrow on IE/Edge */
+.theme-widget select::-ms-expand { display: none; }
 
-    // Close mobile menu when clicking on links
-    document.querySelectorAll(".mobile-nav-link").forEach((link) => {
-      link.addEventListener("click", closeMobileMenu);
-    });
-
-    // Initialize
-    addContentSpacing();
-    setActivePage();
-
-    // Recalculate on resize
-    window.addEventListener("resize", addContentSpacing);
-
-    // Keyboard navigation
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        closeMobileMenu();
-      }
-    });
-  });
-</script>
+.theme-widget .sr-only { position: absolute; left: -9999px; }

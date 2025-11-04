@@ -1,3 +1,4 @@
+<<<<<<< HEAD:footer.html
 
 <footer class="footer">
   <div class="container">
@@ -103,6 +104,9 @@
 
   <style>
     /* Footer Styles */
+=======
+/* Footer Styles */
+>>>>>>> 864fa415bc83cf5e2935d54a4774ca2bb6c24207:css/components/footer.css
 .footer {
   background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
   padding: 70px 0 0;
@@ -372,7 +376,8 @@
   transition: all 0.3s ease;
   opacity: 0;
   visibility: hidden;
-  z-index: 1000;
+  /* ensure this sits above floating action buttons (floating-book-btn uses z-index:1000) */
+  z-index: 1100;
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
 }
 
@@ -416,21 +421,3 @@
     flex-direction: column;
   }
 }
-
-  </style>
-
-  <script>
-    // Back to Top Functionality
-    const backToTopButton = document.getElementById("backToTop");
-    window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add("visible");
-      } else {
-        backToTopButton.classList.remove("visible");
-      }
-    });
-    backToTopButton.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  </script>
-</footer>
