@@ -1785,7 +1785,8 @@ html {
   transition: all 0.3s ease;
   opacity: 0;
   visibility: hidden;
-  z-index: 1000;
+  /* ensure back-to-top sits above floating action buttons (like Book Now) */
+  z-index: 1100;
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
 }
 

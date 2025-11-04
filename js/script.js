@@ -238,15 +238,26 @@
       }, 100); 
     });
 
-     // Back to Top Functionality
-    const backToTopButton = document.getElementById("backToTop");
+     // Back to Top Functionality (defensive)
+    document.addEventListener('DOMContentLoaded', () => {
+      const backToTopButton = document.getElementById('backToTop');
+      if (!backToTopButton) return;
 
-    window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add("visible");
-      } else {
-        backToTopButton.classList.remove("visible");
-      }
+      const toggleVisibility = () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      };
+
+      // initial state and listeners
+      toggleVisibility();
+      window.addEventListener('scroll', toggleVisibility, { passive: true });
+      backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
         // Add input animations
         const inputs = document.querySelectorAll(

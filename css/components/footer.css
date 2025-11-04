@@ -268,7 +268,8 @@
   transition: all 0.3s ease;
   opacity: 0;
   visibility: hidden;
-  z-index: 1000;
+  /* ensure this sits above floating action buttons (floating-book-btn uses z-index:1000) */
+  z-index: 1100;
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
 }
 
