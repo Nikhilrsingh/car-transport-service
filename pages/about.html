@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../css/components/navbar.css" />
   <link rel="stylesheet" href="../css/components/footer.css" />
   <link rel="stylesheet" href="../css/components/floating-call-button.css" />
+  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css" />
   <link rel="stylesheet" href="../css/components/floating-chatbot-button.css" />
   <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
   <link rel="stylesheet" href="../css/components/quote-modal.css" />
@@ -868,36 +869,36 @@
         animateStats = function () {
           const sectionTop = statsSection.getBoundingClientRect().top; const sectionVisible = 100; if
             (sectionTop < window.innerHeight - sectionVisible) {
-              statItems.forEach((item) => {
-                const targetText = item.textContent;
-                let target;
+            statItems.forEach((item) => {
+              const targetText = item.textContent;
+              let target;
 
-                if (targetText.includes("+")) {
-                  target = parseInt(targetText);
-                } else if (targetText.includes("%")) {
-                  target = parseInt(targetText);
-                } else {
-                  target = parseInt(targetText);
+              if (targetText.includes("+")) {
+                target = parseInt(targetText);
+              } else if (targetText.includes("%")) {
+                target = parseInt(targetText);
+              } else {
+                target = parseInt(targetText);
+              }
+
+              let current = 0;
+              const increment = target / 50;
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  current = target;
+                  clearInterval(timer);
                 }
 
-                let current = 0;
-                const increment = target / 50;
-                const timer = setInterval(() => {
-                  current += increment;
-                  if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                  }
-
-                  if (targetText.includes("%")) {
-                    item.textContent = Math.floor(current) + "%";
-                  } else if (targetText.includes("+")) {
-                    item.textContent = Math.floor(current) + "+";
-                  } else {
-                    item.textContent = Math.floor(current);
-                  }
-                }, 30);
-              });
+                if (targetText.includes("%")) {
+                  item.textContent = Math.floor(current) + "%";
+                } else if (targetText.includes("+")) {
+                  item.textContent = Math.floor(current) + "+";
+                } else {
+                  item.textContent = Math.floor(current);
+                }
+              }, 30);
+            });
 
             // Remove the event listener after animation
             window.removeEventListener("scroll", animateStats);
@@ -909,6 +910,7 @@
   </script>
   <script src="../js/modules/floating-book-button.js"></script>
   <script src="../js/modules/floating-call-button.js"></script>
+  <script src="../js/modules/floating-whatsapp-button.js"></script>
   <script src="../js/modules/quote-modal.js"></script>
   <script src="../js/modules/sticky-quote-button.js"></script>
   <script src="../js/modules/floating-chatbot-button.js"></script>
