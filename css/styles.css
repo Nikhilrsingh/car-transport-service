@@ -31,6 +31,91 @@ body {
   background-color: #2b2b2b;
 }
 
+/* 🌿 Auto Slider Styling */
+.auto-slider {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+  margin-top: 80px; /* navbar ke neeche spacing */
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 80px;
+  left: 100px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 20px 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  animation: fadeUp 1.2s ease-in-out;
+}
+
+.slide-text h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.slide-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slide-text {
+    bottom: 40px;
+    left: 30px;
+    max-width: 85%;
+    padding: 15px;
+  }
+
+  .slide-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .slide-text p {
+    font-size: 1rem;
+  }
+}
 
 /* Enhanced Hero Section Styles */
 .hero {
