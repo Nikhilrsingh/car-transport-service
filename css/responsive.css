@@ -1,0 +1,236 @@
+/* ======================================
+   UNIVERSAL RESPONSIVE STYLES
+   ====================================== */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure all images scale */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Global text scaling */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+/* Fix sections padding */
+section {
+  padding: 60px 20px;
+}
+
+/* ======================================
+   HERO SECTION
+   ====================================== */
+@media (max-width: 1024px) {
+  .hero .container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hero-main, .hero-quote {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 80px 10px;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .cta-btn {
+    width: 90%;
+    max-width: 320px;
+  }
+
+  .quote-card {
+    padding: 20px;
+    width: 100%;
+  }
+}
+
+/* ======================================
+   SERVICES SECTION
+   ====================================== */
+@media (max-width: 992px) {
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 25px;
+  }
+
+  .service-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+  }
+
+  .service-cta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .service-btn {
+    width: 100%;
+  }
+}
+
+/* ======================================
+   TESTIMONIALS SECTION
+   ====================================== */
+@media (max-width: 768px) {
+  .testimonial-slider {
+    overflow-x: hidden;
+  }
+
+  .testimonial-card {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .testimonial-card p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ======================================
+   CONTACT CTA SECTION
+   ====================================== */
+@media (max-width: 992px) {
+  .cta-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .cta-text h2 {
+    font-size: 2rem;
+  }
+
+  .cta-features {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-form-box {
+    padding: 25px 20px;
+    width: 100%;
+  }
+
+  .input-group input,
+  .input-group select {
+    font-size: 0.9rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+/* ======================================
+   FOOTER + NAVBAR
+   ====================================== */
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
+    padding: 40px 10px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+}
+
+/* ======================================
+   GENERAL SMALL DEVICE FIXES
+   ====================================== */
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
+
+  .hero-title {
+    font-size: 1.9rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+  }
+
+  .cta-text p,
+  .section-header p {
+    font-size: 0.9rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* ======================================
+   TABLET OPTIMIZATION
+   ====================================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    flex-wrap: wrap;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .quote-card {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
