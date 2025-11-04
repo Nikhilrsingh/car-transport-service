@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Services | Harihar Car Carriers</title>
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="./css/components/navbar.css">
+  <link rel="stylesheet" href="./css/components/footer.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -160,14 +162,209 @@
 </head>
 
 <body>
-  <!-- Navbar -->
-  <div id="navbar-container"></div>
-  <script>
-    fetch('navbar.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('navbar-container').innerHTML = data)
-      .catch(err => console.error('Navbar Load Error:', err));
-  </script>
+
+  <!-- Enhanced Navigation Component -->
+  <header class="header">
+    <div class="navbar-container">
+      <div class="navbar">
+        <!-- Left Logo -->
+        <div class="logo-container left-logo">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./about.html" class="nav-link" data-page="about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./services.html" class="nav-link" data-page="services">
+                <i class="fas fa-truck-moving"></i>
+                <span>Services</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./booking.html" class="nav-link" data-page="booking">
+                <i class="fas fa-calendar-check"></i>
+                <span>Booking</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contributors.html" class="nav-link" data-page="contributors">
+                <i class="fas fa-users"></i>
+                <span>Contributors</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./pricing.html" class="nav-link" data-page="pricing">
+                <i class="fas fa-tags"></i>
+                <span>Pricing</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./tracking.html" class="nav-link" data-page="tracking">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Track Your Car</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./gallery.html" class="nav-link" data-page="gallery">
+                <i class="fas fa-images"></i>
+                <span>Gallery</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contact.html" class="nav-link" data-page="contact">
+                <i class="fas fa-phone"></i>
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Right Actions -->
+          <div class="nav-actions">
+            <a href="./enquiry.html" class="nav-link enquiry-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+            <a href="./blog.html" class="nav-link blog-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+            <a href="#login" class="login-btn">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <div class="mobile-nav-header">
+          <div class="mobile-logo">
+            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+            <span>Harihar Car Carriers</span>
+          </div>
+          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <ul class="mobile-nav-list">
+          <li class="mobile-nav-item">
+            <a href="../index.html" class="mobile-nav-link active">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./about.html" class="mobile-nav-link">
+              <i class="fas fa-info-circle"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./services.html" class="mobile-nav-link">
+              <i class="fas fa-truck-moving"></i>
+              <span>Services</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./booking.html" class="mobile-nav-link">
+              <i class="fas fa-calendar-check"></i>
+              <span>Booking</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./contributors.html" class="mobile-nav-link">
+              <i class="fas fa-users"></i>
+              <span>Contributors</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./pricing.html" class="mobile-nav-link">
+              <i class="fas fa-tags"></i>
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./tracking.html" class="mobile-nav-link">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Track Your Car</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./gallery.html" class="mobile-nav-link">
+              <i class="fas fa-images"></i>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./contact.html" class="mobile-nav-link">
+              <i class="fas fa-phone"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./enquiry.html" class="mobile-nav-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./blog.html" class="mobile-nav-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <a href="#login" class="mobile-login-btn">
+            <i class="fas fa-user"></i>
+            <span>Login</span>
+          </a>
+          <a href="./booking.html" class="mobile-cta-btn">
+            <i class="fas fa-truck"></i>
+            <span>Book Instantly</span>
+          </a>
+        </div>
+        <div class="mobile-contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@hariharcarcarriers.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <span>24/7 Support</span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Navigation Overlay -->
+      <div class="nav-overlay" id="navOverlay"></div>
+    </div>
+  </header>
 
   <!-- Services Section -->
   <section class="services-container">
@@ -235,6 +432,26 @@
     </div>
   </section>
 
+  <!-- Service Stats -->
+        <div class="service-stats">
+          <div class="stat-item">
+            <div class="stat-number" data-target="5000">0</div>
+            <div class="stat-label">Vehicles Transported</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="50">0</div>
+            <div class="stat-label">Cities Covered</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-label">% Satisfaction</div>
+          </div>
+        </div>
+
   <!-- CTA Section -->
   <section class="cta-section">
     <h2>Get a Free Quote Instantly</h2>
@@ -266,5 +483,8 @@
   <button class="back-to-top" id="backToTop">
     <i class="fas fa-chevron-up"></i>
   </button>
+  <script src="./js/modules/Services.js"></script>
+  <script src="./js/script.js"></script>
+  <script src="./js/modules/footer.js"></script>
 </body>
 </html>
