@@ -1154,7 +1154,8 @@ html {
 
 .section-header {
   text-align: center;
-  margin-top: 600px;
+  /* Removed large top margin that created an unwanted gap above sections */
+  margin-top: 0;
 }
 
 .section-header h2 {
