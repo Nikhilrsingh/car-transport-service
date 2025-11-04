@@ -1,805 +1,781 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contributors | Harihar Car Carriers</title>
-    <link rel="stylesheet" href="../css/components/navbar.css">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      :root {
-        --primary: #ff6347;
-        --primary-dark: #ff4500;
-        --dark: #2b2b2b;
-        --dark-light: #333;
-        --text: #ffffff;
-        --text-light: #cccccc;
-      }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributors | Harihar Car Carriers</title>
+  <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="../css/components/floating-call-button.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #ff6347;
+      --primary-dark: #ff4500;
+      --dark: #2b2b2b;
+      --dark-light: #333;
+      --text: #ffffff;
+      --text-light: #cccccc;
+    }
 
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--dark);
-        color: var(--text);
-        line-height: 1.6;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-      /* Header */
-      .header {
-        background: rgba(43, 43, 43, 0.95);
-        backdrop-filter: blur(20px);
-        padding: 1rem 0;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-      }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-      .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+    /* Header */
+    .header {
+      background: rgba(43, 43, 43, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
 
-      .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--primary);
-      }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 2rem;
-      }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
 
-      .nav-links a {
-        color: var(--text);
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
 
-      .nav-links a:hover {
-        color: var(--primary);
-      }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
-      /* Main Content */
-      .main-content {
-        margin-top: 80px;
-      }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
 
-      /* Hero Section */
-      .contributors-hero {
-        padding: 4rem 0;
-        text-align: center;
-        background: linear-gradient(
-          135deg,
+    /* Main Content */
+    .main-content {
+      margin-top: 80px;
+    }
+
+    /* Hero Section */
+    .contributors-hero {
+      padding: 4rem 0;
+      text-align: center;
+      background: linear-gradient(135deg,
           var(--dark) 0%,
-          var(--dark-light) 100%
-        );
+          var(--dark-light) 100%);
+    }
+
+    .contributors-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg,
+          var(--primary),
+          var(--primary-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .contributors-hero p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Contributors Section */
+    .contributors-section {
+      padding: 4rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .section-header p {
+      color: var(--text-light);
+      font-size: 1.1rem;
+    }
+
+    /* Stats */
+    .contributors-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--dark-light);
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid #444;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+
+    /* Search and Filters */
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      background: var(--dark-light);
+      border: 2px solid #444;
+      border-radius: 25px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.75rem 1.5rem;
+      background: var(--dark-light);
+      border: 2px solid #444;
+      border-radius: 25px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Contributors Grid */
+    .contributors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .contributor-card {
+      background: var(--dark-light);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid #444;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contributor-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .contributor-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .contributor-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .contributor-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--primary);
+      overflow: hidden;
+    }
+
+    .contributor-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .contributor-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contributor-role {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .contributor-stats {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+      padding: 1rem 0;
+      border-top: 1px solid #444;
+      border-bottom: 1px solid #444;
+    }
+
+    .contributor-stat {
+      text-align: center;
+    }
+
+    .contributor-stat-number {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary);
+      display: block;
+    }
+
+    .contributor-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .contributor-social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Points System */
+    .points-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    /* Loading States */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-light);
+    }
+
+    .spinner {
+      border: 4px solid #444;
+      border-left: 4px solid var(--primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .error {
+      text-align: center;
+      padding: 2rem;
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
+      border-radius: 10px;
+      margin: 2rem 0;
+    }
+
+    /* How to Contribute */
+    .contribute-section {
+      padding: 4rem 0;
+      background: var(--dark-light);
+      text-align: center;
+    }
+
+    .contribute-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .step-card {
+      background: var(--dark);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid #444;
+    }
+
+    .step-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .pagination-btn {
+      padding: 0.5rem 1rem;
+      background: var(--dark-light);
+      border: 1px solid #444;
+      border-radius: 5px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pagination-btn.active,
+    .pagination-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-light);
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 3px solid var(--primary);
+    }
+
+    .footer p {
+      color: var(--text-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
       }
 
       .contributors-hero h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        background: linear-gradient(
-          135deg,
-          var(--primary),
-          var(--primary-dark)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-size: 2rem;
       }
 
-      .contributors-hero p {
-        font-size: 1.2rem;
-        color: var(--text-light);
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      /* Contributors Section */
-      .contributors-section {
-        padding: 4rem 0;
-      }
-
-      .section-header {
-        text-align: center;
-        margin-bottom: 3rem;
-      }
-
-      .section-header h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-        color: var(--primary);
-      }
-
-      .section-header p {
-        color: var(--text-light);
-        font-size: 1.1rem;
-      }
-
-      /* Stats */
-      .contributors-stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
-      }
-
-      .stat-card {
-        background: var(--dark-light);
-        padding: 2rem;
-        border-radius: 10px;
-        text-align: center;
-        border: 1px solid #444;
-        transition: transform 0.3s ease;
-      }
-
-      .stat-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: var(--primary);
-        display: block;
-      }
-
-      .stat-label {
-        color: var(--text-light);
-        font-size: 1rem;
-      }
-
-      /* Search and Filters */
-      .search-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 2rem;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-
-      .search-box {
-        position: relative;
-        max-width: 400px;
-        width: 100%;
-      }
-
-      .search-input {
-        width: 100%;
-        padding: 0.75rem 1rem 0.75rem 2.5rem;
-        background: var(--dark-light);
-        border: 2px solid #444;
-        border-radius: 25px;
-        color: var(--text);
-        font-size: 1rem;
-      }
-
-      .search-icon {
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-light);
+      .contributors-grid {
+        grid-template-columns: 1fr;
       }
 
       .filters {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
       }
 
       .filter-btn {
-        padding: 0.75rem 1.5rem;
-        background: var(--dark-light);
-        border: 2px solid #444;
-        border-radius: 25px;
-        color: var(--text);
-        cursor: pointer;
-        transition: all 0.3s ease;
+        width: 200px;
       }
+    }
+  </style>
+</head>
 
-      .filter-btn.active,
-      .filter-btn:hover {
-        background: var(--primary);
-        border-color: var(--primary);
-      }
+<body>
+  <!-- Enhanced Navigation Component -->
+  <header class="header">
+    <div class="navbar-container">
+      <div class="navbar">
+        <!-- Left Logo -->
+        <div class="logo-container left-logo">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+        </div>
 
-      /* Contributors Grid */
-      .contributors-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
-      }
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./about.html" class="nav-link" data-page="about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../index.html#services" class="nav-link" data-page="services">
+                <i class="fas fa-truck-moving"></i>
+                <span>Services</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./booking.html" class="nav-link" data-page="booking">
+                <i class="fas fa-calendar-check"></i>
+                <span>Booking</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contributors.html" class="nav-link" data-page="contributors">
+                <i class="fas fa-users"></i>
+                <span>Contributors</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./pricing.html" class="nav-link" data-page="pricing">
+                <i class="fas fa-tags"></i>
+                <span>Pricing</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./tracking.html" class="nav-link" data-page="tracking">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Track Your Car</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./gallery.html" class="nav-link" data-page="gallery">
+                <i class="fas fa-images"></i>
+                <span>Gallery</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contact.html" class="nav-link" data-page="contact">
+                <i class="fas fa-phone"></i>
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
 
-      .contributor-card {
-        background: var(--dark-light);
-        border-radius: 15px;
-        padding: 2rem;
-        text-align: center;
-        border: 1px solid #444;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
+          <!-- Right Actions -->
+          <div class="nav-actions">
+            <a href="./enquiry.html" class="nav-link enquiry-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+            <a href="./blog.html" class="nav-link blog-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+            <a href="#login" class="login-btn">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
+          </div>
+        </nav>
 
-      .contributor-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-      }
-
-      .contributor-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      }
-
-      .contributor-card:hover::before {
-        transform: scaleX(1);
-      }
-
-      .contributor-avatar {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin: 0 auto 1rem;
-        border: 3px solid var(--primary);
-        overflow: hidden;
-      }
-
-      .contributor-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .contributor-info h3 {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .contributor-role {
-        color: var(--primary);
-        font-weight: 600;
-        margin-bottom: 1rem;
-      }
-
-      .contributor-stats {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        margin: 1rem 0;
-        padding: 1rem 0;
-        border-top: 1px solid #444;
-        border-bottom: 1px solid #444;
-      }
-
-      .contributor-stat {
-        text-align: center;
-      }
-
-      .contributor-stat-number {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: var(--primary);
-        display: block;
-      }
-
-      .contributor-stat-label {
-        font-size: 0.8rem;
-        color: var(--text-light);
-      }
-
-      .contributor-social {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .social-link {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: #444;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text);
-        text-decoration: none;
-        transition: all 0.3s ease;
-      }
-
-      .social-link:hover {
-        background: var(--primary);
-        transform: translateY(-3px);
-      }
-
-      /* Points System */
-      .points-badge {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: var(--primary);
-        color: white;
-        padding: 0.3rem 0.7rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: bold;
-      }
-
-      /* Loading States */
-      .loading {
-        text-align: center;
-        padding: 3rem;
-        color: var(--text-light);
-      }
-
-      .spinner {
-        border: 4px solid #444;
-        border-left: 4px solid var(--primary);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-        margin: 0 auto 1rem;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .error {
-        text-align: center;
-        padding: 2rem;
-        color: #ff6b6b;
-        background: rgba(255, 107, 107, 0.1);
-        border-radius: 10px;
-        margin: 2rem 0;
-      }
-
-      /* How to Contribute */
-      .contribute-section {
-        padding: 4rem 0;
-        background: var(--dark-light);
-        text-align: center;
-      }
-
-      .contribute-steps {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin-top: 3rem;
-      }
-
-      .step-card {
-        background: var(--dark);
-        padding: 2rem;
-        border-radius: 10px;
-        border: 1px solid #444;
-      }
-
-      .step-icon {
-        font-size: 3rem;
-        color: var(--primary);
-        margin-bottom: 1rem;
-      }
-
-      /* Pagination */
-      .pagination {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-top: 2rem;
-      }
-
-      .pagination-btn {
-        padding: 0.5rem 1rem;
-        background: var(--dark-light);
-        border: 1px solid #444;
-        border-radius: 5px;
-        color: var(--text);
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .pagination-btn.active,
-      .pagination-btn:hover {
-        background: var(--primary);
-        border-color: var(--primary);
-      }
-
-      .pagination-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      /* Footer */
-      .footer {
-        background: var(--dark-light);
-        padding: 3rem 0;
-        text-align: center;
-        border-top: 3px solid var(--primary);
-      }
-
-      .footer p {
-        color: var(--text-light);
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .nav-links {
-          display: none;
-        }
-
-        .contributors-hero h1 {
-          font-size: 2rem;
-        }
-
-        .contributors-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .filters {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .filter-btn {
-          width: 200px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-        <!-- Enhanced Navigation Component -->
-<header class="header">
-  <div class="navbar-container">
-    <div class="navbar">
-      <!-- Left Logo -->
-      <div class="logo-container left-logo">
-        <img
-          src="../assets/images/left-logo.jpg"
-          alt="Harihar Car Carriers"
-          class="logo-img"
-        />
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
       </div>
 
-      <!-- Desktop Navigation -->
-      <nav class="desktop-nav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="../index.html" class="nav-link active" data-page="home">
+      <!-- Mobile Navigation -->
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <div class="mobile-nav-header">
+          <div class="mobile-logo">
+            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+            <span>Harihar Car Carriers</span>
+          </div>
+          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <ul class="mobile-nav-list">
+          <li class="mobile-nav-item">
+            <a href="../index.html" class="mobile-nav-link active">
               <i class="fas fa-home"></i>
               <span>Home</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./about.html" class="nav-link" data-page="about">
+          <li class="mobile-nav-item">
+            <a href="./about.html" class="mobile-nav-link">
               <i class="fas fa-info-circle"></i>
               <span>About</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../index.html#services" class="nav-link" data-page="services">
+          <li class="mobile-nav-item">
+            <a href="../index.html#services" class="mobile-nav-link">
               <i class="fas fa-truck-moving"></i>
               <span>Services</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./booking.html" class="nav-link" data-page="booking">
+          <li class="mobile-nav-item">
+            <a href="./booking.html" class="mobile-nav-link">
               <i class="fas fa-calendar-check"></i>
               <span>Booking</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./contributors.html" class="nav-link" data-page="contributors">
+          <li class="mobile-nav-item">
+            <a href="./contributors.html" class="mobile-nav-link">
               <i class="fas fa-users"></i>
               <span>Contributors</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./pricing.html" class="nav-link" data-page="pricing">
+          <li class="mobile-nav-item">
+            <a href="./pricing.html" class="mobile-nav-link">
               <i class="fas fa-tags"></i>
               <span>Pricing</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./tracking.html" class="nav-link" data-page="tracking">
+          <li class="mobile-nav-item">
+            <a href="./tracking.html" class="mobile-nav-link">
               <i class="fas fa-map-marker-alt"></i>
               <span>Track Your Car</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./gallery.html" class="nav-link" data-page="gallery">
+          <li class="mobile-nav-item">
+            <a href="./gallery.html" class="mobile-nav-link">
               <i class="fas fa-images"></i>
               <span>Gallery</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./contact.html" class="nav-link" data-page="contact">
+          <li class="mobile-nav-item">
+            <a href="./contact.html" class="mobile-nav-link">
               <i class="fas fa-phone"></i>
               <span>Contact</span>
             </a>
           </li>
+          <li class="mobile-nav-item">
+            <a href="./enquiry.html" class="mobile-nav-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./blog.html" class="mobile-nav-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+          </li>
         </ul>
-
-        <!-- Right Actions -->
-        <div class="nav-actions">
-          <a href="./enquiry.html" class="nav-link enquiry-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-          <a href="./blog.html" class="nav-link blog-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-          <a href="#login" class="login-btn">
+        <div class="mobile-nav-actions">
+          <a href="#login" class="mobile-login-btn">
             <i class="fas fa-user"></i>
             <span>Login</span>
           </a>
+          <a href="./booking.html" class="mobile-cta-btn">
+            <i class="fas fa-truck"></i>
+            <span>Book Instantly</span>
+          </a>
+        </div>
+        <div class="mobile-contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@hariharcarcarriers.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <span>24/7 Support</span>
+          </div>
         </div>
       </nav>
 
-      <!-- Mobile Menu Button -->
-      <button
-        class="mobile-menu-btn"
-        id="mobileMenuBtn"
-        aria-label="Toggle mobile menu"
-      >
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
+      <!-- Navigation Overlay -->
+      <div class="nav-overlay" id="navOverlay"></div>
     </div>
+  </header>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-      <div class="mobile-nav-header">
-        <div class="mobile-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-          <span>Harihar Car Carriers</span>
-        </div>
-        <button
-          class="mobile-close-btn"
-          id="mobileCloseBtn"
-          aria-label="Close mobile menu"
-        >
-          <i class="fas fa-times"></i>
-        </button>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="contributors-hero">
+      <div class="container">
+        <h1>Our Amazing Contributors</h1>
+        <p>
+          Meet the talented developers and contributors who help make Harihar
+          Car Carriers better every day
+        </p>
       </div>
-      <ul class="mobile-nav-list">
-        <li class="mobile-nav-item">
-          <a href="../index.html" class="mobile-nav-link active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./about.html" class="mobile-nav-link">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="../index.html#services" class="mobile-nav-link">
-            <i class="fas fa-truck-moving"></i>
-            <span>Services</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./booking.html" class="mobile-nav-link">
-            <i class="fas fa-calendar-check"></i>
-            <span>Booking</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./contributors.html" class="mobile-nav-link">
-            <i class="fas fa-users"></i>
-            <span>Contributors</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pricing.html" class="mobile-nav-link">
-            <i class="fas fa-tags"></i>
-            <span>Pricing</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./tracking.html" class="mobile-nav-link">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Track Your Car</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./gallery.html" class="mobile-nav-link">
-            <i class="fas fa-images"></i>
-            <span>Gallery</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./contact.html" class="mobile-nav-link">
-            <i class="fas fa-phone"></i>
-            <span>Contact</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./enquiry.html" class="mobile-nav-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./blog.html" class="mobile-nav-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-        </li>
-      </ul>
-      <div class="mobile-nav-actions">
-        <a href="#login" class="mobile-login-btn">
-          <i class="fas fa-user"></i>
-          <span>Login</span>
-        </a>
-        <a href="./booking.html" class="mobile-cta-btn">
-          <i class="fas fa-truck"></i>
-          <span>Book Instantly</span>
-        </a>
-      </div>
-      <div class="mobile-contact-info">
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <span>+91 98765 43210</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <span>info@hariharcarcarriers.com</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-clock"></i>
-          <span>24/7 Support</span>
-        </div>
-      </div>
-    </nav>
+    </section>
 
-    <!-- Navigation Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
-  </div>
-</header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Hero Section -->
-      <section class="contributors-hero">
-        <div class="container">
-          <h1>Our Amazing Contributors</h1>
+    <!-- Contributors Section -->
+    <section class="contributors-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Project Contributors</h2>
           <p>
-            Meet the talented developers and contributors who help make Harihar
-            Car Carriers better every day
+            These amazing people contribute their time and skills to improve
+            our project
           </p>
         </div>
-      </section>
 
-      <!-- Contributors Section -->
-      <section class="contributors-section">
-        <div class="container">
-          <div class="section-header">
-            <h2>Project Contributors</h2>
-            <p>
-              These amazing people contribute their time and skills to improve
-              our project
-            </p>
+        <!-- Stats -->
+        <div class="contributors-stats">
+          <div class="stat-card">
+            <span class="stat-number" id="totalContributors">0</span>
+            <span class="stat-label">Total Contributors</span>
           </div>
-
-          <!-- Stats -->
-          <div class="contributors-stats">
-            <div class="stat-card">
-              <span class="stat-number" id="totalContributors">0</span>
-              <span class="stat-label">Total Contributors</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-number" id="totalCommits">0</span>
-              <span class="stat-label">Total Commits</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-number" id="totalPoints">0</span>
-              <span class="stat-label">Total Points</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-number" id="activeContributors">0</span>
-              <span class="stat-label">Active This Month</span>
-            </div>
+          <div class="stat-card">
+            <span class="stat-number" id="totalCommits">0</span>
+            <span class="stat-label">Total Commits</span>
           </div>
-
-          <!-- Search and Filters -->
-          <div class="search-container">
-            <div class="search-box">
-              <i class="fas fa-search search-icon"></i>
-              <input
-                type="text"
-                class="search-input"
-                id="searchInput"
-                placeholder="Search contributors..."
-              />
-            </div>
-            <div class="filters">
-              <button class="filter-btn active" data-filter="all">
-                All Contributors
-              </button>
-              <button class="filter-btn" data-filter="core">Core Team</button>
-              <button class="filter-btn" data-filter="active">
-                Most Active
-              </button>
-              <button class="filter-btn" data-filter="new">
-                New Contributors
-              </button>
-              <button class="filter-btn" data-filter="top-points">
-                Top Points
-              </button>
-            </div>
+          <div class="stat-card">
+            <span class="stat-number" id="totalPoints">0</span>
+            <span class="stat-label">Total Points</span>
           </div>
-
-          <!-- Contributors Grid -->
-          <div class="contributors-grid" id="contributorsGrid">
-            <div class="loading">
-              <div class="spinner"></div>
-              <p>Loading contributors from GitHub...</p>
-            </div>
+          <div class="stat-card">
+            <span class="stat-number" id="activeContributors">0</span>
+            <span class="stat-label">Active This Month</span>
           </div>
+        </div>
 
-          <!-- Pagination -->
-          <div class="pagination" id="pagination" style="display: none">
-            <button class="pagination-btn" id="prevPage" disabled>
-              <i class="fas fa-chevron-left"></i> Previous
+        <!-- Search and Filters -->
+        <div class="search-container">
+          <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search contributors..." />
+          </div>
+          <div class="filters">
+            <button class="filter-btn active" data-filter="all">
+              All Contributors
             </button>
-            <span style="padding: 0.5rem 1rem; color: var(--text-light)"
-              >Page <span id="currentPage">1</span> of
-              <span id="totalPages">1</span></span
-            >
-            <button class="pagination-btn" id="nextPage">
-              Next <i class="fas fa-chevron-right"></i>
+            <button class="filter-btn" data-filter="core">Core Team</button>
+            <button class="filter-btn" data-filter="active">
+              Most Active
+            </button>
+            <button class="filter-btn" data-filter="new">
+              New Contributors
+            </button>
+            <button class="filter-btn" data-filter="top-points">
+              Top Points
             </button>
           </div>
+        </div>
 
-          <!-- Error Display -->
-          <div id="errorDisplay" class="error" style="display: none">
-            <h3>Unable to load contributors</h3>
-            <p id="errorMessage">
-              Please check your internet connection and try again.
-            </p>
-            <button
-              onclick="loadContributors()"
-              style="
+        <!-- Contributors Grid -->
+        <div class="contributors-grid" id="contributorsGrid">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading contributors from GitHub...</p>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination" style="display: none">
+          <button class="pagination-btn" id="prevPage" disabled>
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span style="padding: 0.5rem 1rem; color: var(--text-light)">Page <span id="currentPage">1</span> of
+            <span id="totalPages">1</span></span>
+          <button class="pagination-btn" id="nextPage">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <!-- Error Display -->
+        <div id="errorDisplay" class="error" style="display: none">
+          <h3>Unable to load contributors</h3>
+          <p id="errorMessage">
+            Please check your internet connection and try again.
+          </p>
+          <button onclick="loadContributors()" style="
                 margin-top: 1rem;
                 padding: 0.5rem 1rem;
                 background: var(--primary);
@@ -807,374 +783,334 @@
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
-              "
-            >
-              Retry
-            </button>
-          </div>
+              ">
+            Retry
+          </button>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- How to Contribute -->
-      <section
-        class="contribute-section"
-        style="padding: 50px 0; text-align: center"
-      >
-        <div class="container" style="max-width: 1200px; margin: auto">
-          <div class="section-header" style="margin-bottom: 40px">
-            <h2>Want to Contribute?</h2>
-            <p>Join our community and help improve Harihar Car Carriers</p>
-          </div>
+    <!-- How to Contribute -->
+    <section class="contribute-section" style="padding: 50px 0; text-align: center">
+      <div class="container" style="max-width: 1200px; margin: auto">
+        <div class="section-header" style="margin-bottom: 40px">
+          <h2>Want to Contribute?</h2>
+          <p>Join our community and help improve Harihar Car Carriers</p>
+        </div>
 
-          <div
-            class="contribute-steps"
-            style="
+        <div class="contribute-steps" style="
               display: flex;
               justify-content: center;
               flex-wrap: wrap;
               gap: 25px;
-            "
-          >
-            <!-- 🆕 New Step: Create an Issue -->
-            <div
-              class="step-card"
-              style="
+            ">
+          <!-- 🆕 New Step: Create an Issue -->
+          <div class="step-card" style="
                 border: 1px solid #ccc;
                 border-radius: 8px;
                 padding: 20px;
                 width: 200px;
                 text-align: center;
-              "
-            >
-              <div
-                class="step-icon"
-                style="font-size: 36px; margin-bottom: 10px"
-              >
-                <i class="fas fa-clipboard-list"></i>
-              </div>
-              <h3>Create an Issue</h3>
-              <p>
-                Start by creating an issue describing your change and wait for
-                it to be assigned before forking the repo.
-              </p>
+              ">
+            <div class="step-icon" style="font-size: 36px; margin-bottom: 10px">
+              <i class="fas fa-clipboard-list"></i>
             </div>
+            <h3>Create an Issue</h3>
+            <p>
+              Start by creating an issue describing your change and wait for
+              it to be assigned before forking the repo.
+            </p>
+          </div>
 
-            <div
-              class="step-card"
-              style="
+          <div class="step-card" style="
                 border: 1px solid #ccc;
                 border-radius: 8px;
                 padding: 20px;
                 width: 200px;
                 text-align: center;
-              "
-            >
-              <div
-                class="step-icon"
-                style="font-size: 36px; margin-bottom: 10px"
-              >
-                <i class="fab fa-github"></i>
-              </div>
-              <h3>Fork the Repository</h3>
-              <p>Start by forking the main repository to your GitHub account</p>
+              ">
+            <div class="step-icon" style="font-size: 36px; margin-bottom: 10px">
+              <i class="fab fa-github"></i>
             </div>
+            <h3>Fork the Repository</h3>
+            <p>Start by forking the main repository to your GitHub account</p>
+          </div>
 
-            <div
-              class="step-card"
-              style="
+          <div class="step-card" style="
                 border: 1px solid #ccc;
                 border-radius: 8px;
                 padding: 20px;
                 width: 200px;
                 text-align: center;
-              "
-            >
-              <div
-                class="step-icon"
-                style="font-size: 36px; margin-bottom: 10px"
-              >
-                <i class="fas fa-code-branch"></i>
-              </div>
-              <h3>Create a Branch</h3>
-              <p>Create a feature branch for your changes</p>
+              ">
+            <div class="step-icon" style="font-size: 36px; margin-bottom: 10px">
+              <i class="fas fa-code-branch"></i>
             </div>
+            <h3>Create a Branch</h3>
+            <p>Create a feature branch for your changes</p>
+          </div>
 
-            <div
-              class="step-card"
-              style="
+          <div class="step-card" style="
                 border: 1px solid #ccc;
                 border-radius: 8px;
                 padding: 20px;
                 width: 200px;
                 text-align: center;
-              "
-            >
-              <div
-                class="step-icon"
-                style="font-size: 36px; margin-bottom: 10px"
-              >
-                <i class="fas fa-code"></i>
-              </div>
-              <h3>Make Changes</h3>
-              <p>Implement your features or bug fixes</p>
+              ">
+            <div class="step-icon" style="font-size: 36px; margin-bottom: 10px">
+              <i class="fas fa-code"></i>
             </div>
+            <h3>Make Changes</h3>
+            <p>Implement your features or bug fixes</p>
+          </div>
 
-            <div
-              class="step-card"
-              style="
+          <div class="step-card" style="
                 border: 1px solid #ccc;
                 border-radius: 8px;
                 padding: 20px;
                 width: 200px;
                 text-align: center;
-              "
-            >
-              <div
-                class="step-icon"
-                style="font-size: 36px; margin-bottom: 10px"
-              >
-                <i class="fas fa-upload"></i>
-              </div>
-              <h3>Submit PR</h3>
-              <p>Create a pull request for review</p>
+              ">
+            <div class="step-icon" style="font-size: 36px; margin-bottom: 10px">
+              <i class="fas fa-upload"></i>
             </div>
+            <h3>Submit PR</h3>
+            <p>Create a pull request for review</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Font Awesome -->
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      />
-    </main>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </main>
 
-    <!-- Footer Section -->
-    <div id="footer-container"></div>
+  <!-- Footer Section -->
+  <div id="footer-container"></div>
 
-    <script>
-      // Load shared footer dynamically
-      fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("footer-container").innerHTML = data;
-        })
-        .catch((error) => console.error("Error loading footer:", error));
-    </script>
+  <script>
+    // Load shared footer dynamically
+    fetch("footer.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("footer-container").innerHTML = data;
+      })
+      .catch((error) => console.error("Error loading footer:", error));
+  </script>
 
-    <script>
-      const GITHUB_OWNER = "Nikhilrsingh";
-      const GITHUB_REPO = "car-transport-service";
-      const GITHUB_TOKEN = ""; // optional
+  <script>
+    const GITHUB_OWNER = "Nikhilrsingh";
+    const GITHUB_REPO = "car-transport-service";
+    const GITHUB_TOKEN = ""; // optional
 
-      let allContributors = [];
-      let filteredContributors = [];
-      let currentFilter = "all";
-      let currentSearch = "";
-      let currentPage = 1;
-      const contributorsPerPage = 9;
+    let allContributors = [];
+    let filteredContributors = [];
+    let currentFilter = "all";
+    let currentSearch = "";
+    let currentPage = 1;
+    const contributorsPerPage = 9;
 
-      // Points mapping based on PR labels
-      const POINTS_MAPPING = {
-        level1: 2,
-        level2: 5,
-        level3: 11,
-      };
+    // Points mapping based on PR labels
+    const POINTS_MAPPING = {
+      level1: 2,
+      level2: 5,
+      level3: 11,
+    };
 
-      async function loadContributors() {
-        const grid = document.getElementById("contributorsGrid");
-        const errorDisplay = document.getElementById("errorDisplay");
-        const pagination = document.getElementById("pagination");
+    async function loadContributors() {
+      const grid = document.getElementById("contributorsGrid");
+      const errorDisplay = document.getElementById("errorDisplay");
+      const pagination = document.getElementById("pagination");
 
-        try {
-          grid.innerHTML = `<div class="loading"><div class="spinner"></div><p>Loading contributors...</p></div>`;
-          errorDisplay.style.display = "none";
-          pagination.style.display = "none";
+      try {
+        grid.innerHTML = `<div class="loading"><div class="spinner"></div><p>Loading contributors...</p></div>`;
+        errorDisplay.style.display = "none";
+        pagination.style.display = "none";
 
-          const headers = GITHUB_TOKEN
-            ? { Authorization: `token ${GITHUB_TOKEN}` }
-            : {};
+        const headers = GITHUB_TOKEN
+          ? { Authorization: `token ${GITHUB_TOKEN}` }
+          : {};
 
-          // Fetch contributors (for commit counts)
-          const response = await fetch(
-            `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contributors?per_page=100`,
-            { headers }
-          );
-          if (!response.ok) throw new Error("Failed to load contributors");
+        // Fetch contributors (for commit counts)
+        const response = await fetch(
+          `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contributors?per_page=100`,
+          { headers }
+        );
+        if (!response.ok) throw new Error("Failed to load contributors");
 
-          const contributors = await response.json(); // ✅ Added this line
+        const contributors = await response.json(); // ✅ Added this line
 
-          // ✅ Filter out repository owner
-          const filteredContributorsList = contributors.filter(
-            (c) => c.login.toLowerCase() !== GITHUB_OWNER.toLowerCase()
-          );
-
-          // ✅ Fetch extra info, PR counts, and calculate points
-          allContributors = await Promise.all(
-            filteredContributorsList.map(async (c) => {
-              const userResponse = await fetch(
-                `https://api.github.com/users/${c.login}`,
-                { headers }
-              );
-              const userData = userResponse.ok ? await userResponse.json() : {};
-
-              // Fetch merged PRs with labels
-              const prResponse = await fetch(
-                `https://api.github.com/search/issues?q=type:pr+repo:${GITHUB_OWNER}/${GITHUB_REPO}+author:${c.login}+is:merged&per_page=100`,
-                { headers }
-              );
-              const prData = prResponse.ok
-                ? await prResponse.json()
-                : { items: [] };
-
-              // Calculate points based on PR labels
-              let points = 0;
-              const prDetails = [];
-
-              if (prData.items && prData.items.length > 0) {
-                for (const pr of prData.items) {
-                  let prPoints = 0;
-                  let highestLevel = null;
-
-                  if (pr.labels && pr.labels.length > 0) {
-                    for (const label of pr.labels) {
-                      const labelName = label.name
-                        .toLowerCase()
-                        .replace(/\s+/g, "");
-                      if (
-                        labelName.includes("level1") ||
-                        labelName.includes("level:1") ||
-                        labelName.includes("level-1")
-                      ) {
-                        prPoints = Math.max(prPoints, POINTS_MAPPING.level1);
-                        highestLevel = "level1";
-                      } else if (
-                        labelName.includes("level2") ||
-                        labelName.includes("level:2") ||
-                        labelName.includes("level-2")
-                      ) {
-                        prPoints = Math.max(prPoints, POINTS_MAPPING.level2);
-                        highestLevel = "level2";
-                      } else if (
-                        labelName.includes("level3") ||
-                        labelName.includes("level:3") ||
-                        labelName.includes("level-3")
-                      ) {
-                        prPoints = Math.max(prPoints, POINTS_MAPPING.level3);
-                        highestLevel = "level3";
-                      }
-                    }
-                  }
-
-                  // Add to total points
-                  points += prPoints;
-
-                  // Store PR details
-                  prDetails.push({
-                    title: pr.title,
-                    number: pr.number,
-                    url: pr.html_url,
-                    points: prPoints,
-                    level: highestLevel,
-                    labels: pr.labels ? pr.labels.map((l) => l.name) : [],
-                  });
-                }
-              }
-
-              let type = "new";
-              if (c.contributions > 100) type = "core";
-              else if (c.contributions > 30) type = "active";
-
-              return {
-                ...c,
-                name: userData.name || c.login,
-                bio: userData.bio || "",
-                location: userData.location || "",
-                blog: userData.blog || "",
-                twitter_username: userData.twitter_username || "",
-                type,
-                prCount: prData.total_count || 0,
-                points: points,
-                prDetails: prDetails,
-              };
-            })
-          );
-
-          // Sort by points first, then by contributions
-          allContributors.sort((a, b) => {
-            if (b.points !== a.points) {
-              return b.points - a.points;
-            }
-            return b.contributions - a.contributions;
-          });
-
-          updateStats();
-          applyFilters();
-          setupEventListeners();
-        } catch (err) {
-          console.error(err);
-          showError(err.message);
-        }
-      }
-
-      function updateStats() {
-        document.getElementById("totalContributors").textContent =
-          allContributors.length;
-        document.getElementById("totalCommits").textContent =
-          allContributors.reduce((sum, c) => sum + c.contributions, 0);
-        document.getElementById("totalPoints").textContent =
-          allContributors.reduce((sum, c) => sum + c.points, 0);
-        const activeCount = allContributors.filter(
-          (c) => c.contributions > 5
-        ).length;
-        document.getElementById("activeContributors").textContent = activeCount;
-      }
-
-      function applyFilters() {
-        let result = [...allContributors];
-
-        if (currentFilter !== "all") {
-          if (currentFilter === "top-points") {
-            result = result.filter((c) => c.points > 0);
-          } else {
-            result = result.filter((c) => c.type === currentFilter);
-          }
-        }
-
-        if (currentSearch) {
-          result = result.filter(
-            (c) =>
-              c.login.toLowerCase().includes(currentSearch.toLowerCase()) ||
-              c.name.toLowerCase().includes(currentSearch.toLowerCase())
-          );
-        }
-
-        filteredContributors = result;
-        currentPage = 1;
-        renderContributors();
-        updatePagination();
-      }
-
-      function renderContributors() {
-        const grid = document.getElementById("contributorsGrid");
-        const pagination = document.getElementById("pagination");
-
-        if (filteredContributors.length === 0) {
-          grid.innerHTML = `<p class="loading">No contributors found.</p>`;
-          pagination.style.display = "none";
-          return;
-        }
-
-        const startIndex = (currentPage - 1) * contributorsPerPage;
-        const endIndex = startIndex + contributorsPerPage;
-        const pageContributors = filteredContributors.slice(
-          startIndex,
-          endIndex
+        // ✅ Filter out repository owner
+        const filteredContributorsList = contributors.filter(
+          (c) => c.login.toLowerCase() !== GITHUB_OWNER.toLowerCase()
         );
 
-        grid.innerHTML = pageContributors
-          .map(
-            (c) => `
+        // ✅ Fetch extra info, PR counts, and calculate points
+        allContributors = await Promise.all(
+          filteredContributorsList.map(async (c) => {
+            const userResponse = await fetch(
+              `https://api.github.com/users/${c.login}`,
+              { headers }
+            );
+            const userData = userResponse.ok ? await userResponse.json() : {};
+
+            // Fetch merged PRs with labels
+            const prResponse = await fetch(
+              `https://api.github.com/search/issues?q=type:pr+repo:${GITHUB_OWNER}/${GITHUB_REPO}+author:${c.login}+is:merged&per_page=100`,
+              { headers }
+            );
+            const prData = prResponse.ok
+              ? await prResponse.json()
+              : { items: [] };
+
+            // Calculate points based on PR labels
+            let points = 0;
+            const prDetails = [];
+
+            if (prData.items && prData.items.length > 0) {
+              for (const pr of prData.items) {
+                let prPoints = 0;
+                let highestLevel = null;
+
+                if (pr.labels && pr.labels.length > 0) {
+                  for (const label of pr.labels) {
+                    const labelName = label.name
+                      .toLowerCase()
+                      .replace(/\s+/g, "");
+                    if (
+                      labelName.includes("level1") ||
+                      labelName.includes("level:1") ||
+                      labelName.includes("level-1")
+                    ) {
+                      prPoints = Math.max(prPoints, POINTS_MAPPING.level1);
+                      highestLevel = "level1";
+                    } else if (
+                      labelName.includes("level2") ||
+                      labelName.includes("level:2") ||
+                      labelName.includes("level-2")
+                    ) {
+                      prPoints = Math.max(prPoints, POINTS_MAPPING.level2);
+                      highestLevel = "level2";
+                    } else if (
+                      labelName.includes("level3") ||
+                      labelName.includes("level:3") ||
+                      labelName.includes("level-3")
+                    ) {
+                      prPoints = Math.max(prPoints, POINTS_MAPPING.level3);
+                      highestLevel = "level3";
+                    }
+                  }
+                }
+
+                // Add to total points
+                points += prPoints;
+
+                // Store PR details
+                prDetails.push({
+                  title: pr.title,
+                  number: pr.number,
+                  url: pr.html_url,
+                  points: prPoints,
+                  level: highestLevel,
+                  labels: pr.labels ? pr.labels.map((l) => l.name) : [],
+                });
+              }
+            }
+
+            let type = "new";
+            if (c.contributions > 100) type = "core";
+            else if (c.contributions > 30) type = "active";
+
+            return {
+              ...c,
+              name: userData.name || c.login,
+              bio: userData.bio || "",
+              location: userData.location || "",
+              blog: userData.blog || "",
+              twitter_username: userData.twitter_username || "",
+              type,
+              prCount: prData.total_count || 0,
+              points: points,
+              prDetails: prDetails,
+            };
+          })
+        );
+
+        // Sort by points first, then by contributions
+        allContributors.sort((a, b) => {
+          if (b.points !== a.points) {
+            return b.points - a.points;
+          }
+          return b.contributions - a.contributions;
+        });
+
+        updateStats();
+        applyFilters();
+        setupEventListeners();
+      } catch (err) {
+        console.error(err);
+        showError(err.message);
+      }
+    }
+
+    function updateStats() {
+      document.getElementById("totalContributors").textContent =
+        allContributors.length;
+      document.getElementById("totalCommits").textContent =
+        allContributors.reduce((sum, c) => sum + c.contributions, 0);
+      document.getElementById("totalPoints").textContent =
+        allContributors.reduce((sum, c) => sum + c.points, 0);
+      const activeCount = allContributors.filter(
+        (c) => c.contributions > 5
+      ).length;
+      document.getElementById("activeContributors").textContent = activeCount;
+    }
+
+    function applyFilters() {
+      let result = [...allContributors];
+
+      if (currentFilter !== "all") {
+        if (currentFilter === "top-points") {
+          result = result.filter((c) => c.points > 0);
+        } else {
+          result = result.filter((c) => c.type === currentFilter);
+        }
+      }
+
+      if (currentSearch) {
+        result = result.filter(
+          (c) =>
+            c.login.toLowerCase().includes(currentSearch.toLowerCase()) ||
+            c.name.toLowerCase().includes(currentSearch.toLowerCase())
+        );
+      }
+
+      filteredContributors = result;
+      currentPage = 1;
+      renderContributors();
+      updatePagination();
+    }
+
+    function renderContributors() {
+      const grid = document.getElementById("contributorsGrid");
+      const pagination = document.getElementById("pagination");
+
+      if (filteredContributors.length === 0) {
+        grid.innerHTML = `<p class="loading">No contributors found.</p>`;
+        pagination.style.display = "none";
+        return;
+      }
+
+      const startIndex = (currentPage - 1) * contributorsPerPage;
+      const endIndex = startIndex + contributorsPerPage;
+      const pageContributors = filteredContributors.slice(
+        startIndex,
+        endIndex
+      );
+
+      grid.innerHTML = pageContributors
+        .map(
+          (c) => `
     <div class="contributor-card" data-type="${c.type}">
       <div class="points-badge">${c.points} pts</div>
       <div class="contributor-avatar">
@@ -1198,142 +1134,137 @@
           </div>
         </div>
         <div class="contributor-social">
-          <a href="${
-            c.html_url
-          }" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-          ${
-            c.blog
+          <a href="${c.html_url
+            }" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+          ${c.blog
               ? `<a href="${c.blog}" class="social-link" target="_blank"><i class="fas fa-globe"></i></a>`
               : ""
-          }
-          ${
-            c.twitter_username
+            }
+          ${c.twitter_username
               ? `<a href="https://twitter.com/${c.twitter_username}" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>`
               : ""
-          }
+            }
         </div>
-        ${
-          c.prDetails && c.prDetails.length > 0
-            ? `
+        ${c.prDetails && c.prDetails.length > 0
+              ? `
         <details style="margin-top: 1rem; text-align: left;">
-          <summary style="cursor: pointer; color: var(--primary);">PR Details (${
-            c.prDetails.length
-          })</summary>
+          <summary style="cursor: pointer; color: var(--primary);">PR Details (${c.prDetails.length
+              })</summary>
           <div style="margin-top: 0.5rem; max-height: 150px; overflow-y: auto;">
             ${c.prDetails
-              .map(
-                (pr) => `
+                .map(
+                  (pr) => `
               <div style="padding: 0.5rem; border-bottom: 1px solid #444;">
-                <a href="${
-                  pr.url
-                }" target="_blank" style="color: var(--primary); text-decoration: none;">
+                <a href="${pr.url
+                    }" target="_blank" style="color: var(--primary); text-decoration: none;">
                   #${pr.number}: ${pr.title}
                 </a>
                 <div style="font-size: 0.8rem; color: var(--text-light);">
                   Points: ${pr.points} | Level: ${pr.level || "None"}
-                  ${
-                    pr.labels && pr.labels.length > 0
+                  ${pr.labels && pr.labels.length > 0
                       ? `| Labels: ${pr.labels.join(", ")}`
                       : ""
-                  }
+                    }
                 </div>
               </div>
             `
-              )
-              .join("")}
+                )
+                .join("")}
           </div>
         </details>
         `
-            : ""
-        }
+              : ""
+            }
       </div>
     </div>`
-          )
-          .join("");
+        )
+        .join("");
 
-        pagination.style.display =
-          filteredContributors.length > contributorsPerPage ? "flex" : "none";
-      }
+      pagination.style.display =
+        filteredContributors.length > contributorsPerPage ? "flex" : "none";
+    }
 
-      function getRoleText(type) {
-        const roles = {
-          core: "Core Contributor",
-          active: "Active Contributor",
-          new: "New Contributor",
-        };
-        return roles[type] || "Contributor";
-      }
+    function getRoleText(type) {
+      const roles = {
+        core: "Core Contributor",
+        active: "Active Contributor",
+        new: "New Contributor",
+      };
+      return roles[type] || "Contributor";
+    }
 
-      function updatePagination() {
+    function updatePagination() {
+      const totalPages = Math.ceil(
+        filteredContributors.length / contributorsPerPage
+      );
+      document.getElementById("currentPage").textContent = currentPage;
+      document.getElementById("totalPages").textContent = totalPages;
+      document.getElementById("prevPage").disabled = currentPage === 1;
+      document.getElementById("nextPage").disabled =
+        currentPage === totalPages;
+    }
+
+    function setupEventListeners() {
+      document.querySelectorAll(".filter-btn").forEach((btn) =>
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          applyFilters();
+        })
+      );
+
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", (e) => {
+          currentSearch = e.target.value.trim();
+          applyFilters();
+        });
+
+      document.getElementById("prevPage").addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderContributors();
+          updatePagination();
+        }
+      });
+      document.getElementById("nextPage").addEventListener("click", () => {
         const totalPages = Math.ceil(
           filteredContributors.length / contributorsPerPage
         );
-        document.getElementById("currentPage").textContent = currentPage;
-        document.getElementById("totalPages").textContent = totalPages;
-        document.getElementById("prevPage").disabled = currentPage === 1;
-        document.getElementById("nextPage").disabled =
-          currentPage === totalPages;
-      }
-
-      function setupEventListeners() {
-        document.querySelectorAll(".filter-btn").forEach((btn) =>
-          btn.addEventListener("click", () => {
-            document
-              .querySelectorAll(".filter-btn")
-              .forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-            currentFilter = btn.dataset.filter;
-            applyFilters();
-          })
-        );
-
-        document
-          .getElementById("searchInput")
-          .addEventListener("input", (e) => {
-            currentSearch = e.target.value.trim();
-            applyFilters();
-          });
-
-        document.getElementById("prevPage").addEventListener("click", () => {
-          if (currentPage > 1) {
-            currentPage--;
-            renderContributors();
-            updatePagination();
-          }
-        });
-        document.getElementById("nextPage").addEventListener("click", () => {
-          const totalPages = Math.ceil(
-            filteredContributors.length / contributorsPerPage
-          );
-          if (currentPage < totalPages) {
-            currentPage++;
-            renderContributors();
-            updatePagination();
-          }
-        });
-      }
-
-      function showError(msg) {
-        document.getElementById("contributorsGrid").innerHTML = "";
-        document.getElementById("errorDisplay").style.display = "block";
-        document.getElementById("errorMessage").textContent = msg;
-      }
-
-      loadContributors();
-
-      // Ensure page always starts from top on load or reload
-      window.addEventListener("beforeunload", () => {
-        window.scrollTo(0, 0);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderContributors();
+          updatePagination();
+        }
       });
+    }
 
-      window.addEventListener("load", () => {
-        window.scrollTo(0, 0);
-      });
+    function showError(msg) {
+      document.getElementById("contributorsGrid").innerHTML = "";
+      document.getElementById("errorDisplay").style.display = "block";
+      document.getElementById("errorMessage").textContent = msg;
+    }
 
-       window.addEventListener("load", () => {
-    window.scrollTo(0, 0);
-  });
-    </script>
-    <script src="../js/modules/themes.js"></script>
-  </body>
+    loadContributors();
+
+    // Ensure page always starts from top on load or reload
+    window.addEventListener("beforeunload", () => {
+      window.scrollTo(0, 0);
+    });
+
+    window.addEventListener("load", () => {
+      window.scrollTo(0, 0);
+    });
+
+    window.addEventListener("load", () => {
+      window.scrollTo(0, 0);
+    });
+  </script>
+  <script src="../js/modules/themes.js"></script>
+  <script src="../js/modules/floating-call-button.js"></script>
+</body>
+
 </html>

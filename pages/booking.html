@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Vehicle Transport - Harihar Car Carriers</title>
     <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/floating-call-button.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @font-face {
@@ -140,8 +142,8 @@
         /* Hero Section */
         .booking-hero {
             padding: 150px 0 80px;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
-                        url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             text-align: center;
@@ -575,23 +577,24 @@
                 height: auto;
                 padding: 15px;
             }
-            
-            .left-logo, .right-logo {
+
+            .left-logo,
+            .right-logo {
                 order: 0;
                 margin-bottom: 15px;
             }
-            
+
             nav {
                 order: 3;
                 width: 100%;
             }
-            
+
             nav ul {
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 20px;
             }
-            
+
             .booking-hero h1 {
                 font-size: 2.2rem;
             }
@@ -636,6 +639,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -647,9 +651,19 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
         }
 
         .shake {
@@ -657,227 +671,217 @@
         }
     </style>
 </head>
+
 <body>
-        <!-- Enhanced Navigation Component -->
-<header class="header">
-  <div class="navbar-container">
-    <div class="navbar">
-      <!-- Left Logo -->
-      <div class="logo-container left-logo">
-        <img
-          src="../assets/images/left-logo.jpg"
-          alt="Harihar Car Carriers"
-          class="logo-img"
-        />
-      </div>
+    <!-- Enhanced Navigation Component -->
+    <header class="header">
+        <div class="navbar-container">
+            <div class="navbar">
+                <!-- Left Logo -->
+                <div class="logo-container left-logo">
+                    <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+                </div>
 
-      <!-- Desktop Navigation -->
-      <nav class="desktop-nav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="../index.html" class="nav-link active" data-page="home">
-              <i class="fas fa-home"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./about.html" class="nav-link" data-page="about">
-              <i class="fas fa-info-circle"></i>
-              <span>About</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../index.html#services" class="nav-link" data-page="services">
-              <i class="fas fa-truck-moving"></i>
-              <span>Services</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./booking.html" class="nav-link" data-page="booking">
-              <i class="fas fa-calendar-check"></i>
-              <span>Booking</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./contributors.html" class="nav-link" data-page="contributors">
-              <i class="fas fa-users"></i>
-              <span>Contributors</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./pricing.html" class="nav-link" data-page="pricing">
-              <i class="fas fa-tags"></i>
-              <span>Pricing</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./tracking.html" class="nav-link" data-page="tracking">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Track Your Car</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./gallery.html" class="nav-link" data-page="gallery">
-              <i class="fas fa-images"></i>
-              <span>Gallery</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./contact.html" class="nav-link" data-page="contact">
-              <i class="fas fa-phone"></i>
-              <span>Contact</span>
-            </a>
-          </li>
-        </ul>
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link active" data-page="home">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./about.html" class="nav-link" data-page="about">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#services" class="nav-link" data-page="services">
+                                <i class="fas fa-truck-moving"></i>
+                                <span>Services</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./booking.html" class="nav-link" data-page="booking">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Booking</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./contributors.html" class="nav-link" data-page="contributors">
+                                <i class="fas fa-users"></i>
+                                <span>Contributors</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./pricing.html" class="nav-link" data-page="pricing">
+                                <i class="fas fa-tags"></i>
+                                <span>Pricing</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./tracking.html" class="nav-link" data-page="tracking">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Track Your Car</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./gallery.html" class="nav-link" data-page="gallery">
+                                <i class="fas fa-images"></i>
+                                <span>Gallery</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./contact.html" class="nav-link" data-page="contact">
+                                <i class="fas fa-phone"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
 
-        <!-- Right Actions -->
-        <div class="nav-actions">
-          <a href="./enquiry.html" class="nav-link enquiry-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-          <a href="./blog.html" class="nav-link blog-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-          <a href="#login" class="login-btn">
-            <i class="fas fa-user"></i>
-            <span>Login</span>
-          </a>
-        </div>
-      </nav>
+                    <!-- Right Actions -->
+                    <div class="nav-actions">
+                        <a href="./enquiry.html" class="nav-link enquiry-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Enquiry</span>
+                        </a>
+                        <a href="./blog.html" class="nav-link blog-link">
+                            <i class="fas fa-blog"></i>
+                            <span>Blog</span>
+                        </a>
+                        <a href="#login" class="login-btn">
+                            <i class="fas fa-user"></i>
+                            <span>Login</span>
+                        </a>
+                    </div>
+                </nav>
 
-      <!-- Mobile Menu Button -->
-      <button
-        class="mobile-menu-btn"
-        id="mobileMenuBtn"
-        aria-label="Toggle mobile menu"
-      >
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
-    </div>
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                </button>
+            </div>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-      <div class="mobile-nav-header">
-        <div class="mobile-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-          <span>Harihar Car Carriers</span>
-        </div>
-        <button
-          class="mobile-close-btn"
-          id="mobileCloseBtn"
-          aria-label="Close mobile menu"
-        >
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <ul class="mobile-nav-list">
-        <li class="mobile-nav-item">
-          <a href="../index.html" class="mobile-nav-link active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./about.html" class="mobile-nav-link">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="../index.html#services" class="mobile-nav-link">
-            <i class="fas fa-truck-moving"></i>
-            <span>Services</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./booking.html" class="mobile-nav-link">
-            <i class="fas fa-calendar-check"></i>
-            <span>Booking</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./contributors.html" class="mobile-nav-link">
-            <i class="fas fa-users"></i>
-            <span>Contributors</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pricing.html" class="mobile-nav-link">
-            <i class="fas fa-tags"></i>
-            <span>Pricing</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./tracking.html" class="mobile-nav-link">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Track Your Car</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./gallery.html" class="mobile-nav-link">
-            <i class="fas fa-images"></i>
-            <span>Gallery</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./contact.html" class="mobile-nav-link">
-            <i class="fas fa-phone"></i>
-            <span>Contact</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./enquiry.html" class="mobile-nav-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./blog.html" class="mobile-nav-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-        </li>
-      </ul>
-      <div class="mobile-nav-actions">
-        <a href="#login" class="mobile-login-btn">
-          <i class="fas fa-user"></i>
-          <span>Login</span>
-        </a>
-        <a href="./booking.html" class="mobile-cta-btn">
-          <i class="fas fa-truck"></i>
-          <span>Book Instantly</span>
-        </a>
-      </div>
-      <div class="mobile-contact-info">
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <span>+91 98765 43210</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <span>info@hariharcarcarriers.com</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-clock"></i>
-          <span>24/7 Support</span>
-        </div>
-      </div>
-    </nav>
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+                <div class="mobile-nav-header">
+                    <div class="mobile-logo">
+                        <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+                        <span>Harihar Car Carriers</span>
+                    </div>
+                    <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="../index.html" class="mobile-nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./about.html" class="mobile-nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#services" class="mobile-nav-link">
+                            <i class="fas fa-truck-moving"></i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./booking.html" class="mobile-nav-link">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Booking</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./contributors.html" class="mobile-nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Contributors</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./pricing.html" class="mobile-nav-link">
+                            <i class="fas fa-tags"></i>
+                            <span>Pricing</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./tracking.html" class="mobile-nav-link">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Track Your Car</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./gallery.html" class="mobile-nav-link">
+                            <i class="fas fa-images"></i>
+                            <span>Gallery</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./contact.html" class="mobile-nav-link">
+                            <i class="fas fa-phone"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./enquiry.html" class="mobile-nav-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Enquiry</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./blog.html" class="mobile-nav-link">
+                            <i class="fas fa-blog"></i>
+                            <span>Blog</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="mobile-nav-actions">
+                    <a href="#login" class="mobile-login-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </a>
+                    <a href="./booking.html" class="mobile-cta-btn">
+                        <i class="fas fa-truck"></i>
+                        <span>Book Instantly</span>
+                    </a>
+                </div>
+                <div class="mobile-contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 98765 43210</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@hariharcarcarriers.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>24/7 Support</span>
+                    </div>
+                </div>
+            </nav>
 
-    <!-- Navigation Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
-  </div>
-</header>
+            <!-- Navigation Overlay -->
+            <div class="nav-overlay" id="navOverlay"></div>
+        </div>
+    </header>
 
     <!-- Hero Section -->
     <section class="booking-hero">
         <div class="container">
             <h1 class="fade-in">Book Your Vehicle Transport</h1>
-            <p class="fade-in delay-1">Quick, secure, and reliable vehicle transportation booking. Get instant confirmation and real-time tracking.</p>
+            <p class="fade-in delay-1">Quick, secure, and reliable vehicle transportation booking. Get instant
+                confirmation and real-time tracking.</p>
         </div>
     </section>
 
@@ -896,13 +900,15 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
-                                <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                                <input type="text" id="fullName" name="fullName" required
+                                    placeholder="Enter your full name">
                                 <div class="error-message" id="nameError">Please enter your full name</div>
                             </div>
                             <div class="form-group">
                                 <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
                                 <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit number">
-                                <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number</div>
+                                <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number
+                                </div>
                             </div>
                         </div>
 
@@ -929,20 +935,23 @@
                             </div>
                             <div class="form-group">
                                 <label for="vehicleModel"><i class="fas fa-cog"></i> Vehicle Model</label>
-                                <input type="text" id="vehicleModel" name="vehicleModel" placeholder="e.g., Hyundai Creta">
+                                <input type="text" id="vehicleModel" name="vehicleModel"
+                                    placeholder="e.g., Hyundai Creta">
                             </div>
                         </div>
 
                         <!-- Location Information -->
                         <div class="form-group">
                             <label for="pickupLocation"><i class="fas fa-map-marker-alt"></i> Pickup Location *</label>
-                            <input type="text" id="pickupLocation" name="pickupLocation" required placeholder="Enter pickup address">
+                            <input type="text" id="pickupLocation" name="pickupLocation" required
+                                placeholder="Enter pickup address">
                             <div class="error-message" id="pickupError">Please enter pickup location</div>
                         </div>
 
                         <div class="form-group">
                             <label for="dropLocation"><i class="fas fa-flag-checkered"></i> Drop Location *</label>
-                            <input type="text" id="dropLocation" name="dropLocation" required placeholder="Enter drop address">
+                            <input type="text" id="dropLocation" name="dropLocation" required
+                                placeholder="Enter drop address">
                             <div class="error-message" id="dropError">Please enter drop location</div>
                         </div>
 
@@ -967,7 +976,8 @@
                         <!-- Additional Information -->
                         <div class="form-group">
                             <label for="additionalInfo"><i class="fas fa-comment"></i> Additional Information</label>
-                            <textarea id="additionalInfo" name="additionalInfo" placeholder="Any special requirements or instructions..." rows="3"></textarea>
+                            <textarea id="additionalInfo" name="additionalInfo"
+                                placeholder="Any special requirements or instructions..." rows="3"></textarea>
                         </div>
 
                         <button type="submit" class="submit-btn" id="submitBtn">
@@ -1009,7 +1019,8 @@
                             <ul>
                                 <li><i class="fas fa-phone"></i> <strong>Call:</strong> +91 98765 43210</li>
                                 <li><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> +91 98765 43210</li>
-                                <li><i class="fas fa-envelope"></i> <strong>Email:</strong> booking@hariharcarcarriers.com</li>
+                                <li><i class="fas fa-envelope"></i> <strong>Email:</strong>
+                                    booking@hariharcarcarriers.com</li>
                                 <li><i class="fas fa-comments"></i> <strong>Live Chat:</strong> Available 24/7</li>
                             </ul>
                         </div>
@@ -1040,7 +1051,8 @@
                             <span>Total Estimated</span>
                             <span>₹6,800</span>
                         </div>
-                        <p style="text-align: center; color: #ccc; font-size: 0.8rem; margin-top: 10px;">* Final price may vary based on distance and vehicle type</p>
+                        <p style="text-align: center; color: #ccc; font-size: 0.8rem; margin-top: 10px;">* Final price
+                            may vary based on distance and vehicle type</p>
                     </div>
                 </div>
             </div>
@@ -1054,7 +1066,8 @@
                 <i class="fas fa-check-circle"></i>
             </div>
             <h3>Booking Confirmed!</h3>
-            <p>Thank you for choosing Harihar Car Carriers. Your booking has been successfully submitted. Our team will contact you within 30 minutes to confirm the details.</p>
+            <p>Thank you for choosing Harihar Car Carriers. Your booking has been successfully submitted. Our team will
+                contact you within 30 minutes to confirm the details.</p>
             <p><strong>Booking Reference: <span id="bookingRef">HC2024-001</span></strong></p>
             <button class="modal-btn" onclick="closeModal()">Close</button>
         </div>
@@ -1063,35 +1076,35 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-      <!-- Footer Section -->
-<div id="footer-container"></div>
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
 
-<script>
-  // Load shared footer dynamically
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    })
-    .catch(error => console.error('Error loading footer:', error));
-</script>
+    <script>
+        // Load shared footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
 
     <script>
         // Toast Notification System
         function showToast(title, message, type = 'success', duration = 5000) {
             const toastContainer = document.getElementById('toastContainer');
             const toastId = 'toast-' + Date.now();
-            
+
             const toast = document.createElement('div');
             toast.className = 'toast';
             toast.id = toastId;
-            
+
             // Set icon based on type
             let icon = 'fa-check-circle';
             if (type === 'error') icon = 'fa-exclamation-circle';
             if (type === 'warning') icon = 'fa-exclamation-triangle';
             if (type === 'info') icon = 'fa-info-circle';
-            
+
             toast.innerHTML = `
                 <div class="toast-icon">
                     <i class="fas ${icon}"></i>
@@ -1104,30 +1117,30 @@
                     <i class="fas fa-times"></i>
                 </button>
             `;
-            
+
             toastContainer.appendChild(toast);
-            
+
             // Show toast with animation
             setTimeout(() => {
                 toast.classList.add('show');
             }, 10);
-            
+
             // Auto remove after duration
             if (duration > 0) {
                 setTimeout(() => {
                     removeToast(toastId);
                 }, duration);
             }
-            
+
             return toastId;
         }
-        
+
         function removeToast(toastId) {
             const toast = document.getElementById(toastId);
             if (toast) {
                 toast.classList.remove('show');
                 toast.classList.add('hide');
-                
+
                 // Remove from DOM after animation
                 setTimeout(() => {
                     if (toast.parentNode) {
@@ -1138,7 +1151,7 @@
         }
 
         // Form Validation and Submission
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const bookingForm = document.getElementById('bookingForm');
             const submitBtn = document.getElementById('submitBtn');
             const successModal = document.getElementById('successModal');
@@ -1174,11 +1187,11 @@
             function showError(inputId, errorId, message) {
                 const input = document.getElementById(inputId);
                 const error = document.getElementById(errorId);
-                
+
                 input.classList.add('error', 'shake');
                 error.textContent = message;
                 error.style.display = 'block';
-                
+
                 setTimeout(() => {
                     input.classList.remove('shake');
                 }, 500);
@@ -1188,7 +1201,7 @@
             function hideError(inputId, errorId) {
                 const input = document.getElementById(inputId);
                 const error = document.getElementById(errorId);
-                
+
                 input.classList.remove('error');
                 error.style.display = 'none';
             }
@@ -1207,10 +1220,10 @@
             Object.keys(inputs).forEach(field => {
                 const input = document.getElementById(field);
                 if (input) {
-                    input.addEventListener('blur', function() {
+                    input.addEventListener('blur', function () {
                         const validator = inputs[field];
                         const errorId = field + 'Error';
-                        
+
                         if (!validator(this.value)) {
                             showError(field, errorId, getErrorMessage(field));
                         } else {
@@ -1218,7 +1231,7 @@
                         }
                     });
 
-                    input.addEventListener('input', function() {
+                    input.addEventListener('input', function () {
                         hideError(field, field + 'Error');
                     });
                 }
@@ -1238,9 +1251,9 @@
             }
 
             // Form submission
-            bookingForm.addEventListener('submit', function(e) {
+            bookingForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-                
+
                 let isValid = true;
 
                 // Validate all fields
@@ -1248,7 +1261,7 @@
                     const input = document.getElementById(field);
                     const validator = inputs[field];
                     const errorId = field + 'Error';
-                    
+
                     if (!validator(input.value)) {
                         showError(field, errorId, getErrorMessage(field));
                         isValid = false;
@@ -1268,7 +1281,7 @@
 
                         // Show success toast
                         showToast(
-                            'Booking Confirmed!', 
+                            'Booking Confirmed!',
                             `Your booking reference is ${reference}. Our team will contact you shortly.`,
                             'success',
                             5000
@@ -1276,10 +1289,10 @@
 
                         // Show success modal
                         successModal.style.display = 'flex';
-                        
+
                         // Reset form
                         bookingForm.reset();
-                        
+
                         // Reset button
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Confirm Booking</span>';
@@ -1287,7 +1300,7 @@
                 } else {
                     // Show error toast if validation fails
                     showToast(
-                        'Form Validation Error', 
+                        'Form Validation Error',
                         'Please check all required fields and try again.',
                         'error',
                         5000
@@ -1297,7 +1310,7 @@
 
             // Phone number formatting
             const phoneInput = document.getElementById('phone');
-            phoneInput.addEventListener('input', function(e) {
+            phoneInput.addEventListener('input', function (e) {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length > 0) {
                     value = value.substring(0, 10);
@@ -1323,7 +1336,7 @@
         }
 
         // Close modal on outside click
-        window.addEventListener('click', function(e) {
+        window.addEventListener('click', function (e) {
             const modal = document.getElementById('successModal');
             if (e.target === modal) {
                 closeModal();
@@ -1331,5 +1344,7 @@
         });
     </script>
     <script src="../js/modules/themes.js"></script>
+    <script src="../js/modules/floating-call-button.js"></script>
 </body>
+
 </html>
