@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog Post | Harihar Car Carriers</title>
   <link rel="icon" type="image/png" href="classic-car.png" />
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/floating-call-button.css">
-  <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
-  <link rel="stylesheet" href="../css/components/quote-modal.css">
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/floating-call-button.css" />
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+  <link rel="stylesheet" href="../css/components/quote-modal.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="../css/components/floating-button.css">
+  <link rel="stylesheet" href="../css/components/floating-button.css" />
   <style>
     :root {
       --orange: #ff6347;
@@ -318,9 +318,12 @@
   <div id="footer-container"></div>
   <script>
     fetch("footer.html")
-      .then(res => res.text())
-      .then(html => document.getElementById("footer-container").innerHTML = html)
-      .catch(err => console.error("Footer load error:", err));
+      .then((res) => res.text())
+      .then(
+        (html) =>
+          (document.getElementById("footer-container").innerHTML = html)
+      )
+      .catch((err) => console.error("Footer load error:", err));
   </script>
 
   <script>
@@ -332,14 +335,32 @@
         readtime: "5 min read",
         image: "../assets/images/car1.png",
         contentHTML: `
-          <p>Transporting a car safely starts before it leaves your driveway. Follow these checks to reduce risk:</p>
-          <ul>
-            <li><strong>Wash & inspect:</strong> Note existing scratches or dents.</li>
-            <li><strong>Remove personal items:</strong> Avoid loose items inside.</li>
-            <li><strong>Check fluids & battery:</strong> Prevent leaks and dead batteries.</li>
-            <li><strong>Tire pressure & keys:</strong> Maintain pressure and hand over spare keys.</li>
-          </ul>
-        `
+              <p>Safe car transport involves preparation, documentation, and thorough checks. Here’s a step-by-step guide to make your next vehicle shipment stress-free.</p>
+  
+              <img src="/assets/Car_Images/washing_Car.webp" alt="Car being washed" style="width:100%;border-radius:12px;margin-bottom:18px;" />
+              <p><strong>Preparation Checklist:</strong></p>
+              <ul>
+              <li><strong>Wash & inspect:</strong> Note existing scratches or dents. Take dated photos of your vehicle for insurance purposes.</li>
+              <li><strong>Remove personal items:</strong> Avoid loose items inside. See <a href="https://www.shipyourcarnow.com/auto-transport/post-car-shipping-checklist/" target="_blank">complete checklist</a> for tips.</li>
+              <li><strong>Check fluids & battery:</strong> Prevent leaks and dead batteries. Read more about <a href="https://goaudits.com/templates/vehicle-safety-checklist/" target="_blank">fluid checks here</a>.</li>
+              <li><strong>Tire pressure & keys:</strong> Maintain pressure and hand over spare keys.</li>
+              <li><strong>Inspect the interior:</strong> Double-check seats, dash, and electronics for damage. Learn additional steps at <a href="https://www.consumerreports.org/car-maintenance/car-care-tips/" target="_blank">Consumer Reports</a>.</li>
+              </ul>
+  
+              <img src="/assets/Car_Images/inspecting_a_car.jpg" alt="Mechanic inspecting vehicle" style="width:100%;border-radius:12px;margin-bottom:18px;" />
+              <p>Before the driver arrives, ensure your vehicle’s registration, insurance, and emission certificates are up to date. If you’re transporting luxury or vintage cars, request information on special handling procedures and enclosed transport options.</p>
+  
+              <p><strong>Helpful Resources:</strong></p>
+              <ul>
+              <li><a href="https://mvd.gov.in" target="_blank">Official India vehicle transport rules</a></li>
+              <li><a href="https://www.dreamstime.com/illustration/vehicle-safety-checklist.html" target="_blank">Visual safety checklists</a></li>
+              <li><a href="https://www.shipyourcarnow.com/auto-transport/post-car-shipping-checklist/" target="_blank">Post-shipping inspection guide</a></li>
+              </ul>
+  
+             <img src="/assets/Car_Images/OIP.webp" alt="Car being loaded onto carrier" style="width:100%;border-radius:12px;margin-bottom:18px;" />
+  
+            <p>Tip: Always call your transporter a day before pickup to confirm details. Keep a copy of your checklist and ask for real-time tracking if available.</p>
+           `,
       },
       {
         id: 2,
@@ -348,14 +369,23 @@
         readtime: "6 min read",
         image: "../assets/images/car2.png",
         contentHTML: `
-          <p>Choosing the right carrier ensures your car’s safety and timely delivery:</p>
-          <ol>
-            <li><strong>Check licensing & reviews.</strong></li>
-            <li><strong>Compare insurance coverage.</strong></li>
-            <li><strong>Choose open or enclosed transport wisely.</strong></li>
-            <li><strong>Ask for tracking & delivery estimates.</strong></li>
-          </ol>
-        `
+             <p>Choosing the right carrier is vital for the safety, security, and punctual delivery of your vehicle. It requires thorough vetting of your options to ensure you get the best service for your investment. Here’s a detailed guide to help you select the perfect carrier for your car transport needs.</p>
+  
+             <ol>
+               <li><strong>Check Licensing & Reviews:</strong> Always confirm that your carrier has the necessary licenses from transport authorities. Look for recent, genuine reviews on trusted platforms to check their reliability and professionalism.</li>
+               <li><strong>Compare Insurance Coverage:</strong> Evaluate the insurance policies the carriers offer. Understanding what is covered during transit, including damages, theft, or accidents, is essential to avoid unexpected costs.</li>
+               <li><strong>Choose Open vs Enclosed Transport Wisely:</strong> Open carriers are less expensive but expose your vehicle to weather and road debris, while enclosed carriers offer more protection for luxury or vintage cars. Consider your budget and your vehicle's sensitivity to decide.</li>
+             </ol>
+  
+             <p>Before finalizing, ask carriers about their tracking options. Carriers providing real-time GPS updates and estimated delivery times offer better transparency and peace of mind. Also, ensure clear communication channels and a responsive customer service team.</p>
+  
+             <img src="../assets/Car_Images/Career.webp" alt="Comparing car carriers" style="width:100%;border-radius:12px;margin:20px 0;">
+  
+             <p>Get multiple quotes and compare terms. The cheapest option may not always be the best. It’s crucial to balance cost, carrier reputation, and service features. For more pointers, check resources like <a href="https://www.movingsolutions.in/blog/2020/11/21/things-to-consider-when-hiring-car-transportation-service-in-india/" target="_blank">Things to Consider When Hiring Car Transport</a>.</p>
+  
+             <p>Finally, if possible, visit the carrier's facility to see their operation and vehicle fleet. A transparent and thorough vetting process will save you stress and protect your vehicle.</p>
+             `,
+
       },
       {
         id: 3,
@@ -364,21 +394,42 @@
         readtime: "4 min read",
         image: "../assets/images/car3.png",
         contentHTML: `
-          <p>We pride ourselves on offering reliability, safety, and transparency at every step of your car’s journey.</p>
-          <p>Our carriers are vetted professionals, and our service is built around customer trust.</p>
-        `
-      }
+  
+              <p>Choosing a carrier for your vehicle involves much more than simply transporting your car from point A to point B. It's about finding a partner that offers reliability, professionalism, and peace of mind for what is often a significant investment. Our car transport service prioritizes excellence at every step, ensuring your vehicle's safety and your satisfaction.</p>
+  
+              <ul>
+                <li><strong>Thoroughly Vetted Carriers:</strong> Every carrier we work with goes through a comprehensive vetting process, including strict safety standards, driver background checks, and professional conduct evaluations. This guarantees your vehicle is handled with the utmost care by trusted experts.</li>
+                <li><strong>Transparent Service:</strong> Our service philosophy is built on transparency — from clear pricing without hidden fees to providing real-time tracking. You can monitor your car’s exact location during transit, receiving timely updates that keep you informed and at ease.</li>
+                <li><strong>Comprehensive Insurance Coverage:</strong> Your car is protected throughout the journey with comprehensive insurance policies that cover potential damages, theft, and accidental loss. We ensure everything is in place so you never have to worry about the unexpected.</li>
+                <li><strong>Nationwide Reach:</strong> Our extensive network allows us to deliver vehicles to every corner of India, whether it’s bustling metros or remote locations. Our goal is to provide consistent, timely service regardless of where you are.</li>
+                <li><strong>Care for Special Vehicles:</strong> We offer specialized handling for luxury, classic, and specialty vehicles. With enclosed transport options and dedicated attention, we safeguard the pristine condition of your high-value cars.</li>
+              </ul>
+  
+              <img src="/assets/Car_Images/LuxuryCar.webp" alt="Luxury car being transported" style="width:100%;border-radius:12px;margin:20px 0;"/>
+  
+              <p>Customer satisfaction and support are at the core of our operations. Our team is available around the clock to assist with any inquiries or service requests, ensuring that every transaction is smooth and stress-free. We invite you to explore our <a href="../testimonials.html" target="_blank">customer testimonials</a> to hear firsthand how we have transformed vehicle transportation experiences.</p>
+  
+              <img src="/assets/Car_Images/customerSupport.webp" alt="Customer support team" style="width:100%;border-radius:12px;margin-bottom:20px;"/>
+  
+              <p>Additionally, understanding how to prepare your vehicle for transport can greatly enhance the shipping process. We recommend reviewing our guide on <a href="https://www.shipyourcarnow.com/auto-transport/post-car-shipping-checklist/" target="_blank">preparing your car for shipping</a>, which offers practical tips to ensure your car is ready for a hassle-free move.</p>
+  
+              <p>Trust our experienced team to deliver your car safely and on time, providing a seamless and reassuring transport service that you can count on.</p>
+              `,
+      },
     ];
 
     const id = new URLSearchParams(window.location.search).get("id");
-    const post = BLOG_POSTS.find(p => String(p.id) === String(id));
+    const post = BLOG_POSTS.find((p) => String(p.id) === String(id));
 
     if (!post) {
-      document.getElementById("post-article").innerHTML = "<h2>Post not found</h2><p>This article does not exist.</p>";
+      document.getElementById("post-article").innerHTML =
+        "<h2>Post not found</h2><p>This article does not exist.</p>";
     } else {
       document.getElementById("post-title").textContent = post.title;
       document.getElementById("post-date").textContent = post.date;
-      document.getElementById("post-readtime").textContent = ` • ${post.readtime}`;
+      document.getElementById(
+        "post-readtime"
+      ).textContent = ` • ${post.readtime}`;
       document.getElementById("post-image").src = post.image;
       document.getElementById("post-body").innerHTML = post.contentHTML;
     }
