@@ -2,7 +2,8 @@
 
 .floating-book-btn {
     position: fixed;
-    bottom: 30px;
+    /* move the Book button up so it does not overlap the Back-to-top button */
+    bottom: 100px;
     right: 30px;
     width: 60px;
     height: 60px;
@@ -48,7 +49,8 @@
 .floating-book-btn::before {
     content: "Book Now";
     position: absolute;
-    bottom: 75px;
+    /* keep tooltip above the moved button */
+    bottom: 145px;
     right: 0;
     background-color: rgba(0, 0, 0, 0.9);
     color: white;
@@ -70,7 +72,8 @@
 /* Mobile responsiveness */
 @media (max-width: 768px) {
     .floating-book-btn {
-        bottom: 20px;
+        /* slightly higher on tablet to avoid overlap */
+        bottom: 90px;
         right: 20px;
         width: 55px;
         height: 55px;
@@ -78,13 +81,14 @@
     }
 
     .floating-book-btn::before {
-        bottom: 70px;
+        bottom: 160px;
     }
 }
 
 @media (max-width: 480px) {
     .floating-book-btn {
-        bottom: 15px;
+        /* mobile: keep some spacing above the back-to-top */
+        bottom: 70px;
         right: 15px;
         width: 50px;
         height: 50px;
@@ -92,7 +96,7 @@
     }
 
     .floating-book-btn::before {
-        bottom: 65px;
+        bottom: 135px;
         font-size: 12px;
     }
 }
