@@ -1,1255 +1,1229 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us - Harihar Car Carriers</title>
-    <link rel="stylesheet" href="../css/components/navbar.css">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      @font-face {
-        font-family: "Poppins";
-        src: url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
-          url("./assets/fonts/Poppins-Regular.woff") format("woff");
-        font-weight: 400;
-        font-style: normal;
-      }
 
-      @font-face {
-        font-family: "Poppins";
-        src: url("./assets/fonts/Poppins-Bold.woff2") format("woff2"),
-          url("./assets/fonts/Poppins-Bold.woff") format("woff");
-        font-weight: 700;
-        font-style: normal;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Harihar Car Carriers</title>
+  <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @font-face {
+      font-family: "Poppins";
+      src: url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
+        url("./assets/fonts/Poppins-Regular.woff") format("woff");
+      font-weight: 400;
+      font-style: normal;
+    }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+    @font-face {
+      font-family: "Poppins";
+      src: url("./assets/fonts/Poppins-Bold.woff2") format("woff2"),
+        url("./assets/fonts/Poppins-Bold.woff") format("woff");
+      font-weight: 700;
+      font-style: normal;
+    }
 
-      body {
-        font-family: "Poppins", sans-serif;
-        height: 100%;
-        width: 100%;
-        background-color: #2b2b2b;
-        color: white;
-        line-height: 1.6;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
+    body {
+      font-family: "Poppins", sans-serif;
+      height: 100%;
+      width: 100%;
+      background-color: #2b2b2b;
+      color: white;
+      line-height: 1.6;
+    }
 
-      /* Navbar Styles */
-      .navbar {
-        height: 5rem;
-        width: 98%;
-        background: rgba(44, 44, 44, 0.4);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        justify-self: center;
-        padding: 0 20px;
-        position: sticky;
-        top: 0;
-        z-index: 999;
-      }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
+    /* Navbar Styles */
+    .navbar {
+      height: 5rem;
+      width: 98%;
+      background: rgba(44, 44, 44, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      justify-self: center;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 82px;
+      padding-left: 0;
+      font-size: 20px;
+    }
+
+    nav ul li a {
+      position: relative;
+      padding: 6px 2px;
+      color: white;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      height: 2px;
+      width: 0%;
+      background-color: #ff6347;
+      transition: width 0.25s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff6347;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    nav ul li a.active {
+      color: #000;
+      background: #ff6347;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+
+    .login-link {
+      background-color: #ff6347;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+
+    .login-link:hover {
+      background-color: #ff4500;
+    }
+
+    .logo-container {
+      width: 100px;
+    }
+
+    .logo-container img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    .left-logo {
+      height: 70px;
+      order: 1;
+    }
+
+    .right-logo {
+      height: 90px;
+      order: 3;
+    }
+
+    nav {
+      order: 2;
+    }
+
+    /* Hero Section */
+    .contact-hero {
+      padding: 150px 0 80px;
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .contact-hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      opacity: 0.9;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 100px 0;
+      background-color: #333;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #ff6347;
+    }
+
+    .section-title p {
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Contact Info */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .info-card {
+      background: #2b2b2b;
+      padding: 30px;
+      border-radius: 15px;
+      border-left: 4px solid #ff6347;
+      transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .info-icon {
+      width: 60px;
+      height: 60px;
+      background: #ff6347;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .info-icon img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .info-header h3 {
+      font-size: 1.4rem;
+      color: white;
+    }
+
+    .info-content p {
+      color: #ccc;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .info-content strong {
+      color: #ff6347;
+    }
+
+    /* Operating Hours */
+    .hours-list {
+      list-style: none;
+    }
+
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #444;
+    }
+
+    .hours-list li:last-child {
+      border-bottom: none;
+    }
+
+    .hours-list .day {
+      color: #ccc;
+    }
+
+    .hours-list .time {
+      color: #ff6347;
+      font-weight: 600;
+    }
+
+    /* Contact Form */
+    .contact-form-container {
+      background: #2b2b2b;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border: 1px solid #444;
+      position: relative;
+    }
+
+    .contact-form-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6347, #ff4500);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-header h3 {
+      font-size: 1.8rem;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .form-header p {
+      color: #ff6347;
+      font-size: 1rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ccc;
+      font-weight: 500;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+      width: 100%;
+      padding: 15px;
+      background: #1a1a1a;
+      border: 2px solid #444;
+      border-radius: 10px;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus,
+    .input-group textarea:focus {
+      outline: none;
+      border-color: #ff6347;
+      box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+      background: #222;
+    }
+
+    .input-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #ff6347, #ff4500);
+      color: white;
+      border: none;
+      padding: 18px 30px;
+      border-radius: 10px;
+      font-family: "Poppins", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
+      background: linear-gradient(135deg, #ff4500, #ff6347);
+    }
+
+    /* Map Section */
+    .map-section {
+      padding: 80px 0;
+      background-color: #2b2b2b;
+    }
+
+    .map-container {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      height: 400px;
+      background: #444;
+      position: relative;
+    }
+
+    .map-embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .map-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #333, #444);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ccc;
+    }
+
+    .map-placeholder i {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #ff6347;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 100px 0;
+      background-color: #333;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .faq-item {
+      background: #2b2b2b;
+      border-radius: 10px;
+      overflow: hidden;
+      border-left: 4px solid #ff6347;
+    }
+
+    .faq-question {
+      padding: 20px;
+      background: rgba(255, 99, 71, 0.1);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(255, 99, 71, 0.2);
+    }
+
+    .faq-question h4 {
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .faq-question i {
+      color: #ff6347;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-answer p {
+      color: #ccc;
+      padding: 20px 0;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    /* CTA Section */
+    .contact-cta {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
+      text-align: center;
+    }
+
+    .contact-cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .contact-cta p {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: #ccc;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn.primary {
+      background: #ff6347;
+      color: white;
+    }
+
+    .cta-btn.secondary {
+      background: transparent;
+      color: #ff6347;
+      border: 2px solid #ff6347;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
       nav ul {
-        list-style: none;
-        display: flex;
-        gap: 82px;
-        padding-left: 0;
-        font-size: 20px;
-      }
-
-      nav ul li a {
-        position: relative;
-        padding: 6px 2px;
-        color: white;
-        text-decoration: none;
-        transition: color 0.25s ease;
-      }
-
-      nav ul li a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        height: 2px;
-        width: 0%;
-        background-color: #ff6347;
-        transition: width 0.25s ease;
-      }
-
-      nav ul li a:hover {
-        color: #ff6347;
-      }
-
-      nav ul li a:hover::after {
-        width: 100%;
-      }
-
-      nav ul li a.active {
-        color: #000;
-        background: #ff6347;
-        padding: 8px 12px;
-        border-radius: 4px;
-      }
-
-      .login-link {
-        background-color: #ff6347;
-        padding: 8px 12px;
-        border-radius: 4px;
-      }
-
-      .login-link:hover {
-        background-color: #ff4500;
-      }
-
-      .logo-container {
-        width: 100px;
-      }
-
-      .logo-container img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-      }
-
-      .left-logo {
-        height: 70px;
-        order: 1;
-      }
-
-      .right-logo {
-        height: 90px;
-        order: 3;
-      }
-
-      nav {
-        order: 2;
-      }
-
-      /* Hero Section */
-      .contact-hero {
-        padding: 150px 0 80px;
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-          url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
-        background-size: cover;
-        background-position: center;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
+        gap: 40px;
+        font-size: 18px;
       }
 
       .contact-hero h1 {
-        font-size: 3.5rem;
-        margin-bottom: 20px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      }
-
-      .contact-hero p {
-        font-size: 1.3rem;
-        max-width: 700px;
-        margin: 0 auto 30px;
-        opacity: 0.9;
-      }
-
-      /* Contact Section */
-      .contact-section {
-        padding: 100px 0;
-        background-color: #333;
-      }
-
-      .section-title {
-        text-align: center;
-        margin-bottom: 60px;
-      }
-
-      .section-title h2 {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        color: #ff6347;
-      }
-
-      .section-title p {
-        color: #ccc;
-        max-width: 600px;
-        margin: 0 auto;
+        font-size: 2.8rem;
       }
 
       .contact-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-        align-items: start;
-      }
-
-      /* Contact Info */
-      .contact-info {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-      }
-
-      .info-card {
-        background: #2b2b2b;
-        padding: 30px;
-        border-radius: 15px;
-        border-left: 4px solid #ff6347;
-        transition: all 0.3s ease;
-      }
-
-      .info-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      }
-
-      .info-header {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 20px;
-      }
-
-      .info-icon {
-        width: 60px;
-        height: 60px;
-        background: #ff6347;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-      }
-
-      .info-icon img {
-        width: 28px;
-        height: 28px;
-        object-fit: contain;
-        display: block;
-      }
-
-      .info-header h3 {
-        font-size: 1.4rem;
-        color: white;
-      }
-
-      .info-content p {
-        color: #ccc;
-        margin-bottom: 10px;
-        line-height: 1.6;
-      }
-
-      .info-content strong {
-        color: #ff6347;
-      }
-
-      /* Operating Hours */
-      .hours-list {
-        list-style: none;
-      }
-
-      .hours-list li {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0;
-        border-bottom: 1px solid #444;
-      }
-
-      .hours-list li:last-child {
-        border-bottom: none;
-      }
-
-      .hours-list .day {
-        color: #ccc;
-      }
-
-      .hours-list .time {
-        color: #ff6347;
-        font-weight: 600;
-      }
-
-      /* Contact Form */
-      .contact-form-container {
-        background: #2b2b2b;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        border: 1px solid #444;
-        position: relative;
-      }
-
-      .contact-form-container::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #ff6347, #ff4500);
-      }
-
-      .form-header {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .form-header h3 {
-        font-size: 1.8rem;
-        color: white;
-        margin-bottom: 8px;
-      }
-
-      .form-header p {
-        color: #ff6347;
-        font-size: 1rem;
-      }
-
-      .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-
-      .input-group {
-        position: relative;
-      }
-
-      .input-group.full-width {
-        grid-column: 1 / -1;
-      }
-
-      .input-group label {
-        display: block;
-        margin-bottom: 8px;
-        color: #ccc;
-        font-weight: 500;
-      }
-
-      .input-group input,
-      .input-group select,
-      .input-group textarea {
-        width: 100%;
-        padding: 15px;
-        background: #1a1a1a;
-        border: 2px solid #444;
-        border-radius: 10px;
-        color: white;
-        font-family: "Poppins", sans-serif;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-      }
-
-      .input-group input:focus,
-      .input-group select:focus,
-      .input-group textarea:focus {
-        outline: none;
-        border-color: #ff6347;
-        box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
-        background: #222;
-      }
-
-      .input-group textarea {
-        resize: vertical;
-        min-height: 120px;
-      }
-
-      .submit-btn {
-        background: linear-gradient(135deg, #ff6347, #ff4500);
-        color: white;
-        border: none;
-        padding: 18px 30px;
-        border-radius: 10px;
-        font-family: "Poppins", sans-serif;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        transition: all 0.3s ease;
-        margin-top: 10px;
-        box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
-      }
-
-      .submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
-        background: linear-gradient(135deg, #ff4500, #ff6347);
-      }
-
-      /* Map Section */
-      .map-section {
-        padding: 80px 0;
-        background-color: #2b2b2b;
-      }
-
-      .map-container {
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        height: 400px;
-        background: #444;
-        position: relative;
-      }
-
-      .map-embed {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
-
-      .map-actions {
-        display: flex;
-        justify-content: center;
-        margin-top: 16px;
-      }
-
-      .map-placeholder {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, #333, #444);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #ccc;
-      }
-
-      .map-placeholder i {
-        font-size: 3rem;
-        margin-bottom: 20px;
-        color: #ff6347;
-      }
-
-      /* FAQ Section */
-      .faq-section {
-        padding: 100px 0;
-        background-color: #333;
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
 
       .faq-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
       }
 
-      .faq-item {
-        background: #2b2b2b;
-        border-radius: 10px;
-        overflow: hidden;
-        border-left: 4px solid #ff6347;
+      .left-logo,
+      .right-logo {
+        order: 0;
+        margin-bottom: 15px;
       }
 
-      .faq-question {
-        padding: 20px;
-        background: rgba(255, 99, 71, 0.1);
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: all 0.3s ease;
+      nav {
+        order: 3;
+        width: 100%;
       }
 
-      .faq-question:hover {
-        background: rgba(255, 99, 71, 0.2);
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
       }
 
-      .faq-question h4 {
-        color: white;
-        font-size: 1.1rem;
+      .contact-hero h1 {
+        font-size: 2.2rem;
       }
 
-      .faq-question i {
-        color: #ff6347;
-        transition: transform 0.3s ease;
+      .section-title h2 {
+        font-size: 2rem;
       }
 
-      .faq-answer {
-        padding: 0 20px;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.3s ease;
+      .contact-form-container {
+        padding: 30px 25px;
       }
 
-      .faq-answer p {
-        color: #ccc;
-        padding: 20px 0;
-        line-height: 1.6;
-      }
-
-      .faq-item.active .faq-answer {
-        max-height: 200px;
-      }
-
-      .faq-item.active .faq-question i {
-        transform: rotate(180deg);
-      }
-
-      /* CTA Section */
-      .contact-cta {
-        padding: 100px 0;
-        background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
-        text-align: center;
-      }
-
-      .contact-cta h2 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        color: white;
-      }
-
-      .contact-cta p {
-        max-width: 600px;
-        margin: 0 auto 30px;
-        color: #ccc;
+      .form-row {
+        grid-template-columns: 1fr;
       }
 
       .cta-buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
       }
 
       .cta-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 15px 30px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
       }
 
-      .cta-btn.primary {
-        background: #ff6347;
-        color: white;
+      .map-container {
+        height: 300px;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
       }
 
-      .cta-btn.secondary {
-        background: transparent;
-        color: #ff6347;
-        border: 2px solid #ff6347;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
 
-      .cta-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
-      }
+    .fade-in {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+  </style>
+  <link rel="stylesheet" href="../css/components/floating-button.css">
+</head>
 
-      /* Responsive Design */
-      @media (max-width: 992px) {
-        nav ul {
-          gap: 40px;
-          font-size: 18px;
-        }
+<body>
+  <!-- Enhanced Navigation Component -->
+  <header class="header">
+    <div class="navbar-container">
+      <div class="navbar">
+        <!-- Left Logo -->
+        <div class="logo-container left-logo">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+        </div>
 
-        .contact-hero h1 {
-          font-size: 2.8rem;
-        }
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./about.html" class="nav-link" data-page="about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../index.html#services" class="nav-link" data-page="services">
+                <i class="fas fa-truck-moving"></i>
+                <span>Services</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./booking.html" class="nav-link" data-page="booking">
+                <i class="fas fa-calendar-check"></i>
+                <span>Booking</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contributors.html" class="nav-link" data-page="contributors">
+                <i class="fas fa-users"></i>
+                <span>Contributors</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./pricing.html" class="nav-link" data-page="pricing">
+                <i class="fas fa-tags"></i>
+                <span>Pricing</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./tracking.html" class="nav-link" data-page="tracking">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Track Your Car</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./gallery.html" class="nav-link" data-page="gallery">
+                <i class="fas fa-images"></i>
+                <span>Gallery</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contact.html" class="nav-link" data-page="contact">
+                <i class="fas fa-phone"></i>
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
 
-        .contact-content {
-          grid-template-columns: 1fr;
-          gap: 40px;
-        }
+          <!-- Right Actions -->
+          <div class="nav-actions">
+            <a href="./enquiry.html" class="nav-link enquiry-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+            <a href="./blog.html" class="nav-link blog-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+            <a href="#login" class="login-btn">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
+          </div>
+        </nav>
 
-        .faq-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .navbar {
-          flex-direction: column;
-          height: auto;
-          padding: 15px;
-        }
-
-        .left-logo,
-        .right-logo {
-          order: 0;
-          margin-bottom: 15px;
-        }
-
-        nav {
-          order: 3;
-          width: 100%;
-        }
-
-        nav ul {
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-
-        .contact-hero h1 {
-          font-size: 2.2rem;
-        }
-
-        .section-title h2 {
-          font-size: 2rem;
-        }
-
-        .contact-form-container {
-          padding: 30px 25px;
-        }
-
-        .form-row {
-          grid-template-columns: 1fr;
-        }
-
-        .cta-buttons {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .cta-btn {
-          width: 100%;
-          max-width: 300px;
-          justify-content: center;
-        }
-
-        .map-container {
-          height: 300px;
-        }
-      }
-
-      /* Animation */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .fade-in {
-        animation: fadeInUp 0.6s ease forwards;
-      }
-    </style>
-  </head>
-  <body>
-        <!-- Enhanced Navigation Component -->
-<header class="header">
-  <div class="navbar-container">
-    <div class="navbar">
-      <!-- Left Logo -->
-      <div class="logo-container left-logo">
-        <img
-          src="../assets/images/left-logo.jpg"
-          alt="Harihar Car Carriers"
-          class="logo-img"
-        />
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
       </div>
 
-      <!-- Desktop Navigation -->
-      <nav class="desktop-nav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="../index.html" class="nav-link active" data-page="home">
+      <!-- Mobile Navigation -->
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <div class="mobile-nav-header">
+          <div class="mobile-logo">
+            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+            <span>Harihar Car Carriers</span>
+          </div>
+          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <ul class="mobile-nav-list">
+          <li class="mobile-nav-item">
+            <a href="../index.html" class="mobile-nav-link active">
               <i class="fas fa-home"></i>
               <span>Home</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./about.html" class="nav-link" data-page="about">
+          <li class="mobile-nav-item">
+            <a href="./about.html" class="mobile-nav-link">
               <i class="fas fa-info-circle"></i>
               <span>About</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../index.html#services" class="nav-link" data-page="services">
+          <li class="mobile-nav-item">
+            <a href="../index.html#services" class="mobile-nav-link">
               <i class="fas fa-truck-moving"></i>
               <span>Services</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./booking.html" class="nav-link" data-page="booking">
+          <li class="mobile-nav-item">
+            <a href="./booking.html" class="mobile-nav-link">
               <i class="fas fa-calendar-check"></i>
               <span>Booking</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./contributors.html" class="nav-link" data-page="contributors">
+          <li class="mobile-nav-item">
+            <a href="./contributors.html" class="mobile-nav-link">
               <i class="fas fa-users"></i>
               <span>Contributors</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./pricing.html" class="nav-link" data-page="pricing">
+          <li class="mobile-nav-item">
+            <a href="./pricing.html" class="mobile-nav-link">
               <i class="fas fa-tags"></i>
               <span>Pricing</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./tracking.html" class="nav-link" data-page="tracking">
+          <li class="mobile-nav-item">
+            <a href="./tracking.html" class="mobile-nav-link">
               <i class="fas fa-map-marker-alt"></i>
               <span>Track Your Car</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./gallery.html" class="nav-link" data-page="gallery">
+          <li class="mobile-nav-item">
+            <a href="./gallery.html" class="mobile-nav-link">
               <i class="fas fa-images"></i>
               <span>Gallery</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./contact.html" class="nav-link" data-page="contact">
+          <li class="mobile-nav-item">
+            <a href="./contact.html" class="mobile-nav-link">
               <i class="fas fa-phone"></i>
               <span>Contact</span>
             </a>
           </li>
+          <li class="mobile-nav-item">
+            <a href="./enquiry.html" class="mobile-nav-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./blog.html" class="mobile-nav-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+          </li>
         </ul>
-
-        <!-- Right Actions -->
-        <div class="nav-actions">
-          <a href="./enquiry.html" class="nav-link enquiry-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-          <a href="./blog.html" class="nav-link blog-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-          <a href="#login" class="login-btn">
+        <div class="mobile-nav-actions">
+          <a href="#login" class="mobile-login-btn">
             <i class="fas fa-user"></i>
             <span>Login</span>
           </a>
+          <a href="./booking.html" class="mobile-cta-btn">
+            <i class="fas fa-truck"></i>
+            <span>Book Instantly</span>
+          </a>
+        </div>
+        <div class="mobile-contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@hariharcarcarriers.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <span>24/7 Support</span>
+          </div>
         </div>
       </nav>
 
-      <!-- Mobile Menu Button -->
-      <button
-        class="mobile-menu-btn"
-        id="mobileMenuBtn"
-        aria-label="Toggle mobile menu"
-      >
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
+      <!-- Navigation Overlay -->
+      <div class="nav-overlay" id="navOverlay"></div>
     </div>
+  </header>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-      <div class="mobile-nav-header">
-        <div class="mobile-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-          <span>Harihar Car Carriers</span>
-        </div>
-        <button
-          class="mobile-close-btn"
-          id="mobileCloseBtn"
-          aria-label="Close mobile menu"
-        >
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <ul class="mobile-nav-list">
-        <li class="mobile-nav-item">
-          <a href="../index.html" class="mobile-nav-link active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./about.html" class="mobile-nav-link">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="../index.html#services" class="mobile-nav-link">
-            <i class="fas fa-truck-moving"></i>
-            <span>Services</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./booking.html" class="mobile-nav-link">
-            <i class="fas fa-calendar-check"></i>
-            <span>Booking</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./contributors.html" class="mobile-nav-link">
-            <i class="fas fa-users"></i>
-            <span>Contributors</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pricing.html" class="mobile-nav-link">
-            <i class="fas fa-tags"></i>
-            <span>Pricing</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./tracking.html" class="mobile-nav-link">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Track Your Car</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./gallery.html" class="mobile-nav-link">
-            <i class="fas fa-images"></i>
-            <span>Gallery</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./contact.html" class="mobile-nav-link">
-            <i class="fas fa-phone"></i>
-            <span>Contact</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./enquiry.html" class="mobile-nav-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./blog.html" class="mobile-nav-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-        </li>
-      </ul>
-      <div class="mobile-nav-actions">
-        <a href="#login" class="mobile-login-btn">
-          <i class="fas fa-user"></i>
-          <span>Login</span>
-        </a>
-        <a href="./booking.html" class="mobile-cta-btn">
-          <i class="fas fa-truck"></i>
-          <span>Book Instantly</span>
-        </a>
-      </div>
-      <div class="mobile-contact-info">
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <span>+91 98765 43210</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <span>info@hariharcarcarriers.com</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-clock"></i>
-          <span>24/7 Support</span>
-        </div>
-      </div>
-    </nav>
+  <!-- Hero Section -->
+  <section class="contact-hero">
+    <div class="container">
+      <h1 class="fade-in">Get In Touch With Us</h1>
+      <p class="fade-in delay-1">
+        We're here to help you with all your vehicle transportation needs.
+        Contact us for quotes, support, or any questions.
+      </p>
+    </div>
+  </section>
 
-    <!-- Navigation Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
-  </div>
-</header>
-
-    <!-- Hero Section -->
-    <section class="contact-hero">
-      <div class="container">
-        <h1 class="fade-in">Get In Touch With Us</h1>
-        <p class="fade-in delay-1">
-          We're here to help you with all your vehicle transportation needs.
-          Contact us for quotes, support, or any questions.
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Contact Information</h2>
+        <p>
+          Multiple ways to reach us. We're always available to assist you.
         </p>
       </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-      <div class="container">
-        <div class="section-title fade-in">
-          <h2>Contact Information</h2>
-          <p>
-            Multiple ways to reach us. We're always available to assist you.
-          </p>
-        </div>
-
-        <div class="contact-content">
-          <!-- Contact Info -->
-          <div class="contact-info fade-in">
-            <div class="info-card">
-              <div class="info-header">
-                <div class="info-icon">
-                  <img src="../assets/images/telephone.png" alt="Phone" />
-                </div>
-                <h3>Phone & WhatsApp</h3>
+      <div class="contact-content">
+        <!-- Contact Info -->
+        <div class="contact-info fade-in">
+          <div class="info-card">
+            <div class="info-header">
+              <div class="info-icon">
+                <img src="../assets/images/telephone.png" alt="Phone" />
               </div>
-              <div class="info-content">
-                <p><strong>Customer Support:</strong> +91 98765 43210</p>
-                <p><strong>Sales & Quotes:</strong> +91 98765 43211</p>
-                <p><strong>Emergency:</strong> +91 98765 43212</p>
-              </div>
+              <h3>Phone & WhatsApp</h3>
             </div>
-
-            <div class="info-card fade-in delay-1">
-              <div class="info-header">
-                <div class="info-icon">
-                  <img src="../assets/images/email.png" alt="Email" />
-                </div>
-                <h3>Email Address</h3>
-              </div>
-              <div class="info-content">
-                <p>
-                  <strong>General Inquiries:</strong>
-                  info@hariharcarcarriers.com
-                </p>
-                <p>
-                  <strong>Customer Support:</strong>
-                  support@hariharcarcarriers.com
-                </p>
-                <p>
-                  <strong>Partnerships:</strong> partners@hariharcarcarriers.com
-                </p>
-              </div>
-            </div>
-
-            <div class="info-card fade-in delay-2">
-              <div class="info-header">
-                <div class="info-icon">
-                  <img src="../assets/images/location.png" alt="Location" />
-                </div>
-                <h3>Office Address</h3>
-              </div>
-              <div class="info-content">
-                <p><strong>Head Office:</strong></p>
-                <p>
-                  123 Transport Nagar, Sitabuldi, Nagpur, Maharashtra - 440001
-                </p>
-                <p><strong>Branch Office:</strong></p>
-                <p>45 Car Market, Mumbai Highway, Pune, Maharashtra - 411001</p>
-              </div>
-            </div>
-
-            <div class="info-card fade-in delay-3">
-              <div class="info-header">
-                <div class="info-icon">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <h3>Operating Hours</h3>
-              </div>
-              <div class="info-content">
-                <ul class="hours-list">
-                  <li>
-                    <span class="day">Monday - Friday</span
-                    ><span class="time">8:00 AM - 10:00 PM</span>
-                  </li>
-                  <li>
-                    <span class="day">Saturday</span
-                    ><span class="time">9:00 AM - 8:00 PM</span>
-                  </li>
-                  <li>
-                    <span class="day">Sunday</span
-                    ><span class="time">9:00 AM - 6:00 PM</span>
-                  </li>
-                  <li>
-                    <span class="day">Emergency Service</span
-                    ><span class="time">24/7 Available</span>
-                  </li>
-                </ul>
-              </div>
+            <div class="info-content">
+              <p><strong>Customer Support:</strong> +91 98765 43210</p>
+              <p><strong>Sales & Quotes:</strong> +91 98765 43211</p>
+              <p><strong>Emergency:</strong> +91 98765 43212</p>
             </div>
           </div>
 
-          <!-- Contact Form -->
-          <div class="contact-form-container fade-in">
-            <div class="form-header">
-              <h3>Send Us a Message</h3>
-              <p>We'll get back to you within 30 minutes</p>
+          <div class="info-card fade-in delay-1">
+            <div class="info-header">
+              <div class="info-icon">
+                <img src="../assets/images/email.png" alt="Email" />
+              </div>
+              <h3>Email Address</h3>
             </div>
-            <form class="contact-form" id="contactForm">
-              <div class="form-row">
-                <div class="input-group">
-                  <label for="name">Full Name *</label>
-                  <input type="text" id="name" name="name" required />
-                </div>
-                <div class="input-group">
-                  <label for="phone">Phone Number *</label>
-                  <input type="tel" id="phone" name="phone" required />
-                </div>
+            <div class="info-content">
+              <p>
+                <strong>General Inquiries:</strong>
+                info@hariharcarcarriers.com
+              </p>
+              <p>
+                <strong>Customer Support:</strong>
+                support@hariharcarcarriers.com
+              </p>
+              <p>
+                <strong>Partnerships:</strong> partners@hariharcarcarriers.com
+              </p>
+            </div>
+          </div>
+
+          <div class="info-card fade-in delay-2">
+            <div class="info-header">
+              <div class="info-icon">
+                <img src="../assets/images/location.png" alt="Location" />
+              </div>
+              <h3>Office Address</h3>
+            </div>
+            <div class="info-content">
+              <p><strong>Head Office:</strong></p>
+              <p>
+                123 Transport Nagar, Sitabuldi, Nagpur, Maharashtra - 440001
+              </p>
+              <p><strong>Branch Office:</strong></p>
+              <p>45 Car Market, Mumbai Highway, Pune, Maharashtra - 411001</p>
+            </div>
+          </div>
+
+          <div class="info-card fade-in delay-3">
+            <div class="info-header">
+              <div class="info-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h3>Operating Hours</h3>
+            </div>
+            <div class="info-content">
+              <ul class="hours-list">
+                <li>
+                  <span class="day">Monday - Friday</span><span class="time">8:00 AM - 10:00 PM</span>
+                </li>
+                <li>
+                  <span class="day">Saturday</span><span class="time">9:00 AM - 8:00 PM</span>
+                </li>
+                <li>
+                  <span class="day">Sunday</span><span class="time">9:00 AM - 6:00 PM</span>
+                </li>
+                <li>
+                  <span class="day">Emergency Service</span><span class="time">24/7 Available</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-container fade-in">
+          <div class="form-header">
+            <h3>Send Us a Message</h3>
+            <p>We'll get back to you within 30 minutes</p>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="input-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required />
               </div>
               <div class="input-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required />
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required />
               </div>
-              <div class="form-row">
-                <div class="input-group">
-                  <label for="vehicle">Vehicle Type *</label>
-                  <select id="vehicle" name="vehicle" required>
-                    <option value="">Select Vehicle Type</option>
-                    <option value="hatchback">Hatchback</option>
-                    <option value="sedan">Sedan</option>
-                    <option value="suv">SUV</option>
-                    <option value="luxury">Luxury Car</option>
-                    <option value="bike">Bike</option>
-                    <option value="commercial">Commercial Vehicle</option>
-                  </select>
-                </div>
-                <div class="input-group">
-                  <label for="service">Service Type *</label>
-                  <select id="service" name="service" required>
-                    <option value="">Select Service</option>
-                    <option value="quote">Get Quote</option>
-                    <option value="booking">Book Transport</option>
-                    <option value="support">Customer Support</option>
-                    <option value="complaint">Complaint</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
+            </div>
+            <div class="input-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label for="vehicle">Vehicle Type *</label>
+                <select id="vehicle" name="vehicle" required>
+                  <option value="">Select Vehicle Type</option>
+                  <option value="hatchback">Hatchback</option>
+                  <option value="sedan">Sedan</option>
+                  <option value="suv">SUV</option>
+                  <option value="luxury">Luxury Car</option>
+                  <option value="bike">Bike</option>
+                  <option value="commercial">Commercial Vehicle</option>
+                </select>
               </div>
-              <div class="input-group full-width">
-                <label for="message">Message *</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell us about your requirements..."
-                  required
-                ></textarea>
+              <div class="input-group">
+                <label for="service">Service Type *</label>
+                <select id="service" name="service" required>
+                  <option value="">Select Service</option>
+                  <option value="quote">Get Quote</option>
+                  <option value="booking">Book Transport</option>
+                  <option value="support">Customer Support</option>
+                  <option value="complaint">Complaint</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
-              <button type="submit" class="submit-btn">
-                <span>Send Message</span>
-                <i class="fas fa-paper-plane"></i>
-              </button>
-            </form>
+            </div>
+            <div class="input-group full-width">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" placeholder="Tell us about your requirements..."
+                required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <span>Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Find Us Here</h2>
+        <p>Visit our office or schedule a meeting with our team</p>
+      </div>
+      <div class="map-container fade-in">
+        <iframe class="map-embed" title="Harihar Car Carriers - Dummy Location"
+          src="https://www.google.com/maps?q=21.1458,79.0882&z=14&output=embed" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" aria-label="Map showing dummy location in Nagpur"></iframe>
+      </div>
+      <div class="map-actions">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=21.1458%2C79.0882" target="_blank"
+          rel="noopener noreferrer" class="cta-btn secondary"
+          aria-label="Open directions to our location in Google Maps">
+          <i class="fas fa-directions"></i>
+          <span>View on Google Maps</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick answers to common questions about our services</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item fade-in">
+          <div class="faq-question">
+            <h4>How quickly can you transport my vehicle?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Delivery time depends on the distance. Typically, within
+              Maharashtra: 1-2 days, Interstate: 3-5 days, Pan-India: 5-7
+              days. Express delivery options are available.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item fade-in delay-1">
+          <div class="faq-question">
+            <h4>Is my vehicle insured during transport?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes, all vehicles are fully insured during transit. We provide
+              comprehensive insurance coverage up to the vehicle's current
+              market value.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item fade-in delay-2">
+          <div class="faq-question">
+            <h4>Do you provide door-to-door service?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Absolutely! We offer complete door-to-door service across all
+              major cities in India. Our team handles pickup and delivery at
+              your specified locations.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item fade-in delay-3">
+          <div class="faq-question">
+            <h4>What documents are required for vehicle transport?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>
+              You'll need RC book, insurance documents, and a valid ID proof.
+              For commercial vehicles, additional permits might be required.
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Map Section -->
-    <section class="map-section">
-      <div class="container">
-        <div class="section-title fade-in">
-          <h2>Find Us Here</h2>
-          <p>Visit our office or schedule a meeting with our team</p>
-        </div>
-        <div class="map-container fade-in">
-          <iframe
-            class="map-embed"
-            title="Harihar Car Carriers - Dummy Location"
-            src="https://www.google.com/maps?q=21.1458,79.0882&z=14&output=embed"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            aria-label="Map showing dummy location in Nagpur"
-          ></iframe>
-        </div>
-        <div class="map-actions">
-          <a
-            href="https://www.google.com/maps/dir/?api=1&destination=21.1458%2C79.0882"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="cta-btn secondary"
-            aria-label="Open directions to our location in Google Maps"
-          >
-            <i class="fas fa-directions"></i>
-            <span>View on Google Maps</span>
-          </a>
-        </div>
+  <!-- CTA Section -->
+  <section class="contact-cta">
+    <div class="container">
+      <h2 class="fade-in">Ready to Transport Your Vehicle?</h2>
+      <p class="fade-in delay-1">
+        Get started with our reliable and secure vehicle transportation
+        services today.
+      </p>
+      <div class="cta-buttons fade-in delay-2">
+        <a href="#quote" class="cta-btn primary">
+          <i class="fas fa-calculator"></i>
+          <span>Get Instant Quote</span>
+        </a>
+        <a href="tel:+919876543210" class="cta-btn secondary">
+          <i class="fas fa-phone"></i>
+          <span>Call Us Now</span>
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
-      <div class="container">
-        <div class="section-title fade-in">
-          <h2>Frequently Asked Questions</h2>
-          <p>Quick answers to common questions about our services</p>
-        </div>
-        <div class="faq-grid">
-          <div class="faq-item fade-in">
-            <div class="faq-question">
-              <h4>How quickly can you transport my vehicle?</h4>
-              <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-              <p>
-                Delivery time depends on the distance. Typically, within
-                Maharashtra: 1-2 days, Interstate: 3-5 days, Pan-India: 5-7
-                days. Express delivery options are available.
-              </p>
-            </div>
-          </div>
-          <div class="faq-item fade-in delay-1">
-            <div class="faq-question">
-              <h4>Is my vehicle insured during transport?</h4>
-              <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-              <p>
-                Yes, all vehicles are fully insured during transit. We provide
-                comprehensive insurance coverage up to the vehicle's current
-                market value.
-              </p>
-            </div>
-          </div>
-          <div class="faq-item fade-in delay-2">
-            <div class="faq-question">
-              <h4>Do you provide door-to-door service?</h4>
-              <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-              <p>
-                Absolutely! We offer complete door-to-door service across all
-                major cities in India. Our team handles pickup and delivery at
-                your specified locations.
-              </p>
-            </div>
-          </div>
-          <div class="faq-item fade-in delay-3">
-            <div class="faq-question">
-              <h4>What documents are required for vehicle transport?</h4>
-              <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-              <p>
-                You'll need RC book, insurance documents, and a valid ID proof.
-                For commercial vehicles, additional permits might be required.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- Footer Section -->
+  <div id="footer-container"></div>
 
-    <!-- CTA Section -->
-    <section class="contact-cta">
-      <div class="container">
-        <h2 class="fade-in">Ready to Transport Your Vehicle?</h2>
-        <p class="fade-in delay-1">
-          Get started with our reliable and secure vehicle transportation
-          services today.
-        </p>
-        <div class="cta-buttons fade-in delay-2">
-          <a href="#quote" class="cta-btn primary">
-            <i class="fas fa-calculator"></i>
-            <span>Get Instant Quote</span>
-          </a>
-          <a href="tel:+919876543210" class="cta-btn secondary">
-            <i class="fas fa-phone"></i>
-            <span>Call Us Now</span>
-          </a>
-        </div>
-      </div>
-    </section>
+  <script>
+    // Load shared footer dynamically
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading footer:', error));
+  </script>
 
-      <!-- Footer Section -->
-<div id="footer-container"></div>
+  <script>
+    // Contact Form Functionality
+    document.addEventListener("DOMContentLoaded", function () {
+      const contactForm = document.getElementById("contactForm");
 
-<script>
-  // Load shared footer dynamically
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    })
-    .catch(error => console.error('Error loading footer:', error));
-</script>
+      contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    <script>
-      // Contact Form Functionality
-      document.addEventListener("DOMContentLoaded", function () {
-        const contactForm = document.getElementById("contactForm");
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const email = document.getElementById("email").value;
 
-        contactForm.addEventListener("submit", function (e) {
-          e.preventDefault();
+        // Simulate form submission
+        const submitBtn = contactForm.querySelector(".submit-btn");
+        const originalText = submitBtn.innerHTML;
 
-          // Get form data
-          const formData = new FormData(contactForm);
-          const name = document.getElementById("name").value;
-          const phone = document.getElementById("phone").value;
-          const email = document.getElementById("email").value;
+        // Show loading state
+        submitBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin"></i><span>Sending Message...</span>';
+        submitBtn.disabled = true;
 
-          // Simulate form submission
-          const submitBtn = contactForm.querySelector(".submit-btn");
-          const originalText = submitBtn.innerHTML;
+        // Simulate API call
+        setTimeout(() => {
+          // Show success message
+          alert(
+            `Thank you ${name}! Your message has been sent successfully. We'll contact you at ${phone} or ${email} within 30 minutes.`
+          );
 
-          // Show loading state
-          submitBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i><span>Sending Message...</span>';
-          submitBtn.disabled = true;
+          // Reset form
+          contactForm.reset();
 
-          // Simulate API call
-          setTimeout(() => {
-            // Show success message
-            alert(
-              `Thank you ${name}! Your message has been sent successfully. We'll contact you at ${phone} or ${email} within 30 minutes.`
-            );
+          // Reset button
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 2000);
+      });
 
-            // Reset form
-            contactForm.reset();
-
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-          }, 2000);
-        });
-
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll(".faq-item");
-        faqItems.forEach((item) => {
-          const question = item.querySelector(".faq-question");
-          question.addEventListener("click", () => {
-            // Close all other items
-            faqItems.forEach((otherItem) => {
-              if (otherItem !== item) {
-                otherItem.classList.remove("active");
-              }
-            });
-
-            // Toggle current item
-            item.classList.toggle("active");
-          });
-        });
-
-        // Phone number formatting
-        const phoneInput = document.getElementById("phone");
-        phoneInput.addEventListener("input", function (e) {
-          let value = e.target.value.replace(/\D/g, "");
-          if (value.length > 0) {
-            value = value.match(/.{1,5}/g).join(" ");
-          }
-          e.target.value = value;
-        });
-
-        // Add input animations
-        const inputs = document.querySelectorAll("input, select, textarea");
-        inputs.forEach((input) => {
-          input.addEventListener("focus", function () {
-            this.style.transform = "scale(1.02)";
+      // FAQ Accordion
+      const faqItems = document.querySelectorAll(".faq-item");
+      faqItems.forEach((item) => {
+        const question = item.querySelector(".faq-question");
+        question.addEventListener("click", () => {
+          // Close all other items
+          faqItems.forEach((otherItem) => {
+            if (otherItem !== item) {
+              otherItem.classList.remove("active");
+            }
           });
 
-          input.addEventListener("blur", function () {
-            this.style.transform = "scale(1)";
-          });
+          // Toggle current item
+          item.classList.toggle("active");
         });
       });
-    </script>
-    <script src="../js/modules/themes.js"></script>
-  </body>
+
+      // Phone number formatting
+      const phoneInput = document.getElementById("phone");
+      phoneInput.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 0) {
+          value = value.match(/.{1,5}/g).join(" ");
+        }
+        e.target.value = value;
+      });
+
+      // Add input animations
+      const inputs = document.querySelectorAll("input, select, textarea");
+      inputs.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.style.transform = "scale(1.02)";
+        });
+
+        input.addEventListener("blur", function () {
+          this.style.transform = "scale(1)";
+        });
+      });
+    });
+  </script>
+  <script src="../js/modules/themes.js"></script>
+  <script src="../js/modules/floating-book-button.js"></script>
+</body>
+
 </html>
