@@ -67,8 +67,8 @@ body {
 
 .slide-text {
   position: absolute;
-  bottom: 80px;
-  left: 100px;
+  bottom: 40%;
+  left: 30px;
   color: #fff;
   background: rgba(0, 0, 0, 0.45);
   padding: 20px 30px;
@@ -248,7 +248,7 @@ body {
 /* Enhanced Hero Section Styles */
 .hero {
   position: relative;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   /* use min-height instead of fixed height */
   overflow: visible;
   /* allow next sections (like slider) to show */
@@ -256,7 +256,8 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 20px;
+  padding: 50px 20px;
+  padding-bottom: 0;
   flex-wrap: wrap;
 }
 
@@ -667,7 +668,7 @@ body {
   transform: translateX(-50%);
   z-index: 4;
   text-align: center;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .scroll-text {
@@ -829,7 +830,7 @@ h2 {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #333333b5;
+  /* background-color: #333333b5; */
   display: inline-block;
 }
 
@@ -838,7 +839,7 @@ h2 {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #333333b5;
+  /* background-color: #333333b5; */
   display: bottom;
 }
 
@@ -849,7 +850,8 @@ html {
 /* Contact CTA Section Styles */
 .contact-cta {
   padding: 100px 0;
-  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
+  padding-top: 10px;
+  /* background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%); */
   position: relative;
   overflow: hidden;
 }
@@ -861,7 +863,6 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") center/cover;
   opacity: 0.1;
 }
 
@@ -1803,6 +1804,7 @@ html {
 
 /* Pricing CTA Section */
 .pricing-cta-section {
+  width: 50%;
   margin-top: 60px;
   padding: 50px 40px;
   background: linear-gradient(135deg,
@@ -1822,6 +1824,7 @@ html {
   box-shadow: 0 10px 30px rgba(255, 99, 71, 0.1),
     inset 0 0 0 1px rgba(255, 107, 53, 0.2);
   grid-column: 1 / -1;
+  justify-self: center;
 }
 
 .pricing-cta-section::before {
@@ -1872,16 +1875,16 @@ html {
 }
 
 .feature-box {
-  font-size: 2rem;
+  font-size: 2rem; 
+}
 
-  .pricing-cta-content p {
+.pricing-cta-content p {
     font-size: 1.05em;
     color: #cccccc;
     max-width: 500px;
     line-height: 1.6;
     margin-bottom: 10px;
   }
-}
 
 .pricing-cta-section .cta-btn {
   margin-top: 10px;
@@ -1944,8 +1947,10 @@ html {
 }
 
 .features {
-  background: linear-gradient(135deg, #8888880f, #88888819);
+  /* background: linear-gradient(135deg, #8888880f, #88888819); */
+  background: transparent;
   padding: 80px 20px;
+  padding-top: 0;
   text-align: center;
 }
 
