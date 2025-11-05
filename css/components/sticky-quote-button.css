@@ -5,8 +5,8 @@
 /* Button Container */
 #sticky-quote-btn {
     position: fixed;
-    bottom: 30px;
-    left: 50%;
+    bottom: 80px;
+    left: 5%;
     padding: 12px 20px;
     background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
     border: none;
@@ -19,7 +19,6 @@
     font-weight: 600;
     color: white;
     box-shadow: 0 4px 15px rgba(255, 75, 0, 0.4);
-    transition: all 0.3s ease;
     z-index: 1000;
     text-decoration: none;
     outline: none;
@@ -27,7 +26,6 @@
     letter-spacing: 0.5px;
     white-space: nowrap;
     opacity: 0;
-    transform: translateX(-50%) translateY(50px);
     pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
@@ -48,7 +46,6 @@
 
 /* Hover State */
 #sticky-quote-btn:hover {
-    transform: translateX(-50%) scale(1.08) translateY(-2px);
     box-shadow: 0 6px 20px rgba(255, 75, 0, 0.5);
     background: linear-gradient(135deg, #ff4500 0%, #ff2d00 100%);
 }
@@ -57,11 +54,6 @@
 #sticky-quote-btn:focus {
     outline: 3px solid rgba(255, 255, 255, 0.5);
     outline-offset: 2px;
-}
-
-/* Active State */
-#sticky-quote-btn:active {
-    transform: translateX(-50%) scale(0.98) translateY(0);
 }
 
 /* Dark mode support */
@@ -105,38 +97,4 @@
         margin-right: 4px;
         font-size: 12px;
     }
-}
-
-/* Animation for entrance */
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
-
-#sticky-quote-btn.animate-in {
-    animation: slideUp 0.4s ease-out;
-}
-
-/* Animation for exit */
-@keyframes slideDown {
-    from {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateX(-50%) translateY(50px);
-    }
-}
-
-#sticky-quote-btn.animate-out {
-    animation: slideDown 0.4s ease-in;
 }

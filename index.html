@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="./css/components/sticky-quote-button.css">
   <link rel="stylesheet" href="./css/components/quote-modal.css">
   <link rel="stylesheet" href="./css/components/chatbot-modal.css">
+  <link rel="stylesheet" href="./css/components/back-to-top-button.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
@@ -66,7 +67,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./pages/services.html" class="nav-link" data-page="services">
+              <a href="./services.html" class="nav-link" data-page="services">
                 <i class="fas fa-truck-moving"></i>
                 <span>Services</span>
               </a>
@@ -159,7 +160,7 @@
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="#services" class="mobile-nav-link">
+            <a href="./services.html" class="mobile-nav-link">
               <i class="fas fa-truck-moving"></i>
               <span>Services</span>
             </a>
@@ -214,7 +215,7 @@
           </li>
         </ul>
         <div class="mobile-nav-actions">
-          <a href="#login" class="mobile-login-btn">
+          <a href="./pages/login.html" class="mobile-login-btn">
             <i class="fas fa-user"></i>
             <span>Login</span>
           </a>
@@ -293,6 +294,15 @@
         </div>
       </div>
     </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-text">Scroll to Explore</div>
+      <div class="scroll-arrow">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+
   </section>
 
   <!-- Enhanced Hero Section -->
@@ -348,7 +358,7 @@
               <i class="fas fa-calculator"></i>
               <span>Get Free Quote</span>
             </a>
-            <a href="/services.html" class="cta-btn outline">
+            <a href="./services.html" class="cta-btn outline">
               <i class="fas fa-play-circle"></i>
               <span>Watch How It Works</span>
             </a>
@@ -398,180 +408,29 @@
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">
-      <div class="scroll-text">Scroll to Explore</div>
-      <div class="scroll-arrow">
-        <i class="fas fa-chevron-down"></i>
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2 class="section-title h1">Our Features</h2>
+    <div class="features-container">
+      <div class="feature-box">
+        🚗
+        <h3>Fast Delivery</h3>
+        <p>We ensure timely and safe transport of your vehicle to the destination.</p>
+      </div>
+      <div class="feature-box">
+        💰
+        <h3>Affordable Rates</h3>
+        <p>Get the best service at budget-friendly prices without hidden charges.</p>
+      </div>
+      <div class="feature-box">
+        🛡️
+        <h3>Full Insurance</h3>
+        <p>Your vehicle is fully insured during the entire transport process.</p>
       </div>
     </div>
   </section>
-
-  <!-- Services Section -->
-  <section class="services-section" id="services">
-    <div class="container">
-      <div class="section-header">
-        <h2>Our Premium Services</h2>
-        <p>Comprehensive vehicle transportation solutions tailored to your needs</p>
-      </div>
-
-      <div class="services-grid">
-        <!-- Service 1 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <i class="fas fa-home"></i>
-            <div class="icon-bg"></div>
-          </div>
-          <h3>Door-to-Door Transport</h3>
-          <p>Convenient pickup from your location and delivery to your destination. We handle everything from start to
-            finish.</p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> Home pickup & delivery</li>
-            <li><i class="fas fa-check"></i> No extra charges</li>
-            <li><i class="fas fa-check"></i> Flexible timing</li>
-          </ul>
-          <div class="service-cta">
-            <span class="price">Starting at ₹5,000</span>
-            <button class="service-btn" data-service="door-to-door">
-              <span>Learn More</span>
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Service 2 -->
-        <div class="service-card featured">
-          <div class="service-badge">Most Popular</div>
-          <div class="service-icon">
-            <i class="fas fa-map-marked-alt"></i>
-            <div class="icon-bg"></div>
-          </div>
-          <h3>Nationwide Coverage</h3>
-          <p>Transport your vehicle to any corner of India with our extensive network of trusted partners and carriers.
-          </p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> 500+ cities covered</li>
-            <li><i class="fas fa-check"></i> Pan-India network</li>
-            <li><i class="fas fa-check"></i> Real-time tracking</li>
-          </ul>
-          <div class="service-cta">
-            <span class="price">Starting at ₹8,000</span>
-            <button class="service-btn" data-service="nationwide">
-              <span>Get Quote</span>
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Service 3 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <i class="fas fa-shield-alt"></i>
-            <div class="icon-bg"></div>
-          </div>
-          <h3>Safe & Secure Transport</h3>
-          <p>Your vehicle's safety is our top priority. We use advanced equipment and follow strict safety protocols.
-          </p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> Full insurance coverage</li>
-            <li><i class="fas fa-check"></i> GPS tracking</li>
-            <li><i class="fas fa-check"></i> 24/7 monitoring</li>
-          </ul>
-          <div class="service-cta">
-            <span class="price">Insurance Included</span>
-            <button class="service-btn" data-service="safe-secure">
-              <span>Learn More</span>
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Service 4 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <i class="fas fa-gem"></i>
-            <div class="icon-bg"></div>
-          </div>
-          <h3>Luxury Car Transport</h3>
-          <p>Specialized handling for luxury and high-value vehicles with extra care and premium service standards.</p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> Climate-controlled carriers</li>
-            <li><i class="fas fa-check"></i> White-glove service</li>
-            <li><i class="fas fa-check"></i> Enhanced insurance</li>
-          </ul>
-          <div class="service-cta">
-            <span class="price">Premium Service</span>
-            <button class="service-btn" data-service="luxury">
-              <span>Book Now</span>
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Service 5 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <i class="fas fa-motorcycle"></i>
-            <div class="icon-bg"></div>
-          </div>
-          <h3>Bike Transportation</h3>
-          <p>Safe and secure transportation for motorcycles and bikes with specialized handling and secure mounting.</p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> Special bike carriers</li>
-            <li><i class="fas fa-check"></i> Secure mounting</li>
-            <li><i class="fas fa-check"></i> Affordable rates</li>
-          </ul>
-          <div class="service-cta">
-            <span class="price">Starting at ₹2,000</span>
-            <button class="service-btn" data-service="bike">
-              <span>Learn More</span>
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Service 6 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <i class="fas fa-truck"></i>
-            <div class="icon-bg"></div>
-          </div>
-          <h3>Commercial Vehicles</h3>
-          <p>Transportation solutions for commercial vehicles including trucks, vans, and other business vehicles.</p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> Heavy vehicle carriers</li>
-            <li><i class="fas fa-check"></i> Business solutions</li>
-            <li><i class="fas fa-check"></i> Bulk discounts</li>
-          </ul>
-          <div class="service-cta">
-            <span class="price">Custom Pricing</span>
-            <button class="service-btn" data-service="commercial">
-              <span>Get Quote</span>
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Service Stats -->
-        <div class="service-stats">
-          <div class="stat-item">
-            <div class="stat-number" data-target="5000">0</div>
-            <div class="stat-label">Vehicles Transported</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-target="50">0</div>
-            <div class="stat-label">Cities Covered</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-target="12">0</div>
-            <div class="stat-label">Years Experience</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-target="98">0</div>
-            <div class="stat-label">% Satisfaction</div>
-          </div>
-        </div>
 
         <!-- Pricing CTA -->
         <div class="pricing-cta-section">
@@ -666,7 +525,70 @@
               </div>
             </div>
           </div>
-        </div>
+
+          <div class="testimonial-card">
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="testimonial-text">
+              "Transported my vintage car from Chennai to Pune. The team was very careful and provided regular updates
+              throughout the journey. My classic car arrived without a scratch. Excellent service!"
+            </p>
+            <div class="client-info">
+              <div class="client-avatar">
+                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=80"
+                  alt="Vikram Singh" />
+              </div>
+              <div class="client-details">
+                <h4>aman Singh</h4>
+                <p>Chennai to Pune</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="testimonial-card">
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="testimonial-text">
+            "Door-to-door service was amazing! They picked up my car from home and delivered it right to my new address.
+            No hassle at all."
+          </p>
+          <div class="grid-client-info">
+            <div class="grid-client-avatar">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
+                alt="Anjali Mehta" />
+            </div>
+            <div class="client-details">
+              <h4>Anjali Mehta</h4>
+              <p>Relocation Service</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="testimonial-text">
+            "Best pricing in the market with premium service. My SUV was transported safely from Hyderabad to Kolkata.
+            Will definitely use again."
+          </p>
+          <div class="grid-client-info">
+            <div class="grid-client-avatar">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80"
+                alt="Amit Patel" />
+            </div>
+            <div class="client-details">
+              <h4>Amit Patel</h4>
+              <p>Hyderabad to Kolkata</p>
+              </div>
+            </div>
+          </div>
+          </div>
 
         <!-- Slider Controls -->
         <div class="slider-controls">
@@ -677,6 +599,9 @@
             <span class="dot active" data-slide="0"></span>
             <span class="dot" data-slide="1"></span>
             <span class="dot" data-slide="2"></span>
+            <span class="dot" data-slide="3"></span>
+            <span class="dot" data-slide="4"></span>
+            <span class="dot" data-slide="5"></span>
           </div>
           <button class="slider-btn next-btn">
             <i class="fas fa-chevron-right"></i>
@@ -685,7 +610,7 @@
       </div>
 
       <!-- Testimonials Grid -->
-      <div class="testimonials-grid">
+      <!-- <div class="testimonials-grid">
         <div class="grid-testimonial">
           <div class="grid-rating">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -727,7 +652,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 
@@ -802,40 +727,18 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="features" id="features">
-    <h2 class="section-title h1">Our Features</h2>
-    <div class="features-container">
-      <div class="feature-box">
-        🚗
-        <h3>Fast Delivery</h3>
-        <p>We ensure timely and safe transport of your vehicle to the destination.</p>
-      </div>
-      <div class="feature-box">
-        💰
-        <h3>Affordable Rates</h3>
-        <p>Get the best service at budget-friendly prices without hidden charges.</p>
-      </div>
-      <div class="feature-box">
-        🛡️
-        <h3>Full Insurance</h3>
-        <p>Your vehicle is fully insured during the entire transport process.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- Footer Section -->
   <div id="footer-container"></div>
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">
-    <i class="fas fa-chevron-up"></i>
+    <i class="fas fa-arrow-up"></i>
   </button>
 
   <!-- Load Footer -->
   <script>
     // Load footer
-    fetch('./footer.html')
+    fetch('./pages/footer.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('footer-container').innerHTML = data;
@@ -872,6 +775,7 @@
   <script src="./js/modules/sticky-quote-button.js"></script>
   <script src="./js/modules/floating-chatbot-button.js"></script>
   <script src="./js/modules/chatbot-modal.js"></script>
+  <script src="./js/modules/back-to-top-button.js"></script>
 
   <div id="car" class="car">🏎️</div>
 
