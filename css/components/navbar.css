@@ -32,6 +32,44 @@
     gap: 30px;
   }
 
+
+  /* --- Real-Time Clock Styles --- */
+
+/* Style for the desktop clock */
+.nav-clock {
+  display: flex;
+  align-items: center;
+  color: #fff; /* Adjust color to match your navbar text */
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 20px; /* Space between clock and other items */
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.1); /* Optional: a subtle background */
+  border-radius: 6px;
+  white-space: nowrap; /* Prevents the clock from wrapping to a new line */
+}
+
+/* Style for the mobile clock */
+#realtime-clock-mobile {
+  font-size: 14px;
+  justify-content: center; /* Center the clock in the mobile menu */
+  width: 100%;
+  color: #ddd; /* Lighter color for mobile menu */
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+}
+
+#realtime-clock-mobile i {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+/* Ensure the clock is hidden on mobile and shown on desktop */
+@media (max-width: 992px) { /* This breakpoint should match your navbar's mobile switch */
+  #realtime-clock-desktop {
+    display: none;
+  }
+}
+
   /* Logo Styles - Fixed alignment */
   .logo-container {
     flex-shrink: 0;
