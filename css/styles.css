@@ -248,7 +248,7 @@ body {
 /* Enhanced Hero Section Styles */
 .hero {
   position: relative;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   /* use min-height instead of fixed height */
   overflow: visible;
   /* allow next sections (like slider) to show */
@@ -256,7 +256,8 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 20px;
+  padding: 50px 20px;
+  padding-bottom: 0;
   flex-wrap: wrap;
 }
 
@@ -829,7 +830,7 @@ h2 {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #333333b5;
+  /* background-color: #333333b5; */
   display: inline-block;
 }
 
@@ -838,7 +839,7 @@ h2 {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #333333b5;
+  /* background-color: #333333b5; */
   display: bottom;
 }
 
@@ -849,7 +850,8 @@ html {
 /* Contact CTA Section Styles */
 .contact-cta {
   padding: 100px 0;
-  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
+  padding-top: 10px;
+  /* background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%); */
   position: relative;
   overflow: hidden;
 }
@@ -861,7 +863,6 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") center/cover;
   opacity: 0.1;
 }
 
@@ -1945,8 +1946,10 @@ html {
 }
 
 .features {
-  background: linear-gradient(135deg, #8888880f, #88888819);
+  /* background: linear-gradient(135deg, #8888880f, #88888819); */
+  background: transparent;
   padding: 80px 20px;
+  padding-top: 0;
   text-align: center;
 }
 
