@@ -17,6 +17,70 @@
   background: linear-gradient(90deg, transparent, #ff6347, transparent);
 }
 
+/* Road & car animation */
+.footer-road {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to bottom, #4a4a4a 0%, #2a2a2a 100%);
+  border-top: 2px solid #666;
+  overflow: hidden;
+}
+
+.footer-road::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg,
+      #fff,
+      #fff 20px,
+      transparent 20px,
+      transparent 40px);
+  transform: translateY(-50%);
+}
+
+.car-animation {
+  position: absolute;
+  bottom: 4px;
+  /* Aligned with the road */
+  left: -50px;
+  z-index: 100;
+  animation: driveCar 19s linear infinite;
+  will-change: transform;
+}
+
+.moving-car {
+  width: 100px;
+  height: 50px;
+
+  filter: brightness(1.2);
+  /* object-fit: contain; */
+}
+
+/* Keyframes: animate across the road width */
+@keyframes driveCar {
+  0% {
+    transform: translateX(-50px);
+  }
+
+  100% {
+    transform: translateX(200vw);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .car-animation {
+    animation: none;
+  }
+}
+
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
