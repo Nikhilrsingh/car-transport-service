@@ -20,10 +20,10 @@
 /* Road & car animation */
 .footer-road {
   position: absolute;
-  bottom: 0;
+  top: 0%;
   left: 0;
   width: 100%;
-  height: 40px;
+  height: 60px;
   background: linear-gradient(to bottom, #4a4a4a 0%, #2a2a2a 100%);
   border-top: 2px solid #666;
   overflow: hidden;
@@ -46,7 +46,7 @@
 
 .car-animation {
   position: absolute;
-  bottom: 4px;
+  top: -1%;
   /* Aligned with the road */
   left: -50px;
   z-index: 100;
