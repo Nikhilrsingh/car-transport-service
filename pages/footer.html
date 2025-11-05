@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="../css/components/footer.css">
+<!-- Car Image preload -->
+<link rel="preload" href="../assets/images/car-footer.png" as="image">
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
@@ -32,7 +34,8 @@
           <li><a href="/car-transport-service/index.html#services"><i class="fas fa-truck-moving"></i> Services</a></li>
           <li><a href="/car-transport-service/pages/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
           <li><a href="/car-transport-service/pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
-          <li><a href="/car-transport-service/pages/enquiry.html"><i class="fas fa-question-circle"></i> Enquiry</a></li>
+          <li><a href="/car-transport-service/pages/enquiry.html"><i class="fas fa-question-circle"></i> Enquiry</a>
+          </li>
           <li><a href="/car-transport-service/pages/blog.html"><i class="fas fa-blog"></i> Blog</a></li>
         </ul>
       </div>
@@ -72,6 +75,12 @@
     </div>
   </div>
 
+  <!-- Car Animation -->
+  <div class="footer-road"></div>
+  <div class="car-animation">
+    <img class="moving-car" src="../assets/images/car-footer.png" alt="Moving car across footer">
+  </div>
+
   <!-- Footer Bottom -->
   <div class="footer-bottom">
     <div class="container">
@@ -100,5 +109,5 @@
   <button class="back-to-top" id="backToTop">
     <i class="fas fa-chevron-up"></i>
   </button>
-  <script src="js/modules/footer.js"></script>
+  <script src="../js/modules/footer.js"></script>
 </footer>
