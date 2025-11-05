@@ -701,6 +701,19 @@
   .header {
     animation: slideDown 0.5s ease-out;
   }
+    /* Highlight style for active menu items */
+  .nav-link.active,
+  .mobile-nav-link.active {
+    color: #ff6347; /* Tomato color highlight */
+    font-weight: 600;
+    border-bottom: 2px solid #ff6347;
+  }
+
+  /* Smooth color transition */
+  .nav-link,
+  .mobile-nav-link {
+    transition: all 0.3s ease;
+  }
 </style>
 
 <script>
@@ -734,24 +747,31 @@
       document.body.style.overflow = "";
     }
 
+    
     // Set active page based on current URL
-    function setActivePage() {
-      const currentPage =
-        window.location.pathname.split("/").pop() || "index.html";
-      navLinks.forEach((link) => {
-        const linkPage = link.getAttribute("href");
-        if (
-          linkPage === currentPage ||
-          (currentPage === "index.html" && linkPage === "/") ||
-          (linkPage.includes(currentPage.replace(".html", "")) &&
-            currentPage !== "index.html")
-        ) {
-          link.classList.add("active");
-        } else {
-          link.classList.remove("active");
-        }
-      });
+function setActivePage() {
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+  navLinks.forEach((link) => {
+    const linkPage = link.getAttribute("href");
+
+    // Highlight full-page links like about.html, booking.html, etc.
+    if (linkPage === currentPage) {
+      link.classList.add("active");
     }
+    // Highlight "Home" link on index.html
+    else if (currentPage === "index.html" && linkPage.includes("index")) {
+      link.classList.add("active");
+    }
+    // Handle in-page section links like #services or #gallery
+    else if (linkPage.startsWith("#") && window.location.hash === linkPage) {
+      link.classList.add("active");
+    }
+    else {
+      link.classList.remove("active");
+    }
+  });
+}
 
     // Event listeners
     mobileMenuBtn.addEventListener("click", openMobileMenu);
@@ -764,17 +784,38 @@
     });
 
     // Initialize
-    addContentSpacing();
-    setActivePage();
+addContentSpacing();
+setActivePage();
 
-    // Recalculate on resize
-    window.addEventListener("resize", addContentSpacing);
+// Recalculate on resize
+window.addEventListener("resize", addContentSpacing);
 
-    // Keyboard navigation
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        closeMobileMenu();
+// Keyboard navigation
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    closeMobileMenu();
+  }
+});
+
+// === Smooth scroll for internal links (like #services, #gallery) ===
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    const targetId = this.getAttribute("href");
+    if (targetId && targetId.startsWith("#") && targetId.length > 1) {
+      e.preventDefault();
+      const target = document.querySelector(targetId);
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - header.offsetHeight,
+          behavior: "smooth",
+        });
+
+        // Highlight the clicked link temporarily
+        navLinks.forEach((l) => l.classList.remove("active"));
+        this.classList.add("active");
       }
-    });
+    }
   });
+});
+});
 </script>
