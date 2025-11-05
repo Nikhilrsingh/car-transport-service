@@ -15,7 +15,7 @@
           }
         };
         window.requestAnimationFrame(step);
-    }});
+      };
 
       // Start counters when hero section is in view
       const heroObserver = new IntersectionObserver((entries) => {
@@ -28,6 +28,7 @@
             heroObserver.unobserve(entry.target);
           }
         });
+      });
       }, { threshold: 0.5 });
 
       heroObserver.observe(document.querySelector('.hero'));
@@ -234,8 +235,8 @@
 
         setTimeout(() => {
           preloader.style.display = "none";
-        }, 100); 
-      }, 100); 
+        }, 100);
+      }, 100);
     });
 
      // Back to Top Functionality (defensive)
@@ -283,16 +284,16 @@
           e.target.value = value;
         });
 
-    
-    //Keypress-Activated Easter Egg 
+
+    //Keypress-Activated Easter Egg
     document.addEventListener("DOMContentLoaded", () => {
       const car = document.querySelector(".car");
-      if (!car) return; 
+      if (!car) return;
 
       document.addEventListener("keydown", (event) => {
         if (event.ctrlKey && event.shiftKey && (event.key === "?" || event.key === "/")) {
           car.classList.remove("animate");
-          void car.offsetWidth; 
+          void car.offsetWidth;
           car.classList.add("animate");
         }
       });
@@ -312,7 +313,7 @@
 
   window.addEventListener("load", () => {
     const preloader = document.getElementById("preloader");
-    
+
     // Small delay for smooth fade-out
     setTimeout(() => {
       preloader.classList.add("fade-out");
@@ -437,4 +438,3 @@ setInterval(nextSlide, 5000); // changes every 5 seconds
         });
       }
     });
-
