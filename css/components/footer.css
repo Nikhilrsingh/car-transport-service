@@ -249,40 +249,7 @@
   color: #ff6347;
 }
 
-/* Back to Top Button */
-.back-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: #ff6347;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  opacity: 0;
-  visibility: hidden;
-  /* ensure this sits above floating action buttons (floating-book-btn uses z-index:1000) */
-  z-index: 1100;
-  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
-}
-
-.back-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.back-to-top:hover {
-  background: #ff4500;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
-}
+/* Back to Top Button - Styles moved to css/components/back-to-top-button.css */
 
 /* Responsive Footer */
 @media (max-width: 992px) {
