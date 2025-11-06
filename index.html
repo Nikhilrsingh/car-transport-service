@@ -55,75 +55,94 @@
         <nav class="desktop-nav" aria-label="Main navigation">
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="./index.html" class="nav-link active" data-page="home">
+              <a href="./index.html" class="nav-link active" data-page="home" data-tooltip="Home">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./pages/about.html" class="nav-link" data-page="about">
+              <a href="./pages/about.html" class="nav-link" data-page="about" data-tooltip="About">
                 <i class="fas fa-info-circle"></i>
                 <span>About</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./services.html" class="nav-link" data-page="services">
+              <a href="./services.html" class="nav-link" data-page="services" data-tooltip="Services">
                 <i class="fas fa-truck-moving"></i>
                 <span>Services</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./pages/booking.html" class="nav-link" data-page="booking">
+              <a href="./pages/booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
                 <i class="fas fa-calendar-check"></i>
                 <span>Booking</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./pages/contributors.html" class="nav-link" data-page="contributors">
+              <a href="./pages/contributors.html" class="nav-link" data-page="contributors" data-tooltip="Contributors">
                 <i class="fas fa-users"></i>
                 <span>Contributors</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./pages/pricing.html" class="nav-link" data-page="pricing">
+              <a href="./pages/pricing.html" class="nav-link" data-page="pricing" data-tooltip="Pricing">
                 <i class="fas fa-tags"></i>
                 <span>Pricing</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./pages/tracking.html" class="nav-link" data-page="tracking">
+              <a href="./pages/tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>Track Your Car</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./pages/gallery.html" class="nav-link" data-page="gallery">
+              <a href="./pages/gallery.html" class="nav-link" data-page="gallery" data-tooltip="Gallery">
                 <i class="fas fa-images"></i>
                 <span>Gallery</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./pages/contact.html" class="nav-link" data-page="contact">
+              <a href="./pages/contact.html" class="nav-link" data-page="contact" data-tooltip="Contact">
                 <i class="fas fa-phone"></i>
                 <span>Contact</span>
               </a>
             </li>
           </ul>
 
+          <!-- Search Bar -->
+          <div class="search-container">
+            <div class="search-bar">
+              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+
           <!-- Right Actions -->
           <div class="nav-actions">
-            <a href="./pages/enquiry.html" class="nav-link enquiry-link">
+            <a href="./pages/enquiry.html" class="nav-link enquiry-link" data-tooltip="Enquiry">
               <i class="fas fa-question-circle"></i>
               <span>Enquiry</span>
             </a>
-            <a href="./pages/blog.html" class="nav-link blog-link">
+            <a href="./pages/blog.html" class="nav-link blog-link" data-tooltip="Blog">
               <i class="fas fa-blog"></i>
               <span>Blog</span>
             </a>
-            <a href="./pages/login.html" class="login-btn">
+            <a href="./pages/login.html" class="login-btn" data-tooltip="Login">
               <i class="fas fa-user"></i>
               <span>Login</span>
             </a>
+            <!-- Theme widget -->
+            <div class="theme-widget" id="themeWidget">
+              <label for="themeWidgetSelect" class="sr-only">Choose theme</label>
+              <select id="themeWidgetSelect" aria-label="Choose theme">
+                <option value="auto">Theme</option>
+                <option value="default">Default</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="glass">Glass</option>
+              </select>
+            </div>
           </div>
         </nav>
 
@@ -139,13 +158,22 @@
       <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
         <div class="mobile-nav-header">
           <div class="mobile-logo">
-            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+            <img src="./assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
             <span>Harihar Car Carriers</span>
           </div>
           <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
             <i class="fas fa-times"></i>
           </button>
         </div>
+
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-container">
+          <div class="mobile-search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
+          </div>
+        </div>
+
         <ul class="mobile-nav-list">
           <li class="mobile-nav-item">
             <a href="./index.html" class="mobile-nav-link active">
@@ -154,7 +182,7 @@
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./about.html" class="mobile-nav-link">
+            <a href="./pages/about.html" class="mobile-nav-link">
               <i class="fas fa-info-circle"></i>
               <span>About</span>
             </a>
@@ -166,49 +194,49 @@
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./booking.html" class="mobile-nav-link">
+            <a href="./pages/booking.html" class="mobile-nav-link">
               <i class="fas fa-calendar-check"></i>
               <span>Booking</span>
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./contributors.html" class="mobile-nav-link">
+            <a href="./pages/contributors.html" class="mobile-nav-link">
               <i class="fas fa-users"></i>
               <span>Contributors</span>
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./pricing.html" class="mobile-nav-link">
+            <a href="./pages/pricing.html" class="mobile-nav-link">
               <i class="fas fa-tags"></i>
               <span>Pricing</span>
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./tracking.html" class="mobile-nav-link">
+            <a href="./pages/tracking.html" class="mobile-nav-link">
               <i class="fas fa-map-marker-alt"></i>
               <span>Track Your Car</span>
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./gallery.html" class="mobile-nav-link">
+            <a href="./pages/gallery.html" class="mobile-nav-link">
               <i class="fas fa-images"></i>
               <span>Gallery</span>
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./contact.html" class="mobile-nav-link">
+            <a href="./pages/contact.html" class="mobile-nav-link">
               <i class="fas fa-phone"></i>
               <span>Contact</span>
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./enquiry.html" class="mobile-nav-link">
+            <a href="./pages/enquiry.html" class="mobile-nav-link">
               <i class="fas fa-question-circle"></i>
               <span>Enquiry</span>
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="./blog.html" class="mobile-nav-link">
+            <a href="./pages/blog.html" class="mobile-nav-link">
               <i class="fas fa-blog"></i>
               <span>Blog</span>
             </a>
@@ -244,20 +272,6 @@
       <div class="nav-overlay" id="navOverlay"></div>
     </div>
   </header>
-
-  <script src="./js/modules/navbar.js"></script>
-
-  <!-- Theme widget (floating top-left) -->
-  <div class="theme-widget" id="themeWidget" aria-hidden="false">
-    <label for="themeWidgetSelect" class="sr-only">Choose theme</label>
-    <select id="themeWidgetSelect" aria-label="Choose theme">
-      <option value="auto">Theme</option>
-      <option value="default">Default</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-      <option value="glass">Glass</option>
-    </select>
-  </div>
 
   <!-- 🌿 Automated Image Slider Section -->
   <section class="auto-slider">
@@ -768,6 +782,7 @@
   <script src="./js/modules/tracking.js"></script>
   <script src="./js/modules/footer.js"></script>
   <script src="./js/modules/navbar.js"></script>
+  <script src="./js/modules/search.js"></script>
   <script src="./js/modules/floating-book-button.js"></script>
   <script src="./js/modules/floating-call-button.js"></script>
   <script src="./js/modules/floating-whatsapp-button.js"></script>
