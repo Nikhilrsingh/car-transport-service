@@ -26,8 +26,7 @@ const backToBottomButton = (() => {
         window.addEventListener('scroll', () => handleScroll(button), { passive: true });
     }
 
-    
-     
+
 /*Show button only when near top*/
   function handleScroll(button) {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
