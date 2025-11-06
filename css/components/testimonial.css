@@ -30,22 +30,24 @@
   max-width: 800px;
   margin: 0 auto 80px;
   overflow: hidden;
+
 }
 
 .slider-container {
   display: flex;
   transition: transform 0.5s ease-in-out;
+
 }
 
 .testimonial-card {
   flex: 0 0 100%;
   padding: 40px;
+  margin-top: 10px;
   background: #2b2b2b;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   text-align: center;
-  position: relative;
-  margin: 0 10px;
+  /* margin: 0 10px; */
   border: 2px solid transparent;
   transition: all 0.3s ease;
 }
@@ -121,7 +123,7 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
-  margin-top: 40px;
+  margin: 40px 0;
 }
 
 .slider-btn {
