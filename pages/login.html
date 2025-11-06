@@ -6,6 +6,8 @@
     <title>Harihar Car Carriers - Login & Signup</title>
     <link rel="stylesheet" href="../css/components/login.css">
    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+   <link rel="stylesheet" href="../css/components/backtoBottom.css">
 </head>
 <body>
     <button class="back-button" onclick="goBack()">Back</button>
@@ -214,5 +216,19 @@
             alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login would be integrated here`);
         }
     </script>
+
+    <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+    <!-- Top to Bottom Button -->
+<button class="back-to-bottom" id="backToBottom">
+  <i class="fas fa-arrow-down"></i>
+</button>
+
+  <script src="../js/modules/backtoBottom.js"></script>
+   <script src="../js/modules/back-to-top-button.js"></script>
+
 </body>
 </html>
