@@ -554,6 +554,14 @@
             </li>
           </ul>
 
+          <!-- Search Bar -->
+          <div class="search-container">
+            <div class="search-bar">
+              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+
           <!-- Right Actions -->
           <div class="nav-actions">
             <a href="./enquiry.html" class="nav-link enquiry-link">
@@ -589,6 +597,13 @@
           <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
             <i class="fas fa-times"></i>
           </button>
+        </div>
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-container">
+          <div class="mobile-search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
+          </div>
         </div>
         <ul class="mobile-nav-list">
           <li class="mobile-nav-item">
@@ -1270,6 +1285,8 @@
       window.scrollTo(0, 0);
     });
   </script>
+  <script src="../js/modules/search.js"></script>
+  <script src="../js/modules/navbar.js"></script>
   <script src="../js/modules/themes.js"></script>
   <script src="../js/modules/floating-book-button.js"></script>
   <script src="../js/modules/floating-call-button.js"></script>
