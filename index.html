@@ -749,18 +749,6 @@
     <i class="fas fa-arrow-up"></i>
   </button>
 
-  <!-- Load Footer -->
-  <script>
-    // Load footer
-    fetch('./pages/footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-container').innerHTML = data;
-      })
-      .catch(error => {
-        console.error('Error loading footer:', error);
-      });
-  </script>
 
   <script>
     window.addEventListener("load", () => {
