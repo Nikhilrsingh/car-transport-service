@@ -73,7 +73,7 @@ git checkout -b fix-issue-123
 
 ---
 
-## ------------------- WORKFLOW -------------------
+## ------------------- WORKFLOW -------------------gi
 
 After making code changes:
 
