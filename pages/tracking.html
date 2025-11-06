@@ -261,19 +261,40 @@
           <p>
             Get real-time updates on your vehicle's location and delivery status
           </p>
+          <p style="color: #ff6b35; margin-top: 10px; font-size: 0.9em;">
+            <i class="fas fa-microphone"></i> Try our new voice search feature!
+          </p>
         </div>
 
         <form class="tracking-form" id="trackingForm">
-          <div class="form-group">
+          <div class="form-group voice-search-group">
             <label for="trackingId">
               <i class="fas fa-barcode"></i> Tracking ID
             </label>
-            <input
-              type="text"
-              id="trackingId"
-              placeholder="Enter your tracking ID"
-              required
-            />
+            <div class="input-with-voice">
+              <input
+                type="text"
+                id="trackingId"
+                placeholder="Enter your tracking ID or speak it"
+                required
+              />
+              <button type="button" class="voice-search-btn" id="voiceSearchBtn" title="Voice Search">
+                <i class="fas fa-microphone"></i>
+              </button>
+            </div>
+            <div class="voice-status" id="voiceStatus">
+              <div class="voice-indicator">
+                <span class="pulse-dot"></span>
+                <span class="status-text">Ready for voice input</span>
+              </div>
+              <div class="language-selector">
+                <label for="languageSelect">Language:</label>
+                <select id="languageSelect">
+                  <option value="en-US">English</option>
+                  <option value="hi-IN">Hindi</option>
+                </select>
+              </div>
+            </div>
           </div>
           <button type="submit" class="btn-track">
             <i class="fas fa-search"></i>
@@ -454,5 +475,6 @@
   <script src="./js/modules/footer.js"></script>
   <script src="./js/modules/navbar.js"></script>
     <script src="../js/modules/themes.js"></script>
+    <script src="../js/modules/voice-search.js"></script>
   </body>
 </html>
