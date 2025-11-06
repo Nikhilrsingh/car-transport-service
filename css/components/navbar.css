@@ -37,6 +37,7 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
+    order: 1;
   }
 
  .left-logo {
@@ -62,6 +63,7 @@
     flex: 1;
     justify-content: space-between;
     margin-left: 20px;
+    order: 2;
   }
 
   .nav-list {
@@ -360,6 +362,8 @@
     cursor: pointer;
     padding: 8px;
     gap: 4px;
+    order: 3;
+    margin-left: auto;
   }
 
   .menu-bar {
@@ -388,6 +392,7 @@
     top: 0;
     right: -100%;
     width: 320px;
+    max-width: 85vw;
     height: 100vh;
     background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
     box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
@@ -395,6 +400,7 @@
     z-index: 1001;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   .mobile-nav.active {
@@ -408,6 +414,7 @@
     padding: 25px 20px;
     border-bottom: 1px solid #444;
     background: rgba(43, 43, 43, 0.9);
+    flex-shrink: 0;
   }
 
   .mobile-logo {
@@ -417,6 +424,7 @@
     color: white;
     font-weight: 600;
     font-size: 1.1rem;
+    white-space: nowrap;
   }
 
   .mobile-logo img {
@@ -441,33 +449,42 @@
 
   .mobile-nav-list {
     list-style: none;
-    padding: 20px 0;
+    padding: 0;
     margin: 0;
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 
   .mobile-nav-item {
     border-bottom: 1px solid #333;
+    width: 100%;
+    flex-shrink: 0;
   }
 
   .mobile-nav-link {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 18px 25px;
+    padding: 16px 25px;
     color: white;
     text-decoration: none;
     transition: all 0.3s ease;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .mobile-nav-link i {
     width: 20px;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #ff6347;
+    flex-shrink: 0;
   }
 
   .mobile-nav-link:hover,
@@ -483,6 +500,7 @@
     flex-direction: column;
     gap: 10px;
     border-top: 1px solid #444;
+    flex-shrink: 0;
   }
 
   /* Mobile Search Bar */
@@ -490,6 +508,7 @@
     padding: 12px 20px;
     border-bottom: 1px solid #333;
     position: relative;
+    flex-shrink: 0;
   }
 
   .mobile-search-bar {
@@ -565,6 +584,7 @@
     padding: 15px 20px;
     border-top: 1px solid #444;
     background: rgba(43, 43, 43, 0.8);
+    flex-shrink: 0;
   }
 
   .contact-item {
@@ -574,6 +594,7 @@
     padding: 8px 0;
     color: #ccc;
     font-size: 0.85rem;
+    white-space: nowrap;
   }
 
   .contact-item i {
@@ -678,7 +699,11 @@
     }
 
     .logo-container {
-      margin-right: auto;
+      order: 1;
+    }
+
+    .mobile-menu-btn {
+      order: 2;
     }
   }
 
