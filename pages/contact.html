@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
   <link rel="stylesheet" href="../css/components/quote-modal.css">
   <link rel="stylesheet" href="../css/components/chatbot-modal.css">
-  <link rel="stylesheet" href="../css/components/back-to-top-button.css">
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+   <link rel="stylesheet" href="../css/components/backtoBottom.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     @font-face {
@@ -50,99 +51,6 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
-    }
-
-    /* Navbar Styles */
-    .navbar {
-      height: 5rem;
-      width: 98%;
-      background: rgba(44, 44, 44, 0.4);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      justify-self: center;
-      padding: 0 20px;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 82px;
-      padding-left: 0;
-      font-size: 20px;
-    }
-
-    nav ul li a {
-      position: relative;
-      padding: 6px 2px;
-      color: white;
-      text-decoration: none;
-      transition: color 0.25s ease;
-    }
-
-    nav ul li a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      height: 2px;
-      width: 0%;
-      background-color: #ff6347;
-      transition: width 0.25s ease;
-    }
-
-    nav ul li a:hover {
-      color: #ff6347;
-    }
-
-    nav ul li a:hover::after {
-      width: 100%;
-    }
-
-    nav ul li a.active {
-      color: #000;
-      background: #ff6347;
-      padding: 8px 12px;
-      border-radius: 4px;
-    }
-
-    .login-link {
-      background-color: #ff6347;
-      padding: 8px 12px;
-      border-radius: 4px;
-    }
-
-    .login-link:hover {
-      background-color: #ff4500;
-    }
-
-    .logo-container {
-      width: 100px;
-    }
-
-    .logo-container img {
-      height: 100%;
-      width: 100%;
-      object-fit: contain;
-    }
-
-    .left-logo {
-      height: 70px;
-      order: 1;
-    }
-
-    .right-logo {
-      height: 90px;
-      order: 3;
-    }
-
-    nav {
-      order: 2;
     }
 
     /* Hero Section */
@@ -748,6 +656,14 @@
             </li>
           </ul>
 
+          <!-- Search Bar -->
+          <div class="search-container">
+            <div class="search-bar">
+              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+
           <!-- Right Actions -->
           <div class="nav-actions">
             <a href="./enquiry.html" class="nav-link enquiry-link">
@@ -783,6 +699,13 @@
           <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
             <i class="fas fa-times"></i>
           </button>
+        </div>
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-container">
+          <div class="mobile-search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
+          </div>
         </div>
         <ul class="mobile-nav-list">
           <li class="mobile-nav-item">
@@ -1246,6 +1169,8 @@
       });
     });
   </script>
+  <script src="../js/modules/search.js"></script>
+  <script src="../js/modules/navbar.js"></script>
   <script src="../js/modules/themes.js"></script>
   <script src="../js/modules/floating-book-button.js"></script>
   <script src="../js/modules/floating-call-button.js"></script>
@@ -1255,11 +1180,20 @@
   <script src="../js/modules/floating-chatbot-button.js"></script>
   <script src="../js/modules/chatbot-modal.js"></script>
   <script src="../js/modules/back-to-top-button.js"></script>
+    <script src="../js/modules/backtoBottom.js"></script>
+
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">
     <i class="fas fa-arrow-up"></i>
   </button>
+
+    <!-- Top to Bottom Button -->
+<button class="back-to-bottom" id="backToBottom">
+  <i class="fas fa-arrow-down"></i>
+</button>
+
+
 </body>
 
 </html>
