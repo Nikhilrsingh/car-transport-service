@@ -50,7 +50,7 @@ testimonials.forEach(testimonial => {
     const testimonialCard = document.createElement('div');
     testimonialCard.classList.add('testimonial-card');
 
-    // for starts rating
+    // for stars rating
     const fullstars = Math.floor(testimonial.rating);
     const halfstars = testimonial.rating % 1 !== 0 ? 1 : 0;
 
