@@ -1,0 +1,332 @@
+/* ====================================
+   QUOTE MODAL STYLES
+   ==================================== */
+
+/* Modal Overlay */
+.quote-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1001;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.quote-modal-overlay.active {
+    display: flex;
+}
+
+/* Modal Container */
+.quote-modal {
+    background: #2b2b2b;
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: slideUp 0.4s ease-out;
+}
+
+/* Close Button */
+.quote-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.quote-modal-close:hover {
+    color: #ff6347;
+    background: rgba(255, 99, 71, 0.1);
+}
+
+/* Modal Header */
+.quote-modal-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.quote-modal-header h2 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.quote-modal-header p {
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Form Styles */
+.quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group label i {
+    color: #ff6347;
+    font-size: 1rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 15px;
+    background: #1a1a1a;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+    color: #666;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff6347;
+    background: #262626;
+    box-shadow: 0 0 10px rgba(255, 99, 71, 0.3);
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Textarea Specific */
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Submit Button */
+.quote-modal-submit {
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: "Poppins", sans-serif;
+}
+
+.quote-modal-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
+    background: linear-gradient(135deg, #ff4500 0%, #ff2d00 100%);
+}
+
+.quote-modal-submit:active {
+    transform: translateY(0);
+}
+
+.quote-modal-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Success Message */
+.quote-success-message {
+    display: none;
+    text-align: center;
+    padding: 30px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 2px solid #22c55e;
+    border-radius: 12px;
+    animation: slideUp 0.4s ease-out;
+}
+
+.quote-success-message.active {
+    display: block;
+}
+
+.quote-success-message i {
+    font-size: 3rem;
+    color: #22c55e;
+    margin-bottom: 15px;
+}
+
+.quote-success-message h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.quote-success-message p {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* Error Message */
+.quote-error-message {
+    display: none;
+    padding: 12px 15px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 2px solid #ef4444;
+    border-radius: 8px;
+    color: #fca5a5;
+    font-size: 0.9rem;
+}
+
+.quote-error-message.active {
+    display: block;
+}
+
+/* Loading State */
+.quote-modal-submit.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.quote-modal-submit.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .quote-modal {
+        padding: 30px 20px;
+        max-width: 95%;
+    }
+
+    .quote-modal-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .quote-modal-close {
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quote-modal {
+        padding: 25px 15px;
+        border-radius: 12px;
+    }
+
+    .quote-modal-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .quote-modal-header p {
+        font-size: 0.9rem;
+    }
+
+    .form-group label {
+        font-size: 0.85rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .quote-modal-submit {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+}

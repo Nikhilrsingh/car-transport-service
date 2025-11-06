@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Blog | Harihar Car Carriers</title>
   <link rel="icon" type="image/png" href="classic-car.png" />
   <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="../css/components/floating-call-button.css">
+  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css">
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
+  <link rel="stylesheet" href="../css/components/quote-modal.css">
+  <link rel="stylesheet" href="../css/components/chatbot-modal.css">
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
@@ -139,222 +147,227 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="../css/components/floating-button.css">
 </head>
+
 <body>
-      <!-- Enhanced Navigation Component -->
-<header class="header">
-  <div class="navbar-container">
-    <div class="navbar">
-      <!-- Left Logo -->
-      <div class="logo-container left-logo">
-        <img
-          src="../assets/images/left-logo.jpg"
-          alt="Harihar Car Carriers"
-          class="logo-img"
-        />
+  <!-- Enhanced Navigation Component -->
+  <header class="header">
+    <div class="navbar-container">
+      <div class="navbar">
+        <!-- Left Logo -->
+        <div class="logo-container left-logo">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./about.html" class="nav-link" data-page="about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./services.html" class="nav-link" data-page="services">
+                <i class="fas fa-truck-moving"></i>
+                <span>Services</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./booking.html" class="nav-link" data-page="booking">
+                <i class="fas fa-calendar-check"></i>
+                <span>Booking</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contributors.html" class="nav-link" data-page="contributors">
+                <i class="fas fa-users"></i>
+                <span>Contributors</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./pricing.html" class="nav-link" data-page="pricing">
+                <i class="fas fa-tags"></i>
+                <span>Pricing</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./tracking.html" class="nav-link" data-page="tracking">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Track Your Car</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./gallery.html" class="nav-link" data-page="gallery">
+                <i class="fas fa-images"></i>
+                <span>Gallery</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contact.html" class="nav-link" data-page="contact">
+                <i class="fas fa-phone"></i>
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Search Bar -->
+          <div class="search-container">
+            <div class="search-bar">
+              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+
+          <!-- Right Actions -->
+          <div class="nav-actions">
+            <a href="./enquiry.html" class="nav-link enquiry-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+            <a href="./blog.html" class="nav-link blog-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+            <a href="./login.html" class="login-btn">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
       </div>
 
-      <!-- Desktop Navigation -->
-      <nav class="desktop-nav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="../index.html" class="nav-link active" data-page="home">
+      <!-- Mobile Navigation -->
+      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <div class="mobile-nav-header">
+          <div class="mobile-logo">
+            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+            <span>Harihar Car Carriers</span>
+          </div>
+          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-container">
+          <div class="mobile-search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
+          </div>
+        </div>
+        <ul class="mobile-nav-list">
+          <li class="mobile-nav-item">
+            <a href="../index.html" class="mobile-nav-link active">
               <i class="fas fa-home"></i>
               <span>Home</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./about.html" class="nav-link" data-page="about">
+          <li class="mobile-nav-item">
+            <a href="./about.html" class="mobile-nav-link">
               <i class="fas fa-info-circle"></i>
               <span>About</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#services" class="nav-link" data-page="services">
+          <li class="mobile-nav-item">
+            <a href="./services.html" class="mobile-nav-link">
               <i class="fas fa-truck-moving"></i>
               <span>Services</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./booking.html" class="nav-link" data-page="booking">
+          <li class="mobile-nav-item">
+            <a href="./booking.html" class="mobile-nav-link">
               <i class="fas fa-calendar-check"></i>
               <span>Booking</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./contributors.html" class="nav-link" data-page="contributors">
+          <li class="mobile-nav-item">
+            <a href="./contributors.html" class="mobile-nav-link">
               <i class="fas fa-users"></i>
               <span>Contributors</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./pricing.html" class="nav-link" data-page="pricing">
+          <li class="mobile-nav-item">
+            <a href="./pricing.html" class="mobile-nav-link">
               <i class="fas fa-tags"></i>
               <span>Pricing</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./tracking.html" class="nav-link" data-page="tracking">
+          <li class="mobile-nav-item">
+            <a href="./tracking.html" class="mobile-nav-link">
               <i class="fas fa-map-marker-alt"></i>
               <span>Track Your Car</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./gallery.html" class="nav-link" data-page="gallery">
+          <li class="mobile-nav-item">
+            <a href="./gallery.html" class="mobile-nav-link">
               <i class="fas fa-images"></i>
               <span>Gallery</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./contact.html" class="nav-link" data-page="contact">
+          <li class="mobile-nav-item">
+            <a href="./contact.html" class="mobile-nav-link">
               <i class="fas fa-phone"></i>
               <span>Contact</span>
             </a>
           </li>
+          <li class="mobile-nav-item">
+            <a href="./enquiry.html" class="mobile-nav-link">
+              <i class="fas fa-question-circle"></i>
+              <span>Enquiry</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="./blog.html" class="mobile-nav-link">
+              <i class="fas fa-blog"></i>
+              <span>Blog</span>
+            </a>
+          </li>
         </ul>
-
-        <!-- Right Actions -->
-        <div class="nav-actions">
-          <a href="./enquiry.html" class="nav-link enquiry-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-          <a href="./blog.html" class="nav-link blog-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-          <a href="#login" class="login-btn">
+        <div class="mobile-nav-actions">
+          <a href="./login.html" class="mobile-login-btn">
             <i class="fas fa-user"></i>
             <span>Login</span>
           </a>
+          <a href="./booking.html" class="mobile-cta-btn">
+            <i class="fas fa-truck"></i>
+            <span>Book Instantly</span>
+          </a>
+        </div>
+        <div class="mobile-contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@hariharcarcarriers.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <span>24/7 Support</span>
+          </div>
         </div>
       </nav>
 
-      <!-- Mobile Menu Button -->
-      <button
-        class="mobile-menu-btn"
-        id="mobileMenuBtn"
-        aria-label="Toggle mobile menu"
-      >
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
+      <!-- Navigation Overlay -->
+      <div class="nav-overlay" id="navOverlay"></div>
     </div>
-
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-      <div class="mobile-nav-header">
-        <div class="mobile-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-          <span>Harihar Car Carriers</span>
-        </div>
-        <button
-          class="mobile-close-btn"
-          id="mobileCloseBtn"
-          aria-label="Close mobile menu"
-        >
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <ul class="mobile-nav-list">
-        <li class="mobile-nav-item">
-          <a href="../index.html" class="mobile-nav-link active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./about.html" class="mobile-nav-link">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="#services" class="mobile-nav-link">
-            <i class="fas fa-truck-moving"></i>
-            <span>Services</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./booking.html" class="mobile-nav-link">
-            <i class="fas fa-calendar-check"></i>
-            <span>Booking</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./contributors.html" class="mobile-nav-link">
-            <i class="fas fa-users"></i>
-            <span>Contributors</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pricing.html" class="mobile-nav-link">
-            <i class="fas fa-tags"></i>
-            <span>Pricing</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./tracking.html" class="mobile-nav-link">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Track Your Car</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./gallery.html" class="mobile-nav-link">
-            <i class="fas fa-images"></i>
-            <span>Gallery</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./contact.html" class="mobile-nav-link">
-            <i class="fas fa-phone"></i>
-            <span>Contact</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./enquiry.html" class="mobile-nav-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./blog.html" class="mobile-nav-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-        </li>
-      </ul>
-      <div class="mobile-nav-actions">
-        <a href="#login" class="mobile-login-btn">
-          <i class="fas fa-user"></i>
-          <span>Login</span>
-        </a>
-        <a href="./booking.html" class="mobile-cta-btn">
-          <i class="fas fa-truck"></i>
-          <span>Book Instantly</span>
-        </a>
-      </div>
-      <div class="mobile-contact-info">
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <span>+91 98765 43210</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <span>info@hariharcarcarriers.com</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-clock"></i>
-          <span>24/7 Support</span>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Navigation Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
-  </div>
-</header>
+  </header>
 
   <!-- HERO -->
   <section class="blog-hero">
@@ -401,6 +414,30 @@
         readtime: "4 min read",
         image: "../assets/images/car3.png",
         excerpt: "From pickup to delivery, our service focuses on safety, timely updates and competitive pricing. Here’s how we stand out."
+      },
+      {
+        id: 4,
+        title: "The Future of Vehicle Transport: Trends and Technologies",
+        date: "November 1, 2025",
+        readtime: "7 min read",
+        image: "https://th.bing.com/th/id/R.aa0c3587e562e6c91c36f8fad94c459d?rik=usDMJxGXKuoZtQ&riu=http%3a%2f%2ftechsouls.co.uk%2fwp-content%2fuploads%2f2024%2f03%2fFuture-of-Mobility-Tech-Innovations-in-Transportation-1024x574.png&ehk=eVQJSTMibrJNk2b82Jg5LClpkcfHzIhwACz4zklS54Q%3d&risl=&pid=ImgRaw&r=0",
+        excerpt: "Discover how AI, IoT, and electric vehicles are revolutionizing vehicle transportation, making it safer, faster, and more eco-friendly."
+      },
+      {
+        id: 5,
+        title: "Essential Tips for Preparing Your Vehicle for Transport",
+        date: "October 10, 2025",
+        readtime: "6 min read",
+        image: "https://tse2.mm.bing.net/th/id/OIP.gT5n9pq2unukUGLVamJsSAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
+        excerpt: "Properly preparing your car before shipment can prevent damage and delays. Learn how to prep your vehicle for a smooth transport experience."
+      },
+      {
+        id: 6,
+        title: "Green Transport Initiatives in the Logistics Industry",
+        date: "September 15, 2025",
+        readtime: "5 min read",
+        image: "https://tse4.mm.bing.net/th/id/OIP.TPHlJt5IJQyCZyX7fx4BhwHaEO?rs=1&pid=ImgDetMain&o=7&rm=3",
+        excerpt: "Sustainability is driving changes in the transport sector. Explore eco-friendly innovations and how logistics companies are reducing their carbon footprint."
       }
     ];
 
@@ -425,6 +462,24 @@
       grid.appendChild(card);
     });
   </script>
+  <script src="../js/modules/search.js"></script>
+  <script src="../js/modules/navbar.js"></script>
   <script src="../js/modules/themes.js"></script>
+  <script src="../js/modules/floating-book-button.js"></script>
+  <script src="../js/modules/floating-call-button.js"></script>
+  <script src="../js/modules/floating-whatsapp-button.js"></script>
+  <script src="../js/modules/quote-modal.js"></script>
+  <script src="../js/modules/sticky-quote-button.js"></script>
+  <script src="../js/modules/floating-chatbot-button.js"></script>
+  <script src="../js/modules/chatbot-modal.js"></script>
+  <script src="../js/modules/back-to-top-button.js"></script>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 </body>
+
+</html>
+
 </html>
