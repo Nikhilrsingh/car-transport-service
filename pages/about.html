@@ -112,24 +112,38 @@
       /* About Section */
       .about {
         padding: 100px 0;
-        background-color: #333;
+        background-color: rgba(15, 15, 15, 0.2);
       }
 
       .section-title {
         text-align: center;
         margin-bottom: 60px;
       }
+      .section-divider {
+  width: 100%;
+  height: 2px;
+  background-color: #444;
+  margin: 50px 0;
+}
+
 
       .section-title h2 {
         font-size: 2.5rem;
         margin-bottom: 15px;
-        color: #ff6347;
+       
+        text-decoration: underline;
+  text-shadow: 0 0 10px rgba(255, 99, 71, 0.6); /* glow effect */
+  color: #ff8667; /* lighter shade on hover */
+  transition: all 0.3s ease-in-out;
       }
 
       .section-title p {
         color: #ccc;
         max-width: 600px;
         margin: 0 auto;
+         text-align: center;
+  line-height: 1.8; /* increased from default line-height */
+  margin-bottom: 18px; 
       }
 
       .about-content {
@@ -146,6 +160,7 @@
         font-size: 1.8rem;
         margin-bottom: 20px;
         color: #ff6347;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
       }
 
       .about-text p {
@@ -159,10 +174,13 @@
         overflow: hidden;
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         transition: all 0.4s ease;
+        
       }
 
       .about-image:hover {
-        transform: scale(1.02);
+      
+        transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
       }
 
       .about-image img {
@@ -717,11 +735,18 @@
     <section class="about">
       <div class="container">
         <div class="section-title fade-in">
+          <div class="section-divider">
+
           <h2>About Harihar Car Carriers</h2>
-          <p>
+          </div>
+          <br>
+            <p>
+             <bold>
             Your trusted partner for safe and reliable vehicle transportation
             across India
-          </p>
+            </bold>
+
+            </p>
         </div>
         <div class="about-content">
           <div class="about-text fade-in">
@@ -747,6 +772,7 @@
               src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
               alt="Our Car Carrier Fleet"
             />
+         
           </div>
         </div>
       </div>
