@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="./css/components/floating-call-button.css" />
+    <link rel="stylesheet" href="./css/components/back-to-top-button.css" />
+    <link rel="stylesheet" href="./css/components/backtoBottom.css" />
+    <link rel="stylesheet" href="./css/components/back-to-top-button.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f6f6f6;
+      }
+
+      .container {
+        background: white;
+        width: 380px;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        transition: 0.4s ease;
+      }
+
+      .tabs {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #eee;
+      }
+
+      .tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px 0;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #777;
+      }
+
+      .tab.active {
+        color: #6c63ff;
+        border-bottom: 3px solid #6c63ff;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      label {
+        display: block;
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 6px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px 40px 10px 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input:focus {
+        border-color: #6c63ff;
+        box-shadow: 0 0 6px rgba(108, 99, 255, 0.3);
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 35px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #777;
+      }
+
+      .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        margin-bottom: 15px;
+      }
+
+      .options label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        color: #555;
+      }
+
+      .options a {
+        color: #6c63ff;
+        text-decoration: none;
+      }
+
+      .options a:hover {
+        text-decoration: underline;
+      }
+
+      .btn {
+        width: 100%;
+        background: #6c63ff;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: #574bff;
+      }
+
+      .google-btn {
+        margin-top: 15px;
+        width: 100%;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: 0.3s;
+      }
+
+      .google-btn:hover {
+        background: #f7f7f7;
+      }
+
+      .google-btn img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .footer {
+        margin-top: 15px;
+        font-size: 14px;
+        text-align: center;
+        color: #555;
+      }
+
+      .footer a {
+        color: #6c63ff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Hide/Show Signup Form */
+      .form {
+        display: none;
+      }
+
+      .form.active {
+        display: block;
+      }
+
+      /* Enhanced Animations */
+      @keyframes slideInFromRight {
+        from {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromTop {
+        from {
+          opacity: 0;
+          transform: translateY(-100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInFromBottom {
+        from {
+          opacity: 0;
+          transform: translateY(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes scaleUp {
+        from {
+          opacity: 0;
+          transform: scale(0.5) rotate(-5deg);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      @keyframes fadeInRotate {
+        from {
+          opacity: 0;
+          transform: rotate(-180deg) scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: rotate(0deg) scale(1);
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes slideInRotate {
+        from {
+          opacity: 0;
+          transform: translateX(-100px) rotate(-20deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0) rotate(0deg);
+        }
+      }
+
+      /* Container Animation */
+      .container {
+        animation: scaleUp 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      /* Tabs Animation - Slide from top */
+      .tabs {
+        animation: slideInFromTop 1s ease-out 0.3s backwards;
+      }
+
+      /* Individual Tab Animations */
+      .tab:nth-child(1) {
+        animation: slideInFromLeft 1s ease-out 0.6s backwards;
+      }
+
+      .tab:nth-child(2) {
+        animation: slideInFromRight 1s ease-out 0.6s backwards;
+      }
+
+      /* Form Title Animation */
+      h2 {
+        animation: bounceIn 1.2s ease-out 0.8s backwards;
+      }
+
+      /* Input Groups with staggered animations */
+      .form.active .input-group:nth-child(1) {
+        animation: slideInFromLeft 1s ease-out 1s backwards;
+      }
+
+      .form.active .input-group:nth-child(2) {
+        animation: slideInFromRight 1s ease-out 1.2s backwards;
+      }
+
+      .form.active .input-group:nth-child(3) {
+        animation: slideInFromLeft 1s ease-out 1.4s backwards;
+      }
+
+      .form.active .input-group:nth-child(4) {
+        animation: slideInFromRight 1s ease-out 1.6s backwards;
+      }
+
+      /* Options (Remember me & Forgot password) */
+      .form.active .options {
+        animation: slideInFromBottom 1s ease-out 1.8s backwards;
+      }
+
+      /* Primary Button Animation */
+      .form.active .btn {
+        animation: slideInFromBottom 1s ease-out 2s backwards;
+        transition: all 0.4s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
+      }
+
+      .btn:active {
+        transform: translateY(-1px);
+      }
+
+      /* Google Button Animation */
+      .form.active .google-btn {
+        animation: slideInFromLeft 1s ease-out 2.2s backwards;
+        transition: all 0.4s ease;
+      }
+
+      .google-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Footer Animation */
+      .form.active .footer {
+        animation: slideInFromBottom 1s ease-out 2.4s backwards;
+      }
+
+      /* Input Focus Effects */
+      input {
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        transform: scale(1.02);
+      }
+
+      /* Toggle Password Icon Animation */
+      .toggle-password {
+        transition: all 0.3s ease;
+      }
+
+      .toggle-password:hover {
+        transform: scale(1.2);
+        color: #6c63ff;
+      }
+
+      /* Tab Hover Effects */
+      .tab {
+        transition: all 0.3s ease;
+      }
+
+      .tab:hover {
+        transform: translateY(-2px);
+        color: #6c63ff;
+      }
+
+      .tab.active {
+        animation: bounceIn 0.5s ease;
+      }
+
+      /* Label Animation on Focus */
+      .input-group {
+        position: relative;
+      }
+
+      .input-group:focus-within label {
+        color: #6c63ff;
+        transform: translateX(5px);
+        transition: all 0.3s ease;
+      }
+
+      /* Checkbox Animation */
+      .options input[type="checkbox"] {
+        transition: transform 0.2s ease;
+      }
+
+      .options input[type="checkbox"]:checked {
+        transform: scale(1.1);
+      }
+
+      /* Link Hover Animation */
+      .options a,
+      .footer a {
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+      }
+
+      .options a:hover,
+      .footer a:hover {
+        transform: translateX(3px);
+      }
+
+      /* Form Switch Animation */
+      .form {
+        transition: all 0.5s ease;
+      }
+
+      .form.active {
+        animation: fadeInRotate 1s ease-out;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="tabs">
+        <div class="tab active" id="login-tab">Login</div>
+        <div class="tab" id="signup-tab">Sign Up</div>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div class="form active" id="login-form">
+        <h2>Welcome Back 👋</h2>
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="Enter your email" />
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input
+            type="password"
+            id="login-password"
+            placeholder="Enter your password"
+          />
+          <span
+            class="toggle-password"
+            onclick="togglePassword('login-password', this)"
+            >👁️</span
+          >
+        </div>
+        <div class="options">
+          <label><input type="checkbox" id="remember" /> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button class="btn" onclick="login()">Login</button>
+
+        <button class="google-btn" onclick="continueWithGoogle()">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
+            alt="Google"
+          />
+          Continue with Google
+        </button>
+        <div class="footer">
+          Don’t have an account? <a href="#" onclick="showSignup()">Sign up</a>
+        </div>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div class="form" id="signup-form">
+        <h2>Create Account 📝</h2>
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" id="signup-name" placeholder="Enter your name" />
+        </div>
+        <div class="input-group">
+          <label>Email</label>
+          <input
+            type="email"
+            id="signup-email"
+            placeholder="Enter your email"
+          />
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input
+            type="password"
+            id="signup-password"
+            placeholder="Create a password"
+          />
+          <span
+            class="toggle-password"
+            onclick="togglePassword('signup-password', this)"
+            >👁️</span
+          >
+        </div>
+        <button class="btn" onclick="signup()">Sign Up</button>
+
+        <button class="google-btn" onclick="continueWithGoogle()">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
+            alt="Google"
+          />
+          Continue with Google
+        </button>
+
+        <div class="footer">
+          Already have an account? <a href="#" onclick="showLogin()">Login</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const loginTab = document.getElementById("login-tab");
+      const signupTab = document.getElementById("signup-tab");
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+
+      loginTab.addEventListener("click", showLogin);
+      signupTab.addEventListener("click", showSignup);
+
+      function showLogin() {
+        loginForm.classList.add("active");
+        signupForm.classList.remove("active");
+        loginTab.classList.add("active");
+        signupTab.classList.remove("active");
+      }
+
+      function showSignup() {
+        signupForm.classList.add("active");
+        loginForm.classList.remove("active");
+        signupTab.classList.add("active");
+        loginTab.classList.remove("active");
+      }
+
+      function togglePassword(id, el) {
+        const input = document.getElementById(id);
+        if (input.type === "password") {
+          input.type = "text";
+          el.textContent = "🙈";
+        } else {
+          input.type = "password";
+          el.textContent = "👁️";
+        }
+      }
+
+      function login() {
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+        if (!email || !password) {
+          alert("Please fill in all fields!");
+          return;
+        }
+        alert(`Welcome back, ${email}!`);
+      }
+
+      function signup() {
+        const name = document.getElementById("signup-name").value;
+        const email = document.getElementById("signup-email").value;
+        const password = document.getElementById("signup-password").value;
+        if (!name || !email || !password) {
+          alert("Please fill all fields!");
+          return;
+        }
+        alert(`Account created for ${name}!`);
+      }
+
+      function continueWithGoogle() {
+        alert("Redirecting to Google Sign-In...");
+      }
+    </script>
+
+    <!-- Top to Bottom Button -->
+    <button class="back-to-bottom" id="backToBottom">
+      <i class="fas fa-arrow-down"></i>
+    </button>
+
+    <script src="./js/modules/floating-call-button.js"></script>
+    <script src="./js/modules/back-to-top-button.js"></script>
+    <script src="./js/modules/backtoBottom.js"></script>
+  </body>
+</html>

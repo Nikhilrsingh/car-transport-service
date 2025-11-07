@@ -1,0 +1,116 @@
+/* 🔝 Back to Top Button - Enhanced Styling */
+
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    /* ensure back-to-top sits above floating action buttons (like Book Now) */
+    z-index: 1100;
+    box-shadow: 0 4px 20px rgba(255, 99, 71, 0.4);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    animation: slideUp 0.4s ease;
+}
+
+.back-to-top:hover {
+    background: linear-gradient(135deg, #ff4500, #ff6347);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(255, 99, 71, 0.6);
+}
+
+.back-to-top:active {
+    transform: translateY(-2px) scale(0.95);
+}
+
+/* Icon animation */
+.back-to-top i {
+    transition: transform 0.3s ease;
+}
+
+.back-to-top:hover i {
+    transform: translateY(-3px);
+}
+
+/* Slide up animation for button appearance */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tooltip for back to top button */
+.back-to-top::before {
+    content: "Back to Top";
+    position: absolute;
+    bottom: 65px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.back-to-top:hover::before {
+    opacity: 1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+
+    .back-to-top::before {
+        bottom: 60px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .back-to-top::before {
+        bottom: 55px;
+    }
+}
