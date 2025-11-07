@@ -46,7 +46,10 @@
           });
         }, { threshold: 0.5 });
 
-        statsObserver.observe(document.querySelector('.service-stats'));
+        const serviceStats = document.querySelector('.service-stats');
+        if (serviceStats) {
+            statsObserver.observe(serviceStats);
+        }
 
         // Hover effects for service cards
         const serviceCards = document.querySelectorAll('.service-card');
