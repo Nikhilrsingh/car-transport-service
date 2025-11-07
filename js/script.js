@@ -102,7 +102,7 @@ if (video) {
   });
 }
 
-// Testimonial Slider Functionality now created seperately in js/modules/testimonial.js
+// Testimonial Slider Functionality now created separately in js/modules/testimonial.js
 
 
 // Load shared footer dynamically
