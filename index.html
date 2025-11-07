@@ -8,6 +8,7 @@
   <base href="./">
   <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
   <link rel="stylesheet" href="./css/components/testimonial.css">
+  <link rel="stylesheet" href="./css/components/rating.css">
   <link rel="stylesheet" href="./css/components/tracking.css">
   <link rel="stylesheet" href="./css/components/navbar.css">
   <link rel="stylesheet" href="./css/components/footer.css">
@@ -517,6 +518,24 @@
         </div>
       </div> -->
       </div>
+
+      <!-- Website Rating Section -->
+      <div class="website-rating-section">
+        <div class="rating-container">
+          <h3>Rate Your Experience</h3>
+          <p>How would you rate our website?</p>
+          <div class="star-rating" id="websiteRating">
+            <i class="far fa-star" data-rating="1"></i>
+            <i class="far fa-star" data-rating="2"></i>
+            <i class="far fa-star" data-rating="3"></i>
+            <i class="far fa-star" data-rating="4"></i>
+            <i class="far fa-star" data-rating="5"></i>
+          </div>
+          <div class="rating-feedback" id="ratingFeedback"></div>
+          <div class="rating-message" id="ratingMessage"></div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Contact CTA Section -->
@@ -650,6 +669,7 @@
 
 
   <script src="./js/modules/testimonial.js"></script>
+  <script src="./js/modules/rating.js"></script>
 
   <div id="car" class="car">🏎️</div>
 
