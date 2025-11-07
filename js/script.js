@@ -113,47 +113,38 @@ fetch('pages/footer.html')
   })
   .catch(error => console.error('Error loading footer:', error));
 
-// Contact Form Functionality
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contactForm");
 
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Get form data
     const formData = new FormData(contactForm);
     const name = contactForm.querySelector('input[type="text"]').value;
     const phone = contactForm.querySelector('input[type="tel"]').value;
     const email = contactForm.querySelector('input[type="email"]').value;
     const vehicleType = contactForm.querySelector("select").value;
 
-    // Simulate form submission
     const submitBtn = contactForm.querySelector(".submit-btn");
     const originalText = submitBtn.innerHTML;
 
-    // Show loading state
     submitBtn.innerHTML =
       '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
     submitBtn.disabled = true;
 
-    // Simulate API call
     setTimeout(() => {
-      // Show success message
       alert(
         `Thank you ${name}! Your quote request has been received. We'll contact you at ${phone} within 30 minutes.`
       );
 
-      // Reset form
       contactForm.reset();
 
-      // Reset button
       submitBtn.innerHTML = originalText;
       submitBtn.disabled = false;
     }, 2000);
   });
 
 
-  // Phone number formatting
   const phoneInput = contactForm.querySelector('input[type="tel"]');
   phoneInput.addEventListener("input", function (e) {
     let value = e.target.value.replace(/\D/g, "");
@@ -163,53 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
     e.target.value = value;
   });
 });
-
-// Load shared footer dynamically
-fetch('pages/footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
-  })
-  .catch(error => console.error('Error loading footer:', error));
-
-//    <!-- Preloader fade-out script -->
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  setTimeout(() => {
-    preloader.classList.add("fade-out");
-
-    setTimeout(() => {
-      preloader.style.display = "none";
-    }, 100);
-  }, 100);
-});
-
-// Back to Top Functionality - Moved to js/modules/back-to-top-button.js
-
-// Add input animations
-const inputs = document.querySelectorAll(
-  ".input-group input, .input-group select"
-);
-inputs.forEach((input) => {
-  input.addEventListener("focus", function () {
-    this.parentElement.style.transform = "scale(1.02)";
-  });
-
-  input.addEventListener("blur", function () {
-    this.parentElement.style.transform = "scale(1)";
-  });
-});
-
-// Phone number formatting
-const phoneInput = contactForm.querySelector('input[type="tel"]');
-phoneInput.addEventListener("input", function (e) {
-  let value = e.target.value.replace(/\D/g, "");
-  if (value.length > 0) {
-    value = value.match(/.{1,5}/g).join(" ");
-  }
-  e.target.value = value;
-});
-
 
 //Keypress-Activated Easter Egg 
 document.addEventListener("DOMContentLoaded", () => {
@@ -224,18 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-
-// <!-- Load Footer -->
-// Load footer
-fetch('./footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
-  })
-  .catch(error => {
-    console.error('Error loading footer:', error);
-  });
 
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
