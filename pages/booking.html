@@ -1,1256 +1,1077 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Vehicle Transport - Harihar Car Carriers</title>
-    <link rel="stylesheet" href="../css/components/navbar.css" />
-    <link rel="stylesheet" href="../css/components/floating-call-button.css" />
-    <link
-      rel="stylesheet"
-      href="../css/components/floating-whatsapp-button.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../css/components/floating-chatbot-button.css"
-    />
-    <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
-    <link rel="stylesheet" href="../css/components/quote-modal.css" />
-    <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
-    <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
-    <link rel="stylesheet" href="../css/components/backtoBottom.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    
+    <!-- Leaflet Control Geocoder CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css" />
+    
     <style>
-      @font-face {
-        font-family: "Poppins";
-        src: url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
-          url("./assets/fonts/Poppins-Regular.woff") format("woff");
-        font-weight: 400;
-        font-style: normal;
-      }
-
-      @font-face {
-        font-family: "Poppins";
-        src: url("./assets/fonts/Poppins-Bold.woff2") format("woff2"),
-          url("./assets/fonts/Poppins-Bold.woff") format("woff");
-        font-weight: 700;
-        font-style: normal;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Poppins", sans-serif;
-        height: 100%;
-        width: 100%;
-        background-color: #2b2b2b;
-        color: white;
-        line-height: 1.6;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-
-      /* Navbar Styles */
-      .navbar {
-        height: 5rem;
-        width: 98%;
-        background: rgba(44, 44, 44, 0.4);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        justify-self: center;
-        padding: 0 20px;
-        position: sticky;
-        top: 0;
-        z-index: 999;
-      }
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        gap: 82px;
-        padding-left: 0;
-        font-size: 20px;
-      }
-
-      nav ul li a {
-        position: relative;
-        padding: 6px 2px;
-        color: white;
-        text-decoration: none;
-        transition: color 0.25s ease;
-      }
-
-      nav ul li a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        height: 2px;
-        width: 0%;
-        background-color: #ff6347;
-        transition: width 0.25s ease;
-      }
-
-      nav ul li a:hover {
-        color: #ff6347;
-      }
-
-      nav ul li a:hover::after {
-        width: 100%;
-      }
-
-      nav ul li a.active {
-        color: #000;
-        background: #ff6347;
-        padding: 8px 12px;
-        border-radius: 4px;
-      }
-
-      .login-link {
-        background-color: #ff6347;
-        padding: 8px 12px;
-        border-radius: 4px;
-      }
-
-      .login-link:hover {
-        background-color: #ff4500;
-      }
-
-      .logo-container {
-        width: 100px;
-      }
-
-      .logo-container img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-      }
-
-      .left-logo {
-        height: 70px;
-        order: 1;
-      }
-
-      .right-logo {
-        height: 90px;
-        order: 3;
-      }
-
-      nav {
-        order: 2;
-      }
-
-      /* Hero Section */
-      .booking-hero {
-        padding: 150px 0 80px;
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-          url("https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
-        background-size: cover;
-        background-position: center;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .booking-hero h1 {
-        font-size: 3.5rem;
-        margin-bottom: 20px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      }
-
-      .booking-hero p {
-        font-size: 1.3rem;
-        max-width: 700px;
-        margin: 0 auto 30px;
-        opacity: 0.9;
-      }
-
-      /* Booking Section */
-      .booking-section {
-        padding: 100px 0;
-        background-color: #333;
-      }
-
-      .booking-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-        align-items: start;
-      }
-
-      /* Booking Form */
-      .booking-form-container {
-        background: linear-gradient(145deg, #2b2b2b, #333);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        border: 1px solid #444;
-        position: relative;
-      }
-
-      .booking-form-container::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #ff6347, #ff4500);
-      }
-
-      .form-header {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .form-header h2 {
-        font-size: 2rem;
-        color: white;
-        margin-bottom: 8px;
-      }
-
-      .form-header p {
-        color: #ff6347;
-        font-size: 1rem;
-      }
-
-      .booking-form {
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-      }
-
-      .form-group {
-        position: relative;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        color: #ccc;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .form-group label i {
-        color: #ff6347;
-        width: 16px;
-      }
-
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-        width: 100%;
-        padding: 15px;
-        background: #1a1a1a;
-        border: 2px solid #444;
-        border-radius: 10px;
-        color: white;
-        font-family: "Poppins", sans-serif;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-      }
-
-      .form-group input:focus,
-      .form-group select:focus,
-      .form-group textarea:focus {
-        outline: none;
-        border-color: #ff6347;
-        box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
-        background: #222;
-      }
-
-      .form-group input.error,
-      .form-group select.error,
-      .form-group textarea.error {
-        border-color: #ff3860;
-        box-shadow: 0 0 0 3px rgba(255, 56, 96, 0.1);
-      }
-
-      .error-message {
-        color: #ff3860;
-        font-size: 0.85rem;
-        margin-top: 5px;
-        display: none;
-      }
-
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-
-      .date-time-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-
-      .submit-btn {
-        background: linear-gradient(135deg, #ff6347, #ff4500);
-        color: white;
-        border: none;
-        padding: 18px 30px;
-        border-radius: 10px;
-        font-family: "Poppins", sans-serif;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        transition: all 0.3s ease;
-        margin-top: 10px;
-        box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
-      }
-
-      .submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
-        background: linear-gradient(135deg, #ff4500, #ff6347);
-      }
-
-      .submit-btn:disabled {
-        background: #666;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
-      }
-
-      /* Booking Info */
-      .booking-info {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-      }
-
-      .info-card {
-        background: #2b2b2b;
-        padding: 30px;
-        border-radius: 15px;
-        border-left: 4px solid #ff6347;
-        transition: all 0.3s ease;
-      }
-
-      .info-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      }
-
-      .info-header {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 20px;
-      }
-
-      .info-icon {
-        width: 50px;
-        height: 50px;
-        background: #ff6347;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-      }
-
-      .info-header h3 {
-        font-size: 1.3rem;
-        color: white;
-      }
-
-      .info-content ul {
-        list-style: none;
-        color: #ccc;
-      }
-
-      .info-content li {
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .info-content li i {
-        color: #ff6347;
-        font-size: 0.8rem;
-      }
-
-      /* Price Calculator */
-      .price-calculator {
-        background: linear-gradient(135deg, #2b2b2b, #333);
-        padding: 30px;
-        border-radius: 15px;
-        border: 1px solid #444;
-        margin-top: 20px;
-      }
-
-      .price-calculator h4 {
-        color: white;
-        margin-bottom: 15px;
-        text-align: center;
-      }
-
-      .price-breakdown {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 20px;
-      }
-
-      .price-item {
-        display: flex;
-        justify-content: space-between;
-        color: #ccc;
-        font-size: 0.9rem;
-      }
-
-      .price-total {
-        display: flex;
-        justify-content: space-between;
-        padding-top: 15px;
-        border-top: 1px solid #444;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #ff6347;
-      }
-
-      /* Success Modal */
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .modal-content {
-        background: #2b2b2b;
-        padding: 40px;
-        border-radius: 20px;
-        text-align: center;
-        max-width: 500px;
-        width: 90%;
-        border: 2px solid #ff6347;
-      }
-
-      .modal-icon {
-        font-size: 4rem;
-        color: #ff6347;
-        margin-bottom: 20px;
-      }
-
-      .modal h3 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-        color: white;
-      }
-
-      .modal p {
-        color: #ccc;
-        margin-bottom: 25px;
-        line-height: 1.6;
-      }
-
-      .modal-btn {
-        background: #ff6347;
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 8px;
-        font-family: "Poppins", sans-serif;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .modal-btn:hover {
-        background: #ff4500;
-        transform: translateY(-2px);
-      }
-
-      /* Toast Notification Styles */
-      .toast-container {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .toast {
-        background: #2b2b2b;
-        color: white;
-        padding: 16px 20px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        border-left: 4px solid #ff6347;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        max-width: 350px;
-        transform: translateX(400px);
-        opacity: 0;
-        transition: all 0.3s ease;
-      }
-
-      .toast.show {
-        transform: translateX(0);
-        opacity: 1;
-      }
-
-      .toast.hide {
-        transform: translateX(400px);
-        opacity: 0;
-      }
-
-      .toast-icon {
-        font-size: 1.5rem;
-        color: #ff6347;
-      }
-
-      .toast-content {
-        flex: 1;
-      }
-
-      .toast-title {
-        font-weight: 600;
-        margin-bottom: 4px;
-      }
-
-      .toast-message {
-        font-size: 0.9rem;
-        color: #ccc;
-      }
-
-      .toast-close {
-        background: none;
-        border: none;
-        color: #ccc;
-        cursor: pointer;
-        font-size: 1.2rem;
-        padding: 0;
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        transition: all 0.2s ease;
-      }
-
-      .toast-close:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-      }
-
-      /* Responsive Design */
-      @media (max-width: 992px) {
-        nav ul {
-          gap: 40px;
-          font-size: 18px;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #2b2b2b;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .booking-hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
         }
 
         .booking-hero h1 {
-          font-size: 2.8rem;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .booking-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            padding: 80px 0;
+            background-color: #333;
         }
 
         .booking-container {
-          grid-template-columns: 1fr;
-          gap: 40px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .navbar {
-          flex-direction: column;
-          height: auto;
-          padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
         }
 
-        .left-logo,
-        .right-logo {
-          order: 0;
-          margin-bottom: 15px;
-        }
-
-        nav {
-          order: 3;
-          width: 100%;
-        }
-
-        nav ul {
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-
-        .booking-hero h1 {
-          font-size: 2.2rem;
-        }
-
+        /* Booking Form */
         .booking-form-container {
-          padding: 30px 25px;
+            background: linear-gradient(145deg, #2b2b2b, #333);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid #444;
+            position: relative;
         }
 
-        .form-row,
+        .booking-form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6347, #ff4500);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: #ff6347;
+            font-size: 1rem;
+        }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group label i {
+            color: #ff6347;
+            width: 16px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 2px solid #444;
+            border-radius: 10px;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6347;
+            box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+            background: #222;
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #ff3860;
+            box-shadow: 0 0 0 3px rgba(255, 56, 96, 0.1);
+        }
+
+        .error-message {
+            color: #ff3860;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
         .date-time-row {
-          grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
+        .location-input-wrapper {
+            position: relative;
+        }
+
+        .map-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff6347;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .map-btn:hover {
+            background: #ff4500;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff6347, #ff4500);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 10px;
+            font-family: "Poppins", sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
+            background: linear-gradient(135deg, #ff4500, #ff6347);
+        }
+
+        .submit-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Map Container */
+        .map-container-wrapper {
+            background: #2b2b2b;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #444;
+        }
+
+        .map-header {
+            margin-bottom: 20px;
+        }
+
+        .map-header h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .map-header p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 15px;
+            border: 2px solid #444;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #map:hover {
+            box-shadow: 0 15px 40px rgba(255, 99, 71, 0.2);
+        }
+
+        .map-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .map-control-btn {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: "Poppins", sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-control-btn:hover {
+            background: #ff6347;
+        }
+
+        .map-control-btn.active {
+            background: #ff6347;
+        }
+
+        .route-info {
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .route-info.show {
+            display: block;
+        }
+
+        .route-info h4 {
+            color: #ff6347;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .route-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .route-detail-item {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .route-detail-item label {
+            color: #999;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .route-detail-item span {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Success Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #2b2b2b;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid #ff6347;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: #ff6347;
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .modal p {
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-btn {
+            background: #ff6347;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            background: #ff4500;
+            transform: translateY(-2px);
+        }
+
+        /* Toast Notification */
         .toast-container {
-          top: 10px;
-          right: 10px;
-          left: 10px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .toast {
-          max-width: 100%;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .booking-hero h1 {
-          font-size: 1.8rem;
-        }
-
-        .booking-form-container {
-          padding: 25px 20px;
-        }
-
-        .info-card {
-          padding: 20px 15px;
-        }
-      }
-
-      /* Animation */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
+            background: #2b2b2b;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #ff6347;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 350px;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
 
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .fade-in {
-        animation: fadeInUp 0.6s ease forwards;
-      }
-
-      @keyframes shake {
-        0%,
-        100% {
-          transform: translateX(0);
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
         }
 
-        25% {
-          transform: translateX(-5px);
+        .toast.hide {
+            transform: translateX(400px);
+            opacity: 0;
         }
 
-        75% {
-          transform: translateX(5px);
+        .toast-icon {
+            font-size: 1.5rem;
+            color: #ff6347;
         }
-      }
 
-      .shake {
-        animation: shake 0.5s ease-in-out;
-      }
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .toast-message {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .toast-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* Leaflet Custom Styles */
+        .leaflet-popup-content-wrapper {
+            background: #2b2b2b;
+            color: white;
+            border-radius: 10px;
+        }
+
+        .leaflet-popup-tip {
+            background: #2b2b2b;
+        }
+
+        .leaflet-control-geocoder {
+            background: #2b2b2b;
+            border: 2px solid #444;
+        }
+
+        .leaflet-control-geocoder input {
+            background: #1a1a1a;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .leaflet-routing-container {
+            background: #2b2b2b;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .booking-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .booking-form-container,
+            .map-container-wrapper {
+                padding: 25px 20px;
+            }
+
+            .form-row,
+            .date-time-row {
+                grid-template-columns: 1fr;
+            }
+
+            #map {
+                height: 400px;
+            }
+
+            .route-details {
+                flex-direction: column;
+            }
+
+            .map-controls {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .booking-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            #map {
+                height: 350px;
+            }
+
+            .toast-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+            }
+
+            .toast {
+                max-width: 100%;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
     </style>
-    <link rel="stylesheet" href="../css/components/floating-button.css" />
-  </head>
+</head>
 
-  <body>
-    <!-- Enhanced Navigation Component -->
-    <header class="header">
-      <div class="navbar-container">
-        <div class="navbar">
-          <!-- Left Logo -->
-          <div class="logo-container left-logo">
-            <img
-              src="../assets/images/left-logo.jpg"
-              alt="Harihar Car Carriers"
-              class="logo-img"
-            />
-          </div>
-
-          <!-- Desktop Navigation -->
-          <nav class="desktop-nav" aria-label="Main navigation">
-            <ul class="nav-list">
-              <li class="nav-item">
-                <a
-                  href="../index.html"
-                  class="nav-link active"
-                  data-page="home"
-                >
-                  <i class="fas fa-home"></i>
-                  <span>Home</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./about.html" class="nav-link" data-page="about">
-                  <i class="fas fa-info-circle"></i>
-                  <span>About</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./services.html" class="nav-link" data-page="services">
-                  <i class="fas fa-truck-moving"></i>
-                  <span>Services</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./booking.html" class="nav-link" data-page="booking">
-                  <i class="fas fa-calendar-check"></i>
-                  <span>Booking</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  href="./contributors.html"
-                  class="nav-link"
-                  data-page="contributors"
-                >
-                  <i class="fas fa-users"></i>
-                  <span>Contributors</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./pricing.html" class="nav-link" data-page="pricing">
-                  <i class="fas fa-tags"></i>
-                  <span>Pricing</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./tracking.html" class="nav-link" data-page="tracking">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <span>Track Your Car</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./gallery.html" class="nav-link" data-page="gallery">
-                  <i class="fas fa-images"></i>
-                  <span>Gallery</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./contact.html" class="nav-link" data-page="contact">
-                  <i class="fas fa-phone"></i>
-                  <span>Contact</span>
-                </a>
-              </li>
-            </ul>
-
-            <!-- Right Actions -->
-            <div class="nav-actions">
-              <a href="./enquiry.html" class="nav-link enquiry-link">
-                <i class="fas fa-question-circle"></i>
-                <span>Enquiry</span>
-              </a>
-              <a href="./blog.html" class="nav-link blog-link">
-                <i class="fas fa-blog"></i>
-                <span>Blog</span>
-              </a>
-              <a href="./login.html" class="login-btn">
-                <i class="fas fa-user"></i>
-                <span>Login</span>
-              </a>
-            </div>
-          </nav>
-
-          <!-- Mobile Menu Button -->
-          <button
-            class="mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-label="Toggle mobile menu"
-          >
-            <span class="menu-bar"></span>
-            <span class="menu-bar"></span>
-            <span class="menu-bar"></span>
-          </button>
-        </div>
-
-        <!-- Mobile Navigation -->
-        <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-          <div class="mobile-nav-header">
-            <div class="mobile-logo">
-              <img
-                src="../assets/images/left-logo.jpg"
-                alt="Harihar Car Carriers"
-              />
-              <span>Harihar Car Carriers</span>
-            </div>
-            <button
-              class="mobile-close-btn"
-              id="mobileCloseBtn"
-              aria-label="Close mobile menu"
-            >
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-          <ul class="mobile-nav-list">
-            <li class="mobile-nav-item">
-              <a href="../index.html" class="mobile-nav-link active">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./about.html" class="mobile-nav-link">
-                <i class="fas fa-info-circle"></i>
-                <span>About</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./services.html" class="mobile-nav-link">
-                <i class="fas fa-truck-moving"></i>
-                <span>Services</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./booking.html" class="mobile-nav-link">
-                <i class="fas fa-calendar-check"></i>
-                <span>Booking</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./contributors.html" class="mobile-nav-link">
-                <i class="fas fa-users"></i>
-                <span>Contributors</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./pricing.html" class="mobile-nav-link">
-                <i class="fas fa-tags"></i>
-                <span>Pricing</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./tracking.html" class="mobile-nav-link">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Track Your Car</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./gallery.html" class="mobile-nav-link">
-                <i class="fas fa-images"></i>
-                <span>Gallery</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./contact.html" class="mobile-nav-link">
-                <i class="fas fa-phone"></i>
-                <span>Contact</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./enquiry.html" class="mobile-nav-link">
-                <i class="fas fa-question-circle"></i>
-                <span>Enquiry</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="./blog.html" class="mobile-nav-link">
-                <i class="fas fa-blog"></i>
-                <span>Blog</span>
-              </a>
-            </li>
-          </ul>
-          <div class="mobile-nav-actions">
-            <a href="./login.html" class="mobile-login-btn">
-              <i class="fas fa-user"></i>
-              <span>Login</span>
-            </a>
-            <a href="./booking.html" class="mobile-cta-btn">
-              <i class="fas fa-truck"></i>
-              <span>Book Instantly</span>
-            </a>
-          </div>
-          <div class="mobile-contact-info">
-            <div class="contact-item">
-              <i class="fas fa-phone"></i>
-              <span>+91 98765 43210</span>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <span>info@hariharcarcarriers.com</span>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-clock"></i>
-              <span>24/7 Support</span>
-            </div>
-          </div>
-        </nav>
-
-        <!-- Navigation Overlay -->
-        <div class="nav-overlay" id="navOverlay"></div>
-      </div>
-    </header>
-
+<body>
     <!-- Hero Section -->
     <section class="booking-hero">
-      <div class="container">
-        <h1 class="fade-in">Book Your Vehicle Transport</h1>
-        <p class="fade-in delay-1">
-          Quick, secure, and reliable vehicle transportation booking. Get
-          instant confirmation and real-time tracking.
-        </p>
-      </div>
+        <div class="container">
+            <h1 class="fade-in">Book Your Vehicle Transport</h1>
+            <p class="fade-in">Quick, secure, and reliable vehicle transportation booking with interactive map</p>
+        </div>
     </section>
 
     <!-- Booking Section -->
     <section class="booking-section">
-      <div class="container">
-        <div class="booking-container">
-          <!-- Booking Form -->
-          <div class="booking-form-container fade-in">
-            <div class="form-header">
-              <h2>Transportation Details</h2>
-              <p>Fill in your vehicle and transport requirements</p>
+        <div class="container">
+            <div class="booking-container">
+                <!-- Booking Form -->
+                <div class="booking-form-container fade-in">
+                    <div class="form-header">
+                        <h2>Transportation Details</h2>
+                        <p>Fill in your vehicle and transport requirements</p>
+                    </div>
+                    <form class="booking-form" id="bookingForm">
+                        <!-- Personal Information -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required
+                                    placeholder="Enter your full name">
+                                <div class="error-message" id="nameError">Please enter your full name</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit number">
+                                <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                            <div class="error-message" id="emailError">Please enter a valid email address</div>
+                        </div>
+
+                        <!-- Vehicle Information -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type *</label>
+                                <select id="vehicleType" name="vehicleType" required>
+                                    <option value="">Select Vehicle Type</option>
+                                    <option value="hatchback">Hatchback</option>
+                                    <option value="sedan">Sedan</option>
+                                    <option value="suv">SUV</option>
+                                    <option value="luxury">Luxury Car</option>
+                                    <option value="bike">Motorcycle</option>
+                                    <option value="commercial">Commercial Vehicle</option>
+                                </select>
+                                <div class="error-message" id="vehicleError">Please select vehicle type</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicleModel"><i class="fas fa-cog"></i> Vehicle Model</label>
+                                <input type="text" id="vehicleModel" name="vehicleModel"
+                                    placeholder="e.g., Hyundai Creta">
+                            </div>
+                        </div>
+
+                        <!-- Location Information -->
+                        <div class="form-group">
+                            <label for="pickupLocation"><i class="fas fa-map-marker-alt"></i> Pickup Location *</label>
+                            <div class="location-input-wrapper">
+                                <input type="text" id="pickupLocation" name="pickupLocation" required
+                                    placeholder="Enter pickup address or click map">
+                                <button type="button" class="map-btn" onclick="selectPickupOnMap()">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="pickupError">Please enter pickup location</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dropLocation"><i class="fas fa-flag-checkered"></i> Drop Location *</label>
+                            <div class="location-input-wrapper">
+                                <input type="text" id="dropLocation" name="dropLocation" required
+                                    placeholder="Enter drop address or click map">
+                                <button type="button" class="map-btn" onclick="selectDropOnMap()">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="dropError">Please enter drop location</div>
+                        </div>
+
+                        <!-- Date & Time -->
+                        <div class="date-time-row">
+                            <div class="form-group">
+                                <label for="pickupDate"><i class="fas fa-calendar"></i> Preferred Pickup Date *</label>
+                                <input type="date" id="pickupDate" name="pickupDate" required>
+                                <div class="error-message" id="dateError">Please select pickup date</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pickupTime"><i class="fas fa-clock"></i> Preferred Time</label>
+                                <select id="pickupTime" name="pickupTime">
+                                    <option value="any">Any Time</option>
+                                    <option value="morning">Morning (8 AM - 12 PM)</option>
+                                    <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                                    <option value="evening">Evening (5 PM - 8 PM)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="form-group">
+                            <label for="additionalInfo"><i class="fas fa-comment"></i> Additional Information</label>
+                            <textarea id="additionalInfo" name="additionalInfo"
+                                placeholder="Any special requirements or instructions..." rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Confirm Booking</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Map Section -->
+                <div class="map-container-wrapper fade-in">
+                    <div class="map-header">
+                        <h3>
+                            <i class="fas fa-map-marked-alt"></i>
+                            Interactive Location Map
+                        </h3>
+                        <p>Click on the map to select pickup and drop-off locations, or use the search function</p>
+                    </div>
+                    
+                    <div id="map"></div>
+                    
+                    <div class="map-controls">
+                        <button class="map-control-btn" id="clearRouteBtn" onclick="clearRoute()">
+                            <i class="fas fa-trash"></i> Clear Route
+                        </button>
+                        <button class="map-control-btn" id="centerMapBtn" onclick="centerMap()">
+                            <i class="fas fa-crosshairs"></i> Center Map
+                        </button>
+                        <button class="map-control-btn" id="showRouteBtn" onclick="showRoute()">
+                            <i class="fas fa-route"></i> Show Route
+                        </button>
+                    </div>
+
+                    <div class="route-info" id="routeInfo">
+                        <h4><i class="fas fa-info-circle"></i> Route Information</h4>
+                        <div class="route-details">
+                            <div class="route-detail-item">
+                                <label>Distance</label>
+                                <span id="routeDistance">-- km</span>
+                            </div>
+                            <div class="route-detail-item">
+                                <label>Estimated Time</label>
+                                <span id="routeTime">-- hours</span>
+                            </div>
+                            <div class="route-detail-item">
+                                <label>Estimated Cost</label>
+                                <span id="routeCost">₹ --</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form class="booking-form" id="bookingForm">
-              <!-- Personal Information -->
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="fullName"
-                    ><i class="fas fa-user"></i> Full Name *</label
-                  >
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    required
-                    placeholder="Enter your full name"
-                  />
-                  <div class="error-message" id="nameError">
-                    Please enter your full name
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="phone"
-                    ><i class="fas fa-phone"></i> Phone Number *</label
-                  >
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    placeholder="Enter 10-digit number"
-                  />
-                  <div class="error-message" id="phoneError">
-                    Please enter a valid 10-digit phone number
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="email"
-                  ><i class="fas fa-envelope"></i> Email Address *</label
-                >
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="Enter your email"
-                />
-                <div class="error-message" id="emailError">
-                  Please enter a valid email address
-                </div>
-              </div>
-
-              <!-- Vehicle Information -->
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="vehicleType"
-                    ><i class="fas fa-car"></i> Vehicle Type *</label
-                  >
-                  <select id="vehicleType" name="vehicleType" required>
-                    <option value="">Select Vehicle Type</option>
-                    <option value="hatchback">Hatchback</option>
-                    <option value="sedan">Sedan</option>
-                    <option value="suv">SUV</option>
-                    <option value="luxury">Luxury Car</option>
-                    <option value="bike">Motorcycle</option>
-                    <option value="commercial">Commercial Vehicle</option>
-                  </select>
-                  <div class="error-message" id="vehicleError">
-                    Please select vehicle type
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="vehicleModel"
-                    ><i class="fas fa-cog"></i> Vehicle Model</label
-                  >
-                  <input
-                    type="text"
-                    id="vehicleModel"
-                    name="vehicleModel"
-                    placeholder="e.g., Hyundai Creta"
-                  />
-                </div>
-              </div>
-
-              <!-- Location Information -->
-              <div class="form-group">
-                <label for="pickupLocation"
-                  ><i class="fas fa-map-marker-alt"></i> Pickup Location
-                  *</label
-                >
-                <input
-                  type="text"
-                  id="pickupLocation"
-                  name="pickupLocation"
-                  required
-                  placeholder="Enter pickup address"
-                />
-                <div class="error-message" id="pickupError">
-                  Please enter pickup location
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="dropLocation"
-                  ><i class="fas fa-flag-checkered"></i> Drop Location *</label
-                >
-                <input
-                  type="text"
-                  id="dropLocation"
-                  name="dropLocation"
-                  required
-                  placeholder="Enter drop address"
-                />
-                <div class="error-message" id="dropError">
-                  Please enter drop location
-                </div>
-              </div>
-
-              <!-- Date & Time -->
-              <div class="date-time-row">
-                <div class="form-group">
-                  <label for="pickupDate"
-                    ><i class="fas fa-calendar"></i> Preferred Pickup Date
-                    *</label
-                  >
-                  <input
-                    type="date"
-                    id="pickupDate"
-                    name="pickupDate"
-                    required
-                  />
-                  <div class="error-message" id="dateError">
-                    Please select pickup date
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="pickupTime"
-                    ><i class="fas fa-clock"></i> Preferred Time</label
-                  >
-                  <select id="pickupTime" name="pickupTime">
-                    <option value="any">Any Time</option>
-                    <option value="morning">Morning (8 AM - 12 PM)</option>
-                    <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-                    <option value="evening">Evening (5 PM - 8 PM)</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Additional Information -->
-              <div class="form-group">
-                <label for="additionalInfo"
-                  ><i class="fas fa-comment"></i> Additional Information</label
-                >
-                <textarea
-                  id="additionalInfo"
-                  name="additionalInfo"
-                  placeholder="Any special requirements or instructions..."
-                  rows="3"
-                ></textarea>
-              </div>
-
-              <button type="submit" class="submit-btn" id="submitBtn">
-                <i class="fas fa-paper-plane"></i>
-                <span>Confirm Booking</span>
-              </button>
-            </form>
-          </div>
-
-          <!-- Booking Information -->
-          <div class="booking-info">
-            <div class="info-card fade-in delay-1">
-              <div class="info-header">
-                <div class="info-icon">
-                  <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Why Book With Us?</h3>
-              </div>
-              <div class="info-content">
-                <ul>
-                  <li>
-                    <i class="fas fa-check"></i> Instant booking confirmation
-                  </li>
-                  <li>
-                    <i class="fas fa-check"></i> Real-time vehicle tracking
-                  </li>
-                  <li><i class="fas fa-check"></i> Full insurance coverage</li>
-                  <li><i class="fas fa-check"></i> 24/7 customer support</li>
-                  <li><i class="fas fa-check"></i> Door-to-door service</li>
-                  <li><i class="fas fa-check"></i> No hidden charges</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="info-card fade-in delay-2">
-              <div class="info-header">
-                <div class="info-icon">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <h3>Quick Support</h3>
-              </div>
-              <div class="info-content">
-                <ul>
-                  <li>
-                    <i class="fas fa-phone"></i> <strong>Call:</strong> +91
-                    98765 43210
-                  </li>
-                  <li>
-                    <i class="fab fa-whatsapp"></i>
-                    <strong>WhatsApp:</strong> +91 98765 43210
-                  </li>
-                  <li>
-                    <i class="fas fa-envelope"></i>
-                    <strong>Email:</strong> booking@hariharcarcarriers.com
-                  </li>
-                  <li>
-                    <i class="fas fa-comments"></i>
-                    <strong>Live Chat:</strong> Available 24/7
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Price Calculator -->
-            <div class="price-calculator fade-in delay-3">
-              <h4>Estimated Cost</h4>
-              <div class="price-breakdown">
-                <div class="price-item">
-                  <span>Base Transport Charge</span>
-                  <span>₹5,000</span>
-                </div>
-                <div class="price-item">
-                  <span>Insurance Coverage</span>
-                  <span>₹500</span>
-                </div>
-                <div class="price-item">
-                  <span>Door-to-Door Service</span>
-                  <span>₹1,000</span>
-                </div>
-                <div class="price-item">
-                  <span>Fuel Surcharge</span>
-                  <span>₹300</span>
-                </div>
-              </div>
-              <div class="price-total">
-                <span>Total Estimated</span>
-                <span>₹6,800</span>
-              </div>
-              <p
-                style="
-                  text-align: center;
-                  color: #ccc;
-                  font-size: 0.8rem;
-                  margin-top: 10px;
-                "
-              >
-                * Final price may vary based on distance and vehicle type
-              </p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- Success Modal -->
     <div class="modal" id="successModal">
-      <div class="modal-content">
-        <div class="modal-icon">
-          <i class="fas fa-check-circle"></i>
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Booking Confirmed!</h3>
+            <p>Thank you for choosing Harihar Car Carriers. Your booking has been successfully submitted.</p>
+            <p><strong>Booking Reference: <span id="bookingRef">HC2024-001</span></strong></p>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
         </div>
-        <h3>Booking Confirmed!</h3>
-        <p>
-          Thank you for choosing Harihar Car Carriers. Your booking has been
-          successfully submitted. Our team will contact you within 30 minutes to
-          confirm the details.
-        </p>
-        <p>
-          <strong
-            >Booking Reference: <span id="bookingRef">HC2024-001</span></strong
-          >
-        </p>
-        <button class="modal-btn" onclick="closeModal()">Close</button>
-      </div>
     </div>
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- Footer Section -->
-    <div id="footer-container"></div>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <!-- Leaflet Routing Machine -->
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    
+    <!-- Leaflet Control Geocoder -->
+    <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
 
     <script>
-      // Load shared footer dynamically
-      fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("footer-container").innerHTML = data;
-        })
-        .catch((error) => console.error("Error loading footer:", error));
-    </script>
+        // Global variables
+        let map;
+        let pickupMarker;
+        let dropMarker;
+        let routingControl;
+        let pickupCoords = null;
+        let dropCoords = null;
+        let selectingPickup = false;
+        let selectingDrop = false;
 
-    <script>
-      // Toast Notification System
-      function showToast(title, message, type = "success", duration = 5000) {
-        const toastContainer = document.getElementById("toastContainer");
-        const toastId = "toast-" + Date.now();
+        // Initialize map
+        function initMap() {
+            // Create map centered on India
+            map = L.map('map').setView([20.5937, 78.9629], 5);
 
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.id = toastId;
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(map);
 
-        // Set icon based on type
-        let icon = "fa-check-circle";
-        if (type === "error") icon = "fa-exclamation-circle";
-        if (type === "warning") icon = "fa-exclamation-triangle";
-        if (type === "info") icon = "fa-info-circle";
+            // Add geocoder (search) control
+            const geocoder = L.Control.geocoder({
+                defaultMarkGeocode: false,
+                placeholder: 'Search location...',
+                errorMessage: 'Location not found'
+            })
+            .on('markgeocode', function(e) {
+                const latlng = e.geocode.center;
+                map.setView(latlng, 13);
+                
+                if (selectingPickup) {
+                    setPickupLocation(latlng.lat, latlng.lng, e.geocode.name);
+                } else if (selectingDrop) {
+                    setDropLocation(latlng.lat, latlng.lng, e.geocode.name);
+                }
+            })
+            .addTo(map);
 
-        toast.innerHTML = `
+            // Add click event to map
+            map.on('click', function(e) {
+                if (selectingPickup) {
+                    reverseGeocode(e.latlng.lat, e.latlng.lng, 'pickup');
+                } else if (selectingDrop) {
+                    reverseGeocode(e.latlng.lat, e.latlng.lng, 'drop');
+                }
+            });
+
+            // Custom markers
+            const pickupIcon = L.divIcon({
+                html: '<i class="fas fa-map-marker-alt" style="color: #4CAF50; font-size: 32px;"></i>',
+                className: 'custom-div-icon',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32]
+            });
+
+            const dropIcon = L.divIcon({
+                html: '<i class="fas fa-flag-checkered" style="color: #ff6347; font-size: 32px;"></i>',
+                className: 'custom-div-icon',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32]
+            });
+        }
+
+        // Reverse geocoding
+        function reverseGeocode(lat, lng, type) {
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    const address = data.display_name;
+                    if (type === 'pickup') {
+                        setPickupLocation(lat, lng, address);
+                    } else if (type === 'drop') {
+                        setDropLocation(lat, lng, address);
+                    }
+                })
+                .catch(error => {
+                    console.error('Geocoding error:', error);
+                    showToast('Error', 'Could not get address for this location', 'error', 3000);
+                });
+        }
+
+        // Set pickup location
+        function setPickupLocation(lat, lng, address) {
+            pickupCoords = [lat, lng];
+            
+            if (pickupMarker) {
+                map.removeLayer(pickupMarker);
+            }
+
+            const pickupIcon = L.divIcon({
+                html: '<i class="fas fa-map-marker-alt" style="color: #4CAF50; font-size: 32px;"></i>',
+                className: 'custom-div-icon',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32]
+            });
+
+            pickupMarker = L.marker([lat, lng], {
+                icon: pickupIcon,
+                draggable: true
+            }).addTo(map);
+
+            pickupMarker.bindPopup('<b>Pickup Location</b><br>' + address).openPopup();
+            
+            pickupMarker.on('dragend', function(e) {
+                const newPos = e.target.getLatLng();
+                reverseGeocode(newPos.lat, newPos.lng, 'pickup');
+            });
+
+            document.getElementById('pickupLocation').value = address;
+            selectingPickup = false;
+            
+            showToast('Success', 'Pickup location set!', 'success', 2000);
+            
+            if (dropCoords) {
+                calculateRoute();
+            }
+        }
+
+        // Set drop location
+        function setDropLocation(lat, lng, address) {
+            dropCoords = [lat, lng];
+            
+            if (dropMarker) {
+                map.removeLayer(dropMarker);
+            }
+
+            const dropIcon = L.divIcon({
+                html: '<i class="fas fa-flag-checkered" style="color: #ff6347; font-size: 32px;"></i>',
+                className: 'custom-div-icon',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32]
+            });
+
+            dropMarker = L.marker([lat, lng], {
+                icon: dropIcon,
+                draggable: true
+            }).addTo(map);
+
+            dropMarker.bindPopup('<b>Drop Location</b><br>' + address).openPopup();
+            
+            dropMarker.on('dragend', function(e) {
+                const newPos = e.target.getLatLng();
+                reverseGeocode(newPos.lat, newPos.lng, 'drop');
+            });
+
+            document.getElementById('dropLocation').value = address;
+            selectingDrop = false;
+            
+            showToast('Success', 'Drop location set!', 'success', 2000);
+            
+            if (pickupCoords) {
+                calculateRoute();
+            }
+        }
+
+        // Select pickup on map
+        function selectPickupOnMap() {
+            selectingPickup = true;
+            selectingDrop = false;
+            showToast('Info', 'Click on the map to select pickup location', 'info', 3000);
+        }
+
+        // Select drop on map
+        function selectDropOnMap() {
+            selectingDrop = true;
+            selectingPickup = false;
+            showToast('Info', 'Click on the map to select drop location', 'info', 3000);
+        }
+
+        // Calculate and show route
+        function calculateRoute() {
+            if (!pickupCoords || !dropCoords) {
+                showToast('Warning', 'Please select both pickup and drop locations', 'warning', 3000);
+                return;
+            }
+
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(pickupCoords[0], pickupCoords[1]),
+                    L.latLng(dropCoords[0], dropCoords[1])
+                ],
+                routeWhileDragging: false,
+                showAlternatives: false,
+                lineOptions: {
+                    styles: [{color: '#ff6347', opacity: 0.8, weight: 5}]
+                },
+                createMarker: function() { return null; }, // Don't create default markers
+                addWaypoints: false
+            }).addTo(map);
+
+            routingControl.on('routesfound', function(e) {
+                const route = e.routes[0];
+                const distance = (route.summary.totalDistance / 1000).toFixed(2);
+                const time = (route.summary.totalTime / 3600).toFixed(1);
+                const cost = Math.round(distance * 15); // ₹15 per km estimate
+
+                document.getElementById('routeDistance').textContent = distance + ' km';
+                document.getElementById('routeTime').textContent = time + ' hours';
+                document.getElementById('routeCost').textContent = '₹ ' + cost.toLocaleString();
+                
+                document.getElementById('routeInfo').classList.add('show');
+                
+                showToast('Route Found', `Distance: ${distance}km, Time: ${time}hrs`, 'success', 4000);
+            });
+
+            // Fit bounds to show entire route
+            const bounds = L.latLngBounds([pickupCoords, dropCoords]);
+            map.fitBounds(bounds, { padding: [50, 50] });
+        }
+
+        // Show route
+        function showRoute() {
+            calculateRoute();
+        }
+
+        // Clear route
+        function clearRoute() {
+            if (routingControl) {
+                map.removeControl(routingControl);
+                routingControl = null;
+            }
+            
+            if (pickupMarker) {
+                map.removeLayer(pickupMarker);
+                pickupMarker = null;
+            }
+            
+            if (dropMarker) {
+                map.removeLayer(dropMarker);
+                dropMarker = null;
+            }
+            
+            pickupCoords = null;
+            dropCoords = null;
+            
+            document.getElementById('pickupLocation').value = '';
+            document.getElementById('dropLocation').value = '';
+            document.getElementById('routeInfo').classList.remove('show');
+            
+            showToast('Cleared', 'Route and markers cleared', 'info', 2000);
+        }
+
+        // Center map
+        function centerMap() {
+            if (pickupCoords && dropCoords) {
+                const bounds = L.latLngBounds([pickupCoords, dropCoords]);
+                map.fitBounds(bounds, { padding: [50, 50] });
+            } else {
+                map.setView([20.5937, 78.9629], 5);
+            }
+        }
+
+        // Toast Notification System
+        function showToast(title, message, type = 'success', duration = 5000) {
+            const toastContainer = document.getElementById('toastContainer');
+            const toastId = 'toast-' + Date.now();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.id = toastId;
+
+            let icon = 'fa-check-circle';
+            if (type === 'error') icon = 'fa-exclamation-circle';
+            if (type === 'warning') icon = 'fa-exclamation-triangle';
+            if (type === 'info') icon = 'fa-info-circle';
+
+            toast.innerHTML = `
                 <div class="toast-icon">
                     <i class="fas ${icon}"></i>
                 </div>
@@ -1263,256 +1084,209 @@
                 </button>
             `;
 
-        toastContainer.appendChild(toast);
+            toastContainer.appendChild(toast);
 
-        // Show toast with animation
-        setTimeout(() => {
-          toast.classList.add("show");
-        }, 10);
-
-        // Auto remove after duration
-        if (duration > 0) {
-          setTimeout(() => {
-            removeToast(toastId);
-          }, duration);
-        }
-
-        return toastId;
-      }
-
-      function removeToast(toastId) {
-        const toast = document.getElementById(toastId);
-        if (toast) {
-          toast.classList.remove("show");
-          toast.classList.add("hide");
-
-          // Remove from DOM after animation
-          setTimeout(() => {
-            if (toast.parentNode) {
-              toast.parentNode.removeChild(toast);
-            }
-          }, 300);
-        }
-      }
-
-      // Form Validation and Submission
-      document.addEventListener("DOMContentLoaded", function () {
-        const bookingForm = document.getElementById("bookingForm");
-        const submitBtn = document.getElementById("submitBtn");
-        const successModal = document.getElementById("successModal");
-        const bookingRef = document.getElementById("bookingRef");
-
-        // Generate random booking reference
-        function generateBookingRef() {
-          const prefix = "HC2024";
-          const randomNum = Math.floor(Math.random() * 1000)
-            .toString()
-            .padStart(3, "0");
-          return `${prefix}-${randomNum}`;
-        }
-
-        // Validation functions
-        function validateName(name) {
-          return name.trim().length >= 2;
-        }
-
-        function validatePhone(phone) {
-          const phoneRegex = /^[6-9]\d{9}$/;
-          return phoneRegex.test(phone.replace(/\D/g, ""));
-        }
-
-        function validateEmail(email) {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return emailRegex.test(email);
-        }
-
-        function validateRequired(value) {
-          return value.trim() !== "";
-        }
-
-        // Show error function
-        function showError(inputId, errorId, message) {
-          const input = document.getElementById(inputId);
-          const error = document.getElementById(errorId);
-
-          input.classList.add("error", "shake");
-          error.textContent = message;
-          error.style.display = "block";
-
-          setTimeout(() => {
-            input.classList.remove("shake");
-          }, 500);
-        }
-
-        // Hide error function
-        function hideError(inputId, errorId) {
-          const input = document.getElementById(inputId);
-          const error = document.getElementById(errorId);
-
-          input.classList.remove("error");
-          error.style.display = "none";
-        }
-
-        // Real-time validation
-        const inputs = {
-          fullName: validateName,
-          phone: validatePhone,
-          email: validateEmail,
-          vehicleType: validateRequired,
-          pickupLocation: validateRequired,
-          dropLocation: validateRequired,
-          pickupDate: validateRequired,
-        };
-
-        Object.keys(inputs).forEach((field) => {
-          const input = document.getElementById(field);
-          if (input) {
-            input.addEventListener("blur", function () {
-              const validator = inputs[field];
-              const errorId = field + "Error";
-
-              if (!validator(this.value)) {
-                showError(field, errorId, getErrorMessage(field));
-              } else {
-                hideError(field, errorId);
-              }
-            });
-
-            input.addEventListener("input", function () {
-              hideError(field, field + "Error");
-            });
-          }
-        });
-
-        function getErrorMessage(field) {
-          const messages = {
-            fullName: "Please enter your full name (min 2 characters)",
-            phone: "Please enter a valid 10-digit Indian phone number",
-            email: "Please enter a valid email address",
-            vehicleType: "Please select vehicle type",
-            pickupLocation: "Please enter pickup location",
-            dropLocation: "Please enter drop location",
-            pickupDate: "Please select pickup date",
-          };
-          return messages[field] || "This field is required";
-        }
-
-        // Form submission
-        bookingForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          let isValid = true;
-
-          // Validate all fields
-          Object.keys(inputs).forEach((field) => {
-            const input = document.getElementById(field);
-            const validator = inputs[field];
-            const errorId = field + "Error";
-
-            if (!validator(input.value)) {
-              showError(field, errorId, getErrorMessage(field));
-              isValid = false;
-            }
-          });
-
-          if (isValid) {
-            // Show loading state
-            submitBtn.disabled = true;
-            submitBtn.innerHTML =
-              '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
-
-            // Simulate API call
             setTimeout(() => {
-              // Generate booking reference
-              const reference = generateBookingRef();
-              bookingRef.textContent = reference;
+                toast.classList.add('show');
+            }, 10);
 
-              // Show success toast
-              showToast(
-                "Booking Confirmed!",
-                `Your booking reference is ${reference}. Our team will contact you shortly.`,
-                "success",
-                5000
-              );
-
-              // Show success modal
-              successModal.style.display = "flex";
-
-              // Reset form
-              bookingForm.reset();
-
-              // Reset button
-              submitBtn.disabled = false;
-              submitBtn.innerHTML =
-                '<i class="fas fa-paper-plane"></i><span>Confirm Booking</span>';
-            }, 2000);
-          } else {
-            // Show error toast if validation fails
-            showToast(
-              "Form Validation Error",
-              "Please check all required fields and try again.",
-              "error",
-              5000
-            );
-          }
-        });
-
-        // Phone number formatting
-        const phoneInput = document.getElementById("phone");
-        phoneInput.addEventListener("input", function (e) {
-          let value = e.target.value.replace(/\D/g, "");
-          if (value.length > 0) {
-            value = value.substring(0, 10);
-            if (value.length > 5) {
-              value = value.substring(0, 5) + " " + value.substring(5);
+            if (duration > 0) {
+                setTimeout(() => {
+                    removeToast(toastId);
+                }, duration);
             }
-            if (value.length > 8) {
-              value = value.substring(0, 8) + " " + value.substring(8);
-            }
-          }
-          e.target.value = value;
-        });
 
-        // Set minimum date to today
-        const dateInput = document.getElementById("pickupDate");
-        const today = new Date().toISOString().split("T")[0];
-        dateInput.min = today;
-      });
-
-      // Modal functions
-      function closeModal() {
-        document.getElementById("successModal").style.display = "none";
-      }
-
-      // Close modal on outside click
-      window.addEventListener("click", function (e) {
-        const modal = document.getElementById("successModal");
-        if (e.target === modal) {
-          closeModal();
+            return toastId;
         }
-      });
+
+        function removeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }
+        }
+
+        // Form Validation and Submission
+        document.addEventListener('DOMContentLoaded', function () {
+            initMap();
+
+            const bookingForm = document.getElementById('bookingForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successModal = document.getElementById('successModal');
+            const bookingRef = document.getElementById('bookingRef');
+
+            function generateBookingRef() {
+                const prefix = 'HC2024';
+                const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+                return `${prefix}-${randomNum}`;
+            }
+
+            function validateName(name) {
+                return name.trim().length >= 2;
+            }
+
+            function validatePhone(phone) {
+                const phoneRegex = /^[6-9]\d{9}$/;
+                return phoneRegex.test(phone.replace(/\D/g, ''));
+            }
+
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function validateRequired(value) {
+                return value.trim() !== '';
+            }
+
+            function showError(inputId, errorId, message) {
+                const input = document.getElementById(inputId);
+                const error = document.getElementById(errorId);
+
+                input.classList.add('error', 'shake');
+                error.textContent = message;
+                error.style.display = 'block';
+
+                setTimeout(() => {
+                    input.classList.remove('shake');
+                }, 500);
+            }
+
+            function hideError(inputId, errorId) {
+                const input = document.getElementById(inputId);
+                const error = document.getElementById(errorId);
+
+                input.classList.remove('error');
+                error.style.display = 'none';
+            }
+
+            const inputs = {
+                fullName: validateName,
+                phone: validatePhone,
+                email: validateEmail,
+                vehicleType: validateRequired,
+                pickupLocation: validateRequired,
+                dropLocation: validateRequired,
+                pickupDate: validateRequired
+            };
+
+            Object.keys(inputs).forEach(field => {
+                const input = document.getElementById(field);
+                if (input) {
+                    input.addEventListener('blur', function () {
+                        const validator = inputs[field];
+                        const errorId = field + 'Error';
+
+                        if (!validator(this.value)) {
+                            showError(field, errorId, getErrorMessage(field));
+                        } else {
+                            hideError(field, errorId);
+                        }
+                    });
+
+                    input.addEventListener('input', function () {
+                        hideError(field, field + 'Error');
+                    });
+                }
+            });
+
+            function getErrorMessage(field) {
+                const messages = {
+                    fullName: 'Please enter your full name (min 2 characters)',
+                    phone: 'Please enter a valid 10-digit Indian phone number',
+                    email: 'Please enter a valid email address',
+                    vehicleType: 'Please select vehicle type',
+                    pickupLocation: 'Please enter pickup location',
+                    dropLocation: 'Please enter drop location',
+                    pickupDate: 'Please select pickup date'
+                };
+                return messages[field] || 'This field is required';
+            }
+
+            bookingForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                let isValid = true;
+
+                Object.keys(inputs).forEach(field => {
+                    const input = document.getElementById(field);
+                    const validator = inputs[field];
+                    const errorId = field + 'Error';
+
+                    if (!validator(input.value)) {
+                        showError(field, errorId, getErrorMessage(field));
+                        isValid = false;
+                    }
+                });
+
+                if (isValid) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+
+                    setTimeout(() => {
+                        const reference = generateBookingRef();
+                        bookingRef.textContent = reference;
+
+                        showToast(
+                            'Booking Confirmed!',
+                            `Your booking reference is ${reference}. Our team will contact you shortly.`,
+                            'success',
+                            5000
+                        );
+
+                        successModal.style.display = 'flex';
+
+                        bookingForm.reset();
+                        clearRoute();
+
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Confirm Booking</span>';
+                    }, 2000);
+                } else {
+                    showToast(
+                        'Form Validation Error',
+                        'Please check all required fields and try again.',
+                        'error',
+                        5000
+                    );
+                }
+            });
+
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    value = value.substring(0, 10);
+                    if (value.length > 5) {
+                        value = value.substring(0, 5) + ' ' + value.substring(5);
+                    }
+                }
+                e.target.value = value;
+            });
+
+            const dateInput = document.getElementById('pickupDate');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+        });
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        window.addEventListener('click', function (e) {
+            const modal = document.getElementById('successModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
     </script>
-    <script src="../js/modules/search.js"></script>
-    <script src="../js/modules/navbar.js"></script>
-    <script src="../js/modules/themes.js"></script>
-    <script src="../js/modules/floating-book-button.js"></script>
-    <script src="../js/modules/floating-call-button.js"></script>
-    <script src="../js/modules/floating-whatsapp-button.js"></script>
-    <script src="../js/modules/quote-modal.js"></script>
-    <script src="../js/modules/sticky-quote-button.js"></script>
-    <script src="../js/modules/floating-chatbot-button.js"></script>
-    <script src="../js/modules/chatbot-modal.js"></script>
-    <script src="../js/modules/back-to-top-button.js"></script>
-    <script src="../js/modules/backtoBottom.js"></script>
+</body>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
-      <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Top to Bottom Button -->
-    <button class="back-to-bottom" id="backToBottom">
-      <i class="fas fa-arrow-down"></i>
-    </button>
-  </body>
 </html>
