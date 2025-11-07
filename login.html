@@ -187,23 +187,257 @@
       /* Hide/Show Signup Form */
       .form {
         display: none;
-        animation: fadeIn 0.5s ease;
       }
 
       .form.active {
         display: block;
       }
 
-      @keyframes fadeIn {
+      /* Enhanced Animations */
+      @keyframes slideInFromRight {
         from {
           opacity: 0;
-          transform: translateY(10px);
+          transform: translateX(100px);
         }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
 
+      @keyframes slideInFromLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromTop {
+        from {
+          opacity: 0;
+          transform: translateY(-100px);
+        }
         to {
           opacity: 1;
           transform: translateY(0);
         }
+      }
+
+      @keyframes slideInFromBottom {
+        from {
+          opacity: 0;
+          transform: translateY(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes scaleUp {
+        from {
+          opacity: 0;
+          transform: scale(0.5) rotate(-5deg);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      @keyframes fadeInRotate {
+        from {
+          opacity: 0;
+          transform: rotate(-180deg) scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: rotate(0deg) scale(1);
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes slideInRotate {
+        from {
+          opacity: 0;
+          transform: translateX(-100px) rotate(-20deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0) rotate(0deg);
+        }
+      }
+
+      /* Container Animation */
+      .container {
+        animation: scaleUp 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      /* Tabs Animation - Slide from top */
+      .tabs {
+        animation: slideInFromTop 1s ease-out 0.3s backwards;
+      }
+
+      /* Individual Tab Animations */
+      .tab:nth-child(1) {
+        animation: slideInFromLeft 1s ease-out 0.6s backwards;
+      }
+
+      .tab:nth-child(2) {
+        animation: slideInFromRight 1s ease-out 0.6s backwards;
+      }
+
+      /* Form Title Animation */
+      h2 {
+        animation: bounceIn 1.2s ease-out 0.8s backwards;
+      }
+
+      /* Input Groups with staggered animations */
+      .form.active .input-group:nth-child(1) {
+        animation: slideInFromLeft 1s ease-out 1s backwards;
+      }
+
+      .form.active .input-group:nth-child(2) {
+        animation: slideInFromRight 1s ease-out 1.2s backwards;
+      }
+
+      .form.active .input-group:nth-child(3) {
+        animation: slideInFromLeft 1s ease-out 1.4s backwards;
+      }
+
+      .form.active .input-group:nth-child(4) {
+        animation: slideInFromRight 1s ease-out 1.6s backwards;
+      }
+
+      /* Options (Remember me & Forgot password) */
+      .form.active .options {
+        animation: slideInFromBottom 1s ease-out 1.8s backwards;
+      }
+
+      /* Primary Button Animation */
+      .form.active .btn {
+        animation: slideInFromBottom 1s ease-out 2s backwards;
+        transition: all 0.4s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
+      }
+
+      .btn:active {
+        transform: translateY(-1px);
+      }
+
+      /* Google Button Animation */
+      .form.active .google-btn {
+        animation: slideInFromLeft 1s ease-out 2.2s backwards;
+        transition: all 0.4s ease;
+      }
+
+      .google-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Footer Animation */
+      .form.active .footer {
+        animation: slideInFromBottom 1s ease-out 2.4s backwards;
+      }
+
+      /* Input Focus Effects */
+      input {
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        transform: scale(1.02);
+      }
+
+      /* Toggle Password Icon Animation */
+      .toggle-password {
+        transition: all 0.3s ease;
+      }
+
+      .toggle-password:hover {
+        transform: scale(1.2);
+        color: #6c63ff;
+      }
+
+      /* Tab Hover Effects */
+      .tab {
+        transition: all 0.3s ease;
+      }
+
+      .tab:hover {
+        transform: translateY(-2px);
+        color: #6c63ff;
+      }
+
+      .tab.active {
+        animation: bounceIn 0.5s ease;
+      }
+
+      /* Label Animation on Focus */
+      .input-group {
+        position: relative;
+      }
+
+      .input-group:focus-within label {
+        color: #6c63ff;
+        transform: translateX(5px);
+        transition: all 0.3s ease;
+      }
+
+      /* Checkbox Animation */
+      .options input[type="checkbox"] {
+        transition: transform 0.2s ease;
+      }
+
+      .options input[type="checkbox"]:checked {
+        transform: scale(1.1);
+      }
+
+      /* Link Hover Animation */
+      .options a,
+      .footer a {
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+      }
+
+      .options a:hover,
+      .footer a:hover {
+        transform: translateX(3px);
+      }
+
+      /* Form Switch Animation */
+      .form {
+        transition: all 0.5s ease;
+      }
+
+      .form.active {
+        animation: fadeInRotate 1s ease-out;
       }
     </style>
   </head>
