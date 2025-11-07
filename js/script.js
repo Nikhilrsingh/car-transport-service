@@ -102,63 +102,8 @@ if (video) {
   });
 }
 
-// Testimonial Slider Functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const sliderContainer = document.getElementById("sliderContainer");
-  const slides = document.querySelectorAll(".testimonial-card");
-  const dots = document.querySelectorAll(".dot");
-  const prevBtn = document.querySelector(".prev-btn");
-  const nextBtn = document.querySelector(".next-btn");
+// Testimonial Slider Functionality now created seperately in js/modules/testimonial.js
 
-  let currentSlide = 0;
-  const totalSlides = slides.length;
-
-  // Update slider position
-  function updateSlider() {
-    sliderContainer.style.transform = `translateX(-${currentSlide * 100
-      }%)`;
-
-    // Update dots
-    dots.forEach((dot, index) => {
-      dot.classList.toggle("active", index === currentSlide);
-    });
-  }
-
-  // Next slide
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlider();
-  }
-
-  // Previous slide
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateSlider();
-  }
-
-  // Event listeners
-  nextBtn.addEventListener("click", nextSlide);
-  prevBtn.addEventListener("click", prevSlide);
-
-  // Dot click events
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      currentSlide = index;
-      updateSlider();
-    });
-  });
-
-  // Auto slide every 5 seconds
-  setInterval(nextSlide, 5000);
-
-  // Pause auto-slide on hover
-  const slider = document.querySelector(".testimonial-slider");
-  slider.addEventListener("mouseenter", () => {
-    clearInterval(autoSlide);
-  });
-
-  let autoSlide = setInterval(nextSlide, 5000);
-});
 
 // Load shared footer dynamically
 fetch('pages/footer.html')
