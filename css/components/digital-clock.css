@@ -1,0 +1,38 @@
+.digital-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #c9436f 0%, #ff6b35 100%);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.digital-clock .time {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.digital-clock .date {
+  font-size: 0.75rem;
+  color: #ffe6e6;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .digital-clock {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+  
+  .digital-clock .time {
+    font-size: 0.8rem;
+  }
+  
+  .digital-clock .date {
+    font-size: 0.65rem;
+  }
+}
