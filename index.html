@@ -67,13 +67,20 @@
                 <span>About</span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item dropdown-nav">
+
               <a href="./services.html" class="nav-link" data-page="services" data-tooltip="Services">
                 <i class="fas fa-truck-moving"></i>
                 <span>Services</span>
+                <i class="fa-solid fa-caret-down"></i>
               </a>
+
+              <div class="dropdown-menu">
+                Content
+              </div>
+
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="./pages/booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
                 <i class="fas fa-calendar-check"></i>
                 <span>Booking</span>
@@ -102,49 +109,82 @@
                 <i class="fas fa-images"></i>
                 <span>Gallery</span>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a href="./pages/contact.html" class="nav-link" data-page="contact" data-tooltip="Contact">
                 <i class="fas fa-phone"></i>
                 <span>Contact</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="./pages/contact.html" class="nav-link" data-page="contact" data-tooltip="Contact">
+                <i class="fa-solid fa-layer-group"></i></i>
+                <span>More</span>
+                <i class="fa-solid fa-caret-down"></i>
+              </a>
+            </li>
           </ul>
 
-          <!-- Search Bar -->
-          <div class="search-container">
-            <div class="search-bar">
-              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
-              <i class="fas fa-search"></i>
+          <!-- creating a div for left aligb navigation links  -->
+          <div class="nav-right-section">
+            <!-- Search Bar -->
+            <div class="search-container">
+              <div class="search-bar">
+                <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
+                <i class="fas fa-search"></i>
+              </div>
             </div>
-          </div>
 
-          <!-- Right Actions -->
-          <div class="nav-actions">
-            <a href="./pages/enquiry.html" class="nav-link enquiry-link" data-tooltip="Enquiry">
+            <div class="action-nav">
+              <!-- <i class="fa-solid fa-moon" style="color: white; "></i> -->
+              <i class="fa-solid fa-sun"></i>
+
+            </div>
+            <div class="action-nav">
+              <i class="fa-solid fa-circle-question"></i>
+
+            </div>
+
+            <!-- Right Actions -->
+            <!-- <div class=" nav-actions"> -->
+            <!-- <a href="./pages/enquiry.html" class="nav-link enquiry-link" data-tooltip="Enquiry">
               <i class="fas fa-question-circle"></i>
               <span>Enquiry</span>
             </a>
             <a href="./pages/blog.html" class="nav-link blog-link" data-tooltip="Blog">
               <i class="fas fa-blog"></i>
               <span>Blog</span>
-            </a>
-            <a href="./pages/login.html" class="login-btn" data-tooltip="Login">
-              <i class="fas fa-user"></i>
-              <span>Login</span>
-            </a>
+            </a> -->
+
+            <div class="nav-actions">
+              <a href="./pages/login.html" class="login-btn" data-tooltip="Login">
+                <i class="fas fa-user"></i>
+                <span>Login</span>
+              </a>
+            </div>
+
             <!-- Theme widget -->
-            <div class="theme-widget" id="themeWidget">
+            <!-- <div class="theme-widget" id="themeWidget">
               <label for="themeWidgetSelect" class="sr-only">Choose theme</label>
               <select id="themeWidgetSelect" aria-label="Choose theme">
                 <option value="auto">Theme</option>
+                <i class="fa-solid fa-moon"></i>
                 <option value="default">Default</option>
                 <option value="light">Light</option>
+                <i class="fa-solid fa-sun"></i>
                 <option value="dark">Dark</option>
+                <i class="fa-solid fa-moon"></i>
                 <option value="glass">Glass</option>
               </select>
-            </div>
+            </div> -->
+            <!-- </div> -->
+
           </div>
+
+
+
+
+
         </nav>
 
         <!-- Mobile Menu Button -->
