@@ -3,13 +3,22 @@
 // in the dedicated back-to-top-button.js module to avoid duplication
 // js/modules/footer.js
 
-document.addEventListener("DOMContentLoaded", () => {
-  fetch('./pages/footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-      const yearSpan = document.getElementById('current-year');
-      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-    })
-    .catch(err => console.error(err));
+document.addEventListener("DOMContentLoaded", async () => {
+  const footerContainer = document.getElementById("footer-container");
+
+  try {
+    const response = await fetch("./pages/footer.html");
+    if (!response.ok) throw new Error("Footer file not found");
+
+    const footerHTML = await response.text();
+    footerContainer.innerHTML = footerHTML;
+
+    // ✅ Manually set the year since inline script won't run
+    const yearSpan = document.getElementById("current-year");
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+  } catch (error) {
+    console.error("Error loading footer:", error);
+    footerContainer.innerHTML = "<p>⚠️ Unable to load footer</p>";
+  }
 });
