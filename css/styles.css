@@ -2411,6 +2411,27 @@ p,
   color: var(--muted) !important;
 }
 
+/* Additional theme-aware text elements */
+.feature-box,
+.service-card p,
+.testimonial-card,
+.pricing-card,
+.quote-text,
+.form-footer p,
+.cta-section p,
+span,
+.slide-text,
+.hero-badge {
+  color: var(--text) !important;
+}
+
+/* Icons and special elements */
+.feature i,
+.service-card i,
+.input-group i {
+  color: var(--primary) !important;
+}
+
 /* Theme presets */
 html[data-theme="default"] {
   --bg: linear-gradient(180deg, #0b1220 0%, #121826 100%);
