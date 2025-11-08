@@ -612,7 +612,11 @@
   <!-- Region-Wise Presence Section -->
   <section class="region-section">
     <h2>Region-Wise Presence</h2>
-    <div class="region-grid">
+    <div class="region-search-container">
+      <input type="text" id="regionSearch" class="region-search" placeholder="Search for a city..." aria-label="Search cities">
+      <i class="fas fa-search"></i>
+    </div>
+    <div class="region-grid" id="regionGrid">
       <a href="#" class="region-btn">Car Transport in Mumbai</a>
       <a href="#" class="region-btn">Car Transport in Chennai</a>
       <a href="#" class="region-btn">Car Transport in Udaipur</a>
@@ -761,6 +765,7 @@
 
   <script src="./js/modules/testimonial.js"></script>
   <script src="./js/modules/rating.js"></script>
+  <script src="./js/modules/region-search.js"></script>
 
   <div id="car" class="car">🏎️</div>
 

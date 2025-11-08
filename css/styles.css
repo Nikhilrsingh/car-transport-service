@@ -2479,6 +2479,36 @@ html[data-theme="glass"] {
   letter-spacing: 2px;
 }
 
+.region-search-container {
+  max-width: 500px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.region-search {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.region-search:focus {
+  border-color: #d9232d;
+  box-shadow: 0 0 10px rgba(217, 35, 45, 0.2);
+}
+
+.region-search-container i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
 .region-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
