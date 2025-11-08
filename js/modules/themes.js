@@ -65,12 +65,15 @@
 
   function applyTheme(theme) {
     const root = document.documentElement;
+    console.log('Applying theme:', theme); // DEBUG
     if (theme === 'auto') {
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       theme = prefersDark ? 'dark' : 'light';
     }
 
+    console.log('Setting data-theme to:', theme); // DEBUG
     root.setAttribute('data-theme', theme);
+    console.log('Current data-theme:', root.getAttribute('data-theme')); // DEBUG
     // add a temporary class to animate the change
     root.classList.add('theme-transition');
     window.setTimeout(() => root.classList.remove('theme-transition'), 350);
