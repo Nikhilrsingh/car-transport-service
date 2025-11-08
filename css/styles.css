@@ -2429,6 +2429,12 @@ html[data-theme="glass"] {
 }
 
 /* Theme Widget Styling */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .theme-widget {
   display: inline-block;
   background: transparent;
