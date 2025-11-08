@@ -2433,29 +2433,31 @@ html[data-theme="glass"] {
   display: inline-block;
   background: transparent;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 10px;
 }
 
 .theme-widget select {
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--muted);
-  padding: 6px 12px;
+  background: #ffffff;
+  color: #333333;
+  border: 2px solid #ff6347;
+  padding: 8px 14px;
   border-radius: 6px;
   font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
   outline: none;
   transition: all 0.3s ease;
 }
 
 .theme-widget select:hover {
-  border-color: var(--primary);
-  background: var(--card);
+  background: #fff5f5;
+  border-color: #ff4500;
+  transform: translateY(-1px);
 }
 
 .theme-widget select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.2);
+  border-color: #ff4500;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.2);
 }
 
 .sr-only {
