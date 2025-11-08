@@ -35,13 +35,15 @@
   .digital-clock .date {
     font-size: 0.65rem;
   }
- }
- 
-/*
+}
+
 .digital-clock-section {
   background: #f8f9fa;
   padding: 40px 0;
   text-align: center;
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .digital-clock {
@@ -76,4 +78,4 @@
   .clock-date {
     font-size: 0.9rem;
   }
-} */
+}
