@@ -1,0 +1,79 @@
+.digital-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #c9436f 0%, #ff6b35 100%);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.digital-clock .time {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.digital-clock .date {
+  font-size: 0.75rem;
+  color: #ffe6e6;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .digital-clock {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+  
+  .digital-clock .time {
+    font-size: 0.8rem;
+  }
+  
+  .digital-clock .date {
+    font-size: 0.65rem;
+  }
+ }
+ 
+/*
+.digital-clock-section {
+  background: #f8f9fa;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.digital-clock {
+  background: linear-gradient(135deg, #d52450 0%, #c76a1d 100%);
+  color: white;
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.clock-time {
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+.clock-date {
+  font-size: 1rem;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .clock-time {
+    font-size: 1.5rem;
+  }
+  .clock-date {
+    font-size: 0.9rem;
+  }
+} */

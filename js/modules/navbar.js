@@ -1,5 +1,5 @@
 // Enhanced Navbar functionality
-(function() {
+(function () {
   'use strict';
 
   function initNavbar() {
@@ -11,7 +11,7 @@
 
     // Toggle mobile menu
     if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', function() {
+      mobileMenuBtn.addEventListener('click', function () {
         this.classList.toggle('active');
         if (mobileNav) mobileNav.classList.toggle('active');
         if (navOverlay) navOverlay.classList.toggle('active');
@@ -46,13 +46,13 @@
     function setActiveLink() {
       const currentPage = window.location.pathname.split('/').pop() || 'index.html';
       const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-      
+
       navLinks.forEach(link => {
         const linkPage = link.getAttribute('href').split('/').pop();
-        
-        if (linkPage === currentPage || 
-            (currentPage === '' && linkPage === 'index.html') ||
-            (currentPage === '/' && linkPage === 'index.html')) {
+
+        if (linkPage === currentPage ||
+          (currentPage === '' && linkPage === 'index.html') ||
+          (currentPage === '/' && linkPage === 'index.html')) {
           link.classList.add('active');
         } else {
           link.classList.remove('active');
@@ -68,7 +68,7 @@
     const header = document.querySelector('.header');
 
     if (header) {
-      window.addEventListener('scroll', function() {
+      window.addEventListener('scroll', function () {
         const currentScroll = window.pageYOffset;
 
         if (currentScroll <= 0) {
@@ -99,3 +99,20 @@
   }
 
 })();
+
+document.addEventListener('click', e => {
+  const isDropdownButton = e.target.closest("[data-dropdown-btn]");
+  if (!isDropdownButton && e.target.closest('[data-dropdown]') != null) return;
+
+  let currentdropdown;
+  if (isDropdownButton) {
+    currentdropdown = e.target.closest('[data-dropdown]');
+    currentdropdown.classList.toggle('active');
+  }
+
+  // close all already opened dropdown
+  document.querySelectorAll('[data-dropdown].active').forEach(dropdown => {
+    if (dropdown === currentdropdown) return;
+    dropdown.classList.remove('active');
+  })
+})

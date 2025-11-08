@@ -28,7 +28,8 @@ body {
 body {
   height: 100%;
   width: 100%;
-  background-color: #2b2b2b;
+  background-color: #f5f5f5;
+  color: #000;
 }
 
 /* 🌿 Auto Slider Styling */
@@ -345,7 +346,7 @@ body {
   width: 100%;
   max-width: 1200px;
   /* ✅ Keeps content centered within a nice width */
-  color: white;
+  color: #000;
   margin: 0 auto;
   /* ✅ Centers content horizontally */
 }
@@ -361,7 +362,7 @@ body {
   align-items: center;
   justify-content: space-between;
   /* ✅ Centers and balances layout */
-  gap: 30px;
+  gap: 50px;
 }
 
 .hero-badge {
@@ -426,7 +427,7 @@ body {
 
 .hero-description {
   font-size: 1.3rem;
-  color: #ccc;
+  color: #333;
   margin-bottom: 40px;
   max-width: 600px;
   line-height: 1.6;
@@ -477,12 +478,12 @@ body {
 
 .stat-label {
   font-size: 0.9rem;
-  color: #ccc;
+  color: #333;
   transition: color 0.3s ease;
 }
 
 .stat:hover .stat-label {
-  color: #fff;
+  color: #000;
 }
 
 .hero-actions {
@@ -530,15 +531,15 @@ body {
 }
 
 .cta-btn.secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+  border: 2px solid rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
 }
 
 .cta-btn.outline {
   background: transparent;
-  color: white;
+  color: #000;
   border: 2px solid #ff6347;
 }
 
@@ -625,17 +626,19 @@ body {
 /* Quick Quote Form */
 .hero-quote {
   position: relative;
+  flex-shrink: 0;
+  margin-right: 80px;
 }
 
 .quote-card {
   background: linear-gradient(145deg,
-      rgba(43, 43, 43, 0.95),
-      rgba(51, 51, 51, 0.95));
+      rgba(255, 255, 255, 0.95),
+      rgba(250, 250, 250, 0.95));
   padding: 30px;
   border-radius: 20px;
   border: 1px solid rgba(255, 99, 71, 0.2);
   backdrop-filter: blur(20px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   animation: scaleUp 0.8s ease-out 0.5s both;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -652,7 +655,7 @@ body {
 
 .quote-header h3 {
   font-size: 1.5rem;
-  color: white;
+  color: #000;
   margin-bottom: 8px;
   animation: popupFromDot 0.6s ease-out 0.8s both;
 }
@@ -693,7 +696,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #ccc;
+  color: #333;
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -707,10 +710,10 @@ body {
 .form-group input,
 .form-group select {
   padding: 12px 15px;
-  background: rgba(26, 26, 26, 0.8);
-  border: 1px solid #444;
+  background: #fff;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  color: white;
+  color: #000;
   font-family: "Poppins", sans-serif;
   transition: all 0.3s ease;
 }
@@ -720,6 +723,7 @@ body {
   outline: none;
   border-color: #ff6347;
   box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.1);
+  background: #fff;
 }
 
 .quote-submit {
@@ -795,7 +799,7 @@ body {
 }
 
 .label {
-  color: #ccc;
+  color: #333;
   font-size: 0.9rem;
 }
 
@@ -1160,13 +1164,13 @@ html {
 .cta-text h2 {
   font-size: 2.8rem;
   margin-bottom: 20px;
-  color: white;
+  color: #000;
   line-height: 1.2;
 }
 
 .cta-text p {
   font-size: 1.2rem;
-  color: #ccc;
+  color: #333;
   margin-bottom: 40px;
   line-height: 1.6;
 }
@@ -1200,18 +1204,18 @@ html {
 }
 
 .feature span {
-  color: white;
+  color: #000;
   font-weight: 500;
 }
 
 /* Form Box Styles */
 .cta-form-box {
-  background: linear-gradient(145deg, #333, #2b2b2b);
+  background: linear-gradient(145deg, #fff, #f5f5f5);
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 99, 71, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  border: 1px solid #444;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 99, 71, 0.1),
+    inset 0 1px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #ddd;
   position: relative;
   overflow: hidden;
 }
@@ -1233,7 +1237,7 @@ html {
 
 .form-header h3 {
   font-size: 1.8rem;
-  color: white;
+  color: #000;
   margin-bottom: 8px;
 }
 
@@ -1267,10 +1271,10 @@ html {
   width: 100%;
   /*padding: 15px 15px 15px 45px;*/
   padding: 1rem 1rem 1rem 3rem;
-  background: #1a1a1a;
-  border: 2px solid #444;
+  background: #fff;
+  border: 2px solid #ddd;
   border-radius: 10px;
-  color: white;
+  color: #000;
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -1281,7 +1285,7 @@ html {
   outline: none;
   border-color: #ff6347;
   box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
-  background: #222;
+  background: #fff;
 }
 
 .input-group input::placeholder {
@@ -1467,7 +1471,7 @@ html {
 .section-header h2 {
   font-size: 3rem;
   margin-bottom: 15px;
-  color: white;
+  color: #000;
   background: linear-gradient(135deg, #ff6347, #ff4500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1476,7 +1480,7 @@ html {
 
 .section-header p {
   font-size: 1.2rem;
-  color: #ccc;
+  color: #333;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -1490,10 +1494,10 @@ html {
 }
 
 .service-card {
-  background: linear-gradient(145deg, #333, #2b2b2b);
+  background: linear-gradient(145deg, #fff, #f5f5f5);
   padding: 40px 30px;
   border-radius: 20px;
-  border: 1px solid #444;
+  border: 1px solid #ddd;
   position: relative;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
@@ -1582,11 +1586,11 @@ html {
 .service-card h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: white;
+  color: #000;
 }
 
 .service-card p {
-  color: #ccc;
+  color: #333;
   margin-bottom: 20px;
   line-height: 1.6;
 }
@@ -1601,7 +1605,7 @@ html {
   align-items: center;
   gap: 10px;
   margin-bottom: 8px;
-  color: #ccc;
+  color: #333;
   font-size: 0.9rem;
 }
 
@@ -1670,7 +1674,7 @@ html {
 }
 
 .stat-label {
-  color: #ccc;
+  color: #333;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -1769,7 +1773,7 @@ html {
 
 .features {
   padding: 80px 0;
-  background-color: #f9f9f9;
+  background-color: #fff;
   text-align: center;
 }
 
@@ -2245,14 +2249,14 @@ html {
 }
 
 .h1 {
-  color: #f3efef !important
+  color: #000 !important
 }
 
 .section-title::after {
   content: "";
   width: 80px;
   height: 3px;
-  background: #007bff;
+  background: #ff6347;
   display: block;
   margin: 10px auto 0;
   border-radius: 5px;
@@ -2267,10 +2271,11 @@ html {
 }
 
 .feature-box {
-  background: #a72704;
+  background: #fff;
   padding: 35px 25px;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid #ddd;
   transition: all 0.3s ease;
   font-size: 2rem;
 }
@@ -2283,12 +2288,12 @@ html {
 .feature-box h3 {
   margin: 15px 0 10px;
   font-size: 1.4rem;
-  color: #fcf9f9;
+  color: #000;
 }
 
 .feature-box p {
   font-size: 1rem;
-  color: #f1eeee;
+  color: #333;
   line-height: 1.5;
 }
 
@@ -2333,8 +2338,8 @@ html {
 /* Base elements use tokens so themes can override them */
 html,
 body {
-  background: var(--bg) !important;
-  color: var(--text) !important;
+  background: #f5f5f5 !important;
+  color: #000 !important;
 }
 
 /* Buttons and primary accents should pick up token values */
@@ -2362,7 +2367,7 @@ body {
 .section-header h2,
 .hero-title,
 .feature-box h3 {
-  color: var(--text) !important;
+  color: #000 !important;
 }
 
 .stat-number,
@@ -2376,7 +2381,7 @@ body {
 p,
 .footer-links a,
 .contact-info li {
-  color: var(--muted) !important;
+  color: #333 !important;
 }
 
 /* Theme presets */
