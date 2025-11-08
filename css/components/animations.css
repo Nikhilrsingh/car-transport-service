@@ -1,0 +1,392 @@
+/* ============================================
+   Smooth Scrolling & Entry Animations
+   ============================================ */
+
+/* Enhanced Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   Entry Animations (Scroll-triggered)
+   ============================================ */
+
+/* Base animation classes - elements start hidden */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered animation delays for child elements */
+.fade-in-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.fade-in-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.fade-in-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.fade-in-delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* ============================================
+   Hover Effects for Interactive Elements
+   ============================================ */
+
+/* Button Hover Effects */
+button,
+.btn,
+.cta-btn,
+.submit-btn,
+.service-btn,
+.quote-submit,
+.quote-next,
+.quote-form-back-btn,
+.quote-form-submit-btn,
+.quote-result-book-btn,
+.quote-result-reset-btn,
+.mobile-cta-btn,
+.mobile-login-btn {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover,
+.btn:hover,
+.cta-btn:hover,
+.submit-btn:hover,
+.service-btn:hover,
+.quote-submit:hover,
+.quote-next:hover,
+.quote-form-back-btn:hover,
+.quote-form-submit-btn:hover,
+.quote-result-book-btn:hover,
+.quote-result-reset-btn:hover,
+.mobile-cta-btn:hover,
+.mobile-login-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+/* Icon Hover Effects */
+.icon,
+i[class^="fas"],
+i[class^="far"],
+i[class^="fab"],
+.service-icon i,
+.value-icon,
+.info-icon,
+.fa-star,
+.fa-phone,
+.fa-envelope,
+.fa-map-marker-alt,
+.fa-clock,
+.fa-search,
+.fa-user,
+.fa-truck,
+.fa-calculator,
+.fa-question-circle,
+.fa-blog,
+.fa-home,
+.fa-info-circle,
+.fa-truck-moving,
+.fa-users,
+.fa-tags,
+.fa-map-marker-alt,
+.fa-images,
+.fa-phone,
+.fa-calendar-check {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon:hover,
+i[class^="fas"]:hover,
+i[class^="far"]:hover,
+i[class^="fab"]:hover,
+.service-icon:hover i,
+.value-icon:hover,
+.info-icon:hover {
+  transform: scale(1.15);
+}
+
+/* Card Hover Effects */
+.service-card,
+.feature-box,
+.value-card,
+.info-card,
+.team-member,
+.quote-card,
+.cta-form-box,
+.pricing-cta-section {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover,
+.feature-box:hover,
+.value-card:hover,
+.info-card:hover,
+.team-member:hover,
+.quote-card:hover,
+.cta-form-box:hover,
+.pricing-cta-section:hover {
+  transform: translateY(-5px);
+}
+
+/* Link Hover Effects */
+a:not(.nav-link):not(.mobile-nav-link):not(.footer-links a):not(.social-links a) {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+a:not(.nav-link):not(.mobile-nav-link):not(.footer-links a):not(.social-links a):hover {
+  transform: translateY(-2px);
+}
+
+/* Social Links Hover */
+.social-links a,
+.member-social a,
+.about-member-social-icons a {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-links a:hover,
+.member-social a:hover,
+.about-member-social-icons a:hover {
+  transform: scale(1.1) translateY(-3px);
+}
+
+/* Nav Link Hover (already has effects, but ensuring consistency) */
+.nav-link,
+.mobile-nav-link {
+  transition: all 0.3s ease;
+}
+
+/* Input/Form Field Hover */
+input,
+select,
+textarea {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  transform: scale(1.01);
+}
+
+/* ============================================
+   Section-Specific Animations
+   ============================================ */
+
+/* Hero Section */
+.hero .hero-title,
+.hero .hero-description,
+.hero .hero-actions,
+.hero .hero-stats {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.hero .hero-title {
+  animation-delay: 0.2s;
+}
+
+.hero .hero-description {
+  animation-delay: 0.4s;
+}
+
+.hero .hero-stats {
+  animation-delay: 0.6s;
+}
+
+.hero .hero-actions {
+  animation-delay: 0.8s;
+}
+
+/* Features Section */
+.features-container .feature-box {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.features-container .feature-box.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Services Section */
+.services-grid .service-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.services-grid .service-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Testimonials */
+.testimonial-slider,
+.testimonials-grid {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.testimonial-slider.visible,
+.testimonials-grid.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Contact Section */
+.contact-content > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.contact-content > *.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   Performance Optimizations
+   ============================================ */
+
+/* Use GPU acceleration for smooth animations */
+.fade-in,
+.slide-up,
+.slide-left,
+.slide-right,
+.scale-in {
+  will-change: opacity, transform;
+}
+
+/* Remove will-change after animation completes */
+.fade-in.visible,
+.slide-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.scale-in.visible {
+  will-change: auto;
+}
+
+/* ============================================
+   Mobile Optimizations
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Reduce animation distances on mobile for better performance */
+  .fade-in,
+  .slide-up {
+    transform: translateY(15px);
+  }
+  
+  .slide-left,
+  .slide-right {
+    transform: translateX(20px);
+  }
+  
+  /* Simpler hover effects on mobile */
+  button:hover,
+  .btn:hover,
+  .cta-btn:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .slide-up,
+  .slide-left,
+  .slide-right,
+  .scale-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  
+  button:hover,
+  .btn:hover,
+  .cta-btn:hover,
+  .icon:hover {
+    transform: none;
+  }
+}
+
