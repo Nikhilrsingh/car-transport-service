@@ -2456,9 +2456,22 @@ html[data-theme="glass"] {
   margin: 0 5px;
 }
 
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .search-bar input {
-  width: 180px !important;
+  width: 200px !important;
   font-size: 0.85rem !important;
+  padding-right: 35px !important;
+}
+
+.search-bar i {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
 }
 
 .nav-actions {
