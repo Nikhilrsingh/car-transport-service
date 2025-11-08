@@ -28,7 +28,7 @@ body {
 body {
   height: 100%;
   width: 100%;
-  background-color: var(--bg);
+  background: var(--bg);
   color: var(--text);
 }
 
@@ -2324,6 +2324,12 @@ html {
   --glass-bg: rgba(255, 255, 255, 0.06);
   --accent: #007bff;
   --transition: 240ms ease;
+}
+
+/* Apply default theme on html root */
+html {
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* Smooth transition helper (temporary while switching) */
