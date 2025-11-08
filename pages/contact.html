@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
    <link rel="stylesheet" href="../css/components/backtoBottom.css">
   <link rel="stylesheet" href="../css/components/animations.css">
+  <link rel="stylesheet" href="../css/components/contact.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     @font-face {
@@ -843,6 +844,20 @@
               <p><strong>Sales & Quotes:</strong> +91 98765 43211</p>
               <p><strong>Emergency:</strong> +91 98765 43212</p>
             </div>
+            <div class="info-actions">
+              <button class="info-action-btn" data-action="call" data-value="+919876543210">
+                <i class="fas fa-phone"></i>
+                <span>Call</span>
+              </button>
+              <button class="info-action-btn" data-action="copy" data-value="+91 98765 43210">
+                <i class="fas fa-copy"></i>
+                <span>Copy</span>
+              </button>
+              <button class="info-action-btn" data-action="qr" data-value="tel:+919876543210">
+                <i class="fas fa-qrcode"></i>
+                <span>QR Code</span>
+              </button>
+            </div>
           </div>
 
           <div class="info-card fade-in fade-in-delay-1">
@@ -864,6 +879,20 @@
               <p>
                 <strong>Partnerships:</strong> partners@hariharcarcarriers.com
               </p>
+            </div>
+            <div class="info-actions">
+              <button class="info-action-btn" data-action="email" data-value="info@hariharcarcarriers.com">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+              </button>
+              <button class="info-action-btn" data-action="copy" data-value="info@hariharcarcarriers.com">
+                <i class="fas fa-copy"></i>
+                <span>Copy</span>
+              </button>
+              <button class="info-action-btn" data-action="qr" data-value="mailto:info@hariharcarcarriers.com">
+                <i class="fas fa-qrcode"></i>
+                <span>QR Code</span>
+              </button>
             </div>
           </div>
 
@@ -958,8 +987,36 @@
             </div>
             <div class="input-group full-width">
               <label for="message">Message *</label>
-              <textarea id="message" name="message" placeholder="Tell us about your requirements..."
+              <textarea id="message" name="message" placeholder="Tell us about your requirements..." maxlength="500"
                 required></textarea>
+              <div class="char-counter">0/500 characters</div>
+              <div class="email-suggestion"></div>
+            </div>
+            <div class="input-group full-width">
+              <label>Upload Images (Optional)</label>
+              <div class="file-upload-area">
+                <input type="file" id="fileUpload" accept="image/*" multiple>
+                <div class="upload-icon">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                  <h4>Drag & Drop Images Here</h4>
+                  <p>or click to browse (Max 5MB per file)</p>
+                </div>
+              </div>
+              <div class="file-preview-container"></div>
+            </div>
+            <div class="form-success-message">
+              <i class="fas fa-check-circle"></i>
+              <span>Message sent successfully!</span>
+            </div>
+            <div class="typing-indicator">
+              <span>Processing your message</span>
+              <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+              </div>
             </div>
             <button type="submit" class="submit-btn">
               <span>Send Message</span>
@@ -979,8 +1036,30 @@
         <p>Visit our office or schedule a meeting with our team</p>
       </div>
       <div class="map-container fade-in">
+        <div class="map-loading">
+          <div class="map-spinner"></div>
+        </div>
+        <div class="map-controls">
+          <button class="map-control-btn" id="mapStyleSwitcher">
+            <i class="fas fa-satellite"></i>
+            <span>Satellite</span>
+          </button>
+        </div>
+        <div class="map-marker">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="map-info-window">
+          <div class="map-info-content">
+            <h4>Harihar Car Carriers</h4>
+            <p>123 Transport Nagar, Sitabuldi, Nagpur</p>
+            <button class="directions-btn">
+              <i class="fas fa-directions"></i>
+              <span>Get Directions</span>
+            </button>
+          </div>
+        </div>
         <iframe class="map-embed" title="Harihar Car Carriers - Dummy Location"
-          src="https://www.google.com/maps?q=21.1458,79.0882&z=14&output=embed" loading="lazy"
+          src="https://www.google.com/maps?q=21.1458,79.0882&z=14&output=embed&t=m" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade" aria-label="Map showing dummy location in Nagpur"></iframe>
       </div>
       <div class="map-actions">
@@ -1001,8 +1080,36 @@
         <h2>Frequently Asked Questions</h2>
         <p>Quick answers to common questions about our services</p>
       </div>
+      <div class="faq-header fade-in">
+        <div class="faq-search-container">
+          <input type="text" id="faqSearch" class="faq-search-input" placeholder="Search FAQs...">
+          <i class="fas fa-search faq-search-icon"></i>
+        </div>
+        <div class="faq-categories">
+          <button class="faq-category-btn active" data-category="all">
+            <i class="fas fa-th"></i>
+            <span>All</span>
+          </button>
+          <button class="faq-category-btn" data-category="delivery">
+            <i class="fas fa-shipping-fast"></i>
+            <span>Delivery</span>
+          </button>
+          <button class="faq-category-btn" data-category="insurance">
+            <i class="fas fa-shield-alt"></i>
+            <span>Insurance</span>
+          </button>
+          <button class="faq-category-btn" data-category="service">
+            <i class="fas fa-concierge-bell"></i>
+            <span>Service</span>
+          </button>
+          <button class="faq-category-btn" data-category="documents">
+            <i class="fas fa-file-alt"></i>
+            <span>Documents</span>
+          </button>
+        </div>
+      </div>
       <div class="faq-grid">
-        <div class="faq-item fade-in">
+        <div class="faq-item fade-in" data-category="delivery">
           <div class="faq-question">
             <h4>How quickly can you transport my vehicle?</h4>
             <i class="fas fa-chevron-down"></i>
@@ -1013,9 +1120,22 @@
               Maharashtra: 1-2 days, Interstate: 3-5 days, Pan-India: 5-7
               days. Express delivery options are available.
             </p>
+            <div class="faq-rating">
+              <span>Was this helpful?</span>
+              <div class="faq-rating-buttons">
+                <button class="rating-btn" data-rating="yes">
+                  <i class="fas fa-thumbs-up"></i>
+                  <span>Yes</span>
+                </button>
+                <button class="rating-btn" data-rating="no">
+                  <i class="fas fa-thumbs-down"></i>
+                  <span>No</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-item fade-in fade-in-delay-1">
+        <div class="faq-item fade-in fade-in-delay-1" data-category="insurance">
           <div class="faq-question">
             <h4>Is my vehicle insured during transport?</h4>
             <i class="fas fa-chevron-down"></i>
@@ -1026,9 +1146,22 @@
               comprehensive insurance coverage up to the vehicle's current
               market value.
             </p>
+            <div class="faq-rating">
+              <span>Was this helpful?</span>
+              <div class="faq-rating-buttons">
+                <button class="rating-btn" data-rating="yes">
+                  <i class="fas fa-thumbs-up"></i>
+                  <span>Yes</span>
+                </button>
+                <button class="rating-btn" data-rating="no">
+                  <i class="fas fa-thumbs-down"></i>
+                  <span>No</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-item fade-in fade-in-delay-2">
+        <div class="faq-item fade-in fade-in-delay-2" data-category="service">
           <div class="faq-question">
             <h4>Do you provide door-to-door service?</h4>
             <i class="fas fa-chevron-down"></i>
@@ -1039,9 +1172,22 @@
               major cities in India. Our team handles pickup and delivery at
               your specified locations.
             </p>
+            <div class="faq-rating">
+              <span>Was this helpful?</span>
+              <div class="faq-rating-buttons">
+                <button class="rating-btn" data-rating="yes">
+                  <i class="fas fa-thumbs-up"></i>
+                  <span>Yes</span>
+                </button>
+                <button class="rating-btn" data-rating="no">
+                  <i class="fas fa-thumbs-down"></i>
+                  <span>No</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-item fade-in fade-in-delay-3">
+        <div class="faq-item fade-in fade-in-delay-3" data-category="documents">
           <div class="faq-question">
             <h4>What documents are required for vehicle transport?</h4>
             <i class="fas fa-chevron-down"></i>
@@ -1051,6 +1197,19 @@
               You'll need RC book, insurance documents, and a valid ID proof.
               For commercial vehicles, additional permits might be required.
             </p>
+            <div class="faq-rating">
+              <span>Was this helpful?</span>
+              <div class="faq-rating-buttons">
+                <button class="rating-btn" data-rating="yes">
+                  <i class="fas fa-thumbs-up"></i>
+                  <span>Yes</span>
+                </button>
+                <button class="rating-btn" data-rating="no">
+                  <i class="fas fa-thumbs-down"></i>
+                  <span>No</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1091,85 +1250,6 @@
       .catch(error => console.error('Error loading footer:', error));
   </script>
 
-  <script>
-    // Contact Form Functionality
-    document.addEventListener("DOMContentLoaded", function () {
-      const contactForm = document.getElementById("contactForm");
-
-      contactForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = document.getElementById("name").value;
-        const phone = document.getElementById("phone").value;
-        const email = document.getElementById("email").value;
-
-        // Simulate form submission
-        const submitBtn = contactForm.querySelector(".submit-btn");
-        const originalText = submitBtn.innerHTML;
-
-        // Show loading state
-        submitBtn.innerHTML =
-          '<i class="fas fa-spinner fa-spin"></i><span>Sending Message...</span>';
-        submitBtn.disabled = true;
-
-        // Simulate API call
-        setTimeout(() => {
-          // Show success message
-          alert(
-            `Thank you ${name}! Your message has been sent successfully. We'll contact you at ${phone} or ${email} within 30 minutes.`
-          );
-
-          // Reset form
-          contactForm.reset();
-
-          // Reset button
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }, 2000);
-      });
-
-      // FAQ Accordion
-      const faqItems = document.querySelectorAll(".faq-item");
-      faqItems.forEach((item) => {
-        const question = item.querySelector(".faq-question");
-        question.addEventListener("click", () => {
-          // Close all other items
-          faqItems.forEach((otherItem) => {
-            if (otherItem !== item) {
-              otherItem.classList.remove("active");
-            }
-          });
-
-          // Toggle current item
-          item.classList.toggle("active");
-        });
-      });
-
-      // Phone number formatting
-      const phoneInput = document.getElementById("phone");
-      phoneInput.addEventListener("input", function (e) {
-        let value = e.target.value.replace(/\D/g, "");
-        if (value.length > 0) {
-          value = value.match(/.{1,5}/g).join(" ");
-        }
-        e.target.value = value;
-      });
-
-      // Add input animations
-      const inputs = document.querySelectorAll("input, select, textarea");
-      inputs.forEach((input) => {
-        input.addEventListener("focus", function () {
-          this.style.transform = "scale(1.02)";
-        });
-
-        input.addEventListener("blur", function () {
-          this.style.transform = "scale(1)";
-        });
-      });
-    });
-  </script>
   <script src="../js/modules/search.js"></script>
   <script src="../js/modules/navbar.js"></script>
   <script src="../js/modules/themes.js"></script>
@@ -1183,6 +1263,7 @@
   <script src="../js/modules/back-to-top-button.js"></script>
     <script src="../js/modules/backtoBottom.js"></script>
     <script src="../js/modules/scroll-animations.js"></script>
+    <script src="../js/modules/contact-enhanced.js"></script>
 
 
   <!-- Back to Top Button -->
