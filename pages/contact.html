@@ -12,7 +12,9 @@
   <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
   <link rel="stylesheet" href="../css/components/quote-modal.css">
   <link rel="stylesheet" href="../css/components/chatbot-modal.css">
-  <link rel="stylesheet" href="../css/components/back-to-top-button.css">
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+   <link rel="stylesheet" href="../css/components/backtoBottom.css">
+  <link rel="stylesheet" href="../css/components/animations.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     @font-face {
@@ -809,7 +811,7 @@
   <section class="contact-hero">
     <div class="container">
       <h1 class="fade-in">Get In Touch With Us</h1>
-      <p class="fade-in delay-1">
+      <p class="fade-in fade-in-delay-1">
         We're here to help you with all your vehicle transportation needs.
         Contact us for quotes, support, or any questions.
       </p>
@@ -843,7 +845,7 @@
             </div>
           </div>
 
-          <div class="info-card fade-in delay-1">
+          <div class="info-card fade-in fade-in-delay-1">
             <div class="info-header">
               <div class="info-icon">
                 <img src="../assets/images/email.png" alt="Email" />
@@ -865,7 +867,7 @@
             </div>
           </div>
 
-          <div class="info-card fade-in delay-2">
+          <div class="info-card fade-in fade-in-delay-2">
             <div class="info-header">
               <div class="info-icon">
                 <img src="../assets/images/location.png" alt="Location" />
@@ -882,7 +884,7 @@
             </div>
           </div>
 
-          <div class="info-card fade-in delay-3">
+          <div class="info-card fade-in fade-in-delay-3">
             <div class="info-header">
               <div class="info-icon">
                 <i class="fas fa-clock"></i>
@@ -1013,7 +1015,7 @@
             </p>
           </div>
         </div>
-        <div class="faq-item fade-in delay-1">
+        <div class="faq-item fade-in fade-in-delay-1">
           <div class="faq-question">
             <h4>Is my vehicle insured during transport?</h4>
             <i class="fas fa-chevron-down"></i>
@@ -1026,7 +1028,7 @@
             </p>
           </div>
         </div>
-        <div class="faq-item fade-in delay-2">
+        <div class="faq-item fade-in fade-in-delay-2">
           <div class="faq-question">
             <h4>Do you provide door-to-door service?</h4>
             <i class="fas fa-chevron-down"></i>
@@ -1039,7 +1041,7 @@
             </p>
           </div>
         </div>
-        <div class="faq-item fade-in delay-3">
+        <div class="faq-item fade-in fade-in-delay-3">
           <div class="faq-question">
             <h4>What documents are required for vehicle transport?</h4>
             <i class="fas fa-chevron-down"></i>
@@ -1059,11 +1061,11 @@
   <section class="contact-cta">
     <div class="container">
       <h2 class="fade-in">Ready to Transport Your Vehicle?</h2>
-      <p class="fade-in delay-1">
+      <p class="fade-in fade-in-delay-1">
         Get started with our reliable and secure vehicle transportation
         services today.
       </p>
-      <div class="cta-buttons fade-in delay-2">
+      <div class="cta-buttons fade-in fade-in-delay-2">
         <a href="#quote" class="cta-btn primary">
           <i class="fas fa-calculator"></i>
           <span>Get Instant Quote</span>
@@ -1179,11 +1181,21 @@
   <script src="../js/modules/floating-chatbot-button.js"></script>
   <script src="../js/modules/chatbot-modal.js"></script>
   <script src="../js/modules/back-to-top-button.js"></script>
+    <script src="../js/modules/backtoBottom.js"></script>
+    <script src="../js/modules/scroll-animations.js"></script>
+
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">
     <i class="fas fa-arrow-up"></i>
   </button>
+
+    <!-- Top to Bottom Button -->
+<button class="back-to-bottom" id="backToBottom">
+  <i class="fas fa-arrow-down"></i>
+</button>
+
+
 </body>
 
 </html>

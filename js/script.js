@@ -15,23 +15,28 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     };
     window.requestAnimationFrame(step);
+  };
+
+  // Start counters when hero section is in view
+  if (statNumbers.length > 0) {
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            animateValue(stat, 0, target, 2000);
+          });
+          heroObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const heroElement = document.querySelector('.hero');
+    if (heroElement) {
+      heroObserver.observe(heroElement);
+    }
   }
 });
-
-// Start counters when hero section is in view
-const heroObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        animateValue(stat, 0, target, 2000);
-      });
-      heroObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-heroObserver.observe(document.querySelector('.hero'));
 
 // Quick quote form functionality
 const quickQuoteForm = document.getElementById('quickQuoteForm');
@@ -102,63 +107,8 @@ if (video) {
   });
 }
 
-// Testimonial Slider Functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const sliderContainer = document.getElementById("sliderContainer");
-  const slides = document.querySelectorAll(".testimonial-card");
-  const dots = document.querySelectorAll(".dot");
-  const prevBtn = document.querySelector(".prev-btn");
-  const nextBtn = document.querySelector(".next-btn");
+// Testimonial Slider Functionality now created seperately in js/modules/testimonial.js
 
-  let currentSlide = 0;
-  const totalSlides = slides.length;
-
-  // Update slider position
-  function updateSlider() {
-    sliderContainer.style.transform = `translateX(-${currentSlide * 100
-      }%)`;
-
-    // Update dots
-    dots.forEach((dot, index) => {
-      dot.classList.toggle("active", index === currentSlide);
-    });
-  }
-
-  // Next slide
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlider();
-  }
-
-  // Previous slide
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateSlider();
-  }
-
-  // Event listeners
-  nextBtn.addEventListener("click", nextSlide);
-  prevBtn.addEventListener("click", prevSlide);
-
-  // Dot click events
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      currentSlide = index;
-      updateSlider();
-    });
-  });
-
-  // Auto slide every 5 seconds
-  setInterval(nextSlide, 5000);
-
-  // Pause auto-slide on hover
-  const slider = document.querySelector(".testimonial-slider");
-  slider.addEventListener("mouseenter", () => {
-    clearInterval(autoSlide);
-  });
-
-  let autoSlide = setInterval(nextSlide, 5000);
-});
 
 // Load shared footer dynamically
 fetch('pages/footer.html')
@@ -171,8 +121,9 @@ fetch('pages/footer.html')
 // Contact Form Functionality
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contactForm");
-
-  contactForm.addEventListener("submit", function (e) {
+  
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form data
@@ -208,15 +159,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // Phone number formatting
-  const phoneInput = contactForm.querySelector('input[type="tel"]');
-  phoneInput.addEventListener("input", function (e) {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 0) {
-      value = value.match(/.{1,5}/g).join(" ");
+    // Phone number formatting
+    const phoneInput = contactForm.querySelector('input[type="tel"]');
+    if (phoneInput) {
+      phoneInput.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 0) {
+          value = value.match(/.{1,5}/g).join(" ");
+        }
+        e.target.value = value;
+      });
     }
-    e.target.value = value;
-  });
+  }
 });
 
 // Load shared footer dynamically
@@ -255,15 +209,20 @@ inputs.forEach((input) => {
   });
 });
 
-// Phone number formatting
-const phoneInput = contactForm.querySelector('input[type="tel"]');
-phoneInput.addEventListener("input", function (e) {
-  let value = e.target.value.replace(/\D/g, "");
-  if (value.length > 0) {
-    value = value.match(/.{1,5}/g).join(" ");
+// Phone number formatting (duplicate code - should be removed)
+const contactFormDup = document.getElementById("contactForm");
+if (contactFormDup) {
+  const phoneInput = contactFormDup.querySelector('input[type="tel"]');
+  if (phoneInput) {
+    phoneInput.addEventListener("input", function (e) {
+      let value = e.target.value.replace(/\D/g, "");
+      if (value.length > 0) {
+        value = value.match(/.{1,5}/g).join(" ");
+      }
+      e.target.value = value;
+    });
   }
-  e.target.value = value;
-});
+}
 
 
 //Keypress-Activated Easter Egg 
@@ -283,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // <!-- Load Footer -->
 // Load footer
-fetch('./footer.html')
+fetch('./pages/footer.html')
   .then(response => response.text())
   .then(data => {
     document.getElementById('footer-container').innerHTML = data;
@@ -309,12 +268,16 @@ let slides = document.querySelectorAll(".slide");
 let currentSlide = 0;
 
 function nextSlide() {
-  slides[currentSlide].classList.remove("active");
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add("active");
+  if (slides.length > 0) {
+    slides[currentSlide].classList.remove("active");
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add("active");
+  }
 }
 
-setInterval(nextSlide, 5000); // changes every 5 seconds
+if (slides.length > 0) {
+  setInterval(nextSlide, 5000); // changes every 5 seconds
+}
 
 // Enhanced Hero Section Functionality
 document.addEventListener('DOMContentLoaded', function () {

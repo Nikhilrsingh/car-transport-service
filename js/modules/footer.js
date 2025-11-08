@@ -1,6 +1,7 @@
 // Back to Top Functionality - Moved to js/modules/back-to-top-button.js
 // This module previously handled back-to-top button logic but is now centralized
 // in the dedicated back-to-top-button.js module to avoid duplication
+
 // js/modules/footer.js
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const footerHTML = await response.text();
     footerContainer.innerHTML = footerHTML;
 
-    // ✅ Manually set the year since inline script won't run
+  
     const yearSpan = document.getElementById("current-year");
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
@@ -22,3 +23,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     footerContainer.innerHTML = "<p>⚠️ Unable to load footer</p>";
   }
 });
+

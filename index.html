@@ -8,6 +8,7 @@
   <base href="./">
   <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
   <link rel="stylesheet" href="./css/components/testimonial.css">
+  <link rel="stylesheet" href="./css/components/rating.css">
   <link rel="stylesheet" href="./css/components/tracking.css">
   <link rel="stylesheet" href="./css/components/navbar.css">
   <link rel="stylesheet" href="./css/components/footer.css">
@@ -18,7 +19,10 @@
   <link rel="stylesheet" href="./css/components/sticky-quote-button.css">
   <link rel="stylesheet" href="./css/components/quote-modal.css">
   <link rel="stylesheet" href="./css/components/chatbot-modal.css">
+  <link rel="stylesheet" href="./css/components/backtoBottom.css">
   <link rel="stylesheet" href="./css/components/back-to-top-button.css">
+  <link rel="stylesheet" href="./css/components/digital-clock.css">
+  <link rel="stylesheet" href="./css/components/animations.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
@@ -70,12 +74,6 @@
               <a href="./services.html" class="nav-link" data-page="services" data-tooltip="Services">
                 <i class="fas fa-truck-moving"></i>
                 <span>Services</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./pages/booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
-                <i class="fas fa-calendar-check"></i>
-                <span>Booking</span>
               </a>
             </li>
             <li class="nav-item">
@@ -308,7 +306,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Scroll Indicator -->
     <div class="scroll-indicator">
       <div class="scroll-text">Scroll to Explore</div>
@@ -387,37 +385,102 @@
               <h3>Get Instant Quote</h3>
               <p>Quick & accurate pricing in 30 seconds</p>
             </div>
-            <form class="quote-form" id="quickQuoteForm">
-              <div class="form-group">
-                <label for="fromCity"><i class="fas fa-map-marker-alt"></i> From</label>
-                <input type="text" id="fromCity" placeholder="Pickup City" required>
+            
+            <!-- Step Progress Indicator -->
+            <div class="step-progress">
+              <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Route</div>
               </div>
-              <div class="form-group">
-                <label for="toCity"><i class="fas fa-flag-checkered"></i> To</label>
-                <input type="text" id="toCity" placeholder="Drop City" required>
+              <div class="step-line"></div>
+              <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Vehicle</div>
               </div>
-              <div class="form-group">
-                <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
-                <select id="vehicleType" required>
-                  <option value="">Select Vehicle</option>
-                  <option value="hatchback">Hatchback</option>
-                  <option value="sedan">Sedan</option>
-                  <option value="suv">SUV</option>
-                  <option value="luxury">Luxury Car</option>
-                </select>
+              <div class="step-line"></div>
+              <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Quote</div>
               </div>
-              <button type="submit" class="quote-submit">
-                <span>Calculate Price</span>
-                <i class="fas fa-arrow-right"></i>
-              </button>
-            </form>
-            <div class="quote-result" id="quoteResult">
-              <div class="result-price">
-                <span class="amount">₹5,800</span>
-                <span class="label">Estimated Cost</span>
-              </div>
-              <a href="./pages/booking.html" class="result-book">Book Now</a>
             </div>
+
+            <form class="quote-form" id="quickQuoteForm">
+              <!-- Step 1: Route -->
+              <div class="form-step active" data-step="1">
+                <div class="form-group floating-label">
+                  <input type="text" id="fromCity" required autocomplete="off">
+                  <label for="fromCity"><i class="fas fa-map-marker-alt"></i> Pickup City</label>
+                  <div class="autocomplete-dropdown" id="fromCityDropdown"></div>
+                </div>
+                <div class="form-group floating-label">
+                  <input type="text" id="toCity" required autocomplete="off">
+                  <label for="toCity"><i class="fas fa-flag-checkered"></i> Drop City</label>
+                  <div class="autocomplete-dropdown" id="toCityDropdown"></div>
+                </div>
+                <div class="distance-display" id="distanceDisplay">
+                  <i class="fas fa-route"></i>
+                  <span>Distance: <strong id="distanceValue">---</strong></span>
+                </div>
+                <button type="button" class="quote-next" id="step1Next">
+                  <span>Next</span>
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+
+              <!-- Step 2: Vehicle Type -->
+              <div class="form-step" data-step="2">
+                <div class="form-group floating-label">
+                  <select id="vehicleType" required>
+                    <option value=""></option>
+                    <option value="hatchback">Hatchback</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="suv">SUV</option>
+                    <option value="luxury">Luxury Car</option>
+                  </select>
+                  <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
+                </div>
+                <div class="form-actions">
+                  <button type="button" class="quote-form-back-btn" id="step2Back">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                  </button>
+                  <button type="submit" class="quote-form-submit-btn">
+                    <span>Calculate Price</span>
+                    <i class="fas fa-calculator"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Step 3: Result -->
+              <div class="form-step" data-step="3">
+                <div class="quote-result" id="quoteResult">
+                  <div class="result-details">
+                    <div class="result-row">
+                      <span class="result-label">Route:</span>
+                      <span class="result-value" id="resultRoute">---</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-label">Distance:</span>
+                      <span class="result-value" id="resultDistance">---</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-label">Vehicle:</span>
+                      <span class="result-value" id="resultVehicle">---</span>
+                    </div>
+                  </div>
+                  <div class="result-price">
+                    <span class="label">Estimated Cost</span>
+                    <span class="amount" id="resultAmount">₹0</span>
+                  </div>
+                  <div class="result-actions">
+                    <button type="button" class="quote-result-book-btn" id="bookNowBtn">Book Now</button>
+                    <button type="button" class="quote-result-reset-btn" id="resetQuote">
+                      <i class="fas fa-redo"></i> New Quote
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -426,19 +489,19 @@
 
   <!-- Features Section -->
   <section class="features" id="features">
-    <h2 class="section-title h1">Our Features</h2>
+    <h2 class="section-title h1 fade-in">Our Features</h2>
     <div class="features-container">
-      <div class="feature-box">
+      <div class="feature-box fade-in">
         🚗
         <h3>Fast Delivery</h3>
         <p>We ensure timely and safe transport of your vehicle to the destination.</p>
       </div>
-      <div class="feature-box">
+      <div class="feature-box fade-in">
         💰
         <h3>Affordable Rates</h3>
         <p>Get the best service at budget-friendly prices without hidden charges.</p>
       </div>
-      <div class="feature-box">
+      <div class="feature-box fade-in">
         🛡️
         <h3>Full Insurance</h3>
         <p>Your vehicle is fully insured during the entire transport process.</p>
@@ -446,26 +509,26 @@
     </div>
   </section>
 
-        <!-- Pricing CTA -->
-        <div class="pricing-cta-section">
-          <div class="pricing-cta-content">
-            <h3>Compare Our Pricing Plans</h3>
-            <p>Transparent pricing for every transportation need. Choose the perfect plan that fits your budget and
-              requirements.</p>
-            <a href="./pages/pricing.html" class="cta-btn primary">
-              <i class="fas fa-tags"></i>
-              <span>View Pricing Plans</span>
-            </a>
-          </div>
-        </div>
-      </div>
+  <!-- Pricing CTA -->
+  <div class="pricing-cta-section fade-in">
+    <div class="pricing-cta-content">
+      <h3>Compare Our Pricing Plans</h3>
+      <p>Transparent pricing for every transportation need. Choose the perfect plan that fits your budget and
+        requirements.</p>
+      <a href="./pages/pricing.html" class="cta-btn primary">
+        <i class="fas fa-tags"></i>
+        <span>View Pricing Plans</span>
+      </a>
     </div>
+  </div>
+  </div>
+  </div>
   </section>
 
   <!-- Testimonials Section -->
   <section class="testimonials-section" id="testimonials">
     <div class="container">
-      <div class="section-title">
+      <div class="section-title fade-in">
         <h2>What Our Customers Say</h2>
         <p>Don't just take our word for it. Read genuine reviews from our satisfied customers.</p>
       </div>
@@ -473,158 +536,12 @@
       <!-- Slider Section -->
       <div class="testimonial-slider">
         <div class="slider-container" id="sliderContainer">
-          <!-- Testimonial 1 -->
-          <div class="testimonial-card">
-            <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="testimonial-text">
-              "I was extremely worried about shipping my BMW from Delhi to Bangalore, but Harihar Car Carriers made the
-              process seamless. Their professional handling and timely delivery exceeded my expectations. Highly
-              recommended!"
-            </p>
-            <div class="client-info">
-              <div class="client-avatar">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1000&q=80"
-                  alt="Rajesh Kumar" />
-              </div>
-              <div class="client-details">
-                <h4>Rajesh Kumar</h4>
-                <p>Delhi to Bangalore</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Testimonial 2 -->
-          <div class="testimonial-card">
-            <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="testimonial-text">
-              "As a car dealer, I regularly use transport services. Harihar Car Carriers stands out with their
-              punctuality and care. My luxury cars always arrive in perfect condition. Trustworthy service!"
-            </p>
-            <div class="client-info">
-              <div class="client-avatar">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1000&q=80"
-                  alt="Priya Sharma" />
-              </div>
-              <div class="client-details">
-                <h4>Priya Sharma</h4>
-                <p>Car Dealer, Mumbai</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Testimonial 3 -->
-          <div class="testimonial-card">
-            <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-            </div>
-            <p class="testimonial-text">
-              "Transported my vintage car from Chennai to Pune. The team was very careful and provided regular updates
-              throughout the journey. My classic car arrived without a scratch. Excellent service!"
-            </p>
-            <div class="client-info">
-              <div class="client-avatar">
-                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=80"
-                  alt="Vikram Singh" />
-              </div>
-              <div class="client-details">
-                <h4>Vikram Singh</h4>
-                <p>Chennai to Pune</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-            </div>
-            <p class="testimonial-text">
-              "Transported my vintage car from Chennai to Pune. The team was very careful and provided regular updates
-              throughout the journey. My classic car arrived without a scratch. Excellent service!"
-            </p>
-            <div class="client-info">
-              <div class="client-avatar">
-                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=80"
-                  alt="Vikram Singh" />
-              </div>
-              <div class="client-details">
-                <h4>aman Singh</h4>
-                <p>Chennai to Pune</p>
-              </div>
-            </div>
-
-          </div>
-          <div class="testimonial-card">
-            <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-            </div>
-            <p class="testimonial-text">
-            "Door-to-door service was amazing! They picked up my car from home and delivered it right to my new address.
-            No hassle at all."
-          </p>
-          <div class="grid-client-info">
-            <div class="grid-client-avatar">
-              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
-                alt="Anjali Mehta" />
-            </div>
-            <div class="client-details">
-              <h4>Anjali Mehta</h4>
-              <p>Relocation Service</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="rating">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-            </div>
-            <p class="testimonial-text">
-            "Best pricing in the market with premium service. My SUV was transported safely from Hyderabad to Kolkata.
-            Will definitely use again."
-          </p>
-          <div class="grid-client-info">
-            <div class="grid-client-avatar">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80"
-                alt="Amit Patel" />
-            </div>
-            <div class="client-details">
-              <h4>Amit Patel</h4>
-              <p>Hyderabad to Kolkata</p>
-              </div>
-            </div>
-          </div>
-          </div>
-
-        <!-- Slider Controls -->
-        <div class="slider-controls">
-          <button class="slider-btn prev-btn">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <div class="slider-dots">
-            <span class="dot active" data-slide="0"></span>
-            <span class="dot" data-slide="1"></span>
-            <span class="dot" data-slide="2"></span>
-            <span class="dot" data-slide="3"></span>
-            <span class="dot" data-slide="4"></span>
-            <span class="dot" data-slide="5"></span>
-          </div>
-          <button class="slider-btn next-btn">
-            <i class="fas fa-chevron-right"></i>
-          </button>
+          <!-- testimonial cards will be added dynamicaly here by JS file testimonial.js -->
         </div>
-      </div>
+        <!-- Slider Controls is also added through JS -->
 
-      <!-- Testimonials Grid -->
-      <!-- <div class="testimonials-grid">
+        <!-- Testimonials Grid -->
+        <!-- <div class="testimonials-grid">
         <div class="grid-testimonial">
           <div class="grid-rating">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -667,6 +584,24 @@
           </div>
         </div>
       </div> -->
+      </div>
+
+      <!-- Website Rating Section -->
+      <div class="website-rating-section">
+        <div class="rating-container">
+          <h3>Rate Your Experience</h3>
+          <p>How would you rate our website?</p>
+          <div class="star-rating" id="websiteRating">
+            <i class="far fa-star" data-rating="1"></i>
+            <i class="far fa-star" data-rating="2"></i>
+            <i class="far fa-star" data-rating="3"></i>
+            <i class="far fa-star" data-rating="4"></i>
+            <i class="far fa-star" data-rating="5"></i>
+          </div>
+          <div class="rating-feedback" id="ratingFeedback"></div>
+          <div class="rating-message" id="ratingMessage"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -674,7 +609,7 @@
   <section class="contact-cta">
     <div class="container">
       <div class="cta-content">
-        <div class="cta-text">
+        <div class="cta-text fade-in">
           <h2>Have Any Questions About Vehicle Transport?</h2>
           <p>Our expert team is here to help you with all your car transportation needs. Get instant quotes, schedule
             pickups, or ask any questions.</p>
@@ -693,7 +628,7 @@
             </div>
           </div>
         </div>
-        <div class="cta-form-box">
+        <div class="cta-form-box fade-in">
           <div class="form-header">
             <h3>Get In Touch</h3>
             <p>Quick response guaranteed</p>
@@ -741,6 +676,16 @@
     </div>
   </section>
 
+  <!-- Digital Clock Section -->
+  <section class="digital-clock-section">
+    <div class="container">
+      <div class="digital-clock">
+        <div class="clock-time" id="clock-time">00:00:00 AM</div>
+        <div class="clock-date" id="clock-date">Loading...</div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer Section -->
   <div id="footer-container"></div>
 
@@ -749,6 +694,23 @@
     <i class="fas fa-arrow-up"></i>
   </button>
 
+  <!-- Top to Bottom Button -->
+  <button class="back-to-bottom" id="backToBottom">
+    <i class="fas fa-arrow-down"></i>
+  </button>
+
+  <!-- Load Footer -->
+  <script>
+    // Load footer
+    fetch('./pages/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading footer:', error);
+      });
+  </script>
 
   <script>
     window.addEventListener("load", () => {
@@ -765,6 +727,7 @@
   </script>
 
   <script src="./js/script.js"></script>
+  <script src="./js/modules/hero-animations.js"></script>
   <script src="./js/modules/themes.js"></script>
   <script src="./js/modules/Services.js"></script>
   <script src="./js/modules/tracking.js"></script>
@@ -779,6 +742,13 @@
   <script src="./js/modules/floating-chatbot-button.js"></script>
   <script src="./js/modules/chatbot-modal.js"></script>
   <script src="./js/modules/back-to-top-button.js"></script>
+  <script src="./js/modules/backtoBottom.js"></script>
+
+
+  <script src="./js/modules/testimonial.js"></script>
+  <script src="./js/modules/rating.js"></script>
+  <script src="./js/modules/digital-clock.js"></script>
+  <script src="./js/modules/scroll-animations.js"></script>
 
   <div id="car" class="car">🏎️</div>
 

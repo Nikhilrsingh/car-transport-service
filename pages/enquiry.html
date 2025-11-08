@@ -1,457 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enquiry | Harihar Car Carriers</title>
+    <link rel="icon" type="image/png" href="classic-car.png" />
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <link rel="stylesheet" href="../css/components/floating-call-button.css" />
+    <link
+      rel="stylesheet"
+      href="../css/components/floating-whatsapp-button.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../css/components/floating-chatbot-button.css"
+    />
+    <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+    <link rel="stylesheet" href="../css/components/quote-modal.css" />
+    <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
+    <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enquiry | Harihar Car Carriers</title>
-  <link rel="icon" type="image/png" href="classic-car.png" />
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/floating-call-button.css">
-  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
-  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css">
-  <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
-  <link rel="stylesheet" href="../css/components/quote-modal.css">
-  <link rel="stylesheet" href="../css/components/chatbot-modal.css">
-  <link rel="stylesheet" href="../css/components/back-to-top-button.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="../css/components/floating-button.css">
-  <style>
-    :root {
-      --orange: #ff6347;
-      --bg: #1a1a1a;
-      --text: #f5f5f5;
-      --muted: #aaaaaa;
-      --card-bg: #2b2b2b;
-      --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-      --radius: 12px;
-      font-family: "Poppins", sans-serif;
-    }
+    <link rel="stylesheet" href="../css/components/backtoBottom.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/components/floating-button.css" />
+    <style>
+      :root {
+        --orange: #ff6347;
+        --bg: #1a1a1a;
+        --text: #f5f5f5;
+        --muted: #aaaaaa;
+        --card-bg: #2b2b2b;
+        --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        --radius: 12px;
+        font-family: "Poppins", sans-serif;
+      }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-    }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+      }
 
-    /* HERO SECTION */
-    .enquiry-hero {
-      text-align: center;
-      padding: 100px 20px 60px;
-      background: linear-gradient(135deg, rgba(255, 99, 71, 0.15), rgba(0, 0, 0, 0.9));
-    }
+      /* HERO SECTION */
+      .enquiry-hero {
+        text-align: center;
+        padding: 100px 20px 60px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 99, 71, 0.15),
+          rgba(0, 0, 0, 0.9)
+        );
+      }
 
-    .enquiry-hero h1 {
-      font-size: 2.8rem;
-      background: linear-gradient(135deg, #ff6347, #ff4500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-    }
-
-    .enquiry-hero p {
-      color: var(--muted);
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    /* FORM SECTION */
-    .enquiry-container {
-      max-width: 700px;
-      margin: 60px auto;
-      background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .enquiry-container h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: var(--orange);
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    label {
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #444;
-      background: #222;
-      color: var(--text);
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border 0.3s ease;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: var(--orange);
-      outline: none;
-    }
-
-    textarea {
-      resize: none;
-      height: 120px;
-    }
-
-    button {
-      padding: 12px;
-      background: linear-gradient(135deg, #ff6347, #ff4500);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: linear-gradient(135deg, #ff4500, #ff6347);
-    }
-
-    .success-message {
-      display: none;
-      text-align: center;
-      margin-top: 15px;
-      color: #32cd32;
-      font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
       .enquiry-hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.8rem;
+        background: linear-gradient(135deg, #ff6347, #ff4500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
       }
 
+      .enquiry-hero p {
+        color: var(--muted);
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* FORM SECTION */
       .enquiry-container {
-        margin: 40px 15px;
-        padding: 25px 20px;
+        max-width: 700px;
+        margin: 60px auto;
+        background: var(--card-bg);
+        padding: 40px 30px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
       }
-    }
-  </style>
-</head>
 
-<body>
-  <!-- Enhanced Navigation Component -->
-  <header class="header">
-    <div class="navbar-container">
-      <div class="navbar">
-        <!-- Left Logo -->
-        <div class="logo-container left-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+      .enquiry-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: var(--orange);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      label {
+        font-weight: 500;
+        color: var(--text);
+        margin-bottom: 0;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #444;
+        background: #222;
+        color: var(--text);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: var(--orange);
+        outline: none;
+      }
+
+      textarea {
+        resize: none;
+        height: 120px;
+      }
+
+      button {
+        padding: 12px;
+        background: linear-gradient(135deg, #ff6347, #ff4500);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #ff4500, #ff6347);
+      }
+
+      .success-message {
+        display: none;
+        text-align: center;
+        margin-top: 15px;
+        color: #32cd32;
+        font-weight: 500;
+      }
+
+      @media (max-width: 768px) {
+        .enquiry-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .enquiry-container {
+          margin: 40px 15px;
+          padding: 25px 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Enhanced Navigation Component -->
+    <header class="header">
+      <div class="navbar-container">
+        <div class="navbar">
+          <!-- Left Logo -->
+          <div class="logo-container left-logo">
+            <img
+              src="../assets/images/left-logo.jpg"
+              alt="Harihar Car Carriers"
+              class="logo-img"
+            />
+          </div>
+
+          <!-- Desktop Navigation -->
+          <nav class="desktop-nav" aria-label="Main navigation">
+            <ul class="nav-list">
+              <li class="nav-item">
+                <a
+                  href="../index.html"
+                  class="nav-link active"
+                  data-page="home"
+                >
+                  <i class="fas fa-home"></i>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./about.html" class="nav-link" data-page="about">
+                  <i class="fas fa-info-circle"></i>
+                  <span>About</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="../index.html./services.html"
+                  class="nav-link"
+                  data-page="services"
+                >
+                  <i class="fas fa-truck-moving"></i>
+                  <span>Services</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./booking.html" class="nav-link" data-page="booking">
+                  <i class="fas fa-calendar-check"></i>
+                  <span>Booking</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="./contributors.html"
+                  class="nav-link"
+                  data-page="contributors"
+                >
+                  <i class="fas fa-users"></i>
+                  <span>Contributors</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./pricing.html" class="nav-link" data-page="pricing">
+                  <i class="fas fa-tags"></i>
+                  <span>Pricing</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./tracking.html" class="nav-link" data-page="tracking">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Track Your Car</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./gallery.html" class="nav-link" data-page="gallery">
+                  <i class="fas fa-images"></i>
+                  <span>Gallery</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./contact.html" class="nav-link" data-page="contact">
+                  <i class="fas fa-phone"></i>
+                  <span>Contact</span>
+                </a>
+              </li>
+            </ul>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+              <div class="search-bar">
+                <input
+                  type="text"
+                  id="navbarSearch"
+                  placeholder="Search services..."
+                  aria-label="Search services"
+                />
+                <i class="fas fa-search"></i>
+              </div>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="nav-actions">
+              <a href="./enquiry.html" class="nav-link enquiry-link">
+                <i class="fas fa-question-circle"></i>
+                <span>Enquiry</span>
+              </a>
+              <a href="./blog.html" class="nav-link blog-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+              </a>
+              <a href="./login.html" class="login-btn">
+                <i class="fas fa-user"></i>
+                <span>Login</span>
+              </a>
+            </div>
+          </nav>
+
+          <!-- Mobile Menu Button -->
+          <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Toggle mobile menu"
+          >
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+          </button>
         </div>
 
-        <!-- Desktop Navigation -->
-        <nav class="desktop-nav" aria-label="Main navigation">
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a href="../index.html" class="nav-link active" data-page="home">
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+          <div class="mobile-nav-header">
+            <div class="mobile-logo">
+              <img
+                src="../assets/images/left-logo.jpg"
+                alt="Harihar Car Carriers"
+              />
+              <span>Harihar Car Carriers</span>
+            </div>
+            <button
+              class="mobile-close-btn"
+              id="mobileCloseBtn"
+              aria-label="Close mobile menu"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <!-- Mobile Search Bar -->
+          <div class="mobile-search-container">
+            <div class="mobile-search-bar">
+              <i class="fas fa-search"></i>
+              <input
+                type="text"
+                id="mobileSearch"
+                placeholder="Search services..."
+                aria-label="Search services"
+              />
+            </div>
+          </div>
+          <ul class="mobile-nav-list">
+            <li class="mobile-nav-item">
+              <a href="../index.html" class="mobile-nav-link active">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./about.html" class="nav-link" data-page="about">
+            <li class="mobile-nav-item">
+              <a href="./about.html" class="mobile-nav-link">
                 <i class="fas fa-info-circle"></i>
                 <span>About</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="../index.html./services.html" class="nav-link" data-page="services">
+            <li class="mobile-nav-item">
+              <a href="../index.html./services.html" class="mobile-nav-link">
                 <i class="fas fa-truck-moving"></i>
                 <span>Services</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./booking.html" class="nav-link" data-page="booking">
+            <li class="mobile-nav-item">
+              <a href="./booking.html" class="mobile-nav-link">
                 <i class="fas fa-calendar-check"></i>
                 <span>Booking</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./contributors.html" class="nav-link" data-page="contributors">
+            <li class="mobile-nav-item">
+              <a href="./contributors.html" class="mobile-nav-link">
                 <i class="fas fa-users"></i>
                 <span>Contributors</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./pricing.html" class="nav-link" data-page="pricing">
+            <li class="mobile-nav-item">
+              <a href="./pricing.html" class="mobile-nav-link">
                 <i class="fas fa-tags"></i>
                 <span>Pricing</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./tracking.html" class="nav-link" data-page="tracking">
+            <li class="mobile-nav-item">
+              <a href="./tracking.html" class="mobile-nav-link">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>Track Your Car</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./gallery.html" class="nav-link" data-page="gallery">
+            <li class="mobile-nav-item">
+              <a href="./gallery.html" class="mobile-nav-link">
                 <i class="fas fa-images"></i>
                 <span>Gallery</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./contact.html" class="nav-link" data-page="contact">
+            <li class="mobile-nav-item">
+              <a href="./contact.html" class="mobile-nav-link">
                 <i class="fas fa-phone"></i>
                 <span>Contact</span>
               </a>
             </li>
+            <li class="mobile-nav-item">
+              <a href="./enquiry.html" class="mobile-nav-link">
+                <i class="fas fa-question-circle"></i>
+                <span>Enquiry</span>
+              </a>
+            </li>
+            <li class="mobile-nav-item">
+              <a href="./blog.html" class="mobile-nav-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+              </a>
+            </li>
           </ul>
-
-          <!-- Search Bar -->
-          <div class="search-container">
-            <div class="search-bar">
-              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
-              <i class="fas fa-search"></i>
-            </div>
-          </div>
-
-          <!-- Right Actions -->
-          <div class="nav-actions">
-            <a href="./enquiry.html" class="nav-link enquiry-link">
-              <i class="fas fa-question-circle"></i>
-              <span>Enquiry</span>
-            </a>
-            <a href="./blog.html" class="nav-link blog-link">
-              <i class="fas fa-blog"></i>
-              <span>Blog</span>
-            </a>
-            <a href="./login.html" class="login-btn">
+          <div class="mobile-nav-actions">
+            <a href="./login.html" class="mobile-login-btn">
               <i class="fas fa-user"></i>
               <span>Login</span>
             </a>
+            <a href="./booking.html" class="mobile-cta-btn">
+              <i class="fas fa-truck"></i>
+              <span>Book Instantly</span>
+            </a>
+          </div>
+          <div class="mobile-contact-info">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 98765 43210</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@hariharcarcarriers.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i>
+              <span>24/7 Support</span>
+            </div>
           </div>
         </nav>
 
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-        </button>
+        <!-- Navigation Overlay -->
+        <div class="nav-overlay" id="navOverlay"></div>
       </div>
+    </header>
 
-      <!-- Mobile Navigation -->
-      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-        <div class="mobile-nav-header">
-          <div class="mobile-logo">
-            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-            <span>Harihar Car Carriers</span>
-          </div>
-          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
-            <i class="fas fa-times"></i>
-          </button>
+    <!-- HERO -->
+    <section class="enquiry-hero">
+      <h1>Enquiry Form</h1>
+      <p>
+        Get in touch with Harihar Car Carriers for bookings, quotes, or
+        service-related questions.
+      </p>
+    </section>
+
+    <!-- ENQUIRY FORM -->
+    <section class="enquiry-container">
+      <h2>Send Us Your Details</h2>
+      <form id="enquiryForm">
+        <div>
+          <label for="name">Full Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            required
+          />
         </div>
-        <!-- Mobile Search Bar -->
-        <div class="mobile-search-container">
-          <div class="mobile-search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
-          </div>
+
+        <div>
+          <label for="email">Email *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
         </div>
-        <ul class="mobile-nav-list">
-          <li class="mobile-nav-item">
-            <a href="../index.html" class="mobile-nav-link active">
-              <i class="fas fa-home"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./about.html" class="mobile-nav-link">
-              <i class="fas fa-info-circle"></i>
-              <span>About</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="../index.html./services.html" class="mobile-nav-link">
-              <i class="fas fa-truck-moving"></i>
-              <span>Services</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./booking.html" class="mobile-nav-link">
-              <i class="fas fa-calendar-check"></i>
-              <span>Booking</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./contributors.html" class="mobile-nav-link">
-              <i class="fas fa-users"></i>
-              <span>Contributors</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pricing.html" class="mobile-nav-link">
-              <i class="fas fa-tags"></i>
-              <span>Pricing</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./tracking.html" class="mobile-nav-link">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Track Your Car</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./gallery.html" class="mobile-nav-link">
-              <i class="fas fa-images"></i>
-              <span>Gallery</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./contact.html" class="mobile-nav-link">
-              <i class="fas fa-phone"></i>
-              <span>Contact</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./enquiry.html" class="mobile-nav-link">
-              <i class="fas fa-question-circle"></i>
-              <span>Enquiry</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./blog.html" class="mobile-nav-link">
-              <i class="fas fa-blog"></i>
-              <span>Blog</span>
-            </a>
-          </li>
-        </ul>
-        <div class="mobile-nav-actions">
-          <a href="./login.html" class="mobile-login-btn">
-            <i class="fas fa-user"></i>
-            <span>Login</span>
-          </a>
-          <a href="./booking.html" class="mobile-cta-btn">
-            <i class="fas fa-truck"></i>
-            <span>Book Instantly</span>
-          </a>
+
+        <div>
+          <label for="phone">Phone Number *</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Enter your phone number"
+            required
+            pattern="[0-9]{10}"
+          />
         </div>
-        <div class="mobile-contact-info">
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <span>+91 98765 43210</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <span>info@hariharcarcarriers.com</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-clock"></i>
-            <span>24/7 Support</span>
-          </div>
+
+        <div>
+          <label for="message">Message / Service Requirement *</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Write your message..."
+            required
+          ></textarea>
         </div>
-      </nav>
 
-      <!-- Navigation Overlay -->
-      <div class="nav-overlay" id="navOverlay"></div>
-    </div>
-  </header>
+        <button type="submit">Submit Enquiry</button>
+        <div class="success-message" id="successMessage">
+          ✅ Your enquiry has been submitted successfully!
+        </div>
+      </form>
+    </section>
 
-  <!-- HERO -->
-  <section class="enquiry-hero">
-    <h1>Enquiry Form</h1>
-    <p>Get in touch with Harihar Car Carriers for bookings, quotes, or service-related questions.</p>
-  </section>
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+    <script>
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then(
+          (html) =>
+            (document.getElementById("footer-container").innerHTML = html)
+        )
+        .catch((err) => console.error("Footer load error:", err));
+    </script>
 
-  <!-- ENQUIRY FORM -->
-  <section class="enquiry-container">
-    <h2>Send Us Your Details</h2>
-    <form id="enquiryForm">
-      <div>
-        <label for="name">Full Name *</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required />
-      </div>
+    <script>
+      const form = document.getElementById("enquiryForm");
+      const successMsg = document.getElementById("successMessage");
 
-      <div>
-        <label for="email">Email *</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required />
-      </div>
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-      <div>
-        <label for="phone">Phone Number *</label>
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required pattern="[0-9]{10}" />
-      </div>
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const phone = form.phone.value.trim();
+        const message = form.message.value.trim();
 
-      <div>
-        <label for="message">Message / Service Requirement *</label>
-        <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
-      </div>
+        if (!name || !email || !phone || !message) {
+          alert("Please fill in all required fields.");
+          return;
+        }
 
-      <button type="submit">Submit Enquiry</button>
-      <div class="success-message" id="successMessage">✅ Your enquiry has been submitted successfully!</div>
-    </form>
-  </section>
+        if (!/^[0-9]{10}$/.test(phone)) {
+          alert("Please enter a valid 10-digit phone number.");
+          return;
+        }
 
-  <!-- FOOTER -->
-  <div id="footer-container"></div>
-  <script>
-    fetch("footer.html")
-      .then(res => res.text())
-      .then(html => document.getElementById("footer-container").innerHTML = html)
-      .catch(err => console.error("Footer load error:", err));
-  </script>
+        successMsg.style.display = "block";
+        form.reset();
 
-  <script>
-    const form = document.getElementById("enquiryForm");
-    const successMsg = document.getElementById("successMessage");
+        setTimeout(() => {
+          successMsg.style.display = "none";
+        }, 4000);
+      });
+    </script>
+    <script src="../js/modules/search.js"></script>
+    <script src="../js/modules/navbar.js"></script>
+    <script src="../js/modules/themes.js"></script>
+    <script src="../js/modules/floating-book-button.js"></script>
+    <script src="../js/modules/floating-call-button.js"></script>
+    <script src="../js/modules/floating-whatsapp-button.js"></script>
+    <script src="../js/modules/quote-modal.js"></script>
+    <script src="../js/modules/sticky-quote-button.js"></script>
+    <script src="../js/modules/floating-chatbot-button.js"></script>
+    <script src="../js/modules/chatbot-modal.js"></script>
+    <script src="../js/modules/back-to-top-button.js"></script>
+    <script src="../js/modules/backtoBottom.js"></script>
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const phone = form.phone.value.trim();
-      const message = form.message.value.trim();
-
-      if (!name || !email || !phone || !message) {
-        alert("Please fill in all required fields.");
-        return;
-      }
-
-      if (!/^[0-9]{10}$/.test(phone)) {
-        alert("Please enter a valid 10-digit phone number.");
-        return;
-      }
-
-      successMsg.style.display = "block";
-      form.reset();
-
-      setTimeout(() => {
-        successMsg.style.display = "none";
-      }, 4000);
-    });
-  </script>
-  <script src="../js/modules/search.js"></script>
-  <script src="../js/modules/navbar.js"></script>
-  <script src="../js/modules/themes.js"></script>
-  <script src="../js/modules/floating-book-button.js"></script>
-  <script src="../js/modules/floating-call-button.js"></script>
-  <script src="../js/modules/floating-whatsapp-button.js"></script>
-  <script src="../js/modules/quote-modal.js"></script>
-  <script src="../js/modules/sticky-quote-button.js"></script>
-  <script src="../js/modules/floating-chatbot-button.js"></script>
-  <script src="../js/modules/chatbot-modal.js"></script>
-  <script src="../js/modules/back-to-top-button.js"></script>
-
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-</body>
-
+    <!-- Top to Bottom Button -->
+    <button class="back-to-bottom" id="backToBottom">
+      <i class="fas fa-arrow-down"></i>
+    </button>
+  </body>
 </html>

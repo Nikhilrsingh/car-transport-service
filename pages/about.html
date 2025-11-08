@@ -1,946 +1,1551 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us | Harihar Car Carriers</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="../css/components/navbar.css" />
-  <link rel="stylesheet" href="../css/components/footer.css" />
-  <link rel="stylesheet" href="../css/components/floating-call-button.css" />
-  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css" />
-  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css" />
-  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
-  <link rel="stylesheet" href="../css/components/quote-modal.css" />
-  <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
-  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
-  <style>
-    @font-face {
-      font-family: "Poppins";
-      src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
-        url("../assets/fonts/Poppins-Regular.woff") format("woff");
-      font-weight: 400;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: "Poppins";
-      src: url("../assets/fonts/Poppins-Bold.woff2") format("woff2"),
-        url("../assets/fonts/Poppins-Bold.woff") format("woff");
-      font-weight: 700;
-      font-style: normal;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Poppins", sans-serif;
-      height: 100%;
-      width: 100%;
-      background-color: #2b2b2b;
-      color: white;
-      line-height: 1.6;
-      padding-top: 80px;
-      /* Add padding for fixed navbar */
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* REMOVED DUPLICATE NAVBAR STYLES - They are in navbar.css */
-
-    /* Hero Section */
-    .hero {
-      padding: 100px 0 80px;
-      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
-      background-size: cover;
-      background-position: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      opacity: 0.9;
-    }
-
-    .hero-btn {
-      display: inline-block;
-      background-color: #ff6347;
-      color: white;
-      padding: 12px 30px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .hero-btn:hover {
-      background-color: #ff4500;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    /* About Section */
-    .about {
-      padding: 100px 0;
-      background-color: #333;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-title h2 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      color: #ff6347;
-    }
-
-    .section-title p {
-      color: #ccc;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .about-content {
-      display: flex;
-      align-items: center;
-      gap: 50px;
-    }
-
-    .about-text {
-      flex: 1;
-    }
-
-    .about-text h3 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      color: #ff6347;
-    }
-
-    .about-text p {
-      margin-bottom: 20px;
-      color: #ccc;
-    }
-
-    .about-image {
-      flex: 1;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-      transition: all 0.4s ease;
-    }
-
-    .about-image:hover {
-      transform: scale(1.02);
-    }
-
-    .about-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Values Section */
-    .values {
-      padding: 100px 0;
-      background-color: #2b2b2b;
-    }
-
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .value-card {
-      background-color: #333;
-      padding: 40px 30px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .value-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .value-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: #ff6347;
-    }
-
-    .value-icon {
-      width: 80px;
-      height: 80px;
-      background: #ff6347;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      color: white;
-      font-size: 30px;
-    }
-
-    .value-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: white;
-    }
-
-    .value-card p {
-      color: #ccc;
-    }
-
-    /* Team Section */
-    .team {
-      padding: 100px 0;
-      background-color: #333;
-    }
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .team-member {
-      background-color: #2b2b2b;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.4s ease;
-      position: relative;
-    }
-
-    .team-member:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .member-image {
-      height: 300px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .member-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: all 0.4s ease;
-    }
-
-    .team-member:hover .member-image img {
-      transform: scale(1.1);
-    }
-
-    .member-info {
-      padding: 25px;
-      text-align: center;
-    }
-
-    .member-info h3 {
-      font-size: 1.3rem;
-      margin-bottom: 5px;
-      color: white;
-    }
-
-    .member-info p {
-      color: #ff6347;
-      font-weight: 500;
-      margin-bottom: 15px;
-    }
-
-    .member-social {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .member-social a {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: #444;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      transition: all 0.3s ease;
-    }
-
-    .member-social a:hover {
-      background-color: #ff6347;
-      transform: translateY(-3px);
-    }
-
-    /* Stats Section */
-    .stats {
-      padding: 80px 0;
-      background: linear-gradient(rgba(255, 99, 71, 0.9),
-          rgba(255, 69, 0, 0.9)),
-        url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80");
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-align: center;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-    }
-
-    .stat-item h3 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-
-    .stat-item p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-
-    /* CTA Section */
-    .cta {
-      padding: 100px 0;
-      background-color: #2b2b2b;
-      text-align: center;
-    }
-
-    .cta h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: white;
-    }
-
-    .cta p {
-      max-width: 600px;
-      margin: 0 auto 30px;
-      color: #ccc;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      background: #ff6347;
-      color: white;
-      padding: 15px 40px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
-    }
-
-    .cta-btn:hover {
-      background: #ff4500;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
-    }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | Harihar Car Carriers</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/floating-call-button.css" />
+    <link
+      rel="stylesheet"
+      href="../css/components/floating-whatsapp-button.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../css/components/floating-chatbot-button.css"
+    />
+    <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+    <link rel="stylesheet" href="../css/components/quote-modal.css" />
+    <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
+    <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+    <link rel="stylesheet" href="../css/components/backtoBottom.css" />
+    <link rel="stylesheet" href="../css/components/about.css" />
+    <link rel="stylesheet" href="../css/components/animations.css" />
+    <style>
+      @font-face {
+        font-family: "Poppins";
+        src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
+          url("../assets/fonts/Poppins-Regular.woff") format("woff");
+        font-weight: 400;
+        font-style: normal;
       }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in {
-      opacity: 0;
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-    .delay-1 {
-      animation-delay: 0.2s;
-    }
-
-    .delay-2 {
-      animation-delay: 0.4s;
-    }
-
-    .delay-3 {
-      animation-delay: 0.6s;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      .about-content {
-        flex-direction: column;
+      @font-face {
+        font-family: "Poppins";
+        src: url("../assets/fonts/Poppins-Bold.woff2") format("woff2"),
+          url("../assets/fonts/Poppins-Bold.woff") format("woff");
+        font-weight: 700;
+        font-style: normal;
       }
 
-      .hero h1 {
-        font-size: 2.8rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .section-title h2 {
-        font-size: 2rem;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
       body {
-        padding-top: 70px;
-        /* Adjust for mobile navbar */
+        font-family: "Poppins", sans-serif;
+        height: 100%;
+        width: 100%;
+        background-color: #2b2b2b;
+        color: white;
+        line-height: 1.6;
+        padding-top: 80px;
+        /* Add padding for fixed navbar */
       }
-    }
-  </style>
-  <link rel="stylesheet" href="../css/components/floating-button.css">
-</head>
 
-<body>
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
 
-  <!-- Enhanced Navigation Component -->
-  <header class="header">
-    <div class="navbar-container">
-      <div class="navbar">
-        <!-- Left Logo -->
-        <div class="logo-container left-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+      /* REMOVED DUPLICATE NAVBAR STYLES - They are in navbar.css */
+
+      /* Hero Section */
+      .hero {
+        padding: 100px 0 80px;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        opacity: 0.9;
+      }
+
+      .hero-btn {
+        display: inline-block;
+        background-color: #ff6347;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-btn:hover {
+        background-color: #ff4500;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* About Section */
+      .about {
+        padding: 100px 0;
+        background-color: rgba(15, 15, 15, 0.2);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .section-divider {
+  width: 100%;
+  height: 2px;
+  background-color: #444;
+  margin: 50px 0;
+}
+
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+       
+        text-decoration: underline;
+  text-shadow: 0 0 10px rgba(255, 99, 71, 0.6); /* glow effect */
+  color: #ff8667; /* lighter shade on hover */
+  transition: all 0.3s ease-in-out;
+      }
+
+      .section-title p {
+        color: #ccc;
+        max-width: 600px;
+        margin: 0 auto;
+         text-align: center;
+  line-height: 1.8; /* increased from default line-height */
+  margin-bottom: 18px; 
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-text h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #ff6347;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+      }
+
+      .about-text p {
+        margin-bottom: 20px;
+        color: #ccc;
+      }
+
+      .about-image {
+        flex: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s ease;
+        
+      }
+
+      .about-image:hover {
+      
+        transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      }
+
+      .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Values Section */
+      .values {
+        padding: 100px 0;
+        background-color: #2b2b2b;
+      }
+
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .value-card {
+        background-color: #333;
+        padding: 40px 30px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .value-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: #ff6347;
+      }
+
+      .value-icon {
+        width: 80px;
+        height: 80px;
+        background: #ff6347;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: white;
+        font-size: 30px;
+      }
+
+      .value-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: white;
+      }
+
+      .value-card p {
+        color: #ccc;
+      }
+
+      /* Team Section */
+      .team {
+        padding: 100px 0;
+        background-color: #333;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .team-member {
+        background-color: #2b2b2b;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.4s ease;
+        position: relative;
+      }
+
+      .team-member:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .member-image {
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .member-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.4s ease;
+      }
+
+      .team-member:hover .member-image img {
+        transform: scale(1.1);
+      }
+
+      .member-info {
+        padding: 25px;
+        text-align: center;
+      }
+
+      .member-info h3 {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+        color: white;
+      }
+
+      .member-info p {
+        color: #ff6347;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .member-social {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .member-social a {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: #444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+      .member-social a:hover {
+        background-color: #ff6347;
+        transform: translateY(-3px);
+      }
+
+      /* Stats Section */
+      .stats {
+        padding: 80px 0;
+        background: linear-gradient(
+            rgba(255, 99, 71, 0.9),
+            rgba(255, 69, 0, 0.9)
+          ),
+          url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+      }
+
+      .stat-item h3 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+      }
+
+      .stat-item p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      /* CTA Section */
+      .cta {
+        padding: 100px 0;
+        background-color: #2b2b2b;
+        text-align: center;
+      }
+
+      .cta h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .cta p {
+        max-width: 600px;
+        margin: 0 auto 30px;
+        color: #ccc;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: #ff6347;
+        color: white;
+        padding: 15px 40px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+      }
+
+      .cta-btn:hover {
+        background: #ff4500;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes fall {
+        to {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .about-content {
+          flex-direction: column;
+        }
+
+        .hero h1 {
+          font-size: 2.8rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .section-title h2 {
+          font-size: 2rem;
+        }
+
+        body {
+          padding-top: 70px;
+          /* Adjust for mobile navbar */
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="../css/components/floating-button.css" />
+  </head>
+
+  <body>
+    <!-- Enhanced Navigation Component -->
+    <header class="header">
+      <div class="navbar-container">
+        <div class="navbar">
+          <!-- Left Logo -->
+          <div class="logo-container left-logo">
+            <img
+              src="../assets/images/left-logo.jpg"
+              alt="Harihar Car Carriers"
+              class="logo-img"
+            />
+          </div>
+
+          <!-- Desktop Navigation -->
+          <nav class="desktop-nav" aria-label="Main navigation">
+            <ul class="nav-list">
+              <li class="nav-item">
+                <a
+                  href="../index.html"
+                  class="nav-link active"
+                  data-page="home"
+                >
+                  <i class="fas fa-home"></i>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./about.html" class="nav-link" data-page="about">
+                  <i class="fas fa-info-circle"></i>
+                  <span>About</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="../services.html"
+                  class="nav-link"
+                  data-page="services"
+                >
+                  <i class="fas fa-truck-moving"></i>
+                  <span>Services</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./booking.html" class="nav-link" data-page="booking">
+                  <i class="fas fa-calendar-check"></i>
+                  <span>Booking</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="./contributors.html"
+                  class="nav-link"
+                  data-page="contributors"
+                >
+                  <i class="fas fa-users"></i>
+                  <span>Contributors</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./pricing.html" class="nav-link" data-page="pricing">
+                  <i class="fas fa-tags"></i>
+                  <span>Pricing</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./tracking.html" class="nav-link" data-page="tracking">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Track Your Car</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./gallery.html" class="nav-link" data-page="gallery">
+                  <i class="fas fa-images"></i>
+                  <span>Gallery</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./contact.html" class="nav-link" data-page="contact">
+                  <i class="fas fa-phone"></i>
+                  <span>Contact</span>
+                </a>
+              </li>
+            </ul>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+              <div class="search-bar">
+                <input
+                  type="text"
+                  id="navbarSearch"
+                  placeholder="Search services..."
+                  aria-label="Search services"
+                />
+                <i class="fas fa-search"></i>
+              </div>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="nav-actions">
+              <a href="./enquiry.html" class="nav-link enquiry-link">
+                <i class="fas fa-question-circle"></i>
+                <span>Enquiry</span>
+              </a>
+              <a href="./blog.html" class="nav-link blog-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+              </a>
+              <a href="./login.html" class="login-btn">
+                <i class="fas fa-user"></i>
+                <span>Login</span>
+              </a>
+            </div>
+          </nav>
+
+          <!-- Mobile Menu Button -->
+          <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Toggle mobile menu"
+          >
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+          </button>
         </div>
 
-        <!-- Desktop Navigation -->
-        <nav class="desktop-nav" aria-label="Main navigation">
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a href="../index.html" class="nav-link active" data-page="home">
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+          <div class="mobile-nav-header">
+            <div class="mobile-logo">
+              <img
+                src="../assets/images/left-logo.jpg"
+                alt="Harihar Car Carriers"
+              />
+              <span>Harihar Car Carriers</span>
+            </div>
+            <button
+              class="mobile-close-btn"
+              id="mobileCloseBtn"
+              aria-label="Close mobile menu"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <!-- Mobile Search Bar -->
+          <div class="mobile-search-container">
+            <div class="mobile-search-bar">
+              <i class="fas fa-search"></i>
+              <input
+                type="text"
+                id="mobileSearch"
+                placeholder="Search services..."
+                aria-label="Search services"
+              />
+            </div>
+          </div>
+
+          <ul class="mobile-nav-list">
+            <li class="mobile-nav-item">
+              <a href="../index.html" class="mobile-nav-link active">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./about.html" class="nav-link" data-page="about">
+            <li class="mobile-nav-item">
+              <a href="./about.html" class="mobile-nav-link">
                 <i class="fas fa-info-circle"></i>
                 <span>About</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="../services.html" class="nav-link" data-page="services">
+            <li class="mobile-nav-item">
+              <a href="./services.html" class="mobile-nav-link">
                 <i class="fas fa-truck-moving"></i>
                 <span>Services</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./booking.html" class="nav-link" data-page="booking">
+            <li class="mobile-nav-item">
+              <a href="./booking.html" class="mobile-nav-link">
                 <i class="fas fa-calendar-check"></i>
                 <span>Booking</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./contributors.html" class="nav-link" data-page="contributors">
+            <li class="mobile-nav-item">
+              <a href="./contributors.html" class="mobile-nav-link">
                 <i class="fas fa-users"></i>
                 <span>Contributors</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./pricing.html" class="nav-link" data-page="pricing">
+            <li class="mobile-nav-item">
+              <a href="./pricing.html" class="mobile-nav-link">
                 <i class="fas fa-tags"></i>
                 <span>Pricing</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./tracking.html" class="nav-link" data-page="tracking">
+            <li class="mobile-nav-item">
+              <a href="./tracking.html" class="mobile-nav-link">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>Track Your Car</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./gallery.html" class="nav-link" data-page="gallery">
+            <li class="mobile-nav-item">
+              <a href="./gallery.html" class="mobile-nav-link">
                 <i class="fas fa-images"></i>
                 <span>Gallery</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./contact.html" class="nav-link" data-page="contact">
+            <li class="mobile-nav-item">
+              <a href="./contact.html" class="mobile-nav-link">
                 <i class="fas fa-phone"></i>
                 <span>Contact</span>
               </a>
             </li>
+            <li class="mobile-nav-item">
+              <a href="./enquiry.html" class="mobile-nav-link">
+                <i class="fas fa-question-circle"></i>
+                <span>Enquiry</span>
+              </a>
+            </li>
+            <li class="mobile-nav-item">
+              <a href="./blog.html" class="mobile-nav-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+              </a>
+            </li>
           </ul>
-
-          <!-- Search Bar -->
-          <div class="search-container">
-            <div class="search-bar">
-              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
-              <i class="fas fa-search"></i>
-            </div>
-          </div>
-
-          <!-- Right Actions -->
-          <div class="nav-actions">
-            <a href="./enquiry.html" class="nav-link enquiry-link">
-              <i class="fas fa-question-circle"></i>
-              <span>Enquiry</span>
-            </a>
-            <a href="./blog.html" class="nav-link blog-link">
-              <i class="fas fa-blog"></i>
-              <span>Blog</span>
-            </a>
-            <a href="./login.html" class="login-btn">
+          <div class="mobile-nav-actions">
+            <a href="./login.html" class="mobile-login-btn">
               <i class="fas fa-user"></i>
               <span>Login</span>
             </a>
+            <a href="./booking.html" class="mobile-cta-btn">
+              <i class="fas fa-truck"></i>
+              <span>Book Instantly</span>
+            </a>
+          </div>
+          <div class="mobile-contact-info">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 98765 43210</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@hariharcarcarriers.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i>
+              <span>24/7 Support</span>
+            </div>
           </div>
         </nav>
 
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-        </button>
+        <!-- Navigation Overlay -->
+        <div class="nav-overlay" id="navOverlay"></div>
       </div>
+    </header>
 
-      <!-- Mobile Navigation -->
-      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-        <div class="mobile-nav-header">
-          <div class="mobile-logo">
-            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-            <span>Harihar Car Carriers</span>
-          </div>
-          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-
-        <!-- Mobile Search Bar -->
-        <div class="mobile-search-container">
-          <div class="mobile-search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
-          </div>
-        </div>
-
-        <ul class="mobile-nav-list">
-          <li class="mobile-nav-item">
-            <a href="../index.html" class="mobile-nav-link active">
-              <i class="fas fa-home"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./about.html" class="mobile-nav-link">
-              <i class="fas fa-info-circle"></i>
-              <span>About</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./services.html" class="mobile-nav-link">
-              <i class="fas fa-truck-moving"></i>
-              <span>Services</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./booking.html" class="mobile-nav-link">
-              <i class="fas fa-calendar-check"></i>
-              <span>Booking</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./contributors.html" class="mobile-nav-link">
-              <i class="fas fa-users"></i>
-              <span>Contributors</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pricing.html" class="mobile-nav-link">
-              <i class="fas fa-tags"></i>
-              <span>Pricing</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./tracking.html" class="mobile-nav-link">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Track Your Car</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./gallery.html" class="mobile-nav-link">
-              <i class="fas fa-images"></i>
-              <span>Gallery</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./contact.html" class="mobile-nav-link">
-              <i class="fas fa-phone"></i>
-              <span>Contact</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./enquiry.html" class="mobile-nav-link">
-              <i class="fas fa-question-circle"></i>
-              <span>Enquiry</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./blog.html" class="mobile-nav-link">
-              <i class="fas fa-blog"></i>
-              <span>Blog</span>
-            </a>
-          </li>
-        </ul>
-        <div class="mobile-nav-actions">
-          <a href="./login.html" class="mobile-login-btn">
-            <i class="fas fa-user"></i>
-            <span>Login</span>
-          </a>
-          <a href="./booking.html" class="mobile-cta-btn">
-            <i class="fas fa-truck"></i>
-            <span>Book Instantly</span>
-          </a>
-        </div>
-        <div class="mobile-contact-info">
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <span>+91 98765 43210</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <span>info@hariharcarcarriers.com</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-clock"></i>
-            <span>24/7 Support</span>
-          </div>
-        </div>
-      </nav>
-
-      <!-- Navigation Overlay -->
-      <div class="nav-overlay" id="navOverlay"></div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h1 class="fade-in">Our Journey</h1>
-      <p class="fade-in delay-1">
-        With years of experience in vehicle transportation, we've built a
-        reputation for reliability, safety, and exceptional service across
-        India.
-      </p>
-      <a href="#team" class="hero-btn fade-in delay-2">Meet Our Team</a>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="about">
-    <div class="container">
-      <div class="section-title fade-in">
-        <h2>About Harihar Car Carriers</h2>
-        <p>
-          Your trusted partner for safe and reliable vehicle transportation
-          across India
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="fade-in">Our Journey</h1>
+        <p class="fade-in delay-1">
+          With years of experience in vehicle transportation, we've built a
+          reputation for reliability, safety, and exceptional service across
+          India.
         </p>
+        <a href="#team" class="hero-btn fade-in delay-2">Meet Our Team</a>
       </div>
-      <div class="about-content">
-        <div class="about-text fade-in">
-          <h3>Transporting Your Vehicles with Care</h3>
-          <p>
-            Founded with a vision to revolutionize vehicle transportation in
-            India, Harihar Car Carriers has grown from a small local service
-            to a nationwide network trusted by thousands of customers.
-          </p>
-          <p>
-            We understand that your vehicle is more than just transportation -
-            it's an investment and often a cherished possession. That's why we
-            treat every vehicle with the utmost care and professionalism.
-          </p>
-          <p>
-            Our team of experienced drivers and logistics experts work around
-            the clock to ensure your vehicle reaches its destination safely
-            and on time, whether it's across the city or across the country.
-          </p>
-        </div>
-        <div class="about-image fade-in delay-1">
-          <img
-            src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="Our Car Carrier Fleet" />
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Values Section -->
-  <section class="values">
-    <div class="container">
-      <div class="section-title fade-in">
-        <h2>Our Values</h2>
-        <p>The principles that drive everything we do</p>
-      </div>
-      <div class="values-grid">
-        <div class="value-card fade-in">
-          <div class="value-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <h3>Safety First</h3>
-          <p>
-            Your vehicle's safety is our top priority. We use state-of-the-art
-            equipment and follow strict safety protocols.
-          </p>
-        </div>
-        <div class="value-card fade-in delay-1">
-          <div class="value-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <h3>Timely Delivery</h3>
-          <p>
-            We understand the importance of time. Our efficient logistics
-            ensure your vehicle arrives as promised.
-          </p>
-        </div>
-        <div class="value-card fade-in delay-2">
-          <div class="value-icon">
-            <i class="fas fa-handshake"></i>
-          </div>
-          <h3>Customer Trust</h3>
-          <p>
-            We've built our reputation on reliability and transparency. Your
-            trust is our most valuable asset.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- About Section -->
+    <section class="about">
+      <div class="container">
+        <div class="section-title fade-in">
+          <div class="section-divider">
 
-  <!-- Team Section -->
-  <section class="team" id="team">
-    <div class="container">
-      <div class="section-title fade-in">
-        <h2>Meet Our Team</h2>
-        <p>The experienced professionals behind our success</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-member fade-in">
-          <div class="member-image">
+          <h2>About Harihar Car Carriers</h2>
+          </div>
+          <br>
+            <p>
+             <bold>
+            Your trusted partner for safe and reliable vehicle transportation
+            across India
+            </bold>
+
+            </p>
+        </div>
+        <div class="about-content">
+          <div class="about-text fade-in">
+            <h3>Transporting Your Vehicles with Care</h3>
+            <p>
+              Founded with a vision to revolutionize vehicle transportation in
+              India, Harihar Car Carriers has grown from a small local service
+              to a nationwide network trusted by thousands of customers.
+            </p>
+            <p>
+              We understand that your vehicle is more than just transportation -
+              it's an investment and often a cherished possession. That's why we
+              treat every vehicle with the utmost care and professionalism.
+            </p>
+            <p>
+              Our team of experienced drivers and logistics experts work around
+              the clock to ensure your vehicle reaches its destination safely
+              and on time, whether it's across the city or across the country.
+            </p>
+          </div>
+          <div class="about-image fade-in delay-1">
             <img
-              src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-              alt="Rajesh Sharma" />
+              src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              alt="Our Car Carrier Fleet"
+            />
+         
           </div>
-          <div class="member-info">
-            <h3>Rajesh Sharma</h3>
-            <p>Founder & CEO</p>
-            <div class="member-social">
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section - Enhanced with Tooltips and Animations -->
+    <section class="values values-enhanced">
+      <div class="container">
+        <div class="section-title fade-in">
+          <h2>Our Values</h2>
+          <p>The principles that drive everything we do</p>
+        </div>
+        <div class="values-grid">
+          <div class="value-card reveal-on-scroll">
+            <div class="value-icon-wrapper">
+              <div class="value-icon-morph">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+            </div>
+            <h3>Safety First</h3>
+            <p>
+              Your vehicle's safety is our top priority. We use state-of-the-art
+              equipment and follow strict safety protocols.
+            </p>
+            <div class="value-tooltip">ISO 9001 Certified Safety Standards</div>
+          </div>
+          
+          <div class="value-card reveal-on-scroll">
+            <div class="value-icon-wrapper">
+              <div class="value-icon-morph">
+                <i class="fas fa-clock"></i>
+              </div>
+            </div>
+            <h3>Timely Delivery</h3>
+            <p>
+              We understand the importance of time. Our efficient logistics
+              ensure your vehicle arrives as promised.
+            </p>
+            <div class="value-tooltip">96% On-Time Delivery Rate</div>
+          </div>
+          
+          <div class="value-card reveal-on-scroll">
+            <div class="value-icon-wrapper">
+              <div class="value-icon-morph">
+                <i class="fas fa-handshake"></i>
+              </div>
+            </div>
+            <h3>Customer Trust</h3>
+            <p>
+              We've built our reputation on reliability and transparency. Your
+              trust is our most valuable asset.
+            </p>
+            <div class="value-tooltip">98% Customer Satisfaction Score</div>
+          </div>
+          
+          <div class="value-card reveal-on-scroll">
+            <div class="value-icon-wrapper">
+              <div class="value-icon-morph">
+                <i class="fas fa-leaf"></i>
+              </div>
+            </div>
+            <h3>Eco-Friendly</h3>
+            <p>
+              Committed to reducing our carbon footprint with fuel-efficient
+              vehicles and sustainable practices.
+            </p>
+            <div class="value-tooltip">30% Emission Reduction by 2025</div>
+          </div>
+          
+          <div class="value-card reveal-on-scroll">
+            <div class="value-icon-wrapper">
+              <div class="value-icon-morph">
+                <i class="fas fa-headset"></i>
+              </div>
+            </div>
+            <h3>24/7 Support</h3>
+            <p>
+              Our dedicated support team is always available to assist you
+              throughout your vehicle's journey.
+            </p>
+            <div class="value-tooltip">Round-the-Clock Customer Service</div>
+          </div>
+          
+          <div class="value-card reveal-on-scroll">
+            <div class="value-icon-wrapper">
+              <div class="value-icon-morph">
+                <i class="fas fa-certificate"></i>
+              </div>
+            </div>
+            <h3>Quality Assurance</h3>
+            <p>
+              Rigorous quality checks at every stage ensure your vehicle is
+              handled with the utmost care.
+            </p>
+            <div class="value-tooltip">Multi-Point Quality Inspection</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section - Enhanced with Flip Cards -->
+    <section class="team" id="team">
+      <div class="container">
+        <div class="section-title fade-in">
+          <h2>Meet Our Team</h2>
+          <p>The experienced professionals behind our success</p>
+        </div>
+        <div class="team-grid">
+          <!-- Team Member 1 - Rajesh Sharma -->
+          <div class="about-team-flip-card reveal-on-scroll">
+            <div class="about-team-flip-card-inner">
+              <!-- Front of Card -->
+              <div class="about-team-flip-card-front">
+                <div class="about-member-image-wrapper">
+                  <img
+                    src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                    alt="Rajesh Sharma"
+                  />
+                </div>
+                <div class="about-member-front-info">
+                  <h3>Rajesh Sharma</h3>
+                  <p class="about-member-role">Founder & CEO</p>
+                  
+                  <!-- Skill Bars -->
+                  <div class="about-skill-bars">
+                    <div class="skill-bar">
+                      <div class="skill-name">
+                        <span>Leadership</span>
+                        <span>95%</span>
+                      </div>
+                      <div class="skill-progress">
+                        <div class="skill-progress-bar" data-skill-level="95"></div>
+                      </div>
+                    </div>
+                    <div class="about-skill-bar">
+                      <div class="about-skill-name">
+                        <span>Strategy</span>
+                        <span>90%</span>
+                      </div>
+                      <div class="about-skill-progress">
+                        <div class="about-skill-progress-bar" data-skill-level="90"></div>
+                      </div>
+                    </div>
+                    <div class="about-skill-bar">
+                      <div class="about-skill-name">
+                        <span>Innovation</span>
+                        <span>88%</span>
+                      </div>
+                      <div class="about-skill-progress">
+                        <div class="about-skill-progress-bar" data-skill-level="88"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Back of Card -->
+              <div class="about-team-flip-card-back">
+                <h3 style="color: #fff; margin-bottom: 15px;">Rajesh Sharma</h3>
+                <p class="about-member-bio">
+                  With over 15 years of experience in logistics, Rajesh founded Harihar Car Carriers with a vision to revolutionize vehicle transportation in India.
+                </p>
+                <ul class="about-member-highlights">
+                  <li>IIM Ahmedabad Alumni</li>
+                  <li>15+ Years in Logistics</li>
+                  <li>Award-winning Entrepreneur</li>
+                  <li>Industry Speaker</li>
+                </ul>
+                <div class="about-member-social-icons">
+                  <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                  <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Member 2 - Priya Patel -->
+          <div class="about-team-flip-card reveal-on-scroll">
+            <div class="about-team-flip-card-inner">
+              <div class="about-team-flip-card-front">
+                <div class="about-member-image-wrapper">
+                  <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                    alt="Priya Patel"
+                  />
+                </div>
+                <div class="about-member-front-info">
+                  <h3>Priya Patel</h3>
+                  <p class="about-member-role">Operations Manager</p>
+                  
+                  <div class="about-skill-bars">
+                    <div class="skill-bar">
+                      <div class="skill-name">
+                        <span>Operations</span>
+                        <span>92%</span>
+                      </div>
+                      <div class="skill-progress">
+                        <div class="skill-progress-bar" data-skill-level="92"></div>
+                      </div>
+                    </div>
+                    <div class="about-skill-bar">
+                      <div class="about-skill-name">
+                        <span>Management</span>
+                        <span>89%</span>
+                      </div>
+                      <div class="about-skill-progress">
+                        <div class="about-skill-progress-bar" data-skill-level="89"></div>
+                      </div>
+                    </div>
+                    <div class="about-skill-bar">
+                      <div class="about-skill-name">
+                        <span>Efficiency</span>
+                        <span>94%</span>
+                      </div>
+                      <div class="about-skill-progress">
+                        <div class="about-skill-progress-bar" data-skill-level="94"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="about-team-flip-card-back">
+                <h3 style="color: #fff; margin-bottom: 15px;">Priya Patel</h3>
+                <p class="about-member-bio">
+                  Priya streamlines our operations with precision and dedication, ensuring every vehicle is transported safely and efficiently.
+                </p>
+                <ul class="about-member-highlights">
+                  <li>MBA in Operations</li>
+                  <li>10+ Years Experience</li>
+                  <li>Six Sigma Certified</li>
+                  <li>Process Optimization Expert</li>
+                </ul>
+                <div class="about-member-social-icons">
+                  <a href="#" class="about-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fas fa-envelope"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Member 3 - Vikram Singh -->
+          <div class="about-team-flip-card reveal-on-scroll">
+            <div class="about-team-flip-card-inner">
+              <div class="about-team-flip-card-front">
+                <div class="about-member-image-wrapper">
+                  <img
+                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                    alt="Vikram Singh"
+                  />
+                </div>
+                <div class="about-member-front-info">
+                  <h3>Vikram Singh</h3>
+                  <p class="about-member-role">Head of Logistics</p>
+                  
+                  <div class="about-skill-bars">
+                    <div class="skill-bar">
+                      <div class="skill-name">
+                        <span>Logistics</span>
+                        <span>96%</span>
+                      </div>
+                      <div class="skill-progress">
+                        <div class="skill-progress-bar" data-skill-level="96"></div>
+                      </div>
+                    </div>
+                    <div class="about-skill-bar">
+                      <div class="about-skill-name">
+                        <span>Planning</span>
+                        <span>91%</span>
+                      </div>
+                      <div class="about-skill-progress">
+                        <div class="about-skill-progress-bar" data-skill-level="91"></div>
+                      </div>
+                    </div>
+                    <div class="about-skill-bar">
+                      <div class="about-skill-name">
+                        <span>Coordination</span>
+                        <span>93%</span>
+                      </div>
+                      <div class="about-skill-progress">
+                        <div class="about-skill-progress-bar" data-skill-level="93"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="about-team-flip-card-back">
+                <h3 style="color: #fff; margin-bottom: 15px;">Vikram Singh</h3>
+                <p class="about-member-bio">
+                  Vikram's expertise in route optimization and fleet management ensures timely delivery across the nation.
+                </p>
+                <ul class="about-member-highlights">
+                  <li>Logistics Professional</li>
+                  <li>12+ Years in Industry</li>
+                  <li>Route Optimization Expert</li>
+                  <li>National Network Builder</li>
+                </ul>
+                <div class="about-member-social-icons">
+                  <a href="#" class="about-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fas fa-envelope"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Member 4 - Anjali Mehta -->
+          <div class="about-team-flip-card reveal-on-scroll">
+            <div class="about-team-flip-card-inner">
+              <div class="about-team-flip-card-front">
+                <div class="about-member-image-wrapper">
+                  <img
+                    src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                    alt="Anjali Mehta"
+                  />
+                </div>
+                <div class="about-member-front-info">
+                  <h3>Anjali Mehta</h3>
+                  <p class="about-member-role">Customer Relations</p>
+                  
+                  <div class="about-skill-bars">
+                    <div class="skill-bar">
+                      <div class="skill-name">
+                        <span>Communication</span>
+                        <span>97%</span>
+                      </div>
+                      <div class="skill-progress">
+                        <div class="skill-progress-bar" data-skill-level="97"></div>
+                      </div>
+                    </div>
+                    <div class="about-skill-bar">
+                      <div class="about-skill-name">
+                        <span>Problem Solving</span>
+                        <span>90%</span>
+                      </div>
+                      <div class="about-skill-progress">
+                        <div class="about-skill-progress-bar" data-skill-level="90"></div>
+                      </div>
+                    </div>
+                    <div class="about-skill-bar">
+                      <div class="about-skill-name">
+                        <span>Empathy</span>
+                        <span>95%</span>
+                      </div>
+                      <div class="about-skill-progress">
+                        <div class="about-skill-progress-bar" data-skill-level="95"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="about-team-flip-card-back">
+                <h3 style="color: #fff; margin-bottom: 15px;">Anjali Mehta</h3>
+                <p class="about-member-bio">
+                  Anjali builds lasting relationships with our clients, ensuring exceptional service and satisfaction at every step.
+                </p>
+                <ul class="about-member-highlights">
+                  <li>Customer Service Expert</li>
+                  <li>8+ Years Experience</li>
+                  <li>Client Satisfaction Leader</li>
+                  <li>Relationship Manager</li>
+                </ul>
+                <div class="about-member-social-icons">
+                  <a href="#" class="about-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fas fa-envelope"></i></a>
+                  <a href="#" class="about-social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="team-member fade-in delay-1">
-          <div class="member-image">
-            <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-              alt="Priya Patel" />
+      </div>
+    </section>
+
+    <!-- Stats Section - Enhanced with SVG Circular Progress -->
+    <section class="stats-enhanced">
+      <div class="container">
+        <div class="section-title fade-in">
+          <h2>Our Achievements</h2>
+          <p>Numbers that speak for our excellence</p>
+        </div>
+        
+        <div class="stats-enhanced-grid">
+          <!-- Stat 1 -->
+          <div class="stat-circle-item reveal-on-scroll">
+            <div class="stat-circle-wrapper">
+              <svg class="stat-circle-svg" viewBox="0 0 200 200">
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ff6347;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#ff4500;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <circle class="stat-circle-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="stat-circle-progress" cx="100" cy="100" r="90"></circle>
+              </svg>
+              <div class="stat-circle-content">
+                <div class="stat-circle-number stat-number" data-target="5000" data-suffix="+" data-max="10000">0+</div>
+                <div class="stat-circle-label">Vehicles</div>
+              </div>
+            </div>
+            <p class="stat-circle-description">Successfully Transported</p>
           </div>
-          <div class="member-info">
-            <h3>Priya Patel</h3>
-            <p>Operations Manager</p>
-            <div class="member-social">
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fas fa-envelope"></i></a>
+
+          <!-- Stat 2 -->
+          <div class="stat-circle-item reveal-on-scroll">
+            <div class="stat-circle-wrapper">
+              <svg class="stat-circle-svg" viewBox="0 0 200 200">
+                <circle class="stat-circle-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="stat-circle-progress" cx="100" cy="100" r="90"></circle>
+              </svg>
+              <div class="stat-circle-content">
+                <div class="stat-circle-number stat-number" data-target="50" data-suffix="+" data-max="100">0+</div>
+                <div class="stat-circle-label">Cities</div>
+              </div>
+            </div>
+            <p class="stat-circle-description">Pan-India Coverage</p>
+          </div>
+
+          <!-- Stat 3 -->
+          <div class="stat-circle-item reveal-on-scroll">
+            <div class="stat-circle-wrapper">
+              <svg class="stat-circle-svg" viewBox="0 0 200 200">
+                <circle class="stat-circle-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="stat-circle-progress" cx="100" cy="100" r="90"></circle>
+              </svg>
+              <div class="stat-circle-content">
+                <div class="stat-circle-number stat-number" data-target="12" data-suffix=" Yrs" data-max="20">0 Yrs</div>
+                <div class="stat-circle-label">Experience</div>
+              </div>
+            </div>
+            <p class="stat-circle-description">Industry Expertise</p>
+          </div>
+
+          <!-- Stat 4 -->
+          <div class="stat-circle-item reveal-on-scroll">
+            <div class="stat-circle-wrapper">
+              <svg class="stat-circle-svg" viewBox="0 0 200 200">
+                <circle class="stat-circle-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="stat-circle-progress" cx="100" cy="100" r="90"></circle>
+              </svg>
+              <div class="stat-circle-content">
+                <div class="stat-circle-number stat-number" data-target="98" data-suffix="%" data-max="100">0%</div>
+                <div class="stat-circle-label">Satisfaction</div>
+              </div>
+            </div>
+            <p class="stat-circle-description">Happy Customers</p>
+          </div>
+        </div>
+
+        <!-- Milestone Timeline -->
+        <div class="milestone-timeline reveal-on-scroll">
+          <h3 style="text-align: center; color: #ff6347; font-size: 2rem; margin-bottom: 40px;">Key Milestones</h3>
+          <div class="timeline-items">
+            <div class="timeline-milestone">
+              <div class="milestone-marker">
+                <i class="fas fa-flag"></i>
+              </div>
+              <div class="milestone-year">2012</div>
+              <p class="milestone-achievement">Company Founded</p>
+            </div>
+            
+            <div class="timeline-milestone">
+              <div class="milestone-marker">
+                <i class="fas fa-trophy"></i>
+              </div>
+              <div class="milestone-year">2015</div>
+              <p class="milestone-achievement">1000+ Deliveries</p>
+            </div>
+            
+            <div class="timeline-milestone">
+              <div class="milestone-marker">
+                <i class="fas fa-map"></i>
+              </div>
+              <div class="milestone-year">2018</div>
+              <p class="milestone-achievement">Pan-India Network</p>
+            </div>
+            
+            <div class="timeline-milestone">
+              <div class="milestone-marker">
+                <i class="fas fa-award"></i>
+              </div>
+              <div class="milestone-year">2021</div>
+              <p class="milestone-achievement">Industry Award</p>
+            </div>
+            
+            <div class="timeline-milestone">
+              <div class="milestone-marker">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <div class="milestone-year">2024</div>
+              <p class="milestone-achievement">Digital Platform</p>
             </div>
           </div>
         </div>
-        <div class="team-member fade-in delay-2">
-          <div class="member-image">
-            <img
-              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-              alt="Vikram Singh" />
-          </div>
-          <div class="member-info">
-            <h3>Vikram Singh</h3>
-            <p>Head of Logistics</p>
-            <div class="member-social">
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fas fa-envelope"></i></a>
+
+        <!-- Animated Infographics -->
+        <div class="animated-infographic reveal-on-scroll">
+          <h3 style="text-align: center; color: #ff6347; font-size: 1.8rem; margin-bottom: 30px;">Performance Metrics</h3>
+          <div class="infographic-bars">
+            <div class="infographic-item">
+              <div class="infographic-label">
+                <span>On-Time Delivery</span>
+                <span class="percentage-value">0%</span>
+              </div>
+              <div class="infographic-bar">
+                <div class="infographic-bar-fill" data-percentage="96">
+                  <span class="percentage-value">96%</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="team-member fade-in delay-3">
-          <div class="member-image">
-            <img
-              src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-              alt="Anjali Mehta" />
-          </div>
-          <div class="member-info">
-            <h3>Anjali Mehta</h3>
-            <p>Customer Relations</p>
-            <div class="member-social">
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fas fa-envelope"></i></a>
+            
+            <div class="infographic-item">
+              <div class="infographic-label">
+                <span>Customer Retention</span>
+                <span class="percentage-value">0%</span>
+              </div>
+              <div class="infographic-bar">
+                <div class="infographic-bar-fill" data-percentage="92">
+                  <span class="percentage-value">92%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="infographic-item">
+              <div class="infographic-label">
+                <span>Safety Record</span>
+                <span class="percentage-value">0%</span>
+              </div>
+              <div class="infographic-bar">
+                <div class="infographic-bar-fill" data-percentage="99">
+                  <span class="percentage-value">99%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="infographic-item">
+              <div class="infographic-label">
+                <span>Fleet Utilization</span>
+                <span class="percentage-value">0%</span>
+              </div>
+              <div class="infographic-bar">
+                <div class="infographic-bar-fill" data-percentage="85">
+                  <span class="percentage-value">85%</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Stats Section -->
-  <section class="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item fade-in">
-          <h3>5000+</h3>
-          <p>Vehicles Transported</p>
+    <!-- Company Timeline Section -->
+    <section class="company-timeline">
+      <div class="container">
+        <div class="section-title fade-in">
+          <h2>Our Journey Through Time</h2>
+          <p>Milestones that shaped our success story</p>
         </div>
-        <div class="stat-item fade-in delay-1">
-          <h3>50+</h3>
-          <p>Cities Covered</p>
-        </div>
-        <div class="stat-item fade-in delay-2">
-          <h3>12</h3>
-          <p>Years Experience</p>
-        </div>
-        <div class="stat-item fade-in delay-3">
-          <h3>98%</h3>
-          <p>Customer Satisfaction</p>
+        
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+          
+          <!-- 2012 - Foundation -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-achievement">
+                <h3>The Beginning</h3>
+                <p>
+                  Harihar Car Carriers was founded with a single truck and a dream
+                  to provide reliable vehicle transportation services across India.
+                </p>
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Company Founded</span>
+                <span class="timeline-tag">Single Vehicle Fleet</span>
+              </div>
+            </div>
+            <div class="timeline-year">2012</div>
+          </div>
+          
+          <!-- 2014 - Expansion -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-achievement">
+                <h3>Regional Expansion</h3>
+                <p>
+                  Expanded operations to cover 5 major cities in North India,
+                  establishing our first regional hubs and growing our fleet to 10 carriers.
+                </p>
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">5 Cities</span>
+                <span class="timeline-tag">10 Carriers</span>
+                <span class="timeline-tag">Regional Hubs</span>
+              </div>
+            </div>
+            <div class="timeline-year">2014</div>
+          </div>
+          
+          <!-- 2016 - Technology -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-achievement">
+                <h3>Digital Transformation</h3>
+                <p>
+                  Launched our first online booking platform and real-time vehicle
+                  tracking system, revolutionizing customer experience.
+                </p>
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Online Platform</span>
+                <span class="timeline-tag">GPS Tracking</span>
+                <span class="timeline-tag">Digital Innovation</span>
+              </div>
+            </div>
+            <div class="timeline-year">2016</div>
+          </div>
+          
+          <!-- 2018 - Pan-India -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-achievement">
+                <h3>Pan-India Presence</h3>
+                <p>
+                  Achieved pan-India coverage with operations in 50+ cities,
+                  establishing ourselves as a national leader in car transportation.
+                </p>
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">50+ Cities</span>
+                <span class="timeline-tag">National Network</span>
+                <span class="timeline-tag">Market Leader</span>
+              </div>
+            </div>
+            <div class="timeline-year">2018</div>
+          </div>
+          
+          <!-- 2020 - Recognition -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-achievement">
+                <h3>Industry Recognition</h3>
+                <p>
+                  Received "Best Logistics Service Provider" award and achieved
+                  ISO 9001 certification for quality management systems.
+                </p>
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Industry Award</span>
+                <span class="timeline-tag">ISO Certified</span>
+                <span class="timeline-tag">Quality Excellence</span>
+              </div>
+            </div>
+            <div class="timeline-year">2020</div>
+          </div>
+          
+          <!-- 2022 - Sustainability -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-achievement">
+                <h3>Green Initiative</h3>
+                <p>
+                  Launched eco-friendly fleet with hybrid and electric carriers,
+                  committed to reducing carbon emissions by 30% by 2025.
+                </p>
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Eco-Friendly</span>
+                <span class="timeline-tag">Hybrid Fleet</span>
+                <span class="timeline-tag">Sustainability</span>
+              </div>
+            </div>
+            <div class="timeline-year">2022</div>
+          </div>
+          
+          <!-- 2024 - Innovation -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-achievement">
+                <h3>AI-Powered Platform</h3>
+                <p>
+                  Introduced AI-powered route optimization and predictive analytics,
+                  achieving 96% on-time delivery rate and 5000+ successful transports.
+                </p>
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">AI Technology</span>
+                <span class="timeline-tag">5000+ Deliveries</span>
+                <span class="timeline-tag">Innovation Leader</span>
+              </div>
+            </div>
+            <div class="timeline-year">2024</div>
+          </div>
+          
+          <!-- 2025 - Future -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-achievement">
+                <h3>Future Vision</h3>
+                <p>
+                  Expanding to international markets and developing autonomous
+                  carrier technology for safer, more efficient transportation.
+                </p>
+              </div>
+              <div class="timeline-tags">
+                <span class="timeline-tag">International</span>
+                <span class="timeline-tag">Autonomous Tech</span>
+                <span class="timeline-tag">Future Ready</span>
+              </div>
+            </div>
+            <div class="timeline-year">2025</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CTA Section -->
-  <section class="cta">
-    <div class="container">
-      <h2 class="fade-in">Ready to Transport Your Vehicle?</h2>
-      <p class="fade-in delay-1">
-        Get a free, no-obligation quote for your vehicle transportation needs.
-      </p>
-      <a href="../pages/booking.html" class="cta-btn fade-in delay-2">Get Quotation</a>
-    </div>
-  </section>
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="container">
+        <h2 class="fade-in">Ready to Transport Your Vehicle?</h2>
+        <p class="fade-in delay-1">
+          Get a free, no-obligation quote for your vehicle transportation needs.
+        </p>
+        <a href="../pages/booking.html" class="cta-btn fade-in delay-2"
+          >Get Quotation</a
+        >
+      </div>
+    </section>
 
+    <script src="../js/modules/themes.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/modules/about-animations.js"></script>
+    <script src="../js/modules/floating-call-button.js"></script>
+    <script src="../js/modules/sticky-quote-button.js"></script>
+    <script src="../js/modules/floating-book-button.js"></script>
+    <script src="../js/modules/floating-call-button.js"></script>
+    <script src="../js/modules/floating-whatsapp-button.js"></script>
+    <script src="../js/modules/quote-modal.js"></script>
+    <script src="../js/modules/sticky-quote-button.js"></script>
+    <script src="../js/modules/floating-chatbot-button.js"></script>
+    <script src="../js/modules/chatbot-modal.js"></script>
+    <script src="../js/modules/navbar.js"></script>
+    <script src="../js/modules/search.js"></script>
+    <script src="../js/modules/backtoBottom.js"></script>
+    <script src="../js/modules/back-to-top-button.js"></script>
+    <script src="../js/modules/scroll-animations.js"></script>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
-
-
-  <script src="../js/modules/themes.js"></script>
-  <script src="../js/script.js"></script>
-  <script src="../js/modules/floating-call-button.js"></script>
-  <script src="../js/modules/sticky-quote-button.js"></script>
-
-  <script>
-    // Animation on scroll
-    document.addEventListener("DOMContentLoaded", function () {
-      const fadeElements = document.querySelectorAll(".fade-in");
-
-      const fadeInOnScroll = function () {
-        fadeElements.forEach((element) => {
-          const elementTop = element.getBoundingClientRect().top;
-          const elementVisible = 150;
-
-          if (elementTop < window.innerHeight - elementVisible) {
-            element.style.opacity = "1";
-            element.style.transform = "translateY(0)";
-          }
-        });
-      }; // Initial check fadeInOnScroll(); // Check on scroll
-      window.addEventListener("scroll", fadeInOnScroll); // Stats counter animation const
-      statItems = document.querySelectorAll(".stat-item h3"); const statsSection = document.querySelector(".stats"); const
-        animateStats = function () {
-          const sectionTop = statsSection.getBoundingClientRect().top; const sectionVisible = 100; if
-            (sectionTop < window.innerHeight - sectionVisible) {
-            statItems.forEach((item) => {
-              const targetText = item.textContent;
-              let target;
-
-              if (targetText.includes("+")) {
-                target = parseInt(targetText);
-              } else if (targetText.includes("%")) {
-                target = parseInt(targetText);
-              } else {
-                target = parseInt(targetText);
-              }
-
-              let current = 0;
-              const increment = target / 50;
-              const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                  current = target;
-                  clearInterval(timer);
-                }
-
-                if (targetText.includes("%")) {
-                  item.textContent = Math.floor(current) + "%";
-                } else if (targetText.includes("+")) {
-                  item.textContent = Math.floor(current) + "+";
-                } else {
-                  item.textContent = Math.floor(current);
-                }
-              }, 30);
-            });
-
-            // Remove the event listener after animation
-            window.removeEventListener("scroll", animateStats);
-          }
-        };
-
-      window.addEventListener("scroll", animateStats);
-    });
-  </script>
-  <script src="../js/modules/floating-book-button.js"></script>
-  <script src="../js/modules/floating-call-button.js"></script>
-  <script src="../js/modules/floating-whatsapp-button.js"></script>
-  <script src="../js/modules/quote-modal.js"></script>
-  <script src="../js/modules/sticky-quote-button.js"></script>
-  <script src="../js/modules/floating-chatbot-button.js"></script>
-  <script src="../js/modules/chatbot-modal.js"></script>
-  <script src="../js/modules/back-to-top-button.js"></script>
-  <script src="../js/modules/navbar.js"></script>
-  <script src="../js/modules/search.js"></script>
-
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-</body>
-
+    <!-- Top to Bottom Button -->
+    <button class="back-to-bottom" id="backToBottom">
+      <i class="fas fa-arrow-down"></i>
+    </button>
+  </body>
 </html>
