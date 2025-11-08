@@ -88,16 +88,25 @@
   }
 
   function init() {
+    console.log('Theme init called'); // DEBUG
     const select = document.getElementById(SELECT_ID) || createWidget();
+    console.log('Select element found:', select); // DEBUG
+
+    if (!select) {
+      console.error('Theme select element not found!');
+      return;
+    }
 
     // restore
     const stored = loadStoredTheme();
+    console.log('Stored theme:', stored); // DEBUG
     select.value = stored;
     applyTheme(stored);
 
     // change handler
     select.addEventListener('change', (e) => {
       const val = e.target.value;
+      console.log('Theme changed to:', val); // DEBUG
       saveTheme(val);
       applyTheme(val);
     });
