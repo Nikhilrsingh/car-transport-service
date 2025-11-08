@@ -93,9 +93,16 @@
         gap: 18px;
       }
 
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
       label {
         font-weight: 500;
         color: var(--text);
+        margin-bottom: 0;
       }
 
       input,
@@ -108,6 +115,7 @@
         border-radius: 8px;
         font-size: 1rem;
         transition: border 0.3s ease;
+        box-sizing: border-box;
       }
 
       input:focus,
