@@ -278,25 +278,56 @@ body {
   margin-left: auto;
 }
 
-/* Action nav styles for theme and enquiry*/
+/* Action nav styles for enquiry */
 .action-nav {
-  color: white;
   padding: 12px;
   border-radius: 50%;
 }
 
-.action-nav:nth-child(3) {
-  color: rgb(255, 17, 0);
-}
-
 .action-nav i {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  color: rgb(255, 0, 0);
+
   transition: transform 0.3s ease;
 }
 
 .action-nav:hover {
-  background: rgba(0, 0, 0, 0.1);
-  color: #ff4500;
+  transform: translateY(-2px);
+}
+
+/* navbar dropdown */
+.dropdown-nav {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  left: 10px;
+  top: calc(100% + 1rem);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 200px;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  font: inherit;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  background-color: #2b2b2b;
+}
+
+.dropdown-nav.active>.nav-link+.dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+
+}
+
+.dropdown-nav.active>.nav-link {
+  color: #ff6347;
+  background: rgba(43, 43, 43, 0.95);
   transform: translateY(-2px);
 }
 
@@ -313,7 +344,7 @@ body {
   border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.enquiry-link,
+/* .enquiry-link,
 .blog-link {
   display: flex;
   align-items: center;
@@ -328,10 +359,9 @@ body {
   white-space: nowrap;
   height: 36px;
   box-sizing: border-box;
-}
+} */
 
-.enquiry-link:hover,
-.blog-link:hover {
+.enquiry-link:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #ff6347;
 }
@@ -874,15 +904,20 @@ body {
   height: 36px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.05);
+  margin-left: 10px;
 }
 
 .theme-widget select {
   background: transparent;
-  color: white;
+  color: rgb(193, 192, 192);
   border: none;
   padding: 6px 12px;
   font-size: 0.85rem;
   cursor: pointer;
+}
+
+.theme-widget select option {
+  background-color: transparent;
 }
 
 .theme-widget:hover {
