@@ -2432,26 +2432,39 @@ html[data-theme="glass"] {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   flex-wrap: nowrap;
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .desktop-nav .nav-list {
   display: flex;
-  gap: 5px;
+  gap: 3px;
   margin: 0;
   padding: 0;
   list-style: none;
   flex-shrink: 0;
 }
 
+.desktop-nav .nav-link,
+.desktop-nav .login-btn {
+  font-size: 0.85rem !important;
+  padding: 8px 10px !important;
+}
+
+.search-container {
+  margin: 0 5px;
+}
+
+.search-bar input {
+  width: 180px !important;
+  font-size: 0.85rem !important;
+}
+
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -2467,9 +2480,9 @@ html[data-theme="glass"] {
   background: #ffffff;
   color: #333333;
   border: 2px solid #ff6347;
-  padding: 8px 14px;
+  padding: 6px 10px;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
   outline: none;
