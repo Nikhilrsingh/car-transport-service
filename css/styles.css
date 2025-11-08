@@ -2385,6 +2385,18 @@ body {
   color: var(--text) !important;
 }
 
+/* Apply theme text color to all headings and sections */
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.feature h3,
+.pricing-plan h3,
+.testimonial-text,
+.form-header h3,
+.cta-section h2,
+.quote-section h2 {
+  color: var(--text) !important;
+}
+
 .stat-number,
 .price,
 .amount {
