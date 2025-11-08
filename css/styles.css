@@ -2429,10 +2429,27 @@ html[data-theme="glass"] {
 }
 
 /* Theme Widget Styling */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.desktop-nav .nav-list {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-left: auto;
 }
 
 .theme-widget {
