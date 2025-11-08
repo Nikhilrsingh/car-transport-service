@@ -2474,6 +2474,9 @@ html[data-theme="glass"] {
   padding: 40px 20px 60px;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+  clear: both;
 }
 
 .region-section h2 {
