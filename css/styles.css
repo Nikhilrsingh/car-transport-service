@@ -2432,24 +2432,28 @@ html[data-theme="glass"] {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
   flex-wrap: nowrap;
   width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .desktop-nav .nav-list {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   margin: 0;
   padding: 0;
   list-style: none;
+  flex-shrink: 0;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .theme-widget {
