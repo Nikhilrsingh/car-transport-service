@@ -361,7 +361,7 @@ body {
   align-items: center;
   justify-content: space-between;
   /* ✅ Centers and balances layout */
-  gap: 30px;
+  gap: 50px;
 }
 
 .hero-badge {
@@ -625,6 +625,8 @@ body {
 /* Quick Quote Form */
 .hero-quote {
   position: relative;
+  flex-shrink: 0;
+  margin-right: 80px;
 }
 
 .quote-card {
@@ -2252,7 +2254,7 @@ html {
   content: "";
   width: 80px;
   height: 3px;
-  background: #007bff;
+  background: #ff6347;
   display: block;
   margin: 10px auto 0;
   border-radius: 5px;
