@@ -2463,3 +2463,131 @@ html[data-theme="glass"] {
     opacity: 1;
   }
 }
+
+/* ============================================
+   🌍 REGION-WISE PRESENCE SECTION
+   ============================================ */
+
+.region-section {
+  text-align: center;
+  margin: 60px auto;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.region-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.region-search-container {
+  max-width: 500px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.region-search {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.region-search:focus {
+  border-color: #d9232d;
+  box-shadow: 0 0 10px rgba(217, 35, 45, 0.2);
+}
+
+.region-search-container i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+.region-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 30px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.region-btn {
+  display: block;
+  background-color: #f8f8f8;
+  color: #222;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.region-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(217, 35, 45, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.region-btn:hover::before {
+  left: 100%;
+}
+
+.region-btn:hover {
+  background-color: #d9232d;
+  color: #fff;
+  border-color: #d9232d;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(217, 35, 45, 0.3);
+}
+
+.region-btn:active {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .region-section h2 {
+    font-size: 1.8rem;
+  }
+  
+  .region-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  
+  .region-btn {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .region-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .region-grid {
+    grid-template-columns: 1fr;
+  }
+}
