@@ -15,583 +15,9 @@
     <link rel="stylesheet" href="../css/components/quote-modal.css">
     <link rel="stylesheet" href="../css/components/chatbot-modal.css">
     <link rel="stylesheet" href="../css/components/back-to-top-button.css">
-     <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
-   <link rel="stylesheet" href="../css/components/backtoBottom.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1a1a1a;
-            color: #ffffff;
-            min-height: 100vh;
-        }
-
-        /* Page Header */
-        .page-header {
-            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-            padding: 80px 20px 100px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
-        }
-
-        .page-header-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .page-header h1 {
-            font-size: 3em;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .page-header h1 i {
-            color: #ff6b35;
-        }
-
-        .page-header .subtitle {
-            font-size: 1.3em;
-            color: #cccccc;
-            margin-bottom: 10px;
-        }
-
-        .breadcrumb {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            font-size: 0.95em;
-        }
-
-        .breadcrumb a {
-            color: #ff6b35;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .breadcrumb a:hover {
-            opacity: 0.8;
-        }
-
-        .breadcrumb span {
-            color: #666;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: -50px auto 50px;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Back Button */
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            background: #2d2d2d;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            transition: all 0.3s;
-            border: 1px solid #3d3d3d;
-        }
-
-        .back-button:hover {
-            background: #3d3d3d;
-            transform: translateX(-5px);
-            border-color: #ff6b35;
-        }
-
-        .back-button i {
-            color: #ff6b35;
-        }
-
-        /* Pricing Toggle */
-        .pricing-toggle {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .pricing-toggle h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-
-        .toggle-container {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: #2d2d2d;
-            padding: 8px;
-            border-radius: 50px;
-            border: 1px solid #3d3d3d;
-        }
-
-        .toggle-option {
-            padding: 12px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            color: #aaaaaa;
-        }
-
-        .toggle-option.active {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .save-badge {
-            display: inline-block;
-            background: rgba(34, 197, 94, 0.2);
-            color: #4ade80;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            margin-left: 10px;
-            border: 1px solid #22c55e;
-        }
-
-        /* Pricing Grid */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        /* Pricing Card */
-        .pricing-card {
-            background: #2d2d2d;
-            border-radius: 20px;
-            padding: 40px 30px;
-            border: 2px solid #3d3d3d;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            border-color: #ff6b35;
-        }
-
-        .pricing-card.popular {
-            border-color: #ff6b35;
-            background: linear-gradient(145deg, #2d2d2d 0%, #2a2a2a 100%);
-            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
-            transform: scale(1.05);
-        }
-
-        .pricing-card.popular:hover {
-            transform: scale(1.08) translateY(-10px);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-            color: white;
-            padding: 8px 25px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
-        }
-
-        .plan-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #3d3d3d 0%, #2d2d2d 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5em;
-            border: 2px solid #4d4d4d;
-        }
-
-        .pricing-card.popular .plan-icon {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-            border-color: #ff6b35;
-        }
-
-        .plan-icon i {
-            color: #ff6b35;
-        }
-
-        .pricing-card.popular .plan-icon i {
-            color: white;
-        }
-
-        .plan-name {
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        .plan-description {
-            text-align: center;
-            color: #aaaaaa;
-            margin-bottom: 25px;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
-
-        .plan-price {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .price-amount {
-            font-size: 3em;
-            font-weight: 700;
-            color: #ff6b35;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .currency {
-            font-size: 0.5em;
-            margin-top: 10px;
-        }
-
-        .price-period {
-            color: #666666;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-
-        .price-note {
-            color: #888888;
-            font-size: 0.85em;
-            font-style: italic;
-            margin-top: 5px;
-        }
-
-        /* Features List */
-        .features-list {
-            list-style: none;
-            margin-bottom: 30px;
-            flex-grow: 1;
-        }
-
-        .feature-item {
-            padding: 12px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            border-bottom: 1px solid #3d3d3d;
-        }
-
-        .feature-item:last-child {
-            border-bottom: none;
-        }
-
-        .feature-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: rgba(255, 107, 53, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .feature-icon i {
-            color: #ff6b35;
-            font-size: 0.75em;
-        }
-
-        .feature-icon.disabled {
-            background: rgba(128, 128, 128, 0.1);
-        }
-
-        .feature-icon.disabled i {
-            color: #666666;
-        }
-
-        .feature-text {
-            color: #cccccc;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
-
-        .feature-item.disabled .feature-text {
-            color: #666666;
-            text-decoration: line-through;
-        }
-
-        /* CTA Button */
-        .cta-button {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #3d3d3d 0%, #2d2d2d 100%);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.05em;
-            transition: all 0.3s;
-            border: 2px solid #4d4d4d;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            border-color: #ff6b35;
-        }
-
-        .pricing-card.popular .cta-button {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-            border-color: #ff6b35;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .pricing-card.popular .cta-button:hover {
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
-            transform: translateY(-2px);
-        }
-
-        /* Comparison Table */
-        .comparison-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            margin-top: 80px;
-            background: #2d2d2d;
-            border-radius: 20px;
-            padding: 50px 80px;
-            border: 1px solid #3d3d3d;
-        }
-
-        .comparison-section h2 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            color: #ffffff;
-        }
-
-        .comparison-section h2 i {
-            color: #ff6b35;
-        }
-
-        .comparison-table {
-            
-            width: 100%;
-            border-collapse: collapse;
-            overflow-x: auto;
-        }
-
-        .comparison-table thead {
-            background: #252525;
-        }
-
-        .comparison-table th {
-            padding: 20px;
-            text-align: center;
-            font-weight: 700;
-            color: #ffffff;
-            border: 1px solid #3d3d3d;
-            font-size: 1.1em;
-        }
-
-        .comparison-table th:first-child {
-            text-align: left;
-            background: #1a1a1a;
-        }
-
-        .comparison-table th.popular-col {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-            position: relative;
-        }
-
-        .comparison-table td {
-            padding: 18px 20px;
-            border: 1px solid #3d3d3d;
-            text-align: center;
-            color: #cccccc;
-        }
-
-        .comparison-table td:first-child {
-            text-align: left;
-            font-weight: 600;
-            color: #ffffff;
-            background: #252525;
-        }
-
-        .comparison-table tbody tr:hover {
-            background: #252525;
-        }
-
-        .check-icon {
-            color: #4ade80;
-            font-size: 1.2em;
-        }
-
-        .cross-icon {
-            color: #666666;
-            font-size: 1.2em;
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            margin-top: 80px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .faq-section h2 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            color: #ffffff;
-        }
-
-        .faq-section h2 i {
-            color: #ff6b35;
-        }
-
-        .faq-item {
-            background: #2d2d2d;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #3d3d3d;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 20px 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .faq-question:hover {
-            background: #3d3d3d;
-        }
-
-        .faq-question h3 {
-            font-size: 1.1em;
-            color: #ffffff;
-            margin: 0;
-        }
-
-        .faq-question i {
-            color: #ff6b35;
-            transition: transform 0.3s;
-        }
-
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-        }
-
-        .faq-answer p {
-            padding: 0 25px 20px;
-            color: #aaaaaa;
-            line-height: 1.6;
-        }
-
-        @media (max-width: 1024px) {
-            .pricing-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-
-            .pricing-card.popular {
-                transform: scale(1);
-            }
-
-            .comparison-table {
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .page-header h1 {
-                font-size: 2em;
-            }
-
-            .page-header .subtitle {
-                font-size: 1.1em;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-card.popular {
-                transform: scale(1);
-            }
-
-            .comparison-section {
-                padding: 30px 20px;
-            }
-
-            .comparison-table {
-                font-size: 0.85em;
-            }
-
-            .comparison-table th,
-            .comparison-table td {
-                padding: 12px 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../css/components/backtoBottom.css">
+    <!-- Enhanced Pricing Styles -->
+    <link rel="stylesheet" href="../css/components/pricing.css">
     <link rel="stylesheet" href="../css/components/floating-button.css">
 </head>
 
@@ -799,8 +225,10 @@
         </div>
     </header>
 
-    <!-- Page Header -->
-    <header class="page-header">
+    <!-- Pricing Page Content -->
+    <div class="pricing-page">
+        <!-- Page Header -->
+        <header class="page-header">
         <div class="page-header-content">
             <h1><i class="fas fa-tags"></i> Pricing & Plans</h1>
             <p class="subtitle">Choose the perfect plan for your vehicle transportation needs</p>
@@ -813,11 +241,6 @@
     </header>
 
     <div class="container">
-        <a href="index.html" class="back-button">
-            <i class="fas fa-arrow-left"></i>
-            Back to Home
-        </a>
-
         <!-- Pricing Toggle -->
         <div class="pricing-toggle">
             <h2>Transparent Pricing for Every Need</h2>
@@ -1042,56 +465,60 @@
         <!-- Detailed Comparison Table -->
         <div class="comparison-section">
             <h2><i class="fas fa-table"></i> Detailed Feature Comparison</h2>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Features</th>
-                        <th>Basic</th>
-                        <th class="popular-col">Standard</th>
-                        <th>Premium</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><i class="fas fa-shield-alt"></i> Insurance Coverage</td>
-                        <td>₹50,000</td>
-                        <td>₹2,00,000</td>
-                        <td>₹10,00,000</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-truck"></i> Transport Type</td>
-                        <td>Open Carrier</td>
-                        <td>Open/Covered</td>
-                        <td>Covered Only</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-clock"></i> Delivery Time</td>
-                        <td>5-7 days</td>
-                        <td>3-5 days</td>
-                        <td>2-3 days</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-map-marker-alt"></i> GPS Tracking</td>
-                        <td><i class="fas fa-times cross-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-headset"></i> Customer Support</td>
-                        <td>Email/Phone</td>
-                        <td>24/7 Support</td>
-                        <td>VIP Priority</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-user-tie"></i> Dedicated Manager</td>
-                        <td><i class="fas fa-times cross-icon"></i></td>
-                        <td><i class="fas fa-times cross-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Features</th>
+                            <th>Basic</th>
+                            <th class="popular-col">Standard</th>
+                            <th>Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-shield-alt"></i> Insurance Coverage</td>
+                            <td>₹50,000</td>
+                            <td>₹2,00,000</td>
+                            <td>₹10,00,000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-truck"></i> Transport Type</td>
+                            <td>Open Carrier</td>
+                            <td>Open/Covered</td>
+                            <td>Covered Only</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-clock"></i> Delivery Time</td>
+                            <td>5-7 days</td>
+                            <td>3-5 days</td>
+                            <td>2-3 days</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-map-marker-alt"></i> GPS Tracking</td>
+                            <td><i class="fas fa-times cross-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-headset"></i> Customer Support</td>
+                            <td>Email/Phone</td>
+                            <td>24/7 Support</td>
+                            <td>VIP Priority</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-user-tie"></i> Dedicated Manager</td>
+                            <td><i class="fas fa-times cross-icon"></i></td>
+                            <td><i class="fas fa-times cross-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    </div>
+    <!-- End Pricing Page Content -->
 
     <footer class="footer">
         <div class="container">
@@ -1192,49 +619,6 @@
             </div>
         </div>
 
-        <script>
-            // Toggle functionality for pricing plans
-            document.querySelectorAll('.toggle-option').forEach(option => {
-                option.addEventListener('click', function () {
-                    // Remove active class from all options
-                    document.querySelectorAll('.toggle-option').forEach(opt => {
-                        opt.classList.remove('active');
-                    });
-
-                    // Add active class to clicked option
-                    this.classList.add('active');
-
-                    // Get the selected plan type
-                    const planType = this.getAttribute('data-plan');
-
-                    // Update all pricing amounts
-                    document.querySelectorAll('.amount').forEach(priceElement => {
-                        const price = priceElement.getAttribute(`data-${planType}`);
-                        if (price) {
-                            // Format the price with commas
-                            const formattedPrice = parseInt(price).toLocaleString('en-IN');
-                            priceElement.textContent = formattedPrice;
-                        }
-                    });
-                });
-            });
-
-            // FAQ Toggle functionality
-            document.querySelectorAll('.faq-question').forEach(question => {
-                question.addEventListener('click', function () {
-                    const faqItem = this.parentElement;
-                    faqItem.classList.toggle('active');
-                });
-            });
-
-            // Load navbar
-            fetch('navbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.querySelector('.nav-placeholder').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading navbar:', error));
-        </script>
         <script src="../js/modules/search.js"></script>
         <script src="../js/modules/navbar.js"></script>
         <script src="../js/modules/themes.js"></script>
@@ -1246,7 +630,9 @@
         <script src="../js/modules/floating-chatbot-button.js"></script>
         <script src="../js/modules/chatbot-modal.js"></script>
         <script src="../js/modules/back-to-top-button.js"></script>
-          <script src="../js/modules/backtoBottom.js"></script>
+        <script src="../js/modules/backtoBottom.js"></script>
+        <!-- Enhanced Pricing Module -->
+        <script src="../js/modules/pricing.js"></script>
 
 
         <!-- Back to Top Button -->
