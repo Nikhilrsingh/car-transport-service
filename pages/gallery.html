@@ -25,136 +25,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../css/components/floating-button.css" />
-    <style>
-      :root {
-        --orange: #ff6347;
-        --bg: #1a1a1a;
-        --text: #f5f5f5;
-        --muted: #aaaaaa;
-        --card-bg: #2b2b2b;
-        --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        --radius: 12px;
-        font-family: "Poppins", sans-serif;
-      }
-
-      body {
-        background: var(--bg);
-        color: var(--text);
-        margin: 0;
-        font-family: "Poppins", sans-serif;
-      }
-
-      /* HERO SECTION */
-      .gallery-hero {
-        text-align: center;
-        padding: 100px 20px 60px;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 99, 71, 0.15),
-          rgba(0, 0, 0, 0.9)
-        );
-      }
-
-      .gallery-hero h1 {
-        font-size: 2.8rem;
-        background: linear-gradient(135deg, #ff6347, #ff4500);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 10px;
-      }
-
-      .gallery-hero p {
-        color: var(--muted);
-        font-size: 1.1rem;
-        max-width: 700px;
-        margin: 0 auto;
-      }
-
-      /* GALLERY SECTION */
-      .gallery-section {
-        padding: 60px 5%;
-      }
-
-      .gallery-section h2 {
-        text-align: center;
-        color: var(--orange);
-        margin-bottom: 40px;
-      }
-
-      .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-      }
-
-      .gallery-item {
-        position: relative;
-        overflow: hidden;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        cursor: pointer;
-        transition: transform 0.3s ease;
-        background: var(--card-bg);
-      }
-
-      .gallery-item img {
-        width: 100%;
-        height: 230px;
-        object-fit: cover;
-        border-radius: var(--radius);
-        transition: transform 0.3s ease;
-      }
-
-      .gallery-item:hover img {
-        transform: scale(1.05);
-      }
-
-      /* LIGHTBOX */
-      .lightbox {
-        display: none;
-        position: fixed;
-        z-index: 2000;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .lightbox img {
-        max-width: 90%;
-        max-height: 80%;
-        border-radius: 10px;
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-      }
-
-      .lightbox.active {
-        display: flex;
-      }
-
-      .close-btn {
-        position: absolute;
-        top: 30px;
-        right: 50px;
-        color: white;
-        font-size: 2rem;
-        cursor: pointer;
-        z-index: 2100;
-      }
-
-      @media (max-width: 768px) {
-        .gallery-hero h1 {
-          font-size: 2.2rem;
-        }
-
-        .gallery-item img {
-          height: 200px;
-        }
-      }
-    </style>
-  </head>
+    <link rel="stylesheet" href="../css/components/gallery.css" />
 
   <body>
     <!-- Enhanced Navigation Component -->
@@ -413,56 +284,569 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section class="gallery-hero">
-      <h1>Our Gallery</h1>
-      <p>
-        Explore real images from our car transport services, delivery
-        operations, and happy customers.
-      </p>
-    </section>
+    <section class="enhanced-gallery-hero">
+      <div class="enhanced-gallery-hero-content">
+        <h1 class="hero-title-animate">Our Gallery</h1>
+        <p class="hero-text-animate">
+          Witness Excellence in Every Delivery — Browse our collection of successful 
+          car transport projects, featuring premium vehicles safely delivered across India. 
+          From luxury cars to everyday vehicles, see how we handle each transport with care.
+        </p>
 
-    <!-- GALLERY SECTION -->
-    <section class="gallery-section">
-      <h2>Transport Highlights</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="../assets/images/bmw.jpg" alt="Car Carrier" />
+        <!-- Search Bar -->
+        <div class="enhanced-gallery-search hero-search-animate">
+          <div class="search-input-wrapper">
+            <input 
+              type="text" 
+              id="gallerySearch" 
+              placeholder="Search by location, car type, or tags..."
+              aria-label="Search gallery"
+            />
+            <i class="fas fa-search"></i>
+          </div>
         </div>
-        <div class="gallery-item">
-          <img src="../assets/images/bmw2.jpeg" alt="Car Carrier" />
-        </div>
-        <div class="gallery-item">
-          <img src="../assets/images/gallery-1.jpg" alt="Car Carrier" />
-        </div>
-        <div class="gallery-item">
-          <img src="../assets/images/gallery-3.jpg" alt="Car Carrier" />
-        </div>
-        <div class="gallery-item">
-          <img src="../assets/images/gallery-5.jpg" alt="Car Carrier" />
-        </div>
-        <div class="gallery-item">
-          <img src="../assets/images/gallery-6.jpg" alt="Car Carrier" />
-        </div>
-        <div class="gallery-item">
-          <img src="../assets/images/gallery-7.jpg" alt="Car Carrier" />
-        </div>
-        <div class="gallery-item">
-          <img src="../assets/images/footer-bg.jpg" alt="Car Carrier" />
-        </div>
-        <div class="gallery-item">
-          <img src="../assets/images/hasel-free.png" alt="Car Carrier" />
-        </div>
-        <div class="gallery-item">
-          <img src="../assets/images/mg.jpeg" alt="Car Carrier" />
+
+        <!-- Filter Controls -->
+        <div class="enhanced-gallery-filters hero-filters-animate">
+          <button class="filter-btn active" data-filter="all">
+            <span>All Images <span class="filter-count">0</span></span>
+          </button>
+          <button class="filter-btn" data-filter="transport">
+            <span>Transport <span class="filter-count">0</span></span>
+          </button>
+          <button class="filter-btn" data-filter="delivery">
+            <span>Delivery <span class="filter-count">0</span></span>
+          </button>
+          <button class="filter-btn" data-filter="customers">
+            <span>Happy Customers <span class="filter-count">0</span></span>
+          </button>
+          <button class="filter-btn" data-filter="fleet">
+            <span>Our Fleet <span class="filter-count">0</span></span>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox">
-      <span class="close-btn" id="closeLightbox">&times;</span>
-      <img id="lightboxImage" src="" alt="Expanded View" />
+    <!-- GALLERY SECTION -->
+    <section class="enhanced-gallery-section">
+      <div class="enhanced-gallery-grid">
+        <!-- Transport Category -->
+        <div class="enhanced-gallery-item" 
+             data-category="transport" 
+             data-title="BMW Transport Service"
+             data-description="Premium BMW transported safely from Mumbai to Delhi"
+             data-date="Nov 5, 2025"
+             data-location="Mumbai to Delhi"
+             data-tags="bmw,luxury,transport">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/bmw.jpg" alt="BMW Transport" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">BMW Transport Service</h3>
+                <p class="enhanced-gallery-description">Premium BMW transported safely</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Nov 5, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Mumbai to Delhi</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Transport</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="enhanced-gallery-item" 
+             data-category="transport" 
+             data-title="BMW Series Transport"
+             data-description="Secure door-to-door BMW delivery"
+             data-date="Nov 3, 2025"
+             data-location="Bangalore to Chennai"
+             data-tags="bmw,sedan,transport">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/bmw2.jpeg" alt="BMW Transport" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">BMW Series Transport</h3>
+                <p class="enhanced-gallery-description">Secure door-to-door delivery</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Nov 3, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Bangalore</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Transport</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fleet Category -->
+        <div class="enhanced-gallery-item" 
+             data-category="fleet" 
+             data-title="Professional Car Carrier"
+             data-description="Our modern fleet of car carriers"
+             data-date="Nov 1, 2025"
+             data-location="Delhi Depot"
+             data-tags="carrier,fleet,truck">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/gallery-1.jpg" alt="Car Carrier" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">Professional Car Carrier</h3>
+                <p class="enhanced-gallery-description">Modern fleet for safe transport</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Nov 1, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Delhi</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Fleet</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delivery Category -->
+        <div class="enhanced-gallery-item" 
+             data-category="delivery" 
+             data-title="Successful Delivery"
+             data-description="On-time delivery to customer location"
+             data-date="Oct 30, 2025"
+             data-location="Pune"
+             data-tags="delivery,customer,success">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/gallery-3.jpg" alt="Delivery Service" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">Successful Delivery</h3>
+                <p class="enhanced-gallery-description">On-time delivery guaranteed</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oct 30, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Pune</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Delivery</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="enhanced-gallery-item" 
+             data-category="fleet" 
+             data-title="Multi-Car Carrier"
+             data-description="State-of-the-art multi-level carrier"
+             data-date="Oct 28, 2025"
+             data-location="Mumbai Port"
+             data-tags="carrier,fleet,multilevel">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/gallery-5.jpg" alt="Multi-Car Carrier" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">Multi-Car Carrier</h3>
+                <p class="enhanced-gallery-description">Advanced transport solutions</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oct 28, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Mumbai</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Fleet</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="enhanced-gallery-item" 
+             data-category="transport" 
+             data-title="Luxury Car Transport"
+             data-description="Premium handling for luxury vehicles"
+             data-date="Oct 25, 2025"
+             data-location="Hyderabad to Bangalore"
+             data-tags="luxury,premium,transport">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/gallery-6.jpg" alt="Luxury Transport" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">Luxury Car Transport</h3>
+                <p class="enhanced-gallery-description">White-glove service for premium cars</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oct 25, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Hyderabad</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Transport</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="enhanced-gallery-item" 
+             data-category="delivery" 
+             data-title="Loading Process"
+             data-description="Professional loading with care"
+             data-date="Oct 22, 2025"
+             data-location="Chennai Depot"
+             data-tags="loading,process,safety">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/gallery-7.jpg" alt="Loading Process" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">Loading Process</h3>
+                <p class="enhanced-gallery-description">Safe and secure loading</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oct 22, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Chennai</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Delivery</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="enhanced-gallery-item" 
+             data-category="customers" 
+             data-title="Happy Customer"
+             data-description="Satisfied customer receiving their vehicle"
+             data-date="Oct 20, 2025"
+             data-location="Kolkata"
+             data-tags="customer,happy,satisfaction">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/footer-bg.jpg" alt="Happy Customer" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">Happy Customer</h3>
+                <p class="enhanced-gallery-description">100% customer satisfaction</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oct 20, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kolkata</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Customers</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="enhanced-gallery-item" 
+             data-category="customers" 
+             data-title="Hassle-Free Service"
+             data-description="Stress-free car transport experience"
+             data-date="Oct 18, 2025"
+             data-location="Ahmedabad"
+             data-tags="service,hasslefree,easy">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/hasel-free.png" alt="Hassle-Free" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">Hassle-Free Service</h3>
+                <p class="enhanced-gallery-description">Simple and easy process</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oct 18, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Ahmedabad</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Customers</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="enhanced-gallery-item" 
+             data-category="transport" 
+             data-title="MG Car Transport"
+             data-description="MG vehicle safely transported"
+             data-date="Oct 15, 2025"
+             data-location="Jaipur to Delhi"
+             data-tags="mg,suv,transport">
+          <div class="enhanced-gallery-item-inner">
+            <div class="enhanced-gallery-image-container">
+              <div class="loading-spinner"></div>
+              <img data-src="../assets/images/mg.jpeg" alt="MG Transport" />
+            </div>
+            <div class="enhanced-gallery-overlay">
+              <div class="enhanced-gallery-overlay-content">
+                <h3 class="enhanced-gallery-title">MG Car Transport</h3>
+                <p class="enhanced-gallery-description">Professional MG vehicle transport</p>
+                <div class="enhanced-gallery-meta">
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oct 15, 2025</span>
+                  </div>
+                  <div class="enhanced-gallery-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Jaipur</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="enhanced-gallery-category-badge">Transport</div>
+            <div class="enhanced-gallery-zoom-icon">
+              <i class="fas fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENHANCED LIGHTBOX -->
+    <div class="enhanced-lightbox" id="enhancedLightbox">
+      <!-- Lightbox Controls -->
+      <div class="lightbox-controls">
+        <button class="lightbox-btn lightbox-download" title="Download Image" aria-label="Download image">
+          <i class="fas fa-download"></i>
+        </button>
+        <button class="lightbox-btn lightbox-fullscreen" title="Fullscreen" aria-label="Toggle fullscreen">
+          <i class="fas fa-expand"></i>
+        </button>
+        <button class="lightbox-btn lightbox-close" title="Close" aria-label="Close lightbox">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Lightbox Container -->
+      <div class="lightbox-container">
+        <!-- Previous Button -->
+        <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <!-- Lightbox Content -->
+        <div class="lightbox-content">
+          <div class="lightbox-image-wrapper">
+            <img class="lightbox-image" src="" alt="" />
+          </div>
+
+          <!-- Caption -->
+          <div class="lightbox-caption">
+            <h3>Image Title</h3>
+            <p>Image description goes here</p>
+            
+            <div class="lightbox-meta">
+              <div class="lightbox-meta-item">
+                <i class="fas fa-calendar"></i>
+                <span class="meta-date">Date</span>
+              </div>
+              <div class="lightbox-meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span class="meta-location">Location</span>
+              </div>
+              <div class="lightbox-meta-item">
+                <i class="fas fa-tag"></i>
+                <span class="meta-category">Category</span>
+              </div>
+            </div>
+
+            <!-- Share Buttons -->
+            <div class="lightbox-share">
+              <button class="share-btn" data-platform="facebook">
+                <i class="fab fa-facebook-f"></i>
+                <span>Share</span>
+              </button>
+              <button class="share-btn" data-platform="twitter">
+                <i class="fab fa-twitter"></i>
+                <span>Tweet</span>
+              </button>
+              <button class="share-btn" data-platform="pinterest">
+                <i class="fab fa-pinterest-p"></i>
+                <span>Pin</span>
+              </button>
+              <button class="share-btn" data-platform="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+              </button>
+              <button class="share-btn" data-platform="copy">
+                <i class="fas fa-link"></i>
+                <span>Copy Link</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next Button -->
+        <button class="lightbox-nav lightbox-next" aria-label="Next image">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Zoom Controls -->
+      <div class="lightbox-zoom-controls">
+        <button class="zoom-btn zoom-out" title="Zoom Out" aria-label="Zoom out">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button class="zoom-btn zoom-reset" title="Reset Zoom" aria-label="Reset zoom">
+          <i class="fas fa-compress"></i>
+        </button>
+        <button class="zoom-btn zoom-in" title="Zoom In" aria-label="Zoom in">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+      <!-- Thumbnail Strip -->
+      <div class="lightbox-thumbnails"></div>
     </div>
+
+    <!-- VEHICLE JOURNEY CAROUSEL -->
+    <section class="gallery-section">
+      <h2 style="text-align: center; color: #ff6347; margin-bottom: 40px;">
+        Vehicle Journey Tracking
+      </h2>
+      <div class="journey-carousel">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <img src="../assets/images/gallery-7.jpg" alt="Step 1" />
+            <div class="carousel-slide-content">
+              <h3 class="carousel-slide-title">Step 1: Vehicle Pickup</h3>
+              <p class="carousel-slide-description">
+                Professional team arrives at your location for safe pickup
+              </p>
+            </div>
+          </div>
+          
+          <div class="carousel-slide">
+            <img src="../assets/images/gallery-1.jpg" alt="Step 2" />
+            <div class="carousel-slide-content">
+              <h3 class="carousel-slide-title">Step 2: Secure Loading</h3>
+              <p class="carousel-slide-description">
+                Your vehicle is carefully loaded onto our specialized carrier
+              </p>
+            </div>
+          </div>
+          
+          <div class="carousel-slide">
+            <img src="../assets/images/gallery-5.jpg" alt="Step 3" />
+            <div class="carousel-slide-content">
+              <h3 class="carousel-slide-title">Step 3: Safe Transport</h3>
+              <p class="carousel-slide-description">
+                Real-time tracking during the entire journey
+              </p>
+            </div>
+          </div>
+          
+          <div class="carousel-slide">
+            <img src="../assets/images/gallery-3.jpg" alt="Step 4" />
+            <div class="carousel-slide-content">
+              <h3 class="carousel-slide-title">Step 4: Happy Delivery</h3>
+              <p class="carousel-slide-description">
+                Your vehicle delivered safely to your destination
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="carousel-navigation">
+          <button class="carousel-btn carousel-prev" aria-label="Previous slide">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn carousel-next" aria-label="Next slide">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        
+        <div class="carousel-indicators">
+          <div class="carousel-indicator active"></div>
+          <div class="carousel-indicator"></div>
+          <div class="carousel-indicator"></div>
+          <div class="carousel-indicator"></div>
+        </div>
+      </div>
+    </section>
 
     <!-- FOOTER -->
     <div id="footer-container"></div>
@@ -475,32 +859,12 @@
         )
         .catch((err) => console.error("Footer load error:", err));
     </script>
+    
+    <!-- Scripts -->
     <script src="../js/modules/search.js"></script>
     <script src="../js/modules/navbar.js"></script>
     <script src="../js/modules/themes.js"></script>
-
-    <!-- JS: Lightbox -->
-    <script>
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightboxImage");
-      const closeBtn = document.getElementById("closeLightbox");
-      const galleryItems = document.querySelectorAll(".gallery-item img");
-
-      galleryItems.forEach((img) => {
-        img.addEventListener("click", () => {
-          lightboxImg.src = img.src;
-          lightbox.classList.add("active");
-        });
-      });
-
-      closeBtn.addEventListener("click", () => {
-        lightbox.classList.remove("active");
-      });
-
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) lightbox.classList.remove("active");
-      });
-    </script>
+    <script src="../js/modules/gallery.js"></script>
     <script src="../js/modules/floating-book-button.js"></script>
     <script src="../js/modules/floating-call-button.js"></script>
     <script src="../js/modules/floating-whatsapp-button.js"></script>

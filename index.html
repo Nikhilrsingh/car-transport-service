@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="./css/components/backtoBottom.css">
   <link rel="stylesheet" href="./css/components/back-to-top-button.css">
   <link rel="stylesheet" href="./css/components/digital-clock.css">
+  <link rel="stylesheet" href="./css/components/animations.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
@@ -69,67 +70,99 @@
                 <span>About</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./services.html" class="nav-link" data-page="services" data-tooltip="Services">
+
+            <!-- Dropdown for services -->
+            <li class="nav-item dropdown-nav" data-dropdown>
+
+              <div class="nav-link" data-dropdown-btn>
                 <i class="fas fa-truck-moving"></i>
                 <span>Services</span>
-              </a>
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+
+              <div class="dropdown-menu">
+                <ul style="list-style-type: none;">
+                  <li class="nav-item">
+                    <a href="./services.html" class="nav-link" data-page="services" data-tooltip="Services">
+                      <i class="fas fa-truck-moving"></i>
+                      <span>Our Services</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="./pages/booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
+                      <i class="fas fa-calendar-check"></i>
+                      <span>Booking</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./pages/pricing.html" class="nav-link" data-page="pricing" data-tooltip="Pricing">
+                      <i class="fas fa-tags"></i>
+                      <span>Pricing</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./pages/tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span>Track Your Car</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
             </li>
-            <li class="nav-item">
-              <a href="./pages/contributors.html" class="nav-link" data-page="contributors" data-tooltip="Contributors">
-                <i class="fas fa-users"></i>
-                <span>Contributors</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./pages/pricing.html" class="nav-link" data-page="pricing" data-tooltip="Pricing">
-                <i class="fas fa-tags"></i>
-                <span>Pricing</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./pages/tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Track Your Car</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./pages/gallery.html" class="nav-link" data-page="gallery" data-tooltip="Gallery">
-                <i class="fas fa-images"></i>
-                <span>Gallery</span>
-              </a>
-            </li>
+
             <li class="nav-item">
               <a href="./pages/contact.html" class="nav-link" data-page="contact" data-tooltip="Contact">
                 <i class="fas fa-phone"></i>
                 <span>Contact</span>
               </a>
             </li>
+
+            <li class="nav-item dropdown-nav" data-dropdown>
+              <div class="nav-link" data-dropdown-btn>
+                <i class="fa-solid fa-layer-group"></i></i>
+                <span>More</span>
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+
+              <div class="dropdown-menu">
+                <ul style="list-style-type: none;">
+                  <li>
+                    <a href="./pages/gallery.html" class="nav-link" data-page="gallery" data-tooltip="Gallery">
+                      <i class="fas fa-images"></i>
+                      <span>Gallery</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="./pages/contributors.html" class="nav-link" data-page="contributors"
+                      data-tooltip="Contributors">
+                      <i class="fas fa-users"></i>
+                      <span>Contributors</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="./pages/blog.html" class="nav-link blog-link" data-tooltip="Blog">
+                      <i class="fas fa-blog"></i>
+                      <span>Blog</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </li>
           </ul>
 
-          <!-- Search Bar -->
-          <div class="search-container">
-            <div class="search-bar">
-              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
-              <i class="fas fa-search"></i>
+          <!-- creating a div for left aligb navigation links  -->
+          <div class="nav-right-section">
+            <!-- Search Bar -->
+            <div class="search-container">
+              <div class="search-bar">
+                <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
+                <i class="fas fa-microphone" id="micButton"></i>
+                <i class="fas fa-search"></i>
+              </div>
             </div>
-          </div>
 
-          <!-- Right Actions -->
-          <div class="nav-actions">
-            <a href="./pages/enquiry.html" class="nav-link enquiry-link" data-tooltip="Enquiry">
-              <i class="fas fa-question-circle"></i>
-              <span>Enquiry</span>
-            </a>
-            <a href="./pages/blog.html" class="nav-link blog-link" data-tooltip="Blog">
-              <i class="fas fa-blog"></i>
-              <span>Blog</span>
-            </a>
-            <a href="./pages/login.html" class="login-btn" data-tooltip="Login">
-              <i class="fas fa-user"></i>
-              <span>Login</span>
-            </a>
-            <!-- Theme widget -->
             <div class="theme-widget" id="themeWidget">
               <label for="themeWidgetSelect" class="sr-only">Choose theme</label>
               <select id="themeWidgetSelect" aria-label="Choose theme">
@@ -140,133 +173,149 @@
                 <option value="glass">Glass</option>
               </select>
             </div>
+
+            <div class="action-nav">
+              <a href="./pages/enquiry.html" class="enquiry-link" data-tooltip="Enquiry">
+                <i class="fas fa-question-circle"></i>
+              </a>
+            </div>
+          </div>
+
+
+          <div class="nav-actions">
+            <a href="./pages/login.html" class="login-btn" data-tooltip="Login">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
           </div>
         </nav>
+      </div>
 
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <div class="mobile-nav-header">
+        <div class="mobile-logo">
+          <img src="./assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+          <span>Harihar Car Carriers</span>
+        </div>
+        <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+          <i class="fas fa-times"></i>
         </button>
       </div>
 
-      <!-- Mobile Navigation -->
-      <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-        <div class="mobile-nav-header">
-          <div class="mobile-logo">
-            <img src="./assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-            <span>Harihar Car Carriers</span>
-          </div>
-          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
-            <i class="fas fa-times"></i>
-          </button>
+      <!-- Mobile Search Bar -->
+      <div class="mobile-search-container">
+        <div class="mobile-search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
         </div>
+      </div>
 
-        <!-- Mobile Search Bar -->
-        <div class="mobile-search-container">
-          <div class="mobile-search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
-          </div>
-        </div>
-
-        <ul class="mobile-nav-list">
-          <li class="mobile-nav-item">
-            <a href="./index.html" class="mobile-nav-link active">
-              <i class="fas fa-home"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/about.html" class="mobile-nav-link">
-              <i class="fas fa-info-circle"></i>
-              <span>About</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./services.html" class="mobile-nav-link">
-              <i class="fas fa-truck-moving"></i>
-              <span>Services</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/booking.html" class="mobile-nav-link">
-              <i class="fas fa-calendar-check"></i>
-              <span>Booking</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/contributors.html" class="mobile-nav-link">
-              <i class="fas fa-users"></i>
-              <span>Contributors</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/pricing.html" class="mobile-nav-link">
-              <i class="fas fa-tags"></i>
-              <span>Pricing</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/tracking.html" class="mobile-nav-link">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Track Your Car</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/gallery.html" class="mobile-nav-link">
-              <i class="fas fa-images"></i>
-              <span>Gallery</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/contact.html" class="mobile-nav-link">
-              <i class="fas fa-phone"></i>
-              <span>Contact</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/enquiry.html" class="mobile-nav-link">
-              <i class="fas fa-question-circle"></i>
-              <span>Enquiry</span>
-            </a>
-          </li>
-          <li class="mobile-nav-item">
-            <a href="./pages/blog.html" class="mobile-nav-link">
-              <i class="fas fa-blog"></i>
-              <span>Blog</span>
-            </a>
-          </li>
-        </ul>
-        <div class="mobile-nav-actions">
-          <a href="./pages/login.html" class="mobile-login-btn">
-            <i class="fas fa-user"></i>
-            <span>Login</span>
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <a href="./index.html" class="mobile-nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
           </a>
-          <a href="./pages/booking.html" class="mobile-cta-btn">
-            <i class="fas fa-truck"></i>
-            <span>Book Instantly</span>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/about.html" class="mobile-nav-link">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
           </a>
-        </div>
-        <div class="mobile-contact-info">
-          <div class="contact-item">
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./services.html" class="mobile-nav-link">
+            <i class="fas fa-truck-moving"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/booking.html" class="mobile-nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Booking</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/contributors.html" class="mobile-nav-link">
+            <i class="fas fa-users"></i>
+            <span>Contributors</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/pricing.html" class="mobile-nav-link">
+            <i class="fas fa-tags"></i>
+            <span>Pricing</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/tracking.html" class="mobile-nav-link">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Track Your Car</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/gallery.html" class="mobile-nav-link">
+            <i class="fas fa-images"></i>
+            <span>Gallery</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/contact.html" class="mobile-nav-link">
             <i class="fas fa-phone"></i>
-            <span>+91 98765 43210</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <span>info@hariharcarcarriers.com</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-clock"></i>
-            <span>24/7 Support</span>
-          </div>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/enquiry.html" class="mobile-nav-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Enquiry</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
+          <a href="./pages/blog.html" class="mobile-nav-link">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="./pages/login.html" class="mobile-login-btn">
+          <i class="fas fa-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="./pages/booking.html" class="mobile-cta-btn">
+          <i class="fas fa-truck"></i>
+          <span>Book Instantly</span>
+        </a>
+      </div>
+      <div class="mobile-contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 98765 43210</span>
         </div>
-      </nav>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@hariharcarcarriers.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>24/7 Support</span>
+        </div>
+      </div>
+    </nav>
 
-      <!-- Navigation Overlay -->
-      <div class="nav-overlay" id="navOverlay"></div>
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
     </div>
   </header>
 
@@ -488,19 +537,19 @@
 
   <!-- Features Section -->
   <section class="features" id="features">
-    <h2 class="section-title h1">Our Features</h2>
+    <h2 class="section-title h1 fade-in">Our Features</h2>
     <div class="features-container">
-      <div class="feature-box">
+      <div class="feature-box fade-in">
         🚗
         <h3>Fast Delivery</h3>
         <p>We ensure timely and safe transport of your vehicle to the destination.</p>
       </div>
-      <div class="feature-box">
+      <div class="feature-box fade-in">
         💰
         <h3>Affordable Rates</h3>
         <p>Get the best service at budget-friendly prices without hidden charges.</p>
       </div>
-      <div class="feature-box">
+      <div class="feature-box fade-in">
         🛡️
         <h3>Full Insurance</h3>
         <p>Your vehicle is fully insured during the entire transport process.</p>
@@ -509,7 +558,7 @@
   </section>
 
   <!-- Pricing CTA -->
-  <div class="pricing-cta-section">
+  <div class="pricing-cta-section fade-in">
     <div class="pricing-cta-content">
       <h3>Compare Our Pricing Plans</h3>
       <p>Transparent pricing for every transportation need. Choose the perfect plan that fits your budget and
@@ -527,7 +576,7 @@
   <!-- Testimonials Section -->
   <section class="testimonials-section" id="testimonials">
     <div class="container">
-      <div class="section-title">
+      <div class="section-title fade-in">
         <h2>What Our Customers Say</h2>
         <p>Don't just take our word for it. Read genuine reviews from our satisfied customers.</p>
       </div>
@@ -608,7 +657,7 @@
   <section class="contact-cta">
     <div class="container">
       <div class="cta-content">
-        <div class="cta-text">
+        <div class="cta-text fade-in">
           <h2>Have Any Questions About Vehicle Transport?</h2>
           <p>Our expert team is here to help you with all your car transportation needs. Get instant quotes, schedule
             pickups, or ask any questions.</p>
@@ -627,7 +676,7 @@
             </div>
           </div>
         </div>
-        <div class="cta-form-box">
+        <div class="cta-form-box fade-in">
           <div class="form-header">
             <h3>Get In Touch</h3>
             <p>Quick response guaranteed</p>
@@ -673,6 +722,101 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Region-Wise Presence Section -->
+  <section class="region-section">
+    <h2>Region-Wise Presence</h2>
+    <div class="region-search-container">
+      <input type="text" id="regionSearch" class="region-search" placeholder="Search for a city..." aria-label="Search cities">
+      <i class="fas fa-search"></i>
+    </div>
+    <div class="region-grid" id="regionGrid">
+      <a href="#" class="region-btn">Car Transport in Mumbai</a>
+      <a href="#" class="region-btn">Car Transport in Chennai</a>
+      <a href="#" class="region-btn">Car Transport in Udaipur</a>
+      <a href="#" class="region-btn">Car Transport in Bangalore</a>
+      <a href="#" class="region-btn">Car Transport in Navi Mumbai</a>
+      <a href="#" class="region-btn">Car Transport in Kottayam</a>
+      <a href="#" class="region-btn">Car Transport in Pondichery</a>
+      <a href="#" class="region-btn">Car Transport in Jamshedpur</a>
+      <a href="#" class="region-btn">Car Transport in Thane</a>
+      <a href="#" class="region-btn">Car Transport in Tirupur</a>
+      <a href="#" class="region-btn">Car Transport in Varanasi</a>
+      <a href="#" class="region-btn">Car Transport in Ranchi</a>
+      <a href="#" class="region-btn">Car Transport in Virar</a>
+      <a href="#" class="region-btn">Car Transport in Nagpur</a>
+      <a href="#" class="region-btn">Car Transport in Haryana</a>
+      <a href="#" class="region-btn">Car Transport in Bhubaneswar</a>
+      <a href="#" class="region-btn">Car Transport in Chembur</a>
+      <a href="#" class="region-btn">Car Transport in Haridwar</a>
+      <a href="#" class="region-btn">Car Transport in Port Blair</a>
+      <a href="#" class="region-btn">Car Transport in Jodhpur</a>
+      <a href="#" class="region-btn">Car Transport in Ulwe</a>
+      <a href="#" class="region-btn">Car Transport in Allahabad</a>
+      <a href="#" class="region-btn">Car Transport in Pune</a>
+      <a href="#" class="region-btn">Car Transport in Rajkot</a>
+      <a href="#" class="region-btn">Car Transport in Andheri</a>
+      <a href="#" class="region-btn">Car Transport in Aurangabad</a>
+      <a href="#" class="region-btn">Car Transport in Indore</a>
+      <a href="#" class="region-btn">Car Transport in Bhuj</a>
+      <a href="#" class="region-btn">Car Transport in Bandra</a>
+      <a href="#" class="region-btn">Car Transport in Hisar</a>
+      <a href="#" class="region-btn">Car Transport in Bhopal</a>
+      <a href="#" class="region-btn">Car Transport in Jaipur</a>
+      <a href="#" class="region-btn">Car Transport in Dadar</a>
+      <a href="#" class="region-btn">Car Transport in Patna</a>
+      <a href="#" class="region-btn">Car Transport in Baroda</a>
+      <a href="#" class="region-btn">Car Transport in Rourkela</a>
+      <a href="#" class="region-btn">Car Transport in Agra</a>
+      <a href="#" class="region-btn">Car Transport in Ahmedabad</a>
+      <a href="#" class="region-btn">Car Transport in Jabalpur</a>
+      <a href="#" class="region-btn">Car Transport in Chandigarh</a>
+      <a href="#" class="region-btn">Car Transport in Ghaziabad</a>
+      <a href="#" class="region-btn">Car Transport in Patalganga</a>
+      <a href="#" class="region-btn">Car Transport in Goa</a>
+      <a href="#" class="region-btn">Car Transport in Jammu Kashmir</a>
+      <a href="#" class="region-btn">Car Transport in Ambala</a>
+      <a href="#" class="region-btn">Car Transport in Ankleshwar</a>
+      <a href="#" class="region-btn">Car Transport in Madurai</a>
+      <a href="#" class="region-btn">Car Transport in Rudrapur</a>
+      <a href="#" class="region-btn">Car Transport in Guwahati</a>
+      <a href="#" class="region-btn">Car Transport in Hyderabad</a>
+      <a href="#" class="region-btn">Car Transport in Banaras</a>
+      <a href="#" class="region-btn">Car Transport in Kanpur</a>
+      <a href="#" class="region-btn">Car Transport in Nashik</a>
+      <a href="#" class="region-btn">Car Transport in Dehradun</a>
+      <a href="#" class="region-btn">Car Transport in Gurgaon</a>
+      <a href="#" class="region-btn">Car Transport in Raigarh</a>
+      <a href="#" class="region-btn">Car Transport in Noida</a>
+      <a href="#" class="region-btn">Car Transport in Ludhiana</a>
+      <a href="#" class="region-btn">Car Transport in Vapi</a>
+      <a href="#" class="region-btn">Car Transport in Coimbatore</a>
+      <a href="#" class="region-btn">Car Transport in Calicut</a>
+      <a href="#" class="region-btn">Car Transport in Trivandrum</a>
+      <a href="#" class="region-btn">Car Transport in Gwalior</a>
+      <a href="#" class="region-btn">Car Transport in Kolkata</a>
+      <a href="#" class="region-btn">Car Transport in Kalighat</a>
+      <a href="#" class="region-btn">Car Transport in Delhi</a>
+      <a href="#" class="region-btn">Car Transport in Mysore</a>
+      <a href="#" class="region-btn">Car Transport in Siliguri</a>
+      <a href="#" class="region-btn">Car Transport in Surat</a>
+      <a href="#" class="region-btn">Car Transport in Lucknow</a>
+      <a href="#" class="region-btn">Car Transport in Vijaywada</a>
+      <a href="#" class="region-btn">Car Transport in Mangalore</a>
+      <a href="#" class="region-btn">Car Transport in Cochin</a>
+      <a href="#" class="region-btn">Car Transport in Trichy</a>
+      <a href="#" class="region-btn">Car Transport in Gandhidham</a>
+      <a href="#" class="region-btn">Car Transport in Pilani</a>
+      <a href="#" class="region-btn">Car Transport in Kolhapur</a>
+      <a href="#" class="region-btn">Car Transport in Faridabad</a>
+      <a href="#" class="region-btn">Car Transport in Vishakhapatnam</a>
+      <a href="#" class="region-btn">Car Transport in Bhiwani</a>
+      <a href="#" class="region-btn">Car Transport in Tinsukia</a>
+      <a href="#" class="region-btn">Car Transport in Meerut</a>
+      <a href="#" class="region-btn">Car Transport in Raipur</a>
+      <a href="#" class="region-btn">Car Transport in Rajasthan</a>
+</div>
   </section>
 
   <!-- Digital Clock Section -->
@@ -746,8 +890,9 @@
 
   <script src="./js/modules/testimonial.js"></script>
   <script src="./js/modules/rating.js"></script>
+  <script src="./js/modules/region-search.js"></script>
   <script src="./js/modules/digital-clock.js"></script>
-
+  <script src="./js/modules/scroll-animations.js"></script>
   <div id="car" class="car">🏎️</div>
 
 </body>
