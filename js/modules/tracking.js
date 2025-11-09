@@ -59,7 +59,9 @@ function setTrackingId(id) {
     document.getElementById('trackingForm').dispatchEvent(new Event('submit'));
 }
 
-document.getElementById('trackingForm').addEventListener('submit', function (e) {
+const trackingForm = document.getElementById('trackingForm');
+if (trackingForm) {
+    trackingForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const trackingId = document.getElementById('trackingId').value.trim().toUpperCase();
@@ -103,20 +105,28 @@ document.getElementById('trackingForm').addEventListener('submit', function (e) 
     } else {
         alert('❌ Tracking ID not found!\n\nPlease try one of these sample IDs:\n• TRK12345\n• TRK67890\n• TRK11111');
     }
-});
+    });
+}
 
 function includeHTML(id, file) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', file, true);
-    xhr.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            document.getElementById(id).innerHTML = this.responseText;
-        }
-    };
-    xhr.send();
+    const element = document.getElementById(id);
+    if (element) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', file, true);
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                element.innerHTML = this.responseText;
+            }
+        };
+        xhr.send();
+    }
 }
-includeHTML('navbar-include', '../pages/navbar.html');
-includeHTML('footer-include', '../pages/footer.html');
+if (document.getElementById('navbar-include')) {
+    includeHTML('navbar-include', '../pages/navbar.html');
+}
+if (document.getElementById('footer-include')) {
+    includeHTML('footer-include', '../pages/footer.html');
+}
 
 // Voice Search Integration with Tracking
 document.addEventListener('DOMContentLoaded', function() {
@@ -127,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const trackingInput = document.getElementById('trackingId');
     
     // Auto-focus on input after voice search
-    if (window.voiceSearch) {
+    if (window.voiceSearch && trackingInput) {
         // Add event listener for successful voice input
         trackingInput.addEventListener('focus', function() {
             // Reset voice status when user manually focuses on input
@@ -138,7 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Enhanced form submission with voice search feedback
-    trackingForm.addEventListener('submit', function(e) {
+    if (trackingForm) {
+        trackingForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const trackingId = trackingInput.value.trim().toUpperCase();
@@ -207,5 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             alert(errorMessage);
         }
-    });
+        });
+    }
 });

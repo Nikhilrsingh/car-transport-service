@@ -361,7 +361,7 @@ body {
   align-items: center;
   justify-content: space-between;
   /* ✅ Centers and balances layout */
-  gap: 60px;
+  gap: 50px;
 }
 
 .hero-badge {
@@ -375,10 +375,16 @@ body {
   font-size: 0.9rem;
   margin-bottom: 30px;
   backdrop-filter: blur(10px);
+  animation: bloom 1s ease-out;
+}
+
+.hero-badge:hover {
+  animation: pulse-glow 1.5s ease-in-out infinite;
 }
 
 .hero-badge i {
   color: #ff6347;
+  animation: spinAndPulse 3s ease-in-out infinite;
 }
 
 .hero-title {
@@ -390,6 +396,15 @@ body {
 
 .title-line {
   display: block;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.title-line:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.title-line:nth-child(3) {
+  animation-delay: 0.4s;
 }
 
 .title-line.highlight {
@@ -397,6 +412,16 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: slideInLeft 0.8s ease-out 0.2s, glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 5px rgba(255, 99, 71, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 0 20px rgba(255, 99, 71, 0.8));
+  }
 }
 
 .hero-description {
@@ -405,6 +430,7 @@ body {
   margin-bottom: 40px;
   max-width: 600px;
   line-height: 1.6;
+  animation: fadeInUp 1s ease-out 0.6s both;
 }
 
 .hero-stats {
@@ -415,6 +441,25 @@ body {
 
 .stat {
   text-align: center;
+  transition: transform 0.3s ease;
+  animation: popupFromDot 0.8s ease-out both;
+}
+
+.stat:nth-child(1) {
+  animation-delay: 0.8s;
+}
+
+.stat:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.stat:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.stat:hover {
+  transform: scale(1.1) rotate(2deg);
+  animation: none;
 }
 
 .stat-number {
@@ -422,11 +467,22 @@ body {
   font-weight: 700;
   color: #ff6347;
   margin-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+.stat:hover .stat-number {
+  color: #ff4500;
+  text-shadow: 0 0 20px rgba(255, 99, 71, 0.6);
 }
 
 .stat-label {
   font-size: 0.9rem;
   color: #ccc;
+  transition: color 0.3s ease;
+}
+
+.stat:hover .stat-label {
+  color: #fff;
 }
 
 .hero-actions {
@@ -434,6 +490,22 @@ body {
   gap: 20px;
   margin-bottom: 50px;
   flex-wrap: wrap;
+}
+
+.hero-actions .cta-btn {
+  animation: bloom 0.6s ease-out both;
+}
+
+.hero-actions .cta-btn:nth-child(1) {
+  animation-delay: 1s;
+}
+
+.hero-actions .cta-btn:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+.hero-actions .cta-btn:nth-child(3) {
+  animation-delay: 1.4s;
 }
 
 .cta-btn {
@@ -454,6 +526,7 @@ body {
   background: linear-gradient(135deg, #ff6347, #ff4500);
   color: white;
   box-shadow: 0 10px 30px rgba(255, 99, 71, 0.3);
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .cta-btn.secondary {
@@ -472,6 +545,7 @@ body {
 .cta-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 40px rgba(255, 99, 71, 0.4);
+  animation: none;
 }
 
 .btn-shine {
@@ -489,6 +563,35 @@ body {
 
 .cta-btn.primary:hover .btn-shine {
   left: 100%;
+}
+
+/* Ripple Effect */
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.cta-btn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Pulsing Animation for Primary Button */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(255, 99, 71, 0.3), 0 0 0 0 rgba(255, 99, 71, 0.7);
+  }
+  50% {
+    box-shadow: 0 10px 30px rgba(255, 99, 71, 0.3), 0 0 0 15px rgba(255, 99, 71, 0);
+  }
 }
 
 .trust-indicators {
@@ -522,6 +625,8 @@ body {
 /* Quick Quote Form */
 .hero-quote {
   position: relative;
+  flex-shrink: 0;
+  margin-right: 80px;
 }
 
 .quote-card {
@@ -533,6 +638,13 @@ body {
   border: 1px solid rgba(255, 99, 71, 0.2);
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: scaleUp 0.8s ease-out 0.5s both;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quote-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 99, 71, 0.2);
 }
 
 .quote-header {
@@ -544,11 +656,13 @@ body {
   font-size: 1.5rem;
   color: white;
   margin-bottom: 8px;
+  animation: popupFromDot 0.6s ease-out 0.8s both;
 }
 
 .quote-header p {
   color: #ff6347;
   font-size: 0.9rem;
+  animation: fadeInUp 0.6s ease-out 1s both;
 }
 
 .quote-form {
@@ -562,6 +676,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  animation: slideInRight 0.5s ease-out both;
+}
+
+.form-group:nth-child(1) {
+  animation-delay: 1.1s;
+}
+
+.form-group:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+.form-group:nth-child(3) {
+  animation-delay: 1.3s;
 }
 
 .form-group label {
@@ -576,6 +703,7 @@ body {
 .form-group label i {
   color: #ff6347;
   font-size: 0.8rem;
+  animation: bounce 2s ease-in-out infinite;
 }
 
 .form-group input,
@@ -611,11 +739,40 @@ body {
   gap: 8px;
   transition: all 0.3s ease;
   margin-top: 10px;
+  animation: bloom 0.6s ease-out 1.4s both;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-submit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.quote-submit:active::before {
+  width: 300px;
+  height: 300px;
 }
 
 .quote-submit:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3);
+}
+
+.quote-submit i {
+  transition: transform 0.3s ease;
+}
+
+.quote-submit:hover i {
+  transform: translateX(5px);
 }
 
 .quote-result {
@@ -727,6 +884,133 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Bloom Animation - Starts from a dot and expands */
+@keyframes bloom {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Popup from Dot - More dramatic scale effect */
+@keyframes popupFromDot {
+  0% {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Scale Up - Smooth entrance */
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pulse Glow Animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 99, 71, 0.3), 0 0 10px rgba(255, 99, 71, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 99, 71, 0.6), 0 0 30px rgba(255, 99, 71, 0.4);
+    transform: scale(1.05);
+  }
+}
+
+/* Spin and Pulse Combined */
+@keyframes spinAndPulse {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
   }
 }
 
@@ -1970,7 +2254,7 @@ html {
   content: "";
   width: 80px;
   height: 3px;
-  background: #007bff;
+  background: #ff6347;
   display: block;
   margin: 10px auto 0;
   border-radius: 5px;
