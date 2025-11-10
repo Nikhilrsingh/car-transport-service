@@ -44,48 +44,320 @@
         font-family: "Poppins", sans-serif;
       }
 
-      .post-page {
-        padding: 100px 20px 60px;
-        max-width: 900px;
-        margin: auto;
+      /* READING PROGRESS BAR */
+      .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, #ff6347, #ff4500);
+        z-index: 9999;
+        transition: width 0.1s ease;
       }
 
-      .post-article {
+      .post-page {
+        padding: 100px 20px 60px;
+        max-width: 1400px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 220px 1fr; /* TOC + Article */
+        gap: 30px;
+      }
+
+      /* When TOC is hidden, switch to two columns */
+      .post-page.no-toc {
+        grid-template-columns: 1fr; /* Only Article */
+      }
+
+      /* Ensure article can shrink within grid column */
+      .post-article { min-width: 0; }
+
+      /* TABLE OF CONTENTS SIDEBAR */
+      .toc-sidebar {
+        position: sticky;
+        top: 100px;
+        height: fit-content;
         background: var(--card-bg);
-        padding: 30px;
+        padding: 25px;
         border-radius: var(--radius);
         box-shadow: var(--shadow);
       }
 
+      .toc-title {
+        font-size: 1rem;
+        color: var(--orange);
+        margin-bottom: 15px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .toc-item {
+        padding: 8px 12px;
+        margin-bottom: 6px;
+        border-left: 3px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .toc-item:hover {
+        color: var(--text);
+        border-left-color: var(--orange);
+        background: rgba(255, 99, 71, 0.1);
+      }
+
+      .toc-item.active {
+        color: var(--orange);
+        border-left-color: var(--orange);
+        background: rgba(255, 99, 71, 0.1);
+        font-weight: 600;
+      }
+
+      /* SOCIAL SHARE (collapsed under one toggle) */
+      .share-sidebar {
+        position: fixed;
+        right: 30px;
+        bottom: 340px; /* sits above call/whatsapp/book buttons */
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 1100;
+      }
+
+      .share-btn.toggle {
+        background: linear-gradient(135deg, #ff6347, #ff4500);
+      }
+
+      .share-options {
+        position: absolute;
+        left: -58px; /* to the left of the toggle (50px + gap) */
+        top: 62px; /* open downward below the toggle */
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        opacity: 0;
+        transform: translateX(8px); /* slide in from toggle */
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
+        padding-left: 2px;
+      }
+
+      .share-sidebar.open .share-options {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+      }
+
+      /* No alternate direction: always left + down as requested */
+
+      .share-hint {
+        position: absolute;
+        right: 60px;
+        bottom: 8px;
+        background: rgba(0, 0, 0, 0.85);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        white-space: nowrap;
+        box-shadow: var(--shadow);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .share-hint::after {
+        content: "";
+        position: absolute;
+        right: -6px;
+        bottom: 18px;
+        width: 0;
+        height: 0;
+        border-left: 6px solid rgba(0, 0, 0, 0.85);
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+      }
+
+      .share-hint.hide {
+        opacity: 0;
+        transform: translateX(6px);
+        pointer-events: none;
+      }
+
+      .share-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .share-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        font-size: 1.2rem;
+        transition: all 0.25s ease;
+        box-shadow: var(--shadow);
+      }
+
+      .share-btn:hover {
+        transform: translateY(-2px) scale(1.08);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Smaller size for expanded buttons */
+      .share-options .share-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+      }
+
+      .share-btn.facebook {
+        background: #1877f2;
+      }
+
+      .share-btn.twitter {
+        background: #1da1f2;
+      }
+
+      .share-btn.linkedin {
+        background: #0a66c2;
+      }
+
+      .share-btn.whatsapp {
+        background: #25d366;
+      }
+
+      .share-btn.email {
+        background: #ea4335;
+      }
+
+      .share-btn.copy {
+        background: #6c757d;
+      }
+
+      .share-btn.copy.copied {
+        background: #28a745;
+      }
+
+      .post-article {
+        background: var(--card-bg);
+        padding: 40px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        min-height: 400px;
+      }
+
       .post-meta h1 {
         color: var(--orange);
-        font-size: 2rem;
-        margin-bottom: 10px;
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+        line-height: 1.3;
       }
 
       .meta-row {
         color: var(--muted);
-        font-size: 0.9rem;
-        margin-bottom: 20px;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
 
       .post-figure img {
         width: 100%;
         border-radius: var(--radius);
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         object-fit: cover;
+        max-height: 450px;
+      }
+
+      .post-body {
+        line-height: 1.8;
+        color: #e8e8e8;
       }
 
       .post-body p {
-        line-height: 1.7;
-        color: #ddd;
+        margin-bottom: 20px;
+        color: #e8e8e8;
+      }
+
+      .post-body h2 {
+        color: var(--orange);
+        font-size: 1.6rem;
+        margin-top: 35px;
         margin-bottom: 15px;
+        scroll-margin-top: 100px;
+      }
+
+      .post-body h3 {
+        color: #f0f0f0;
+        font-size: 1.3rem;
+        margin-top: 25px;
+        margin-bottom: 12px;
+      }
+
+      .post-body ul,
+      .post-body ol {
+        margin: 20px 0;
+        padding-left: 25px;
+        color: #e8e8e8;
+      }
+
+      .post-body li {
+        margin-bottom: 10px;
+        color: #e8e8e8;
+      }
+
+      .post-body a {
+        color: var(--orange);
+        text-decoration: underline;
+      }
+
+      .post-body a:hover {
+        color: #ff4500;
+      }
+
+      .post-body img {
+        width: 100%;
+        border-radius: var(--radius);
+        margin: 25px 0;
+      }
+
+      .post-actions {
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 2px solid #3a3a3a;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
       }
 
       .btn {
         display: inline-block;
         text-decoration: none;
-        padding: 10px 18px;
+        padding: 12px 24px;
         border-radius: 8px;
         font-weight: 600;
         transition: all 0.3s ease;
@@ -99,6 +371,113 @@
       .btn.ghost:hover {
         background: var(--orange);
         color: #fff;
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, #ff6347, #ff4500);
+        color: white;
+        border: none;
+      }
+
+      .btn.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+      }
+
+      /* RELATED POSTS SECTION */
+      .related-posts {
+        margin-top: 50px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: var(--radius);
+      }
+
+      .related-posts-title {
+        font-size: 1.8rem;
+        color: var(--orange);
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .related-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .related-card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .related-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(255, 99, 71, 0.2);
+      }
+
+      .related-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .related-card-body {
+        padding: 15px;
+      }
+
+      .related-card-title {
+        color: var(--text);
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .related-card-meta {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1200px) {
+        .post-page {
+          grid-template-columns: 1fr;
+        }
+
+        .toc-sidebar {
+          position: static;
+        }
+
+        /* Hide floating share buttons on medium screens to reduce clutter */
+        .share-sidebar { display: none; }
+
+        .toc-sidebar {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .post-article {
+          padding: 25px 20px;
+        }
+
+        .post-meta h1 {
+          font-size: 1.8rem;
+        }
+
+        .related-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .post-page {
+          padding: 100px 10px 60px;
+        }
+        .share-sidebar { display: none; }
       }
     </style>
   </head>
@@ -330,26 +709,75 @@
       </div>
     </header>
 
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress"></div>
+
     <main class="post-page">
+      <!-- Table of Contents Sidebar -->
+      <aside class="toc-sidebar" id="tocSidebar">
+        <h3 class="toc-title"><i class="fas fa-list"></i> Contents</h3>
+        <ul class="toc-list" id="tocList">
+          <!-- Generated dynamically -->
+        </ul>
+      </aside>
+
+      <!-- Main Article -->
       <article class="post-article" id="post-article">
         <div class="post-meta">
           <h1 id="post-title">Loading...</h1>
           <div class="meta-row">
-            <time id="post-date"></time>
-            <span id="post-readtime"></span>
+            <span class="meta-item"><i class="fas fa-calendar-alt"></i> <time id="post-date"></time></span>
+            <span class="meta-item"><i class="fas fa-clock"></i> <span id="post-readtime"></span></span>
+            <span class="meta-item"><i class="fas fa-eye"></i> <span id="post-views"></span> views</span>
           </div>
         </div>
         <figure class="post-figure">
           <img id="post-image" alt="Post image" />
         </figure>
         <section id="post-body" class="post-body">
-          <p>Loading post...</p>
+          <p style="color: #e8e8e8; font-size: 1.1rem;">Loading post...</p>
         </section>
         <div class="post-actions">
-          <a href="blog.html" class="btn ghost">← Back to Blog</a>
+          <a href="blog.html" class="btn ghost"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+          <a href="contact.html" class="btn primary"><i class="fas fa-quote-left"></i> Get a Quote</a>
+        </div>
+
+        <!-- Related Posts Section -->
+        <div class="related-posts" id="relatedPosts">
+          <h2 class="related-posts-title"><i class="fas fa-newspaper"></i> Related Articles</h2>
+          <div class="related-grid" id="relatedGrid"></div>
         </div>
       </article>
+
     </main>
+
+    <!-- Floating Share Toggle + Options -->
+    <aside class="share-sidebar" id="shareSidebar">
+      <button class="share-btn toggle" id="shareToggle" title="Share">
+        <i class="fas fa-share-alt"></i>
+      </button>
+      <div class="share-hint" id="shareHint">Click to share</div>
+      <div class="share-options" id="shareOptions">
+        <a href="#" class="share-btn facebook" id="shareFacebook" title="Share on Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="share-btn twitter" id="shareTwitter" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="share-btn linkedin" id="shareLinkedin" title="Share on LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="#" class="share-btn whatsapp" id="shareWhatsapp" title="Share on WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="#" class="share-btn email" id="shareEmail" title="Share via Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <button class="share-btn copy" id="copyLink" title="Copy link">
+          <i class="fas fa-link"></i>
+        </button>
+      </div>
+    </aside>
 
     <div id="footer-container"></div>
     <script>
@@ -399,6 +827,10 @@
           date: "September 10, 2025",
           readtime: "6 min read",
           image: "../assets/images/car2.png",
+          category: "guide",
+          tags: ["tips", "transport"],
+          views: 980,
+          excerpt: "Choosing a carrier means balancing price, reliability and safety. Here's a quick checklist to select the right one.",
           contentHTML: `
              <p>Choosing the right carrier is vital for the safety, security, and punctual delivery of your vehicle. It requires thorough vetting of your options to ensure you get the best service for your investment. Here’s a detailed guide to help you select the perfect carrier for your car transport needs.</p>
              <ol>
@@ -418,6 +850,10 @@
           date: "August 02, 2025",
           readtime: "4 min read",
           image: "../assets/images/car3.png",
+          category: "guide",
+          tags: ["transport"],
+          views: 1450,
+          excerpt: "From pickup to delivery, our service focuses on safety, timely updates and competitive pricing.",
           contentHTML: `
               <p>Choosing a carrier for your vehicle involves much more than simply transporting your car from point A to point B. It's about finding a partner that offers reliability, professionalism, and peace of mind for what is often a significant investment. Our car transport service prioritizes excellence at every step, ensuring your vehicle's safety and your satisfaction.</p>
               <ul>
@@ -441,6 +877,9 @@
           readtime: "7 min read",
           image:
             "https://th.bing.com/th/id/R.aa0c3587e562e6c91c36f8fad94c459d?rik=usDMJxGXKuoZtQ&riu=http%3a%2f%2ftechsouls.co.uk%2fwp-content%2fuploads%2f2024%2f03%2fFuture-of-Mobility-Tech-Innovations-in-Transportation-1024x574.png&ehk=eVQJSTMibrJNk2b82Jg5LClpkcfHzIhwACz4zklS54Q%3d&risl=&pid=ImgRaw&r=0",
+          category: "tech",
+          tags: ["technology", "eco-friendly"],
+          views: 2100,
           excerpt:
             "Discover how AI, IoT, and electric vehicles are revolutionizing vehicle transportation, making it safer, faster, and more eco-friendly.",
           contentHTML: `
@@ -492,17 +931,211 @@
       const id = new URLSearchParams(window.location.search).get("id");
       const post = BLOG_POSTS.find((p) => String(p.id) === String(id));
 
+      console.log('Post ID from URL:', id);
+      console.log('Found post:', post);
+
       if (!post) {
         document.getElementById("post-article").innerHTML =
-          "<h2>Post not found</h2><p>This article does not exist.</p>";
+          "<h2 style='color: #ff6347;'>Post not found</h2><p style='color: #e8e8e8;'>This article does not exist. Post ID: " + id + "</p>";
       } else {
+        // Set post content
         document.getElementById("post-title").textContent = post.title;
         document.getElementById("post-date").textContent = post.date;
-        document.getElementById(
-          "post-readtime"
-        ).textContent = ` • ${post.readtime}`;
+        document.getElementById("post-readtime").textContent = post.readtime;
+        document.getElementById("post-views").textContent = post.views || 0;
         document.getElementById("post-image").src = post.image;
-        document.getElementById("post-body").innerHTML = post.contentHTML;
+        
+        console.log('Setting post content HTML...');
+        const postBodyEl = document.getElementById("post-body");
+        postBodyEl.innerHTML = post.contentHTML;
+        console.log('Content set. Body HTML length:', postBodyEl.innerHTML.length);
+
+        // Setup reading progress
+        setupReadingProgress();
+        
+        // Setup table of contents
+        setupTableOfContents();
+        
+        // Setup social sharing
+        setupSocialSharing(post);
+        
+        // Setup related posts
+        setupRelatedPosts(post);
+      }
+
+      // Reading Progress Bar
+      function setupReadingProgress() {
+        const progressBar = document.getElementById('readingProgress');
+        
+        window.addEventListener('scroll', () => {
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight - windowHeight;
+          const scrolled = window.scrollY;
+          const progress = (scrolled / documentHeight) * 100;
+          
+          progressBar.style.width = `${Math.min(progress, 100)}%`;
+        });
+      }
+
+      // Table of Contents
+      function setupTableOfContents() {
+        const postBody = document.getElementById('post-body');
+        const tocList = document.getElementById('tocList');
+        const postPage = document.querySelector('.post-page');
+
+        if (!postBody) {
+          console.warn('TOC setup aborted: #post-body not found');
+          if (postPage) postPage.classList.add('no-toc');
+          const tocSidebar = document.getElementById('tocSidebar');
+          if (tocSidebar) tocSidebar.style.display = 'none';
+          return;
+        }
+
+        const headings = postBody.querySelectorAll('h2, h3');
+
+        if (headings.length === 0) {
+          const tocSidebar = document.getElementById('tocSidebar');
+          if (tocSidebar) tocSidebar.style.display = 'none';
+          if (postPage) postPage.classList.add('no-toc');
+          console.log('No headings found: applying two-column layout (.no-toc)');
+          return;
+        } else {
+          if (postPage) postPage.classList.remove('no-toc');
+          const tocSidebar = document.getElementById('tocSidebar');
+          if (tocSidebar) tocSidebar.style.display = '';
+        }
+        
+        headings.forEach((heading, index) => {
+          // Add ID to heading
+          heading.id = `section-${index}`;
+          
+          // Create TOC item
+          const li = document.createElement('li');
+          li.className = 'toc-item';
+          li.textContent = heading.textContent;
+          li.style.paddingLeft = heading.tagName === 'H3' ? '20px' : '0';
+          
+          li.addEventListener('click', () => {
+            heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          
+          tocList.appendChild(li);
+        });
+        
+        // Highlight active section on scroll
+        window.addEventListener('scroll', () => {
+          let currentSection = '';
+          
+          headings.forEach((heading) => {
+            const rect = heading.getBoundingClientRect();
+            if (rect.top <= 150) {
+              currentSection = heading.id;
+            }
+          });
+          
+          const tocItems = document.querySelectorAll('.toc-item');
+          tocItems.forEach((item, index) => {
+            item.classList.toggle('active', `section-${index}` === currentSection);
+          });
+        });
+      }
+
+      // Social Sharing
+      function setupSocialSharing(post) {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(post.title);
+        const text = encodeURIComponent(post.excerpt || post.title);
+        const sidebar = document.getElementById('shareSidebar');
+        const toggle = document.getElementById('shareToggle');
+        const hint = document.getElementById('shareHint');
+        const options = document.getElementById('shareOptions');
+
+        // Facebook
+        document.getElementById('shareFacebook').href = 
+          `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        
+        // Twitter
+        document.getElementById('shareTwitter').href = 
+          `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+        
+        // LinkedIn
+        document.getElementById('shareLinkedin').href = 
+          `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+        
+        // WhatsApp
+        document.getElementById('shareWhatsapp').href = 
+          `https://wa.me/?text=${title}%20${url}`;
+        
+        // Email
+        document.getElementById('shareEmail').href = 
+          `mailto:?subject=${title}&body=${text}%0A%0A${url}`;
+        
+        // Copy Link
+        document.getElementById('copyLink').addEventListener('click', (e) => {
+          e.preventDefault();
+          navigator.clipboard.writeText(window.location.href).then(() => {
+            const btn = e.currentTarget;
+            const icon = btn.querySelector('i');
+            btn.classList.add('copied');
+            icon.className = 'fas fa-check';
+            
+            setTimeout(() => {
+              btn.classList.remove('copied');
+              icon.className = 'fas fa-link';
+            }, 2000);
+          });
+        });
+
+        // Toggle share options
+        if (toggle && sidebar) {
+          const hideHint = () => hint && hint.classList.add('hide');
+
+          toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            sidebar.classList.toggle('open');
+            hideHint();
+          });
+
+          // Auto-hide hint after a few seconds
+          setTimeout(hideHint, 4000);
+
+          // Click outside to close
+          document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target)) {
+              sidebar.classList.remove('open');
+            }
+          });
+        }
+      }
+
+      // Related Posts
+      function setupRelatedPosts(currentPost) {
+        const relatedGrid = document.getElementById('relatedGrid');
+        
+        // Find related posts based on category or tags
+        const related = BLOG_POSTS
+          .filter(p => p.id !== currentPost.id)
+          .filter(p => {
+            if (!currentPost.category && !currentPost.tags) return true;
+            return p.category === currentPost.category || 
+                   (currentPost.tags && p.tags && p.tags.some(tag => currentPost.tags.includes(tag)));
+          })
+          .slice(0, 3);
+        
+        if (related.length === 0) {
+          document.getElementById('relatedPosts').style.display = 'none';
+          return;
+        }
+        
+        relatedGrid.innerHTML = related.map(post => `
+          <a href="blog-post.html?id=${post.id}" class="related-card">
+            <img src="${post.image}" alt="${post.title}">
+            <div class="related-card-body">
+              <h3 class="related-card-title">${post.title}</h3>
+              <p class="related-card-meta">${post.date} • ${post.readtime}</p>
+            </div>
+          </a>
+        `).join('');
       }
     </script>
     <script src="../js/modules/themes.js"></script>
