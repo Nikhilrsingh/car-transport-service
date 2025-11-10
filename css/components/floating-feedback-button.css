@@ -1,0 +1,174 @@
+/* === Floating Feedback Button === */
+.floating-feedback-btn {
+  position: fixed;
+  bottom: 130px; /* above Get Quote */
+  left: 25px;
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+  color: white;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.floating-feedback-btn:hover {
+  background: linear-gradient(135deg, #e68900, #ff9800);
+  transform: scale(1.1);
+}
+
+/* === Modal Overlay === */
+.feedback-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === Modal Card === */
+.feedback-modal-content {
+  background: #ffffff;
+  padding: 30px 35px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* === Close Button === */
+.close-feedback {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-feedback:hover {
+  color: #000;
+}
+
+/* === Modal Header === */
+.feedback-modal-content h2 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* === Input Groups === */
+.feedback-input {
+  text-align: left;
+  margin-top: 12px;
+}
+
+.feedback-input label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.feedback-input input,
+.feedback-input textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: #fff !important;    /* ✅ force white background */
+  color: #333 !important;          /* ✅ ensure dark text */
+}
+
+.feedback-input input:focus,
+.feedback-input textarea:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 6px rgba(255, 152, 0, 0.3);
+}
+
+/* === Star Rating === */
+.feedback-stars {
+  margin: 18px 0 10px;
+  text-align: center;
+}
+
+.feedback-stars i {
+  font-size: 28px;
+  margin: 0 5px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.feedback-stars i:hover {
+  transform: scale(1.2);
+  color: #ffb84d;
+}
+
+.feedback-stars i.active {
+  color: #ff9800;
+}
+
+/* === Submit Button === */
+#feedbackForm button {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-top: 18px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+#feedbackForm button:hover {
+  background: linear-gradient(135deg, #e68900, #ff9800);
+  transform: translateY(-2px);
+}
+
+/* === Responsive Modal Adjustments === */
+@media (max-width: 500px) {
+  .feedback-modal-content {
+    padding: 25px 20px;
+  }
+
+  .feedback-stars i {
+    font-size: 24px;
+  }
+
+  #feedbackForm button {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+}
