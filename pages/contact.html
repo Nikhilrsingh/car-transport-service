@@ -921,20 +921,62 @@
               <h3>Operating Hours</h3>
             </div>
             <div class="info-content">
-              <ul class="hours-list">
-                <li>
-                  <span class="day">Monday - Friday</span><span class="time">8:00 AM - 10:00 PM</span>
+              <ul class="hours-list" id="hourslist">
+                <li data-day="1-5">
+                  <span class="day">Monday - Friday</span>
+                  <span class="time" data-open="08:00" data-close="22:00">8:00 AM - 10:00 PM</span>
+                  <span class="status-badge"></span>
                 </li>
-                <li>
-                  <span class="day">Saturday</span><span class="time">9:00 AM - 8:00 PM</span>
+                <li data-day="6">
+                  <span class="day">Saturday</span>
+                  <span class="time" data-open="09:00" data-close="20:00">9:00 AM - 8:00 PM</span>
+                  <span class="status-badge"></span>
                 </li>
-                <li>
-                  <span class="day">Sunday</span><span class="time">9:00 AM - 6:00 PM</span>
+                <li data-day="0">
+                  <span class="day">Sunday</span>
+                  <span class="time" data-open="09:00" data-close="18:00">9:00 AM - 6:00 PM</span>
+                  <span class="status-badge"></span>
                 </li>
-                <li>
-                  <span class="day">Emergency Service</span><span class="time">24/7 Available</span>
+                <li data-day="0-6">
+                  <span class="day">Emergency Service</span>
+                  <span class="time" data-open="00:00" data-close="23:59">24/7 Available</span>
+                  <span class="status-badge open">Open Now</span>
                 </li>
               </ul>
+            </div>
+          </div>
+
+          <div class="info-card fade-in fade-in-delay-4">
+            <div class="info-header">
+              <div class="info-icon">
+                <i class="fas fa-comments"></i>
+              </div>
+              <h3>Alternative Contacts</h3>
+            </div>
+            <div class="info-content">
+              <div class="social-links">
+                <a href="https://facebook.com/hariharcarcarriers" target="_blank" rel="noopener" class="social-link facebook">
+                  <i class="fab fa-facebook-f"></i>
+                  <span>Facebook</span>
+                </a>
+                <a href="https://twitter.com/hariharcarriers" target="_blank" rel="noopener" class="social-link twitter">
+                  <i class="fab fa-twitter"></i>
+                  <span>Twitter</span>
+                </a>
+                <a href="https://instagram.com/hariharcarcarriers" target="_blank" rel="noopener" class="social-link instagram">
+                  <i class="fab fa-instagram"></i>
+                  <span>Instagram</span>
+                </a>
+                <a href="https://linkedin.com/company/hariharcarcarriers" target="_blank" rel="noopener" class="social-link linkedin">
+                  <i class="fab fa-linkedin-in"></i>
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+              <button class="live-chat-btn" id="liveChatBtn">
+                <i class="fas fa-comments"></i>
+                <span>Start Live Chat</span>
+                <span class="online-indicator"></span>
+              </button>
             </div>
           </div>
         </div>
@@ -943,22 +985,25 @@
         <div class="contact-form-container fade-in">
           <div class="form-header">
             <h3>Send Us a Message</h3>
-            <p>We'll get back to you within 30 minutes</p>
+            <p class="response-time"><i class="fas fa-clock"></i> We typically respond within 2 hours</p>
           </div>
           <form class="contact-form" id="contactForm">
             <div class="form-row">
               <div class="input-group">
                 <label for="name">Full Name *</label>
                 <input type="text" id="name" name="name" required />
+                <span class="error-message"></span>
               </div>
               <div class="input-group">
                 <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required />
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required />
+                <span class="error-message"></span>
               </div>
             </div>
             <div class="input-group">
               <label for="email">Email Address *</label>
               <input type="email" id="email" name="email" required />
+              <span class="error-message"></span>
             </div>
             <div class="form-row">
               <div class="input-group">
@@ -972,6 +1017,7 @@
                   <option value="bike">Bike</option>
                   <option value="commercial">Commercial Vehicle</option>
                 </select>
+                <span class="error-message"></span>
               </div>
               <div class="input-group">
                 <label for="service">Service Type *</label>
@@ -983,12 +1029,14 @@
                   <option value="complaint">Complaint</option>
                   <option value="other">Other</option>
                 </select>
+                <span class="error-message"></span>
               </div>
             </div>
             <div class="input-group full-width">
               <label for="message">Message *</label>
               <textarea id="message" name="message" placeholder="Tell us about your requirements..." maxlength="500"
                 required></textarea>
+              <span class="error-message"></span>
               <div class="char-counter">0/500 characters</div>
               <div class="email-suggestion"></div>
             </div>

@@ -8,6 +8,8 @@
     initFAQEnhancements();
     initContactCards();
     initEnhancedForm();
+    initOfficeHours();
+    initLiveChat();
   });
 
   // ==================== INTERACTIVE MAP ====================
@@ -312,6 +314,9 @@
     const form = document.getElementById('contactForm');
     if (!form) return;
 
+    // Real-time validation
+    initRealTimeValidation();
+
     // File upload with drag & drop
     initFileUpload();
 
@@ -324,8 +329,199 @@
     // Form submission with typing indicator
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      handleFormSubmit(form);
+      if (validateForm()) {
+        handleFormSubmit(form);
+      }
     });
+  }
+
+  // Real-time form validation
+  function initRealTimeValidation() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
+    const vehicleSelect = document.getElementById('vehicle');
+    const serviceSelect = document.getElementById('service');
+    const messageTextarea = document.getElementById('message');
+
+    // Name validation
+    if (nameInput) {
+      nameInput.addEventListener('input', function() {
+        validateField(this, validateName(this.value));
+      });
+
+      nameInput.addEventListener('blur', function() {
+        validateField(this, validateName(this.value));
+      });
+    }
+
+    // Phone validation
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function() {
+        // Allow only numbers
+        this.value = this.value.replace(/[^0-9]/g, '');
+        validateField(this, validatePhone(this.value));
+      });
+
+      phoneInput.addEventListener('blur', function() {
+        validateField(this, validatePhone(this.value));
+      });
+    }
+
+    // Email validation
+    if (emailInput) {
+      emailInput.addEventListener('input', function() {
+        validateField(this, validateEmail(this.value));
+      });
+
+      emailInput.addEventListener('blur', function() {
+        validateField(this, validateEmail(this.value));
+      });
+    }
+
+    // Select validation
+    if (vehicleSelect) {
+      vehicleSelect.addEventListener('change', function() {
+        validateField(this, this.value !== '');
+      });
+    }
+
+    if (serviceSelect) {
+      serviceSelect.addEventListener('change', function() {
+        validateField(this, this.value !== '');
+      });
+    }
+
+    // Message validation
+    if (messageTextarea) {
+      messageTextarea.addEventListener('input', function() {
+        validateField(this, this.value.trim().length >= 10);
+      });
+
+      messageTextarea.addEventListener('blur', function() {
+        validateField(this, this.value.trim().length >= 10);
+      });
+    }
+  }
+
+  // Validation helper functions
+  function validateName(name) {
+    return name.trim().length >= 2 && /^[a-zA-Z\s]+$/.test(name);
+  }
+
+  function validatePhone(phone) {
+    return /^[0-9]{10}$/.test(phone);
+  }
+
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function validateField(field, isValid) {
+    const inputGroup = field.closest('.input-group');
+    const errorMessage = inputGroup.querySelector('.error-message');
+
+    if (isValid) {
+      field.classList.remove('error');
+      field.classList.add('success');
+      if (errorMessage) {
+        errorMessage.classList.remove('show');
+        errorMessage.textContent = '';
+      }
+      
+      // Add success icon if not exists
+      if (!inputGroup.querySelector('.success-icon')) {
+        const successIcon = document.createElement('i');
+        successIcon.className = 'fas fa-check-circle success-icon';
+        inputGroup.appendChild(successIcon);
+      }
+      inputGroup.classList.add('valid');
+    } else if (field.value.length > 0) {
+      field.classList.add('error');
+      field.classList.remove('success');
+      inputGroup.classList.remove('valid');
+      
+      if (errorMessage) {
+        errorMessage.classList.add('show');
+        errorMessage.textContent = getErrorMessage(field);
+      }
+    } else {
+      field.classList.remove('error', 'success');
+      inputGroup.classList.remove('valid');
+      if (errorMessage) {
+        errorMessage.classList.remove('show');
+        errorMessage.textContent = '';
+      }
+    }
+  }
+
+  function getErrorMessage(field) {
+    const fieldName = field.name || field.id;
+    
+    switch(fieldName) {
+      case 'name':
+        return 'Please enter a valid name (letters only, min 2 characters)';
+      case 'phone':
+        return 'Please enter a valid 10-digit phone number';
+      case 'email':
+        return 'Please enter a valid email address';
+      case 'vehicle':
+        return 'Please select a vehicle type';
+      case 'service':
+        return 'Please select a service type';
+      case 'message':
+        return 'Please enter a message (min 10 characters)';
+      default:
+        return 'This field is required';
+    }
+  }
+
+  function validateForm() {
+    const form = document.getElementById('contactForm');
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
+    const vehicleSelect = document.getElementById('vehicle');
+    const serviceSelect = document.getElementById('service');
+    const messageTextarea = document.getElementById('message');
+
+    let isValid = true;
+
+    if (!validateName(nameInput.value)) {
+      validateField(nameInput, false);
+      isValid = false;
+    }
+
+    if (!validatePhone(phoneInput.value)) {
+      validateField(phoneInput, false);
+      isValid = false;
+    }
+
+    if (!validateEmail(emailInput.value)) {
+      validateField(emailInput, false);
+      isValid = false;
+    }
+
+    if (vehicleSelect.value === '') {
+      validateField(vehicleSelect, false);
+      isValid = false;
+    }
+
+    if (serviceSelect.value === '') {
+      validateField(serviceSelect, false);
+      isValid = false;
+    }
+
+    if (messageTextarea.value.trim().length < 10) {
+      validateField(messageTextarea, false);
+      isValid = false;
+    }
+
+    return isValid;
   }
 
   // File upload with drag & drop
@@ -559,5 +755,103 @@
     setTimeout(() => {
       notification.classList.remove('show');
     }, 3000);
+  }
+
+  // ==================== OFFICE HOURS STATUS ====================
+  function initOfficeHours() {
+    updateOfficeHoursStatus();
+    // Update every minute
+    setInterval(updateOfficeHoursStatus, 60000);
+  }
+
+  function updateOfficeHoursStatus() {
+    const now = new Date();
+    const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+    const currentTime = now.getHours() * 60 + now.getMinutes(); // Minutes since midnight
+
+    const hoursItems = document.querySelectorAll('.hours-list li[data-day]');
+    
+    hoursItems.forEach(item => {
+      const dayRange = item.dataset.day;
+      const timeElement = item.querySelector('.time');
+      const statusBadge = item.querySelector('.status-badge');
+      
+      if (!timeElement || !statusBadge) return;
+
+      const openTime = timeElement.dataset.open;
+      const closeTime = timeElement.dataset.close;
+
+      // Parse time strings (HH:MM format)
+      const openMinutes = parseTime(openTime);
+      const closeMinutes = parseTime(closeTime);
+
+      // Check if current day matches
+      const isDayMatch = checkDayMatch(dayRange, currentDay);
+
+      // Check if currently open
+      let isOpen = false;
+      if (isDayMatch) {
+        if (closeMinutes >= openMinutes) {
+          // Normal case (e.g., 9:00 - 18:00)
+          isOpen = currentTime >= openMinutes && currentTime <= closeMinutes;
+        } else {
+          // Overnight case (e.g., 22:00 - 02:00)
+          isOpen = currentTime >= openMinutes || currentTime <= closeMinutes;
+        }
+      }
+
+      // Update status badge
+      if (dayRange === '0-6') {
+        // 24/7 service
+        statusBadge.textContent = 'Open Now';
+        statusBadge.className = 'status-badge open';
+      } else if (isOpen) {
+        statusBadge.textContent = 'Open Now';
+        statusBadge.className = 'status-badge open';
+      } else {
+        statusBadge.textContent = 'Closed';
+        statusBadge.className = 'status-badge closed';
+      }
+    });
+  }
+
+  function parseTime(timeStr) {
+    if (!timeStr) return 0;
+    const parts = timeStr.split(':');
+    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+  }
+
+  function checkDayMatch(dayRange, currentDay) {
+    if (dayRange.includes('-')) {
+      const parts = dayRange.split('-');
+      const start = parseInt(parts[0]);
+      const end = parseInt(parts[1]);
+      
+      if (start <= end) {
+        return currentDay >= start && currentDay <= end;
+      } else {
+        // Wraps around week (e.g., Sat-Sun = 6-0)
+        return currentDay >= start || currentDay <= end;
+      }
+    } else {
+      return currentDay === parseInt(dayRange);
+    }
+  }
+
+  // ==================== LIVE CHAT ====================
+  function initLiveChat() {
+    const liveChatBtn = document.getElementById('liveChatBtn');
+    
+    if (liveChatBtn) {
+      liveChatBtn.addEventListener('click', function() {
+        // Open chatbot modal or redirect to live chat
+        const chatbotBtn = document.querySelector('.floating-chatbot-button');
+        if (chatbotBtn) {
+          chatbotBtn.click();
+        } else {
+          showNotification('Live chat is currently unavailable. Please use the contact form or call us directly.');
+        }
+      });
+    }
   }
 })();
