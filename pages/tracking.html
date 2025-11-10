@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="../css/components/quote-modal.css" />
   <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
   <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
-   <link rel="stylesheet" href="../css/components/backtoBottom.css">
+  <link rel="stylesheet" href="../css/components/backtoBottom.css">
 
 </head>
 
@@ -35,80 +35,129 @@
         <nav class="desktop-nav" aria-label="Main navigation">
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="../index.html" class="nav-link active" data-page="home">
+              <a href="../index.html" class="nav-link" data-page="home" data-tooltip="Home">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./about.html" class="nav-link" data-page="about">
+              <a href="./about.html" class="nav-link" data-page="about" data-tooltip="About">
                 <i class="fas fa-info-circle"></i>
                 <span>About</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="../index.html./services.html" class="nav-link" data-page="services">
+
+            <!-- Dropdown for services -->
+            <li class="nav-item dropdown-nav" data-dropdown>
+
+              <div class="nav-link" data-dropdown-btn>
                 <i class="fas fa-truck-moving"></i>
                 <span>Services</span>
-              </a>
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+
+              <div class="dropdown-menu">
+                <ul style="list-style-type: none;">
+                  <li class="nav-item">
+                    <a href="../services.html" class="nav-link" data-page="services" data-tooltip="Services">
+                      <i class="fas fa-truck-moving"></i>
+                      <span>Our Services</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="./booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
+                      <i class="fas fa-calendar-check"></i>
+                      <span>Booking</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./pricing.html" class="nav-link" data-page="pricing" data-tooltip="Pricing">
+                      <i class="fas fa-tags"></i>
+                      <span>Pricing</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span>Track Your Car</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
             </li>
+
             <li class="nav-item">
-              <a href="./booking.html" class="nav-link" data-page="booking">
-                <i class="fas fa-calendar-check"></i>
-                <span>Booking</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./contributors.html" class="nav-link" data-page="contributors">
-                <i class="fas fa-users"></i>
-                <span>Contributors</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./pricing.html" class="nav-link" data-page="pricing">
-                <i class="fas fa-tags"></i>
-                <span>Pricing</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./tracking.html" class="nav-link" data-page="tracking">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Track Your Car</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./gallery.html" class="nav-link" data-page="gallery">
-                <i class="fas fa-images"></i>
-                <span>Gallery</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./contact.html" class="nav-link" data-page="contact">
+              <a href="./contact.html" class="nav-link" data-page="contact" data-tooltip="Contact">
                 <i class="fas fa-phone"></i>
                 <span>Contact</span>
               </a>
             </li>
+
+            <li class="nav-item dropdown-nav" data-dropdown>
+              <div class="nav-link" data-dropdown-btn>
+                <i class="fa-solid fa-layer-group"></i></i>
+                <span>More</span>
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+
+              <div class="dropdown-menu">
+                <ul style="list-style-type: none;">
+                  <li>
+                    <a href="./gallery.html" class="nav-link" data-page="gallery" data-tooltip="Gallery">
+                      <i class="fas fa-images"></i>
+                      <span>Gallery</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="./contributors.html" class="nav-link" data-page="contributors" data-tooltip="Contributors">
+                      <i class="fas fa-users"></i>
+                      <span>Contributors</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="./blog.html" class="nav-link blog-link" data-tooltip="Blog">
+                      <i class="fas fa-blog"></i>
+                      <span>Blog</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </li>
           </ul>
 
-          <!-- Search Bar -->
-          <div class="search-container">
-            <div class="search-bar">
-              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
-              <i class="fas fa-search"></i>
+          <!-- creating a div for left aligb navigation links  -->
+          <div class="nav-right-section">
+            <!-- Search Bar -->
+            <div class="search-container">
+              <div class="search-bar">
+                <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
+                <i class="fas fa-search"></i>
+              </div>
+            </div>
+
+            <div class="theme-widget" id="themeWidget">
+              <label for="themeWidgetSelect" class="sr-only">Choose theme</label>
+              <select id="themeWidgetSelect" aria-label="Choose theme">
+                <option value="auto">Theme</option>
+                <option value="default">Default</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="glass">Glass</option>
+              </select>
+            </div>
+
+            <div class="action-nav">
+              <a href="./enquiry.html" class="enquiry-link" data-tooltip="Enquiry">
+                <i class="fas fa-question-circle"></i>
+              </a>
             </div>
           </div>
 
-          <!-- Right Actions -->
+
           <div class="nav-actions">
-            <a href="./enquiry.html" class="nav-link enquiry-link">
-              <i class="fas fa-question-circle"></i>
-              <span>Enquiry</span>
-            </a>
-            <a href="./blog.html" class="nav-link blog-link">
-              <i class="fas fa-blog"></i>
-              <span>Blog</span>
-            </a>
-            <a href="./login.html" class="login-btn">
+            <a href="./login.html" class="login-btn" data-tooltip="Login">
               <i class="fas fa-user"></i>
               <span>Login</span>
             </a>
@@ -155,7 +204,7 @@
             </a>
           </li>
           <li class="mobile-nav-item">
-            <a href="../index.html./services.html" class="mobile-nav-link">
+            <a href="../services.html" class="mobile-nav-link">
               <i class="fas fa-truck-moving"></i>
               <span>Services</span>
             </a>
@@ -275,12 +324,7 @@
             <i class="fas fa-barcode"></i> Tracking ID
           </label>
           <div class="input-with-voice">
-            <input
-              type="text"
-              id="trackingId"
-              placeholder="Enter your tracking ID or speak it"
-              required
-            />
+            <input type="text" id="trackingId" placeholder="Enter your tracking ID or speak it" required />
             <button type="button" class="voice-search-btn" id="voiceSearchBtn" title="Voice Search">
               <i class="fas fa-microphone"></i>
             </button>
@@ -314,7 +358,7 @@
 
       <div class="tracking-info" id="trackingInfo">
         <h2><i class="fas fa-info-circle"></i> Shipment Details</h2>
-        
+
         <!-- Live Update Indicator -->
         <div style="text-align: right; margin-bottom: 10px;">
           <span style="color: #22c55e; font-size: 0.9em;">
@@ -322,7 +366,7 @@
             Live Tracking Active
           </span>
         </div>
-        
+
         <div class="info-grid">
           <div class="info-item">
             <h3><i class="fas fa-hashtag"></i> Tracking ID</h3>
@@ -382,7 +426,7 @@
       <div id="notificationSection">
         <h3><i class="fas fa-bell"></i> Notification Preferences</h3>
         <p style="color: #aaa; margin-bottom: 20px;">Choose how you want to receive updates about your shipment</p>
-        
+
         <form id="notificationPreferences">
           <div class="notification-options">
             <div class="notification-option">
@@ -396,7 +440,7 @@
                 <label for="emailNotifications">Email Notifications</label>
               </div>
             </div>
-            
+
             <div class="notification-option">
               <h4 style="color: #ff6b35; margin-bottom: 15px;">Notification Events</h4>
               <div class="checkbox-wrapper">
@@ -413,7 +457,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="notification-contact">
             <div>
               <label for="notificationPhone"><i class="fas fa-phone"></i> Phone Number</label>
@@ -424,7 +468,7 @@
               <input type="email" id="notificationEmail" placeholder="your.email@example.com">
             </div>
           </div>
-          
+
           <button type="submit" class="btn-save-preferences">
             <i class="fas fa-save"></i>
             Save Preferences
@@ -436,7 +480,7 @@
       <div id="deliveryProofUploadSection">
         <h3><i class="fas fa-upload"></i> Upload Delivery Proof</h3>
         <p style="color: #aaa; margin-bottom: 20px;">Upload photos and signature to confirm delivery</p>
-        
+
         <form id="deliveryProofForm">
           <div class="upload-grid">
             <div class="upload-item">
@@ -444,24 +488,24 @@
               <input type="file" id="deliveryPhoto" accept="image/*" required>
               <div id="photoPreview" class="upload-preview"></div>
             </div>
-            
+
             <div class="upload-item">
               <label for="deliverySignature"><i class="fas fa-signature"></i> Signature</label>
               <input type="file" id="deliverySignature" accept="image/*" required>
               <div id="signaturePreview" class="upload-preview"></div>
             </div>
-            
+
             <div class="upload-item">
               <label for="receiverName"><i class="fas fa-user"></i> Receiver Name</label>
               <input type="text" id="receiverName" placeholder="Enter receiver's name" required>
             </div>
-            
+
             <div class="upload-item">
               <label for="receiverComments"><i class="fas fa-comment"></i> Additional Comments</label>
               <input type="text" id="receiverComments" placeholder="Any additional notes (optional)">
             </div>
           </div>
-          
+
           <button type="submit" class="btn-upload-proof">
             <i class="fas fa-cloud-upload-alt"></i>
             Submit Delivery Proof
@@ -574,11 +618,11 @@
     <button class="back-to-top" id="backToTop">
       <i class="fas fa-arrow-up"></i>
     </button>
-  
+
     <!-- Top to Bottom Button -->
-<button class="back-to-bottom" id="backToBottom">
-  <i class="fas fa-arrow-down"></i>
-</button>
+    <button class="back-to-bottom" id="backToBottom">
+      <i class="fas fa-arrow-down"></i>
+    </button>
 
     <script src="./js/script.js"></script>
     <script src="./js/modules/Services.js"></script>
@@ -589,16 +633,16 @@
     <script src="../js/modules/navbar.js"></script>
     <script src="../js/modules/themes.js"></script>
     <script src="../js/modules/voice-search.js"></script>
-  </body>
-    <script src="../js/modules/floating-book-button.js"></script>
-    <script src="../js/modules/floating-call-button.js"></script>
-    <script src="../js/modules/floating-whatsapp-button.js"></script>
-    <script src="../js/modules/quote-modal.js"></script>
-    <script src="../js/modules/sticky-quote-button.js"></script>
-    <script src="../js/modules/floating-chatbot-button.js"></script>
-    <script src="../js/modules/chatbot-modal.js"></script>
-    <script src="../js/modules/back-to-top-button.js"></script>
-      <script src="../js/modules/backtoBottom.js"></script>
+</body>
+<script src="../js/modules/floating-book-button.js"></script>
+<script src="../js/modules/floating-call-button.js"></script>
+<script src="../js/modules/floating-whatsapp-button.js"></script>
+<script src="../js/modules/quote-modal.js"></script>
+<script src="../js/modules/sticky-quote-button.js"></script>
+<script src="../js/modules/floating-chatbot-button.js"></script>
+<script src="../js/modules/chatbot-modal.js"></script>
+<script src="../js/modules/back-to-top-button.js"></script>
+<script src="../js/modules/backtoBottom.js"></script>
 
 </body>
 
