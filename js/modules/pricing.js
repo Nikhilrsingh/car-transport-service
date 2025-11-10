@@ -159,7 +159,7 @@
     }
 
     // ========================================
-    // COMPARISON TABLE ENHANCEMENTS
+    // COMPARISON TABLE ENHANCEMENTS - WITH SORTING
     // ========================================
     function initComparisonTable() {
         const comparisonRows = document.querySelectorAll('.pricing-page .comparison-table tbody tr');
@@ -183,6 +183,32 @@
             });
         });
 
+        // Add sortable functionality to column headers
+        const headers = document.querySelectorAll('.pricing-page .comparison-table th');
+        headers.forEach((header, index) => {
+            if (index > 0) { // Skip first column (feature names)
+                header.style.cursor = 'pointer';
+                header.innerHTML += ' <i class="fas fa-sort sort-icon"></i>';
+                
+                let sortAscending = true;
+                header.addEventListener('click', function() {
+                    sortTableByColumn(index, sortAscending);
+                    sortAscending = !sortAscending;
+                    
+                    // Update sort icons
+                    headers.forEach(h => {
+                        const icon = h.querySelector('.sort-icon');
+                        if (icon) icon.className = 'fas fa-sort sort-icon';
+                    });
+                    
+                    const icon = this.querySelector('.sort-icon');
+                    if (icon) {
+                        icon.className = sortAscending ? 'fas fa-sort-up sort-icon' : 'fas fa-sort-down sort-icon';
+                    }
+                });
+            }
+        });
+
         // Sticky header detection
         const comparisonSection = document.querySelector('.pricing-page .comparison-section');
         if (comparisonSection) {
@@ -202,6 +228,33 @@
 
             observer.observe(comparisonSection);
         }
+    }
+
+    // ========================================
+    // SORT TABLE BY COLUMN
+    // ========================================
+    function sortTableByColumn(columnIndex, ascending) {
+        const table = document.querySelector('.pricing-page .comparison-table');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.cells[columnIndex];
+            const cellB = rowB.cells[columnIndex];
+
+            // Check if cells contain checkmarks or crosses
+            const hasCheckA = cellA.querySelector('.check-icon');
+            const hasCheckB = cellB.querySelector('.check-icon');
+
+            if (hasCheckA && !hasCheckB) return ascending ? -1 : 1;
+            if (!hasCheckA && hasCheckB) return ascending ? 1 : -1;
+
+            // If both have same icon type, maintain original order
+            return 0;
+        });
+
+        // Re-append rows in sorted order
+        rows.forEach(row => tbody.appendChild(row));
     }
 
     // ========================================
@@ -473,6 +526,162 @@
     }
 
     // ========================================
+    // PRICE CALCULATOR WIDGET
+    // ========================================
+    function initPriceCalculator() {
+        const calculator = document.querySelector('.price-calculator');
+        if (!calculator) return;
+
+        const distanceInput = calculator.querySelector('#calc-distance');
+        const vehicleSelect = calculator.querySelector('#calc-vehicle');
+        const calculateBtn = calculator.querySelector('#calculate-price-btn');
+        const resultDiv = calculator.querySelector('.calculator-result');
+
+        const priceRates = {
+            hatchback: { base: 3999, perKm: 8 },
+            sedan: { base: 6999, perKm: 12 },
+            suv: { base: 8999, perKm: 15 },
+            luxury: { base: 12999, perKm: 20 }
+        };
+
+        function calculatePrice() {
+            const distance = parseFloat(distanceInput.value);
+            const vehicleType = vehicleSelect.value;
+
+            if (!distance || distance <= 0) {
+                showResult('Please enter a valid distance', 'error');
+                return;
+            }
+
+            if (!vehicleType) {
+                showResult('Please select a vehicle type', 'error');
+                return;
+            }
+
+            const rate = priceRates[vehicleType];
+            const basePrice = distance > 500 ? rate.base * 1.5 : rate.base;
+            const distanceCharge = distance * rate.perKm;
+            const subtotal = Math.round(basePrice + distanceCharge);
+            const gst = Math.round(subtotal * 0.18);
+            const total = subtotal + gst;
+
+            const resultHTML = `
+                <div class="price-breakdown">
+                    <h4><i class="fas fa-calculator"></i> Estimated Price</h4>
+                    <div class="breakdown-item">
+                        <span>Base Price:</span>
+                        <span>₹${basePrice.toLocaleString('en-IN')}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Distance Charge (${distance}km @ ₹${rate.perKm}/km):</span>
+                        <span>₹${distanceCharge.toLocaleString('en-IN')}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>GST (18%):</span>
+                        <span>₹${gst.toLocaleString('en-IN')}</span>
+                    </div>
+                    <div class="breakdown-total">
+                        <span>Total Estimated Cost:</span>
+                        <span class="total-amount">₹${total.toLocaleString('en-IN')}</span>
+                    </div>
+                    <p class="calculator-note">
+                        <i class="fas fa-info-circle"></i>
+                        This is an estimate. Final price may vary based on actual conditions.
+                    </p>
+                    <a href="booking.html" class="calc-book-btn">
+                        <i class="fas fa-truck"></i> Book Now
+                    </a>
+                </div>
+            `;
+
+            showResult(resultHTML, 'success');
+        }
+
+        function showResult(content, type) {
+            resultDiv.innerHTML = content;
+            resultDiv.className = `calculator-result ${type}`;
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        calculateBtn.addEventListener('click', calculatePrice);
+
+        // Allow Enter key to calculate
+        distanceInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') calculatePrice();
+        });
+    }
+
+    // ========================================
+    // FAQ ACCORDION
+    // ========================================
+    function initFaqAccordion() {
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', function() {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other FAQs
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+
+                // Toggle current FAQ
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    }
+
+    // ========================================
+    // TESTIMONIAL SLIDER
+    // ========================================
+    function initTestimonialSlider() {
+        const sliders = document.querySelectorAll('.testimonial-slider');
+        
+        sliders.forEach(slider => {
+            const track = slider.querySelector('.testimonial-track');
+            const slides = slider.querySelectorAll('.testimonial-slide');
+            const prevBtn = slider.querySelector('.testimonial-prev');
+            const nextBtn = slider.querySelector('.testimonial-next');
+            
+            if (!track || slides.length === 0) return;
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function updateSlider() {
+                const offset = -currentSlide * 100;
+                track.style.transform = `translateX(${offset}%)`;
+                
+                // Update button states
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlider();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlider();
+                }
+            });
+
+            updateSlider();
+        });
+    }
+
+    // ========================================
     // INITIALIZATION
     // ========================================
     function init() {
@@ -496,6 +705,9 @@
         initPopularBadge();
         initKeyboardNavigation();
         initPriceTooltips();
+        initPriceCalculator();
+        initFaqAccordion();
+        initTestimonialSlider();
 
         // Handle window resize
         let resizeTimer;
