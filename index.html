@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="./css/components/back-to-top-button.css">
   <link rel="stylesheet" href="./css/components/digital-clock.css">
   <link rel="stylesheet" href="./css/components/animations.css">
+  <link rel="stylesheet" href="./css/components/floating-feedback-button.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
@@ -632,21 +633,7 @@
       </div>
 
       <!-- Website Rating Section -->
-      <div class="website-rating-section">
-        <div class="rating-container">
-          <h3>Rate Your Experience</h3>
-          <p>How would you rate our website?</p>
-          <div class="star-rating" id="websiteRating">
-            <i class="far fa-star" data-rating="1"></i>
-            <i class="far fa-star" data-rating="2"></i>
-            <i class="far fa-star" data-rating="3"></i>
-            <i class="far fa-star" data-rating="4"></i>
-            <i class="far fa-star" data-rating="5"></i>
-          </div>
-          <div class="rating-feedback" id="ratingFeedback"></div>
-          <div class="rating-message" id="ratingMessage"></div>
-        </div>
-      </div>
+      
     </div>
   </section>
 
@@ -960,6 +947,7 @@
   <script src="./js/modules/chatbot-modal.js"></script>
   <script src="./js/modules/back-to-top-button.js"></script>
   <script src="./js/modules/backtoBottom.js"></script>
+ <script src="./js/modules/feedback-modal.js"></script>
 
 
   <script src="./js/modules/testimonial.js"></script>
@@ -969,6 +957,54 @@
   <script src="./js/modules/scroll-animations.js"></script>
 
   <div id="car" class="car">🏎️</div>
+
+<!-- 🟠 Floating Feedback Button -->
+<div id="feedbackBtn" class="floating-feedback-btn" title="Give Feedback">
+  <i class="fas fa-comment-dots"></i>
+</div>
+
+<!-- 💬 Feedback Modal -->
+<div id="feedbackModal" class="feedback-modal">
+  <div class="feedback-modal-content">
+    <span id="closeFeedback" class="close-feedback">&times;</span>
+    <h2>We value your feedback!</h2>
+
+    <form id="feedbackForm">
+      <!-- Name -->
+      <div class="feedback-input">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required />
+      </div>
+
+      <!-- Email -->
+      <div class="feedback-input">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Your email" required />
+      </div>
+
+      <!-- Rating -->
+      <div class="feedback-stars" id="starContainer">
+        <i class="far fa-star" data-value="1"></i>
+        <i class="far fa-star" data-value="2"></i>
+        <i class="far fa-star" data-value="3"></i>
+        <i class="far fa-star" data-value="4"></i>
+        <i class="far fa-star" data-value="5"></i>
+      </div>
+
+      <!-- Feedback -->
+      <div class="feedback-input">
+        <label for="feedbackText">Feedback:</label>
+        <textarea id="feedbackText" name="feedbackText" rows="4" placeholder="Write your feedback..." required></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </div>
+</div>
+
+
+
 
 </body>
 
