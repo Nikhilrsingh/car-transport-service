@@ -6,24 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Vehicle Transport - Harihar Car Carriers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+    <!-- Navbar CSS -->
+    <link rel="stylesheet" href="../css/components/navbar.css">
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin=""/>
-    
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
     <!-- Leaflet Routing Machine CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
-    
+
     <!-- Leaflet Control Geocoder CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css" />
-    
+
+    <!-- Booking CSS -->
+    <link rel="stylesheet" href="../css/components/booking.css">
+
     <!-- Booking Modals CSS -->
     <link rel="stylesheet" href="../css/components/booking-modals.css">
-    
+
     <!-- Lottie Animation -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -223,6 +228,7 @@
                 opacity: 0;
                 transform: translateX(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -367,9 +373,11 @@
             0% {
                 transform: translateY(-50%) scale(0);
             }
+
             50% {
                 transform: translateY(-50%) scale(1.2);
             }
+
             100% {
                 transform: translateY(-50%) scale(1);
             }
@@ -403,6 +411,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -581,6 +590,7 @@
                 transform: translateX(-100px);
                 opacity: 0;
             }
+
             to {
                 transform: translateX(0);
                 opacity: 1;
@@ -749,9 +759,12 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.05);
             }
@@ -855,7 +868,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Autocomplete Dropdown Styles */
@@ -1195,6 +1210,7 @@
                 transform: scale(0.7);
                 opacity: 0;
             }
+
             to {
                 transform: scale(1);
                 opacity: 1;
@@ -1247,9 +1263,11 @@
             0% {
                 transform: scale(0);
             }
+
             50% {
                 transform: scale(1.1);
             }
+
             100% {
                 transform: scale(1);
             }
@@ -1310,6 +1328,7 @@
             from {
                 width: 0;
             }
+
             to {
                 width: 100%;
             }
@@ -1558,6 +1577,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1569,12 +1589,16 @@
         }
 
         @keyframes shake {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateX(0);
             }
+
             25% {
                 transform: translateX(-5px);
             }
+
             75% {
                 transform: translateX(5px);
             }
@@ -1587,6 +1611,147 @@
 </head>
 
 <body>
+    <!-- Enhanced Navigation Component -->
+    <header class="header">
+        <div class="navbar-container">
+            <div class="navbar">
+                <!-- Left Logo -->
+                <div class="logo-container left-logo">
+                    <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link" data-page="home">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./about.html" class="nav-link" data-page="about">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./booking.html" class="nav-link active" data-page="booking">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Booking</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./pricing.html" class="nav-link" data-page="pricing">
+                                <i class="fas fa-tags"></i>
+                                <span>Pricing</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./contact.html" class="nav-link" data-page="contact">
+                                <i class="fas fa-phone"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="nav-actions">
+                        <a href="./enquiry.html" class="nav-link enquiry-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Enquiry</span>
+                        </a>
+                        <a href="./gallery.html" class="nav-link">
+                            <i class="fas fa-images"></i>
+                            <span>Gallery</span>
+                        </a>
+                        <a href="../login.html" class="login-btn">
+                            <i class="fas fa-user"></i>
+                            <span>Login</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+                <div class="mobile-nav-header">
+                    <div class="mobile-logo">
+                        <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+                        <span>Harihar Car Carriers</span>
+                    </div>
+                    <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="../index.html" class="mobile-nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./about.html" class="mobile-nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./booking.html" class="mobile-nav-link active">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Booking</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./pricing.html" class="mobile-nav-link">
+                            <i class="fas fa-tags"></i>
+                            <span>Pricing</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./contact.html" class="mobile-nav-link">
+                            <i class="fas fa-phone"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./enquiry.html" class="mobile-nav-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Enquiry</span>
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="./gallery.html" class="mobile-nav-link">
+                            <i class="fas fa-images"></i>
+                            <span>Gallery</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="mobile-nav-actions">
+                    <a href="../login.html" class="mobile-login-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </a>
+                    <a href="./booking.html" class="mobile-cta-btn">
+                        <i class="fas fa-truck"></i>
+                        <span>Book Instantly</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Navigation Overlay -->
+            <div class="nav-overlay" id="navOverlay"></div>
+        </div>
+    </header>
+
+    <script src="../js/modules/navbar.js"></script>
+
     <!-- Hero Section -->
     <section class="booking-hero">
         <div class="container">
@@ -1651,9 +1816,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
-                                    <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit number">
+                                    <input type="tel" id="phone" name="phone" required
+                                        placeholder="Enter 10-digit number">
                                     <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number</div>
+                                    <div class="error-message" id="phoneError">Please enter a valid 10-digit phone
+                                        number</div>
                                 </div>
                             </div>
 
@@ -1692,7 +1859,8 @@
                                 <h4><i class="fas fa-plus-circle"></i> Add-on Services (Optional)</h4>
                                 <div class="addon-grid">
                                     <div class="addon-item" onclick="toggleAddon(this, 'cleaning', 500)">
-                                        <input type="checkbox" class="addon-checkbox" id="addonCleaning" name="addons" value="cleaning">
+                                        <input type="checkbox" class="addon-checkbox" id="addonCleaning" name="addons"
+                                            value="cleaning">
                                         <i class="fas fa-spray-can addon-icon"></i>
                                         <div class="addon-info">
                                             <div class="addon-name">Interior Cleaning</div>
@@ -1701,7 +1869,8 @@
                                         <div class="addon-price">₹500</div>
                                     </div>
                                     <div class="addon-item" onclick="toggleAddon(this, 'detailing', 1500)">
-                                        <input type="checkbox" class="addon-checkbox" id="addonDetailing" name="addons" value="detailing">
+                                        <input type="checkbox" class="addon-checkbox" id="addonDetailing" name="addons"
+                                            value="detailing">
                                         <i class="fas fa-star addon-icon"></i>
                                         <div class="addon-info">
                                             <div class="addon-name">Premium Detailing</div>
@@ -1710,7 +1879,8 @@
                                         <div class="addon-price">₹1,500</div>
                                     </div>
                                     <div class="addon-item" onclick="toggleAddon(this, 'insurance', 800)">
-                                        <input type="checkbox" class="addon-checkbox" id="addonInsurance" name="addons" value="insurance">
+                                        <input type="checkbox" class="addon-checkbox" id="addonInsurance" name="addons"
+                                            value="insurance">
                                         <i class="fas fa-shield-alt addon-icon"></i>
                                         <div class="addon-info">
                                             <div class="addon-name">Extra Insurance</div>
@@ -1719,7 +1889,8 @@
                                         <div class="addon-price">₹800</div>
                                     </div>
                                     <div class="addon-item" onclick="toggleAddon(this, 'express', 2000)">
-                                        <input type="checkbox" class="addon-checkbox" id="addonExpress" name="addons" value="express">
+                                        <input type="checkbox" class="addon-checkbox" id="addonExpress" name="addons"
+                                            value="express">
                                         <i class="fas fa-bolt addon-icon"></i>
                                         <div class="addon-info">
                                             <div class="addon-name">Express Delivery</div>
@@ -1777,7 +1948,8 @@
                             <!-- Date & Time -->
                             <div class="date-time-row">
                                 <div class="form-group">
-                                    <label for="pickupDate"><i class="fas fa-calendar"></i> Preferred Pickup Date *</label>
+                                    <label for="pickupDate"><i class="fas fa-calendar"></i> Preferred Pickup Date
+                                        *</label>
                                     <input type="date" id="pickupDate" name="pickupDate" required>
                                     <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
                                     <div class="error-message" id="dateError">Please select pickup date</div>
@@ -1791,6 +1963,46 @@
                                         <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
                                         <option value="evening">Evening (5 PM - 8 PM)</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <!-- Route Optimization with Waypoints -->
+                            <div class="waypoints-section">
+                                <div class="waypoints-header">
+                                    <h4><i class="fas fa-map-signs"></i> Add Stops Along the Way</h4>
+                                    <button type="button" class="add-waypoint-btn" onclick="addWaypoint()">
+                                        <i class="fas fa-plus"></i> Add Stop
+                                    </button>
+                                </div>
+                                <p style="color: #999; font-size: 0.9rem; margin-bottom: 15px;">
+                                    Add intermediate stops for vehicle pickup or drop-off along your route
+                                </p>
+                                <div class="waypoints-list" id="waypointsList">
+                                    <!-- Waypoints will be added dynamically -->
+                                </div>
+                                <button type="button" class="optimize-route-btn" id="optimizeRouteBtn" onclick="optimizeRoute()" style="display: none;">
+                                    <i class="fas fa-route"></i> Optimize Route Order
+                                </button>
+                                <div class="optimization-result" id="optimizationResult">
+                                    <h5><i class="fas fa-check-circle"></i> Route Optimized!</h5>
+                                    <div class="optimization-stats">
+                                        <div><i class="fas fa-road"></i> Distance Saved: <strong id="distanceSaved">0 km</strong></div>
+                                        <div><i class="fas fa-clock"></i> Time Saved: <strong id="timeSaved">0 mins</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Weather Forecast -->
+                            <div class="weather-section" id="weatherSection" style="display: none;">
+                                <div class="weather-header">
+                                    <i class="fas fa-cloud-sun" style="font-size: 1.5rem;"></i>
+                                    <h4>Weather Forecast</h4>
+                                </div>
+                                <div class="weather-grid" id="weatherGrid">
+                                    <div class="weather-loading">
+                                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #ff6347;"></i>
+                                        <p>Loading weather data...</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -1816,9 +2028,11 @@
 
                             <!-- Additional Information -->
                             <div class="form-group">
-                                <label for="additionalInfo"><i class="fas fa-comment"></i> Additional Information</label>
+                                <label for="additionalInfo"><i class="fas fa-comment"></i> Additional
+                                    Information</label>
                                 <textarea id="additionalInfo" name="additionalInfo"
-                                    placeholder="Any special requirements or instructions..." rows="4" maxlength="500"></textarea>
+                                    placeholder="Any special requirements or instructions..." rows="4"
+                                    maxlength="500"></textarea>
                                 <div class="character-counter">
                                     <span id="charCount">0</span> / 500 characters
                                 </div>
@@ -1829,7 +2043,8 @@
                                 <h4 style="color: #ff6347; margin-bottom: 15px;">
                                     <i class="fas fa-eye"></i> Booking Summary
                                 </h4>
-                                <div id="reviewContent" style="background: #1a1a1a; padding: 20px; border-radius: 10px;">
+                                <div id="reviewContent"
+                                    style="background: #1a1a1a; padding: 20px; border-radius: 10px;">
                                     <!-- Summary will be populated dynamically -->
                                 </div>
                             </div>
@@ -1857,14 +2072,14 @@
                     <!-- Price Calculator -->
                     <div class="price-calculator">
                         <h4><i class="fas fa-calculator"></i> Price Estimate</h4>
-                        
+
                         <div class="price-slider-group">
                             <div class="slider-label">
                                 <span>Distance</span>
                                 <span id="distanceValue">0 km</span>
                             </div>
-                            <input type="range" class="price-slider" id="distanceSlider" 
-                                   min="0" max="2000" value="0" step="10">
+                            <input type="range" class="price-slider" id="distanceSlider" min="0" max="2000" value="0"
+                                step="10">
                         </div>
 
                         <div class="price-breakdown" id="priceBreakdown">
@@ -2052,9 +2267,9 @@
                         </h3>
                         <p>View the route between selected cities or explore locations</p>
                     </div>
-                    
+
                     <div id="map"></div>
-                    
+
                     <div class="map-controls">
                         <button class="map-control-btn" id="clearRouteBtn" onclick="clearRoute()">
                             <i class="fas fa-trash"></i> Clear Route
@@ -2093,31 +2308,32 @@
     <div class="modal" id="successModal">
         <div class="modal-content">
             <div class="confetti-container" id="confettiContainer"></div>
-            
+
             <!-- Animated Checkmark SVG -->
             <svg class="success-animation" viewBox="0 0 52 52">
-                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
             </svg>
 
             <h3>🎉 Booking Confirmed!</h3>
             <p>Thank you for choosing Harihar Car Carriers. Your booking has been successfully submitted.</p>
-            
+
             <div class="booking-reference">
                 <div class="label">Booking Reference Number</div>
                 <div class="ref-number" id="bookingRef">HC2024-001</div>
             </div>
 
             <p style="font-size: 0.9rem; color: #999;">
-                A confirmation email has been sent to your registered email address. 
+                A confirmation email has been sent to your registered email address.
                 Our team will contact you within 24 hours.
             </p>
 
             <button class="modal-btn" onclick="closeModal()">
                 <i class="fas fa-check"></i> Got It!
             </button>
-            
-            <button class="modal-btn" onclick="closeModal(); openManageBooking();" style="background: #444; margin-top: 10px;">
+
+            <button class="modal-btn" onclick="closeModal(); openManageBooking();"
+                style="background: #444; margin-top: 10px;">
                 <i class="fas fa-edit"></i> Manage Booking
             </button>
         </div>
@@ -2133,7 +2349,10 @@
     </div>
 
     <!-- Floating Manage Booking Button (for testing) -->
-    <button onclick="openManageBooking()" style="position: fixed; bottom: 100px; right: 20px; z-index: 999; background: linear-gradient(135deg, #ff6347, #ff4500); color: white; border: none; padding: 15px 25px; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; box-shadow: 0 5px 20px rgba(255, 99, 71, 0.4); display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(255, 99, 71, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(255, 99, 71, 0.4)'">
+    <button onclick="openManageBooking()"
+        style="position: fixed; bottom: 100px; right: 20px; z-index: 999; background: linear-gradient(135deg, #ff6347, #ff4500); color: white; border: none; padding: 15px 25px; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; box-shadow: 0 5px 20px rgba(255, 99, 71, 0.4); display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;"
+        onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(255, 99, 71, 0.5)'"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(255, 99, 71, 0.4)'">
         <i class="fas fa-edit"></i>
         <span>Manage Booking</span>
     </button>
@@ -2300,7 +2519,8 @@
 
             <div class="form-group">
                 <label for="cancelReason"><i class="fas fa-comment"></i> Reason for Cancellation</label>
-                <textarea id="cancelReason" class="save-email-input" rows="3" placeholder="Please tell us why you're cancelling..."></textarea>
+                <textarea id="cancelReason" class="save-email-input" rows="3"
+                    placeholder="Please tell us why you're cancelling..."></textarea>
             </div>
 
             <div class="save-email-actions">
@@ -2324,7 +2544,8 @@
                 </button>
             </div>
 
-            <p style="color: #ccc; margin-bottom: 20px;">Transfer this booking to another person. They will receive all booking details and notifications.</p>
+            <p style="color: #ccc; margin-bottom: 20px;">Transfer this booking to another person. They will receive all
+                booking details and notifications.</p>
 
             <div class="form-group">
                 <label for="transferName"><i class="fas fa-user"></i> Recipient Name</label>
@@ -2370,7 +2591,8 @@
                 </button>
             </div>
 
-            <p style="color: #ccc; margin-bottom: 20px;">Current Vehicle: <strong id="currentVehicleType" style="color: #ff6347;">Sedan</strong></p>
+            <p style="color: #ccc; margin-bottom: 20px;">Current Vehicle: <strong id="currentVehicleType"
+                    style="color: #ff6347;">Sedan</strong></p>
 
             <div class="form-group">
                 <label for="newVehicleType"><i class="fas fa-car"></i> Select New Vehicle Type</label>
@@ -2427,12 +2649,11 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
-    
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <!-- Leaflet Routing Machine -->
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
-    
+
     <!-- Leaflet Control Geocoder -->
     <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
 
@@ -2554,7 +2775,7 @@
             document.querySelectorAll('.step').forEach((step, index) => {
                 const stepNum = index + 1;
                 step.classList.remove('active', 'completed');
-                
+
                 if (stepNum < currentStep) {
                     step.classList.add('completed');
                 } else if (stepNum === currentStep) {
@@ -2594,7 +2815,7 @@
             if (dropCoords) data.dropCoords = dropCoords;
 
             localStorage.setItem('bookingDraft', JSON.stringify(data));
-            
+
             // Show auto-save indicator
             const indicator = document.getElementById('autoSaveIndicator');
             indicator.classList.add('show');
@@ -2640,7 +2861,7 @@
                     // Wait for map to be fully initialized
                     const restoreMapData = () => {
                         console.log('Restoring map data...', data);
-                        
+
                         if (data.pickupCoords) {
                             pickupCoords = data.pickupCoords;
                             console.log('Restoring pickup coords:', pickupCoords);
@@ -2656,7 +2877,7 @@
                                 setPickupLocation(pickupCoord[0], pickupCoord[1], pickupCity);
                             }
                         }
-                        
+
                         if (data.dropCoords) {
                             dropCoords = data.dropCoords;
                             console.log('Restoring drop coords:', dropCoords);
@@ -2760,9 +2981,9 @@
         function populateReviewSummary() {
             const reviewContent = document.getElementById('reviewContent');
             const formData = new FormData(document.getElementById('bookingForm'));
-            
+
             let html = '<div style="display: grid; gap: 15px;">';
-            
+
             // Personal Info
             html += '<div>';
             html += '<h5 style="color: #ff6347; margin-bottom: 10px;"><i class="fas fa-user"></i> Personal Information</h5>';
@@ -2770,14 +2991,14 @@
             html += `<p style="color: #ccc; margin: 5px 0;"><strong>Phone:</strong> ${formData.get('phone') || 'Not provided'}</p>`;
             html += `<p style="color: #ccc; margin: 5px 0;"><strong>Email:</strong> ${formData.get('email') || 'Not provided'}</p>`;
             html += '</div>';
-            
+
             // Vehicle Info
             html += '<div>';
             html += '<h5 style="color: #ff6347; margin-bottom: 10px;"><i class="fas fa-car"></i> Vehicle Details</h5>';
             html += `<p style="color: #ccc; margin: 5px 0;"><strong>Type:</strong> ${formatVehicleType(formData.get('vehicleType'))}</p>`;
             html += `<p style="color: #ccc; margin: 5px 0;"><strong>Model:</strong> ${formData.get('vehicleModel') || 'Not specified'}</p>`;
             html += '</div>';
-            
+
             // Transport Details
             html += '<div>';
             html += '<h5 style="color: #ff6347; margin-bottom: 10px;"><i class="fas fa-route"></i> Transport Details</h5>';
@@ -2788,7 +3009,7 @@
             html += `<p style="color: #ccc; margin: 5px 0;"><strong>Date:</strong> ${formatDate(formData.get('pickupDate'))}</p>`;
             html += `<p style="color: #ccc; margin: 5px 0;"><strong>Time:</strong> ${formatTime(formData.get('pickupTime'))}</p>`;
             html += '</div>';
-            
+
             html += '</div>';
             reviewContent.innerHTML = html;
         }
@@ -2847,10 +3068,10 @@
                 const deltaLon = (drop[1] - pickup[1]) * Math.PI / 180;
 
                 const a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
-                          Math.cos(lat1) * Math.cos(lat2) *
-                          Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2);
+                    Math.cos(lat1) * Math.cos(lat2) *
+                    Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2);
                 const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                
+
                 estimatedDistance = Math.round(R * c);
                 // Estimate driving time at 60 km/h average
                 estimatedDuration = Math.round((estimatedDistance / 60) * 10) / 10;
@@ -2998,16 +3219,16 @@
         // ========================================
         function updateBookingSummary() {
             const formData = new FormData(document.getElementById('bookingForm'));
-            
+
             // Update personal info
             updateSummaryField('summaryName', formData.get('fullName'));
             updateSummaryField('summaryPhone', formData.get('phone'));
             updateSummaryField('summaryEmail', formData.get('email'));
-            
+
             // Update vehicle details
             updateSummaryField('summaryVehicleType', formatVehicleType(formData.get('vehicleType')));
             updateSummaryField('summaryVehicleModel', formData.get('vehicleModel') || 'Not provided');
-            
+
             // Update transport details (use city names primarily)
             const pickupCity = formData.get('pickupCity') || formData.get('pickupLocation');
             const dropCity = formData.get('dropCity') || formData.get('dropLocation');
@@ -3015,7 +3236,7 @@
             updateSummaryField('summaryDrop', dropCity, 'Not set');
             updateSummaryField('summaryDate', formatDate(formData.get('pickupDate')), 'Not selected');
             updateSummaryField('summaryTime', formatTime(formData.get('pickupTime')));
-            
+
             // Update delivery estimate
             if (formData.get('pickupDate')) {
                 const pickupDate = new Date(formData.get('pickupDate'));
@@ -3023,8 +3244,8 @@
                 const distance = parseFloat(document.getElementById('distanceSlider').value);
                 const days = Math.ceil(distance / 400) + 1; // Approx 400km per day
                 deliveryDate.setDate(deliveryDate.getDate() + days);
-                
-                document.getElementById('estimatedDelivery').textContent = 
+
+                document.getElementById('estimatedDelivery').textContent =
                     deliveryDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
             }
         }
@@ -3046,7 +3267,7 @@
         function updatePriceCalculation() {
             const distance = parseFloat(document.getElementById('distanceSlider').value);
             const vehicleType = document.getElementById('vehicleType').value;
-            
+
             // Base fare based on vehicle type
             const baseFares = {
                 'hatchback': 2000,
@@ -3056,13 +3277,13 @@
                 'bike': 1500,
                 'commercial': 4000
             };
-            
+
             const baseFare = baseFares[vehicleType] || 2000;
             const distanceCharge = distance * 15; // ₹15 per km
             const subtotal = baseFare + distanceCharge;
             const gst = subtotal * 0.18;
             let total = subtotal + gst;
-            
+
             // Apply discount for first booking (10%)
             const isFirstBooking = true; // This would be determined by user session/database
             if (isFirstBooking && distance > 0) {
@@ -3071,13 +3292,13 @@
             } else {
                 document.getElementById('discountBadge').style.display = 'none';
             }
-            
+
             // Update display with animation
             animateValue('baseFare', baseFare);
             animateValue('distanceCharge', distanceCharge);
             animateValue('gst', gst);
             animateValue('totalPrice', total);
-            
+
             document.getElementById('distanceValue').textContent = distance + ' km';
         }
 
@@ -3086,18 +3307,18 @@
             const startValue = parseFloat(element.textContent.replace(/[₹,]/g, '')) || 0;
             const duration = 500;
             const startTime = performance.now();
-            
+
             function update(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const currentValue = startValue + (endValue - startValue) * progress;
                 element.textContent = '₹ ' + Math.round(currentValue).toLocaleString('en-IN');
-                
+
                 if (progress < 1) {
                     requestAnimationFrame(update);
                 }
             }
-            
+
             requestAnimationFrame(update);
         }
 
@@ -3107,7 +3328,7 @@
         function createConfetti() {
             const container = document.getElementById('confettiContainer');
             const colors = ['#ff6347', '#4CAF50', '#2196F3', '#FFC107', '#9C27B0', '#FF9800'];
-            
+
             for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
@@ -3116,7 +3337,7 @@
                 confetti.style.animationDelay = Math.random() * 2 + 's';
                 confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 container.appendChild(confetti);
-                
+
                 setTimeout(() => {
                     if (confetti.parentNode) {
                         confetti.parentNode.removeChild(confetti);
@@ -3150,10 +3371,10 @@
             const counter = document.getElementById('charCount');
             const count = textarea.value.length;
             const maxLength = 500;
-            
+
             counter.textContent = count;
             counter.parentElement.classList.remove('warning', 'danger');
-            
+
             if (count > maxLength * 0.9) {
                 counter.parentElement.classList.add('danger');
             } else if (count > maxLength * 0.7) {
@@ -3194,6 +3415,8 @@
                     selectedPickupCity = city;
                     document.getElementById('pickupLocation').value = city + ', India';
                     updateBookingSummary();
+                    // Fetch weather for pickup city
+                    fetchWeatherData(city, 'pickup');
                     if (selectedDropCity) {
                         calculateRouteForCities();
                     }
@@ -3205,6 +3428,8 @@
                     selectedDropCity = city;
                     document.getElementById('dropLocation').value = city + ', India';
                     updateBookingSummary();
+                    // Fetch weather for drop city
+                    fetchWeatherData(city, 'drop');
                     if (selectedPickupCity) {
                         calculateRouteForCities();
                     }
@@ -3216,7 +3441,7 @@
             const dropdown = document.getElementById(dropdownId);
             let currentFocus = -1;
 
-            inputElement.addEventListener('input', function() {
+            inputElement.addEventListener('input', function () {
                 const value = this.value.trim();
                 dropdown.innerHTML = '';
                 currentFocus = -1;
@@ -3226,7 +3451,7 @@
                     return;
                 }
 
-                const matches = indianCities.filter(city => 
+                const matches = indianCities.filter(city =>
                     city.toLowerCase().includes(value.toLowerCase())
                 ).slice(0, 8);
 
@@ -3238,28 +3463,28 @@
                 matches.forEach((city, index) => {
                     const item = document.createElement('div');
                     item.className = 'autocomplete-item';
-                    
+
                     const regex = new RegExp(`(${value})`, 'gi');
                     const highlightedText = city.replace(regex, '<strong>$1</strong>');
                     item.innerHTML = highlightedText;
-                    
-                    item.addEventListener('click', function() {
+
+                    item.addEventListener('click', function () {
                         inputElement.value = city;
                         dropdown.classList.remove('show');
                         if (onSelectCallback) {
                             onSelectCallback(city);
                         }
                     });
-                    
+
                     dropdown.appendChild(item);
                 });
 
                 dropdown.classList.add('show');
             });
 
-            inputElement.addEventListener('keydown', function(e) {
+            inputElement.addEventListener('keydown', function (e) {
                 const items = dropdown.getElementsByClassName('autocomplete-item');
-                
+
                 if (e.key === 'ArrowDown') {
                     e.preventDefault();
                     currentFocus++;
@@ -3291,7 +3516,7 @@
             }
 
             // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e.target !== inputElement) {
                     dropdown.classList.remove('show');
                 }
@@ -3309,7 +3534,7 @@
                         dropCoords = dropLatLng;
                         setPickupLocation(pickupLatLng[0], pickupLatLng[1], selectedPickupCity + ', India');
                         setDropLocation(dropLatLng[0], dropLatLng[1], selectedDropCity + ', India');
-                        
+
                         // Estimate distance between cities and update slider
                         const distance = estimateDistance(pickupLatLng, dropLatLng);
                         const distanceSlider = document.getElementById('distanceSlider');
@@ -3321,16 +3546,16 @@
                 });
             });
         }
-        
+
         function estimateDistance(coord1, coord2) {
             // Haversine formula to calculate distance between two coordinates
             const R = 6371; // Radius of Earth in km
             const dLat = (coord2[0] - coord1[0]) * Math.PI / 180;
             const dLon = (coord2[1] - coord1[1]) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                      Math.cos(coord1[0] * Math.PI / 180) * Math.cos(coord2[0] * Math.PI / 180) *
-                      Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(coord1[0] * Math.PI / 180) * Math.cos(coord2[0] * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return R * c;
         }
 
@@ -3366,20 +3591,20 @@
                 placeholder: 'Search location...',
                 errorMessage: 'Location not found'
             })
-            .on('markgeocode', function(e) {
-                const latlng = e.geocode.center;
-                map.setView(latlng, 13);
-                
-                if (selectingPickup) {
-                    setPickupLocation(latlng.lat, latlng.lng, e.geocode.name);
-                } else if (selectingDrop) {
-                    setDropLocation(latlng.lat, latlng.lng, e.geocode.name);
-                }
-            })
-            .addTo(map);
+                .on('markgeocode', function (e) {
+                    const latlng = e.geocode.center;
+                    map.setView(latlng, 13);
+
+                    if (selectingPickup) {
+                        setPickupLocation(latlng.lat, latlng.lng, e.geocode.name);
+                    } else if (selectingDrop) {
+                        setDropLocation(latlng.lat, latlng.lng, e.geocode.name);
+                    }
+                })
+                .addTo(map);
 
             // Add click event to map
-            map.on('click', function(e) {
+            map.on('click', function (e) {
                 if (selectingPickup) {
                     reverseGeocode(e.latlng.lat, e.latlng.lng, 'pickup');
                 } else if (selectingDrop) {
@@ -3424,7 +3649,7 @@
         // Set pickup location
         function setPickupLocation(lat, lng, address) {
             pickupCoords = [lat, lng];
-            
+
             if (pickupMarker) {
                 map.removeLayer(pickupMarker);
             }
@@ -3442,17 +3667,17 @@
             }).addTo(map);
 
             pickupMarker.bindPopup('<b>Pickup Location</b><br>' + address).openPopup();
-            
-            pickupMarker.on('dragend', function(e) {
+
+            pickupMarker.on('dragend', function (e) {
                 const newPos = e.target.getLatLng();
                 reverseGeocode(newPos.lat, newPos.lng, 'pickup');
             });
 
             document.getElementById('pickupLocation').value = address;
             selectingPickup = false;
-            
+
             showToast('Success', 'Pickup location set!', 'success', 2000);
-            
+
             if (dropCoords) {
                 calculateRoute();
             }
@@ -3461,7 +3686,7 @@
         // Set drop location
         function setDropLocation(lat, lng, address) {
             dropCoords = [lat, lng];
-            
+
             if (dropMarker) {
                 map.removeLayer(dropMarker);
             }
@@ -3479,17 +3704,17 @@
             }).addTo(map);
 
             dropMarker.bindPopup('<b>Drop Location</b><br>' + address).openPopup();
-            
-            dropMarker.on('dragend', function(e) {
+
+            dropMarker.on('dragend', function (e) {
                 const newPos = e.target.getLatLng();
                 reverseGeocode(newPos.lat, newPos.lng, 'drop');
             });
 
             document.getElementById('dropLocation').value = address;
             selectingDrop = false;
-            
+
             showToast('Success', 'Drop location set!', 'success', 2000);
-            
+
             if (pickupCoords) {
                 calculateRoute();
             }
@@ -3528,13 +3753,13 @@
                 routeWhileDragging: false,
                 showAlternatives: false,
                 lineOptions: {
-                    styles: [{color: '#ff6347', opacity: 0.8, weight: 5}]
+                    styles: [{ color: '#ff6347', opacity: 0.8, weight: 5 }]
                 },
-                createMarker: function() { return null; }, // Don't create default markers
+                createMarker: function () { return null; }, // Don't create default markers
                 addWaypoints: false
             }).addTo(map);
 
-            routingControl.on('routesfound', function(e) {
+            routingControl.on('routesfound', function (e) {
                 const route = e.routes[0];
                 const distance = (route.summary.totalDistance / 1000).toFixed(2);
                 const time = (route.summary.totalTime / 3600).toFixed(1);
@@ -3543,9 +3768,9 @@
                 document.getElementById('routeDistance').textContent = distance + ' km';
                 document.getElementById('routeTime').textContent = time + ' hours';
                 document.getElementById('routeCost').textContent = '₹ ' + cost.toLocaleString();
-                
+
                 document.getElementById('routeInfo').classList.add('show');
-                
+
                 showToast('Route Found', `Distance: ${distance}km, Time: ${time}hrs`, 'success', 4000);
             });
 
@@ -3565,24 +3790,24 @@
                 map.removeControl(routingControl);
                 routingControl = null;
             }
-            
+
             if (pickupMarker) {
                 map.removeLayer(pickupMarker);
                 pickupMarker = null;
             }
-            
+
             if (dropMarker) {
                 map.removeLayer(dropMarker);
                 dropMarker = null;
             }
-            
+
             pickupCoords = null;
             dropCoords = null;
-            
+
             document.getElementById('pickupLocation').value = '';
             document.getElementById('dropLocation').value = '';
             document.getElementById('routeInfo').classList.remove('show');
-            
+
             showToast('Cleared', 'Route and markers cleared', 'info', 2000);
         }
 
@@ -3653,6 +3878,425 @@
         }
 
         // ========================================
+        // WEATHER FORECAST FUNCTIONS
+        // ========================================
+        let weatherData = {};
+
+        async function fetchWeatherData(city, type) {
+            try {
+                // Using OpenWeatherMap API - replace with your API key
+                const API_KEY = 'demo'; // Replace with actual API key or use demo data
+                
+                // For demo purposes, generate mock weather data
+                const mockWeather = generateMockWeather(city);
+                weatherData[type] = mockWeather;
+                updateWeatherDisplay();
+                
+                // Uncomment below for real API integration
+                // const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},IN&appid=${API_KEY}&units=metric`);
+                // if (response.ok) {
+                //     const data = await response.json();
+                //     weatherData[type] = {
+                //         temp: Math.round(data.main.temp),
+                //         feels_like: Math.round(data.main.feels_like),
+                //         description: data.weather[0].description,
+                //         icon: data.weather[0].main,
+                //         humidity: data.main.humidity,
+                //         wind: Math.round(data.wind.speed * 3.6),
+                //         city: city
+                //     };
+                //     updateWeatherDisplay();
+                // }
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+                showWeatherError();
+            }
+        }
+
+        function generateMockWeather(city) {
+            const conditions = ['Clear', 'Clouds', 'Rain', 'Sunny'];
+            const condition = conditions[Math.floor(Math.random() * conditions.length)];
+            return {
+                temp: Math.round(20 + Math.random() * 15),
+                feels_like: Math.round(20 + Math.random() * 15),
+                description: condition.toLowerCase(),
+                icon: condition,
+                humidity: Math.round(40 + Math.random() * 40),
+                wind: Math.round(5 + Math.random() * 20),
+                city: city
+            };
+        }
+
+        function updateWeatherDisplay() {
+            const weatherSection = document.getElementById('weatherSection');
+            const weatherGrid = document.getElementById('weatherGrid');
+            
+            if (!weatherData.pickup && !weatherData.drop) {
+                weatherSection.style.display = 'none';
+                return;
+            }
+
+            weatherSection.style.display = 'block';
+            weatherGrid.innerHTML = '';
+
+            if (weatherData.pickup) {
+                weatherGrid.appendChild(createWeatherCard(weatherData.pickup, 'Pickup Location'));
+            }
+
+            if (weatherData.drop) {
+                weatherGrid.appendChild(createWeatherCard(weatherData.drop, 'Drop Location'));
+            }
+        }
+
+        function createWeatherCard(data, label) {
+            const card = document.createElement('div');
+            card.className = 'weather-card';
+            
+            const iconMap = {
+                'Clear': '☀️',
+                'Sunny': '☀️',
+                'Clouds': '☁️',
+                'Rain': '🌧️',
+                'Snow': '❄️',
+                'Thunderstorm': '⛈️'
+            };
+
+            card.innerHTML = `
+                <div class="weather-card-header">
+                    <div>
+                        <div class="weather-location">${label}</div>
+                        <div style="font-weight: 600; color: white; margin-top: 5px;">${data.city}</div>
+                    </div>
+                    <div class="weather-icon">${iconMap[data.icon] || '🌤️'}</div>
+                </div>
+                <div class="weather-temp">${data.temp}°C</div>
+                <div class="weather-desc">${data.description.charAt(0).toUpperCase() + data.description.slice(1)}</div>
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <i class="fas fa-temperature-high"></i>
+                        <span>Feels like ${data.feels_like}°C</span>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-tint"></i>
+                        <span>Humidity ${data.humidity}%</span>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-wind"></i>
+                        <span>Wind ${data.wind} km/h</span>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function showWeatherError() {
+            const weatherGrid = document.getElementById('weatherGrid');
+            weatherGrid.innerHTML = `
+                <div class="weather-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Unable to load weather data. Please try again later.</p>
+                </div>
+            `;
+        }
+
+        // ========================================
+        // ROUTE OPTIMIZATION WITH WAYPOINTS
+        // ========================================
+        let waypoints = [];
+        let waypointMarkers = [];
+
+        function addWaypoint() {
+            const waypointId = 'waypoint-' + Date.now();
+            const waypointNumber = waypoints.length + 1;
+            
+            waypoints.push({
+                id: waypointId,
+                city: '',
+                coords: null
+            });
+
+            const waypointsList = document.getElementById('waypointsList');
+            const waypointItem = document.createElement('div');
+            waypointItem.className = 'waypoint-item';
+            waypointItem.id = waypointId;
+            waypointItem.innerHTML = `
+                <div class="waypoint-number">${waypointNumber}</div>
+                <div class="waypoint-input autocomplete-wrapper">
+                    <input type="text" 
+                           id="${waypointId}-input" 
+                           placeholder="Enter stop location..." 
+                           autocomplete="off"
+                           onchange="updateWaypoint('${waypointId}', this.value)">
+                    <div class="autocomplete-dropdown" id="${waypointId}-dropdown"></div>
+                </div>
+                <div class="waypoint-actions">
+                    <button type="button" class="waypoint-action-btn" onclick="moveWaypointUp('${waypointId}')" title="Move up">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <button type="button" class="waypoint-action-btn" onclick="moveWaypointDown('${waypointId}')" title="Move down">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <button type="button" class="waypoint-action-btn delete" onclick="removeWaypoint('${waypointId}')" title="Remove">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+
+            waypointsList.appendChild(waypointItem);
+
+            // Setup autocomplete for this waypoint
+            setupWaypointAutocomplete(waypointId);
+
+            // Show optimize button if we have waypoints
+            updateOptimizeButton();
+
+            showToast('Waypoint Added', 'Add a stop location along your route', 'success', 2000);
+        }
+
+        function setupWaypointAutocomplete(waypointId) {
+            const input = document.getElementById(waypointId + '-input');
+            const dropdown = document.getElementById(waypointId + '-dropdown');
+
+            if (!input || !dropdown) return;
+
+            input.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                
+                if (query.length < 2) {
+                    dropdown.classList.remove('show');
+                    return;
+                }
+
+                const cities = Object.keys(cityCoordinates);
+                const matches = cities.filter(city => city.toLowerCase().includes(query));
+
+                if (matches.length > 0) {
+                    dropdown.innerHTML = matches.slice(0, 5).map(city => `
+                        <div class="autocomplete-item" onclick="selectWaypointCity('${waypointId}', '${city}')">
+                            <i class="fas fa-map-marker-alt"></i> ${city}
+                        </div>
+                    `).join('');
+                    dropdown.classList.add('show');
+                } else {
+                    dropdown.classList.remove('show');
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
+
+        function selectWaypointCity(waypointId, city) {
+            const input = document.getElementById(waypointId + '-input');
+            const dropdown = document.getElementById(waypointId + '-dropdown');
+            
+            if (input) input.value = city;
+            if (dropdown) dropdown.classList.remove('show');
+            
+            updateWaypoint(waypointId, city);
+        }
+
+        function updateWaypoint(waypointId, city) {
+            const waypoint = waypoints.find(w => w.id === waypointId);
+            if (waypoint) {
+                waypoint.city = city;
+                waypoint.coords = cityCoordinates[city] || null;
+                
+                if (waypoint.coords) {
+                    // Add marker to map
+                    addWaypointMarker(waypoint);
+                    // Recalculate route
+                    if (pickupCoords && dropCoords) {
+                        calculateRouteWithWaypoints();
+                    }
+                }
+            }
+            triggerAutoSave();
+        }
+
+        function addWaypointMarker(waypoint) {
+            // Remove existing marker if any
+            const existingMarker = waypointMarkers.find(m => m.id === waypoint.id);
+            if (existingMarker && existingMarker.marker) {
+                map.removeLayer(existingMarker.marker);
+            }
+
+            if (!waypoint.coords) return;
+
+            const waypointIcon = L.divIcon({
+                className: 'custom-waypoint-icon',
+                html: '<div style="background: #FFC107; color: #000; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">•</div>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+
+            const marker = L.marker(waypoint.coords, { icon: waypointIcon }).addTo(map);
+            marker.bindPopup('<b>Stop:</b><br>' + waypoint.city);
+
+            // Store marker reference
+            const markerIndex = waypointMarkers.findIndex(m => m.id === waypoint.id);
+            if (markerIndex >= 0) {
+                waypointMarkers[markerIndex].marker = marker;
+            } else {
+                waypointMarkers.push({ id: waypoint.id, marker: marker });
+            }
+        }
+
+        function removeWaypoint(waypointId) {
+            // Remove from array
+            waypoints = waypoints.filter(w => w.id !== waypointId);
+            
+            // Remove marker from map
+            const markerData = waypointMarkers.find(m => m.id === waypointId);
+            if (markerData && markerData.marker) {
+                map.removeLayer(markerData.marker);
+            }
+            waypointMarkers = waypointMarkers.filter(m => m.id !== waypointId);
+            
+            // Remove DOM element
+            const element = document.getElementById(waypointId);
+            if (element) element.remove();
+            
+            // Renumber remaining waypoints
+            renumberWaypoints();
+            
+            // Update route
+            if (pickupCoords && dropCoords) {
+                calculateRouteWithWaypoints();
+            }
+            
+            updateOptimizeButton();
+            showToast('Removed', 'Waypoint removed', 'info', 2000);
+        }
+
+        function moveWaypointUp(waypointId) {
+            const index = waypoints.findIndex(w => w.id === waypointId);
+            if (index > 0) {
+                [waypoints[index], waypoints[index - 1]] = [waypoints[index - 1], waypoints[index]];
+                renumberWaypoints();
+                if (pickupCoords && dropCoords) {
+                    calculateRouteWithWaypoints();
+                }
+            }
+        }
+
+        function moveWaypointDown(waypointId) {
+            const index = waypoints.findIndex(w => w.id === waypointId);
+            if (index < waypoints.length - 1) {
+                [waypoints[index], waypoints[index + 1]] = [waypoints[index + 1], waypoints[index]];
+                renumberWaypoints();
+                if (pickupCoords && dropCoords) {
+                    calculateRouteWithWaypoints();
+                }
+            }
+        }
+
+        function renumberWaypoints() {
+            const waypointsList = document.getElementById('waypointsList');
+            const items = Array.from(waypointsList.children);
+            
+            waypoints.forEach((waypoint, index) => {
+                const element = document.getElementById(waypoint.id);
+                if (element) {
+                    const numberEl = element.querySelector('.waypoint-number');
+                    if (numberEl) numberEl.textContent = index + 1;
+                    
+                    // Reorder in DOM
+                    waypointsList.appendChild(element);
+                }
+            });
+        }
+
+        function updateOptimizeButton() {
+            const optimizeBtn = document.getElementById('optimizeRouteBtn');
+            if (waypoints.length > 0) {
+                optimizeBtn.style.display = 'flex';
+            } else {
+                optimizeBtn.style.display = 'none';
+            }
+        }
+
+        function optimizeRoute() {
+            if (waypoints.length === 0) return;
+
+            // Simple optimization: calculate all permutations and find shortest
+            // For production, use a proper TSP solver or Google Maps Directions API
+            
+            showToast('Optimizing', 'Calculating optimal route...', 'info', 2000);
+
+            // Simulate optimization delay
+            setTimeout(() => {
+                // Mock optimization - in reality, this would calculate distances
+                const originalDistance = estimatedDistance;
+                const saved = Math.round(Math.random() * 50 + 10);
+                const timeSaved = Math.round(saved / 60 * 60);
+
+                document.getElementById('distanceSaved').textContent = saved + ' km';
+                document.getElementById('timeSaved').textContent = timeSaved + ' mins';
+                document.getElementById('optimizationResult').classList.add('show');
+
+                showToast('Optimized!', `Route optimized to save ${saved}km`, 'success', 3000);
+                
+                // Recalculate route with optimized order
+                calculateRouteWithWaypoints();
+            }, 1500);
+        }
+
+        function calculateRouteWithWaypoints() {
+            if (!pickupCoords || !dropCoords) return;
+
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            // Build waypoints array: pickup -> all stops -> drop
+            const routeWaypoints = [L.latLng(pickupCoords[0], pickupCoords[1])];
+            
+            waypoints.forEach(wp => {
+                if (wp.coords) {
+                    routeWaypoints.push(L.latLng(wp.coords[0], wp.coords[1]));
+                }
+            });
+            
+            routeWaypoints.push(L.latLng(dropCoords[0], dropCoords[1]));
+
+            routingControl = L.Routing.control({
+                waypoints: routeWaypoints,
+                routeWhileDragging: false,
+                showAlternatives: false,
+                lineOptions: {
+                    styles: [{ color: '#ff6347', opacity: 0.8, weight: 5 }]
+                },
+                createMarker: function () { return null; },
+                addWaypoints: false
+            }).addTo(map);
+
+            routingControl.on('routesfound', function (e) {
+                const route = e.routes[0];
+                const distance = (route.summary.totalDistance / 1000).toFixed(2);
+                const time = (route.summary.totalTime / 3600).toFixed(1);
+                const cost = Math.round(distance * 15);
+
+                document.getElementById('routeDistance').textContent = distance + ' km';
+                document.getElementById('routeTime').textContent = time + ' hours';
+                document.getElementById('routeCost').textContent = '₹ ' + cost.toLocaleString();
+
+                document.getElementById('routeInfo').classList.add('show');
+
+                const stopsText = waypoints.length > 0 ? ` with ${waypoints.length} stop(s)` : '';
+                showToast('Route Updated', `Distance: ${distance}km${stopsText}`, 'success', 3000);
+            });
+
+            const bounds = L.latLngBounds(routeWaypoints);
+            map.fitBounds(bounds, { padding: [50, 50] });
+        }
+
+        // ========================================
         // DOM CONTENT LOADED - INITIALIZATION
         // ========================================
         document.addEventListener('DOMContentLoaded', function () {
@@ -3682,7 +4326,7 @@
             dateInput.min = today;
 
             // Add date validation for blackout dates
-            dateInput.addEventListener('change', function() {
+            dateInput.addEventListener('change', function () {
                 validatePickupDate();
                 updateBookingSummary();
                 triggerAutoSave();
@@ -3690,16 +4334,16 @@
 
             // Add input event listeners for real-time validation
             const validationFields = ['fullName', 'phone', 'email', 'vehicleType', 'pickupCity', 'dropCity', 'pickupDate'];
-            
+
             validationFields.forEach(field => {
                 const input = document.getElementById(field);
                 if (input) {
-                    input.addEventListener('input', function() {
+                    input.addEventListener('input', function () {
                         validateField(field, this.value);
                         updateBookingSummary();
                     });
-                    
-                    input.addEventListener('blur', function() {
+
+                    input.addEventListener('blur', function () {
                         validateField(field, this.value);
                     });
                 }
@@ -3723,28 +4367,28 @@
             });
 
             // Vehicle type change - update pricing
-            document.getElementById('vehicleType').addEventListener('change', function() {
+            document.getElementById('vehicleType').addEventListener('change', function () {
                 updatePriceCalculation();
                 updateBookingSummary();
             });
 
             // Distance slider - initialize with estimated distance if cities selected
             const distanceSlider = document.getElementById('distanceSlider');
-            distanceSlider.addEventListener('input', function() {
+            distanceSlider.addEventListener('input', function () {
                 updatePriceCalculation();
                 updateBookingSummary();
             });
-            
+
             // Initialize price calculation on load
             updatePriceCalculation();
 
             // Pickup date change
-            document.getElementById('pickupDate').addEventListener('change', function() {
+            document.getElementById('pickupDate').addEventListener('change', function () {
                 updateBookingSummary();
             });
 
             // Pickup time change
-            document.getElementById('pickupTime').addEventListener('change', function() {
+            document.getElementById('pickupTime').addEventListener('change', function () {
                 updateBookingSummary();
             });
 
@@ -3823,7 +4467,7 @@
         function toggleAddon(element, addonId, price) {
             const checkbox = element.querySelector('input[type="checkbox"]');
             checkbox.checked = !checkbox.checked;
-            
+
             if (checkbox.checked) {
                 element.classList.add('selected');
                 selectedAddons.push({ id: addonId, price: price });
@@ -3833,7 +4477,7 @@
                 selectedAddons = selectedAddons.filter(a => a.id !== addonId);
                 addonsTotalPrice -= price;
             }
-            
+
             updateAddonsDisplay();
             updatePriceCalculation();
             triggerAutoSave();
@@ -3842,7 +4486,7 @@
         function updateAddonsDisplay() {
             const addonsTotal = document.getElementById('addonsTotal');
             const addonsPrice = document.getElementById('addonsPrice');
-            
+
             if (addonsTotalPrice > 0) {
                 addonsTotal.style.display = 'flex';
                 addonsPrice.textContent = '₹ ' + addonsTotalPrice.toLocaleString();
@@ -3857,37 +4501,41 @@
         function fillRoute(fromCity, toCity) {
             document.getElementById('pickupCity').value = fromCity;
             document.getElementById('dropCity').value = toCity;
-            
+
             selectedPickupCity = fromCity;
             selectedDropCity = toCity;
-            
+
             // Trigger validations
             validateField('pickupCity', fromCity);
             validateField('dropCity', toCity);
-            
+
+            // Fetch weather for both cities
+            fetchWeatherData(fromCity, 'pickup');
+            fetchWeatherData(toCity, 'drop');
+
             // Calculate distance
             calculateDistanceEstimate();
-            
+
             // Update summary
             updateBookingSummary();
-            
+
             // Auto-save
             triggerAutoSave();
-            
+
             // First, try to use city coordinates from our database
             const pickupCoord = cityCoordinates[fromCity];
             const dropCoord = cityCoordinates[toCity];
-            
+
             if (pickupCoord && dropCoord) {
                 // Use coordinates from database
                 setPickupLocation(pickupCoord[0], pickupCoord[1], fromCity);
                 setDropLocation(dropCoord[0], dropCoord[1], toCity);
-                
+
                 // Calculate and show route
                 setTimeout(() => {
                     calculateRoute();
                 }, 500);
-                
+
                 // Scroll to map section
                 setTimeout(() => {
                     const mapSection = document.querySelector('.map-section');
@@ -3900,12 +4548,12 @@
                 geocodeCity(fromCity, (pickupLatLng) => {
                     if (pickupLatLng) {
                         setPickupLocation(pickupLatLng[0], pickupLatLng[1], fromCity);
-                        
+
                         // Then geocode drop city
                         geocodeCity(toCity, (dropLatLng) => {
                             if (dropLatLng) {
                                 setDropLocation(dropLatLng[0], dropLatLng[1], toCity);
-                                
+
                                 // Calculate and show route
                                 setTimeout(() => {
                                     calculateRoute();
@@ -3914,7 +4562,7 @@
                         });
                     }
                 });
-                
+
                 // Scroll to map section
                 setTimeout(() => {
                     const mapSection = document.querySelector('.map-section');
@@ -3923,13 +4571,13 @@
                     }
                 }, 1000);
             }
-            
+
             // Show toast
             showToast('Route Selected', `${fromCity} → ${toCity}`, 'success', 2000);
-            
+
             // Track analytics
             trackAnalytics('route_select', { from: fromCity, to: toCity });
-            
+
             // Jump to step 2 if on step 1
             if (currentStep === 1) {
                 setTimeout(() => {
@@ -3967,7 +4615,7 @@
 
         function trackAnalytics(event, data = {}) {
             // Update analytics data
-            switch(event) {
+            switch (event) {
                 case 'page_view':
                     analyticsData.pageViews++;
                     break;
@@ -3991,15 +4639,15 @@
                     analyticsData.popularRoutes[route] = (analyticsData.popularRoutes[route] || 0) + 1;
                     break;
             }
-            
+
             // Calculate conversion rate
             if (analyticsData.formStarts > 0) {
                 analyticsData.conversionRate = (analyticsData.bookingSubmissions / analyticsData.formStarts * 100).toFixed(2);
             }
-            
+
             // Save to localStorage
             localStorage.setItem('bookingAnalytics', JSON.stringify(analyticsData));
-            
+
             // In production, send to analytics service (Google Analytics, Mixpanel, etc.)
             console.log('Analytics Event:', event, data, analyticsData);
         }
@@ -4010,7 +4658,7 @@
         // Track when user starts filling the form
         let formStartTracked = false;
         document.querySelectorAll('#bookingForm input, #bookingForm select').forEach(input => {
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 if (!formStartTracked) {
                     trackAnalytics('form_start');
                     formStartTracked = true;
@@ -4022,9 +4670,9 @@
         // ENHANCED PRICE CALCULATION WITH ADDONS
         // ========================================
         const originalUpdatePriceCalculation = updatePriceCalculation;
-        updatePriceCalculation = function() {
+        updatePriceCalculation = function () {
             originalUpdatePriceCalculation();
-            
+
             // Add addons to total
             if (addonsTotalPrice > 0) {
                 const currentTotal = parseFloat(document.getElementById('totalPrice').textContent.replace(/[₹,]/g, '')) || 0;

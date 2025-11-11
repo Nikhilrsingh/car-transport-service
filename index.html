@@ -45,277 +45,8 @@
     </div>
   </div>
 
-  <link rel="stylesheet" href="css/components/navbar.css">
-
-  <!-- Enhanced Navigation Component -->
-  <header class="header">
-    <div class="navbar-container">
-      <div class="navbar">
-        <!-- Left Logo -->
-        <div class="logo-container left-logo">
-          <img src="./assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
-        </div>
-
-        <!-- Desktop Navigation -->
-        <nav class="desktop-nav" aria-label="Main navigation">
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a href="./index.html" class="nav-link active" data-page="home" data-tooltip="Home">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./pages/about.html" class="nav-link" data-page="about" data-tooltip="About">
-                <i class="fas fa-info-circle"></i>
-                <span>About</span>
-              </a>
-            </li>
-
-            <!-- Dropdown for services -->
-            <li class="nav-item dropdown-nav" data-dropdown>
-
-              <div class="nav-link" data-dropdown-btn>
-                <i class="fas fa-truck-moving"></i>
-                <span>Services</span>
-                <i class="fa-solid fa-caret-down"></i>
-              </div>
-
-              <div class="dropdown-menu">
-                <ul style="list-style-type: none;">
-                  <li class="nav-item">
-                    <a href="./services.html" class="nav-link" data-page="services" data-tooltip="Services">
-                      <i class="fas fa-truck-moving"></i>
-                      <span>Our Services</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="./pages/booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
-                      <i class="fas fa-calendar-check"></i>
-                      <span>Booking</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="./pages/pricing.html" class="nav-link" data-page="pricing" data-tooltip="Pricing">
-                      <i class="fas fa-tags"></i>
-                      <span>Pricing</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="./pages/tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <span>Track Your Car</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-            </li>
-
-            <li class="nav-item">
-              <a href="./pages/contact.html" class="nav-link" data-page="contact" data-tooltip="Contact">
-                <i class="fas fa-phone"></i>
-                <span>Contact</span>
-              </a>
-            </li>
-
-            <li class="nav-item dropdown-nav" data-dropdown>
-              <div class="nav-link" data-dropdown-btn>
-                <i class="fa-solid fa-layer-group"></i></i>
-                <span>More</span>
-                <i class="fa-solid fa-caret-down"></i>
-              </div>
-
-              <div class="dropdown-menu">
-                <ul style="list-style-type: none;">
-                  <li>
-                    <a href="./pages/gallery.html" class="nav-link" data-page="gallery" data-tooltip="Gallery">
-                      <i class="fas fa-images"></i>
-                      <span>Gallery</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="./pages/contributors.html" class="nav-link" data-page="contributors"
-                      data-tooltip="Contributors">
-                      <i class="fas fa-users"></i>
-                      <span>Contributors</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="./pages/blog.html" class="nav-link blog-link" data-tooltip="Blog">
-                      <i class="fas fa-blog"></i>
-                      <span>Blog</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-            </li>
-          </ul>
-
-          <!-- creating a div for left aligb navigation links  -->
-          <div class="nav-right-section">
-            <!-- Search Bar -->
-            <div class="search-container">
-              <div class="search-bar">
-                <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
-                <i class="fas fa-search"></i>
-              </div>
-            </div>
-
-            <div class="theme-widget" id="themeWidget">
-              <label for="themeWidgetSelect" class="sr-only">Choose theme</label>
-              <select id="themeWidgetSelect" aria-label="Choose theme">
-                <option value="auto">Theme</option>
-                <option value="default">Default</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="glass">Glass</option>
-              </select>
-            </div>
-
-            <div class="action-nav">
-              <a href="./pages/enquiry.html" class="enquiry-link" data-tooltip="Enquiry">
-                <i class="fas fa-question-circle"></i>
-              </a>
-            </div>
-          </div>
-
-
-          <div class="nav-actions">
-            <a href="./pages/login.html" class="login-btn" data-tooltip="Login">
-              <i class="fas fa-user"></i>
-              <span>Login</span>
-            </a>
-          </div>
-        </nav>
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-      <div class="mobile-nav-header">
-        <div class="mobile-logo">
-          <img src="./assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-          <span>Harihar Car Carriers</span>
-        </div>
-        <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-
-      <!-- Mobile Search Bar -->
-      <div class="mobile-search-container">
-        <div class="mobile-search-bar">
-          <i class="fas fa-search"></i>
-          <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
-        </div>
-      </div>
-
-      <ul class="mobile-nav-list">
-        <li class="mobile-nav-item">
-          <a href="./index.html" class="mobile-nav-link active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/about.html" class="mobile-nav-link">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./services.html" class="mobile-nav-link">
-            <i class="fas fa-truck-moving"></i>
-            <span>Services</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/booking.html" class="mobile-nav-link">
-            <i class="fas fa-calendar-check"></i>
-            <span>Booking</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/contributors.html" class="mobile-nav-link">
-            <i class="fas fa-users"></i>
-            <span>Contributors</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/pricing.html" class="mobile-nav-link">
-            <i class="fas fa-tags"></i>
-            <span>Pricing</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/tracking.html" class="mobile-nav-link">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Track Your Car</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/gallery.html" class="mobile-nav-link">
-            <i class="fas fa-images"></i>
-            <span>Gallery</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/contact.html" class="mobile-nav-link">
-            <i class="fas fa-phone"></i>
-            <span>Contact</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/enquiry.html" class="mobile-nav-link">
-            <i class="fas fa-question-circle"></i>
-            <span>Enquiry</span>
-          </a>
-        </li>
-        <li class="mobile-nav-item">
-          <a href="./pages/blog.html" class="mobile-nav-link">
-            <i class="fas fa-blog"></i>
-            <span>Blog</span>
-          </a>
-        </li>
-      </ul>
-      <div class="mobile-nav-actions">
-        <a href="./pages/login.html" class="mobile-login-btn">
-          <i class="fas fa-user"></i>
-          <span>Login</span>
-        </a>
-        <a href="./pages/booking.html" class="mobile-cta-btn">
-          <i class="fas fa-truck"></i>
-          <span>Book Instantly</span>
-        </a>
-      </div>
-      <div class="mobile-contact-info">
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <span>+91 98765 43210</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <span>info@hariharcarcarriers.com</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-clock"></i>
-          <span>24/7 Support</span>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Navigation Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
-    </div>
-  </header>
+  <!-- Navbar Container - Loaded dynamically -->
+  <div id="navbar-container"></div>
 
   <!-- 🌿 Automated Image Slider Section -->
   <section class="auto-slider">
@@ -708,100 +439,48 @@
     </div>
   </section>
 
-  <!-- Region-Wise Presence Section -->
-  <!-- <section class="region-section">
-    <h2>Region-Wise Presence</h2>
-    <div class="region-search-container">
-      <input type="text" id="regionSearch" class="region-search" placeholder="Search for a city..." aria-label="Search cities">
-      <i class="fas fa-search"></i>
-    </div>
-    <div class="region-grid" id="regionGrid">
-      <a href="#" class="region-btn">Car Transport in Mumbai</a>
-      <a href="#" class="region-btn">Car Transport in Chennai</a>
-      <a href="#" class="region-btn">Car Transport in Udaipur</a>
-      <a href="#" class="region-btn">Car Transport in Bangalore</a>
-      <a href="#" class="region-btn">Car Transport in Navi Mumbai</a>
-      <a href="#" class="region-btn">Car Transport in Kottayam</a>
+
+      <!-- <a href="#" class="region-btn">Car Transport in Kottayam</a>
       <a href="#" class="region-btn">Car Transport in Pondichery</a>
       <a href="#" class="region-btn">Car Transport in Jamshedpur</a>
-      <a href="#" class="region-btn">Car Transport in Thane</a>
       <a href="#" class="region-btn">Car Transport in Tirupur</a>
-      <a href="#" class="region-btn">Car Transport in Varanasi</a>
-      <a href="#" class="region-btn">Car Transport in Ranchi</a>
       <a href="#" class="region-btn">Car Transport in Virar</a>
-      <a href="#" class="region-btn">Car Transport in Nagpur</a>
       <a href="#" class="region-btn">Car Transport in Haryana</a>
-      <a href="#" class="region-btn">Car Transport in Bhubaneswar</a>
       <a href="#" class="region-btn">Car Transport in Chembur</a>
       <a href="#" class="region-btn">Car Transport in Haridwar</a>
       <a href="#" class="region-btn">Car Transport in Port Blair</a>
       <a href="#" class="region-btn">Car Transport in Jodhpur</a>
       <a href="#" class="region-btn">Car Transport in Ulwe</a>
-      <a href="#" class="region-btn">Car Transport in Allahabad</a>
-      <a href="#" class="region-btn">Car Transport in Pune</a>
-      <a href="#" class="region-btn">Car Transport in Rajkot</a>
       <a href="#" class="region-btn">Car Transport in Andheri</a>
-      <a href="#" class="region-btn">Car Transport in Aurangabad</a>
-      <a href="#" class="region-btn">Car Transport in Indore</a>
       <a href="#" class="region-btn">Car Transport in Bhuj</a>
       <a href="#" class="region-btn">Car Transport in Bandra</a>
       <a href="#" class="region-btn">Car Transport in Hisar</a>
-      <a href="#" class="region-btn">Car Transport in Bhopal</a>
-      <a href="#" class="region-btn">Car Transport in Jaipur</a>
       <a href="#" class="region-btn">Car Transport in Dadar</a>
-      <a href="#" class="region-btn">Car Transport in Patna</a>
       <a href="#" class="region-btn">Car Transport in Baroda</a>
-      <a href="#" class="region-btn">Car Transport in Rourkela</a>
-      <a href="#" class="region-btn">Car Transport in Agra</a>
-      <a href="#" class="region-btn">Car Transport in Ahmedabad</a>
-      <a href="#" class="region-btn">Car Transport in Jabalpur</a>
-      <a href="#" class="region-btn">Car Transport in Chandigarh</a>
-      <a href="#" class="region-btn">Car Transport in Ghaziabad</a>
       <a href="#" class="region-btn">Car Transport in Patalganga</a>
       <a href="#" class="region-btn">Car Transport in Goa</a>
       <a href="#" class="region-btn">Car Transport in Jammu Kashmir</a>
       <a href="#" class="region-btn">Car Transport in Ambala</a>
       <a href="#" class="region-btn">Car Transport in Ankleshwar</a>
-      <a href="#" class="region-btn">Car Transport in Madurai</a>
       <a href="#" class="region-btn">Car Transport in Rudrapur</a>
-      <a href="#" class="region-btn">Car Transport in Guwahati</a>
-      <a href="#" class="region-btn">Car Transport in Hyderabad</a>
       <a href="#" class="region-btn">Car Transport in Banaras</a>
-      <a href="#" class="region-btn">Car Transport in Kanpur</a>
-      <a href="#" class="region-btn">Car Transport in Nashik</a>
-      <a href="#" class="region-btn">Car Transport in Dehradun</a>
-      <a href="#" class="region-btn">Car Transport in Gurgaon</a>
       <a href="#" class="region-btn">Car Transport in Raigarh</a>
       <a href="#" class="region-btn">Car Transport in Noida</a>
-      <a href="#" class="region-btn">Car Transport in Ludhiana</a>
       <a href="#" class="region-btn">Car Transport in Vapi</a>
-      <a href="#" class="region-btn">Car Transport in Coimbatore</a>
       <a href="#" class="region-btn">Car Transport in Calicut</a>
       <a href="#" class="region-btn">Car Transport in Trivandrum</a>
-      <a href="#" class="region-btn">Car Transport in Gwalior</a>
-      <a href="#" class="region-btn">Car Transport in Kolkata</a>
       <a href="#" class="region-btn">Car Transport in Kalighat</a>
-      <a href="#" class="region-btn">Car Transport in Delhi</a>
       <a href="#" class="region-btn">Car Transport in Mysore</a>
       <a href="#" class="region-btn">Car Transport in Siliguri</a>
-      <a href="#" class="region-btn">Car Transport in Surat</a>
-      <a href="#" class="region-btn">Car Transport in Lucknow</a>
-      <a href="#" class="region-btn">Car Transport in Vijaywada</a>
       <a href="#" class="region-btn">Car Transport in Mangalore</a>
       <a href="#" class="region-btn">Car Transport in Cochin</a>
       <a href="#" class="region-btn">Car Transport in Trichy</a>
       <a href="#" class="region-btn">Car Transport in Gandhidham</a>
       <a href="#" class="region-btn">Car Transport in Pilani</a>
       <a href="#" class="region-btn">Car Transport in Kolhapur</a>
-      <a href="#" class="region-btn">Car Transport in Faridabad</a>
-      <a href="#" class="region-btn">Car Transport in Vishakhapatnam</a>
       <a href="#" class="region-btn">Car Transport in Bhiwani</a>
       <a href="#" class="region-btn">Car Transport in Tinsukia</a>
-      <a href="#" class="region-btn">Car Transport in Meerut</a>
-      <a href="#" class="region-btn">Car Transport in Raipur</a>
-      <a href="#" class="region-btn">Car Transport in Rajasthan</a>
-</div>
-  </section> -->
+      <a href="#" class="region-btn">Car Transport in Rajasthan</a> -->
 
 
 <!-- Region-Wise Presence Section -->
@@ -812,69 +491,69 @@
       <i class="fas fa-search"></i>
     </div>
     <div class="region-grid" id="regionGrid">
-      <a href="/pages/city.html?city=agra" class="region-btn">Car Transport in Agra</a>
-<a href="/pages/city.html?city=ahmedabad" class="region-btn">Car Transport in Ahmedabad</a>
-<a href="/pages/city.html?city=aizawl" class="region-btn">Car Transport in Aizawl</a>
-<a href="/pages/city.html?city=aligarh" class="region-btn">Car Transport in Aligarh</a>
-<a href="/pages/city.html?city=allahabad" class="region-btn">Car Transport in Allahabad</a>
-<a href="/pages/city.html?city=amritsar" class="region-btn">Car Transport in Amritsar</a>
-<a href="/pages/city.html?city=aurangabad" class="region-btn">Car Transport in Aurangabad</a>
-<a href="/pages/city.html?city=bangalore" class="region-btn">Car Transport in Bangalore</a>
-<a href="/pages/city.html?city=bareilly" class="region-btn">Car Transport in Bareilly</a>
-<a href="/pages/city.html?city=bhopal" class="region-btn">Car Transport in Bhopal</a>
-<a href="/pages/city.html?city=bhubaneswar" class="region-btn">Car Transport in Bhubaneswar</a>
-<a href="/pages/city.html?city=bikaner" class="region-btn">Car Transport in Bikaner</a>
-<a href="/pages/city.html?city=bilaspur" class="region-btn">Car Transport in Bilaspur</a>
-<a href="/pages/city.html?city=chandigarh" class="region-btn">Car Transport in Chandigarh</a>
-<a href="/pages/city.html?city=chennai" class="region-btn">Car Transport in Chennai</a>
-<a href="/pages/city.html?city=coimbatore" class="region-btn">Car Transport in Coimbatore</a>
-<a href="/pages/city.html?city=cuttack" class="region-btn">Car Transport in Cuttack</a>
-<a href="/pages/city.html?city=dehradun" class="region-btn">Car Transport in Dehradun</a>
-<a href="/pages/city.html?city=delhi" class="region-btn">Car Transport in Delhi</a>
-<a href="/pages/city.html?city=dhanbad" class="region-btn">Car Transport in Dhanbad</a>
-<a href="/pages/city.html?city=durgapur" class="region-btn">Car Transport in Durgapur</a>
-<a href="/pages/city.html?city=faridabad" class="region-btn">Car Transport in Faridabad</a>
-<a href="/pages/city.html?city=gandhinagar" class="region-btn">Car Transport in Gandhinagar</a>
-<a href="/pages/city.html?city=gangtok" class="region-btn">Car Transport in Gangtok</a>
-<a href="/pages/city.html?city=ghaziabad" class="region-btn">Car Transport in Ghaziabad</a>
-<a href="/pages/city.html?city=gorakhpur" class="region-btn">Car Transport in Gorakhpur</a>
-<a href="/pages/city.html?city=gurgaon" class="region-btn">Car Transport in Gurgaon</a>
-<a href="/pages/city.html?city=guwahati" class="region-btn">Car Transport in Guwahati</a>
-<a href="/pages/city.html?city=gwalior" class="region-btn">Car Transport in Gwalior</a>
-<a href="/pages/city.html?city=hyderabad" class="region-btn">Car Transport in Hyderabad</a>
-<a href="/pages/city.html?city=imphal" class="region-btn">Car Transport in Imphal</a>
-<a href="/pages/city.html?city=indore" class="region-btn">Car Transport in Indore</a>
-<a href="/pages/city.html?city=itanagar" class="region-btn">Car Transport in Itanagar</a>
-<a href="/pages/city.html?city=jabalpur" class="region-btn">Car Transport in Jabalpur</a>
-<a href="/pages/city.html?city=jaipur" class="region-btn">Car Transport in Jaipur</a>
-<a href="/pages/city.html?city=jalandhar" class="region-btn">Car Transport in Jalandhar</a>
-<a href="/pages/city.html?city=kanpur" class="region-btn">Car Transport in Kanpur</a>
-<a href="/pages/city.html?city=kolkata" class="region-btn">Car Transport in Kolkata</a>
-<a href="/pages/city.html?city=kota" class="region-btn">Car Transport in Kota</a>
-<a href="/pages/city.html?city=lucknow" class="region-btn">Car Transport in Lucknow</a>
-<a href="/pages/city.html?city=ludhiana" class="region-btn">Car Transport in Ludhiana</a>
-<a href="/pages/city.html?city=madurai" class="region-btn">Car Transport in Madurai</a>
-<a href="/pages/city.html?city=meerut" class="region-btn">Car Transport in Meerut</a>
-<a href="/pages/city.html?city=mumbai" class="region-btn">Car Transport in Mumbai</a>
-<a href="/pages/city.html?city=nagpur" class="region-btn">Car Transport in Nagpur</a>
-<a href="/pages/city.html?city=nashik" class="region-btn">Car Transport in Nashik</a>
-<a href="/pages/city.html?city=navi_mumbai" class="region-btn">Car Transport in Navi Mumbai</a>
-<a href="/pages/city.html?city=patna" class="region-btn">Car Transport in Patna</a>
-<a href="/pages/city.html?city=pune" class="region-btn">Car Transport in Pune</a>
-<a href="/pages/city.html?city=puri" class="region-btn">Car Transport in Puri</a>
-<a href="/pages/city.html?city=raipur" class="region-btn">Car Transport in Raipur</a>
-<a href="/pages/city.html?city=rajkot" class="region-btn">Car Transport in Rajkot</a>
-<a href="/pages/city.html?city=ranchi" class="region-btn">Car Transport in Ranchi</a>
-<a href="/pages/city.html?city=rourkela" class="region-btn">Car Transport in Rourkela</a>
-<a href="/pages/city.html?city=shimla" class="region-btn">Car Transport in Shimla</a>
-<a href="/pages/city.html?city=srinagar" class="region-btn">Car Transport in Srinagar</a>
-<a href="/pages/city.html?city=surat" class="region-btn">Car Transport in Surat</a>
-<a href="/pages/city.html?city=thane" class="region-btn">Car Transport in Thane</a>
-<a href="/pages/city.html?city=udaipur" class="region-btn">Car Transport in Udaipur</a>
-<a href="/pages/city.html?city=vadodara" class="region-btn">Car Transport in Vadodara</a>
-<a href="/pages/city.html?city=varanasi" class="region-btn">Car Transport in Varanasi</a>
-<a href="/pages/city.html?city=vijayawada" class="region-btn">Car Transport in Vijayawada</a>
-<a href="/pages/city.html?city=visakhapatnam" class="region-btn">Car Transport in Visakhapatnam</a>
+      <a href="/pages/city.html?city=agra" class="region-card effect-1">Car Transport in Agra</a>
+<a href="/pages/city.html?city=ahmedabad" class="region-card effect-2">Car Transport in Ahmedabad</a>
+<a href="/pages/city.html?city=aizawl" class="region-card effect-3">Car Transport in Aizawl</a>
+<a href="/pages/city.html?city=aligarh" class="region-card effect-4">Car Transport in Aligarh</a>
+<a href="/pages/city.html?city=allahabad" class="region-card effect-1">Car Transport in Allahabad</a>
+<a href="/pages/city.html?city=amritsar" class="region-card effect-2">Car Transport in Amritsar</a>
+<a href="/pages/city.html?city=aurangabad" class="region-card effect-3">Car Transport in Aurangabad</a>
+<a href="/pages/city.html?city=bangalore" class="region-card effect-4">Car Transport in Bangalore</a>
+<a href="/pages/city.html?city=bareilly" class="region-card effect-1">Car Transport in Bareilly</a>
+<a href="/pages/city.html?city=bhopal" class="region-card effect-2">Car Transport in Bhopal</a>
+<a href="/pages/city.html?city=bhubaneswar" class="region-card effect-3">Car Transport in Bhubaneswar</a>
+<a href="/pages/city.html?city=bikaner" class="region-card effect-4">Car Transport in Bikaner</a>
+<a href="/pages/city.html?city=bilaspur" class="region-card effect-1">Car Transport in Bilaspur</a>
+<a href="/pages/city.html?city=chandigarh" class="region-card effect-2">Car Transport in Chandigarh</a>
+<a href="/pages/city.html?city=chennai" class="region-card effect-3">Car Transport in Chennai</a>
+<a href="/pages/city.html?city=coimbatore" class="region-card effect-4">Car Transport in Coimbatore</a>
+<a href="/pages/city.html?city=cuttack" class="region-card effect-1">Car Transport in Cuttack</a>
+<a href="/pages/city.html?city=dehradun" class="region-card effect-2">Car Transport in Dehradun</a>
+<a href="/pages/city.html?city=delhi" class="region-card effect-3">Car Transport in Delhi</a>
+<a href="/pages/city.html?city=dhanbad" class="region-card effect-4">Car Transport in Dhanbad</a>
+<a href="/pages/city.html?city=durgapur" class="region-card effect-1">Car Transport in Durgapur</a>
+<a href="/pages/city.html?city=faridabad" class="region-card effect-2">Car Transport in Faridabad</a>
+<a href="/pages/city.html?city=gandhinagar" class="region-card effect-3">Car Transport in Gandhinagar</a>
+<a href="/pages/city.html?city=gangtok" class="region-card effect-4">Car Transport in Gangtok</a>
+<a href="/pages/city.html?city=ghaziabad" class="region-card effect-1">Car Transport in Ghaziabad</a>
+<a href="/pages/city.html?city=gorakhpur" class="region-card effect-2">Car Transport in Gorakhpur</a>
+<a href="/pages/city.html?city=gurgaon" class="region-card effect-3">Car Transport in Gurgaon</a>
+<a href="/pages/city.html?city=guwahati" class="region-card effect-4">Car Transport in Guwahati</a>
+<a href="/pages/city.html?city=gwalior" class="region-card effect-1">Car Transport in Gwalior</a>
+<a href="/pages/city.html?city=hyderabad" class="region-card effect-2">Car Transport in Hyderabad</a>
+<a href="/pages/city.html?city=imphal" class="region-card effect-3">Car Transport in Imphal</a>
+<a href="/pages/city.html?city=indore" class="region-card effect-4">Car Transport in Indore</a>
+<a href="/pages/city.html?city=itanagar" class="region-card effect-1">Car Transport in Itanagar</a>
+<a href="/pages/city.html?city=jabalpur" class="region-card effect-2">Car Transport in Jabalpur</a>
+<a href="/pages/city.html?city=jaipur" class="region-card effect-3">Car Transport in Jaipur</a>
+<a href="/pages/city.html?city=jalandhar" class="region-card effect-4">Car Transport in Jalandhar</a>
+<a href="/pages/city.html?city=kanpur" class="region-card effect-1">Car Transport in Kanpur</a>
+<a href="/pages/city.html?city=kolkata" class="region-card effect-2">Car Transport in Kolkata</a>
+<a href="/pages/city.html?city=kota" class="region-card effect-3">Car Transport in Kota</a>
+<a href="/pages/city.html?city=lucknow" class="region-card effect-4">Car Transport in Lucknow</a>
+<a href="/pages/city.html?city=ludhiana" class="region-card effect-1">Car Transport in Ludhiana</a>
+<a href="/pages/city.html?city=madurai" class="region-card effect-2">Car Transport in Madurai</a>
+<a href="/pages/city.html?city=meerut" class="region-card effect-3">Car Transport in Meerut</a>
+<a href="/pages/city.html?city=mumbai" class="region-card effect-4">Car Transport in Mumbai</a>
+<a href="/pages/city.html?city=nagpur" class="region-card effect-1">Car Transport in Nagpur</a>
+<a href="/pages/city.html?city=nashik" class="region-card effect-2">Car Transport in Nashik</a>
+<a href="/pages/city.html?city=navi_mumbai" class="region-card effect-3">Car Transport in Navi Mumbai</a>
+<a href="/pages/city.html?city=patna" class="region-card effect-4">Car Transport in Patna</a>
+<a href="/pages/city.html?city=pune" class="region-card effect-1">Car Transport in Pune</a>
+<a href="/pages/city.html?city=puri" class="region-card effect-2">Car Transport in Puri</a>
+<a href="/pages/city.html?city=raipur" class="region-card effect-3">Car Transport in Raipur</a>
+<a href="/pages/city.html?city=rajkot" class="region-card effect-4">Car Transport in Rajkot</a>
+<a href="/pages/city.html?city=ranchi" class="region-card effect-1">Car Transport in Ranchi</a>
+<a href="/pages/city.html?city=rourkela" class="region-card effect-2">Car Transport in Rourkela</a>
+<a href="/pages/city.html?city=shimla" class="region-card effect-3">Car Transport in Shimla</a>
+<a href="/pages/city.html?city=srinagar" class="region-card effect-4">Car Transport in Srinagar</a>
+<a href="/pages/city.html?city=surat" class="region-card effect-1">Car Transport in Surat</a>
+<a href="/pages/city.html?city=thane" class="region-card effect-2">Car Transport in Thane</a>
+<a href="/pages/city.html?city=udaipur" class="region-card effect-3">Car Transport in Udaipur</a>
+<a href="/pages/city.html?city=vadodara" class="region-card effect-4">Car Transport in Vadodara</a>
+<a href="/pages/city.html?city=varanasi" class="region-card effect-1">Car Transport in Varanasi</a>
+<a href="/pages/city.html?city=vijayawada" class="region-card effect-2">Car Transport in Vijayawada</a>
+<a href="/pages/city.html?city=visakhapatnam" class="region-card effect-3">Car Transport in Visakhapatnam</a>
 
 </div>
   </section>
@@ -936,7 +615,7 @@
   <script src="./js/modules/Services.js"></script>
   <script src="./js/modules/tracking.js"></script>
   <script src="./js/modules/footer.js"></script>
-  <script src="./js/modules/navbar.js"></script>
+  <script src="./js/modules/navbar-loader.js"></script>
   <script src="./js/modules/search.js"></script>
   <script src="./js/modules/floating-book-button.js"></script>
   <script src="./js/modules/floating-call-button.js"></script>
