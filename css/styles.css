@@ -2943,3 +2943,192 @@ html[data-theme="glass"] {
     grid-template-columns: 1fr;
   }
 }
+
+/* ================================================
+   ✨ Attractive Button Glow & Gradient Animation
+   ================================================ */
+
+button,
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: linear-gradient(135deg, #007bff, #00b4d8);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Gradient shift + glowing ring effect */
+button::before,
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00b4d8, #007bff, #00b4d8, #007bff);
+  z-index: -1;
+  border-radius: 50px;
+  background-size: 300%;
+  opacity: 0;
+  transition: opacity 0.4s ease, background-position 0.8s ease;
+}
+
+/* Hover animation magic */
+button:hover::before,
+.btn:hover::before {
+  opacity: 1;
+  background-position: 100%;
+}
+
+button:hover,
+.btn:hover {
+  transform: scale(1.08);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.6);
+}
+
+/* Active (click) effect */
+button:active,
+.btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* ================================
+   🌟 Base Card Style
+================================= */
+.region-card {
+  display: inline-block;
+  padding: 14px 22px;
+  margin: 10px;
+  border-radius: 12px;
+  border: none;
+  background: #fff;
+  color: #222;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Common hover lift */
+.region-card:hover {
+  transform: translateY(-6px);
+}
+
+/* =======================================
+   ✨ EFFECT 1: Neon Glow + Shimmer Light
+======================================= */
+.effect-1 {
+  border: 2px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(135deg, #007bff, #00e0ff, #00ffc6) border-box;
+}
+
+.effect-1:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #007bff, #00e0ff);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+}
+
+.effect-1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-20deg);
+  transition: 0.7s;
+}
+
+.effect-1:hover::after {
+  left: 130%;
+}
+
+/* =======================================
+   🔥 EFFECT 2: Gradient Sweep Background
+======================================= */
+.effect-2 {
+  background: linear-gradient(90deg, #ffffff, #ffffff);
+  transition: background-position 0.5s ease;
+  background-size: 200%;
+}
+
+.effect-2:hover {
+  color: #fff;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  background-position: right;
+  box-shadow: 0 0 20px rgba(255, 75, 43, 0.6);
+}
+
+/* =======================================
+   🌈 EFFECT 3: Floating Glow Pulse
+======================================= */
+.effect-3 {
+  background: #ffffff;
+  border: 1px solid #ddd;
+}
+
+.effect-3:hover {
+  background: #6a11cb;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  box-shadow: 0 0 25px rgba(102, 126, 234, 0.6);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(102, 126, 234, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(102, 126, 234, 0.8); }
+  100% { box-shadow: 0 0 10px rgba(102, 126, 234, 0.5); }
+}
+
+/* =======================================
+   ⚡ EFFECT 4: Border Zoom + Ripple
+======================================= */
+.effect-4 {
+  border: 2px solid #00b4d8;
+  background: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.effect-4::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(0, 180, 216, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: 0.5s;
+}
+
+.effect-4:hover::before {
+  width: 300%;
+  height: 300%;
+}
+
+.effect-4:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #00b4d8, #48cae4);
+  box-shadow: 0 10px 25px rgba(0, 180, 216, 0.5);
+}
