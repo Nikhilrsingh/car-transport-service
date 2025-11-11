@@ -6,15 +6,21 @@
 .about-team-flip-card {
   background-color: transparent;
   perspective: 1000px;
-  height: 400px;
+  height: 460px;
   position: relative;
   transition: transform 0.3s ease;
-  overflow: visible;
+  overflow: hidden; /* ✅ contain shadow bleed */
+  border-radius: 16px;
+  z-index: 1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .about-team-flip-card:hover {
   transform: translateY(-8px);
+  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5); /* ✅ contained glow */
+  z-index: 2; /* ensure hovered card appears above others */
 }
+
 
 .about-team-flip-card-inner {
   position: absolute;
@@ -36,16 +42,17 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 15px;
-  overflow: hidden;
+  border-radius: 16px;
+  overflow: hidden; /* ✅ keep gradient/glow within card */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.3s ease;
 }
 
 .about-team-flip-card:hover .about-team-flip-card-front,
 .about-team-flip-card:hover .about-team-flip-card-back {
-  box-shadow: 0 20px 50px rgba(255, 99, 71, 0.4);
+  box-shadow: 0 16px 40px rgba(255, 99, 71, 0.4); /* ✅ glow softened */
 }
+
 
 .about-team-flip-card-front {
   background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
