@@ -2868,7 +2868,7 @@ html[data-theme="glass"] {
 
 .region-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 12px;
   margin-top: 30px;
   max-width: 1400px;
@@ -3022,6 +3022,7 @@ button:active,
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
 }
 
 /* Common hover lift */
