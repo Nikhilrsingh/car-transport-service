@@ -298,6 +298,18 @@
         margin-top: 20px;
         font-weight: 600;
       } 
+      .special-lead {
+      background: linear-gradient(135deg, #b5722f, #5c6515);
+      color: #222;
+      border: 2px solid gold;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+    transform: scale(1.05);
+    }
+    .special-lead:hover {
+    transform: translateY(-6px) scale(1.07);
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.8);
+    }
+
     </style>
     <link rel="stylesheet" href="../css/components/floating-button.css" />
   </head>
@@ -352,6 +364,16 @@
           <div id="spinner">
             <div class="spinner-circle"></div>
           </div>
+          <!-- Special Project Lead Card -->
+<div id="projectLeadContainer" style="display: flex; justify-content: center; margin-bottom: 2rem;">
+  <div class="contributor special-lead">
+    <img src="https://avatars.githubusercontent.com/Nikhilrsingh" alt="Nikhil R. Singh">
+    <a href="https://github.com/Nikhilrsingh" target="_blank">Nikhil R. Singh</a>
+    <p style="font-weight: 600; color: #ffd700;">🌟 Project Lead 🌟</p>
+    <p>Leading the project vision and development.</p>
+  </div>
+</div>
+
 
           <!-- Contributors Grid -->
           <div id="contributorsList"></div>
