@@ -3068,3 +3068,14 @@ button:active,
   background: linear-gradient(135deg, #00b4d8, #48cae4);
   box-shadow: 0 10px 25px rgba(0, 180, 216, 0.5);
 }
+/* Scroll Progress Bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 0%;
+  background-color: #f39c12; /* match your theme color */
+  z-index: 9999;
+  transition: width 0.25s ease-out;
+}
