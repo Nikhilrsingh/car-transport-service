@@ -44,7 +44,7 @@
   transform: translateY(-50%);
 }
 
-.car-animation {
+.car-carrier-animation {
   position: absolute;
   top: -1%;
   /* Aligned with the road */
@@ -54,7 +54,7 @@
   will-change: transform;
 }
 
-.moving-car {
+.moving-car-carrier {
   width: 100px;
   height: 50px;
 
@@ -75,7 +75,7 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .car-animation {
+  .car-carrier-animation {
     animation: none;
   }
 }
