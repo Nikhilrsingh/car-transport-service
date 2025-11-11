@@ -643,3 +643,312 @@
         text-align: left;
     }
 }
+
+/* ============================================
+   WEATHER FORECAST STYLES
+   ============================================ */
+
+.weather-section {
+    background: #2b2b2b;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #444;
+    margin-top: 20px;
+}
+
+.weather-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #ff6347;
+}
+
+.weather-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.weather-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.weather-card {
+    background: linear-gradient(145deg, #1a1a1a, #222);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+}
+
+.weather-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 99, 71, 0.2);
+}
+
+.weather-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.weather-location {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.weather-icon {
+    font-size: 2.5rem;
+}
+
+.weather-temp {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.weather-desc {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.weather-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.weather-detail i {
+    color: #ff6347;
+}
+
+.weather-loading {
+    text-align: center;
+    padding: 30px;
+    color: #999;
+}
+
+.weather-error {
+    text-align: center;
+    padding: 20px;
+    color: #ff6347;
+    background: rgba(255, 99, 71, 0.1);
+    border-radius: 10px;
+}
+
+/* ============================================
+   ROUTE OPTIMIZATION STYLES
+   ============================================ */
+
+.waypoints-section {
+    background: #2b2b2b;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #444;
+    margin-bottom: 20px;
+}
+
+.waypoints-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.waypoints-header h4 {
+    color: #ff6347;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-waypoint-btn {
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.add-waypoint-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+}
+
+.waypoints-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.waypoint-item {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.waypoint-item:hover {
+    border-color: #ff6347;
+}
+
+.waypoint-number {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #ff6347;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.waypoint-input {
+    flex: 1;
+}
+
+.waypoint-input input {
+    width: 100%;
+    background: #2b2b2b;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.waypoint-input input:focus {
+    outline: none;
+    border-color: #ff6347;
+}
+
+.waypoint-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.waypoint-action-btn {
+    background: #444;
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.waypoint-action-btn:hover {
+    background: #ff6347;
+}
+
+.waypoint-action-btn.delete:hover {
+    background: #dc3545;
+}
+
+.optimize-route-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    width: 100%;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.optimize-route-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.optimization-result {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid #4CAF50;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    display: none;
+}
+
+.optimization-result.show {
+    display: block;
+}
+
+.optimization-result h5 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.optimization-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - WEATHER & WAYPOINTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .weather-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .optimization-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .waypoints-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .add-waypoint-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
