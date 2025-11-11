@@ -2682,18 +2682,6 @@ html {
   --transition: 240ms ease;
 }
 
-/* Smooth transition helper (temporary while switching) */
-.theme-transition * {
-  transition: background-color var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition) !important;
-}
-
-/* Base elements use tokens so themes can override them */
-html,
-body {
-  background: #f5f5f5 !important;
-  color: #000 !important;
-}
-
 /* Buttons and primary accents should pick up token values */
 .cta-btn.primary {
   background: linear-gradient(135deg, var(--primary), var(--primary-2)) !important;
@@ -2735,57 +2723,6 @@ p,
 .contact-info li {
   color: #333 !important;
 }
-
-/* Theme presets */
-html[data-theme="default"] {
-  --bg: linear-gradient(180deg, #0b1220 0%, #121826 100%);
-  --surface: #121419;
-  --text: #eef2f6;
-  --muted: #bfc5ca;
-  --primary: #ff6347;
-  --primary-2: #ff4500;
-}
-
-html[data-theme="light"] {
-  --bg: #f7f9fb;
-  --surface: #ffffff;
-  --card: #f4f6f8;
-  --text: #111827;
-  --muted: #6b7280;
-  --primary: #0b76ff;
-  --primary-2: #0066ff;
-  --glass-bg: rgba(255, 255, 255, 0.6);
-}
-
-html[data-theme="dark"] {
-  --bg: #0b0f12;
-  --surface: #0f1417;
-  --card: rgba(255, 255, 255, 0.02);
-  --text: #e6eef6;
-  --muted: #97a0ab;
-  --primary: #ff9b6b;
-  --primary-2: #ff6b35;
-}
-
-html[data-theme="glass"] {
-  --bg: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-  --surface: rgba(255, 255, 255, 0.04);
-  --card: rgba(255, 255, 255, 0.03);
-  --text: #f5f7fb;
-  --muted: #c7cdd3;
-  --primary: #8bd3ff;
-  --primary-2: #4aa3ff;
-  --glass-bg: rgba(255, 255, 255, 0.06);
-}
-
-/* small-screen adjustments so widget doesn't overlap content */
-@media (max-width: 480px) {
-  .theme-widget {
-    left: 8px;
-    top: 8px;
-  }
-}
-
 
 /* Keypress-Activated Easter Egg */
 .car {

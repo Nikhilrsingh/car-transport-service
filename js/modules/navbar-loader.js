@@ -155,17 +155,6 @@
             </div>
           </div>
 
-          <div class="theme-widget" id="themeWidget">
-            <label for="themeWidgetSelect" class="sr-only">Choose theme</label>
-            <select id="themeWidgetSelect" aria-label="Choose theme">
-              <option value="auto">Theme</option>
-              <option value="default">Default</option>
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-              <option value="glass">Glass</option>
-            </select>
-          </div>
-
           <div class="action-nav">
             <a href="../pages/enquiry.html" class="enquiry-link" data-tooltip="Enquiry">
               <i class="fas fa-question-circle"></i>
