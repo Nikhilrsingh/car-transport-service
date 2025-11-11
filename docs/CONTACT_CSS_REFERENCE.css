@@ -1,0 +1,352 @@
+/* ============================================
+   CONTACT PAGE - QUICK REFERENCE GUIDE
+   ============================================ */
+
+/* 🗺️ INTERACTIVE MAP */
+/* =================== */
+
+/* Add map controls */
+.map-controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+}
+
+/* Customize marker animation */
+@keyframes markerBounce {
+  0%, 100% { transform: translate(-50%, -100%); }
+  50% { transform: translate(-50%, -110%); }
+}
+
+/* Info window styling */
+.map-info-window {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ❓ FAQ ACCORDION */
+/* ================ */
+
+/* Search bar styling */
+.faq-search-input {
+  padding: 15px 50px 15px 20px;
+  border-radius: 50px;
+  background: #2b2b2b;
+  color: white;
+}
+
+/* Category buttons */
+.faq-category-btn {
+  padding: 10px 25px;
+  border-radius: 25px;
+  background: #2b2b2b;
+  border: 2px solid #444;
+}
+
+.faq-category-btn.active {
+  background: #ff6347;
+  border-color: #ff6347;
+}
+
+/* Smooth accordion transitions */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item.active .faq-answer {
+  max-height: 400px;
+}
+
+/* Rating buttons */
+.rating-btn {
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 2px solid #444;
+  background: transparent;
+}
+
+.rating-btn.selected {
+  background: #ff6347;
+  border-color: #ff6347;
+  color: white;
+}
+
+
+/* 📞 CONTACT CARDS */
+/* ================ */
+
+/* Action buttons */
+.info-action-btn {
+  padding: 10px 15px;
+  border: 2px solid #ff6347;
+  border-radius: 8px;
+  background: transparent;
+  color: #ff6347;
+}
+
+.info-action-btn:hover {
+  background: #ff6347;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* QR Code container */
+.qr-code-container {
+  position: absolute;
+  top: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.qr-code-container.active {
+  transform: scale(1);
+}
+
+/* Icon animation */
+.info-icon.animated {
+  animation: iconPulse 0.6s ease;
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Notification toast */
+.copy-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  z-index: 10000;
+  transform: translateX(400px);
+}
+
+.copy-notification.show {
+  transform: translateX(0);
+}
+
+
+/* 💬 CONTACT FORM */
+/* ================ */
+
+/* File upload area */
+.file-upload-area {
+  border: 2px dashed #444;
+  padding: 30px;
+  border-radius: 10px;
+  background: #1a1a1a;
+  cursor: pointer;
+  text-align: center;
+}
+
+.file-upload-area.dragover {
+  border-color: #ff6347;
+  background: rgba(255, 99, 71, 0.1);
+}
+
+/* File preview */
+.file-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  border: 2px solid #444;
+  position: relative;
+}
+
+.file-remove {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff6347;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+/* Character counter */
+.char-counter {
+  color: #ccc;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+.char-counter.warning { color: #ffa500; }
+.char-counter.error { color: #ff4500; }
+
+/* Email suggestion */
+.email-suggestion {
+  background: #444;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 5px;
+  display: none;
+  cursor: pointer;
+}
+
+.email-suggestion.show {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  color: #ff6347;
+}
+
+.typing-indicator.show {
+  display: flex;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: #ff6347;
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-10px); }
+}
+
+
+/* 🎨 UTILITY CLASSES */
+/* =================== */
+
+/* Show/Hide */
+.hidden { display: none; }
+.show { display: block; }
+
+/* Active states */
+.active {
+  /* Varies by component */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+
+
+/* 📱 RESPONSIVE BREAKPOINTS */
+/* ========================== */
+
+/* Tablet (992px and below) */
+@media (max-width: 992px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile (768px and below) */
+@media (max-width: 768px) {
+  .map-controls {
+    flex-direction: column;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .faq-categories {
+    gap: 10px;
+  }
+  
+  .info-actions {
+    flex-direction: column;
+  }
+  
+  .qr-code-container {
+    left: 10px;
+    right: 10px;
+  }
+}
+
+
+/* ⚙️ CUSTOMIZATION VARIABLES */
+/* =========================== */
+
+:root {
+  /* Colors */
+  --primary-color: #ff6347;
+  --secondary-color: #ff4500;
+  --bg-dark: #2b2b2b;
+  --bg-darker: #1a1a1a;
+  --border-color: #444;
+  --text-light: #ccc;
+  --success-color: #4CAF50;
+  
+  /* Spacing */
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
+  --spacing-lg: 40px;
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  --radius-round: 50px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* 🔍 DEBUGGING HELPERS */
+/* ===================== */
+
+/* Add to temporarily debug layouts */
+/* * { outline: 1px solid red; } */
+
+/* Check z-index stacking */
+/* [style*="z-index"] {
+  outline: 2px solid blue;
+} */
+
+/* Visualize animations */
+/* * {
+  animation-duration: 3s !important;
+  transition-duration: 3s !important;
+} */

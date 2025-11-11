@@ -1,0 +1,1236 @@
+/* ========================================
+   GALLERY ENHANCEMENTS
+   ======================================== */
+
+:root {
+  --gallery-primary: #ff6347;
+  --gallery-secondary: #ff4500;
+  --gallery-dark: #1a1a1a;
+  --gallery-card: #2b2b2b;
+  --gallery-text: #f5f5f5;
+  --gallery-muted: #aaaaaa;
+  --gallery-overlay: rgba(0, 0, 0, 0.85);
+  --gallery-radius: 12px;
+  --gallery-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  --gallery-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+.enhanced-gallery-hero {
+  text-align: center;
+  padding: 100px 20px 60px;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(0, 0, 0, 0.98));
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.enhanced-gallery-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,99,71,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.enhanced-gallery-hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.enhanced-gallery-hero h1 {
+  font-size: 3.5rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--gallery-primary), var(--gallery-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* Fallback for browsers that don't support background-clip */
+@supports not ((background-clip: text) or (-webkit-background-clip: text)) {
+  .enhanced-gallery-hero h1 {
+    color: var(--gallery-primary);
+  }
+}
+
+/* Hero Title Animation */
+.hero-title-animate {
+  animation: slideInFromTop 1s ease forwards;
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.enhanced-gallery-hero p {
+  color: #cccccc;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  line-height: 1.8;
+}
+
+/* Hero Text Animation */
+.hero-text-animate {
+  animation: slideInFromBottom 1s ease 0.3s forwards;
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   FILTER CONTROLS
+   ======================================== */
+.enhanced-gallery-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 50px;
+  padding: 0 20px;
+  animation: fadeIn 1s ease;
+}
+
+.filter-btn {
+  background: var(--gallery-card);
+  color: var(--gallery-text);
+  border: 2px solid transparent;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--gallery-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--gallery-primary);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: 0;
+}
+
+.filter-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.filter-btn:hover {
+  color: white;
+  border-color: var(--gallery-primary);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--gallery-primary), var(--gallery-secondary));
+  color: white;
+  border-color: var(--gallery-primary);
+  box-shadow: 0 5px 20px rgba(255, 99, 71, 0.4);
+}
+
+.filter-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.filter-count {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+
+/* ========================================
+   SEARCH BAR
+   ======================================== */
+.enhanced-gallery-search {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+/* Search Bar Animation */
+.hero-search-animate {
+  animation: fadeInScale 1s ease 0.6s forwards;
+}
+
+@keyframes fadeInScale {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Filters Animation */
+.hero-filters-animate {
+  animation: fadeInUp 1s ease 0.9s forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 15px 50px 15px 20px;
+  background: var(--gallery-card);
+  border: 2px solid transparent;
+  border-radius: 50px;
+  color: var(--gallery-text);
+  font-size: 1rem;
+  transition: var(--gallery-transition);
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: var(--gallery-primary);
+  box-shadow: 0 0 20px rgba(255, 99, 71, 0.2);
+}
+
+.search-input-wrapper i {
+  position: absolute;
+  right: 20px;
+  color: var(--gallery-muted);
+  font-size: 1.2rem;
+}
+
+/* ========================================
+   MASONRY GRID LAYOUT
+   ======================================== */
+.enhanced-gallery-section {
+  padding: 60px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #1a1a1a;
+  min-height: 400px;
+}
+
+.enhanced-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  
+  /* Modern browsers with masonry support */
+  grid-auto-rows: masonry;
+}
+
+/* Fallback for browsers without masonry support */
+@supports not (grid-template-rows: masonry) {
+  .enhanced-gallery-grid {
+    grid-auto-rows: 300px;
+  }
+  
+  /* Vary heights for visual interest */
+  .enhanced-gallery-item:nth-child(3n+1) {
+    grid-row-end: span 1;
+  }
+  
+  .enhanced-gallery-item:nth-child(3n+2) {
+    grid-row-end: span 2;
+  }
+  
+  .enhanced-gallery-item:nth-child(3n+3) {
+    grid-row-end: span 1;
+  }
+}
+
+/* ========================================
+   GALLERY ITEMS
+   ======================================== */
+.enhanced-gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--gallery-radius);
+  box-shadow: var(--gallery-shadow);
+  cursor: pointer;
+  background: var(--gallery-card);
+  transition: var(--gallery-transition);
+  opacity: 0;
+  transform: scale(0.8);
+  animation: galleryItemFadeIn 0.6s ease forwards;
+}
+
+.enhanced-gallery-item[data-category="cars"] { animation-delay: 0.1s; }
+.enhanced-gallery-item[data-category="bikes"] { animation-delay: 0.2s; }
+.enhanced-gallery-item[data-category="trailers"] { animation-delay: 0.3s; }
+.enhanced-gallery-item[data-category="delivery"] { animation-delay: 0.4s; }
+
+.enhanced-gallery-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(255, 99, 71, 0.3);
+}
+
+.enhanced-gallery-item-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  line-height: 0;
+}
+
+/* Image Container with Blur-up Loading */
+.enhanced-gallery-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+  line-height: 0;
+}
+
+.enhanced-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.5s ease, transform 0.5s ease;
+  display: block;
+}
+
+.enhanced-gallery-item img.lazy-loading {
+  filter: blur(20px);
+  transform: scale(1.1);
+}
+
+.enhanced-gallery-item img.lazy-loaded {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Loading Spinner */
+.enhanced-gallery-item .loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 99, 71, 0.3);
+  border-top-color: var(--gallery-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Hover Overlay Effect */
+.enhanced-gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  opacity: 0;
+  transition: var(--gallery-transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.enhanced-gallery-item:hover .enhanced-gallery-overlay {
+  opacity: 1;
+}
+
+.enhanced-gallery-overlay-content {
+  transform: translateY(20px);
+  transition: var(--gallery-transition);
+}
+
+.enhanced-gallery-item:hover .enhanced-gallery-overlay-content {
+  transform: translateY(0);
+}
+
+.enhanced-gallery-title {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.enhanced-gallery-description {
+  color: var(--gallery-muted);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.enhanced-gallery-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 0.85rem;
+  color: var(--gallery-muted);
+}
+
+.enhanced-gallery-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.enhanced-gallery-meta-item i {
+  color: var(--gallery-primary);
+}
+
+/* Category Badge */
+.enhanced-gallery-category-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(135deg, var(--gallery-primary), var(--gallery-secondary));
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 10;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: var(--gallery-transition);
+}
+
+.enhanced-gallery-item:hover .enhanced-gallery-category-badge {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Zoom Icon */
+.enhanced-gallery-zoom-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 99, 71, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  transition: var(--gallery-transition);
+  z-index: 5;
+}
+
+.enhanced-gallery-item:hover .enhanced-gallery-zoom-icon {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ========================================
+   ENHANCED LIGHTBOX
+   ======================================== */
+.enhanced-lightbox {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gallery-overlay);
+  backdrop-filter: blur(10px);
+}
+
+.enhanced-lightbox.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 85vh;
+  animation: zoomIn 0.4s ease;
+}
+
+.lightbox-image-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  width: 100%;
+  height: 80vh;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: var(--gallery-radius);
+  box-shadow: 0 0 50px rgba(255, 99, 71, 0.3);
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  transform-origin: center center;
+}
+
+/* Lightbox Controls */
+.lightbox-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  z-index: 10001;
+}
+
+.lightbox-counter {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lightbox-counter .current-image {
+  color: var(--gallery-primary);
+  font-size: 1.2rem;
+}
+
+.lightbox-btn {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--gallery-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-btn:hover {
+  background: var(--gallery-primary);
+  border-color: var(--gallery-primary);
+  transform: scale(1.1);
+}
+
+/* Navigation Arrows */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--gallery-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.lightbox-nav:hover {
+  background: var(--gallery-primary);
+  border-color: var(--gallery-primary);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 40px;
+}
+
+/* Lightbox Caption */
+.lightbox-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  padding: 40px 30px 20px;
+  color: white;
+  transform: translateY(100%);
+  transition: var(--gallery-transition);
+}
+
+.enhanced-lightbox.active .lightbox-caption {
+  transform: translateY(0);
+}
+
+.lightbox-caption h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.lightbox-caption p {
+  color: var(--gallery-muted);
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.lightbox-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.lightbox-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gallery-muted);
+}
+
+.lightbox-meta-item i {
+  color: var(--gallery-primary);
+}
+
+/* Share Buttons */
+.lightbox-share {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.share-btn {
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--gallery-transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-btn:hover {
+  background: var(--gallery-primary);
+  border-color: var(--gallery-primary);
+  transform: translateY(-2px);
+}
+
+/* Thumbnail Strip */
+.lightbox-thumbnails {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  max-width: 90%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.lightbox-thumbnails::-webkit-scrollbar {
+  display: none;
+}
+
+.lightbox-thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: var(--gallery-transition);
+  border: 2px solid transparent;
+  object-fit: cover;
+}
+
+.lightbox-thumbnail:hover {
+  opacity: 0.8;
+}
+
+.lightbox-thumbnail.active {
+  opacity: 1;
+  border-color: var(--gallery-primary);
+  transform: scale(1.1);
+}
+
+/* Zoom Controls */
+.lightbox-zoom-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 50px;
+}
+
+.zoom-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: var(--gallery-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-btn:hover {
+  background: var(--gallery-primary);
+  border-color: var(--gallery-primary);
+}
+
+/* ========================================
+   BEFORE/AFTER SLIDER
+   ======================================== */
+.before-after-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--gallery-radius);
+  box-shadow: var(--gallery-shadow);
+}
+
+.before-after-slider {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.before-image,
+.after-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.after-image {
+  clip-path: inset(0 50% 0 0);
+  transition: clip-path 0.3s ease;
+}
+
+.slider-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: var(--gallery-primary);
+  cursor: ew-resize;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+}
+
+.slider-button i {
+  font-size: 1.2rem;
+  color: var(--gallery-primary);
+}
+
+.before-label,
+.after-label {
+  position: absolute;
+  top: 20px;
+  padding: 8px 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.before-label {
+  left: 20px;
+}
+
+.after-label {
+  right: 20px;
+}
+
+/* ========================================
+   360° VIEW
+   ======================================== */
+.view-360-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background: var(--gallery-dark);
+  border-radius: var(--gallery-radius);
+  overflow: hidden;
+  cursor: grab;
+}
+
+.view-360-container:active {
+  cursor: grabbing;
+}
+
+.view-360-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.view-360-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 25px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+}
+
+.view-360-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--gallery-transition);
+  padding: 5px 10px;
+}
+
+.view-360-btn:hover {
+  color: var(--gallery-primary);
+  transform: scale(1.2);
+}
+
+.view-360-indicator {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+}
+
+/* ========================================
+   IMAGE CAROUSEL
+   ======================================== */
+.journey-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--gallery-radius);
+  background: var(--gallery-dark);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.carousel-slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  padding: 40px 30px 20px;
+  color: white;
+}
+
+.carousel-slide-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.carousel-slide-description {
+  color: var(--gallery-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.carousel-navigation {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.carousel-btn {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--gallery-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-btn:hover {
+  background: var(--gallery-primary);
+  border-color: var(--gallery-primary);
+  transform: scale(1.1);
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--gallery-transition);
+}
+
+.carousel-indicator.active {
+  background: var(--gallery-primary);
+  transform: scale(1.3);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes galleryItemFadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 1024px) {
+  .enhanced-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .lightbox-thumbnails {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .enhanced-gallery-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .enhanced-gallery-hero p {
+    font-size: 1rem;
+  }
+  
+  .enhanced-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .enhanced-gallery-filters {
+    gap: 10px;
+  }
+  
+  .filter-btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .lightbox-counter {
+    font-size: 0.85rem;
+    padding: 8px 15px;
+  }
+  
+  .lightbox-counter .current-image {
+    font-size: 1rem;
+  }
+  
+  .lightbox-controls {
+    top: 10px;
+    right: 10px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .lightbox-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .lightbox-thumbnails {
+    display: none;
+  }
+  
+  .lightbox-caption h3 {
+    font-size: 1.2rem;
+  }
+  
+  .lightbox-share {
+    flex-wrap: wrap;
+  }
+  
+  .view-360-container,
+  .carousel-slide img {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .enhanced-gallery-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .enhanced-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .enhanced-gallery-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-btn {
+    width: 100%;
+  }
+  
+  .lightbox-controls {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  
+  .lightbox-counter {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    order: 1;
+    flex: 1;
+  }
+  
+  .lightbox-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+  
+  .lightbox-zoom-controls {
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .view-360-container,
+  .carousel-slide img {
+    height: 300px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .filter-btn,
+  .lightbox-btn,
+  .carousel-btn {
+    border-width: 3px;
+  }
+}

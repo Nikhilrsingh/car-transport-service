@@ -20,7 +20,7 @@ body {
 .navbar-container {
   max-width: 100%;
   margin: 0;
-  padding: 0 5px;
+  padding: 0 10px;
 }
 
 .navbar {
@@ -233,6 +233,7 @@ body {
   font-size: 0.9rem;
   cursor: pointer;
   transition: color 0.3s ease;
+  margin-right: 10px;
 }
 
 .search-bar:hover i,
@@ -454,7 +455,7 @@ body {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 320px;
+  width: 90vw;
   max-width: 85vw;
   height: 100vh;
   background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
@@ -739,7 +740,7 @@ body {
   }
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 912px) {
   .desktop-nav {
     display: none;
   }
@@ -770,7 +771,7 @@ body {
   }
 }
 
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .nav-list {
     gap: 2px;
   }
@@ -836,7 +837,7 @@ body {
   .logo-container {
     margin-right: auto;
   }
-}
+} */
 
 @media (max-width: 768px) {
   .navbar-container {
@@ -887,76 +888,4 @@ body {
 
 .header {
   animation: slideDown 0.5s ease-out;
-}
-
-/* Theme widget - positioned in navbar */
-.theme-widget {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  border: 2px solid rgba(255, 99, 71, 0.5);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  font-size: 0.85rem;
-  white-space: nowrap;
-  height: 36px;
-  box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.05);
-  margin-left: 10px;
-}
-
-.theme-widget select {
-  background: transparent;
-  color: rgb(193, 192, 192);
-  border: none;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.theme-widget select option {
-  background-color: transparent;
-}
-
-.theme-widget:hover {
-  background: rgba(255, 107, 53, 0.1);
-  border-color: #ff6347;
-  transform: translateY(-2px);
-}
-
-/* Improve select visuals to look like a compact pill */
-.theme-widget select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 6px;
-  padding: 8px 12px;
-  min-width: 85px;
-  height: 34px;
-  border: none;
-  outline: none;
-}
-
-.theme-widget select:focus {
-  outline: none;
-}
-
-/* hide the native dropdown arrow on IE/Edge */
-.theme-widget select::-ms-expand {
-  display: none;
-}
-
-.theme-widget .sr-only {
-  position: absolute;
-  left: -9999px;
-}
-
-/* Responsive positioning for theme widget */
-@media (max-width: 1280px) {
-  .theme-widget {
-    display: none;
-  }
 }
