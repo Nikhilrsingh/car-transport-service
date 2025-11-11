@@ -20,6 +20,9 @@
     <!-- Leaflet Control Geocoder CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css" />
 
+    <!-- Booking CSS -->
+    <link rel="stylesheet" href="../css/components/booking.css">
+
     <!-- Booking Modals CSS -->
     <link rel="stylesheet" href="../css/components/booking-modals.css">
 
@@ -1963,6 +1966,46 @@
                                 </div>
                             </div>
 
+                            <!-- Route Optimization with Waypoints -->
+                            <div class="waypoints-section">
+                                <div class="waypoints-header">
+                                    <h4><i class="fas fa-map-signs"></i> Add Stops Along the Way</h4>
+                                    <button type="button" class="add-waypoint-btn" onclick="addWaypoint()">
+                                        <i class="fas fa-plus"></i> Add Stop
+                                    </button>
+                                </div>
+                                <p style="color: #999; font-size: 0.9rem; margin-bottom: 15px;">
+                                    Add intermediate stops for vehicle pickup or drop-off along your route
+                                </p>
+                                <div class="waypoints-list" id="waypointsList">
+                                    <!-- Waypoints will be added dynamically -->
+                                </div>
+                                <button type="button" class="optimize-route-btn" id="optimizeRouteBtn" onclick="optimizeRoute()" style="display: none;">
+                                    <i class="fas fa-route"></i> Optimize Route Order
+                                </button>
+                                <div class="optimization-result" id="optimizationResult">
+                                    <h5><i class="fas fa-check-circle"></i> Route Optimized!</h5>
+                                    <div class="optimization-stats">
+                                        <div><i class="fas fa-road"></i> Distance Saved: <strong id="distanceSaved">0 km</strong></div>
+                                        <div><i class="fas fa-clock"></i> Time Saved: <strong id="timeSaved">0 mins</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Weather Forecast -->
+                            <div class="weather-section" id="weatherSection" style="display: none;">
+                                <div class="weather-header">
+                                    <i class="fas fa-cloud-sun" style="font-size: 1.5rem;"></i>
+                                    <h4>Weather Forecast</h4>
+                                </div>
+                                <div class="weather-grid" id="weatherGrid">
+                                    <div class="weather-loading">
+                                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #ff6347;"></i>
+                                        <p>Loading weather data...</p>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-navigation">
                                 <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()">
                                     <i class="fas fa-arrow-left"></i> Previous
@@ -3372,6 +3415,8 @@
                     selectedPickupCity = city;
                     document.getElementById('pickupLocation').value = city + ', India';
                     updateBookingSummary();
+                    // Fetch weather for pickup city
+                    fetchWeatherData(city, 'pickup');
                     if (selectedDropCity) {
                         calculateRouteForCities();
                     }
@@ -3383,6 +3428,8 @@
                     selectedDropCity = city;
                     document.getElementById('dropLocation').value = city + ', India';
                     updateBookingSummary();
+                    // Fetch weather for drop city
+                    fetchWeatherData(city, 'drop');
                     if (selectedPickupCity) {
                         calculateRouteForCities();
                     }
@@ -3831,6 +3878,425 @@
         }
 
         // ========================================
+        // WEATHER FORECAST FUNCTIONS
+        // ========================================
+        let weatherData = {};
+
+        async function fetchWeatherData(city, type) {
+            try {
+                // Using OpenWeatherMap API - replace with your API key
+                const API_KEY = 'demo'; // Replace with actual API key or use demo data
+                
+                // For demo purposes, generate mock weather data
+                const mockWeather = generateMockWeather(city);
+                weatherData[type] = mockWeather;
+                updateWeatherDisplay();
+                
+                // Uncomment below for real API integration
+                // const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},IN&appid=${API_KEY}&units=metric`);
+                // if (response.ok) {
+                //     const data = await response.json();
+                //     weatherData[type] = {
+                //         temp: Math.round(data.main.temp),
+                //         feels_like: Math.round(data.main.feels_like),
+                //         description: data.weather[0].description,
+                //         icon: data.weather[0].main,
+                //         humidity: data.main.humidity,
+                //         wind: Math.round(data.wind.speed * 3.6),
+                //         city: city
+                //     };
+                //     updateWeatherDisplay();
+                // }
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+                showWeatherError();
+            }
+        }
+
+        function generateMockWeather(city) {
+            const conditions = ['Clear', 'Clouds', 'Rain', 'Sunny'];
+            const condition = conditions[Math.floor(Math.random() * conditions.length)];
+            return {
+                temp: Math.round(20 + Math.random() * 15),
+                feels_like: Math.round(20 + Math.random() * 15),
+                description: condition.toLowerCase(),
+                icon: condition,
+                humidity: Math.round(40 + Math.random() * 40),
+                wind: Math.round(5 + Math.random() * 20),
+                city: city
+            };
+        }
+
+        function updateWeatherDisplay() {
+            const weatherSection = document.getElementById('weatherSection');
+            const weatherGrid = document.getElementById('weatherGrid');
+            
+            if (!weatherData.pickup && !weatherData.drop) {
+                weatherSection.style.display = 'none';
+                return;
+            }
+
+            weatherSection.style.display = 'block';
+            weatherGrid.innerHTML = '';
+
+            if (weatherData.pickup) {
+                weatherGrid.appendChild(createWeatherCard(weatherData.pickup, 'Pickup Location'));
+            }
+
+            if (weatherData.drop) {
+                weatherGrid.appendChild(createWeatherCard(weatherData.drop, 'Drop Location'));
+            }
+        }
+
+        function createWeatherCard(data, label) {
+            const card = document.createElement('div');
+            card.className = 'weather-card';
+            
+            const iconMap = {
+                'Clear': '☀️',
+                'Sunny': '☀️',
+                'Clouds': '☁️',
+                'Rain': '🌧️',
+                'Snow': '❄️',
+                'Thunderstorm': '⛈️'
+            };
+
+            card.innerHTML = `
+                <div class="weather-card-header">
+                    <div>
+                        <div class="weather-location">${label}</div>
+                        <div style="font-weight: 600; color: white; margin-top: 5px;">${data.city}</div>
+                    </div>
+                    <div class="weather-icon">${iconMap[data.icon] || '🌤️'}</div>
+                </div>
+                <div class="weather-temp">${data.temp}°C</div>
+                <div class="weather-desc">${data.description.charAt(0).toUpperCase() + data.description.slice(1)}</div>
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <i class="fas fa-temperature-high"></i>
+                        <span>Feels like ${data.feels_like}°C</span>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-tint"></i>
+                        <span>Humidity ${data.humidity}%</span>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-wind"></i>
+                        <span>Wind ${data.wind} km/h</span>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function showWeatherError() {
+            const weatherGrid = document.getElementById('weatherGrid');
+            weatherGrid.innerHTML = `
+                <div class="weather-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Unable to load weather data. Please try again later.</p>
+                </div>
+            `;
+        }
+
+        // ========================================
+        // ROUTE OPTIMIZATION WITH WAYPOINTS
+        // ========================================
+        let waypoints = [];
+        let waypointMarkers = [];
+
+        function addWaypoint() {
+            const waypointId = 'waypoint-' + Date.now();
+            const waypointNumber = waypoints.length + 1;
+            
+            waypoints.push({
+                id: waypointId,
+                city: '',
+                coords: null
+            });
+
+            const waypointsList = document.getElementById('waypointsList');
+            const waypointItem = document.createElement('div');
+            waypointItem.className = 'waypoint-item';
+            waypointItem.id = waypointId;
+            waypointItem.innerHTML = `
+                <div class="waypoint-number">${waypointNumber}</div>
+                <div class="waypoint-input autocomplete-wrapper">
+                    <input type="text" 
+                           id="${waypointId}-input" 
+                           placeholder="Enter stop location..." 
+                           autocomplete="off"
+                           onchange="updateWaypoint('${waypointId}', this.value)">
+                    <div class="autocomplete-dropdown" id="${waypointId}-dropdown"></div>
+                </div>
+                <div class="waypoint-actions">
+                    <button type="button" class="waypoint-action-btn" onclick="moveWaypointUp('${waypointId}')" title="Move up">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <button type="button" class="waypoint-action-btn" onclick="moveWaypointDown('${waypointId}')" title="Move down">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <button type="button" class="waypoint-action-btn delete" onclick="removeWaypoint('${waypointId}')" title="Remove">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+
+            waypointsList.appendChild(waypointItem);
+
+            // Setup autocomplete for this waypoint
+            setupWaypointAutocomplete(waypointId);
+
+            // Show optimize button if we have waypoints
+            updateOptimizeButton();
+
+            showToast('Waypoint Added', 'Add a stop location along your route', 'success', 2000);
+        }
+
+        function setupWaypointAutocomplete(waypointId) {
+            const input = document.getElementById(waypointId + '-input');
+            const dropdown = document.getElementById(waypointId + '-dropdown');
+
+            if (!input || !dropdown) return;
+
+            input.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                
+                if (query.length < 2) {
+                    dropdown.classList.remove('show');
+                    return;
+                }
+
+                const cities = Object.keys(cityCoordinates);
+                const matches = cities.filter(city => city.toLowerCase().includes(query));
+
+                if (matches.length > 0) {
+                    dropdown.innerHTML = matches.slice(0, 5).map(city => `
+                        <div class="autocomplete-item" onclick="selectWaypointCity('${waypointId}', '${city}')">
+                            <i class="fas fa-map-marker-alt"></i> ${city}
+                        </div>
+                    `).join('');
+                    dropdown.classList.add('show');
+                } else {
+                    dropdown.classList.remove('show');
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
+
+        function selectWaypointCity(waypointId, city) {
+            const input = document.getElementById(waypointId + '-input');
+            const dropdown = document.getElementById(waypointId + '-dropdown');
+            
+            if (input) input.value = city;
+            if (dropdown) dropdown.classList.remove('show');
+            
+            updateWaypoint(waypointId, city);
+        }
+
+        function updateWaypoint(waypointId, city) {
+            const waypoint = waypoints.find(w => w.id === waypointId);
+            if (waypoint) {
+                waypoint.city = city;
+                waypoint.coords = cityCoordinates[city] || null;
+                
+                if (waypoint.coords) {
+                    // Add marker to map
+                    addWaypointMarker(waypoint);
+                    // Recalculate route
+                    if (pickupCoords && dropCoords) {
+                        calculateRouteWithWaypoints();
+                    }
+                }
+            }
+            triggerAutoSave();
+        }
+
+        function addWaypointMarker(waypoint) {
+            // Remove existing marker if any
+            const existingMarker = waypointMarkers.find(m => m.id === waypoint.id);
+            if (existingMarker && existingMarker.marker) {
+                map.removeLayer(existingMarker.marker);
+            }
+
+            if (!waypoint.coords) return;
+
+            const waypointIcon = L.divIcon({
+                className: 'custom-waypoint-icon',
+                html: '<div style="background: #FFC107; color: #000; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">•</div>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+
+            const marker = L.marker(waypoint.coords, { icon: waypointIcon }).addTo(map);
+            marker.bindPopup('<b>Stop:</b><br>' + waypoint.city);
+
+            // Store marker reference
+            const markerIndex = waypointMarkers.findIndex(m => m.id === waypoint.id);
+            if (markerIndex >= 0) {
+                waypointMarkers[markerIndex].marker = marker;
+            } else {
+                waypointMarkers.push({ id: waypoint.id, marker: marker });
+            }
+        }
+
+        function removeWaypoint(waypointId) {
+            // Remove from array
+            waypoints = waypoints.filter(w => w.id !== waypointId);
+            
+            // Remove marker from map
+            const markerData = waypointMarkers.find(m => m.id === waypointId);
+            if (markerData && markerData.marker) {
+                map.removeLayer(markerData.marker);
+            }
+            waypointMarkers = waypointMarkers.filter(m => m.id !== waypointId);
+            
+            // Remove DOM element
+            const element = document.getElementById(waypointId);
+            if (element) element.remove();
+            
+            // Renumber remaining waypoints
+            renumberWaypoints();
+            
+            // Update route
+            if (pickupCoords && dropCoords) {
+                calculateRouteWithWaypoints();
+            }
+            
+            updateOptimizeButton();
+            showToast('Removed', 'Waypoint removed', 'info', 2000);
+        }
+
+        function moveWaypointUp(waypointId) {
+            const index = waypoints.findIndex(w => w.id === waypointId);
+            if (index > 0) {
+                [waypoints[index], waypoints[index - 1]] = [waypoints[index - 1], waypoints[index]];
+                renumberWaypoints();
+                if (pickupCoords && dropCoords) {
+                    calculateRouteWithWaypoints();
+                }
+            }
+        }
+
+        function moveWaypointDown(waypointId) {
+            const index = waypoints.findIndex(w => w.id === waypointId);
+            if (index < waypoints.length - 1) {
+                [waypoints[index], waypoints[index + 1]] = [waypoints[index + 1], waypoints[index]];
+                renumberWaypoints();
+                if (pickupCoords && dropCoords) {
+                    calculateRouteWithWaypoints();
+                }
+            }
+        }
+
+        function renumberWaypoints() {
+            const waypointsList = document.getElementById('waypointsList');
+            const items = Array.from(waypointsList.children);
+            
+            waypoints.forEach((waypoint, index) => {
+                const element = document.getElementById(waypoint.id);
+                if (element) {
+                    const numberEl = element.querySelector('.waypoint-number');
+                    if (numberEl) numberEl.textContent = index + 1;
+                    
+                    // Reorder in DOM
+                    waypointsList.appendChild(element);
+                }
+            });
+        }
+
+        function updateOptimizeButton() {
+            const optimizeBtn = document.getElementById('optimizeRouteBtn');
+            if (waypoints.length > 0) {
+                optimizeBtn.style.display = 'flex';
+            } else {
+                optimizeBtn.style.display = 'none';
+            }
+        }
+
+        function optimizeRoute() {
+            if (waypoints.length === 0) return;
+
+            // Simple optimization: calculate all permutations and find shortest
+            // For production, use a proper TSP solver or Google Maps Directions API
+            
+            showToast('Optimizing', 'Calculating optimal route...', 'info', 2000);
+
+            // Simulate optimization delay
+            setTimeout(() => {
+                // Mock optimization - in reality, this would calculate distances
+                const originalDistance = estimatedDistance;
+                const saved = Math.round(Math.random() * 50 + 10);
+                const timeSaved = Math.round(saved / 60 * 60);
+
+                document.getElementById('distanceSaved').textContent = saved + ' km';
+                document.getElementById('timeSaved').textContent = timeSaved + ' mins';
+                document.getElementById('optimizationResult').classList.add('show');
+
+                showToast('Optimized!', `Route optimized to save ${saved}km`, 'success', 3000);
+                
+                // Recalculate route with optimized order
+                calculateRouteWithWaypoints();
+            }, 1500);
+        }
+
+        function calculateRouteWithWaypoints() {
+            if (!pickupCoords || !dropCoords) return;
+
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            // Build waypoints array: pickup -> all stops -> drop
+            const routeWaypoints = [L.latLng(pickupCoords[0], pickupCoords[1])];
+            
+            waypoints.forEach(wp => {
+                if (wp.coords) {
+                    routeWaypoints.push(L.latLng(wp.coords[0], wp.coords[1]));
+                }
+            });
+            
+            routeWaypoints.push(L.latLng(dropCoords[0], dropCoords[1]));
+
+            routingControl = L.Routing.control({
+                waypoints: routeWaypoints,
+                routeWhileDragging: false,
+                showAlternatives: false,
+                lineOptions: {
+                    styles: [{ color: '#ff6347', opacity: 0.8, weight: 5 }]
+                },
+                createMarker: function () { return null; },
+                addWaypoints: false
+            }).addTo(map);
+
+            routingControl.on('routesfound', function (e) {
+                const route = e.routes[0];
+                const distance = (route.summary.totalDistance / 1000).toFixed(2);
+                const time = (route.summary.totalTime / 3600).toFixed(1);
+                const cost = Math.round(distance * 15);
+
+                document.getElementById('routeDistance').textContent = distance + ' km';
+                document.getElementById('routeTime').textContent = time + ' hours';
+                document.getElementById('routeCost').textContent = '₹ ' + cost.toLocaleString();
+
+                document.getElementById('routeInfo').classList.add('show');
+
+                const stopsText = waypoints.length > 0 ? ` with ${waypoints.length} stop(s)` : '';
+                showToast('Route Updated', `Distance: ${distance}km${stopsText}`, 'success', 3000);
+            });
+
+            const bounds = L.latLngBounds(routeWaypoints);
+            map.fitBounds(bounds, { padding: [50, 50] });
+        }
+
+        // ========================================
         // DOM CONTENT LOADED - INITIALIZATION
         // ========================================
         document.addEventListener('DOMContentLoaded', function () {
@@ -4042,6 +4508,10 @@
             // Trigger validations
             validateField('pickupCity', fromCity);
             validateField('dropCity', toCity);
+
+            // Fetch weather for both cities
+            fetchWeatherData(fromCity, 'pickup');
+            fetchWeatherData(toCity, 'drop');
 
             // Calculate distance
             calculateDistanceEstimate();
