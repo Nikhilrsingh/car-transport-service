@@ -94,6 +94,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="../pages/pricing-calculator.html" class="nav-link" data-page="pricing-calculator" data-tooltip="Pricing Calculator">
+                    <i class="fas fa-calculator"></i>
+                    <span>Pricing Calculator</span>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="../pages/tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>Track Your Car</span>
@@ -240,6 +246,12 @@
         <a href="../pages/pricing.html" class="mobile-nav-link">
           <i class="fas fa-tags"></i>
           <span>Pricing</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="../pages/pricing-calculator.html" class="mobile-nav-link">
+          <i class="fas fa-calculator"></i>
+          <span>Pricing Calculator</span>
         </a>
       </li>
       <li class="mobile-nav-item">
