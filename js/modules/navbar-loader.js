@@ -134,6 +134,12 @@
                   </a>
                 </li>
                 <li>
+                  <a href="../pages/careers.html" class="nav-link" data-page="careers" data-tooltip="Careers">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Careers</span>
+                  </a>
+                </li>
+                <li>
                   <a href="../pages/blog.html" class="nav-link blog-link" data-tooltip="Blog">
                     <i class="fas fa-blog"></i>
                     <span>Blog</span>
@@ -252,6 +258,12 @@
         <a href="../pages/contact.html" class="mobile-nav-link">
           <i class="fas fa-phone"></i>
           <span>Contact</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="../pages/careers.html" class="mobile-nav-link">
+          <i class="fas fa-briefcase"></i>
+          <span>Careers</span>
         </a>
       </li>
       <li class="mobile-nav-item">
