@@ -27,14 +27,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   stars.forEach((star) => {
     star.addEventListener("click", () => {
-      selectedRating = star.getAttribute("data-value");
+      selectedRating = parseInt(star.getAttribute("data-value"));
 
       // Reset all stars
-      stars.forEach((s) => s.classList.remove("selected"));
+      stars.forEach((s) => {
+        s.classList.remove("active");
+        s.classList.replace("fas", "far");
+      });
 
       // Highlight up to clicked star
       for (let i = 0; i < selectedRating; i++) {
-        stars[i].classList.add("selected");
+        stars[i].classList.add("active");
+        stars[i].classList.replace("far", "fas"); // fill the star
       }
     });
 
@@ -57,14 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
-    const feedback = document.getElementById("feedback").value.trim();
+    const feedback = document.getElementById("feedbackText").value.trim();
 
     alert(`⭐ Thanks, ${name}!\nRating: ${selectedRating} stars\n\nYour feedback:\n${feedback}`);
 
     // Reset modal
     feedbackModal.style.display = "none";
     feedbackForm.reset();
-    stars.forEach((s) => s.classList.remove("selected"));
+    stars.forEach((s) => {
+      s.classList.remove("active");
+      s.classList.replace("fas", "far");
+      s.style.color = "#ccc";
+    });
     selectedRating = 0;
   });
 });
