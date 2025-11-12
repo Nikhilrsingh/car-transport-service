@@ -19,3 +19,92 @@ body {
   color: var(--footer-text);
 }
 
+/* Hero Section - Light overlay for dark text visibility */
+.hero-overlay {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 99, 71, 0.15) 50%,
+      rgba(255, 255, 255, 0.8) 100%) !important;
+}
+
+/* Dark text for light theme */
+.hero-title,
+.title-line {
+  color: #1a1a1a !important;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5) !important;
+}
+
+.hero-description {
+  color: #2d2d2d !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+.hero-badge {
+  color: #1a1a1a !important;
+  background: rgba(255, 99, 71, 0.15) !important;
+  border-color: rgba(255, 99, 71, 0.4) !important;
+}
+
+.stat-number {
+  color: #ff6347 !important;
+}
+
+.stat-label {
+  color: #333 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Keep gradient on highlighted title */
+.title-line.highlight {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: slideInLeft 0.8s ease-out 0.2s !important;
+  filter: none !important;
+}
+
+/* Contact CTA Section */
+.contact-cta {
+  background: #f9f9f9;
+}
+
+.cta-text h2 {
+  color: #1a1a1a !important;
+}
+
+.cta-text p {
+  color: #2d2d2d !important;
+}
+
+.feature span {
+  color: #1a1a1a !important;
+}
+
+/* Features Section */
+.features {
+  background: #ffffff;
+}
+
+.section-title,
+.features .section-title {
+  color: #df0808 !important;
+}
+
+.h1 {
+  color: #000 !important;
+}
+
+.feature-box {
+  background: #fff;
+  border-color: #ddd;
+}
+
+.feature-box h3 {
+  color: #000 !important;
+}
+
+.feature-box p {
+  color: #555 !important;
+}
+
