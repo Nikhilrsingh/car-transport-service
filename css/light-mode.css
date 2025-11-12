@@ -156,3 +156,24 @@ body {
   box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3) !important;
 }
 
+/* Testimonials intro paragraph on light background */
+body[data-theme="light"] .testimonials-section .section-title p {
+  color: #2d2d2d !important;
+}
+
+/* Footer text contrast in light theme */
+body[data-theme="light"] .footer,
+body[data-theme="light"] #footer-container .footer {
+  color: #222222 !important;
+}
+body[data-theme="light"] .footer .footer-about p,
+body[data-theme="light"] .footer .footer-links a,
+body[data-theme="light"] .footer .contact-info li,
+body[data-theme="light"] .footer .footer-bottom-content,
+body[data-theme="light"] .footer .footer-bottom-content .copyright,
+body[data-theme="light"] .footer .footer-bottom-links a,
+body[data-theme="light"] .footer .payment-methods i,
+body[data-theme="light"] .footer .footer-brand {
+  color: #333333 !important;
+}
+
