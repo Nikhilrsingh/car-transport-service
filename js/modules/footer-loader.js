@@ -49,85 +49,99 @@
 
   // This is the single, correct function for your footer HTML
   function getFooterHTML() {
-    return `
-      <footer class="footer-section-enhanced">
-        <div class="footer-container">
-          
-          <div class="footer-section about-us">
-            <h2>About Us</h2>
-            <p>We are a leading car transport service, dedicated to providing safe, reliable, and affordable vehicle shipping solutions. Our team of experts ensures your vehicle is handled with the utmost care.</p>
-            <div class="social-links">
-              <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-              <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-            </div>
-          </div>
+  return `<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
 
-          <div class="footer-section quick-links">
-            <h2>Quick Links</h2>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="pages/about.html">About Us</a></li>
-              <li><a href="pages/contact.html">Contact</a></li>
-              <li><a href="pages/tracking.html">Tracking</a></li>
-              <li><a href="pages/blog.html">Blog</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-section contact-info">
-            <h2>Contact Info</h2>
-            <ul>
-              <li><i class="fas fa-map-marker-alt"></i> 123 Transport St, City, Country</li>
-              <li><i class="fas fa-phone-alt"></i> +123 456 7890</li>
-              <li><i class="fas fa-envelope"></i> info@cartransport.com</li>
-            </ul>
-          </div>
-
-          <div class="footer-section newsletter">
-            <h2>Newsletter</h2>
-            <p>Subscribe to our newsletter for updates.</p>
-            <form class="newsletter-form">
-              <input type="email" placeholder="Your Email" required>
-              <button type="submit">Subscribe</button>
-            </form>
-          </div>
-
+      <!-- Column 1: Company Info -->
+      <div class="footer-column footer-about">
+        <div class="footer-logo-group">
+          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+          <span class="footer-brand">Harihar Car Carriers</span>
         </div>
-
-        <div class="footer-road"></div>
-        <div class="car-carrier-animation">
-          <img
-            class="moving-car-carrier"
-            src="../assets/images/car-carrier.png"
-            alt="Moving car across footer"
-          />
+        <p>
+          Your trusted partner for safe and reliable vehicle transportation across India. With over 12 years of experience, we ensure your vehicles reach their destination securely and on time.
+        </p>
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
+      </div>
 
-        <div class="footer-bottom">
-          <div class="container">
-            <div class="footer-bottom-content">
-              <div class="copyright">
-                &copy; <span id="current-year"></span> Harihar Car Carriers. All rights reserved.
-              </div>
-              <div class="footer-bottom-links">
-                <a href="../pages/privacy-policy.html">Privacy Policy</a>
-                <a href="../pages/Terms of Services.html">Terms of Service</a>
-                <a href="#sitemap">Sitemap</a>
-              </div>
-              <div class="payment-methods">
-                <i class="fab fa-cc-visa" title="Visa"></i>
-                <i class="fab fa-cc-mastercard" title="MasterCard"></i>
-                <i class="fab fa-cc-paypal" title="PayPal"></i>
-                <i class="fas fa-university" title="Net Banking"></i>
-              </div>
-            </div>
-          </div>
+      <!-- Column 2: Quick Links + Services -->
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../pages/about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="../index.html#services"><i class="fas fa-truck-moving"></i> Services</a></li>
+          <li><a href="../pages/pricing.html"><i class="fas fa-tags"></i> Pricing</a></li>
+          <li><a href="../pages/booking.html"><i class="fas fa-calendar-check"></i> Book Now</a></li>
+          <li><a href="../pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
+        </ul>
+        <h3 class="mt-6">Our Services</h3>
+        <ul class="footer-links">
+          <li><a href="#door-to-door"><i class="fas fa-door-open"></i> Door-to-Door</a></li>
+          <li><a href="#nationwide"><i class="fas fa-globe-asia"></i> Nationwide</a></li>
+          <li><a href="#luxury"><i class="fas fa-crown"></i> Luxury Cars</a></li>
+          <li><a href="#bike"><i class="fas fa-motorcycle"></i> Bike Transport</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Contact Info + Newsletter -->
+      <div class="footer-column">
+        <h3>Contact Info</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i><span>Nagpur, Maharashtra, India - 440001</span></li>
+          <li><i class="fas fa-phone"></i><span>+91 XXXXX XXXXX</span></li>
+          <li><i class="fas fa-envelope"></i><span>info@hariharcarcarriers.com</span></li>
+          <li><i class="fas fa-clock"></i><span>24/7 Customer Support</span></li>
+        </ul>
+        <div class="newsletter">
+          <h5>Newsletter</h5>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+          </form>
         </div>
-      </footer>`;
-  }
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Optional: Road & Car Animation -->
+  <div class="footer-road"></div>
+  <div class="car-carrier-animation">
+    <img
+      class="moving-car-carrier"
+      src="../assets/images/car-carrier.png"
+      alt="Moving car across footer"
+    />
+  </div>
+
+  <!-- Footer Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <div class="copyright">
+        © <span id="current-year">2025</span> Harihar Car Carriers. All rights reserved.
+      </div>
+      <div class="footer-bottom-links">
+        <a href="../pages/privacy-policy.html">Privacy Policy</a>
+        <a href="../pages/Terms of Services.html">Terms</a>
+        <a href="#sitemap">Sitemap</a>
+      </div>
+      <div class="payment-methods">
+        <i class="fab fa-cc-visa" title="Visa"></i>
+        <i class="fab fa-cc-mastercard" title="MasterCard"></i>
+        <i class="fab fa-cc-paypal" title="PayPal"></i>
+        <i class="fas fa-university" title="Net Banking"></i>
+      </div>
+    </div>
+  </div>
+</footer>`;
+}
 
   function fixPathsForRootPage(container) {
     // Fix image paths
