@@ -120,17 +120,7 @@
         }
       }
 
-      /* Footer */
-      .footer {
-        background: var(--dark-light);
-        padding: 3rem 0;
-        text-align: center;
-        border-top: 3px solid var(--primary);
-      }
-
-      .footer p {
-        color: var(--text-light);
-      }
+      
 
       /* Responsive */
       @media (max-width: 768px) {
@@ -506,20 +496,11 @@
     <!-- Footer Section -->
     <div id="footer-container"></div>
 
-    <script>
-      // Load shared footer dynamically
-      fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("footer-container").innerHTML = data;
-        })
-        .catch((error) => console.error("Error loading footer:", error));
-    </script>
-     
-    <script src="../js/modules//contribute.js"></script>
     <script src="../js/modules/search.js"></script>
     <script src="../js/modules/navbar-loader.js"></script>
+    <script src="../js/modules/footer-loader.js"></script>
     <script src="../js/modules/themes.js"></script>
+    <script src="../js/modules/contribute.js"></script>
     <script src="../js/modules/floating-book-button.js"></script>
     <script src="../js/modules/floating-call-button.js"></script>
     <script src="../js/modules/floating-whatsapp-button.js"></script>

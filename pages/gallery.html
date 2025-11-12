@@ -6,6 +6,7 @@
     <title>Gallery | Harihar Car Carriers</title>
     <link rel="icon" type="image/png" href="classic-car.png" />
     <link rel="stylesheet" href="../css/components/navbar.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
     <link rel="stylesheet" href="../css/components/floating-call-button.css" />
     <link
       rel="stylesheet"
@@ -26,6 +27,7 @@
     />
     <link rel="stylesheet" href="../css/components/floating-button.css" />
     <link rel="stylesheet" href="../css/components/gallery.css" />
+  </head>
 
   <body>
     <!-- Enhanced Navigation Component -->
@@ -605,19 +607,12 @@
 
     <!-- FOOTER -->
     <div id="footer-container"></div>
-    <script>
-      fetch("footer.html")
-        .then((res) => res.text())
-        .then(
-          (html) =>
-            (document.getElementById("footer-container").innerHTML = html)
-        )
-        .catch((err) => console.error("Footer load error:", err));
-    </script>
+
     
     <!-- Scripts -->
     <script src="../js/modules/search.js"></script>
     <script src="../js/modules/navbar-loader.js"></script>
+    <script src="../js/modules/footer-loader.js"></script>
     <script src="../js/modules/themes.js"></script>
     <script src="../js/modules/gallery.js"></script>
     <script src="../js/modules/floating-book-button.js"></script>
