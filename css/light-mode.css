@@ -1,0 +1,21 @@
+:root {
+  --bg: #ffffff;
+  --text: #222222;
+  --footer-bg: #f6f6f6;
+  --footer-text: #222222;
+  --accent: #ff6b3d;
+  --glass-opacity: 0.85; /* not used if you don't want glass */
+}
+
+/* global overrides */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* footer example */
+.footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+

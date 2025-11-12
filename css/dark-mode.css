@@ -1,0 +1,18 @@
+:root {
+  --bg: #0f1115;
+  --text: #ffffff;
+  --footer-bg: #111416; /* dark footer */
+  --footer-text: #ff9b6b; /* orange-ish text in footer */
+  --accent: #ff6b3d;
+  --glass-opacity: 0.6; /* not required */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
