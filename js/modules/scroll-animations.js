@@ -67,19 +67,23 @@
     // Configuration for Intersection Observer
     const observerOptions = {
       root: null, // viewport
-      rootMargin: '0px 0px -50px 0px', // trigger when element is 50px from bottom of viewport
-      threshold: 0.1 // trigger when 10% of element is visible
+      rootMargin: '0px 0px -80px 0px', // trigger earlier for smoother appearance
+      threshold: [0, 0.1, 0.2] // multiple thresholds for progressive reveal
     };
 
     // Create observer instance
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Add visible class to trigger animation
-          entry.target.classList.add('visible');
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
+          // Add visible class to trigger animation with slight delay for smoothness
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 50);
           
           // Unobserve after animation (performance optimization)
-          observer.unobserve(entry.target);
+          setTimeout(() => {
+            observer.unobserve(entry.target);
+          }, 1000);
         }
       });
     }, observerOptions);

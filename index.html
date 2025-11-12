@@ -515,7 +515,78 @@
     <!-- Footer Section -->
     <div id="footer-container"></div>
 
-    <!-- Car Animation -->
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Top to Bottom Button -->
+    <button class="back-to-bottom" id="backToBottom">
+      <i class="fas fa-arrow-down"></i>
+    </button>
+
+  <!--  Theme Toggle Button -->
+  <div class="theme-toggle">
+    <button id="theme-toggle">
+      <i id="theme-icon" class="fas fa-sun"></i>
+    </button>
+    <link id="theme-style" rel="stylesheet" href="./css/light-mode.css"/>
+  </div>
+
+  <!-- JS files -->
+  <script src="./js/script.js"></script>
+  <script src="./js/modules/theme-switcher.js"></script>
+
+    <!-- Load Footer -->
+    <script>
+      // Load footer
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-container").innerHTML = data;
+        })
+        .catch((error) => {
+          console.error("Error loading footer:", error);
+        });
+    </script>
+
+    <script>
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+
+        // Small delay for smooth fade-out
+        setTimeout(() => {
+          preloader.classList.add("fade-out");
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 800);
+        }, 1000); // delay before hiding
+      });
+    </script>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/modules/hero-animations.js"></script>
+    <script src="./js/modules/Services.js"></script>
+    <script src="./js/modules/tracking.js"></script>
+    <script src="./js/modules/footer.js"></script>
+    <script src="./js/modules/navbar-loader.js"></script>
+    <script src="./js/modules/search.js"></script>
+    <script src="./js/modules/floating-book-button.js"></script>
+    <script src="./js/modules/floating-call-button.js"></script>
+    <script src="./js/modules/floating-whatsapp-button.js"></script>
+    <script src="./js/modules/quote-modal.js"></script>
+    <script src="./js/modules/sticky-quote-button.js"></script>
+    <script src="./js/modules/floating-chatbot-button.js"></script>
+    <script src="./js/modules/chatbot-modal.js"></script>
+    <script src="./js/modules/back-to-top-button.js"></script>
+    <script src="./js/modules/backtoBottom.js"></script>
+    <script src="./js/modules/feedback-modal.js"></script>
+    <script src="./js/modules/testimonial.js"></script>
+    <script src="./js/modules/rating.js"></script>
+    <script src="./js/modules/region-search.js"></script>
+    <script src="./js/modules/scroll-animations.js"></script>
+    <script src="./js/modules/section-dividers.js"></script>
+
     <div id="car" class="car">🏎️</div>
 
     <!-- 🟠 Floating Feedback Button -->
