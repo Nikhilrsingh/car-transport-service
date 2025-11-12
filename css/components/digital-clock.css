@@ -1,4 +1,7 @@
 #mac-clock {
+  position: fixed;
+  top: 80px;
+  right: 20px;
   font-size: 15px;
   font-weight: 500;
   color: #f5f5f7;
@@ -8,6 +11,32 @@
   backdrop-filter: blur(8px);
   z-index: 9999;
   letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+#mac-clock:hover {
+  background: rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  #mac-clock {
+    top: 70px;
+    right: 15px;
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  #mac-clock {
+    top: 65px;
+    right: 10px;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
 }
 
 
