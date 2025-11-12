@@ -1,10 +1,41 @@
-/* Footer Styles */
-.footer {
-  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
-  padding: 70px 0 0;
-  border-top: 3px solid #ff6347;
-  position: relative;
-  overflow: hidden;
+/* Footer Styles - High specificity to override any conflicting styles */
+footer.footer,
+#footer-container footer.footer,
+#footer-container .footer {
+  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%) !important;
+  padding: 80px 0 0 !important;
+  border-top: 3px solid #ff6347 !important;
+  position: relative !important;
+  overflow: visible !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  clear: both !important;
+  color: #e0e0e0 !important;
+  min-height: 400px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure all text in footer is visible - but preserve icon and heading colors */
+footer.footer p,
+footer.footer li,
+footer.footer span:not(.footer-logo-text),
+#footer-container footer.footer p,
+#footer-container footer.footer li,
+#footer-container footer.footer span:not(.footer-logo-text) {
+  color: #e0e0e0 !important;
+}
+
+footer.footer a,
+#footer-container footer.footer a,
+#footer-container .footer a {
+  color: #e0e0e0 !important;
+}
+
+footer.footer a:hover,
+#footer-container footer.footer a:hover,
+#footer-container .footer a:hover {
+  color: #ff6347 !important;
 }
 
 .footer::before {
@@ -20,13 +51,14 @@
 /* Road & car animation */
 .footer-road {
   position: absolute;
-  top: 0%;
+  top: 0;
   left: 0;
   width: 100%;
   height: 60px;
   background: linear-gradient(to bottom, #4a4a4a 0%, #2a2a2a 100%);
   border-top: 2px solid #666;
   overflow: hidden;
+  z-index: 0;
 }
 
 .footer-road::before {
@@ -46,10 +78,9 @@
 
 .car-carrier-animation {
   position: absolute;
-  top: -1%;
-  /* Aligned with the road */
+  top: 5px;
   left: -50px;
-  z-index: 100;
+  z-index: 10;
   animation: driveCar 19s linear infinite;
   will-change: transform;
 }
@@ -81,10 +112,12 @@
 }
 
 
-.container {
+.footer .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-content {
@@ -92,12 +125,19 @@
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
   gap: 50px;
   margin-bottom: 50px;
+  padding-top: 80px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
 }
 
+footer.footer .footer-column h3,
+#footer-container footer.footer .footer-column h3,
+#footer-container .footer .footer-column h3,
 .footer-column h3 {
   font-size: 1.4rem;
   margin-bottom: 25px;
-  color: #ff6347;
+  color: #ff6347 !important;
   position: relative;
   padding-bottom: 10px;
 }
@@ -117,10 +157,13 @@
   width: 80px;
 }
 
-.footer-about p {
-  color: #ccc;
+footer.footer .footer-about p,
+#footer-container footer.footer .footer-about p,
+#footer-container .footer .footer-about p {
+  color: #e0e0e0 !important;
   margin-bottom: 20px;
   line-height: 1.8;
+  font-size: 0.95rem;
 }
 
 .footer-logo {
@@ -135,10 +178,13 @@
   width: auto;
 }
 
+footer.footer .footer-logo-text,
+#footer-container footer.footer .footer-logo-text,
+#footer-container .footer .footer-logo-text,
 .footer-logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ff6347;
+  color: #ff6347 !important;
 }
 
 .social-links {
@@ -176,13 +222,16 @@
   margin-bottom: 12px;
 }
 
-.footer-links a {
-  color: #ccc;
+footer.footer .footer-links a,
+#footer-container footer.footer .footer-links a,
+#footer-container .footer .footer-links a {
+  color: #e0e0e0 !important;
   text-decoration: none;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 0.95rem;
 }
 
 .footer-links a:hover {
@@ -190,26 +239,42 @@
   padding-left: 5px;
 }
 
+footer.footer .footer-links a i,
+#footer-container footer.footer .footer-links a i,
+#footer-container .footer .footer-links a i,
 .footer-links a i {
   width: 20px;
   text-align: center;
-  color: #ff6347;
+  color: #ff6347 !important;
 }
 
 .contact-info {
   list-style: none;
 }
 
-.contact-info li {
+footer.footer .contact-info li,
+#footer-container footer.footer .contact-info li,
+#footer-container .footer .contact-info li {
   margin-bottom: 15px;
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  color: #ccc;
+  color: #e0e0e0 !important;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
+footer.footer .contact-info li span,
+#footer-container footer.footer .contact-info li span,
+#footer-container .footer .contact-info li span {
+  color: #e0e0e0 !important;
+}
+
+footer.footer .contact-info i,
+#footer-container footer.footer .contact-info i,
+#footer-container .footer .contact-info i,
 .contact-info i {
-  color: #ff6347;
+  color: #ff6347 !important;
   margin-top: 2px;
   width: 20px;
   text-align: center;
@@ -219,9 +284,12 @@
   margin-top: 20px;
 }
 
-.newsletter-form p {
-  color: #ccc;
+footer.footer .newsletter-form p,
+#footer-container footer.footer .newsletter-form p,
+#footer-container .footer .newsletter-form p {
+  color: #e0e0e0 !important;
   margin-bottom: 15px;
+  font-size: 0.95rem;
 }
 
 .newsletter-input {
@@ -272,12 +340,14 @@
 
 .footer-bottom-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
-.copyright {
-  color: #ccc;
+footer.footer .copyright,
+#footer-container footer.footer .copyright,
+#footer-container .footer .copyright {
+  color: #e0e0e0 !important;
   font-size: 0.9rem;
 }
 
@@ -286,8 +356,10 @@
   gap: 25px;
 }
 
-.footer-bottom-links a {
-  color: #ccc;
+footer.footer .footer-bottom-links a,
+#footer-container footer.footer .footer-bottom-links a,
+#footer-container .footer .footer-bottom-links a {
+  color: #e0e0e0 !important;
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s ease;
@@ -303,9 +375,11 @@
   align-items: center;
 }
 
-.payment-methods i {
+footer.footer .payment-methods i,
+#footer-container footer.footer .payment-methods i,
+#footer-container .footer .payment-methods i {
   font-size: 1.5rem;
-  color: #ccc;
+  color: #e0e0e0 !important;
   transition: color 0.3s ease;
 }
 
@@ -315,22 +389,105 @@
 
 /* Back to Top Button - Styles moved to css/components/back-to-top-button.css */
 
+/* Normalize spacing for sections that appear before footer */
+/* Ensure all sections before footer have consistent bottom spacing */
+/* This prevents sections from having excessive bottom margins that create inconsistent spacing */
+
+/* Target any section that appears before footer-container */
+section:last-of-type,
+main:last-of-type,
+.contact-cta,
+.digital-clock-section,
+.enhanced-gallery-section,
+.testimonials-section,
+.services-section,
+.pricing-cta-section,
+.region-section,
+.website-rating-section,
+.page-header + .container {
+  margin-bottom: 0 !important;
+}
+
+/* Normalize padding for sections that might have bottom padding */
+.contact-cta {
+  padding-bottom: 0 !important;
+}
+
+/* Ensure footer container has consistent spacing across all pages */
+/* High specificity to override any page-specific styles */
+#footer-container,
+body #footer-container,
+html body #footer-container,
+body > #footer-container,
+main + #footer-container,
+section + #footer-container,
+div + #footer-container,
+.contact-cta + #footer-container,
+.digital-clock-section + #footer-container,
+.enhanced-gallery-section + #footer-container,
+.testimonials-section + #footer-container,
+.services-section + #footer-container,
+.pricing-cta-section + #footer-container,
+.region-section + #footer-container,
+.website-rating-section + #footer-container {
+  margin-top: 80px !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  width: 100% !important;
+  clear: both !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure consistent spacing regardless of what comes before footer */
+/* Use universal selector to catch any element before footer-container */
+* + #footer-container {
+  margin-top: 80px !important;
+}
+
 /* Responsive Footer */
 @media (max-width: 992px) {
+  /* Maintain consistent footer container spacing on tablets */
+  #footer-container,
+  body #footer-container,
+  html body #footer-container,
+  * + #footer-container {
+    margin-top: 80px !important;
+  }
+
   .footer-content {
     grid-template-columns: 1fr 1fr;
     gap: 40px;
+    padding-top: 60px;
   }
 }
 
 @media (max-width: 768px) {
+  /* Maintain consistent footer container spacing on mobile */
+  #footer-container,
+  body #footer-container,
+  html body #footer-container,
+  * + #footer-container {
+    margin-top: 60px !important;
+  }
+
+  footer.footer,
+  #footer-container footer.footer,
+  #footer-container .footer {
+    padding: 60px 0 0 !important;
+  }
+
   .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;
+    padding-top: 40px;
   }
 
   .footer-bottom-content {
-    flex-direction: column;
+    display: flex;
+    align-items: center;
+    /* flex-direction: column; */
     gap: 20px;
     text-align: center;
   }
@@ -342,5 +499,12 @@
 
   .newsletter-input {
     flex-direction: column;
+  }
+
+  footer.footer .footer-column h3,
+  #footer-container footer.footer .footer-column h3,
+  #footer-container .footer .footer-column h3,
+  .footer-column h3 {
+    font-size: 1.2rem;
   }
 }

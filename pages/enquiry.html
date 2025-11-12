@@ -554,20 +554,16 @@
 
     <!-- FOOTER -->
     <div id="footer-container"></div>
-    <script>
-      fetch("footer.html")
-        .then((res) => res.text())
-        .then(
-          (html) =>
-            (document.getElementById("footer-container").innerHTML = html)
-        )
-        .catch((err) => console.error("Footer load error:", err));
-    </script>
+
 
     <!-- Scripts -->
     <!-- Scripts -->
     <script src="../js/modules/search.js"></script>
     <script src="../js/modules/navbar-loader.js"></script>
+
+    <script src="../js/modules/footer-loader.js"></script>
+    <script src="../js/modules/themes.js"></script>
+
     <script src="../js/modules/floating-book-button.js"></script>
     <script src="../js/modules/floating-call-button.js"></script>
     <script src="../js/modules/floating-whatsapp-button.js"></script>

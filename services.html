@@ -17,6 +17,8 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+      /* Footer spacing and styles handled by footer.css */
+
       /* ===== Services Page Styling ===== */
       .services-container {
         max-width: 1200px;
@@ -132,13 +134,7 @@
         color: var(--primary-color);
       }
 
-      footer {
-        text-align: center;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        border-top: 1px solid var(--border-color);
-        padding: 20px;
-      }
+      
 
       .back-to-top {
         position: fixed;
@@ -279,28 +275,23 @@
     </section>
 
     <!-- Footer -->
-    <footer>
-      <div id="footer-container"></div>
-    </footer>
+    <div id="footer-container"></div>
 
     <script>
-      fetch("footer.html")
-        .then((res) => res.text())
-        .then(
-          (data) =>
-            (document.getElementById("footer-container").innerHTML = data)
-        )
-        .catch((err) => console.error("Footer Load Error:", err));
-
       lucide.createIcons();
-
-      // Back to top button
-      const backToTop = document.getElementById("backToTop");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) backToTop.classList.add("visible");
-        else backToTop.classList.remove("visible");
-      });
     </script>
+
+    <script src="./js/modules/search.js"></script>
+    <script src="./js/modules/navbar-loader.js"></script>
+    <script src="./js/modules/footer-loader.js"></script>
+    <script src="./js/modules/themes.js"></script>
+    <script src="./js/modules/Services.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/modules/backtoBottom.js"></script>
+    <script src="./js/modules/back-to-top-button.js"></script>
+    <script src="./js/modules/scroll-animations.js"></script>
+
+    <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop">
       <i class="fas fa-chevron-up"></i>
     </button>
@@ -309,13 +300,5 @@
     <button class="back-to-bottom" id="backToBottom">
       <i class="fas fa-arrow-down"></i>
     </button>
-
-    <script src="./js/modules/Services.js"></script>
-    <script src="./js/script.js"></script>
-    <script src="./js/modules/footer.js"></script>
-    <script src="./js/modules/navbar-loader.js"></script>
-    <script src="./js/modules/search.js"></script>
-    <script src="./js/modules/backtoBottom.js"></script>
-    <script src="./js/modules/scroll-animations.js"></script>
   </body>
 </html>

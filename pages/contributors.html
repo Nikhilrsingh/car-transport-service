@@ -24,6 +24,274 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <style>
+      :root {
+        --primary: #ff6347;
+        --primary-dark: #ff4500;
+        --dark: #2b2b2b;
+        --dark-light: #333;
+        --text: #ffffff;
+        --text-light: #cccccc;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--dark);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-top: 80px;
+      }
+
+      /* Hero Section */
+      .contributors-hero {
+        padding: 4rem 0;
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          var(--dark) 0%,
+          var(--dark-light) 100%
+        );
+      }
+
+      .contributors-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .contributors-hero p {
+        font-size: 1.2rem;
+        color: var(--text-light);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Search and Filters */
+      .search-contributor {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      /* Loading Spinner */
+      #spinner {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+      }
+
+      .spinner-circle {
+        border: 5px solid #ccc;
+        border-top: 5px solid var(--accent);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .contributors-hero h1 {
+          font-size: 2rem;
+        }
+
+        .contributors-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .filters {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .filter-btn {
+          width: 200px;
+        }
+      }
+      .contributor-container h1 {
+        text-align: center;
+        background: linear-gradient(
+          90deg,
+          var(--primary),
+          var(--text),
+          var(--primary-dark)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 300%;
+        animation: flow 6s linear infinite;
+        margin-bottom: 25px;
+      }
+      @keyframes flow {
+        to {
+          background-position: 300%;
+        }
+      }
+
+      #stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+
+      /* .stat-box {
+        border-radius: 20px;
+        padding: 15px 25px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        min-width: 160px;
+        text-align: center;
+      } */
+      .stat-box {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 14px;
+        padding: 15px 25px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.25s ease, background 0.3s;
+      }
+
+      .stat-box:hover {
+        transform: translateY(-4px);
+        background: rgba(255, 255, 255, 0.12);
+      }
+      #controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      #searchInput {
+        padding: 10px 16px;
+        border-radius: 10px;
+        border: 1px solid rgba(247, 57, 9, 0.5);
+        background: rgba(252, 58, 10, 0.05);
+        color: #fff !important;
+        width: 250px;
+        transition: all 0.3s;
+      }
+      #searchInput::placeholder {
+        color: #fff;
+      }
+
+      #searchInput:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: 0 0 8px var(--primary-dark);
+      }
+
+      button {
+        background: #ff5321;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 14px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.2s;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      #contributorsList {
+        max-width: 80%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        margin: 2rem auto;
+      }
+
+      .contributor {
+        background: linear-gradient(
+          135deg,
+          var(--text-light),
+          var(--primary-dark)
+        );
+        border-radius: 18px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        text-align: center;
+        color: #fff;
+        transform: scale(1);
+        transition: all 0.3s ease;
+      }
+      .contributor:hover {
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 8px 20px rgba(255, 165, 0, 0.3);
+      }
+
+      .contributor img {
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        margin-bottom: 10px;
+      }
+
+      .contributor a {
+        display: block;
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .contributor a:hover {
+        text-decoration: underline;
+      }
+
+      #errorMessage {
+        color: red;
+        text-align: center;
+        margin-top: 20px;
+        font-weight: 600;
+      } 
+    </style>
+
     <link rel="stylesheet" href="../css/components/floating-button.css" />
   </head>
 
@@ -304,19 +572,12 @@
     <!-- Footer Section -->
     <div id="footer-container"></div>
 
-    <script>
-      // Load shared footer dynamically
-      fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("footer-container").innerHTML = data;
-        })
-        .catch((error) => console.error("Error loading footer:", error));
-    </script>
-     
-    <script src="../js/modules/contribute-enhanced.js"></script>
     <script src="../js/modules/search.js"></script>
     <script src="../js/modules/navbar-loader.js"></script>
+    <script src="../js/modules/footer-loader.js"></script>
+    <script src="../js/modules/themes.js"></script>
+    <script src="../js/modules/contribute.js"></script>
+
     <script src="../js/modules/floating-book-button.js"></script>
     <script src="../js/modules/floating-call-button.js"></script>
     <script src="../js/modules/floating-whatsapp-button.js"></script>
