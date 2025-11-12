@@ -48,6 +48,7 @@
   }
 
   function getFooterHTML() {
+    function getFooterHTML() {
     return `
       <footer class="footer-section-enhanced">
         <div class="footer-container">
@@ -84,6 +85,50 @@
               <li><i class="fas fa-envelope"></i> info@cartransport.com</li>
             </ul>
           </div>
+
+          <div class="footer-section newsletter">
+            <h2>Newsletter</h2>
+            <p>Subscribe to our newsletter for updates.</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your Email" required>
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+
+        </div>
+        <div class="footer-bottom">
+
+      <div class="footer-road"></div>
+      <div class="car-carrier-animation">
+        <img
+          class="moving-car-carrier"
+          src="../assets/images/car-carrier.png"
+          alt="Moving car across footer"
+        />
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="footer-bottom-content">
+            <div class="copyright">
+              &copy; <span id="current-year"></span> Harihar Car Carriers. All rights reserved.
+            </div>
+            <div class="footer-bottom-links">
+              <a href="../pages/privacy-policy.html">Privacy Policy</a>
+              <a href="../pages/Terms of Services.html">Terms of Service</a>
+              <a href="#sitemap">Sitemap</a>
+            </div>
+            <div class="payment-methods">
+              <i class="fab fa-cc-visa" title="Visa"></i>
+              <i class="fab fa-cc-mastercard" title="MasterCard"></i>
+              <i class="fab fa-cc-paypal" title="PayPal"></i>
+              <i class="fas fa-university" title="Net Banking"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>`;
+  }
 
           <div class="footer-section newsletter">
             <h2>Newsletter</h2>
