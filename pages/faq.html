@@ -4,10 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FAQ - Harihar Car Carriers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/components/navbar.css">
 
     <style>
+        @font-face {
+            font-family: "Poppins";
+            src: url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
+                url("./assets/fonts/Poppins-Regular.woff") format("woff");
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Poppins";
+            src: url("./assets/fonts/Poppins-Bold.woff2") format("woff2"),
+                url("./assets/fonts/Poppins-Bold.woff") format("woff");
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            height: 100%;
+            width: 100%;
+            background-color: #2b2b2b;
+            color: white;
+            line-height: 1.6;
+        }
+
         .faq-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -491,6 +523,23 @@
             });
         }
     </script>
+
+
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+
+    <script>
+        // Load shared footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <script src="../js/modules/navbar-loader.js"></script>
+
 
 </body>
 
