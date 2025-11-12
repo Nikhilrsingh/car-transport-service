@@ -67,11 +67,11 @@
           <!-- Dropdown for services -->
           <li class="nav-item dropdown-nav" data-dropdown>
 
-            <div class="nav-link" data-dropdown-btn>
+            <button class="nav-link" data-dropdown-btn type="button">
               <i class="fas fa-truck-moving"></i>
               <span>Services</span>
               <i class="fa-solid fa-caret-down"></i>
-            </div>
+            </button>
 
             <div class="dropdown-menu">
               <ul style="list-style-type: none;">
@@ -130,11 +130,11 @@
           </li>
 
           <li class="nav-item dropdown-nav" data-dropdown>
-            <div class="nav-link" data-dropdown-btn>
+            <button class="nav-link" data-dropdown-btn type="button">
               <i class="fa-solid fa-layer-group"></i>
               <span>More</span>
               <i class="fa-solid fa-caret-down"></i>
-            </div>
+            </button>
 
             <div class="dropdown-menu">
               <ul style="list-style-type: none;">
@@ -445,8 +445,11 @@
 
       let currentdropdown;
       if (isDropdownButton) {
+        e.preventDefault();
+        e.stopPropagation();
         currentdropdown = e.target.closest('[data-dropdown]');
         currentdropdown.classList.toggle('active');
+        console.log('Dropdown toggled:', currentdropdown.classList.contains('active') ? 'open' : 'closed');
       }
 
       // close all already opened dropdown

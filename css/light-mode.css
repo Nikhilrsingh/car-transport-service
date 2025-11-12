@@ -4,7 +4,14 @@
   --footer-bg: #f6f6f6;
   --footer-text: #222222;
   --accent: #ff6b3d;
-  --glass-opacity: 0.85; /* not used if you don't want glass */
+  --glass-opacity: 0.85;
+}
+
+/* Light Mode Color Palette Override */
+body[data-theme="light"] {
+  --color-text-primary: #000000;
+  --color-text-secondary: #2d2d2d;
+  --color-text-muted: #555555;
 }
 
 /* global overrides */
@@ -106,5 +113,46 @@ body {
 
 .feature-box p {
   color: #555 !important;
+}
+
+/* Hero Action Buttons - Improved contrast for light theme */
+.hero-actions .cta-btn.primary {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 10px 30px rgba(255, 99, 71, 0.4) !important;
+  border: 2px solid transparent !important;
+}
+
+.hero-actions .cta-btn.primary:hover {
+  background: linear-gradient(135deg, #ff4500, #e63900) !important;
+  box-shadow: 0 15px 40px rgba(255, 99, 71, 0.5) !important;
+  border-color: rgba(255, 99, 71, 0.3) !important;
+}
+
+.hero-actions .cta-btn.secondary {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 2px solid #d0d0d0 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.hero-actions .cta-btn.secondary:hover {
+  background: #f5f5f5 !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.hero-actions .cta-btn.outline {
+  color: #ff6347 !important;
+  border-color: #ff6347 !important;
+  border-width: 2px !important;
+  background: transparent !important;
+}
+
+.hero-actions .cta-btn.outline:hover {
+  background: #ff6347 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3) !important;
 }
 
