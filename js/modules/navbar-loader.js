@@ -331,7 +331,13 @@
 
   <!-- Navigation Overlay -->
   <div class="nav-overlay" id="navOverlay"></div>
-</header>`;
+</header>
+
+<!-- Digital Clock (Fixed Top-Right) -->
+<link rel="stylesheet" href="../css/components/digital-clock.css">
+<div id="mac-clock">
+  <span id="clock-full"></span>
+</div>`;
   }
 
   /**
@@ -477,11 +483,47 @@
     });
   }
 
+  /**
+   * Initialize digital clock
+   */
+  function initializeClock() {
+    function updateClock() {
+      const clockFull = document.getElementById('clock-full');
+
+      if (clockFull) {
+        const now = new Date();
+
+        const day = now.toLocaleDateString('en-US', { weekday: 'short' });
+        const date = now.getDate();
+        const month = now.toLocaleDateString('en-US', { month: 'short' });
+        const time = now.toLocaleTimeString('en-US', {
+          hour12: true,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+
+        const formatted = `${day} ${date} ${month} ${time}`;
+        clockFull.textContent = formatted;
+      }
+    }
+
+    // Start clock
+    setTimeout(() => {
+      updateClock();
+      setInterval(updateClock, 1000);
+    }, 100);
+  }
+
   // Load navbar when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadNavbar);
+    document.addEventListener('DOMContentLoaded', () => {
+      loadNavbar();
+      initializeClock();
+    });
   } else {
     loadNavbar();
+    initializeClock();
   }
 
 })();
