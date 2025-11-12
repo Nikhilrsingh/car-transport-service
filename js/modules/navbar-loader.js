@@ -81,6 +81,12 @@
                     <span>Our Services</span>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="../pages/how-it-works.html" class="nav-link" data-page="how-it-works" data-tooltip="How It Works">
+                    <i class="fas fa-tasks"></i>
+                    <span>How It Works</span>
+                  </a>
+                </li>
                 <li>
                   <a href="../pages/booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
                     <i class="fas fa-calendar-check"></i>
@@ -94,9 +100,21 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="../pages/pricing-calculator.html" class="nav-link" data-page="pricing-calculator" data-tooltip="Pricing Calculator">
+                    <i class="fas fa-calculator"></i>
+                    <span>Pricing Calculator</span>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="../pages/tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>Track Your Car</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../pages/emergency-support.html" class="nav-link" data-page="emergency-support" data-tooltip="Emergency Support">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Emergency Support</span>
                   </a>
                 </li>
               </ul>
@@ -131,6 +149,18 @@
                     data-tooltip="Contributors">
                     <i class="fas fa-users"></i>
                     <span>Contributors</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="../pages/careers.html" class="nav-link" data-page="careers" data-tooltip="Careers">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Careers</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="../pages/press-media.html" class="nav-link" data-page="press-media" data-tooltip="Press & Media">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Press & Media</span>
                   </a>
                 </li>
                 <li>
@@ -219,6 +249,12 @@
         </a>
       </li>
       <li class="mobile-nav-item">
+        <a href="../pages/how-it-works.html" class="mobile-nav-link">
+          <i class="fas fa-tasks"></i>
+          <span>How It Works</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
         <a href="../pages/booking.html" class="mobile-nav-link">
           <i class="fas fa-calendar-check"></i>
           <span>Booking</span>
@@ -237,6 +273,12 @@
         </a>
       </li>
       <li class="mobile-nav-item">
+        <a href="../pages/pricing-calculator.html" class="mobile-nav-link">
+          <i class="fas fa-calculator"></i>
+          <span>Pricing Calculator</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
         <a href="../pages/tracking.html" class="mobile-nav-link">
           <i class="fas fa-map-marker-alt"></i>
           <span>Track Your Car</span>
@@ -252,6 +294,24 @@
         <a href="../pages/contact.html" class="mobile-nav-link">
           <i class="fas fa-phone"></i>
           <span>Contact</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="../pages/emergency-support.html" class="mobile-nav-link">
+          <i class="fas fa-life-ring"></i>
+          <span>Emergency Support</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="../pages/careers.html" class="mobile-nav-link">
+          <i class="fas fa-briefcase"></i>
+          <span>Careers</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="../pages/press-media.html" class="mobile-nav-link">
+          <i class="fas fa-newspaper"></i>
+          <span>Press & Media</span>
         </a>
       </li>
       <li class="mobile-nav-item">
@@ -295,7 +355,13 @@
 
   <!-- Navigation Overlay -->
   <div class="nav-overlay" id="navOverlay"></div>
-</header>`;
+</header>
+
+<!-- Digital Clock (Fixed Top-Right) -->
+<link rel="stylesheet" href="../css/components/digital-clock.css">
+<div id="mac-clock">
+  <span id="clock-full"></span>
+</div>`;
   }
 
   /**
@@ -441,11 +507,47 @@
     });
   }
 
+  /**
+   * Initialize digital clock
+   */
+  function initializeClock() {
+    function updateClock() {
+      const clockFull = document.getElementById('clock-full');
+
+      if (clockFull) {
+        const now = new Date();
+
+        const day = now.toLocaleDateString('en-US', { weekday: 'short' });
+        const date = now.getDate();
+        const month = now.toLocaleDateString('en-US', { month: 'short' });
+        const time = now.toLocaleTimeString('en-US', {
+          hour12: true,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+
+        const formatted = `${day} ${date} ${month} ${time}`;
+        clockFull.textContent = formatted;
+      }
+    }
+
+    // Start clock
+    setTimeout(() => {
+      updateClock();
+      setInterval(updateClock, 1000);
+    }, 100);
+  }
+
   // Load navbar when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadNavbar);
+    document.addEventListener('DOMContentLoaded', () => {
+      loadNavbar();
+      initializeClock();
+    });
   } else {
     loadNavbar();
+    initializeClock();
   }
 
 })();

@@ -320,14 +320,14 @@ body {
   background-color: #2b2b2b;
 }
 
-.dropdown-nav.active>.nav-link+.dropdown-menu {
+.dropdown-nav.active .dropdown-menu {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-
 }
 
-.dropdown-nav.active>.nav-link {
+.dropdown-nav.active>.nav-link,
+.dropdown-nav.active>[data-dropdown-btn] {
   color: #ff6347;
   background: rgba(43, 43, 43, 0.95);
   transform: translateY(-2px);
@@ -888,4 +888,40 @@ body {
 
 .header {
   animation: slideDown 0.5s ease-out;
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.theme-toggle button {
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.theme-toggle button:hover {
+  background: #555;
+  transform: scale(1.1);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;           
+  right: 510px;         
+  z-index: 9999;
 }

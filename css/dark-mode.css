@@ -1,0 +1,84 @@
+:root {
+  --bg: #0f1115;
+  --text: #ffffff;
+  --footer-bg: #111416; /* dark footer */
+  --footer-text: #ff9b6b; /* orange-ish text in footer */
+  --accent: #ff6b3d;
+  --glass-opacity: 0.6; /* not required */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+/* Contact CTA Section */
+.contact-cta {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f1115 100%);
+}
+
+.cta-text h2 {
+  color: #ffffff !important;
+}
+
+.cta-text p {
+  color: #e0e0e0 !important;
+}
+
+.feature span {
+  color: #ffffff !important;
+}
+
+/* Features Section */
+.features {
+  background: var(--bg);
+}
+
+.section-title,
+.features .section-title {
+  color: #ff6347 !important;
+}
+
+.h1 {
+  color: #ffffff !important;
+}
+
+.feature-box {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+.feature-box h3 {
+  color: #ffffff !important;
+}
+
+.feature-box p {
+  color: #d0d0d0 !important;
+}
+
+/* Hero Action Buttons - ensure visibility in dark mode */
+.hero-actions .cta-btn.primary {
+  color: #fff !important;
+  background: linear-gradient(135deg, #ff6b3d, #ff4500) !important;
+  box-shadow: 0 10px 30px rgba(255, 107, 61, 0.35) !important;
+}
+
+.hero-actions .cta-btn.secondary {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+.hero-actions .cta-btn.outline {
+  color: #ffffff !important;
+  border-color: #ff6b3d !important;
+}
+
+.hero-actions .cta-btn:hover {
+  box-shadow: 0 15px 40px rgba(255, 107, 61, 0.45) !important;
+}

@@ -19,10 +19,12 @@
     <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
     <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
     <link rel="stylesheet" href="../css/components/backtoBottom.css" />
+    <link rel="stylesheet" href="../css/components/contributors.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
     <style>
       :root {
         --primary: #ff6347;
@@ -120,17 +122,7 @@
         }
       }
 
-      /* Footer */
-      .footer {
-        background: var(--dark-light);
-        padding: 3rem 0;
-        text-align: center;
-        border-top: 3px solid var(--primary);
-      }
-
-      .footer p {
-        color: var(--text-light);
-      }
+      
 
       /* Responsive */
       @media (max-width: 768px) {
@@ -299,6 +291,7 @@
         font-weight: 600;
       } 
     </style>
+
     <link rel="stylesheet" href="../css/components/floating-button.css" />
   </head>
 
@@ -340,21 +333,87 @@
               <p id="activeContributors">0</p>
             </div>
           </div>
-          <!-- search bar  -->
+          <!-- Search and Filters -->
           <div class="search-contributor">
             <input
               type="text"
               id="searchInput"
               placeholder="Search contributor..."
             />
+            <select id="sortBy" class="filter-select">
+              <option value="contributions">Most Contributions</option>
+              <option value="alphabetical">Alphabetical</option>
+              <option value="recent">Recent Activity</option>
+            </select>
+            <select id="filterLevel" class="filter-select">
+              <option value="all">All Contributors</option>
+              <option value="top10">Top 10</option>
+              <option value="gold">🥇 Gold (50+ commits)</option>
+              <option value="silver">🥈 Silver (20-49 commits)</option>
+              <option value="bronze">🥉 Bronze (10-19 commits)</option>
+              <option value="contributor">⭐ Contributor (1-9 commits)</option>
+              <option value="new">New Contributors</option>
+            </select>
           </div>
+          
           <!-- Spinner -->
           <div id="spinner">
             <div class="spinner-circle"></div>
           </div>
+          <!-- Special Project Lead Card -->
+<div id="projectLeadContainer" style="display: flex; justify-content: center; margin-bottom: 2rem;">
+  <div class="contributor special-lead">
+    <img src="https://avatars.githubusercontent.com/Nikhilrsingh" alt="Nikhil R. Singh">
+    <a href="https://github.com/Nikhilrsingh" target="_blank">Nikhil R. Singh</a>
+    <p style="font-weight: 600; color: #ffd700;">🌟 Project Lead 🌟</p>
+    <p>Leading the project vision and development.</p>
+  </div>
+</div>
+
 
           <!-- Contributors Grid -->
           <div id="contributorsList"></div>
+          
+          <!-- Contributor Detail Modal -->
+          <div id="contributorModal" class="contributor-modal">
+            <div class="modal-content">
+              <span class="modal-close">&times;</span>
+              <div class="modal-header">
+                <img id="modalAvatar" src="" alt="" class="modal-avatar">
+                <div class="modal-info">
+                  <h2 id="modalName"></h2>
+                  <a id="modalGithubLink" href="" target="_blank">View on GitHub</a>
+                  <div id="modalBadges" class="modal-badges"></div>
+                </div>
+              </div>
+              <div class="modal-stats">
+                <div class="modal-stat">
+                  <i class="fas fa-code-commit"></i>
+                  <span id="modalCommits">0</span>
+                  <p>Commits</p>
+                </div>
+                <div class="modal-stat">
+                  <i class="fas fa-code-pull-request"></i>
+                  <span id="modalPRs">0</span>
+                  <p>Pull Requests</p>
+                </div>
+                <div class="modal-stat">
+                  <i class="fas fa-plus-circle"></i>
+                  <span id="modalAdditions">0</span>
+                  <p>Lines Added</p>
+                </div>
+                <div class="modal-stat">
+                  <i class="fas fa-minus-circle"></i>
+                  <span id="modalDeletions">0</span>
+                  <p>Lines Deleted</p>
+                </div>
+              </div>
+              <div class="modal-heatmap">
+                <h3>Contribution Heatmap</h3>
+                <div id="contributionHeatmap"></div>
+              </div>
+            </div>
+          </div>
           <!-- Controls Section -->
           <div id="controls">
             <button id="prevPage">⬅️ Prev</button>
@@ -364,6 +423,13 @@
             >
             <button id="nextPage">Next ➡️</button>
           </div>
+          
+          <!-- Contribution Activity Timeline -->
+          <div id="activityTimeline" class="timeline-container">
+            <h2>Recent Contribution Activity</h2>
+            <div id="timelineContent" class="timeline-content"></div>
+          </div>
+          
           <!-- Error Message -->
           <p id="errorMessage"></p>
         </div>
@@ -506,19 +572,12 @@
     <!-- Footer Section -->
     <div id="footer-container"></div>
 
-    <script>
-      // Load shared footer dynamically
-      fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("footer-container").innerHTML = data;
-        })
-        .catch((error) => console.error("Error loading footer:", error));
-    </script>
-     
-    <script src="../js/modules//contribute.js"></script>
     <script src="../js/modules/search.js"></script>
     <script src="../js/modules/navbar-loader.js"></script>
+    <script src="../js/modules/footer-loader.js"></script>
+    <script src="../js/modules/themes.js"></script>
+    <script src="../js/modules/contribute.js"></script>
+
     <script src="../js/modules/floating-book-button.js"></script>
     <script src="../js/modules/floating-call-button.js"></script>
     <script src="../js/modules/floating-whatsapp-button.js"></script>
