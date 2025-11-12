@@ -48,25 +48,54 @@
   }
 
   function getFooterHTML() {
-    return `<footer class="footer">
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-column footer-about">
-        <div class="footer-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-          <span class="footer-logo-text">Harihar Car Carriers</span>
+    return `
+      <footer class="footer-section-enhanced">
+        <div class="footer-container">
+          
+          <div class="footer-section about-us">
+            <h2>About Us</h2>
+            <p>We are a leading car transport service, dedicated to providing safe, reliable, and affordable vehicle shipping solutions. Our team of experts ensures your vehicle is handled with the utmost care.</p>
+            <div class="social-links">
+              <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-section quick-links">
+            <h2>Quick Links</h2>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="pages/about.html">About Us</a></li>
+              <li><a href="pages/contact.html">Contact</a></li>
+              <li><a href="pages/tracking.html">Tracking</a></li>
+              <li><a href="pages/blog.html">Blog</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section contact-info">
+            <h2>Contact Info</h2>
+            <ul>
+              <li><i class="fas fa-map-marker-alt"></i> 123 Transport St, City, Country</li>
+              <li><i class="fas fa-phone-alt"></i> +123 456 7890</li>
+              <li><i class="fas fa-envelope"></i> info@cartransport.com</li>
+            </ul>
+          </div>
+
+          <div class="footer-section newsletter">
+            <h2>Newsletter</h2>
+            <p>Subscribe to our newsletter for updates.</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your Email" required>
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+
         </div>
-        <p>
-          Your trusted partner for safe and reliable vehicle transportation across India. With over 12 years of experience, we ensure your vehicles reach their destination securely and on time.
-        </p>
-        <div class="social-links">
-          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
+        <div class="footer-bottom">
 
       <div class="footer-column">
         <h3>Quick Links</h3>
