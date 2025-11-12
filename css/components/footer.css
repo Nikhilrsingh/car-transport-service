@@ -21,13 +21,15 @@ footer.footer,
 
 /* Footer Content Grid */
 .footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
-  align-items: start;
+  /* --- WIDTH FIX --- */
+  width: 100%;       
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: #111;
+  color: #fff;
 }
 
 /* Column Styling */

@@ -48,12 +48,11 @@
   }
 
   // This is the single, correct function for your footer HTML
-  function getFooterHTML() {
+function getFooterHTML() {
   return `<footer class="footer">
   <div class="container">
     <div class="footer-content">
 
-      <!-- Column 1: Company Info -->
       <div class="footer-column footer-about">
         <div class="footer-logo-group">
           <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
@@ -70,7 +69,6 @@
         </div>
       </div>
 
-      <!-- Column 2: Quick Links + Services -->
       <div class="footer-column">
         <h3>Quick Links</h3>
         <ul class="footer-links">
@@ -81,7 +79,10 @@
           <li><a href="../pages/booking.html"><i class="fas fa-calendar-check"></i> Book Now</a></li>
           <li><a href="../pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
         </ul>
-        <h3 class="mt-6">Our Services</h3>
+      </div>
+
+      <div class="footer-column">
+        <h3>Our Services</h3>
         <ul class="footer-links">
           <li><a href="#door-to-door"><i class="fas fa-door-open"></i> Door-to-Door</a></li>
           <li><a href="#nationwide"><i class="fas fa-globe-asia"></i> Nationwide</a></li>
@@ -90,28 +91,27 @@
         </ul>
       </div>
 
-      <!-- Column 3: Contact Info + Newsletter -->
       <div class="footer-column">
         <h3>Contact Info</h3>
+
         <ul class="contact-info">
           <li><i class="fas fa-map-marker-alt"></i><span>Nagpur, Maharashtra, India - 440001</span></li>
           <li><i class="fas fa-phone"></i><span>+91 XXXXX XXXXX</span></li>
           <li><i class="fas fa-envelope"></i><span>info@hariharcarcarriers.com</span></li>
           <li><i class="fas fa-clock"></i><span>24/7 Customer Support</span></li>
         </ul>
+
         <div class="newsletter">
-          <h5>Newsletter</h5>
           <form class="newsletter-form">
             <input type="email" placeholder="Enter your email" required />
             <button type="submit"><i class="fas fa-paper-plane"></i></button>
           </form>
+          <h5>Newsletter</h5>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Optional: Road & Car Animation -->
   <div class="footer-road"></div>
   <div class="car-carrier-animation">
     <img
@@ -121,7 +121,6 @@
     />
   </div>
 
-  <!-- Footer Bottom Bar -->
   <div class="footer-bottom">
     <div class="footer-bottom-content">
       <div class="copyright">
