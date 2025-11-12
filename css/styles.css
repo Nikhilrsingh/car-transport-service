@@ -2664,6 +2664,67 @@ html {
   }
 }
 
+/* --- Enhanced Feature Cards: Modern Glow Design --- */
+.features-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 20px;
+}
+
+.feature-box {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 30px 20px;
+  text-align: center;
+  transition: all 0.4s ease;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  max-width: 320px;
+  flex: 1 1 280px;
+  cursor: pointer;
+}
+
+/* Hover glow & motion */
+.feature-box:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.5);
+  border-color: rgba(255, 165, 0, 0.7);
+}
+
+/* Headings */
+.feature-box h3 {
+  font-size: 1.4rem;
+  color: #ffb100;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Description */
+.feature-box p {
+  font-size: 1rem;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+/* Icon adjustments (if emoji or icon font used) */
+.feature-box h3::before {
+  content: "✨ ";
+  font-size: 1.2rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .feature-box {
+    max-width: 100%;
+  }
+}
+
 /* Keypress-Activated Easter Egg */
 .car {
   position: fixed;
