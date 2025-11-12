@@ -76,7 +76,7 @@ footer.footer a:hover,
   transform: translateY(-50%);
 }
 
-.car-animation {
+.car-carrier-animation {
   position: absolute;
   top: 5px;
   left: -50px;
@@ -85,7 +85,7 @@ footer.footer a:hover,
   will-change: transform;
 }
 
-.moving-car {
+.moving-car-carrier {
   width: 100px;
   height: 50px;
 
@@ -106,7 +106,7 @@ footer.footer a:hover,
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .car-animation {
+  .car-carrier-animation {
     animation: none;
   }
 }

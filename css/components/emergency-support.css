@@ -1,0 +1,980 @@
+/* Emergency Support Page Styles */
+
+:root {
+    --primary-color: #ff6b35;
+    --secondary-color: #004e89;
+    --dark-color: #1a1a2e;
+    --light-color: #f5f5f5;
+    --white: #ffffff;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --text-color: #333;
+    --border-color: #ddd;
+}
+
+/* Hero Section */
+.emergency-hero {
+    position: relative;
+    height: 400px;
+    background: linear-gradient(135deg, var(--danger-color) 0%, var(--primary-color) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.emergency-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;
+    background-size: cover;
+}
+
+.emergency-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.emergency-hero .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--white);
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.emergency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+}
+
+.emergency-badge i {
+    font-size: 1.2rem;
+}
+
+.emergency-hero .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.8s ease;
+}
+
+.emergency-hero .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.emergency-call-btn,
+.live-chat-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.emergency-call-btn {
+    background: var(--white);
+    color: var(--danger-color);
+}
+
+.emergency-call-btn:hover {
+    background: var(--danger-color);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.live-chat-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.live-chat-btn:hover {
+    background: var(--white);
+    color: var(--primary-color);
+}
+
+/* Common Section Styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: block;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+/* Emergency Hotline Section */
+.emergency-hotline {
+    background: var(--white);
+}
+
+.hotline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.hotline-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid var(--border-color);
+}
+
+.hotline-card.urgent {
+    border-color: var(--danger-color);
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, rgba(255, 107, 53, 0.05) 100%);
+}
+
+.hotline-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.hotline-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.hotline-card.urgent .hotline-icon {
+    background: linear-gradient(135deg, var(--danger-color) 0%, var(--warning-color) 100%);
+}
+
+.hotline-icon i {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.hotline-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.hotline-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+.hotline-card.urgent .hotline-number {
+    color: var(--danger-color);
+}
+
+.hotline-alt {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.hotline-description {
+    color: #666;
+    margin: 1rem 0 1.5rem;
+    line-height: 1.6;
+}
+
+.hotline-btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hotline-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.urgent-btn {
+    background: var(--danger-color);
+}
+
+.urgent-btn:hover {
+    background: #c82333;
+}
+
+/* Live Chat Section */
+.live-chat-section {
+    background: var(--light-color);
+}
+
+.chat-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.chat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.chat-feature {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.chat-feature i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    min-width: 40px;
+}
+
+.chat-feature h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.chat-feature p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.chat-preview {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    color: var(--white);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--white);
+}
+
+.status-dot.online {
+    animation: pulse 2s infinite;
+}
+
+.chat-agents {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.chat-messages {
+    padding: 2rem;
+    min-height: 200px;
+    background: #f8f9fa;
+}
+
+.chat-message {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.message-avatar i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.message-content {
+    flex: 1;
+}
+
+.message-sender {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text-color);
+}
+
+.message-text {
+    background: var(--white);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.25rem;
+}
+
+.message-time {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.start-chat-btn {
+    width: 100%;
+    padding: 1.25rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.start-chat-btn:hover {
+    background: var(--secondary-color);
+}
+
+/* Emergency Contact Form */
+.emergency-contact {
+    background: var(--white);
+}
+
+.contact-form-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+}
+
+.emergency-form {
+    background: var(--light-color);
+    padding: 2.5rem;
+    border-radius: 12px;
+}
+
+.form-alert {
+    background: #fff3cd;
+    border: 2px solid var(--warning-color);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.form-alert i {
+    font-size: 1.5rem;
+    color: var(--warning-color);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group input {
+    width: auto;
+}
+
+.submit-emergency-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--danger-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.submit-emergency-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.sidebar-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.sidebar-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.sidebar-card p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.sidebar-btn,
+.sidebar-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.sidebar-btn:hover,
+.sidebar-link:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Emergency Procedures */
+.emergency-procedures {
+    background: var(--light-color);
+}
+
+.procedures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.procedure-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.procedure-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.procedure-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.procedure-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(0, 78, 137, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.procedure-icon i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.procedure-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.procedure-steps {
+    list-style: none;
+    padding: 0;
+}
+
+.procedure-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    color: #666;
+}
+
+.procedure-steps i {
+    color: var(--success-color);
+    margin-top: 0.25rem;
+}
+
+/* Roadside Assistance */
+.roadside-assistance {
+    background: var(--white);
+}
+
+.assistance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.assistance-card {
+    background: var(--light-color);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.assistance-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.assistance-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.assistance-icon i {
+    font-size: 1.8rem;
+    color: var(--white);
+}
+
+.assistance-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.assistance-card > p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.assistance-features {
+    list-style: none;
+    padding: 0;
+}
+
+.assistance-features li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #666;
+}
+
+.assistance-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: 700;
+}
+
+/* Support Hours */
+.support-hours {
+    background: var(--light-color);
+}
+
+.hours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.hours-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hours-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.hours-card.priority {
+    border: 2px solid var(--danger-color);
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, rgba(255, 107, 53, 0.05) 100%);
+}
+
+.hours-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--danger-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    animation: pulse 2s infinite;
+}
+
+.hours-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.hours-card.priority i {
+    color: var(--danger-color);
+}
+
+.hours-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.hours-time {
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0.5rem 0;
+}
+
+.hours-contact {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 1rem 0;
+}
+
+.hours-card.priority .hours-contact {
+    color: var(--danger-color);
+}
+
+.hours-description {
+    color: #666;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+/* FAQ Section */
+.emergency-faq {
+    background: var(--white);
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.faq-item {
+    background: var(--light-color);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.faq-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.faq-item h3 i {
+    color: var(--primary-color);
+    margin-top: 0.2rem;
+}
+
+.faq-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Live Chat Widget */
+.chat-widget {
+    position: fixed;
+    bottom: -500px;
+    right: 20px;
+    width: 350px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: bottom 0.3s ease;
+}
+
+.chat-widget.active {
+    bottom: 20px;
+}
+
+.chat-widget-header {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-widget-header h4 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.close-chat-btn {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.chat-widget-body {
+    padding: 2rem;
+    min-height: 300px;
+}
+
+.chat-widget-message {
+    text-align: center;
+    color: #666;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .chat-wrapper,
+    .contact-form-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .emergency-hero {
+        height: 350px;
+    }
+    
+    .emergency-hero .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .emergency-hero .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+    }
+    
+    .emergency-call-btn,
+    .live-chat-btn {
+        width: 100%;
+    }
+    
+    section {
+        padding: 40px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .hotline-grid,
+    .procedures-grid,
+    .assistance-grid,
+    .hours-grid,
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .chat-widget {
+        width: calc(100% - 40px);
+        right: 20px;
+        left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .emergency-hero .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .hotline-card,
+    .procedure-card,
+    .sidebar-card {
+        padding: 1.5rem;
+    }
+    
+    .emergency-form {
+        padding: 1.5rem;
+    }
+}

@@ -46,6 +46,7 @@ window.hideSpinner = () => {
   spinner.style.display = "none";
   list.style.display = "grid";
 };
+
 // ==== FETCH CONTRIBUTORS ====
 async function fetchContributors() {
   try {
@@ -58,12 +59,15 @@ async function fetchContributors() {
       throw new Error("Invalid contributors response");
     }
 
-    allContributors = contributors.map((c) => ({
+    allContributors = contributors
+    .filter((c) => c.login.toLowerCase() !== "nikhilrsingh") // Exclude project lead
+    .map((c) => ({
       login: c.login,
       avatar_url: c.avatar_url,
       html_url: c.html_url,
       contributions: c.contributions,
     }));
+    
 
     console.log(`✅ Loaded ${allContributors.length} contributors`);
     updateStats();

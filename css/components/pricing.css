@@ -70,12 +70,20 @@ body:has(.pricing-page) {
     color: #ff6b35;
 }
 
+/* ========================================
+   Subtitle Styling - Improved Color + Readability
+   ======================================== */
 .pricing-page .page-header .subtitle {
     font-size: 1.3em;
-    color: #cccccc;
+    color: #9B3922; /* Warm deep orange for better contrast and brand match */
+    font-weight: 500;
+    opacity: 1;
     margin-bottom: 10px;
+    line-height: 1.6;
+    text-align: center;
     animation: pricing-fadeInUp 0.8s ease-out 0.2s both;
 }
+
 
 .pricing-page .breadcrumb {
     display: flex;
