@@ -5,7 +5,6 @@
   // Initialize all enhanced features
   document.addEventListener('DOMContentLoaded', function () {
     initInteractiveMap();
-    initFAQEnhancements();
     initContactCards();
     initEnhancedForm();
     initOfficeHours();
@@ -19,7 +18,7 @@
 
     const mapEmbed = mapContainer.querySelector('.map-embed');
     const mapLoading = mapContainer.querySelector('.map-loading');
-    
+
     // Hide loading when map loads
     if (mapEmbed && mapLoading) {
       mapEmbed.addEventListener('load', () => {
@@ -34,19 +33,19 @@
     if (styleSwitcher) {
       styleSwitcher.addEventListener('click', function () {
         const currentSrc = mapEmbed.src;
-        
+
         if (currentSrc.includes('&t=m')) {
           // Switch to satellite
           mapEmbed.src = currentSrc.replace('&t=m', '&t=k');
           styleSwitcher.innerHTML = '<i class="fas fa-map"></i><span>Roadmap</span>';
         } else {
           // Switch to roadmap
-          mapEmbed.src = currentSrc.includes('&t=k') 
+          mapEmbed.src = currentSrc.includes('&t=k')
             ? currentSrc.replace('&t=k', '&t=m')
             : currentSrc + '&t=m';
           styleSwitcher.innerHTML = '<i class="fas fa-satellite"></i><span>Satellite</span>';
         }
-        
+
         styleSwitcher.classList.toggle('active');
         if (mapLoading) mapLoading.classList.remove('hidden');
       });
@@ -55,7 +54,7 @@
     // Marker info window toggle
     const mapMarker = document.querySelector('.map-marker');
     const infoWindow = document.querySelector('.map-info-window');
-    
+
     if (mapMarker && infoWindow) {
       mapMarker.addEventListener('click', function () {
         infoWindow.classList.toggle('active');
@@ -77,101 +76,6 @@
         window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}`, '_blank');
       });
     }
-  }
-
-  // ==================== FAQ ENHANCEMENTS ====================
-  function initFAQEnhancements() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    const searchInput = document.getElementById('faqSearch');
-    const categoryBtns = document.querySelectorAll('.faq-category-btn');
-
-    // FAQ Accordion with smooth transitions
-    faqItems.forEach((item) => {
-      const question = item.querySelector('.faq-question');
-      const answer = item.querySelector('.faq-answer');
-
-      question.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-
-        // Close all other items
-        faqItems.forEach((otherItem) => {
-          if (otherItem !== item) {
-            otherItem.classList.remove('active');
-          }
-        });
-
-        // Toggle current item
-        item.classList.toggle('active');
-      });
-    });
-
-    // FAQ Search functionality
-    if (searchInput) {
-      searchInput.addEventListener('input', function (e) {
-        const searchTerm = e.target.value.toLowerCase();
-
-        faqItems.forEach((item) => {
-          const question = item.querySelector('.faq-question h4').textContent.toLowerCase();
-          const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
-
-          if (question.includes(searchTerm) || answer.includes(searchTerm)) {
-            item.classList.remove('hidden');
-            
-            // Highlight search term
-            if (searchTerm.length > 0) {
-              item.style.borderLeftWidth = '6px';
-            } else {
-              item.style.borderLeftWidth = '4px';
-            }
-          } else {
-            item.classList.add('hidden');
-          }
-        });
-      });
-    }
-
-    // Category filtering
-    categoryBtns.forEach((btn) => {
-      btn.addEventListener('click', function () {
-        const category = this.dataset.category;
-
-        // Update active button
-        categoryBtns.forEach((b) => b.classList.remove('active'));
-        this.classList.add('active');
-
-        // Filter FAQs
-        faqItems.forEach((item) => {
-          if (category === 'all' || item.dataset.category === category) {
-            item.classList.remove('hidden');
-          } else {
-            item.classList.add('hidden');
-          }
-        });
-      });
-    });
-
-    // FAQ Rating buttons
-    const ratingBtns = document.querySelectorAll('.rating-btn');
-    ratingBtns.forEach((btn) => {
-      btn.addEventListener('click', function () {
-        const parent = this.closest('.faq-rating-buttons');
-        const siblings = parent.querySelectorAll('.rating-btn');
-
-        // Remove selected from siblings
-        siblings.forEach((sibling) => sibling.classList.remove('selected'));
-
-        // Add selected to clicked button
-        this.classList.add('selected');
-
-        // Show feedback message
-        const feedbackType = this.dataset.rating;
-        showNotification(
-          feedbackType === 'yes'
-            ? 'Thank you for your feedback! 😊'
-            : 'We\'ll improve this answer. Thank you!'
-        );
-      });
-    });
   }
 
   // ==================== CONTACT CARDS ENHANCEMENTS ====================
@@ -264,14 +168,14 @@
       document.body.appendChild(textArea);
       textArea.focus();
       textArea.select();
-      
+
       try {
         document.execCommand('copy');
         showNotification(`Copied: ${text}`);
       } catch (err) {
         console.error('Failed to copy text: ', err);
       }
-      
+
       document.body.removeChild(textArea);
     }
   }
@@ -286,7 +190,7 @@
     const canvas = document.createElement('canvas');
     canvas.width = 200;
     canvas.height = 200;
-    
+
     // Simple QR code placeholder using Google Charts API
     const qrImage = document.createElement('img');
     qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
@@ -349,59 +253,59 @@
 
     // Name validation
     if (nameInput) {
-      nameInput.addEventListener('input', function() {
+      nameInput.addEventListener('input', function () {
         validateField(this, validateName(this.value));
       });
 
-      nameInput.addEventListener('blur', function() {
+      nameInput.addEventListener('blur', function () {
         validateField(this, validateName(this.value));
       });
     }
 
     // Phone validation
     if (phoneInput) {
-      phoneInput.addEventListener('input', function() {
+      phoneInput.addEventListener('input', function () {
         // Allow only numbers
         this.value = this.value.replace(/[^0-9]/g, '');
         validateField(this, validatePhone(this.value));
       });
 
-      phoneInput.addEventListener('blur', function() {
+      phoneInput.addEventListener('blur', function () {
         validateField(this, validatePhone(this.value));
       });
     }
 
     // Email validation
     if (emailInput) {
-      emailInput.addEventListener('input', function() {
+      emailInput.addEventListener('input', function () {
         validateField(this, validateEmail(this.value));
       });
 
-      emailInput.addEventListener('blur', function() {
+      emailInput.addEventListener('blur', function () {
         validateField(this, validateEmail(this.value));
       });
     }
 
     // Select validation
     if (vehicleSelect) {
-      vehicleSelect.addEventListener('change', function() {
+      vehicleSelect.addEventListener('change', function () {
         validateField(this, this.value !== '');
       });
     }
 
     if (serviceSelect) {
-      serviceSelect.addEventListener('change', function() {
+      serviceSelect.addEventListener('change', function () {
         validateField(this, this.value !== '');
       });
     }
 
     // Message validation
     if (messageTextarea) {
-      messageTextarea.addEventListener('input', function() {
+      messageTextarea.addEventListener('input', function () {
         validateField(this, this.value.trim().length >= 10);
       });
 
-      messageTextarea.addEventListener('blur', function() {
+      messageTextarea.addEventListener('blur', function () {
         validateField(this, this.value.trim().length >= 10);
       });
     }
@@ -432,7 +336,7 @@
         errorMessage.classList.remove('show');
         errorMessage.textContent = '';
       }
-      
+
       // Add success icon if not exists
       if (!inputGroup.querySelector('.success-icon')) {
         const successIcon = document.createElement('i');
@@ -444,7 +348,7 @@
       field.classList.add('error');
       field.classList.remove('success');
       inputGroup.classList.remove('valid');
-      
+
       if (errorMessage) {
         errorMessage.classList.add('show');
         errorMessage.textContent = getErrorMessage(field);
@@ -461,8 +365,8 @@
 
   function getErrorMessage(field) {
     const fieldName = field.name || field.id;
-    
-    switch(fieldName) {
+
+    switch (fieldName) {
       case 'name':
         return 'Please enter a valid name (letters only, min 2 characters)';
       case 'phone':
@@ -770,12 +674,12 @@
     const currentTime = now.getHours() * 60 + now.getMinutes(); // Minutes since midnight
 
     const hoursItems = document.querySelectorAll('.hours-list li[data-day]');
-    
+
     hoursItems.forEach(item => {
       const dayRange = item.dataset.day;
       const timeElement = item.querySelector('.time');
       const statusBadge = item.querySelector('.status-badge');
-      
+
       if (!timeElement || !statusBadge) return;
 
       const openTime = timeElement.dataset.open;
@@ -826,7 +730,7 @@
       const parts = dayRange.split('-');
       const start = parseInt(parts[0]);
       const end = parseInt(parts[1]);
-      
+
       if (start <= end) {
         return currentDay >= start && currentDay <= end;
       } else {
@@ -841,9 +745,9 @@
   // ==================== LIVE CHAT ====================
   function initLiveChat() {
     const liveChatBtn = document.getElementById('liveChatBtn');
-    
+
     if (liveChatBtn) {
-      liveChatBtn.addEventListener('click', function() {
+      liveChatBtn.addEventListener('click', function () {
         // Open chatbot modal or redirect to live chat
         const chatbotBtn = document.querySelector('.floating-chatbot-button');
         if (chatbotBtn) {
