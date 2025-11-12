@@ -27,6 +27,11 @@ body {
   color: var(--footer-text);
 }
 
+/* Ensure Region heading is visible on dark background */
+body[data-theme="dark"] .region-section h2 {
+  color: #ffffff !important;
+}
+
 /* Contact CTA Section */
 .contact-cta {
   background: linear-gradient(135deg, #1a1a1a 0%, #0f1115 100%);
