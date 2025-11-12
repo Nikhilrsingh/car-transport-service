@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="24/7 Emergency Support - Get immediate help for your car transport needs. Live chat, hotline, and roadside assistance available.">
+    <title>Emergency Support - Car Transport Service</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components/header.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/emergency-support.css">
+    <link rel="stylesheet" href="../css/components/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+
+    <!-- Hero Section -->
+    <section class="emergency-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="emergency-badge">
+                <i class="fas fa-headset"></i>
+                <span>24/7 Available</span>
+            </div>
+            <h1 class="hero-title">Emergency Support</h1>
+            <p class="hero-subtitle">We're Here to Help - Anytime, Anywhere</p>
+            <div class="hero-actions">
+                <a href="tel:+1-800-TRANSPORT" class="emergency-call-btn">
+                    <i class="fas fa-phone-alt"></i>
+                    Call Now: 1-800-TRANSPORT
+                </a>
+                <button class="live-chat-btn" onclick="openLiveChat()">
+                    <i class="fas fa-comments"></i>
+                    Start Live Chat
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Hotline Section -->
+    <section class="emergency-hotline">
+        <div class="container">
+            <h2 class="section-title fade-in">24/7 Emergency Hotline</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Immediate assistance when you need it most</p>
+            
+            <div class="hotline-grid fade-in fade-in-delay-2">
+                <div class="hotline-card urgent">
+                    <div class="hotline-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Emergency Dispatch</h3>
+                    <p class="hotline-number">1-800-TRANSPORT</p>
+                    <p class="hotline-alt">(1-800-872-6776)</p>
+                    <p class="hotline-description">For accidents, breakdowns, or urgent delivery issues</p>
+                    <a href="tel:+18008726776" class="hotline-btn urgent-btn">Call Emergency Line</a>
+                </div>
+                
+                <div class="hotline-card">
+                    <div class="hotline-icon">
+                        <i class="fas fa-headphones-alt"></i>
+                    </div>
+                    <h3>Customer Support</h3>
+                    <p class="hotline-number">1-800-HELP-NOW</p>
+                    <p class="hotline-alt">(1-800-435-7669)</p>
+                    <p class="hotline-description">For general inquiries and non-urgent assistance</p>
+                    <a href="tel:+18004357669" class="hotline-btn">Call Support</a>
+                </div>
+                
+                <div class="hotline-card">
+                    <div class="hotline-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Roadside Assistance</h3>
+                    <p class="hotline-number">1-800-ROADSIDE</p>
+                    <p class="hotline-alt">(1-800-762-3743)</p>
+                    <p class="hotline-description">For vehicle breakdowns and towing needs</p>
+                    <a href="tel:+18007623743" class="hotline-btn">Call Roadside</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Chat Support -->
+    <section class="live-chat-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Live Chat Support</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Get instant answers from our support team</p>
+            
+            <div class="chat-wrapper fade-in fade-in-delay-2">
+                <div class="chat-info">
+                    <div class="chat-feature">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Available 24/7</h4>
+                            <p>Our chat support team is always online to help you</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-feature">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <h4>Instant Response</h4>
+                            <p>Get answers to your questions in real-time</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-feature">
+                        <i class="fas fa-user-shield"></i>
+                        <div>
+                            <h4>Expert Assistance</h4>
+                            <p>Talk to trained professionals who know car transport</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-feature">
+                        <i class="fas fa-file-alt"></i>
+                        <div>
+                            <h4>Chat Transcripts</h4>
+                            <p>Receive a copy of your chat for future reference</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-preview">
+                    <div class="chat-header">
+                        <div class="chat-status">
+                            <span class="status-dot online"></span>
+                            <span>Support Team Online</span>
+                        </div>
+                        <div class="chat-agents">
+                            <span>12 agents available</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages">
+                        <div class="chat-message agent">
+                            <div class="message-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="message-content">
+                                <p class="message-sender">Support Agent</p>
+                                <p class="message-text">Hello! How can I help you today?</p>
+                                <span class="message-time">Just now</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="start-chat-btn" onclick="openLiveChat()">
+                        <i class="fas fa-comments"></i>
+                        Start Chat Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Contact Form -->
+    <section class="emergency-contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Emergency Contact Form</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Submit an urgent request and we'll respond immediately</p>
+            
+            <div class="contact-form-wrapper fade-in fade-in-delay-2">
+                <form id="emergencyContactForm" class="emergency-form">
+                    <div class="form-alert">
+                        <i class="fas fa-info-circle"></i>
+                        <span>For immediate assistance, please call our emergency hotline: <strong>1-800-TRANSPORT</strong></span>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="urgencyLevel">Urgency Level *</label>
+                            <select id="urgencyLevel" name="urgencyLevel" required>
+                                <option value="">Select urgency...</option>
+                                <option value="critical">Critical - Immediate Response Needed</option>
+                                <option value="high">High - Response within 1 hour</option>
+                                <option value="medium">Medium - Response within 4 hours</option>
+                                <option value="low">Low - Response within 24 hours</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="issueType">Issue Type *</label>
+                            <select id="issueType" name="issueType" required>
+                                <option value="">Select issue type...</option>
+                                <option value="accident">Accident/Collision</option>
+                                <option value="breakdown">Vehicle Breakdown</option>
+                                <option value="delay">Delivery Delay</option>
+                                <option value="damage">Vehicle Damage</option>
+                                <option value="lost">Lost/Missing Vehicle</option>
+                                <option value="other">Other Emergency</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Your Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number *</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="emailAddress">Email Address *</label>
+                            <input type="email" id="emailAddress" name="emailAddress" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bookingId">Booking/Tracking ID</label>
+                            <input type="text" id="bookingId" name="bookingId" placeholder="e.g., TRK123456">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="currentLocation">Current Location</label>
+                        <input type="text" id="currentLocation" name="currentLocation" placeholder="City, State or Address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="issueDescription">Describe the Emergency *</label>
+                        <textarea id="issueDescription" name="issueDescription" rows="6" required placeholder="Please provide detailed information about the emergency situation..."></textarea>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="smsUpdates" name="smsUpdates">
+                        <label for="smsUpdates">Send me SMS updates about this emergency</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-emergency-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Emergency Request
+                    </button>
+                </form>
+                
+                <div class="contact-sidebar">
+                    <div class="sidebar-card">
+                        <i class="fas fa-phone-volume"></i>
+                        <h4>Need Immediate Help?</h4>
+                        <p>Call our 24/7 emergency hotline</p>
+                        <a href="tel:+18008726776" class="sidebar-btn">1-800-TRANSPORT</a>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Track Your Vehicle</h4>
+                        <p>Check real-time location</p>
+                        <a href="tracking.html" class="sidebar-link">Go to Tracking</a>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <i class="fas fa-file-contract"></i>
+                        <h4>View Your Booking</h4>
+                        <p>Access booking details</p>
+                        <a href="booking.html" class="sidebar-link">My Bookings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Procedures -->
+    <section class="emergency-procedures">
+        <div class="container">
+            <h2 class="section-title fade-in">What to Do in Case of Emergency</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Step-by-step guides for common emergency situations</p>
+            
+            <div class="procedures-grid fade-in fade-in-delay-2">
+                <div class="procedure-card">
+                    <div class="procedure-number">1</div>
+                    <div class="procedure-icon">
+                        <i class="fas fa-car-crash"></i>
+                    </div>
+                    <h3>In Case of Accident</h3>
+                    <ul class="procedure-steps">
+                        <li><i class="fas fa-check-circle"></i> Ensure everyone's safety first</li>
+                        <li><i class="fas fa-check-circle"></i> Call emergency services if needed (911)</li>
+                        <li><i class="fas fa-check-circle"></i> Contact our emergency hotline immediately</li>
+                        <li><i class="fas fa-check-circle"></i> Take photos of the scene and damage</li>
+                        <li><i class="fas fa-check-circle"></i> Do not move vehicles unless necessary</li>
+                        <li><i class="fas fa-check-circle"></i> Exchange information with other parties</li>
+                        <li><i class="fas fa-check-circle"></i> File a police report</li>
+                    </ul>
+                </div>
+                
+                <div class="procedure-card">
+                    <div class="procedure-number">2</div>
+                    <div class="procedure-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Delivery Delays</h3>
+                    <ul class="procedure-steps">
+                        <li><i class="fas fa-check-circle"></i> Check real-time tracking for updates</li>
+                        <li><i class="fas fa-check-circle"></i> Contact customer support for status</li>
+                        <li><i class="fas fa-check-circle"></i> Review your delivery timeline</li>
+                        <li><i class="fas fa-check-circle"></i> Request revised ETA from our team</li>
+                        <li><i class="fas fa-check-circle"></i> Document delay for insurance purposes</li>
+                        <li><i class="fas fa-check-circle"></i> Discuss compensation if applicable</li>
+                    </ul>
+                </div>
+                
+                <div class="procedure-card">
+                    <div class="procedure-number">3</div>
+                    <div class="procedure-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>Vehicle Damage</h3>
+                    <ul class="procedure-steps">
+                        <li><i class="fas fa-check-circle"></i> Inspect vehicle upon delivery</li>
+                        <li><i class="fas fa-check-circle"></i> Document all damage with photos</li>
+                        <li><i class="fas fa-check-circle"></i> Note damage on delivery receipt</li>
+                        <li><i class="fas fa-check-circle"></i> Contact us within 24 hours</li>
+                        <li><i class="fas fa-check-circle"></i> File insurance claim immediately</li>
+                        <li><i class="fas fa-check-circle"></i> Keep all documentation safe</li>
+                        <li><i class="fas fa-check-circle"></i> Get repair estimates from certified shops</li>
+                    </ul>
+                </div>
+                
+                <div class="procedure-card">
+                    <div class="procedure-number">4</div>
+                    <div class="procedure-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Vehicle Breakdown</h3>
+                    <ul class="procedure-steps">
+                        <li><i class="fas fa-check-circle"></i> Move to safe location if possible</li>
+                        <li><i class="fas fa-check-circle"></i> Call roadside assistance immediately</li>
+                        <li><i class="fas fa-check-circle"></i> Provide exact location details</li>
+                        <li><i class="fas fa-check-circle"></i> Stay with vehicle until help arrives</li>
+                        <li><i class="fas fa-check-circle"></i> Follow driver's safety instructions</li>
+                        <li><i class="fas fa-check-circle"></i> Get estimated repair time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadside Assistance -->
+    <section class="roadside-assistance">
+        <div class="container">
+            <h2 class="section-title fade-in">Roadside Assistance Services</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Comprehensive support wherever you are</p>
+            
+            <div class="assistance-grid fade-in fade-in-delay-2">
+                <div class="assistance-card">
+                    <div class="assistance-icon">
+                        <i class="fas fa-tow-truck"></i>
+                    </div>
+                    <h3>Emergency Towing</h3>
+                    <p>24/7 towing service to nearest facility or your preferred location</p>
+                    <ul class="assistance-features">
+                        <li>Flatbed towing available</li>
+                        <li>Enclosed trailer option</li>
+                        <li>Long-distance coverage</li>
+                        <li>Insurance coordination</li>
+                    </ul>
+                </div>
+                
+                <div class="assistance-card">
+                    <div class="assistance-icon">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <h3>Battery Service</h3>
+                    <p>Jump-start or battery replacement on the spot</p>
+                    <ul class="assistance-features">
+                        <li>Quick jump-start service</li>
+                        <li>Battery testing</li>
+                        <li>New battery installation</li>
+                        <li>Disposal of old batteries</li>
+                    </ul>
+                </div>
+                
+                <div class="assistance-card">
+                    <div class="assistance-icon">
+                        <i class="fas fa-tire"></i>
+                    </div>
+                    <h3>Flat Tire Assistance</h3>
+                    <p>Tire change and emergency repair services</p>
+                    <ul class="assistance-features">
+                        <li>Spare tire installation</li>
+                        <li>Tire inflation</li>
+                        <li>Emergency tire repair</li>
+                        <li>Towing if no spare available</li>
+                    </ul>
+                </div>
+                
+                <div class="assistance-card">
+                    <div class="assistance-icon">
+                        <i class="fas fa-gas-pump"></i>
+                    </div>
+                    <h3>Fuel Delivery</h3>
+                    <p>Emergency fuel delivery to your location</p>
+                    <ul class="assistance-features">
+                        <li>Gasoline or diesel delivery</li>
+                        <li>Minimum 2-gallon service</li>
+                        <li>24/7 availability</li>
+                        <li>Fast response time</li>
+                    </ul>
+                </div>
+                
+                <div class="assistance-card">
+                    <div class="assistance-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Lockout Service</h3>
+                    <p>Professional locksmith assistance for locked vehicles</p>
+                    <ul class="assistance-features">
+                        <li>Non-damage entry methods</li>
+                        <li>Key replacement available</li>
+                        <li>Transponder key programming</li>
+                        <li>Trunk access service</li>
+                    </ul>
+                </div>
+                
+                <div class="assistance-card">
+                    <div class="assistance-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Minor Repairs</h3>
+                    <p>On-site minor mechanical repairs</p>
+                    <ul class="assistance-features">
+                        <li>Belt/hose replacement</li>
+                        <li>Fluid top-offs</li>
+                        <li>Light bulb replacement</li>
+                        <li>Fuse replacement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Hours & Availability -->
+    <section class="support-hours">
+        <div class="container">
+            <h2 class="section-title fade-in">Customer Support Hours</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">When and how to reach our different support teams</p>
+            
+            <div class="hours-grid fade-in fade-in-delay-2">
+                <div class="hours-card priority">
+                    <div class="hours-badge">24/7</div>
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Emergency Hotline</h3>
+                    <p class="hours-time">Available 24 Hours a Day, 7 Days a Week</p>
+                    <p class="hours-contact">1-800-TRANSPORT</p>
+                    <p class="hours-description">For urgent matters, accidents, breakdowns, and critical assistance</p>
+                </div>
+                
+                <div class="hours-card priority">
+                    <div class="hours-badge">24/7</div>
+                    <i class="fas fa-comments"></i>
+                    <h3>Live Chat Support</h3>
+                    <p class="hours-time">Always Online</p>
+                    <p class="hours-contact">Click chat widget</p>
+                    <p class="hours-description">Instant messaging support with real-time responses</p>
+                </div>
+                
+                <div class="hours-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Customer Service</h3>
+                    <p class="hours-time">Monday - Friday: 7:00 AM - 10:00 PM EST</p>
+                    <p class="hours-time">Saturday - Sunday: 8:00 AM - 8:00 PM EST</p>
+                    <p class="hours-contact">1-800-HELP-NOW</p>
+                    <p class="hours-description">General inquiries, booking assistance, and quote requests</p>
+                </div>
+                
+                <div class="hours-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Support</h3>
+                    <p class="hours-time">Response within 2-4 hours</p>
+                    <p class="hours-contact">support@cartransport.com</p>
+                    <p class="hours-description">Non-urgent inquiries and detailed questions</p>
+                </div>
+                
+                <div class="hours-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Roadside Assistance</h3>
+                    <p class="hours-time">24/7 Emergency Service</p>
+                    <p class="hours-contact">1-800-ROADSIDE</p>
+                    <p class="hours-description">Vehicle breakdowns, towing, and mechanical emergencies</p>
+                </div>
+                
+                <div class="hours-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Claims Department</h3>
+                    <p class="hours-time">Monday - Friday: 9:00 AM - 6:00 PM EST</p>
+                    <p class="hours-contact">claims@cartransport.com</p>
+                    <p class="hours-description">Insurance claims and damage reports</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="emergency-faq">
+        <div class="container">
+            <h2 class="section-title fade-in">Emergency Support FAQs</h2>
+            
+            <div class="faq-grid fade-in fade-in-delay-1">
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> What qualifies as an emergency?</h3>
+                    <p>Emergencies include accidents, vehicle breakdowns, significant delays, vehicle damage, safety concerns, or any situation requiring immediate assistance.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> How quickly will someone respond?</h3>
+                    <p>Emergency calls are answered immediately 24/7. Critical situations receive response within 15-30 minutes. Non-critical emergencies within 1-2 hours.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Is emergency support free?</h3>
+                    <p>Emergency support is included in all transport services. Roadside assistance may have additional costs depending on the service required.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> What if I can't reach anyone?</h3>
+                    <p>If you cannot reach us (unlikely), call 911 for immediate safety concerns, then try our backup emergency number or submit an emergency form online.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Can I track my emergency request?</h3>
+                    <p>Yes, all emergency requests receive a tracking number. You'll get SMS and email updates throughout the resolution process.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> What information should I have ready?</h3>
+                    <p>Have your booking ID, current location, contact information, and a description of the emergency ready when you call or chat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Live Chat Widget (Hidden by default) -->
+    <div id="liveChatWidget" class="chat-widget">
+        <div class="chat-widget-header">
+            <h4><i class="fas fa-comments"></i> Live Support Chat</h4>
+            <button class="close-chat-btn" onclick="closeLiveChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-widget-body">
+            <p class="chat-widget-message">Connecting you to an agent...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/modules/navbar-loader.js"></script>
+    <script src="../js/modules/footer.js"></script>
+    <script src="../js/modules/scroll-animations.js"></script>
+    <script src="../js/modules/emergency-support.js"></script>
+</body>
+</html>
