@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us - Harihar Car Carriers</title>
   <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="../css/components/footer.css">
   <link rel="stylesheet" href="../css/components/floating-call-button.css">
   <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
   <link rel="stylesheet" href="../css/components/floating-chatbot-button.css">
@@ -111,7 +112,7 @@
     }
 
     /* Contact Info */
-    .contact-info {
+    .contact-info-pg {
       display: flex;
       flex-direction: column;
       gap: 30px;
@@ -616,11 +617,11 @@
 
       <div class="contact-content">
         <!-- Contact Info -->
-        <div class="contact-info fade-in">
+        <div class="contact-info-pg fade-in">
           <div class="info-card">
             <div class="info-header">
               <div class="info-icon">
-                <img src="../assets/images/telephone.png" alt="Phone" />
+                <i class="fa-solid fa-phone-volume"></i>
               </div>
               <h3>Phone & WhatsApp</h3>
             </div>
@@ -648,7 +649,7 @@
           <div class="info-card fade-in fade-in-delay-1">
             <div class="info-header">
               <div class="info-icon">
-                <img src="../assets/images/email.png" alt="Email" />
+                <i class="fa-solid fa-envelope"></i>
               </div>
               <h3>Email Address</h3>
             </div>
@@ -684,7 +685,7 @@
           <div class="info-card fade-in fade-in-delay-2">
             <div class="info-header">
               <div class="info-icon">
-                <img src="../assets/images/location.png" alt="Location" />
+                <i class="fa-solid fa-location-dot"></i>
               </div>
               <h3>Office Address</h3>
             </div>
@@ -743,22 +744,22 @@
                 <a href="https://facebook.com/hariharcarcarriers" target="_blank" rel="noopener"
                   class="social-link facebook">
                   <i class="fab fa-facebook-f"></i>
-                  <span>Facebook</span>
+                  <!-- <span>Facebook</span> -->
                 </a>
                 <a href="https://twitter.com/hariharcarriers" target="_blank" rel="noopener"
                   class="social-link twitter">
                   <i class="fab fa-twitter"></i>
-                  <span>Twitter</span>
+                  <!-- <span>Twitter</span> -->
                 </a>
                 <a href="https://instagram.com/hariharcarcarriers" target="_blank" rel="noopener"
                   class="social-link instagram">
                   <i class="fab fa-instagram"></i>
-                  <span>Instagram</span>
+                  <!-- <span>Instagram</span> -->
                 </a>
                 <a href="https://linkedin.com/company/hariharcarcarriers" target="_blank" rel="noopener"
                   class="social-link linkedin">
                   <i class="fab fa-linkedin-in"></i>
-                  <span>LinkedIn</span>
+                  <!-- <span>LinkedIn</span> -->
                 </a>
               </div>
               <button class="live-chat-btn" id="liveChatBtn">
@@ -1077,18 +1078,10 @@
   <!-- Footer Section -->
   <div id="footer-container"></div>
 
-  <script>
-    // Load shared footer dynamically
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-container').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading footer:', error));
-  </script>
-
   <script src="../js/modules/search.js"></script>
   <script src="../js/modules/navbar-loader.js"></script>
+
+  <script src="../js/modules/footer-loader.js"></script>
   <script src="../js/modules/themes.js"></script>
   <script src="../js/modules/floating-book-button.js"></script>
   <script src="../js/modules/floating-call-button.js"></script>
@@ -1101,7 +1094,6 @@
   <script src="../js/modules/backtoBottom.js"></script>
   <script src="../js/modules/scroll-animations.js"></script>
   <script src="../js/modules/contact-enhanced.js"></script>
-
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">

@@ -110,13 +110,7 @@ if (video) {
 // Testimonial Slider Functionality now created seperately in js/modules/testimonial.js
 
 
-// Load shared footer dynamically
-fetch('pages/footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
-  })
-  .catch(error => console.error('Error loading footer:', error));
+
 
 // Contact Form Functionality
 document.addEventListener("DOMContentLoaded", function () {
@@ -173,13 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Load shared footer dynamically
-fetch('pages/footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
-  })
-  .catch(error => console.error('Error loading footer:', error));
+
 
 //    <!-- Preloader fade-out script -->
 window.addEventListener("load", () => {
@@ -240,16 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// <!-- Load Footer -->
-// Load footer
-fetch('./pages/footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
-  })
-  .catch(error => {
-    console.error('Error loading footer:', error);
-  });
+
 
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
@@ -382,4 +361,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-
+window.addEventListener("scroll", function() {
+  const scrollProgress = document.getElementById("scroll-progress");
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  scrollProgress.style.width = scrollPercent + "%";
+});
