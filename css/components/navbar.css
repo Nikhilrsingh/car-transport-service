@@ -1037,6 +1037,7 @@ body {
 .nav-link[data-dropdown-btn],
 button.nav-link[data-dropdown-btn] {
   background: none;
+  background-color: transparent;
   border: none;
   cursor: pointer;
   font-family: inherit;
@@ -1050,6 +1051,10 @@ button.nav-link[data-dropdown-btn] {
   align-items: center;
   gap: 6px;
   transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none;
+  filter: none;
 }
 
 .nav-link[data-dropdown-btn]:hover,
@@ -1057,6 +1062,13 @@ button.nav-link[data-dropdown-btn]:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #ff6347;
 }
+
+/* Consistent focus styles: show ring only for keyboard focus */
+/* Remove any residual glow from mouse focus; only keyboard shows subtle ring */
+.nav-link:focus,
+button.nav-link:focus { outline: none; box-shadow: none; }
+.nav-link:focus-visible,
+button.nav-link:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,99,71,0.6); }
 
 .nav-link[data-dropdown-btn] i.fa-caret-down,
 button.nav-link[data-dropdown-btn] i.fa-caret-down {
