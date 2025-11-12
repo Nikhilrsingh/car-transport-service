@@ -47,8 +47,8 @@
     });
   }
 
+  // This is the single, correct function for your footer HTML
   function getFooterHTML() {
-    function getFooterHTML() {
     return `
       <footer class="footer-section-enhanced">
         <div class="footer-container">
@@ -96,128 +96,37 @@
           </div>
 
         </div>
+
+        <div class="footer-road"></div>
+        <div class="car-carrier-animation">
+          <img
+            class="moving-car-carrier"
+            src="../assets/images/car-carrier.png"
+            alt="Moving car across footer"
+          />
+        </div>
+
         <div class="footer-bottom">
-
-      <div class="footer-road"></div>
-      <div class="car-carrier-animation">
-        <img
-          class="moving-car-carrier"
-          src="../assets/images/car-carrier.png"
-          alt="Moving car across footer"
-        />
-      </div>
-
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="footer-bottom-content">
-            <div class="copyright">
-              &copy; <span id="current-year"></span> Harihar Car Carriers. All rights reserved.
-            </div>
-            <div class="footer-bottom-links">
-              <a href="../pages/privacy-policy.html">Privacy Policy</a>
-              <a href="../pages/Terms of Services.html">Terms of Service</a>
-              <a href="#sitemap">Sitemap</a>
-            </div>
-            <div class="payment-methods">
-              <i class="fab fa-cc-visa" title="Visa"></i>
-              <i class="fab fa-cc-mastercard" title="MasterCard"></i>
-              <i class="fab fa-cc-paypal" title="PayPal"></i>
-              <i class="fas fa-university" title="Net Banking"></i>
+          <div class="container">
+            <div class="footer-bottom-content">
+              <div class="copyright">
+                &copy; <span id="current-year"></span> Harihar Car Carriers. All rights reserved.
+              </div>
+              <div class="footer-bottom-links">
+                <a href="../pages/privacy-policy.html">Privacy Policy</a>
+                <a href="../pages/Terms of Services.html">Terms of Service</a>
+                <a href="#sitemap">Sitemap</a>
+              </div>
+              <div class="payment-methods">
+                <i class="fab fa-cc-visa" title="Visa"></i>
+                <i class="fab fa-cc-mastercard" title="MasterCard"></i>
+                <i class="fab fa-cc-paypal" title="PayPal"></i>
+                <i class="fas fa-university" title="Net Banking"></i>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>`;
-  }
-
-          <div class="footer-section newsletter">
-            <h2>Newsletter</h2>
-            <p>Subscribe to our newsletter for updates.</p>
-            <form class="newsletter-form">
-              <input type="email" placeholder="Your Email" required>
-              <button type="submit">Subscribe</button>
-            </form>
-          </div>
-
-        </div>
-        <div class="footer-bottom">
-
-      <div class="footer-column">
-        <h3>Quick Links</h3>
-        <ul class="footer-links">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../pages/about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-          <li><a href="../index.html#services"><i class="fas fa-truck-moving"></i> Services</a></li>
-          <li><a href="../pages/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
-          <li><a href="../pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
-          <li><a href="../pages/enquiry.html"><i class="fas fa-question-circle"></i> Enquiry</a></li>
-          <li><a href="../pages/blog.html"><i class="fas fa-blog"></i> Blog</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h3>Our Services</h3>
-        <ul class="footer-links">
-          <li><a href="#door-to-door"><i class="fas fa-door-open"></i> Door-to-Door Transport</a></li>
-          <li><a href="#nationwide"><i class="fas fa-map-marked-alt"></i> Nationwide Coverage</a></li>
-          <li><a href="#commercial"><i class="fas fa-truck"></i> Commercial Vehicles</a></li>
-          <li><a href="#personal"><i class="fas fa-car"></i> Personal Vehicles</a></li>
-          <li><a href="#luxury"><i class="fas fa-gem"></i> Luxury Cars</a></li>
-          <li><a href="#bikes"><i class="fas fa-motorcycle"></i> Bike Transport</a></li>
-          <li><a href="#insurance"><i class="fas fa-shield-alt"></i> Insurance Coverage</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h3>Contact Info</h3>
-        <ul class="contact-info">
-          <li><i class="fas fa-map-marker-alt"></i><span>Nagpur, Maharashtra, India - 440001</span></li>
-          <li><i class="fas fa-phone"></i><span>+91 XXXXX XXXXX</span></li>
-          <li><i class="fas fa-envelope"></i><span>info@hariharcarcarriers.com</span></li>
-          <li><i class="fas fa-clock"></i><span>24/7 Customer Support<br/>Emergency Services Available</span></li>
-        </ul>
-        <div class="newsletter-form">
-          <p>Subscribe for updates & offers</p>
-          <div class="newsletter-input">
-            <input type="email" placeholder="Enter your email" />
-            <button type="submit">Subscribe</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Car Animation -->
-  <div class="footer-road"></div>
-  <div class="car-carrier-animation">
-    <img
-      class="moving-car-carrier"
-      src="../assets/images/car-carrier.png"
-      alt="Moving car across footer"
-    />
-  </div>
-
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="footer-bottom-content">
-        <div class="copyright">
-          &copy; <span id="current-year"></span> Harihar Car Carriers. All rights reserved.
-        </div>
-        <div class="footer-bottom-links">
-          <a href="../pages/privacy-policy.html">Privacy Policy</a>
-          <a href="../pages/Terms of Services.html">Terms of Service</a>
-          <a href="#sitemap">Sitemap</a>
-        </div>
-        <div class="payment-methods">
-          <i class="fab fa-cc-visa" title="Visa"></i>
-          <i class="fab fa-cc-mastercard" title="MasterCard"></i>
-          <i class="fab fa-cc-paypal" title="PayPal"></i>
-          <i class="fas fa-university" title="Net Banking"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>`;
+      </footer>`;
   }
 
   function fixPathsForRootPage(container) {
@@ -257,5 +166,3 @@
     loadFooter();
   }
 })();
-
-
