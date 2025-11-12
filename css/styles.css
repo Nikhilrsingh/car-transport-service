@@ -2765,7 +2765,6 @@ html {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-
 .region-section h2 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -2779,7 +2778,6 @@ html {
   max-width: 500px;
   margin: 20px auto;
   position: relative;
-  display: inline-block;
 }
 
 .region-search {
@@ -2797,28 +2795,15 @@ html {
   box-shadow: 0 0 10px rgba(217, 35, 45, 0.2);
 }
 
-.search-icon {
+.region-search-container i {
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
   color: #999;
   pointer-events: none;
-} 
-.clear-btn {
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #888;
-  font-size: 20px;
-  display: none;
-  transition: color 0.2s;
 }
-.clear-btn:hover {
-  color: #f1ebeb;
-}
+
 .region-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -2827,50 +2812,7 @@ html {
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-  justify-items: center;  
 }
-.region-card {
-  display: inline-block;
-  width: 100%;
-  max-width: 290px;
-  text-align: center;
-  background: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  text-decoration: none;
-  color: #000;
-  transition: all 0.3s ease;
-}
-
-.region-card[style*="display: none"] {
-  opacity: 0;
-  transform: scale(0.95);
-}
-
-.region-card {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.no-results {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 1rem;
-  color: #6b6a6a;
-  font-style: italic;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 
 .region-btn {
   display: block;
