@@ -430,7 +430,7 @@ div + #footer-container,
 .pricing-cta-section + #footer-container,
 .region-section + #footer-container,
 .website-rating-section + #footer-container {
-  margin-top: 80px !important;
+  /* margin-top: 80px !important; */
   margin-bottom: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
@@ -443,7 +443,8 @@ div + #footer-container,
 /* Ensure consistent spacing regardless of what comes before footer */
 /* Use universal selector to catch any element before footer-container */
 * + #footer-container {
-  margin-top: 80px !important;
+  box-sizing: border-box;
+  /* margin-top: 80px !important; */
 }
 
 /* Responsive Footer */
