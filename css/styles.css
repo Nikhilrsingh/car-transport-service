@@ -14,6 +14,53 @@
   font-style: normal;
 }
 
+/* ========================================
+   COLOR PALETTE - Standardized & Accessible
+   ======================================== */
+:root {
+  /* Primary Colors */
+  --color-primary: #ff6347;
+  --color-primary-dark: #ff4500;
+  --color-primary-light: #ff7f5c;
+  
+  /* Secondary Colors */
+  --color-secondary: #3498db;
+  --color-secondary-dark: #2980b9;
+  
+  /* Neutral Grays - High Contrast */
+  --color-text-primary: #000000;
+  --color-text-secondary: #2d2d2d;
+  --color-text-muted: #555555;
+  
+  /* Light Theme Grays */
+  --color-gray-50: #f9f9f9;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e8e8e8;
+  --color-gray-300: #d0d0d0;
+  --color-gray-400: #b0b0b0;
+  --color-gray-500: #888888;
+  
+  /* Dark Theme Grays (High Contrast) */
+  --color-dark-bg: #0f1115;
+  --color-dark-surface: #1a1a1a;
+  --color-dark-border: #2d2d2d;
+  --color-dark-text-primary: #ffffff;
+  --color-dark-text-secondary: #f0f0f0;
+  --color-dark-text-muted: #c0c0c0;
+  
+  /* Status Colors */
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+  --color-info: #17a2b8;
+  
+  /* Shadows & Overlays */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
 body {
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
@@ -29,8 +76,8 @@ body {
 body {
   height: 100%;
   width: 100%;
-  background-color: #f5f5f5;
-  color: #000;
+  background-color: var(--color-gray-100);
+  color: var(--color-text-primary);
 }
 
 /* 🌿 Auto Slider Styling */
@@ -739,7 +786,7 @@ body {
 
 .stat-label {
   font-size: 0.9rem;
-  color: #e0e0e0;
+  color: #f0f0f0;
   transition: color 0.3s ease;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
@@ -885,7 +932,7 @@ body {
 
 .trust-item span {
   font-size: 0.9rem;
-  color: #ccc;
+  color: #e8e8e8;
 }
 
 /* Quick Quote Form */
@@ -1924,7 +1971,7 @@ html {
 }
 
 .input-group input::placeholder {
-  color: #888;
+  color: #666;
 }
 
 .submit-btn {
@@ -1964,7 +2011,7 @@ html {
 }
 
 .form-footer p {
-  color: #888;
+  color: #a0a0a0;
   margin-bottom: 15px;
   font-size: 0.9rem;
 }
