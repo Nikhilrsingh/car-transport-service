@@ -105,6 +105,12 @@
                     <span>Track Your Car</span>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="../pages/emergency-support.html" class="nav-link" data-page="emergency-support" data-tooltip="Emergency Support">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Emergency Support</span>
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -270,6 +276,12 @@
         <a href="../pages/contact.html" class="mobile-nav-link">
           <i class="fas fa-phone"></i>
           <span>Contact</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="../pages/emergency-support.html" class="mobile-nav-link">
+          <i class="fas fa-life-ring"></i>
+          <span>Emergency Support</span>
         </a>
       </li>
       <li class="mobile-nav-item">
