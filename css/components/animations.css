@@ -29,8 +29,8 @@ html {
 /* Base animation classes - elements start hidden */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fade-in.visible {
@@ -40,8 +40,8 @@ html {
 
 .slide-up {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(50px);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .slide-up.visible {
@@ -51,8 +51,8 @@ html {
 
 .slide-left {
   opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateX(-50px);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .slide-left.visible {
@@ -62,8 +62,8 @@ html {
 
 .slide-right {
   opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateX(50px);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .slide-right.visible {
@@ -73,37 +73,45 @@ html {
 
 .scale-in {
   opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: scale(0.85) translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .scale-in.visible {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) translateY(0);
 }
 
 /* Staggered animation delays for child elements */
 .fade-in-delay-1 {
-  transition-delay: 0.1s;
+  transition-delay: 0.15s;
 }
 
 .fade-in-delay-2 {
-  transition-delay: 0.2s;
-}
-
-.fade-in-delay-3 {
   transition-delay: 0.3s;
 }
 
+.fade-in-delay-3 {
+  transition-delay: 0.45s;
+}
+
 .fade-in-delay-4 {
-  transition-delay: 0.4s;
+  transition-delay: 0.6s;
+}
+
+.fade-in-delay-5 {
+  transition-delay: 0.75s;
+}
+
+.fade-in-delay-6 {
+  transition-delay: 0.9s;
 }
 
 /* ============================================
    Hover Effects for Interactive Elements
    ============================================ */
 
-/* Button Hover Effects */
+/* Button Hover Effects with Micro-animations */
 button,
 .btn,
 .cta-btn,
@@ -117,7 +125,11 @@ button,
 .quote-result-reset-btn,
 .mobile-cta-btn,
 .mobile-login-btn {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.3s ease, 
+              background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 button:hover,
@@ -133,10 +145,35 @@ button:hover,
 .quote-result-reset-btn:hover,
 .mobile-cta-btn:hover,
 .mobile-login-btn:hover {
-  transform: scale(1.05) translateY(-2px);
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 99, 71, 0.25);
 }
 
-/* Icon Hover Effects */
+/* Ripple effect on click */
+button:active::after,
+.btn:active::after,
+.cta-btn:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  to {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+/* Icon Hover Effects with Micro-animations */
 .icon,
 i[class^="fas"],
 i[class^="far"],
@@ -164,7 +201,9 @@ i[class^="fab"],
 .fa-images,
 .fa-phone,
 .fa-calendar-check {
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              color 0.3s ease,
+              filter 0.3s ease;
 }
 
 .icon:hover,
@@ -174,10 +213,26 @@ i[class^="fab"]:hover,
 .service-icon:hover i,
 .value-icon:hover,
 .info-icon:hover {
-  transform: scale(1.15);
+  transform: scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 4px 8px rgba(255, 99, 71, 0.3));
 }
 
-/* Card Hover Effects */
+/* Pulse animation for attention-grabbing icons */
+@keyframes icon-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.service-icon i,
+.value-icon {
+  animation: icon-pulse 3s ease-in-out infinite;
+}
+
+/* Card Hover Effects with Micro-animations */
 .service-card,
 .feature-box,
 .value-card,
@@ -186,7 +241,9 @@ i[class^="fab"]:hover,
 .quote-card,
 .cta-form-box,
 .pricing-cta-section {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.4s ease,
+              border-color 0.3s ease;
 }
 
 .service-card:hover,
@@ -197,7 +254,27 @@ i[class^="fab"]:hover,
 .quote-card:hover,
 .cta-form-box:hover,
 .pricing-cta-section:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(255, 99, 71, 0.15), 0 0 20px rgba(255, 99, 71, 0.1);
+}
+
+/* Subtle glow on scroll appearance */
+.service-card.visible,
+.feature-box.visible,
+.value-card.visible {
+  animation: card-glow 0.8s ease-out;
+}
+
+@keyframes card-glow {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 99, 71, 0);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 99, 71, 0.3);
+  }
+  100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
 }
 
 /* Link Hover Effects */
@@ -245,13 +322,13 @@ textarea:hover {
    Section-Specific Animations
    ============================================ */
 
-/* Hero Section */
+/* Hero Section with Enhanced Micro-interactions */
 .hero .hero-title,
 .hero .hero-description,
 .hero .hero-actions,
 .hero .hero-stats {
   opacity: 0;
-  animation: fadeInUp 0.8s ease forwards;
+  animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .hero .hero-title {
@@ -270,36 +347,39 @@ textarea:hover {
   animation-delay: 0.8s;
 }
 
-/* Features Section */
+/* Features Section with Sequential Reveal */
 .features-container .feature-box {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(40px) scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .features-container .feature-box.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-/* Services Section */
+/* Services Section with Enhanced Entrance */
 .services-grid .service-card {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(40px) rotateX(5deg);
+  transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .services-grid .service-card.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) rotateX(0);
 }
 
-/* Testimonials */
+/* Testimonials with Smooth Slide */
 .testimonial-slider,
 .testimonials-grid {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .testimonial-slider.visible,
@@ -308,11 +388,12 @@ textarea:hover {
   transform: translateY(0);
 }
 
-/* Contact Section */
+/* Contact Section with Gentle Reveal */
 .contact-content > * {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .contact-content > *.visible {
