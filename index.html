@@ -301,6 +301,26 @@
                         <span class="result-value" id="resultVehicle">---</span>
                       </div>
                     </div>
+
+                    <!-- Estimated Delivery Time -->
+                    <div class="delivery-time-display" id="deliveryTimeDisplay">
+                      <i class="fas fa-clock"></i>
+                      <div class="time-info">
+                        <span class="time-label">Estimated Delivery</span>
+                        <span class="time-value" id="deliveryTime">---</span>
+                      </div>
+                    </div>
+
+                    <!-- Compare Prices Section -->
+                    <div class="compare-prices-section" id="comparePricesSection" style="display: none;">
+                      <div class="compare-prices-header">
+                        <h4><i class="fas fa-layer-group"></i> Transport Options</h4>
+                      </div>
+                      <div class="price-options" id="priceOptions">
+                        <!-- Price options will be dynamically inserted here -->
+                      </div>
+                    </div>
+
                     <div class="result-price">
                       <span class="label">Estimated Cost</span>
                       <span class="amount" id="resultAmount">₹0</span>
@@ -311,7 +331,16 @@
                         class="quote-result-book-btn"
                         id="bookNowBtn"
                       >
-                        Book Now
+                        <i class="fas fa-check-circle"></i>
+                        <span>Book Now</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="quote-save-later-btn"
+                        id="saveLaterBtn"
+                      >
+                        <i class="fas fa-bookmark"></i>
+                        <span>Save for Later</span>
                       </button>
                       <button
                         type="button"

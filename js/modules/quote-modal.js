@@ -41,9 +41,33 @@
         'luxury': 15
     };
 
+    // Transport options with different service levels
+    const transportOptions = {
+        'hatchback': [
+            { name: 'Economy', rate: 7, deliveryDays: '5-7', description: 'Standard carrier, budget-friendly' },
+            { name: 'Standard', rate: 8, deliveryDays: '3-5', description: 'Covered carrier, insured', bestValue: true },
+            { name: 'Express', rate: 10, deliveryDays: '2-3', description: 'Priority delivery, premium service' }
+        ],
+        'sedan': [
+            { name: 'Economy', rate: 9, deliveryDays: '5-7', description: 'Standard carrier, budget-friendly' },
+            { name: 'Standard', rate: 10, deliveryDays: '3-5', description: 'Covered carrier, insured', bestValue: true },
+            { name: 'Express', rate: 12, deliveryDays: '2-3', description: 'Priority delivery, premium service' }
+        ],
+        'suv': [
+            { name: 'Economy', rate: 11, deliveryDays: '5-7', description: 'Standard carrier, budget-friendly' },
+            { name: 'Standard', rate: 12, deliveryDays: '3-5', description: 'Covered carrier, insured', bestValue: true },
+            { name: 'Express', rate: 14, deliveryDays: '2-3', description: 'Priority delivery, premium service' }
+        ],
+        'luxury': [
+            { name: 'Premium', rate: 15, deliveryDays: '3-5', description: 'Enclosed carrier, fully insured' },
+            { name: 'VIP', rate: 18, deliveryDays: '2-3', description: 'White-glove service, door-to-door', bestValue: true }
+        ]
+    };
+
     let currentStep = 1;
     let selectedFromCity = '';
     let selectedToCity = '';
+    let currentQuoteData = null;
 
     /**
      * Initialize Quick Quote Form
@@ -59,6 +83,7 @@
         const step2Back = document.getElementById('step2Back');
         const resetBtn = document.getElementById('resetQuote');
         const bookNowBtn = document.getElementById('bookNowBtn');
+        const saveLaterBtn = document.getElementById('saveLaterBtn');
 
         // Setup autocomplete
         setupAutocomplete(fromCityInput, 'fromCityDropdown');
@@ -72,6 +97,11 @@
         // Book Now handler
         if (bookNowBtn) {
             bookNowBtn.addEventListener('click', () => handleBookNow());
+        }
+
+        // Save for Later handler
+        if (saveLaterBtn) {
+            saveLaterBtn.addEventListener('click', () => handleSaveForLater());
         }
 
         // Form submission
@@ -116,6 +146,157 @@
             // Redirect to booking page
             window.location.href = './pages/booking.html';
         }
+    }
+
+    /**
+     * Handle Save for Later
+     */
+    function handleSaveForLater() {
+        if (!currentQuoteData) return;
+
+        const saveLaterBtn = document.getElementById('saveLaterBtn');
+        
+        // Get existing saved quotes
+        let savedQuotes = JSON.parse(localStorage.getItem('savedQuotes') || '[]');
+        
+        // Add current quote with timestamp
+        const quoteToSave = {
+            ...currentQuoteData,
+            savedAt: new Date().toISOString(),
+            id: Date.now()
+        };
+        
+        savedQuotes.push(quoteToSave);
+        
+        // Limit to 10 saved quotes
+        if (savedQuotes.length > 10) {
+            savedQuotes = savedQuotes.slice(-10);
+        }
+        
+        // Save to localStorage
+        localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+        
+        // Update button state
+        saveLaterBtn.classList.add('saved');
+        saveLaterBtn.innerHTML = '<i class="fas fa-check"></i><span>Saved!</span>';
+        
+        // Show notification
+        showNotification('Quote saved successfully! You can access it later from your saved quotes.', 'success');
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            saveLaterBtn.classList.remove('saved');
+            saveLaterBtn.innerHTML = '<i class="fas fa-bookmark"></i><span>Save for Later</span>';
+        }, 3000);
+    }
+
+    /**
+     * Show Notification
+     */
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' : 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    /**
+     * Calculate Delivery Time
+     */
+    function calculateDeliveryTime(distance) {
+        // Estimate delivery based on distance
+        // Assuming average speed of 400-500 km per day for transport
+        const daysNeeded = Math.ceil(distance / 450);
+        
+        if (daysNeeded <= 1) {
+            return '1-2 days';
+        } else if (daysNeeded <= 3) {
+            return '2-3 days';
+        } else if (daysNeeded <= 5) {
+            return '3-5 days';
+        } else if (daysNeeded <= 7) {
+            return '5-7 days';
+        } else {
+            return '7-10 days';
+        }
+    }
+
+    /**
+     * Display Compare Prices
+     */
+    function displayComparePrices(vehicleType, distance) {
+        const comparePricesSection = document.getElementById('comparePricesSection');
+        const priceOptions = document.getElementById('priceOptions');
+        
+        if (!transportOptions[vehicleType]) {
+            comparePricesSection.style.display = 'none';
+            return;
+        }
+        
+        const options = transportOptions[vehicleType];
+        
+        // Generate price option cards
+        priceOptions.innerHTML = options.map((option, index) => {
+            const price = Math.round(option.rate * distance);
+            return `
+                <div class="price-option ${option.bestValue ? 'best-value' : ''}" data-option-index="${index}">
+                    <div class="price-option-info">
+                        <div class="price-option-name">${option.name}</div>
+                        <div class="price-option-details">
+                            <i class="fas fa-clock"></i> ${option.deliveryDays} days • ${option.description}
+                        </div>
+                    </div>
+                    <div class="price-option-amount">₹${price.toLocaleString('en-IN')}</div>
+                </div>
+            `;
+        }).join('');
+        
+        comparePricesSection.style.display = 'block';
+        
+        // Add click handlers for price options
+        document.querySelectorAll('.price-option').forEach((option, index) => {
+            option.addEventListener('click', () => {
+                // Remove previous selection
+                document.querySelectorAll('.price-option').forEach(opt => opt.classList.remove('selected'));
+                
+                // Select this option
+                option.classList.add('selected');
+                
+                // Update main price display
+                const selectedOption = options[index];
+                const price = Math.round(selectedOption.rate * distance);
+                document.getElementById('resultAmount').textContent = `₹${price.toLocaleString('en-IN')}`;
+                
+                // Update delivery time
+                document.getElementById('deliveryTime').textContent = selectedOption.deliveryDays + ' days';
+                
+                // Update current quote data
+                if (currentQuoteData) {
+                    currentQuoteData.selectedOption = selectedOption.name;
+                    currentQuoteData.price = price;
+                    currentQuoteData.deliveryTime = selectedOption.deliveryDays + ' days';
+                }
+            });
+        });
     }
 
     /**
@@ -309,12 +490,28 @@
         const rate = pricingRates[vehicleType];
         const basePrice = distance * rate;
         const estimatedPrice = Math.round(basePrice);
+        const deliveryTime = calculateDeliveryTime(distance);
 
         // Update result display
         document.getElementById('resultRoute').textContent = `${fromCity} → ${toCity}`;
         document.getElementById('resultDistance').textContent = `${distance} km`;
         document.getElementById('resultVehicle').textContent = vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1);
         document.getElementById('resultAmount').textContent = `₹${estimatedPrice.toLocaleString('en-IN')}`;
+        document.getElementById('deliveryTime').textContent = deliveryTime;
+
+        // Store current quote data
+        currentQuoteData = {
+            fromCity,
+            toCity,
+            distance,
+            vehicleType,
+            price: estimatedPrice,
+            deliveryTime,
+            selectedOption: 'Standard'
+        };
+
+        // Display compare prices
+        displayComparePrices(vehicleType, distance);
 
         // Go to result step
         goToStep(3);
@@ -330,8 +527,17 @@
         document.getElementById('vehicleType').value = '';
         document.getElementById('vehicleType').removeAttribute('value');
         document.getElementById('distanceValue').textContent = '---';
+        document.getElementById('deliveryTime').textContent = '---';
+        
+        // Hide compare prices section
+        const comparePricesSection = document.getElementById('comparePricesSection');
+        if (comparePricesSection) {
+            comparePricesSection.style.display = 'none';
+        }
+        
         selectedFromCity = '';
         selectedToCity = '';
+        currentQuoteData = null;
         goToStep(1);
     }
 
@@ -348,7 +554,7 @@
      * Initialize Quote Modal (existing functionality)
      */
     function initQuoteModal() {
-        // Create modal HTML
+        // Create modal HTML with enhanced features
         const modalHTML = `
             <div class="quote-modal-overlay" id="quoteModalOverlay">
                 <div class="quote-modal">
@@ -361,58 +567,143 @@
                         <p>Fill in your vehicle details for an instant quote</p>
                     </div>
 
+                    <!-- Step Progress Indicator -->
+                    <div class="step-progress" id="modalStepProgress">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Route</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Vehicle</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Quote</div>
+                        </div>
+                    </div>
+
                     <form class="quote-form" id="quoteForm">
                         <div class="quote-error-message" id="quoteErrorMessage"></div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="quoteName"><i class="fas fa-user"></i> Full Name</label>
-                                <input type="text" id="quoteName" name="name" required placeholder="Your name">
+                        <!-- Step 1: Route -->
+                        <div class="form-step active" data-step="1" id="modalStep1">
+                            <div class="form-group floating-label">
+                                <input type="text" id="modalFromCity" required autocomplete="off" />
+                                <label for="modalFromCity"><i class="fas fa-map-marker-alt"></i> Pickup City</label>
+                                <div class="autocomplete-dropdown" id="modalFromCityDropdown"></div>
                             </div>
-                            <div class="form-group">
-                                <label for="quotePhone"><i class="fas fa-phone"></i> Phone</label>
-                                <input type="tel" id="quotePhone" name="phone" required placeholder="10-digit number">
+                            <div class="form-group floating-label">
+                                <input type="text" id="modalToCity" required autocomplete="off" />
+                                <label for="modalToCity"><i class="fas fa-flag-checkered"></i> Drop City</label>
+                                <div class="autocomplete-dropdown" id="modalToCityDropdown"></div>
                             </div>
+                            <div class="distance-display" id="modalDistanceDisplay">
+                                <i class="fas fa-route"></i>
+                                <span>Distance: <strong id="modalDistanceValue">---</strong></span>
+                            </div>
+                            <button type="button" class="quote-next" id="modalStep1Next">
+                                <span>Next</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
                         </div>
 
-                        <div class="form-group full-width">
-                            <label for="quoteEmail"><i class="fas fa-envelope"></i> Email</label>
-                            <input type="email" id="quoteEmail" name="email" required placeholder="your@email.com">
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="quoteVehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
-                                <select id="quoteVehicleType" name="vehicleType" required>
-                                    <option value="">Select Vehicle Type</option>
+                        <!-- Step 2: Vehicle Type & Contact -->
+                        <div class="form-step" data-step="2" id="modalStep2">
+                            <div class="form-group floating-label">
+                                <select id="modalVehicleType" required>
+                                    <option value=""></option>
                                     <option value="hatchback">Hatchback</option>
                                     <option value="sedan">Sedan</option>
                                     <option value="suv">SUV</option>
                                     <option value="luxury">Luxury Car</option>
-                                    <option value="bike">Motorcycle</option>
-                                    <option value="commercial">Commercial Vehicle</option>
                                 </select>
+                                <label for="modalVehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
                             </div>
-                            <div class="form-group">
-                                <label for="quoteDistance"><i class="fas fa-road"></i> Approx. Distance (km)</label>
-                                <input type="number" id="quoteDistance" name="distance" required placeholder="e.g., 500">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="quoteName"><i class="fas fa-user"></i> Full Name</label>
+                                    <input type="text" id="quoteName" name="name" placeholder="Your name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="quotePhone"><i class="fas fa-phone"></i> Phone</label>
+                                    <input type="tel" id="quotePhone" name="phone" placeholder="10-digit number">
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="quoteEmail"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="quoteEmail" name="email" placeholder="your@email.com">
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="quote-form-back-btn" id="modalStep2Back">
+                                    <i class="fas fa-arrow-left"></i>
+                                    <span>Back</span>
+                                </button>
+                                <button type="submit" class="quote-form-submit-btn">
+                                    <span>Calculate Price</span>
+                                    <i class="fas fa-calculator"></i>
+                                </button>
                             </div>
                         </div>
 
-                        <div class="form-group full-width">
-                            <label for="quoteRoute"><i class="fas fa-map-marker-alt"></i> Route (Pickup to Drop)</label>
-                            <input type="text" id="quoteRoute" name="route" required placeholder="e.g., Delhi to Mumbai">
-                        </div>
+                        <!-- Step 3: Result -->
+                        <div class="form-step" data-step="3" id="modalStep3">
+                            <div class="quote-result" id="modalQuoteResult">
+                                <div class="result-details">
+                                    <div class="result-row">
+                                        <span class="result-label">Route:</span>
+                                        <span class="result-value" id="modalResultRoute">---</span>
+                                    </div>
+                                    <div class="result-row">
+                                        <span class="result-label">Distance:</span>
+                                        <span class="result-value" id="modalResultDistance">---</span>
+                                    </div>
+                                    <div class="result-row">
+                                        <span class="result-label">Vehicle:</span>
+                                        <span class="result-value" id="modalResultVehicle">---</span>
+                                    </div>
+                                </div>
 
-                        <div class="form-group full-width">
-                            <label for="quoteNotes"><i class="fas fa-comment"></i> Additional Notes</label>
-                            <textarea id="quoteNotes" name="notes" placeholder="Any special requirements..."></textarea>
-                        </div>
+                                <!-- Estimated Delivery Time -->
+                                <div class="delivery-time-display" id="modalDeliveryTimeDisplay">
+                                    <i class="fas fa-clock"></i>
+                                    <div class="time-info">
+                                        <span class="time-label">Estimated Delivery</span>
+                                        <span class="time-value" id="modalDeliveryTime">---</span>
+                                    </div>
+                                </div>
 
-                        <button type="submit" class="quote-modal-submit" id="quoteSubmitBtn">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>Get Instant Quote</span>
-                        </button>
+                                <!-- Compare Prices Section -->
+                                <div class="compare-prices-section" id="modalComparePricesSection" style="display: none;">
+                                    <div class="compare-prices-header">
+                                        <h4><i class="fas fa-layer-group"></i> Transport Options</h4>
+                                    </div>
+                                    <div class="price-options" id="modalPriceOptions">
+                                        <!-- Price options will be dynamically inserted here -->
+                                    </div>
+                                </div>
+
+                                <div class="result-price">
+                                    <span class="label">Estimated Cost</span>
+                                    <span class="amount" id="modalResultAmount">₹0</span>
+                                </div>
+                                <div class="result-actions">
+                                    <button type="button" class="quote-result-book-btn" id="modalBookNowBtn">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Book Now</span>
+                                    </button>
+                                    <button type="button" class="quote-save-later-btn" id="modalSaveLaterBtn">
+                                        <i class="fas fa-bookmark"></i>
+                                        <span>Save for Later</span>
+                                    </button>
+                                    <button type="button" class="quote-result-reset-btn" id="modalResetQuote">
+                                        <i class="fas fa-redo"></i> New Quote
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
 
                     <div class="quote-success-message" id="quoteSuccessMessage">
@@ -434,6 +725,9 @@
         const closeBtn = document.getElementById('quoteModalClose');
         const form = document.getElementById('quoteForm');
 
+        // Initialize modal form functionality
+        initModalForm();
+
         // Event listeners
         closeBtn.addEventListener('click', closeQuoteModal);
         modal.addEventListener('click', function (e) {
@@ -450,28 +744,351 @@
     }
 
     /**
+     * Initialize Modal Form - Enhanced functionality for modal version
+     */
+    function initModalForm() {
+        let modalStep = 1;
+        let modalSelectedFromCity = '';
+        let modalSelectedToCity = '';
+        let modalQuoteData = null;
+
+        const modalFromCity = document.getElementById('modalFromCity');
+        const modalToCity = document.getElementById('modalToCity');
+        const modalVehicleType = document.getElementById('modalVehicleType');
+        const modalStep1Next = document.getElementById('modalStep1Next');
+        const modalStep2Back = document.getElementById('modalStep2Back');
+        const modalResetBtn = document.getElementById('modalResetQuote');
+        const modalBookNowBtn = document.getElementById('modalBookNowBtn');
+        const modalSaveLaterBtn = document.getElementById('modalSaveLaterBtn');
+
+        // Setup autocomplete for modal
+        if (modalFromCity) setupAutocomplete(modalFromCity, 'modalFromCityDropdown');
+        if (modalToCity) setupAutocomplete(modalToCity, 'modalToCityDropdown');
+
+        // Update distance when cities change
+        if (modalFromCity) {
+            modalFromCity.addEventListener('input', () => updateModalDistance());
+        }
+        if (modalToCity) {
+            modalToCity.addEventListener('input', () => updateModalDistance());
+        }
+
+        // Handle select focus for floating label
+        if (modalVehicleType) {
+            modalVehicleType.addEventListener('change', function() {
+                if (this.value) {
+                    this.setAttribute('value', this.value);
+                } else {
+                    this.removeAttribute('value');
+                }
+            });
+        }
+
+        // Step navigation
+        if (modalStep1Next) {
+            modalStep1Next.addEventListener('click', () => {
+                const fromCity = modalFromCity.value.trim();
+                const toCity = modalToCity.value.trim();
+
+                if (!fromCity || !toCity) {
+                    alert('Please select both pickup and drop cities');
+                    return;
+                }
+
+                if (fromCity === toCity) {
+                    alert('Pickup and drop cities cannot be the same');
+                    return;
+                }
+
+                modalSelectedFromCity = fromCity;
+                modalSelectedToCity = toCity;
+                goToModalStep(2);
+            });
+        }
+
+        if (modalStep2Back) {
+            modalStep2Back.addEventListener('click', () => goToModalStep(1));
+        }
+
+        if (modalResetBtn) {
+            modalResetBtn.addEventListener('click', () => {
+                document.getElementById('quoteForm').reset();
+                modalFromCity.value = '';
+                modalToCity.value = '';
+                modalVehicleType.value = '';
+                modalVehicleType.removeAttribute('value');
+                document.getElementById('modalDistanceValue').textContent = '---';
+                document.getElementById('modalDeliveryTime').textContent = '---';
+                
+                const comparePricesSection = document.getElementById('modalComparePricesSection');
+                if (comparePricesSection) {
+                    comparePricesSection.style.display = 'none';
+                }
+                
+                modalSelectedFromCity = '';
+                modalSelectedToCity = '';
+                modalQuoteData = null;
+                goToModalStep(1);
+            });
+        }
+
+        if (modalBookNowBtn) {
+            modalBookNowBtn.addEventListener('click', () => {
+                const confirmed = confirm(
+                    `🚗 Booking Summary\\n\\n` +
+                    `Route: ${modalSelectedFromCity} → ${modalSelectedToCity}\\n` +
+                    `Vehicle: ${modalVehicleType.value.charAt(0).toUpperCase() + modalVehicleType.value.slice(1)}\\n` +
+                    `Estimated Cost: ${document.getElementById('modalResultAmount').textContent}\\n\\n` +
+                    `Would you like to proceed to the booking page?`
+                );
+                
+                if (confirmed) {
+                    window.location.href = './pages/booking.html';
+                }
+            });
+        }
+
+        if (modalSaveLaterBtn) {
+            modalSaveLaterBtn.addEventListener('click', () => {
+                if (!modalQuoteData) return;
+
+                let savedQuotes = JSON.parse(localStorage.getItem('savedQuotes') || '[]');
+                const quoteToSave = {
+                    ...modalQuoteData,
+                    savedAt: new Date().toISOString(),
+                    id: Date.now()
+                };
+                
+                savedQuotes.push(quoteToSave);
+                if (savedQuotes.length > 10) {
+                    savedQuotes = savedQuotes.slice(-10);
+                }
+                
+                localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+                
+                modalSaveLaterBtn.classList.add('saved');
+                modalSaveLaterBtn.innerHTML = '<i class="fas fa-check"></i><span>Saved!</span>';
+                
+                showNotification('Quote saved successfully!', 'success');
+                
+                setTimeout(() => {
+                    modalSaveLaterBtn.classList.remove('saved');
+                    modalSaveLaterBtn.innerHTML = '<i class="fas fa-bookmark"></i><span>Save for Later</span>';
+                }, 3000);
+            });
+        }
+
+        function updateModalDistance() {
+            const fromCity = modalFromCity.value.trim();
+            const toCity = modalToCity.value.trim();
+            const distanceValue = document.getElementById('modalDistanceValue');
+
+            if (!fromCity || !toCity) {
+                distanceValue.textContent = '---';
+                return;
+            }
+
+            if (fromCity.toLowerCase() === toCity.toLowerCase()) {
+                distanceValue.textContent = 'Same city!';
+                distanceValue.style.color = '#ef4444';
+                return;
+            }
+
+            const distance = calculateDistance(fromCity, toCity);
+            
+            if (distance) {
+                distanceValue.textContent = `${distance} km`;
+                distanceValue.style.color = '#4ade80';
+            } else {
+                const estimatedDistance = Math.floor(Math.random() * 1500) + 300;
+                distanceValue.textContent = `~${estimatedDistance} km (estimated)`;
+                distanceValue.style.color = '#fbbf24';
+            }
+        }
+
+        function goToModalStep(step) {
+            modalStep = step;
+
+            console.log('Going to modal step:', step);
+
+            // Update step indicators in modal
+            const modalSteps = document.querySelectorAll('#modalStepProgress .step');
+            modalSteps.forEach((el, index) => {
+                el.classList.remove('active', 'completed');
+                if (index + 1 < step) {
+                    el.classList.add('completed');
+                } else if (index + 1 === step) {
+                    el.classList.add('active');
+                }
+            });
+
+            // Update form steps in modal
+            const modalFormSteps = document.querySelectorAll('#quoteForm .form-step');
+            console.log('Modal form steps found:', modalFormSteps.length);
+            
+            modalFormSteps.forEach((el) => {
+                el.classList.remove('active');
+                const elStep = parseInt(el.dataset.step);
+                console.log('Form step data-step:', elStep, 'target step:', step);
+                if (elStep === step) {
+                    el.classList.add('active');
+                    el.style.display = 'block';
+                    console.log('Activated step', elStep);
+                }
+            });
+        }
+
+        // Store functions for modal quote calculation
+        window.calculateModalQuote = function() {
+            const vehicleType = modalVehicleType.value;
+            const fromCity = modalSelectedFromCity;
+            const toCity = modalSelectedToCity;
+
+            console.log('Calculating modal quote:', { vehicleType, fromCity, toCity });
+
+            if (!vehicleType) {
+                alert('Please select a vehicle type');
+                return;
+            }
+
+            const distance = calculateDistance(fromCity, toCity) || Math.floor(Math.random() * 1500) + 300;
+            const rate = pricingRates[vehicleType];
+            const basePrice = distance * rate;
+            const estimatedPrice = Math.round(basePrice);
+            const deliveryTime = calculateDeliveryTime(distance);
+
+            console.log('Quote calculated:', { distance, estimatedPrice, deliveryTime });
+
+            // Update result display
+            document.getElementById('modalResultRoute').textContent = `${fromCity} → ${toCity}`;
+            document.getElementById('modalResultDistance').textContent = `${distance} km`;
+            document.getElementById('modalResultVehicle').textContent = vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1);
+            document.getElementById('modalResultAmount').textContent = `₹${estimatedPrice.toLocaleString('en-IN')}`;
+            document.getElementById('modalDeliveryTime').textContent = deliveryTime;
+
+            // Store modal quote data
+            modalQuoteData = {
+                fromCity,
+                toCity,
+                distance,
+                vehicleType,
+                price: estimatedPrice,
+                deliveryTime,
+                selectedOption: 'Standard'
+            };
+
+            // Display compare prices
+            displayModalComparePrices(vehicleType, distance);
+
+            // Go to result step
+            console.log('Moving to step 3');
+            goToModalStep(3);
+        };
+
+        function displayModalComparePrices(vehicleType, distance) {
+            const comparePricesSection = document.getElementById('modalComparePricesSection');
+            const priceOptions = document.getElementById('modalPriceOptions');
+            
+            if (!transportOptions[vehicleType]) {
+                comparePricesSection.style.display = 'none';
+                return;
+            }
+            
+            const options = transportOptions[vehicleType];
+            
+            priceOptions.innerHTML = options.map((option, index) => {
+                const price = Math.round(option.rate * distance);
+                return `
+                    <div class="price-option ${option.bestValue ? 'best-value' : ''}" data-option-index="${index}">
+                        <div class="price-option-info">
+                            <div class="price-option-name">${option.name}</div>
+                            <div class="price-option-details">
+                                <i class="fas fa-clock"></i> ${option.deliveryDays} days • ${option.description}
+                            </div>
+                        </div>
+                        <div class="price-option-amount">₹${price.toLocaleString('en-IN')}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            comparePricesSection.style.display = 'block';
+            
+            document.querySelectorAll('#modalPriceOptions .price-option').forEach((option, index) => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('#modalPriceOptions .price-option').forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    
+                    const selectedOption = options[index];
+                    const price = Math.round(selectedOption.rate * distance);
+                    document.getElementById('modalResultAmount').textContent = `₹${price.toLocaleString('en-IN')}`;
+                    document.getElementById('modalDeliveryTime').textContent = selectedOption.deliveryDays + ' days';
+                    
+                    if (modalQuoteData) {
+                        modalQuoteData.selectedOption = selectedOption.name;
+                        modalQuoteData.price = price;
+                        modalQuoteData.deliveryTime = selectedOption.deliveryDays + ' days';
+                    }
+                });
+            });
+        }
+    }
+
+    /**
      * Open Quote Modal
      */
     function openQuoteModal() {
         const modal = document.getElementById('quoteModalOverlay');
         const form = document.getElementById('quoteForm');
-        const successMessage = document.getElementById('quoteSuccessMessage');
 
         // Reset form
-        form.reset();
-        form.style.display = 'block';
-        successMessage.classList.remove('active');
+        if (form) {
+            form.reset();
+            
+            // Reset modal fields
+            const modalFromCity = document.getElementById('modalFromCity');
+            const modalToCity = document.getElementById('modalToCity');
+            const modalVehicleType = document.getElementById('modalVehicleType');
+            
+            if (modalFromCity) modalFromCity.value = '';
+            if (modalToCity) modalToCity.value = '';
+            if (modalVehicleType) {
+                modalVehicleType.value = '';
+                modalVehicleType.removeAttribute('value');
+            }
+            
+            const modalDistanceValue = document.getElementById('modalDistanceValue');
+            if (modalDistanceValue) modalDistanceValue.textContent = '---';
+            
+            // Reset to step 1
+            const modalSteps = document.querySelectorAll('#modalStepProgress .step');
+            modalSteps.forEach((el, index) => {
+                el.classList.remove('active', 'completed');
+                if (index === 0) {
+                    el.classList.add('active');
+                }
+            });
+
+            const modalFormSteps = document.querySelectorAll('#quoteForm .form-step');
+            modalFormSteps.forEach((el) => {
+                el.classList.remove('active');
+                if (el.dataset.step === '1') {
+                    el.classList.add('active');
+                }
+            });
+        }
 
         // Show modal
-        modal.classList.add('active');
+        if (modal) {
+            modal.classList.add('active');
 
-        // Focus on first input
-        setTimeout(() => {
-            const firstInput = form.querySelector('input, select, textarea');
-            if (firstInput) {
-                firstInput.focus();
-            }
-        }, 300);
+            // Focus on first input
+            setTimeout(() => {
+                const firstInput = document.getElementById('modalFromCity');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }, 300);
+        }
 
         console.log('Quote modal opened');
     }
@@ -492,47 +1109,10 @@
         e.preventDefault();
         e.stopPropagation();
 
-        const form = document.getElementById('quoteForm');
-        const submitBtn = document.getElementById('quoteSubmitBtn');
-        const errorMessage = document.getElementById('quoteErrorMessage');
-        const successMessage = document.getElementById('quoteSuccessMessage');
-
-        // Validate form
-        if (!form.checkValidity()) {
-            errorMessage.textContent = 'Please fill in all required fields correctly';
-            errorMessage.classList.add('active');
-            return;
+        // Check if we're in modal and calculate quote
+        if (typeof window.calculateModalQuote === 'function') {
+            window.calculateModalQuote();
         }
-
-        errorMessage.classList.remove('active');
-
-        // Get form data
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-
-        console.log('Quote form submitted:', data);
-
-        // Disable submit button
-        submitBtn.disabled = true;
-        submitBtn.classList.add('loading');
-
-        // Simulate API call (you can replace with actual API endpoint)
-        setTimeout(() => {
-            // Here you would send data to your backend
-            // For now, we'll just show success message
-
-            form.style.display = 'none';
-            successMessage.classList.add('active');
-
-            // Re-enable button
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('loading');
-
-            // Close modal after 3 seconds
-            setTimeout(() => {
-                closeQuoteModal();
-            }, 3000);
-        }, 1500);
     }
 
     /**
