@@ -1,11 +1,11 @@
-// Navbar Loader Module - Statically loads navbar on all pages (works with file:// protocol)
+// Navbar Loader Module - Dynamically loads navbar component on all pages
 (function () {
   'use strict';
 
   /**
-   * Loads the navbar HTML into the page
+   * Loads the navbar HTML into the page from components/navbar.html
    */
-  function loadNavbar() {
+  async function loadNavbar() {
     const navbarContainer = document.getElementById('navbar-container');
     
     if (!navbarContainer) {
@@ -16,353 +16,48 @@
     // Determine the correct path based on current location
     const path = window.location.pathname;
     const isInPagesFolder = path.includes('/pages/');
-    
-    // Get the navbar HTML template
-    const navbarHTML = getNavbarHTML();
-    
-    // Insert the HTML
-    navbarContainer.innerHTML = navbarHTML;
-    
-    // Fix paths for root pages
-    if (!isInPagesFolder) {
-      fixPathsForRootPage(navbarContainer);
+    const base = isInPagesFolder ? '..' : '.';
+
+    // Fetch the navbar component
+    const navbarUrl = `${base}/components/navbar.html?v=${Date.now()}`;
+    try {
+      const res = await fetch(navbarUrl, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Failed to fetch navbar: ${res.status}`);
+      const navbarHTML = await res.text();
+
+      // Insert the HTML
+      navbarContainer.innerHTML = navbarHTML;
+
+      // Ensure navbar CSS is loaded from <head>
+      ensureNavbarCss(base);
+
+      // Remove any CSS link tags left inside the container to avoid duplicates
+      navbarContainer.querySelectorAll('link[rel="stylesheet"]').forEach(l => {
+        const href = l.getAttribute('href') || '';
+        if (href.includes('css/components/navbar.css')) {
+          l.parentElement && l.parentElement.removeChild(l);
+        }
+      });
+
+      // Fix paths for root pages
+      if (!isInPagesFolder) {
+        fixPathsForRootPage(navbarContainer);
+      }
+
+      // Initialize navbar functionality after loading
+      initializeNavbar();
+
+      // Set active link
+      setActiveLink();
+
+      // Ensure digital clock exists on pages that don't include it directly
+      ensureClock(base);
+    } catch (err) {
+      console.error(err);
     }
-    
-    // Initialize navbar functionality after loading
-    initializeNavbar();
-    
-    // Set active link
-    setActiveLink();
   }
 
-  /**
-   * Returns the navbar HTML template
-   */
-  function getNavbarHTML() {
-    return `<link rel="stylesheet" href="../css/components/navbar.css">
-<header class="header">
-  <div class="navbar-container">
-    <div class="navbar">
-      <!-- Left Logo -->
-      <div class="logo-container left-logo">
-        <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
-      </div>
-
-      <!-- Desktop Navigation -->
-      <nav class="desktop-nav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="../index.html" class="nav-link" data-page="home" data-tooltip="Home">
-              <i class="fas fa-home"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../pages/about.html" class="nav-link" data-page="about" data-tooltip="About">
-              <i class="fas fa-info-circle"></i>
-              <span>About</span>
-            </a>
-          </li>
-
-          <!-- Dropdown for services -->
-          <li class="nav-item dropdown-nav" data-dropdown>
-
-            <div class="nav-link" data-dropdown-btn>
-              <i class="fas fa-truck-moving"></i>
-              <span>Services</span>
-              <i class="fa-solid fa-caret-down"></i>
-            </div>
-
-            <div class="dropdown-menu">
-              <ul style="list-style-type: none;">
-                <li class="nav-item">
-                  <a href="../services.html" class="nav-link" data-page="services" data-tooltip="Services">
-                    <i class="fas fa-truck-moving"></i>
-                    <span>Our Services</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../pages/how-it-works.html" class="nav-link" data-page="how-it-works" data-tooltip="How It Works">
-                    <i class="fas fa-tasks"></i>
-                    <span>How It Works</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
-                    <i class="fas fa-calendar-check"></i>
-                    <span>Booking</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../pages/pricing.html" class="nav-link" data-page="pricing" data-tooltip="Pricing">
-                    <i class="fas fa-tags"></i>
-                    <span>Pricing</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../pages/pricing-calculator.html" class="nav-link" data-page="pricing-calculator" data-tooltip="Pricing Calculator">
-                    <i class="fas fa-calculator"></i>
-                    <span>Pricing Calculator</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../pages/tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Track Your Car</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../pages/emergency-support.html" class="nav-link" data-page="emergency-support" data-tooltip="Emergency Support">
-                    <i class="fas fa-life-ring"></i>
-                    <span>Emergency Support</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-          </li>
-
-          <li class="nav-item">
-            <a href="../pages/contact.html" class="nav-link" data-page="contact" data-tooltip="Contact">
-              <i class="fas fa-phone"></i>
-              <span>Contact</span>
-            </a>
-          </li>
-
-          <li class="nav-item dropdown-nav" data-dropdown>
-            <div class="nav-link" data-dropdown-btn>
-              <i class="fa-solid fa-layer-group"></i>
-              <span>More</span>
-              <i class="fa-solid fa-caret-down"></i>
-            </div>
-
-            <div class="dropdown-menu">
-              <ul style="list-style-type: none;">
-                <li>
-                  <a href="../pages/gallery.html" class="nav-link" data-page="gallery" data-tooltip="Gallery">
-                    <i class="fas fa-images"></i>
-                    <span>Gallery</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/contributors.html" class="nav-link" data-page="contributors"
-                    data-tooltip="Contributors">
-                    <i class="fas fa-users"></i>
-                    <span>Contributors</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/careers.html" class="nav-link" data-page="careers" data-tooltip="Careers">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Careers</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/press-media.html" class="nav-link" data-page="press-media" data-tooltip="Press & Media">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Press & Media</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/blog.html" class="nav-link blog-link" data-tooltip="Blog">
-                    <i class="fas fa-blog"></i>
-                    <span>Blog</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-          </li>
-        </ul>
-
-        <!-- creating a div for left align navigation links  -->
-        <div class="nav-right-section">
-          <!-- Search Bar -->
-          <div class="search-container">
-            <div class="search-bar">
-              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services">
-              <i class="fas fa-search"></i>
-            </div>
-          </div>
-
-          <div class="action-nav">
-            <a href="../pages/enquiry.html" class="enquiry-link" data-tooltip="Enquiry">
-              <i class="fas fa-question-circle"></i>
-            </a>
-          </div>
-        </div>
-
-
-        <div class="nav-actions">
-          <a href="../pages/login.html" class="login-btn" data-tooltip="Login">
-            <i class="fas fa-user"></i>
-            <span>Login</span>
-          </a>
-        </div>
-      </nav>
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile Navigation -->
-  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-    <div class="mobile-nav-header">
-      <div class="mobile-logo">
-        <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-        <span>Harihar Car Carriers</span>
-      </div>
-      <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-
-    <!-- Mobile Search Bar -->
-    <div class="mobile-search-container">
-      <div class="mobile-search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services">
-      </div>
-    </div>
-
-    <ul class="mobile-nav-list">
-      <li class="mobile-nav-item">
-        <a href="../index.html" class="mobile-nav-link">
-          <i class="fas fa-home"></i>
-          <span>Home</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/about.html" class="mobile-nav-link">
-          <i class="fas fa-info-circle"></i>
-          <span>About</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../services.html" class="mobile-nav-link">
-          <i class="fas fa-truck-moving"></i>
-          <span>Services</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/how-it-works.html" class="mobile-nav-link">
-          <i class="fas fa-tasks"></i>
-          <span>How It Works</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/booking.html" class="mobile-nav-link">
-          <i class="fas fa-calendar-check"></i>
-          <span>Booking</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/contributors.html" class="mobile-nav-link">
-          <i class="fas fa-users"></i>
-          <span>Contributors</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/pricing.html" class="mobile-nav-link">
-          <i class="fas fa-tags"></i>
-          <span>Pricing</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/pricing-calculator.html" class="mobile-nav-link">
-          <i class="fas fa-calculator"></i>
-          <span>Pricing Calculator</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/tracking.html" class="mobile-nav-link">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Track Your Car</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/gallery.html" class="mobile-nav-link">
-          <i class="fas fa-images"></i>
-          <span>Gallery</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/contact.html" class="mobile-nav-link">
-          <i class="fas fa-phone"></i>
-          <span>Contact</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/emergency-support.html" class="mobile-nav-link">
-          <i class="fas fa-life-ring"></i>
-          <span>Emergency Support</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/careers.html" class="mobile-nav-link">
-          <i class="fas fa-briefcase"></i>
-          <span>Careers</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/press-media.html" class="mobile-nav-link">
-          <i class="fas fa-newspaper"></i>
-          <span>Press & Media</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/enquiry.html" class="mobile-nav-link">
-          <i class="fas fa-question-circle"></i>
-          <span>Enquiry</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/blog.html" class="mobile-nav-link">
-          <i class="fas fa-blog"></i>
-          <span>Blog</span>
-        </a>
-      </li>
-    </ul>
-    <div class="mobile-nav-actions">
-      <a href="../pages/login.html" class="mobile-login-btn">
-        <i class="fas fa-user"></i>
-        <span>Login</span>
-      </a>
-      <a href="../pages/booking.html" class="mobile-cta-btn">
-        <i class="fas fa-truck"></i>
-        <span>Book Instantly</span>
-      </a>
-    </div>
-    <div class="mobile-contact-info">
-      <div class="contact-item">
-        <i class="fas fa-phone"></i>
-        <span>+91 98765 43210</span>
-      </div>
-      <div class="contact-item">
-        <i class="fas fa-envelope"></i>
-        <span>info@hariharcarcarriers.com</span>
-      </div>
-      <div class="contact-item">
-        <i class="fas fa-clock"></i>
-        <span>24/7 Support</span>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Navigation Overlay -->
-  <div class="nav-overlay" id="navOverlay"></div>
-</header>
-
-<!-- Digital Clock (Fixed Top-Right) -->
-<link rel="stylesheet" href="../css/components/digital-clock.css">
-<div id="mac-clock">
-  <span id="clock-full"></span>
-</div>`;
-  }
+  // Removed static HTML template to eliminate duplication with components/navbar.html
 
   /**
    * Fixes paths in navbar for root-level pages (index.html, services.html)
@@ -387,13 +82,12 @@
     });
 
     // Fix CSS link path
-    const cssLink = container.querySelector('link[href]');
-    if (cssLink) {
+    container.querySelectorAll('link[href]').forEach(cssLink => {
       const currentHref = cssLink.getAttribute('href');
       if (currentHref && currentHref.startsWith('../')) {
-        cssLink.setAttribute('href', currentHref.replace(/^\.\.\//, './'));
+        cssLink.setAttribute('href', currentHref.replace(/^\.{2}\//, './'));
       }
-    }
+    });
   }
 
   /**
@@ -445,8 +139,11 @@
 
       let currentdropdown;
       if (isDropdownButton) {
+        e.preventDefault();
+        e.stopPropagation();
         currentdropdown = e.target.closest('[data-dropdown]');
         currentdropdown.classList.toggle('active');
+        console.log('Dropdown toggled:', currentdropdown.classList.contains('active') ? 'open' : 'closed');
       }
 
       // close all already opened dropdown
@@ -508,9 +205,31 @@
   }
 
   /**
-   * Initialize digital clock
+   * Ensure digital clock exists and is running if not present on page
    */
-  function initializeClock() {
+  function ensureClock(basePath) {
+    const existingClock = document.getElementById('mac-clock');
+    if (existingClock) return; // Page already has a clock
+
+    // Add CSS for clock if not already present
+    const existingLink = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+      .some(l => (l.getAttribute('href') || '').includes('digital-clock.css'));
+    if (!existingLink) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `${basePath}/css/components/digital-clock.css`;
+      document.head.appendChild(link);
+    }
+
+    // Add clock markup
+    const clock = document.createElement('div');
+    clock.id = 'mac-clock';
+    const span = document.createElement('span');
+    span.id = 'clock-full';
+    clock.appendChild(span);
+    document.body.appendChild(clock);
+
+    // Start clock updates
     function updateClock() {
       const clockFull = document.getElementById('clock-full');
 
@@ -539,15 +258,24 @@
     }, 100);
   }
 
+  function ensureNavbarCss(basePath) {
+    const exists = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+      .some(l => ((l.getAttribute('href') || '').includes('css/components/navbar.css')));
+    if (!exists) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `${basePath}/css/components/navbar.css`;
+      document.head.appendChild(link);
+    }
+  }
+
   // Load navbar when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       loadNavbar();
-      initializeClock();
     });
   } else {
     loadNavbar();
-    initializeClock();
   }
 
 })();

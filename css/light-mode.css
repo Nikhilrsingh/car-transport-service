@@ -4,7 +4,14 @@
   --footer-bg: #f6f6f6;
   --footer-text: #222222;
   --accent: #ff6b3d;
-  --glass-opacity: 0.85; /* not used if you don't want glass */
+  --glass-opacity: 0.85;
+}
+
+/* Light Mode Color Palette Override */
+body[data-theme="light"] {
+  --color-text-primary: #000000;
+  --color-text-secondary: #2d2d2d;
+  --color-text-muted: #555555;
 }
 
 /* global overrides */
@@ -17,5 +24,156 @@ body {
 .footer {
   background: var(--footer-bg);
   color: var(--footer-text);
+}
+
+/* Hero Section - Light overlay for dark text visibility */
+.hero-overlay {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 99, 71, 0.15) 50%,
+      rgba(255, 255, 255, 0.8) 100%) !important;
+}
+
+/* Dark text for light theme */
+.hero-title,
+.title-line {
+  color: #1a1a1a !important;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5) !important;
+}
+
+.hero-description {
+  color: #2d2d2d !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+.hero-badge {
+  color: #1a1a1a !important;
+  background: rgba(255, 99, 71, 0.15) !important;
+  border-color: rgba(255, 99, 71, 0.4) !important;
+}
+
+.stat-number {
+  color: #ff6347 !important;
+}
+
+.stat-label {
+  color: #333 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Keep gradient on highlighted title */
+.title-line.highlight {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: slideInLeft 0.8s ease-out 0.2s !important;
+  filter: none !important;
+}
+
+/* Contact CTA Section */
+.contact-cta {
+  background: #ffffff;
+}
+
+.cta-text h2 {
+  color: #1a1a1a !important;
+}
+
+.cta-text p {
+  color: #2d2d2d !important;
+}
+
+.feature span {
+  color: #1a1a1a !important;
+}
+
+/* Features Section */
+.features {
+  background: #ffffff;
+}
+
+.section-title,
+.features .section-title {
+  color: #df0808 !important;
+}
+
+.h1 {
+  color: #000 !important;
+}
+
+.feature-box {
+  background: #fff;
+  border-color: #ddd;
+}
+
+.feature-box h3 {
+  color: #000 !important;
+}
+
+.feature-box p {
+  color: #555 !important;
+}
+
+/* Hero Action Buttons - Improved contrast for light theme */
+.hero-actions .cta-btn.primary {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 10px 30px rgba(255, 99, 71, 0.4) !important;
+  border: 2px solid transparent !important;
+}
+
+.hero-actions .cta-btn.primary:hover {
+  background: linear-gradient(135deg, #ff4500, #e63900) !important;
+  box-shadow: 0 15px 40px rgba(255, 99, 71, 0.5) !important;
+  border-color: rgba(255, 99, 71, 0.3) !important;
+}
+
+.hero-actions .cta-btn.secondary {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 2px solid #d0d0d0 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.hero-actions .cta-btn.secondary:hover {
+  background: #f5f5f5 !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.hero-actions .cta-btn.outline {
+  color: #ff6347 !important;
+  border-color: #ff6347 !important;
+  border-width: 2px !important;
+  background: transparent !important;
+}
+
+.hero-actions .cta-btn.outline:hover {
+  background: #ff6347 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3) !important;
+}
+
+/* Testimonials intro paragraph on light background */
+body[data-theme="light"] .testimonials-section .section-title p {
+  color: #2d2d2d !important;
+}
+
+/* Footer text contrast in light theme */
+body[data-theme="light"] .footer,
+body[data-theme="light"] #footer-container .footer {
+  color: #222222 !important;
+}
+body[data-theme="light"] .footer .footer-about p,
+body[data-theme="light"] .footer .footer-links a,
+body[data-theme="light"] .footer .contact-info li,
+body[data-theme="light"] .footer .footer-bottom-content,
+body[data-theme="light"] .footer .footer-bottom-content .copyright,
+body[data-theme="light"] .footer .footer-bottom-links a,
+body[data-theme="light"] .footer .payment-methods i,
+body[data-theme="light"] .footer .footer-brand {
+  color: #333333 !important;
 }
 
