@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore Harihar Car Carriers' network of offices across India. Fast coordination, reliable service, and seamless customer support.">
+    <meta name="description"
+        content="Explore Harihar Car Carriers' network of offices across India. Fast coordination, reliable service, and seamless customer support.">
     <title>Our Network - Car Transport Service</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/components/header.css">
-    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <!-- Loading Indicators CSS -->
+    <link rel="stylesheet" href="../css/components/loading-indicators.css" />
     <link rel="stylesheet" href="../css/components/footer.css">
     <link rel="stylesheet" href="../css/components/network.css">
     <link rel="stylesheet" href="../css/components/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <div id="navbar-container"></div>
@@ -31,25 +36,28 @@
     <section class="coverage-section">
         <div class="container">
             <h2 class="section-title fade-in">Pan-India Coverage</h2>
-            <p class="section-subtitle fade-in fade-in-delay-1">Our network ensures faster coordination, better coverage, and reliable service</p>
-            
+            <p class="section-subtitle fade-in fade-in-delay-1">Our network ensures faster coordination, better
+                coverage, and reliable service</p>
+
             <div class="coverage-grid">
                 <div class="coverage-card fade-in fade-in-delay-1">
                     <div class="coverage-icon">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
                     <h3>50+ Cities</h3>
-                    <p>Extensive network covering all major cities and regions across India for seamless connectivity.</p>
+                    <p>Extensive network covering all major cities and regions across India for seamless connectivity.
+                    </p>
                 </div>
-                
+
                 <div class="coverage-card fade-in fade-in-delay-2">
                     <div class="coverage-icon">
                         <i class="fas fa-shipping-fast"></i>
                     </div>
                     <h3>Fast Coordination</h3>
-                    <p>Regional offices enable quick response times and efficient route planning for timely delivery.</p>
+                    <p>Regional offices enable quick response times and efficient route planning for timely delivery.
+                    </p>
                 </div>
-                
+
                 <div class="coverage-card fade-in fade-in-delay-3">
                     <div class="coverage-icon">
                         <i class="fas fa-headset"></i>
@@ -57,13 +65,14 @@
                     <h3>Local Support</h3>
                     <p>Dedicated teams in each region provide personalized service and on-ground assistance.</p>
                 </div>
-                
+
                 <div class="coverage-card fade-in fade-in-delay-4">
                     <div class="coverage-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3>Secure Operations</h3>
-                    <p>Each office follows strict safety protocols ensuring your vehicle's protection throughout transit.</p>
+                    <p>Each office follows strict safety protocols ensuring your vehicle's protection throughout
+                        transit.</p>
                 </div>
             </div>
         </div>
@@ -73,8 +82,9 @@
     <section class="regional-offices" id="offices">
         <div class="container">
             <h2 class="section-title fade-in">Our Regional Offices</h2>
-            <p class="section-subtitle fade-in fade-in-delay-1">Reach out to any of our regional offices. Our dedicated teams are ready to assist you.</p>
-            
+            <p class="section-subtitle fade-in fade-in-delay-1">Reach out to any of our regional offices. Our dedicated
+                teams are ready to assist you.</p>
+
             <div class="offices-grid">
                 <div class="office-card fade-in fade-in-delay-1">
                     <div class="office-header">
@@ -221,24 +231,25 @@
     <section class="network-stats">
         <div class="container">
             <h2 class="section-title fade-in">Our Reach in Numbers</h2>
-            <p class="section-subtitle fade-in fade-in-delay-1">Building India's most trusted car transportation network</p>
-            
+            <p class="section-subtitle fade-in fade-in-delay-1">Building India's most trusted car transportation network
+            </p>
+
             <div class="stats-grid">
                 <div class="stat-item fade-in fade-in-delay-1">
                     <div class="stat-number">6</div>
                     <div class="stat-label">Regional Offices</div>
                 </div>
-                
+
                 <div class="stat-item fade-in fade-in-delay-2">
                     <div class="stat-number">50+</div>
                     <div class="stat-label">Cities Covered</div>
                 </div>
-                
+
                 <div class="stat-item fade-in fade-in-delay-3">
                     <div class="stat-number">5000+</div>
                     <div class="stat-label">Vehicles Transported</div>
                 </div>
-                
+
                 <div class="stat-item fade-in fade-in-delay-4">
                     <div class="stat-number">24/7</div>
                     <div class="stat-label">Customer Support</div>
@@ -251,8 +262,9 @@
     <section class="contact-cta-section">
         <div class="container">
             <h2 class="section-title fade-in">Get in Touch with Our Team</h2>
-            <p class="fade-in fade-in-delay-1">Have questions or need assistance? Our regional teams are here to help you 24/7.</p>
-            
+            <p class="fade-in fade-in-delay-1">Have questions or need assistance? Our regional teams are here to help
+                you 24/7.</p>
+
             <div class="contact-buttons fade-in fade-in-delay-2">
                 <a href="../pages/contact.html" class="contact-btn primary">
                     <i class="fas fa-phone"></i>
@@ -270,8 +282,13 @@
     <div id="footer-container"></div>
 
     <!-- Scripts -->
+    <!-- Loading State Manager - Must load first -->
+    <script src="../js/modules/loading-state-manager.js"></script>
+    <!-- Page Navigation Loader - Must load after loading-state-manager -->
+    <script src="../js/modules/page-navigation-loader.js"></script>
     <script src="../js/modules/navbar-loader.js?v=2"></script>
     <script src="../js/modules/footer.js"></script>
     <script src="../js/modules/scroll-animations.js"></script>
 </body>
+
 </html>

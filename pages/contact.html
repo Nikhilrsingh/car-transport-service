@@ -5,7 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us - Harihar Car Carriers</title>
-  <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/components/loading-indicators.css" />
   <link rel="stylesheet" href="../css/components/footer.css">
   <link rel="stylesheet" href="../css/components/floating-call-button.css">
   <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
@@ -880,6 +882,10 @@
   <div id="footer-container"></div>
 
   <script src="../js/modules/search.js"></script>
+  <!-- Loading State Manager - Must load first -->
+  <script src="../js/modules/loading-state-manager.js"></script>
+  <!-- Page Navigation Loader - Must load after loading-state-manager -->
+  <script src="../js/modules/page-navigation-loader.js"></script>
   <script src="../js/modules/navbar-loader.js?v=2"></script>
 
   <script src="../js/modules/footer-loader.js"></script>
