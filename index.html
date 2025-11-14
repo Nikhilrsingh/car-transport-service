@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="./css/components/digital-clock.css" />
     <link rel="stylesheet" href="./css/components/animations.css" />
     <link rel="stylesheet" href="./css/components/floating-feedback-button.css" />
+    <link rel="stylesheet" href="./css/components/region-enhanced.css" />
+    <link rel="stylesheet" href="./css/components/map-enhancements.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -429,79 +431,8 @@
       </div>
     </section>
 
-    <!-- Region-Wise Presence Section -->
-    <section class="region-section">
-      <h2>Region-Wise Presence</h2>
-      <div class="region-search-container">
-        <input type="text" id="regionSearch" class="region-search" placeholder="Search for a city..." aria-label="Search cities" />
-        <i class="fas fa-search"></i>
-      </div>
-      <div class="region-grid" id="regionGrid">
-        <a href="/pages/city.html?city=agra" class="region-card effect-1">Car Transport in Agra</a>
-        <a href="/pages/city.html?city=ahmedabad" class="region-card effect-2">Car Transport in Ahmedabad</a>
-        <a href="/pages/city.html?city=aizawl" class="region-card effect-3">Car Transport in Aizawl</a>
-        <a href="/pages/city.html?city=aligarh" class="region-card effect-4">Car Transport in Aligarh</a>
-        <a href="/pages/city.html?city=allahabad" class="region-card effect-1">Car Transport in Allahabad</a>
-        <a href="/pages/city.html?city=amritsar" class="region-card effect-2">Car Transport in Amritsar</a>
-        <a href="/pages/city.html?city=aurangabad" class="region-card effect-3">Car Transport in Aurangabad</a>
-        <a href="/pages/city.html?city=bangalore" class="region-card effect-4">Car Transport in Bangalore</a>
-        <a href="/pages/city.html?city=bareilly" class="region-card effect-1">Car Transport in Bareilly</a>
-        <a href="/pages/city.html?city=bhopal" class="region-card effect-2">Car Transport in Bhopal</a>
-        <a href="/pages/city.html?city=bhubaneswar" class="region-card effect-3">Car Transport in Bhubaneswar</a>
-        <a href="/pages/city.html?city=bikaner" class="region-card effect-4">Car Transport in Bikaner</a>
-        <a href="/pages/city.html?city=bilaspur" class="region-card effect-1">Car Transport in Bilaspur</a>
-        <a href="/pages/city.html?city=chandigarh" class="region-card effect-2">Car Transport in Chandigarh</a>
-        <a href="/pages/city.html?city=chennai" class="region-card effect-3">Car Transport in Chennai</a>
-        <a href="/pages/city.html?city=coimbatore" class="region-card effect-4">Car Transport in Coimbatore</a>
-        <a href="/pages/city.html?city=cuttack" class="region-card effect-1">Car Transport in Cuttack</a>
-        <a href="/pages/city.html?city=dehradun" class="region-card effect-2">Car Transport in Dehradun</a>
-        <a href="/pages/city.html?city=delhi" class="region-card effect-3">Car Transport in Delhi</a>
-        <a href="/pages/city.html?city=dhanbad" class="region-card effect-4">Car Transport in Dhanbad</a>
-        <a href="/pages/city.html?city=durgapur" class="region-card effect-1">Car Transport in Durgapur</a>
-        <a href="/pages/city.html?city=faridabad" class="region-card effect-2">Car Transport in Faridabad</a>
-        <a href="/pages/city.html?city=gandhinagar" class="region-card effect-3">Car Transport in Gandhinagar</a>
-        <a href="/pages/city.html?city=gangtok" class="region-card effect-4">Car Transport in Gangtok</a>
-        <a href="/pages/city.html?city=ghaziabad" class="region-card effect-1">Car Transport in Ghaziabad</a>
-        <a href="/pages/city.html?city=gorakhpur" class="region-card effect-2">Car Transport in Gorakhpur</a>
-        <a href="/pages/city.html?city=gurgaon" class="region-card effect-3">Car Transport in Gurgaon</a>
-        <a href="/pages/city.html?city=guwahati" class="region-card effect-4">Car Transport in Guwahati</a>
-        <a href="/pages/city.html?city=gwalior" class="region-card effect-1">Car Transport in Gwalior</a>
-        <a href="/pages/city.html?city=hyderabad" class="region-card effect-2">Car Transport in Hyderabad</a>
-        <a href="/pages/city.html?city=imphal" class="region-card effect-3">Car Transport in Imphal</a>
-        <a href="/pages/city.html?city=indore" class="region-card effect-4">Car Transport in Indore</a>
-        <a href="/pages/city.html?city=itanagar" class="region-card effect-1">Car Transport in Itanagar</a>
-        <a href="/pages/city.html?city=jabalpur" class="region-card effect-2">Car Transport in Jabalpur</a>
-        <a href="/pages/city.html?city=jaipur" class="region-card effect-3">Car Transport in Jaipur</a>
-        <a href="/pages/city.html?city=jalandhar" class="region-card effect-4">Car Transport in Jalandhar</a>
-        <a href="/pages/city.html?city=kanpur" class="region-card effect-1">Car Transport in Kanpur</a>
-        <a href="/pages/city.html?city=kolkata" class="region-card effect-2">Car Transport in Kolkata</a>
-        <a href="/pages/city.html?city=kota" class="region-card effect-3">Car Transport in Kota</a>
-        <a href="/pages/city.html?city=lucknow" class="region-card effect-4">Car Transport in Lucknow</a>
-        <a href="/pages/city.html?city=ludhiana" class="region-card effect-1">Car Transport in Ludhiana</a>
-        <a href="/pages/city.html?city=madurai" class="region-card effect-2">Car Transport in Madurai</a>
-        <a href="/pages/city.html?city=meerut" class="region-card effect-3">Car Transport in Meerut</a>
-        <a href="/pages/city.html?city=mumbai" class="region-card effect-4">Car Transport in Mumbai</a>
-        <a href="/pages/city.html?city=nagpur" class="region-card effect-1">Car Transport in Nagpur</a>
-        <a href="/pages/city.html?city=nashik" class="region-card effect-2">Car Transport in Nashik</a>
-        <a href="/pages/city.html?city=navi_mumbai" class="region-card effect-3">Car Transport in Navi Mumbai</a>
-        <a href="/pages/city.html?city=patna" class="region-card effect-4">Car Transport in Patna</a>
-        <a href="/pages/city.html?city=pune" class="region-card effect-1">Car Transport in Pune</a>
-        <a href="/pages/city.html?city=puri" class="region-card effect-2">Car Transport in Puri</a>
-        <a href="/pages/city.html?city=raipur" class="region-card effect-3">Car Transport in Raipur</a>
-        <a href="/pages/city.html?city=rajkot" class="region-card effect-4">Car Transport in Rajkot</a>
-        <a href="/pages/city.html?city=ranchi" class="region-card effect-1">Car Transport in Ranchi</a>
-        <a href="/pages/city.html?city=rourkela" class="region-card effect-2">Car Transport in Rourkela</a>
-        <a href="/pages/city.html?city=shimla" class="region-card effect-3">Car Transport in Shimla</a>
-        <a href="/pages/city.html?city=srinagar" class="region-card effect-4">Car Transport in Srinagar</a>
-        <a href="/pages/city.html?city=surat" class="region-card effect-1">Car Transport in Surat</a>
-        <a href="/pages/city.html?city=thane" class="region-card effect-2">Car Transport in Thane</a>
-        <a href="/pages/city.html?city=udaipur" class="region-card effect-3">Car Transport in Udaipur</a>
-        <a href="/pages/city.html?city=vadodara" class="region-card effect-4">Car Transport in Vadodara</a>
-        <a href="/pages/city.html?city=varanasi" class="region-card effect-1">Car Transport in Varanasi</a>
-        <a href="/pages/city.html?city=vijayawada" class="region-card effect-2">Car Transport in Vijayawada</a>
-        <a href="/pages/city.html?city=visakhapatnam" class="region-card effect-3">Car Transport in Visakhapatnam</a>
-      </div>
-    </section>
+    <!-- Region-Wise Presence Section Container - Loaded dynamically -->
+    <div id="region-container"></div>
 
     <!-- Digital Clock Section -->
     <section class="digital-clock-section">
@@ -635,7 +566,10 @@
     <script src="./js/modules/feedback-modal.js"></script>
     <script src="./js/modules/testimonial.js"></script>
     <script src="./js/modules/rating.js"></script>
-    <script src="./js/modules/region-search.js"></script>
+    <script src="./js/modules/region-loader.js"></script>
+    <script src="./js/modules/region-search.js?v=3"></script>
+    <script src="./js/modules/region-map.js?v=4"></script>
+    <script src="./js/modules/region-enhancements.js"></script>
     <script src="./js/modules/digital-clock.js"></script>
     <script src="./js/modules/scroll-animations.js"></script>
     <script src="./js/modules/theme-switcher.js"></script>

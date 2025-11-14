@@ -28,6 +28,10 @@ body {
 }
 
 /* Ensure Region heading is visible on dark background */
+body[data-theme="dark"] .region-section {
+  background: var(--bg, #0f1115) !important;
+}
+
 body[data-theme="dark"] .region-section h2 {
   color: #ffffff !important;
 }
