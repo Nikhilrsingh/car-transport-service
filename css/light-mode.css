@@ -1,0 +1,443 @@
+:root {
+  --bg: #ffffff;
+  --text: #222222;
+  --footer-bg: #f6f6f6;
+  --footer-text: #222222;
+  --accent: #ff6b3d;
+  --glass-opacity: 0.85;
+}
+
+/* Light Mode Color Palette Override */
+body[data-theme="light"] {
+  --color-text-primary: #000000;
+  --color-text-secondary: #2d2d2d;
+  --color-text-muted: #555555;
+}
+
+/* global overrides */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* footer example */
+.footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+/* Hero Section - Light overlay for dark text visibility */
+.hero-overlay {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 99, 71, 0.15) 50%,
+      rgba(255, 255, 255, 0.8) 100%) !important;
+}
+
+/* Dark text for light theme */
+.hero-title,
+.title-line {
+  color: #1a1a1a !important;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5) !important;
+}
+
+.hero-description {
+  color: #2d2d2d !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+.hero-badge {
+  color: #1a1a1a !important;
+  background: rgba(255, 99, 71, 0.15) !important;
+  border-color: rgba(255, 99, 71, 0.4) !important;
+}
+
+.stat-number {
+  color: #ff6347 !important;
+}
+
+.stat-label {
+  color: #333 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Keep gradient on highlighted title */
+.title-line.highlight {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: slideInLeft 0.8s ease-out 0.2s !important;
+  filter: none !important;
+}
+
+/* Contact CTA Section */
+.contact-cta {
+  background: #ffffff;
+}
+
+.cta-text h2 {
+  color: #1a1a1a !important;
+}
+
+.cta-text p {
+  color: #2d2d2d !important;
+}
+
+.feature span {
+  color: #1a1a1a !important;
+}
+
+/* Features Section */
+.features {
+  background: #ffffff;
+}
+
+.section-title,
+.features .section-title {
+  color: #df0808 !important;
+}
+
+.h1 {
+  color: #000 !important;
+}
+
+.feature-box {
+  background: #fff;
+  border-color: #ddd;
+}
+
+.feature-box h3 {
+  color: #000 !important;
+}
+
+.feature-box p {
+  color: #555 !important;
+}
+
+/* Hero Action Buttons - Improved contrast for light theme */
+.hero-actions .cta-btn.primary {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 10px 30px rgba(255, 99, 71, 0.4) !important;
+  border: 2px solid transparent !important;
+}
+
+.hero-actions .cta-btn.primary:hover {
+  background: linear-gradient(135deg, #ff4500, #e63900) !important;
+  box-shadow: 0 15px 40px rgba(255, 99, 71, 0.5) !important;
+  border-color: rgba(255, 99, 71, 0.3) !important;
+}
+
+.hero-actions .cta-btn.secondary {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 2px solid #d0d0d0 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.hero-actions .cta-btn.secondary:hover {
+  background: #f5f5f5 !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.hero-actions .cta-btn.outline {
+  color: #ff6347 !important;
+  border-color: #ff6347 !important;
+  border-width: 2px !important;
+  background: transparent !important;
+}
+
+.hero-actions .cta-btn.outline:hover {
+  background: #ff6347 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3) !important;
+}
+
+/* Testimonials intro paragraph on light background */
+body[data-theme="light"] .testimonials-section .section-title p {
+  color: #2d2d2d !important;
+}
+
+/* Footer text contrast in light theme */
+body[data-theme="light"] .footer,
+body[data-theme="light"] #footer-container .footer {
+  color: #222222 !important;
+}
+body[data-theme="light"] .footer .footer-about p,
+body[data-theme="light"] .footer .footer-links a,
+body[data-theme="light"] .footer .contact-info li,
+body[data-theme="light"] .footer .footer-bottom-content,
+body[data-theme="light"] .footer .footer-bottom-content .copyright,
+body[data-theme="light"] .footer .footer-bottom-links a,
+body[data-theme="light"] .footer .payment-methods i,
+body[data-theme="light"] .footer .footer-brand {
+  color: #333333 !important;
+}
+
+/* Quote Card - Light Theme */
+body[data-theme="light"] .quote-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(250, 250, 250, 0.98)) !important;
+  border-color: rgba(255, 99, 71, 0.2) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 20px rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] .quote-card:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12), 0 0 30px rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .quote-header h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .quote-header p {
+  color: #ff6347 !important;
+}
+
+/* Step Progress - Light Theme */
+body[data-theme="light"] .step-progress {
+  background: rgba(255, 99, 71, 0.05) !important;
+  border-color: rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .step-number {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  color: rgba(0, 0, 0, 0.4) !important;
+}
+
+body[data-theme="light"] .step-label {
+  color: #666666 !important;
+}
+
+body[data-theme="light"] .step.active .step-label {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .step-line {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Form Fields - Light Theme */
+body[data-theme="light"] .form-group.floating-label input,
+body[data-theme="light"] .form-group.floating-label select {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #000000 !important;
+}
+
+body[data-theme="light"] .form-group.floating-label label {
+  color: #666666 !important;
+}
+
+body[data-theme="light"] .form-group.floating-label input:focus,
+body[data-theme="light"] .form-group.floating-label input:not(:placeholder-shown),
+body[data-theme="light"] .form-group.floating-label select:focus,
+body[data-theme="light"] .form-group.floating-label select:not([value=""]) {
+  background: rgba(255, 99, 71, 0.05) !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .form-group.floating-label input:focus ~ label,
+body[data-theme="light"] .form-group.floating-label input:not(:placeholder-shown) ~ label,
+body[data-theme="light"] .form-group.floating-label select:focus ~ label,
+body[data-theme="light"] .form-group.floating-label select:not([value=""]) ~ label {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .form-group.floating-label select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+}
+
+body[data-theme="light"] .form-group.floating-label select option {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Autocomplete Dropdown - Light Theme */
+body[data-theme="light"] .autocomplete-dropdown {
+  background: #ffffff !important;
+  border-color: #ff6347 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+body[data-theme="light"] .autocomplete-item {
+  color: #000000 !important;
+}
+
+body[data-theme="light"] .autocomplete-item:hover,
+body[data-theme="light"] .autocomplete-item.active {
+  background: rgba(255, 99, 71, 0.1) !important;
+  color: #ff6347 !important;
+}
+
+/* Distance Display - Light Theme */
+body[data-theme="light"] .distance-display {
+  background: rgba(34, 197, 94, 0.08) !important;
+  border-color: rgba(34, 197, 94, 0.25) !important;
+  color: #16a34a !important;
+}
+
+body[data-theme="light"] .distance-display strong {
+  color: #15803d !important;
+}
+
+/* Result Display - Light Theme */
+body[data-theme="light"] .result-details {
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
+body[data-theme="light"] .result-row {
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .result-label {
+  color: #666666 !important;
+}
+
+body[data-theme="light"] .result-value {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .result-price {
+  background: linear-gradient(135deg, rgba(255, 99, 71, 0.1) 0%, rgba(255, 69, 0, 0.08) 100%) !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .result-price .label {
+  color: #666666 !important;
+}
+
+body[data-theme="light"] .result-price .amount {
+  color: #ff6347 !important;
+}
+
+/* Back Button - Light Theme */
+body[data-theme="light"] .quote-form-back-btn {
+  background: #f5f5f5 !important;
+  color: #333333 !important;
+  border: 2px solid #d0d0d0 !important;
+}
+
+body[data-theme="light"] .quote-form-back-btn:hover {
+  background: #e8e8e8 !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+
+/* Calculate Price Button - Light Theme */
+body[data-theme="light"] .quote-next,
+body[data-theme="light"] .quote-form-submit-btn {
+  background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .quote-next:hover,
+body[data-theme="light"] .quote-form-submit-btn:hover {
+  background: linear-gradient(135deg, #ff4500 0%, #e63900 100%) !important;
+  box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5) !important;
+}
+
+/* Completed Step - Light Theme - Green Border Visible */
+body[data-theme="light"] .step.completed .step-number {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  border-color: #22c55e !important;
+  color: white !important;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), 0 4px 15px rgba(34, 197, 94, 0.3) !important;
+}
+
+body[data-theme="light"] .step.completed .step-label {
+  color: #16a34a !important;
+  font-weight: 700 !important;
+}
+
+/* Delivery Time Display - Light Theme */
+body[data-theme="light"] .delivery-time-display {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+body[data-theme="light"] .delivery-time-display i {
+  color: #3b82f6 !important;
+}
+
+body[data-theme="light"] .delivery-time-display .time-label {
+  color: #666666 !important;
+}
+
+body[data-theme="light"] .delivery-time-display .time-value {
+  color: #2563eb !important;
+}
+
+/* Compare Prices Section - Light Theme */
+body[data-theme="light"] .compare-prices-section {
+  background: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .compare-prices-header h4 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .compare-prices-header i {
+  color: #fbbf24 !important;
+}
+
+body[data-theme="light"] .price-option {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .price-option:hover {
+  background: rgba(255, 99, 71, 0.05) !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .price-option.selected {
+  background: rgba(34, 197, 94, 0.1) !important;
+  border-color: #22c55e !important;
+}
+
+body[data-theme="light"] .price-option.best-value {
+  border-color: #fbbf24 !important;
+}
+
+body[data-theme="light"] .price-option-name {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .price-option-details {
+  color: #666666 !important;
+}
+
+body[data-theme="light"] .price-option-amount {
+  color: #ff6347 !important;
+}
+
+/* Result Actions Buttons - Light Theme */
+body[data-theme="light"] .quote-result-book-btn {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .quote-save-later-btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .quote-result-reset-btn {
+  background: #f5f5f5 !important;
+  color: #333333 !important;
+  border: 2px solid #d0d0d0 !important;
+}
+
+body[data-theme="light"] .quote-result-reset-btn:hover {
+  background: #e8e8e8 !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+

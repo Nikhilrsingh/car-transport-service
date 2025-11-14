@@ -80,7 +80,7 @@
         }
 
         .brand-tagline {
-            color: #999;
+            color: #b0b0b0;
             font-size: 14px;
         }
 
@@ -104,7 +104,7 @@
         }
 
         .auth-header p {
-            color: #999;
+            color: #b0b0b0;
             font-size: 14px;
         }
 
@@ -122,7 +122,7 @@
             padding: 12px;
             background: transparent;
             border: none;
-            color: #999;
+            color: #b0b0b0;
             font-size: 15px;
             font-weight: 500;
             cursor: pointer;
@@ -141,7 +141,7 @@
 
         .form-group label {
             display: block;
-            color: #ccc;
+            color: #e8e8e8;
             font-size: 14px;
             margin-bottom: 8px;
             font-weight: 500;
@@ -163,6 +163,95 @@
             transform: translateY(-50%);
             color: #ff6347;
             font-size: 18px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #b0b0b0;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #ff6347;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .password-toggle .eye-icon {
+            font-size: 18px;
+        }
+
+        .password-strength {
+            margin-top: 8px;
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 4px;
+            background: #1a1a1a;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-text {
+            font-size: 12px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .auth-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2a2a2a;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid #3a3a3a;
+            z-index: 10000;
+            transition: all 0.3s ease;
+            min-width: 300px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .auth-notification.show {
+            top: 20px;
+        }
+
+        .auth-notification.success {
+            border-color: #00cc66;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a3a2a 100%);
+        }
+
+        .auth-notification.error {
+            border-color: #ff4444;
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a1a1a 100%);
+        }
+
+        .auth-notification.info {
+            border-color: #ff6347;
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a2520 100%);
         }
 
         .form-control {
@@ -208,7 +297,7 @@
         }
 
         .checkbox-wrapper label {
-            color: #ccc;
+            color: #e8e8e8;
             cursor: pointer;
             margin: 0;
         }
@@ -263,7 +352,7 @@
             position: relative;
             background: #2a2a2a;
             padding: 0 15px;
-            color: #999;
+            color: #b0b0b0;
             font-size: 14px;
         }
 
@@ -296,7 +385,7 @@
 
         .auth-footer {
             text-align: center;
-            color: #999;
+            color: #b0b0b0;
             font-size: 14px;
         }
 

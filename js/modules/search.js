@@ -174,3 +174,51 @@
     initSearch();
   }
 })();
+
+// Mic button implemetation
+
+const micButton = document.getElementById("micButton");
+const searchInput = document.getElementById("navbarSearch");
+
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (window.SpeechRecognition) {
+  const recognition = new SpeechRecognition();
+  recognition.lang = navigator.language || "en-US";
+  recognition.interimResults = false;
+  recognition.continuous = true;
+
+  let isListening = false;
+
+  micButton.addEventListener("click", () => {
+    if (!isListening) {
+      recognition.start();
+      isListening = true;
+      micButton.style.color = "red";
+    } else {
+      recognition.stop();
+      isListening = false;
+      micButton.style.color = "";
+    }
+  });
+
+  recognition.addEventListener("result", (event) => {
+    const transcript = event.results[event.results.length - 1][0].transcript.trim();
+    searchInput.focus();
+    searchInput.value = transcript;
+    searchInput.dispatchEvent(new Event("input"));
+  });
+
+  recognition.addEventListener("end", () => {
+    isListening = false;
+    micButton.style.color = "";
+  });
+
+  recognition.addEventListener("error", () => {
+    isListening = false;
+    micButton.style.color = "";
+  });
+} else {
+  console.error("Speech Recognition not supported in this browser.");
+}
+

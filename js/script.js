@@ -15,23 +15,28 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     };
     window.requestAnimationFrame(step);
+  };
+
+  // Start counters when hero section is in view
+  if (statNumbers.length > 0) {
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            animateValue(stat, 0, target, 2000);
+          });
+          heroObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const heroElement = document.querySelector('.hero');
+    if (heroElement) {
+      heroObserver.observe(heroElement);
+    }
   }
 });
-
-// Start counters when hero section is in view
-const heroObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        animateValue(stat, 0, target, 2000);
-      });
-      heroObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-heroObserver.observe(document.querySelector('.hero'));
 
 // Quick quote form functionality
 const quickQuoteForm = document.getElementById('quickQuoteForm');
@@ -105,19 +110,14 @@ if (video) {
 // Testimonial Slider Functionality now created seperately in js/modules/testimonial.js
 
 
-// Load shared footer dynamically
-fetch('pages/footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
-  })
-  .catch(error => console.error('Error loading footer:', error));
+
 
 // Contact Form Functionality
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contactForm");
-
-  contactForm.addEventListener("submit", function (e) {
+  
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form data
@@ -153,24 +153,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // Phone number formatting
-  const phoneInput = contactForm.querySelector('input[type="tel"]');
-  phoneInput.addEventListener("input", function (e) {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 0) {
-      value = value.match(/.{1,5}/g).join(" ");
+    // Phone number formatting
+    const phoneInput = contactForm.querySelector('input[type="tel"]');
+    if (phoneInput) {
+      phoneInput.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 0) {
+          value = value.match(/.{1,5}/g).join(" ");
+        }
+        e.target.value = value;
+      });
     }
-    e.target.value = value;
-  });
+  }
 });
 
-// Load shared footer dynamically
-fetch('pages/footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
-  })
-  .catch(error => console.error('Error loading footer:', error));
+
 
 //    <!-- Preloader fade-out script -->
 window.addEventListener("load", () => {
@@ -200,15 +197,20 @@ inputs.forEach((input) => {
   });
 });
 
-// Phone number formatting
-const phoneInput = contactForm.querySelector('input[type="tel"]');
-phoneInput.addEventListener("input", function (e) {
-  let value = e.target.value.replace(/\D/g, "");
-  if (value.length > 0) {
-    value = value.match(/.{1,5}/g).join(" ");
+// Phone number formatting (duplicate code - should be removed)
+const contactFormDup = document.getElementById("contactForm");
+if (contactFormDup) {
+  const phoneInput = contactFormDup.querySelector('input[type="tel"]');
+  if (phoneInput) {
+    phoneInput.addEventListener("input", function (e) {
+      let value = e.target.value.replace(/\D/g, "");
+      if (value.length > 0) {
+        value = value.match(/.{1,5}/g).join(" ");
+      }
+      e.target.value = value;
+    });
   }
-  e.target.value = value;
-});
+}
 
 
 //Keypress-Activated Easter Egg 
@@ -226,16 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// <!-- Load Footer -->
-// Load footer
-fetch('./footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
-  })
-  .catch(error => {
-    console.error('Error loading footer:', error);
-  });
+
 
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
@@ -249,17 +242,146 @@ window.addEventListener("load", () => {
   }, 1000); // delay before hiding
 });
 
-// 🌿 Slider Script
-let slides = document.querySelectorAll(".slide");
-let currentSlide = 0;
+// 🌿 Slider Script - Enhanced with controls and accessibility
+(function() {
+  const slides = document.querySelectorAll(".slide");
+  const dotsContainer = document.getElementById("sliderDots");
+  const controlBtn = document.getElementById("sliderControl");
+  
+  let currentSlide = 0;
+  let isPlaying = true;
+  let sliderInterval = null;
 
-function nextSlide() {
-  slides[currentSlide].classList.remove("active");
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add("active");
-}
+  // Create navigation dots
+  function createDots() {
+    if (!dotsContainer || slides.length === 0) return;
+    
+    slides.forEach((_, index) => {
+      const dot = document.createElement("div");
+      dot.classList.add("slider-dot");
+      if (index === 0) dot.classList.add("active");
+      dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+      dot.addEventListener("click", () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+  }
 
-setInterval(nextSlide, 5000); // changes every 5 seconds
+  // Update active dot
+  function updateDots() {
+    if (!dotsContainer) return;
+    
+    const dots = dotsContainer.querySelectorAll(".slider-dot");
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentSlide);
+    });
+  }
+
+  // Go to specific slide
+  function goToSlide(index) {
+    if (slides.length === 0) return;
+    
+    slides[currentSlide].classList.remove("active");
+    currentSlide = index;
+    slides[currentSlide].classList.add("active");
+    updateDots();
+  }
+
+  // Next slide
+  function nextSlide() {
+    if (slides.length === 0) return;
+    
+    const nextIndex = (currentSlide + 1) % slides.length;
+    goToSlide(nextIndex);
+  }
+
+  // Start auto-play
+  function startSlider() {
+    if (slides.length === 0) return;
+    
+    isPlaying = true;
+    sliderInterval = setInterval(nextSlide, 5000); // changes every 5 seconds
+    
+    if (controlBtn) {
+      controlBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      controlBtn.setAttribute("aria-label", "Pause slider");
+    }
+  }
+
+  // Pause auto-play
+  function pauseSlider() {
+    isPlaying = false;
+    if (sliderInterval) {
+      clearInterval(sliderInterval);
+      sliderInterval = null;
+    }
+    
+    if (controlBtn) {
+      controlBtn.innerHTML = '<i class="fas fa-play"></i>';
+      controlBtn.setAttribute("aria-label", "Play slider");
+    }
+  }
+
+  // Toggle play/pause
+  function toggleSlider() {
+    if (isPlaying) {
+      pauseSlider();
+    } else {
+      startSlider();
+    }
+  }
+
+  // Initialize slider
+  function init() {
+    if (slides.length === 0) return;
+    
+    createDots();
+    startSlider();
+    
+    // Add control button listener
+    if (controlBtn) {
+      controlBtn.addEventListener("click", toggleSlider);
+    }
+
+    // Pause on hover for accessibility
+    const sliderContainer = document.querySelector(".auto-slider");
+    if (sliderContainer) {
+      sliderContainer.addEventListener("mouseenter", () => {
+        if (isPlaying) pauseSlider();
+      });
+      
+      sliderContainer.addEventListener("mouseleave", () => {
+        if (!isPlaying) startSlider();
+      });
+    }
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (!sliderContainer) return;
+      
+      const sliderRect = sliderContainer.getBoundingClientRect();
+      const isInView = sliderRect.top < window.innerHeight && sliderRect.bottom > 0;
+      
+      if (isInView) {
+        if (e.key === "ArrowLeft") {
+          const prevIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+          goToSlide(prevIndex);
+        } else if (e.key === "ArrowRight") {
+          nextSlide();
+        } else if (e.key === " " && e.target.tagName !== "INPUT") {
+          e.preventDefault();
+          toggleSlider();
+        }
+      }
+    });
+  }
+
+  // Start when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
 
 // Enhanced Hero Section Functionality
 document.addEventListener('DOMContentLoaded', function () {
@@ -364,4 +486,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-
+window.addEventListener("scroll", function() {
+  const scrollProgress = document.getElementById("scroll-progress");
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  scrollProgress.style.width = scrollPercent + "%";
+});

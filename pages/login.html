@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harihar Car Carriers - Login & Signup</title>
+    <link rel="stylesheet" href="../css/components/loading-indicators.css">
     <link rel="stylesheet" href="../css/components/login.css">
-   <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
     <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
-   <link rel="stylesheet" href="../css/components/backtoBottom.css">
+    <link rel="stylesheet" href="../css/components/backtoBottom.css">
 </head>
+
 <body>
     <button class="back-button" onclick="goBack()">Back</button>
-    
+
     <div class="container">
         <div class="logo-section">
             <div class="logo">
                 <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers Logo">
-                    <path d="M50 20L70 35V65L50 80L30 65V35L50 20Z" fill="#ff6347"/>
-                    <path d="M50 30L60 37.5V62.5L50 70L40 62.5V37.5L50 30Z" fill="#fff"/>
-                </svg>
             </div>
             <div class="brand-name">Harihar Car Carriers</div>
             <div class="brand-tagline">Trusted Vehicle Transportation</div>
@@ -50,7 +50,12 @@
                         <label>Password <span class="required">*</span></label>
                         <div class="input-wrapper">
                             <span class="input-icon">🔒</span>
-                            <input type="password" class="form-control" placeholder="Enter your password" required>
+                            <input type="password" id="login-password" class="form-control"
+                                placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle"
+                                onclick="togglePassword('login-password', this)">
+                                <span class="eye-icon">👁️</span>
+                            </button>
                         </div>
                     </div>
 
@@ -129,7 +134,18 @@
                         <label>Password <span class="required">*</span></label>
                         <div class="input-wrapper">
                             <span class="input-icon">🔒</span>
-                            <input type="password" class="form-control" placeholder="Create password" required>
+                            <input type="password" id="signup-password" class="form-control"
+                                placeholder="Create password" required oninput="checkPasswordStrength(this.value)">
+                            <button type="button" class="password-toggle"
+                                onclick="togglePassword('signup-password', this)">
+                                <span class="eye-icon">👁️</span>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                            <span class="strength-text" id="strength-text"></span>
                         </div>
                     </div>
 
@@ -137,7 +153,12 @@
                         <label>Confirm Password <span class="required">*</span></label>
                         <div class="input-wrapper">
                             <span class="input-icon">🔒</span>
-                            <input type="password" class="form-control" placeholder="Confirm password" required>
+                            <input type="password" id="confirm-password" class="form-control"
+                                placeholder="Confirm password" required>
+                            <button type="button" class="password-toggle"
+                                onclick="togglePassword('confirm-password', this)">
+                                <span class="eye-icon">👁️</span>
+                            </button>
                         </div>
                     </div>
 
@@ -171,64 +192,21 @@
         </div>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-
-        function switchTab(tab) {
-            const loginForm = document.getElementById('login-form');
-            const signupForm = document.getElementById('signup-form');
-            const tabBtns = document.querySelectorAll('.tab-btn');
-
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-
-            if (tab === 'login') {
-                loginForm.classList.add('active');
-                signupForm.classList.remove('active');
-                tabBtns[0].classList.add('active');
-            } else {
-                signupForm.classList.add('active');
-                loginForm.classList.remove('active');
-                tabBtns[1].classList.add('active');
-            }
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            alert('Login functionality would be connected to your backend API');
-        }
-
-        function handleSignup(event) {
-            event.preventDefault();
-            const password = event.target.querySelector('input[type="password"]').value;
-            const confirmPassword = event.target.querySelectorAll('input[type="password"]')[1].value;
-
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-
-            alert('Signup functionality would be connected to your backend API');
-        }
-
-        function handleSocialLogin(provider) {
-            alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login would be integrated here`);
-        }
-    </script>
-
     <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Top to Bottom Button -->
-<button class="back-to-bottom" id="backToBottom">
-  <i class="fas fa-arrow-down"></i>
-</button>
+    <button class="back-to-bottom" id="backToBottom">
+        <i class="fas fa-arrow-down"></i>
+    </button>
 
-  <script src="../js/modules/backtoBottom.js"></script>
-   <script src="../js/modules/back-to-top-button.js"></script>
+    <script src="../js/modules/login.js"></script>
+
+    <script src="../js/modules/backtoBottom.js"></script>
+    <script src="../js/modules/back-to-top-button.js"></script>
 
 </body>
+
 </html>

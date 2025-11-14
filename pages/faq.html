@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Harihar Car Carriers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <!-- Loading Indicators CSS -->
+    <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+    <link rel="stylesheet" href="../css/components/floating-call-button.css">
+    <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
+    <link rel="stylesheet" href="../css/components/floating-chatbot-button.css">
+    <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
+    <link rel="stylesheet" href="../css/components/quote-modal.css">
+    <link rel="stylesheet" href="../css/components/chatbot-modal.css">
+    <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+    <link rel="stylesheet" href="../css/components/backtoBottom.css">
+    <link rel="stylesheet" href="../css/components/animations.css">
+
+    <style>
+        @font-face {
+            font-family: "Poppins";
+            src: url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
+                url("./assets/fonts/Poppins-Regular.woff") format("woff");
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Poppins";
+            src: url("./assets/fonts/Poppins-Bold.woff2") format("woff2"),
+                url("./assets/fonts/Poppins-Bold.woff") format("woff");
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            height: 100%;
+            width: 100%;
+            background-color: #2b2b2b;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .faq-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* FAQ Section from contact page*/
+
+        /* section-title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ff6347;
+        }
+
+        .section-title p {
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+
+
+        /* faq section */
+        .faq-section {
+            padding: 100px 0;
+            background-color: #333;
+        }
+
+        .faq-grid {
+            /* Updated this faq to faq flex */
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .faq-item {
+            min-width: 45%;
+            width: 48%;
+            background: #2b2b2b;
+            border-radius: 10px;
+            overflow: hidden;
+            border-left: 4px solid #ff6347;
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: rgba(255, 99, 71, 0.1);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 99, 71, 0.2);
+        }
+
+        .faq-question h4 {
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .faq-question i {
+            color: #ff6347;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer p {
+            color: #ccc;
+            padding: 20px 0;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* FAQ Enhanced Styles taken from contact.css */
+        .faq-header {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .faq-search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .faq-search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background: #2b2b2b;
+            border: 2px solid #444;
+            border-radius: 50px;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-search-input:focus {
+            outline: none;
+            border-color: #ff6347;
+            box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+        }
+
+        .faq-search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ff6347;
+            font-size: 1.2rem;
+        }
+
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .faq-category-btn {
+            background: #2b2b2b;
+            color: white;
+            border: 2px solid #444;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: "Poppins", sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-category-btn:hover {
+            border-color: #ff6347;
+            transform: translateY(-2px);
+        }
+
+        .faq-category-btn.active {
+            background: #ff6347;
+            border-color: #ff6347;
+            box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+        }
+
+        .faq-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item.hidden {
+            display: none;
+        }
+
+        .faq-answer {
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 400px;
+            padding: 0 20px;
+        }
+
+        .faq-rating {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px 20px;
+            border-top: 1px solid #444;
+            margin-top: 10px;
+        }
+
+        .faq-rating span {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .faq-rating-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .rating-btn {
+            background: transparent;
+            border: 2px solid #444;
+            color: #ccc;
+            padding: 6px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: "Poppins", sans-serif;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating-btn:hover {
+            border-color: #ff6347;
+            color: #ff6347;
+        }
+
+        .rating-btn.selected {
+            background: #ff6347;
+            border-color: #ff6347;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Container - Loaded dynamically -->
+    <div id="navbar-container"></div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="section-title fade-in">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions about our services</p>
+            </div>
+            <div class="faq-header fade-in">
+                <div class="faq-search-container">
+                    <input type="text" id="faqSearch" class="faq-search-input" placeholder="Search FAQs...">
+                    <i class="fas fa-search faq-search-icon"></i>
+                </div>
+                <div class="faq-categories">
+                    <button class="faq-category-btn active" data-category="all">
+                        <i class="fas fa-th"></i>
+                        <span>All</span>
+                    </button>
+                    <button class="faq-category-btn" data-category="delivery">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>Delivery</span>
+                    </button>
+                    <button class="faq-category-btn" data-category="insurance">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Insurance</span>
+                    </button>
+                    <button class="faq-category-btn" data-category="service">
+                        <i class="fas fa-concierge-bell"></i>
+                        <span>Service</span>
+                    </button>
+                    <button class="faq-category-btn" data-category="documents">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Documents</span>
+                    </button>
+                </div>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item fade-in" data-category="delivery">
+                    <div class="faq-question">
+                        <h4>How quickly can you transport my vehicle?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Delivery time depends on the distance. Typically, within
+                            Maharashtra: 1-2 days, Interstate: 3-5 days, Pan-India: 5-7
+                            days. Express delivery options are available.
+                        </p>
+                        <div class="faq-rating">
+                            <span>Was this helpful?</span>
+                            <div class="faq-rating-buttons">
+                                <button class="rating-btn" data-rating="yes">
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <span>Yes</span>
+                                </button>
+                                <button class="rating-btn" data-rating="no">
+                                    <i class="fas fa-thumbs-down"></i>
+                                    <span>No</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in fade-in-delay-1" data-category="insurance">
+                    <div class="faq-question">
+                        <h4>Is my vehicle insured during transport?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Yes, all vehicles are fully insured during transit. We provide
+                            comprehensive insurance coverage up to the vehicle's current
+                            market value.
+                        </p>
+                        <div class="faq-rating">
+                            <span>Was this helpful?</span>
+                            <div class="faq-rating-buttons">
+                                <button class="rating-btn" data-rating="yes">
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <span>Yes</span>
+                                </button>
+                                <button class="rating-btn" data-rating="no">
+                                    <i class="fas fa-thumbs-down"></i>
+                                    <span>No</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in fade-in-delay-2" data-category="service">
+                    <div class="faq-question">
+                        <h4>Do you provide door-to-door service?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Absolutely! We offer complete door-to-door service across all
+                            major cities in India. Our team handles pickup and delivery at
+                            your specified locations.
+                        </p>
+                        <div class="faq-rating">
+                            <span>Was this helpful?</span>
+                            <div class="faq-rating-buttons">
+                                <button class="rating-btn" data-rating="yes">
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <span>Yes</span>
+                                </button>
+                                <button class="rating-btn" data-rating="no">
+                                    <i class="fas fa-thumbs-down"></i>
+                                    <span>No</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in fade-in-delay-3" data-category="documents">
+                    <div class="faq-question">
+                        <h4>What documents are required for vehicle transport?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            You'll need RC book, insurance documents, and a valid ID proof.
+                            For commercial vehicles, additional permits might be required.
+                        </p>
+                        <div class="faq-rating">
+                            <span>Was this helpful?</span>
+                            <div class="faq-rating-buttons">
+                                <button class="rating-btn" data-rating="yes">
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <span>Yes</span>
+                                </button>
+                                <button class="rating-btn" data-rating="no">
+                                    <i class="fas fa-thumbs-down"></i>
+                                    <span>No</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // faq js taken from contact-enhanced.js and deleted from there
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initFAQEnhancements();
+        });
+
+        function initFAQEnhancements() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const searchInput = document.getElementById('faqSearch');
+            const categoryBtns = document.querySelectorAll('.faq-category-btn');
+
+            // FAQ Accordion with smooth transitions
+            faqItems.forEach((item) => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+
+                    // Close all other items
+                    faqItems.forEach((otherItem) => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+
+            // FAQ Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', function (e) {
+                    const searchTerm = e.target.value.toLowerCase();
+
+                    faqItems.forEach((item) => {
+                        const question = item.querySelector('.faq-question h4').textContent.toLowerCase();
+                        const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
+
+                        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                            item.classList.remove('hidden');
+
+                            // Highlight search term
+                            if (searchTerm.length > 0) {
+                                item.style.borderLeftWidth = '6px';
+                            } else {
+                                item.style.borderLeftWidth = '4px';
+                            }
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            }
+
+            // Category filtering
+            categoryBtns.forEach((btn) => {
+                btn.addEventListener('click', function () {
+                    const category = this.dataset.category;
+
+                    // Update active button
+                    categoryBtns.forEach((b) => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Filter FAQs
+                    faqItems.forEach((item) => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // FAQ Rating buttons
+            const ratingBtns = document.querySelectorAll('.rating-btn');
+            ratingBtns.forEach((btn) => {
+                btn.addEventListener('click', function () {
+                    const parent = this.closest('.faq-rating-buttons');
+                    const siblings = parent.querySelectorAll('.rating-btn');
+
+                    // Remove selected from siblings
+                    siblings.forEach((sibling) => sibling.classList.remove('selected'));
+
+                    // Add selected to clicked button
+                    this.classList.add('selected');
+
+                    // Show feedback message
+                    const feedbackType = this.dataset.rating;
+                    showNotification(
+                        feedbackType === 'yes'
+                            ? 'Thank you for your feedback! 😊'
+                            : 'We\'ll improve this answer. Thank you!'
+                    );
+                });
+            });
+        }
+    </script>
+
+
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+
+    <script>
+        // Load shared footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <script src="../js/modules/search.js"></script>
+    <!-- Loading State Manager - Must load first -->
+    <script src="../js/modules/loading-state-manager.js"></script>
+    <!-- Page Navigation Loader - Must load after loading-state-manager -->
+    <script src="../js/modules/page-navigation-loader.js"></script>
+    <script src="../js/modules/navbar-loader.js?v=2"></script>
+    <script src="../js/modules/floating-book-button.js"></script>
+    <script src="../js/modules/floating-call-button.js"></script>
+    <script src="../js/modules/floating-whatsapp-button.js"></script>
+    <script src="../js/modules/quote-modal.js"></script>
+    <script src="../js/modules/sticky-quote-button.js"></script>
+    <script src="../js/modules/floating-chatbot-button.js"></script>
+    <script src="../js/modules/chatbot-modal.js"></script>
+    <script src="../js/modules/back-to-top-button.js"></script>
+    <script src="../js/modules/backtoBottom.js"></script>
+    <script src="../js/modules/scroll-animations.js"></script>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Top to Bottom Button -->
+    <button class="back-to-bottom" id="backToBottom">
+        <i class="fas fa-arrow-down"></i>
+    </button>
+
+</body>
+
+</html>
