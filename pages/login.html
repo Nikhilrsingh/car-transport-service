@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harihar Car Carriers - Login & Signup</title>
+    <link rel="stylesheet" href="../css/components/loading-indicators.css">
     <link rel="stylesheet" href="../css/components/login.css">
-   <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
     <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
-   <link rel="stylesheet" href="../css/components/backtoBottom.css">
+    <link rel="stylesheet" href="../css/components/backtoBottom.css">
 </head>
+
 <body>
     <button class="back-button" onclick="goBack()">Back</button>
-    
+
     <div class="container">
         <div class="logo-section">
             <div class="logo">
@@ -47,8 +50,10 @@
                         <label>Password <span class="required">*</span></label>
                         <div class="input-wrapper">
                             <span class="input-icon">🔒</span>
-                            <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
-                            <button type="button" class="password-toggle" onclick="togglePassword('login-password', this)">
+                            <input type="password" id="login-password" class="form-control"
+                                placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle"
+                                onclick="togglePassword('login-password', this)">
                                 <span class="eye-icon">👁️</span>
                             </button>
                         </div>
@@ -129,8 +134,10 @@
                         <label>Password <span class="required">*</span></label>
                         <div class="input-wrapper">
                             <span class="input-icon">🔒</span>
-                            <input type="password" id="signup-password" class="form-control" placeholder="Create password" required oninput="checkPasswordStrength(this.value)">
-                            <button type="button" class="password-toggle" onclick="togglePassword('signup-password', this)">
+                            <input type="password" id="signup-password" class="form-control"
+                                placeholder="Create password" required oninput="checkPasswordStrength(this.value)">
+                            <button type="button" class="password-toggle"
+                                onclick="togglePassword('signup-password', this)">
                                 <span class="eye-icon">👁️</span>
                             </button>
                         </div>
@@ -146,8 +153,10 @@
                         <label>Confirm Password <span class="required">*</span></label>
                         <div class="input-wrapper">
                             <span class="input-icon">🔒</span>
-                            <input type="password" id="confirm-password" class="form-control" placeholder="Confirm password" required>
-                            <button type="button" class="password-toggle" onclick="togglePassword('confirm-password', this)">
+                            <input type="password" id="confirm-password" class="form-control"
+                                placeholder="Confirm password" required>
+                            <button type="button" class="password-toggle"
+                                onclick="togglePassword('confirm-password', this)">
                                 <span class="eye-icon">👁️</span>
                             </button>
                         </div>
@@ -195,8 +204,9 @@
 
     <script src="../js/modules/login.js"></script>
 
-  <script src="../js/modules/backtoBottom.js"></script>
-   <script src="../js/modules/back-to-top-button.js"></script>
+    <script src="../js/modules/backtoBottom.js"></script>
+    <script src="../js/modules/back-to-top-button.js"></script>
 
 </body>
+
 </html>

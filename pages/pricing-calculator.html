@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Compare car transport plans and calculate your pricing with our interactive calculator. Standard, Premium, and Express service options.">
+    <meta name="description"
+        content="Compare car transport plans and calculate your pricing with our interactive calculator. Standard, Premium, and Express service options.">
     <title>Pricing Calculator - Car Transport Service</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/components/header.css">
-    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <!-- Loading Indicators CSS -->
+    <link rel="stylesheet" href="../css/components/loading-indicators.css" />
     <link rel="stylesheet" href="../css/components/footer.css">
     <link rel="stylesheet" href="../css/components/pricing-calculator.css">
     <link rel="stylesheet" href="../css/components/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <div id="navbar-container"></div>
@@ -31,7 +36,7 @@
         <div class="container">
             <h2 class="section-title fade-in">Compare Our Plans</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Choose the perfect service level for your needs</p>
-            
+
             <div class="comparison-table-wrapper fade-in fade-in-delay-2">
                 <table class="comparison-table">
                     <thead>
@@ -135,24 +140,24 @@
         <div class="container">
             <h2 class="section-title fade-in">Calculate Your Price</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Get an instant estimate for your car transport</p>
-            
+
             <div class="calculator-wrapper fade-in fade-in-delay-2">
                 <div class="calculator-form">
                     <div class="form-section">
                         <h3><i class="fas fa-route"></i> Route Details</h3>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fromZip">From ZIP Code</label>
                                 <input type="text" id="fromZip" placeholder="Enter ZIP code" required>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="toZip">To ZIP Code</label>
                                 <input type="text" id="toZip" placeholder="Enter ZIP code" required>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="distance">Estimated Distance (miles)</label>
                             <input type="number" id="distance" placeholder="Auto-calculated" min="1" value="500">
@@ -162,7 +167,7 @@
 
                     <div class="form-section">
                         <h3><i class="fas fa-car"></i> Vehicle Information</h3>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="vehicleType">Vehicle Type</label>
@@ -174,7 +179,7 @@
                                     <option value="classic">Classic/Antique</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="vehicleCondition">Vehicle Condition</label>
                                 <select id="vehicleCondition">
@@ -187,7 +192,7 @@
 
                     <div class="form-section">
                         <h3><i class="fas fa-layer-group"></i> Service Level</h3>
-                        
+
                         <div class="service-options">
                             <label class="service-option">
                                 <input type="radio" name="servicePlan" value="standard" checked>
@@ -198,7 +203,7 @@
                                     <span class="delivery-time">7-10 days</span>
                                 </div>
                             </label>
-                            
+
                             <label class="service-option">
                                 <input type="radio" name="servicePlan" value="premium">
                                 <div class="option-card">
@@ -208,7 +213,7 @@
                                     <span class="delivery-time">4-6 days</span>
                                 </div>
                             </label>
-                            
+
                             <label class="service-option">
                                 <input type="radio" name="servicePlan" value="express">
                                 <div class="option-card">
@@ -223,7 +228,7 @@
 
                     <div class="form-section">
                         <h3><i class="fas fa-plus-circle"></i> Add-On Services</h3>
-                        
+
                         <div class="addon-options">
                             <label class="addon-option">
                                 <input type="checkbox" name="addon" value="enclosed" data-price="200">
@@ -236,7 +241,7 @@
                                     <span class="addon-price">+$200</span>
                                 </div>
                             </label>
-                            
+
                             <label class="addon-option">
                                 <input type="checkbox" name="addon" value="insurance" data-price="100">
                                 <div class="addon-card">
@@ -248,7 +253,7 @@
                                     <span class="addon-price">+$100</span>
                                 </div>
                             </label>
-                            
+
                             <label class="addon-option">
                                 <input type="checkbox" name="addon" value="topload" data-price="150">
                                 <div class="addon-card">
@@ -260,7 +265,7 @@
                                     <span class="addon-price">+$150</span>
                                 </div>
                             </label>
-                            
+
                             <label class="addon-option">
                                 <input type="checkbox" name="addon" value="expedited" data-price="250">
                                 <div class="addon-card">
@@ -283,45 +288,45 @@
                 <!-- Price Summary -->
                 <div class="price-summary">
                     <h3><i class="fas fa-file-invoice-dollar"></i> Price Breakdown</h3>
-                    
+
                     <div class="summary-item">
                         <span>Base Transport Cost</span>
                         <span id="baseCost">$250.00</span>
                     </div>
-                    
+
                     <div class="summary-item" id="vehicleTypeRow" style="display: none;">
                         <span>Vehicle Type Adjustment</span>
                         <span id="vehicleTypeCost">$0.00</span>
                     </div>
-                    
+
                     <div class="summary-item" id="conditionRow" style="display: none;">
                         <span>Non-Running Fee</span>
                         <span id="conditionCost">$0.00</span>
                     </div>
-                    
+
                     <div id="addonsList"></div>
-                    
+
                     <div class="summary-item discount-item" id="discountRow" style="display: none;">
                         <span><i class="fas fa-tag"></i> Discount Applied</span>
                         <span class="discount-amount" id="discountAmount">-$0.00</span>
                     </div>
-                    
+
                     <hr>
-                    
+
                     <div class="summary-total">
                         <span>Total Estimated Cost</span>
                         <span id="totalCost">$250.00</span>
                     </div>
-                    
+
                     <p class="summary-note">
                         <i class="fas fa-info-circle"></i>
                         Final price may vary based on specific route and availability
                     </p>
-                    
+
                     <button class="book-now-btn">
                         <i class="fas fa-calendar-check"></i> Book Now
                     </button>
-                    
+
                     <button class="save-quote-btn">
                         <i class="fas fa-save"></i> Save Quote
                     </button>
@@ -335,7 +340,7 @@
         <div class="container">
             <h2 class="section-title fade-in">Bulk & Corporate Discounts</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Save more when you ship multiple vehicles</p>
-            
+
             <div class="discount-grid fade-in fade-in-delay-2">
                 <div class="discount-card">
                     <div class="discount-icon">
@@ -357,7 +362,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="discount-card">
                     <div class="discount-icon">
                         <i class="fas fa-building"></i>
@@ -372,7 +377,7 @@
                     </ul>
                     <button class="contact-btn">Contact for Corporate Rates</button>
                 </div>
-                
+
                 <div class="discount-card">
                     <div class="discount-icon">
                         <i class="fas fa-redo"></i>
@@ -386,7 +391,7 @@
                         <span>Plus earn points toward free services</span>
                     </div>
                 </div>
-                
+
                 <div class="discount-card">
                     <div class="discount-icon">
                         <i class="fas fa-user-friends"></i>
@@ -406,7 +411,7 @@
         <div class="container">
             <h2 class="section-title fade-in">Seasonal Offers</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Limited-time promotions to save even more</p>
-            
+
             <div class="offers-grid fade-in fade-in-delay-2">
                 <div class="offer-card active">
                     <div class="offer-badge">Active Now</div>
@@ -417,7 +422,8 @@
                     <p class="offer-period">Valid: Dec 1 - Feb 28</p>
                     <div class="offer-discount">15% OFF</div>
                     <p class="offer-description">
-                        Save on enclosed transport during winter months. Perfect for protecting your vehicle from harsh weather.
+                        Save on enclosed transport during winter months. Perfect for protecting your vehicle from harsh
+                        weather.
                     </p>
                     <ul class="offer-terms">
                         <li>Applies to enclosed transport only</li>
@@ -426,7 +432,7 @@
                     </ul>
                     <button class="claim-offer-btn">Claim Offer</button>
                 </div>
-                
+
                 <div class="offer-card upcoming">
                     <div class="offer-badge">Coming Soon</div>
                     <div class="offer-icon">
@@ -440,7 +446,7 @@
                     </p>
                     <button class="notify-btn">Notify Me</button>
                 </div>
-                
+
                 <div class="offer-card">
                     <div class="offer-icon">
                         <i class="fas fa-truck-moving"></i>
@@ -461,26 +467,30 @@
     <section class="calculator-faq">
         <div class="container">
             <h2 class="section-title fade-in">Pricing FAQs</h2>
-            
+
             <div class="faq-grid fade-in fade-in-delay-1">
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> How is pricing calculated?</h3>
-                    <p>Our pricing is based on distance, vehicle type, service level, and any add-ons you select. The calculator above provides an instant estimate.</p>
+                    <p>Our pricing is based on distance, vehicle type, service level, and any add-ons you select. The
+                        calculator above provides an instant estimate.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> Are there hidden fees?</h3>
-                    <p>No! Our quotes include all costs. The only exception is if you request additional services after booking or if vehicle details were inaccurate.</p>
+                    <p>No! Our quotes include all costs. The only exception is if you request additional services after
+                        booking or if vehicle details were inaccurate.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> When do I pay?</h3>
-                    <p>We require a deposit to secure your booking, with the balance due upon delivery. We accept all major credit cards and payment plans.</p>
+                    <p>We require a deposit to secure your booking, with the balance due upon delivery. We accept all
+                        major credit cards and payment plans.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> Can I get a price match?</h3>
-                    <p>Yes! We offer price matching on comparable services. Contact us with a competitor's quote for review.</p>
+                    <p>Yes! We offer price matching on comparable services. Contact us with a competitor's quote for
+                        review.</p>
                 </div>
             </div>
         </div>
@@ -490,9 +500,14 @@
     <div id="footer-container"></div>
 
     <!-- Scripts -->
+    <!-- Loading State Manager - Must load first -->
+    <script src="../js/modules/loading-state-manager.js"></script>
+    <!-- Page Navigation Loader - Must load after loading-state-manager -->
+    <script src="../js/modules/page-navigation-loader.js"></script>
     <script src="../js/modules/navbar-loader.js?v=2"></script>
     <script src="../js/modules/footer.js"></script>
     <script src="../js/modules/scroll-animations.js"></script>
     <script src="../js/modules/pricing-calculator.js"></script>
 </body>
+
 </html>

@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="24/7 Emergency Support - Get immediate help for your car transport needs. Live chat, hotline, and roadside assistance available.">
+    <meta name="description"
+        content="24/7 Emergency Support - Get immediate help for your car transport needs. Live chat, hotline, and roadside assistance available.">
     <title>Emergency Support - Car Transport Service</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/components/header.css">
-    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <!-- Loading Indicators CSS -->
+    <link rel="stylesheet" href="../css/components/loading-indicators.css" />
     <link rel="stylesheet" href="../css/components/footer.css">
     <link rel="stylesheet" href="../css/components/emergency-support.css">
     <link rel="stylesheet" href="../css/components/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <div id="navbar-container"></div>
@@ -45,7 +50,7 @@
         <div class="container">
             <h2 class="section-title fade-in">24/7 Emergency Hotline</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Immediate assistance when you need it most</p>
-            
+
             <div class="hotline-grid fade-in fade-in-delay-2">
                 <div class="hotline-card urgent">
                     <div class="hotline-icon">
@@ -57,7 +62,7 @@
                     <p class="hotline-description">For accidents, breakdowns, or urgent delivery issues</p>
                     <a href="tel:+18008726776" class="hotline-btn urgent-btn">Call Emergency Line</a>
                 </div>
-                
+
                 <div class="hotline-card">
                     <div class="hotline-icon">
                         <i class="fas fa-headphones-alt"></i>
@@ -68,7 +73,7 @@
                     <p class="hotline-description">For general inquiries and non-urgent assistance</p>
                     <a href="tel:+18004357669" class="hotline-btn">Call Support</a>
                 </div>
-                
+
                 <div class="hotline-card">
                     <div class="hotline-icon">
                         <i class="fas fa-tools"></i>
@@ -88,7 +93,7 @@
         <div class="container">
             <h2 class="section-title fade-in">Live Chat Support</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Get instant answers from our support team</p>
-            
+
             <div class="chat-wrapper fade-in fade-in-delay-2">
                 <div class="chat-info">
                     <div class="chat-feature">
@@ -98,7 +103,7 @@
                             <p>Our chat support team is always online to help you</p>
                         </div>
                     </div>
-                    
+
                     <div class="chat-feature">
                         <i class="fas fa-bolt"></i>
                         <div>
@@ -106,7 +111,7 @@
                             <p>Get answers to your questions in real-time</p>
                         </div>
                     </div>
-                    
+
                     <div class="chat-feature">
                         <i class="fas fa-user-shield"></i>
                         <div>
@@ -114,7 +119,7 @@
                             <p>Talk to trained professionals who know car transport</p>
                         </div>
                     </div>
-                    
+
                     <div class="chat-feature">
                         <i class="fas fa-file-alt"></i>
                         <div>
@@ -123,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="chat-preview">
                     <div class="chat-header">
                         <div class="chat-status">
@@ -134,7 +139,7 @@
                             <span>12 agents available</span>
                         </div>
                     </div>
-                    
+
                     <div class="chat-messages">
                         <div class="chat-message agent">
                             <div class="message-avatar">
@@ -147,7 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <button class="start-chat-btn" onclick="openLiveChat()">
                         <i class="fas fa-comments"></i>
                         Start Chat Now
@@ -161,15 +166,17 @@
     <section class="emergency-contact">
         <div class="container">
             <h2 class="section-title fade-in">Emergency Contact Form</h2>
-            <p class="section-subtitle fade-in fade-in-delay-1">Submit an urgent request and we'll respond immediately</p>
-            
+            <p class="section-subtitle fade-in fade-in-delay-1">Submit an urgent request and we'll respond immediately
+            </p>
+
             <div class="contact-form-wrapper fade-in fade-in-delay-2">
                 <form id="emergencyContactForm" class="emergency-form">
                     <div class="form-alert">
                         <i class="fas fa-info-circle"></i>
-                        <span>For immediate assistance, please call our emergency hotline: <strong>1-800-TRANSPORT</strong></span>
+                        <span>For immediate assistance, please call our emergency hotline:
+                            <strong>1-800-TRANSPORT</strong></span>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="urgencyLevel">Urgency Level *</label>
@@ -181,7 +188,7 @@
                                 <option value="low">Low - Response within 24 hours</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="issueType">Issue Type *</label>
                             <select id="issueType" name="issueType" required>
@@ -195,52 +202,54 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="fullName">Your Name *</label>
                             <input type="text" id="fullName" name="fullName" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="phoneNumber">Phone Number *</label>
                             <input type="tel" id="phoneNumber" name="phoneNumber" required>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="emailAddress">Email Address *</label>
                             <input type="email" id="emailAddress" name="emailAddress" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="bookingId">Booking/Tracking ID</label>
                             <input type="text" id="bookingId" name="bookingId" placeholder="e.g., TRK123456">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="currentLocation">Current Location</label>
-                        <input type="text" id="currentLocation" name="currentLocation" placeholder="City, State or Address">
+                        <input type="text" id="currentLocation" name="currentLocation"
+                            placeholder="City, State or Address">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="issueDescription">Describe the Emergency *</label>
-                        <textarea id="issueDescription" name="issueDescription" rows="6" required placeholder="Please provide detailed information about the emergency situation..."></textarea>
+                        <textarea id="issueDescription" name="issueDescription" rows="6" required
+                            placeholder="Please provide detailed information about the emergency situation..."></textarea>
                     </div>
-                    
+
                     <div class="form-group checkbox-group">
                         <input type="checkbox" id="smsUpdates" name="smsUpdates">
                         <label for="smsUpdates">Send me SMS updates about this emergency</label>
                     </div>
-                    
+
                     <button type="submit" class="submit-emergency-btn">
                         <i class="fas fa-paper-plane"></i>
                         Submit Emergency Request
                     </button>
                 </form>
-                
+
                 <div class="contact-sidebar">
                     <div class="sidebar-card">
                         <i class="fas fa-phone-volume"></i>
@@ -248,14 +257,14 @@
                         <p>Call our 24/7 emergency hotline</p>
                         <a href="tel:+18008726776" class="sidebar-btn">1-800-TRANSPORT</a>
                     </div>
-                    
+
                     <div class="sidebar-card">
                         <i class="fas fa-map-marker-alt"></i>
                         <h4>Track Your Vehicle</h4>
                         <p>Check real-time location</p>
                         <a href="tracking.html" class="sidebar-link">Go to Tracking</a>
                     </div>
-                    
+
                     <div class="sidebar-card">
                         <i class="fas fa-file-contract"></i>
                         <h4>View Your Booking</h4>
@@ -272,7 +281,7 @@
         <div class="container">
             <h2 class="section-title fade-in">What to Do in Case of Emergency</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Step-by-step guides for common emergency situations</p>
-            
+
             <div class="procedures-grid fade-in fade-in-delay-2">
                 <div class="procedure-card">
                     <div class="procedure-number">1</div>
@@ -290,7 +299,7 @@
                         <li><i class="fas fa-check-circle"></i> File a police report</li>
                     </ul>
                 </div>
-                
+
                 <div class="procedure-card">
                     <div class="procedure-number">2</div>
                     <div class="procedure-icon">
@@ -306,7 +315,7 @@
                         <li><i class="fas fa-check-circle"></i> Discuss compensation if applicable</li>
                     </ul>
                 </div>
-                
+
                 <div class="procedure-card">
                     <div class="procedure-number">3</div>
                     <div class="procedure-icon">
@@ -323,7 +332,7 @@
                         <li><i class="fas fa-check-circle"></i> Get repair estimates from certified shops</li>
                     </ul>
                 </div>
-                
+
                 <div class="procedure-card">
                     <div class="procedure-number">4</div>
                     <div class="procedure-icon">
@@ -348,7 +357,7 @@
         <div class="container">
             <h2 class="section-title fade-in">Roadside Assistance Services</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Comprehensive support wherever you are</p>
-            
+
             <div class="assistance-grid fade-in fade-in-delay-2">
                 <div class="assistance-card">
                     <div class="assistance-icon">
@@ -363,7 +372,7 @@
                         <li>Insurance coordination</li>
                     </ul>
                 </div>
-                
+
                 <div class="assistance-card">
                     <div class="assistance-icon">
                         <i class="fas fa-battery-full"></i>
@@ -377,7 +386,7 @@
                         <li>Disposal of old batteries</li>
                     </ul>
                 </div>
-                
+
                 <div class="assistance-card">
                     <div class="assistance-icon">
                         <i class="fas fa-tire"></i>
@@ -391,7 +400,7 @@
                         <li>Towing if no spare available</li>
                     </ul>
                 </div>
-                
+
                 <div class="assistance-card">
                     <div class="assistance-icon">
                         <i class="fas fa-gas-pump"></i>
@@ -405,7 +414,7 @@
                         <li>Fast response time</li>
                     </ul>
                 </div>
-                
+
                 <div class="assistance-card">
                     <div class="assistance-icon">
                         <i class="fas fa-key"></i>
@@ -419,7 +428,7 @@
                         <li>Trunk access service</li>
                     </ul>
                 </div>
-                
+
                 <div class="assistance-card">
                     <div class="assistance-icon">
                         <i class="fas fa-wrench"></i>
@@ -442,7 +451,7 @@
         <div class="container">
             <h2 class="section-title fade-in">Customer Support Hours</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">When and how to reach our different support teams</p>
-            
+
             <div class="hours-grid fade-in fade-in-delay-2">
                 <div class="hours-card priority">
                     <div class="hours-badge">24/7</div>
@@ -452,7 +461,7 @@
                     <p class="hours-contact">1-800-TRANSPORT</p>
                     <p class="hours-description">For urgent matters, accidents, breakdowns, and critical assistance</p>
                 </div>
-                
+
                 <div class="hours-card priority">
                     <div class="hours-badge">24/7</div>
                     <i class="fas fa-comments"></i>
@@ -461,7 +470,7 @@
                     <p class="hours-contact">Click chat widget</p>
                     <p class="hours-description">Instant messaging support with real-time responses</p>
                 </div>
-                
+
                 <div class="hours-card">
                     <i class="fas fa-headset"></i>
                     <h3>Customer Service</h3>
@@ -470,7 +479,7 @@
                     <p class="hours-contact">1-800-HELP-NOW</p>
                     <p class="hours-description">General inquiries, booking assistance, and quote requests</p>
                 </div>
-                
+
                 <div class="hours-card">
                     <i class="fas fa-envelope"></i>
                     <h3>Email Support</h3>
@@ -478,7 +487,7 @@
                     <p class="hours-contact">support@cartransport.com</p>
                     <p class="hours-description">Non-urgent inquiries and detailed questions</p>
                 </div>
-                
+
                 <div class="hours-card">
                     <i class="fas fa-tools"></i>
                     <h3>Roadside Assistance</h3>
@@ -486,7 +495,7 @@
                     <p class="hours-contact">1-800-ROADSIDE</p>
                     <p class="hours-description">Vehicle breakdowns, towing, and mechanical emergencies</p>
                 </div>
-                
+
                 <div class="hours-card">
                     <i class="fas fa-file-alt"></i>
                     <h3>Claims Department</h3>
@@ -502,36 +511,42 @@
     <section class="emergency-faq">
         <div class="container">
             <h2 class="section-title fade-in">Emergency Support FAQs</h2>
-            
+
             <div class="faq-grid fade-in fade-in-delay-1">
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> What qualifies as an emergency?</h3>
-                    <p>Emergencies include accidents, vehicle breakdowns, significant delays, vehicle damage, safety concerns, or any situation requiring immediate assistance.</p>
+                    <p>Emergencies include accidents, vehicle breakdowns, significant delays, vehicle damage, safety
+                        concerns, or any situation requiring immediate assistance.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> How quickly will someone respond?</h3>
-                    <p>Emergency calls are answered immediately 24/7. Critical situations receive response within 15-30 minutes. Non-critical emergencies within 1-2 hours.</p>
+                    <p>Emergency calls are answered immediately 24/7. Critical situations receive response within 15-30
+                        minutes. Non-critical emergencies within 1-2 hours.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> Is emergency support free?</h3>
-                    <p>Emergency support is included in all transport services. Roadside assistance may have additional costs depending on the service required.</p>
+                    <p>Emergency support is included in all transport services. Roadside assistance may have additional
+                        costs depending on the service required.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> What if I can't reach anyone?</h3>
-                    <p>If you cannot reach us (unlikely), call 911 for immediate safety concerns, then try our backup emergency number or submit an emergency form online.</p>
+                    <p>If you cannot reach us (unlikely), call 911 for immediate safety concerns, then try our backup
+                        emergency number or submit an emergency form online.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> Can I track my emergency request?</h3>
-                    <p>Yes, all emergency requests receive a tracking number. You'll get SMS and email updates throughout the resolution process.</p>
+                    <p>Yes, all emergency requests receive a tracking number. You'll get SMS and email updates
+                        throughout the resolution process.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-question-circle"></i> What information should I have ready?</h3>
-                    <p>Have your booking ID, current location, contact information, and a description of the emergency ready when you call or chat.</p>
+                    <p>Have your booking ID, current location, contact information, and a description of the emergency
+                        ready when you call or chat.</p>
                 </div>
             </div>
         </div>
@@ -554,9 +569,15 @@
     </div>
 
     <!-- Scripts -->
+    <!-- Loading State Manager - Must load first -->
+    <script src="../js/modules/loading-state-manager.js"></script>
+    <!-- Page Navigation Loader - Must load after loading-state-manager -->
+    <script src="../js/modules/page-navigation-loader.js"></script>
     <script src="../js/modules/navbar-loader.js?v=2"></script>
     <script src="../js/modules/footer.js"></script>
     <script src="../js/modules/scroll-animations.js"></script>
-    <script src="../js/modules/emergency-support.js"></script></script>
+    <script src="../js/modules/emergency-support.js"></script>
+    </script>
 </body>
+
 </html>

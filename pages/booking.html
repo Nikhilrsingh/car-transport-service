@@ -9,6 +9,8 @@
 
     <!-- Navbar CSS -->
     <link rel="stylesheet" href="../css/components/navbar.css">
+    <!-- Loading Indicators CSS -->
+    <link rel="stylesheet" href="../css/components/loading-indicators.css">
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -22,7 +24,8 @@
 
     <!-- Leaflet Plugins for Advanced Features -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
 
     <!-- Booking CSS -->
     <link rel="stylesheet" href="../css/components/booking.css">
@@ -1612,11 +1615,15 @@
             animation: shake 0.5s ease-in-out;
         }
     </style>
-    </head>
+</head>
 
 <body>
     <!-- Navbar Component -->
     <div id="navbar-container"></div>
+    <!-- Loading State Manager - Must load first -->
+    <script src="../js/modules/loading-state-manager.js"></script>
+    <!-- Page Navigation Loader - Must load after loading-state-manager -->
+    <script src="../js/modules/page-navigation-loader.js"></script>
     <script src="../js/modules/navbar-loader.js?v=2"></script>
 
     <!-- Hero Section -->
@@ -1847,14 +1854,17 @@
                                 <div class="waypoints-list" id="waypointsList">
                                     <!-- Waypoints will be added dynamically -->
                                 </div>
-                                <button type="button" class="optimize-route-btn" id="optimizeRouteBtn" onclick="optimizeRoute()" style="display: none;">
+                                <button type="button" class="optimize-route-btn" id="optimizeRouteBtn"
+                                    onclick="optimizeRoute()" style="display: none;">
                                     <i class="fas fa-route"></i> Optimize Route Order
                                 </button>
                                 <div class="optimization-result" id="optimizationResult">
                                     <h5><i class="fas fa-check-circle"></i> Route Optimized!</h5>
                                     <div class="optimization-stats">
-                                        <div><i class="fas fa-road"></i> Distance Saved: <strong id="distanceSaved">0 km</strong></div>
-                                        <div><i class="fas fa-clock"></i> Time Saved: <strong id="timeSaved">0 mins</strong></div>
+                                        <div><i class="fas fa-road"></i> Distance Saved: <strong id="distanceSaved">0
+                                                km</strong></div>
+                                        <div><i class="fas fa-clock"></i> Time Saved: <strong id="timeSaved">0
+                                                mins</strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -2182,7 +2192,8 @@
                             </button>
                         </div>
                         <div class="street-view-content">
-                            <iframe id="streetViewFrame" width="100%" height="400" frameborder="0" style="border:0; border-radius: 10px;"></iframe>
+                            <iframe id="streetViewFrame" width="100%" height="400" frameborder="0"
+                                style="border:0; border-radius: 10px;"></iframe>
                             <p style="color: #999; font-size: 0.85rem; margin-top: 10px; text-align: center;">
                                 Click on the map to preview street view at that location
                             </p>
@@ -3744,7 +3755,7 @@
 
             // Clear alternative routes
             clearAlternativeRoutes();
-            
+
             // Hide alternative routes panel
             if (showAlternativeRoutes) {
                 document.getElementById('alternativeRoutesPanel').style.display = 'none';
@@ -3779,7 +3790,7 @@
         // Toggle Satellite View
         function toggleSatelliteView() {
             const btn = document.getElementById('satelliteViewBtn');
-            
+
             if (currentMapStyle === 'street') {
                 map.removeLayer(streetLayer);
                 map.addLayer(satelliteLayer);
@@ -3802,9 +3813,9 @@
             const btn = document.getElementById('enable3DBtn');
             const mapContainer = document.getElementById('map');
             const indicator = document.getElementById('map3DIndicator');
-            
+
             is3DView = !is3DView;
-            
+
             if (is3DView) {
                 mapContainer.style.transform = 'perspective(1000px) rotateX(30deg)';
                 mapContainer.style.transition = 'transform 0.5s ease';
@@ -3822,14 +3833,14 @@
         // Toggle Traffic Layer (Mock implementation - would need real traffic API)
         function toggleTrafficLayer() {
             const btn = document.getElementById('trafficLayerBtn');
-            
+
             if (!trafficLayer) {
                 // Mock traffic layer - in production, use Google Maps Traffic Layer or similar
                 // For demonstration, we'll show a toast
                 trafficLayer = true;
                 btn.classList.add('active');
                 showToast('Traffic Layer', 'Traffic layer enabled (demo mode)', 'success', 2000);
-                
+
                 // In production, you would integrate with a real traffic API:
                 // Example: Google Maps, TomTom, HERE Maps, etc.
             } else {
@@ -3842,7 +3853,7 @@
         // Toggle Service Centers
         function toggleServiceCenters() {
             const btn = document.getElementById('serviceCentersBtn');
-            
+
             if (!map.hasLayer(serviceCentersLayer)) {
                 // Add service centers to map
                 loadServiceCenters();
@@ -3859,7 +3870,7 @@
         // Load Service Centers (mock data - would fetch from API in production)
         function loadServiceCenters() {
             serviceCentersLayer.clearLayers();
-            
+
             // Mock service center locations across India
             const serviceCenters = [
                 { name: 'Harihar Service Center - Mumbai', lat: 19.0760, lng: 72.8777, phone: '+91 9876543210' },
@@ -3869,14 +3880,14 @@
                 { name: 'Harihar Service Center - Chennai', lat: 13.0827, lng: 80.2707, phone: '+91 9876543214' },
                 { name: 'Harihar Service Center - Hyderabad', lat: 17.3850, lng: 78.4867, phone: '+91 9876543215' }
             ];
-            
+
             const serviceIcon = L.divIcon({
                 html: '<i class=\"fas fa-tools\" style=\"color: #2196F3; font-size: 24px;\"></i>',
                 className: 'custom-div-icon',
                 iconSize: [24, 24],
                 iconAnchor: [12, 24]
             });
-            
+
             serviceCenters.forEach(center => {
                 const marker = L.marker([center.lat, center.lng], { icon: serviceIcon });
                 marker.bindPopup(`
@@ -3893,7 +3904,7 @@
         // Toggle Rest Stops
         function toggleRestStops() {
             const btn = document.getElementById('restStopsBtn');
-            
+
             if (!map.hasLayer(restStopsLayer)) {
                 loadRestStops();
                 map.addLayer(restStopsLayer);
@@ -3909,7 +3920,7 @@
         // Load Rest Stops (mock data)
         function loadRestStops() {
             restStopsLayer.clearLayers();
-            
+
             // Mock rest stop locations
             const restStops = [
                 { name: 'Highway Dhaba - NH48', lat: 19.5, lng: 73.2, amenities: 'Food, Washroom, Fuel' },
@@ -3918,14 +3929,14 @@
                 { name: 'Roadside Cafe - NH27', lat: 24.5, lng: 73.7, amenities: 'Food, Washroom' },
                 { name: 'Highway Rest Stop - NH66', lat: 11.2, lng: 75.8, amenities: 'Food, Washroom, Fuel' }
             ];
-            
+
             const restIcon = L.divIcon({
                 html: '<i class=\"fas fa-coffee\" style=\"color: #795548; font-size: 24px;\"></i>',
                 className: 'custom-div-icon',
                 iconSize: [24, 24],
                 iconAnchor: [12, 24]
             });
-            
+
             restStops.forEach(stop => {
                 const marker = L.marker([stop.lat, stop.lng], { icon: restIcon });
                 marker.bindPopup(`
@@ -3942,7 +3953,7 @@
         // Toggle Toll Plazas
         function toggleTollPlazas() {
             const btn = document.getElementById('tollPlazasBtn');
-            
+
             if (!map.hasLayer(tollPlazasLayer)) {
                 loadTollPlazas();
                 map.addLayer(tollPlazasLayer);
@@ -3958,7 +3969,7 @@
         // Load Toll Plazas (mock data)
         function loadTollPlazas() {
             tollPlazasLayer.clearLayers();
-            
+
             // Mock toll plaza locations
             const tollPlazas = [
                 { name: 'Khalapur Toll Plaza', lat: 18.8329, lng: 73.1986, cost: '₹145', highway: 'Mumbai-Pune Expressway' },
@@ -3967,16 +3978,16 @@
                 { name: 'Panipat Toll Plaza', lat: 29.3909, lng: 76.9635, cost: '₹120', highway: 'NH44' },
                 { name: 'Vadodara Toll Plaza', lat: 22.3072, lng: 73.1812, cost: '₹75', highway: 'NH48' }
             ];
-            
+
             let totalTollCost = 0;
-            
+
             const tollIcon = L.divIcon({
                 html: '<i class=\"fas fa-coins\" style=\"color: #FFC107; font-size: 24px;\"></i>',
                 className: 'custom-div-icon',
                 iconSize: [24, 24],
                 iconAnchor: [12, 24]
             });
-            
+
             tollPlazas.forEach(toll => {
                 const marker = L.marker([toll.lat, toll.lng], { icon: tollIcon });
                 marker.bindPopup(`
@@ -3987,12 +3998,12 @@
                     </div>
                 `);
                 tollPlazasLayer.addLayer(marker);
-                
+
                 // Extract numeric value for total
                 const costValue = parseInt(toll.cost.replace(/[^0-9]/g, ''));
                 totalTollCost += costValue;
             });
-            
+
             // Update toll cost in route info
             document.getElementById('routeTollCost').textContent = '₹ ' + totalTollCost;
         }
@@ -4001,15 +4012,15 @@
         function toggleAlternativeRoutes() {
             const btn = document.getElementById('alternativeRoutesBtn');
             const panel = document.getElementById('alternativeRoutesPanel');
-            
+
             showAlternativeRoutes = !showAlternativeRoutes;
-            
+
             if (showAlternativeRoutes) {
                 if (!pickupCoords || !dropCoords) {
                     showToast('Error', 'Please select pickup and drop locations first', 'error', 3000);
                     return;
                 }
-                
+
                 loadAlternativeRoutes();
                 panel.style.display = 'block';
                 btn.classList.add('active');
@@ -4024,10 +4035,10 @@
         // Load Alternative Routes
         function loadAlternativeRoutes() {
             const panel = document.getElementById('routesComparison');
-            
+
             // Clear existing routes
             clearAlternativeRoutes();
-            
+
             // Mock alternative routes data
             const routes = [
                 {
@@ -4061,10 +4072,10 @@
                     color: '#FFC107'
                 }
             ];
-            
+
             panel.innerHTML = routes.map((route, index) => `
                 <div class=\"route-option ${index === 0 ? 'active' : ''}\" onclick=\"selectAlternativeRoute('${route.id}', ${index})\">\n                    <div class=\"route-option-info\">\n                        <div class=\"route-option-label\">${route.label}</div>\n                        <div class=\"route-option-details\">\n                            <span><i class=\"fas fa-road\"></i> ${route.distance}</span>\n                            <span><i class=\"fas fa-clock\"></i> ${route.time}</span>\n                            <span><i class=\"fas fa-coins\"></i> ${route.toll}</span>\n                        </div>\n                    </div>\n                    <div class=\"route-option-badge ${route.badge}\">\n                        ${route.badge.charAt(0).toUpperCase() + route.badge.slice(1).replace('-', ' ')}\n                    </div>\n                </div>\n            `).join('');
-            
+
             // Display all routes on map
             routes.forEach((route, index) => {
                 displayRouteOnMap(route, index === 0);
@@ -4078,16 +4089,16 @@
                 routeWhileDragging: false,
                 showAlternatives: false,
                 lineOptions: {
-                    styles: [{ 
-                        color: route.color, 
-                        opacity: isActive ? 0.8 : 0.4, 
-                        weight: isActive ? 5 : 3 
+                    styles: [{
+                        color: route.color,
+                        opacity: isActive ? 0.8 : 0.4,
+                        weight: isActive ? 5 : 3
                     }]
                 },
                 createMarker: function () { return null; },
                 addWaypoints: false
             }).addTo(map);
-            
+
             alternativeRoutesControls.push(routeControl);
         }
 
@@ -4100,11 +4111,11 @@
                     el.classList.add('active');
                 }
             });
-            
+
             // Clear and redisplay routes with updated active state
             clearAlternativeRoutes();
             loadAlternativeRoutes();
-            
+
             showToast('Route Selected', `Switched to ${routeId}`, 'success', 2000);
         }
 
@@ -4120,9 +4131,9 @@
         function openStreetViewPanel() {
             const panel = document.getElementById('streetViewPanel');
             const btn = document.getElementById('streetViewBtn');
-            
+
             streetViewActive = !streetViewActive;
-            
+
             if (streetViewActive) {
                 panel.style.display = 'block';
                 btn.classList.add('active');
@@ -4136,7 +4147,7 @@
         function closeStreetViewPanel() {
             const panel = document.getElementById('streetViewPanel');
             const btn = document.getElementById('streetViewBtn');
-            
+
             panel.style.display = 'none';
             btn.classList.remove('active');
             streetViewActive = false;
@@ -4145,15 +4156,15 @@
         // Show Street View at location
         function showStreetView(lat, lng) {
             const frame = document.getElementById('streetViewFrame');
-            
+
             // Google Street View embed URL
             const streetViewUrl = `https://www.google.com/maps/embed/v1/streetview?key=YOUR_GOOGLE_MAPS_API_KEY&location=${lat},${lng}&heading=0&pitch=0&fov=90`;
-            
+
             // For demo without API key, show OpenStreetMap instead
-            const demoUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${lng-0.01},${lat-0.01},${lng+0.01},${lat+0.01}&layer=mapnik&marker=${lat},${lng}`;
-            
+            const demoUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.01},${lat - 0.01},${lng + 0.01},${lat + 0.01}&layer=mapnik&marker=${lat},${lng}`;
+
             frame.src = demoUrl;
-            
+
             showToast('Street View', 'Loading street view preview...', 'success', 2000);
         }
 
@@ -4226,12 +4237,12 @@
             try {
                 // Using OpenWeatherMap API - replace with your API key
                 const API_KEY = 'demo'; // Replace with actual API key or use demo data
-                
+
                 // For demo purposes, generate mock weather data
                 const mockWeather = generateMockWeather(city);
                 weatherData[type] = mockWeather;
                 updateWeatherDisplay();
-                
+
                 // Uncomment below for real API integration
                 // const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},IN&appid=${API_KEY}&units=metric`);
                 // if (response.ok) {
@@ -4270,7 +4281,7 @@
         function updateWeatherDisplay() {
             const weatherSection = document.getElementById('weatherSection');
             const weatherGrid = document.getElementById('weatherGrid');
-            
+
             if (!weatherData.pickup && !weatherData.drop) {
                 weatherSection.style.display = 'none';
                 return;
@@ -4291,7 +4302,7 @@
         function createWeatherCard(data, label) {
             const card = document.createElement('div');
             card.className = 'weather-card';
-            
+
             const iconMap = {
                 'Clear': '☀️',
                 'Sunny': '☀️',
@@ -4349,7 +4360,7 @@
         function addWaypoint() {
             const waypointId = 'waypoint-' + Date.now();
             const waypointNumber = waypoints.length + 1;
-            
+
             waypoints.push({
                 id: waypointId,
                 city: '',
@@ -4400,9 +4411,9 @@
 
             if (!input || !dropdown) return;
 
-            input.addEventListener('input', function() {
+            input.addEventListener('input', function () {
                 const query = this.value.toLowerCase();
-                
+
                 if (query.length < 2) {
                     dropdown.classList.remove('show');
                     return;
@@ -4424,7 +4435,7 @@
             });
 
             // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (!input.contains(e.target) && !dropdown.contains(e.target)) {
                     dropdown.classList.remove('show');
                 }
@@ -4434,10 +4445,10 @@
         function selectWaypointCity(waypointId, city) {
             const input = document.getElementById(waypointId + '-input');
             const dropdown = document.getElementById(waypointId + '-dropdown');
-            
+
             if (input) input.value = city;
             if (dropdown) dropdown.classList.remove('show');
-            
+
             updateWaypoint(waypointId, city);
         }
 
@@ -4446,7 +4457,7 @@
             if (waypoint) {
                 waypoint.city = city;
                 waypoint.coords = cityCoordinates[city] || null;
-                
+
                 if (waypoint.coords) {
                     // Add marker to map
                     addWaypointMarker(waypoint);
@@ -4490,26 +4501,26 @@
         function removeWaypoint(waypointId) {
             // Remove from array
             waypoints = waypoints.filter(w => w.id !== waypointId);
-            
+
             // Remove marker from map
             const markerData = waypointMarkers.find(m => m.id === waypointId);
             if (markerData && markerData.marker) {
                 map.removeLayer(markerData.marker);
             }
             waypointMarkers = waypointMarkers.filter(m => m.id !== waypointId);
-            
+
             // Remove DOM element
             const element = document.getElementById(waypointId);
             if (element) element.remove();
-            
+
             // Renumber remaining waypoints
             renumberWaypoints();
-            
+
             // Update route
             if (pickupCoords && dropCoords) {
                 calculateRouteWithWaypoints();
             }
-            
+
             updateOptimizeButton();
             showToast('Removed', 'Waypoint removed', 'info', 2000);
         }
@@ -4539,13 +4550,13 @@
         function renumberWaypoints() {
             const waypointsList = document.getElementById('waypointsList');
             const items = Array.from(waypointsList.children);
-            
+
             waypoints.forEach((waypoint, index) => {
                 const element = document.getElementById(waypoint.id);
                 if (element) {
                     const numberEl = element.querySelector('.waypoint-number');
                     if (numberEl) numberEl.textContent = index + 1;
-                    
+
                     // Reorder in DOM
                     waypointsList.appendChild(element);
                 }
@@ -4566,7 +4577,7 @@
 
             // Simple optimization: calculate all permutations and find shortest
             // For production, use a proper TSP solver or Google Maps Directions API
-            
+
             showToast('Optimizing', 'Calculating optimal route...', 'info', 2000);
 
             // Simulate optimization delay
@@ -4581,7 +4592,7 @@
                 document.getElementById('optimizationResult').classList.add('show');
 
                 showToast('Optimized!', `Route optimized to save ${saved}km`, 'success', 3000);
-                
+
                 // Recalculate route with optimized order
                 calculateRouteWithWaypoints();
             }, 1500);
@@ -4596,13 +4607,13 @@
 
             // Build waypoints array: pickup -> all stops -> drop
             const routeWaypoints = [L.latLng(pickupCoords[0], pickupCoords[1])];
-            
+
             waypoints.forEach(wp => {
                 if (wp.coords) {
                     routeWaypoints.push(L.latLng(wp.coords[0], wp.coords[1]));
                 }
             });
-            
+
             routeWaypoints.push(L.latLng(dropCoords[0], dropCoords[1]));
 
             routingControl = L.Routing.control({
@@ -5021,9 +5032,9 @@
             }
         };
     </script>
- <!-- Footer -->
-  <div id="footer-container"></div>
-  <script src="../js/modules/footer-loader.js"></script>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script src="../js/modules/footer-loader.js"></script>
 </body>
 
-</html> 
+</html>
