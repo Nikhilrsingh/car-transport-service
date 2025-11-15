@@ -109,6 +109,58 @@ footer.footer,
   box-shadow: 0 4px 12px rgba(255, 99, 71, 0.2);
 }
 
+.social-links {
+  display: flex;
+  gap: 14px;
+}
+
+.social-links a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  text-decoration: none;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: transform 0.35s ease;
+}
+
+.social-links a::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: width 0.4s ease;
+  z-index: -1;
+}
+
+.social-links a:hover::before {
+  width: 100%;
+}
+
+.social-links a i {
+  font-size: 20px;
+  transition: color 0.3s ease, transform 0.55s ease;
+}
+
+.social-links a:hover i {
+  transform: rotate(360deg);
+  color: #ff7b00;   
+}
+
+.social-links a:hover {
+  transform: translateY(-5px);
+}
+
 /* Quick Links & Services */
 .footer-links {
   list-style: none;
