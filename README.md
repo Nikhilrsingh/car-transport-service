@@ -32,23 +32,58 @@ Currently, the website has basic structure and design. Contributors are encourag
 
 ```
 car-transport-service/
-├── index.html
-├── about.html
-├── contact.html
-├── assets/
-│   ├── images/       # Logos, photos, placeholders
-│   ├── videos/       # Optional
-│   ├── fonts/        # Custom fonts
-│   └── icons/        # SVGs or icon files
-├── css/
-│   ├── style.css     # Main CSS
-│   └── components/   # Optional component-specific CSS
-├── js/
-│   ├── script.js     # Main JS
-│   └── modules/      # Optional JS modules
-├── vendor/           # Third-party libraries (Bootstrap, jQuery, etc.)
+│
+├── frontend/                # All frontend code
+│   ├── index.html          # Main landing page
+│   ├── services.html       # Services page
+│   ├── login.html          # Login/Signup page
+│   ├── pages/              # Additional HTML pages
+│   │   ├── about.html
+│   │   ├── booking.html
+│   │   ├── contact.html
+│   │   ├── pricing.html
+│   │   ├── gallery.html
+│   │   └── ... (more pages)
+│   ├── assets/
+│   │   ├── images/         # Logos, photos, banners
+│   │   ├── icons/          # SVGs and icon files
+│   │   ├── fonts/          # Custom fonts
+│   │   ├── data/           # JSON data files
+│   │   └── gallery/        # Gallery images
+│   ├── components/         # Reusable HTML components
+│   │   ├── navbar.html
+│   │   ├── footer.html
+│   │   └── region-section.html
+│   ├── css/
+│   │   ├── styles.css      # Main CSS
+│   │   ├── light-mode.css
+│   │   ├── dark-mode.css
+│   │   └── components/     # Component-specific CSS
+│   └── js/
+│       ├── script.js       # Main JavaScript
+│       └── modules/        # JavaScript modules
+│
+├── backend/                # Backend services (planned for Q1 2026)
+├── api/                    # API gateway & microservices (planned)
+├── mobile-app/             # React Native app (planned for Q2 2026)
+│
+├── docs/                   # Documentation
+│   ├── API_DOCS.md
+│   ├── CONTRIBUTING.md
+│   ├── ROADMAP.md
+│   └── DESIGN_GUIDELINES.md
+│
+├── scripts/                # Build & deployment scripts
+│
+├── .github/
+│   ├── ISSUE_TEMPLATE/     # Issue templates
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   └── workflows/          # GitHub Actions
+│
+├── .gitignore
 ├── README.md
-└── .gitignore
+├── LICENSE
+└── SECURITY.md
 ```
 
 ---
@@ -75,6 +110,7 @@ Once assigned, follow the steps below:
 2. **Clone** your fork:
 ```bash
 git clone https://github.com/your-username/car-transport-service.git
+cd car-transport-service
 ```
 3. Create a **feature branch**:
 ```bash
@@ -90,6 +126,8 @@ git push origin feature-name
 ```
 6. Open a **Pull Request** and describe your changes.  
 
+> 📖 For detailed guidelines, see [CONTRIBUTING.md](docs/CONTRIBUTING.md)  
+
 ---
 
 ### ✅ Contribution Guidelines
@@ -98,7 +136,12 @@ git push origin feature-name
 - Add comments if required  
 - Respect Code of Conduct
 
-> ⭐ Don’t forget to **star** the repo if you like this project!
+> 📚 **Read More:**  
+> - [Contributing Guidelines](docs/CONTRIBUTING.md)  
+> - [Project Roadmap](docs/ROADMAP.md)  
+> - [Design Guidelines](docs/DESIGN_GUIDELINES.md)
+
+> ⭐ Don't forget to **star** the repo if you like this project!
 
 ## 📝 Issues
 

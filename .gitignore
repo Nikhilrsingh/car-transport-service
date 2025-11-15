@@ -1,0 +1,100 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Production builds
+/dist
+/build
+/.next
+/out
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IDE - IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+.jest/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache/
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Uploaded files (if applicable)
+uploads/
+temp-uploads/
+
+# Backend specific
+backend/node_modules/
+backend/.env
+backend/uploads/
+backend/logs/
+
+# Frontend specific  
+frontend/node_modules/
+frontend/.env.local
+
+# Build files
+*.min.js
+*.min.css
+*.map
+
+# API keys and secrets
+secrets/
+.secrets/
+credentials.json
+
+# Misc
+.sass-cache/
+.grunt/
+bower_components/
