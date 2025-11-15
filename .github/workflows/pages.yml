@@ -1,9 +1,10 @@
-name: Deploy static website to GitHub Pages
+name: Deploy frontend to GitHub Pages
 
 on:
   push:
     branches:
-      - main   # deploy whenever you push to main branch
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -21,10 +22,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Upload website files
+      - name: Upload frontend folder as Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .   # 👈 this means: use everything in your repo root (index.html, css/, js/ etc.)
+          path: ./frontend    # <-- publish only frontend folder
 
       - name: Deploy to GitHub Pages
         id: deployment

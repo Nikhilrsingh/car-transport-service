@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Blog | Harihar Car Carriers</title>
+  <link rel="icon" type="image/png" href="classic-car.png" />
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+  <link rel="stylesheet" href="../css/components/footer.css" />
+  <link rel="stylesheet" href="../css/components/floating-call-button.css" />
+  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css" />
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css" />
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+  <link rel="stylesheet" href="../css/components/quote-modal.css" />
+  <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+  <link rel="stylesheet" href="../css/components/backtoBottom.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/components/floating-button.css" />
+  <style>
+    :root {
+      --orange: #ff6347;
+      --bg: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #aaaaaa;
+      --card-bg: #2b2b2b;
+      --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      --radius: 12px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* HERO */
+    .blog-hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: linear-gradient(135deg,
+          rgba(255, 99, 71, 0.15),
+          rgba(0, 0, 0, 0.9));
+    }
+
+    .blog-hero h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #ff6347, #ff4500);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .blog-hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* SEARCH & FILTER SECTION */
+    .blog-controls {
+      max-width: 1400px;
+      margin: 40px auto 20px;
+      padding: 0 20px;
+    }
+
+    .search-filter-container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .blog-search-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 280px;
+      max-width: 500px;
+    }
+
+    .blog-search-input {
+      width: 100%;
+      padding: 14px 45px 14px 20px;
+      border-radius: var(--radius);
+      border: 2px solid #3a3a3a;
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .blog-search-input:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .sort-dropdown {
+      padding: 14px 40px 14px 20px;
+      border-radius: var(--radius);
+      border: 2px solid #3a3a3a;
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23aaaaaa' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+    }
+
+    .sort-dropdown:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    /* TAG CLOUD */
+    .tag-cloud-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .tag-badge {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      background: #333;
+      color: var(--text);
+    }
+
+    .tag-badge:hover {
+      transform: translateY(-2px);
+      border-color: var(--orange);
+    }
+
+    .tag-badge.active {
+      background: linear-gradient(135deg, #ff6347, #ff4500);
+      color: white;
+      border-color: var(--orange);
+    }
+
+    /* BLOG LAYOUT WITH SIDEBAR */
+    .blog-main {
+      padding: 20px;
+      max-width: 1400px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+    }
+
+    .blog-sidebar {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 25px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar-section {
+      margin-bottom: 30px;
+    }
+
+    .sidebar-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .sidebar-title {
+      font-size: 1.1rem;
+      color: var(--orange);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .category-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .category-item {
+      padding: 10px 15px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .category-item:hover {
+      background: rgba(255, 99, 71, 0.1);
+      transform: translateX(5px);
+    }
+
+    .category-item.active {
+      background: linear-gradient(135deg, rgba(255, 99, 71, 0.2), rgba(255, 69, 0, 0.2));
+      border-left: 3px solid var(--orange);
+    }
+
+    .category-count {
+      background: rgba(255, 99, 71, 0.2);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      color: var(--orange);
+    }
+
+    .blog-content {
+      min-width: 0;
+    }
+
+    .blog-grid {
+      display: grid;
+      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(255, 99, 71, 0.25);
+    }
+
+    /* ENHANCED CARD IMAGE WITH OVERLAY */
+    .card-figure {
+      position: relative;
+      overflow: hidden;
+      height: 220px;
+    }
+
+    .card-figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-figure img {
+      transform: scale(1.1);
+    }
+
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg,
+          transparent 0%,
+          rgba(0, 0, 0, 0.3) 50%,
+          rgba(0, 0, 0, 0.8) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .card:hover .card-overlay {
+      opacity: 1;
+    }
+
+    .overlay-info {
+      color: white;
+      font-size: 0.9rem;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    /* BOOKMARK BUTTON */
+    .bookmark-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .bookmark-btn:hover {
+      background: var(--orange);
+      transform: scale(1.1);
+    }
+
+    .bookmark-btn i {
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .bookmark-btn.bookmarked i {
+      color: #ffd700;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    /* CATEGORY BADGES */
+    .category-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .category-badge {
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .category-badge.tips {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    .category-badge.guide {
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      color: white;
+    }
+
+    .category-badge.news {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: white;
+    }
+
+    .category-badge.tech {
+      background: linear-gradient(135deg, #43e97b, #38f9d7);
+      color: white;
+    }
+
+    .category-badge.sustainability {
+      background: linear-gradient(135deg, #90ee90, #228b22);
+      color: white;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      color: var(--orange);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .card-meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card-excerpt {
+      color: #ccc;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 15px;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-align: center;
+      flex: 1;
+    }
+
+    .btn.ghost {
+      border: 1px solid var(--orange);
+      color: var(--orange);
+    }
+
+    .btn.ghost:hover {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #ff6347, #ff4500);
+      color: white;
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+    }
+
+    /* NO RESULTS MESSAGE */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+
+    .no-results i {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      opacity: 0.3;
+    }
+
+    .no-results h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .blog-main {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-sidebar {
+        position: static;
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .blog-hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .search-filter-container {
+        flex-direction: column;
+      }
+
+      .blog-search-wrapper {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Enhanced Navigation Component -->
+
+  <!-- Navbar Container - Loaded dynamically -->
+  <div id="navbar-container"></div>
+
+
+
+  <!-- HERO -->
+  <section class="blog-hero">
+    <h1>Our Blog</h1>
+    <p>
+      Explore updates, transport tips, and expert insights from Harihar Car
+      Carriers.
+    </p>
+  </section>
+
+  <!-- SEARCH & FILTER CONTROLS -->
+  <div class="blog-controls">
+    <div class="search-filter-container">
+      <div class="blog-search-wrapper">
+        <input type="text" id="blogSearch" class="blog-search-input" placeholder="Search articles..."
+          autocomplete="off" />
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      <select id="sortSelect" class="sort-dropdown">
+        <option value="latest">Latest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="popular">Most Popular</option>
+        <option value="trending">Trending</option>
+      </select>
+    </div>
+
+    <!-- TAG CLOUD -->
+    <div class="tag-cloud-container" id="tagCloud">
+      <span class="tag-badge" data-tag="safety">Safety</span>
+      <span class="tag-badge" data-tag="transport">Transport</span>
+      <span class="tag-badge" data-tag="tips">Tips</span>
+      <span class="tag-badge" data-tag="eco-friendly">Eco-Friendly</span>
+      <span class="tag-badge" data-tag="technology">Technology</span>
+    </div>
+  </div>
+
+  <!-- BLOG MAIN WITH SIDEBAR -->
+  <main class="blog-main">
+    <!-- CATEGORY SIDEBAR -->
+    <aside class="blog-sidebar">
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Categories</h3>
+        <ul class="category-list" id="categoryList">
+          <li class="category-item active" data-category="all">
+            <span>All Posts</span>
+            <span class="category-count" id="count-all">6</span>
+          </li>
+          <li class="category-item" data-category="tips">
+            <span>Tips & Advice</span>
+            <span class="category-count" id="count-tips">2</span>
+          </li>
+          <li class="category-item" data-category="guide">
+            <span>Guides</span>
+            <span class="category-count" id="count-guide">2</span>
+          </li>
+          <li class="category-item" data-category="tech">
+            <span>Technology</span>
+            <span class="category-count" id="count-tech">1</span>
+          </li>
+          <li class="category-item" data-category="sustainability">
+            <span>Sustainability</span>
+            <span class="category-count" id="count-sustainability">1</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Popular Tags</h3>
+        <div class="tag-cloud-container">
+          <span class="tag-badge" data-tag="safety">Safety</span>
+          <span class="tag-badge" data-tag="transport">Transport</span>
+          <span class="tag-badge" data-tag="tips">Tips</span>
+          <span class="tag-badge" data-tag="eco-friendly">Eco-Friendly</span>
+          <span class="tag-badge" data-tag="technology">Technology</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- BLOG CONTENT -->
+    <div class="blog-content">
+      <section class="blog-grid" id="blog-grid"></section>
+      <div class="no-results" id="noResults" style="display: none;">
+        <i class="fas fa-search"></i>
+        <h3>No articles found</h3>
+        <p>Try adjusting your search or filter criteria</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <script>
+    const BLOG_POSTS = [
+      {
+        id: 1,
+        title: "Tips for Safe Car Transport",
+        date: "October 18, 2025",
+        readtime: "5 min read",
+        image: "../assets/images/car1.png",
+        excerpt:
+          "Preparing your vehicle before transit reduces risk and speeds up delivery. Learn the top checks to perform before handover.",
+        category: "tips",
+        tags: ["safety", "transport", "tips"],
+        views: 1250,
+        trending: true,
+      },
+      {
+        id: 2,
+        title: "How to Choose the Right Carrier",
+        date: "September 10, 2025",
+        readtime: "6 min read",
+        image: "../assets/images/car2.png",
+        excerpt:
+          "Choosing a carrier means balancing price, reliability and safety. Here's a quick checklist to select the right one.",
+        category: "guide",
+        tags: ["tips", "transport"],
+        views: 980,
+        trending: false,
+      },
+      {
+        id: 3,
+        title: "Why Choose Our Car Transport Service",
+        date: "August 02, 2025",
+        readtime: "4 min read",
+        image: "../assets/images/car3.png",
+        excerpt:
+          "From pickup to delivery, our service focuses on safety, timely updates and competitive pricing. Here's how we stand out.",
+        category: "guide",
+        tags: ["transport"],
+        views: 1450,
+        trending: true,
+      },
+      {
+        id: 4,
+        title: "The Future of Vehicle Transport: Trends and Technologies",
+        date: "November 1, 2025",
+        readtime: "7 min read",
+        image:
+          "https://th.bing.com/th/id/R.aa0c3587e562e6c91c36f8fad94c459d?rik=usDMJxGXKuoZtQ&riu=http%3a%2f%2ftechsouls.co.uk%2fwp-content%2fuploads%2f2024%2f03%2fFuture-of-Mobility-Tech-Innovations-in-Transportation-1024x574.png&ehk=eVQJSTMibrJNk2b82Jg5LClpkcfHzIhwACz4zklS54Q%3d&risl=&pid=ImgRaw&r=0",
+        excerpt:
+          "Discover how AI, IoT, and electric vehicles are revolutionizing vehicle transportation, making it safer, faster, and more eco-friendly.",
+        category: "tech",
+        tags: ["technology", "eco-friendly"],
+        views: 2100,
+        trending: true,
+      },
+      {
+        id: 5,
+        title: "Essential Tips for Preparing Your Vehicle for Transport",
+        date: "October 10, 2025",
+        readtime: "6 min read",
+        image:
+          "https://tse2.mm.bing.net/th/id/OIP.gT5n9pq2unukUGLVamJsSAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
+        excerpt:
+          "Properly preparing your car before shipment can prevent damage and delays. Learn how to prep your vehicle for a smooth transport experience.",
+        category: "tips",
+        tags: ["safety", "tips"],
+        views: 890,
+        trending: false,
+      },
+      {
+        id: 6,
+        title: "Green Transport Initiatives in the Logistics Industry",
+        date: "September 15, 2025",
+        readtime: "5 min read",
+        image:
+          "https://tse4.mm.bing.net/th/id/OIP.TPHlJt5IJQyCZyX7fx4BhwHaEO?rs=1&pid=ImgDetMain&o=7&rm=3",
+        excerpt:
+          "Sustainability is driving changes in the transport sector. Explore eco-friendly innovations and how logistics companies are reducing their carbon footprint.",
+        category: "sustainability",
+        tags: ["eco-friendly", "sustainability"],
+        views: 760,
+        trending: false,
+      },
+    ];
+
+    // State management
+    let filteredPosts = [...BLOG_POSTS];
+    let currentCategory = 'all';
+    let currentSort = 'latest';
+    let searchQuery = '';
+    let bookmarkedPosts = JSON.parse(localStorage.getItem('bookmarkedPosts') || '[]');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPosts();
+      setupEventListeners();
+      updateCategoryCounts();
+    });
+
+    // Create card HTML
+    function createCard(post) {
+      const isBookmarked = bookmarkedPosts.includes(post.id);
+
+      return `
+          <article class="card" data-id="${post.id}">
+            <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" onclick="toggleBookmark(${post.id}, event)">
+              <i class="fas fa-bookmark"></i>
+            </button>
+            <div class="card-figure">
+              <img src="${post.image}" alt="${post.title}">
+              <div class="card-overlay">
+                <div class="overlay-info">
+                  <span><i class="fas fa-eye"></i> ${post.views} views</span>
+                  ${post.trending ? '<span><i class="fas fa-fire"></i> Trending</span>' : ''}
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="category-badges">
+                <span class="category-badge ${post.category}">${post.category}</span>
+                ${post.trending ? '<span class="category-badge" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);"><i class="fas fa-fire"></i> Hot</span>' : ''}
+              </div>
+              <h3 class="card-title">${post.title}</h3>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-calendar-alt"></i> ${post.date}</span>
+                <span class="meta-item"><i class="fas fa-clock"></i> ${post.readtime}</span>
+              </div>
+              <p class="card-excerpt">${post.excerpt}</p>
+              <div class="card-actions">
+                <a href="blog-post.html?id=${post.id}" class="btn ghost">Read More →</a>
+                <a href="contact.html" class="btn primary">Get Quote</a>
+              </div>
+            </div>
+          </article>
+        `;
+    }
+
+    // Render posts
+    function renderPosts() {
+      const grid = document.getElementById('blog-grid');
+      const noResults = document.getElementById('noResults');
+
+      if (filteredPosts.length === 0) {
+        grid.style.display = 'none';
+        noResults.style.display = 'block';
+      } else {
+        grid.style.display = 'grid';
+        noResults.style.display = 'none';
+        grid.innerHTML = filteredPosts.map(createCard).join('');
+      }
+    }
+
+    // Filter posts
+    function filterPosts() {
+      filteredPosts = BLOG_POSTS.filter(post => {
+        // Category filter
+        const categoryMatch = currentCategory === 'all' || post.category === currentCategory;
+
+        // Search filter
+        const searchMatch = searchQuery === '' ||
+          post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+
+        return categoryMatch && searchMatch;
+      });
+
+      // Sort posts
+      sortPosts();
+      renderPosts();
+    }
+
+    // Sort posts
+    function sortPosts() {
+      switch (currentSort) {
+        case 'latest':
+          filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+          break;
+        case 'oldest':
+          filteredPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
+          break;
+        case 'popular':
+          filteredPosts.sort((a, b) => b.views - a.views);
+          break;
+        case 'trending':
+          filteredPosts.sort((a, b) => {
+            if (a.trending === b.trending) return b.views - a.views;
+            return b.trending ? 1 : -1;
+          });
+          break;
+      }
+    }
+
+    // Bookmark functionality
+    function toggleBookmark(postId, event) {
+      event.stopPropagation();
+      const index = bookmarkedPosts.indexOf(postId);
+
+      if (index > -1) {
+        bookmarkedPosts.splice(index, 1);
+      } else {
+        bookmarkedPosts.push(postId);
+      }
+
+      localStorage.setItem('bookmarkedPosts', JSON.stringify(bookmarkedPosts));
+      renderPosts();
+    }
+
+    // Update category counts
+    function updateCategoryCounts() {
+      const counts = {
+        all: BLOG_POSTS.length,
+        tips: BLOG_POSTS.filter(p => p.category === 'tips').length,
+        guide: BLOG_POSTS.filter(p => p.category === 'guide').length,
+        tech: BLOG_POSTS.filter(p => p.category === 'tech').length,
+        sustainability: BLOG_POSTS.filter(p => p.category === 'sustainability').length,
+      };
+
+      Object.keys(counts).forEach(category => {
+        const countEl = document.getElementById(`count-${category}`);
+        if (countEl) countEl.textContent = counts[category];
+      });
+    }
+
+    // Event listeners
+    function setupEventListeners() {
+      // Search
+      const searchInput = document.getElementById('blogSearch');
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        filterPosts();
+      });
+
+      // Sort
+      const sortSelect = document.getElementById('sortSelect');
+      sortSelect.addEventListener('change', (e) => {
+        currentSort = e.target.value;
+        filterPosts();
+      });
+
+      // Category sidebar
+      const categoryItems = document.querySelectorAll('.category-item');
+      categoryItems.forEach(item => {
+        item.addEventListener('click', () => {
+          categoryItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          currentCategory = item.dataset.category;
+          filterPosts();
+        });
+      });
+
+      // Tag badges
+      const tagBadges = document.querySelectorAll('.tag-badge[data-tag]');
+      tagBadges.forEach(badge => {
+        badge.addEventListener('click', () => {
+          const tag = badge.dataset.tag;
+          const isActive = badge.classList.contains('active');
+
+          tagBadges.forEach(b => b.classList.remove('active'));
+
+          if (!isActive) {
+            badge.classList.add('active');
+            searchQuery = tag;
+            document.getElementById('blogSearch').value = tag;
+          } else {
+            searchQuery = '';
+            document.getElementById('blogSearch').value = '';
+          }
+
+          filterPosts();
+        });
+      });
+    }
+  </script>
+  <script src="../js/modules/search.js"></script>
+  <!-- Loading State Manager - Must load first -->
+  <script src="../js/modules/loading-state-manager.js"></script>
+  <!-- Page Navigation Loader - Must load after loading-state-manager -->
+  <script src="../js/modules/page-navigation-loader.js"></script>
+  <script src="../js/modules/navbar-loader.js?v=2"></script>
+
+  <script src="../js/modules/footer-loader.js"></script>
+  <script src="../js/modules/themes.js"></script>
+
+  <script src="../js/modules/floating-book-button.js"></script>
+  <script src="../js/modules/floating-call-button.js"></script>
+  <script src="../js/modules/floating-whatsapp-button.js"></script>
+  <script src="../js/modules/quote-modal.js"></script>
+  <script src="../js/modules/sticky-quote-button.js"></script>
+  <script src="../js/modules/floating-chatbot-button.js"></script>
+  <script src="../js/modules/chatbot-modal.js"></script>
+  <script src="../js/modules/back-to-top-button.js"></script>
+  <script src="../js/modules/backtoBottom.js"></script>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Top to Bottom Button -->
+  <button class="back-to-bottom" id="backToBottom">
+    <i class="fas fa-arrow-down"></i>
+  </button>
+</body>
+
+</html>

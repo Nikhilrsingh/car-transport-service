@@ -2,6 +2,12 @@
    ABOUT PAGE ENHANCEMENTS
    ================================ */
 
+/* for giving container spacing from left and right */
+.container {
+  width: 80vw;
+  margin: 0 auto;
+}
+
 /* Team Section - Flip Cards */
 .about-team-flip-card {
   background-color: transparent;
@@ -851,6 +857,7 @@
 .timeline-item {
   display: flex;
   margin-bottom: 25%;
+
   position: relative;
   opacity: 0;
   transform: translateY(50px);
@@ -866,11 +873,13 @@
 
 /* Timeline Content Box */
 .timeline-content {
+
   flex: 1;
   background: #333;
   padding: 30px;
   border-radius: 15px;
   /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); */
+
   position: absolute;
   width: 40%;
   margin: 0 30px;
@@ -882,6 +891,7 @@
   /* box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); */
 }
 
+/* changing before to after for right side triangle show */
 .timeline-content::after {
   content: '';
   position: absolute;
@@ -912,8 +922,10 @@
 /* Timeline Year Badge */
 .timeline-year {
   position: absolute;
+
   top: 130px;
   left: 50%;
+
   transform: translate(-50%, -50%);
   width: 80px;
   height: 80px;
@@ -996,6 +1008,13 @@
     gap: 40px;
   }
 
+  .timeline-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 7rem;
+  }
+
   .timeline-content {
     width: 80%;
   }
@@ -1060,6 +1079,10 @@
 
   .stat-circle-number {
     font-size: 2rem;
+  }
+
+  .timeline-container {
+    gap: 10rem
   }
 
   .timeline-items {

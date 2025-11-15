@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Car Transport Service</title>
+  <link rel="stylesheet" href="../css/components/loading-indicators.css">
+  <link rel="stylesheet" href="../css/components/floating-call-button.css">
+  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css">
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
+  <link rel="stylesheet" href="../css/components/quote-modal.css">
+  <link rel="stylesheet" href="../css/components/chatbot-modal.css">
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+  <link rel="stylesheet" href="../css/components/backtoBottom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* ========== GLOBAL STYLES ========== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0a3d62;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #0a3d62;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      background: #0a3d62;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: #f1c40f;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 1.2rem;
+      }
+    }
+
+    /* Scroll Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>Privacy Policy</header>
+
+  <div class="container">
+    <section class="fade-in">
+      <h2>1. Information We Collect</h2>
+      <p>
+        We collect personal information such as your name, contact number, email address,
+        pickup and drop-off locations, and payment details when you use our car transport services.
+        We may also collect non-personal data like browser type and website usage statistics.
+      </p>
+    </section>
+
+    <section class="fade-in">
+      <h2>2. How We Use User Data</h2>
+      <p>
+        Your information is used to process bookings, provide better service, send updates about
+        your transport status, and improve our services. We do not sell or rent user data to third parties.
+      </p>
+    </section>
+
+    <section class="fade-in">
+      <h2>3. Data Protection and Security</h2>
+      <p>
+        We implement industry-standard security measures to protect your data, including
+        encryption, secure servers, and restricted access to sensitive information.
+        Regular audits are performed to ensure compliance with data protection standards.
+      </p>
+    </section>
+
+    <section class="fade-in">
+      <h2>4. Cookies Policy</h2>
+      <p>
+        Our website uses cookies to enhance user experience, analyze traffic, and remember preferences.
+        You can control cookie settings through your browser and disable them anytime.
+      </p>
+    </section>
+
+    <section class="fade-in">
+      <h2>5. Contact for Privacy Concerns</h2>
+      <p>
+        If you have any questions or concerns regarding your privacy, please contact us at:<br>
+        📧 <a href="info@hariharcarcarriers.com">info@hariharcarcarriers.com</a>
+      </p>
+    </section>
+  </div>
+
+  <footer>
+    © 2025 Car Transport Service | <a href="../index.html">Back to Home</a>
+  </footer>
+
+  <script>
+    // Scroll fade-in animation
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+
+  <!-- Top to Bottom Button -->
+  <button class="back-to-bottom" id="backToBottom">
+    <i class="fas fa-arrow-down"></i>
+    <script src="../js/modules/floating-call-button.js"></script>
+    <script src="../js/modules/floating-whatsapp-button.js"></script>
+    <script src="../js/modules/quote-modal.js"></script>
+    <script src="../js/modules/sticky-quote-button.js"></script>
+    <script src="../js/modules/floating-chatbot-button.js"></script>
+    <script src="../js/modules/chatbot-modal.js"></script>
+    <script src="../js/modules/backtoBottom.js"></script>
+    <script src="../js/modules/back-to-top-button.js"></script>
+</body>
+
+</html>
