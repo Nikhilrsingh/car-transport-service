@@ -160,11 +160,14 @@ body {
   z-index: 2;
 }
 
-.slide img {
+.slide-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.7);
+  background-color: black;
+  backdrop-filter: blur(0.4px);
+  /* Slightly darken the image to improve text contrast */
+  filter: brightness(0.6);
 }
 
 /* Gradient Overlay for better text readability */
@@ -174,12 +177,14 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  /* Blue-tinted overlay for better header readability */
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(33, 100, 145, 0.28) 0%,
+    rgba(52, 152, 219, 0.45) 50%,
+    rgba(52, 152, 219, 0.65) 100%
   );
+  mix-blend-mode: multiply;
   z-index: 1;
   pointer-events: none;
 }
@@ -190,10 +195,6 @@ body {
   left: 30px;
   right: 30px;
   color: #fff;
-  background: rgba(0, 0, 0, 0.45);
-  padding: 20px 30px;
-  border-radius: 12px;
-  backdrop-filter: blur(4px);
   animation: fadeUp 1.2s ease-in-out;
   max-width: calc(100% - 60px);
   word-wrap: break-word;
@@ -202,7 +203,7 @@ body {
 }
 
 .slide-text h2 {
-  font-size: 2rem;
+  font-size: 4rem;
   margin-bottom: 8px;
   word-wrap: break-word;
 }
@@ -210,6 +211,7 @@ body {
 .slide-text p {
   font-size: 1.1rem;
   line-height: 1.6;
+  color: rgb(215, 215, 215);
   word-wrap: break-word;
 }
 
