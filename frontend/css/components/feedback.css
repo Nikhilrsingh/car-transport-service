@@ -1,0 +1,222 @@
+body {
+  background: #181818;
+  color: #f8f8f8;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+.feedback-header {
+  text-align: center;
+  padding: 2em 1em 1em 1em;
+}
+.feedback-header h1 {
+  color: #ff6347;
+  margin-bottom: 0.2em;
+  font-size: 2.8rem;
+}
+.feedback-header p {
+  color: #bbb;
+  font-size: 1.1em;
+  margin: 0;
+}
+.feedback-form-section {
+  display: flex;
+  justify-content: center;
+  margin: 2.5em 0;
+}
+.feedback-form {
+  background: #222;
+  border-radius: 16px;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.24);
+  padding: 2em;
+  width: 630px;
+  max-width: 98vw;
+  color: #fff;
+}
+.feedback-form label {
+  display: block;
+  margin: 0.8em 0 0.2em;
+}
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  margin-bottom: 0.8em;
+  padding: 0.6em;
+  border-radius: 8px;
+  border: none;
+  background: #292929;
+  color: #f8f8f8;
+  font-size: 1em;
+}
+.feedback-form textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+.star-rating {
+  font-size: 1.3em;
+  color: #ffac33;
+  margin-bottom: 1em;
+}
+.feedback-form button {
+  background: #ff6347;
+  color: #fff;
+  border: none;
+  font-size: 1.1em;
+  padding: 0.7em 2em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.22s;
+}
+.feedback-form button:hover {
+  background: #ff3500;
+}
+
+.testimonials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 900px;
+  margin: 2em auto 4em auto;
+}
+.testimonial-card {
+  background: #232323;
+  border-radius: 15px;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.32);
+  padding: 1.7em 1.3em;
+  color: #fff;
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  position: relative;
+  flex-wrap: wrap;
+}
+.testimonial-pic {
+  width: 70px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(30, 30, 30, 0.12);
+  border: 2px solid #ff6347;
+  flex-shrink: 0;
+}
+.testimonial-product-img {
+  width: 90px;
+  height: 103px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #444;
+  margin-left: 13px;
+  box-shadow: 0 1px 8px #0005;
+}
+.testimonial-main {
+  flex: 1;
+  min-width: 180px;
+}
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.testimonial-name {
+  font-size: 1.12em;
+  font-weight: bold;
+  color: #ff6848;
+}
+.testimonial-stars {
+  color: #ffac33;
+  font-size: 1.17em;
+}
+.testimonial-time {
+  font-size: 0.98em;
+  color: #bbb;
+  margin-left: 8px;
+}
+.testimonial-message {
+  font-size: 1.14em;
+  margin: 0.7em 0;
+}
+
+.comments-section {
+  background: #292929;
+  border-radius: 10px;
+  padding: 0.7em 1em 1em 1em;
+  margin: 1em 0 0 0;
+}
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+  font-size: 0.98em;
+}
+.comment {
+  background: #272626;
+  padding: 0.5em 0.7em;
+  border-radius: 6px;
+  color: #e8e8e8;
+}
+.comment small {
+  color: #ff6848;
+  font-size: 0.97em;
+  margin-right: 5px;
+}
+.comment-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 0.8em;
+}
+.comment-form input {
+  flex: 1;
+  padding: 0.4em 0.7em;
+  border-radius: 6px;
+  border: none;
+  background: #333;
+  color: #f8f8f8;
+}
+.comment-form button {
+  padding: 0.4em 0.9em;
+  border-radius: 7px;
+  border: none;
+  background: #ff6848;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.19s;
+}
+.comment-form button:hover {
+  background: #ff3500;
+}
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ff6347;
+  font-size: 1.2em;
+  margin-left: auto;
+  cursor: pointer;
+  padding: 0 0.4em;
+  margin-top: 0;
+  margin-bottom: 0;
+  transition: color 0.19s;
+}
+.delete-btn:hover {
+  color: #ff3500;
+}
+@media (max-width: 650px) {
+  .testimonial-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .testimonials-list {
+    margin: 1.3em 0 3em 0;
+    padding: 0 6px;
+  }
+  .feedback-form {
+    padding: 1em;
+  }
+  .testimonial-header {
+    flex-wrap: wrap;
+  }
+  .testimonial-product-img {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+}
