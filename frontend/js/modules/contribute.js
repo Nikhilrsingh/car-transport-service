@@ -5,8 +5,10 @@ const GITHUB_TOKEN = ""; // optional
 
 // ==== GLOBAL STATE ====
 let allContributors = [];
+let visibleContributors = [];
 let currentPage = 1;
 const contributorsPerPage = 10;
+const LEVELS = { gold: 50, silver: 20, bronze: 10, contributor: 1 };
 
 // ==== UTIL ====
 function safeSetText(id, text) {
@@ -51,34 +53,35 @@ window.hideSpinner = () => {
 async function fetchContributors() {
   try {
     showSpinner();
-    console.log("📡 Fetching contributors...");
     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contributors?per_page=100`;
     const contributors = await fetchWithAuth(url);
-
-    if (!Array.isArray(contributors)) {
-      throw new Error("Invalid contributors response");
-    }
-
+    if (!Array.isArray(contributors)) throw new Error("Invalid contributors response");
+    const exclude = "nikhilrsingh";
     allContributors = contributors
-    .filter((c) => c.login.toLowerCase() !== "nikhilrsingh") // Exclude project lead
-    .map((c) => ({
-      login: c.login,
-      avatar_url: c.avatar_url,
-      html_url: c.html_url,
-      contributions: c.contributions,
-    }));
-    
-
-    console.log(`✅ Loaded ${allContributors.length} contributors`);
+      .filter(c => c.login.toLowerCase() !== exclude)
+      .map(c => ({ login: c.login, avatar_url: c.avatar_url, html_url: c.html_url, contributions: c.contributions }));
+    let stats = await fetchWithAuth(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/stats/contributors`);
+    const statsMap = {};
+    if (Array.isArray(stats)) {
+      stats.forEach(s => {
+        const login = s.author?.login;
+        if (login) {
+          const adds = s.weeks.reduce((a,w)=>a+(w.a||0),0);
+          const dels = s.weeks.reduce((a,w)=>a+(w.d||0),0);
+          const recent = s.weeks.slice(-12).reduce((a,w)=>a+(w.c||0),0);
+          statsMap[login] = { additions:adds, deletions:dels, recentCommits:recent, weeks:s.weeks };
+        }
+      });
+      allContributors = allContributors.map(c => ({...c, ...(statsMap[c.login]||{additions:0,deletions:0,recentCommits:0,weeks:[]})}));
+    }
+    visibleContributors = [...allContributors];
     updateStats();
     displayContributors();
+    loadRecentActivity();
   } catch (err) {
     console.error("❌ Failed to load contributors:", err);
-    safeSetText(
-      "errorMessage",
-      "Failed to load contributors. Check console for details."
-    );
-  }finally{
+    safeSetText("errorMessage","Failed to load contributors. Check console for details.");
+  } finally {
     hideSpinner();
   }
 }
@@ -86,53 +89,69 @@ async function fetchContributors() {
 // ==== DISPLAY CONTRIBUTORS ====
 function displayContributors() {
   const list = document.getElementById("contributorsList");
-  if (!list) {
-    console.warn("⚠️ Missing element with id='contributorsList'");
-    return;
-  }
-
+  if (!list) return;
   list.innerHTML = "";
-
   const start = (currentPage - 1) * contributorsPerPage;
   const end = start + contributorsPerPage;
-  const pageContributors = allContributors.slice(start, end);
-
+  const pageContributors = visibleContributors.slice(start, end);
   for (const c of pageContributors) {
     const item = document.createElement("div");
     item.className = "contributor";
-    item.innerHTML = `
-      <img src="${c.avatar_url}" alt="${c.login}" width="50" height="50">
-      <a href="${c.html_url}" target="_blank">${c.login}</a>
-      <span>Commits: ${c.contributions}</span>
-    `;
+    item.innerHTML = `<img src="${c.avatar_url}" alt="${c.login}" width="50" height="50"><a href="${c.html_url}" target="_blank">${c.login}</a><span>Commits: ${c.contributions}</span>`;
+    item.addEventListener("click", () => openContributorModal(c));
     list.appendChild(item);
   }
-
   safeSetText("currentPage", currentPage);
-  safeSetText(
-    "totalPages",
-    Math.ceil(allContributors.length / contributorsPerPage)
-  );
+  safeSetText("totalPages", Math.max(1, Math.ceil(visibleContributors.length / contributorsPerPage)));
 }
 
 // ==== UPDATE STATS ====
 function updateStats() {
   safeSetText("totalContributors", allContributors.length);
-  const totalCommits = allContributors.reduce(
-    (sum, c) => sum + c.contributions,
-    0
-  );
+  const totalCommits = allContributors.reduce((s,c)=>s+c.contributions,0);
   safeSetText("totalCommits", totalCommits);
+  const totalPoints = allContributors.reduce((s,c)=>s + c.contributions + Math.round(((c.additions||0)-(c.deletions||0))/100),0);
+  safeSetText("totalPoints", totalPoints);
+  const active = allContributors.filter(c => (c.recentCommits||0)>0).length;
+  safeSetText("activeContributors", active);
+}
+function applyFilters() {
+  const term = (document.getElementById("searchInput")?.value || "").toLowerCase();
+  const sortBy = document.getElementById("sortBy")?.value || "contributions";
+  const level = document.getElementById("filterLevel")?.value || "all";
+  let filtered = allContributors.filter(c => c.login.toLowerCase().includes(term));
+  if (level === "top10") {
+    filtered = filtered.sort((a,b)=>b.contributions-a.contributions).slice(0,10);
+  } else if (level === "gold") {
+    filtered = filtered.filter(c => c.contributions >= LEVELS.gold);
+  } else if (level === "silver") {
+    filtered = filtered.filter(c => c.contributions >= LEVELS.silver && c.contributions < LEVELS.gold);
+  } else if (level === "bronze") {
+    filtered = filtered.filter(c => c.contributions >= LEVELS.bronze && c.contributions < LEVELS.silver);
+  } else if (level === "contributor") {
+    filtered = filtered.filter(c => c.contributions >= LEVELS.contributor && c.contributions < LEVELS.bronze);
+  } else if (level === "new") {
+    filtered = filtered.filter(c => c.contributions <= 1);
+  }
+  if (sortBy === "alphabetical") {
+    filtered.sort((a,b)=>a.login.localeCompare(b.login));
+  } else if (sortBy === "recent") {
+    filtered.sort((a,b)=> (b.recentCommits||0)-(a.recentCommits||0));
+  } else {
+    filtered.sort((a,b)=>b.contributions-a.contributions);
+  }
+  visibleContributors = filtered;
+  currentPage = 1;
+  displayContributors();
 }
 
 // ==== PAGINATION ====
 function nextPage() {
-  if (currentPage < Math.ceil(allContributors.length / contributorsPerPage)) {
+  if (currentPage < Math.ceil(visibleContributors.length / contributorsPerPage)) {
     currentPage++;
     displayContributors();
   }
 }
-
 function prevPage() {
   if (currentPage > 1) {
     currentPage--;
@@ -142,24 +161,7 @@ function prevPage() {
 
 // ==== SEARCH ====
 function searchContributors(term) {
-  const filtered = allContributors.filter((c) =>
-    c.login.toLowerCase().includes(term.toLowerCase())
-  );
-
-  const list = document.getElementById("contributorsList");
-  if (!list) return;
-  list.innerHTML = "";
-
-  for (const c of filtered) {
-    const item = document.createElement("div");
-    item.className = "contributor";
-    item.innerHTML = `
-      <img src="${c.avatar_url}" alt="${c.login}" width="50" height="50">
-      <a href="${c.html_url}" target="_blank">${c.login}</a>
-      <span>Commits: ${c.contributions}</span>
-    `;
-    list.appendChild(item);
-  }
+  applyFilters();
 }
 
 // ==== SETUP EVENT LISTENERS ====
@@ -167,15 +169,68 @@ function setupEventListeners() {
   const nextBtn = document.getElementById("nextPage");
   const prevBtn = document.getElementById("prevPage");
   const searchInput = document.getElementById("searchInput");
-
+  const sortSelect = document.getElementById("sortBy");
+  const levelSelect = document.getElementById("filterLevel");
+  const closeBtn = document.querySelector(".modal-close");
   if (nextBtn) nextBtn.addEventListener("click", nextPage);
   if (prevBtn) prevBtn.addEventListener("click", prevPage);
-  if (searchInput)
-    searchInput.addEventListener("input", (e) =>
-      searchContributors(e.target.value)
-    );
+  if (searchInput) searchInput.addEventListener("input", applyFilters);
+  if (sortSelect) sortSelect.addEventListener("change", applyFilters);
+  if (levelSelect) levelSelect.addEventListener("change", applyFilters);
+  if (closeBtn) closeBtn.addEventListener("click", () => {
+    document.getElementById("contributorModal")?.classList.remove("active");
+  });
+  document.addEventListener("click", e => {
+    if (e.target.id === "contributorModal") e.target.classList.remove("active");
+  });
+}
+function openContributorModal(c) {
+  document.getElementById("modalAvatar").src = c.avatar_url;
+  document.getElementById("modalName").textContent = c.login;
+  const link = document.getElementById("modalGithubLink");
+  if (link) link.href = c.html_url;
+  const badges = document.getElementById("modalBadges");
+  if (badges) {
+    badges.innerHTML = "";
+    if (c.contributions >= LEVELS.gold) badges.innerHTML += "🥇 Gold";
+    else if (c.contributions >= LEVELS.silver) badges.innerHTML += "🥈 Silver";
+    else if (c.contributions >= LEVELS.bronze) badges.innerHTML += "🥉 Bronze";
+    else if (c.contributions >= 1) badges.innerHTML += "⭐ Contributor";
+  }
+  safeSetText("modalCommits", c.contributions);
+  safeSetText("modalAdditions", (c.additions||0));
+  safeSetText("modalDeletions", (c.deletions||0));
+  fetchWithAuth(`https://api.github.com/search/issues?q=repo:${REPO_OWNER}/${REPO_NAME}+is:pr+author:${c.login}`)
+    .then(res => {
+      const count = typeof res.total_count === "number" ? res.total_count : 0;
+      safeSetText("modalPRs", count);
+    }).catch(()=> safeSetText("modalPRs","0"));
+  const heatmap = document.getElementById("contributionHeatmap");
+  if (heatmap) {
+    const cells = [];
+    const totalWeeks = 52;
+    for (let i=0;i<totalWeeks;i++) {
+      const intensity = i < (c.recentCommits||0) ? "rgba(255,99,71,0.8)" : "rgba(255,255,255,0.2)";
+      cells.push(`<span style="display:inline-block;width:8px;height:8px;margin:1px;background:${intensity}"></span>`);
+    }
+    heatmap.innerHTML = cells.join("");
+  }
+  document.getElementById("contributorModal")?.classList.add("active");
+}
+function loadRecentActivity() {
+  fetchWithAuth(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?per_page=20`)
+    .then(commits => {
+      const container = document.getElementById("timelineContent");
+      if (!container || !Array.isArray(commits)) return;
+      container.innerHTML = commits.map(c => {
+        const msg = c.commit?.message || "";
+        const author = c.author?.login || c.commit?.author?.name || "unknown";
+        const date = c.commit?.author?.date ? new Date(c.commit.author.date).toLocaleString() : "";
+        return `<div class="timeline-item"><strong>${author}</strong> — ${msg} <span style="opacity:.7">(${date})</span></div>`;
+      }).join("");
+    }).catch(()=>{});
 }
 
 // ==== INIT ====
-fetchContributors();
+fetchContributors().then(()=>applyFilters());
 setupEventListeners();
