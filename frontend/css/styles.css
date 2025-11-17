@@ -3476,3 +3476,65 @@ button:active,
   z-index: 9999;
   transition: width 0.25s ease-out;
 }
+
+.cookie-popup {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 520px;
+  padding: 15px 20px;
+  background: #ffffff;
+  color: #333;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  z-index: 9999;
+}
+
+.cookie-popup p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cookie-popup a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.accept-btn,
+.reject-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.accept-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.accept-btn:hover {
+  background: #15803d;
+}
+
+.reject-btn {
+  background: #dc2626;
+  color: white;
+}
+
+.reject-btn:hover {
+  background: #b91c1c;
+}
