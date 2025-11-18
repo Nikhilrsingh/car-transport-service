@@ -85,18 +85,13 @@ testimonials.forEach(testimonial => {
 //Slider controls section
 const testimonialSlider = document.querySelector('.testimonial-slider');
 
+
 const slidercontrols = document.createElement('div');
 slidercontrols.classList.add('slider-controls');
 slidercontrols.innerHTML = `
-    <button class="slider-btn prev-btn">
-        <i class="fas fa-chevron-left"></i>
-    </button>
     <div class="slider-dots">
         ${testimonials.map((_, index) => `<span class="dot ${index === 0 ? 'active' : ''}"></span>`).join('')}
     </div>
-    <button class="slider-btn next-btn">
-        <i class="fas fa-chevron-right"></i>
-    </button>
     `;
 
 testimonialSlider.appendChild(slidercontrols);
@@ -108,9 +103,8 @@ testimonialSlider.appendChild(slidercontrols);
 document.addEventListener("DOMContentLoaded", function () {
     const sliderContainer = document.getElementById("sliderContainer");
     const slides = document.querySelectorAll(".testimonial-card");
+
     const dots = document.querySelectorAll(".dot");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
 
     let currentSlide = 0;
     const totalSlides = slides.length;
@@ -132,16 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
         updateSlider();
     }
 
-    // Previous slide
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    }
-
-    // Event listeners
-    nextBtn.addEventListener("click", nextSlide);
-    prevBtn.addEventListener("click", prevSlide);
-
     // Dot click events
     dots.forEach((dot, index) => {
         dot.addEventListener("click", () => {
@@ -150,8 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Auto slide every 5 seconds
-    setInterval(nextSlide, 5000);
+    // Auto slide will be managed by `autoSlide` below
 
     // Pause auto-slide on hover
     const slider = document.querySelector(".testimonial-slider");
