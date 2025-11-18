@@ -13,6 +13,9 @@ function initRegionMap() {
   let currentX = 0;
   let currentY = 0;
   const mapContainer = document.getElementById('mapContainer');
+
+  let tooltipHideTimer = null;
+const TOOLTIP_HIDE_DELAY = 100;
   
   // City statistics (you can make this dynamic)
   const cityStats = {
@@ -169,56 +172,78 @@ function initRegionMap() {
 
   // Marker interactions with enhanced tooltips
   markers.forEach(marker => {
-    const cityName = marker.getAttribute('data-city');
-    const city = cityName.charAt(0).toUpperCase() + cityName.slice(1);
-    
-    marker.addEventListener('mouseenter', function(e) {
-      if (!tooltip) return;
-      
-      const region = this.closest('.region-group')?.getAttribute('data-region') || 
-                     this.closest('svg').querySelector('.state[data-state="' + cityName.toLowerCase() + '"]')?.closest('.region-group')?.getAttribute('data-region') || 'india';
-      const regionName = region.charAt(0).toUpperCase() + region.slice(1) + ' India';
-      
-      // Get stats for this city
-      const stats = cityStats[cityName] || { transports: '500+', routes: '50+' };
-      
-      // Position tooltip
-      const x = parseFloat(this.getAttribute('cx'));
-      const y = parseFloat(this.getAttribute('cy'));
-      
-      tooltip.style.display = 'block';
-      tooltip.setAttribute('transform', `translate(${x - 80}, ${y - 80})`);
-      
-      // Update tooltip content with stats
-      const cityText = tooltip.querySelector('.tooltip-city');
-      const regionText = tooltip.querySelector('.tooltip-region');
-      const statsText = tooltip.querySelector('.tooltip-stats');
-      
-      if (cityText) cityText.textContent = city;
-      if (regionText) regionText.textContent = regionName;
-      if (statsText) statsText.textContent = `${stats.transports} transports | ${stats.routes} routes`;
-      
-      // Add pulse effect to marker
-      this.style.transform = 'scale(1.3)';
-      this.style.transformOrigin = 'center';
-      this.style.filter = 'drop-shadow(0 0 8px #ff6b35)';
+        const cityName = marker.getAttribute('data-city');
+        const city = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+        
+        marker.addEventListener('mouseenter', function(e) {
+            if (!tooltip) return;
+            
+            // --- FIX STEP 1: Clear the hide timer on mouse enter ---
+            clearTimeout(tooltipHideTimer);
+            // --------------------------------------------------------
+            
+            const region = this.closest('.region-group')?.getAttribute('data-region') || 
+                            this.closest('svg').querySelector('.state[data-state="' + cityName.toLowerCase() + '"]')?.closest('.region-group')?.getAttribute('data-region') || 'india';
+            const regionName = region.charAt(0).toUpperCase() + region.slice(1) + ' India';
+            
+            // Get stats for this city
+            const stats = cityStats[cityName] || { transports: '500+', routes: '50+' };
+            
+            // Position tooltip
+            const x = parseFloat(this.getAttribute('cx'));
+            const y = parseFloat(this.getAttribute('cy'));
+            
+            tooltip.style.display = 'block';
+            // Position the tooltip group relative to the marker
+            tooltip.setAttribute('transform', `translate(${x - 80}, ${y - 80})`);
+            
+            // Update tooltip content with stats
+            const cityText = tooltip.querySelector('.tooltip-city');
+            const regionText = tooltip.querySelector('.tooltip-region');
+            const statsText = tooltip.querySelector('.tooltip-stats');
+            
+            if (cityText) cityText.textContent = city;
+            if (regionText) regionText.textContent = regionName;
+            if (statsText) statsText.textContent = `${stats.transports} transports | ${stats.routes} routes`;
+            
+            // Add pulse effect to marker
+          
+            this.style.filter = 'drop-shadow(0 0 8px #ff6b35)';
+        });
+
+        marker.addEventListener('mouseleave', function() {
+            if (tooltip) {
+                // --- FIX STEP 2: Use setTimeout to delay hiding ---
+                tooltipHideTimer = setTimeout(() => {
+                    tooltip.style.display = 'none';
+                }, TOOLTIP_HIDE_DELAY);
+                // ----------------------------------------------------
+            }
+            
+            this.style.filter = 'none';
+        });
+
+        marker.addEventListener('click', function() {
+            // Navigate to city page
+            const cityUrl = `./pages/city.html?city=${cityName}`;
+            window.location.href = cityUrl;
+        });
     });
 
-    marker.addEventListener('mouseleave', function() {
-      if (tooltip) {
-        tooltip.style.display = 'none';
-      }
-      this.style.transform = 'scale(1)';
-      this.style.filter = 'none';
-    });
+    // --- FIX STEP 3: Add event listeners to the tooltip itself ---
+    if (tooltip) {
+        tooltip.addEventListener('mouseenter', () => {
+            // Clear hide timer if cursor enters the tooltip
+            clearTimeout(tooltipHideTimer);
+        });
 
-    marker.addEventListener('click', function() {
-      // Navigate to city page
-      const cityUrl = `./pages/city.html?city=${cityName}`;
-      window.location.href = cityUrl;
-    });
-  });
-
+        tooltip.addEventListener('mouseleave', () => {
+            // Hide the tooltip after a delay when leaving it
+            tooltipHideTimer = setTimeout(() => {
+                tooltip.style.display = 'none';
+            }, TOOLTIP_HIDE_DELAY);
+        });
+    }
   // Make regions clickable for filtering
   const regionGroups = indiaMap.querySelectorAll('.region-group');
   regionGroups.forEach(group => {
