@@ -2,6 +2,11 @@
 const REPO_OWNER = "Nikhilrsingh"; // change to your repo owner
 const REPO_NAME = "car-transport-service"; // change to your repo name
 const GITHUB_TOKEN = ""; // optional  
+const CACHE_TTL_MS = 10 * 60 * 1000;
+function cacheKey(k){return `cts_${REPO_OWNER}_${REPO_NAME}_${k}`;}
+function cacheGet(k){try{const raw=localStorage.getItem(cacheKey(k));if(!raw) return null;const obj=JSON.parse(raw);if(Date.now()-obj.ts>obj.ttl) return null;return obj.data;}catch{return null;}}
+function cacheSet(k,data,ttl=CACHE_TTL_MS){try{localStorage.setItem(cacheKey(k),JSON.stringify({ts:Date.now(),ttl,data}));}catch{}}
+function cacheClear(){['contributors','commits'].forEach(k=>localStorage.removeItem(cacheKey(k)));}
 
 // ==== GLOBAL STATE ====
 let allContributors = [];
@@ -53,6 +58,15 @@ window.hideSpinner = () => {
 async function fetchContributors() {
   try {
     showSpinner();
+    const cachedList = cacheGet('contributors');
+    if (cachedList && Array.isArray(cachedList)) {
+      allContributors = cachedList;
+      visibleContributors = [...allContributors];
+      updateStats();
+      displayContributors();
+      loadRecentActivity();
+      return;
+    }
     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contributors?per_page=100`;
     const contributors = await fetchWithAuth(url);
     if (!Array.isArray(contributors)) throw new Error("Invalid contributors response");
@@ -75,12 +89,21 @@ async function fetchContributors() {
       allContributors = allContributors.map(c => ({...c, ...(statsMap[c.login]||{additions:0,deletions:0,recentCommits:0,weeks:[]})}));
     }
     visibleContributors = [...allContributors];
+    cacheSet('contributors', allContributors);
     updateStats();
     displayContributors();
     loadRecentActivity();
   } catch (err) {
-    console.error("❌ Failed to load contributors:", err);
-    safeSetText("errorMessage","Failed to load contributors. Check console for details.");
+    const fallback = cacheGet('contributors');
+    if (fallback) {
+      allContributors = fallback;
+      visibleContributors = [...allContributors];
+      updateStats();
+      displayContributors();
+      loadRecentActivity();
+    } else {
+      safeSetText("errorMessage","Failed to load contributors. Check console for details.");
+    }
   } finally {
     hideSpinner();
   }
@@ -172,6 +195,7 @@ function setupEventListeners() {
   const sortSelect = document.getElementById("sortBy");
   const levelSelect = document.getElementById("filterLevel");
   const closeBtn = document.querySelector(".modal-close");
+  const refreshBtn = document.getElementById("refreshData");
   if (nextBtn) nextBtn.addEventListener("click", nextPage);
   if (prevBtn) prevBtn.addEventListener("click", prevPage);
   if (searchInput) searchInput.addEventListener("input", applyFilters);
@@ -183,6 +207,7 @@ function setupEventListeners() {
   document.addEventListener("click", e => {
     if (e.target.id === "contributorModal") e.target.classList.remove("active");
   });
+  if (refreshBtn) refreshBtn.addEventListener("click", () => { cacheClear(); currentPage = 1; fetchContributors().then(()=>applyFilters()); });
 }
 function openContributorModal(c) {
   document.getElementById("modalAvatar").src = c.avatar_url;
@@ -218,17 +243,26 @@ function openContributorModal(c) {
   document.getElementById("contributorModal")?.classList.add("active");
 }
 function loadRecentActivity() {
+  const cached = cacheGet('commits');
+  const container = document.getElementById("timelineContent");
+  if (cached && container) {
+    container.innerHTML = cached;
+    return;
+  }
   fetchWithAuth(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?per_page=20`)
     .then(commits => {
-      const container = document.getElementById("timelineContent");
       if (!container || !Array.isArray(commits)) return;
-      container.innerHTML = commits.map(c => {
+      const html = commits.map(c => {
         const msg = c.commit?.message || "";
         const author = c.author?.login || c.commit?.author?.name || "unknown";
         const date = c.commit?.author?.date ? new Date(c.commit.author.date).toLocaleString() : "";
-        return `<div class="timeline-item"><strong>${author}</strong> — ${msg} <span style="opacity:.7">(${date})</span></div>`;
+        return `<div class=\"timeline-item\"><strong>${author}</strong> — ${msg} <span style=\"opacity:.7\">(${date})</span></div>`;
       }).join("");
-    }).catch(()=>{});
+      container.innerHTML = html;
+      cacheSet('commits', html);
+    }).catch(()=>{
+      if (container && cached) container.innerHTML = cached;
+    });
 }
 
 // ==== INIT ====
