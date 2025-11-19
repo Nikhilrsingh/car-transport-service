@@ -2,94 +2,120 @@
 <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
 <link rel="stylesheet" href="../css/components/backtoBottom.css" />
 <link rel="preload" href="../assets/images/car-footer.png" as="image" />
-<footer class="footer">
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-column footer-about">
-        <div class="footer-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-          <span class="footer-logo-text">Harihar Car Carriers</span>
-        </div>
-        <p>
-          Your trusted partner for safe and reliable vehicle transportation across India. With over 12 years of experience, we ensure your vehicles reach their destination securely and on time.
-        </p>
-        <div class="social-links">
-          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
 
-      <div class="footer-column">
-        <h3>Quick Links</h3>
-        <ul class="footer-links">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../pages/about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-          <li><a href="../index.html#services"><i class="fas fa-truck-moving"></i> Services</a></li>
-          <li><a href="../pages/how-it-works.html"><i class="fas fa-tasks"></i> How It Works</a></li>
-          <li><a href="../pages/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
-          <li><a href="../pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
-          <li><a href="../pages/enquiry.html"><i class="fas fa-question-circle"></i> Enquiry</a></li>
-          <li><a href="../pages/blog.html"><i class="fas fa-blog"></i> Blog</a></li>
-        </ul>
-      </div>
+<footer class="footer" aria-label="Site footer">
+  <div class="footer-accent" aria-hidden="true"></div>
+  <button class="footer-toggle" aria-expanded="true" aria-controls="footer-main">
+    <span class="toggle-label">Footer</span>
+    <i class="fas fa-chevron-down"></i>
+  </button>
 
-      <div class="footer-column">
-        <h3>Our Services</h3>
-        <ul class="footer-links">
-          <li><a href="#door-to-door"><i class="fas fa-door-open"></i> Door-to-Door Transport</a></li>
-          <li><a href="#nationwide"><i class="fas fa-map-marked-alt"></i> Nationwide Coverage</a></li>
-          <li><a href="#commercial"><i class="fas fa-truck"></i> Commercial Vehicles</a></li>
-          <li><a href="#personal"><i class="fas fa-car"></i> Personal Vehicles</a></li>
-          <li><a href="#luxury"><i class="fas fa-gem"></i> Luxury Cars</a></li>
-          <li><a href="#bikes"><i class="fas fa-motorcycle"></i> Bike Transport</a></li>
-          <li><a href="#insurance"><i class="fas fa-shield-alt"></i> Insurance Coverage</a></li>
-        </ul>
-      </div>
+  <div id="footer-main" class="container">
+    <div class="footer-content footer-grid">
 
-      <div class="footer-column">
-        <h3>Contact Info</h3>
-        <ul class="contact-info">
-          <li><i class="fas fa-map-marker-alt"></i><span>Nagpur, Maharashtra, India - 440001</span></li>
-          <li><i class="fas fa-phone"></i><span>+91 XXXXX XXXXX</span></li>
-          <li><i class="fas fa-envelope"></i><span>info@hariharcarcarriers.com</span></li>
-          <li><i class="fas fa-clock"></i><span>24/7 Customer Support<br/>Emergency Services Available</span></li>
-        </ul>
-        <div class="newsletter-form">
-          <p>Subscribe for updates & offers</p>
-          <div class="newsletter-input">
-            <input type="email" placeholder="Enter your email" />
-            <button type="submit">Subscribe</button>
+      <!-- About Card -->
+      <section class="footer-card footer-about footer-accordion" aria-labelledby="footer-about-header">
+        <button class="accordion-header" id="footer-about-header" aria-expanded="false" aria-controls="footer-about-panel">
+          <div class="footer-logo-group">
+            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+            <span class="footer-brand">Harihar Car Carriers</span>
+          </div>
+          <i class="fas fa-chevron-down accordion-icon" aria-hidden="true"></i>
+        </button>
+        <div id="footer-about-panel" class="accordion-panel" role="region" aria-labelledby="footer-about-header">
+          <p>
+            Your trusted partner for safe and reliable vehicle transportation across India. With over 12 years of experience, we ensure your vehicles reach their destination securely and on time.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Links Card -->
+      <section class="footer-card footer-links-card footer-accordion" aria-labelledby="footer-links-header">
+        <button class="accordion-header" id="footer-links-header" aria-expanded="false" aria-controls="footer-links-panel">
+          <h3 class="footer-heading">Links</h3>
+          <i class="fas fa-chevron-down accordion-icon" aria-hidden="true"></i>
+        </button>
+        <div id="footer-links-panel" class="accordion-panel two-col" role="region" aria-labelledby="footer-links-header">
+          <ul class="footer-links">
+            <li><a href="../index.html" class="link-underline"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../pages/about.html" class="link-underline"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="../pages/how-it-works.html" class="link-underline"><i class="fas fa-tasks"></i> How It Works</a></li>
+            <li><a href="../pages/gallery.html" class="link-underline"><i class="fas fa-images"></i> Gallery</a></li>
+            <li><a href="../pages/pricing.html" class="link-underline"><i class="fas fa-tags"></i> Pricing</a></li>
+            <li><a href="../pages/booking.html" class="link-underline"><i class="fas fa-calendar-check"></i> Book Now</a></li>
+            <li><a href="../pages/enquiry.html" class="link-underline"><i class="fas fa-question-circle"></i> Enquiry</a></li>
+            <li><a href="../pages/blog.html" class="link-underline"><i class="fas fa-blog"></i> Blog</a></li>
+          </ul>
+          <ul class="footer-links">
+            <li><a href="#door-to-door" class="link-underline"><i class="fas fa-door-open"></i> Door‑to‑Door</a></li>
+            <li><a href="#nationwide" class="link-underline"><i class="fas fa-map-marked-alt"></i> Nationwide</a></li>
+            <li><a href="#commercial" class="link-underline"><i class="fas fa-truck"></i> Commercial</a></li>
+            <li><a href="#personal" class="link-underline"><i class="fas fa-car"></i> Personal</a></li>
+            <li><a href="#luxury" class="link-underline"><i class="fas fa-gem"></i> Luxury</a></li>
+            <li><a href="#bikes" class="link-underline"><i class="fas fa-motorcycle"></i> Bike</a></li>
+            <li><a href="#insurance" class="link-underline"><i class="fas fa-shield-alt"></i> Insurance</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contact Card -->
+      <section class="footer-card footer-contact footer-accordion" aria-labelledby="footer-contact-header">
+        <button class="accordion-header" id="footer-contact-header" aria-expanded="false" aria-controls="footer-contact-panel">
+          <h3 class="footer-heading">Contact</h3>
+          <i class="fas fa-chevron-down accordion-icon" aria-hidden="true"></i>
+        </button>
+        <div id="footer-contact-panel" class="accordion-panel" role="region" aria-labelledby="footer-contact-header">
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i><span>Nagpur, Maharashtra, India - 440001</span></li>
+            <li><i class="fas fa-phone"></i><a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a></li>
+            <li><i class="fas fa-envelope"></i><a href="mailto:info@hariharcarcarriers.com">info@hariharcarcarriers.com</a></li>
+            <li><i class="fas fa-clock"></i><span>24/7 Customer Support</span></li>
+          </ul>
+
+          <div class="footer-cta">
+            <a class="cta-primary" href="../pages/booking.html" aria-label="Get Instant Quote">
+              <span>Get Instant Quote</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <form class="newsletter-animated" id="footerNewsletter" novalidate>
+            <label for="newsletterEmail" class="sr-only">Email address</label>
+            <input id="newsletterEmail" name="email" type="email" placeholder="Your email" required />
+            <button type="submit" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+          </form>
+
+          <div class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </section>
+
     </div>
   </div>
 
-  <!-- Car Animation -->
-  <div class="footer-road"></div>
-  <div class="car-carrier-animation">
-    <img
-      class="moving-car-carrier"
-      src="../assets/images/car-carrier.png"
-      alt="Moving car across footer"
-    />
+  <!-- Road & Car Animation -->
+  <div class="footer-road" aria-hidden="true"></div>
+  <div class="car-carrier-animation" aria-hidden="true">
+    <img class="moving-car-carrier" src="../assets/images/car-carrier.png" alt="" />
   </div>
 
-  <div class="footer-bottom">
+  <!-- Bottom Bar -->
+  <div class="footer-bottom" role="contentinfo">
     <div class="container">
       <div class="footer-bottom-content">
-        <div class="copyright">
-          &copy; <span id="current-year"></span> Harihar Car Carriers. All rights reserved.
-        </div>
+        <div class="copyright">&copy; <span id="current-year"></span> Harihar Car Carriers</div>
         <div class="footer-bottom-links">
-          <a href="../pages/privacy-policy.html">Privacy Policy</a>
-          <a href="../pages/Terms of Services.html">Terms of Service</a>
-          <a href="#sitemap">Sitemap</a>
+          <a class="link-underline" href="../pages/privacy-policy.html">Privacy</a>
+          <a class="link-underline" href="../pages/Terms of Services.html">Terms</a>
+          <a class="link-underline" href="#sitemap">Sitemap</a>
         </div>
-        <div class="payment-methods">
+        <div class="payment-methods" aria-label="Payment methods">
           <i class="fab fa-cc-visa" title="Visa"></i>
           <i class="fab fa-cc-mastercard" title="MasterCard"></i>
           <i class="fab fa-cc-paypal" title="PayPal"></i>
@@ -97,6 +123,22 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Sticky Mini Footer (mobile) -->
+  <div class="mini-sticky-footer" role="region" aria-label="Quick contact bar">
+    <a href="tel:+91XXXXXXXXXX" class="mini-call">
+      <i class="fas fa-phone"></i>
+      <span>Call</span>
+    </a>
+    <a href="../pages/booking.html" class="mini-quote">
+      <i class="fas fa-bolt"></i>
+      <span>Quote</span>
+    </a>
+    <button class="mini-up" aria-controls="footer-main" aria-expanded="false">
+      <i class="fas fa-chevron-up"></i>
+      <span>Open</span>
+    </button>
   </div>
 </footer>
 
