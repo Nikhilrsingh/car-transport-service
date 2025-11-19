@@ -29,6 +29,11 @@
   <link rel="stylesheet" href="css/components/bottom-fixed-container.css"/>
   <!-- Theme Toggle Link (must be in <head>) -->
   <link id="theme-style" rel="stylesheet" href="css/light-mode.css" />
+<!-- Before </head> -->
+<link rel="stylesheet" href="css/components/glowing-input.css">
+
+
+
 </head>
 
 <body>
@@ -454,15 +459,7 @@
   <!-- Footer Section -->
   <div id="footer-container"></div>
 
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </button>
 
-  <!-- Top to Bottom Button -->
-  <button class="back-to-bottom" id="backToBottom">
-    <i class="fas fa-arrow-down"></i>
-  </button>
 
   <!-- Scripts: single consolidated block -->
 
@@ -560,17 +557,6 @@
   <script src="js/modules/loading-state-manager.js"></script>
   <!-- Page Navigation Loader - Must load after loading-state-manager -->
   <script src="js/modules/page-navigation-loader.js"></script>
-  <script>
-    window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
-      setTimeout(() => {
-        preloader.classList.add("fade-out");
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 800);
-      }, 1000);
-    });
-  </script>
   <script src="js/modules/navbar-loader.js?v=2"></script>
   <script src="js/modules/footer-loader.js"></script>
   <script src="js/script.js"></script>
@@ -593,12 +579,51 @@
   <script src="js/modules/region-search.js?v=3"></script>
   <script src="js/modules/region-map.js?v=4"></script>
   <script src="js/modules/region-enhancements.js"></script>
+  <script src="js/modules/theme-switcher.js"></script>
   <script src="js/modules/digital-clock.js"></script>
   <script src="js/modules/scroll-animations.js"></script>
   <script src="js/modules/theme-switcher.js"></script>
+ <script src="../js/modules/glow-inputs.js"></script>
 
 
-  
+<div id="cookie-popup" class="cookie-popup">
+  <p>
+    We use cookies to enhance your browsing experience.
+    <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
+
+
+  </p>
+
+  <div class="button-group">
+    <button id="reject-cookie" class="reject-btn">Reject</button>
+    <button id="accept-cookie" class="accept-btn">Accept</button>
+  </div>
+</div>
+
+
+<script>
+  const popup = document.getElementById("cookie-popup");
+  const acceptBtn = document.getElementById("accept-cookie");
+  const rejectBtn = document.getElementById("reject-cookie");
+
+  // show popup only if user hasn't decided
+  if (!localStorage.getItem("cookieDecision")) {
+    popup.style.display = "flex";
+  }
+
+  acceptBtn.addEventListener("click", () => {
+    localStorage.setItem("cookieDecision", "accepted");
+    popup.style.display = "none";
+  });
+
+  rejectBtn.addEventListener("click", () => {
+    localStorage.setItem("cookieDecision", "rejected");
+    popup.style.display = "none";
+  });
+</script>
+
+
+
 
 </body>
 

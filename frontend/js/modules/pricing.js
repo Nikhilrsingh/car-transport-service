@@ -543,6 +543,12 @@
             suv: { base: 8999, perKm: 15 },
             luxury: { base: 12999, perKm: 20 }
         };
+        const emissionRates = {
+            hatchback: 0.20,
+            sedan: 0.25,
+            suv: 0.30,
+            luxury: 0.35
+        };
 
         function calculatePrice() {
             const distance = parseFloat(distanceInput.value);
@@ -564,6 +570,8 @@
             const subtotal = Math.round(basePrice + distanceCharge);
             const gst = Math.round(subtotal * 0.18);
             const total = subtotal + gst;
+            const co2 = Math.round(distance * (emissionRates[vehicleType] || 0.25) * 10) / 10;
+            const trees = Math.max(1, Math.ceil(co2 / 21));
 
             const resultHTML = `
                 <div class="price-breakdown">
@@ -584,6 +592,12 @@
                         <span>Total Estimated Cost:</span>
                         <span class="total-amount">₹${total.toLocaleString('en-IN')}</span>
                     </div>
+                    <div class="eco-summary" style="margin-top:14px;padding:12px;border-radius:10px;background:rgba(22,163,74,.12);color:#e5ffe6">
+                        <h4 style="color:#22c55e;margin:0 0 8px 0"><i class="fas fa-leaf"></i> Environmental Impact</h4>
+                        <div class="breakdown-item"><span>Estimated CO₂:</span><span>${co2} kg</span></div>
+                        <div class="breakdown-item"><span>Offset suggestion:</span><span>Plant ${trees} trees</span></div>
+                        <button class="offset-btn" style="margin-top:8px;background:#22c55e;color:white;border:none;border-radius:8px;padding:8px 12px;cursor:pointer"><i class="fas fa-seedling"></i> Learn how to offset</button>
+                    </div>
                     <p class="calculator-note">
                         <i class="fas fa-info-circle"></i>
                         This is an estimate. Final price may vary based on actual conditions.
@@ -595,6 +609,12 @@
             `;
 
             showResult(resultHTML, 'success');
+            const btn = calculator.querySelector('.offset-btn');
+            if (btn) {
+                btn.addEventListener('click', function(){
+                    alert(`Estimated CO₂: ${co2} kg. Consider planting ${trees} trees or choosing consolidated transport to reduce impact.`);
+                });
+            }
         }
 
         function showResult(content, type) {
