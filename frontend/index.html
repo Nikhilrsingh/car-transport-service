@@ -12,11 +12,7 @@
   <link rel="stylesheet" href="css/components/tracking.css" />
   <link rel="stylesheet" href="css/components/navbar.css" />
   <link rel="stylesheet" href="css/components/footer.css" />
-  <link rel="stylesheet" href="css/components/floating-button.css" />
-  <link rel="stylesheet" href="css/components/floating-call-button.css" />
-  <link rel="stylesheet" href="css/components/floating-whatsapp-button.css" />
   <link rel="stylesheet" href="css/components/floating-chatbot-button.css" />
-  <link rel="stylesheet" href="css/components/sticky-quote-button.css" />
   <link rel="stylesheet" href="css/components/quote-modal.css" />
   <link rel="stylesheet" href="css/components/chatbot-modal.css" />
   <link rel="stylesheet" href="css/components/backtoBottom.css" />
@@ -30,12 +26,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/components/feedback.css">
+  <link rel="stylesheet" href="css/components/bottom-fixed-container.css"/>
   <!-- Theme Toggle Link (must be in <head>) -->
   <link id="theme-style" rel="stylesheet" href="css/light-mode.css" />
+
+
 <!-- Before </head> -->
 <link rel="stylesheet" href="css/components/glowing-input.css">
-
-
 
 </head>
 
@@ -244,69 +241,57 @@
                     <div class="result-row">
                       <span class="result-label">Vehicle:</span>
                       <span class="result-value" id="resultVehicle">---</span>
-                    
-                    <!-- Delivery Time Display -->
-                    <div class="delivery-time-display">
-                      <i class="fas fa-shipping-fast"></i>
-                      <div class="time-info">
-                        <span class="time-label">Estimated Delivery</span>
-                        <span class="time-value" id="deliveryTime">---</span>
+
+                      <!-- Delivery Time Display -->
+                      <div class="delivery-time-display">
+                        <i class="fas fa-shipping-fast"></i>
+                        <div class="time-info">
+                          <span class="time-label">Estimated Delivery</span>
+                          <span class="time-value" id="deliveryTime">---</span>
+                        </div>
+                      </div>
+
+                      <div class="result-price">
+                        <span class="label">Estimated Cost</span>
+                        <span class="amount" id="resultAmount">₹0</span>
+                      </div>
+
+                      <!-- Compare Prices Section -->
+                      <div class="compare-prices-section" id="comparePricesSection" style="display: none;">
+                        <div class="compare-prices-header">
+                          <h4><i class="fas fa-chart-line"></i> Compare Service Options</h4>
+                        </div>
+                        <div class="price-options" id="priceOptions"></div>
+                      </div>
+
+                      <div class="result-actions">
+                        <button type="button" class="quote-result-book-btn" id="bookNowBtn">
+                          <i class="fas fa-check-circle"></i>
+                          <span>Book Now</span>
+                        </button>
+                        <button type="button" class="quote-save-later-btn" id="saveLaterBtn">
+                          <i class="fas fa-bookmark"></i>
+                          <span>Save for Later</span>
+                        </button>
+                        <button type="button" class="quote-result-reset-btn" id="resetQuote">
+                          <i class="fas fa-redo"></i> New Quote
+                        </button>
                       </div>
                     </div>
-                    
                     <div class="result-price">
                       <span class="label">Estimated Cost</span>
                       <span class="amount" id="resultAmount">₹0</span>
                     </div>
-                    
-                    <!-- Compare Prices Section -->
-                    <div class="compare-prices-section" id="comparePricesSection" style="display: none;">
-                      <div class="compare-prices-header">
-                        <h4><i class="fas fa-chart-line"></i> Compare Service Options</h4>
-                      </div>
-                      <div class="price-options" id="priceOptions"></div>
-                    </div>
-                    
                     <div class="result-actions">
-                      <button
-                        type="button"
-                        class="quote-result-book-btn"
-                        id="bookNowBtn"
-                      >
-                        <i class="fas fa-check-circle"></i>
-                        <span>Book Now</span>
+                      <button type="button" class="quote-result-book-btn" id="bookNowBtn">
+                        Book Now
                       </button>
-                      <button
-                        type="button"
-                        class="quote-save-later-btn"
-                        id="saveLaterBtn"
-                      >
-                        <i class="fas fa-bookmark"></i>
-                        <span>Save for Later</span>
-                      </button>
-                      <button
-                        type="button"
-                        class="quote-result-reset-btn"
-                        id="resetQuote"
-                      >
+                      <button type="button" class="quote-result-reset-btn" id="resetQuote">
                         <i class="fas fa-redo"></i> New Quote
                       </button>
                     </div>
                   </div>
-                  <div class="result-price">
-                    <span class="label">Estimated Cost</span>
-                    <span class="amount" id="resultAmount">₹0</span>
-                  </div>
-                  <div class="result-actions">
-                    <button type="button" class="quote-result-book-btn" id="bookNowBtn">
-                      Book Now
-                    </button>
-                    <button type="button" class="quote-result-reset-btn" id="resetQuote">
-                      <i class="fas fa-redo"></i> New Quote
-                    </button>
-                  </div>
                 </div>
-              </div>
             </form>
           </div>
         </div>
@@ -531,6 +516,42 @@
     <i class="fas fa-arrow-down"></i>
   </button>
 
+  <!-- 🌟 Quote Modal -->
+  <!-- <div id="quoteModal" class="quote-modal hidden">
+    <div class="quote-modal-content">
+      <span id="closeQuoteModal" class="quote-modal-close">&times;</span>
+
+      <h2>Get Instant Quote</h2>
+
+      <form id="modalQuoteForm">
+        <div class="form-group">
+          <label>Pickup City</label>
+          <input id="modalFromCity" type="text" required />
+        </div>
+
+        <div class="form-group">
+          <label>Drop City</label>
+          <input id="modalToCity" type="text" required />
+        </div>
+
+        <div class="form-group">
+          <label>Vehicle Type</label>
+          <select id="modalVehicleType" required>
+            <option value="">Select</option>
+            <option value="hatchback">Hatchback</option>
+            <option value="sedan">Sedan</option>
+            <option value="suv">SUV</option>
+            <option value="luxury">Luxury</option>
+          </select>
+        </div>
+
+        <button type="submit" class="modal-submit-btn">
+          Get Price
+        </button>
+      </form>
+    </div>
+  </div> -->
+
   <!-- Scripts -->
   <!-- Loading State Manager - Must load first -->
   <script src="js/modules/loading-state-manager.js"></script>
@@ -543,10 +564,9 @@
   <script src="js/modules/Services.js"></script>
   <script src="js/modules/tracking.js"></script>
   <script src="js/modules/search.js"></script>
-  <script src="js/modules/floating-book-button.js"></script>
-  <script src="js/modules/floating-call-button.js"></script>
-  <script src="js/modules/floating-whatsapp-button.js"></script>
+  <script src="js/modules/modal.js"></script>
   <script src="js/modules/quote-modal.js"></script>
+  <script src="js/modules/bottom-fixed-loader.js"></script>
   <script src="js/modules/sticky-quote-button.js"></script>
   <script src="js/modules/floating-chatbot-button.js"></script>
   <script src="js/modules/chatbot-modal.js"></script>
