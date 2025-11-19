@@ -3538,3 +3538,22 @@ button:active,
 .reject-btn:hover {
   background: #b91c1c;
 }
+/* button, .btn {
+    letter-spacing: 0.5px;
+} */
+:root {
+  --button-letter-spacing: 0.5px;
+}
+/* ========================================
+   GLOBAL BUTTON LETTER-SPACING ENHANCEMENT
+   ======================================== */
+button,
+.cta-btn,
+.quote-submit,
+.submit-btn,
+.service-btn,
+.newsletter-input button,
+.result-book,
+.contact-link {
+  letter-spacing: 0.6px;  /* Adjust value if needed */
+}
