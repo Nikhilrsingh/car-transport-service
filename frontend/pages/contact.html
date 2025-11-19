@@ -914,8 +914,33 @@
     <i class="fas fa-arrow-down"></i>
   </button>
 
-<script src="../js/modules/glow-inputs.js"></script>
+  <!-- 🌟 Bottom Fixed Action Bar -->
+   <link rel="stylesheet" href="../css/components/footer.css" />
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+  <link rel="stylesheet" href="../css/components/quote-modal.css" />
+  <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
+  
+  <div class="bottom-action-bar">
 
+    <!-- Left WhatsApp -->
+    <a href="https://wa.me/919999999999" class="action-btn circle-btn whatsapp-btn">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Center Get Quote Button -->
+    <button id="openQuoteModal" class="action-btn main-btn">
+      Get Quote
+    </button>
+
+    <!-- Right Call Button (changed from WhatsApp → Call) -->
+    <a href="tel:+919876543210" class="action-btn circle-btn call-btn">
+      <i class="fas fa-phone"></i>
+    </a>
+
+  </div>
+  <script src="../js/modules/modal.js"></script>
+  <script src="../js/modules/quote-modal.js"></script>
+  <script src="../js/modules/bottom-fixed-loader.js"></script>
 
 </body>
 
