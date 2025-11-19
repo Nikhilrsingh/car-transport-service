@@ -3514,7 +3514,8 @@ button:active,
 
 .accept-btn,
 .reject-btn {
-  padding: 8px 14px;
+  padding: 8px
+   14px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -3538,15 +3539,20 @@ button:active,
 .reject-btn:hover {
   background: #b91c1c;
 }
-/* button, .btn {
-    letter-spacing: 0.5px;
-} */
+/* 🔵 Global Rounded Button Update (Issue: Add Consistent Border-Radius to All Buttons) */
+button,
+.btn,
+button[type="button"],
+button[type="submit"],
+input[type="submit"] {
+    border-radius: 8px !important;
+}
+
+/* 🌟 Global Letter-Spacing Enhancement (Issue #459) */
 :root {
   --button-letter-spacing: 0.5px;
 }
-/* ========================================
-   GLOBAL BUTTON LETTER-SPACING ENHANCEMENT
-   ======================================== */
+
 button,
 .cta-btn,
 .quote-submit,
@@ -3555,5 +3561,5 @@ button,
 .newsletter-input button,
 .result-book,
 .contact-link {
-  letter-spacing: 0.6px;  /* Adjust value if needed */
+  letter-spacing: var(--button-letter-spacing);
 }

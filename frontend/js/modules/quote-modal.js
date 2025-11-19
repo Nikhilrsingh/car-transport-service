@@ -122,6 +122,17 @@
                 this.removeAttribute('value');
             }
         });
+        const actions = document.querySelector('.quote-result .result-actions');
+        if (actions && !document.getElementById('shareQuoteBtn')) {
+            const shareBtn = document.createElement('button');
+            shareBtn.type = 'button';
+            shareBtn.id = 'shareQuoteBtn';
+            shareBtn.className = 'quote-save-later-btn';
+            shareBtn.innerHTML = '<i class="fas fa-share-alt"></i><span>Share Quote</span>';
+            shareBtn.addEventListener('click', () => handleShareQuote());
+            actions.appendChild(shareBtn);
+        }
+        applyQuoteFromQuery();
     }
     
     /**
@@ -217,6 +228,65 @@
             notification.style.animation = 'slideOutRight 0.3s ease';
             setTimeout(() => notification.remove(), 300);
         }, 3000);
+    }
+
+    function generateQuoteLink(data) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('from', data.fromCity);
+        url.searchParams.set('to', data.toCity);
+        url.searchParams.set('vehicle', data.vehicleType);
+        url.searchParams.set('distance', String(data.distance));
+        url.searchParams.set('price', String(data.price));
+        return url.toString();
+    }
+
+    function handleShareQuote() {
+        if (!currentQuoteData) {
+            alert('Please complete the quote first');
+            return;
+        }
+        const link = generateQuoteLink(currentQuoteData);
+        const title = 'Your Car Transport Quote';
+        const text = `${currentQuoteData.fromCity} → ${currentQuoteData.toCity} • ${currentQuoteData.vehicleType} • ₹${currentQuoteData.price.toLocaleString('en-IN')}`;
+        if (navigator.share) {
+            navigator.share({ title, text, url: link }).catch(() => {});
+            return;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('Share link copied to clipboard', 'info');
+            }).catch(() => {});
+        }
+        const wa = `https://wa.me/?text=${encodeURIComponent(text + '\n' + link)}`;
+        const mail = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n' + link)}`;
+        window.open(wa, '_blank');
+        window.open(mail, '_self');
+    }
+
+    function applyQuoteFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const from = params.get('from');
+        const to = params.get('to');
+        const vehicle = params.get('vehicle');
+        if (from) {
+            const fromInput = document.getElementById('fromCity');
+            fromInput.value = from;
+            selectedFromCity = from;
+        }
+        if (to) {
+            const toInput = document.getElementById('toCity');
+            toInput.value = to;
+            selectedToCity = to;
+        }
+        if (from && to) updateDistance();
+        if (vehicle) {
+            const select = document.getElementById('vehicleType');
+            select.value = vehicle;
+            select.setAttribute('value', vehicle);
+        }
+        if (from && to && vehicle) {
+            calculateQuote();
+        }
     }
 
     /**
