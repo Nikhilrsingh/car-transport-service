@@ -557,6 +557,46 @@
   <script src="js/modules/theme-switcher.js"></script>
   <script src="js/modules/digital-clock.js"></script>
   <script src="js/modules/scroll-animations.js"></script>
+  <script src="js/modules/theme-switcher.js"></script>
+
+<div id="cookie-popup" class="cookie-popup">
+  <p>
+    We use cookies to enhance your browsing experience.
+    <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
+
+
+  </p>
+
+  <div class="button-group">
+    <button id="reject-cookie" class="reject-btn">Reject</button>
+    <button id="accept-cookie" class="accept-btn">Accept</button>
+  </div>
+</div>
+
+
+<script>
+  const popup = document.getElementById("cookie-popup");
+  const acceptBtn = document.getElementById("accept-cookie");
+  const rejectBtn = document.getElementById("reject-cookie");
+
+  // show popup only if user hasn't decided
+  if (!localStorage.getItem("cookieDecision")) {
+    popup.style.display = "flex";
+  }
+
+  acceptBtn.addEventListener("click", () => {
+    localStorage.setItem("cookieDecision", "accepted");
+    popup.style.display = "none";
+  });
+
+  rejectBtn.addEventListener("click", () => {
+    localStorage.setItem("cookieDecision", "rejected");
+    popup.style.display = "none";
+  });
+</script>
+
+
+
 </body>
 
 </html>
