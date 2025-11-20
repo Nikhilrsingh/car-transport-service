@@ -1107,6 +1107,40 @@ body {
   animation: theme-pulse 3s ease-in-out infinite;
 }
 
+/* Inline theme toggle when placed inside navbar */
+.header .desktop-nav .nav-right-section .theme-toggle,
+.header .desktop-nav .nav-right-section .nav-theme-toggle {
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+  margin-left: 8px;
+}
+
+.header .desktop-nav .nav-right-section .theme-toggle button,
+.header .desktop-nav .nav-right-section .nav-theme-toggle button {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  box-shadow: none;
+  animation: none;
+  transform: none;
+}
+
+.header .desktop-nav .nav-right-section .theme-toggle button:hover,
+.header .desktop-nav .nav-right-section .nav-theme-toggle button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.header .desktop-nav .nav-right-section .theme-toggle button i,
+.header .desktop-nav .nav-right-section .nav-theme-toggle button i {
+  font-size: 18px;
+}
+
 /* Responsive adjustments for theme toggle */
 @media (max-width: 1024px) {
   .theme-toggle {
