@@ -21,40 +21,16 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("🧩 themes.js: Injected missing <link id=\"theme-style\">");
   }
 
-  // Ensure there is a theme toggle button
-  let toggleBtn = document.getElementById("theme-toggle");
-  let themeIcon = document.getElementById("theme-icon");
+  // Safe localStorage helpers
+  const safeGet = (k) => {
+    try { return window.localStorage.getItem(k); } catch (_) { return null; }
+  };
+  const safeSet = (k, v) => {
+    try { window.localStorage.setItem(k, v); } catch (_) {}
+  };
 
-  if (!toggleBtn) {
-    const toggleWrapper = document.createElement("div");
-    toggleWrapper.className = "theme-toggle";
-
-    toggleBtn = document.createElement("button");
-    toggleBtn.id = "theme-toggle";
-    toggleBtn.setAttribute("aria-label", "Toggle theme");
-
-    themeIcon = document.createElement("i");
-    themeIcon.id = "theme-icon";
-    themeIcon.className = "fas fa-sun";
-
-    toggleBtn.appendChild(themeIcon);
-    toggleWrapper.appendChild(toggleBtn);
-    document.body.appendChild(toggleWrapper);
-
-    console.log("🧩 themes.js: Injected missing theme toggle button");
-  }
-
-  if (!themeLink || !toggleBtn) {
-    console.warn("⚠️ themes.js: Missing required elements.");
-    console.warn("themeLink:", themeLink);
-    console.warn("toggleBtn:", toggleBtn);
-    return;
-  }
-
-  console.log("✅ themes.js: All elements ready");
-
-  // Load saved theme from localStorage
-  const savedTheme = localStorage.getItem("theme") || "light";
+  // Load saved theme
+  const savedTheme = safeGet("theme") || "light";
   console.log("📋 themes.js: Saved theme from localStorage:", savedTheme);
   applyTheme(savedTheme);
 
@@ -64,28 +40,55 @@ document.addEventListener("DOMContentLoaded", () => {
     if (theme === "dark") {
       themeLink.setAttribute("href", DARK);
       document.body.setAttribute("data-theme", "dark");
-      if (themeIcon) {
-        themeIcon.className = "fas fa-moon";
-      }
+      const iconEl = document.getElementById("theme-icon");
+      if (iconEl) iconEl.className = "fas fa-moon";
     } else {
       themeLink.setAttribute("href", LIGHT);
       document.body.setAttribute("data-theme", "light");
-      if (themeIcon) {
-        themeIcon.className = "fas fa-sun";
-      }
+      const iconEl = document.getElementById("theme-icon");
+      if (iconEl) iconEl.className = "fas fa-sun";
     }
 
-    localStorage.setItem("theme", theme);
+    safeSet("theme", theme);
     console.log("💾 themes.js: Theme saved to localStorage:", theme);
   }
 
-  // Toggle on click
-  toggleBtn.addEventListener("click", () => {
-    console.log("🖱️ themes.js: Theme toggle clicked");
-    const current = localStorage.getItem("theme") || "light";
+  // Delegate click to handle dynamically loaded navbar button
+  // Capture phase to avoid other listeners stopping propagation
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("#theme-toggle");
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("🖱️ themes.js: Theme toggle clicked (delegated)");
+    const current = safeGet("theme") || "light";
     const next = current === "dark" ? "light" : "dark";
     applyTheme(next);
-  });
+  }, true);
+
+  // Extra safety: bind directly when the button becomes available
+  const directBind = () => {
+    const btn = document.getElementById("theme-toggle");
+    if (!btn || btn.dataset.themeBound === "1") return false;
+    console.log("🔗 themes.js: Binding directly to theme-toggle button");
+    btn.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      console.log("🖱️ themes.js: Theme toggle clicked (direct)");
+      const current = safeGet("theme") || "light";
+      const next = current === "dark" ? "light" : "dark";
+      applyTheme(next);
+    }, true);
+    btn.dataset.themeBound = "1";
+    return true;
+  };
+  if (!directBind()) {
+    console.log("⏳ themes.js: Waiting for theme-toggle button via MutationObserver...");
+    const obs = new MutationObserver(() => {
+      if (directBind()) obs.disconnect();
+    });
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+  }
 });
 
 
