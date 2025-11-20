@@ -401,22 +401,24 @@ footer.footer,
   }
 }
 
-/* ===================== Enhanced Footer Overrides ===================== */
+/* ===================== Theme-aware Footer Overrides ===================== */
+/* Use variables provided by the global theme files (light-mode.css / dark-mode.css).
+   Fall back to sensible defaults to keep text visible if theme variables are missing. */
 footer.footer,
 #footer-container footer.footer,
 #footer-container .footer {
-  --bg: #0f1113;
-  --card: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.18);
-  --text: #d0d0d0;
-  --muted: #a8a8a8;
-  --heading: #ffffff;
-  --accent: #ff6b46;
-  --accent-2: #ff8a66;
-  --highlight: #fff5f0;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--footer-bg, var(--bg, #0f1113));
+  color: var(--footer-text, var(--text, #d0d0d0));
   padding-top: 72px;
+
+  /* Local semantic variables for footer internals — use theme fallbacks when available */
+  --card: var(--footer-card, rgba(255, 255, 255, 0.05));
+  --card-border: var(--footer-card-border, rgba(255, 255, 255, 0.18));
+  --muted: var(--footer-muted, rgba(208,208,208,0.9));
+  --heading: var(--footer-heading, var(--footer-text, #ffffff));
+  --accent: var(--accent, #ff6b46);
+  --accent-2: var(--accent-2, #ff8a66);
+  --highlight: var(--footer-highlight, #fff5f0);
 }
 
 .footer-accent { position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: 0.9; }

@@ -62,29 +62,10 @@
             <li><a href="#bikes" class="link-underline"><i class="fas fa-motorcycle"></i> Bike</a></li>
             <li><a href="#insurance" class="link-underline"><i class="fas fa-shield-alt"></i> Insurance</a></li>
           </ul>
-<link rel="stylesheet" href="..css/components/bottom-fixed-container.css">
-<footer class="footer">
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-column footer-about">
-        <div class="footer-logo">
-          <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-          <span class="footer-logo-text">Harihar Car Carriers</span>
-        </div>
-        <p>
-          Your trusted partner for safe and reliable vehicle transportation across India. With over 12 years of
-          experience, we ensure your vehicles reach their destination securely and on time.
-        </p>
-        <div class="social-links">
-          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </section>
 
-      <!-- Contact Card -->
+      <!-- Contact / Newsletter Card -->
       <section class="footer-card footer-contact footer-accordion" aria-labelledby="footer-contact-header">
         <button class="accordion-header" id="footer-contact-header" aria-expanded="false" aria-controls="footer-contact-panel">
           <h3 class="footer-heading">Contact</h3>
@@ -103,41 +84,17 @@
               <span>Get Instant Quote</span>
               <i class="fas fa-arrow-right"></i>
             </a>
-      <div class="footer-column">
-        <h3>Our Services</h3>
-        <ul class="footer-links">
-          <li><a href="#door-to-door"><i class="fas fa-door-open"></i> Door-to-Door Transport</a></li>
-          <li><a href="#nationwide"><i class="fas fa-map-marked-alt"></i> Nationwide Coverage</a></li>
-          <li><a href="#commercial"><i class="fas fa-truck"></i> Commercial Vehicles</a></li>
-          <li><a href="#personal"><i class="fas fa-car"></i> Personal Vehicles</a></li>
-          <li><a href="#luxury"><i class="fas fa-gem"></i> Luxury Cars</a></li>
-          <li><a href="#bikes"><i class="fas fa-motorcycle"></i> Bike Transport</a></li>
-          <li><a href="#insurance"><i class="fas fa-shield-alt"></i> Insurance Coverage</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h3>Contact Info</h3>
-        <ul class="contact-info">
-          <li><i class="fas fa-map-marker-alt"></i><span>Nagpur, Maharashtra, India - 440001</span></li>
-          <li><i class="fas fa-phone"></i><span>+91 XXXXX XXXXX</span></li>
-          <li><i class="fas fa-envelope"></i><span>info@hariharcarcarriers.com</span></li>
-          <li><i class="fas fa-clock"></i><span>24/7 Customer Support<br />Emergency Services Available</span></li>
-        </ul>
-        <div class="newsletter-form">
-          <p>Subscribe for updates & offers</p>
-          <div class="newsletter-input">
-            <input type="email" placeholder="Enter your email" />
-            <button type="submit">Subscribe</button>
           </div>
 
-          <form class="newsletter-animated" id="footerNewsletter" novalidate>
-            <label for="newsletterEmail" class="sr-only">Email address</label>
-            <input id="newsletterEmail" name="email" type="email" placeholder="Your email" required />
-            <button type="submit" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
-          </form>
-
-          <div class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+          <div class="newsletter-form">
+            <p>Subscribe for updates &amp; offers</p>
+            <form class="newsletter-animated" id="footerNewsletter" novalidate>
+              <label for="newsletterEmail" class="sr-only">Email address</label>
+              <input id="newsletterEmail" name="email" type="email" placeholder="Your email" required />
+              <button type="submit" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+            </form>
+            <div class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+          </div>
         </div>
       </section>
 
@@ -147,10 +104,6 @@
   <!-- Road & Car Animation -->
   <div class="footer-road" aria-hidden="true"></div>
   <div class="car-carrier-animation" aria-hidden="true">
-    <img class="moving-car-carrier" src="../assets/images/car-carrier.png" alt="" />
-  <!-- Car Animation -->
-  <div class="footer-road"></div>
-  <div class="car-carrier-animation">
     <img class="moving-car-carrier" src="../assets/images/car-carrier.png" alt="Moving car across footer" />
   </div>
 
@@ -189,26 +142,24 @@
       <span>Open</span>
     </button>
   </div>
+
 </footer>
 
-  <!-- 🌟 Bottom Fixed Action Bar -->
+<!-- 🌟 Bottom Fixed Action Bar -->
+<div class="bottom-action-bar">
+  <!-- Left WhatsApp -->
+  <a href="https://wa.me/919999999999" class="action-btn circle-btn whatsapp-btn">
+    <img src="/static/whatsapp-icon.png" alt="WhatsApp">
+  </a>
 
-  <div class="bottom-action-bar">
+  <!-- Center Get Quote Button -->
+  <button id="openQuoteModal" class="action-btn main-btn">
+    Get Quote
+  </button>
 
-    <!-- Left WhatsApp -->
-    <a href="https://wa.me/919999999999" class="action-btn circle-btn whatsapp-btn">
-      <img src="/static/whatsapp-icon.png" alt="WhatsApp">
-    </a>
+  <!-- Right Call Button -->
+  <a href="tel:+919876543210" class="action-btn circle-btn call-btn">
+    <i class="fas fa-phone"></i>
+  </a>
 
-    <!-- Center Get Quote Button -->
-    <button id="openQuoteModal" class="action-btn main-btn">
-      Get Quote
-    </button>
-
-    <!-- Right Call Button (changed from WhatsApp → Call) -->
-    <a href="tel:+919876543210" class="action-btn circle-btn call-btn">
-      <i class="fas fa-phone"></i>
-    </a>
-
-  </div>
-</footer>
+</div>
