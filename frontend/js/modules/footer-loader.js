@@ -15,22 +15,45 @@
     // Load CSS into head if not already loaded
     loadFooterCSS(isInPagesFolder);
 
-    // Get footer HTML without CSS links (CSS is handled separately)
-    const footerHTML = getFooterHTML();
-    footerContainer.innerHTML = footerHTML;
+    // Fetch footer.html instead of using hardcoded template
+    const footerPath = isInPagesFolder ? '../components/footer.html' : './components/footer.html';
+    
+    fetch(footerPath)
+      .then(response => {
+        if (!response.ok) throw new Error('Footer not found');
+        return response.text();
+      })
+      .then(html => {
+        // Remove CSS link tags from fetched HTML (we load CSS separately)
+        const cleanHTML = html.replace(/<link[^>]*>/gi, '');
+        footerContainer.innerHTML = cleanHTML;
 
-    if (!isInPagesFolder) {
-      fixPathsForRootPage(footerContainer);
-    }
+        if (!isInPagesFolder) {
+          fixPathsForRootPage(footerContainer);
+        }
 
-    // Set current year if element exists
-    const yearSpan = document.getElementById('current-year');
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
+        // Set current year if element exists
+        const yearSpan = document.getElementById('current-year');
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
+        }
 
-    // Load footer interaction script once
-    loadFooterJS(isInPagesFolder);
+        // Load footer interaction script once
+        loadFooterJS(isInPagesFolder);
+      })
+      .catch(err => {
+        console.error('Failed to load footer:', err);
+        // Fallback to inline template if fetch fails
+        footerContainer.innerHTML = getFooterHTML();
+        if (!isInPagesFolder) {
+          fixPathsForRootPage(footerContainer);
+        }
+        const yearSpan = document.getElementById('current-year');
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
+        }
+        loadFooterJS(isInPagesFolder);
+      });
   }
 
   function loadFooterCSS(isInPagesFolder) {
@@ -109,15 +132,6 @@ function getFooterHTML() {
             <li><a href="../pages/booking.html" class="link-underline"><i class="fas fa-calendar-check"></i> Book Now</a></li>
             <li><a href="../pages/enquiry.html" class="link-underline"><i class="fas fa-question-circle"></i> Enquiry</a></li>
             <li><a href="../pages/blog.html" class="link-underline"><i class="fas fa-blog"></i> Blog</a></li>
-          </ul>
-          <ul class="footer-links">
-            <li><a href="#door-to-door" class="link-underline"><i class="fas fa-door-open"></i> Door‑to‑Door</a></li>
-            <li><a href="#nationwide" class="link-underline"><i class="fas fa-map-marked-alt"></i> Nationwide</a></li>
-            <li><a href="#commercial" class="link-underline"><i class="fas fa-truck"></i> Commercial</a></li>
-            <li><a href="#personal" class="link-underline"><i class="fas fa-car"></i> Personal</a></li>
-            <li><a href="#luxury" class="link-underline"><i class="fas fa-gem"></i> Luxury</a></li>
-            <li><a href="#bikes" class="link-underline"><i class="fas fa-motorcycle"></i> Bike</a></li>
-            <li><a href="#insurance" class="link-underline"><i class="fas fa-shield-alt"></i> Insurance</a></li>
           </ul>
         </div>
       </section>
