@@ -3547,3 +3547,19 @@ button[type="submit"],
 input[type="submit"] {
     border-radius: 8px !important;
 }
+
+/* 🌟 Global Letter-Spacing Enhancement (Issue #459) */
+:root {
+  --button-letter-spacing: 0.5px;
+}
+
+button,
+.cta-btn,
+.quote-submit,
+.submit-btn,
+.service-btn,
+.newsletter-input button,
+.result-book,
+.contact-link {
+  letter-spacing: var(--button-letter-spacing);
+}
