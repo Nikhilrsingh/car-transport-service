@@ -16,6 +16,23 @@
   function init() {
     console.log('FAB: Initializing...');
     
+    // Check if there's a hash in the URL (e.g., #quote) and scroll to it
+    if (window.location.hash === '#quote') {
+      setTimeout(() => {
+        const quoteSection = document.querySelector('.hero-quote');
+        if (quoteSection) {
+          quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Focus on the first input field
+          setTimeout(() => {
+            const firstInput = document.getElementById('fromCity');
+            if (firstInput) {
+              firstInput.focus();
+            }
+          }, 500);
+        }
+      }, 300); // Delay to ensure page is fully loaded
+    }
+    
     const fabMain = document.getElementById('fabMain');
     const fabActions = document.getElementById('fabActions');
     const fabQuoteBtn = document.getElementById('fabQuoteBtn');
@@ -106,24 +123,30 @@
       console.log('Quote button clicked');
       closeFAB();
       
-      // Small delay to ensure FAB closes smoothly before opening modal
+      // Small delay to ensure FAB closes smoothly
       setTimeout(() => {
-        // Trigger quote modal if it exists
-        const quoteModal = document.getElementById('quoteModal');
-        const openQuoteModalBtn = document.getElementById('openQuoteModal');
-        
-        if (quoteModal) {
-          console.log('Opening quote modal');
-          quoteModal.classList.remove('hidden');
-          quoteModal.style.display = 'flex';
-        } else if (openQuoteModalBtn) {
-          console.log('Clicking existing quote button');
-          // Click the existing quote button
-          openQuoteModalBtn.click();
+        const currentPath = window.location.pathname;
+        const isIndexPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || !currentPath.includes('.html');
+
+        if (isIndexPage) {
+          // If on index.html, scroll to the quote section
+          console.log('Scrolling to quote section on index page');
+          const quoteSection = document.querySelector('.hero-quote');
+          if (quoteSection) {
+            quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Focus on the first input field
+            setTimeout(() => {
+              const firstInput = document.getElementById('fromCity');
+              if (firstInput) {
+                firstInput.focus();
+              }
+            }, 500);
+          }
         } else {
-          console.log('Redirecting to booking page');
-          // Redirect to booking page as fallback
-          window.location.href = getRelativePath('pages/booking.html');
+          // If on other pages, navigate to index.html with quote section anchor
+          console.log('Navigating to index page quote section');
+          window.location.href = getRelativePath('index.html#quote');
         }
       }, 100);
     }

@@ -30,25 +30,31 @@
   function handleQuoteClick() {
     console.log('Bottom Action Bar: Quote button clicked');
 
-    // Try to open quote modal if it exists
-    const quoteModal = document.getElementById('quoteModal');
-    const openQuoteModalBtn = document.getElementById('openQuoteModal');
+    const currentPath = window.location.pathname;
+    const isIndexPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || !currentPath.includes('.html');
 
-    if (quoteModal) {
-      console.log('Opening quote modal');
-      quoteModal.classList.remove('hidden');
-      quoteModal.style.display = 'flex';
-    } else if (openQuoteModalBtn) {
-      console.log('Clicking existing quote button');
-      openQuoteModalBtn.click();
+    if (isIndexPage) {
+      // If on index.html, scroll to the quote section
+      console.log('Scrolling to quote section on index page');
+      const quoteSection = document.querySelector('.hero-quote');
+      if (quoteSection) {
+        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Focus on the first input field
+        setTimeout(() => {
+          const firstInput = document.getElementById('fromCity');
+          if (firstInput) {
+            firstInput.focus();
+          }
+        }, 500);
+      }
     } else {
-      // Redirect to booking page as fallback
-      console.log('Redirecting to booking page');
-      const currentPath = window.location.pathname;
+      // If on other pages, navigate to index.html with quote section anchor
+      console.log('Navigating to index page quote section');
       if (currentPath.includes('/pages/')) {
-        window.location.href = 'booking.html';
+        window.location.href = '../index.html#quote';
       } else {
-        window.location.href = 'pages/booking.html';
+        window.location.href = 'index.html#quote';
       }
     }
   }
