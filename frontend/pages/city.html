@@ -1,105 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Transport Service</title>
+    <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+    <!-- <link rel="stylesheet" href="../css/styles.css" /> -->
+    <link rel="stylesheet" href="../css/components/glowing-input.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Car Transport Service</title>
-  <link rel="stylesheet" href="../css/components/loading-indicators.css" />
-  <link rel="stylesheet" href="../assets/css/style.css" />
+    <!-- Basic meta -->
+    <meta
+      name="description"
+      content="Car Transport Service - Reliable car shipping across India."
+    />
+    <meta
+      name="keywords"
+      content="car transport, vehicle transport, car movers India"
+    />
 
-  <!-- Basic meta -->
-  <meta name="description" content="Car Transport Service - Reliable car shipping across India.">
-  <meta name="keywords" content="car transport, vehicle transport, car movers India">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        margin: 0;
+        padding: 0;
+      }
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-    }
+      header,
+      footer {
+        text-align: center;
+        background: #000;
+        color: #fff;
+        padding: 1rem 0;
+      }
 
-    header,
-    footer {
-      text-align: center;
-      background: #000;
-      color: #fff;
-      padding: 1rem 0;
-    }
+      .city-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        background: #fff;
+        border-radius: 8px;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
 
-    .city-container {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: #fff;
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
+      .city-container img {
+        width: 50%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+      .description {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+      .description h1 {
+        text-align: center;
+        margin-top: 1rem;
+        color: #333;
+      }
 
-    .city-container img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-
-    .city-container h1 {
-      text-align: center;
-      margin-top: 1rem;
-      color: #333;
-    }
-
-    .city-container p {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #555;
-      line-height: 1.6;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <h2>Car Transport Service 🚗</h2>
-  </header>
-
-  <main class="city-container">
-    <img id="cityImage" src="" alt="City Image">
-    <h1 id="cityTitle">Loading...</h1>
-    <p id="cityDescription">Please wait while we load city details.</p>
-  </main>
-
-  <footer>
-    <p>© 2025 Car Transport Service. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // --- Fetch city from URL ---
-    const params = new URLSearchParams(window.location.search);
-    const citySlug = params.get('city');
-
-    // --- Load data ---
-    fetch('../assets/data/cities.json')
-      .then(res => res.json())
-      .then(cities => {
-        const city = cities.find(c => c.slug === citySlug);
-        if (city) {
-          document.title = city.name + " | Car Transport Service";
-          document.getElementById('cityTitle').textContent = city.name;
-          document.getElementById('cityDescription').textContent = city.description;
-          document.getElementById('cityImage').src = "../" + city.image;
-        } else {
-          document.getElementById('cityTitle').textContent = "City Not Found";
-          document.getElementById('cityDescription').textContent = "Sorry, the requested city could not be found.";
-          document.getElementById('cityImage').style.display = 'none';
+      .description p {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+      }
+      @media screen and (max-width: 670px) {
+        .city-container {
+          flex-direction: column;
         }
-      })
-      .catch(() => {
-        document.getElementById('cityTitle').textContent = "Error Loading City Data";
-        document.getElementById('cityDescription').textContent = "Please try again later.";
-      });
-  </script>
-</body>
+        .city-container img {
+          width: 80%;
+        }
+      }
+      /* Calculator */
+      .card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin: 30px auto;
+        max-width: 900px;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-direction: column;
+      }
+      .card h3 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      input,
+      select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .btn button{
+        margin: 10px auto;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 2px soslid rgba(0, 0, 0, 0.1);
+        outline: none;
+        font-size: 23px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
 
+  <body>
+    <header>
+      <h2>Car Transport Service 🚗</h2>
+    </header>
+
+    <main class="city-container">
+      <img id="cityImage" src="" alt="City Image" />
+      <div class="description">
+        <h1 id="cityTitle">Loading...</h1>
+        <p id="cityDescription">Please wait while we load city details.</p>
+      </div>
+    </main>
+    <!-- Calculator -->
+    <section class="card">
+      <h3>Instant Price Calculator</h3>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Pickup City</label><input id="myCity" name="pickup" />
+        </div>
+        <div class="form-group"><label>Drop City</label><input /></div>
+        <div class="form-group">
+          <label>Car Type</label
+          ><select>
+            <option value="">--Please choose an option--</option>
+            <option>Hatchback</option>
+            <option>Sedan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Transport Type</label
+          ><select>
+            <option>Open</option>
+            <option>Closed</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Distance (km)</label
+          ><input type="number" placeholder="Enter Distance" />
+        </div>
+        <div class="form-group">
+          <label>Add-ons</label>
+          <div class="div">
+            <input type="checkbox" /> Door Pickup &nbsp;
+            <input type="checkbox" /> Insurance
+          </div>
+        </div>
+      </div>
+      <div class="btn">
+        <button type="submit">Submit</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Car Transport Service. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // --- Fetch city from URL ---
+      const params = new URLSearchParams(window.location.search);
+      const citySlug = params.get("city");
+
+      // --- Load data ---
+      fetch("../assets/data/cities.json")
+        .then((res) => res.json())
+        .then((cities) => {
+          const city = cities.find((c) => c.slug === citySlug);
+          if (city) {
+            document.title = city.name + " | Car Transport Service";
+            document.getElementById("cityTitle").textContent = city.name;
+            document.getElementById("cityDescription").textContent =
+              city.description;
+            document.getElementById("cityImage").src = "../" + city.image;
+
+            // form validation
+            document.getElementById("myCity").value = city.name;  
+            
+            const drop=document.querySelector('div.form-group:nth-child(2) input').value.trim();
+            const distance=document.querySelector('input[type="number"]').value.trim();
+            let errors=[];
+
+ 
+            if(drop==='') errors.push('Drop city is required');
+            if(distance==='' || distance<=0) errors.push('Valid distance is required');
+
+
+            // if(errors.length>0){alert(errors.join("")); 
+            
+            // alert('Form submitted successfully!'); 
+          } else {
+            document.getElementById("cityTitle").textContent = "City Not Found";
+            document.getElementById("cityDescription").textContent =
+              "Sorry, the requested city could not be found.";
+            document.getElementById("cityImage").style.display = "none";
+          }
+        })
+        .catch(() => {
+          document.getElementById("cityTitle").textContent =
+            "Error Loading City Data";
+          document.getElementById("cityDescription").textContent =
+            "Please try again later.";
+        });
+    </script>
+
+    <!-- 🌟 Bottom Fixed Action Bar -->
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+    <link rel="stylesheet" href="../css/components/quote-modal.css" />
+    <link
+      rel="stylesheet"
+      href="../css/components/bottom-fixed-container.css"
+    />
+
+    <div class="bottom-action-bar">
+      <!-- Left WhatsApp -->
+      <a
+        href="https://wa.me/919999999999"
+        class="action-btn circle-btn whatsapp-btn"
+      >
+        <i class="fab fa-whatsapp"></i>
+      </a>
+
+      <!-- Center Get Quote Button -->
+      <button id="openQuoteModal" class="action-btn main-btn">Get Quote</button>
+
+      <!-- Right Call Button (changed from WhatsApp → Call) -->
+      <a href="tel:+919876543210" class="action-btn circle-btn call-btn">
+        <i class="fas fa-phone"></i>
+      </a>
+    </div>
+    <script src="../js/modules/modal.js"></script>
+    <script src="../js/modules/quote-modal.js"></script>
+    <script src="../js/modules/bottom-fixed-loader.js"></script>
+  </body>
 </html>

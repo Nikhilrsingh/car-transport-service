@@ -1,0 +1,50 @@
+.bottom-action-bar {
+    width: 100%;
+    background: #484343;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 7px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+    z-index: 9999;
+}
+
+/* General Button Style */
+.action-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Round Buttons */
+.circle-btn {
+    width: 60px;
+    height: 60px;
+    background: #00c853;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    font-size: 26px;
+}
+
+/* Image inside WhatsApp icon */
+.circle-btn img {
+    width: 32px;
+    height: 32px;
+}
+
+/* Main Center Button (Get Quote) */
+.main-btn {
+    background: red;
+    padding: 12px 35px;
+    border-radius: 8px;
+    font-size: 18px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    cursor: pointer;
+    border: none;
+}

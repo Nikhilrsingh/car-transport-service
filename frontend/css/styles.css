@@ -9,7 +9,7 @@
 }
 @font-face {
   font-family: "Poppins";
-  src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
+  src: url("../assets/fonts/Inter-Regular.woff2") format("woff2"),
     url("../assets/fonts/Poppins-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -3201,10 +3201,12 @@ html {
   border-color: #d9232d;
   box-shadow: 0 0 10px rgba(217, 35, 45, 0.2);
 }
-
+.region-search-container input{
+  position: relative;
+}
 .region-search-container i {
   position: absolute;
-  right: 15px;
+  left: 90%;
   top: 50%;
   transform: translateY(-50%);
   color: #999;
@@ -3528,7 +3530,8 @@ button:active,
 
 .accept-btn,
 .reject-btn {
-  padding: 8px 14px;
+  padding: 8px
+   14px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -3551,4 +3554,28 @@ button:active,
 
 .reject-btn:hover {
   background: #b91c1c;
+}
+/* 🔵 Global Rounded Button Update (Issue: Add Consistent Border-Radius to All Buttons) */
+button,
+.btn,
+button[type="button"],
+button[type="submit"],
+input[type="submit"] {
+    border-radius: 8px !important;
+}
+
+/* 🌟 Global Letter-Spacing Enhancement (Issue #459) */
+:root {
+  --button-letter-spacing: 0.5px;
+}
+
+button,
+.cta-btn,
+.quote-submit,
+.submit-btn,
+.service-btn,
+.newsletter-input button,
+.result-book,
+.contact-link {
+  letter-spacing: var(--button-letter-spacing);
 }
