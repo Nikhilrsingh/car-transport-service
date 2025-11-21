@@ -45,6 +45,9 @@
         
         // Load FAB (Floating Action Menu) script
         loadFABJS(isInPagesFolder);
+        
+        // Load Bottom Action Bar script
+        loadBottomActionBarJS(isInPagesFolder);
       })
       .catch(err => {
         console.error('Failed to load footer:', err);
@@ -56,6 +59,7 @@
         const yearSpan = document.getElementById('current-year');
         if (yearSpan) {
           yearSpan.textContent = new Date().getFullYear();
+        loadBottomActionBarJS(isInPagesFolder);
         }
         loadFooterJS(isInPagesFolder);
         loadFABJS(isInPagesFolder);
@@ -64,7 +68,7 @@
 
   function loadFooterCSS(isInPagesFolder) {
     const cssBasePath = isInPagesFolder ? '../css/components/' : './css/components/';
-    const cssFiles = ['footer.css', 'back-to-top-button.css', 'backtoBottom.css', 'floating-action-menu.css'];
+    const cssFiles = ['footer.css', 'back-to-top-button.css', 'backtoBottom.css', 'floating-action-menu.css', 'bottom-action-bar.css'];
     
     cssFiles.forEach(cssFile => {
       const cssPath = cssBasePath + cssFile;
@@ -101,6 +105,22 @@
     };
     script.onerror = function() {
       console.error('Failed to load FAB script');
+    };
+    document.body.appendChild(script);
+  }
+
+  function loadBottomActionBarJS(isInPagesFolder) {
+    const existing = document.getElementById('bottom-action-bar-script');
+    if (existing) return;
+    const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
+    const script = document.createElement('script');
+    script.src = jsBasePath + 'bottom-action-bar.js';
+    script.id = 'bottom-action-bar-script';
+    script.onload = function() {
+      console.log('Bottom Action Bar script loaded successfully');
+    };
+    script.onerror = function() {
+      console.error('Failed to load Bottom Action Bar script');
     };
     document.body.appendChild(script);
   }

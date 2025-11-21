@@ -9,6 +9,16 @@
   bottom: 30px;
   left: 30px;
   z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* On desktop with bottom bar, position FAB higher */
+@media (min-width: 769px) {
+  .fab-container {
+    bottom: 80px;
+  }
 }
 
 /* Main FAB Button */
@@ -26,6 +36,7 @@
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   position: relative;
   z-index: 10001;
+  flex-shrink: 0;
 }
 
 .fab-main:hover {
@@ -55,11 +66,13 @@
   left: 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
   pointer-events: none;
+  width: auto;
 }
 
 .fab-actions.active {
