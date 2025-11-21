@@ -4,6 +4,136 @@ body {
   padding-top: 50px;
 }
 
+.upbar {
+  height: 50px;
+  background: rgba(43, 43, 43, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  gap: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.upbar-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  height: 36px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.upbar-btn i {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.upbar-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.upbar-btn:hover::before {
+  left: 100%;
+}
+
+.track-btn:hover {
+  background: rgba(255, 99, 71, 0.3);
+  border-color: #ff6347;
+  color: #ff6347;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+}
+
+.track-btn:hover i {
+  transform: scale(1.2);
+}
+
+.help-btn:hover {
+  background: rgba(0, 174, 239, 0.3);
+  border-color: #00aeef;
+  color: #00aeef;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 174, 239, 0.3);
+}
+
+.help-btn:hover i {
+  transform: scale(1.2);
+}
+
+/* Tooltip for upbar buttons */
+.upbar-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(43, 43, 43, 0.95);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1001;
+  border: 1px solid rgba(255, 99, 71, 0.3);
+}
+
+.upbar-btn:hover::after {
+  opacity: 1;
+}
+
+/* Mobile Responsive - Hide text on smaller screens */
+@media (max-width: 912px) {
+  .upbar-btn span {
+    display: none;
+  }
+
+  .upbar-btn {
+    padding: 8px 10px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .upbar-actions {
+    gap: 8px;
+  }
+
+  .upbar-btn {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+
+  .upbar-btn i {
+    font-size: 0.9rem;
+  }
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -44,13 +174,14 @@ body {
   width: 55px;
   height: 55px;
   position: relative;
+  overflow: hidden;
 }
 
 .logo-img {
-  width: 170%;
-  height: 170%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-
+  display: block;
 }
 
 .left-logo:hover .logo-img {
@@ -72,7 +203,7 @@ body {
   list-style: none;
   gap: 8px;
   margin: 0;
-  padding: 0;
+  padding: 5px 15px;
   align-items: center;
 }
 
@@ -112,10 +243,12 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 
@@ -177,7 +310,6 @@ body {
 }
 
 @media (min-width: 1201px) {
-
   .nav-link::after,
   .enquiry-link::after,
   .blog-link::after,
@@ -272,7 +404,6 @@ body {
   border-radius: 3px;
 }
 
-
 /* Right Side nav links */
 .nav-right-section {
   display: flex;
@@ -328,14 +459,12 @@ body {
   z-index: 10001;
 }
 
-.dropdown-nav.active>.nav-link,
-.dropdown-nav.active>[data-dropdown-btn] {
+.dropdown-nav.active > .nav-link,
+.dropdown-nav.active > [data-dropdown-btn] {
   color: #ff6347;
   background: rgba(43, 43, 43, 0.95);
   transform: translateY(-2px);
 }
-
-
 
 /* Right Actions - Fixed alignment */
 .nav-actions {
@@ -909,9 +1038,8 @@ body {
   height: 60px;
   cursor: pointer;
   font-size: 24px;
-  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4),
-              0 4px 8px rgba(0, 0, 0, 0.15),
-              inset 0 -2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   align-items: center;
@@ -921,7 +1049,7 @@ body {
 }
 
 .theme-toggle button::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -936,9 +1064,8 @@ body {
 .theme-toggle button:hover {
   background: linear-gradient(135deg, #ff7f5c 0%, #ff6347 100%);
   transform: scale(1.15) rotate(15deg);
-  box-shadow: 0 12px 30px rgba(255, 99, 71, 0.6),
-              0 6px 12px rgba(0, 0, 0, 0.2),
-              inset 0 -3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 30px rgba(255, 99, 71, 0.6), 0 6px 12px rgba(0, 0, 0, 0.2),
+    inset 0 -3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .theme-toggle button:hover::before {
@@ -949,7 +1076,7 @@ body {
 .theme-toggle button:active {
   transform: scale(0.95) rotate(0deg);
   box-shadow: 0 4px 10px rgba(255, 99, 71, 0.4),
-              inset 0 2px 8px rgba(0, 0, 0, 0.3);
+    inset 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .theme-toggle button i {
@@ -966,19 +1093,52 @@ body {
 
 /* Pulse animation for theme toggle */
 @keyframes theme-pulse {
-  0%, 100% {
-    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4),
-                0 4px 8px rgba(0, 0, 0, 0.15);
+  0%,
+  100% {
+    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15);
   }
   50% {
-    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.6),
-                0 4px 8px rgba(0, 0, 0, 0.15),
-                0 0 0 8px rgba(255, 99, 71, 0.1);
+    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.6), 0 4px 8px rgba(0, 0, 0, 0.15),
+      0 0 0 8px rgba(255, 99, 71, 0.1);
   }
 }
 
 .theme-toggle button {
   animation: theme-pulse 3s ease-in-out infinite;
+}
+
+/* Inline theme toggle when placed inside navbar */
+.header .desktop-nav .nav-right-section .theme-toggle,
+.header .desktop-nav .nav-right-section .nav-theme-toggle {
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+  margin-left: 8px;
+}
+
+.header .desktop-nav .nav-right-section .theme-toggle button,
+.header .desktop-nav .nav-right-section .nav-theme-toggle button {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  box-shadow: none;
+  animation: none;
+  transform: none;
+}
+
+.header .desktop-nav .nav-right-section .theme-toggle button:hover,
+.header .desktop-nav .nav-right-section .nav-theme-toggle button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.header .desktop-nav .nav-right-section .theme-toggle button i,
+.header .desktop-nav .nav-right-section .nav-theme-toggle button i {
+  font-size: 18px;
 }
 
 /* Responsive adjustments for theme toggle */
@@ -987,13 +1147,13 @@ body {
     top: 100px;
     right: 15px;
   }
-  
+
   .theme-toggle button {
     width: 55px;
     height: 55px;
     font-size: 22px;
   }
-  
+
   .theme-toggle button i {
     font-size: 24px;
   }
@@ -1004,13 +1164,13 @@ body {
     top: 80px;
     right: 15px;
   }
-  
+
   .theme-toggle button {
     width: 50px;
     height: 50px;
     font-size: 20px;
   }
-  
+
   .theme-toggle button i {
     font-size: 22px;
   }
@@ -1021,13 +1181,13 @@ body {
     top: 70px;
     right: 10px;
   }
-  
+
   .theme-toggle button {
     width: 45px;
     height: 45px;
     font-size: 18px;
   }
-  
+
   .theme-toggle button i {
     font-size: 20px;
   }
@@ -1066,9 +1226,15 @@ button.nav-link[data-dropdown-btn]:hover {
 /* Consistent focus styles: show ring only for keyboard focus */
 /* Remove any residual glow from mouse focus; only keyboard shows subtle ring */
 .nav-link:focus,
-button.nav-link:focus { outline: none; box-shadow: none; }
+button.nav-link:focus {
+  outline: none;
+  box-shadow: none;
+}
 .nav-link:focus-visible,
-button.nav-link:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,99,71,0.6); }
+button.nav-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.6);
+}
 
 .nav-link[data-dropdown-btn] i.fa-caret-down,
 button.nav-link[data-dropdown-btn] i.fa-caret-down {
@@ -1083,5 +1249,5 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
