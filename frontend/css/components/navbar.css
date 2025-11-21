@@ -62,9 +62,11 @@ body {
   display: flex;
   align-items: center;
   flex: 1;
-  justify-content: space-between;
-  margin-left: 20px;
+  justify-content: center;
+  margin: 0 auto;
   order: 2;
+  width: 100%;
+  max-width: 1100px;
 }
 
 .nav-list {
