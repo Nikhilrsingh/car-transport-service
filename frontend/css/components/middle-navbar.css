@@ -1,0 +1,288 @@
+/* Middle Navbar Styles */
+.middle-navbar {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: fixed;
+  top: 35px; /* Below the upbar */
+  left: 0;
+  right: 0;
+  z-index: 999;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hide middle navbar when scrolled */
+.middle-navbar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.middle-navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 40px;
+  max-width: 100%;
+  margin: 0;
+  gap: 15px;
+}
+
+/* Left: Logo */
+.middle-navbar-left {
+  flex: 0 0 auto;
+}
+
+.middle-navbar-logo {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.middle-navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Center: Banner */
+.middle-navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle-navbar-banner {
+  height: 75px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Right: Contact Info */
+.middle-navbar-right {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.middle-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.middle-contact-item i {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.middle-contact-item span {
+  white-space: nowrap;
+}
+
+/* WhatsApp Link */
+.whatsapp-link {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.whatsapp-link:hover::before {
+  left: 100%;
+}
+
+.whatsapp-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-link:hover i {
+  transform: scale(1.15) rotate(10deg);
+}
+
+/* Email Link */
+.email-link {
+  background: linear-gradient(135deg, #EA4335 0%, #C5221F 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(234, 67, 53, 0.3);
+}
+
+.email-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.email-link:hover::before {
+  left: 100%;
+}
+
+.email-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(234, 67, 53, 0.4);
+}
+
+.email-link:hover i {
+  transform: scale(1.15) rotate(-10deg);
+}
+
+/* Dark Mode Styles */
+body.dark-mode .middle-navbar {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-bottom: 2px solid #444;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .middle-navbar-logo,
+body.dark-mode .middle-navbar-banner {
+  filter: brightness(0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .middle-navbar-container {
+    padding: 6px 20px;
+  }
+
+  .middle-navbar-logo {
+    height: 50px;
+  }
+
+  .middle-navbar-banner {
+    height: 65px;
+  }
+
+  .middle-contact-item {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+
+  .middle-contact-item i {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .middle-navbar-container {
+    flex-wrap: wrap;
+    padding: 6px 12px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .middle-navbar-left {
+    order: 1;
+    flex: 0 0 auto;
+  }
+
+  .middle-navbar-right {
+    order: 2;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  .middle-navbar-center {
+    order: 3;
+    flex: 1 1 100%;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .middle-navbar-logo {
+    height: 40px;
+  }
+
+  .middle-navbar-banner {
+    height: 50px;
+    max-width: 90%;
+  }
+
+  .middle-contact-item {
+    padding: 5px 8px;
+    font-size: 0.7rem;
+  }
+
+  .middle-contact-item span {
+    display: none;
+  }
+
+  .middle-contact-item i {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .middle-navbar-container {
+    padding: 5px 8px;
+  }
+
+  .middle-navbar-logo,
+  .middle-navbar-banner {
+    height: 36px;
+  }
+
+  .middle-navbar-right {
+    gap: 6px;
+  }
+
+  .middle-contact-item {
+    padding: 4px 6px;
+  }
+
+  .middle-contact-item i {
+    font-size: 0.9rem;
+  }
+}
+
+/* Scrolled State */
+.middle-navbar.scrolled {
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+}
+
+.middle-navbar.scrolled .middle-navbar-logo,
+.middle-navbar.scrolled .middle-navbar-banner {
+  height: 48px;
+}
+
+@media (max-width: 768px) {
+  .middle-navbar.scrolled .middle-navbar-logo,
+  .middle-navbar.scrolled .middle-navbar-banner {
+    height: 40px;
+  }
+}

@@ -30,11 +30,12 @@
 
       // Ensure navbar CSS is loaded from <head>
       ensureNavbarCss(base);
+      ensureMiddleNavbarCss(base);
 
       // Remove any CSS link tags left inside the container to avoid duplicates
       navbarContainer.querySelectorAll('link[rel="stylesheet"]').forEach(l => {
         const href = l.getAttribute('href') || '';
-        if (href.includes('css/components/navbar.css')) {
+        if (href.includes('css/components/navbar.css') || href.includes('css/components/middle-navbar.css')) {
           l.parentElement && l.parentElement.removeChild(l);
         }
       });
@@ -153,27 +154,27 @@
       });
     });
 
-    // Header scroll effect
+    // Header scroll effect - Hide upbar and middle navbar, keep main navbar sticky
     let lastScroll = 0;
     const header = document.querySelector('.header');
+    const middleNavbar = document.querySelector('.middle-navbar');
+    const upbar = document.querySelector('.upbar');
+    const mainNavbar = document.querySelector('.navbar');
 
     if (header) {
       window.addEventListener('scroll', function () {
         const currentScroll = window.pageYOffset;
 
-        if (currentScroll <= 0) {
-          header.classList.remove('scroll-up');
-          return;
-        }
-
-        if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
-          // Scrolling down
-          header.classList.remove('scroll-up');
-          header.classList.add('scroll-down');
-        } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
-          // Scrolling up
-          header.classList.remove('scroll-down');
-          header.classList.add('scroll-up');
+        if (currentScroll <= 100) {
+          // At top - show all bars
+          if (upbar) upbar.classList.remove('hidden');
+          if (middleNavbar) middleNavbar.classList.remove('hidden');
+          if (mainNavbar) mainNavbar.classList.remove('scrolled');
+        } else {
+          // Scrolled down - hide upbar and middle navbar, keep main navbar at top
+          if (upbar) upbar.classList.add('hidden');
+          if (middleNavbar) middleNavbar.classList.add('hidden');
+          if (mainNavbar) mainNavbar.classList.add('scrolled');
         }
 
         lastScroll = currentScroll;
@@ -265,6 +266,17 @@
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = `${basePath}/css/components/navbar.css`;
+      document.head.appendChild(link);
+    }
+  }
+
+  function ensureMiddleNavbarCss(basePath) {
+    const exists = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+      .some(l => ((l.getAttribute('href') || '').includes('css/components/middle-navbar.css')));
+    if (!exists) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `${basePath}/css/components/middle-navbar.css`;
       document.head.appendChild(link);
     }
   }

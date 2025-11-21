@@ -1,41 +1,72 @@
 /* Enhanced Navigation Styles */
 
 body {
-  padding-top: 50px;
+  padding-top: 195px; /* Upbar (35px) + Middle navbar (~91px) + Main navbar (~70px) */
+}
+
+@media (max-width: 1024px) {
+  body {
+    padding-top: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 210px; /* Account for wrapped middle navbar */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 195px;
+  }
 }
 
 .upbar {
-  height: 50px;
+  height: 35px;
   background: rgba(43, 43, 43, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  gap: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  gap: 12px;
   display: flex;
   justify-content: flex-end;
+  padding: 0 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Hide upbar when scrolled */
+.upbar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .upbar-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 14px;
+  gap: 5px;
+  padding: 0 10px;
   color: white;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 4px;
   transition: all 0.3s ease;
   font-weight: 500;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   white-space: nowrap;
-  height: 36px;
+  height: 28px;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
 }
 
 .upbar-btn i {
-  font-size: 1rem;
+  font-size: 0.85rem;
   transition: transform 0.3s ease;
 }
 
@@ -140,26 +171,37 @@ body {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(43, 43, 43, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  background: transparent;
   transition: all 0.3s ease;
 }
 
 .navbar-container {
   max-width: 100%;
   margin: 0;
-  padding: 0 10px;
+  padding: 0;
 }
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
-  position: relative;
+  padding: 12px 10px;
+  position: fixed;
+  top: 126px; /* Below upbar (35px) + middle navbar (~91px) */
+  left: 0;
+  right: 0;
   gap: 30px;
+  background: rgba(43, 43, 43, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  transition: top 0.3s ease;
+  z-index: 998;
+}
+
+/* When scrolled, main navbar moves to top */
+.navbar.scrolled {
+  top: 0;
 }
 
 /* Logo Styles - Fixed alignment */
@@ -891,6 +933,11 @@ body {
   .navbar {
     justify-content: space-between;
     gap: 0;
+    top: 135px; /* Adjust for mobile wrapped middle navbar */
+  }
+
+  .navbar.scrolled {
+    top: 0;
   }
 
   .logo-container {
