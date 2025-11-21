@@ -40,6 +40,14 @@
   font-weight: 600;
   font-style: normal;
 }
+/* ===============================
+   GLOBAL FOCUS ACCESSIBILITY FIX
+   =============================== */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
 
 :root {
     --primary-color: #ff6347; /* your current brand color */
