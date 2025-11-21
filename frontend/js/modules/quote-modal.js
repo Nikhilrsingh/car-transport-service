@@ -68,6 +68,8 @@
     let selectedFromCity = '';
     let selectedToCity = '';
     let currentQuoteData = null;
+    let appliedPromoCode = null;
+    let currentDiscountPercent = 0;
 
     /**
      * Initialize Quick Quote Form
@@ -142,6 +144,18 @@
             copyBtn.innerHTML = '<i class="fas fa-link"></i><span>Copy Link</span>';
             copyBtn.addEventListener('click', () => { if (currentQuoteData) copyQuoteLink(currentQuoteData); });
             actions.appendChild(copyBtn);
+        }
+        ensurePromoStyles();
+        if (actions && !document.getElementById('promoCodeInput')) {
+            const container = document.createElement('div');
+            container.className = 'promo-code';
+            container.innerHTML = '<input id="promoCodeInput" type="text" placeholder="Promo code"/><button type="button" id="applyPromoBtn" class="quote-save-later-btn"><i class="fas fa-tag"></i><span>Apply</span></button>';
+            actions.appendChild(container);
+            const btn = container.querySelector('#applyPromoBtn');
+            btn.addEventListener('click', () => {
+                const input = container.querySelector('#promoCodeInput');
+                applyPromo(input.value.trim());
+            });
         }
         applyQuoteFromQuery();
     }
@@ -351,6 +365,47 @@
         }
     }
 
+    function ensurePromoStyles() {
+        if (document.getElementById('quotePromoStyles')) return;
+        const s = document.createElement('style');
+        s.id = 'quotePromoStyles';
+        s.textContent = '.amount-original{text-decoration:line-through;color:#9ca3af;margin-right:8px}.amount-final{color:#22c55e;font-weight:600}.discount-badge{background:#22c55e;color:#fff;border-radius:6px;padding:2px 8px;font-size:12px;margin-left:8px}.promo-code{display:flex;gap:8px;align-items:center;margin-top:8px}.promo-code input{border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px}';
+        document.head.appendChild(s);
+    }
+
+    function getPromoDiscount(code, vehicleType, selectedOption){
+        if(!code) return 0; const c=code.toUpperCase();
+        if(c==='SAVE10') return 10; if(c==='VIP15' && vehicleType==='luxury') return 15; if(c==='EXPRESS5' && selectedOption==='Express') return 5; return 0;
+    }
+
+    function displayAmountWithDiscountEl(el, base, pct, dataObj){
+        if(!el) return;
+        if(pct>0){
+            const final=Math.round(base*(100-pct)/100);
+            el.innerHTML = `<span class="amount-original">₹${base.toLocaleString('en-IN')}</span><span class="amount-final">₹${final.toLocaleString('en-IN')}</span><span class="discount-badge">-${pct}%</span>`;
+            animateAmount(`#${el.id}`);
+            if(dataObj) dataObj.price = final;
+        } else {
+            el.textContent = `₹${base.toLocaleString('en-IN')}`;
+            animateAmount(`#${el.id}`);
+            if(dataObj) dataObj.price = base;
+        }
+    }
+
+    function applyPromo(code){
+        if(!currentQuoteData || !currentQuoteData.priceBeforeDiscount){ alert('Please complete the quote first'); return; }
+        const pct=getPromoDiscount(code, currentQuoteData.vehicleType, currentQuoteData.selectedOption);
+        appliedPromoCode = pct>0 ? code : null; currentDiscountPercent = pct;
+        const el = document.getElementById('resultAmount');
+        displayAmountWithDiscountEl(el, currentQuoteData.priceBeforeDiscount, pct, currentQuoteData);
+        showNotification(pct>0 ? `Promo applied: ${pct}% off` : 'Invalid promo code', pct>0 ? 'success' : 'info');
+    }
+
+    function reapplyPromoIfAnyQuick(){
+        if(!currentQuoteData || !currentQuoteData.priceBeforeDiscount) return;
+        displayAmountWithDiscountEl(document.getElementById('resultAmount'), currentQuoteData.priceBeforeDiscount, currentDiscountPercent, currentQuoteData);
+    }
+
     /**
      * Calculate Delivery Time
      */
@@ -417,6 +472,7 @@
                 const selectedOption = options[index];
                 const price = Math.round(selectedOption.rate * distance);
                 document.getElementById('resultAmount').textContent = `₹${price.toLocaleString('en-IN')}`;
+                animateAmount('#resultAmount');
                 
                 // Update delivery time
                 document.getElementById('deliveryTime').textContent = selectedOption.deliveryDays + ' days';
@@ -424,8 +480,10 @@
                 // Update current quote data
                 if (currentQuoteData) {
                     currentQuoteData.selectedOption = selectedOption.name;
+                    currentQuoteData.priceBeforeDiscount = price;
                     currentQuoteData.price = price;
                     currentQuoteData.deliveryTime = selectedOption.deliveryDays + ' days';
+                    reapplyPromoIfAnyQuick();
                 }
             });
         });
@@ -642,6 +700,8 @@
             deliveryTime,
             selectedOption: 'Standard'
         };
+        currentQuoteData.priceBeforeDiscount = estimatedPrice;
+        reapplyPromoIfAnyQuick();
 
         // Display compare prices
         displayComparePrices(vehicleType, distance);
@@ -884,6 +944,8 @@
         let modalSelectedFromCity = '';
         let modalSelectedToCity = '';
         let modalQuoteData = null;
+        let modalAppliedPromoCode = null;
+        let modalCurrentDiscountPercent = 0;
 
         const modalFromCity = document.getElementById('modalFromCity');
         const modalToCity = document.getElementById('modalToCity');
@@ -895,6 +957,19 @@
         const modalSaveLaterBtn = document.getElementById('modalSaveLaterBtn');
 
         injectQuoteEnhancementStyles();
+
+        function applyModalPromo(code){
+            if(!modalQuoteData || !modalQuoteData.priceBeforeDiscount){ alert('Please complete the quote in modal first'); return; }
+            const pct=getPromoDiscount(code, modalQuoteData.vehicleType, modalQuoteData.selectedOption);
+            modalAppliedPromoCode = pct>0 ? code : null; modalCurrentDiscountPercent = pct;
+            const el = document.getElementById('modalResultAmount');
+            displayAmountWithDiscountEl(el, modalQuoteData.priceBeforeDiscount, pct, modalQuoteData);
+            showNotification(pct>0 ? `Promo applied: ${pct}% off` : 'Invalid promo code', pct>0 ? 'success' : 'info');
+        }
+        function reapplyPromoIfAnyModal(){
+            if(!modalQuoteData || !modalQuoteData.priceBeforeDiscount) return;
+            displayAmountWithDiscountEl(document.getElementById('modalResultAmount'), modalQuoteData.priceBeforeDiscount, modalCurrentDiscountPercent, modalQuoteData);
+        }
 
         const modalActions = document.querySelector('#modalQuoteResult .result-actions');
         if (modalActions) {
@@ -915,6 +990,18 @@
                 copyBtn.innerHTML = '<i class="fas fa-link"></i><span>Copy Link</span>';
                 copyBtn.addEventListener('click', () => { if (modalQuoteData) copyQuoteLink(modalQuoteData); });
                 modalActions.appendChild(copyBtn);
+            }
+            ensurePromoStyles();
+            if (!document.getElementById('modalPromoCodeInput')) {
+                const container = document.createElement('div');
+                container.className = 'promo-code';
+                container.innerHTML = '<input id="modalPromoCodeInput" type="text" placeholder="Promo code"/><button type="button" id="modalApplyPromoBtn" class="quote-save-later-btn"><i class="fas fa-tag"></i><span>Apply</span></button>';
+                modalActions.appendChild(container);
+                const btn = container.querySelector('#modalApplyPromoBtn');
+                btn.addEventListener('click', () => {
+                    const input = container.querySelector('#modalPromoCodeInput');
+                    applyModalPromo(input.value.trim());
+                });
             }
         }
 
@@ -1121,8 +1208,8 @@
             document.getElementById('modalResultDistance').textContent = `${distance} km`;
             document.getElementById('modalResultVehicle').textContent = vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1);
             document.getElementById('modalResultAmount').textContent = `₹${estimatedPrice.toLocaleString('en-IN')}`;
-                    animateAmount('#modalResultAmount');
-                    document.getElementById('modalDeliveryTime').textContent = deliveryTime;
+            animateAmount('#modalResultAmount');
+            document.getElementById('modalDeliveryTime').textContent = deliveryTime;
 
             // Store modal quote data
             modalQuoteData = {
@@ -1134,6 +1221,8 @@
                 deliveryTime,
                 selectedOption: 'Standard'
             };
+            modalQuoteData.priceBeforeDiscount = estimatedPrice;
+            reapplyPromoIfAnyModal();
 
             // Display compare prices
             displayModalComparePrices(vehicleType, distance);
@@ -1179,12 +1268,15 @@
                     const selectedOption = options[index];
                     const price = Math.round(selectedOption.rate * distance);
                     document.getElementById('modalResultAmount').textContent = `₹${price.toLocaleString('en-IN')}`;
+                    animateAmount('#modalResultAmount');
                     document.getElementById('modalDeliveryTime').textContent = selectedOption.deliveryDays + ' days';
                     
                     if (modalQuoteData) {
                         modalQuoteData.selectedOption = selectedOption.name;
+                        modalQuoteData.priceBeforeDiscount = price;
                         modalQuoteData.price = price;
                         modalQuoteData.deliveryTime = selectedOption.deliveryDays + ' days';
+                        reapplyPromoIfAnyModal();
                     }
                 });
             });
