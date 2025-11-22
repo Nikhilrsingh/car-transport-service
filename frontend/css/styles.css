@@ -158,7 +158,7 @@ body {
 .auto-slider {
   position: relative;
   width: 100%;
-  height: 97vh;
+  height: 45vh;
   overflow: hidden;
   min-height: 300px;
 }
@@ -1221,7 +1221,7 @@ body {
 /* Scroll Indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: 30px;
+  bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
@@ -1749,7 +1749,6 @@ body {
 /* Section Styles */
 section {
   text-align: center;
-  padding: 60px 0;
   position: relative;
 }
 
@@ -2541,7 +2540,6 @@ html {
 }
 
 .features {
-  padding: 80px 0;
   background-color: #fff;
   text-align: center;
 }
@@ -3003,7 +3001,6 @@ html {
 .features {
   /* background: linear-gradient(135deg, #8888880f, #88888819); */
   background: transparent;
-  padding: 80px 20px;
   padding-top: 0;
   text-align: center;
 }
