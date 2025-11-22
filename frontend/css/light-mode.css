@@ -20,6 +20,64 @@ body {
   color: var(--text);
 }
 
+/* Navbar visibility in light theme */
+body[data-theme="light"] .header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+}
+body[data-theme="light"] .nav-link,
+body[data-theme="light"] .login-btn,
+body[data-theme="light"] .enquiry-link,
+body[data-theme="light"] .mobile-close-btn,
+body[data-theme="light"] .mobile-login-btn {
+  color: #1a1a1a !important;
+}
+body[data-theme="light"] .nav-link i,
+body[data-theme="light"] .action-nav i {
+  color: #ff6347 !important;
+}
+
+/* Search bar visibility in light theme */
+body[data-theme="light"] .search-bar {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+body[data-theme="light"] .search-bar input {
+  color: #1a1a1a !important;
+}
+body[data-theme="light"] .search-bar input::placeholder {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+body[data-theme="light"] .search-bar i {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+body[data-theme="light"] .search-bar:hover i,
+body[data-theme="light"] .search-bar:focus-within i {
+  color: #ff6347 !important;
+}
+body[data-theme="light"] .search-bar:focus-within {
+  background: rgba(255, 99, 71, 0.08) !important;
+  border-color: #ff6347 !important;
+}
+
+/* Theme toggle button visibility in light mode */
+body[data-theme="light"] .nav-theme-toggle button,
+body[data-theme="light"] #theme-toggle {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #1a1a1a !important;
+}
+body[data-theme="light"] .nav-theme-toggle button:hover,
+body[data-theme="light"] #theme-toggle:hover {
+  background: rgba(255, 99, 71, 0.15) !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+body[data-theme="light"] .nav-theme-toggle button i,
+body[data-theme="light"] #theme-toggle i {
+  color: #ff6347 !important;
+}
+
 /* footer example */
 .footer {
   background: var(--footer-bg);
@@ -175,6 +233,39 @@ body[data-theme="light"] .footer .footer-bottom-links a,
 body[data-theme="light"] .footer .payment-methods i,
 body[data-theme="light"] .footer .footer-brand {
   color: #333333 !important;
+}
+
+/* Footer form & button visibility fixes for light theme */
+body[data-theme="light"] .footer .newsletter-animated input,
+body[data-theme="light"] .footer .newsletter-form input,
+body[data-theme="light"] .footer input[type="email"],
+body[data-theme="light"] .footer .newsletter input {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  caret-color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .footer .newsletter-animated input::placeholder,
+body[data-theme="light"] .footer .newsletter-form input::placeholder,
+body[data-theme="light"] .footer input::placeholder {
+  color: rgba(0,0,0,0.45) !important;
+}
+
+body[data-theme="light"] .footer .newsletter-animated button,
+body[data-theme="light"] .footer .newsletter-form button,
+body[data-theme="light"] .footer .cta-primary {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* Ensure small sticky footer icons and toggle are visible */
+body[data-theme="light"] .mini-sticky-footer,
+body[data-theme="light"] .footer-toggle {
+  background: rgba(255,255,255,0.9) !important;
+  color: #1a1a1a !important;
+  border-color: rgba(0,0,0,0.06) !important;
 }
 
 /* Quote Card - Light Theme */

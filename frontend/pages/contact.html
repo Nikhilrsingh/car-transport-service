@@ -5,13 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us - Harihar Car Carriers</title>
-  <link rel="stylesheet" href="../css/components/navbar.css" />
-  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/components/navbar.css" />    <link rel="stylesheet" href="../css/components/middle-navbar.css" />  <!-- Loading Indicators CSS -->
   <link rel="stylesheet" href="../css/components/loading-indicators.css" />
   <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/components/floating-call-button.css">
+  <!-- <link rel="stylesheet" href="../css/components/floating-call-button.css">
   <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
-  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css">
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css"> -->
   <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
   <link rel="stylesheet" href="../css/components/quote-modal.css">
   <link rel="stylesheet" href="../css/components/chatbot-modal.css">
@@ -20,6 +19,8 @@
   <link rel="stylesheet" href="../css/components/animations.css">
   <link rel="stylesheet" href="../css/components/contact.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/components/glowing-input.css">
+
   <style>
     @font-face {
       font-family: "Poppins";
@@ -43,6 +44,7 @@
       box-sizing: border-box;
     }
 
+    /* Body padding-top handled by navbar.css */
     body {
       font-family: "Poppins", sans-serif;
       height: 100%;
@@ -570,20 +572,20 @@
               <h3>Phone & WhatsApp</h3>
             </div>
             <div class="info-content">
-              <p><strong>Customer Support:</strong> +91 98765 43210</p>
-              <p><strong>Sales & Quotes:</strong> +91 98765 43211</p>
-              <p><strong>Emergency:</strong> +91 98765 43212</p>
+              <p><strong>Customer Support:</strong> +91 9372693389</p>
+              <p><strong>Sales & Quotes:</strong> +91 9372693389</p>
+              <p><strong>Emergency:</strong> +91 9372693389</p>
             </div>
             <div class="info-actions">
-              <button class="info-action-btn" data-action="call" data-value="+919876543210">
+              <button class="info-action-btn" data-action="call" data-value="+919372693389">
                 <i class="fas fa-phone"></i>
                 <span>Call</span>
               </button>
-              <button class="info-action-btn" data-action="copy" data-value="+91 98765 43210">
+              <button class="info-action-btn" data-action="copy" data-value="+91 9372693389">
                 <i class="fas fa-copy"></i>
                 <span>Copy</span>
               </button>
-              <button class="info-action-btn" data-action="qr" data-value="tel:+919876543210">
+              <button class="info-action-btn" data-action="qr" data-value="tel:+919372693389">
                 <i class="fas fa-qrcode"></i>
                 <span>QR Code</span>
               </button>
@@ -600,26 +602,26 @@
             <div class="info-content">
               <p>
                 <strong>General Inquiries:</strong>
-                info@hariharcarcarriers.com
+                hariharcarcarrier@gmail.com
               </p>
               <p>
                 <strong>Customer Support:</strong>
-                support@hariharcarcarriers.com
+                hariharcarcarrier@gmail.com
               </p>
               <p>
-                <strong>Partnerships:</strong> partners@hariharcarcarriers.com
+                <strong>Partnerships:</strong> hariharcarcarrier@gmail.com
               </p>
             </div>
             <div class="info-actions">
-              <button class="info-action-btn" data-action="email" data-value="info@hariharcarcarriers.com">
+              <button class="info-action-btn" data-action="email" data-value="hariharcarcarrier@gmail.com">
                 <i class="fas fa-envelope"></i>
                 <span>Email</span>
               </button>
-              <button class="info-action-btn" data-action="copy" data-value="info@hariharcarcarriers.com">
+              <button class="info-action-btn" data-action="copy" data-value="hariharcarcarrier@gmail.com">
                 <i class="fas fa-copy"></i>
                 <span>Copy</span>
               </button>
-              <button class="info-action-btn" data-action="qr" data-value="mailto:info@hariharcarcarriers.com">
+              <button class="info-action-btn" data-action="qr" data-value="mailto:hariharcarcarrier@gmail.com">
                 <i class="fas fa-qrcode"></i>
                 <span>QR Code</span>
               </button>
@@ -706,11 +708,12 @@
                   <!-- <span>LinkedIn</span> -->
                 </a>
               </div>
-              <button class="live-chat-btn" id="liveChatBtn">
+              <!-- Live chat button removed - handled by FAB menu -->
+              <!-- <button class="live-chat-btn" id="liveChatBtn">
                 <i class="fas fa-comments"></i>
                 <span>Start Live Chat</span>
                 <span class="online-indicator"></span>
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
@@ -870,7 +873,7 @@
           <i class="fas fa-calculator"></i>
           <span>Get Instant Quote</span>
         </a>
-        <a href="tel:+919876543210" class="cta-btn secondary">
+        <a href="tel:+919372693389" class="cta-btn secondary">
           <i class="fas fa-phone"></i>
           <span>Call Us Now</span>
         </a>
@@ -890,12 +893,14 @@
 
   <script src="../js/modules/footer-loader.js"></script>
   <script src="../js/modules/themes.js"></script>
-  <script src="../js/modules/floating-book-button.js"></script>
+  <!-- Floating buttons removed - handled by FAB menu in footer -->
+  <!-- Floating buttons removed - handled by FAB menu in footer -->
+  <!-- <script src="../js/modules/floating-book-button.js"></script>
   <script src="../js/modules/floating-call-button.js"></script>
-  <script src="../js/modules/floating-whatsapp-button.js"></script>
+  <script src="../js/modules/floating-whatsapp-button.js"></script> -->
   <script src="../js/modules/quote-modal.js"></script>
   <script src="../js/modules/sticky-quote-button.js"></script>
-  <script src="../js/modules/floating-chatbot-button.js"></script>
+  <!-- <script src="../js/modules/floating-chatbot-button.js"></script> -->
   <script src="../js/modules/chatbot-modal.js"></script>
   <script src="../js/modules/back-to-top-button.js"></script>
   <script src="../js/modules/backtoBottom.js"></script>
@@ -912,6 +917,13 @@
     <i class="fas fa-arrow-down"></i>
   </button>
 
+  <!-- 🌟 Bottom Fixed Action Bar -->
+   <link rel="stylesheet" href="../css/components/footer.css" />
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+  <link rel="stylesheet" href="../css/components/quote-modal.css" />
+  <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
+  
+  <!-- 🚀 Floating Action Menu loaded via footer component -->
 
 </body>
 
