@@ -1,12 +1,23 @@
-/* ------------------------------
-   Global Styles / Base Styles
------------------------------- */
-
+/* =============================
+   GLOBAL CONTENT WIDTH CONTROL
+============================= */
 :root {
+    --content-max-width: 900px;
     --primary-color: #ff6347;
     --text-color: #333;
     --background-light: #ffffff;
 }
+
+.content-wrapper {
+    max-width: var(--content-max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ------------------------------
+   Global Styles / Base Styles
+------------------------------ */
+
 @font-face {
   font-family: "Poppins";
   src: url("../assets/fonts/Inter-Regular.woff2") format("woff2"),
