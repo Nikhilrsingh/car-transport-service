@@ -1,24 +1,24 @@
 /* Enhanced Navigation Styles */
 
 body {
-  padding-top: 195px; /* Upbar (35px) + Middle navbar (~91px) + Main navbar (~70px) */
+  padding-top: 170px; /* Upbar (35px) + Middle navbar (~66px) + Main navbar (~70px) */
 }
 
 @media (max-width: 1024px) {
   body {
-    padding-top: 180px;
+    padding-top: 160px;
   }
 }
 
 @media (max-width: 768px) {
   body {
-    padding-top: 210px; /* Account for wrapped middle navbar */
+    padding-top: 180px; /* Account for wrapped middle navbar */
   }
 }
 
 @media (max-width: 480px) {
   body {
-    padding-top: 195px;
+    padding-top: 160px;
   }
 }
 
@@ -187,7 +187,7 @@ body {
   justify-content: space-between;
   padding: 12px 10px;
   position: fixed;
-  top: 126px; /* Below upbar (35px) + middle navbar (~91px) */
+  top: 101px; /* Below upbar (35px) + middle navbar (~66px) */
   left: 0;
   right: 0;
   gap: 30px;
@@ -933,7 +933,7 @@ body {
   .navbar {
     justify-content: space-between;
     gap: 0;
-    top: 135px; /* Adjust for mobile wrapped middle navbar */
+    top: 110px; /* Adjust for mobile wrapped middle navbar */
   }
 
   .navbar.scrolled {

@@ -52,11 +52,16 @@
   align-items: center;
 }
 
+.middle-navbar-center { overflow: visible; }
+
 .middle-navbar-banner {
-  height: 75px;
+  height: 50px;
   width: auto;
-  max-width: 100%;
+  max-width: none;
   object-fit: contain;
+  transform-origin: center center;
+  transform: scale(1.25);
+  transition: transform 0.2s ease;
 }
 
 /* Right: Contact Info */
@@ -70,97 +75,70 @@
 .middle-contact-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 20px;
+  gap: 8px;
+  padding: 0 6px;
+  border-radius: 0;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.8rem;
-  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  transition: none;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #000 !important;
 }
 
 .middle-contact-item i {
-  font-size: 1.1rem;
-  transition: transform 0.3s ease;
+  font-size: 1.4rem;
+  transition: transform 0.18s ease;
+  line-height: 1;
 }
 
 .middle-contact-item span {
   white-space: nowrap;
 }
 
+.contact-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.contact-number {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.contact-number-alt {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #000;
+  margin-top: 2px;
+}
+
+.contact-sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
 /* WhatsApp Link */
 .whatsapp-link {
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  background: transparent !important;
+  color: inherit;
 }
 
-.whatsapp-link::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: left 0.5s ease;
-}
-
-.whatsapp-link:hover::before {
-  left: 100%;
-}
-
-.whatsapp-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-}
-
-.whatsapp-link:hover i {
-  transform: scale(1.15) rotate(10deg);
-}
+.whatsapp-link::before { display: none; }
+.whatsapp-link:hover { transform: none; box-shadow: none; }
+.whatsapp-link i, .email-link i { color: #ff0000 !important; }
 
 /* Email Link */
-.email-link {
-  background: linear-gradient(135deg, #EA4335 0%, #C5221F 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(234, 67, 53, 0.3);
-}
-
-.email-link::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: left 0.5s ease;
-}
-
-.email-link:hover::before {
-  left: 100%;
-}
-
-.email-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(234, 67, 53, 0.4);
-}
-
-.email-link:hover i {
-  transform: scale(1.15) rotate(-10deg);
-}
+.email-link::before { display: none; }
+.email-link:hover { transform: none; box-shadow: none; }
 
 /* Dark Mode Styles */
 body.dark-mode .middle-navbar {
@@ -185,16 +163,19 @@ body.dark-mode .middle-navbar-banner {
   }
 
   .middle-navbar-banner {
-    height: 65px;
+    height: 45px;
   }
 
   .middle-contact-item {
-    font-size: 0.75rem;
-    padding: 5px 10px;
+    font-size: 0.85rem;
+    padding: 6px 10px;
   }
 
+  .contact-number { font-size: 1rem; }
+  .contact-sub { font-size: 0.72rem; }
+
   .middle-contact-item i {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -229,7 +210,7 @@ body.dark-mode .middle-navbar-banner {
   }
 
   .middle-navbar-banner {
-    height: 50px;
+    height: 35px;
     max-width: 90%;
   }
 
@@ -238,12 +219,12 @@ body.dark-mode .middle-navbar-banner {
     font-size: 0.7rem;
   }
 
-  .middle-contact-item span {
-    display: none;
-  }
+  .middle-contact-item i { margin-right: 6px; }
+  .contact-number { font-size: 0.95rem; }
+  .contact-sub { font-size: 0.65rem; }
 
   .middle-contact-item i {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 }
 
@@ -254,7 +235,7 @@ body.dark-mode .middle-navbar-banner {
 
   .middle-navbar-logo,
   .middle-navbar-banner {
-    height: 36px;
+    height: 30px;
   }
 
   .middle-navbar-right {
@@ -266,7 +247,7 @@ body.dark-mode .middle-navbar-banner {
   }
 
   .middle-contact-item i {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 }
 
