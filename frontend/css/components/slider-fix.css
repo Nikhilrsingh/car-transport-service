@@ -1,0 +1,18 @@
+/* Fix for Issue #490: Slider Images Not Fitting Properly */
+
+/* Override the slide-image styling to ensure images fit properly without cropping */
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important; /* Changed from cover to contain */
+  object-position: center;
+  background-color: #000; /* Keep black background for letterboxing */
+}
+
+/* Alternative: If you want images to fill but maintain aspect ratio without extreme cropping */
+.slide-image-alt {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  object-position: center;
+}
