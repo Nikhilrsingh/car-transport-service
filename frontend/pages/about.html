@@ -7,14 +7,15 @@
   <title>About Us | Harihar Car Carriers</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/middle-navbar.css" />
   <!-- Loading Indicators CSS -->
   <link rel="stylesheet" href="../css/components/loading-indicators.css" />
   <link rel="stylesheet" href="../css/components/footer.css" />
   <!-- <link rel="stylesheet" href="../css/components/floating-call-button.css" />
-  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css" /> -->
-  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css" />
+  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css" />
   <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
-  <link rel="stylesheet" href="../css/components/quote-modal.css" />
+  <link rel="stylesheet" href="../css/components/quote-modal.css" /> -->
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css" />
   <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
   <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
   <link rel="stylesheet" href="../css/components/backtoBottom.css" />
@@ -45,6 +46,7 @@
       box-sizing: border-box;
     }
 
+    /* Body styles now handled by navbar.css */
     body {
       font-family: "Poppins", sans-serif;
       height: 100%;
@@ -52,8 +54,7 @@
       background-color: #2b2b2b;
       color: white;
       line-height: 1.6;
-      padding-top: 80px;
-      /* Add padding for fixed navbar */
+      /* padding-top handled by navbar.css to account for upbar + middle navbar + main navbar */
     }
 
     .page-content {
@@ -458,10 +459,7 @@
         font-size: 2rem;
       }
 
-      body {
-        padding-top: 70px;
-        /* Adjust for mobile navbar */
-      }
+      /* Body padding-top handled by navbar.css responsive styles */
     }
   </style>
   <link rel="stylesheet" href="../css/components/floating-button.css" />
@@ -1271,17 +1269,17 @@
   <script src="../js/modules/themes.js"></script>
   <script src="../js/script.js"></script>
   <script src="../js/modules/about-animations.js"></script>
-  <script src="../js/modules/floating-book-button.js"></script>
+  <!-- <script src="../js/modules/floating-book-button.js"></script> -->
   <!-- <script src="../js/modules/floating-call-button.js"></script>
   <script src="../js/modules/floating-whatsapp-button.js"></script> -->
-  <script src="../js/modules/sticky-quote-button.js"></script>
+  <!-- <script src="../js/modules/sticky-quote-button.js"></script> -->
   <script src="../js/modules/floating-chatbot-button.js"></script>
   <script src="../js/modules/chatbot-modal.js"></script>
   <script src="../js/modules/back-to-top-button.js"></script>
   <script src="../js/modules/backtoBottom.js"></script>
   <script src="../js/modules/scroll-animations.js"></script>
   <script src="../js/modules/modal.js"></script>
-  <script src="../js/modules/quote-modal.js"></script>
+  <!-- <script src="../js/modules/quote-modal.js"></script> -->
   <script src="../js/modules/bottom-fixed-loader.js"></script>
 
 
