@@ -38,6 +38,7 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
+  height: 45px;
 }
 
 /* Hide upbar when scrolled */
@@ -177,6 +178,7 @@ body {
 
 .navbar-container {
   max-width: 100%;
+  height: 900px;
   margin: 0;
   padding: 0;
 }
@@ -187,7 +189,7 @@ body {
   justify-content: space-between;
   padding: 12px 10px;
   position: fixed;
-  top: 101px; /* Below upbar (35px) + middle navbar (~66px) */
+  top: 120px; /* Below upbar (35px) + middle navbar (~66px) */
   left: 0;
   right: 0;
   gap: 30px;
@@ -197,6 +199,7 @@ body {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   transition: top 0.3s ease;
   z-index: 998;
+  height: 80px;
 }
 
 /* When scrolled, main navbar moves to top */
@@ -213,8 +216,9 @@ body {
 }
 
 .left-logo {
-  width: 55px;
-  height: 55px;
+  top: 7px;
+  left: 50px;
+  width: 110px;
   position: relative;
   overflow: hidden;
 }
