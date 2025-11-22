@@ -7,16 +7,28 @@
     --text-color: #333;
     --background-light: #ffffff;
 }
-
 .content-wrapper {
     max-width: var(--content-max-width);
     margin-left: auto;
     margin-right: auto;
 }
 
+/* =============================
+   GLOBAL CLICKABLE CURSOR FIX
+============================= */
+button,
+a,
+.clickable,
+input[type="submit"],
+.cta-btn,
+.service-btn {
+    cursor: pointer;
+}
+
 /* ------------------------------
    Global Styles / Base Styles
 ------------------------------ */
+
 
 @font-face {
   font-family: "Poppins";
