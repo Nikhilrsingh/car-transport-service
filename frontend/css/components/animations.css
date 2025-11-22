@@ -1,0 +1,473 @@
+/* ============================================
+   Smooth Scrolling & Entry Animations
+   ============================================ */
+
+/* Enhanced Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   Entry Animations (Scroll-triggered)
+   ============================================ */
+
+/* Base animation classes - elements start hidden */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.slide-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.slide-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.85) translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Staggered animation delays for child elements */
+.fade-in-delay-1 {
+  transition-delay: 0.15s;
+}
+
+.fade-in-delay-2 {
+  transition-delay: 0.3s;
+}
+
+.fade-in-delay-3 {
+  transition-delay: 0.45s;
+}
+
+.fade-in-delay-4 {
+  transition-delay: 0.6s;
+}
+
+.fade-in-delay-5 {
+  transition-delay: 0.75s;
+}
+
+.fade-in-delay-6 {
+  transition-delay: 0.9s;
+}
+
+/* ============================================
+   Hover Effects for Interactive Elements
+   ============================================ */
+
+/* Button Hover Effects with Micro-animations */
+button,
+.btn,
+.cta-btn,
+.submit-btn,
+.service-btn,
+.quote-submit,
+.quote-next,
+.quote-form-back-btn,
+.quote-form-submit-btn,
+.quote-result-book-btn,
+.quote-result-reset-btn,
+.mobile-cta-btn,
+.mobile-login-btn {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.3s ease, 
+              background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover,
+.btn:hover,
+.cta-btn:hover,
+.submit-btn:hover,
+.service-btn:hover,
+.quote-submit:hover,
+.quote-next:hover,
+.quote-form-back-btn:hover,
+.quote-form-submit-btn:hover,
+.quote-result-book-btn:hover,
+.quote-result-reset-btn:hover,
+.mobile-cta-btn:hover,
+.mobile-login-btn:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 99, 71, 0.25);
+}
+
+/* Ripple effect on click */
+button:active::after,
+.btn:active::after,
+.cta-btn:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  to {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+/* Icon Hover Effects with Micro-animations */
+.icon,
+i[class^="fas"],
+i[class^="far"],
+i[class^="fab"],
+.service-icon i,
+.value-icon,
+.info-icon,
+.fa-star,
+.fa-phone,
+.fa-envelope,
+.fa-map-marker-alt,
+.fa-clock,
+.fa-search,
+.fa-user,
+.fa-truck,
+.fa-calculator,
+.fa-question-circle,
+.fa-blog,
+.fa-home,
+.fa-info-circle,
+.fa-truck-moving,
+.fa-users,
+.fa-tags,
+.fa-map-marker-alt,
+.fa-images,
+.fa-phone,
+.fa-calendar-check {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              color 0.3s ease,
+              filter 0.3s ease;
+}
+
+.icon:hover,
+i[class^="fas"]:hover,
+i[class^="far"]:hover,
+i[class^="fab"]:hover,
+.service-icon:hover i,
+.value-icon:hover,
+.info-icon:hover {
+  transform: scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 4px 8px rgba(255, 99, 71, 0.3));
+}
+
+/* Pulse animation for attention-grabbing icons */
+@keyframes icon-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.service-icon i,
+.value-icon {
+  animation: icon-pulse 3s ease-in-out infinite;
+}
+
+/* Card Hover Effects with Micro-animations */
+.service-card,
+.feature-box,
+.value-card,
+.info-card,
+.team-member,
+.quote-card,
+.cta-form-box,
+.pricing-cta-section {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.4s ease,
+              border-color 0.3s ease;
+}
+
+.service-card:hover,
+.feature-box:hover,
+.value-card:hover,
+.info-card:hover,
+.team-member:hover,
+.quote-card:hover,
+.cta-form-box:hover,
+.pricing-cta-section:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(255, 99, 71, 0.15), 0 0 20px rgba(255, 99, 71, 0.1);
+}
+
+/* Subtle glow on scroll appearance */
+.service-card.visible,
+.feature-box.visible,
+.value-card.visible {
+  animation: card-glow 0.8s ease-out;
+}
+
+@keyframes card-glow {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 99, 71, 0);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 99, 71, 0.3);
+  }
+  100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Link Hover Effects */
+a:not(.nav-link):not(.mobile-nav-link):not(.footer-links a):not(.social-links a) {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+a:not(.nav-link):not(.mobile-nav-link):not(.footer-links a):not(.social-links a):hover {
+  transform: translateY(-2px);
+}
+
+/* Social Links Hover */
+.social-links a,
+.member-social a,
+.about-member-social-icons a {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-links a:hover,
+.member-social a:hover,
+.about-member-social-icons a:hover {
+  transform: scale(1.1) translateY(-3px);
+}
+
+/* Nav Link Hover (already has effects, but ensuring consistency) */
+.nav-link,
+.mobile-nav-link {
+  transition: all 0.3s ease;
+}
+
+/* Input/Form Field Hover */
+input,
+select,
+textarea {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  transform: scale(1.01);
+}
+
+/* ============================================
+   Section-Specific Animations
+   ============================================ */
+
+/* Hero Section with Enhanced Micro-interactions */
+.hero .hero-title,
+.hero .hero-description,
+.hero .hero-actions,
+.hero .hero-stats {
+  opacity: 0;
+  animation: fadeInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.hero .hero-title {
+  animation-delay: 0.2s;
+}
+
+.hero .hero-description {
+  animation-delay: 0.4s;
+}
+
+.hero .hero-stats {
+  animation-delay: 0.6s;
+}
+
+.hero .hero-actions {
+  animation-delay: 0.8s;
+}
+
+/* Features Section with Sequential Reveal */
+.features-container .feature-box {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.features-container .feature-box.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Services Section with Enhanced Entrance */
+.services-grid .service-card {
+  opacity: 0;
+  transform: translateY(40px) rotateX(5deg);
+  transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.services-grid .service-card.visible {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+/* Testimonials with Smooth Slide */
+.testimonial-slider,
+.testimonials-grid {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.testimonial-slider.visible,
+.testimonials-grid.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Contact Section with Gentle Reveal */
+.contact-content > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contact-content > *.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   Performance Optimizations
+   ============================================ */
+
+/* Use GPU acceleration for smooth animations */
+.fade-in,
+.slide-up,
+.slide-left,
+.slide-right,
+.scale-in {
+  will-change: opacity, transform;
+}
+
+/* Remove will-change after animation completes */
+.fade-in.visible,
+.slide-up.visible,
+.slide-left.visible,
+.slide-right.visible,
+.scale-in.visible {
+  will-change: auto;
+}
+
+/* ============================================
+   Mobile Optimizations
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Reduce animation distances on mobile for better performance */
+  .fade-in,
+  .slide-up {
+    transform: translateY(15px);
+  }
+  
+  .slide-left,
+  .slide-right {
+    transform: translateX(20px);
+  }
+  
+  /* Simpler hover effects on mobile */
+  button:hover,
+  .btn:hover,
+  .cta-btn:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .slide-up,
+  .slide-left,
+  .slide-right,
+  .scale-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  
+  button:hover,
+  .btn:hover,
+  .cta-btn:hover,
+  .icon:hover {
+    transform: none;
+  }
+}
+

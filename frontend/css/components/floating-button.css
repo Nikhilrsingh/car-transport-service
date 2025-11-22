@@ -1,0 +1,105 @@
+/* 🎯 Floating "Book Now" Button */
+
+.floating-book-btn {
+    position: fixed;
+    /* move the Book button up so it does not overlap the Back-to-top button */
+    bottom: 150px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(255, 99, 71, 0.4);
+    z-index: 1000;
+}
+
+.floating-book-btn:hover {
+    background: linear-gradient(135deg, #ff4500, #ff6347);
+    box-shadow: 0 8px 30px rgba(255, 99, 71, 0.6);
+    transform: scale(1.1);
+}
+
+.floating-book-btn:active {
+    transform: scale(0.95);
+}
+
+/* Floating animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Tooltip for floating button */
+.floating-book-btn::before {
+    content: "Book Now";
+    position: absolute;
+    /* keep tooltip above the moved button */
+    bottom: 145px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.floating-book-btn:hover::before {
+    opacity: 1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .floating-book-btn {
+        /* slightly higher on tablet to avoid overlap */
+        bottom: 90px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+    }
+
+    .floating-book-btn::before {
+        bottom: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-book-btn {
+        /* mobile: keep some spacing above the back-to-top */
+        bottom: 70px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .floating-book-btn::before {
+        bottom: 135px;
+        font-size: 12px;
+    }
+}
+
+/* Hide floating button on booking page if needed */
+.pages\\booking .floating-book-btn {
+    display: none;
+}
