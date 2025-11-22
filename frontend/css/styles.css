@@ -12,6 +12,19 @@
     margin-right: auto;
 }
 
+/* =============================
+   GLOBAL CLICKABLE CURSOR FIX
+============================= */
+button,
+a,
+.clickable,
+input[type="submit"],
+.cta-btn,
+.service-btn {
+    cursor: pointer;
+}
+
+
 @font-face {
   font-family: "Poppins";
   src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
