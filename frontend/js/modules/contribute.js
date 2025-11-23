@@ -164,7 +164,7 @@ function getLeagueData(points) {
     if (points > 150) return { text: 'Gold 🏆', class: 'badge-gold', tier: 'tier-gold', label: 'Gold League' };
     if (points > 75) return { text: 'Silver 🥈', class: 'badge-silver', tier: 'tier-silver', label: 'Silver League' };
     if (points > 30) return { text: 'Bronze 🥉', class: 'badge-bronze', tier: 'tier-bronze', label: 'Bronze League' };
-    return { text: 'Contributor 🚀', class: 'badge-contributor', tier: 'tier-contributor', label: 'Contributor' };
+    return { text: 'Contributor !!', class: 'badge-contributor', tier: 'tier-contributor', label: 'Contributor' };
 }
 
 // 4. Render Grid
