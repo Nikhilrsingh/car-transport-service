@@ -4,7 +4,7 @@ const REPO_NAME = "car-transport-service";
 const API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
 
 // State
-let contributorsData = [];
+let contributorsData = []; 
 let currentPage = 1;
 const itemsPerPage = 12; 
 
@@ -26,28 +26,25 @@ async function initData() {
     try {
         // Show loading state
         const grid = document.getElementById('contributorsList');
-        if(grid) grid.innerHTML = '<div id="spinner"><div class="spinner-circle"></div></div>';
+        if(grid) grid.innerHTML = '<div id="spinner" style="display:flex"><div class="spinner-circle"></div></div>';
 
-        // Fetch Repo Info & Contributors
+        // Fetch Repo Info, Contributors, and Pull Requests (last 100)
         const [repoRes, contributorsRes] = await Promise.all([
             fetch(API_BASE),
             fetch(`${API_BASE}/contributors?per_page=100`)
         ]);
 
-        if (!repoRes.ok || !contributorsRes.ok) throw new Error("API Limit Exceeded or Network Error");
-
         const repoData = await repoRes.json();
         const rawContributors = await contributorsRes.json();
-
-        // Fetch Pull Requests (Deep Fetch)
+        
+        // Fetch Pull Requests (Recursive) to capture history
         const rawPulls = await fetchAllPulls();
 
         processData(repoData, rawContributors, rawPulls);
 
     } catch (error) {
         console.error('Error initializing data:', error);
-        const grid = document.getElementById('contributorsList');
-        if(grid) grid.innerHTML = '<p id="errorMessage">Failed to load data. Please try again later.</p>';
+        document.getElementById('contributorsList').innerHTML = '<p id="errorMessage">Failed to load data. Please try again later.</p>';
     }
 }
 
@@ -55,10 +52,9 @@ async function initData() {
 async function fetchAllPulls() {
     let pulls = [];
     let page = 1;
-    while (page <= 3) { // Limit to 3 pages to prevent rate limiting
+    while (page <= 3) {
         try {
             const res = await fetch(`${API_BASE}/pulls?state=all&per_page=100&page=${page}`);
-            if (!res.ok) break;
             const data = await res.json();
             if (!data.length) break;
             pulls = pulls.concat(data);
@@ -77,9 +73,9 @@ function processData(repoData, contributors, pulls) {
 
     // A. Calculate Points from PRs
     pulls.forEach(pr => {
-        if (!pr.merged_at) return; // Only count merged PRs
+        if (!pr.merged_at) return; 
 
-        const user = pr.user.login.toLowerCase(); // Normalize username
+        const user = pr.user.login;
         if (!statsMap[user]) statsMap[user] = { prs: 0, points: 0 };
 
         statsMap[user].prs++;
@@ -101,15 +97,13 @@ function processData(repoData, contributors, pulls) {
         totalProjectPoints += prPoints;
     });
 
-    // B. Merge with Contributor Profile
+    // B. Merge with Contributor Profile Data
     contributorsData = contributors.map(c => {
-        const login = c.login.toLowerCase();
+        const login = c.login;
         const userStats = statsMap[login] || { prs: 0, points: 0 };
         
-        // Strict Points (PRs only)
-        const totalScore = userStats.points; 
-        
-        // Aggregate Commits
+        // Strict Point Calculation (No Commits Added)
+        const totalScore = userStats.points;
         totalProjectCommits += c.contributions;
 
         return {
@@ -119,26 +113,31 @@ function processData(repoData, contributors, pulls) {
             html_url: c.html_url,
             contributions: c.contributions,
             prs: userStats.prs,
-            points: totalScore
+            points: totalScore 
         };
     });
 
-    // C. Sort by Points (Desc), Tie-break with Commits
-    contributorsData.sort((a, b) => (b.points - a.points) || (b.contributions - a.contributions));
+    // C. Filter & Sort
+    // RULE: Remove Lead AND Remove Contributors with 0 PRs
+    contributorsData = contributorsData
+        .filter(c => 
+            c.login.toLowerCase() !== REPO_OWNER.toLowerCase() && 
+            c.prs > 0 // <--- NEW CONDITION: Must have at least 1 PR
+        )
+        .sort((a, b) => b.points - a.points); 
 
     // D. Update DOM Stats
     updateGlobalStats(
-        contributors.length,
-        totalProjectPRs,
-        totalProjectPoints,
-        repoData.stargazers_count,
+        contributorsData.length, 
+        totalProjectPRs, 
+        totalProjectPoints, 
+        repoData.stargazers_count, 
         repoData.forks_count,
-        totalProjectCommits // Pass calculated commits
+        totalProjectCommits
     );
 
-    // E. Render
+    // E. Render Grid
     renderContributors(1);
-    setupPaginationListeners();
 }
 
 function updateGlobalStats(count, prs, points, stars, forks, commits) {
@@ -148,7 +147,6 @@ function updateGlobalStats(count, prs, points, stars, forks, commits) {
     safeSetText('totalStars', stars);
     safeSetText('totalForks', forks);
     
-    // FIX: Dynamic Commit Count
     const displayCommits = commits > 1000 ? "1000+" : commits;
     safeSetText('totalCommits', displayCommits);
 }
@@ -158,7 +156,7 @@ function safeSetText(id, text) {
     if (el) el.innerText = text;
 }
 
-// 3. League Logic
+// 3. Get League/Badge Data
 function getLeagueData(points) {
     if (points > 150) return { text: 'Gold 🏆', class: 'badge-gold', tier: 'tier-gold', label: 'Gold League' };
     if (points > 75) return { text: 'Silver 🥈', class: 'badge-silver', tier: 'tier-silver', label: 'Silver League' };
@@ -177,7 +175,7 @@ function renderContributors(page) {
     const paginatedItems = contributorsData.slice(start, end);
 
     if (paginatedItems.length === 0) {
-        grid.innerHTML = '<p>No contributors found.</p>';
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;">No active contributors found.</p>';
         return;
     }
 
@@ -188,10 +186,8 @@ function renderContributors(page) {
         const card = document.createElement('div');
         card.className = `contributor ${league.tier}`;
         
-        // FIX: Proper Click Event
-        card.onclick = function() {
-            openContributorModal(contributor, league, globalRank);
-        };
+        // Click Event
+        card.addEventListener('click', () => openContributorModal(contributor, league, globalRank));
 
         card.innerHTML = `
             <img src="${contributor.avatar_url}" alt="${contributor.login}">
@@ -211,27 +207,29 @@ function renderContributors(page) {
     updatePaginationUI();
 }
 
-// 5. Pagination
-function setupPaginationListeners() {
-    const prevBtn = document.getElementById('prevPage');
-    const nextBtn = document.getElementById('nextPage');
-
-    if(prevBtn) prevBtn.onclick = () => {
-        if (currentPage > 1) { currentPage--; renderContributors(currentPage); }
-    };
-    if(nextBtn) nextBtn.onclick = () => {
-        const maxPage = Math.ceil(contributorsData.length / itemsPerPage);
-        if (currentPage < maxPage) { currentPage++; renderContributors(currentPage); }
-    };
-}
-
 function updatePaginationUI() {
     const maxPage = Math.ceil(contributorsData.length / itemsPerPage) || 1;
     safeSetText('currentPage', currentPage);
     safeSetText('totalPages', maxPage);
+    
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+    
+    if(prevBtn) {
+        prevBtn.onclick = () => {
+            if (currentPage > 1) { currentPage--; renderContributors(currentPage); }
+        };
+        prevBtn.disabled = currentPage === 1;
+    }
+    if(nextBtn) {
+        nextBtn.onclick = () => {
+            if (currentPage < maxPage) { currentPage++; renderContributors(currentPage); }
+        };
+        nextBtn.disabled = currentPage === maxPage;
+    }
 }
 
-// 6. Modal Logic
+// 5. Modal Logic
 function openContributorModal(contributor, league, rank) {
     const modal = document.getElementById('contributorModal');
     if (!modal) return;
@@ -239,19 +237,19 @@ function openContributorModal(contributor, league, rank) {
     document.getElementById('modalAvatar').src = contributor.avatar_url;
     document.getElementById('modalName').textContent = contributor.login;
     
-    // Update Modal Stats
+    // Using safeSetText to populate existing IDs or fallbacks
     safeSetText('modalRank', `#${rank}`);
     safeSetText('modalPoints', contributor.points);
     safeSetText('modalLeague', league.label);
     safeSetText('modalCommits', contributor.contributions);
     safeSetText('modalPRs', contributor.prs);
 
-    // Links
     const prLink = `https://github.com/${REPO_OWNER}/${REPO_NAME}/pulls?q=is%3Apr+author%3A${contributor.login}`;
-    document.getElementById('modalGithubLink').href = contributor.html_url;
-    
     const viewPrBtn = document.getElementById('viewPrBtn');
     if(viewPrBtn) viewPrBtn.href = prLink;
+    
+    const ghLink = document.getElementById('modalGithubLink');
+    if(ghLink) ghLink.href = contributor.html_url;
 
     modal.classList.add('active');
 }
@@ -265,7 +263,7 @@ window.onclick = (e) => {
     if (e.target === modal) modal.classList.remove('active');
 };
 
-// 7. Recent Activity
+// 6. Recent Activity
 async function fetchRecentActivity() {
     try {
         const response = await fetch(`${API_BASE}/commits?per_page=10`);
