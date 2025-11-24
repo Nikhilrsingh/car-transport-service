@@ -109,7 +109,6 @@ body {
 /* --- STATS GRID (6 Columns) --- */
 #stats {
   display: grid;
-  /* Ensure consistent columns */
   grid-template-columns: repeat(6, 1fr); 
   gap: 15px;
   margin-bottom: 40px;
@@ -131,7 +130,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: transform 0.25s ease, background 0.3s, border-color 0.3s;
   text-align: center;
-  min-width: 120px; /* Prevent crushing */
+  min-width: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -184,6 +183,13 @@ body {
   transition: all 0.3s;
 }
 
+/* --- FIX FOR DROPDOWN OPTION VISIBILITY --- */
+.filter-select option {
+  background-color: #2b2b2b; /* Force dark background */
+  color: #ffffff; /* Force white text */
+  padding: 10px;
+}
+
 #searchInput { width: 250px; }
 .filter-select { cursor: pointer; }
 
@@ -206,11 +212,10 @@ button {
 
 button:hover { background: #0056b3; }
 
-/* Contributors List - FIX: Use auto-fill instead of auto-fit */
+/* Contributors List */
 #contributorsList {
   max-width: 80%;
   display: grid;
-  /* auto-fill keeps columns intact even if only 1 item exists */
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   margin: 2rem auto;
@@ -234,7 +239,6 @@ button:hover { background: #0056b3; }
   z-index: 1;
 }
 
-/* The Pop Splatter Circle Effect */
 .contributor::before {
   content: '';
   position: absolute;
