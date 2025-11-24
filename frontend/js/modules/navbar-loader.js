@@ -15,7 +15,7 @@
 
     // Determine the correct path based on current location
     const path = window.location.pathname;
-    const isInPagesFolder = path.includes('/pages/');
+    const isInPagesFolder = path.toLowerCase().includes('/pages/');
     const base = isInPagesFolder ? '..' : '.';
 
     // Fetch the navbar component
