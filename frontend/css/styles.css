@@ -32,6 +32,64 @@
   font-style: normal;
 }
 
+/* ============================================
+   GLOBAL SHADOW SYSTEM (Design Tokens)
+   ============================================ */
+
+:root {
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.18);
+    --shadow-soft: 0 4px 12px rgba(255, 99, 71, 0.15); /* brand soft glow */
+    --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================
+   APPLY SHADOWS GLOBALLY TO COMMON COMPONENTS
+   ============================================ */
+
+/* Buttons */
+button,
+.cta-btn,
+.btn,
+.service-btn {
+    box-shadow: var(--shadow-sm);
+}
+
+/* Cards and feature blocks */
+.card,
+.feature-box,
+.service-box,
+.review-card,
+.team-card {
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.25s ease;
+}
+
+/* Hover elevation */
+.card:hover,
+.feature-box:hover,
+.service-box:hover,
+.review-card:hover,
+.team-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+/* Navbar dropdowns, popups, etc. */
+.dropdown,
+.menu-popup,
+.modal {
+    box-shadow: var(--shadow-md);
+}
+
+/* Soft brand glow */
+.highlight-box,
+.hero-info,
+.quote-box {
+    box-shadow: var(--shadow-soft);
+}
+
+
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
