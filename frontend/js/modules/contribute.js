@@ -115,7 +115,7 @@ function processData(repoData, contributors, pulls) {
         
         totalProjectCommits += c.contributions;
 
-        // If no PR points, give base points for commits to avoid 0 score for heavy committers
+        // If no PR points, give base points for commits
         let finalPoints = userStats.points;
         if (finalPoints === 0) {
             finalPoints = c.contributions * POINTS.COMMIT; 
@@ -160,7 +160,7 @@ function updateGlobalStats(count, prs, points, stars, forks, commits) {
     safeSetText('totalForks', forks);
 }
 
-// 3. Event Listeners (Search/Filter)
+// 3. Event Listeners
 function setupEventListeners() {
     const searchInput = document.getElementById('searchInput');
     const sortBy = document.getElementById('sortBy');
@@ -197,21 +197,19 @@ function setupEventListeners() {
     }
 }
 
-// 4. Filtering Logic
+// 4. Filtering
 function applyFilters(searchTerm, sortType, levelType) {
     let result = [...allContributors];
 
-    // Name Filter
     if (searchTerm) {
         const term = searchTerm.toLowerCase();
         result = result.filter(c => c.login.toLowerCase().includes(term));
     }
 
-    // Level/League Filter
     if (levelType !== 'all') {
         result = result.filter(c => {
             const league = getLeagueData(c.points);
-            if (levelType === 'top10') return true; // Handle slice later
+            if (levelType === 'top10') return true; 
             if (levelType === 'gold') return league.tier === 'tier-gold';
             if (levelType === 'silver') return league.tier === 'tier-silver';
             if (levelType === 'bronze') return league.tier === 'tier-bronze';
@@ -220,7 +218,6 @@ function applyFilters(searchTerm, sortType, levelType) {
         });
     }
 
-    // Sort
     if (sortType === 'contributions') {
         result.sort((a, b) => b.points - a.points);
     } else if (sortType === 'alphabetical') {
@@ -263,6 +260,7 @@ function renderContributors(page) {
         card.className = `contributor ${league.tier}`;
         card.onclick = () => openContributorModal(c, league, rank);
 
+        // UPDATED: Shows Points AND PRs (Branch Icon)
         card.innerHTML = `
             <img src="${c.avatar_url}" alt="${c.login}" loading="lazy">
             <span class="cont-name">${c.login}</span>
@@ -272,7 +270,7 @@ function renderContributors(page) {
             <div class="contributor-stats">
                  <i class="fas fa-star" style="color:gold"></i> ${c.points} Pts
                  <span style="margin: 0 5px">|</span>
-                 <i class="fas fa-code"></i> ${c.contributions}
+                 <i class="fas fa-code-branch" style="color:#4a90e2"></i> ${c.prs} PRs
             </div>
         `;
         grid.appendChild(card);
@@ -320,7 +318,6 @@ function openContributorModal(c, league, rank) {
     safeSetText('modalCommits', c.contributions);
     safeSetText('modalPRs', c.prs);
 
-    // Link to PRs
     const prLink = document.getElementById('viewPrBtn');
     if(prLink) prLink.href = `https://github.com/${REPO_OWNER}/${REPO_NAME}/pulls?q=is%3Apr+author%3A${c.login}`;
 
