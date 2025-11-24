@@ -28,7 +28,6 @@ body {
   padding: 0 20px;
 }
 
-/* Main Content */
 .main-content {
   margin-top: 80px;
 }
@@ -37,21 +36,13 @@ body {
 .contributors-hero {
   padding: 4rem 0;
   text-align: center;
-  background: linear-gradient(
-    135deg,
-    var(--dark) 0%,
-    var(--dark-light) 100%
-  );
+  background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
 }
 
 .contributors-hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  background: linear-gradient(
-    135deg,
-    var(--primary),
-    var(--primary-dark)
-  );
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -90,11 +81,7 @@ body {
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* Footer */
 .footer {
@@ -104,18 +91,11 @@ body {
   border-top: 3px solid var(--primary);
 }
 
-.footer p {
-  color: var(--text-light);
-}
+.footer p { color: var(--text-light); }
 
 .contributor-container h1 {
   text-align: center;
-  background: linear-gradient(
-    90deg,
-    var(--primary),
-    var(--text),
-    var(--primary-dark)
-  );
+  background: linear-gradient(90deg, var(--primary), var(--text), var(--primary-dark));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -124,27 +104,19 @@ body {
   margin-bottom: 25px;
 }
 
-@keyframes flow {
-  to {
-    background-position: 300%;
-  }
-}
+@keyframes flow { to { background-position: 300%; } }
 
-/* --- STATS GRID (UPDATED: 6 Columns Horizontal) --- */
+/* --- STATS GRID (6 Columns Horizontal) --- */
 #stats {
   display: grid;
-  /* Force 6 equal columns in one line */
   grid-template-columns: repeat(6, 1fr); 
   gap: 15px;
   margin-bottom: 40px;
   width: 100%;
-  
-  /* Responsive: Scroll horizontally on small screens instead of stacking */
   overflow-x: auto;
   padding-bottom: 10px; 
 }
 
-/* Hide scrollbar for cleaner look */
 #stats::-webkit-scrollbar { height: 6px; }
 #stats::-webkit-scrollbar-thumb { background: var(--primary-dark); border-radius: 3px; }
 
@@ -153,18 +125,27 @@ body {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 14px;
-  padding: 15px 10px; /* Compact padding */
+  padding: 15px 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.25s ease, background 0.3s;
+  transition: transform 0.25s ease, background 0.3s, border-color 0.3s, box-shadow 0.3s;
   text-align: center;
-  
-  /* Ensure cards don't shrink too much */
   min-width: 130px;
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* Dynamic Hover Colors for Stats */
+.stat-box:nth-child(1):hover { border-color: #4a90e2; box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3); background: rgba(74, 144, 226, 0.1); } /* Contributors - Blue */
+.stat-box:nth-child(2):hover { border-color: #2ecc71; box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3); background: rgba(46, 204, 113, 0.1); } /* Commits - Green */
+.stat-box:nth-child(3):hover { border-color: #9b59b6; box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3); background: rgba(155, 89, 182, 0.1); } /* PRs - Purple */
+.stat-box:nth-child(4):hover { border-color: #f1c40f; box-shadow: 0 8px 20px rgba(241, 196, 15, 0.3); background: rgba(241, 196, 15, 0.1); } /* Points - Gold */
+.stat-box:nth-child(5):hover { border-color: #e67e22; box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3); background: rgba(230, 126, 34, 0.1); } /* Stars - Orange */
+.stat-box:nth-child(6):hover { border-color: #e74c3c; box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3); background: rgba(231, 76, 60, 0.1); } /* Forks - Red */
+
+.stat-box:hover {
+  transform: translateY(-4px);
 }
 
 .stat-box h3 {
@@ -181,11 +162,7 @@ body {
   margin: 0;
 }
 
-.stat-box:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.12);
-}
-
+/* Controls */
 #controls {
   display: flex;
   justify-content: center;
@@ -195,21 +172,19 @@ body {
   flex-wrap: wrap;
 }
 
-#searchInput {
+#searchInput, .filter-select {
   padding: 10px 16px;
   border-radius: 10px;
   border: 1px solid rgba(247, 57, 9, 0.5);
   background: rgba(252, 58, 10, 0.05);
   color: #fff !important;
-  width: 250px;
   transition: all 0.3s;
 }
 
-#searchInput::placeholder {
-  color: #fff;
-}
+#searchInput { width: 250px; }
+.filter-select { cursor: pointer; }
 
-#searchInput:focus {
+#searchInput:focus, .filter-select:focus {
   border-color: var(--primary);
   outline: none;
   box-shadow: 0 0 8px var(--primary-dark);
@@ -226,10 +201,9 @@ button {
   transition: background 0.2s;
 }
 
-button:hover {
-  background: #0056b3;
-}
+button:hover { background: #0056b3; }
 
+/* Contributors List */
 #contributorsList {
   max-width: 80%;
   display: grid;
@@ -309,16 +283,14 @@ button:hover {
   align-items: center;
 }
 
-.contributor-modal.active {
-  display: flex;
-}
+.contributor-modal.active { display: flex; }
 
 .modal-content {
   background: linear-gradient(135deg, var(--dark), var(--dark-light));
   padding: 30px;
   border-radius: 20px;
   width: 90%;
-  max-width: 500px; /* Narrower modal */
+  max-width: 500px;
   box-shadow: 0 10px 50px rgba(255, 99, 71, 0.3);
   border: 1px solid rgba(255, 99, 71, 0.2);
   animation: modalSlideIn 0.3s ease-out;
@@ -357,17 +329,8 @@ button:hover {
   margin-bottom: 10px;
 }
 
-.modal-info h2 {
-  margin: 0;
-  color: var(--primary);
-  font-size: 1.5rem;
-}
-
-.modal-subtitle {
-  color: var(--text-light);
-  font-size: 0.9rem;
-  margin: 5px 0;
-}
+.modal-info h2 { margin: 0; color: var(--primary); font-size: 1.5rem; }
+.modal-subtitle { color: var(--text-light); font-size: 0.9rem; margin: 5px 0; }
 
 .modal-stats {
   display: grid;
@@ -391,20 +354,9 @@ button:hover {
   display: block;
 }
 
-.modal-stat span {
-  display: block;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: var(--text);
-}
+.modal-stat span { display: block; font-size: 1.4rem; font-weight: bold; color: var(--text); }
+.modal-stat p { color: var(--text-light); font-size: 0.85rem; margin: 0; }
 
-.modal-stat p {
-  color: var(--text-light);
-  font-size: 0.85rem;
-  margin: 0;
-}
-
-/* Modal Buttons */
 .modal-actions {
     display: flex;
     gap: 15px;
@@ -425,7 +377,6 @@ button:hover {
 }
 
 .modal-btn:hover { transform: translateY(-2px); }
-
 .modal-btn.primary { background: var(--primary); color: white; }
 .modal-btn.secondary { border: 1px solid #ccc; color: white; }
 
@@ -437,7 +388,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* --- ACTIVITY TIMELINE --- */
+/* Timeline */
 .timeline-container {
   max-width: 100%;
   margin: 3rem auto 0;
@@ -464,17 +415,9 @@ button:hover {
   gap: 12px;
 }
 
-/* Custom Scrollbar for Timeline */
-.timeline-content::-webkit-scrollbar {
-  width: 6px;
-}
-.timeline-content::-webkit-scrollbar-thumb {
-  background: var(--primary-dark);
-  border-radius: 3px;
-}
-.timeline-content::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-}
+.timeline-content::-webkit-scrollbar { width: 6px; }
+.timeline-content::-webkit-scrollbar-thumb { background: var(--primary-dark); border-radius: 3px; }
+.timeline-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
 
 .timeline-item {
   display: flex;
@@ -493,26 +436,22 @@ button:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.activity-marker {
-  /* Optional: Dot or Icon if needed, currently border-left handles visual */
-  display: none; 
-}
+.timeline-info { flex: 1; color: var(--text-light); font-size: 0.95rem; line-height: 1.4; }
+.timeline-info strong { color: var(--primary); font-weight: 600; }
+.timeline-info small { display: block; margin-top: 4px; font-size: 0.8rem; color: #888; }
 
-.timeline-info {
-  flex: 1;
-  color: var(--text-light);
-  font-size: 0.95rem;
-  line-height: 1.4;
+/* Steps */
+.step-card {
+    border: 1px solid #333;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s;
 }
-
-.timeline-info strong {
-  color: var(--primary);
-  font-weight: 600;
+.step-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
 }
-
-.timeline-info small {
-  display: block;
-  margin-top: 4px;
-  font-size: 0.8rem;
-  color: #888;
-}
+.step-icon { font-size: 36px; margin-bottom: 10px; color: var(--primary); }

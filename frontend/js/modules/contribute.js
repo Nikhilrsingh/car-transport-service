@@ -18,35 +18,30 @@ const POINTS = {
     COMMIT: 1
 };
 
-// Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
     initData();
     fetchRecentActivity();
     setupEventListeners();
 });
 
-// ---------------------------------------------------------
 // 1. Data Fetching & Initialization
-// ---------------------------------------------------------
 async function initData() {
     const grid = document.getElementById('contributorsList');
     const errorMessage = document.getElementById('errorMessage');
     
     try {
-        // Reset UI state
-        if(grid) grid.innerHTML = ''; 
+        // Show loading spinner
         document.getElementById('spinner').style.display = 'flex';
+        if(grid) grid.innerHTML = '';
         if(errorMessage) errorMessage.innerText = '';
 
-        // Parallel Fetch: Repo Details & Contributors List
+        // Parallel Fetch
         const [repoRes, contributorsRes] = await Promise.all([
             fetch(API_BASE),
             fetch(`${API_BASE}/contributors?per_page=100`)
         ]);
 
-        if (!repoRes.ok || !contributorsRes.ok) {
-            throw new Error("API Limit Exceeded or Network Error");
-        }
+        if (!repoRes.ok || !contributorsRes.ok) throw new Error("API Limit Exceeded or Network Error");
 
         const repoData = await repoRes.json();
         const rawContributors = await contributorsRes.json();
@@ -54,7 +49,6 @@ async function initData() {
         // Fetch Pull Requests to calculate points
         const rawPulls = await fetchAllPulls();
 
-        // Process Data
         processData(repoData, rawContributors, rawPulls);
 
     } catch (error) {
@@ -65,7 +59,6 @@ async function initData() {
     }
 }
 
-// Fetch up to 3 pages of PRs to avoid rate limits
 async function fetchAllPulls() {
     let pulls = [];
     let page = 1;
@@ -82,11 +75,10 @@ async function fetchAllPulls() {
     return pulls;
 }
 
-// ---------------------------------------------------------
 // 2. Data Processing
-// ---------------------------------------------------------
 function processData(repoData, contributors, pulls) {
     const statsMap = {};
+    let totalProjectPRs = 0;
     let totalProjectPoints = 0;
     let totalProjectCommits = 0;
 
@@ -98,11 +90,11 @@ function processData(repoData, contributors, pulls) {
         if (!statsMap[user]) statsMap[user] = { prs: 0, points: 0 };
 
         statsMap[user].prs++;
+        totalProjectPRs++;
 
         let prPoints = 0;
         let hasLevel = false;
 
-        // Check labels for points
         pr.labels.forEach(label => {
             const name = label.name.toLowerCase();
             if (name.includes('level 3')) { prPoints += POINTS.L3; hasLevel = true; }
@@ -123,14 +115,14 @@ function processData(repoData, contributors, pulls) {
         
         totalProjectCommits += c.contributions;
 
-        // If no PR points, give base points for commits
+        // If no PR points, give base points for commits to avoid 0 score for heavy committers
         let finalPoints = userStats.points;
         if (finalPoints === 0) {
             finalPoints = c.contributions * POINTS.COMMIT; 
         }
 
         return {
-            login: c.login, // Original case
+            login: c.login,
             id: c.id,
             avatar_url: c.avatar_url,
             html_url: c.html_url,
@@ -140,36 +132,35 @@ function processData(repoData, contributors, pulls) {
         };
     });
 
-    // C. Initial Sort (Most Points)
+    // C. Initial Sort
     allContributors.sort((a, b) => b.points - a.points);
 
-    // D. Update Stats on Screen
-    updateGlobalStats(contributors.length, totalProjectPoints, totalProjectCommits);
+    // D. Update Stats
+    updateGlobalStats(
+        contributors.length,
+        totalProjectPRs,
+        totalProjectPoints,
+        repoData.stargazers_count,
+        repoData.forks_count,
+        totalProjectCommits
+    );
 
-    // E. Initialize Filtered Data
+    // E. Initialize Filtered Data & Render
     filteredContributors = [...allContributors];
-    
-    // F. Render
     document.getElementById('spinner').style.display = 'none';
     renderContributors(1);
 }
 
-function updateGlobalStats(count, points, commits) {
+function updateGlobalStats(count, prs, points, stars, forks, commits) {
     safeSetText('totalContributors', count);
+    safeSetText('totalCommits', commits);
+    safeSetText('totalPRs', prs);
     safeSetText('totalPoints', points);
-    
-    // Format commits (e.g., 1.2k)
-    const displayCommits = commits > 1000 ? (commits/1000).toFixed(1) + 'k' : commits;
-    safeSetText('totalCommits', displayCommits);
-
-    // Active Contributors (Logic: merged a PR or > 5 commits)
-    const activeCount = allContributors.filter(c => c.prs > 0 || c.contributions > 5).length;
-    safeSetText('activeContributors', activeCount);
+    safeSetText('totalStars', stars);
+    safeSetText('totalForks', forks);
 }
 
-// ---------------------------------------------------------
-// 3. Event Listeners (Search, Filter, Sort)
-// ---------------------------------------------------------
+// 3. Event Listeners (Search/Filter)
 function setupEventListeners() {
     const searchInput = document.getElementById('searchInput');
     const sortBy = document.getElementById('sortBy');
@@ -178,70 +169,45 @@ function setupEventListeners() {
     const prevBtn = document.getElementById('prevPage');
     const nextBtn = document.getElementById('nextPage');
 
-    // Search
     if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            applyFilters(e.target.value, sortBy.value, filterLevel.value);
-        });
+        searchInput.addEventListener('input', (e) => applyFilters(e.target.value, sortBy.value, filterLevel.value));
     }
-
-    // Sort
     if (sortBy) {
-        sortBy.addEventListener('change', (e) => {
-            applyFilters(searchInput.value, e.target.value, filterLevel.value);
-        });
+        sortBy.addEventListener('change', (e) => applyFilters(searchInput.value, e.target.value, filterLevel.value));
     }
-
-    // Filter
     if (filterLevel) {
-        filterLevel.addEventListener('change', (e) => {
-            applyFilters(searchInput.value, sortBy.value, e.target.value);
-        });
+        filterLevel.addEventListener('change', (e) => applyFilters(searchInput.value, sortBy.value, e.target.value));
     }
-
-    // Refresh
     if (refreshBtn) {
         refreshBtn.addEventListener('click', () => {
             allContributors = [];
             initData();
         });
     }
-
-    // Pagination
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                renderContributors(currentPage);
-            }
+            if (currentPage > 1) { currentPage--; renderContributors(currentPage); }
         });
     }
-
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             const maxPage = Math.ceil(filteredContributors.length / itemsPerPage);
-            if (currentPage < maxPage) {
-                currentPage++;
-                renderContributors(currentPage);
-            }
+            if (currentPage < maxPage) { currentPage++; renderContributors(currentPage); }
         });
     }
 }
 
-// ---------------------------------------------------------
 // 4. Filtering Logic
-// ---------------------------------------------------------
 function applyFilters(searchTerm, sortType, levelType) {
-    // Reset to full list first
     let result = [...allContributors];
 
-    // 1. Filter by Name
+    // Name Filter
     if (searchTerm) {
         const term = searchTerm.toLowerCase();
         result = result.filter(c => c.login.toLowerCase().includes(term));
     }
 
-    // 2. Filter by Level
+    // Level/League Filter
     if (levelType !== 'all') {
         result = result.filter(c => {
             const league = getLeagueData(c.points);
@@ -249,36 +215,31 @@ function applyFilters(searchTerm, sortType, levelType) {
             if (levelType === 'gold') return league.tier === 'tier-gold';
             if (levelType === 'silver') return league.tier === 'tier-silver';
             if (levelType === 'bronze') return league.tier === 'tier-bronze';
-            if (levelType === 'contributor') return league.tier === 'tier-contributor';
             if (levelType === 'new') return c.contributions < 5;
             return true;
         });
     }
 
-    // 3. Sort
+    // Sort
     if (sortType === 'contributions') {
-        result.sort((a, b) => b.points - a.points); // Points usually correlate with contribution value
+        result.sort((a, b) => b.points - a.points);
     } else if (sortType === 'alphabetical') {
         result.sort((a, b) => a.login.localeCompare(b.login));
     } else if (sortType === 'recent') {
-        // Since we don't have exact recent date in this view, fallback to commits count
         result.sort((a, b) => b.contributions - a.contributions);
     }
 
-    // Special case for Top 10
     if (levelType === 'top10') {
         result.sort((a, b) => b.points - a.points);
         result = result.slice(0, 10);
     }
 
     filteredContributors = result;
-    currentPage = 1; // Reset to page 1 on filter change
+    currentPage = 1;
     renderContributors(1);
 }
 
-// ---------------------------------------------------------
 // 5. Rendering
-// ---------------------------------------------------------
 function renderContributors(page) {
     const grid = document.getElementById('contributorsList');
     if (!grid) return;
@@ -325,15 +286,19 @@ function updatePaginationUI() {
     safeSetText('currentPage', currentPage);
     safeSetText('totalPages', maxPage);
     
-    // Disable buttons if at limits
-    document.getElementById('prevPage').disabled = currentPage === 1;
-    document.getElementById('nextPage').disabled = currentPage === maxPage;
-    
-    // Visual feedback
-    document.getElementById('prevPage').style.opacity = currentPage === 1 ? '0.5' : '1';
-    document.getElementById('nextPage').style.opacity = currentPage === maxPage ? '0.5' : '1';
+    const prev = document.getElementById('prevPage');
+    const next = document.getElementById('nextPage');
+    if(prev) {
+        prev.disabled = currentPage === 1;
+        prev.style.opacity = currentPage === 1 ? '0.5' : '1';
+    }
+    if(next) {
+        next.disabled = currentPage === maxPage;
+        next.style.opacity = currentPage === maxPage ? '0.5' : '1';
+    }
 }
 
+// 6. Modal & Utilities
 function getLeagueData(points) {
     if (points > 150) return { text: 'Gold 🏆', class: 'badge-gold', tier: 'tier-gold', label: 'Gold League' };
     if (points > 75) return { text: 'Silver 🥈', class: 'badge-silver', tier: 'tier-silver', label: 'Silver League' };
@@ -341,9 +306,6 @@ function getLeagueData(points) {
     return { text: 'Contributor', class: 'badge-contributor', tier: 'tier-contributor', label: 'Contributor' };
 }
 
-// ---------------------------------------------------------
-// 6. Modal & Utilities
-// ---------------------------------------------------------
 function openContributorModal(c, league, rank) {
     const modal = document.getElementById('contributorModal');
     if (!modal) return;
@@ -352,18 +314,19 @@ function openContributorModal(c, league, rank) {
     document.getElementById('modalName').textContent = c.login;
     document.getElementById('modalGithubLink').href = c.html_url;
     
-    // Safe text setting
+    safeSetText('modalRank', `#${rank}`);
+    safeSetText('modalPoints', c.points);
+    safeSetText('modalLeague', league.label);
     safeSetText('modalCommits', c.contributions);
     safeSetText('modalPRs', c.prs);
-    
-    // Mock data for additions/deletions since we don't deep fetch everyone
-    safeSetText('modalAdditions', c.contributions * 15 + Math.floor(Math.random() * 100));
-    safeSetText('modalDeletions', Math.floor(c.contributions * 5));
+
+    // Link to PRs
+    const prLink = document.getElementById('viewPrBtn');
+    if(prLink) prLink.href = `https://github.com/${REPO_OWNER}/${REPO_NAME}/pulls?q=is%3Apr+author%3A${c.login}`;
 
     modal.classList.add('active');
 }
 
-// Close Modal logic
 document.querySelector('.modal-close')?.addEventListener('click', () => {
     document.getElementById('contributorModal')?.classList.remove('active');
 });
@@ -372,13 +335,12 @@ window.onclick = (e) => {
     if (e.target === modal) modal.classList.remove('active');
 };
 
-// Helper to set text safely
 function safeSetText(id, text) {
     const el = document.getElementById(id);
     if (el) el.innerText = text;
 }
 
-// 7. Recent Activity (Commits)
+// 7. Recent Activity
 async function fetchRecentActivity() {
     try {
         const response = await fetch(`${API_BASE}/commits?per_page=10`);
