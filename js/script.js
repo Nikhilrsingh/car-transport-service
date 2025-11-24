@@ -1,7 +1,7 @@
 // Enhanced Hero Section Functionality
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
   // Animated counters for stats
-  const statNumbers = document.querySelectorAll('.stat-number');
+  const statNumbers = document.querySelectorAll(".stat-number");
 
   const animateValue = (element, start, end, duration) => {
     let startTimestamp = null;
@@ -9,41 +9,45 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
       const value = Math.floor(progress * (end - start) + start);
-      element.textContent = value + (element.getAttribute('data-target') === '98' ? '%' : '+');
+      element.textContent =
+        value + (element.getAttribute("data-target") === "98" ? "%" : "+");
       if (progress < 1) {
         window.requestAnimationFrame(step);
       }
     };
     window.requestAnimationFrame(step);
-  }
+  };
 });
 
 // Start counters when hero section is in view
-const heroObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        animateValue(stat, 0, target, 2000);
-      });
-      heroObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
+const heroObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        statNumbers.forEach((stat) => {
+          const target = parseInt(stat.getAttribute("data-target"));
+          animateValue(stat, 0, target, 2000);
+        });
+        heroObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
 
-heroObserver.observe(document.querySelector('.hero'));
+heroObserver.observe(document.querySelector(".hero"));
 
 // Quick quote form functionality
-const quickQuoteForm = document.getElementById('quickQuoteForm');
-const quoteResult = document.getElementById('quoteResult');
+const quickQuoteForm = document.getElementById("quickQuoteForm");
+const quoteResult = document.getElementById("quoteResult");
 
 if (quickQuoteForm) {
-  quickQuoteForm.addEventListener('submit', function (e) {
+  quickQuoteForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const fromCity = document.getElementById('fromCity').value;
-    const toCity = document.getElementById('toCity').value;
-    const vehicleType = document.getElementById('vehicleType').value;
+    const fromCity = document.getElementById("fromCity").value;
+    const toCity = document.getElementById("toCity").value;
+    const vehicleType = document.getElementById("vehicleType").value;
 
     if (fromCity && toCity && vehicleType) {
       // Simulate price calculation
@@ -53,26 +57,28 @@ if (quickQuoteForm) {
         hatchback: 1.0,
         sedan: 1.2,
         suv: 1.5,
-        luxury: 2.0
+        luxury: 2.0,
       };
 
-      const calculatedPrice = Math.floor(basePrice * distanceMultiplier * (vehicleMultipliers[vehicleType] || 1));
-      const formattedPrice = calculatedPrice.toLocaleString('en-IN');
+      const calculatedPrice = Math.floor(
+        basePrice * distanceMultiplier * (vehicleMultipliers[vehicleType] || 1)
+      );
+      const formattedPrice = calculatedPrice.toLocaleString("en-IN");
 
-      document.querySelector('.amount').textContent = `₹${formattedPrice}`;
-      quoteResult.style.display = 'block';
+      document.querySelector(".amount").textContent = `₹${formattedPrice}`;
+      quoteResult.style.display = "block";
 
       // Smooth scroll to result
-      quoteResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      quoteResult.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   });
 }
 
 // Parallax effect for background
-window.addEventListener('scroll', function () {
+window.addEventListener("scroll", function () {
   const scrolled = window.pageYOffset;
-  const hero = document.querySelector('.hero');
-  const video = document.querySelector('.hero-video');
+  const hero = document.querySelector(".hero");
+  const video = document.querySelector(".hero-video");
 
   if (video) {
     video.style.transform = `translateY(${scrolled * 0.5}px)`;
@@ -80,25 +86,25 @@ window.addEventListener('scroll', function () {
 });
 
 // Smooth scroll for CTA buttons
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const target = document.querySelector(this.getAttribute("href"));
     if (target) {
       target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+        behavior: "smooth",
+        block: "start",
       });
     }
   });
 });
 
 // Video fallback for mobile
-const video = document.querySelector('.hero-video');
+const video = document.querySelector(".hero-video");
 if (video) {
-  video.addEventListener('error', function () {
-    this.style.display = 'none';
-    document.querySelector('.hero-fallback').style.display = 'block';
+  video.addEventListener("error", function () {
+    this.style.display = "none";
+    document.querySelector(".hero-fallback").style.display = "block";
   });
 }
 
@@ -115,8 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Update slider position
   function updateSlider() {
-    sliderContainer.style.transform = `translateX(-${currentSlide * 100
-      }%)`;
+    sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
 
     // Update dots
     dots.forEach((dot, index) => {
@@ -161,12 +166,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Load shared footer dynamically
-fetch('pages/footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
+fetch("pages/footer.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("footer-container").innerHTML = data;
   })
-  .catch(error => console.error('Error loading footer:', error));
+  .catch((error) => console.error("Error loading footer:", error));
 
 // Contact Form Functionality
 document.addEventListener("DOMContentLoaded", function () {
@@ -207,7 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 2000);
   });
 
-
   // Phone number formatting
   const phoneInput = contactForm.querySelector('input[type="tel"]');
   phoneInput.addEventListener("input", function (e) {
@@ -220,12 +224,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Load shared footer dynamically
-fetch('pages/footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
+fetch("pages/footer.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("footer-container").innerHTML = data;
   })
-  .catch(error => console.error('Error loading footer:', error));
+  .catch((error) => console.error("Error loading footer:", error));
 
 //    <!-- Preloader fade-out script -->
 window.addEventListener("load", () => {
@@ -265,14 +269,17 @@ phoneInput.addEventListener("input", function (e) {
   e.target.value = value;
 });
 
-
-//Keypress-Activated Easter Egg 
+//Keypress-Activated Easter Egg
 document.addEventListener("DOMContentLoaded", () => {
   const car = document.querySelector(".car");
   if (!car) return;
 
   document.addEventListener("keydown", (event) => {
-    if (event.ctrlKey && event.shiftKey && (event.key === "?" || event.key === "/")) {
+    if (
+      event.ctrlKey &&
+      event.shiftKey &&
+      (event.key === "?" || event.key === "/")
+    ) {
       car.classList.remove("animate");
       void car.offsetWidth;
       car.classList.add("animate");
@@ -280,16 +287,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 // <!-- Load Footer -->
 // Load footer
-fetch('./footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-container').innerHTML = data;
+fetch("./footer.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("footer-container").innerHTML = data;
   })
-  .catch(error => {
-    console.error('Error loading footer:', error);
+  .catch((error) => {
+    console.error("Error loading footer:", error);
   });
 
 window.addEventListener("load", () => {
@@ -317,9 +323,9 @@ function nextSlide() {
 setInterval(nextSlide, 5000); // changes every 5 seconds
 
 // Enhanced Hero Section Functionality
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
   // Animated counters for stats
-  const statNumbers = document.querySelectorAll('.stat-number');
+  const statNumbers = document.querySelectorAll(".stat-number");
 
   const animateValue = (element, start, end, duration) => {
     let startTimestamp = null;
@@ -327,7 +333,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
       const value = Math.floor(progress * (end - start) + start);
-      element.textContent = value + (element.getAttribute('data-target') === '98' ? '%' : '+');
+      element.textContent =
+        value + (element.getAttribute("data-target") === "98" ? "%" : "+");
       if (progress < 1) {
         window.requestAnimationFrame(step);
       }
@@ -336,31 +343,34 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   // Start counters when hero section is in view
-  const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        statNumbers.forEach(stat => {
-          const target = parseInt(stat.getAttribute('data-target'));
-          animateValue(stat, 0, target, 2000);
-        });
-        heroObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
+  const heroObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          statNumbers.forEach((stat) => {
+            const target = parseInt(stat.getAttribute("data-target"));
+            animateValue(stat, 0, target, 2000);
+          });
+          heroObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
-  heroObserver.observe(document.querySelector('.hero'));
+  heroObserver.observe(document.querySelector(".hero"));
 
   // Quick quote form functionality
-  const quickQuoteForm = document.getElementById('quickQuoteForm');
-  const quoteResult = document.getElementById('quoteResult');
+  const quickQuoteForm = document.getElementById("quickQuoteForm");
+  const quoteResult = document.getElementById("quoteResult");
 
   if (quickQuoteForm) {
-    quickQuoteForm.addEventListener('submit', function (e) {
+    quickQuoteForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const fromCity = document.getElementById('fromCity').value;
-      const toCity = document.getElementById('toCity').value;
-      const vehicleType = document.getElementById('vehicleType').value;
+      const fromCity = document.getElementById("fromCity").value;
+      const toCity = document.getElementById("toCity").value;
+      const vehicleType = document.getElementById("vehicleType").value;
 
       if (fromCity && toCity && vehicleType) {
         // Simulate price calculation
@@ -370,26 +380,30 @@ document.addEventListener('DOMContentLoaded', function () {
           hatchback: 1.0,
           sedan: 1.2,
           suv: 1.5,
-          luxury: 2.0
+          luxury: 2.0,
         };
 
-        const calculatedPrice = Math.floor(basePrice * distanceMultiplier * (vehicleMultipliers[vehicleType] || 1));
-        const formattedPrice = calculatedPrice.toLocaleString('en-IN');
+        const calculatedPrice = Math.floor(
+          basePrice *
+            distanceMultiplier *
+            (vehicleMultipliers[vehicleType] || 1)
+        );
+        const formattedPrice = calculatedPrice.toLocaleString("en-IN");
 
-        document.querySelector('.amount').textContent = `₹${formattedPrice}`;
-        quoteResult.style.display = 'block';
+        document.querySelector(".amount").textContent = `₹${formattedPrice}`;
+        quoteResult.style.display = "block";
 
         // Smooth scroll to result
-        quoteResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        quoteResult.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
     });
   }
 
   // Parallax effect for background
-  window.addEventListener('scroll', function () {
+  window.addEventListener("scroll", function () {
     const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    const video = document.querySelector('.hero-video');
+    const hero = document.querySelector(".hero");
+    const video = document.querySelector(".hero-video");
 
     if (video) {
       video.style.transform = `translateY(${scrolled * 0.5}px)`;
@@ -397,26 +411,25 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Smooth scroll for CTA buttons
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const target = document.querySelector(this.getAttribute("href"));
       if (target) {
         target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+          behavior: "smooth",
+          block: "start",
         });
       }
     });
   });
 
   // Video fallback for mobile
-  const video = document.querySelector('.hero-video');
+  const video = document.querySelector(".hero-video");
   if (video) {
-    video.addEventListener('error', function () {
-      this.style.display = 'none';
-      document.querySelector('.hero-fallback').style.display = 'block';
+    video.addEventListener("error", function () {
+      this.style.display = "none";
+      document.querySelector(".hero-fallback").style.display = "block";
     });
   }
 });
-

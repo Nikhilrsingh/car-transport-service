@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Track Your Car - Harihar Car Carriers</title>
+  <base href="./">
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/components/tracking.css" />
   <link rel="stylesheet" href="../css/components/navbar.css" />
@@ -17,7 +19,7 @@
   <link rel="stylesheet" href="../css/components/quote-modal.css" />
   <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
   <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
-   <link rel="stylesheet" href="../css/components/backtoBottom.css">
+  <link rel="stylesheet" href="../css/components/backtoBottom.css">
 
 </head>
 
@@ -280,249 +282,242 @@
           <p style="color: #ff6b35; margin-top: 10px; font-size: 0.9em;">
             <i class="fas fa-microphone"></i> Try our new voice search feature!
           </p>
-      <form class="tracking-form" id="trackingForm">
-        <div class="form-group">
-          <label for="trackingId">
-            <i class="fas fa-barcode"></i> Tracking ID
-          </label>
-          <input type="text" id="trackingId" placeholder="Enter your tracking ID" required />
+          <form class="tracking-form" id="trackingForm">
+            <div class="form-group">
+              <label for="trackingId">
+                <i class="fas fa-barcode"></i> Tracking ID
+              </label>
+              <input type="text" id="trackingId" placeholder="Enter your tracking ID" required />
+            </div>
+            <button type="submit" class="btn-track">
+              <i class="fas fa-search"></i>
+              Track Vehicle
+            </button>
+          </form>
+
+          <form class="tracking-form" id="trackingForm">
+            <div class="form-group voice-search-group">
+              <label for="trackingId">
+                <i class="fas fa-barcode"></i> Tracking ID
+              </label>
+              <div class="input-with-voice">
+                <input type="text" id="trackingId" placeholder="Enter your tracking ID or speak it" required />
+                <button type="button" class="voice-search-btn" id="voiceSearchBtn" title="Voice Search">
+                  <i class="fas fa-microphone"></i>
+                </button>
+              </div>
+              <div class="voice-status" id="voiceStatus">
+                <div class="voice-indicator">
+                  <span class="pulse-dot"></span>
+                  <span class="status-text">Ready for voice input</span>
+                </div>
+                <div class="language-selector">
+                  <label for="languageSelect">Language:</label>
+                  <select id="languageSelect">
+                    <option value="en-US">English</option>
+                    <option value="hi-IN">Hindi</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn-track">
+              <i class="fas fa-search"></i>
+              Track Vehicle
+            </button>
+          </form>
+
+          <div class="sample-ids">
+            <strong><i class="fas fa-lightbulb"></i> Try Sample IDs:</strong>
+            <span class="id-code" onclick="setTrackingId('TRK12345')">TRK12345</span>
+            <span class="id-code" onclick="setTrackingId('TRK67890')">TRK67890</span>
+            <span class="id-code" onclick="setTrackingId('TRK11111')">TRK11111</span>
+          </div>
+          <div class="sample-ids">
+            <strong><i class="fas fa-lightbulb"></i> Try Sample IDs:</strong>
+            <span class="id-code" onclick="setTrackingId('TRK12345')">TRK12345</span>
+            <span class="id-code" onclick="setTrackingId('TRK67890')">TRK67890</span>
+            <span class="id-code" onclick="setTrackingId('TRK11111')">TRK11111</span>
+          </div>
+
+          <div class="tracking-info" id="trackingInfo">
+            <h2><i class="fas fa-info-circle"></i> Shipment Details</h2>
+            <div class="info-grid">
+              <div class="info-item">
+                <h3><i class="fas fa-hashtag"></i> Tracking ID</h3>
+                <p id="displayTrackingId">-</p>
+              </div>
+              <div class="info-item">
+                <h3><i class="fas fa-car"></i> Vehicle</h3>
+                <p id="displayVehicle">-</p>
+              </div>
+              <div class="info-item">
+                <h3><i class="fas fa-map-pin"></i> Current Location</h3>
+                <p id="displayLocation">-</p>
+              </div>
+              <div class="info-item">
+                <h3><i class="fas fa-tasks"></i> Status</h3>
+                <p><span class="status-badge" id="displayStatus">-</span></p>
+              </div>
+              <div class="info-item">
+                <h3><i class="fas fa-calendar-check"></i> Estimated Delivery</h3>
+                <p id="displayETA">-</p>
+              </div>
+              <div class="info-item">
+                <h3><i class="fas fa-road"></i> Distance Remaining</h3>
+                <p id="displayDistance">-</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-container">
+            <div class="route-info">
+              <h3>Route Information</h3>
+              <p id="routeDisplay">Enter tracking ID to view route</p>
+            </div>
+            <iframe id="mapFrame" src="https://www.google.com/maps?q=India&output=embed" allowfullscreen=""
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+          <div class="timeline" id="timeline" style="display: none">
+            <h2><i class="fas fa-history"></i> Tracking Timeline</h2>
+            <div id="timelineContent"></div>
+          </div>
         </div>
-        <button type="submit" class="btn-track">
-          <i class="fas fa-search"></i>
-          Track Vehicle
+      </div>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <!-- Company Info Column -->
+            <div class="footer-column footer-about">
+              <div class="footer-logo">
+                <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
+                <span class="footer-logo-text">Harihar Car Carriers</span>
+              </div>
+              <p>
+                Your trusted partner for safe and reliable vehicle transportation
+                across India. With over 12 years of experience, we ensure your
+                vehicles reach their destination securely and on time.
+              </p>
+
+              <div class="social-links">
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+
+            <!-- Quick Links Column -->
+            <div class="footer-column">
+              <h3>Quick Links</h3>
+              <ul class="footer-links">
+                <li><a href="/car-transport-service/index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/car-transport-service/pages/about.html"><i class="fas fa-info-circle"></i> About Us</a>
+                </li>
+                <li><a href="/car-transport-service/index.html../index.html#services"><i
+                      class="fas fa-truck-moving"></i>
+                    Services</a></li>
+                <li><a href="/car-transport-service/pages/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="/car-transport-service/pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
+                <li><a href="/car-transport-service/pages/enquiry.html"><i class="fas fa-question-circle"></i>
+                    Enquiry</a>
+                </li>
+                <li><a href="/car-transport-service/pages/blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+              </ul>
+            </div>
+
+            <!-- Services Column -->
+            <div class="footer-column">
+              <h3>Our Services</h3>
+              <ul class="footer-links">
+                <li><a href="#door-to-door"><i class="fas fa-door-open"></i> Door-to-Door Transport</a></li>
+                <li><a href="#nationwide"><i class="fas fa-map-marked-alt"></i> Nationwide Coverage</a></li>
+                <li><a href="#commercial"><i class="fas fa-truck"></i> Commercial Vehicles</a></li>
+                <li><a href="#personal"><i class="fas fa-car"></i> Personal Vehicles</a></li>
+                <li><a href="#luxury"><i class="fas fa-gem"></i> Luxury Cars</a></li>
+                <li><a href="#bikes"><i class="fas fa-motorcycle"></i> Bike Transport</a></li>
+                <li><a href="#insurance"><i class="fas fa-shield-alt"></i> Insurance Coverage</a></li>
+              </ul>
+            </div>
+
+            <!-- Contact & Newsletter Column -->
+            <div class="footer-column">
+              <h3>Contact Info</h3>
+              <ul class="contact-info">
+                <li><i class="fas fa-map-marker-alt"></i><span>Nagpur, Maharashtra, India - 440001</span></li>
+                <li><i class="fas fa-phone"></i><span>+91 XXXXX XXXXX</span></li>
+                <li><i class="fas fa-envelope"></i><span>info@hariharcarcarriers.com</span></li>
+                <li><i class="fas fa-clock"></i><span>24/7 Customer Support<br />Emergency Services Available</span>
+                </li>
+              </ul>
+
+              <div class="newsletter-form">
+                <p>Subscribe for updates & offers</p>
+                <div class="newsletter-input">
+                  <input type="email" placeholder="Enter your email" />
+                  <button type="submit">Subscribe</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <div class="container">
+            <div class="footer-bottom-content">
+              <div class="copyright">
+                &copy; 2024 Harihar Car Carriers. All rights reserved.
+              </div>
+
+              <div class="footer-bottom-links">
+                <a href="pages/privacy-policy.html">Privacy Policy</a>
+                <a href="pages/Terms of Services.html">Terms of Service</a>
+                <a href="#sitemap">Sitemap</a>
+              </div>
+
+              <div class="payment-methods">
+                <i class="fab fa-cc-visa" title="Visa"></i>
+                <i class="fab fa-cc-mastercard" title="MasterCard"></i>
+                <i class="fab fa-cc-paypal" title="PayPal"></i>
+                <i class="fas fa-university" title="Net Banking"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop">
+          <i class="fas fa-arrow-up"></i>
         </button>
-      </form>
 
-        <form class="tracking-form" id="trackingForm">
-          <div class="form-group voice-search-group">
-            <label for="trackingId">
-              <i class="fas fa-barcode"></i> Tracking ID
-            </label>
-            <div class="input-with-voice">
-              <input
-                type="text"
-                id="trackingId"
-                placeholder="Enter your tracking ID or speak it"
-                required
-              />
-              <button type="button" class="voice-search-btn" id="voiceSearchBtn" title="Voice Search">
-                <i class="fas fa-microphone"></i>
-              </button>
-            </div>
-            <div class="voice-status" id="voiceStatus">
-              <div class="voice-indicator">
-                <span class="pulse-dot"></span>
-                <span class="status-text">Ready for voice input</span>
-              </div>
-              <div class="language-selector">
-                <label for="languageSelect">Language:</label>
-                <select id="languageSelect">
-                  <option value="en-US">English</option>
-                  <option value="hi-IN">Hindi</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn-track">
-            <i class="fas fa-search"></i>
-            Track Vehicle
-          </button>
-        </form>
+        <!-- Top to Bottom Button -->
+        <button class="back-to-bottom" id="backToBottom">
+          <i class="fas fa-arrow-down"></i>
+        </button>
 
-        <div class="sample-ids">
-          <strong><i class="fas fa-lightbulb"></i> Try Sample IDs:</strong>
-          <span class="id-code" onclick="setTrackingId('TRK12345')"
-            >TRK12345</span
-          >
-          <span class="id-code" onclick="setTrackingId('TRK67890')"
-            >TRK67890</span
-          >
-          <span class="id-code" onclick="setTrackingId('TRK11111')"
-            >TRK11111</span
-          >
-        </div>
-      <div class="sample-ids">
-        <strong><i class="fas fa-lightbulb"></i> Try Sample IDs:</strong>
-        <span class="id-code" onclick="setTrackingId('TRK12345')">TRK12345</span>
-        <span class="id-code" onclick="setTrackingId('TRK67890')">TRK67890</span>
-        <span class="id-code" onclick="setTrackingId('TRK11111')">TRK11111</span>
-      </div>
-
-      <div class="tracking-info" id="trackingInfo">
-        <h2><i class="fas fa-info-circle"></i> Shipment Details</h2>
-        <div class="info-grid">
-          <div class="info-item">
-            <h3><i class="fas fa-hashtag"></i> Tracking ID</h3>
-            <p id="displayTrackingId">-</p>
-          </div>
-          <div class="info-item">
-            <h3><i class="fas fa-car"></i> Vehicle</h3>
-            <p id="displayVehicle">-</p>
-          </div>
-          <div class="info-item">
-            <h3><i class="fas fa-map-pin"></i> Current Location</h3>
-            <p id="displayLocation">-</p>
-          </div>
-          <div class="info-item">
-            <h3><i class="fas fa-tasks"></i> Status</h3>
-            <p><span class="status-badge" id="displayStatus">-</span></p>
-          </div>
-          <div class="info-item">
-            <h3><i class="fas fa-calendar-check"></i> Estimated Delivery</h3>
-            <p id="displayETA">-</p>
-          </div>
-          <div class="info-item">
-            <h3><i class="fas fa-road"></i> Distance Remaining</h3>
-            <p id="displayDistance">-</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="map-container">
-        <div class="route-info">
-          <h3>Route Information</h3>
-          <p id="routeDisplay">Enter tracking ID to view route</p>
-        </div>
-        <iframe id="mapFrame" src="https://www.google.com/maps?q=India&output=embed" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-
-      <div class="timeline" id="timeline" style="display: none">
-        <h2><i class="fas fa-history"></i> Tracking Timeline</h2>
-        <div id="timelineContent"></div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <!-- Company Info Column -->
-        <div class="footer-column footer-about">
-          <div class="footer-logo">
-            <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
-            <span class="footer-logo-text">Harihar Car Carriers</span>
-          </div>
-          <p>
-            Your trusted partner for safe and reliable vehicle transportation
-            across India. With over 12 years of experience, we ensure your
-            vehicles reach their destination securely and on time.
-          </p>
-
-          <div class="social-links">
-            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-
-        <!-- Quick Links Column -->
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="/car-transport-service/index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="/car-transport-service/pages/about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-            <li><a href="/car-transport-service/index.html../index.html#services"><i class="fas fa-truck-moving"></i>
-                Services</a></li>
-            <li><a href="/car-transport-service/pages/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
-            <li><a href="/car-transport-service/pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
-            <li><a href="/car-transport-service/pages/enquiry.html"><i class="fas fa-question-circle"></i> Enquiry</a>
-            </li>
-            <li><a href="/car-transport-service/pages/blog.html"><i class="fas fa-blog"></i> Blog</a></li>
-          </ul>
-        </div>
-
-        <!-- Services Column -->
-        <div class="footer-column">
-          <h3>Our Services</h3>
-          <ul class="footer-links">
-            <li><a href="#door-to-door"><i class="fas fa-door-open"></i> Door-to-Door Transport</a></li>
-            <li><a href="#nationwide"><i class="fas fa-map-marked-alt"></i> Nationwide Coverage</a></li>
-            <li><a href="#commercial"><i class="fas fa-truck"></i> Commercial Vehicles</a></li>
-            <li><a href="#personal"><i class="fas fa-car"></i> Personal Vehicles</a></li>
-            <li><a href="#luxury"><i class="fas fa-gem"></i> Luxury Cars</a></li>
-            <li><a href="#bikes"><i class="fas fa-motorcycle"></i> Bike Transport</a></li>
-            <li><a href="#insurance"><i class="fas fa-shield-alt"></i> Insurance Coverage</a></li>
-          </ul>
-        </div>
-
-        <!-- Contact & Newsletter Column -->
-        <div class="footer-column">
-          <h3>Contact Info</h3>
-          <ul class="contact-info">
-            <li><i class="fas fa-map-marker-alt"></i><span>Nagpur, Maharashtra, India - 440001</span></li>
-            <li><i class="fas fa-phone"></i><span>+91 XXXXX XXXXX</span></li>
-            <li><i class="fas fa-envelope"></i><span>info@hariharcarcarriers.com</span></li>
-            <li><i class="fas fa-clock"></i><span>24/7 Customer Support<br />Emergency Services Available</span></li>
-          </ul>
-
-          <div class="newsletter-form">
-            <p>Subscribe for updates & offers</p>
-            <div class="newsletter-input">
-              <input type="email" placeholder="Enter your email" />
-              <button type="submit">Subscribe</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer Bottom -->
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="footer-bottom-content">
-          <div class="copyright">
-            &copy; 2024 Harihar Car Carriers. All rights reserved.
-          </div>
-
-          <div class="footer-bottom-links">
-            <a href="pages/privacy-policy.html">Privacy Policy</a>
-            <a href="pages/Terms of Services.html">Terms of Service</a>
-            <a href="#sitemap">Sitemap</a>
-          </div>
-
-          <div class="payment-methods">
-            <i class="fab fa-cc-visa" title="Visa"></i>
-            <i class="fab fa-cc-mastercard" title="MasterCard"></i>
-            <i class="fab fa-cc-paypal" title="PayPal"></i>
-            <i class="fas fa-university" title="Net Banking"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
-      <i class="fas fa-arrow-up"></i>
-    </button>
-  
-    <!-- Top to Bottom Button -->
-<button class="back-to-bottom" id="backToBottom">
-  <i class="fas fa-arrow-down"></i>
-</button>
-
-    <script src="./js/script.js"></script>
-    <script src="./js/modules/Services.js"></script>
-    <script src="./js/modules/tracking.js"></script>
-    <script src="./js/modules/footer.js"></script>
-    <script src="./js/modules/navbar.js"></script>
-    <script src="../js/modules/search.js"></script>
-    <script src="../js/modules/navbar.js"></script>
-    <script src="../js/modules/themes.js"></script>
-    <script src="../js/modules/voice-search.js"></script>
-  </body>
-    <script src="../js/modules/floating-book-button.js"></script>
-    <script src="../js/modules/floating-call-button.js"></script>
-    <script src="../js/modules/floating-whatsapp-button.js"></script>
-    <script src="../js/modules/quote-modal.js"></script>
-    <script src="../js/modules/sticky-quote-button.js"></script>
-    <script src="../js/modules/floating-chatbot-button.js"></script>
-    <script src="../js/modules/chatbot-modal.js"></script>
-    <script src="../js/modules/back-to-top-button.js"></script>
-      <script src="../js/modules/backtoBottom.js"></script>
+        <script src="./js/script.js"></script>
+        <script src="./js/modules/Services.js"></script>
+        <script src="./js/modules/tracking.js"></script>
+        <script src="./js/modules/footer.js"></script>
+        <script src="./js/modules/navbar.js"></script>
+        <script src="../js/modules/search.js"></script>
+        <script src="../js/modules/navbar.js"></script>
+        <script src="../js/modules/themes.js"></script>
+        <script src="../js/modules/voice-search.js"></script>
+</body>
+<script src="../js/modules/floating-book-button.js"></script>
+<script src="../js/modules/floating-call-button.js"></script>
+<script src="../js/modules/floating-whatsapp-button.js"></script>
+<script src="../js/modules/quote-modal.js"></script>
+<script src="../js/modules/sticky-quote-button.js"></script>
+<script src="../js/modules/floating-chatbot-button.js"></script>
+<script src="../js/modules/chatbot-modal.js"></script>
+<script src="../js/modules/back-to-top-button.js"></script>
+<script src="../js/modules/backtoBottom.js"></script>
 
 </body>
 

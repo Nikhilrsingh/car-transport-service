@@ -1,42 +1,110 @@
 // Search functionality for navbar search bar
-(function() {
-  'use strict';
+(function () {
+  "use strict";
 
   // Determine base path based on current page location
   function getBasePath() {
     const path = window.location.pathname;
     // If we're in a subdirectory (pages/), go up one level
-    return path.includes('/pages/') ? '../' : './';
+    return path.includes("/pages/") ? "../" : "./";
   }
 
   // Search data - services and pages that can be searched
   function getSearchData() {
     const base = getBasePath();
     return [
-      { title: 'Home', url: base + 'index.html', keywords: ['home', 'main', 'landing'] },
-      { title: 'About Us', url: base + 'pages/about.html', keywords: ['about', 'company', 'who we are', 'team'] },
-      { title: 'Services', url: base + 'services.html', keywords: ['services', 'what we do', 'offerings'] },
-      { title: 'Car Transport', url: base + 'services.html', keywords: ['car transport', 'vehicle shipping', 'auto transport'] },
-      { title: 'Bike Transport', url: base + 'services.html', keywords: ['bike transport', 'motorcycle shipping', 'two wheeler'] },
-      { title: 'Door to Door Service', url: base + 'services.html', keywords: ['door to door', 'pickup', 'delivery'] },
-      { title: 'Booking', url: base + 'pages/booking.html', keywords: ['booking', 'book now', 'reserve', 'schedule'] },
-      { title: 'Contributors', url: base + 'pages/contributors.html', keywords: ['contributors', 'team', 'developers'] },
-      { title: 'Pricing', url: base + 'pages/pricing.html', keywords: ['pricing', 'rates', 'cost', 'quote', 'price'] },
-      { title: 'Track Your Car', url: base + 'pages/tracking.html', keywords: ['track', 'tracking', 'locate', 'find car'] },
-      { title: 'Gallery', url: base + 'pages/gallery.html', keywords: ['gallery', 'photos', 'images', 'pictures'] },
-      { title: 'Contact', url: base + 'pages/contact.html', keywords: ['contact', 'reach us', 'get in touch', 'phone', 'email'] },
-      { title: 'Enquiry', url: base + 'pages/enquiry.html', keywords: ['enquiry', 'inquiry', 'ask', 'question'] },
-      { title: 'Blog', url: base + 'pages/blog.html', keywords: ['blog', 'news', 'articles', 'posts'] },
-      { title: 'Login', url: base + 'pages/login.html', keywords: ['login', 'sign in', 'account'] },
-      { title: 'Insurance', url: base + 'services.html', keywords: ['insurance', 'coverage', 'protection'] },
-      { title: 'Safe Transport', url: base + 'services.html', keywords: ['safe', 'secure', 'reliable'] },
+      {
+        title: "Home",
+        url: base + "index.html",
+        keywords: ["home", "main", "landing"],
+      },
+      {
+        title: "About Us",
+        url: base + "pages/about.html",
+        keywords: ["about", "company", "who we are", "team"],
+      },
+      {
+        title: "Services",
+        url: base + "services.html",
+        keywords: ["services", "what we do", "offerings"],
+      },
+      {
+        title: "Car Transport",
+        url: base + "services.html",
+        keywords: ["car transport", "vehicle shipping", "auto transport"],
+      },
+      {
+        title: "Bike Transport",
+        url: base + "services.html",
+        keywords: ["bike transport", "motorcycle shipping", "two wheeler"],
+      },
+      {
+        title: "Door to Door Service",
+        url: base + "services.html",
+        keywords: ["door to door", "pickup", "delivery"],
+      },
+      {
+        title: "Booking",
+        url: base + "pages/booking.html",
+        keywords: ["booking", "book now", "reserve", "schedule"],
+      },
+      {
+        title: "Contributors",
+        url: base + "pages/contributors.html",
+        keywords: ["contributors", "team", "developers"],
+      },
+      {
+        title: "Pricing",
+        url: base + "pages/pricing.html",
+        keywords: ["pricing", "rates", "cost", "quote", "price"],
+      },
+      {
+        title: "Track Your Car",
+        url: base + "pages/tracking.html",
+        keywords: ["track", "tracking", "locate", "find car"],
+      },
+      {
+        title: "Gallery",
+        url: base + "pages/gallery.html",
+        keywords: ["gallery", "photos", "images", "pictures"],
+      },
+      {
+        title: "Contact",
+        url: base + "pages/contact.html",
+        keywords: ["contact", "reach us", "get in touch", "phone", "email"],
+      },
+      {
+        title: "Enquiry",
+        url: base + "pages/enquiry.html",
+        keywords: ["enquiry", "inquiry", "ask", "question"],
+      },
+      {
+        title: "Blog",
+        url: base + "pages/blog.html",
+        keywords: ["blog", "news", "articles", "posts"],
+      },
+      {
+        title: "Login",
+        url: base + "pages/login.html",
+        keywords: ["login", "sign in", "account"],
+      },
+      {
+        title: "Insurance",
+        url: base + "services.html",
+        keywords: ["insurance", "coverage", "protection"],
+      },
+      {
+        title: "Safe Transport",
+        url: base + "services.html",
+        keywords: ["safe", "secure", "reliable"],
+      },
     ];
   }
 
   // Initialize search functionality
   function initSearch() {
-    const desktopSearchInput = document.getElementById('navbarSearch');
-    const mobileSearchInput = document.getElementById('mobileSearch');
+    const desktopSearchInput = document.getElementById("navbarSearch");
+    const mobileSearchInput = document.getElementById("mobileSearch");
 
     if (desktopSearchInput) {
       setupSearchInput(desktopSearchInput);
@@ -54,9 +122,9 @@
     inputElement.parentElement.appendChild(resultsDropdown);
 
     // Search on input
-    inputElement.addEventListener('input', function(e) {
+    inputElement.addEventListener("input", function (e) {
       const query = e.target.value.trim().toLowerCase();
-      
+
       if (query.length > 0) {
         const results = performSearch(query);
         displayResults(resultsDropdown, results);
@@ -66,11 +134,11 @@
     });
 
     // Handle Enter key
-    inputElement.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
+    inputElement.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
         e.preventDefault();
         const query = e.target.value.trim().toLowerCase();
-        
+
         if (query.length > 0) {
           const results = performSearch(query);
           if (results.length > 0) {
@@ -81,8 +149,11 @@
     });
 
     // Hide results when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!inputElement.contains(e.target) && !resultsDropdown.contains(e.target)) {
+    document.addEventListener("click", function (e) {
+      if (
+        !inputElement.contains(e.target) &&
+        !resultsDropdown.contains(e.target)
+      ) {
         hideResults(resultsDropdown);
       }
     });
@@ -90,8 +161,8 @@
 
   // Create results dropdown element
   function createResultsDropdown() {
-    const dropdown = document.createElement('div');
-    dropdown.className = 'search-results-dropdown';
+    const dropdown = document.createElement("div");
+    dropdown.className = "search-results-dropdown";
     dropdown.style.cssText = `
       position: absolute;
       top: 100%;
@@ -114,11 +185,15 @@
   // Perform search based on query
   function performSearch(query) {
     const searchData = getSearchData();
-    return searchData.filter(item => {
-      const titleMatch = item.title.toLowerCase().includes(query);
-      const keywordMatch = item.keywords.some(keyword => keyword.includes(query));
-      return titleMatch || keywordMatch;
-    }).slice(0, 5); // Limit to 5 results
+    return searchData
+      .filter((item) => {
+        const titleMatch = item.title.toLowerCase().includes(query);
+        const keywordMatch = item.keywords.some((keyword) =>
+          keyword.includes(query)
+        );
+        return titleMatch || keywordMatch;
+      })
+      .slice(0, 5); // Limit to 5 results
   }
 
   // Display search results
@@ -131,7 +206,9 @@
         </div>
       `;
     } else {
-      dropdown.innerHTML = results.map(result => `
+      dropdown.innerHTML = results
+        .map(
+          (result) => `
         <a href="${result.url}" class="search-result-item" style="
           display: flex;
           align-items: center;
@@ -144,32 +221,34 @@
           <i class="fas fa-chevron-right" style="margin-right: 10px; color: #ff6347; font-size: 0.8rem;"></i>
           <span>${result.title}</span>
         </a>
-      `).join('');
+      `
+        )
+        .join("");
 
       // Add hover effects
-      dropdown.querySelectorAll('.search-result-item').forEach(item => {
-        item.addEventListener('mouseenter', function() {
-          this.style.background = 'rgba(255, 99, 71, 0.1)';
-          this.style.paddingLeft = '20px';
+      dropdown.querySelectorAll(".search-result-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.style.background = "rgba(255, 99, 71, 0.1)";
+          this.style.paddingLeft = "20px";
         });
-        item.addEventListener('mouseleave', function() {
-          this.style.background = 'transparent';
-          this.style.paddingLeft = '15px';
+        item.addEventListener("mouseleave", function () {
+          this.style.background = "transparent";
+          this.style.paddingLeft = "15px";
         });
       });
     }
 
-    dropdown.style.display = 'block';
+    dropdown.style.display = "block";
   }
 
   // Hide search results
   function hideResults(dropdown) {
-    dropdown.style.display = 'none';
+    dropdown.style.display = "none";
   }
 
   // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSearch);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSearch);
   } else {
     initSearch();
   }

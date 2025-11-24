@@ -5,17 +5,17 @@
 // - Injects the widget into the page if it's not already present
 
 (function () {
-  const STORAGE_KEY = 'site-theme';
-  const SELECT_ID = 'themeWidgetSelect';
-  const WIDGET_ID = 'themeWidget';
+  const STORAGE_KEY = "site-theme";
+  const SELECT_ID = "themeWidgetSelect";
+  const WIDGET_ID = "themeWidget";
 
   // Options available in the select (must match index.html options)
   const OPTIONS = [
-    { value: 'auto', label: 'Theme' },
-    { value: 'default', label: 'Default' },
-    { value: 'light', label: 'Light' },
-    { value: 'dark', label: 'Dark' },
-    { value: 'glass', label: 'Glass' }
+    { value: "auto", label: "Theme" },
+    { value: "default", label: "Default" },
+    { value: "light", label: "Light" },
+    { value: "dark", label: "Dark" },
+    { value: "glass", label: "Glass" },
   ];
 
   function createWidget() {
@@ -23,26 +23,30 @@
     let widget = document.getElementById(WIDGET_ID);
     if (widget) {
       // ensure widget is attached to <body> so fixed positioning is reliable
-      try { document.body.appendChild(widget); } catch (e) { /* ignore */ }
-      return widget.querySelector('#' + SELECT_ID);
+      try {
+        document.body.appendChild(widget);
+      } catch (e) {
+        /* ignore */
+      }
+      return widget.querySelector("#" + SELECT_ID);
     }
 
-    widget = document.createElement('div');
+    widget = document.createElement("div");
     widget.id = WIDGET_ID;
-    widget.className = 'theme-widget';
-    widget.setAttribute('aria-hidden', 'false');
+    widget.className = "theme-widget";
+    widget.setAttribute("aria-hidden", "false");
 
-    const label = document.createElement('label');
-    label.className = 'sr-only';
+    const label = document.createElement("label");
+    label.className = "sr-only";
     label.htmlFor = SELECT_ID;
-    label.textContent = 'Choose theme';
+    label.textContent = "Choose theme";
 
-    const select = document.createElement('select');
+    const select = document.createElement("select");
     select.id = SELECT_ID;
-    select.setAttribute('aria-label', 'Choose theme');
+    select.setAttribute("aria-label", "Choose theme");
 
-    OPTIONS.forEach(opt => {
-      const o = document.createElement('option');
+    OPTIONS.forEach((opt) => {
+      const o = document.createElement("option");
       o.value = opt.value;
       o.textContent = opt.label;
       select.appendChild(o);
@@ -65,23 +69,29 @@
 
   function applyTheme(theme) {
     const root = document.documentElement;
-    if (theme === 'auto') {
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      theme = prefersDark ? 'dark' : 'light';
+    if (theme === "auto") {
+      const prefersDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      theme = prefersDark ? "dark" : "light";
     }
 
-    root.setAttribute('data-theme', theme);
+    root.setAttribute("data-theme", theme);
     // add a temporary class to animate the change
-    root.classList.add('theme-transition');
-    window.setTimeout(() => root.classList.remove('theme-transition'), 350);
+    root.classList.add("theme-transition");
+    window.setTimeout(() => root.classList.remove("theme-transition"), 350);
   }
 
   function loadStoredTheme() {
-    return localStorage.getItem(STORAGE_KEY) || 'auto';
+    return localStorage.getItem(STORAGE_KEY) || "auto";
   }
 
   function saveTheme(theme) {
-    try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) { /* noop */ }
+    try {
+      localStorage.setItem(STORAGE_KEY, theme);
+    } catch (e) {
+      /* noop */
+    }
   }
 
   function init() {
@@ -93,7 +103,7 @@
     applyTheme(stored);
 
     // change handler
-    select.addEventListener('change', (e) => {
+    select.addEventListener("change", (e) => {
       const val = e.target.value;
       saveTheme(val);
       applyTheme(val);
@@ -101,19 +111,19 @@
 
     // If using 'auto', respond to system theme changes
     if (window.matchMedia) {
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      mq.addEventListener && mq.addEventListener('change', () => {
-        const current = loadStoredTheme();
-        if (current === 'auto') applyTheme('auto');
-      });
+      const mq = window.matchMedia("(prefers-color-scheme: dark)");
+      mq.addEventListener &&
+        mq.addEventListener("change", () => {
+          const current = loadStoredTheme();
+          if (current === "auto") applyTheme("auto");
+        });
     }
   }
 
   // Init when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
   } else {
     init();
   }
-
 })();

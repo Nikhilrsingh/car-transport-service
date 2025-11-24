@@ -3,31 +3,31 @@
    ==================================== */
 
 (function () {
-    'use strict';
+  "use strict";
 
-    // Sample responses for the dummy chatbot
-    const botResponses = [
-        "Hello! How can I help you today?",
-        "I'm here to assist you with any questions about our car transport services.",
-        "You can ask me about pricing, booking, tracking, or general inquiries.",
-        "Feel free to ask anything - what would you like to know?",
-        "Is there anything specific about our services you'd like to know?",
-        "Thank you for reaching out! How can we assist you?"
-    ];
+  // Sample responses for the dummy chatbot
+  const botResponses = [
+    "Hello! How can I help you today?",
+    "I'm here to assist you with any questions about our car transport services.",
+    "You can ask me about pricing, booking, tracking, or general inquiries.",
+    "Feel free to ask anything - what would you like to know?",
+    "Is there anything specific about our services you'd like to know?",
+    "Thank you for reaching out! How can we assist you?",
+  ];
 
-    let messageCount = 0;
+  let messageCount = 0;
 
-    /**
-     * Initialize Chatbot Modal
-     */
-    function initChatbotModal() {
-        // Check if modal already exists
-        if (document.getElementById('chatbot-modal-overlay')) {
-            return;
-        }
+  /**
+   * Initialize Chatbot Modal
+   */
+  function initChatbotModal() {
+    // Check if modal already exists
+    if (document.getElementById("chatbot-modal-overlay")) {
+      return;
+    }
 
-        // Create modal HTML
-        const modalHTML = `
+    // Create modal HTML
+    const modalHTML = `
             <div class="chatbot-modal-overlay" id="chatbot-modal-overlay">
                 <div class="chatbot-modal">
                     <!-- Modal Header -->
@@ -97,217 +97,224 @@
             </div>
         `;
 
-        // Add modal to body
-        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    // Add modal to body
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
 
-        // Initialize event listeners
-        setupEventListeners();
+    // Initialize event listeners
+    setupEventListeners();
+  }
+
+  /**
+   * Setup Event Listeners
+   */
+  function setupEventListeners() {
+    const closeBtn = document.getElementById("chatbotModalClose");
+    const form = document.getElementById("chatbotForm");
+    const input = document.getElementById("chatbot-input");
+    const quickReplies = document.querySelectorAll(".quick-reply");
+    const overlay = document.getElementById("chatbot-modal-overlay");
+
+    // Close button
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeChatbotModal);
     }
 
-    /**
-     * Setup Event Listeners
-     */
-    function setupEventListeners() {
-        const closeBtn = document.getElementById('chatbotModalClose');
-        const form = document.getElementById('chatbotForm');
-        const input = document.getElementById('chatbot-input');
-        const quickReplies = document.querySelectorAll('.quick-reply');
-        const overlay = document.getElementById('chatbot-modal-overlay');
-
-        // Close button
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeChatbotModal);
-        }
-
-        // Form submission
-        if (form) {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                sendMessage();
-            });
-        }
-
-        // Enter key to send
-        if (input) {
-            input.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage();
-                }
-            });
-        }
-
-        // Quick replies
-        quickReplies.forEach(button => {
-            button.addEventListener('click', function () {
-                const message = this.getAttribute('data-message');
-                input.value = message;
-                sendMessage();
-            });
-        });
-
-        // Click outside to close
-        if (overlay) {
-            overlay.addEventListener('click', function (e) {
-                if (e.target === overlay) {
-                    closeChatbotModal();
-                }
-            });
-        }
-
-        // Prevent click propagation inside modal
-        const modal = document.querySelector('.chatbot-modal');
-        if (modal) {
-            modal.addEventListener('click', function (e) {
-                e.stopPropagation();
-            });
-        }
+    // Form submission
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        sendMessage();
+      });
     }
 
-    /**
-     * Send Message
-     */
-    function sendMessage() {
-        const input = document.getElementById('chatbot-input');
-        const messagesContainer = document.getElementById('chatbot-messages');
-        const form = document.getElementById('chatbotForm');
-
-        if (!input || !input.value.trim() || !messagesContainer) return;
-
-        const message = input.value.trim();
-
-        // Add user message
-        addUserMessage(message, messagesContainer);
-
-        // Clear input
-        input.value = '';
-        input.focus();
-
-        // Disable send button temporarily
-        const sendBtn = form.querySelector('.chatbot-send-btn');
-        if (sendBtn) {
-            sendBtn.disabled = true;
+    // Enter key to send
+    if (input) {
+      input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
         }
-
-        // Simulate bot response delay
-        setTimeout(() => {
-            addBotMessage(messagesContainer);
-            if (sendBtn) {
-                sendBtn.disabled = false;
-            }
-        }, 800);
+      });
     }
 
-    /**
-     * Add User Message to Chat
-     * @param {string} message - The user's message
-     * @param {HTMLElement} container - The messages container
-     */
-    function addUserMessage(message, container) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message user-message';
+    // Quick replies
+    quickReplies.forEach((button) => {
+      button.addEventListener("click", function () {
+        const message = this.getAttribute("data-message");
+        input.value = message;
+        sendMessage();
+      });
+    });
 
-        const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // Click outside to close
+    if (overlay) {
+      overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) {
+          closeChatbotModal();
+        }
+      });
+    }
 
-        messageDiv.innerHTML = `
+    // Prevent click propagation inside modal
+    const modal = document.querySelector(".chatbot-modal");
+    if (modal) {
+      modal.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+  }
+
+  /**
+   * Send Message
+   */
+  function sendMessage() {
+    const input = document.getElementById("chatbot-input");
+    const messagesContainer = document.getElementById("chatbot-messages");
+    const form = document.getElementById("chatbotForm");
+
+    if (!input || !input.value.trim() || !messagesContainer) return;
+
+    const message = input.value.trim();
+
+    // Add user message
+    addUserMessage(message, messagesContainer);
+
+    // Clear input
+    input.value = "";
+    input.focus();
+
+    // Disable send button temporarily
+    const sendBtn = form.querySelector(".chatbot-send-btn");
+    if (sendBtn) {
+      sendBtn.disabled = true;
+    }
+
+    // Simulate bot response delay
+    setTimeout(() => {
+      addBotMessage(messagesContainer);
+      if (sendBtn) {
+        sendBtn.disabled = false;
+      }
+    }, 800);
+  }
+
+  /**
+   * Add User Message to Chat
+   * @param {string} message - The user's message
+   * @param {HTMLElement} container - The messages container
+   */
+  function addUserMessage(message, container) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "message user-message";
+
+    const timeNow = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    messageDiv.innerHTML = `
             <div class="message-content">
                 <p>${escapeHTML(message)}</p>
             </div>
             <span class="message-time">${timeNow}</span>
         `;
 
-        // Remove initial message if present
-        const initialMessage = container.querySelector('.initial');
-        if (initialMessage) {
-            initialMessage.remove();
-        }
-
-        container.appendChild(messageDiv);
-        scrollToBottom(container);
+    // Remove initial message if present
+    const initialMessage = container.querySelector(".initial");
+    if (initialMessage) {
+      initialMessage.remove();
     }
 
-    /**
-     * Add Bot Message to Chat
-     * @param {HTMLElement} container - The messages container
-     */
-    function addBotMessage(container) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message bot-message';
+    container.appendChild(messageDiv);
+    scrollToBottom(container);
+  }
 
-        // Get a random response
-        const response = botResponses[Math.floor(Math.random() * botResponses.length)];
-        const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  /**
+   * Add Bot Message to Chat
+   * @param {HTMLElement} container - The messages container
+   */
+  function addBotMessage(container) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "message bot-message";
 
-        messageDiv.innerHTML = `
+    // Get a random response
+    const response =
+      botResponses[Math.floor(Math.random() * botResponses.length)];
+    const timeNow = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    messageDiv.innerHTML = `
             <div class="message-content">
                 <p>${escapeHTML(response)}</p>
             </div>
             <span class="message-time">${timeNow}</span>
         `;
 
-        container.appendChild(messageDiv);
-        scrollToBottom(container);
+    container.appendChild(messageDiv);
+    scrollToBottom(container);
 
-        messageCount++;
+    messageCount++;
+  }
+
+  /**
+   * Scroll to Bottom of Messages
+   * @param {HTMLElement} container - The messages container
+   */
+  function scrollToBottom(container) {
+    setTimeout(() => {
+      container.scrollTop = container.scrollHeight;
+    }, 100);
+  }
+
+  /**
+   * Close Chatbot Modal
+   */
+  function closeChatbotModal() {
+    const modal = document.getElementById("chatbot-modal-overlay");
+    if (modal) {
+      modal.classList.remove("active");
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 300);
     }
+  }
 
-    /**
-     * Scroll to Bottom of Messages
-     * @param {HTMLElement} container - The messages container
-     */
-    function scrollToBottom(container) {
-        setTimeout(() => {
-            container.scrollTop = container.scrollHeight;
-        }, 100);
-    }
-
-    /**
-     * Close Chatbot Modal
-     */
-    function closeChatbotModal() {
-        const modal = document.getElementById('chatbot-modal-overlay');
-        if (modal) {
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-    }
-
-    /**
-     * Escape HTML to prevent XSS
-     * @param {string} text - Text to escape
-     * @returns {string} Escaped text
-     */
-    function escapeHTML(text) {
-        const map = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;'
-        };
-        return text.replace(/[&<>"']/g, m => map[m]);
-    }
-
-    /**
-     * Initialize when DOM is ready
-     */
-    function initialize() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initChatbotModal);
-        } else {
-            initChatbotModal();
-        }
-    }
-
-    // Expose public methods globally
-    window.chatbotModal = {
-        close: closeChatbotModal,
-        sendMessage: sendMessage,
-        init: initialize
+  /**
+   * Escape HTML to prevent XSS
+   * @param {string} text - Text to escape
+   * @returns {string} Escaped text
+   */
+  function escapeHTML(text) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
     };
+    return text.replace(/[&<>"']/g, (m) => map[m]);
+  }
 
-    // Initialize on script load
-    initialize();
+  /**
+   * Initialize when DOM is ready
+   */
+  function initialize() {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initChatbotModal);
+    } else {
+      initChatbotModal();
+    }
+  }
+
+  // Expose public methods globally
+  window.chatbotModal = {
+    close: closeChatbotModal,
+    sendMessage: sendMessage,
+    init: initialize,
+  };
+
+  // Initialize on script load
+  initialize();
 })();

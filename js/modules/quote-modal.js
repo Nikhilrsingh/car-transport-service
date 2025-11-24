@@ -3,14 +3,14 @@
    ==================================== */
 
 (function () {
-    'use strict';
+  "use strict";
 
-    /**
-     * Initialize Quote Modal
-     */
-    function initQuoteModal() {
-        // Create modal HTML
-        const modalHTML = `
+  /**
+   * Initialize Quote Modal
+   */
+  function initQuoteModal() {
+    // Create modal HTML
+    const modalHTML = `
             <div class="quote-modal-overlay" id="quoteModalOverlay">
                 <div class="quote-modal">
                     <button class="quote-modal-close" id="quoteModalClose" aria-label="Close quote modal">
@@ -85,123 +85,123 @@
             </div>
         `;
 
-        // Add modal to body if not already present
-        if (!document.getElementById('quoteModalOverlay')) {
-            document.body.insertAdjacentHTML('beforeend', modalHTML);
-        }
-
-        // Get modal elements
-        const modal = document.getElementById('quoteModalOverlay');
-        const closeBtn = document.getElementById('quoteModalClose');
-        const form = document.getElementById('quoteForm');
-
-        // Event listeners
-        closeBtn.addEventListener('click', closeQuoteModal);
-        modal.addEventListener('click', function (e) {
-            if (e.target === modal) {
-                closeQuoteModal();
-            }
-        });
-
-        form.addEventListener('submit', handleQuoteSubmit);
-
-        // Expose function to open modal
-        window.openQuoteModal = openQuoteModal;
-        window.closeQuoteModal = closeQuoteModal;
+    // Add modal to body if not already present
+    if (!document.getElementById("quoteModalOverlay")) {
+      document.body.insertAdjacentHTML("beforeend", modalHTML);
     }
 
-    /**
-     * Open Quote Modal
-     */
-    function openQuoteModal() {
-        const modal = document.getElementById('quoteModalOverlay');
-        const form = document.getElementById('quoteForm');
-        const successMessage = document.getElementById('quoteSuccessMessage');
+    // Get modal elements
+    const modal = document.getElementById("quoteModalOverlay");
+    const closeBtn = document.getElementById("quoteModalClose");
+    const form = document.getElementById("quoteForm");
 
-        // Reset form
-        form.reset();
-        form.style.display = 'block';
-        successMessage.classList.remove('active');
+    // Event listeners
+    closeBtn.addEventListener("click", closeQuoteModal);
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) {
+        closeQuoteModal();
+      }
+    });
 
-        // Show modal
-        modal.classList.add('active');
+    form.addEventListener("submit", handleQuoteSubmit);
 
-        // Focus on first input
-        setTimeout(() => {
-            const firstInput = form.querySelector('input, select, textarea');
-            if (firstInput) {
-                firstInput.focus();
-            }
-        }, 300);
+    // Expose function to open modal
+    window.openQuoteModal = openQuoteModal;
+    window.closeQuoteModal = closeQuoteModal;
+  }
 
-        console.log('Quote modal opened');
+  /**
+   * Open Quote Modal
+   */
+  function openQuoteModal() {
+    const modal = document.getElementById("quoteModalOverlay");
+    const form = document.getElementById("quoteForm");
+    const successMessage = document.getElementById("quoteSuccessMessage");
+
+    // Reset form
+    form.reset();
+    form.style.display = "block";
+    successMessage.classList.remove("active");
+
+    // Show modal
+    modal.classList.add("active");
+
+    // Focus on first input
+    setTimeout(() => {
+      const firstInput = form.querySelector("input, select, textarea");
+      if (firstInput) {
+        firstInput.focus();
+      }
+    }, 300);
+
+    console.log("Quote modal opened");
+  }
+
+  /**
+   * Close Quote Modal
+   */
+  function closeQuoteModal() {
+    const modal = document.getElementById("quoteModalOverlay");
+    modal.classList.remove("active");
+    console.log("Quote modal closed");
+  }
+
+  /**
+   * Handle Quote Form Submission
+   */
+  function handleQuoteSubmit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const form = document.getElementById("quoteForm");
+    const submitBtn = document.getElementById("quoteSubmitBtn");
+    const errorMessage = document.getElementById("quoteErrorMessage");
+    const successMessage = document.getElementById("quoteSuccessMessage");
+
+    // Validate form
+    if (!form.checkValidity()) {
+      errorMessage.textContent = "Please fill in all required fields correctly";
+      errorMessage.classList.add("active");
+      return;
     }
 
-    /**
-     * Close Quote Modal
-     */
-    function closeQuoteModal() {
-        const modal = document.getElementById('quoteModalOverlay');
-        modal.classList.remove('active');
-        console.log('Quote modal closed');
-    }
+    errorMessage.classList.remove("active");
 
-    /**
-     * Handle Quote Form Submission
-     */
-    function handleQuoteSubmit(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    // Get form data
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
 
-        const form = document.getElementById('quoteForm');
-        const submitBtn = document.getElementById('quoteSubmitBtn');
-        const errorMessage = document.getElementById('quoteErrorMessage');
-        const successMessage = document.getElementById('quoteSuccessMessage');
+    console.log("Quote form submitted:", data);
 
-        // Validate form
-        if (!form.checkValidity()) {
-            errorMessage.textContent = 'Please fill in all required fields correctly';
-            errorMessage.classList.add('active');
-            return;
-        }
+    // Disable submit button
+    submitBtn.disabled = true;
+    submitBtn.classList.add("loading");
 
-        errorMessage.classList.remove('active');
+    // Simulate API call (you can replace with actual API endpoint)
+    setTimeout(() => {
+      // Here you would send data to your backend
+      // For now, we'll just show success message
 
-        // Get form data
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
+      form.style.display = "none";
+      successMessage.classList.add("active");
 
-        console.log('Quote form submitted:', data);
+      // Re-enable button
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("loading");
 
-        // Disable submit button
-        submitBtn.disabled = true;
-        submitBtn.classList.add('loading');
+      // Close modal after 3 seconds
+      setTimeout(() => {
+        closeQuoteModal();
+      }, 3000);
+    }, 1500);
+  }
 
-        // Simulate API call (you can replace with actual API endpoint)
-        setTimeout(() => {
-            // Here you would send data to your backend
-            // For now, we'll just show success message
-
-            form.style.display = 'none';
-            successMessage.classList.add('active');
-
-            // Re-enable button
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('loading');
-
-            // Close modal after 3 seconds
-            setTimeout(() => {
-                closeQuoteModal();
-            }, 3000);
-        }, 1500);
-    }
-
-    /**
-     * Initialize on DOM Ready
-     */
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initQuoteModal);
-    } else {
-        initQuoteModal();
-    }
+  /**
+   * Initialize on DOM Ready
+   */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initQuoteModal);
+  } else {
+    initQuoteModal();
+  }
 })();
