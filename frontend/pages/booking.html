@@ -9,6 +9,7 @@
 
     <!-- Navbar CSS -->
     <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/middle-navbar.css">
     <!-- Loading Indicators CSS -->
     <link rel="stylesheet" href="../css/components/loading-indicators.css">
 
@@ -35,6 +36,8 @@
 
     <!-- Lottie Animation -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" href="../css/components/glowing-input.css">
+
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -45,6 +48,7 @@
             box-sizing: border-box;
         }
 
+        /* Body padding-top handled by navbar.css */
         body {
             font-family: "Poppins", sans-serif;
             background-color: #2b2b2b;
@@ -1671,7 +1675,7 @@
                         <div class="progress-percentage" id="progressPercentage">33% Complete</div>
                     </div>
 
-                    <form class="booking-form" id="bookingForm">
+                    <form class="booking-form" id="autoSaveForm">
                         <!-- Step 1: Personal & Vehicle Details -->
                         <div class="form-step active" data-step="1">
                             <div class="step-header">
@@ -2292,7 +2296,7 @@
         <div class="save-email-content">
             <h3><i class="fas fa-envelope"></i> Save & Continue Later</h3>
             <p>Enter your email to receive a link to continue this booking later.</p>
-            <input type="email" class="save-email-input" id="saveEmail" placeholder="your.email@example.com" />
+            <input type="email" class="save-email-input" id="saveEmail" name="saveEmail" placeholder="your.email@example.com" />
             <div class="save-email-actions">
                 <button class="btn-send-link" onclick="sendSaveLink()">
                     <i class="fas fa-paper-plane"></i> Send Link
@@ -2361,7 +2365,7 @@
 
             <div class="form-group">
                 <label for="newPickupDate"><i class="fas fa-calendar"></i> New Pickup Date</label>
-                <input type="date" id="newPickupDate" class="save-email-input" style="margin-bottom: 15px;">
+                <input type="date" id="newPickupDate" name="newPickupDate" class="save-email-input" style="margin-bottom: 15px;">
             </div>
 
             <div class="form-group">
@@ -2479,17 +2483,17 @@
 
             <div class="form-group">
                 <label for="transferName"><i class="fas fa-user"></i> Recipient Name</label>
-                <input type="text" id="transferName" class="save-email-input" placeholder="Enter full name">
+                <input type="text" id="transferName" name="transferName" class="save-email-input" placeholder="Enter full name">
             </div>
 
             <div class="form-group">
                 <label for="transferEmail"><i class="fas fa-envelope"></i> Recipient Email</label>
-                <input type="email" id="transferEmail" class="save-email-input" placeholder="Enter email address">
+                <input type="email" id="transferEmail" name="transferEmail" class="save-email-input" placeholder="Enter email address">
             </div>
 
             <div class="form-group">
                 <label for="transferPhone"><i class="fas fa-phone"></i> Recipient Phone</label>
-                <input type="tel" id="transferPhone" class="save-email-input" placeholder="Enter 10-digit phone number">
+                <input type="tel" id="transferPhone" name="transferPhone" class="save-email-input" placeholder="Enter 10-digit phone number">
             </div>
 
             <div class="fee-structure">
@@ -5035,6 +5039,14 @@
     <!-- Footer -->
     <div id="footer-container"></div>
     <script src="../js/modules/footer-loader.js"></script>
+
+    <!-- 🌟 Bottom Fixed Action Bar -->
+   <link rel="stylesheet" href="../css/components/footer.css" />
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+  <link rel="stylesheet" href="../css/components/quote-modal.css" />
+  <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
+  
+  <!-- 🚀 Floating Action Menu loaded via footer component -->
 </body>
 
 </html>

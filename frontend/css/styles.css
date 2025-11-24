@@ -1,6 +1,38 @@
+/* =============================
+   GLOBAL CONTENT WIDTH CONTROL
+============================= */
+:root {
+    --content-max-width: 900px;
+    --primary-color: #ff6347;
+    --text-color: #333;
+    --background-light: #ffffff;
+}
+.content-wrapper {
+    max-width: var(--content-max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =============================
+   GLOBAL CLICKABLE CURSOR FIX
+============================= */
+button,
+a,
+.clickable,
+input[type="submit"],
+.cta-btn,
+.service-btn {
+    cursor: pointer;
+}
+
+/* ------------------------------
+   Global Styles / Base Styles
+------------------------------ */
+
+
 @font-face {
   font-family: "Poppins";
-  src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
+  src: url("../assets/fonts/Inter-Regular.woff2") format("woff2"),
     url("../assets/fonts/Poppins-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -31,6 +63,19 @@
   font-weight: 600;
   font-style: normal;
 }
+/* ===============================
+   GLOBAL FOCUS ACCESSIBILITY FIX
+   =============================== */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+
+:root {
+    --primary-color: #ff6347; /* your current brand color */
+}
+
 
 /* ============================================
    GLOBAL SHADOW SYSTEM (Design Tokens)
@@ -194,9 +239,10 @@ body {
 .auto-slider {
   position: relative;
   width: 100%;
-  height: 97vh;
+  height: 45vh;
   overflow: hidden;
   min-height: 300px;
+  padding-top: 30px;
 }
 
 .slider-container {
@@ -834,7 +880,8 @@ body {
 }
 
 .title-line.highlight {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color)
+, #ff4500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -895,7 +942,7 @@ body {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ff6347;
+  color: var(--primary-color);
   margin-bottom: 5px;
   transition: all 0.3s ease;
 }
@@ -955,8 +1002,7 @@ body {
 }
 
 .cta-btn.primary {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
-  color: white;
+  background: linear-gradient(135deg,var(--primary-color), #ff4500); color: white;
   box-shadow: 0 10px 30px rgba(255, 99, 71, 0.3);
   animation: pulse 2s ease-in-out infinite;
 }
@@ -971,7 +1017,7 @@ body {
 .cta-btn.outline {
   background: transparent;
   color: #000;
-  border: 2px solid #ff6347;
+  border: 2px solid var(--primary-color);
 }
 
 .cta-btn:hover {
@@ -1048,7 +1094,7 @@ body {
 }
 
 .trust-item i {
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 1rem;
 }
 
@@ -1096,7 +1142,7 @@ body {
 }
 
 .quote-header p {
-  color: #ff6347;
+  color:var(--primary-color);
   font-size: 0.9rem;
   animation: fadeInUp 0.6s ease-out 1s both;
 }
@@ -1137,7 +1183,7 @@ body {
 }
 
 .form-group label i {
-  color: #ff6347;
+  color:var(--primary-color);
   font-size: 0.8rem;
   animation: bounce 2s ease-in-out infinite;
 }
@@ -1156,13 +1202,13 @@ body {
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #ff6347;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.1);
   background: #fff;
 }
 
 .quote-submit {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   color: white;
   border: none;
   padding: 15px;
@@ -1229,7 +1275,7 @@ body {
   display: block;
   font-size: 2rem;
   font-weight: 700;
-  color: #ff6347;
+  color:var(--primary-color);
   margin-bottom: 5px;
 }
 
@@ -1240,7 +1286,7 @@ body {
 
 .result-book {
   display: inline-block;
-  background: #ff6347;
+  background:var(--primary-color);
   color: white;
   padding: 10px 20px;
   border-radius: 6px;
@@ -1257,7 +1303,7 @@ body {
 /* Scroll Indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: 30px;
+  bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
@@ -1785,7 +1831,6 @@ body {
 /* Section Styles */
 section {
   text-align: center;
-  padding: 60px 0;
   position: relative;
 }
 
@@ -1863,7 +1908,7 @@ html {
   transform: translate(-50%, -50%);
   width: 8px;
   height: 8px;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   border-radius: 50%;
   box-shadow: 0 0 15px rgba(255, 99, 71, 0.5);
   animation: pulse-dot 2s ease-in-out infinite;
@@ -1993,7 +2038,7 @@ html {
   padding: 15px 20px;
   background: rgba(255, 99, 71, 0.1);
   border-radius: 10px;
-  border-left: 4px solid #ff6347;
+  border-left: 4px solid var(--primary-color);
   transition: all 0.3s ease;
 }
 
@@ -2003,7 +2048,7 @@ html {
 }
 
 .feature i {
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 1.2rem;
   width: 25px;
 }
@@ -2032,7 +2077,7 @@ html {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #ff6347, #ff4500);
+  background: linear-gradient(90deg,var(--primary-color), #ff4500);
 }
 
 .form-header {
@@ -2047,7 +2092,7 @@ html {
 }
 
 .form-header p {
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 1rem;
 }
 
@@ -2066,7 +2111,7 @@ html {
 .input-group i {
   position: absolute;
   left: 0.938rem;
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 1.1rem;
   z-index: 2;
 }
@@ -2088,7 +2133,7 @@ html {
 .input-group input:focus,
 .input-group select:focus {
   outline: none;
-  border-color: #ff6347;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
   background: #fff;
 }
@@ -2098,7 +2143,7 @@ html {
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   color: white;
   border: none;
   padding: 18px 30px;
@@ -2119,7 +2164,7 @@ html {
 .submit-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
-  background: linear-gradient(135deg, #ff4500, #ff6347);
+  background: linear-gradient(135deg, #ff4500, var(--primary-color));
 }
 
 .submit-btn:active {
@@ -2143,17 +2188,17 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #ff6347;
+  color:var(--primary-color);
   text-decoration: none;
   padding: 12px 25px;
-  border: 2px solid #ff6347;
+  border: 2px solid var(--primary-color);
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: 500;
 }
 
 .contact-link:hover {
-  background: #ff6347;
+  background: var(--primary-color);
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
@@ -2277,7 +2322,7 @@ html {
   font-size: 3rem;
   margin-bottom: 15px;
   color: #000;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -2315,7 +2360,7 @@ html {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #ff6347, #ff4500);
+  background: linear-gradient(90deg, var(--primary-color), #ff4500);
   transform: scaleX(0);
   transition: transform 0.4s ease;
 }
@@ -2330,7 +2375,7 @@ html {
 }
 
 .service-card.featured {
-  border: 2px solid #ff6347;
+  border: 2px solid var(--primary-color);
   transform: scale(1.05);
 }
 
@@ -2342,7 +2387,7 @@ html {
   position: absolute;
   top: 20px;
   right: -30px;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   color: white;
   padding: 8px 40px;
   font-size: 0.8rem;
@@ -2360,7 +2405,7 @@ html {
 
 .service-icon i {
   font-size: 2.5rem;
-  color: #ff6347;
+  color: var(--primary-color);
   position: relative;
   z-index: 2;
   transition: all 0.3s ease;
@@ -2415,7 +2460,7 @@ html {
 }
 
 .service-features i {
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 0.8rem;
 }
 
@@ -2427,13 +2472,13 @@ html {
 }
 
 .price {
-  color: #ff6347;
+  color: var(--primary-color);
   font-weight: 600;
   font-size: 1.1rem;
 }
 
 .service-btn {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -2474,7 +2519,7 @@ html {
 .stat-number {
   font-size: 3rem;
   font-weight: 700;
-  color: #ff6347;
+  color: var(--primary-color);
   margin-bottom: 10px;
 }
 
@@ -2577,7 +2622,6 @@ html {
 }
 
 .features {
-  padding: 80px 0;
   background-color: #fff;
   text-align: center;
 }
@@ -2602,7 +2646,7 @@ html {
 .footer {
   background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
   padding: 70px 0 0;
-  border-top: 3px solid #ff6347;
+  border-top: 3px solid var(--primary-color);
   position: relative;
   overflow: hidden;
 }
@@ -2614,7 +2658,7 @@ html {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #ff6347, transparent);
+  background: linear-gradient(90deg, transparent,var(--primary-color), transparent);
 }
 
 .container {
@@ -2633,7 +2677,7 @@ html {
 .footer-column h3 {
   font-size: 1.4rem;
   margin-bottom: 25px;
-  color: #ff6347;
+  color: var(--primary-color);
   position: relative;
   padding-bottom: 10px;
 }
@@ -2645,7 +2689,7 @@ html {
   left: 0;
   width: 40px;
   height: 2px;
-  background-color: #ff6347;
+  background-color: var(--primary-color);
   transition: width 0.3s ease;
 }
 
@@ -2708,7 +2752,7 @@ html {
 .footer-logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ff6347;
+  color: var(--primary-color);
 }
 
 .social-links {
@@ -2732,9 +2776,9 @@ html {
 }
 
 .social-links a:hover {
-  background: #ff6347;
+  background: var(--primary-color);
   transform: translateY(-3px);
-  border-color: #ff6347;
+  border-color: var(--primary-color);
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
 }
 
@@ -2756,14 +2800,14 @@ html {
 }
 
 .footer-links a:hover {
-  color: #ff6347;
+  color: var(--primary-color);
   padding-left: 5px;
 }
 
 .footer-links a i {
   width: 20px;
   text-align: center;
-  color: #ff6347;
+  color: var(--primary-color);
 }
 
 .contact-info {
@@ -2779,20 +2823,11 @@ html {
 }
 
 .contact-info i {
-  color: #ff6347;
+  color: var(--primary-color);
   margin-top: 2px;
   width: 20px;
   text-align: center;
-}
-
-.newsletter-form {
-  margin-top: 20px;
-}
-
-.newsletter-form p {
-  color: #ccc;
-  margin-bottom: 15px;
-}
+} 
 
 .newsletter-input {
   display: flex;
@@ -2812,12 +2847,12 @@ html {
 
 .newsletter-input input:focus {
   outline: none;
-  border-color: #ff6347;
+  border-color: var(--primary-color);
   box-shadow: 0 0 10px rgba(255, 99, 71, 0.2);
 }
 
 .newsletter-input button {
-  background: #ff6347;
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -2829,7 +2864,7 @@ html {
 }
 
 .newsletter-input button:hover {
-  background: #ff4500;
+  background: var(--primary-color);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
 }
@@ -2863,7 +2898,7 @@ html {
 }
 
 .footer-bottom-links a:hover {
-  color: #ff6347;
+  color: var(--primary-color);
 }
 
 .payment-methods {
@@ -2879,7 +2914,7 @@ html {
 }
 
 .payment-methods i:hover {
-  color: #ff6347;
+  color:var(--primary-color);
 }
 
 /* Back to Top Button - Styles moved to css/components/back-to-top-button.css */
@@ -2957,7 +2992,7 @@ html {
   color: #ffffff;
   font-weight: 700;
   margin-bottom: 10px;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -3039,7 +3074,6 @@ html {
 .features {
   /* background: linear-gradient(135deg, #8888880f, #88888819); */
   background: transparent;
-  padding: 80px 20px;
   padding-top: 0;
   text-align: center;
 }
@@ -3060,7 +3094,7 @@ html {
   content: "";
   width: 80px;
   height: 3px;
-  background: #ff6347;
+  background:var(--primary-color);
   display: block;
   margin: 10px auto 0;
   border-radius: 5px;
@@ -3245,10 +3279,12 @@ html {
   border-color: #d9232d;
   box-shadow: 0 0 10px rgba(217, 35, 45, 0.2);
 }
-
+.region-search-container input{
+  position: relative;
+}
 .region-search-container i {
   position: absolute;
-  right: 15px;
+  left: 90%;
   top: 50%;
   transform: translateY(-50%);
   color: #999;
@@ -3572,7 +3608,8 @@ button:active,
 
 .accept-btn,
 .reject-btn {
-  padding: 8px 14px;
+  padding: 8px
+   14px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -3595,4 +3632,28 @@ button:active,
 
 .reject-btn:hover {
   background: #b91c1c;
+}
+/* 🔵 Global Rounded Button Update (Issue: Add Consistent Border-Radius to All Buttons) */
+button,
+.btn,
+button[type="button"],
+button[type="submit"],
+input[type="submit"] {
+    border-radius: 8px !important;
+}
+
+/* 🌟 Global Letter-Spacing Enhancement (Issue #459) */
+:root {
+  --button-letter-spacing: 0.5px;
+}
+
+button,
+.cta-btn,
+.quote-submit,
+.submit-btn,
+.service-btn,
+.newsletter-input button,
+.result-book,
+.contact-link {
+  letter-spacing: var(--button-letter-spacing);
 }
