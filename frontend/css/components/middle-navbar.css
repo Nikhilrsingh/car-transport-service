@@ -1,73 +1,270 @@
+/* Middle Navbar Styles */
 .middle-navbar {
-  width: 100%;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: fixed;
+  top: 45px; /* Below the upbar */
+  left: 0;
+  right: 0;
+  z-index: 999;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hide middle navbar when scrolled */
+.middle-navbar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .middle-navbar-container {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 10px 20px;
-
   display: flex;
   align-items: center;
-  justify-content: space-between;       /* FIX 1 */
-  gap: 20px;                             /* FIX 2 */
-}
-
-.middle-navbar-left,
-.middle-navbar-center,
-.middle-navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-/* FIX: equal flex behavior */
-.middle-navbar-left {
-  flex: 1;
-}
-.middle-navbar-center {
-  flex: 2;
-  justify-content: center;               /* FIX 3 */
-}
-.middle-navbar-right {
-  flex: 1;
-  justify-content: flex-end;             /* FIX 4 */
+  justify-content: space-between;
+  padding: 8px 40px;
+  max-width: 100%;
+  height: 80px;
+  margin: 0;
   gap: 15px;
 }
 
-/* Logo Sizing */
+/* Left: Logo */
+.middle-navbar-left {
+  flex: 0 0 auto;
+}
+
 .middle-navbar-logo {
-  height: 65px;                           /* FIX 5 */
+  height: 120px;
+  width: auto;
   object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-/* Banner Sizing */
+.middle-navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Center: Banner */
+.middle-navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle-navbar-center { overflow: visible; }
+
 .middle-navbar-banner {
-  height: 70px;                           /* FIX 6 */
+  height: 80px;
+  width: auto;
+  max-width: none;
   object-fit: contain;
+  transform-origin: center center;
+  transform: scale(1.25);
+  transition: transform 0.2s ease;
 }
 
-/* Contact Section Fix */
+/* Right: Contact Info */
+.middle-navbar-right {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
 .middle-contact-item {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 0 6px;
+  border-radius: 0;
   text-decoration: none;
-  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: none;
+  position: relative;
+  overflow: visible;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #000 !important;
 }
 
 .middle-contact-item i {
-  font-size: 24px;
-  color: #25D366; /* WhatsApp green */
+  font-size: 1.4rem;
+  transition: transform 0.18s ease;
+  line-height: 1;
 }
 
-.email-link i {
-  color: #d14836; /* Email red */
+.middle-contact-item span {
+  white-space: nowrap;
 }
 
 .contact-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  line-height: 1;
+}
+
+.contact-number {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.contact-number-alt {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #000;
+  margin-top: 2px;
+}
+
+.contact-sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+/* WhatsApp Link */
+.whatsapp-link {
+  background: transparent !important;
+  color: inherit;
+}
+
+.whatsapp-link::before { display: none; }
+.whatsapp-link:hover { transform: none; box-shadow: none; }
+.whatsapp-link i, .email-link i { color: #ff0000 !important; }
+
+/* Email Link */
+.email-link::before { display: none; }
+.email-link:hover { transform: none; box-shadow: none; }
+
+/* Dark Mode Styles */
+body.dark-mode .middle-navbar {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-bottom: 2px solid #444;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .middle-navbar-logo,
+body.dark-mode .middle-navbar-banner {
+  filter: brightness(0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .middle-navbar-container {
+    padding: 6px 20px;
+  }
+
+  .middle-navbar-logo {
+    height: 50px;
+  }
+
+  .middle-navbar-banner {
+    height: 45px;
+  }
+
+  .middle-contact-item {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+  .contact-number { font-size: 1rem; }
+  .contact-sub { font-size: 0.72rem; }
+
+  .middle-contact-item i {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .middle-navbar-container {
+    flex-wrap: wrap;
+    padding: 6px 12px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .middle-navbar-left {
+    order: 1;
+    flex: 0 0 auto;
+  }
+
+  .middle-navbar-right {
+    order: 2;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  .middle-navbar-center {
+    order: 3;
+    flex: 1 1 100%;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .middle-navbar-logo {
+    height: 40px;
+  }
+
+  .middle-navbar-banner {
+    height: 35px;
+    max-width: 90%;
+  }
+
+  .middle-contact-item {
+    padding: 5px 8px;
+    font-size: 0.7rem;
+  }
+
+  .middle-contact-item i { margin-right: 6px; }
+  .contact-number { font-size: 0.95rem; }
+  .contact-sub { font-size: 0.65rem; }
+
+  .middle-contact-item i {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .middle-navbar-container {
+    padding: 5px 8px;
+  }
+
+  .middle-navbar-logo,
+  .middle-navbar-banner {
+    height: 30px;
+  }
+
+  .middle-navbar-right {
+    gap: 6px;
+  }
+
+  .middle-contact-item {
+    padding: 4px 6px;
+  }
+
+  .middle-contact-item i {
+    font-size: 0.95rem;
+  }
+}
+
+/* Scrolled State */
+.middle-navbar.scrolled {
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+}
+
+.middle-navbar.scrolled .middle-navbar-logo,
+.middle-navbar.scrolled .middle-navbar-banner {
+  height: 48px;
+}
+
+@media (max-width: 768px) {
+  .middle-navbar.scrolled .middle-navbar-logo,
+  .middle-navbar.scrolled .middle-navbar-banner {
+    height: 40px;
+  }
 }
