@@ -872,7 +872,7 @@ body {
   max-width: 1500px;
   margin: 0 auto;
   padding: 0 20px;
-  display: flex;
+  /* display: flex; */
   /* ✅ Changed from grid to flex for better alignment */
   flex-direction: row;
   /* ✅ Keeps text and form side-by-side on desktop */
@@ -3714,3 +3714,98 @@ button,
 .contact-link {
   letter-spacing: var(--button-letter-spacing);
 }
+
+@media only screen and (max-width: 991px) {
+    
+    
+
+ 
+    div.middle-navbar-container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        padding: 5px 5px !important;
+        background: #ffffff !important;
+    }
+
+
+    div.middle-navbar-left {
+        width: 40% !important;
+        order: 1 !important;
+        padding-left: 0 !important;
+        margin-left: 10px !important; 
+    }
+    div.middle-navbar-left img {
+        max-width: 160px !important; 
+        height: auto !important;
+    }
+
+    div.middle-navbar-right {
+        width: 40% !important;
+        order: 2 !important;
+        text-align: right !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
+    }
+    div.middle-navbar-right span,
+    div.middle-navbar-right a {
+        color: #000 !important;
+        font-size: 7px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+        display: block !important;
+    }
+    div.middle-navbar-right span:last-child,
+    div.middle-navbar-right div { 
+        font-weight: 400 !important;
+        font-size: 8px !important;
+        color: #444 !important;
+        margin-bottom: 2px !important;
+    }
+    div.middle-navbar-right i { display: none !important; }
+
+    div.middle-navbar-center {
+        width: 100% !important;
+        order: 3 !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 0px !important;
+        margin-bottom: 2px !important;
+    }
+    div.middle-navbar-center img {
+        width: 60px !important;
+    }
+
+
+    div.navbar {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0px 0px !important;
+    }
+    
+    div.logo-container.left-logo {
+        margin-left: -40px !important;
+        padding-left: 0 !important;
+    }
+    div.logo-container.left-logo img {
+        max-height: 45px !important;
+    }
+
+    #mobileMenuBtn, .mobile-menu-btn {
+        display: flex !important;
+        margin-top: 15px;
+        margin-right: 10px !important;
+    }
+}
+.navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
