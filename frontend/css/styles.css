@@ -3714,3 +3714,21 @@ button,
 .contact-link {
   letter-spacing: var(--button-letter-spacing);
 }
+
+@media (max-width: 991px) {
+    .middle-navbar-right {
+        display: none !important;
+    }
+
+    .middle-navbar-center {
+        display: none !important;
+    }
+
+    .desktop-nav {
+        display: none !important;
+    }
+
+    .middle-navbar-container {
+        justify-content: center !important;
+    }
+}
