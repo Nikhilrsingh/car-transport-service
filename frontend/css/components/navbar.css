@@ -40,7 +40,9 @@ body {
   z-index: 1000;
   height: 45px;
 }
-
+ .upbar a{
+ right: 300px;
+}
 /* Hide upbar when scrolled */
 .upbar.hidden {
   transform: translateY(-100%);
