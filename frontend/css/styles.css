@@ -3715,21 +3715,90 @@ button,
   letter-spacing: var(--button-letter-spacing);
 }
 
-@media (max-width: 991px) {
-    .middle-navbar-right {
-        display: none !important;
+@media only screen and (max-width: 991px) {
+    
+    
+
+ 
+    div.middle-navbar-container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        padding: 5px 5px !important;
+        background: #ffffff !important;
     }
 
-    .middle-navbar-center {
-        display: none !important;
+
+    div.middle-navbar-left {
+        width: 40% !important;
+        order: 1 !important;
+        padding-left: 0 !important;
+        margin-left: 10px !important; 
+    }
+    div.middle-navbar-left img {
+        max-width: 160px !important; 
+        height: auto !important;
     }
 
-    .desktop-nav {
-        display: none !important;
+    div.middle-navbar-right {
+        width: 40% !important;
+        order: 2 !important;
+        text-align: right !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
     }
+    div.middle-navbar-right span,
+    div.middle-navbar-right a {
+        color: #000 !important;
+        font-size: 7px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+        display: block !important;
+    }
+    div.middle-navbar-right span:last-child,
+    div.middle-navbar-right div { 
+        font-weight: 400 !important;
+        font-size: 8px !important;
+        color: #444 !important;
+        margin-bottom: 2px !important;
+    }
+    div.middle-navbar-right i { display: none !important; }
 
-    .middle-navbar-container {
+    div.middle-navbar-center {
+        width: 100% !important;
+        order: 3 !important;
+        display: flex !important;
         justify-content: center !important;
+        margin-top: 0px !important;
+        margin-bottom: 2px !important;
+    }
+    div.middle-navbar-center img {
+        width: 60px !important;
+    }
+
+
+    div.navbar {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0px 0px !important;
+    }
+    
+    div.logo-container.left-logo {
+        margin-left: -40px !important;
+        padding-left: 0 !important;
+    }
+    div.logo-container.left-logo img {
+        max-height: 45px !important;
+    }
+
+    #mobileMenuBtn, .mobile-menu-btn {
+        display: flex !important;
+        margin-top: 15px;
+        margin-right: 10px !important;
     }
 }
 .navbar {
