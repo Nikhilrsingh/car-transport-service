@@ -31,7 +31,49 @@
   font-weight: 600;
   font-style: normal;
 }
+:root {
+    --motion-fast: 150ms;
+    --motion-medium: 250ms;
+    --motion-slow: 400ms;
 
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+button,
+.btn,
+.cta-btn {
+    transition: all var(--motion-medium) var(--ease-standard);
+}
+
+.card,
+.service-box {
+    transition: transform var(--motion-medium) var(--ease-standard),
+                box-shadow var(--motion-medium) var(--ease-standard);
+}
+
+:root {
+    --motion-fast: 150ms;
+    --motion-medium: 250ms;
+    --motion-slow: 400ms;
+
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+button,
+.btn,
+.cta-btn {
+    transition: all var(--motion-medium) var(--ease-standard);
+}
+
+.card,
+.service-box {
+    transition: transform var(--motion-medium) var(--ease-standard),
+                box-shadow var(--motion-medium) var(--ease-standard);
+}
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
