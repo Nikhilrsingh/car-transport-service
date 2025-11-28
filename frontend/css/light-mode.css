@@ -93,31 +93,33 @@ body[data-theme="light"] #theme-toggle i {
 }
 
 /* Dark text for light theme */
+
 .hero-title,
 .title-line {
-  color: #ffffff !important;
-  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8) !important;
+  color: #000000 !important;                 /* Black title text */
+  text-shadow: none !important;              /* Remove heavy shadow */
 }
 
 .hero-description {
-  color: #f5f5f5 !important;
-  text-shadow:0 2px 6px rgba(0, 0, 0, 0.7) !important;
+  color: #000000 !important;                 /* Black description text */
+  text-shadow: none !important;
 }
 
 .hero-badge {
-  color:#ffffff !important;
-  background: rgba(255, 99, 71, 0.35) !important;
-  border-color: rgba(255, 99, 71, 0.8)  !important;
+  color: #000000 !important;                 /* Dark text */
+  background: rgba(255, 99, 71, 0.15) !important;   /* Softer badge bg */
+  border-color: rgba(255, 99, 71, 0.8) !important;
 }
 
 .stat-number {
-  color:  #ffb399 !important;
+  color: #000000 !important;                 /* Dark stat numbers */
 }
 
 .stat-label {
-  color: #f0f0f0 !important;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7) !important;
+  color: #000000 !important;                 /* Dark stat labels */
+  text-shadow: none !important;              /* Remove shadow */
 }
+
 
 /* Keep gradient on highlighted title */
 .title-line.highlight {
