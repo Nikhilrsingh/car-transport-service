@@ -6,7 +6,7 @@
 /* Container */
 .fab-container {
   position: fixed;
-  bottom: 30px;
+  bottom: 0px;
   left: 30px;
   z-index: 9999;
   display: flex;
@@ -17,14 +17,14 @@
 /* On desktop with bottom bar, position FAB higher */
 @media (min-width: 769px) {
   .fab-container {
-    bottom: 80px;
+    bottom: 0;
   }
 }
 
 /* Main FAB Button */
 .fab-main {
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
   border: none;
   border-radius: 50%;
