@@ -1,11 +1,9 @@
-/* 🔝 Back to Top Button - Enhanced Styling */
-
+/* 🔝 Right Button - Moved Down 3px */
 .back-to-top {
-    position: fixed;
-    bottom: 75px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
+    position: fixed !important;
+    right: 30px !important;
+    width: 45px;
+    height: 45px;
     background: linear-gradient(135deg, #ff6347, #ff4500);
     color: white;
     border: none;
@@ -15,12 +13,14 @@
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
+    z-index: 10000 !important;
+    
+    /* Visibility Force */
+    opacity: 1 !important;
+    visibility: visible !important;
+    
     transition: all 0.3s ease;
-    opacity: 0;
-    visibility: hidden;
-    /* ensure back-to-top sits above floating action buttons (like Book Now) */
-    z-index: 1100;
-    box-shadow: 0 4px 20px rgba(255, 99, 71, 0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .back-to-top.visible {
@@ -45,7 +45,7 @@
 }
 
 .back-to-top:hover i {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
 /* Slide up animation for button appearance */
@@ -65,7 +65,7 @@
 .back-to-top::before {
     content: "Back to Top";
     position: absolute;
-    bottom: 65px;
+    bottom: 0px;
     right: 0;
     background-color: rgba(0, 0, 0, 0.9);
     color: white;

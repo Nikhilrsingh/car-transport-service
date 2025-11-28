@@ -3803,3 +3803,38 @@ button,
     
     
 }
+
+
+/* Lowered it from 12px to 8px as requested */
+.fab-container, #fabMain {
+    position: fixed !important;
+    bottom: 8px !important;    /* ⬇️ Moved DOWN closer to edge */
+    left: 30px !important;
+    z-index: 10000 !important;
+}
+
+/* 2. Fix the RIGHT Scroll Button (Arrow) */
+.back-to-top {
+    position: fixed !important;
+    bottom: 7px !important;   /* Centers it in the bar */
+    right: 30px !important;
+    z-index: 10000 !important;
+    
+    /* FORCE IT VISIBLE (Overrides any JS hiding it) */
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    
+    /* Styling */
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    border-radius: 50%;
+    color: white;
+}
+
+/* 3. Hide the tooltip text if it's getting in the way */
+.back-to-top::before {
+    display: none !important;
+}
+

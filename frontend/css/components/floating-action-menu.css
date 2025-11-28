@@ -5,13 +5,14 @@
 
 /* Container */
 .fab-container {
-  position: fixed;
-  bottom: 30px;
-  left: 30px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+    position: fixed !important;
+    bottom: 7px !important;    
+    left: 30px !important;     
+    right: auto !important;   
+    z-index: 10000 !important;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
 }
 
 /* On desktop with bottom bar, position FAB higher */
@@ -37,6 +38,21 @@
   position: relative;
   z-index: 10001;
   flex-shrink: 0;
+}
+
+#fabMain {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .fab-main:hover {
