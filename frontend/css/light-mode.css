@@ -93,31 +93,45 @@ body[data-theme="light"] #theme-toggle i {
 }
 
 /* Dark text for light theme */
-
 .hero-title,
 .title-line {
-  color: #000000 !important;                 /* Black title text */
-  text-shadow: none !important;              /* Remove heavy shadow */
+  color: #ffffff !important;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8) !important;
 }
 
 .hero-description {
-  color: #000000 !important;                 /* Black description text */
-  text-shadow: none !important;
+  color: #222 !important; /* Dark text so it stays visible in bright mode */
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.7),      /* existing shadow */
+    0 0 8px rgba(255, 255, 255, 0.8),  /* soft white glow */
+    0 0 18px rgba(255, 140, 0, 0.6);   /* warm orange glow */
 }
+
 
 .hero-badge {
-  color: #000000 !important;                 /* Dark text */
-  background: rgba(255, 99, 71, 0.15) !important;   /* Softer badge bg */
-  border-color: rgba(255, 99, 71, 0.8) !important;
+  color:#ffffff !important;
+  background: rgba(255, 99, 71, 0.35) !important;
+  border-color: rgba(255, 99, 71, 0.8)  !important;
 }
 
+/* Stat Numbers (5000+, 50+, 98%) */
 .stat-number {
-  color: #000000 !important;                 /* Dark stat numbers */
+  color: #ffb399 !important; /* Darker base for visibility */
+  font-weight: 700;
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.7),         /* keep depth */
+    0 0 8px rgba(255, 255, 255, 0.8),     /* white glow */
+    0 0 18px rgba(255, 140, 0, 0.6);      /* orange warm glow */
 }
 
+/* Labels (Vehicles Transported, Cities Covered, etc.) */
 .stat-label {
-  color: #000000 !important;                 /* Dark stat labels */
-  text-shadow: none !important;              /* Remove shadow */
+  color: #333 !important;
+  font-weight: 600;
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.7),         /* original shadow */
+    0 0 6px rgba(255, 255, 255, 0.8),     /* soft white glow */
+    0 0 15px rgba(255, 140, 0, 0.4);      /* subtle orange glow */
 }
 
 
