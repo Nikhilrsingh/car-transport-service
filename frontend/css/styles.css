@@ -219,6 +219,52 @@ button,
     --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
+
+/* ================================
+   GLOBAL SPACING TOKENS
+:root {
+    --space-xxs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+}
+
+/* Apply to sections */
+section {
+    padding: var(--space-xl) 0;
+}
+
+/* Apply to cards */
+.card,
+.service-box,
+.review-card {
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+/* Apply to buttons */
+button,
+.btn,
+.cta-btn {
+    padding: var(--space-xs) var(--space-md);
+}
+
+/* Apply to form fields */
+input,
+textarea,
+select {
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+/* Apply to headings */
+h1, h2, h3 {
+    margin-bottom: var(--space-md);
+}
+
 button,
 .btn,
 .cta-btn {
