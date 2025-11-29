@@ -63,37 +63,59 @@ input[type="submit"],
   font-weight: 600;
   font-style: normal;
 }
-/* ===============================
-   GLOBAL FOCUS ACCESSIBILITY FIX
-   =============================== */
+/* ============================================
+   GLOBAL MOTION / ANIMATION TOKENS
+============================================ */
+
+:root {
+    --motion-fast: 150ms;
+    --motion-medium: 250ms;
+    --motion-slow: 400ms;
+
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+
+    /* Primary color included from main branch */
+    --primary-color: #ff6347;
+}
+
+/* Motion applied to buttons */
+button,
+.btn,
+.cta-btn {
+    transition: all var(--motion-medium) var(--ease-standard);
+}
+
+/* Motion applied to cards & services */
+.card,
+.service-box {
+    transition: transform var(--motion-medium) var(--ease-standard),
+                box-shadow var(--motion-medium) var(--ease-standard);
+}
+
+/* ============================================
+   GLOBAL FOCUS ACCESSIBILITY FIX (from main)
+============================================ */
+
 :focus-visible {
     outline: 2px solid var(--primary-color);
     outline-offset: 3px;
 }
 
-
-:root {
-    --primary-color: #ff6347; /* your current brand color */
-}
-
-
 /* ============================================
    GLOBAL SHADOW SYSTEM (Design Tokens)
-   ============================================ */
+============================================ */
 
 :root {
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.18);
-    --shadow-soft: 0 4px 12px rgba(255, 99, 71, 0.15); /* brand soft glow */
+    --shadow-soft: 0 4px 12px rgba(255, 99, 71, 0.15);
     --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* ============================================
-   APPLY SHADOWS GLOBALLY TO COMMON COMPONENTS
-   ============================================ */
-
-/* Buttons */
+/* Apply to buttons */
 button,
 .cta-btn,
 .btn,
@@ -101,7 +123,7 @@ button,
     box-shadow: var(--shadow-sm);
 }
 
-/* Cards and feature blocks */
+/* Cards and blocks */
 .card,
 .feature-box,
 .service-box,
@@ -120,25 +142,23 @@ button,
     box-shadow: var(--shadow-lg);
 }
 
-/* Navbar dropdowns, popups, etc. */
+/* Dropdowns, popups */
 .dropdown,
 .menu-popup,
 .modal {
     box-shadow: var(--shadow-md);
 }
 
-/* Soft brand glow */
+/* Soft glow */
 .highlight-box,
 .hero-info,
 .quote-box {
     box-shadow: var(--shadow-soft);
 }
 
-
-
 /* ============================================
    GLOBAL RESPONSIVE TYPOGRAPHY SYSTEM
-   ============================================ */
+============================================ */
 
 :root {
     --font-size-base: 16px;
@@ -157,7 +177,6 @@ button,
     --text-small: clamp(0.85rem, 0.8vw + 0.25rem, 1rem);
 }
 
-/* Apply globally */
 body {
     font-size: var(--text-base);
 }
@@ -190,8 +209,73 @@ button,
     font-size: var(--text-base);
 }
 
+:root {
+    --motion-fast: 150ms;
+    --motion-medium: 250ms;
+    --motion-slow: 400ms;
+
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+}
 
 
+/* ================================
+   GLOBAL SPACING TOKENS
+:root {
+    --space-xxs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+}
+
+/* Apply to sections */
+section {
+    padding: var(--space-xl) 0;
+}
+
+/* Apply to cards */
+.card,
+.service-box,
+.review-card {
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+/* Apply to buttons */
+button,
+.btn,
+.cta-btn {
+    padding: var(--space-xs) var(--space-md);
+}
+
+/* Apply to form fields */
+input,
+textarea,
+select {
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+/* Apply to headings */
+h1, h2, h3 {
+    margin-bottom: var(--space-md);
+}
+
+button,
+.btn,
+.cta-btn {
+    transition: all var(--motion-medium) var(--ease-standard);
+}
+
+.card,
+.service-box {
+    transition: transform var(--motion-medium) var(--ease-standard),
+                box-shadow var(--motion-medium) var(--ease-standard);
+}
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
