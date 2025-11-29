@@ -766,17 +766,14 @@ body {
 /* Enhanced Hero Section Styles */
 .hero {
   position: relative;
-  /* min-height: 100vh; */
-  /* use min-height instead of fixed height */
+  min-height: 80vh;
   overflow: visible;
-  /* allow next sections (like slider) to show */
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   padding: 50px 20px;
   padding-bottom: 0;
-  flex-wrap: wrap;
 }
 
 .hero-background {
@@ -862,24 +859,35 @@ body {
   z-index: 4;
   width: 100%;
   max-width: 1200px;
-  /* ✅ Keeps content centered within a nice width */
   color: #000;
   margin: 0 auto;
-  /* ✅ Centers content horizontally */
+}
+
+/* Hero Layout */
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 80vh;
+}
+
+/* Left Side - Content */
+.hero-main {
+  padding-right: 2rem;
+  text-align: left;
+}
+
+/* Right Side - Quote Form */
+.hero-quote {
+  padding-left: 2rem;
 }
 
 .container {
   max-width: 1500px;
   margin: 0 auto;
   padding: 0 20px;
-  /* display: flex; */
-  /* ✅ Changed from grid to flex for better alignment */
-  flex-direction: row;
-  /* ✅ Keeps text and form side-by-side on desktop */
-  align-items: center;
-  justify-content: space-between;
-  /* ✅ Centers and balances layout */
-  gap: 50px;
+  width: 100%;
 }
 
 .hero-badge {
@@ -910,7 +918,7 @@ body {
   font-size: 4.5rem;
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
   color: #fff;
 }
 
@@ -918,7 +926,7 @@ body {
   font-size: 3rem;
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
   color: #ff4500;
 }
 
@@ -958,8 +966,7 @@ body {
 .hero-description {
   font-size: 1.3rem;
   color: #f0f0f0;
-  margin-bottom: 40px;
-  margin: 0 10px;
+  margin-bottom: 2rem;
   line-height: 1.6;
   animation: fadeInUp 1s ease-out 0.6s both;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
@@ -968,9 +975,8 @@ body {
 .hero-stats {
   display: flex;
   gap: 40px;
-  margin-bottom: 40px;
-  justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 2.5rem;
+  justify-content: flex-start;
 }
 
 .stat {
@@ -1025,7 +1031,7 @@ body {
   gap: 20px;
   margin-bottom: 50px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .hero-actions .cta-btn {
@@ -1056,6 +1062,7 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  letter-spacing: 0.5px;
 }
 
 .cta-btn.primary {
@@ -1164,7 +1171,6 @@ body {
 .hero-quote {
   position: relative;
   flex-shrink: 0;
-  margin-right: 80px;
 }
 
 .quote-card {
@@ -1282,6 +1288,7 @@ body {
   animation: bloom 0.6s ease-out 1.4s both;
   position: relative;
   overflow: hidden;
+  letter-spacing: 0.5px;
 }
 
 .quote-submit::before {
@@ -1350,6 +1357,7 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
+  letter-spacing: 0.5px;
 }
 
 .result-book:hover {
@@ -1574,21 +1582,24 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-    gap: 30px;
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
-
+  
+  .hero-main {
+    padding-right: 0;
+    text-align: center;
+  }
+  
   .hero-quote {
-    max-width: 400px;
+    padding-left: 0;
+    max-width: 500px;
     margin: 0 auto;
-    width: 100%;
   }
 
   .hero-stats {
     justify-content: center;
-    gap: 30px;
   }
 
   .trust-indicators {
@@ -1613,9 +1624,20 @@ body {
 }
 
 @media (max-width: 1024px) {
-  .container {
-    flex-direction: column;
-    gap: 25px;
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .hero-main {
+    padding-right: 0;
+    text-align: center;
+  }
+  
+  .hero-quote {
+    padding-left: 0;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   .hero {
@@ -1636,15 +1658,33 @@ body {
 }
 
 @media (max-width: 768px) {
+  .hero-layout {
+    gap: 2rem;
+  }
+  
+  .hero-stats {
+    justify-content: center;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-actions .cta-btn {
+    width: 100%;
+    max-width: 300px;
+    margin: 0.5rem 0;
+  }
+
   .hero {
     padding: 35px 15px 30px;
     min-height: auto;
   }
 
-  .container {
-    gap: 20px;
-    padding: 0 10px;
-    flex-direction: column;
+  .hero-main {
+    padding-right: 0;
+    text-align: center;
   }
 
   .hero-badge {
@@ -1712,7 +1752,10 @@ body {
   .hero-quote {
     width: 100%;
     max-width: none;
-    margin-right: 0;
+  }
+
+  .quote-card {
+    min-width: auto;
   }
 }
 
@@ -1746,11 +1789,6 @@ body {
 @media (max-width: 480px) {
   .hero {
     padding: 30px 10px 20px;
-  }
-
-  .container {
-    padding: 0 8px;
-    gap: 15px;
   }
 
   .hero-badge {
@@ -1905,7 +1943,6 @@ h2 {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  /* background-color: #333333b5; */
   display: inline-block;
 }
 
@@ -1914,7 +1951,6 @@ h2 {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  /* background-color: #333333b5; */
   display: bottom;
 }
 
@@ -2043,7 +2079,6 @@ html {
 /* Contact CTA Section Styles */
 .contact-cta {
   padding: 60px 0;
-  /* background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%); */
   position: relative;
   overflow: hidden;
 }
@@ -2176,7 +2211,6 @@ html {
 .input-group input,
 .input-group select {
   width: 100%;
-  /*padding: 15px 15px 15px 45px;*/
   padding: 1rem 1rem 1rem 3rem;
   background: #fff;
   border: 2px solid #ddd;
@@ -2216,6 +2250,7 @@ html {
   transition: all 0.3s ease;
   margin-top: 10px;
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+  letter-spacing: 0.5px;
 }
 
 .submit-btn:hover {
@@ -2252,6 +2287,7 @@ html {
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .contact-link:hover {
@@ -2548,6 +2584,7 @@ html {
   gap: 8px;
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+  letter-spacing: 0.5px;
 }
 
 .service-btn:hover {
@@ -2918,6 +2955,7 @@ html {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   transition: all 0.3s ease;
+  letter-spacing: 0.5px;
 }
 
 .newsletter-input button:hover {
@@ -3129,7 +3167,6 @@ html {
 }
 
 .features {
-  /* background: linear-gradient(135deg, #8888880f, #88888819); */
   background: transparent;
   padding-top: 0;
   text-align: center;
@@ -3665,8 +3702,7 @@ button:active,
 
 .accept-btn,
 .reject-btn {
-  padding: 8px
-   14px;
+  padding: 8px 14px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -3690,7 +3726,8 @@ button:active,
 .reject-btn:hover {
   background: #b91c1c;
 }
-/* 🔵 Global Rounded Button Update (Issue: Add Consistent Border-Radius to All Buttons) */
+
+/* 🔵 Global Rounded Button Update */
 button,
 .btn,
 button[type="button"],
@@ -3699,7 +3736,7 @@ input[type="submit"] {
     border-radius: 8px !important;
 }
 
-/* 🌟 Global Letter-Spacing Enhancement (Issue #459) */
+/* 🌟 Global Letter-Spacing Enhancement */
 :root {
   --button-letter-spacing: 0.5px;
 }
@@ -3814,4 +3851,3 @@ button,
   align-items: center;
   justify-content: center;
 }
-
