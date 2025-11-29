@@ -3,6 +3,9 @@ const REPO_OWNER = "Nikhilrsingh";
 const REPO_NAME = "car-transport-service";
 const API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
 
+// Project Lead to exclude from contributors list
+const PROJECT_LEAD = "nikhilrsingh"; // GitHub username in lowercase
+
 // State Management
 let allContributors = []; 
 let filteredContributors = [];
@@ -108,36 +111,38 @@ function processData(repoData, contributors, pulls) {
         totalProjectPoints += prPoints;
     });
 
-    // B. Merge with Profile Data
-    allContributors = contributors.map(c => {
-        const login = c.login.toLowerCase();
-        const userStats = statsMap[login] || { prs: 0, points: 0 };
-        
-        totalProjectCommits += c.contributions;
+    // B. Filter out project lead and merge with profile data
+    allContributors = contributors
+        .filter(c => c.login.toLowerCase() !== PROJECT_LEAD) // EXCLUDE PROJECT LEAD
+        .map(c => {
+            const login = c.login.toLowerCase();
+            const userStats = statsMap[login] || { prs: 0, points: 0 };
+            
+            totalProjectCommits += c.contributions;
 
-        // If no PR points, give base points for commits
-        let finalPoints = userStats.points;
-        if (finalPoints === 0) {
-            finalPoints = c.contributions * POINTS.COMMIT; 
-        }
+            // If no PR points, give base points for commits
+            let finalPoints = userStats.points;
+            if (finalPoints === 0) {
+                finalPoints = c.contributions * POINTS.COMMIT; 
+            }
 
-        return {
-            login: c.login,
-            id: c.id,
-            avatar_url: c.avatar_url,
-            html_url: c.html_url,
-            contributions: c.contributions,
-            prs: userStats.prs,
-            points: finalPoints
-        };
-    });
+            return {
+                login: c.login,
+                id: c.id,
+                avatar_url: c.avatar_url,
+                html_url: c.html_url,
+                contributions: c.contributions,
+                prs: userStats.prs,
+                points: finalPoints
+            };
+        });
 
     // C. Initial Sort
     allContributors.sort((a, b) => b.points - a.points);
 
-    // D. Update Stats
+    // D. Update Stats (exclude project lead from count)
     updateGlobalStats(
-        contributors.length,
+        contributors.length - 1, // Subtract 1 to exclude project lead
         totalProjectPRs,
         totalProjectPoints,
         repoData.stargazers_count,
@@ -260,7 +265,6 @@ function renderContributors(page) {
         card.className = `contributor ${league.tier}`;
         card.onclick = () => openContributorModal(c, league, rank);
 
-        // UPDATED: Shows Points AND PRs (Branch Icon)
         card.innerHTML = `
             <img src="${c.avatar_url}" alt="${c.login}" loading="lazy">
             <span class="cont-name">${c.login}</span>
