@@ -1,6 +1,38 @@
+/* =============================
+   GLOBAL CONTENT WIDTH CONTROL
+============================= */
+:root {
+    --content-max-width: 900px;
+    --primary-color: #ff6347;
+    --text-color: #333;
+    --background-light: #ffffff;
+}
+.content-wrapper {
+    max-width: var(--content-max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =============================
+   GLOBAL CLICKABLE CURSOR FIX
+============================= */
+button,
+a,
+.clickable,
+input[type="submit"],
+.cta-btn,
+.service-btn {
+    cursor: pointer;
+}
+
+/* ------------------------------
+   Global Styles / Base Styles
+------------------------------ */
+
+
 @font-face {
   font-family: "Poppins";
-  src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
+  src: url("../assets/fonts/Inter-Regular.woff2") format("woff2"),
     url("../assets/fonts/Poppins-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -31,11 +63,165 @@
   font-weight: 600;
   font-style: normal;
 }
+/* ============================================
+   GLOBAL MOTION / ANIMATION TOKENS
+============================================ */
+
+:root {
+    --motion-fast: 150ms;
+    --motion-medium: 250ms;
+    --motion-slow: 400ms;
+
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+
+    /* Primary color included from main branch */
+    --primary-color: #ff6347;
+}
+
+/* Motion applied to buttons */
+button,
+.btn,
+.cta-btn {
+    transition: all var(--motion-medium) var(--ease-standard);
+}
+
+/* Motion applied to cards & services */
+.card,
+.service-box {
+    transition: transform var(--motion-medium) var(--ease-standard),
+                box-shadow var(--motion-medium) var(--ease-standard);
+}
+
+/* ============================================
+   GLOBAL FOCUS ACCESSIBILITY FIX (from main)
+============================================ */
+
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+/* ============================================
+   GLOBAL SHADOW SYSTEM (Design Tokens)
+============================================ */
+
+:root {
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.18);
+    --shadow-soft: 0 4px 12px rgba(255, 99, 71, 0.15);
+    --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Apply to buttons */
+button,
+.cta-btn,
+.btn,
+.service-btn {
+    box-shadow: var(--shadow-sm);
+}
+
+/* Cards and blocks */
+.card,
+.feature-box,
+.service-box,
+.review-card,
+.team-card {
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.25s ease;
+}
+
+/* Hover elevation */
+.card:hover,
+.feature-box:hover,
+.service-box:hover,
+.review-card:hover,
+.team-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+/* Dropdowns, popups */
+.dropdown,
+.menu-popup,
+.modal {
+    box-shadow: var(--shadow-md);
+}
+
+/* Soft glow */
+.highlight-box,
+.hero-info,
+.quote-box {
+    box-shadow: var(--shadow-soft);
+}
+
+/* ============================================
+   GLOBAL RESPONSIVE TYPOGRAPHY SYSTEM
+============================================ */
+
+:root {
+    --font-size-base: 16px;
+
+    /* Headings */
+    --h1-size: clamp(2rem, 4vw + 1rem, 3.2rem);
+    --h2-size: clamp(1.75rem, 3vw + 1rem, 2.6rem);
+    --h3-size: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
+    --h4-size: clamp(1.25rem, 1.8vw + 0.5rem, 1.6rem);
+    --h5-size: clamp(1.1rem, 1.5vw + 0.3rem, 1.3rem);
+    --h6-size: 1rem;
+
+    /* Body text */
+    --text-large: clamp(1rem, 1.2vw + 0.4rem, 1.25rem);
+    --text-base: clamp(0.95rem, 1vw + 0.3rem, 1.1rem);
+    --text-small: clamp(0.85rem, 0.8vw + 0.25rem, 1rem);
+}
+
+body {
+    font-size: var(--text-base);
+}
+
+/* Heading styles */
+h1 { font-size: var(--h1-size); }
+h2 { font-size: var(--h2-size); }
+h3 { font-size: var(--h3-size); }
+h4 { font-size: var(--h4-size); }
+h5 { font-size: var(--h5-size); }
+h6 { font-size: var(--h6-size); }
+
+/* Paragraph & small text */
+p { font-size: var(--text-base); }
+small, .small { font-size: var(--text-small); }
+
+/* Buttons */
+button,
+.cta-btn,
+.service-btn,
+.quote-submit {
+    font-size: var(--text-base);
+    font-weight: 600;
+}
+
+/* Cards, service boxes, FAQ */
+.card p,
+.service-box p,
+.faq-content p {
+    font-size: var(--text-base);
+}
+
+:root {
+    --motion-fast: 150ms;
+    --motion-medium: 250ms;
+    --motion-slow: 400ms;
+
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+}
 
 
 /* ================================
    GLOBAL SPACING TOKENS
-================================ */
 :root {
     --space-xxs: 4px;
     --space-xs: 8px;
@@ -79,6 +265,17 @@ h1, h2, h3 {
     margin-bottom: var(--space-md);
 }
 
+button,
+.btn,
+.cta-btn {
+    transition: all var(--motion-medium) var(--ease-standard);
+}
+
+.card,
+.service-box {
+    transition: transform var(--motion-medium) var(--ease-standard),
+                box-shadow var(--motion-medium) var(--ease-standard);
+}
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
@@ -183,9 +380,10 @@ body {
 .auto-slider {
   position: relative;
   width: 100%;
-  height: 97vh;
+  height: 45vh;
   overflow: hidden;
   min-height: 300px;
+  padding-top: 30px;
 }
 
 .slider-container {
@@ -758,7 +956,7 @@ body {
   max-width: 1500px;
   margin: 0 auto;
   padding: 0 20px;
-  display: flex;
+  /* display: flex; */
   /* ✅ Changed from grid to flex for better alignment */
   flex-direction: row;
   /* ✅ Keeps text and form side-by-side on desktop */
@@ -823,7 +1021,8 @@ body {
 }
 
 .title-line.highlight {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color)
+, #ff4500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -884,7 +1083,7 @@ body {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ff6347;
+  color: var(--primary-color);
   margin-bottom: 5px;
   transition: all 0.3s ease;
 }
@@ -944,8 +1143,7 @@ body {
 }
 
 .cta-btn.primary {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
-  color: white;
+  background: linear-gradient(135deg,var(--primary-color), #ff4500); color: white;
   box-shadow: 0 10px 30px rgba(255, 99, 71, 0.3);
   animation: pulse 2s ease-in-out infinite;
 }
@@ -960,7 +1158,7 @@ body {
 .cta-btn.outline {
   background: transparent;
   color: #000;
-  border: 2px solid #ff6347;
+  border: 2px solid var(--primary-color);
 }
 
 .cta-btn:hover {
@@ -1037,7 +1235,7 @@ body {
 }
 
 .trust-item i {
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 1rem;
 }
 
@@ -1085,7 +1283,7 @@ body {
 }
 
 .quote-header p {
-  color: #ff6347;
+  color:var(--primary-color);
   font-size: 0.9rem;
   animation: fadeInUp 0.6s ease-out 1s both;
 }
@@ -1126,7 +1324,7 @@ body {
 }
 
 .form-group label i {
-  color: #ff6347;
+  color:var(--primary-color);
   font-size: 0.8rem;
   animation: bounce 2s ease-in-out infinite;
 }
@@ -1145,13 +1343,13 @@ body {
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #ff6347;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.1);
   background: #fff;
 }
 
 .quote-submit {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   color: white;
   border: none;
   padding: 15px;
@@ -1218,7 +1416,7 @@ body {
   display: block;
   font-size: 2rem;
   font-weight: 700;
-  color: #ff6347;
+  color:var(--primary-color);
   margin-bottom: 5px;
 }
 
@@ -1229,7 +1427,7 @@ body {
 
 .result-book {
   display: inline-block;
-  background: #ff6347;
+  background:var(--primary-color);
   color: white;
   padding: 10px 20px;
   border-radius: 6px;
@@ -1246,7 +1444,7 @@ body {
 /* Scroll Indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: 30px;
+  bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
@@ -1774,7 +1972,6 @@ body {
 /* Section Styles */
 section {
   text-align: center;
-  padding: 60px 0;
   position: relative;
 }
 
@@ -1852,7 +2049,7 @@ html {
   transform: translate(-50%, -50%);
   width: 8px;
   height: 8px;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   border-radius: 50%;
   box-shadow: 0 0 15px rgba(255, 99, 71, 0.5);
   animation: pulse-dot 2s ease-in-out infinite;
@@ -1982,7 +2179,7 @@ html {
   padding: 15px 20px;
   background: rgba(255, 99, 71, 0.1);
   border-radius: 10px;
-  border-left: 4px solid #ff6347;
+  border-left: 4px solid var(--primary-color);
   transition: all 0.3s ease;
 }
 
@@ -1992,7 +2189,7 @@ html {
 }
 
 .feature i {
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 1.2rem;
   width: 25px;
 }
@@ -2021,7 +2218,7 @@ html {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #ff6347, #ff4500);
+  background: linear-gradient(90deg,var(--primary-color), #ff4500);
 }
 
 .form-header {
@@ -2036,7 +2233,7 @@ html {
 }
 
 .form-header p {
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 1rem;
 }
 
@@ -2055,7 +2252,7 @@ html {
 .input-group i {
   position: absolute;
   left: 0.938rem;
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 1.1rem;
   z-index: 2;
 }
@@ -2077,7 +2274,7 @@ html {
 .input-group input:focus,
 .input-group select:focus {
   outline: none;
-  border-color: #ff6347;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
   background: #fff;
 }
@@ -2087,7 +2284,7 @@ html {
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   color: white;
   border: none;
   padding: 18px 30px;
@@ -2108,7 +2305,7 @@ html {
 .submit-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
-  background: linear-gradient(135deg, #ff4500, #ff6347);
+  background: linear-gradient(135deg, #ff4500, var(--primary-color));
 }
 
 .submit-btn:active {
@@ -2132,17 +2329,17 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #ff6347;
+  color:var(--primary-color);
   text-decoration: none;
   padding: 12px 25px;
-  border: 2px solid #ff6347;
+  border: 2px solid var(--primary-color);
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: 500;
 }
 
 .contact-link:hover {
-  background: #ff6347;
+  background: var(--primary-color);
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
@@ -2266,7 +2463,7 @@ html {
   font-size: 3rem;
   margin-bottom: 15px;
   color: #000;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -2304,7 +2501,7 @@ html {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #ff6347, #ff4500);
+  background: linear-gradient(90deg, var(--primary-color), #ff4500);
   transform: scaleX(0);
   transition: transform 0.4s ease;
 }
@@ -2319,7 +2516,7 @@ html {
 }
 
 .service-card.featured {
-  border: 2px solid #ff6347;
+  border: 2px solid var(--primary-color);
   transform: scale(1.05);
 }
 
@@ -2331,7 +2528,7 @@ html {
   position: absolute;
   top: 20px;
   right: -30px;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   color: white;
   padding: 8px 40px;
   font-size: 0.8rem;
@@ -2349,7 +2546,7 @@ html {
 
 .service-icon i {
   font-size: 2.5rem;
-  color: #ff6347;
+  color: var(--primary-color);
   position: relative;
   z-index: 2;
   transition: all 0.3s ease;
@@ -2404,7 +2601,7 @@ html {
 }
 
 .service-features i {
-  color: #ff6347;
+  color: var(--primary-color);
   font-size: 0.8rem;
 }
 
@@ -2416,13 +2613,13 @@ html {
 }
 
 .price {
-  color: #ff6347;
+  color: var(--primary-color);
   font-weight: 600;
   font-size: 1.1rem;
 }
 
 .service-btn {
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -2463,7 +2660,7 @@ html {
 .stat-number {
   font-size: 3rem;
   font-weight: 700;
-  color: #ff6347;
+  color: var(--primary-color);
   margin-bottom: 10px;
 }
 
@@ -2566,7 +2763,6 @@ html {
 }
 
 .features {
-  padding: 80px 0;
   background-color: #fff;
   text-align: center;
 }
@@ -2591,7 +2787,7 @@ html {
 .footer {
   background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
   padding: 70px 0 0;
-  border-top: 3px solid #ff6347;
+  border-top: 3px solid var(--primary-color);
   position: relative;
   overflow: hidden;
 }
@@ -2603,7 +2799,7 @@ html {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #ff6347, transparent);
+  background: linear-gradient(90deg, transparent,var(--primary-color), transparent);
 }
 
 .container {
@@ -2622,7 +2818,7 @@ html {
 .footer-column h3 {
   font-size: 1.4rem;
   margin-bottom: 25px;
-  color: #ff6347;
+  color: var(--primary-color);
   position: relative;
   padding-bottom: 10px;
 }
@@ -2634,7 +2830,7 @@ html {
   left: 0;
   width: 40px;
   height: 2px;
-  background-color: #ff6347;
+  background-color: var(--primary-color);
   transition: width 0.3s ease;
 }
 
@@ -2697,7 +2893,7 @@ html {
 .footer-logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ff6347;
+  color: var(--primary-color);
 }
 
 .social-links {
@@ -2721,9 +2917,9 @@ html {
 }
 
 .social-links a:hover {
-  background: #ff6347;
+  background: var(--primary-color);
   transform: translateY(-3px);
-  border-color: #ff6347;
+  border-color: var(--primary-color);
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
 }
 
@@ -2745,14 +2941,14 @@ html {
 }
 
 .footer-links a:hover {
-  color: #ff6347;
+  color: var(--primary-color);
   padding-left: 5px;
 }
 
 .footer-links a i {
   width: 20px;
   text-align: center;
-  color: #ff6347;
+  color: var(--primary-color);
 }
 
 .contact-info {
@@ -2768,20 +2964,11 @@ html {
 }
 
 .contact-info i {
-  color: #ff6347;
+  color: var(--primary-color);
   margin-top: 2px;
   width: 20px;
   text-align: center;
-}
-
-.newsletter-form {
-  margin-top: 20px;
-}
-
-.newsletter-form p {
-  color: #ccc;
-  margin-bottom: 15px;
-}
+} 
 
 .newsletter-input {
   display: flex;
@@ -2801,12 +2988,12 @@ html {
 
 .newsletter-input input:focus {
   outline: none;
-  border-color: #ff6347;
+  border-color: var(--primary-color);
   box-shadow: 0 0 10px rgba(255, 99, 71, 0.2);
 }
 
 .newsletter-input button {
-  background: #ff6347;
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -2818,7 +3005,7 @@ html {
 }
 
 .newsletter-input button:hover {
-  background: #ff4500;
+  background: var(--primary-color);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
 }
@@ -2852,7 +3039,7 @@ html {
 }
 
 .footer-bottom-links a:hover {
-  color: #ff6347;
+  color: var(--primary-color);
 }
 
 .payment-methods {
@@ -2868,7 +3055,7 @@ html {
 }
 
 .payment-methods i:hover {
-  color: #ff6347;
+  color:var(--primary-color);
 }
 
 /* Back to Top Button - Styles moved to css/components/back-to-top-button.css */
@@ -2946,7 +3133,7 @@ html {
   color: #ffffff;
   font-weight: 700;
   margin-bottom: 10px;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
+  background: linear-gradient(135deg,var(--primary-color), #ff4500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -3028,7 +3215,6 @@ html {
 .features {
   /* background: linear-gradient(135deg, #8888880f, #88888819); */
   background: transparent;
-  padding: 80px 20px;
   padding-top: 0;
   text-align: center;
 }
@@ -3049,7 +3235,7 @@ html {
   content: "";
   width: 80px;
   height: 3px;
-  background: #ff6347;
+  background:var(--primary-color);
   display: block;
   margin: 10px auto 0;
   border-radius: 5px;
@@ -3234,10 +3420,12 @@ html {
   border-color: #d9232d;
   box-shadow: 0 0 10px rgba(217, 35, 45, 0.2);
 }
-
+.region-search-container input{
+  position: relative;
+}
 .region-search-container i {
   position: absolute;
-  right: 15px;
+  left: 90%;
   top: 50%;
   transform: translateY(-50%);
   color: #999;
@@ -3353,7 +3541,7 @@ button::before,
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, #00b4d8, #007bff, #00b4d8, #007bff);
+  background: linear-gradient(45deg, #44413b, #aaa29b, #484843, #aaa49b);
   z-index: -1;
   border-radius: 50px;
   background-size: 300%;
@@ -3561,7 +3749,8 @@ button:active,
 
 .accept-btn,
 .reject-btn {
-  padding: 8px 14px;
+  padding: 8px
+   14px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -3584,4 +3773,168 @@ button:active,
 
 .reject-btn:hover {
   background: #b91c1c;
+}
+/* 🔵 Global Rounded Button Update (Issue: Add Consistent Border-Radius to All Buttons) */
+button,
+.btn,
+button[type="button"],
+button[type="submit"],
+input[type="submit"] {
+    border-radius: 8px !important;
+}
+
+/* 🌟 Global Letter-Spacing Enhancement (Issue #459) */
+:root {
+  --button-letter-spacing: 0.5px;
+}
+
+button,
+.cta-btn,
+.quote-submit,
+.submit-btn,
+.service-btn,
+.newsletter-input button,
+.result-book,
+.contact-link {
+  letter-spacing: var(--button-letter-spacing);
+}
+
+@media only screen and (max-width: 991px) {
+    
+    
+
+ 
+    div.middle-navbar-container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        padding: 5px 5px !important;
+        background: #ffffff !important;
+    }
+
+
+    div.middle-navbar-left {
+        width: 40% !important;
+        order: 1 !important;
+        padding-left: 0 !important;
+        margin-left: 10px !important; 
+    }
+    div.middle-navbar-left img {
+        max-width: 160px !important; 
+        height: auto !important;
+    }
+
+    div.middle-navbar-right {
+        width: 40% !important;
+        order: 2 !important;
+        text-align: right !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
+    }
+    div.middle-navbar-right span,
+    div.middle-navbar-right a {
+        color: #000 !important;
+        font-size: 7px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+        display: block !important;
+    }
+    div.middle-navbar-right span:last-child,
+    div.middle-navbar-right div { 
+        font-weight: 400 !important;
+        font-size: 8px !important;
+        color: #444 !important;
+        margin-bottom: 2px !important;
+    }
+    div.middle-navbar-right i { display: none !important; }
+
+    div.middle-navbar-center {
+        width: 100% !important;
+        order: 3 !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 0px !important;
+        margin-bottom: 2px !important;
+    }
+    div.middle-navbar-center img {
+        width: 60px !important;
+    }
+
+
+    div.navbar {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0px 0px !important;
+    }
+    
+    div.logo-container.left-logo {
+        margin-left: -40px !important;
+        padding-left: 0 !important;
+    }
+    div.logo-container.left-logo img {
+        max-height: 45px !important;
+    }
+
+    #mobileMenuBtn, .mobile-menu-btn {
+        display: flex !important;
+        margin-top: 15px;
+        margin-right: 10px !important;
+    }
+}
+.navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+#theme-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- FIX: LOGIN VISIBILITY & SPACING --- */
+
+/* 1. Make Labels Bright White (Visible) */
+.form-group label,
+.options label,
+.auth-card label {
+    color: #ffffff !important; /* Bright White */
+    font-weight: 500 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Slight shadow for readability */
+}
+
+/* 2. Fix Input Fields (Dark Mode + Spacing) */
+.form-control,
+.input-group input {
+    /* Push text to the right so it doesn't hit the icon */
+    padding-left: 45px !important; 
+    
+    /* Dark Theme Coloring */
+    background-color: #222222 !important; 
+    color: #ffffff !important; 
+    border: 1px solid #444 !important;
+}
+
+/* 3. Fix Placeholder Text (The "Enter your email" text) */
+::placeholder {
+    color: #888888 !important; /* Readable Grey */
+    opacity: 1 !important;
+}
+
+/* 4. Fix Icon Positioning & Color */
+.input-icon,
+.input-group i {
+    position: absolute !important;
+    left: 15px !important; /* Position it nicely on the left */
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: #ff6347 !important; /* Brand Orange */
+    z-index: 10 !important;
 }
