@@ -698,48 +698,62 @@ body {
 .preloader-content {
   text-align: center;
   animation: fadeIn 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.preloader-logo {
-  width: 100px;
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 200px;
+  margin-top: -300px;
+}
+
+.logo-container img {
+  width: 600px;
   height: auto;
   animation: bounce 1.5s infinite ease-in-out;
-  margin-bottom: 20px;
+  margin-top: 40px;
 }
+
 
 .loading-text {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #222;
+  color: #fff; /* Changed to white for better visibility */
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
 
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
 .dots span {
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin: 0 3px;
+  width: 6px;
+  height: 6px;
   background-color: #3498db;
   border-radius: 50%;
   animation: blink 1.4s infinite both;
 }
 
-.dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
 .progress-bar {
-  width: 550px;
-  height: 5px;
+  width: 300px;
+  height: 4px;
   background: #d0d0d0;
   border-radius: 10px;
-  margin-top: 15px;
+  margin-top: 300px;
+  margin-bottom: 20px;
   overflow: hidden;
 }
 
