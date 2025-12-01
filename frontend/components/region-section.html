@@ -13,173 +13,180 @@
     </div>
 
     <!-- Interactive India Map -->
-    <div class="india-map-section">
-      <div class="map-header">
-        <h3 class="map-section-title">
-          <i class="fas fa-map-marker-alt"></i> Explore Our Network
-        </h3>
-        <div class="map-controls">
-          <button class="map-control-btn" id="zoomInBtn" title="Zoom In">
-            <i class="fas fa-search-plus"></i>
-          </button>
-          <button class="map-control-btn" id="zoomOutBtn" title="Zoom Out">
-            <i class="fas fa-search-minus"></i>
-          </button>
-          <button class="map-control-btn" id="resetMapBtn" title="Reset View">
-            <i class="fas fa-redo"></i>
-          </button>
-          <button class="map-control-btn" id="fullscreenBtn" title="Fullscreen">
-            <i class="fas fa-expand"></i>
-          </button>
-        </div>
+<div class="india-map-section">
+  <div class="map-header">
+    <h3 class="map-section-title">
+      <i class="fas fa-map-marker-alt"></i> Explore Our Network
+    </h3>
+    <div class="map-controls">
+      <button class="map-control-btn" id="zoomInBtn" title="Zoom In">
+        <i class="fas fa-search-plus"></i>
+      </button>
+      <button class="map-control-btn" id="zoomOutBtn" title="Zoom Out">
+        <i class="fas fa-search-minus"></i>
+      </button>
+      <button class="map-control-btn" id="resetMapBtn" title="Reset View">
+        <i class="fas fa-redo"></i>
+      </button>
+      <button class="map-control-btn" id="fullscreenBtn" title="Fullscreen">
+        <i class="fas fa-expand"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="map-container" id="mapContainer">
+    <!-- Modern India Map with Actual India Image -->
+    <div class="modern-india-map" id="indiaMap">
+      <!-- India Map Image -->
+      <div class="india-map-image">
+        <!-- Replace this src with your actual india-map.png path -->
+        <img src="./assets/images/india-map-outline.png" alt="India Map" id="indiaMapImage">
       </div>
-      <div class="map-container" id="mapContainer">
-        <svg id="indiaMap" viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg">
-          <!-- North India -->
-          <g class="region-group" data-region="north">
-            <path class="state" data-state="delhi" d="M280,180 L285,175 L295,178 L298,188 L290,193 L282,190 Z" fill="#4a90e2" opacity="0.7"/>
-            <path class="state" data-state="haryana" d="M270,170 L290,165 L305,175 L298,188 L280,180 L268,178 Z" fill="#4a90e2" opacity="0.7"/>
-            <path class="state" data-state="punjab" d="M240,140 L270,135 L290,150 L285,165 L260,160 Z" fill="#4a90e2" opacity="0.7"/>
-            <path class="state" data-state="rajasthan" d="M180,200 L240,190 L270,210 L265,280 L220,290 L180,270 Z" fill="#4a90e2" opacity="0.7"/>
-            <path class="state" data-state="uttarakhand" d="M305,150 L330,145 L340,165 L330,180 L310,175 Z" fill="#4a90e2" opacity="0.7"/>
-            <path class="state" data-state="uttar-pradesh" d="M300,190 L350,185 L380,210 L375,260 L340,270 L300,250 Z" fill="#4a90e2" opacity="0.7"/>
-          </g>
-          
-          <!-- South India -->
-          <g class="region-group" data-region="south">
-            <path class="state" data-state="karnataka" d="M260,520 L310,510 L340,540 L335,600 L290,610 L255,580 Z" fill="#e74c3c" opacity="0.7"/>
-            <path class="state" data-state="kerala" d="M240,590 L265,580 L280,620 L275,680 L250,690 L235,650 Z" fill="#e74c3c" opacity="0.7"/>
-            <path class="state" data-state="tamil-nadu" d="M285,610 L335,605 L360,650 L350,710 L300,720 L275,680 Z" fill="#e74c3c" opacity="0.7"/>
-            <path class="state" data-state="andhra-pradesh" d="M310,450 L370,440 L400,480 L395,540 L340,540 L310,510 Z" fill="#e74c3c" opacity="0.7"/>
-            <path class="state" data-state="telangana" d="M310,430 L350,425 L370,450 L365,480 L330,475 Z" fill="#e74c3c" opacity="0.7"/>
-          </g>
-          
-          <!-- East India -->
-          <g class="region-group" data-region="east">
-            <path class="state" data-state="west-bengal" d="M430,280 L475,275 L490,310 L480,350 L445,345 Z" fill="#f39c12" opacity="0.7"/>
-            <path class="state" data-state="odisha" d="M400,340 L450,335 L470,380 L460,430 L415,425 Z" fill="#f39c12" opacity="0.7"/>
-            <path class="state" data-state="bihar" d="M375,260 L425,255 L445,285 L435,315 L390,310 Z" fill="#f39c12" opacity="0.7"/>
-            <path class="state" data-state="jharkhand" d="M390,310 L435,305 L450,340 L440,370 L400,365 Z" fill="#f39c12" opacity="0.7"/>
-          </g>
-          
-          <!-- West India -->
-          <g class="region-group" data-region="west">
-            <path class="state" data-state="maharashtra" d="M220,380 L290,370 L330,410 L320,480 L260,490 L215,450 Z" fill="#16a085" opacity="0.7"/>
-            <path class="state" data-state="gujarat" d="M150,310 L220,300 L250,350 L240,400 L190,410 L145,370 Z" fill="#16a085" opacity="0.7"/>
-            <path class="state" data-state="goa" d="M215,450 L235,445 L245,465 L235,480 L220,475 Z" fill="#16a085" opacity="0.7"/>
-          </g>
-          
-          <!-- Animated Connection Lines -->
-          <g class="connection-lines" opacity="0.3">
-            <line class="connection" x1="290" y1="183" x2="230" y2="420" stroke="#ff6b35" stroke-width="2" stroke-dasharray="5,5">
-              <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/>
-            </line>
-            <line class="connection" x1="290" y1="183" x2="300" y2="570" stroke="#ff6b35" stroke-width="2" stroke-dasharray="5,5">
-              <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/>
-            </line>
-            <line class="connection" x1="230" y1="420" x2="300" y2="570" stroke="#ff6b35" stroke-width="2" stroke-dasharray="5,5">
-              <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1.2s" repeatCount="indefinite"/>
-            </line>
-            <line class="connection" x1="460" y1="320" x2="300" y2="570" stroke="#ff6b35" stroke-width="2" stroke-dasharray="5,5">
-              <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1.5s" repeatCount="indefinite"/>
-            </line>
-            <line class="connection" x1="320" y1="670" x2="335" y2="455" stroke="#ff6b35" stroke-width="2" stroke-dasharray="5,5">
-              <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1.3s" repeatCount="indefinite"/>
-            </line>
-          </g>
-
-          <!-- Office Markers with Pulsing Animation -->
-          <g class="marker-group" data-city="delhi">
-            <circle class="marker-pulse" cx="290" cy="183" r="8" fill="#ff6b35" opacity="0.3">
-              <animate attributeName="r" from="8" to="20" dur="2s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
-            </circle>
-            <circle class="office-marker main-office" data-city="delhi" cx="290" cy="183" r="8" fill="#ff6b35"/>
-          </g>
-          <g class="marker-group" data-city="mumbai">
-            <circle class="marker-pulse" cx="230" cy="420" r="8" fill="#ff6b35" opacity="0.3">
-              <animate attributeName="r" from="8" to="20" dur="2s" begin="0.2s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" from="0.5" to="0" dur="2s" begin="0.2s" repeatCount="indefinite"/>
-            </circle>
-            <circle class="office-marker main-office" data-city="mumbai" cx="230" cy="420" r="8" fill="#ff6b35"/>
-          </g>
-          <g class="marker-group" data-city="bangalore">
-            <circle class="marker-pulse" cx="300" cy="570" r="8" fill="#ff6b35" opacity="0.3">
-              <animate attributeName="r" from="8" to="20" dur="2s" begin="0.4s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" from="0.5" to="0" dur="2s" begin="0.4s" repeatCount="indefinite"/>
-            </circle>
-            <circle class="office-marker main-office" data-city="bangalore" cx="300" cy="570" r="8" fill="#ff6b35"/>
-          </g>
-          <g class="marker-group" data-city="kolkata">
-            <circle class="marker-pulse" cx="460" cy="320" r="8" fill="#ff6b35" opacity="0.3">
-              <animate attributeName="r" from="8" to="20" dur="2s" begin="0.6s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" from="0.5" to="0" dur="2s" begin="0.6s" repeatCount="indefinite"/>
-            </circle>
-            <circle class="office-marker main-office" data-city="kolkata" cx="460" cy="320" r="8" fill="#ff6b35"/>
-          </g>
-          <g class="marker-group" data-city="chennai">
-            <circle class="marker-pulse" cx="320" cy="670" r="8" fill="#ff6b35" opacity="0.3">
-              <animate attributeName="r" from="8" to="20" dur="2s" begin="0.8s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" from="0.5" to="0" dur="2s" begin="0.8s" repeatCount="indefinite"/>
-            </circle>
-            <circle class="office-marker main-office" data-city="chennai" cx="320" cy="670" r="8" fill="#ff6b35"/>
-          </g>
-          <g class="marker-group" data-city="hyderabad">
-            <circle class="marker-pulse" cx="335" cy="455" r="8" fill="#ff6b35" opacity="0.3">
-              <animate attributeName="r" from="8" to="20" dur="2s" begin="1s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" from="0.5" to="0" dur="2s" begin="1s" repeatCount="indefinite"/>
-            </circle>
-            <circle class="office-marker main-office" data-city="hyderabad" cx="335" cy="455" r="8" fill="#ff6b35"/>
-          </g>
-          <circle class="office-marker secondary-office" data-city="pune" cx="250" cy="440" r="6" fill="#ff9b6b"/>
-          <circle class="office-marker secondary-office" data-city="ahmedabad" cx="200" cy="350" r="6" fill="#ff9b6b"/>
-          
-          <!-- Enhanced Tooltips for markers -->
-          <g class="marker-tooltip" id="tooltip" style="display:none">
-            <rect x="0" y="0" width="160" height="70" rx="8" fill="#1a1a2e" opacity="0.98"/>
-            <rect x="0" y="0" width="160" height="70" rx="8" fill="url(#tooltipGradient)" opacity="0.1"/>
-            <text x="80" y="22" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" class="tooltip-city"></text>
-            <text x="80" y="38" text-anchor="middle" fill="#ff9b6b" font-size="11" class="tooltip-region"></text>
-            <text x="80" y="54" text-anchor="middle" fill="#4a90e2" font-size="10" class="tooltip-stats"></text>
-            <text x="80" y="65" text-anchor="middle" fill="#16a085" font-size="9" class="tooltip-action">Click to explore →</text>
-          </g>
-          
-          <!-- Gradient for tooltip -->
-          <defs>
-            <linearGradient id="tooltipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#004e89;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div class="map-legend">
-          <div class="legend-title">
-            <i class="fas fa-layer-group"></i> Map Legend
-            <span class="active-filter-badge" id="activeFilterBadge" style="display: none;">
-              <i class="fas fa-filter"></i> <span id="activeFilterText">All Regions</span>
-            </span>
-          </div>
-          <div class="legend-items">
-            <div class="legend-item" data-region="north"><span class="legend-color" style="background: #4a90e2;"></span> North India</div>
-            <div class="legend-item" data-region="south"><span class="legend-color" style="background: #e74c3c;"></span> South India</div>
-            <div class="legend-item" data-region="east"><span class="legend-color" style="background: #f39c12;"></span> East India</div>
-            <div class="legend-item" data-region="west"><span class="legend-color" style="background: #16a085;"></span> West India</div>
-            <div class="legend-item"><span class="legend-color office" style="background: #ff6b35;"></span> Main Office</div>
-            <div class="legend-item"><span class="legend-color office secondary" style="background: #ff9b6b;"></span> Branch Office</div>
-          </div>
-          <div class="map-stats" id="mapStats">
-            <div class="stat-item">
-              <i class="fas fa-city"></i>
-              <span><strong id="citiesCount">60+</strong> Cities</span>
-            </div>
-            <div class="stat-item">
-              <i class="fas fa-route"></i>
-              <span><strong>500+</strong> Routes</span>
+      
+      <!-- Animated Connection Lines -->
+      <div class="connections-overlay" id="connectionsOverlay">
+        <!-- Connection lines will be generated by JavaScript -->
+      </div>
+      
+      <!-- City Pins Container -->
+      <div class="city-pins-container">
+        <!-- Major Cities with Pins -->
+        <!-- Delhi -->
+        <div class="city-pin" data-city="delhi" style="top: 25%; left: 42%;">
+          <div class="pin-marker delhi" data-city="delhi">
+            <div class="pin-pulse"></div>
+            <div class="pin-icon">
+              <i class="fas fa-map-marker-alt"></i>
             </div>
           </div>
+          <div class="pin-tooltip">Delhi</div>
+        </div>
+        
+        <!-- Mumbai -->
+        <div class="city-pin" data-city="mumbai" style="top: 55%; left: 30%;">
+          <div class="pin-marker mumbai" data-city="mumbai">
+            <div class="pin-pulse"></div>
+            <div class="pin-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Mumbai</div>
+        </div>
+        
+        <!-- Bangalore -->
+        <div class="city-pin" data-city="bangalore" style="top: 75%; left: 38%;">
+          <div class="pin-marker bangalore" data-city="bangalore">
+            <div class="pin-pulse"></div>
+            <div class="pin-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Bangalore</div>
+        </div>
+        
+        <!-- Kolkata -->
+        <div class="city-pin" data-city="kolkata" style="top: 45%; left: 60%;">
+          <div class="pin-marker kolkata" data-city="kolkata">
+            <div class="pin-pulse"></div>
+            <div class="pin-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Kolkata</div>
+        </div>
+        
+        <!-- Chennai -->
+        <div class="city-pin" data-city="chennai" style="top: 75%; left: 48%;">
+          <div class="pin-marker chennai" data-city="chennai">
+            <div class="pin-pulse"></div>
+            <div class="pin-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Chennai</div>
+        </div>
+        
+        <!-- Hyderabad -->
+        <div class="city-pin" data-city="hyderabad" style="top: 65%; left: 40%;">
+          <div class="pin-marker hyderabad" data-city="hyderabad">
+            <div class="pin-pulse"></div>
+            <div class="pin-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Hyderabad</div>
+        </div>
+        
+        <!-- Pune -->
+        <div class="city-pin" data-city="pune" style="top: 60%; left: 32%;">
+          <div class="pin-marker pune" data-city="pune">
+            <div class="pin-icon secondary">
+              <i class="fas fa-map-pin"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Pune</div>
+        </div>
+        
+        <!-- Ahmedabad -->
+        <div class="city-pin" data-city="ahmedabad" style="top: 45%; left: 28%;">
+          <div class="pin-marker ahmedabad" data-city="ahmedabad">
+            <div class="pin-icon secondary">
+              <i class="fas fa-map-pin"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Ahmedabad</div>
+        </div>
+        
+        <!-- Jaipur -->
+        <div class="city-pin" data-city="jaipur" style="top: 35%; left: 36%;">
+          <div class="pin-marker jaipur" data-city="jaipur">
+            <div class="pin-icon secondary">
+              <i class="fas fa-map-pin"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Jaipur</div>
+        </div>
+        
+        <!-- Lucknow -->
+        <div class="city-pin" data-city="lucknow" style="top: 35%; left: 46%;">
+          <div class="pin-marker lucknow" data-city="lucknow">
+            <div class="pin-icon secondary">
+              <i class="fas fa-map-pin"></i>
+            </div>
+          </div>
+          <div class="pin-tooltip">Lucknow</div>
         </div>
       </div>
     </div>
+    
+    <div class="map-legend">
+      <div class="legend-title">
+        <i class="fas fa-layer-group"></i> Map Legend
+        <span class="active-filter-badge" id="activeFilterBadge" style="display: none;">
+          <i class="fas fa-filter"></i> <span id="activeFilterText">All Regions</span>
+        </span>
+      </div>
+      <div class="legend-items">
+        <div class="legend-item" data-region="north"><span class="legend-color" style="background: #4a90e2;"></span> North India</div>
+        <div class="legend-item" data-region="south"><span class="legend-color" style="background: #e74c3c;"></span> South India</div>
+        <div class="legend-item" data-region="east"><span class="legend-color" style="background: #f39c12;"></span> East India</div>
+        <div class="legend-item" data-region="west"><span class="legend-color" style="background: #16a085;"></span> West India</div>
+        <div class="legend-item"><span class="legend-color office" style="background: #ff6b35;"></span> Major Cities</div>
+        <div class="legend-item"><span class="legend-color office secondary" style="background: #ff9b6b;"></span> Other Cities</div>
+      </div>
+      <div class="map-stats" id="mapStats">
+        <div class="stat-item">
+          <i class="fas fa-city"></i>
+          <span><strong id="citiesCount">60+</strong> Cities</span>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-route"></i>
+          <span><strong>500+</strong> Routes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Popular Cities Quick Access -->
     <div class="popular-cities-section">
