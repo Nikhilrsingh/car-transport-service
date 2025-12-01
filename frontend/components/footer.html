@@ -30,10 +30,10 @@
             <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" aria-label="X (Twitter)">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor">
-        <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
-    </svg>
-</a>           
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor">
+                <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
+              </svg>
+            </a>           
             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           </div>
@@ -57,7 +57,46 @@
             <li><a href="../pages/enquiry.html" class="link-underline"><i class="fas fa-question-circle"></i> Enquiry</a></li>
             <li><a href="../pages/blog.html" class="link-underline"><i class="fas fa-blog"></i> Blog</a></li>
           </ul>
-          <!-- second column removed per request (service links omitted) -->
+        </div>
+      </section>
+
+      <!-- Cities Card -->
+      <section class="footer-card footer-cities footer-accordion" aria-labelledby="footer-cities-header">
+        <button class="accordion-header" id="footer-cities-header" aria-expanded="false" aria-controls="footer-cities-panel">
+          <h3 class="footer-heading">Cities We Serve</h3>
+          <i class="fas fa-chevron-down accordion-icon" aria-hidden="true"></i>
+        </button>
+        <div id="footer-cities-panel" class="accordion-panel" role="region" aria-labelledby="footer-cities-header">
+          <!-- Search Bar -->
+          <div class="cities-search-container">
+            <div class="cities-search-input">
+              <i class="fas fa-search"></i>
+              <input type="text" id="footerCitySearch" placeholder="Search cities..." autocomplete="off" />
+              <div class="search-clear" id="footerSearchClear" style="display: none;">
+                <i class="fas fa-times"></i>
+              </div>
+            </div>
+            <div class="cities-search-results" id="footerSearchResults"></div>
+          </div>
+
+          <!-- Popular Cities List -->
+          <div class="popular-cities" id="popularCities">
+            <ul class="footer-links">
+              <li><a href="../pages/city.html?city=mumbai" class="link-underline"><i class="fas fa-city"></i> Mumbai</a></li>
+              <li><a href="../pages/city.html?city=delhi" class="link-underline"><i class="fas fa-city"></i> Delhi</a></li>
+              <li><a href="../pages/city.html?city=bangalore" class="link-underline"><i class="fas fa-city"></i> Bangalore</a></li>
+              <li><a href="../pages/city.html?city=hyderabad" class="link-underline"><i class="fas fa-city"></i> Hyderabad</a></li>
+              <li><a href="../pages/city.html?city=kolkata" class="link-underline"><i class="fas fa-city"></i> Kolkata</a></li>
+            </ul>
+          </div>
+
+          <!-- Show All Cities Button -->
+          <div class="show-all-cities">
+            <a href="../pages/explore-cities.html" class="all-cities-btn">
+              <span>Show All Cities</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
         </div>
       </section>
 
