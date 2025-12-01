@@ -386,6 +386,18 @@ body {
   padding-top: 30px;
 }
 
+@media ( min-width: 1025px) {
+  .auto-slider{
+      position: relative;
+    width: 60%;
+    height: 76vh;
+    overflow: hidden;
+    min-height: 300px;
+    padding-top: 30px;
+    margin-left: 350px;
+  }
+}
+
 .slider-container {
   position: relative;
   width: 100%;
