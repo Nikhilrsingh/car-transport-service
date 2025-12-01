@@ -19,13 +19,17 @@ footer.footer,
   margin: 0;
 }
 
+#footer-main{
+  margin-left: 70px;
+}
+
 /* Footer Content Grid - PERFECT EQUAL SIZES */
 .footer-content.footer-grid {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px 24px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); /* Force equal columns */
+  /* grid-template-columns: repeat(4, minmax(0, 1fr)); Force equal columns */
   gap: 20px; /* Reduced gap for better width distribution */
   align-items: stretch;
   width: 100%;
@@ -33,6 +37,7 @@ footer.footer,
 
 /* Footer Cards - PERFECT EQUAL HEIGHTS AND WIDTHS */
 .footer-card {
+  width: 350px;
   background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: 14px;
@@ -49,7 +54,6 @@ footer.footer,
   flex-direction: column;
   height: 100%;
   min-height: 360px; /* Fixed equal height */
-  width: 100%; /* Force full width */
   box-sizing: border-box;
   overflow: hidden; /* Prevent content overflow */
 }
@@ -454,6 +458,8 @@ footer.footer,
 /* Cities Section - Improved spacing */
 .cities-search-container {
   position: relative;
+  display: flex;
+    justify-content: center;
   margin-bottom: 15px;
   width: 100%;
 }
@@ -467,7 +473,8 @@ footer.footer,
   border-radius: 8px;
   padding: 6px 10px;
   transition: all 0.3s ease;
-  width: 100%;
+      width: 60%;
+    height: 40px;
 }
 
 .cities-search-input:focus-within {
