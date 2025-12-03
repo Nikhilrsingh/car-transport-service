@@ -446,3 +446,35 @@ body[data-theme="dark"] .quote-result-reset-btn:hover {
   background: rgba(255, 255, 255, 0.15) !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
+/* ---------------------------------------------------------
+   FIX: Service Cards Text & Background in Dark Mode
+   --------------------------------------------------------- */
+   body[data-theme="dark"] .service-card,
+   body[data-theme="dark"] .feature-card,
+   body[data-theme="dark"] .transport-card {
+       background: #ffffff !important;        /* keep white cards */
+       color: #1a1a1a !important;             /* dark text so readable */
+   }
+   
+   /* Card Title */
+   body[data-theme="dark"] .service-card h3,
+   body[data-theme="dark"] .feature-card h3,
+   body[data-theme="dark"] .transport-card h3 {
+       color: #ff6b3d !important;             /* your original orange */
+   }
+   
+   /* Card Paragraphs */
+   body[data-theme="dark"] .service-card p,
+   body[data-theme="dark"] .feature-card p,
+   body[data-theme="dark"] .transport-card p {
+       color: #333333 !important;             /* readable dark grey */
+   }
+   
+   /* Icons inside cards */
+   body[data-theme="dark"] .service-card i,
+   body[data-theme="dark"] .feature-card i,
+   body[data-theme="dark"] .transport-card i {
+       color: #ff6b3d !important;
+   }
+   
