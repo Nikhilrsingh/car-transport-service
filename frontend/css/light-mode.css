@@ -534,3 +534,17 @@ body[data-theme="light"] .quote-result-reset-btn:hover {
   color: #ff6347 !important;
 }
 
+/* Light Mode: Improve Card Visibility */
+body[data-theme="light"] .service-card,
+body[data-theme="light"] .feature-box,
+body[data-theme="light"] .card {
+    background: #f2f2f2 !important;                    /* Slight grey for contrast */
+    border: 1px solid rgba(0,0,0,0.08) !important;     /* Soft border */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important; /* Card pops out */
+    color: #1a1a1a !important;                         /* Ensure text is readable */
+}
+
+body[data-theme="light"] .service-card p,
+body[data-theme="light"] .service-card h3 {
+    color: #1a1a1a !important;                         /* Fix faded text */
+}
