@@ -25,6 +25,16 @@ setTimeout(() => {
   setInterval(updateClock, 1000);
 }, 100);
 
+window.addEventListener('scroll', () => {
+  const macClock = document.getElementById("mac-clock");
+  if (macClock) { 
+    if (window.scrollY > 20) {
+    } else {
+      macClock.style.top = "3px";
+    }
+  }
+});
+
 
 
 // function updateClock() {
