@@ -32,6 +32,85 @@
   font-style: normal;
 }
 
+/* ============================================================
+   GLOBAL Z-INDEX LAYER TOKENS (Consistent UI Stacking System)
+   ============================================================ */
+
+:root {
+    /* Base content */
+    --z-default: 1;
+    --z-content: 10;
+
+    /* Floating components */
+    --z-sticky-header: 100;
+    --z-sticky-quote-btn: 150;
+    --z-dropdown: 300;
+    --z-tooltip: 350;
+
+    /* Overlays */
+    --z-overlay: 500;
+    --z-modal: 600;
+    --z-modal-content: 650;
+
+    /* Emergency top layer (alerts, loaders) */
+    --z-alert: 900;
+    --z-loader: 999;
+}
+
+/* ============================================================
+   GLOBAL APPLICATION — AUTOMATICALLY USES TOKENS
+   ============================================================ */
+
+/* Sticky navbar */
+.navbar,
+header.sticky {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky-header);
+}
+
+/* Dropdown menus */
+.dropdown,
+.menu-popup {
+    z-index: var(--z-dropdown);
+}
+
+/* Tooltips */
+.tooltip {
+    position: absolute;
+    z-index: var(--z-tooltip);
+}
+
+/* Overlays (like quote form overlay) */
+.overlay {
+    position: fixed;
+    z-index: var(--z-overlay);
+}
+
+/* Modals */
+.modal {
+    position: fixed;
+    z-index: var(--z-modal);
+}
+
+.modal-content {
+    position: relative;
+    z-index: var(--z-modal-content);
+}
+
+/* Alerts */
+.alert-box {
+    position: fixed;
+    z-index: var(--z-alert);
+}
+
+/* Global loading screen / animation */
+.loader {
+    position: fixed;
+    z-index: var(--z-loader);
+}
+
+
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
