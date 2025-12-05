@@ -76,6 +76,8 @@
         const form = document.getElementById('quickQuoteForm');
         if (!form) return;
 
+        injectQuoteEnhancementStyles();
+
         const fromCityInput = document.getElementById('fromCity');
         const toCityInput = document.getElementById('toCity');
         const vehicleTypeSelect = document.getElementById('vehicleType');
@@ -122,6 +124,26 @@
                 this.removeAttribute('value');
             }
         });
+        const actions = document.querySelector('.quote-result .result-actions');
+        if (actions && !document.getElementById('shareQuoteBtn')) {
+            const shareBtn = document.createElement('button');
+            shareBtn.type = 'button';
+            shareBtn.id = 'shareQuoteBtn';
+            shareBtn.className = 'quote-save-later-btn';
+            shareBtn.innerHTML = '<i class="fas fa-share-alt"></i><span>Share Quote</span>';
+            shareBtn.addEventListener('click', () => handleShareQuote());
+            actions.appendChild(shareBtn);
+        }
+        if (actions && !document.getElementById('copyQuoteBtn')) {
+            const copyBtn = document.createElement('button');
+            copyBtn.type = 'button';
+            copyBtn.id = 'copyQuoteBtn';
+            copyBtn.className = 'quote-save-later-btn';
+            copyBtn.innerHTML = '<i class="fas fa-link"></i><span>Copy Link</span>';
+            copyBtn.addEventListener('click', () => { if (currentQuoteData) copyQuoteLink(currentQuoteData); });
+            actions.appendChild(copyBtn);
+        }
+        applyQuoteFromQuery();
     }
     
     /**
@@ -217,6 +239,116 @@
             notification.style.animation = 'slideOutRight 0.3s ease';
             setTimeout(() => notification.remove(), 300);
         }, 3000);
+    }
+
+    function injectQuoteEnhancementStyles() {
+        if (document.getElementById('quoteEnhanceStyles')) return;
+        const style = document.createElement('style');
+        style.id = 'quoteEnhanceStyles';
+        style.textContent = `
+            .amount-bump { animation: amountBump .6s ease; }
+            @keyframes amountBump { 0%{transform:scale(1)} 40%{transform:scale(1.08)} 100%{transform:scale(1)} }
+            .price-option { transition: transform .2s, box-shadow .2s; }
+            .price-option:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,.08); }
+            .price-option.selected { box-shadow: 0 12px 24px rgba(34,197,94,.25); transform: translateY(-2px); }
+            .result-actions button { transition: transform .2s, box-shadow .2s; }
+            .result-actions button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,.1); }
+        `;
+        document.head.appendChild(style);
+    }
+
+    function animateAmount(selector) {
+        const el = document.querySelector(selector);
+        if (!el) return;
+        el.classList.add('amount-bump');
+        setTimeout(() => el.classList.remove('amount-bump'), 600);
+    }
+
+    function shareQuote(data) {
+        if (!data) return;
+        const link = generateQuoteLink(data);
+        const title = 'Your Car Transport Quote';
+        const text = `${data.fromCity} → ${data.toCity} • ${data.vehicleType} • ₹${data.price.toLocaleString('en-IN')}`;
+        if (navigator.share) {
+            navigator.share({ title, text, url: link }).catch(() => {});
+            return;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('Share link copied to clipboard', 'info');
+            }).catch(() => {});
+        }
+        const wa = `https://wa.me/?text=${encodeURIComponent(text + '\n' + link)}`;
+        const mail = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n' + link)}`;
+        window.open(wa, '_blank');
+        window.open(mail, '_self');
+    }
+
+    function copyQuoteLink(data) {
+        if (!data || !navigator.clipboard || !navigator.clipboard.writeText) return;
+        const link = generateQuoteLink(data);
+        navigator.clipboard.writeText(link).then(() => {
+            showNotification('Link copied to clipboard', 'info');
+        }).catch(() => {});
+    }
+
+    function generateQuoteLink(data) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('from', data.fromCity);
+        url.searchParams.set('to', data.toCity);
+        url.searchParams.set('vehicle', data.vehicleType);
+        url.searchParams.set('distance', String(data.distance));
+        url.searchParams.set('price', String(data.price));
+        return url.toString();
+    }
+
+    function handleShareQuote() {
+        if (!currentQuoteData) {
+            alert('Please complete the quote first');
+            return;
+        }
+        const link = generateQuoteLink(currentQuoteData);
+        const title = 'Your Car Transport Quote';
+        const text = `${currentQuoteData.fromCity} → ${currentQuoteData.toCity} • ${currentQuoteData.vehicleType} • ₹${currentQuoteData.price.toLocaleString('en-IN')}`;
+        if (navigator.share) {
+            navigator.share({ title, text, url: link }).catch(() => {});
+            return;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('Share link copied to clipboard', 'info');
+            }).catch(() => {});
+        }
+        const wa = `https://wa.me/?text=${encodeURIComponent(text + '\n' + link)}`;
+        const mail = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n' + link)}`;
+        window.open(wa, '_blank');
+        window.open(mail, '_self');
+    }
+
+    function applyQuoteFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const from = params.get('from');
+        const to = params.get('to');
+        const vehicle = params.get('vehicle');
+        if (from) {
+            const fromInput = document.getElementById('fromCity');
+            fromInput.value = from;
+            selectedFromCity = from;
+        }
+        if (to) {
+            const toInput = document.getElementById('toCity');
+            toInput.value = to;
+            selectedToCity = to;
+        }
+        if (from && to) updateDistance();
+        if (vehicle) {
+            const select = document.getElementById('vehicleType');
+            select.value = vehicle;
+            select.setAttribute('value', vehicle);
+        }
+        if (from && to && vehicle) {
+            calculateQuote();
+        }
     }
 
     /**
@@ -497,6 +629,7 @@
         document.getElementById('resultDistance').textContent = `${distance} km`;
         document.getElementById('resultVehicle').textContent = vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1);
         document.getElementById('resultAmount').textContent = `₹${estimatedPrice.toLocaleString('en-IN')}`;
+        animateAmount('#resultAmount');
         document.getElementById('deliveryTime').textContent = deliveryTime;
 
         // Store current quote data
@@ -761,6 +894,30 @@
         const modalBookNowBtn = document.getElementById('modalBookNowBtn');
         const modalSaveLaterBtn = document.getElementById('modalSaveLaterBtn');
 
+        injectQuoteEnhancementStyles();
+
+        const modalActions = document.querySelector('#modalQuoteResult .result-actions');
+        if (modalActions) {
+            if (!document.getElementById('modalShareQuoteBtn')) {
+                const shareBtn = document.createElement('button');
+                shareBtn.type = 'button';
+                shareBtn.id = 'modalShareQuoteBtn';
+                shareBtn.className = 'quote-save-later-btn';
+                shareBtn.innerHTML = '<i class="fas fa-share-alt"></i><span>Share Quote</span>';
+                shareBtn.addEventListener('click', () => { if (modalQuoteData) shareQuote(modalQuoteData); });
+                modalActions.appendChild(shareBtn);
+            }
+            if (!document.getElementById('modalCopyQuoteBtn')) {
+                const copyBtn = document.createElement('button');
+                copyBtn.type = 'button';
+                copyBtn.id = 'modalCopyQuoteBtn';
+                copyBtn.className = 'quote-save-later-btn';
+                copyBtn.innerHTML = '<i class="fas fa-link"></i><span>Copy Link</span>';
+                copyBtn.addEventListener('click', () => { if (modalQuoteData) copyQuoteLink(modalQuoteData); });
+                modalActions.appendChild(copyBtn);
+            }
+        }
+
         // Setup autocomplete for modal
         if (modalFromCity) setupAutocomplete(modalFromCity, 'modalFromCityDropdown');
         if (modalToCity) setupAutocomplete(modalToCity, 'modalToCityDropdown');
@@ -964,7 +1121,8 @@
             document.getElementById('modalResultDistance').textContent = `${distance} km`;
             document.getElementById('modalResultVehicle').textContent = vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1);
             document.getElementById('modalResultAmount').textContent = `₹${estimatedPrice.toLocaleString('en-IN')}`;
-            document.getElementById('modalDeliveryTime').textContent = deliveryTime;
+                    animateAmount('#modalResultAmount');
+                    document.getElementById('modalDeliveryTime').textContent = deliveryTime;
 
             // Store modal quote data
             modalQuoteData = {
