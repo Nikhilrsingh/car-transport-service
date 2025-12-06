@@ -922,35 +922,3 @@ footer.footer,
     display: flex;
   }
 }
-
-@media (max-width: 480px) {
-  .footer-content.footer-grid {
-    padding: 0 15px 20px;
-  }
-  
-  .footer-card {
-    padding: 15px;
-    min-height: auto;
-  }
-  
-  .footer-bottom-content {
-    gap: 4px;
-    padding: 4px 8px;
-  }
-  
-  .footer-bottom-links {
-    gap: 8px;
-  }
-  
-  .accordion-panel.two-col {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-  
-  .accordion-panel.two-col ul + ul {
-    border-left: none;
-    padding-left: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 6px;
-  }
-}

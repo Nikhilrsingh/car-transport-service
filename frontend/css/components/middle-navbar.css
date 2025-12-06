@@ -229,29 +229,6 @@ body.dark-mode .middle-navbar-banner {
   }
 }
 
-@media (max-width: 480px) {
-  .middle-navbar-container {
-    padding: 5px 8px;
-  }
-
-  .middle-navbar-logo,
-  .middle-navbar-banner {
-    height: 30px;
-  }
-
-  .middle-navbar-right {
-    gap: 6px;
-  }
-
-  .middle-contact-item {
-    padding: 4px 6px;
-  }
-
-  .middle-contact-item i {
-    font-size: 0.95rem;
-  }
-}
-
 /* Scrolled State */
 .middle-navbar.scrolled {
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);

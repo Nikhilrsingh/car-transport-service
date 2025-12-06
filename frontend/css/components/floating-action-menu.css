@@ -314,47 +314,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .fab-container {
-    bottom: 15px;
-    left: 15px;
-  }
-
-  .fab-main {
-    width: 50px;
-    height: 50px;
-  }
-
-  .fab-icon {
-    font-size: 20px;
-  }
-
-  .fab-actions {
-    bottom: 60px;
-    gap: 10px;
-  }
-
-  .fab-action-btn {
-    width: 42px !important;
-    height: 42px !important;
-    min-width: 42px !important;
-    min-height: 42px !important;
-    max-width: 42px !important;
-    max-height: 42px !important;
-    font-size: 16px;
-  }
-
-  .fab-action-btn i {
-    font-size: 16px;
-  }
-
-  /* Hide tooltips on very small screens */
-  .fab-action-btn::before,
-  .fab-action-btn::after {
-    display: none;
-  }
-}
-
 /* Accessibility: Focus states */
 .fab-main:focus,
 .fab-action-btn:focus {

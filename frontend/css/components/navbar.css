@@ -16,12 +16,6 @@ body {
   }
 }
 
-@media (max-width: 480px) {
-  body {
-    padding-top: 160px;
-  }
-}
-
 .upbar {
   height: 35px;
   background: #2b2b2b;
@@ -155,21 +149,6 @@ body {
   .upbar-btn {
     padding: 8px 10px;
     justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .upbar-actions {
-    gap: 8px;
-  }
-
-  .upbar-btn {
-    padding: 6px 8px;
-    font-size: 0.75rem;
-  }
-
-  .upbar-btn i {
-    font-size: 0.9rem;
   }
 }
 
@@ -1057,21 +1036,6 @@ left: 100%;
   }
 }
 
-@media (max-width: 480px) {
-  .navbar {
-    padding: 10px 0;
-  }
-
-  .left-logo {
-    width: 90px;
-    height: 45px;
-  }
-
-  .main-content {
-    margin-top: 65px;
-  }
-}
-
 /* Animation for page load */
 @keyframes slideDown {
   from {
@@ -1240,23 +1204,6 @@ left: 100%;
 
   .theme-toggle button i {
     font-size: 22px;
-  }
-}
-
-@media (max-width: 480px) {
-  .theme-toggle {
-    top: 70px;
-    right: 10px;
-  }
-
-  .theme-toggle button {
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
-  }
-
-  .theme-toggle button i {
-    font-size: 20px;
   }
 }
 
