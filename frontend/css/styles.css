@@ -331,6 +331,179 @@ button,
 
 /* ============================================================
    EXISTING MAIN BRANCH CODE — PRESERVED
+   GLOBAL Z-INDEX LAYER TOKENS (Consistent UI Stacking System)
+   ============================================================ */
+
+:root {
+    /* Base content */
+    --z-default: 1;
+    --z-content: 10;
+
+    /* Floating components */
+    --z-sticky-header: 100;
+    --z-sticky-quote-btn: 150;
+    --z-dropdown: 300;
+    --z-tooltip: 350;
+
+    /* Overlays */
+    --z-overlay: 500;
+    --z-modal: 600;
+    --z-modal-content: 650;
+
+    /* Emergency top layer (alerts, loaders) */
+    --z-alert: 900;
+    --z-loader: 999;
+}
+
+/* ============================================================
+   GLOBAL APPLICATION — AUTOMATICALLY USES Z-INDEX TOKENS
+   ============================================================ */
+
+/* Sticky navbar */
+.navbar,
+header.sticky {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky-header);
+}
+
+/* Dropdown menus */
+.dropdown,
+.menu-popup {
+    z-index: var(--z-dropdown);
+}
+
+/* Tooltips */
+.tooltip {
+    position: absolute;
+    z-index: var(--z-tooltip);
+}
+
+/* Overlays (quote overlay etc.) */
+.overlay {
+    position: fixed;
+    z-index: var(--z-overlay);
+}
+
+/* Modals */
+.modal {
+    position: fixed;
+    z-index: var(--z-modal);
+}
+
+.modal-content {
+    position: relative;
+    z-index: var(--z-modal-content);
+}
+
+/* Alerts */
+.alert-box {
+    position: fixed;
+    z-index: var(--z-alert);
+}
+
+/* Global loading screen / spinner */
+.loader {
+    position: fixed;
+    z-index: var(--z-loader);
+}
+
+
+/* ============================================================
+   EXISTING PROJECT STYLES (PRESERVED FROM main)
+   GLOBAL IMAGE TREATMENT SYSTEM (Theme Adaptive)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   DEFAULT IMAGE TOKENS (Light Mode)
+   ------------------------------------------------------------ */
+:root {
+    /* Light mode filters */
+    --img-brightness-soft: brightness(0.95);
+    --img-brightness-normal: brightness(1);
+    --img-brightness-low: brightness(0.75);
+    --img-contrast-soft: contrast(1.05);
+    --img-contrast-boost: contrast(1.2);
+
+    /* Muted global filter tone */
+    --img-muted: grayscale(8%) brightness(0.95);
+
+    /* Hero/large banner treatment */
+    --img-hero-filter: brightness(0.65) contrast(1.15);
+
+    /* Hover reveal */
+    --img-hover-reveal: brightness(1.05) contrast(1.05);
+
+    /* Card image default */
+    --img-card-default: brightness(0.9) contrast(1.05);
+}
+
+/* ------------------------------------------------------------
+   DARK MODE IMAGE TOKENS
+   ------------------------------------------------------------ */
+[data-theme="dark"] {
+    /* Dark mode requires stronger filtering for readability */
+    --img-brightness-soft: brightness(0.8);
+    --img-brightness-normal: brightness(0.9);
+    --img-brightness-low: brightness(0.55);
+    --img-contrast-soft: contrast(1.1);
+    --img-contrast-boost: contrast(1.25);
+
+    /* Dark mode muted tone */
+    --img-muted: grayscale(12%) brightness(0.75) contrast(1.1);
+
+    /* Hero images darker and cinematic */
+    --img-hero-filter: brightness(0.45) contrast(1.25);
+
+    /* Hover reveal becomes subtle */
+    --img-hover-reveal: brightness(0.85) contrast(1.15);
+
+    /* Card images */
+    --img-card-default: brightness(0.7) contrast(1.15);
+}
+
+/* ------------------------------------------------------------
+   GLOBAL IMAGE APPLICATION
+   Works on ALL <img> across the website
+   ------------------------------------------------------------ */
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: var(--img-muted);  /* global default */
+    transition: filter 0.3s ease;
+}
+
+/* ------------------------------------------------------------
+   SPECIFIC SECTIONS (automatically adapts to theme)
+   ------------------------------------------------------------ */
+
+/* HERO IMAGE */
+.hero img,
+.banner img {
+    filter: var(--img-hero-filter);
+}
+
+/* CARDS / SERVICE BOXES */
+.card img,
+.service-box img,
+.review-card img,
+.team-card img {
+    filter: var(--img-card-default);
+}
+
+/* HOVER REVEAL EFFECT */
+img:hover {
+    filter: var(--img-hover-reveal);
+}
+
+/* OPTIONAL — Completely disable filters for logos */
+.logo img {
+    filter: none !important;
+}
+
+/* ============================================================
+   EXISTING CODE FROM MAIN (Preserved)
    ============================================================ */
 
 /* Apply to form fields */
@@ -341,17 +514,19 @@ select {
     margin-bottom: var(--space-sm);
 }
 
-/* Apply to headings */
+/* Headings spacing */
 h1, h2, h3 {
     margin-bottom: var(--space-md);
 }
 
+/* Buttons transition */
 button,
 .btn,
 .cta-btn {
     transition: all var(--motion-medium) var(--ease-standard);
 }
 
+/* Card and service-box transitions */
 .card,
 .service-box {
     transition: transform var(--motion-medium) var(--ease-standard),
