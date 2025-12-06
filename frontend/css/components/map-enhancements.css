@@ -333,27 +333,6 @@ body[data-theme="dark"] .legend-item:hover {
   }
 }
 
-@media (max-width: 480px) {
-  .map-controls {
-    gap: 6px;
-    padding: 6px;
-  }
-  
-  .map-control-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.85rem;
-  }
-  
-  .legend-title {
-    font-size: 0.9rem;
-  }
-  
-  .map-section-title {
-    font-size: 1.4rem;
-  }
-}
-
 /* Modern India Map Styles */
 .modern-india-map {
   position: relative;
@@ -807,55 +786,5 @@ body[data-theme="dark"] .legend-item:hover {
   .map-stats {
     flex-direction: column;
     gap: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .modern-india-map {
-    height: 350px;
-  }
-  
-  .map-controls {
-    gap: 6px;
-    padding: 6px;
-  }
-  
-  .map-control-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.85rem;
-  }
-  
-  .legend-title {
-    font-size: 0.9rem;
-  }
-  
-  .map-section-title {
-    font-size: 1.4rem;
-  }
-  
-  .pin-marker {
-    width: 30px;
-    height: 45px;
-  }
-  
-  .pin-icon {
-    width: 30px;
-    height: 30px;
-  }
-  
-  .pin-icon i {
-    font-size: 14px;
-  }
-  
-  .pin-pulse {
-    width: 30px;
-    height: 30px;
-  }
-  
-  .pin-tooltip {
-    font-size: 11px;
-    padding: 5px 10px;
-    top: -40px;
   }
 }

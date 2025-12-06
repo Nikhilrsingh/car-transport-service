@@ -391,26 +391,6 @@
     }
 }
 
-@media (max-width: 480px) {
-    .chatbot-modal {
-        height: 100vh;
-    }
-
-    .chatbot-messages-container {
-        padding: 16px 12px;
-    }
-
-    .message-content {
-        max-width: 90%;
-        padding: 10px 14px;
-    }
-
-    .chatbot-input {
-        font-size: 16px;
-        /* Prevent zoom on iOS */
-    }
-}
-
 /* Print Styles */
 @media print {
 

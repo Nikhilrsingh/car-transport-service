@@ -1151,56 +1151,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .enhanced-gallery-hero h1 {
-    font-size: 2rem;
-  }
-  
-  .enhanced-gallery-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .enhanced-gallery-filters {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .filter-btn {
-    width: 100%;
-  }
-  
-  .lightbox-controls {
-    top: 10px;
-    right: 10px;
-    left: 10px;
-    gap: 8px;
-    justify-content: space-between;
-  }
-  
-  .lightbox-counter {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    order: 1;
-    flex: 1;
-  }
-  
-  .lightbox-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 0.9rem;
-  }
-  
-  .lightbox-zoom-controls {
-    bottom: 10px;
-    left: 10px;
-  }
-  
-  .view-360-container,
-  .carousel-slide img {
-    height: 300px;
-  }
-}
-
 /* ========================================
    ACCESSIBILITY
    ======================================== */

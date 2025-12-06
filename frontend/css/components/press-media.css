@@ -937,33 +937,3 @@ section {
     }
 }
 
-@media (max-width: 480px) {
-    section {
-        padding: 50px 0;
-    }
-
-    .press-hero {
-        height: 320px;
-    }
-
-    .hero-title {
-        font-size: 1.8rem;
-    }
-
-    .quick-links-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-item {
-        flex-direction: row;
-        gap: 10px;
-    }
-
-    .achievement-card,
-    .certification-card,
-    .media-card,
-    .asset-card {
-        padding: 20px;
-    }
-}
-
