@@ -253,6 +253,84 @@ button,
 }
 
 /* ============================================================
+   GLOBAL ACCESSIBILITY UTILITY CLASSES (A11y Helpers)
+   ============================================================ */
+
+/* 1. Screen Reader Only — hidden visually but readable by SR */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* 2. Reveal .sr-only content on focus */
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* 3. Strong focus ring for accessibility */
+:focus-visible,
+.a11y-focus {
+    outline: 3px solid var(--color-primary, #ff6347);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* 4. High contrast mode utility */
+.a11y-high-contrast {
+    filter: contrast(1.35) brightness(1.1);
+}
+
+/* 5. Skip-to-content link (appears on focus) */
+.skip-to-content {
+    position: absolute;
+    top: -999px;
+    left: 0;
+    background: var(--color-primary, #ff6347);
+    color: #ffffff;
+    padding: 0.75rem 1.25rem;
+    font-weight: 600;
+    z-index: 9999;
+    border-radius: 0 0 6px 6px;
+    transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* 6. Readable text utility */
+.a11y-readable-text {
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    font-size: 1.05rem;
+}
+
+/* 7. Reduced motion for sensitive users */
+@media (prefers-reduced-motion: reduce) {
+    .a11y-reduce-motion,
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================================
+   EXISTING MAIN BRANCH CODE — PRESERVED
    GLOBAL Z-INDEX LAYER TOKENS (Consistent UI Stacking System)
    ============================================================ */
 
