@@ -5,9 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enquiry | Harihar Car Carriers</title>
+  <base href="./" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
   <link rel="icon" type="image/png" href="classic-car.png" />
-  <link rel="stylesheet" href="../css/components/navbar.css" />
-  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/components/navbar.css" />    <link rel="stylesheet" href="../css/components/middle-navbar.css" />  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/components/loading-indicators.css" />
   <link rel="stylesheet" href="../css/components/floating-call-button.css" />
   <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css" />
@@ -20,6 +22,8 @@
   <link rel="stylesheet" href="../css/components/enquiry.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/components/floating-button.css" />
+  <link rel="stylesheet" href="../css/components/glowing-input.css">
+
 
   <!-- Lottie Animation -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -153,7 +157,7 @@
               <input type="tel" id="phone" name="phone" placeholder="10-digit number" required pattern="[0-9]{10}" />
               <span class="validation-icon"></span>
               <div class="error-message"></div>
-              <div class="phone-format-hint">Format: 9876543210</div>
+              <div class="phone-format-hint">Format: 9372693389</div>
             </div>
           </div>
 
@@ -392,17 +396,17 @@
       <div class="contact-widget">
         <h3><i class="fas fa-comments"></i> Contact Us</h3>
 
-        <a href="tel:+919876543210" class="contact-option">
+        <a href="tel:+919372693389" class="contact-option">
           <div class="contact-icon">
             <i class="fas fa-phone"></i>
           </div>
           <div class="contact-info">
             <h4>Call Us</h4>
-            <p>+91 98765 43210</p>
+            <p>+919372693389</p>
           </div>
         </a>
 
-        <a href="https://wa.me/919876543210" target="_blank" class="contact-option">
+        <a href="https://wa.me/919372693389" target="_blank" class="contact-option">
           <div class="contact-icon" style="background: #25D366;">
             <i class="fab fa-whatsapp"></i>
           </div>
@@ -412,13 +416,13 @@
           </div>
         </a>
 
-        <a href="mailto:info@hariharcarcarriers.com" class="contact-option">
+        <a href="mailto:hariharcarcarrier@gmail.com" class="contact-option">
           <div class="contact-icon">
             <i class="fas fa-envelope"></i>
           </div>
           <div class="contact-info">
             <h4>Email</h4>
-            <p>info@hariharcarcarriers.com</p>
+            <p>hariharcarcarrier@gmail.com</p>
           </div>
         </a>
       </div>
@@ -519,9 +523,10 @@
   <script src="../js/modules/footer-loader.js"></script>
   <script src="../js/modules/themes.js"></script>
 
-  <script src="../js/modules/floating-book-button.js"></script>
+  <!-- Floating buttons removed - handled by FAB menu in footer -->
+  <!-- <script src="../js/modules/floating-book-button.js"></script>
   <script src="../js/modules/floating-call-button.js"></script>
-  <script src="../js/modules/floating-whatsapp-button.js"></script>
+  <script src="../js/modules/floating-whatsapp-button.js"></script> -->
   <script src="../js/modules/quote-modal.js"></script>
   <script src="../js/modules/sticky-quote-button.js"></script>
   <script src="../js/modules/floating-chatbot-button.js"></script>
@@ -539,6 +544,8 @@
   <button class="back-to-bottom" id="backToBottom">
     <i class="fas fa-arrow-down"></i>
   </button>
+
+  <!-- 🚀 Floating Action Menu loaded via footer component -->
 </body>
 
 </html>

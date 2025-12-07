@@ -12,8 +12,8 @@ body[data-theme="dark"] {
   --color-text-primary: #ffffff;
   --color-text-secondary: #f0f0f0;
   --color-text-muted: #c0c0c0;
-  --color-gray-200: #2d2d2d;
-  --color-gray-300: #3a3a3a;
+  --color-gray-200: #d2c4c4;
+  --color-gray-300: #6e6c6c;
   --color-gray-400: #555555;
 }
 
@@ -161,7 +161,7 @@ body[data-theme="dark"] .input-group input:-webkit-autofill:focus {
 }
 
 .hero-actions .cta-btn.secondary {
-  background: rgba(255, 255, 255, 0.15) !important;
+  background: rgba(224, 84, 84, 0.15) !important;
   color: #ffffff !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
   backdrop-filter: blur(10px);
@@ -446,3 +446,35 @@ body[data-theme="dark"] .quote-result-reset-btn:hover {
   background: rgba(255, 255, 255, 0.15) !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
+/* ---------------------------------------------------------
+   FIX: Service Cards Text & Background in Dark Mode
+   --------------------------------------------------------- */
+   body[data-theme="dark"] .service-card,
+   body[data-theme="dark"] .feature-card,
+   body[data-theme="dark"] .transport-card {
+       background: #ffffff !important;        /* keep white cards */
+       color: #1a1a1a !important;             /* dark text so readable */
+   }
+   
+   /* Card Title */
+   body[data-theme="dark"] .service-card h3,
+   body[data-theme="dark"] .feature-card h3,
+   body[data-theme="dark"] .transport-card h3 {
+       color: #ff6b3d !important;             /* your original orange */
+   }
+   
+   /* Card Paragraphs */
+   body[data-theme="dark"] .service-card p,
+   body[data-theme="dark"] .feature-card p,
+   body[data-theme="dark"] .transport-card p {
+       color: #333333 !important;             /* readable dark grey */
+   }
+   
+   /* Icons inside cards */
+   body[data-theme="dark"] .service-card i,
+   body[data-theme="dark"] .feature-card i,
+   body[data-theme="dark"] .transport-card i {
+       color: #ff6b3d !important;
+   }
+   
