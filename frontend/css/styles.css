@@ -532,6 +532,71 @@ button,
                 box-shadow var(--motion-medium) var(--ease-standard);
 }
 
+/* ============================================================
+   GLOBAL FROSTED GLASS SYSTEM (Glassmorphism Utilities)
+   ============================================================ */
+
+/* Transparency tokens */
+:root {
+    --glass-bg-light: rgba(255, 255, 255, 0.55);
+    --glass-bg-medium: rgba(255, 255, 255, 0.35);
+    --glass-bg-strong: rgba(255, 255, 255, 0.18);
+
+    --glass-border-light: rgba(255, 255, 255, 0.65);
+    --glass-border-dark: rgba(0, 0, 0, 0.3);
+
+    /* Backdrop blur levels */
+    --blur-sm: 2px;
+    --blur-md: 6px;
+    --blur-lg: 12px;
+    --blur-xl: 20px;
+}
+
+/* Dark-mode adaptation */
+[data-theme="dark"] {
+    --glass-bg-light: rgba(30, 30, 30, 0.55);
+    --glass-bg-medium: rgba(30, 30, 30, 0.35);
+    --glass-bg-strong: rgba(30, 30, 30, 0.18);
+    --glass-border-light: rgba(255, 255, 255, 0.15);
+    --glass-border-dark: rgba(0, 0, 0, 0.7);
+}
+
+/* Base frosted class */
+.glass {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(var(--blur-md));
+    border: 1px solid var(--glass-border-light);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+/* Variants */
+.glass-soft {
+    background: var(--glass-bg-medium);
+    backdrop-filter: blur(var(--blur-lg));
+}
+
+.glass-strong {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(var(--blur-xl));
+}
+
+/* Utility borders */
+.glass-border {
+    border: 1px solid var(--glass-border-light);
+}
+
+.glass-border-dark {
+    border: 1px solid var(--glass-border-dark);
+}
+
+/* Hover enhancement */
+.glass:hover {
+    backdrop-filter: blur(var(--blur-xl));
+    transition: backdrop-filter 0.3s ease, background 0.3s ease;
+}
+
+
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
