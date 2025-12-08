@@ -20,19 +20,27 @@ footer.footer,
 }
 
 #footer-main{
-  margin-left: 70px;
+  margin-left: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Override global container width restriction */
+footer .container {
+  max-width: 100% !important;
 }
 
 /* Footer Content Grid - PERFECT EQUAL SIZES */
 .footer-content.footer-grid {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px 24px;
+  padding: 0 40px 24px;
   display: grid;
-  /* grid-template-columns: repeat(4, minmax(0, 1fr)); Force equal columns */
-  gap: 20px; /* Reduced gap for better width distribution */
-  align-items: stretch;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: start;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Footer Cards - PERFECT EQUAL HEIGHTS AND WIDTHS */
