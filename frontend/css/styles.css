@@ -597,6 +597,100 @@ button,
 }
 
 
+/* ============================================================
+   GLOBAL DISABLED STATE SYSTEM (DISABLED TOKENS)
+   Ensures consistent UX clarity for all disabled UI components
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. DESIGN TOKENS — Light Mode
+   ------------------------------------------------------------ */
+:root {
+    --disabled-bg: #e6e6e6;
+    --disabled-text: #9b9b9b;
+    --disabled-border: #c8c8c8;
+    --disabled-opacity: 0.55;
+
+    --disabled-btn-bg: #d4d4d4;
+    --disabled-btn-text: #8a8a8a;
+}
+
+/* ------------------------------------------------------------
+   2. DESIGN TOKENS — Dark Mode
+   ------------------------------------------------------------ */
+[data-theme="dark"] {
+    --disabled-bg: #3a3a3a;
+    --disabled-text: #7d7d7d;
+    --disabled-border: #555;
+    --disabled-opacity: 0.45;
+
+    --disabled-btn-bg: #444;
+    --disabled-btn-text: #888;
+}
+
+/* ------------------------------------------------------------
+   3. GLOBAL DISABLED CLASS — Applies universally
+   ------------------------------------------------------------ */
+.disabled,
+[disabled],
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+    background-color: var(--disabled-bg) !important;
+    color: var(--disabled-text) !important;
+    border-color: var(--disabled-border) !important;
+    opacity: var(--disabled-opacity);
+    cursor: not-allowed !important;
+    pointer-events: none;
+    user-select: none;
+    transform: none !important;
+}
+
+/* ------------------------------------------------------------
+   4. Disabled Buttons
+   ------------------------------------------------------------ */
+button.disabled,
+.btn.disabled,
+.cta-btn.disabled,
+button:disabled,
+.btn:disabled,
+.cta-btn:disabled {
+    background-color: var(--disabled-btn-bg) !important;
+    color: var(--disabled-btn-text) !important;
+    box-shadow: none !important;
+}
+
+/* ------------------------------------------------------------
+   5. Disabled Service Boxes / Cards
+   ------------------------------------------------------------ */
+.card.disabled,
+.service-box.disabled,
+.feature-box.disabled {
+    filter: grayscale(50%) brightness(0.85);
+    box-shadow: none !important;
+}
+
+/* ------------------------------------------------------------
+   6. Disabled Links
+   ------------------------------------------------------------ */
+a.disabled,
+a[disabled] {
+    pointer-events: none;
+    color: var(--disabled-text) !important;
+    opacity: var(--disabled-opacity);
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   7. Utility Class to Simulate Disabled Look Without Disabling
+   ------------------------------------------------------------ */
+.u-disabled-visual {
+    opacity: var(--disabled-opacity);
+    filter: grayscale(40%);
+    pointer-events: none;
+}
+
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
