@@ -1,6 +1,6 @@
 #mac-clock {
   position: fixed;
-  top: 80px;
+  top:  3px;
   right: 20px;
   font-size: 15px;
   font-weight: 500;
@@ -29,17 +29,6 @@
     padding: 5px 10px;
   }
 }
-
-@media (max-width: 480px) {
-  #mac-clock {
-    top: 65px;
-    right: 10px;
-    font-size: 11px;
-    padding: 4px 8px;
-  }
-}
-
-
 
 /* .digital-clock {
   display: inline-flex;
