@@ -691,6 +691,132 @@ a[disabled] {
     pointer-events: none;
 }
 
+/* ============================================================
+   GLOBAL 12-COLUMN RESPONSIVE GRID SYSTEM
+   (Paste this into frontend/css/styles.css)
+   ============================================================ */
+
+/* Grid tokens (uses existing spacing tokens when available) */
+:root {
+    --grid-max-width: 1400px;
+    --grid-gutter: var(--space-md, 20px);
+    --grid-break-sm: 576px;
+    --grid-break-md: 768px;
+    --grid-break-lg: 992px;
+    --grid-break-xl: 1200px;
+}
+
+/* Container centers page content */
+.container {
+    width: 100%;
+    max-width: var(--grid-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: calc(var(--grid-gutter) / 2);
+    padding-right: calc(var(--grid-gutter) / 2);
+    box-sizing: border-box;
+}
+
+/* Row: the grid wrapper */
+.row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter);
+    align-items: start; /* default alignment */
+    box-sizing: border-box;
+}
+
+/* Column helpers: span N columns (1-12) */
+.col-1  { grid-column: span 1;  }
+.col-2  { grid-column: span 2;  }
+.col-3  { grid-column: span 3;  }
+.col-4  { grid-column: span 4;  }
+.col-5  { grid-column: span 5;  }
+.col-6  { grid-column: span 6;  }
+.col-7  { grid-column: span 7;  }
+.col-8  { grid-column: span 8;  }
+.col-9  { grid-column: span 9;  }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+/* Auto columns: useful for mixed content */
+.col-auto { grid-column: auto; }
+
+/* Column offsets (push to the right) */
+.offset-1  { margin-left: calc((100% / 12) * 1 + var(--grid-gutter) * 0); grid-column: span 11; }
+.offset-2  { margin-left: calc((100% / 12) * 2 + var(--grid-gutter) * 0); grid-column: span 10; }
+/* NOTE: offsets above are simple helpers; use grid-gap for precise spacing when needed */
+
+/* Alignment utilities */
+.align-start   { align-self: start; }
+.align-center  { align-self: center; }
+.align-end     { align-self: end; }
+.justify-start { justify-self: start; }
+.justify-center{ justify-self: center; }
+.justify-end   { justify-self: end; }
+
+/* Order utilities (for reordering on small screens) */
+.order-1  { order: 1;  }
+.order-2  { order: 2;  }
+.order-3  { order: 3;  }
+
+/* Responsive helpers: collapse columns on smaller screens */
+
+/* Large (>= XL) — default grid is 12 columns (no changes needed) */
+
+/* Large screens (>= LG) — ensure 12 column behavior remains */
+@media (max-width: calc(var(--grid-break-xl) - 1px)) {
+    /* allow simpler classes like .col-lg-6 if needed */
+    .col-lg-6  { grid-column: span 6; }
+    .col-lg-4  { grid-column: span 4; }
+    .col-lg-3  { grid-column: span 3; }
+}
+
+/* Medium screens: convert many layouts to fewer columns */
+@media (max-width: calc(var(--grid-break-lg) - 1px)) {
+    .row { grid-template-columns: repeat(8, 1fr); } /* 8 virtual columns for better scaling */
+    .col-md-12 { grid-column: span 8; }
+    .col-md-6  { grid-column: span 4; }
+    .col-md-4  { grid-column: span 3; }
+    .col-md-3  { grid-column: span 2; }
+}
+
+/* Small screens: single column stack by default */
+@media (max-width: calc(var(--grid-break-md) - 1px)) {
+    .row { grid-template-columns: repeat(4, 1fr); }
+    .col-sm-12 { grid-column: span 4; }
+    .col-sm-6  { grid-column: span 2; }
+    .col-sm-4  { grid-column: span 1; }
+}
+
+/* Extra small / mobile: full width columns */
+@media (max-width: calc(var(--grid-break-sm) - 1px)) {
+    .row { grid-template-columns: 1fr; }
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+    .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
+    .col-md-*, .col-lg-*, .col-sm-* {
+        grid-column: span 1 !important;
+    }
+}
+
+/* Utility gap overrides */
+.gap-sm { gap: calc(var(--grid-gutter) / 2); }
+.gap-md { gap: var(--grid-gutter); }
+.gap-lg { gap: calc(var(--grid-gutter) * 1.5); }
+
+/* Simple helper: full-height column */
+.full-height { height: 100%; }
+
+/* Helpful example usage comments (do not remove):
+   <div class="container">
+     <div class="row">
+       <div class="col-12 col-md-6">Left</div>
+       <div class="col-12 col-md-6">Right</div>
+     </div>
+   </div>
+*/
+
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
