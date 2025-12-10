@@ -597,6 +597,226 @@ button,
 }
 
 
+/* ============================================================
+   GLOBAL DISABLED STATE SYSTEM (DISABLED TOKENS)
+   Ensures consistent UX clarity for all disabled UI components
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. DESIGN TOKENS — Light Mode
+   ------------------------------------------------------------ */
+:root {
+    --disabled-bg: #e6e6e6;
+    --disabled-text: #9b9b9b;
+    --disabled-border: #c8c8c8;
+    --disabled-opacity: 0.55;
+
+    --disabled-btn-bg: #d4d4d4;
+    --disabled-btn-text: #8a8a8a;
+}
+
+/* ------------------------------------------------------------
+   2. DESIGN TOKENS — Dark Mode
+   ------------------------------------------------------------ */
+[data-theme="dark"] {
+    --disabled-bg: #3a3a3a;
+    --disabled-text: #7d7d7d;
+    --disabled-border: #555;
+    --disabled-opacity: 0.45;
+
+    --disabled-btn-bg: #444;
+    --disabled-btn-text: #888;
+}
+
+/* ------------------------------------------------------------
+   3. GLOBAL DISABLED CLASS — Applies universally
+   ------------------------------------------------------------ */
+.disabled,
+[disabled],
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+    background-color: var(--disabled-bg) !important;
+    color: var(--disabled-text) !important;
+    border-color: var(--disabled-border) !important;
+    opacity: var(--disabled-opacity);
+    cursor: not-allowed !important;
+    pointer-events: none;
+    user-select: none;
+    transform: none !important;
+}
+
+/* ------------------------------------------------------------
+   4. Disabled Buttons
+   ------------------------------------------------------------ */
+button.disabled,
+.btn.disabled,
+.cta-btn.disabled,
+button:disabled,
+.btn:disabled,
+.cta-btn:disabled {
+    background-color: var(--disabled-btn-bg) !important;
+    color: var(--disabled-btn-text) !important;
+    box-shadow: none !important;
+}
+
+/* ------------------------------------------------------------
+   5. Disabled Service Boxes / Cards
+   ------------------------------------------------------------ */
+.card.disabled,
+.service-box.disabled,
+.feature-box.disabled {
+    filter: grayscale(50%) brightness(0.85);
+    box-shadow: none !important;
+}
+
+/* ------------------------------------------------------------
+   6. Disabled Links
+   ------------------------------------------------------------ */
+a.disabled,
+a[disabled] {
+    pointer-events: none;
+    color: var(--disabled-text) !important;
+    opacity: var(--disabled-opacity);
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   7. Utility Class to Simulate Disabled Look Without Disabling
+   ------------------------------------------------------------ */
+.u-disabled-visual {
+    opacity: var(--disabled-opacity);
+    filter: grayscale(40%);
+    pointer-events: none;
+}
+
+/* ============================================================
+   GLOBAL 12-COLUMN RESPONSIVE GRID SYSTEM
+   (Paste this into frontend/css/styles.css)
+   ============================================================ */
+
+/* Grid tokens (uses existing spacing tokens when available) */
+:root {
+    --grid-max-width: 1400px;
+    --grid-gutter: var(--space-md, 20px);
+    --grid-break-sm: 576px;
+    --grid-break-md: 768px;
+    --grid-break-lg: 992px;
+    --grid-break-xl: 1200px;
+}
+
+/* Container centers page content */
+.container {
+    width: 100%;
+    max-width: var(--grid-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: calc(var(--grid-gutter) / 2);
+    padding-right: calc(var(--grid-gutter) / 2);
+    box-sizing: border-box;
+}
+
+/* Row: the grid wrapper */
+.row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter);
+    align-items: start; /* default alignment */
+    box-sizing: border-box;
+}
+
+/* Column helpers: span N columns (1-12) */
+.col-1  { grid-column: span 1;  }
+.col-2  { grid-column: span 2;  }
+.col-3  { grid-column: span 3;  }
+.col-4  { grid-column: span 4;  }
+.col-5  { grid-column: span 5;  }
+.col-6  { grid-column: span 6;  }
+.col-7  { grid-column: span 7;  }
+.col-8  { grid-column: span 8;  }
+.col-9  { grid-column: span 9;  }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+/* Auto columns: useful for mixed content */
+.col-auto { grid-column: auto; }
+
+/* Column offsets (push to the right) */
+.offset-1  { margin-left: calc((100% / 12) * 1 + var(--grid-gutter) * 0); grid-column: span 11; }
+.offset-2  { margin-left: calc((100% / 12) * 2 + var(--grid-gutter) * 0); grid-column: span 10; }
+/* NOTE: offsets above are simple helpers; use grid-gap for precise spacing when needed */
+
+/* Alignment utilities */
+.align-start   { align-self: start; }
+.align-center  { align-self: center; }
+.align-end     { align-self: end; }
+.justify-start { justify-self: start; }
+.justify-center{ justify-self: center; }
+.justify-end   { justify-self: end; }
+
+/* Order utilities (for reordering on small screens) */
+.order-1  { order: 1;  }
+.order-2  { order: 2;  }
+.order-3  { order: 3;  }
+
+/* Responsive helpers: collapse columns on smaller screens */
+
+/* Large (>= XL) — default grid is 12 columns (no changes needed) */
+
+/* Large screens (>= LG) — ensure 12 column behavior remains */
+@media (max-width: calc(var(--grid-break-xl) - 1px)) {
+    /* allow simpler classes like .col-lg-6 if needed */
+    .col-lg-6  { grid-column: span 6; }
+    .col-lg-4  { grid-column: span 4; }
+    .col-lg-3  { grid-column: span 3; }
+}
+
+/* Medium screens: convert many layouts to fewer columns */
+@media (max-width: calc(var(--grid-break-lg) - 1px)) {
+    .row { grid-template-columns: repeat(8, 1fr); } /* 8 virtual columns for better scaling */
+    .col-md-12 { grid-column: span 8; }
+    .col-md-6  { grid-column: span 4; }
+    .col-md-4  { grid-column: span 3; }
+    .col-md-3  { grid-column: span 2; }
+}
+
+/* Small screens: single column stack by default */
+@media (max-width: calc(var(--grid-break-md) - 1px)) {
+    .row { grid-template-columns: repeat(4, 1fr); }
+    .col-sm-12 { grid-column: span 4; }
+    .col-sm-6  { grid-column: span 2; }
+    .col-sm-4  { grid-column: span 1; }
+}
+
+/* Extra small / mobile: full width columns */
+@media (max-width: calc(var(--grid-break-sm) - 1px)) {
+    .row { grid-template-columns: 1fr; }
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+    .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
+    .col-md-*, .col-lg-*, .col-sm-* {
+        grid-column: span 1 !important;
+    }
+}
+
+/* Utility gap overrides */
+.gap-sm { gap: calc(var(--grid-gutter) / 2); }
+.gap-md { gap: var(--grid-gutter); }
+.gap-lg { gap: calc(var(--grid-gutter) * 1.5); }
+
+/* Simple helper: full-height column */
+.full-height { height: 100%; }
+
+/* Helpful example usage comments (do not remove):
+   <div class="container">
+     <div class="row">
+       <div class="col-12 col-md-6">Left</div>
+       <div class="col-12 col-md-6">Right</div>
+     </div>
+   </div>
+*/
+
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
