@@ -63,6 +63,23 @@ input[type="submit"],
   font-weight: 600;
   font-style: normal;
 }
+
+/* Additional font faces for about page */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2"),
+    url("../assets/fonts/Poppins-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Bold.woff2") format("woff2"),
+    url("../assets/fonts/Poppins-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
 /* ============================================
    GLOBAL MOTION / ANIMATION TOKENS
 ============================================ */
@@ -466,11 +483,440 @@ header.sticky {
    Works on ALL <img> across the website
    ------------------------------------------------------------ */
 img {
+    max-width: 100%;
     width: 100%;
     height: auto;
     display: block;
     filter: var(--img-muted);  /* global default */
     transition: filter 0.3s ease;
+}
+
+/* Add responsive breakpoints for small screens */
+@media (max-width: 480px) {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .slide-image {
+        height: auto;
+        object-fit: cover;
+    }
+    
+    .hero img,
+    .banner img {
+        min-height: 200px;
+    }
+    
+    .card img,
+    .service-box img,
+    .review-card img,
+    .team-card img {
+        min-height: 150px;
+    }
+    
+    /* Home page specific mobile styles */
+    .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .hero-main {
+        padding-right: 0;
+        text-align: center;
+        padding: 0 15px;
+    }
+    
+    .hero-quote {
+        padding-left: 0;
+        padding: 0 15px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-sub-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-stats {
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .hero-actions {
+        justify-content: center;
+    }
+    
+    .cta-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .slider-feature-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto;
+    }
+    
+    .feature-box {
+        padding: 15px;
+    }
+    
+    .feature-box.left-top,
+    .feature-box.left-bottom,
+    .feature-box.right-top,
+    .feature-box.right-bottom {
+        position: static;
+        transform: none;
+    }
+    
+    .auto-slider {
+        min-height: 200px;
+    }
+    
+    /* Services page specific mobile styles */
+    .services-container {
+        margin: 60px auto 30px;
+        padding: 0 15px;
+    }
+    
+    .services-header {
+        margin-bottom: 30px;
+    }
+    
+    .services-header h1 {
+        font-size: 2rem;
+    }
+    
+    .services-header p {
+        font-size: 1rem;
+    }
+    
+    .service-grid {
+        gap: 20px;
+    }
+    
+    .service-card {
+        padding: 25px 20px;
+    }
+    
+    .service-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+    
+    .service-icon svg {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .service-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .service-card p {
+        font-size: 0.9rem;
+    }
+    
+    .cta-section {
+        padding: 40px 15px;
+        margin: 60px auto 50px;
+        border-radius: 15px;
+    }
+    
+    .cta-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .cta-section p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+    .cta-section a {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* About page specific mobile styles */
+    .hero {
+        padding: 60px 0 40px;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        max-width: 100%;
+        margin: 0 auto 20px;
+    }
+    
+    .hero-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .about {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        margin-bottom: 30px;
+    }
+    
+    .section-title h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .section-title p {
+        font-size: 0.9rem;
+        max-width: 100%;
+    }
+    
+    .about-content {
+        gap: 30px;
+    }
+    
+    .about-text h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .about-text p {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    
+    .values {
+        padding: 60px 0;
+    }
+    
+    .values-grid {
+        gap: 20px;
+    }
+    
+    .value-card {
+        padding: 25px 20px;
+    }
+    
+    .value-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+        font-size: 24px;
+    }
+    
+    .value-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+    
+    .value-card p {
+        font-size: 0.9rem;
+    }
+    
+    .team {
+        padding: 60px 0;
+    }
+    
+    .team-grid {
+        gap: 20px;
+    }
+    
+    .member-info {
+        padding: 20px;
+    }
+    
+    .member-info h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+    
+    .member-social {
+        gap: 10px;
+    }
+    
+    .member-social a {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .stats {
+        padding: 50px 0;
+    }
+    
+    .stats-grid {
+        gap: 20px;
+    }
+    
+    .stat-item h3 {
+        font-size: 2rem;
+        margin-bottom: 5px;
+    }
+    
+    .stat-item p {
+        font-size: 0.9rem;
+    }
+    
+    .cta {
+        padding: 60px 0;
+    }
+    
+    .cta h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .cta p {
+        font-size: 0.9rem;
+        margin: 0 auto 20px;
+    }
+    
+    .cta-btn {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .slide-image {
+        min-height: 180px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-sub-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .cta-btn {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .feature-box {
+        padding: 10px;
+    }
+    
+    .feature-box h3 {
+        font-size: 1.1rem;
+    }
+    
+    .feature-box p {
+        font-size: 0.8rem;
+    }
+    
+    /* Services page specific mobile styles for smaller screens */
+    .services-container {
+        margin: 50px auto 20px;
+        padding: 0 10px;
+    }
+    
+    .services-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .service-grid {
+        gap: 15px;
+    }
+    
+    .service-card {
+        padding: 20px 15px;
+    }
+    
+    .service-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .cta-section {
+        padding: 30px 10px;
+        margin: 50px auto 40px;
+    }
+    
+    .cta-section h2 {
+        font-size: 1.3rem;
+    }
+    
+    .cta-section a {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+    
+    /* About page specific mobile styles for smaller screens */
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+    }
+    
+    .hero-btn {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .section-title h2 {
+        font-size: 1.5rem;
+    }
+    
+    .about-text h3 {
+        font-size: 1.3rem;
+    }
+    
+    .value-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .member-info h3 {
+        font-size: 1rem;
+    }
+    
+    .stat-item h3 {
+        font-size: 1.5rem;
+    }
+    
+    .cta h2 {
+        font-size: 1.5rem;
+    }
+    
+    .cta-btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
 }
 
 /* ------------------------------------------------------------

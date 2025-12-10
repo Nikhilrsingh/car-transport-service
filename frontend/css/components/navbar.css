@@ -1205,6 +1205,136 @@ left: 100%;
   .theme-toggle button i {
     font-size: 22px;
   }
+  
+  .navbar {
+    padding: 12px 20px !important;
+  }
+  
+  .logo-container {
+    width: 100px !important;
+    height: 50px !important;
+  }
+}
+
+/* Add specific breakpoints for small screens ≤480px */
+@media (max-width: 480px) {
+  body {
+    padding-top: 160px;
+  }
+  
+  .upbar {
+    height: 40px;
+    padding: 0 8px;
+  }
+  
+  .upbar-btn {
+    padding: 0 8px;
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+  
+  .upbar-btn i {
+    font-size: 0.9rem !important;
+  }
+  
+  .navbar {
+    padding: 10px 15px !important;
+  }
+  
+  .left-logo {
+    width: 80px;
+    height: 40px;
+  }
+  
+  .logo-img {
+    height: 40px !important;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  .mobile-nav {
+    width: 100vw;
+    max-width: 100vw;
+  }
+  
+  .mobile-nav-link {
+    padding: 14px 20px !important;
+    font-size: 0.95rem !important;
+    gap: 12px !important;
+  }
+  
+  .mobile-nav-link i {
+    font-size: 0.9rem;
+  }
+  
+  .theme-toggle {
+    top: 70px;
+    right: 10px;
+  }
+  
+  .theme-toggle button {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+  .theme-toggle button i {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    padding-top: 150px;
+  }
+  
+  .upbar {
+    height: 35px;
+  }
+  
+  .upbar-btn {
+    padding: 0 6px;
+    font-size: 0.7rem;
+  }
+  
+  .navbar {
+    padding: 8px 12px !important;
+  }
+  
+  .left-logo {
+    width: 70px;
+    height: 35px;
+  }
+  
+  .logo-img {
+    height: 35px !important;
+  }
+  
+  .mobile-nav-link {
+    padding: 12px 16px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .theme-toggle {
+    top: 65px;
+    right: 8px;
+  }
+  
+  .theme-toggle button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .theme-toggle button i {
+    font-size: 18px;
+  }
 }
 
 /* Make dropdown buttons look like links but behave as buttons */

@@ -1557,6 +1557,160 @@
             }
         }
 
+        /* Add responsive breakpoints for small screens ≤480px */
+        @media (max-width: 480px) {
+            .booking-hero {
+                padding: 120px 0 60px;
+            }
+            
+            .booking-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .booking-hero p {
+                font-size: 1rem;
+            }
+            
+            .booking-section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .booking-form-container,
+            .map-container-wrapper {
+                padding: 20px 15px;
+            }
+            
+            .form-header h3 {
+                font-size: 1.4rem;
+            }
+            
+            .input-group label {
+                font-size: 0.9rem;
+            }
+            
+            .input-group input,
+            .input-group select,
+            .input-group textarea {
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+            
+            .submit-btn {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            #map {
+                height: 350px;
+            }
+            
+            .route-details-card {
+                padding: 15px;
+            }
+            
+            .booking-actions-grid {
+                gap: 15px;
+            }
+            
+            .action-card {
+                padding: 20px 15px;
+            }
+            
+            .action-card i {
+                font-size: 1.8rem;
+            }
+            
+            .action-card h4 {
+                font-size: 1rem;
+            }
+            
+            .manage-booking-content {
+                padding: 20px 15px;
+                width: 100%;
+            }
+            
+            .analytics-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .addon-services {
+                padding: 12px;
+            }
+            
+            .addon-card {
+                padding: 15px;
+            }
+        }
+
+        /* Add responsive breakpoints for extra small screens ≤360px */
+        @media (max-width: 360px) {
+            .booking-hero {
+                padding: 100px 0 50px;
+            }
+            
+            .booking-hero h1 {
+                font-size: 1.6rem;
+            }
+            
+            .booking-section {
+                padding: 50px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.4rem;
+            }
+            
+            .booking-form-container,
+            .map-container-wrapper {
+                padding: 15px 12px;
+            }
+            
+            .input-group input,
+            .input-group select,
+            .input-group textarea {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .submit-btn {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            #map {
+                height: 300px;
+            }
+            
+            .action-card {
+                padding: 15px 12px;
+            }
+            
+            .action-card i {
+                font-size: 1.5rem;
+            }
+            
+            .manage-booking-content {
+                padding: 15px 12px;
+            }
+            
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .addon-card {
+                padding: 12px;
+            }
+        }
+
         /* Animation */
         @keyframes fadeInUp {
             from {
@@ -4053,7 +4207,20 @@
             ];
 
             panel.innerHTML = routes.map((route, index) => `
-                <div class=\"route-option ${index === 0 ? 'active' : ''}\" onclick=\"selectAlternativeRoute('${route.id}', ${index})\">\n                    <div class=\"route-option-info\">\n                        <div class=\"route-option-label\">${route.label}</div>\n                        <div class=\"route-option-details\">\n                            <span><i class=\"fas fa-road\"></i> ${route.distance}</span>\n                            <span><i class=\"fas fa-clock\"></i> ${route.time}</span>\n                            <span><i class=\"fas fa-coins\"></i> ${route.toll}</span>\n                        </div>\n                    </div>\n                    <div class=\"route-option-badge ${route.badge}\">\n                        ${route.badge.charAt(0).toUpperCase() + route.badge.slice(1).replace('-', ' ')}\n                    </div>\n                </div>\n            `).join('');
+                <div class=\"route-option ${index === 0 ? 'active' : ''}\" onclick=\"selectAlternativeRoute('${route.id}', ${index})\">
+                    <div class=\"route-option-info\">
+                        <div class=\"route-option-label\">${route.label}</div>
+                        <div class=\"route-option-details\">
+                            <span><i class=\"fas fa-road\"></i> ${route.distance}</span>
+                            <span><i class=\"fas fa-clock\"></i> ${route.time}</span>
+                            <span><i class=\"fas fa-coins\"></i> ${route.toll}</span>
+                        </div>
+                    </div>
+                    <div class=\"route-option-badge ${route.badge}\">
+                        ${route.badge.charAt(0).toUpperCase() + route.badge.slice(1).replace('-', ' ')}
+                    </div>
+                </div>
+            `).join('');
 
             // Display all routes on map
             routes.forEach((route, index) => {
