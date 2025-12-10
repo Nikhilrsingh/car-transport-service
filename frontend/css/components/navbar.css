@@ -1375,4 +1375,31 @@ body {
 .nav-overlay {
   z-index: 900;  /* below navbar so it never steals clicks */
 }
- 
+/* === Search bar visibility fix (OVERRIDE) === */
+.search-bar {
+  background: #3b3b3b !important;           /* lighter than navbar */
+  border: 1px solid #ff6a3d !important;     /* orange outline to pop */
+  border-radius: 999px !important;          /* pill shape */
+  padding: 8px 16px !important;
+}
+
+.search-bar input {
+  color: #ffffff !important;                /* text clearly visible */
+  font-size: 0.9rem !important;
+}
+
+.search-bar input::placeholder {
+  color: #f0f0f0 !important;                /* light placeholder */
+  opacity: 0.9 !important;
+}
+
+.search-bar i {
+  color: #ff6a3d !important;                /* orange search icon */
+  margin-right: 8px;
+}
+
+.search-bar:hover,
+.search-bar:focus-within {
+  background: #444444 !important;
+  box-shadow: 0 0 10px rgba(255, 106, 61, 0.35) !important;
+}

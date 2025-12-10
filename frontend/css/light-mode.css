@@ -1,6 +1,6 @@
 :root {
   --bg: #ffffff;
-  --text: #222222;
+  --text: #6b0808;
   --footer-bg: #f6f6f6;
   --footer-text: #222222;
   --accent: #ff6b3d;
@@ -43,10 +43,10 @@ body[data-theme="light"] .search-bar {
   border-color: rgba(0, 0, 0, 0.15) !important;
 }
 body[data-theme="light"] .search-bar input {
-  color: #1a1a1a !important;
+  color: #fff9f9 !important;
 }
 body[data-theme="light"] .search-bar input::placeholder {
-  color: rgba(0, 0, 0, 0.5) !important;
+  color: rgb(255, 253, 253) !important;
 }
 body[data-theme="light"] .search-bar i {
   color: rgba(0, 0, 0, 0.6) !important;
@@ -135,11 +135,11 @@ body[data-theme="light"] #theme-toggle i {
 }
 
 .cta-text h2 {
-  color: #1a1a1a !important;
+  color: #aa0707 !important;
 }
 
 .cta-text p {
-  color: #2d2d2d !important;
+  color: #d00000 !important;
 }
 
 .feature span {
