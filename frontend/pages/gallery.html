@@ -85,7 +85,11 @@
         <div class="enhanced-gallery-item-inner">
           <div class="enhanced-gallery-image-container">
             <div class="loading-spinner"></div>
-            <img data-src="../assets/images/bmw.jpg" alt="BMW Transport" />
+            <img src="../assets/images/bmw.jpg" 
+                 data-src="../assets/images/bmw-640w.webp" 
+                 data-srcset="../assets/images/bmw-320w.webp 320w, ../assets/images/bmw-640w.webp 640w, ../assets/images/bmw-1024w.webp 1024w" 
+                 data-sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, 1024px"
+                 alt="BMW Transport" loading="lazy" />
           </div>
           <div class="enhanced-gallery-overlay">
             <div class="enhanced-gallery-overlay-content">
@@ -116,7 +120,11 @@
         <div class="enhanced-gallery-item-inner">
           <div class="enhanced-gallery-image-container">
             <div class="loading-spinner"></div>
-            <img data-src="../assets/images/bmw2.jpeg" alt="BMW Transport" />
+            <img src="../assets/images/bmw2.jpeg" 
+                 data-src="../assets/images/bmw2-640w.webp" 
+                 data-srcset="../assets/images/bmw2-320w.webp 320w, ../assets/images/bmw2-640w.webp 640w, ../assets/images/bmw2-1024w.webp 1024w" 
+                 data-sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, 1024px"
+                 alt="BMW Transport" loading="lazy" />
           </div>
           <div class="enhanced-gallery-overlay">
             <div class="enhanced-gallery-overlay-content">
@@ -570,21 +578,19 @@
   <!-- Page Navigation Loader - Must load after loading-state-manager -->
   <script src="../js/modules/page-navigation-loader.js"></script>
   <script src="../js/modules/navbar-loader.js?v=2"></script>
-
   <script src="../js/modules/footer-loader.js"></script>
   <script src="../js/modules/themes.js"></script>
-
+  <script src="../js/modules/scroll-animations.js"></script>
+  <script src="../js/modules/glow-inputs.js"></script>
   <script src="../js/modules/gallery.js"></script>
-  <!-- Floating buttons removed - handled by FAB menu in footer -->
-  <!-- <script src="../js/modules/floating-book-button.js"></script>
-  <!-- <script src="../js/modules/floating-call-button.js"></script>
-  <script src="../js/modules/floating-whatsapp-button.js"></script> -->
-  <!-- <script src="../js/modules/quote-modal.js"></script> -->
-  <!-- <script src="../js/modules/sticky-quote-button.js"></script> -->
-  <script src="../js/modules/floating-chatbot-button.js"></script>
-  <script src="../js/modules/chatbot-modal.js"></script>
-  <script src="../js/modules/back-to-top-button.js"></script>
+  <script src="../js/modules/gallery-enhanced.js"></script>
+  <!-- Enhanced Lazy Loading -->
+  <script src="../js/modules/enhanced-lazy-loading.js"></script>
+  <!-- Performance Monitoring -->
+  <script src="../js/modules/performance-monitor.js"></script>
+  <script src="../js/script.js"></script>
   <script src="../js/modules/backtoBottom.js"></script>
+  <script src="../js/modules/back-to-top-button.js"></script>
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">
