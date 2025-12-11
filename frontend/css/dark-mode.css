@@ -477,4 +477,22 @@ body[data-theme="dark"] .quote-result-reset-btn:hover {
    body[data-theme="dark"] .transport-card i {
        color: #ff6b3d !important;
    }
-   
+/* === Search bar visibility fix (global) === */
+.search-bar {
+  background: #3b3b3b !important;           /* lighter than navbar */
+  border: 1px solid #ff6a3d !important;     /* orange outline */
+  border-radius: 999px !important;          /* pill shape */
+  padding: 8px 16px !important;
+}
+
+.search-bar input {
+  color: #ffffff !important;                /* visible text */
+  font-size: 0.9rem !important;
+}
+
+.search-bar input::placeholder {
+  color: #f0f0f0 !important;                /* light placeholder */
+  opacity: 0.9 !important;
+}
+
+
