@@ -73,13 +73,25 @@
   <div class="auto-slider grid-slider">
    <div class="slider-container">
       <div class="slide active">
-        <img src="assets/images/first.jpeg" alt="Car Transport 1" class="slide-image" />
+        <img src="assets/images/first.jpeg" 
+             data-src="assets/images/first-640w.webp" 
+             data-srcset="assets/images/first-320w.webp 320w, assets/images/first-640w.webp 640w, assets/images/first-1024w.webp 1024w" 
+             data-sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, 1024px"
+             alt="Car Transport 1" class="slide-image lazy-load" loading="lazy" />
       </div>
       <div class="slide">
-        <img src="assets/images/right-logo.jpg" alt="Car Transport 1" class="slide-image" />
+        <img src="assets/images/right-logo.jpg" 
+             data-src="assets/images/right-logo-640w.webp" 
+             data-srcset="assets/images/right-logo-320w.webp 320w, assets/images/right-logo-640w.webp 640w, assets/images/right-logo-1024w.webp 1024w" 
+             data-sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, 1024px"
+             alt="Car Transport 1" class="slide-image lazy-load" loading="lazy" />
       </div>
       <div class="slide">
-        <img src="assets/images/hasel-free.png" alt="Car Transport 1" class="slide-image" />
+        <img src="assets/images/hasel-free.png" 
+             data-src="assets/images/hasel-free-640w.webp" 
+             data-srcset="assets/images/hasel-free-320w.webp 320w, assets/images/hasel-free-640w.webp 640w, assets/images/hasel-free-1024w.webp 1024w" 
+             data-sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, 1024px"
+             alt="Car Transport 1" class="slide-image lazy-load" loading="lazy" />
         <div class="slide-gradient-overlay"></div>
         <div class="slide-text">
           <h2>Safe & Reliable Vehicle Transport</h2>
@@ -87,7 +99,11 @@
         </div>
       </div>
       <div class="slide">
-        <img src="assets/images/banner-2.jpg" alt="Car Transport 2" class="slide-image" />
+        <img src="assets/images/banner-2.jpg" 
+             data-src="assets/images/banner-2-640w.webp" 
+             data-srcset="assets/images/banner-2-320w.webp 320w, assets/images/banner-2-640w.webp 640w, assets/images/banner-2-1024w.webp 1024w" 
+             data-sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, 1024px"
+             alt="Car Transport 2" class="slide-image lazy-load" loading="lazy" />
         <div class="slide-gradient-overlay"></div>
         <div class="slide-text">
           <h2>Nationwide Auto Delivery</h2>
@@ -95,7 +111,11 @@
         </div>
       </div>
       <div class="slide">
-        <img src="assets/images/banner.jpg" alt="Car Transport 3" class="slide-image" />
+        <img src="assets/images/banner.jpg" 
+             data-src="assets/images/banner-640w.webp" 
+             data-srcset="assets/images/banner-320w.webp 320w, assets/images/banner-640w.webp 640w, assets/images/banner-1024w.webp 1024w" 
+             data-sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, 1024px"
+             alt="Car Transport 3" class="slide-image lazy-load" loading="lazy" />
         <div class="slide-gradient-overlay"></div>
         <div class="slide-text">
           <h2>Modern Fleet. Trusted Service.</h2>
@@ -513,7 +533,10 @@
   <script src="js/modules/digital-clock.js"></script>
   <script src="js/modules/scroll-animations.js"></script>
   <script src="js/modules/glow-inputs.js"></script>
-
+  <!-- Enhanced Lazy Loading -->
+  <script src="js/modules/enhanced-lazy-loading.js"></script>
+  <!-- Performance Monitoring -->
+  <script src="js/modules/performance-monitor.js"></script>
 
 <div id="cookie-popup" class="cookie-popup">
   <p>
