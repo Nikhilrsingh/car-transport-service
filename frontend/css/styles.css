@@ -817,6 +817,130 @@ a[disabled] {
    </div>
 */
 
+/* ============================================================
+   CLEAN NEON CYBERPUNK THEME – Light & Dark Compatible
+   ============================================================ */
+
+/* ------------------------------
+   DARK MODE CYBERPUNK
+------------------------------ */
+body.neon-theme.dark {
+    --bg-main: #0a0c10;
+    --bg-surface: #13161f;
+
+    --text-primary: #f8f8f8;
+    --text-secondary: #bbbbbb;
+
+    /* Accent – toned neon */
+    --accent-pink: #ff2ea6;
+    --accent-cyan: #0de7ff;
+    --accent-purple: #c088ff;
+
+    /* Subtle glow (beautiful, not ugly) */
+    --glow-pink: 0 0 10px rgba(255, 46, 166, 0.4);
+    --glow-cyan: 0 0 10px rgba(13, 231, 255, 0.35);
+    --glow-purple: 0 0 12px rgba(192, 136, 255, 0.4);
+
+    --border-soft: rgba(255, 46, 166, 0.25);
+}
+
+/* ------------------------------
+   LIGHT MODE CYBERPUNK
+------------------------------ */
+body.neon-theme.light {
+    --bg-main: #f3f4f7;
+    --bg-surface: #ffffff;
+
+    --text-primary: #222;
+    --text-secondary: #555;
+
+    /* Muted neon accents for light mode */
+    --accent-pink: #d61f88;
+    --accent-cyan: #00bcd4;
+    --accent-purple: #8855ff;
+
+    /* No glow (glow looks bad on light mode) */
+    --glow-pink: none;
+    --glow-cyan: none;
+    --glow-purple: none;
+
+    --border-soft: rgba(214, 31, 136, 0.25);
+}
+
+/* ------------------------------
+   GLOBAL APPLY
+------------------------------ */
+body.neon-theme {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    transition: 0.3s ease;
+}
+
+/* SURFACES */
+body.neon-theme .card,
+body.neon-theme .service-box,
+body.neon-theme .feature-box,
+body.neon-theme .hero-content,
+body.neon-theme .about-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--glow-purple);
+}
+
+/* HEADINGS */
+body.neon-theme h1,
+body.neon-theme h2,
+body.neon-theme h3 {
+    color: var(--text-primary);
+    text-shadow: var(--glow-purple);
+}
+
+/* BUTTONS */
+body.neon-theme button,
+body.neon-theme .btn,
+body.neon-theme .cta-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-pink);
+    color: var(--text-primary);
+    box-shadow: var(--glow-pink);
+    transition: 0.25s ease;
+}
+
+body.neon-theme button:hover,
+body.neon-theme .btn:hover,
+body.neon-theme .cta-btn:hover {
+    background: var(--accent-pink);
+    color: #fff;
+    box-shadow: var(--glow-pink), var(--glow-purple);
+}
+
+/* LINKS */
+body.neon-theme a {
+    color: var(--accent-cyan);
+    text-shadow: var(--glow-cyan);
+}
+
+/* INPUTS */
+body.neon-theme input,
+body.neon-theme textarea,
+body.neon-theme select {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-soft);
+}
+
+/* HERO TITLES */
+body.neon-theme .hero-title {
+    text-shadow: var(--glow-purple);
+}
+
+/* OPTIONAL: add smooth glow for images in dark mode */
+body.neon-theme.dark img {
+    filter: brightness(0.92) contrast(1.05);
+    box-shadow: var(--glow-purple);
+}
+
+
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
