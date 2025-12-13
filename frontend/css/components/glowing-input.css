@@ -1,0 +1,17 @@
+ .glow-inputs:focus {
+    outline: none !important;
+    border: 2px solid #4A90E2 !important;
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.9),
+                0 0 30px rgba(74, 144, 226, 0.7);
+    transition: all 0.25s ease-in-out;
+} 
+ 
+
+
+input.glow-inputs,
+select.glow-inputs,
+textarea.glow-inputs {
+    transition: all 0.25s ease-in-out;
+    border-radius: 6px;
+} 
+

@@ -894,58 +894,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .region-icon {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .region-icon i {
-    font-size: 2rem;
-  }
-  
-  .region-header .section-title {
-    font-size: 1.8rem;
-  }
-  
-  .popular-cities-title {
-    font-size: 1.5rem;
-  }
-  
-  .city-thumbnail {
-    height: 100px;
-    font-size: 3rem;
-  }
-  
-  .city-name {
-    font-size: 1.2rem;
-  }
-  
-  .filter-tab {
-    flex: 1 1 calc(50% - 10px);
-    justify-content: center;
-  }
-  
-  .map-section-title {
-    font-size: 1.3rem;
-  }
-  
-  .map-legend {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  
-  .load-more-btn {
-    padding: 12px 28px;
-    font-size: 0.95rem;
-  }
-  
-  .cities-count {
-    font-size: 0.85rem;
-  }
-}
-
 /* Mobile Bottom Sheet Filter Panel */
 .bottom-sheet-overlay {
   position: fixed;
@@ -1244,7 +1192,6 @@
 }
 
 .office-marker:hover {
-  r: 10;
   filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.6));
 }
 

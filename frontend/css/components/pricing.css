@@ -1315,35 +1315,3 @@ body:has(.pricing-page) {
         grid-template-columns: 1fr;
     }
 }
-
-@media (max-width: 480px) {
-    .page-header h1 {
-        font-size: 1.5em;
-    }
-
-    .pricing-page .pricing-card {
-        padding: 30px 20px;
-    }
-
-    .pricing-page .plan-name {
-        font-size: 1.5em;
-    }
-
-    .pricing-page .price-amount {
-        font-size: 2.5em;
-    }
-
-    .pricing-page .calculator-header h2 {
-        font-size: 1.5em;
-    }
-
-    .pricing-page .faq-section h2,
-    .pricing-page .testimonials-section h2 {
-        font-size: 1.8em;
-    }
-}
-
-
-
-
-
