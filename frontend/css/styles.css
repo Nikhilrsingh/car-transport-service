@@ -32,6 +32,86 @@
   font-style: normal;
 }
 
+/* ============================================================
+   GLOBAL REDUCED-DATA MODE
+   Improves performance on slow / metered networks
+   ============================================================ */
+
+/* Triggered when user enables "Reduce Data Usage" at OS / browser level */
+@media (prefers-reduced-data: reduce) {
+
+    /* --------------------------------
+       Disable heavy animations globally
+    -------------------------------- */
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* --------------------------------
+       Reduce visual effects on images
+    -------------------------------- */
+    img,
+    .slide-image,
+    .hero img {
+        filter: none !important;
+        box-shadow: none !important;
+        background: none !important;
+    }
+
+    /* --------------------------------
+       Simplify cards and surfaces
+    -------------------------------- */
+    .card,
+    .service-box,
+    .feature-box,
+    .review-card,
+    .team-card {
+        box-shadow: none !important;
+        border: 1px solid #ddd;
+        background-image: none !important;
+    }
+
+    /* --------------------------------
+       Disable decorative backgrounds
+    -------------------------------- */
+    .hero-background,
+    .gradient-overlay,
+    .slide-gradient-overlay {
+        display: none !important;
+    }
+
+    /* --------------------------------
+       Simplify buttons for clarity
+    -------------------------------- */
+    button,
+    .btn,
+    .cta-btn,
+    .service-btn {
+        box-shadow: none !important;
+        background-image: none !important;
+    }
+
+    /* --------------------------------
+       Improve text readability
+    -------------------------------- */
+    body {
+        background: #ffffff !important;
+        color: #111111 !important;
+    }
+
+    /* --------------------------------
+       Reduce large section spacing
+    -------------------------------- */
+    section {
+        padding: 40px 0 !important;
+    }
+}
+
+
 /* ========================================
    COLOR PALETTE - Standardized & Accessible
    ======================================== */
