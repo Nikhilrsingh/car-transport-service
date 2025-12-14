@@ -1,6 +1,6 @@
 :root {
   --bg: #ffffff;
-  --text: #222222;
+  --text: #6b0808;
   --footer-bg: #f6f6f6;
   --footer-text: #222222;
   --accent: #ff6b3d;
@@ -10,14 +10,72 @@
 /* Light Mode Color Palette Override */
 body[data-theme="light"] {
   --color-text-primary: #000000;
-  --color-text-secondary: #2d2d2d;
-  --color-text-muted: #555555;
+  --color-text-secondary: #c78a70;
+  --color-text-muted: #b46e52;
 }
 
 /* global overrides */
 body {
   background: var(--bg);
   color: var(--text);
+}
+
+/* Navbar visibility in light theme */
+body[data-theme="light"] .header {
+  background: rgba(10, 10, 10, 0.96) !important;
+  box-shadow:  0 4px 24px rgba(0, 0, 0, 0.4) !important;
+}
+body[data-theme="light"] .nav-link,
+body[data-theme="light"] .login-btn,
+body[data-theme="light"] .enquiry-link,
+body[data-theme="light"] .mobile-close-btn,
+body[data-theme="light"] .mobile-login-btn {
+  color: #f5f5f5 !important;
+}
+body[data-theme="light"] .nav-link i,
+body[data-theme="light"] .action-nav i {
+  color: #ff6347 !important;
+}
+
+/* Search bar visibility in light theme */
+body[data-theme="light"] .search-bar {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+body[data-theme="light"] .search-bar input {
+  color: #fff9f9 !important;
+}
+body[data-theme="light"] .search-bar input::placeholder {
+  color: rgb(255, 253, 253) !important;
+}
+body[data-theme="light"] .search-bar i {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+body[data-theme="light"] .search-bar:hover i,
+body[data-theme="light"] .search-bar:focus-within i {
+  color: #ff6347 !important;
+}
+body[data-theme="light"] .search-bar:focus-within {
+  background: rgba(255, 99, 71, 0.08) !important;
+  border-color: #ff6347 !important;
+}
+
+/* Theme toggle button visibility in light mode */
+body[data-theme="light"] .nav-theme-toggle button,
+body[data-theme="light"] #theme-toggle {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #1a1a1a !important;
+}
+body[data-theme="light"] .nav-theme-toggle button:hover,
+body[data-theme="light"] #theme-toggle:hover {
+  background: rgba(255, 99, 71, 0.15) !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+body[data-theme="light"] .nav-theme-toggle button i,
+body[data-theme="light"] #theme-toggle i {
+  color: #ff6347 !important;
 }
 
 /* footer example */
@@ -29,36 +87,36 @@ body {
 /* Hero Section - Light overlay for dark text visibility */
 .hero-overlay {
   background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.85) 0%,
-      rgba(255, 99, 71, 0.15) 50%,
-      rgba(255, 255, 255, 0.8) 100%) !important;
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.35) 100%) !important;
 }
 
 /* Dark text for light theme */
 .hero-title,
 .title-line {
-  color: #1a1a1a !important;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8) !important;
 }
 
 .hero-description {
-  color: #2d2d2d !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+  color: #f5f5f5 !important;
+  text-shadow:0 2px 6px rgba(0, 0, 0, 0.7) !important;
 }
 
 .hero-badge {
-  color: #1a1a1a !important;
-  background: rgba(255, 99, 71, 0.15) !important;
-  border-color: rgba(255, 99, 71, 0.4) !important;
+  color:#ffffff !important;
+  background: rgba(255, 99, 71, 0.35) !important;
+  border-color: rgba(255, 99, 71, 0.8)  !important;
 }
 
 .stat-number {
-  color: #ff6347 !important;
+  color:  #ffb399 !important;
 }
 
 .stat-label {
-  color: #333 !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+  color: #f0f0f0 !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7) !important;
 }
 
 /* Keep gradient on highlighted title */
@@ -77,11 +135,11 @@ body {
 }
 
 .cta-text h2 {
-  color: #1a1a1a !important;
+  color: #aa0707 !important;
 }
 
 .cta-text p {
-  color: #2d2d2d !important;
+  color: #d00000 !important;
 }
 
 .feature span {
@@ -119,14 +177,16 @@ body {
 .hero-actions .cta-btn.primary {
   color: #ffffff !important;
   background: linear-gradient(135deg, #ff6347, #ff4500) !important;
-  box-shadow: 0 10px 30px rgba(255, 99, 71, 0.4) !important;
+  box-shadow: 0 12px 32px rgba(255, 99, 71, 0.5)!important;
   border: 2px solid transparent !important;
+  filter: brightness(1.05) !important;
 }
 
 .hero-actions .cta-btn.primary:hover {
   background: linear-gradient(135deg, #ff4500, #e63900) !important;
-  box-shadow: 0 15px 40px rgba(255, 99, 71, 0.5) !important;
+  box-shadow:  0 16px 40px rgba(255, 99, 71, 0.6)!important;
   border-color: rgba(255, 99, 71, 0.3) !important;
+  filter: brightness(1.1) !important;
 }
 
 .hero-actions .cta-btn.secondary {
@@ -164,7 +224,7 @@ body[data-theme="light"] .testimonials-section .section-title p {
 /* Footer text contrast in light theme */
 body[data-theme="light"] .footer,
 body[data-theme="light"] #footer-container .footer {
-  color: #222222 !important;
+  color: #d3654c !important;
 }
 body[data-theme="light"] .footer .footer-about p,
 body[data-theme="light"] .footer .footer-links a,
@@ -175,6 +235,39 @@ body[data-theme="light"] .footer .footer-bottom-links a,
 body[data-theme="light"] .footer .payment-methods i,
 body[data-theme="light"] .footer .footer-brand {
   color: #333333 !important;
+}
+
+/* Footer form & button visibility fixes for light theme */
+body[data-theme="light"] .footer .newsletter-animated input,
+body[data-theme="light"] .footer .newsletter-form input,
+body[data-theme="light"] .footer input[type="email"],
+body[data-theme="light"] .footer .newsletter input {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  caret-color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .footer .newsletter-animated input::placeholder,
+body[data-theme="light"] .footer .newsletter-form input::placeholder,
+body[data-theme="light"] .footer input::placeholder {
+  color: rgba(0,0,0,0.45) !important;
+}
+
+body[data-theme="light"] .footer .newsletter-animated button,
+body[data-theme="light"] .footer .newsletter-form button,
+body[data-theme="light"] .footer .cta-primary {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* Ensure small sticky footer icons and toggle are visible */
+body[data-theme="light"] .mini-sticky-footer,
+body[data-theme="light"] .footer-toggle {
+  background: rgba(255,255,255,0.9) !important;
+  color: #1a1a1a !important;
+  border-color: rgba(0,0,0,0.06) !important;
 }
 
 /* Quote Card - Light Theme */
@@ -441,3 +534,17 @@ body[data-theme="light"] .quote-result-reset-btn:hover {
   color: #ff6347 !important;
 }
 
+/* Light Mode: Improve Card Visibility */
+body[data-theme="light"] .service-card,
+body[data-theme="light"] .feature-box,
+body[data-theme="light"] .card {
+    background: #f2f2f2 !important;                    /* Slight grey for contrast */
+    border: 1px solid rgba(0,0,0,0.08) !important;     /* Soft border */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important; /* Card pops out */
+    color: #1a1a1a !important;                         /* Ensure text is readable */
+}
+
+body[data-theme="light"] .service-card p,
+body[data-theme="light"] .service-card h3 {
+    color: #1a1a1a !important;                         /* Fix faded text */
+}
