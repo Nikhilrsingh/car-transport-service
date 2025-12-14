@@ -83,22 +83,6 @@
     }
 }
 
-@media (max-width: 480px) {
-    .floating-book-btn {
-        /* mobile: keep some spacing above the back-to-top */
-        bottom: 70px;
-        right: 15px;
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .floating-book-btn::before {
-        bottom: 135px;
-        font-size: 12px;
-    }
-}
-
 /* Hide floating button on booking page if needed */
 .pages\\booking .floating-book-btn {
     display: none;
