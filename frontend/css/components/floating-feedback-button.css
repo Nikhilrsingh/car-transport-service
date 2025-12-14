@@ -156,19 +156,3 @@
   background: linear-gradient(135deg, #e68900, #ff9800);
   transform: translateY(-2px);
 }
-
-/* === Responsive Modal Adjustments === */
-@media (max-width: 500px) {
-  .feedback-modal-content {
-    padding: 25px 20px;
-  }
-
-  .feedback-stars i {
-    font-size: 24px;
-  }
-
-  #feedbackForm button {
-    font-size: 15px;
-    padding: 10px 18px;
-  }
-}

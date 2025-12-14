@@ -122,38 +122,6 @@
     }
 }
 
-/* Mobile Breakpoint (480px and below) */
-@media (max-width: 480px) {
-    #floating-call-btn {
-        width: 50px;
-        height: 50px;
-        bottom: 15px;
-        left: 15px;
-        font-size: 20px;
-        box-shadow: 0 2px 8px rgba(30, 144, 255, 0.3);
-    }
-
-    #floating-call-btn:hover {
-        transform: scale(1.06);
-        box-shadow: 0 3px 10px rgba(30, 144, 255, 0.4);
-    }
-
-    #floating-call-btn::before {
-        left: 60px;
-        bottom: 12px;
-        font-size: 10px;
-        padding: 6px 8px;
-    }
-
-    #floating-call-btn::after {
-        left: 57px;
-        bottom: 18px;
-        border-right: 4px solid transparent;
-        border-top: 4px solid rgba(30, 144, 255, 0.9);
-        border-bottom: 4px solid transparent;
-    }
-}
-
 /* Accessibility: Reduce animations for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
     #floating-call-btn {

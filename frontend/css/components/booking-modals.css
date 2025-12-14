@@ -465,28 +465,3 @@
         font-size: 0.85rem;
     }
 }
-
-@media (max-width: 480px) {
-    .action-card {
-        min-height: 120px;
-        padding: 20px 15px;
-    }
-
-    .action-card i {
-        font-size: 2rem;
-    }
-
-    .action-card h4 {
-        font-size: 1rem;
-    }
-
-    .refund-tier {
-        flex-wrap: wrap;
-    }
-
-    .refund-tier .tier-amount {
-        width: 100%;
-        text-align: left;
-        margin-top: 5px;
-    }
-}

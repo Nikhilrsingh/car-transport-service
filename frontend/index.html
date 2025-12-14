@@ -11,43 +11,43 @@
   <link rel="stylesheet" href="css/components/rating.css" />
   <link rel="stylesheet" href="css/components/tracking.css" />
   <link rel="stylesheet" href="css/components/navbar.css" />
+  <link rel="stylesheet" href="css/components/middle-navbar.css" />
   <link rel="stylesheet" href="css/components/footer.css" />
-  <link rel="stylesheet" href="css/components/floating-button.css" />
-  <link rel="stylesheet" href="css/components/floating-call-button.css" />
-  <link rel="stylesheet" href="css/components/floating-whatsapp-button.css" />
-  <link rel="stylesheet" href="css/components/floating-chatbot-button.css" />
-  <link rel="stylesheet" href="css/components/sticky-quote-button.css" />
   <link rel="stylesheet" href="css/components/quote-modal.css" />
   <link rel="stylesheet" href="css/components/chatbot-modal.css" />
   <link rel="stylesheet" href="css/components/backtoBottom.css" />
   <link rel="stylesheet" href="css/components/back-to-top-button.css" />
   <link rel="stylesheet" href="css/components/digital-clock.css" />
   <link rel="stylesheet" href="css/components/animations.css" />
-  <link rel="stylesheet" href="css/components/floating-feedback-button.css" />
   <link rel="stylesheet" href="css/components/region-enhanced.css" />
   <link rel="stylesheet" href="css/components/map-enhancements.css" />
   <link rel="stylesheet" href="css/components/loading-indicators.css" />
+  <link rel="stylesheet" href="css/components/floating-action-menu.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/components/feedback.css">
+  <link rel="stylesheet" href="css/components/floating-feedback-button.css">
   <!-- Theme Toggle Link (must be in <head>) -->
   <link id="theme-style" rel="stylesheet" href="css/light-mode.css" />
+
+  <!-- Before </head> -->
+  <link rel="stylesheet" href="css/components/glowing-input.css">
+
 </head>
 
-<body>
+<body class="neon-theme">
   <!-- 🌟 Enhanced Preloader -->
-  <div id="preloader">
-    <div class="preloader-content">
-      <div class="logo-container">
-        <img src="assets/images/left-logo-w-bt.png" alt="Harihar Car Carriers" />
-      </div>
-      <div class="loading-text">Loading</div>
-      <div class="dots"><span></span><span></span><span></span></div>
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
-      </div>
+<div id="preloader">
+  <div class="preloader-content">
+    <div class="logo-container">
+      <img src="assets/images/left-logo-w-bt.png" alt="Harihar Car Carriers" />
+    </div>
+    <div class="loading-text">Loading</div>
+    <div class="dots"><span></span><span></span><span></span></div>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
     </div>
   </div>
+</div>
 
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
@@ -55,10 +55,27 @@
   <!-- Navbar Container - Loaded dynamically -->
   <div id="navbar-container"></div>
 
-  <!--  Automated Image Slider Section -->
-  <section class="auto-slider">
-    <div class="slider-container">
+  <!--  Automated Image Slider Section & features -->
+    <section class="slider-feature-grid">
+
+  <div class="feature-box left-top fade-in">
+    🚗
+    <h3>Fast Delivery</h3>
+    <p>We ensure timely and safe transport of your vehicle.</p>
+  </div>
+
+  <div class="feature-box left-bottom fade-in">
+    💰
+    <h3>Affordable Rates</h3>
+    <p>Budget-friendly prices with no hidden charges.</p>
+  </div>
+
+  <div class="auto-slider grid-slider">
+   <div class="slider-container">
       <div class="slide active">
+        <img src="assets/images/first.jpeg" alt="Car Transport 1" class="slide-image" />
+      </div>
+      <div class="slide">
         <img src="assets/images/right-logo.jpg" alt="Car Transport 1" class="slide-image" />
       </div>
       <div class="slide">
@@ -86,160 +103,178 @@
         </div>
       </div>
     </div>
-    <!-- Scroll Indicator -->
+
     <div class="scroll-indicator">
       <div class="scroll-text">Scroll to Explore</div>
-      <div class="scroll-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
+      <div class="scroll-arrow"><i class="fas fa-chevron-down"></i></div>
     </div>
-  </section>
+  </div>
+
+  <div class="feature-box right-top fade-in">
+    🛡️
+    <h3>Full Insurance</h3>
+    <p>Your vehicle is fully insured during transport.</p>
+  </div>
+  <div class="feature-box right-bottom fade-in">
+    🚚
+    <h3>Door-to-Door Service</h3>
+    <p>We pick up and deliver your vehicle safely.</p>
+  </div>
+
+</section>
+
+  
 
   <!-- Enhanced Hero Section -->
   <section id="home" class="hero">
     <div class="hero-background"></div>
     <div class="hero-content">
       <div class="container">
-        <div class="hero-main">
-          <!-- Badge -->
-          <div class="hero-badge">
-            <i class="fas fa-shield-alt"></i>
-            <span>Trusted by 5000+ Customers</span>
+        <div class="hero-layout">
+          <!-- Left Side: Written Content -->
+          <div class="hero-main">
+            <!-- Badge -->
+            <div class="hero-badge">
+              <i class="fas fa-shield-alt"></i>
+              <span>Trusted by 5000+ Customers</span>
+            </div>
+            <!-- Main Heading -->
+            <h1 class="hero-title">
+              <span class="title-line highlight">HARIHAR</span>
+              <span class="title-line">CAR</span>
+              <span class="title-line">CARRIERS</span>
+            </h1>
+            <!-- Sub Heading -->
+            <h2 class="hero-sub-title">
+              <span>Premium Vehicle</span>
+              <span>Transportation</span>
+              <span>Across India</span>
+            </h2>
+            <!-- Description -->
+            <p class="hero-description">
+              Experience safe, reliable, and insured car transportation services
+              with real-time tracking and door-to-door delivery.
+            </p>
+            <!-- Stats -->
+            <div class="hero-stats">
+              <div class="stat">
+                <div class="stat-number" data-target="5000">0</div>
+                <div class="stat-label">Vehicles Transported</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Cities Covered</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number" data-target="98">0</div>
+                <div class="stat-label">% Satisfaction</div>
+              </div>
+            </div>
+            <!-- CTA Buttons -->
+            <div class="hero-actions">
+              <a href="pages/booking.html" class="cta-btn primary">
+                <i class="fas fa-truck-moving"></i>
+                <span>Book Instantly</span>
+                <div class="btn-shine"></div>
+              </a>
+              <a href="#quote" class="cta-btn secondary">
+                <i class="fas fa-calculator"></i>
+                <span>Get Free Quote</span>
+              </a>
+              <a href="pages/how-it-works.html" class="cta-btn outline">
+                <i class="fas fa-play-circle"></i>
+                <span>Watch How It Works</span>
+              </a>
+            </div>
           </div>
-          <!-- Main Heading -->
-          <h1 class="hero-title">
-            <span class="title-line highlight">HARIHAR</span>
-            <span class="title-line">CAR</span>
-            <span class="title-line">CARRIERS</span>
-          </h1>
-          <!-- Sub Heading -->
-          <h2 class="hero-sub-title">
-            <span>Premium Vehicle</span>
-            <span>Transportation</span>
-            <span>Across India</span>
-          </h2>
-          <!-- Description -->
-          <p class="hero-description">
-            Experience safe, reliable, and insured car transportation services
-            with real-time tracking and door-to-door delivery.
-          </p>
-          <!-- Stats -->
-          <div class="hero-stats">
-            <div class="stat">
-              <div class="stat-number" data-target="5000">0</div>
-              <div class="stat-label">Vehicles Transported</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number" data-target="50">0</div>
-              <div class="stat-label">Cities Covered</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number" data-target="98">0</div>
-              <div class="stat-label">% Satisfaction</div>
-            </div>
-          </div>
-          <!-- CTA Buttons -->
-          <div class="hero-actions">
-            <a href="pages/booking.html" class="cta-btn primary">
-              <i class="fas fa-truck-moving"></i>
-              <span>Book Instantly</span>
-              <div class="btn-shine"></div>
-            </a>
-            <a href="#quote" class="cta-btn secondary">
-              <i class="fas fa-calculator"></i>
-              <span>Get Free Quote</span>
-            </a>
-            <a href="pages/how-it-works.html" class="cta-btn outline">
-              <i class="fas fa-play-circle"></i>
-              <span>Watch How It Works</span>
-            </a>
-          </div>
-        </div>
-        <!-- Quick Quote Form -->
-        <div class="hero-quote">
-          <div class="quote-card">
-            <div class="quote-header">
-              <h3>Get Instant Quote</h3>
-              <p>Quick & accurate pricing in 30 seconds</p>
-            </div>
-            <!-- Step Progress Indicator -->
-            <div class="step-progress">
-              <div class="step active" data-step="1">
-                <div class="step-number">1</div>
-                <div class="step-label">Route</div>
+
+          <!-- Right Side: Quick Quote Form -->
+          <div class="hero-quote" id="quote">
+            <div class="quote-card">
+              <div class="quote-header">
+                <h3>Get Instant Quote</h3>
+                <p>Quick & accurate pricing in 30 seconds</p>
               </div>
-              <div class="step-line"></div>
-              <div class="step" data-step="2">
-                <div class="step-number">2</div>
-                <div class="step-label">Vehicle</div>
+              <!-- Step Progress Indicator -->
+              <div class="step-progress">
+                <div class="step active" data-step="1">
+                  <div class="step-number">1</div>
+                  <div class="step-label">Route</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="2">
+                  <div class="step-number">2</div>
+                  <div class="step-label">Vehicle</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="3">
+                  <div class="step-number">3</div>
+                  <div class="step-label">Quote</div>
+                </div>
               </div>
-              <div class="step-line"></div>
-              <div class="step" data-step="3">
-                <div class="step-number">3</div>
-                <div class="step-label">Quote</div>
-              </div>
-            </div>
-            <form class="quote-form" id="quickQuoteForm">
-              <!-- Step 1: Route -->
-              <div class="form-step active" data-step="1">
-                <div class="form-group floating-label">
-                  <input type="text" id="fromCity" required autocomplete="off" />
-                  <label for="fromCity"><i class="fas fa-map-marker-alt"></i> Pickup City</label>
-                  <div class="autocomplete-dropdown" id="fromCityDropdown"></div>
-                </div>
-                <div class="form-group floating-label">
-                  <input type="text" id="toCity" required autocomplete="off" />
-                  <label for="toCity"><i class="fas fa-flag-checkered"></i> Drop City</label>
-                  <div class="autocomplete-dropdown" id="toCityDropdown"></div>
-                </div>
-                <div class="distance-display" id="distanceDisplay">
-                  <i class="fas fa-route"></i>
-                  <span>Distance: <strong id="distanceValue">---</strong></span>
-                </div>
-                <button type="button" class="quote-next" id="step1Next">
-                  <span>Next</span>
-                  <i class="fas fa-arrow-right"></i>
-                </button>
-              </div>
-              <!-- Step 2: Vehicle Type -->
-              <div class="form-step" data-step="2">
-                <div class="form-group floating-label">
-                  <select id="vehicleType" required>
-                    <option value=""></option>
-                    <option value="hatchback">Hatchback</option>
-                    <option value="sedan">Sedan</option>
-                    <option value="suv">SUV</option>
-                    <option value="luxury">Luxury Car</option>
-                  </select>
-                  <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
-                </div>
-                <div class="form-actions">
-                  <button type="button" class="quote-form-back-btn" id="step2Back">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Back</span>
-                  </button>
-                  <button type="submit" class="quote-form-submit-btn">
-                    <span>Calculate Price</span>
-                    <i class="fas fa-calculator"></i>
+              <form class="quote-form" id="quickQuoteForm">
+                <!-- Step 1: Route -->
+                <div class="form-step active" data-step="1">
+                  <div class="form-group floating-label">
+                    <input type="text" id="fromCity" required autocomplete="off" />
+                    <label for="fromCity"><i class="fas fa-map-marker-alt"></i> Pickup City</label>
+                    <div class="autocomplete-dropdown" id="fromCityDropdown"></div>
+                  </div>
+                  <div class="form-group floating-label">
+                    <input type="text" id="toCity" required autocomplete="off" />
+                    <label for="toCity"><i class="fas fa-flag-checkered"></i> Drop City</label>
+                    <div class="autocomplete-dropdown" id="toCityDropdown"></div>
+                  </div>
+                  <div class="distance-display" id="distanceDisplay">
+                    <i class="fas fa-route"></i>
+                    <span>Distance: <strong id="distanceValue">---</strong></span>
+                  </div>
+                  <button type="button" class="quote-next" id="step1Next">
+                    <span>Next</span>
+                    <i class="fas fa-arrow-right"></i>
                   </button>
                 </div>
-              </div>
-              <!-- Step 3: Result -->
-              <div class="form-step" data-step="3">
-                <div class="quote-result" id="quoteResult">
-                  <div class="result-details">
-                    <div class="result-row">
-                      <span class="result-label">Route:</span>
-                      <span class="result-value" id="resultRoute">---</span>
+                <!-- Step 2: Vehicle Type -->
+                <div class="form-step" data-step="2">
+                  <div class="form-group floating-label">
+                    <select id="vehicleType" required>
+                      <option value=""></option>
+                      <option value="hatchback">Hatchback</option>
+                      <option value="sedan">Sedan</option>
+                      <option value="suv">SUV</option>
+                      <option value="luxury">Luxury Car</option>
+                    </select>
+                    <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" class="quote-form-back-btn" id="step2Back">
+                      <i class="fas fa-arrow-left"></i>
+                      <span>Back</span>
+                    </button>
+                    <button type="submit" class="quote-form-submit-btn">
+                      <span>Calculate Price</span>
+                      <i class="fas fa-calculator"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- Step 3: Result -->
+                <div class="form-step" data-step="3">
+                  <div class="quote-result" id="quoteResult">
+                    <div class="result-details">
+                      <div class="result-row">
+                        <span class="result-label">Route:</span>
+                        <span class="result-value" id="resultRoute">---</span>
+                      </div>
+                      <div class="result-row">
+                        <span class="result-label">Distance:</span>
+                        <span class="result-value" id="resultDistance">---</span>
+                      </div>
+                      <div class="result-row">
+                        <span class="result-label">Vehicle:</span>
+                        <span class="result-value" id="resultVehicle">---</span>
+                      </div>
                     </div>
-                    <div class="result-row">
-                      <span class="result-label">Distance:</span>
-                      <span class="result-value" id="resultDistance">---</span>
-                    </div>
-                    <div class="result-row">
-                      <span class="result-label">Vehicle:</span>
-                      <span class="result-value" id="resultVehicle">---</span>
-                    
+
                     <!-- Delivery Time Display -->
                     <div class="delivery-time-display">
                       <i class="fas fa-shipping-fast"></i>
@@ -248,12 +283,7 @@
                         <span class="time-value" id="deliveryTime">---</span>
                       </div>
                     </div>
-                    
-                    <div class="result-price">
-                      <span class="label">Estimated Cost</span>
-                      <span class="amount" id="resultAmount">₹0</span>
-                    </div>
-                    
+
                     <!-- Compare Prices Section -->
                     <div class="compare-prices-section" id="comparePricesSection" style="display: none;">
                       <div class="compare-prices-header">
@@ -261,80 +291,31 @@
                       </div>
                       <div class="price-options" id="priceOptions"></div>
                     </div>
-                    
+
+                    <div class="result-price">
+                      <span class="label">Estimated Cost</span>
+                      <span class="amount" id="resultAmount">₹0</span>
+                    </div>
+
                     <div class="result-actions">
-                      <button
-                        type="button"
-                        class="quote-result-book-btn"
-                        id="bookNowBtn"
-                      >
+                      <button type="button" class="quote-result-book-btn" id="bookNowBtn">
                         <i class="fas fa-check-circle"></i>
                         <span>Book Now</span>
                       </button>
-                      <button
-                        type="button"
-                        class="quote-save-later-btn"
-                        id="saveLaterBtn"
-                      >
+                      <button type="button" class="quote-save-later-btn" id="saveLaterBtn">
                         <i class="fas fa-bookmark"></i>
                         <span>Save for Later</span>
                       </button>
-                      <button
-                        type="button"
-                        class="quote-result-reset-btn"
-                        id="resetQuote"
-                      >
+                      <button type="button" class="quote-result-reset-btn" id="resetQuote">
                         <i class="fas fa-redo"></i> New Quote
                       </button>
                     </div>
                   </div>
-                  <div class="result-price">
-                    <span class="label">Estimated Cost</span>
-                    <span class="amount" id="resultAmount">₹0</span>
-                  </div>
-                  <div class="result-actions">
-                    <button type="button" class="quote-result-book-btn" id="bookNowBtn">
-                      Book Now
-                    </button>
-                    <button type="button" class="quote-result-reset-btn" id="resetQuote">
-                      <i class="fas fa-redo"></i> New Quote
-                    </button>
-                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features" id="features">
-    <h2 class="section-title h1 fade-in">Our Features</h2>
-    <div class="features-container">
-      <div class="feature-box fade-in">
-        🚗
-        <h3>Fast Delivery</h3>
-        <p>
-          We ensure timely and safe transport of your vehicle to the
-          destination.
-        </p>
-      </div>
-      <div class="feature-box fade-in">
-        💰
-        <h3>Affordable Rates</h3>
-        <p>
-          Get the best service at budget-friendly prices without hidden
-          charges.
-        </p>
-      </div>
-      <div class="feature-box fade-in">
-        🛡️
-        <h3>Full Insurance</h3>
-        <p>
-          Your vehicle is fully insured during the entire transport process.
-        </p>
       </div>
     </div>
   </section>
@@ -450,44 +431,6 @@
   <!-- Region-Wise Presence Section Container - Loaded dynamically -->
   <div id="region-container"></div>
 
-  <!-- Digital Clock Section -->
-  <section class="digital-clock-section">
-    <div class="container">
-      <div id="mac-clock">
-        <span id="clock-full"></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Theme Toggle Button -->
-  <div class="theme-toggle">
-    <button id="theme-toggle" aria-label="Toggle theme">
-      <i id="theme-icon" class="fas fa-sun"></i>
-    </button>
-  </div>
-
-  <!-- Footer Section -->
-  <div id="footer-container"></div>
-
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <!-- Top to Bottom Button -->
-  <button class="back-to-bottom" id="backToBottom">
-    <i class="fas fa-arrow-down"></i>
-  </button>
-
-  <!-- Scripts: single consolidated block -->
-
-  <div id="car" class="car">🏎️</div>
-
-  <!-- 🟠 Floating Feedback Button -->
-  <div id="feedbackBtn" class="floating-feedback-btn" title="Give Feedback">
-    <i class="fas fa-comment-dots"></i>
-  </div>
-
   <!-- 💬 Feedback Modal -->
   <div id="feedbackModal" class="feedback-modal">
     <div class="feedback-modal-content">
@@ -524,6 +467,13 @@
     </div>
   </div>
 
+  <!-- Footer Section -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts: single consolidated block -->
+
+  <div id="car" class="car">🏎️</div>
+
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">
     <i class="fas fa-arrow-up"></i>
@@ -539,17 +489,6 @@
   <script src="js/modules/loading-state-manager.js"></script>
   <!-- Page Navigation Loader - Must load after loading-state-manager -->
   <script src="js/modules/page-navigation-loader.js"></script>
-  <script>
-    window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
-      setTimeout(() => {
-        preloader.classList.add("fade-out");
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 800);
-      }, 1000);
-    });
-  </script>
   <script src="js/modules/navbar-loader.js?v=2"></script>
   <script src="js/modules/footer-loader.js"></script>
   <script src="js/script.js"></script>
@@ -557,12 +496,8 @@
   <script src="js/modules/Services.js"></script>
   <script src="js/modules/tracking.js"></script>
   <script src="js/modules/search.js"></script>
-  <script src="js/modules/floating-book-button.js"></script>
-  <script src="js/modules/floating-call-button.js"></script>
-  <script src="js/modules/floating-whatsapp-button.js"></script>
+  <script src="js/modules/modal.js"></script>
   <script src="js/modules/quote-modal.js"></script>
-  <script src="js/modules/sticky-quote-button.js"></script>
-  <script src="js/modules/floating-chatbot-button.js"></script>
   <script src="js/modules/chatbot-modal.js"></script>
   <script src="js/modules/back-to-top-button.js"></script>
   <script src="js/modules/backtoBottom.js"></script>
@@ -573,16 +508,17 @@
   <script src="js/modules/region-search.js?v=3"></script>
   <script src="js/modules/region-map.js?v=4"></script>
   <script src="js/modules/region-enhancements.js"></script>
+  <!-- Unified theme handler for all pages -->
+  <script src="js/modules/themes.js"></script>
   <script src="js/modules/digital-clock.js"></script>
   <script src="js/modules/scroll-animations.js"></script>
-  <script src="js/modules/theme-switcher.js"></script>
+  <script src="js/modules/glow-inputs.js"></script>
+
 
 <div id="cookie-popup" class="cookie-popup">
   <p>
     We use cookies to enhance your browsing experience.
     <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
-
-
   </p>
 
   <div class="button-group">
@@ -613,8 +549,8 @@
   });
 </script>
 
-
-
 </body>
 
 </html>
+
+
