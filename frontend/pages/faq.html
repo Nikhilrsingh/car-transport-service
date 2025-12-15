@@ -301,148 +301,363 @@
     <!-- Navbar Container - Loaded dynamically -->
     <div id="navbar-container"></div>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="faq-container">
-            <div class="section-title fade-in">
-                <h2>Frequently Asked Questions</h2>
-                <p>Quick answers to common questions about our services</p>
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="faq-container">
+        <div class="section-title fade-in">
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to common questions about our services</p>
+        </div>
+
+        <div class="faq-header fade-in">
+            <div class="faq-search-container">
+                <input type="text" id="faqSearch" class="faq-search-input" placeholder="Search FAQs...">
+                <i class="fas fa-search faq-search-icon"></i>
             </div>
-            <div class="faq-header fade-in">
-                <div class="faq-search-container">
-                    <input type="text" id="faqSearch" class="faq-search-input" placeholder="Search FAQs...">
-                    <i class="fas fa-search faq-search-icon"></i>
+
+            <div class="faq-categories">
+                <button class="faq-category-btn active" data-category="all">
+                    <i class="fas fa-th"></i>
+                    <span>All</span>
+                </button>
+                <button class="faq-category-btn" data-category="delivery">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Delivery</span>
+                </button>
+                <button class="faq-category-btn" data-category="insurance">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Insurance</span>
+                </button>
+                <button class="faq-category-btn" data-category="service">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>Service</span>
+                </button>
+                <button class="faq-category-btn" data-category="documents">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Documents</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-item fade-in" data-category="service">
+                <div class="faq-question">
+                    <h4>How do I book a car transport service?</h4>
+                    <i class="fas fa-chevron-down"></i>
                 </div>
-                <div class="faq-categories">
-                    <button class="faq-category-btn active" data-category="all">
-                        <i class="fas fa-th"></i>
-                        <span>All</span>
-                    </button>
-                    <button class="faq-category-btn" data-category="delivery">
-                        <i class="fas fa-shipping-fast"></i>
-                        <span>Delivery</span>
-                    </button>
-                    <button class="faq-category-btn" data-category="insurance">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Insurance</span>
-                    </button>
-                    <button class="faq-category-btn" data-category="service">
-                        <i class="fas fa-concierge-bell"></i>
-                        <span>Service</span>
-                    </button>
-                    <button class="faq-category-btn" data-category="documents">
-                        <i class="fas fa-file-alt"></i>
-                        <span>Documents</span>
-                    </button>
+                <div class="faq-answer">
+                    <p>You can book our service by filling out the booking form on the website or by contacting our support team.</p>
+                    <div class="faq-rating">
+                        <span>Was this helpful?</span>
+                        <div class="faq-rating-buttons">
+                            <button class="rating-btn" data-rating="yes">
+                                <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                            </button>
+                            <button class="rating-btn" data-rating="no">
+                                <i class="fas fa-thumbs-down"></i><span>No</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="faq-grid">
-                <div class="faq-item fade-in" data-category="delivery">
-                    <div class="faq-question">
-                        <h4>How quickly can you transport my vehicle?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>
-                            Delivery time depends on the distance. Typically, within
-                            Maharashtra: 1-2 days, Interstate: 3-5 days, Pan-India: 5-7
-                            days. Express delivery options are available.
-                        </p>
-                        <div class="faq-rating">
-                            <span>Was this helpful?</span>
-                            <div class="faq-rating-buttons">
-                                <button class="rating-btn" data-rating="yes">
-                                    <i class="fas fa-thumbs-up"></i>
-                                    <span>Yes</span>
-                                </button>
-                                <button class="rating-btn" data-rating="no">
-                                    <i class="fas fa-thumbs-down"></i>
-                                    <span>No</span>
-                                </button>
-                            </div>
+
+            <div class="faq-item fade-in" data-category="service">
+                <div class="faq-question">
+                    <h4>How much does car transportation cost?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>The cost depends on distance, vehicle type, and transport method. Exact pricing is shared after booking details are provided.</p>
+                    <div class="faq-rating">
+                        <span>Was this helpful?</span>
+                        <div class="faq-rating-buttons">
+                            <button class="rating-btn" data-rating="yes">
+                                <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                            </button>
+                            <button class="rating-btn" data-rating="no">
+                                <i class="fas fa-thumbs-down"></i><span>No</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item fade-in fade-in-delay-1" data-category="insurance">
-                    <div class="faq-question">
-                        <h4>Is my vehicle insured during transport?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>
-                            Yes, all vehicles are fully insured during transit. We provide
-                            comprehensive insurance coverage up to the vehicle's current
-                            market value.
-                        </p>
-                        <div class="faq-rating">
-                            <span>Was this helpful?</span>
-                            <div class="faq-rating-buttons">
-                                <button class="rating-btn" data-rating="yes">
-                                    <i class="fas fa-thumbs-up"></i>
-                                    <span>Yes</span>
-                                </button>
-                                <button class="rating-btn" data-rating="no">
-                                    <i class="fas fa-thumbs-down"></i>
-                                    <span>No</span>
-                                </button>
-                            </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="insurance">
+                <div class="faq-question">
+                    <h4>Is my vehicle insured during transport?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, all vehicles are covered with basic insurance during transportation.</p>
+                    <div class="faq-rating">
+                        <span>Was this helpful?</span>
+                        <div class="faq-rating-buttons">
+                            <button class="rating-btn" data-rating="yes">
+                                <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                            </button>
+                            <button class="rating-btn" data-rating="no">
+                                <i class="fas fa-thumbs-down"></i><span>No</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item fade-in fade-in-delay-2" data-category="service">
-                    <div class="faq-question">
-                        <h4>Do you provide door-to-door service?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>
-                            Absolutely! We offer complete door-to-door service across all
-                            major cities in India. Our team handles pickup and delivery at
-                            your specified locations.
-                        </p>
-                        <div class="faq-rating">
-                            <span>Was this helpful?</span>
-                            <div class="faq-rating-buttons">
-                                <button class="rating-btn" data-rating="yes">
-                                    <i class="fas fa-thumbs-up"></i>
-                                    <span>Yes</span>
-                                </button>
-                                <button class="rating-btn" data-rating="no">
-                                    <i class="fas fa-thumbs-down"></i>
-                                    <span>No</span>
-                                </button>
-                            </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="delivery">
+                <div class="faq-question">
+                    <h4>How long does car delivery take?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Delivery time depends on the pickup and drop location but usually takes a few working days.</p>
+                    <div class="faq-rating">
+                        <span>Was this helpful?</span>
+                        <div class="faq-rating-buttons">
+                            <button class="rating-btn" data-rating="yes">
+                                <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                            </button>
+                            <button class="rating-btn" data-rating="no">
+                                <i class="fas fa-thumbs-down"></i><span>No</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item fade-in fade-in-delay-3" data-category="documents">
-                    <div class="faq-question">
-                        <h4>What documents are required for vehicle transport?</h4>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>
-                            You'll need RC book, insurance documents, and a valid ID proof.
-                            For commercial vehicles, additional permits might be required.
-                        </p>
-                        <div class="faq-rating">
-                            <span>Was this helpful?</span>
-                            <div class="faq-rating-buttons">
-                                <button class="rating-btn" data-rating="yes">
-                                    <i class="fas fa-thumbs-up"></i>
-                                    <span>Yes</span>
-                                </button>
-                                <button class="rating-btn" data-rating="no">
-                                    <i class="fas fa-thumbs-down"></i>
-                                    <span>No</span>
-                                </button>
-                            </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="service">
+                <div class="faq-question">
+                    <h4>Do you provide door-to-door service?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we provide door-to-door pickup and delivery services.</p>
+                    <div class="faq-rating">
+                        <span>Was this helpful?</span>
+                        <div class="faq-rating-buttons">
+                            <button class="rating-btn" data-rating="yes">
+                                <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                            </button>
+                            <button class="rating-btn" data-rating="no">
+                                <i class="fas fa-thumbs-down"></i><span>No</span>
+                            </button>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="delivery">
+                <div class="faq-question">
+                    <h4>Can I track my car during transportation?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, tracking updates are provided once the vehicle is dispatched.</p>
+                    <div class="faq-rating">
+                        <span>Was this helpful?</span>
+                        <div class="faq-rating-buttons">
+                            <button class="rating-btn" data-rating="yes">
+                                <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                            </button>
+                            <button class="rating-btn" data-rating="no">
+                                <i class="fas fa-thumbs-down"></i><span>No</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="documents">
+                <div class="faq-question">
+                    <h4>What documents are required for car transport?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Basic documents like vehicle RC copy and ID proof are required.</p>
+                    <div class="faq-rating">
+                        <span>Was this helpful?</span>
+                        <div class="faq-rating-buttons">
+                            <button class="rating-btn" data-rating="yes">
+                                <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                            </button>
+                            <button class="rating-btn" data-rating="no">
+                                <i class="fas fa-thumbs-down"></i><span>No</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="service">
+                <div class="faq-question">
+                    <h4>What happens if my car gets damaged?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>In rare cases of damage, insurance support and claim assistance are provided.</p>
+                    <div class="faq-rating">
+                        <span>Was this helpful?</span>
+                        <div class="faq-rating-buttons">
+                            <button class="rating-btn" data-rating="yes">
+                                <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                            </button>
+                            <button class="rating-btn" data-rating="no">
+                                <i class="fas fa-thumbs-down"></i><span>No</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="faq-item fade-in" data-category="service">
+            <div class="faq-question">
+                <h4>Can I transport a non-running vehicle?</h4>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, non-running vehicles can also be transported with special arrangements.</p>
+                <div class="faq-rating">
+                    <span>Was this helpful?</span>
+                    <div class="faq-rating-buttons">
+                        <button class="rating-btn" data-rating="yes">
+                            <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                        </button>
+                        <button class="rating-btn" data-rating="no">
+                            <i class="fas fa-thumbs-down"></i><span>No</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="faq-item fade-in" data-category="service">
+            <div class="faq-question">
+                <h4>Are there any hidden charges?</h4>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>No, we maintain transparent pricing with no hidden charges.</p>
+                <div class="faq-rating">
+                    <span>Was this helpful?</span>
+                    <div class="faq-rating-buttons">
+                        <button class="rating-btn" data-rating="yes">
+                            <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                        </button>
+                        <button class="rating-btn" data-rating="no">
+                            <i class="fas fa-thumbs-down"></i><span>No</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item fade-in" data-category="service">
+            <div class="faq-question">
+                <h4>Can I cancel or reschedule my booking?</h4>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, bookings can be cancelled or rescheduled as per our cancellation policy.</p>
+                <div class="faq-rating">
+                    <span>Was this helpful?</span>
+                    <div class="faq-rating-buttons">
+                        <button class="rating-btn" data-rating="yes">
+                            <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                        </button>
+                        <button class="rating-btn" data-rating="no">
+                            <i class="fas fa-thumbs-down"></i><span>No</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item fade-in" data-category="service">
+            <div class="faq-question">
+                <h4>Do you offer open and enclosed transport options?</h4>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, both open and enclosed carrier options are available.</p>
+                <div class="faq-rating">
+                    <span>Was this helpful?</span>
+                    <div class="faq-rating-buttons">
+                        <button class="rating-btn" data-rating="yes">
+                            <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                        </button>
+                        <button class="rating-btn" data-rating="no">
+                            <i class="fas fa-thumbs-down"></i><span>No</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item fade-in" data-category="service">
+            <div class="faq-question">
+                <h4>Is advance payment required?</h4>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Advance payment may be required to confirm the booking.</p>
+                <div class="faq-rating">
+                    <span>Was this helpful?</span>
+                    <div class="faq-rating-buttons">
+                        <button class="rating-btn" data-rating="yes">
+                            <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                        </button>
+                        <button class="rating-btn" data-rating="no">
+                            <i class="fas fa-thumbs-down"></i><span>No</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item fade-in" data-category="service">
+            <div class="faq-question">
+                <h4>Do you transport luxury or sports cars?</h4>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, luxury and premium cars can be transported using enclosed carriers.</p>
+                <div class="faq-rating">
+                    <span>Was this helpful?</span>
+                    <div class="faq-rating-buttons">
+                        <button class="rating-btn" data-rating="yes">
+                            <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                        </button>
+                        <button class="rating-btn" data-rating="no">
+                            <i class="fas fa-thumbs-down"></i><span>No</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="faq-item fade-in" data-category="service">
+            <div class="faq-question">
+                <h4>How can I contact customer support?</h4>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>You can contact us through the website contact form or provided support details.</p>
+                <div class="faq-rating">
+                    <span>Was this helpful?</span>
+                    <div class="faq-rating-buttons">
+                        <button class="rating-btn" data-rating="yes">
+                            <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                        </button>
+                        <button class="rating-btn" data-rating="no">
+                            <i class="fas fa-thumbs-down"></i><span>No</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+</section>
+
 
     <script>
         // faq js taken from contact-enhanced.js and deleted from there
