@@ -12,10 +12,57 @@
     <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
     <link rel="stylesheet" href="css/components/quote-modal.css">
     <link rel="stylesheet" href="css/components/bottom-fixed-container.css"/>
+     <style>
+        .theme-toggle-left {
+            position: fixed;
+            top: 24px;
+            left: 110px;
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+            border: none;
+
+            background: #222;
+            color: #fff;
+
+            font-size: 18px;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        body.dark-theme {
+            background-color: #121212;
+            color: #eaeaea;
+        }
+
+        body.dark-theme .login-auth-card {
+            background: #1e1e1e;
+        }
+
+        body.dark-theme input {
+            background: #2a2a2a;
+            color: #fff;
+            border-color: #444;
+        }
+
+        body.dark-theme .theme-toggle-left {
+            background: #f5f5f5;
+            color: #111;
+        }
+    </style>
 </head>
 
 <body class="login-page-body">
     <button class="login-back-button" onclick="goBack()">Back</button>
+    <button class="theme-toggle-left" onclick="toggleTheme()">🌙</button>
 
     <div class="login-container">
         <div class="login-logo-section">
@@ -199,5 +246,31 @@
     <script src="js/modules/quote-modal.js"></script>
     <script src="js/modules/bottom-fixed-loader.js"></script>
     <script src="js/modules/sticky-quote-button.js"></script>
+     <script>
+        function toggleTheme() {
+            document.body.classList.toggle("dark-theme");
+
+            const btn = document.querySelector(".theme-toggle-left");
+
+            if (document.body.classList.contains("dark-theme")) {
+                btn.textContent = "☀️";
+                localStorage.setItem("theme", "dark");
+            } else {
+                btn.textContent = "🌙";
+                localStorage.setItem("theme", "light");
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem("theme");
+            const btn = document.querySelector(".theme-toggle-left");
+
+            if (savedTheme === "dark") {
+                document.body.classList.add("dark-theme");
+                btn.textContent = "☀️";
+            }
+        });
+    </script>
+
 </body>
 </html>
