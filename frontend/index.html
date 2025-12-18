@@ -613,27 +613,95 @@
         <button id="reject-cookie" class="reject-btn">Reject</button>
         <button id="accept-cookie" class="accept-btn">Accept</button>
       </div>
+    </div>  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Top to Bottom Button -->
+  <button class="back-to-bottom" id="backToBottom">
+    <i class="fas fa-arrow-down"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="js/modules/loading-state-manager.js"></script>
+  <script src="js/modules/page-navigation-loader.js"></script>
+
+  <script>
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      setTimeout(() => {
+        preloader.classList.add("fade-out");
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 800);
+      }, 1000);
+    });
+  </script>
+
+  <script src="js/modules/navbar-loader.js?v=2"></script>
+  <script src="js/modules/footer-loader.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/modules/hero-animations.js"></script>
+  <script src="js/modules/Services.js"></script>
+  <script src="js/modules/tracking.js"></script>
+  <script src="js/modules/search.js"></script>
+  <script src="js/modules/floating-book-button.js"></script>
+  <script src="js/modules/floating-call-button.js"></script>
+  <script src="js/modules/floating-whatsapp-button.js"></script>
+  <script src="js/modules/quote-modal.js"></script>
+  <script src="js/modules/sticky-quote-button.js"></script>
+  <script src="js/modules/floating-chatbot-button.js"></script>
+  <script src="js/modules/chatbot-modal.js"></script>
+  <script src="js/modules/back-to-top-button.js"></script>
+  <script src="js/modules/backtoBottom.js"></script>
+  <script src="js/modules/feedback-modal.js"></script>
+  <script src="js/modules/testimonial.js"></script>
+  <script src="js/modules/rating.js"></script>
+  <script src="js/modules/region-loader.js"></script>
+  <script src="js/modules/region-search.js?v=3"></script>
+  <script src="js/modules/region-map.js?v=4"></script>
+  <script src="js/modules/region-enhancements.js"></script>
+  <script src="js/modules/digital-clock.js"></script>
+  <script src="js/modules/scroll-animations.js"></script>
+  <script src="js/modules/theme-switcher.js"></script>
+
+  <!-- ✅ Keyboard Section Navigation -->
+  <script src="js/modules/keyboard-section-navigation.js"></script>
+
+  <!-- Cookie Popup -->
+  <div id="cookie-popup" class="cookie-popup">
+    <p>
+      We use cookies to enhance your browsing experience.
+      <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
+    </p>
+
+    <div class="button-group">
+      <button id="reject-cookie" class="reject-btn">Reject</button>
+      <button id="accept-cookie" class="accept-btn">Accept</button>
     </div>
+  </div>
 
-    <script>
-      const popup = document.getElementById("cookie-popup");
-      const acceptBtn = document.getElementById("accept-cookie");
-      const rejectBtn = document.getElementById("reject-cookie");
+  <script>
+    const popup = document.getElementById("cookie-popup");
+    const acceptBtn = document.getElementById("accept-cookie");
+    const rejectBtn = document.getElementById("reject-cookie");
 
-      // show popup only if user hasn't decided
-      if (!localStorage.getItem("cookieDecision")) {
-        popup.style.display = "flex";
-      }
+    if (!localStorage.getItem("cookieDecision")) {
+      popup.style.display = "flex";
+    }
 
-      acceptBtn.addEventListener("click", () => {
-        localStorage.setItem("cookieDecision", "accepted");
-        popup.style.display = "none";
-      });
+    acceptBtn.addEventListener("click", () => {
+      localStorage.setItem("cookieDecision", "accepted");
+      popup.style.display = "none";
+    });
 
-      rejectBtn.addEventListener("click", () => {
-        localStorage.setItem("cookieDecision", "rejected");
-        popup.style.display = "none";
-      });
-    </script>
-  </body>
+    rejectBtn.addEventListener("click", () => {
+      localStorage.setItem("cookieDecision", "rejected");
+      popup.style.display = "none";
+    });
+  </script>
+
+</body>
 </html>
+
