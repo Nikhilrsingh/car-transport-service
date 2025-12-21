@@ -21,11 +21,21 @@ const POINTS = {
     COMMIT: 1
 };
 
+// Global Network State
+let isOnline = navigator.onLine;
+
 document.addEventListener('DOMContentLoaded', () => {
-    initData();
-    fetchRecentActivity();
+    handleNetworkChange();
+    setupNetworkListeners();
+
+    if (isOnline) {
+        initData();
+        fetchRecentActivity();
+    }
+
     setupEventListeners();
 });
+
 
 // 1. Data Fetching & Initialization
 async function initData() {
@@ -33,6 +43,8 @@ async function initData() {
     const errorMessage = document.getElementById('errorMessage');
     
     try {
+                if (!isOnline) throw new Error('Offline');
+
         // Show loading spinner
         document.getElementById('spinner').style.display = 'flex';
         if(grid) grid.innerHTML = '';
@@ -63,6 +75,8 @@ async function initData() {
 }
 
 async function fetchAllPulls() {
+    if (!isOnline) return [];
+
     let pulls = [];
     let page = 1;
     while (page <= 3) {
@@ -343,7 +357,9 @@ function safeSetText(id, text) {
 
 // 7. Recent Activity
 async function fetchRecentActivity() {
+    if (!isOnline) return;
     try {
+
         const response = await fetch(`${API_BASE}/commits?per_page=10`);
         if(!response.ok) return;
         const commits = await response.json();
@@ -365,4 +381,36 @@ async function fetchRecentActivity() {
             `;
         }).join('');
     } catch (e) { console.error('Timeline error:', e); }
+}
+
+// ===============================
+// NETWORK HANDLING (OFFLINE SUPPORT)
+// ===============================
+
+function setupNetworkListeners() {
+    window.addEventListener('online', () => {
+        isOnline = true;
+        handleNetworkChange();
+        initData();
+        fetchRecentActivity();
+    });
+
+    window.addEventListener('offline', () => {
+        isOnline = false;
+        handleNetworkChange();
+    });
+}
+
+function handleNetworkChange() {
+    const errorMessage = document.getElementById('errorMessage');
+    const spinner = document.getElementById('spinner');
+
+    if (!isOnline) {
+        if (spinner) spinner.style.display = 'none';
+        if (errorMessage) {
+            errorMessage.innerText = 'You are offline. Please check your internet connection.';
+        }
+    } else {
+        if (errorMessage) errorMessage.innerText = '';
+    }
 }

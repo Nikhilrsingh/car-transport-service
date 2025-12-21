@@ -4711,3 +4711,41 @@ section:last-of-type {
     width: 100%;
   }
 }
+
+#offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #b91c1c;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  z-index: 9999;
+  display: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+
+  .container,
+  .section,
+  .content {
+    width: 100%;
+    padding: 12px;
+  }
+
+  button,
+  input,
+  select {
+    width: 100%;
+  }
+}
