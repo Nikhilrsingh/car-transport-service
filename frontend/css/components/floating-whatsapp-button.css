@@ -132,28 +132,6 @@
     }
 }
 
-/* Mobile Breakpoint (480px and below) */
-@media (max-width: 480px) {
-    #floating-whatsapp-btn {
-        width: 45px;
-        height: 45px;
-        bottom: 145px;
-        left: 15px;
-        font-size: 20px;
-    }
-
-    #floating-whatsapp-btn::before {
-        font-size: 11px;
-        padding: 6px 10px;
-        left: -75px;
-    }
-
-    #floating-whatsapp-btn::after {
-        width: 0;
-        height: 0;
-    }
-}
-
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     #floating-whatsapp-btn {

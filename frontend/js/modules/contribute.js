@@ -1,270 +1,368 @@
-// ==== CONFIG ====
-const REPO_OWNER = "Nikhilrsingh"; // change to your repo owner
-const REPO_NAME = "car-transport-service"; // change to your repo name
-const GITHUB_TOKEN = ""; // optional  
-const CACHE_TTL_MS = 10 * 60 * 1000;
-function cacheKey(k){return `cts_${REPO_OWNER}_${REPO_NAME}_${k}`;}
-function cacheGet(k){try{const raw=localStorage.getItem(cacheKey(k));if(!raw) return null;const obj=JSON.parse(raw);if(Date.now()-obj.ts>obj.ttl) return null;return obj.data;}catch{return null;}}
-function cacheSet(k,data,ttl=CACHE_TTL_MS){try{localStorage.setItem(cacheKey(k),JSON.stringify({ts:Date.now(),ttl,data}));}catch{}}
-function cacheClear(){['contributors','commits'].forEach(k=>localStorage.removeItem(cacheKey(k)));}
+// GitHub Repository Configuration
+const REPO_OWNER = "Nikhilrsingh";
+const REPO_NAME = "car-transport-service";
+const API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
 
-// ==== GLOBAL STATE ====
-let allContributors = [];
-let visibleContributors = [];
+// Project Lead to exclude from contributors list
+const PROJECT_LEAD = "nikhilrsingh"; // GitHub username in lowercase
+
+// State Management
+let allContributors = []; 
+let filteredContributors = [];
 let currentPage = 1;
-const contributorsPerPage = 10;
-const LEVELS = { gold: 50, silver: 20, bronze: 10, contributor: 1 };
+const itemsPerPage = 15;
 
-// ==== UTIL ====
-function safeSetText(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
-}
-
-async function fetchWithAuth(url) {
-  const headers = GITHUB_TOKEN
-    ? { Authorization: `token ${GITHUB_TOKEN}` }
-    : {};
-  const res = await fetch(url, { headers });
-  const text = await res.text();
-  try {
-    const json = JSON.parse(text);
-    if (json.message) {
-      console.warn(`⚠️ GitHub API error: ${json.message}`);
-    }
-    return json;
-  } catch {
-    console.error("❌ Failed to parse JSON:", text);
-    return [];
-  }
-}
-const spinner = document.getElementById("spinner");
-const list = document.getElementById("contributorsList");
-
-// Optional: integrate with your fetchContributors()
-// Call this before fetch starts
-window.showSpinner = () => {
-  spinner.style.display = "flex";
-  list.style.display = "none";
+// Point System Weights
+const POINTS = {
+    L3: 11,
+    L2: 5,
+    L1: 2,
+    DEFAULT: 1,
+    COMMIT: 1
 };
 
-// Call this after data loads
-window.hideSpinner = () => {
-  spinner.style.display = "none";
-  list.style.display = "grid";
-};
+document.addEventListener('DOMContentLoaded', () => {
+    initData();
+    fetchRecentActivity();
+    setupEventListeners();
+});
 
-// ==== FETCH CONTRIBUTORS ====
-async function fetchContributors() {
-  try {
-    showSpinner();
-    const cachedList = cacheGet('contributors');
-    if (cachedList && Array.isArray(cachedList)) {
-      allContributors = cachedList;
-      visibleContributors = [...allContributors];
-      updateStats();
-      displayContributors();
-      loadRecentActivity();
-      return;
+// 1. Data Fetching & Initialization
+async function initData() {
+    const grid = document.getElementById('contributorsList');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    try {
+        // Show loading spinner
+        document.getElementById('spinner').style.display = 'flex';
+        if(grid) grid.innerHTML = '';
+        if(errorMessage) errorMessage.innerText = '';
+
+        // Parallel Fetch
+        const [repoRes, contributorsRes] = await Promise.all([
+            fetch(API_BASE),
+            fetch(`${API_BASE}/contributors?per_page=100`)
+        ]);
+
+        if (!repoRes.ok || !contributorsRes.ok) throw new Error("API Limit Exceeded or Network Error");
+
+        const repoData = await repoRes.json();
+        const rawContributors = await contributorsRes.json();
+
+        // Fetch Pull Requests to calculate points
+        const rawPulls = await fetchAllPulls();
+
+        processData(repoData, rawContributors, rawPulls);
+
+    } catch (error) {
+        console.error('Error initializing data:', error);
+        document.getElementById('spinner').style.display = 'none';
+        if(grid) grid.innerHTML = '';
+        if(errorMessage) errorMessage.innerText = 'Failed to load data. GitHub API limit may be exceeded. Please try again later.';
     }
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contributors?per_page=100`;
-    const contributors = await fetchWithAuth(url);
-    if (!Array.isArray(contributors)) throw new Error("Invalid contributors response");
-    const exclude = "nikhilrsingh";
-    allContributors = contributors
-      .filter(c => c.login.toLowerCase() !== exclude)
-      .map(c => ({ login: c.login, avatar_url: c.avatar_url, html_url: c.html_url, contributions: c.contributions }));
-    let stats = await fetchWithAuth(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/stats/contributors`);
+}
+
+async function fetchAllPulls() {
+    let pulls = [];
+    let page = 1;
+    while (page <= 3) {
+        try {
+            const res = await fetch(`${API_BASE}/pulls?state=all&per_page=100&page=${page}`);
+            if (!res.ok) break;
+            const data = await res.json();
+            if (!data.length) break;
+            pulls = pulls.concat(data);
+            page++;
+        } catch (e) { break; }
+    }
+    return pulls;
+}
+
+// 2. Data Processing
+function processData(repoData, contributors, pulls) {
     const statsMap = {};
-    if (Array.isArray(stats)) {
-      stats.forEach(s => {
-        const login = s.author?.login;
-        if (login) {
-          const adds = s.weeks.reduce((a,w)=>a+(w.a||0),0);
-          const dels = s.weeks.reduce((a,w)=>a+(w.d||0),0);
-          const recent = s.weeks.slice(-12).reduce((a,w)=>a+(w.c||0),0);
-          statsMap[login] = { additions:adds, deletions:dels, recentCommits:recent, weeks:s.weeks };
-        }
-      });
-      allContributors = allContributors.map(c => ({...c, ...(statsMap[c.login]||{additions:0,deletions:0,recentCommits:0,weeks:[]})}));
-    }
-    visibleContributors = [...allContributors];
-    cacheSet('contributors', allContributors);
-    updateStats();
-    displayContributors();
-    loadRecentActivity();
-  } catch (err) {
-    const fallback = cacheGet('contributors');
-    if (fallback) {
-      allContributors = fallback;
-      visibleContributors = [...allContributors];
-      updateStats();
-      displayContributors();
-      loadRecentActivity();
-    } else {
-      safeSetText("errorMessage","Failed to load contributors. Check console for details.");
-    }
-  } finally {
-    hideSpinner();
-  }
-}
+    let totalProjectPRs = 0;
+    let totalProjectPoints = 0;
+    let totalProjectCommits = 0;
 
-// ==== DISPLAY CONTRIBUTORS ====
-function displayContributors() {
-  const list = document.getElementById("contributorsList");
-  if (!list) return;
-  list.innerHTML = "";
-  const start = (currentPage - 1) * contributorsPerPage;
-  const end = start + contributorsPerPage;
-  const pageContributors = visibleContributors.slice(start, end);
-  for (const c of pageContributors) {
-    const item = document.createElement("div");
-    item.className = "contributor";
-    item.innerHTML = `<img src="${c.avatar_url}" alt="${c.login}" width="50" height="50"><a href="${c.html_url}" target="_blank">${c.login}</a><span>Commits: ${c.contributions}</span>`;
-    item.addEventListener("click", () => openContributorModal(c));
-    list.appendChild(item);
-  }
-  safeSetText("currentPage", currentPage);
-  safeSetText("totalPages", Math.max(1, Math.ceil(visibleContributors.length / contributorsPerPage)));
-}
+    // A. Calculate Points from PRs
+    pulls.forEach(pr => {
+        if (!pr.merged_at) return; 
 
-// ==== UPDATE STATS ====
-function updateStats() {
-  safeSetText("totalContributors", allContributors.length);
-  const totalCommits = allContributors.reduce((s,c)=>s+c.contributions,0);
-  safeSetText("totalCommits", totalCommits);
-  const totalPoints = allContributors.reduce((s,c)=>s + c.contributions + Math.round(((c.additions||0)-(c.deletions||0))/100),0);
-  safeSetText("totalPoints", totalPoints);
-  const active = allContributors.filter(c => (c.recentCommits||0)>0).length;
-  safeSetText("activeContributors", active);
-}
-function applyFilters() {
-  const term = (document.getElementById("searchInput")?.value || "").toLowerCase();
-  const sortBy = document.getElementById("sortBy")?.value || "contributions";
-  const level = document.getElementById("filterLevel")?.value || "all";
-  let filtered = allContributors.filter(c => c.login.toLowerCase().includes(term));
-  if (level === "top10") {
-    filtered = filtered.sort((a,b)=>b.contributions-a.contributions).slice(0,10);
-  } else if (level === "gold") {
-    filtered = filtered.filter(c => c.contributions >= LEVELS.gold);
-  } else if (level === "silver") {
-    filtered = filtered.filter(c => c.contributions >= LEVELS.silver && c.contributions < LEVELS.gold);
-  } else if (level === "bronze") {
-    filtered = filtered.filter(c => c.contributions >= LEVELS.bronze && c.contributions < LEVELS.silver);
-  } else if (level === "contributor") {
-    filtered = filtered.filter(c => c.contributions >= LEVELS.contributor && c.contributions < LEVELS.bronze);
-  } else if (level === "new") {
-    filtered = filtered.filter(c => c.contributions <= 1);
-  }
-  if (sortBy === "alphabetical") {
-    filtered.sort((a,b)=>a.login.localeCompare(b.login));
-  } else if (sortBy === "recent") {
-    filtered.sort((a,b)=> (b.recentCommits||0)-(a.recentCommits||0));
-  } else {
-    filtered.sort((a,b)=>b.contributions-a.contributions);
-  }
-  visibleContributors = filtered;
-  currentPage = 1;
-  displayContributors();
-}
+        const user = pr.user.login.toLowerCase();
+        if (!statsMap[user]) statsMap[user] = { prs: 0, points: 0 };
 
-// ==== PAGINATION ====
-function nextPage() {
-  if (currentPage < Math.ceil(visibleContributors.length / contributorsPerPage)) {
-    currentPage++;
-    displayContributors();
-  }
-}
-function prevPage() {
-  if (currentPage > 1) {
-    currentPage--;
-    displayContributors();
-  }
-}
+        statsMap[user].prs++;
+        totalProjectPRs++;
 
-// ==== SEARCH ====
-function searchContributors(term) {
-  applyFilters();
-}
+        let prPoints = 0;
+        let hasLevel = false;
 
-// ==== SETUP EVENT LISTENERS ====
-function setupEventListeners() {
-  const nextBtn = document.getElementById("nextPage");
-  const prevBtn = document.getElementById("prevPage");
-  const searchInput = document.getElementById("searchInput");
-  const sortSelect = document.getElementById("sortBy");
-  const levelSelect = document.getElementById("filterLevel");
-  const closeBtn = document.querySelector(".modal-close");
-  const refreshBtn = document.getElementById("refreshData");
-  if (nextBtn) nextBtn.addEventListener("click", nextPage);
-  if (prevBtn) prevBtn.addEventListener("click", prevPage);
-  if (searchInput) searchInput.addEventListener("input", applyFilters);
-  if (sortSelect) sortSelect.addEventListener("change", applyFilters);
-  if (levelSelect) levelSelect.addEventListener("change", applyFilters);
-  if (closeBtn) closeBtn.addEventListener("click", () => {
-    document.getElementById("contributorModal")?.classList.remove("active");
-  });
-  document.addEventListener("click", e => {
-    if (e.target.id === "contributorModal") e.target.classList.remove("active");
-  });
-  if (refreshBtn) refreshBtn.addEventListener("click", () => { cacheClear(); currentPage = 1; fetchContributors().then(()=>applyFilters()); });
-}
-function openContributorModal(c) {
-  document.getElementById("modalAvatar").src = c.avatar_url;
-  document.getElementById("modalName").textContent = c.login;
-  const link = document.getElementById("modalGithubLink");
-  if (link) link.href = c.html_url;
-  const badges = document.getElementById("modalBadges");
-  if (badges) {
-    badges.innerHTML = "";
-    if (c.contributions >= LEVELS.gold) badges.innerHTML += "🥇 Gold";
-    else if (c.contributions >= LEVELS.silver) badges.innerHTML += "🥈 Silver";
-    else if (c.contributions >= LEVELS.bronze) badges.innerHTML += "🥉 Bronze";
-    else if (c.contributions >= 1) badges.innerHTML += "⭐ Contributor";
-  }
-  safeSetText("modalCommits", c.contributions);
-  safeSetText("modalAdditions", (c.additions||0));
-  safeSetText("modalDeletions", (c.deletions||0));
-  fetchWithAuth(`https://api.github.com/search/issues?q=repo:${REPO_OWNER}/${REPO_NAME}+is:pr+author:${c.login}`)
-    .then(res => {
-      const count = typeof res.total_count === "number" ? res.total_count : 0;
-      safeSetText("modalPRs", count);
-    }).catch(()=> safeSetText("modalPRs","0"));
-  const heatmap = document.getElementById("contributionHeatmap");
-  if (heatmap) {
-    const cells = [];
-    const totalWeeks = 52;
-    for (let i=0;i<totalWeeks;i++) {
-      const intensity = i < (c.recentCommits||0) ? "rgba(255,99,71,0.8)" : "rgba(255,255,255,0.2)";
-      cells.push(`<span style="display:inline-block;width:8px;height:8px;margin:1px;background:${intensity}"></span>`);
-    }
-    heatmap.innerHTML = cells.join("");
-  }
-  document.getElementById("contributorModal")?.classList.add("active");
-}
-function loadRecentActivity() {
-  const cached = cacheGet('commits');
-  const container = document.getElementById("timelineContent");
-  if (cached && container) {
-    container.innerHTML = cached;
-    return;
-  }
-  fetchWithAuth(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?per_page=20`)
-    .then(commits => {
-      if (!container || !Array.isArray(commits)) return;
-      const html = commits.map(c => {
-        const msg = c.commit?.message || "";
-        const author = c.author?.login || c.commit?.author?.name || "unknown";
-        const date = c.commit?.author?.date ? new Date(c.commit.author.date).toLocaleString() : "";
-        return `<div class=\"timeline-item\"><strong>${author}</strong> — ${msg} <span style=\"opacity:.7\">(${date})</span></div>`;
-      }).join("");
-      container.innerHTML = html;
-      cacheSet('commits', html);
-    }).catch(()=>{
-      if (container && cached) container.innerHTML = cached;
+        pr.labels.forEach(label => {
+            const name = label.name.toLowerCase();
+            if (name.includes('level 3')) { prPoints += POINTS.L3; hasLevel = true; }
+            else if (name.includes('level 2')) { prPoints += POINTS.L2; hasLevel = true; }
+            else if (name.includes('level 1')) { prPoints += POINTS.L1; hasLevel = true; }
+        });
+
+        if (!hasLevel) prPoints += POINTS.DEFAULT;
+
+        statsMap[user].points += prPoints;
+        totalProjectPoints += prPoints;
     });
+
+    // B. Filter out project lead and merge with profile data
+    allContributors = contributors
+        .filter(c => c.login.toLowerCase() !== PROJECT_LEAD) // EXCLUDE PROJECT LEAD
+        .map(c => {
+            const login = c.login.toLowerCase();
+            const userStats = statsMap[login] || { prs: 0, points: 0 };
+            
+            totalProjectCommits += c.contributions;
+
+            // If no PR points, give base points for commits
+            let finalPoints = userStats.points;
+            if (finalPoints === 0) {
+                finalPoints = c.contributions * POINTS.COMMIT; 
+            }
+
+            return {
+                login: c.login,
+                id: c.id,
+                avatar_url: c.avatar_url,
+                html_url: c.html_url,
+                contributions: c.contributions,
+                prs: userStats.prs,
+                points: finalPoints
+            };
+        });
+
+    // C. Initial Sort
+    allContributors.sort((a, b) => b.points - a.points);
+
+    // D. Update Stats (exclude project lead from count)
+    updateGlobalStats(
+        contributors.length - 1, // Subtract 1 to exclude project lead
+        totalProjectPRs,
+        totalProjectPoints,
+        repoData.stargazers_count,
+        repoData.forks_count,
+        totalProjectCommits
+    );
+
+    // E. Initialize Filtered Data & Render
+    filteredContributors = [...allContributors];
+    document.getElementById('spinner').style.display = 'none';
+    renderContributors(1);
 }
 
-// ==== INIT ====
-fetchContributors().then(()=>applyFilters());
-setupEventListeners();
+function updateGlobalStats(count, prs, points, stars, forks, commits) {
+    safeSetText('totalContributors', count);
+    safeSetText('totalCommits', commits);
+    safeSetText('totalPRs', prs);
+    safeSetText('totalPoints', points);
+    safeSetText('totalStars', stars);
+    safeSetText('totalForks', forks);
+}
+
+// 3. Event Listeners
+function setupEventListeners() {
+    const searchInput = document.getElementById('searchInput');
+    const sortBy = document.getElementById('sortBy');
+    const filterLevel = document.getElementById('filterLevel');
+    const refreshBtn = document.getElementById('refreshData');
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => applyFilters(e.target.value, sortBy.value, filterLevel.value));
+    }
+    if (sortBy) {
+        sortBy.addEventListener('change', (e) => applyFilters(searchInput.value, e.target.value, filterLevel.value));
+    }
+    if (filterLevel) {
+        filterLevel.addEventListener('change', (e) => applyFilters(searchInput.value, sortBy.value, e.target.value));
+    }
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            allContributors = [];
+            initData();
+        });
+    }
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) { currentPage--; renderContributors(currentPage); }
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const maxPage = Math.ceil(filteredContributors.length / itemsPerPage);
+            if (currentPage < maxPage) { currentPage++; renderContributors(currentPage); }
+        });
+    }
+}
+
+// 4. Filtering
+function applyFilters(searchTerm, sortType, levelType) {
+    let result = [...allContributors];
+
+    if (searchTerm) {
+        const term = searchTerm.toLowerCase();
+        result = result.filter(c => c.login.toLowerCase().includes(term));
+    }
+
+    if (levelType !== 'all') {
+        result = result.filter(c => {
+            const league = getLeagueData(c.points);
+            if (levelType === 'top10') return true; 
+            if (levelType === 'gold') return league.tier === 'tier-gold';
+            if (levelType === 'silver') return league.tier === 'tier-silver';
+            if (levelType === 'bronze') return league.tier === 'tier-bronze';
+            if (levelType === 'new') return c.contributions < 5;
+            return true;
+        });
+    }
+
+    if (sortType === 'contributions') {
+        result.sort((a, b) => b.points - a.points);
+    } else if (sortType === 'alphabetical') {
+        result.sort((a, b) => a.login.localeCompare(b.login));
+    } else if (sortType === 'recent') {
+        result.sort((a, b) => b.contributions - a.contributions);
+    }
+
+    if (levelType === 'top10') {
+        result.sort((a, b) => b.points - a.points);
+        result = result.slice(0, 10);
+    }
+
+    filteredContributors = result;
+    currentPage = 1;
+    renderContributors(1);
+}
+
+// 5. Rendering
+function renderContributors(page) {
+    const grid = document.getElementById('contributorsList');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsToShow = filteredContributors.slice(start, end);
+
+    if (itemsToShow.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No contributors match your search.</p>';
+        updatePaginationUI();
+        return;
+    }
+
+    itemsToShow.forEach((c, index) => {
+        const rank = start + index + 1;
+        const league = getLeagueData(c.points);
+
+        const card = document.createElement('div');
+        card.className = `contributor ${league.tier}`;
+        card.onclick = () => openContributorModal(c, league, rank);
+
+        card.innerHTML = `
+            <img src="${c.avatar_url}" alt="${c.login}" loading="lazy">
+            <span class="cont-name">${c.login}</span>
+            <div class="contributor-badges">
+                <span class="tier-badge ${league.class}">${league.text}</span>
+            </div>
+            <div class="contributor-stats">
+                 <i class="fas fa-star" style="color:gold"></i> ${c.points} Pts
+                 <span style="margin: 0 5px">|</span>
+                 <i class="fas fa-code-branch" style="color:#4a90e2"></i> ${c.prs} PRs
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    updatePaginationUI();
+}
+
+function updatePaginationUI() {
+    const maxPage = Math.ceil(filteredContributors.length / itemsPerPage) || 1;
+    safeSetText('currentPage', currentPage);
+    safeSetText('totalPages', maxPage);
+    
+    const prev = document.getElementById('prevPage');
+    const next = document.getElementById('nextPage');
+    if(prev) {
+        prev.disabled = currentPage === 1;
+        prev.style.opacity = currentPage === 1 ? '0.5' : '1';
+    }
+    if(next) {
+        next.disabled = currentPage === maxPage;
+        next.style.opacity = currentPage === maxPage ? '0.5' : '1';
+    }
+}
+
+// 6. Modal & Utilities
+function getLeagueData(points) {
+    if (points > 150) return { text: 'Gold 🏆', class: 'badge-gold', tier: 'tier-gold', label: 'Gold League' };
+    if (points > 75) return { text: 'Silver 🥈', class: 'badge-silver', tier: 'tier-silver', label: 'Silver League' };
+    if (points > 30) return { text: 'Bronze 🥉', class: 'badge-bronze', tier: 'tier-bronze', label: 'Bronze League' };
+    return { text: 'Contributor', class: 'badge-contributor', tier: 'tier-contributor', label: 'Contributor' };
+}
+
+function openContributorModal(c, league, rank) {
+    const modal = document.getElementById('contributorModal');
+    if (!modal) return;
+
+    document.getElementById('modalAvatar').src = c.avatar_url;
+    document.getElementById('modalName').textContent = c.login;
+    document.getElementById('modalGithubLink').href = c.html_url;
+    
+    safeSetText('modalRank', `#${rank}`);
+    safeSetText('modalPoints', c.points);
+    safeSetText('modalLeague', league.label);
+    safeSetText('modalCommits', c.contributions);
+    safeSetText('modalPRs', c.prs);
+
+    const prLink = document.getElementById('viewPrBtn');
+    if(prLink) prLink.href = `https://github.com/${REPO_OWNER}/${REPO_NAME}/pulls?q=is%3Apr+author%3A${c.login}`;
+
+    modal.classList.add('active');
+}
+
+document.querySelector('.modal-close')?.addEventListener('click', () => {
+    document.getElementById('contributorModal')?.classList.remove('active');
+});
+window.onclick = (e) => {
+    const modal = document.getElementById('contributorModal');
+    if (e.target === modal) modal.classList.remove('active');
+};
+
+function safeSetText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.innerText = text;
+}
+
+// 7. Recent Activity
+async function fetchRecentActivity() {
+    try {
+        const response = await fetch(`${API_BASE}/commits?per_page=10`);
+        if(!response.ok) return;
+        const commits = await response.json();
+        const container = document.getElementById("timelineContent");
+        if (!container) return;
+        
+        container.innerHTML = commits.map(c => {
+            const msg = c.commit.message.split('\n')[0];
+            const author = c.commit.author.name;
+            const date = new Date(c.commit.author.date).toLocaleDateString();
+            return `
+                <div class="timeline-item">
+                    <div class="activity-marker"></div>
+                    <div class="timeline-info">
+                        <strong>${author}</strong>: ${msg} 
+                        <br><small style="opacity:0.7">${date}</small>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    } catch (e) { console.error('Timeline error:', e); }
+}
