@@ -1991,6 +1991,34 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* CTA Button Tooltips */
+.cta-btn[data-tooltip]::after,
+.cta-button[data-tooltip]::after,
+#calculate-price-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 9999;
+}
+
+.cta-btn[data-tooltip]:hover::after,
+.cta-button[data-tooltip]:hover::after,
+#calculate-price-btn[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
 .cta-btn.primary {
   background: linear-gradient(135deg, var(--primary-color), #ff4500);
   color: white;
