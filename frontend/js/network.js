@@ -1,17 +1,22 @@
+// frontend/js/network.js
+
 (function () {
-  const updateStatus = () => {
+  const offlineClass = "app-offline";
+
+  function updateNetworkStatus() {
     const isOnline = navigator.onLine;
-    document.body.classList.toggle("offline", !isOnline);
 
-    const banner = document.getElementById("offline-banner");
-    if (banner) {
-      banner.style.display = isOnline ? "none" : "flex";
-    }
-  };
+    document.body.classList.toggle(offlineClass, !isOnline);
 
-  window.addEventListener("online", updateStatus);
-  window.addEventListener("offline", updateStatus);
+    window.dispatchEvent(
+      new CustomEvent("network-status-change", {
+        detail: { online: isOnline }
+      })
+    );
+  }
 
-  // Run once on page load
-  document.addEventListener("DOMContentLoaded", updateStatus);
+  window.addEventListener("online", updateNetworkStatus);
+  window.addEventListener("offline", updateNetworkStatus);
+
+  document.addEventListener("DOMContentLoaded", updateNetworkStatus);
 })();

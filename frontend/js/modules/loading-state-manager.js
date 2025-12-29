@@ -422,3 +422,12 @@ if (typeof module !== 'undefined' && module.exports) {
         NetworkDetector
     };
 }
+
+window.addEventListener("network-status-change", (e) => {
+  if (e.detail.online) {
+    document.querySelectorAll(".loading").forEach(el => {
+      el.classList.remove("loading");
+    });
+  }
+});
+

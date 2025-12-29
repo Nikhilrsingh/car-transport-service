@@ -389,3 +389,16 @@ section {
         justify-content: center;
     }
 }
+
+#offline-banner {
+  display: none;
+  background: #c62828;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+
+body.app-offline #offline-banner {
+  display: block;
+}
