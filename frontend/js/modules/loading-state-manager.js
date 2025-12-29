@@ -424,10 +424,9 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 window.addEventListener("network-status-change", (e) => {
-  if (e.detail.online) {
-    document.querySelectorAll(".loading").forEach(el => {
-      el.classList.remove("loading");
-    });
-  }
+  const banner = document.getElementById("offline-banner");
+  if (!banner) return;
+
+  banner.style.display = e.detail.online ? "none" : "block";
 });
 
