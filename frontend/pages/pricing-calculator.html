@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Compare car transport plans and calculate your pricing with our interactive calculator. Standard, Premium, and Express service options.">
+    <title>Pricing Calculator - Car Transport Service</title>
+    <base href="./" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components/header.css">
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <link rel="stylesheet" href="../css/components/middle-navbar.css" />
+    <!-- Loading Indicators CSS -->
+    <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/pricing-calculator.css">
+    <link rel="stylesheet" href="../css/components/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/components/glowing-input.css">
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+
+    <!-- Hero Section -->
+    <section class="calculator-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Pricing Calculator</h1>
+            <p class="hero-subtitle">Compare Plans & Calculate Your Transport Cost</p>
+        </div>
+    </section>
+
+    <!-- Plan Comparison Section -->
+    <section class="plan-comparison">
+        <div class="container">
+            <h2 class="section-title fade-in">Compare Our Plans</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Choose the perfect service level for your needs</p>
+
+            <div class="comparison-table-wrapper fade-in fade-in-delay-2">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="feature-column">Features</th>
+                            <th class="plan-column standard">
+                                <div class="plan-header">
+                                    <i class="fas fa-car"></i>
+                                    <h3>Standard</h3>
+                                    <p class="plan-price">$0.50/mile</p>
+                                    <span class="plan-badge">Most Popular</span>
+                                </div>
+                            </th>
+                            <th class="plan-column premium">
+                                <div class="plan-header">
+                                    <i class="fas fa-star"></i>
+                                    <h3>Premium</h3>
+                                    <p class="plan-price">$0.75/mile</p>
+                                    <span class="plan-badge">Best Value</span>
+                                </div>
+                            </th>
+                            <th class="plan-column express">
+                                <div class="plan-header">
+                                    <i class="fas fa-bolt"></i>
+                                    <h3>Express</h3>
+                                    <p class="plan-price">$1.20/mile</p>
+                                    <span class="plan-badge">Fastest</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Delivery Time</td>
+                            <td>7-10 days</td>
+                            <td>4-6 days</td>
+                            <td>1-3 days</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Insurance Coverage</td>
+                            <td>$100,000</td>
+                            <td>$250,000</td>
+                            <td>$500,000</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Real-time Tracking</td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Door-to-Door Service</td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Enclosed Transport</td>
+                            <td><i class="fas fa-times text-muted"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">White Glove Service</td>
+                            <td><i class="fas fa-times text-muted"></i></td>
+                            <td><i class="fas fa-times text-muted"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Guaranteed Pickup Date</td>
+                            <td><i class="fas fa-times text-muted"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">24/7 Support</td>
+                            <td>Business Hours</td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Dedicated Account Manager</td>
+                            <td><i class="fas fa-times text-muted"></i></td>
+                            <td><i class="fas fa-times text-muted"></i></td>
+                            <td><i class="fas fa-check text-success"></i></td>
+                        </tr>
+                        <tr class="action-row">
+                            <td class="feature-name"></td>
+                            <td><button class="select-plan-btn" data-plan="standard">Select Plan</button></td>
+                            <td><button class="select-plan-btn" data-plan="premium">Select Plan</button></td>
+                            <td><button class="select-plan-btn" data-plan="express">Select Plan</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Calculator -->
+    <section class="price-calculator">
+        <div class="container">
+            <h2 class="section-title fade-in">Calculate Your Price</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Get an instant estimate for your car transport</p>
+
+            <div class="calculator-wrapper fade-in fade-in-delay-2">
+                <div class="calculator-form">
+                    <div class="form-section">
+                        <h3><i class="fas fa-route"></i> Route Details</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fromZip">From ZIP Code</label>
+                                <input type="text" id="fromZip" placeholder="Enter ZIP code" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="toZip">To ZIP Code</label>
+                                <input type="text" id="toZip" placeholder="Enter ZIP code" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="distance">Estimated Distance (miles)</label>
+                            <input type="number" id="distance" placeholder="Auto-calculated" min="1" value="500">
+                            <small>Approximately 500 miles</small>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-car"></i> Vehicle Information</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vehicleType">Vehicle Type</label>
+                                <select id="vehicleType">
+                                    <option value="sedan">Sedan</option>
+                                    <option value="suv">SUV/Truck</option>
+                                    <option value="luxury">Luxury Car</option>
+                                    <option value="motorcycle">Motorcycle</option>
+                                    <option value="classic">Classic/Antique</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vehicleCondition">Vehicle Condition</label>
+                                <select id="vehicleCondition">
+                                    <option value="running">Running</option>
+                                    <option value="non-running">Non-Running (+$150)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-layer-group"></i> Service Level</h3>
+
+                        <div class="service-options">
+                            <label class="service-option">
+                                <input type="radio" name="servicePlan" value="standard" checked>
+                                <div class="option-card">
+                                    <i class="fas fa-car"></i>
+                                    <h4>Standard</h4>
+                                    <p>$0.50/mile</p>
+                                    <span class="delivery-time">7-10 days</span>
+                                </div>
+                            </label>
+
+                            <label class="service-option">
+                                <input type="radio" name="servicePlan" value="premium">
+                                <div class="option-card">
+                                    <i class="fas fa-star"></i>
+                                    <h4>Premium</h4>
+                                    <p>$0.75/mile</p>
+                                    <span class="delivery-time">4-6 days</span>
+                                </div>
+                            </label>
+
+                            <label class="service-option">
+                                <input type="radio" name="servicePlan" value="express">
+                                <div class="option-card">
+                                    <i class="fas fa-bolt"></i>
+                                    <h4>Express</h4>
+                                    <p>$1.20/mile</p>
+                                    <span class="delivery-time">1-3 days</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-plus-circle"></i> Add-On Services</h3>
+
+                        <div class="addon-options">
+                            <label class="addon-option">
+                                <input type="checkbox" name="addon" value="enclosed" data-price="200">
+                                <div class="addon-card">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div class="addon-info">
+                                        <h4>Enclosed Transport</h4>
+                                        <p>Extra protection from elements</p>
+                                    </div>
+                                    <span class="addon-price">+$200</span>
+                                </div>
+                            </label>
+
+                            <label class="addon-option">
+                                <input type="checkbox" name="addon" value="insurance" data-price="100">
+                                <div class="addon-card">
+                                    <i class="fas fa-umbrella"></i>
+                                    <div class="addon-info">
+                                        <h4>Extra Insurance</h4>
+                                        <p>Additional $100k coverage</p>
+                                    </div>
+                                    <span class="addon-price">+$100</span>
+                                </div>
+                            </label>
+
+                            <label class="addon-option">
+                                <input type="checkbox" name="addon" value="topload" data-price="150">
+                                <div class="addon-card">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <div class="addon-info">
+                                        <h4>Top Load Position</h4>
+                                        <p>Reduced exposure to road debris</p>
+                                    </div>
+                                    <span class="addon-price">+$150</span>
+                                </div>
+                            </label>
+
+                            <label class="addon-option">
+                                <input type="checkbox" name="addon" value="expedited" data-price="250">
+                                <div class="addon-card">
+                                    <i class="fas fa-clock"></i>
+                                    <div class="addon-info">
+                                        <h4>Expedited Pickup</h4>
+                                        <p>Guaranteed 24-48 hour pickup</p>
+                                    </div>
+                                    <span class="addon-price">+$250</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="calculate-btn" id="calculateBtn">
+                        <i class="fas fa-calculator"></i> Calculate Price
+                    </button>
+                </div>
+
+                <!-- Price Summary -->
+                <div class="price-summary">
+                    <h3><i class="fas fa-file-invoice-dollar"></i> Price Breakdown</h3>
+
+                    <div class="summary-item">
+                        <span>Base Transport Cost</span>
+                        <span id="baseCost">$250.00</span>
+                    </div>
+
+                    <div class="summary-item" id="vehicleTypeRow" style="display: none;">
+                        <span>Vehicle Type Adjustment</span>
+                        <span id="vehicleTypeCost">$0.00</span>
+                    </div>
+
+                    <div class="summary-item" id="conditionRow" style="display: none;">
+                        <span>Non-Running Fee</span>
+                        <span id="conditionCost">$0.00</span>
+                    </div>
+
+                    <div id="addonsList"></div>
+
+                    <div class="summary-item discount-item" id="discountRow" style="display: none;">
+                        <span><i class="fas fa-tag"></i> Discount Applied</span>
+                        <span class="discount-amount" id="discountAmount">-$0.00</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="summary-total">
+                        <span>Total Estimated Cost</span>
+                        <span id="totalCost">$250.00</span>
+                    </div>
+
+                    <p class="summary-note">
+                        <i class="fas fa-info-circle"></i>
+                        Final price may vary based on specific route and availability
+                    </p>
+
+                    <button class="book-now-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+
+                    <button class="save-quote-btn">
+                        <i class="fas fa-save"></i> Save Quote
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bulk & Corporate Discounts -->
+    <section class="discounts-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Bulk & Corporate Discounts</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Save more when you ship multiple vehicles</p>
+
+            <div class="discount-grid fade-in fade-in-delay-2">
+                <div class="discount-card">
+                    <div class="discount-icon">
+                        <i class="fas fa-car-side"></i>
+                    </div>
+                    <h3>Multi-Vehicle Discount</h3>
+                    <div class="discount-details">
+                        <div class="discount-tier">
+                            <span class="tier-range">2-3 vehicles</span>
+                            <span class="tier-discount">10% off</span>
+                        </div>
+                        <div class="discount-tier">
+                            <span class="tier-range">4-6 vehicles</span>
+                            <span class="tier-discount">15% off</span>
+                        </div>
+                        <div class="discount-tier">
+                            <span class="tier-range">7+ vehicles</span>
+                            <span class="tier-discount">20% off</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discount-card">
+                    <div class="discount-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Corporate Accounts</h3>
+                    <ul class="discount-features">
+                        <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                        <li><i class="fas fa-check"></i> Priority scheduling</li>
+                        <li><i class="fas fa-check"></i> Custom pricing agreements</li>
+                        <li><i class="fas fa-check"></i> Monthly billing options</li>
+                        <li><i class="fas fa-check"></i> Volume-based discounts</li>
+                    </ul>
+                    <button class="contact-btn">Contact for Corporate Rates</button>
+                </div>
+
+                <div class="discount-card">
+                    <div class="discount-icon">
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <h3>Returning Customer</h3>
+                    <p class="discount-description">
+                        We value loyalty! Get 5% off your next shipment when you return within 6 months.
+                    </p>
+                    <div class="loyalty-benefit">
+                        <i class="fas fa-gift"></i>
+                        <span>Plus earn points toward free services</span>
+                    </div>
+                </div>
+
+                <div class="discount-card">
+                    <div class="discount-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Referral Program</h3>
+                    <p class="discount-description">
+                        Refer a friend and both receive $50 credit toward your next transport.
+                    </p>
+                    <button class="referral-btn">Get Referral Link</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seasonal Offers -->
+    <section class="seasonal-offers">
+        <div class="container">
+            <h2 class="section-title fade-in">Seasonal Offers</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">Limited-time promotions to save even more</p>
+
+            <div class="offers-grid fade-in fade-in-delay-2">
+                <div class="offer-card active">
+                    <div class="offer-badge">Active Now</div>
+                    <div class="offer-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <h3>Winter Special</h3>
+                    <p class="offer-period">Valid: Dec 1 - Feb 28</p>
+                    <div class="offer-discount">15% OFF</div>
+                    <p class="offer-description">
+                        Save on enclosed transport during winter months. Perfect for protecting your vehicle from harsh
+                        weather.
+                    </p>
+                    <ul class="offer-terms">
+                        <li>Applies to enclosed transport only</li>
+                        <li>Cannot be combined with other offers</li>
+                        <li>Minimum 300 miles</li>
+                    </ul>
+                    <button class="claim-offer-btn">Claim Offer</button>
+                </div>
+
+                <div class="offer-card upcoming">
+                    <div class="offer-badge">Coming Soon</div>
+                    <div class="offer-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Summer Road Trip</h3>
+                    <p class="offer-period">Valid: Jun 1 - Aug 31</p>
+                    <div class="offer-discount">20% OFF</div>
+                    <p class="offer-description">
+                        Peak summer savings on cross-country transport. Perfect for snowbirds and vacation relocations.
+                    </p>
+                    <button class="notify-btn">Notify Me</button>
+                </div>
+
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <h3>Moving Season</h3>
+                    <p class="offer-period">Valid: May 1 - Sep 30</p>
+                    <div class="offer-discount">$100 OFF</div>
+                    <p class="offer-description">
+                        Moving to a new home? Get $100 off when you bundle car transport with household goods.
+                    </p>
+                    <button class="notify-btn">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="calculator-faq">
+        <div class="container">
+            <h2 class="section-title fade-in">Pricing FAQs</h2>
+
+            <div class="faq-grid fade-in fade-in-delay-1">
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> How is pricing calculated?</h3>
+                    <p>Our pricing is based on distance, vehicle type, service level, and any add-ons you select. The
+                        calculator above provides an instant estimate.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Are there hidden fees?</h3>
+                    <p>No! Our quotes include all costs. The only exception is if you request additional services after
+                        booking or if vehicle details were inaccurate.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> When do I pay?</h3>
+                    <p>We require a deposit to secure your booking, with the balance due upon delivery. We accept all
+                        major credit cards and payment plans.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Can I get a price match?</h3>
+                    <p>Yes! We offer price matching on comparable services. Contact us with a competitor's quote for
+                        review.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <!-- Loading State Manager - Must load first -->
+    <script src="../js/modules/loading-state-manager.js"></script>
+    <!-- Page Navigation Loader - Must load after loading-state-manager -->
+    <script src="../js/modules/page-navigation-loader.js"></script>
+    <script src="../js/modules/navbar-loader.js?v=2"></script>
+    <script src="../js/modules/footer-loader.js"></script>
+    <script src="../js/modules/scroll-animations.js"></script>
+    <script src="../js/modules/pricing-calculator.js"></script>
+
+    <!-- 🚀 Floating Action Menu loaded via footer component -->
+</body>
+
+</html>

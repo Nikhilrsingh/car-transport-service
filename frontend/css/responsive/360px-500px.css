@@ -1,0 +1,1411 @@
+/* 360px */
+
+/* styles.css */
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.4rem;
+  }
+
+  .cta-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+
+/* login.css */
+
+@media (max-width: 360px) {
+    .login-auth-card {
+        padding: 20px 15px;
+    }
+    
+    .login-form-tabs {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .login-form-options {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}
+
+
+
+/* 480px */
+
+/* styles.css */
+
+@media (max-width: 480px) {
+  .auto-slider {
+    height: 40vh;
+    min-height: 200px;
+  }
+
+  .slide-text {
+    bottom: 30%;
+    left: 10px;
+    right: 10px;
+    max-width: calc(100% - 20px);
+    padding: 12px 15px;
+  }
+
+  .slide-text h2 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .slide-text p {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .slider-dots {
+    bottom: 10px;
+    gap: 6px;
+    padding: 6px 12px;
+  }
+
+  .slider-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .slider-dot.active {
+    width: 18px;
+  }
+
+  .slider-control {
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+    right: 10px;
+    bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .preloader-logo {
+    width: 60px;
+    margin-bottom: 15px;
+  }
+
+  .loading-text {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .dots span {
+    width: 6px;
+    height: 6px;
+    margin: 0 2px;
+  }
+
+  .progress-bar {
+    width: 250px;
+    height: 3px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 30px 10px 20px;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+  }
+
+  .hero-badge i {
+    font-size: 0.8rem;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .hero-description {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .hero-stats {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .stat {
+    flex: 0 1 100%;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 1.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .hero-actions {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .cta-btn {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    gap: 8px;
+  }
+
+  .cta-btn i {
+    font-size: 0.9rem;
+  }
+
+  .quote-card {
+    padding: 15px;
+  }
+
+  .quote-header {
+    margin-bottom: 15px;
+  }
+
+  .quote-header h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+
+  .quote-header p {
+    font-size: 0.8rem;
+  }
+
+  .form-group {
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  .quote-submit {
+    padding: 12px;
+    font-size: 0.9rem;
+    gap: 6px;
+  }
+
+  .quote-result {
+    padding: 15px;
+  }
+
+  .amount {
+    font-size: 1.6rem;
+  }
+
+  .label {
+    font-size: 0.8rem;
+  }
+
+  .result-book {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-divider {
+    margin: 20px 0;
+  }
+  
+  .section-divider::before {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .section-divider::after {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .cta-text p {
+    font-size: 1rem;
+  }
+
+  .cta-form-box {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-card {
+    padding: 30px 20px;
+  }
+
+  .service-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .region-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .region-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* about.css */
+
+@media (max-width: 480px) {
+  .about-team-flip-card {
+    height: 340px;
+  }
+
+  .about-member-front-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .about-skill-bars {
+    margin-top: 10px;
+  }
+
+  .value-icon-wrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .value-icon-morph {
+    font-size: 2rem;
+  }
+}
+
+
+/* back-to-top-button.css */
+
+@media (max-width: 480px) {
+    .back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .back-to-top::before {
+        bottom: 55px;
+    }
+}
+
+
+/* backtoBottom.css */
+
+@media (max-width: 480px) {
+    .back-to-bottom {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .back-to-bottom::before {
+        bottom: 55px;
+    }
+}
+
+/* booking-modals.css */
+
+@media (max-width: 480px) {
+    .action-card {
+        min-height: 120px;
+        padding: 20px 15px;
+    }
+
+    .action-card i {
+        font-size: 2rem;
+    }
+
+    .action-card h4 {
+        font-size: 1rem;
+    }
+
+    .refund-tier {
+        flex-wrap: wrap;
+    }
+
+    .refund-tier .tier-amount {
+        width: 100%;
+        text-align: left;
+        margin-top: 5px;
+    }
+}
+
+/* booking.css */
+
+@media (max-width: 480px) {
+    .step-label {
+        display: none;
+    }
+
+    .progress-steps {
+        padding: 0 20px;
+    }
+
+    .summary-item {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .summary-value {
+        text-align: left;
+    }
+}
+
+
+/* careers.css */
+
+@media (max-width: 480px) {
+    section {
+        padding: 40px 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+
+/* chatbot-modal.css */
+
+@media (max-width: 480px) {
+    .chatbot-modal {
+        height: 100vh;
+    }
+
+    .chatbot-messages-container {
+        padding: 16px 12px;
+    }
+
+    .message-content {
+        max-width: 90%;
+        padding: 10px 14px;
+    }
+
+    .chatbot-input {
+        font-size: 16px;
+        /* Prevent zoom on iOS */
+    }
+}
+
+
+/* contact.css */
+
+@media (max-width: 480px) {
+  .map-info-window {
+    min-width: auto;
+    width: 85%;
+    max-width: 240px;
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  .map-info-content h4 {
+    font-size: 0.95rem;
+  }
+}
+
+
+/* digital-clock.css */
+
+@media (max-width: 480px) {
+  #mac-clock {
+    top: 65px;
+    right: 10px;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+
+/* emergency-support.css */
+
+@media (max-width: 480px) {
+    .emergency-hero .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .hotline-card,
+    .procedure-card,
+    .sidebar-card {
+        padding: 1.5rem;
+    }
+    
+    .emergency-form {
+        padding: 1.5rem;
+    }
+}
+
+
+/* enquiry.css */
+
+@media (max-width: 480px) {
+    .enquiry-hero h1 {
+        font-size: 2rem;
+    }
+
+    .file-preview-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+}
+
+
+/* floating-action-menu.css */
+
+@media (max-width: 480px) {
+  .fab-container {
+    bottom: 15px;
+    left: 15px;
+  }
+
+  .fab-main {
+    width: 50px;
+    height: 50px;
+  }
+
+  .fab-icon {
+    font-size: 20px;
+  }
+
+  .fab-actions {
+    bottom: 60px;
+    gap: 10px;
+  }
+
+  .fab-action-btn {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    max-width: 42px !important;
+    max-height: 42px !important;
+    font-size: 16px;
+  }
+
+  .fab-action-btn i {
+    font-size: 16px;
+  }
+
+  /* Hide tooltips on very small screens */
+  .fab-action-btn::before,
+  .fab-action-btn::after {
+    display: none;
+  }
+}
+
+
+/* floating-button.css */
+
+@media (max-width: 480px) {
+    .floating-book-btn {
+        /* mobile: keep some spacing above the back-to-top */
+        bottom: 70px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .floating-book-btn::before {
+        bottom: 135px;
+        font-size: 12px;
+    }
+}
+
+
+/* floating-call-button.css */
+
+@media (max-width: 480px) {
+    #floating-call-btn {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        left: 15px;
+        font-size: 20px;
+        box-shadow: 0 2px 8px rgba(30, 144, 255, 0.3);
+    }
+
+    #floating-call-btn:hover {
+        transform: scale(1.06);
+        box-shadow: 0 3px 10px rgba(30, 144, 255, 0.4);
+    }
+
+    #floating-call-btn::before {
+        left: 60px;
+        bottom: 12px;
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+
+    #floating-call-btn::after {
+        left: 57px;
+        bottom: 18px;
+        border-right: 4px solid transparent;
+        border-top: 4px solid rgba(30, 144, 255, 0.9);
+        border-bottom: 4px solid transparent;
+    }
+}
+
+
+
+/* floating-chatbot-button.css */
+
+@media (max-width: 480px) {
+    #floating-chatbot-btn {
+        bottom: 80px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+
+/* floating-whatsapp-button.css */
+
+@media (max-width: 480px) {
+    #floating-whatsapp-btn {
+        width: 45px;
+        height: 45px;
+        bottom: 145px;
+        left: 15px;
+        font-size: 20px;
+    }
+
+    #floating-whatsapp-btn::before {
+        font-size: 11px;
+        padding: 6px 10px;
+        left: -75px;
+    }
+
+    #floating-whatsapp-btn::after {
+        width: 0;
+        height: 0;
+    }
+}
+
+
+/* footer.css */
+
+@media (max-width: 480px) {
+  .footer-content.footer-grid {
+    padding: 0 15px 20px;
+  }
+  
+  .footer-card {
+    padding: 15px;
+    min-height: auto;
+  }
+  
+  .footer-bottom-content {
+    gap: 4px;
+    padding: 4px 8px;
+  }
+  
+  .footer-bottom-links {
+    gap: 8px;
+  }
+  
+  .accordion-panel.two-col {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .accordion-panel.two-col ul + ul {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 6px;
+  }
+}
+
+
+/* gallery.css */
+
+@media (max-width: 480px) {
+  .enhanced-gallery-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .enhanced-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .enhanced-gallery-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-btn {
+    width: 100%;
+  }
+  
+  .lightbox-controls {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  
+  .lightbox-counter {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    order: 1;
+    flex: 1;
+  }
+  
+  .lightbox-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+  
+  .lightbox-zoom-controls {
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .view-360-container,
+  .carousel-slide img {
+    height: 300px;
+  }
+}
+
+
+/* how-it-works.css */
+
+@media (max-width: 480px) {
+    section {
+        padding: 40px 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+    
+    .step-content {
+        padding: 20px;
+    }
+    
+    .step-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .timeline-duration {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* loading-indicators.css */
+
+@media (max-width: 480px) {
+    .spinner {
+        width: 30px;
+        height: 30px;
+    }
+
+    .loading-text {
+        font-size: 14px;
+    }
+
+    .spinner-progress {
+        width: 150px;
+    }
+}
+
+
+/* login.css */
+
+@media (max-width: 480px) {
+    .login-container {
+        max-width: 100%;
+    }
+    
+    .login-auth-card {
+        padding: 25px 20px;
+        border-radius: 14px;
+    }
+    
+    .login-logo-section {
+        margin-bottom: 30px;
+    }
+    
+    .login-logo {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+    }
+    
+    .login-logo img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .login-brand-name {
+        font-size: 22px;
+    }
+    
+    .login-tab-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .login-form-control {
+        padding: 14px 45px 14px 44px;
+        font-size: 14px;
+    }
+    
+    .login-submit-btn {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .login-social-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+}
+
+
+/* map-enhancements.css */
+
+@media (max-width: 480px) {
+  .map-controls {
+    gap: 6px;
+    padding: 6px;
+  }
+  
+  .map-control-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  
+  .legend-title {
+    font-size: 0.9rem;
+  }
+  
+  .map-section-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-india-map {
+    height: 350px;
+  }
+  
+  .map-controls {
+    gap: 6px;
+    padding: 6px;
+  }
+  
+  .map-control-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  
+  .legend-title {
+    font-size: 0.9rem;
+  }
+  
+  .map-section-title {
+    font-size: 1.4rem;
+  }
+  
+  .pin-marker {
+    width: 30px;
+    height: 45px;
+  }
+  
+  .pin-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .pin-icon i {
+    font-size: 14px;
+  }
+  
+  .pin-pulse {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .pin-tooltip {
+    font-size: 11px;
+    padding: 5px 10px;
+    top: -40px;
+  }
+}
+
+
+/* middle-navbar.css */
+
+@media (max-width: 480px) {
+  .middle-navbar-container {
+    padding: 5px 8px;
+  }
+
+  .middle-navbar-logo,
+  .middle-navbar-banner {
+    height: 30px;
+  }
+
+  .middle-navbar-right {
+    gap: 6px;
+  }
+
+  .middle-contact-item {
+    padding: 4px 6px;
+  }
+
+  .middle-contact-item i {
+    font-size: 0.95rem;
+  }
+}
+
+
+/* navbar.css */
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .upbar-actions {
+    gap: 8px;
+  }
+
+  .upbar-btn {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+
+  .upbar-btn i {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 0;
+  }
+
+  .left-logo {
+    width: 90px;
+    height: 45px;
+  }
+
+  .main-content {
+    margin-top: 65px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    top: 70px;
+    right: 10px;
+  }
+
+  .theme-toggle button {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .theme-toggle button i {
+    font-size: 20px;
+  }
+}
+
+
+/* network.css */
+
+@media (max-width: 480px) {
+    section {
+        padding: 40px 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+
+/* press-media.css */
+
+@media (max-width: 480px) {
+    section {
+        padding: 50px 0;
+    }
+
+    .press-hero {
+        height: 320px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .quick-links-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-item {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .achievement-card,
+    .certification-card,
+    .media-card,
+    .asset-card {
+        padding: 20px;
+    }
+}
+
+
+/* pricing-calculator.css */
+
+@media (max-width: 480px) {
+    .calculator-hero .hero-title {
+        font-size: 2rem;
+    }
+    
+    .calculator-hero .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 1rem 0.5rem;
+    }
+    
+    .plan-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .calculator-form,
+    .price-summary {
+        padding: 1.5rem;
+    }
+}
+
+
+/* pricing.css */
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 1.5em;
+    }
+
+    .pricing-page .pricing-card {
+        padding: 30px 20px;
+    }
+
+    .pricing-page .plan-name {
+        font-size: 1.5em;
+    }
+
+    .pricing-page .price-amount {
+        font-size: 2.5em;
+    }
+
+    .pricing-page .calculator-header h2 {
+        font-size: 1.5em;
+    }
+
+    .pricing-page .faq-section h2,
+    .pricing-page .testimonials-section h2 {
+        font-size: 1.8em;
+    }
+}
+
+
+/* quote-modal.css */
+
+@media (max-width: 480px) {
+    .quote-modal {
+        padding: 25px 15px;
+        border-radius: 12px;
+    }
+
+    .quote-modal-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .quote-modal-header p {
+        font-size: 0.9rem;
+    }
+
+    .form-group label {
+        font-size: 0.85rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .quote-modal-submit {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+
+    .step-progress {
+        padding: 15px 10px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 0.95rem;
+    }
+
+    .step-label {
+        font-size: 0.65rem;
+    }
+
+    .step-line {
+        margin: 0 5px;
+    }
+
+    .result-price .amount {
+        font-size: 2rem;
+    }
+
+    .form-actions,
+    .result-actions {
+        flex-direction: column;
+    }
+
+    .quote-result-book-btn,
+    .quote-result-reset-btn,
+    .quote-save-later-btn {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .delivery-time-display {
+        padding: 12px 15px;
+    }
+
+    .delivery-time-display i {
+        font-size: 1.1rem;
+    }
+
+    .delivery-time-display .time-value {
+        font-size: 1rem;
+    }
+
+    .price-option {
+        padding: 12px;
+    }
+
+    .price-option-amount {
+        font-size: 1.1rem;
+    }
+}
+
+
+/* rating.css */
+
+@media (max-width: 480px) {
+  .star-rating {
+    gap: 8px;
+    font-size: 2rem;
+  }
+
+  .rating-container h3 {
+    font-size: 1.4rem;
+  }
+}
+
+
+/* region.enhanced.css */
+
+@media (max-width: 480px) {
+  .region-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .region-icon i {
+    font-size: 2rem;
+  }
+  
+  .region-header .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .popular-cities-title {
+    font-size: 1.5rem;
+  }
+  
+  .city-thumbnail {
+    height: 100px;
+    font-size: 3rem;
+  }
+  
+  .city-name {
+    font-size: 1.2rem;
+  }
+  
+  .filter-tab {
+    flex: 1 1 calc(50% - 10px);
+    justify-content: center;
+  }
+  
+  .map-section-title {
+    font-size: 1.3rem;
+  }
+  
+  .map-legend {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .load-more-btn {
+    padding: 12px 28px;
+    font-size: 0.95rem;
+  }
+  
+  .cities-count {
+    font-size: 0.85rem;
+  }
+}
+
+
+/* sticky-quote-button.css */
+
+@media (max-width: 480px) {
+    #sticky-quote-btn {
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 9px 14px;
+        font-size: 12px;
+        border-radius: 40px;
+    }
+
+    #sticky-quote-btn i {
+        margin-right: 4px;
+        font-size: 12px;
+    }
+}
+
+
+/* testimonial.css */
+
+@media (max-width: 480px) {
+  .testimonials-section {
+    padding: 40px 0;
+  }
+
+  .testimonials-section .container {
+    gap: 20px;
+    padding: 0 10px;
+  }
+
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-title p {
+    font-size: 0.9rem;
+  }
+
+  .testimonial-slider {
+    max-width: 100%;
+    margin: 0 auto 40px;
+  }
+
+  .testimonial-card {
+    padding: 15px 10px;
+    flex: 0 0 100%;
+  }
+
+  .testimonial-card::before {
+    font-size: 2.5rem;
+    left: 15px;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+  }
+
+  .client-info {
+    gap: 10px;
+  }
+
+  .client-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .client-details h4 {
+    font-size: 1rem;
+  }
+
+  .client-details p {
+    font-size: 0.8rem;
+  }
+
+  .slider-controls {
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .grid-testimonial {
+    padding: 20px;
+  }
+
+  .grid-testimonial .testimonial-text {
+    font-size: 0.9rem;
+  }
+
+  .grid-client-avatar {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+/* booking.html */
+
+@media (max-width: 480px) {
+            .booking-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            #map {
+                height: 350px;
+            }
+
+            .toast-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+            }
+
+            .toast {
+                max-width: 100%;
+            }
+
+            .map-controls {
+                flex-direction: column;
+            }
+
+            .map-control-btn {
+                width: 100%;
+            }
+        }
+
+
+/* floating-feedback-button.css */
+
+@media (max-width: 500px) {
+  .feedback-modal-content {
+    padding: 25px 20px;
+  }
+
+  .feedback-stars i {
+    font-size: 24px;
+  }
+
+  #feedbackForm button {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+}

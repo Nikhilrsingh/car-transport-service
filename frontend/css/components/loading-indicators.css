@@ -1,0 +1,601 @@
+/* ============================================================================
+   LOADING INDICATORS & SKELETON PLACEHOLDERS
+   Global loading states with skeleton loaders for smooth UX
+   ============================================================================ */
+
+/* ============================================================================
+   1. GLOBAL LOADING OVERLAY
+   ============================================================================ */
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.loading-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Dark mode support */
+:root[data-theme="dark"] .loading-overlay {
+    background: rgba(20, 20, 20, 0.95);
+}
+
+/* ============================================================================
+   2. SPINNER ANIMATIONS
+   ============================================================================ */
+
+/* Spinner - Rotating Circle */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3 !important;
+    border-top: 4px solid #e74c3c !important;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Dark mode spinner */
+:root[data-theme="dark"] .spinner {
+    border-color: #333;
+    border-top-color: #e74c3c;
+}
+
+/* Spinner - Dots Animation */
+.spinner-dots {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e74c3c;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.spinner-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.spinner-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Spinner - Progress Bar */
+.spinner-progress {
+    width: 200px;
+    height: 5px;
+    background: #d0d0d0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.spinner-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    width: 0%;
+    animation: progressAnim 2.5s forwards;
+}
+
+@keyframes progressAnim {
+    0% {
+        width: 0%;
+    }
+
+    50% {
+        width: 70%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+:root[data-theme="dark"] .spinner-progress {
+    background: #d0d0d0;
+}
+
+/* Spinner - Pulse */
+.spinner-pulse {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #e74c3c;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 20px rgba(231, 76, 60, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+    }
+}
+
+/* Loading text */
+.loading-text {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #222 !important;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: capitalize !important;
+}
+
+:root[data-theme="dark"] .loading-text {
+    color: #e0e0e0;
+}
+
+.loading-text.animated::after {
+    content: '';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+
+    0%,
+    20% {
+        content: '';
+    }
+
+    40% {
+        content: '.';
+    }
+
+    60% {
+        content: '..';
+    }
+
+    80%,
+    100% {
+        content: '...';
+    }
+}
+
+/* ============================================================================
+   3. SKELETON LOADERS
+   ============================================================================ */
+
+/* Base skeleton styles */
+.skeleton {
+    background: linear-gradient(90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+:root[data-theme="dark"] .skeleton {
+    background: linear-gradient(90deg,
+            #333 25%,
+            #444 50%,
+            #333 75%);
+}
+
+/* Skeleton text line */
+.skeleton-text {
+    height: 12px;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.skeleton-text.short {
+    width: 80%;
+}
+
+.skeleton-text.medium {
+    width: 90%;
+}
+
+/* Skeleton heading */
+.skeleton-heading {
+    height: 24px;
+    margin-bottom: 16px;
+    width: 60%;
+}
+
+/* Skeleton card */
+.skeleton-card {
+    padding: 16px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+:root[data-theme="dark"] .skeleton-card {
+    background: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.skeleton-card .skeleton-image {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+}
+
+.skeleton-card .skeleton-text {
+    height: 14px;
+    margin-bottom: 10px;
+}
+
+/* Skeleton image */
+.skeleton-image {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+    background: linear-gradient(90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+:root[data-theme="dark"] .skeleton-image {
+    background: linear-gradient(90deg,
+            #333 25%,
+            #444 50%,
+            #333 75%);
+}
+
+/* Skeleton paragraph (multiple lines) */
+.skeleton-paragraph {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skeleton-paragraph .skeleton-text:last-child {
+    width: 70%;
+}
+
+/* Skeleton avatar */
+.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    animation: shimmer 2s infinite;
+    background: linear-gradient(90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%);
+    background-size: 200% 100%;
+}
+
+:root[data-theme="dark"] .skeleton-avatar {
+    background: linear-gradient(90deg,
+            #333 25%,
+            #444 50%,
+            #333 75%);
+}
+
+/* Skeleton grid/list item */
+.skeleton-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.skeleton-item .skeleton-avatar {
+    flex-shrink: 0;
+}
+
+.skeleton-item .skeleton-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ============================================================================
+   4. CONTENT LOADING STATE
+   ============================================================================ */
+
+.content-loading {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.content-loading.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.skeleton-placeholder {
+    display: none;
+    width: 100%;
+}
+
+.skeleton-placeholder.active {
+    display: block;
+}
+
+/* ============================================================================
+   5. PAGE SECTION SKELETONS
+   ============================================================================ */
+
+/* Services section skeleton */
+.skeleton-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.skeleton-service-card {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="dark"] .skeleton-service-card {
+    background: #2a2a2a;
+}
+
+.skeleton-service-card .skeleton-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 4px;
+}
+
+/* Testimonials skeleton */
+.skeleton-testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.skeleton-testimonial-card {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="dark"] .skeleton-testimonial-card {
+    background: #2a2a2a;
+}
+
+.skeleton-testimonial-card .skeleton-avatar {
+    margin-bottom: 12px;
+}
+
+/* Form skeleton */
+.skeleton-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.skeleton-form .skeleton-input {
+    height: 44px;
+    border-radius: 6px;
+    background: linear-gradient(90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+:root[data-theme="dark"] .skeleton-form .skeleton-input {
+    background: linear-gradient(90deg,
+            #333 25%,
+            #444 50%,
+            #333 75%);
+}
+
+.skeleton-form .skeleton-textarea {
+    height: 120px;
+    border-radius: 6px;
+    background: linear-gradient(90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ============================================================================
+   6. SECTION FADE/TRANSITION EFFECTS
+   ============================================================================ */
+
+.section-loading {
+    position: relative;
+}
+
+.section-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    display: none;
+    z-index: 100;
+    border-radius: inherit;
+    backdrop-filter: blur(2px);
+}
+
+.section-loading.loading::after {
+    display: block;
+}
+
+:root[data-theme="dark"] .section-loading.loading::after {
+    background: rgba(20, 20, 20, 0.5);
+}
+
+/* ============================================================================
+   7. MINI LOADERS (For partial content loading)
+   ============================================================================ */
+
+.mini-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #e74c3c;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+:root[data-theme="dark"] .mini-spinner {
+    border-color: #333;
+    border-top-color: #e74c3c;
+}
+
+/* Inline loading text */
+.inline-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inline-loading .mini-spinner {
+    width: 16px;
+    height: 16px;
+}
+
+/* ============================================================================
+   8. RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .loading-overlay {
+        backdrop-filter: blur(4px);
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+    }
+
+    .loading-text {
+        font-size: 16px;
+    }
+
+    .skeleton-services,
+    .skeleton-testimonials {
+        grid-template-columns: 1fr;
+    }
+
+    .skeleton-form {
+        max-width: 100%;
+    }
+}
+
+/* ============================================================================
+   9. ACCESSIBILITY
+   ============================================================================ */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .spinner,
+    .spinner-dots span,
+    .spinner-pulse,
+    .spinner-progress-bar,
+    .skeleton {
+        animation: none !important;
+    }
+
+    .loading-overlay {
+        transition: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: more) {
+    .spinner {
+        border-width: 5px;
+    }
+
+    .skeleton {
+        opacity: 0.8;
+    }
+}
