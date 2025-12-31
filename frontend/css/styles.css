@@ -1802,11 +1802,15 @@ body {
 .hero-main {
   padding-right: 2rem;
   text-align: left;
+  position: relative;
+  z-index: 2;
 }
 
 /* Right Side - Quote Form */
 .hero-quote {
   padding-left: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -1989,6 +1993,53 @@ body {
   position: relative;
   overflow: hidden;
   letter-spacing: 0.5px;
+}
+
+/* Allow ::after tooltips to render outside button bounds */
+.cta-btn[data-tooltip],
+.cta-button[data-tooltip],
+#calculate-price-btn[data-tooltip],
+.submit-btn[data-tooltip] {
+  overflow: visible;
+  position: relative;
+}
+
+/* Ensure CTA tooltips can overlay adjacent sections */
+.cta-btn[data-tooltip]:hover,
+.cta-button[data-tooltip]:hover,
+#calculate-price-btn[data-tooltip]:hover,
+.submit-btn[data-tooltip]:hover {
+  z-index: 9999;
+}
+
+/* CTA Button Tooltips */
+.cta-btn[data-tooltip]::after,
+.cta-button[data-tooltip]::after,
+#calculate-price-btn[data-tooltip]::after,
+.submit-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 9999;
+}
+
+.cta-btn[data-tooltip]:hover::after,
+.cta-button[data-tooltip]:hover::after,
+#calculate-price-btn[data-tooltip]:hover::after,
+.submit-btn[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
 }
 
 .cta-btn.primary {

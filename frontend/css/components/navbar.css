@@ -327,7 +327,10 @@ left: 100%;
 .nav-link::after,
 .enquiry-link::after,
 .blog-link::after,
-.login-btn::after {
+.login-btn::after,
+.nav-theme-toggle button::after,
+.mobile-menu-btn::after,
+.mobile-close-btn::after {
   content: attr(data-tooltip);
   position: absolute;
   bottom: -35px;
@@ -349,8 +352,18 @@ left: 100%;
 .nav-link:hover::after,
 .enquiry-link:hover::after,
 .blog-link:hover::after,
-.login-btn:hover::after {
+.login-btn:hover::after,
+.nav-theme-toggle button:hover::after,
+.mobile-menu-btn:hover::after,
+.mobile-close-btn:hover::after {
   opacity: 1;
+}
+
+/* Ensure tooltip positioning anchors correctly */
+.nav-theme-toggle button,
+.mobile-menu-btn,
+.mobile-close-btn {
+  position: relative;
 }
 
 @media (min-width: 1201px) {

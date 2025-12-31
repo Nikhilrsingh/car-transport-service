@@ -541,7 +541,8 @@ body:has(.pricing-page) {
     border: 2px solid #4d4d4d;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
+    /* Keep CTA tooltips visible (Issue #561) */
+    overflow: visible;
     margin-top: auto;
     margin-left: auto;
     margin-right: auto;
@@ -558,6 +559,8 @@ body:has(.pricing-page) {
     background: rgba(255, 255, 255, 0.1);
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
+    /* Keep ripple contained even though the button allows overflow for tooltips */
+    clip-path: inset(0 round 10px);
 }
 
 .pricing-page .cta-button:hover::before {
