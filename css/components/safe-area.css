@@ -1,0 +1,57 @@
+/* ============================================================
+   SAFE-AREA SUPPORT FOR NOTCHED & ROUNDED MOBILE DEVICES
+   Uses env(safe-area-inset-*) for modern mobile screens
+   ============================================================ */
+
+/* Apply safe-area padding globally */
+body {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+}
+
+/* Main layout containers */
+main,
+header,
+footer,
+.navbar,
+.container,
+.section {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+}
+
+/* Sticky / fixed elements protection */
+.sticky,
+.fixed,
+.sticky-header,
+.sticky-footer {
+    margin-top: env(safe-area-inset-top);
+    margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* Bottom navigation / action buttons */
+.bottom-bar,
+.mobile-cta,
+.floating-action {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+/* Ensure absolutely positioned elements stay visible */
+.absolute-edge {
+    left: env(safe-area-inset-left);
+    right: env(safe-area-inset-right);
+}
+
+/* ============================================================
+   Graceful fallback — devices without safe-area support
+   ============================================================ */
+@supports not (padding: env(safe-area-inset-top)) {
+    body,
+    main,
+    header,
+    footer {
+        padding: 16px;
+    }
+}
