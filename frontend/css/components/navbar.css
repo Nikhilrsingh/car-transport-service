@@ -509,7 +509,14 @@ left: 100%;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   background-color: #2b2b2b;
   z-index: 10001;
+  display:flex;
+  justify-content:center;
 }
+
+.dropdown-menu a{
+  padding-left:10px;
+}
+
 
 .dropdown-nav.active .dropdown-menu {
   opacity: 1;
