@@ -36,6 +36,51 @@ body[data-theme="dark"] .region-section h2 {
   color: #ffffff !important;
 }
 
+/*
+   Navbar & Middle Navbar - Dark Theme Overrides
+   Ensure navigation text is readable (white) in dark mode
+*/
+body[data-theme="dark"] .upbar,
+body[data-theme="dark"] .navbar,
+body[data-theme="dark"] .dropdown-menu,
+body[data-theme="dark"] .mobile-nav {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+  border-color: #444 !important;
+}
+
+body[data-theme="dark"] .upbar-btn,
+body[data-theme="dark"] .upbar-btn span,
+body[data-theme="dark"] .upbar-btn i,
+body[data-theme="dark"] .nav-link,
+body[data-theme="dark"] .nav-link i,
+body[data-theme="dark"] .nav-right-section,
+body[data-theme="dark"] .nav-actions,
+body[data-theme="dark"] .login-btn,
+body[data-theme="dark"] .enquiry-link,
+body[data-theme="dark"] .mobile-nav-link,
+body[data-theme="dark"] .mobile-nav-link i {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .search-bar input {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .search-bar input::placeholder {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+body[data-theme="dark"] .middle-navbar {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+  border-bottom: 1px solid #444 !important;
+}
+
+body[data-theme="dark"] .middle-contact-item,
+body[data-theme="dark"] .contact-number,
+body[data-theme="dark"] .contact-sub {
+  color: #ffffff !important;
+}
+
 /* Contact CTA Section */
 .contact-cta {
   background: linear-gradient(135deg, #1a1a1a 0%, #0f1115 100%);
