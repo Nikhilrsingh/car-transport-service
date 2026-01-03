@@ -1423,3 +1423,11 @@ body {
   background: #444444 !important;
   box-shadow: 0 0 10px rgba(255, 106, 61, 0.35) !important;
 }
+
+.nav-link.active i,
+.dropdown-nav.active > .nav-link i,
+.dropdown-nav.active > [data-dropdown-btn] i,
+.mobile-nav-link.active i {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;;
+}
