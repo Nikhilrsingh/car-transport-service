@@ -24,13 +24,13 @@
     </header>
 
     <main>
-      <div class="feedback-header">
-        <h1>Customer Reviews & Feedback</h1>
+      <div class="feedback-header enhanced-header">
+        <h1>⭐ Customer Reviews & Feedback</h1>
         <p>
-          See what our customers say about our quality, reliability, and
-          service.
+           Real experiences from customers who trusted Harihar Car Carriers
         </p>
       </div>
+
       <!-- Feedback Form -->
       <div class="feedback-form-section">
         <form class="feedback-form" id="feedbackForm">
@@ -192,9 +192,14 @@
 
       renderTestimonials();
 
-      // Star rating handling
+      // Star rating handling (mouse + keyboard friendly)
       let currentStars = 0;
       document.querySelectorAll("#starRating .fa-star").forEach((star) => {
+        // make each star keyboard-focusable
+        star.setAttribute('tabindex', '0');
+        star.setAttribute('role', 'button');
+        star.setAttribute('aria-label', (star.dataset && star.dataset.star) ? (star.dataset.star + ' star') : 'star');
+
         star.addEventListener("mouseenter", function () {
           let n = Number(this.dataset.star);
           highlightStars(n);
@@ -205,6 +210,14 @@
         star.addEventListener("click", function () {
           currentStars = Number(this.dataset.star);
           highlightStars(currentStars);
+        });
+
+        // keyboard support (Enter or Space to select)
+        star.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+          }
         });
       });
       function highlightStars(n) {
