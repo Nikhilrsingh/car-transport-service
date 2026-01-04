@@ -13,6 +13,41 @@
   --region-central: #9b59b6;
 }
 
+
+.explore-hero {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb, #38bdf8);
+  position: relative;
+  overflow: hidden;
+}
+
+.explore-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 60%);
+}
+
+.explore-hero h1 {
+  letter-spacing: -0.5px;
+  animation: fadeSlide 1s ease forwards;
+}
+
+.explore-hero p {
+  animation: fadeSlide 1.2s ease forwards;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 /* Section Container */
 .region-section {
   padding: 60px 0;
@@ -99,6 +134,32 @@
   margin: 0 auto;
   line-height: 1.8;
 }
+
+.region-filters-search {
+  border-radius: 18px;
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 20px;
+}
+
+/* SEARCH BAR */
+.region-search-container {
+  position: relative;
+}
+
+.region-search {
+  border-radius: 14px;
+  padding: 16px 50px 16px 20px;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(135deg, #2563eb, #38bdf8) border-box;
+}
+
+.region-search:focus {
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
 
 /* Popular Cities Section */
 .popular-cities-section {
@@ -270,6 +331,112 @@
   color: #999;
 }
 
+.search-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #2563eb;
+}
+
+
+.filter-tab {
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  background: #f1f5f9;
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: white;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+}
+
+.filter-tab:hover {
+  transform: translateY(-2px);
+}
+
+/* CITY GRID */
+.region-grid {
+  margin-top: 30px;
+  gap: 24px;
+}
+
+/* CITY CARD */
+.region-card.enhanced {
+  border-radius: 22px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  transform: translateY(0);
+}
+
+.region-card.enhanced:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+/* CITY ICON */
+.city-thumbnail {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #e0e7ff, #f0f9ff);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+/* CITY NAME */
+.city-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* REGION BADGES */
+.region-badge {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.region-badge.north { background: #dbeafe; color: #1e40af; }
+.region-badge.south { background: #dcfce7; color: #166534; }
+.region-badge.east  { background: #fef9c3; color: #854d0e; }
+.region-badge.west  { background: #ffe4e6; color: #9f1239; }
+.region-badge.central { background: #ede9fe; color: #5b21b6; }
+
+/* PRICING BADGE */
+.pricing-badge {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* VIEW TOGGLE */
+.view-btn {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.view-btn.active {
+  background: #2563eb;
+  color: white;
+}
+
+/* MOBILE FILTER BUTTON */
+.mobile-filter-btn {
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* BOTTOM SHEET */
+.bottom-sheet {
+  border-radius: 24px 24px 0 0;
+}
+
 /* Search Suggestions Dropdown */
 .search-suggestions {
   position: absolute;
@@ -428,6 +595,44 @@
   background: var(--region-white);
   color: var(--region-primary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.region-badge {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.region-badge.north { background: #dbeafe; color: #1e40af; }
+.region-badge.south { background: #dcfce7; color: #166534; }
+.region-badge.east  { background: #fef9c3; color: #854d0e; }
+.region-badge.west  { background: #ffe4e6; color: #9f1239; }
+.region-badge.central { background: #ede9fe; color: #5b21b6; }
+
+/* PRICING BADGE */
+.pricing-badge {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* VIEW TOGGLE */
+.view-btn {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.view-btn.active {
+  background: #2563eb;
+  color: white;
+}
+
+/* MOBILE FILTER BUTTON */
+.mobile-filter-btn {
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 /* Mobile Filter Button */
@@ -741,6 +946,22 @@
 /* Hidden state for filtered cards */
 .region-card.enhanced.hidden {
   display: none;
+}
+
+.bottom-sheet {
+  border-radius: 24px 24px 0 0;
+}
+
+/* BACK TO TOP / BOTTOM */
+.back-to-top,
+.back-to-bottom {
+  border-radius: 50%;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+.back-to-top:hover,
+.back-to-bottom:hover {
+  transform: scale(1.1);
 }
 
 /* Empty state */
