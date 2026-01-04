@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="css/components/middle-navbar.css" />
     <link rel="stylesheet" href="css/components/glowing-input.css">
 
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <style>
       * {
         margin: 0;
@@ -594,8 +597,53 @@
         alert(`Account created for ${name}!`);
       }
 
+      // Google OAuth Integration
       function continueWithGoogle() {
-        alert("Redirecting to Google Sign-In...");
+        // Replace with your Google OAuth Client ID
+        const clientId = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+        google.accounts.id.initialize({
+          client_id: clientId,
+          callback: handleGoogleCredentialResponse
+        });
+        google.accounts.id.prompt();
+      }
+
+      function handleGoogleCredentialResponse(response) {
+    
+        fetch('http://localhost:5000/api/auth/google', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            credential: response.credential
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.token) {
+            // Store JWT token for authenticated requests
+            localStorage.setItem('authToken', data.token);
+            alert(`Welcome, ${data.user.name}! You are now logged in.`);
+            
+          } else {
+            alert('Login failed: ' + (data.error || 'Unknown error'));
+          }
+        })
+        .catch(error => {
+          console.error('OAuth error:', error);
+          alert('Login failed: Network error');
+        });
+      }
+
+      // Helper to decode JWT (for demo only)
+      function parseJwt(token) {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
       }
     </script>
 

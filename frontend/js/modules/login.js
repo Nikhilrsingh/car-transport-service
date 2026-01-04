@@ -282,11 +282,9 @@ function handleSignup(event) {
 function handleSocialLogin(provider) {
     showNotification(`Initiating ${provider} login...`, 'info');
     
-    // TODO: Implement actual OAuth flows
     if (provider === 'google') {
         // Google OAuth implementation
-        // window.location.href = '/auth/google';
-        showNotification('Google OAuth integration coming soon!', 'info');
+        continueWithGoogle();
     } else if (provider === 'facebook') {
         // Facebook OAuth implementation
         // window.location.href = '/auth/facebook';
@@ -295,6 +293,64 @@ function handleSocialLogin(provider) {
         // Phone OTP authentication
         showNotification('Phone OTP authentication coming soon!', 'info');
     }
+}
+
+/**
+ * Google OAuth Integration
+ */
+function continueWithGoogle() {
+    // Replace with your Google OAuth Client ID
+    const clientId = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+    
+    if (typeof google === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://accounts.google.com/gsi/client';
+        script.onload = () => {
+            initializeGoogleAuth(clientId);
+        };
+        document.head.appendChild(script);
+    } else {
+        initializeGoogleAuth(clientId);
+    }
+}
+
+function initializeGoogleAuth(clientId) {
+    google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleGoogleCredentialResponse
+    });
+    google.accounts.id.prompt(); 
+}
+
+function handleGoogleCredentialResponse(response) {
+    
+    fetch('http://localhost:5000/api/auth/google', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            credential: response.credential
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.token) {
+        
+            localStorage.setItem('authToken', data.token);
+            showNotification(`Welcome, ${data.user.name}! You are now logged in.`, 'success');
+            
+            setTimeout(() => {
+                window.location.href = '/index.html';
+            }, 2000);
+        } else {
+            showNotification('Login failed: ' + (data.error || 'Unknown error'), 'error');
+        }
+    })
+    .catch(error => {
+        console.error('OAuth error:', error);
+        showNotification('Login failed: Network error', 'error');
+    });
 }
 
 // ============================================
