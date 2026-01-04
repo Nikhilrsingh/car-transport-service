@@ -1,3 +1,14 @@
+## Mandatory Onboarding
+
+All contributors must:
+1. fork the repository
+2. Complete the registration form: https://forms.gle/2aVtenoaHg65qi4G7
+3. Join the Discord server: https://discord.gg/3FKndgyuJp
+
+
+PRs without onboarding will not be reviewed.
+
+
 # Contributing to Car Transport Service
 
 Thank you for considering contributing! 
