@@ -1568,16 +1568,16 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 200px;
-  margin-top: -300px;
+  margin-bottom: 40px;
+  margin-top: 0;
 }
 
 /* Preloader logo bounce - only for #preloader */
 #preloader .logo-container img {
-  width: 600px;
+  width: 350px;
+  max-width: 85%;
   height: auto;
   animation: bounce 1.5s infinite ease-in-out;
-  margin-top: 40px;
 }
 
 /* Navbar logo - no animation */
@@ -1587,45 +1587,46 @@ body {
   animation: none !important;
 }
 
-.loading-text {
+#preloader .loading-text {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #fff; /* Changed to white for better visibility */
+  color: #ffffff !important;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
 
-.dots {
+#preloader .dots {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.dots span {
+#preloader .dots span {
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  background-color: #3498db;
+  width: 8px;
+  height: 8px;
+  background-color: #ff6347;
   border-radius: 50%;
   animation: blink 1.4s infinite both;
 }
 
-.progress-bar {
+#preloader .progress-bar {
   width: 300px;
+  max-width: 80%;
   height: 4px;
-  background: #d0d0d0;
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
-  margin-top: 300px;
+  margin-top: 20px;
   margin-bottom: 20px;
   overflow: hidden;
 }
 
-.progress-fill {
+#preloader .progress-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #007bff, #00c6ff);
+  background: linear-gradient(90deg, #ff6347, #ff4500);
   border-radius: 10px;
   animation: progressAnim 2.5s forwards;
 }
