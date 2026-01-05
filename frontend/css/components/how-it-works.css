@@ -792,3 +792,63 @@ section {
         width: 100%;
     }
 }
+
+
+/* ====================================
+   HOW IT WORKS PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .how-hero,
+body[data-theme="light"] .how-it-works-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .steps-section,
+body[data-theme="light"] .process-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .step-card,
+body[data-theme="light"] .process-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .step-card h3,
+body[data-theme="light"] .process-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .step-card p,
+body[data-theme="light"] .process-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .step-number {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .timeline-section {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .timeline-item {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .timeline-item h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .timeline-item p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .section-subtitle {
+  color: #555 !important;
+}

@@ -911,3 +911,68 @@ section {
         transform: translateY(0);
     }
 }
+
+
+/* ====================================
+   PRICING CALCULATOR PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .calculator-hero,
+body[data-theme="light"] .pricing-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .calculator-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .calculator-card,
+body[data-theme="light"] .calculator-container {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .calculator-card h2,
+body[data-theme="light"] .calculator-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .calculator-card label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .calculator-card input,
+body[data-theme="light"] .calculator-card select {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .calculator-card input:focus,
+body[data-theme="light"] .calculator-card select:focus {
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .price-result,
+body[data-theme="light"] .result-card {
+  background: #f8f9fa !important;
+  border-color: rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .price-result h3,
+body[data-theme="light"] .result-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .price-amount,
+body[data-theme="light"] .total-price {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .section-subtitle {
+  color: #555 !important;
+}

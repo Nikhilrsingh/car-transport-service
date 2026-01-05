@@ -105,3 +105,25 @@
         padding: 6px 10px;
     }
 }
+
+
+/* ====================================
+   SCROLL BUTTON - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .scroll-button {
+    background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 20px rgba(255, 99, 71, 0.35) !important;
+}
+
+body[data-theme="light"] .scroll-button:hover {
+    box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5) !important;
+}
+
+body[data-theme="light"] .scroll-button i {
+    color: #ffffff !important;
+}
+
+body[data-theme="light"] .scroll-button[data-tooltip]::after {
+    background-color: rgba(50, 50, 50, 0.95) !important;
+}

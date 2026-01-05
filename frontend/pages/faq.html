@@ -293,6 +293,105 @@
             border-color: #ff6347;
             color: white;
         }
+
+        /* ====================================
+           FAQ PAGE - Light Mode Styles
+           ==================================== */
+        body[data-theme="light"] {
+            background-color: #f8f9fa !important;
+            color: #333 !important;
+        }
+
+        body[data-theme="light"] .faq-section {
+            background-color: #f0f2f5 !important;
+        }
+
+        body[data-theme="light"] .section-title h2 {
+            color: #ff6347 !important;
+        }
+
+        body[data-theme="light"] .section-title p {
+            color: #555 !important;
+        }
+
+        body[data-theme="light"] .faq-search-input {
+            background: #ffffff !important;
+            border: 2px solid #ddd !important;
+            color: #333 !important;
+        }
+
+        body[data-theme="light"] .faq-search-input::placeholder {
+            color: #888 !important;
+        }
+
+        body[data-theme="light"] .faq-search-input:focus {
+            border-color: #ff6347 !important;
+            box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.15) !important;
+        }
+
+        body[data-theme="light"] .faq-category-btn {
+            background: #ffffff !important;
+            color: #333 !important;
+            border: 2px solid #ddd !important;
+        }
+
+        body[data-theme="light"] .faq-category-btn:hover {
+            border-color: #ff6347 !important;
+            color: #ff6347 !important;
+        }
+
+        body[data-theme="light"] .faq-category-btn.active {
+            background: #ff6347 !important;
+            border-color: #ff6347 !important;
+            color: white !important;
+        }
+
+        body[data-theme="light"] .faq-item {
+            background: #ffffff !important;
+            border-left: 4px solid #ff6347 !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        body[data-theme="light"] .faq-question {
+            background: rgba(255, 99, 71, 0.08) !important;
+        }
+
+        body[data-theme="light"] .faq-question:hover {
+            background: rgba(255, 99, 71, 0.15) !important;
+        }
+
+        body[data-theme="light"] .faq-question h4 {
+            color: #333 !important;
+        }
+
+        body[data-theme="light"] .faq-answer p {
+            color: #555 !important;
+        }
+
+        body[data-theme="light"] .faq-rating {
+            border-top: 1px solid #ddd !important;
+        }
+
+        body[data-theme="light"] .faq-rating span {
+            color: #555 !important;
+        }
+
+        body[data-theme="light"] .rating-btn {
+            background: transparent !important;
+            border: 2px solid #ddd !important;
+            color: #555 !important;
+        }
+
+        body[data-theme="light"] .rating-btn:hover {
+            border-color: #ff6347 !important;
+            color: #ff6347 !important;
+        }
+
+        body[data-theme="light"] .rating-btn.selected {
+            background: #ff6347 !important;
+            border-color: #ff6347 !important;
+            color: white !important;
+        }
     </style>
 </head>
 
@@ -792,6 +891,7 @@
     <script src="../js/modules/scroll-animations.js"></script>
 <!-- Bug: fix the footer on FAQ page  -->
     <script src="../js/modules/footer-loader.js"></script>
+    <script src="../js/modules/themes.js"></script>
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop">

@@ -1184,3 +1184,97 @@
     border-width: 3px;
   }
 }
+
+
+/* ====================================
+   GALLERY PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .enhanced-gallery-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-hero::before {
+  opacity: 0.1 !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-hero h1 {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-hero p {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .filter-btn {
+  background: #ffffff !important;
+  color: #333 !important;
+  border: 2px solid #ddd !important;
+}
+
+body[data-theme="light"] .filter-btn:hover {
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .filter-btn.active {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .search-input-wrapper input {
+  background: #ffffff !important;
+  color: #333 !important;
+  border: 2px solid #ddd !important;
+}
+
+body[data-theme="light"] .search-input-wrapper input:focus {
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .search-input-wrapper i {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-item {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-image-container {
+  background: linear-gradient(135deg, #f0f0f0, #e8e8e8) !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-title {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body[data-theme="light"] .gallery-section {
+  background: #f0f2f5 !important;
+}
+
+body[data-theme="light"] .gallery-section h2 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .carousel-slide-content {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent) !important;
+}
+
+body[data-theme="light"] .carousel-slide-title {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .carousel-slide-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+}

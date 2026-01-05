@@ -201,3 +201,29 @@
   outline: 2px solid rgba(255, 255, 255, 0.6);
   outline-offset: 2px;
 }
+
+
+/* ====================================
+   FAB - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .fab-main {
+  box-shadow: 0 4px 20px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .fab-main:hover {
+  box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5) !important;
+}
+
+body[data-theme="light"] .fab-action-btn {
+  background: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .fab-action-btn:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+body[data-theme="light"] .fab-tooltip {
+  background: rgba(50, 50, 50, 0.95) !important;
+  color: #ffffff !important;
+}
