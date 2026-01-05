@@ -5,330 +5,199 @@
 
 /* Container */
 .fab-container {
-  position: fixed;
-  bottom: 0px;
-  left: 30px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-/* On desktop with bottom bar, position FAB higher */
-@media (min-width: 769px) {
-  .fab-container {
-    bottom: 0;
-  }
+  position: fixed !important;
+  bottom: 6px !important;
+  right: 90px !important;
+  z-index: 99998 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
 
 /* Main FAB Button */
 .fab-main {
-  width: 55px;
-  height: 55px;
-  background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  position: relative;
-  z-index: 10001;
-  flex-shrink: 0;
-}
-
-.fab-main:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
-}
-
-.fab-main:active {
-  transform: scale(0.95);
-}
-
-/* FAB Icon - rotates when menu opens */
-.fab-icon {
-  font-size: 24px;
-  color: white;
-  transition: transform 0.3s ease;
-}
-
-.fab-main[aria-expanded="true"] .fab-icon {
-  transform: rotate(135deg);
-}
-
-/* Action Buttons Container */
-.fab-actions {
-  position: absolute;
-  bottom: 70px;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  pointer-events: none;
-  width: auto;
-}
-
-.fab-actions.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: all;
-}
-
-/* Individual Action Buttons */
-.fab-action-btn {
   width: 50px !important;
   height: 50px !important;
   min-width: 50px !important;
   min-height: 50px !important;
   max-width: 50px !important;
   max-height: 50px !important;
-  background: #fff;
-  border: none;
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  border: none !important;
   border-radius: 50% !important;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex !important;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: #333;
-  font-size: 20px;
-  position: relative;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 20px rgba(255, 99, 71, 0.4) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  position: relative !important;
+  z-index: 99999 !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.fab-main:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 25px rgba(255, 99, 71, 0.6) !important;
+}
+
+.fab-main:active {
+  transform: scale(0.95) !important;
+}
+
+/* FAB Icon - rotates when menu opens */
+.fab-icon {
+  font-size: 20px !important;
+  color: white !important;
+  transition: transform 0.3s ease !important;
+  line-height: 1 !important;
+}
+
+.fab-main[aria-expanded="true"] .fab-icon {
+  transform: rotate(45deg) !important;
+}
+
+/* Remove any ::before pseudo element from FAB main */
+.fab-main::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Action Buttons Container */
+.fab-actions {
+  position: absolute !important;
+  bottom: 60px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease !important;
+  pointer-events: none;
+  width: auto !important;
+}
+
+.fab-actions.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: all !important;
+}
+
+/* Individual Action Buttons */
+.fab-action-btn {
+  width: 45px !important;
+  height: 45px !important;
+  min-width: 45px !important;
+  min-height: 45px !important;
+  max-width: 45px !important;
+  max-height: 45px !important;
+  background: #fff !important;
+  border: none !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease !important;
+  text-decoration: none !important;
+  color: #333 !important;
+  font-size: 18px !important;
+  position: relative !important;
   transform: scale(0);
   opacity: 0;
   padding: 0 !important;
-  margin: 0;
-  overflow: visible;
-  line-height: 1;
+  margin: 0 auto !important;
+  overflow: visible !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
 }
 
 /* Ensure icons inside buttons don't break circle */
 .fab-action-btn i {
-  font-size: 20px;
-  line-height: 1;
-  margin: 0;
-  padding: 0;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .fab-actions.active .fab-action-btn {
-  transform: scale(1);
-  opacity: 1;
+  transform: scale(1) !important;
+  opacity: 1 !important;
 }
 
 /* Stagger animation for action buttons */
-.fab-actions.active .fab-action-btn:nth-child(1) {
-  transition-delay: 0.05s;
-}
-
-.fab-actions.active .fab-action-btn:nth-child(2) {
-  transition-delay: 0.1s;
-}
-
-.fab-actions.active .fab-action-btn:nth-child(3) {
-  transition-delay: 0.15s;
-}
-
-.fab-actions.active .fab-action-btn:nth-child(4) {
-  transition-delay: 0.2s;
-}
-
-.fab-actions.active .fab-action-btn:nth-child(5) {
-  transition-delay: 0.25s;
-}
-
-.fab-actions.active .fab-action-btn:nth-child(6) {
-  transition-delay: 0.3s;
-}
+.fab-actions.active .fab-action-btn:nth-child(1) { transition-delay: 0.02s; }
+.fab-actions.active .fab-action-btn:nth-child(2) { transition-delay: 0.04s; }
+.fab-actions.active .fab-action-btn:nth-child(3) { transition-delay: 0.06s; }
+.fab-actions.active .fab-action-btn:nth-child(4) { transition-delay: 0.08s; }
+.fab-actions.active .fab-action-btn:nth-child(5) { transition-delay: 0.1s; }
+.fab-actions.active .fab-action-btn:nth-child(6) { transition-delay: 0.12s; }
 
 .fab-action-btn:hover {
-  transform: scale(1.15);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* Icon colors for different actions */
-.fab-action-btn:nth-child(1) i {
-  /* Get Quote - blue */
-  color: #2196F3 !important;
-  font-size: 20px;
-}
+.fab-action-btn:nth-child(1) i { color: #2196F3 !important; } /* Get Quote - Blue */
+.fab-action-btn:nth-child(2) i { color: #9C27B0 !important; } /* Book Now - Purple */
+.fab-action-btn:nth-child(3) i { color: #25D366 !important; } /* WhatsApp - Green */
+.fab-action-btn:nth-child(4) i { color: #00BCD4 !important; } /* Call - Cyan */
+.fab-action-btn:nth-child(5) i { color: #FF9800 !important; } /* Feedback - Orange */
+.fab-action-btn:nth-child(6) i { color: #607D8B !important; } /* Chat - Blue Grey */
 
-.fab-action-btn:nth-child(2) i {
-  /* Book Now - purple */
-  color: #9C27B0 !important;
-  font-size: 20px;
-}
-
-.fab-action-btn:nth-child(3) i {
-  /* WhatsApp - green */
-  color: #25D366 !important;
-  font-size: 20px;
-}
-
-.fab-action-btn:nth-child(4) i {
-  /* Call - teal */
-  color: #00BCD4 !important;
-  font-size: 20px;
-}
-
-.fab-action-btn:nth-child(5) i {
-  /* Chatbot - orange */
-  color: #FF9800 !important;
-  font-size: 20px;
-}
-
-.fab-action-btn:nth-child(6) i {
-  /* Feedback - amber */
-  color: #FFC107 !important;
-  font-size: 20px;
-}
-
-/* Tooltips - for both buttons and links */
+/* Remove any ::before pseudo element */
 .fab-action-btn::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Tooltips - using ::after, positioned to the left */
+.fab-action-btn[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 60px;
+  right: 55px;
   top: 50%;
-  transform: translateY(-50%) translateX(-10px);
+  transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.9);
   color: white;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
   white-space: nowrap;
   opacity: 0;
-  transition: all 0.3s ease;
-  pointer-events: none;
-  font-weight: 500;
-  z-index: 10002;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  letter-spacing: 0.3px;
-  min-width: fit-content;
-}
-
-.fab-action-btn::after {
-  content: "";
-  position: absolute;
-  left: 55px;
-  top: 50%;
-  transform: translateY(-50%) translateX(-10px);
-  width: 0;
-  height: 0;
-  border-right: 7px solid rgba(0, 0, 0, 0.9);
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  opacity: 0;
-  transition: all 0.3s ease;
-  pointer-events: none;
-  z-index: 10002;
-}
-
-.fab-action-btn:hover::before {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-
-.fab-action-btn:hover::after {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-
-/* Backdrop (optional overlay) */
-.fab-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 9998;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 100000;
 }
 
-.fab-backdrop.active {
+.fab-action-btn[data-tooltip]:hover::after {
   opacity: 1;
   visibility: visible;
 }
 
-/* Pulse animation for main FAB */
-@keyframes fab-pulse {
-  0% {
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
-  }
-  50% {
-    box-shadow: 0 4px 30px rgba(255, 107, 53, 0.7);
-  }
-  100% {
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
-  }
-}
-
-.fab-main.pulse {
-  animation: fab-pulse 2s infinite;
-}
-
-/* Mobile Responsive */
+/* Mobile Responsive - HIDE FAB on mobile, use mini footer instead */
 @media (max-width: 768px) {
   .fab-container {
-    bottom: 20px;
-    left: 20px;
-  }
-
-  .fab-main {
-    width: 55px;
-    height: 55px;
-  }
-
-  .fab-icon {
-    font-size: 22px;
-  }
-
-  .fab-actions {
-    bottom: 65px;
-  }
-
-  .fab-action-btn {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-    font-size: 18px;
-  }
-
-  .fab-action-btn i {
-    font-size: 18px;
-  }
-
-  .fab-action-btn::before {
-    font-size: 12px;
-    padding: 6px 10px;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }
 
 /* Accessibility: Focus states */
 .fab-main:focus,
 .fab-action-btn:focus {
-  outline: 3px solid rgba(255, 255, 255, 0.6);
+  outline: 2px solid rgba(255, 255, 255, 0.6);
   outline-offset: 2px;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .fab-action-btn {
-    background: #2d2d2d;
-    color: #fff;
-  }
-
-  .fab-action-btn:hover {
-    background: #3d3d3d;
-  }
 }

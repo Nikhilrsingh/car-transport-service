@@ -23,6 +23,35 @@
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* Bottom Bar Clock - positioned on the left */
+.bottom-bar-clock {
+  position: absolute;
+  left: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 5px 10px;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 1;
+}
+
+.bottom-bar-clock .clock-time {
+  color: #ff6347;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.bottom-bar-clock .clock-date {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+}
+
 .bottom-action-bar-fixed::before {
   content: '';
   position: absolute;
@@ -42,14 +71,16 @@
   color: white;
   border: none;
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  max-width: 50px;
+  max-height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
@@ -58,6 +89,8 @@
   position: relative;
   z-index: 1;
   flex-shrink: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .bottom-action-btn::before {
@@ -113,17 +146,24 @@
 
 /* Main Get Quote Button */
 .bottom-action-btn.quote {
-  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
-  width: auto;
-  min-width: auto;
-  border-radius: 10px;
-  padding: 10px 28px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%) !important;
+  width: auto !important;
+  min-width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 40px !important;
+  max-height: none !important;
+  border-radius: 25px !important;
+  padding: 10px 20px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  color: white !important;
+  border: none !important;
   box-shadow: 0 6px 20px rgba(244, 67, 54, 0.35), 
-              0 2px 8px rgba(211, 47, 47, 0.25);
+              0 2px 8px rgba(211, 47, 47, 0.25) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   overflow: hidden;

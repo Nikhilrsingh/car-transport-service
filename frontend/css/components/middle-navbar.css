@@ -141,15 +141,30 @@
 /* ===============================
    Dark Mode
 ================================ */
-body.dark-mode .middle-navbar {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  border-bottom: 2px solid #444;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+body.dark-mode .middle-navbar,
+body[data-theme="dark"] .middle-navbar {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+  border-bottom: 1px solid #444 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
 }
 
 body.dark-mode .middle-navbar-logo,
-body.dark-mode .middle-navbar-banner {
-  filter: brightness(0.9);
+body.dark-mode .middle-navbar-banner,
+body[data-theme="dark"] .middle-navbar-logo,
+body[data-theme="dark"] .middle-navbar-banner {
+  filter: brightness(0.95);
+}
+
+body.dark-mode .middle-contact-item,
+body[data-theme="dark"] .middle-contact-item {
+  color: #fff !important;
+}
+
+body.dark-mode .contact-number,
+body.dark-mode .contact-sub,
+body[data-theme="dark"] .contact-number,
+body[data-theme="dark"] .contact-sub {
+  color: #fff !important;
 }
 
 /* ===============================
@@ -183,37 +198,60 @@ body.dark-mode .middle-navbar-banner {
 }
 
 @media (max-width: 768px) {
+  .middle-navbar {
+    top: 32px; /* Below smaller upbar */
+  }
+  
   .middle-navbar-container {
     flex-wrap: wrap;
-    padding: 6px 12px;
-    gap: 8px;
+    padding: 6px 10px;
+    gap: 6px;
+    height: auto;
+    min-height: 70px;
   }
 
   .middle-navbar-left {
     order: 1;
+    flex: 0 0 auto;
   }
 
   .middle-navbar-right {
     order: 2;
-    gap: 8px;
+    gap: 6px;
+    flex: 1;
+    justify-content: flex-end;
   }
 
   .middle-navbar-center {
     order: 3;
-    margin-top: 5px;
+    width: 100%;
+    margin-top: 4px;
   }
 
   .middle-navbar-logo {
-    height: 40px;
+    height: 45px;
   }
 
   .middle-navbar-banner {
-    height: 35px;
+    height: 30px;
     transform: scale(1.1);
   }
 
   /* Disable excessive hover zoom on mobile */
   .middle-navbar-banner:hover {
     transform: scale(1.15);
+  }
+  
+  /* Contact info mobile */
+  .middle-contact-item {
+    padding: 0 4px;
+  }
+  
+  .middle-contact-item i {
+    font-size: 1.1rem;
+  }
+  
+  .contact-text {
+    display: none;
   }
 }
