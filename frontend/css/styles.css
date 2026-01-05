@@ -1562,7 +1562,8 @@ body {
   width: 100%;
 }
 
-.logo-container {
+/* Preloader logo container only */
+#preloader .logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -4722,11 +4723,12 @@ button,
   }
 
   div.logo-container.left-logo {
-    margin-left: -40px !important;
-    padding-left: 0 !important;
+    margin-left: 10px !important;
+    padding-left: 5px !important;
   }
   div.logo-container.left-logo img {
-    max-height: 45px !important;
+    max-height: 55px !important;
+    height: 55px !important;
   }
 
   #mobileMenuBtn,
