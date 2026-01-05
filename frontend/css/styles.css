@@ -399,6 +399,378 @@ header.sticky {
   z-index: var(--z-overlay);
 }
 
+.hero {
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(3, 6, 23, 0.65), rgba(255, 99, 71, 0.12));
+  z-index: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 20;
+  padding: 3rem 0 4rem;
+}
+
+/* Title and subtitles: larger, higher contrast */
+.hero-title {
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.hero-title .title-line {
+  display: block;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+.hero-title .highlight {
+  color: var(--primary-color);
+  text-shadow: 0 8px 26px rgba(255,99,71,0.22);
+}
+
+.hero-sub-title {
+  color: #f5f7fb;
+  opacity: 0.95;
+  margin-bottom: 0.8rem;
+}
+
+.hero-description {
+  color: rgba(245,247,251,0.9);
+  max-width: 48ch;
+}
+
+/* CTA buttons: more prominent */
+.cta-btn.primary {
+  background: linear-gradient(90deg, #ff7a59 0%, #ff3d00 100%);
+  color: #fff;
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(255,77,34,0.14), var(--shadow-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cta-btn.primary .btn-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.18;
+}
+
+.cta-btn.secondary, .cta-btn.outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* Quote card: glass effect and improved legibility */
+.hero-quote .quote-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px) saturate(1.05);
+  padding: 1.25rem;
+  border-radius: 14px;
+  color: #ffffff;
+}
+
+.hero-quote .quote-header h3 {
+  color: #fff;
+  margin-bottom: 0.125rem;
+}
+
+.quote-form .form-group input,
+.quote-form .form-group select,
+.contact-form .input-group input,
+.contact-form .input-group select,
+.feedback-input input,
+.feedback-input textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+}
+
+.quote-form .form-group label,
+.contact-form .input-group i,
+.feedback-input label {
+  color: rgba(255,255,255,0.85);
+}
+
+/* Slider: more dramatic imagery */
+.slider-feature-grid .auto-slider {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.slider-feature-grid .slide-image {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.68) contrast(1.05);
+  transition: transform 0.8s cubic-bezier(.2,.9,.3,1), filter 0.35s ease;
+}
+
+.slider-feature-grid .slide:hover .slide-image,
+.slider-feature-grid .slide.active .slide-image {
+  transform: scale(1.03);
+  filter: brightness(0.78) contrast(1.06);
+}
+
+.slide-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.45));
+}
+
+.slide-text h2,
+.slide-text p {
+  color: #fff;
+}
+
+/* Feature boxes: subtle glass cards */
+.slider-feature-grid .feature-box {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius: 12px;
+  padding: 1rem;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Scroll indicator */
+.scroll-indicator .scroll-text {
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+}
+
+.scroll-indicator .scroll-arrow i {
+  color: rgba(255,255,255,0.95);
+  animation: floatDown 1.6s infinite ease-in-out;
+}
+
+@keyframes floatDown {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+  100% { transform: translateY(0); }
+}
+
+/* Hero stats: larger and more visible */
+.hero-stats { display:flex; gap:1rem; margin-top:1rem; }
+.hero-stats .stat { text-align:center; }
+.hero-stats .stat-number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .slider-feature-grid .slide-image { height: 240px; }
+  .hero-content { padding: 2rem 0 3rem; }
+  .hero-stats { flex-direction: row; gap:0.8rem; }
+}
+
+/* ==================================
+   NAVBAR, POPUP & BUTTON VISIBILITY
+================================== */
+
+.navbar {
+  background: linear-gradient(180deg, rgba(3,6,23,0.92), rgba(3,6,23,0.80));
+  color: #fff;
+  padding: 0.6rem 1rem;
+  box-shadow: 0 6px 22px rgba(2,8,23,0.45);
+  backdrop-filter: blur(6px);
+}
+
+.navbar a,
+.navbar .nav-link {
+  color: rgba(255,255,255,0.95);
+}
+
+/* Back-to-top: larger and more visible */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(180deg,#ff6b3a,#ff3d00);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 30px rgba(255,77,34,0.16);
+  border: none;
+  z-index: var(--z-sticky-quote-btn);
+}
+
+.back-to-top:hover { transform: translateY(-4px) scale(1.02); }
+
+/* Cookie popup: higher contrast and accessible layout */
+#cookie-popup {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  background: linear-gradient(180deg, rgba(3,6,23,0.96), rgba(3,6,23,0.88));
+  color: #fff;
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(2,8,23,0.5);
+  gap: 0.6rem;
+  align-items: center;
+  display: none; /* controlled by JS */
+  z-index: var(--z-alert);
+}
+
+#cookie-popup p { margin:0 0.6rem 0 0; color: rgba(255,255,255,0.95); }
+
+#cookie-popup .button-group { display:flex; gap:0.5rem; }
+
+#cookie-popup .accept-btn {
+  background: #00c853;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+}
+
+#cookie-popup .reject-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+}
+
+/* ==================================
+   SUBTLE ENTRANCE ANIMATIONS
+================================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInUp 0.6s var(--ease-standard) forwards;
+}
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Control animation delay via inline style or CSS chain */
+.fade-in.delay-1 { animation-delay: 0.08s; }
+.fade-in.delay-2 { animation-delay: 0.16s; }
+.fade-in.delay-3 { animation-delay: 0.24s; }
+
+/* Slightly larger base font for visibility */
+body { font-size: 17px; }
+
+/* ==================================================
+   PRICING CTA + PRIMARY BUTTON VISIBILITY ENHANCEMENTS
+   - Make pricing CTA more prominent
+   - Unify primary button appearance across hero, pricing, forms
+================================================== */
+
+.pricing-cta-section {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1.25rem;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  box-shadow: 0 18px 50px rgba(2,8,23,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pricing-cta-content h3 { font-size: 1.35rem; margin:0 0 0.25rem 0; color: #fff; }
+.pricing-cta-content p { margin:0; color: rgba(255,255,255,0.9); }
+
+/* Stronger primary button variant used for pricing CTA */
+.pricing-cta-section .cta-btn.primary,
+.cta-btn.primary.emphasize {
+  background: linear-gradient(90deg, #ff7a59 0%, #ff3d00 100%);
+  color: #fff;
+  padding: 0.95rem 1.4rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.02rem;
+  box-shadow: 0 14px 36px rgba(255,77,34,0.18), 0 6px 18px rgba(0,0,0,0.18);
+  transform-origin: center;
+  border: none;
+}
+
+/* Make sure important CTA buttons stand out across page */
+.quote-result-book-btn,
+.quote-result-book-btn:focus,
+.quote-form-submit-btn,
+.submit-btn,
+.pricing-cta-section .cta-btn.primary,
+.hero-actions .cta-btn.primary {
+  outline: none;
+}
+
+.quote-result-book-btn,
+.quote-form-submit-btn,
+.submit-btn { display: inline-flex; gap:0.5rem; align-items:center; }
+
+.cta-btn.primary:focus-visible,
+.quote-result-book-btn:focus-visible,
+.submit-btn:focus-visible,
+.quote-form-submit-btn:focus-visible {
+  box-shadow: 0 0 0 4px rgba(255,77,34,0.14), 0 12px 30px rgba(255,77,34,0.12);
+  outline: none;
+}
+
+/* Subtle pulsing to draw attention (use sparingly) */
+.pricing-cta-section .cta-btn.primary { animation: pulseSlow 4s ease-in-out infinite; }
+
+@keyframes pulseSlow {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Icon spacing within CTAs */
+.cta-btn i, .submit-btn i { margin-right: 0.5rem; }
+
+/* Ensure secondary / outline CTAs are readable */
+.cta-btn.secondary, .cta-btn.outline {
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: transparent;
+}
+
+/* Responsive: prioritize button stacking on small screens */
+@media (max-width: 720px) {
+  .pricing-cta-section { flex-direction: column; align-items: stretch; }
+  .pricing-cta-section .cta-btn.primary { width: 100%; text-align:center; }
+  .hero-actions { display:flex; flex-direction:column; gap:0.6rem; }
+}
+
+
+
+
 /* Modals */
 .modal {
   position: fixed;
