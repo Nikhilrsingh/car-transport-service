@@ -14,6 +14,15 @@ function initRegionMap() {
   
   // Update active filter badge
   updateActiveFilterBadge('all');
+  
+  // Handle window resize to recalculate connection lines
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      initConnectionLines(); // Recalculate connection lines on resize
+    }, 250);
+  });
 }
 
 // Initialize city pins with hover and click functionality
@@ -96,8 +105,15 @@ function initCityPins() {
 
 // Initialize animated connection lines between major cities
 function initConnectionLines() {
+  // Connection lines disabled to prevent visual clutter
+  // Uncomment the code below if you want to re-enable them
+  
+  /*
   const connectionsOverlay = document.getElementById('connectionsOverlay');
   if (!connectionsOverlay) return;
+
+  // Clear any existing connection lines
+  connectionsOverlay.innerHTML = '';
 
   // Major routes between cities
   const connections = [
@@ -112,41 +128,51 @@ function initConnectionLines() {
     { from: 'hyderabad', to: 'mumbai' }
   ];
 
-  connections.forEach(conn => {
-    const fromPin = document.querySelector(`.city-pin[data-city="${conn.from}"]`);
-    const toPin = document.querySelector(`.city-pin[data-city="${conn.to}"]`);
-    
-    if (fromPin && toPin) {
-      const fromRect = fromPin.getBoundingClientRect();
-      const toRect = toPin.getBoundingClientRect();
-      const containerRect = connectionsOverlay.getBoundingClientRect();
+  // Wait for map to be fully loaded before calculating positions
+  setTimeout(() => {
+    connections.forEach(conn => {
+      const fromPin = document.querySelector(`.city-pin[data-city="${conn.from}"]`);
+      const toPin = document.querySelector(`.city-pin[data-city="${conn.to}"]`);
       
-      // Calculate positions relative to container
-      const x1 = fromRect.left - containerRect.left + fromRect.width / 2;
-      const y1 = fromRect.top - containerRect.top + fromRect.height / 2;
-      const x2 = toRect.left - containerRect.left + toRect.width / 2;
-      const y2 = toRect.top - containerRect.top + toRect.height / 2;
-      
-      // Create connection line
-      const line = document.createElement('div');
-      line.className = 'connection-line';
-      
-      // Calculate length and angle
-      const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-      const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-      
-      // Set line properties
-      line.style.width = `${length}px`;
-      line.style.left = `${x1}px`;
-      line.style.top = `${y1}px`;
-      line.style.transform = `rotate(${angle}deg)`;
-      
-      // Random delay for animation
-      line.style.animationDelay = `${Math.random() * 2}s`;
-      
-      connectionsOverlay.appendChild(line);
-    }
-  });
+      if (fromPin && toPin) {
+        const mapContainer = document.getElementById('indiaMap');
+        if (!mapContainer) return;
+        
+        const mapRect = mapContainer.getBoundingClientRect();
+        const fromRect = fromPin.getBoundingClientRect();
+        const toRect = toPin.getBoundingClientRect();
+        
+        // Calculate positions relative to map container
+        const x1 = fromRect.left - mapRect.left + fromRect.width / 2;
+        const y1 = fromRect.top - mapRect.top + fromRect.height / 2;
+        const x2 = toRect.left - mapRect.left + toRect.width / 2;
+        const y2 = toRect.top - mapRect.top + toRect.height / 2;
+        
+        // Ensure positions are within bounds
+        if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) return;
+        
+        // Create connection line
+        const line = document.createElement('div');
+        line.className = 'connection-line';
+        
+        // Calculate length and angle
+        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        
+        // Set line properties with bounds checking
+        line.style.width = `${Math.max(0, length)}px`;
+        line.style.left = `${Math.max(0, x1)}px`;
+        line.style.top = `${Math.max(0, y1)}px`;
+        line.style.transform = `rotate(${angle}deg)`;
+        
+        // Random delay for animation
+        line.style.animationDelay = `${Math.random() * 2}s`;
+        
+        connectionsOverlay.appendChild(line);
+      }
+    });
+  }, 500); // Delay to ensure proper positioning
+  */
 }
 
 // Helper function to get city data

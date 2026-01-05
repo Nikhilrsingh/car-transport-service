@@ -1,21 +1,29 @@
 /* Map Enhancement Styles */
 
 /* Map Header and Controls */
-.map-header {
+.map-section-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  position: relative;
   flex-wrap: wrap;
   gap: 15px;
 }
 
 .map-section-title {
   margin: 0 !important;
-  text-align: left !important;
+  text-align: center !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .map-controls {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   gap: 10px;
   background: #f8f9fa;
@@ -49,10 +57,26 @@
   transform: translateY(0) scale(0.95);
 }
 
-/* Map Container Enhancements */
+/* Main Layout Container */
+.map-layout-container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  height: 500px;
+}
+
+/* Map Container Wrapper - 2/3 width with proper sizing */
 .map-container {
+  flex: 2;
+  position: relative;
   cursor: grab;
   user-select: none;
+  background: transparent;
+  border-radius: 15px;
+  overflow: visible;
+  padding: 0;
+  height: 500px; /* Fixed height to contain the map properly */
+  max-height: 500px;
 }
 
 .map-container:active {
@@ -76,15 +100,43 @@
 #indiaMap {
   transform-origin: center center;
   will-change: transform;
+  width: 100%;
+  height: 100%; /* Fill the container completely */
 }
 
 /* Animated Connection Lines */
-.connection-lines {
+.connections-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  z-index: 5;
 }
 
-.connection {
-  stroke-linecap: round;
+/* Connection Line Styles - Hidden by default */
+.connection-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b35, #ff9b6b);
+  border-radius: 1px;
+  opacity: 0; /* Hidden by default - change to 0.7 to show */
+  animation: connectionPulse 3s ease-in-out infinite;
+  transform-origin: left center;
+  z-index: 1;
+  display: none; /* Completely hidden */
+}
+
+@keyframes connectionPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleX(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleX(1);
+  }
 }
 
 /* Enhanced Office Markers */
@@ -130,12 +182,19 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Enhanced Legend */
+/* Enhanced Legend - 1/3 width container */
 .map-legend {
+  flex: 1;
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
   border-radius: 12px;
   padding: 20px;
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 .legend-title {
@@ -155,47 +214,24 @@
   margin-right: 8px;
 }
 
-.active-filter-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, var(--region-primary), var(--region-secondary));
-  color: white;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
-  animation: slideInRight 0.3s ease;
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.active-filter-badge i {
-  font-size: 0.75rem;
-}
-
 .legend-items {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 15px;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex: 1;
 }
 
 .legend-item {
   cursor: pointer;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 8px;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .legend-item:hover {
@@ -203,20 +239,16 @@
   transform: translateY(-2px);
 }
 
-.legend-item[data-region] {
-  position: relative;
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
-.legend-item[data-region]:hover::after {
-  content: 'Click to filter';
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.7rem;
-  color: var(--region-primary);
-  white-space: nowrap;
-  font-weight: 600;
+.legend-color.office {
+  border-radius: 50%;
 }
 
 .legend-color.secondary {
@@ -227,10 +259,11 @@
 /* Map Statistics */
 .map-stats {
   display: flex;
-  justify-content: center;
-  gap: 30px;
+  flex-direction: column;
+  gap: 15px;
   padding-top: 15px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: auto;
 }
 
 .stat-item {
@@ -298,14 +331,39 @@ body[data-theme="dark"] .legend-item:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .map-header {
+  /* Stack layout vertically on mobile */
+  .map-layout-container {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 20px;
+    height: auto; /* Allow natural height on mobile */
+  }
+  
+  /* Map takes full width on mobile */
+  .map-container {
+    flex: none;
+    width: 100%;
+    height: 400px; /* Smaller height for mobile */
+    max-height: 400px;
+  }
+  
+  /* Legend takes full width on mobile */
+  .map-legend {
+    flex: none;
+    width: 100%;
+    position: static;
+    min-height: auto;
+  }
+  
+  .map-section-header {
+    flex-direction: column;
+    align-items: center;
   }
   
   .map-controls {
+    position: static;
+    transform: none;
     order: -1;
-    align-self: flex-end;
+    align-self: center;
   }
   
   .map-control-btn {
@@ -315,53 +373,107 @@ body[data-theme="dark"] .legend-item:hover {
   }
   
   .legend-items {
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
   }
   
   .legend-item {
     font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+  
+  .map-stats {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .india-map-section {
+    padding: 20px 15px;
+  }
+  
+  .map-section-header {
+    margin-bottom: 20px;
+  }
+  
+  .map-section-title {
+    font-size: 1.5rem;
+  }
+  
+  .map-container {
+    height: 350px; /* Even smaller for very small screens */
+    max-height: 350px;
+  }
+  
+  .legend-items {
+    gap: 8px;
+  }
+  
+  .legend-item {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+  
+  .legend-color {
+    width: 16px;
+    height: 16px;
   }
   
   .map-stats {
     flex-direction: column;
     gap: 10px;
   }
-  
-  .active-filter-badge {
-    font-size: 0.75rem;
-    padding: 5px 10px;
-  }
 }
 
-/* Modern India Map Styles */
+/* Modern India Map Styles - Fit map inside container */
 .modern-india-map {
   position: relative;
   width: 100%;
-  height: 500px;
-  background: linear-gradient(135deg, #f8fafc, #e8f4f8);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  transition: all 0.3s ease;
+  height: 100%;
+  background: transparent;
+  border-radius: 0;
+  overflow: hidden; /* Contain the map within bounds */
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transform-origin: center center;
 }
 
-.map-base {
+/* India Map Image Container - Fit to container */
+.india-map-image {
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+}
+
+.india-map-image img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* Fit entire map within container */
+  filter: none;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 .india-outline {
-  width: 80%;
+  width: 100%;
   height: auto;
-  max-width: 700px;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  filter: none; /* Remove drop shadow */
   transition: all 0.3s ease;
+  background: transparent;
 }
 
 .india-outline:hover {
@@ -399,13 +511,14 @@ body[data-theme="dark"] .legend-item:hover {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  z-index: 10;
 }
 
 .city-pin {
   position: absolute;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -50%); /* Changed from -100% to -50% for better centering */
   pointer-events: auto;
-  z-index: 10;
+  z-index: 15;
   transition: all 0.3s ease;
 }
 
@@ -511,7 +624,7 @@ body[data-theme="dark"] .legend-item:hover {
 /* Pin Tooltip */
 .pin-tooltip {
   position: absolute;
-  top: -45px;
+  top: -50px; /* Changed from -45px to prevent clipping */
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
@@ -524,9 +637,10 @@ body[data-theme="dark"] .legend-item:hover {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  z-index: 20;
+  z-index: 25; /* Increased z-index to ensure visibility */
   pointer-events: none;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  min-width: max-content; /* Ensure tooltip doesn't wrap */
 }
 
 .pin-tooltip::after {
@@ -603,99 +717,6 @@ body[data-theme="dark"] .legend-item:hover {
   color: var(--region-primary);
 }
 
-/* Map Legend */
-.map-legend {
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
-  margin-top: 20px;
-}
-
-.legend-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--region-dark);
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.legend-title i {
-  color: var(--region-primary);
-  margin-right: 8px;
-}
-
-.legend-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.legend-item {
-  cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.legend-item:hover {
-  background: rgba(255, 107, 53, 0.1);
-  transform: translateY(-2px);
-}
-
-.legend-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.legend-color.office {
-  border-radius: 50%;
-}
-
-.legend-color.secondary {
-  width: 16px;
-  height: 16px;
-}
-
-/* Map Statistics */
-.map-stats {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding-top: 15px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  color: #555;
-}
-
-.stat-item i {
-  color: var(--region-primary);
-  font-size: 1.1rem;
-}
-
-.stat-item strong {
-  color: var(--region-dark);
-  font-size: 1.1rem;
-}
-
 /* Dark Theme Support */
 body[data-theme="dark"] .modern-india-map {
   background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
@@ -756,7 +777,16 @@ body[data-theme="dark"] .legend-item:hover {
 /* Responsive Design */
 @media (max-width: 768px) {
   .modern-india-map {
-    height: 400px;
+    min-height: 400px;
+    padding: 15px;
+  }
+  
+  .india-map-image img {
+    max-width: 350px; /* Smaller on mobile */
+  }
+  
+  .map-container {
+    padding: 10px;
   }
   
   .map-header {

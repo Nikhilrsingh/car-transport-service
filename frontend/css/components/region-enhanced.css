@@ -61,7 +61,6 @@
   margin: 0 auto;
   padding: 0 20px;
   display: block !important;
-  /* Override global flex container */
 }
 
 .region-section::before {
@@ -1016,9 +1015,18 @@
   }
   
   .popular-cities-section,
-  .region-filters-search,
-  .india-map-section {
+  .region-filters-search {
     padding: 25px;
+  }
+  
+  .india-map-section {
+    padding: 20px 15px; /* Further reduced padding for mobile */
+    margin-bottom: 30px;
+  }
+  
+  .map-container {
+    padding: 10px 5px; /* Minimal padding for mobile */
+    min-height: 750px; /* Increased height for mobile to show full map */
   }
   
   .popular-cities-grid {
@@ -1357,10 +1365,21 @@
 .india-map-section {
   background: var(--region-white);
   border-radius: 20px;
-  padding: 30px;
+  padding: 30px 20px;
   margin-bottom: 40px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease 0.15s both;
+  overflow: visible;
+  position: relative;
+}
+
+/* Centered Header */
+.map-section-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
 }
 
 .map-section-title {
@@ -1368,7 +1387,7 @@
   font-size: 1.8rem;
   font-weight: 600;
   color: var(--region-dark);
-  margin-bottom: 24px;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1379,16 +1398,112 @@
   color: var(--region-primary);
 }
 
+/* Map Controls positioned absolutely */
+.map-controls {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 10px;
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Layout Container */
+.map-layout-container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  min-height: 500px;
+}
+
+/* Map Container - 2/3 width */
 .map-container {
-  max-width: 600px;
-  margin: 0 auto;
+  flex: 2;
   position: relative;
+  cursor: grab;
+  user-select: none;
+  background: transparent;
+  border-radius: 15px;
+  overflow: visible;
+  padding: 0;
+}
+
+.map-container:active {
+  cursor: grabbing;
+}
+
+.map-container:fullscreen {
+  background: #1a1a2e !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+}
+
+.map-container:fullscreen #indiaMap {
+  max-width: 90vw;
+  max-height: 90vh;
+  filter: drop-shadow(0 10px 30px rgba(255, 107, 53, 0.4));
+}
+
+/* Modern India Map - Remove black edges and fit perfectly */
+.modern-india-map {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: transparent; /* Remove background to eliminate black edges */
+  border-radius: 0; /* Remove border radius */
+  overflow: visible;
+  box-shadow: none; /* Remove box shadow */
+  margin: 0;
+  padding: 0; /* Remove padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+}
+
+/* India Map Image Container - Perfect fit */
+.india-map-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.india-map-image img {
+  width: 100%; /* Full width to eliminate black edges */
+  height: auto;
+  object-fit: contain;
+  filter: none; /* Remove drop shadow that might create edges */
+  border: none; /* Ensure no border */
+  outline: none; /* Ensure no outline */
+}
+
+/* Legend Container - 1/3 width */
+.map-legend {
+  flex: 1;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
 }
 
 #indiaMap {
+  transform-origin: center center;
+  will-change: transform;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
 }
 
 .state {

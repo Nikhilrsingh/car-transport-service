@@ -852,7 +852,12 @@
 
 @media (max-width: 480px) {
   .modern-india-map {
-    height: 350px;
+    height: 700px; /* Increased height for small screens */
+    margin: 15px 0; /* Reduced margin for smaller screens */
+  }
+  
+  .map-container {
+    padding: 5px; /* Minimal padding */
   }
   
   .map-controls {
