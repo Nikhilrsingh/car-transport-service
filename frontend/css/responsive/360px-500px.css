@@ -1409,3 +1409,14 @@
     padding: 10px 18px;
   }
 }
+
+
+/* Hide desktop FAB on all mobile - use mini footer instead */
+@media (max-width: 768px) {
+  .fab-container {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}

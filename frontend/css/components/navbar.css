@@ -17,26 +17,39 @@ body {
 }
 
 .upbar {
-  height: 35px;
-  background: #2b2b2b;
-   border: none;
+  height: 40px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2b2b2b 50%, #1a1a1a 100%);
+  border: none;
+  border-bottom: 1px solid rgba(255, 99, 71, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, opacity 0.3s ease;
-  gap: 12px;
+  gap: 8px;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  padding: 0 10px;
+  padding: 0 20px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 45px;
 }
- .upbar a{
- right: 300px;
+
+.upbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff6347, #ff4500, #ff6347, transparent);
+  opacity: 0.8;
+}
+
+.upbar a {
+  right: auto;
 }
 /* Hide upbar when scrolled */
 .upbar.hidden {
@@ -49,18 +62,20 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 12px;
-  color: white;
+  padding: 6px 16px;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 20px;
   transition: all 0.3s ease;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   white-space: nowrap;
-  height: 32px;
+  height: 30px;
   box-sizing: border-box;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .upbar-btn i {
@@ -92,28 +107,43 @@ body {
   left: 100%;
 }
 
+.track-btn {
+  border-color: rgba(255, 99, 71, 0.3);
+}
+
 .track-btn:hover {
-  background: rgba(255, 99, 71, 0.3);
+  background: rgba(255, 99, 71, 0.2);
   border-color: #ff6347;
   color: #ff6347;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.25);
 }
 
 .track-btn:hover i {
-  transform: scale(1.2);
+  transform: scale(1.1);
+  animation: pulse-icon 0.6s ease;
+}
+
+.help-btn {
+  border-color: rgba(0, 174, 239, 0.3);
 }
 
 .help-btn:hover {
-  background: rgba(0, 174, 239, 0.3);
+  background: rgba(0, 174, 239, 0.2);
   border-color: #00aeef;
   color: #00aeef;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 174, 239, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 174, 239, 0.25);
 }
 
 .help-btn:hover i {
-  transform: scale(1.2);
+  transform: scale(1.1);
+  animation: pulse-icon 0.6s ease;
+}
+
+@keyframes pulse-icon {
+  0%, 100% { transform: scale(1.1); }
+  50% { transform: scale(1.2); }
 }
 
 /* Tooltip for upbar buttons */
@@ -200,27 +230,31 @@ body {
   flex-shrink: 0;
   display: flex !important;
   align-items: center !important;
-  height: 60px !important;
-  width: 90px !important;
   justify-content: center !important;
+  height: 76px !important;
+  width: 110px !important;
   order: 1;
 }
 
 .left-logo {
-  top: 0;
-  left: 0;
-  width: 90px;
+  width: 110px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-      margin-bottom: 25px !important;
-    margin-top: 0px !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .logo-img {
   width: auto !important;
-  height: 100px !important;
+  height: 110px !important;
+  max-height: 110px !important;
   object-fit: contain !important;
   display: block;
-  margin-top: 10px;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .left-logo:hover .logo-img {
@@ -595,28 +629,30 @@ left: 100%;
 }
 
 .cta-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 9px 18px;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
-  font-size: 0.9rem;
-  white-space: nowrap;
-  min-height: 36px;
-  box-sizing: border-box;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 9px 18px !important;
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3) !important;
+  font-size: 0.9rem !important;
+  white-space: nowrap !important;
+  min-height: 36px !important;
+  box-sizing: border-box !important;
+  border: none !important;
 }
 
 .cta-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
-  background: linear-gradient(135deg, #ff4500, #ff6347);
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4) !important;
+  background: linear-gradient(135deg, #ff4500, #ff6347) !important;
+  color: white !important;
 }
 
 /* Mobile Menu Button */
@@ -1430,4 +1466,78 @@ body {
 .mobile-nav-link.active i {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;;
+}
+
+
+/* ====================================
+   LIGHT MODE OVERRIDES FOR NAVBAR
+   ==================================== */
+body[data-theme="light"] .navbar {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%) !important;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .nav-link {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .nav-link i {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .nav-link:hover {
+  background: rgba(255, 99, 71, 0.1) !important;
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .nav-link:hover i {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .dropdown-nav.active > .nav-link,
+body[data-theme="light"] .dropdown-nav.active > [data-dropdown-btn] {
+  background: rgba(255, 99, 71, 0.15) !important;
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .dropdown-nav.active > .nav-link i,
+body[data-theme="light"] .dropdown-nav.active > [data-dropdown-btn] i {
+  color: #ff6347 !important;
+  -webkit-text-fill-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .dropdown-menu {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .dropdown-menu a {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .dropdown-menu a:hover {
+  background: rgba(255, 99, 71, 0.1) !important;
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .search-bar {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+body[data-theme="light"] .search-bar input {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .search-bar input::placeholder {
+  color: #999 !important;
+}
+
+body[data-theme="light"] .login-btn {
+  color: #333 !important;
+  border-color: rgba(255, 99, 71, 0.4) !important;
+}
+
+body[data-theme="light"] .menu-bar {
+  background: #333 !important;
 }
