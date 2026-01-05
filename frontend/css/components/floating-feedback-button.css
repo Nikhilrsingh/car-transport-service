@@ -1,4 +1,6 @@
 /* === Floating Feedback Button === */
+/* Target both legacy standalone button and FAB action button used on index */
+#fabFeedbackBtn,
 .floating-feedback-btn {
   position: fixed;
   bottom: 130px; /* above Get Quote */
@@ -14,13 +16,154 @@
   font-size: 22px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   z-index: 9999;
+  border: none;
 }
 
-.floating-feedback-btn:hover {
-  background: linear-gradient(135deg, #e68900, #ff9800);
-  transform: scale(1.1);
+.floating-feedback-btn:hover,
+#fabFeedbackBtn:hover {
+  transform: scale(1.12) rotate(-6deg);
+  box-shadow:
+    0 12px 30px rgba(255, 152, 0, 0.7),
+    0 0 18px rgba(255, 183, 77, 0.8);
+}
+
+.floating-feedback-btn i,
+#fabFeedbackBtn i {
+  animation: iconBounce 2s infinite;
+}
+
+/* Tooltip text */
+/* Tooltip: prefer data-tooltip attribute when present (used by FAB markup). Fallback to the pseudo-content for legacy .floating-feedback-btn */
+#fabFeedbackBtn[data-tooltip]::after,
+.floating-feedback-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 75px;
+  white-space: nowrap;
+  background: #222;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  opacity: 0;
+  transform: translateX(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Provide fallback text for legacy markup without data-tooltip */
+.floating-feedback-btn::after { content: "Feedback"; }
+
+/* Tooltip arrow */
+.floating-feedback-btn::before,
+#fabFeedbackBtn::before {
+  content: "";
+  position: absolute;
+  left: 65px;
+  border: 6px solid transparent;
+  border-right-color: #222;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.floating-feedback-btn:hover::after,
+.floating-feedback-btn:hover::before,
+#fabFeedbackBtn:hover::after,
+#fabFeedbackBtn:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Optional notification dot */
+.floating-feedback-btn .notify-dot,
+#fabFeedbackBtn .notify-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  background: #ff3d00;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 61, 0, 0.8);
+}
+@keyframes feedbackPulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(255, 152, 0, 0.6);
+  }
+  70% {
+    box-shadow:
+      0 0 0 16px rgba(255, 152, 0, 0);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(255, 152, 0, 0);
+  }
+}
+
+@keyframes iconBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Accessibility: focus styles */
+#fabFeedbackBtn:focus,
+.floating-feedback-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.18), 0 8px 20px rgba(0,0,0,0.18);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .floating-feedback-btn i,
+  #fabFeedbackBtn i,
+  .floating-feedback-btn,
+  #fabFeedbackBtn {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  #fabFeedbackBtn,
+  .floating-feedback-btn {
+    bottom: 100px;
+    left: 14px;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  /* Move tooltip above on very narrow screens */
+  #fabFeedbackBtn::after,
+  .floating-feedback-btn::after {
+    left: auto;
+    right: 14px;
+    transform: translateX(10px);
+  }
+  #fabFeedbackBtn::before,
+  .floating-feedback-btn::before {
+    left: auto;
+    right: 24px;
+    border-left-color: #222;
+    border-right-color: transparent;
+  }
+}
+
+/* High contrast preference: stronger outline */
+@media (prefers-contrast: more) {
+  #fabFeedbackBtn,
+  .floating-feedback-btn {
+    box-shadow: none;
+    outline: 3px solid #ffb74d;
+  }
 }
 
 /* === Modal Overlay === */

@@ -2,10 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
     <title>Harihar Car Carriers</title>
     <base href="./" />
+
     <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+
+    <!-- Component CSS -->
     <link rel="stylesheet" href="css/components/testimonial.css" />
     <link rel="stylesheet" href="css/components/rating.css" />
     <link rel="stylesheet" href="css/components/tracking.css" />
@@ -28,11 +35,10 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/components/floating-feedback-button.css" />
+    <link rel="stylesheet" href="css/components/glowing-input.css" />
+
     <!-- Theme Toggle Link (must be in <head>) -->
     <link id="theme-style" rel="stylesheet" href="css/light-mode.css" />
-
-    <!-- Before </head> -->
-    <link rel="stylesheet" href="css/components/glowing-input.css" />
   </head>
 
   <body class="neon-theme">
@@ -145,7 +151,7 @@
       </div>
     </section>
 
-    <!-- Enhanced Hero Section -->
+    <!-- Hero Section -->
     <section id="home" class="hero">
       <div class="hero-background"></div>
       <div class="hero-content">
@@ -153,29 +159,28 @@
           <div class="hero-layout">
             <!-- Left Side: Written Content -->
             <div class="hero-main">
-              <!-- Badge -->
               <div class="hero-badge">
                 <i class="fas fa-shield-alt"></i>
                 <span>Trusted by 5000+ Customers</span>
               </div>
-              <!-- Main Heading -->
+
               <h1 class="hero-title">
                 <span class="title-line highlight">HARIHAR</span>
                 <span class="title-line">CAR</span>
                 <span class="title-line">CARRIERS</span>
               </h1>
-              <!-- Sub Heading -->
+
               <h2 class="hero-sub-title">
                 <span>Premium Vehicle</span>
                 <span>Transportation</span>
                 <span>Across India</span>
               </h2>
-              <!-- Description -->
+
               <p class="hero-description">
                 Experience safe, reliable, and insured car transportation
                 services with real-time tracking and door-to-door delivery.
               </p>
-              <!-- Stats -->
+
               <div class="hero-stats">
                 <div class="stat">
                   <div class="stat-number" data-target="5000">0</div>
@@ -190,18 +195,30 @@
                   <div class="stat-label">% Satisfaction</div>
                 </div>
               </div>
-              <!-- CTA Buttons -->
+
               <div class="hero-actions">
-                <a href="pages/booking.html" class="cta-btn primary">
+                <a
+                  href="pages/booking.html"
+                  class="cta-btn primary"
+                  data-tooltip="Book your car transport now"
+                >
                   <i class="fas fa-truck-moving"></i>
                   <span>Book Instantly</span>
                   <div class="btn-shine"></div>
                 </a>
-                <a href="#quote" class="cta-btn secondary">
+                <a
+                  href="#quote"
+                  class="cta-btn secondary"
+                  data-tooltip="Get instant pricing estimate"
+                >
                   <i class="fas fa-calculator"></i>
                   <span>Get Free Quote</span>
                 </a>
-                <a href="pages/how-it-works.html" class="cta-btn outline">
+                <a
+                  href="pages/how-it-works.html"
+                  class="cta-btn outline"
+                  data-tooltip="See our process step-by-step"
+                >
                   <i class="fas fa-play-circle"></i>
                   <span>Watch How It Works</span>
                 </a>
@@ -215,7 +232,7 @@
                   <h3>Get Instant Quote</h3>
                   <p>Quick & accurate pricing in 30 seconds</p>
                 </div>
-                <!-- Step Progress Indicator -->
+
                 <div class="step-progress">
                   <div class="step active" data-step="1">
                     <div class="step-number">1</div>
@@ -232,6 +249,7 @@
                     <div class="step-label">Quote</div>
                   </div>
                 </div>
+
                 <form class="quote-form" id="quickQuoteForm">
                   <!-- Step 1: Route -->
                   <div class="form-step active" data-step="1">
@@ -242,10 +260,9 @@
                         required
                         autocomplete="off"
                       />
-                      <label for="fromCity"
-                        ><i class="fas fa-map-marker-alt"></i> Pickup
-                        City</label
-                      >
+                      <label for="fromCity">
+                        <i class="fas fa-map-marker-alt"></i> Pickup City
+                      </label>
                       <div
                         class="autocomplete-dropdown"
                         id="fromCityDropdown"
@@ -258,9 +275,9 @@
                         required
                         autocomplete="off"
                       />
-                      <label for="toCity"
-                        ><i class="fas fa-flag-checkered"></i> Drop City</label
-                      >
+                      <label for="toCity">
+                        <i class="fas fa-flag-checkered"></i> Drop City
+                      </label>
                       <div
                         class="autocomplete-dropdown"
                         id="toCityDropdown"
@@ -268,15 +285,17 @@
                     </div>
                     <div class="distance-display" id="distanceDisplay">
                       <i class="fas fa-route"></i>
-                      <span
-                        >Distance: <strong id="distanceValue">---</strong></span
-                      >
+                      <span>
+                        Distance:
+                        <strong id="distanceValue">---</strong>
+                      </span>
                     </div>
                     <button type="button" class="quote-next" id="step1Next">
                       <span>Next</span>
                       <i class="fas fa-arrow-right"></i>
                     </button>
                   </div>
+
                   <!-- Step 2: Vehicle Type -->
                   <div class="form-step" data-step="2">
                     <div class="form-group floating-label">
@@ -287,9 +306,9 @@
                         <option value="suv">SUV</option>
                         <option value="luxury">Luxury Car</option>
                       </select>
-                      <label for="vehicleType"
-                        ><i class="fas fa-car"></i> Vehicle Type</label
-                      >
+                      <label for="vehicleType">
+                        <i class="fas fa-car"></i> Vehicle Type
+                      </label>
                     </div>
                     <div class="form-actions">
                       <button
@@ -306,6 +325,7 @@
                       </button>
                     </div>
                   </div>
+
                   <!-- Step 3: Result -->
                   <div class="form-step" data-step="3">
                     <div class="quote-result" id="quoteResult">
@@ -316,19 +336,20 @@
                         </div>
                         <div class="result-row">
                           <span class="result-label">Distance:</span>
-                          <span class="result-value" id="resultDistance"
-                            >---</span
-                          >
+                          <span
+                            class="result-value"
+                            id="resultDistance"
+                          >---</span>
                         </div>
                         <div class="result-row">
                           <span class="result-label">Vehicle:</span>
-                          <span class="result-value" id="resultVehicle"
-                            >---</span
-                          >
+                          <span
+                            class="result-value"
+                            id="resultVehicle"
+                          >---</span>
                         </div>
                       </div>
 
-                      <!-- Delivery Time Display -->
                       <div class="delivery-time-display">
                         <i class="fas fa-shipping-fast"></i>
                         <div class="time-info">
@@ -337,7 +358,6 @@
                         </div>
                       </div>
 
-                      <!-- Compare Prices Section -->
                       <div
                         class="compare-prices-section"
                         id="comparePricesSection"
@@ -387,6 +407,7 @@
                 </form>
               </div>
             </div>
+            <!-- /hero-quote -->
           </div>
         </div>
       </div>
@@ -400,7 +421,11 @@
           Transparent pricing for every transportation need. Choose the perfect
           plan that fits your budget and requirements.
         </p>
-        <a href="pages/pricing.html" class="cta-btn primary">
+        <a
+          href="pages/pricing.html"
+          class="cta-btn primary"
+          data-tooltip="View and compare pricing plans"
+        >
           <i class="fas fa-tags"></i>
           <span>View Pricing Plans</span>
         </a>
@@ -417,10 +442,9 @@
             satisfied customers.
           </p>
         </div>
-        <!-- Slider Section -->
         <div class="testimonial-slider">
           <div class="slider-container" id="sliderContainer">
-            <!-- testimonial cards will be added dynamically by JS -->
+            <!-- testimonial cards via JS -->
           </div>
         </div>
       </div>
@@ -482,7 +506,11 @@
                   <option value="commercial">Commercial Vehicle</option>
                 </select>
               </div>
-              <button type="submit" class="submit-btn">
+              <button
+                type="submit"
+                class="submit-btn"
+                data-tooltip="Request a free quote"
+              >
                 <span>Get Free Quote</span>
                 <i class="fas fa-arrow-right"></i>
               </button>
@@ -505,79 +533,127 @@
 
     <!-- 💬 Feedback Modal -->
     <div id="feedbackModal" class="feedback-modal">
-      <div class="feedback-modal-content">
-        <span id="closeFeedback" class="close-feedback">&times;</span>
-        <h2>We value your feedback!</h2>
-        <form id="feedbackForm">
-          <!-- Name -->
-          <div class="feedback-input">
-            <label for="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your name"
-              required
-            />
-          </div>
-          <!-- Email -->
-          <div class="feedback-input">
-            <label for="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Your email"
-              required
-            />
-          </div>
-          <!-- Rating -->
-          <div class="feedback-stars" id="starContainer">
-            <i class="far fa-star star" data-value="1"></i>
-            <i class="far fa-star star" data-value="2"></i>
-            <i class="far fa-star star" data-value="3"></i>
-            <i class="far fa-star star" data-value="4"></i>
-            <i class="far fa-star star" data-value="5"></i>
-          </div>
-          <!-- Feedback -->
-          <div class="feedback-input">
-            <label for="feedbackText">Feedback:</label>
-            <textarea
-              id="feedbackText"
-              name="feedbackText"
-              rows="4"
-              placeholder="Write your feedback..."
-              required
-            ></textarea>
-          </div>
-          <!-- Submit -->
-          <button type="submit">Submit Feedback</button>
-        </form>
-      </div>
+  <div class="feedback-modal-content">
+    <span id="closeFeedback" class="close-feedback">&times;</span>
+
+    <!-- Header -->
+    <div class="feedback-header">
+      <h2>💬 Your Feedback Matters</h2>
+      <p>Help us improve your car transport experience</p>
     </div>
+
+    <form id="feedbackForm">
+      <!-- Name -->
+      <div class="feedback-input">
+        <label for="name">
+          <i class="fas fa-user"></i> Name
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="feedback-input">
+        <label for="email">
+          <i class="fas fa-envelope"></i> Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+
+      <!-- Rating -->
+      <div class="rating-title">
+        <p>How was your experience?</p>
+      </div>
+      <div class="feedback-stars" id="starContainer">
+        <i class="far fa-star star" data-value="1"></i>
+        <i class="far fa-star star" data-value="2"></i>
+        <i class="far fa-star star" data-value="3"></i>
+        <i class="far fa-star star" data-value="4"></i>
+        <i class="far fa-star star" data-value="5"></i>
+      </div>
+
+      <!-- Feedback Text -->
+      <div class="feedback-input">
+        <label for="feedbackText">
+          <i class="fas fa-comment-dots"></i> Your Feedback
+        </label>
+        <textarea
+          id="feedbackText"
+          name="feedbackText"
+          rows="4"
+          placeholder="Tell us what you liked or what we can improve..."
+          required
+        ></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit">
+        <i class="fas fa-paper-plane"></i>
+        Submit Feedback
+      </button>
+    </form>
+  </div>
+</div>
+
 
     <!-- Footer Section -->
     <div id="footer-container"></div>
 
-    <!-- Scripts: single consolidated block -->
-
+    <!-- Car emoji element -->
     <div id="car" class="car">🏎️</div>
 
-    <!-- Back to Top Button -->
+    <!-- Back to Top Button (single instance) -->
     <button class="back-to-top" id="backToTop">
       <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Top to Bottom Button -->
+    <!-- Top to Bottom Button (single instance) -->
     <button class="back-to-bottom" id="backToBottom">
       <i class="fas fa-arrow-down"></i>
     </button>
 
-    <!-- Scripts -->
-    <!-- Loading State Manager - Must load first -->
+    <!-- Cookie Popup (single instance) -->
+    <div id="cookie-popup" class="cookie-popup">
+      <p>
+        We use cookies to enhance your browsing experience.
+        <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
+      </p>
+      <div class="button-group">
+        <button id="reject-cookie" class="reject-btn">Reject</button>
+        <button id="accept-cookie" class="accept-btn">Accept</button>
+      </div>
+    </div>
+
+    <!-- Scripts: single consolidated block -->
+    <!-- Loading & navigation -->
     <script src="js/modules/loading-state-manager.js"></script>
-    <!-- Page Navigation Loader - Must load after loading-state-manager -->
     <script src="js/modules/page-navigation-loader.js"></script>
+
+    <!-- Preloader hide -->
+    <script>
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        setTimeout(() => {
+          preloader.classList.add("fade-out");
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 800);
+        }, 1000);
+      });
+    </script>
+
+    <!-- Core modules -->
     <script src="js/modules/navbar-loader.js?v=2"></script>
     <script src="js/modules/footer-loader.js"></script>
     <script src="js/script.js"></script>
@@ -597,113 +673,39 @@
     <script src="js/modules/region-search.js?v=3"></script>
     <script src="js/modules/region-map.js?v=4"></script>
     <script src="js/modules/region-enhancements.js"></script>
-    <!-- Unified theme handler for all pages -->
+
+    <!-- Theme & UI enhancements -->
     <script src="js/modules/themes.js"></script>
     <script src="js/modules/digital-clock.js"></script>
     <script src="js/modules/scroll-animations.js"></script>
     <script src="js/modules/glow-inputs.js"></script>
+    <script src="js/modules/floating-book-button.js"></script>
+    <script src="js/modules/floating-call-button.js"></script>
+    <script src="js/modules/floating-whatsapp-button.js"></script>
+    <script src="js/modules/sticky-quote-button.js"></script>
+    <script src="js/modules/floating-chatbot-button.js"></script>
+    <script src="js/modules/sticky-toc.js"></script>
+    <script src="js/modules/keyboard-section-navigation.js"></script>
 
-    <div id="cookie-popup" class="cookie-popup">
-      <p>
-        We use cookies to enhance your browsing experience.
-        <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
-      </p>
+    <!-- Cookie popup script -->
+    <script>
+      const popup = document.getElementById("cookie-popup");
+      const acceptBtn = document.getElementById("accept-cookie");
+      const rejectBtn = document.getElementById("reject-cookie");
 
-      <div class="button-group">
-        <button id="reject-cookie" class="reject-btn">Reject</button>
-        <button id="accept-cookie" class="accept-btn">Accept</button>
-      </div>
-    </div>  <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+      if (!localStorage.getItem("cookieDecision")) {
+        popup.style.display = "flex";
+      }
 
-  <!-- Top to Bottom Button -->
-  <button class="back-to-bottom" id="backToBottom">
-    <i class="fas fa-arrow-down"></i>
-  </button>
+      acceptBtn.addEventListener("click", () => {
+        localStorage.setItem("cookieDecision", "accepted");
+        popup.style.display = "none";
+      });
 
-  <!-- Scripts -->
-  <script src="js/modules/loading-state-manager.js"></script>
-  <script src="js/modules/page-navigation-loader.js"></script>
-
-  <script>
-    window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
-      setTimeout(() => {
-        preloader.classList.add("fade-out");
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 800);
-      }, 1000);
-    });
-  </script>
-
-  <script src="js/modules/navbar-loader.js?v=2"></script>
-  <script src="js/modules/footer-loader.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/modules/hero-animations.js"></script>
-  <script src="js/modules/Services.js"></script>
-  <script src="js/modules/tracking.js"></script>
-  <script src="js/modules/search.js"></script>
-  <script src="js/modules/floating-book-button.js"></script>
-  <script src="js/modules/floating-call-button.js"></script>
-  <script src="js/modules/floating-whatsapp-button.js"></script>
-  <script src="js/modules/quote-modal.js"></script>
-  <script src="js/modules/sticky-quote-button.js"></script>
-  <script src="js/modules/floating-chatbot-button.js"></script>
-  <script src="js/modules/chatbot-modal.js"></script>
-  <script src="js/modules/back-to-top-button.js"></script>
-  <script src="js/modules/backtoBottom.js"></script>
-  <script src="js/modules/feedback-modal.js"></script>
-  <script src="js/modules/testimonial.js"></script>
-  <script src="js/modules/rating.js"></script>
-  <script src="js/modules/region-loader.js"></script>
-  <script src="js/modules/region-search.js?v=3"></script>
-  <script src="js/modules/region-map.js?v=4"></script>
-  <script src="js/modules/region-enhancements.js"></script>
-  <script src="js/modules/digital-clock.js"></script>
-  <script src="js/modules/scroll-animations.js"></script>
-  <script src="js/modules/theme-switcher.js"></script>
-  <script src="js/modules/sticky-toc.js"></script>
-
-
-  <!-- ✅ Keyboard Section Navigation -->
-  <script src="js/modules/keyboard-section-navigation.js"></script>
-
-  <!-- Cookie Popup -->
-  <div id="cookie-popup" class="cookie-popup">
-    <p>
-      We use cookies to enhance your browsing experience.
-      <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
-    </p>
-
-    <div class="button-group">
-      <button id="reject-cookie" class="reject-btn">Reject</button>
-      <button id="accept-cookie" class="accept-btn">Accept</button>
-    </div>
-  </div>
-
-  <script>
-    const popup = document.getElementById("cookie-popup");
-    const acceptBtn = document.getElementById("accept-cookie");
-    const rejectBtn = document.getElementById("reject-cookie");
-
-    if (!localStorage.getItem("cookieDecision")) {
-      popup.style.display = "flex";
-    }
-
-    acceptBtn.addEventListener("click", () => {
-      localStorage.setItem("cookieDecision", "accepted");
-      popup.style.display = "none";
-    });
-
-    rejectBtn.addEventListener("click", () => {
-      localStorage.setItem("cookieDecision", "rejected");
-      popup.style.display = "none";
-    });
-  </script>
-
-</body>
+      rejectBtn.addEventListener("click", () => {
+        localStorage.setItem("cookieDecision", "rejected");
+        popup.style.display = "none";
+      });
+    </script>
+  </body>
 </html>
-
