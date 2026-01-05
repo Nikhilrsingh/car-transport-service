@@ -339,9 +339,9 @@ function initMapControls() {
   const fullscreenBtn = document.getElementById('fullscreenBtn');
   if (fullscreenBtn) {
     fullscreenBtn.addEventListener('click', () => {
-      const mapContainer = document.querySelector('.map-container');
+      const mapLayoutContainer = document.querySelector('.map-layout-container');
       if (!document.fullscreenElement) {
-        mapContainer.requestFullscreen().catch(err => {
+        mapLayoutContainer.requestFullscreen().catch(err => {
           console.log(`Error attempting to enable fullscreen: ${err.message}`);
         });
         fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
