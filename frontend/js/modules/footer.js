@@ -1,4 +1,4 @@
-// Enhanced Footer Interactions: accordion, collapse toggle, micro-toast, in-view animations, and cities search
+// Enhanced Footer Interactions: accordion, collapse toggle, micro-toast, in-view animations, cities search, and mobile FAB
 (function () {
   "use strict";
 
@@ -20,73 +20,20 @@
       .then((cities) => {
         allCities = cities;
       })
-      .catch((error) => {
+      .catch(() => {
         console.log("Using fallback cities data");
         // Fallback cities data
-        const allCities = [
+        allCities = [
           { slug: "agra", name: "Agra" },
           { slug: "ahmedabad", name: "Ahmedabad" },
-          { slug: "aizawl", name: "Aizawl" },
-          { slug: "aligarh", name: "Aligarh" },
-          { slug: "allahabad", name: "Allahabad" },
-          { slug: "amritsar", name: "Amritsar" },
-          { slug: "aurangabad", name: "Aurangabad" },
           { slug: "bangalore", name: "Bangalore" },
-          { slug: "bareilly", name: "Bareilly" },
-          { slug: "bhopal", name: "Bhopal" },
-          { slug: "bhubaneswar", name: "Bhubaneswar" },
-          { slug: "bikaner", name: "Bikaner" },
-          { slug: "bilaspur", name: "Bilaspur" },
-          { slug: "chandigarh", name: "Chandigarh" },
           { slug: "chennai", name: "Chennai" },
-          { slug: "coimbatore", name: "Coimbatore" },
-          { slug: "cuttack", name: "Cuttack" },
-          { slug: "dehradun", name: "Dehradun" },
           { slug: "delhi", name: "Delhi" },
-          { slug: "dhanbad", name: "Dhanbad" },
-          { slug: "durgapur", name: "Durgapur" },
-          { slug: "faridabad", name: "Faridabad" },
-          { slug: "gandhinagar", name: "Gandhinagar" },
-          { slug: "gangtok", name: "Gangtok" },
-          { slug: "ghaziabad", name: "Ghaziabad" },
-          { slug: "gorakhpur", name: "Gorakhpur" },
-          { slug: "gurgaon", name: "Gurgaon" },
-          { slug: "guwahati", name: "Guwahati" },
-          { slug: "gwalior", name: "Gwalior" },
           { slug: "hyderabad", name: "Hyderabad" },
-          { slug: "imphal", name: "Imphal" },
-          { slug: "indore", name: "Indore" },
-          { slug: "itanagar", name: "Itanagar" },
-          { slug: "jabalpur", name: "Jabalpur" },
-          { slug: "jaipur", name: "Jaipur" },
-          { slug: "jalandhar", name: "Jalandhar" },
-          { slug: "kanpur", name: "Kanpur" },
           { slug: "kolkata", name: "Kolkata" },
-          { slug: "kota", name: "Kota" },
-          { slug: "lucknow", name: "Lucknow" },
-          { slug: "ludhiana", name: "Ludhiana" },
-          { slug: "madurai", name: "Madurai" },
-          { slug: "meerut", name: "Meerut" },
           { slug: "mumbai", name: "Mumbai" },
           { slug: "nagpur", name: "Nagpur" },
-          { slug: "nashik", name: "Nashik" },
-          { slug: "navi_mumbai", name: "Navi Mumbai" },
-          { slug: "patna", name: "Patna" },
           { slug: "pune", name: "Pune" },
-          { slug: "puri", name: "Puri" },
-          { slug: "raipur", name: "Raipur" },
-          { slug: "rajkot", name: "Rajkot" },
-          { slug: "ranchi", name: "Ranchi" },
-          { slug: "rourkela", name: "Rourkela" },
-          { slug: "shimla", name: "Shimla" },
-          { slug: "srinagar", name: "Srinagar" },
-          { slug: "surat", name: "Surat" },
-          { slug: "thane", name: "Thane" },
-          { slug: "udaipur", name: "Udaipur" },
-          { slug: "vadodara", name: "Vadodara" },
-          { slug: "varanasi", name: "Varanasi" },
-          { slug: "vijayawada", name: "Vijayawada" },
-          { slug: "visakhapatnam", name: "Visakhapatnam" },
         ];
       });
   }
@@ -185,6 +132,126 @@
     });
   }
 
+  // Mobile FAB functionality
+  function initMobileFAB() {
+    const miniFabTrigger = document.getElementById("miniFabTrigger");
+    const mobileFabActions = document.getElementById("mobileFabActions");
+    
+    if (!miniFabTrigger || !mobileFabActions) return;
+    
+    let isOpen = false;
+    
+    // Toggle mobile FAB
+    miniFabTrigger.addEventListener("click", function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (isOpen) {
+        closeMobileFAB();
+      } else {
+        openMobileFAB();
+      }
+    });
+    
+    // Close when clicking outside
+    document.addEventListener("click", function(e) {
+      if (isOpen && !e.target.closest(".mobile-fab-actions") && !e.target.closest(".mini-fab-trigger")) {
+        closeMobileFAB();
+      }
+    });
+    
+    // Close on ESC
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && isOpen) {
+        closeMobileFAB();
+      }
+    });
+    
+    function openMobileFAB() {
+      isOpen = true;
+      miniFabTrigger.classList.add("active");
+      miniFabTrigger.setAttribute("aria-expanded", "true");
+      mobileFabActions.classList.add("active");
+      
+      // Update button text
+      const span = miniFabTrigger.querySelector("span");
+      if (span) span.textContent = "Close";
+    }
+    
+    function closeMobileFAB() {
+      isOpen = false;
+      miniFabTrigger.classList.remove("active");
+      miniFabTrigger.setAttribute("aria-expanded", "false");
+      mobileFabActions.classList.remove("active");
+      
+      // Update button text
+      const span = miniFabTrigger.querySelector("span");
+      if (span) span.textContent = "More";
+    }
+    
+    // Mobile FAB action handlers
+    const mobileFabQuote = document.getElementById("mobileFabQuote");
+    const mobileFabBook = document.getElementById("mobileFabBook");
+    const mobileFabFeedback = document.getElementById("mobileFabFeedback");
+    const mobileFabChat = document.getElementById("mobileFabChat");
+    
+    if (mobileFabQuote) {
+      mobileFabQuote.addEventListener("click", function() {
+        closeMobileFAB();
+        setTimeout(() => {
+          const currentPath = window.location.pathname;
+          const isIndexPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || !currentPath.includes('.html');
+          
+          if (isIndexPage) {
+            const quoteSection = document.querySelector('.hero-quote');
+            if (quoteSection) {
+              quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setTimeout(() => {
+                const firstInput = document.getElementById('fromCity');
+                if (firstInput) firstInput.focus();
+              }, 500);
+            }
+          } else {
+            window.location.href = '../index.html#quote';
+          }
+        }, 100);
+      });
+    }
+    
+    if (mobileFabBook) {
+      mobileFabBook.addEventListener("click", function() {
+        closeMobileFAB();
+        setTimeout(() => {
+          window.location.href = '../pages/booking.html';
+        }, 100);
+      });
+    }
+    
+    if (mobileFabFeedback) {
+      mobileFabFeedback.addEventListener("click", function() {
+        closeMobileFAB();
+        setTimeout(() => {
+          const feedbackModal = document.getElementById('feedbackModal');
+          if (feedbackModal) {
+            feedbackModal.style.display = 'flex';
+          }
+        }, 100);
+      });
+    }
+    
+    if (mobileFabChat) {
+      mobileFabChat.addEventListener("click", function() {
+        closeMobileFAB();
+        setTimeout(() => {
+          const chatbotModal = document.getElementById('chatbotModal');
+          if (chatbotModal) {
+            chatbotModal.style.display = 'flex';
+          }
+        }, 100);
+      });
+    }
+  }
+
   function showToast(stack, message) {
     if (!stack) return alert(message);
     const t = document.createElement("div");
@@ -204,6 +271,9 @@
 
     // Initialize footer search functionality
     initFooterSearch(footer);
+    
+    // Initialize mobile FAB
+    initMobileFAB();
 
     // IntersectionObserver to toggle in-view state for animations & car
     try {
@@ -239,18 +309,15 @@
     // Footer collapse/expand toggle
     const footerMain = document.getElementById("footer-main");
     const toggleBtn = footer.querySelector(".footer-toggle");
-    const miniUp = footer.querySelector(".mini-sticky-footer .mini-up");
 
     function setCollapsed(collapsed) {
       if (!footerMain) return;
       if (collapsed) {
         toggleBtn && toggleBtn.setAttribute("aria-expanded", "false");
-        miniUp && miniUp.setAttribute("aria-expanded", "false");
         footerMain.style.overflow = "hidden";
         footerMain.style.maxHeight = "0px";
       } else {
         toggleBtn && toggleBtn.setAttribute("aria-expanded", "true");
-        miniUp && miniUp.setAttribute("aria-expanded", "true");
         footerMain.style.overflow = "hidden";
         const h = footerMain.scrollHeight;
         footerMain.style.maxHeight = h + "px";
@@ -272,11 +339,6 @@
       toggleBtn.addEventListener("click", () => {
         const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
         setCollapsed(expanded);
-      });
-    miniUp &&
-      miniUp.addEventListener("click", () => {
-        setCollapsed(false);
-        footer.scrollIntoView({ behavior: "smooth", block: "end" });
       });
 
     // Newsletter subscribe micro-toast

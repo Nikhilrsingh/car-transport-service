@@ -69,7 +69,7 @@
 
     /* Hero Section */
     .hero {
-      color: #a57764;
+      color: #dd6a39;
       padding: 100px 0 80px;
       background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
         url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
@@ -111,12 +111,39 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
+    .hero {
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 99, 71, 0.15),
+    rgba(0, 0, 0, 0.85)
+  );
+  z-index: 0;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero p {
+  color: #ffd1c2;
+}
+
 
     /* About Section */
     .about {
       padding: 100px 0;
     }
 
+
+    
     .section-title {
       text-align: center;
       margin-bottom: 60px;
@@ -172,7 +199,7 @@
 
     .about-text p {
       margin-bottom: 20px;
-      color: coral;
+      color: rgb(233, 79, 22);
     }
 
     .about-image {
@@ -197,6 +224,49 @@
       height: auto;
       display: block;
     }
+
+    .about {
+  background: linear-gradient(to bottom, #2b2b2b, #242424);
+}
+
+.about-text p {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.about-text h3 {
+  color: var(--accent);
+  text-shadow: 0 0 15px rgba(255, 99, 71, 0.3);
+}
+
+.about-image {
+  border-radius: 50%;
+  backdrop-filter: blur(6px);
+  border: 2px solid rgba(255, 99, 71, 0.2);
+}
+
+.about-image img {
+  filter: brightness(1.05) contrast(1.05);
+}
+
+.about-team-flip-card {
+  perspective: 1200px;
+}
+
+.about-team-flip-card-inner {
+  transition: transform 0.8s cubic-bezier(.4,.2,.2,1);
+}
+
+.about-team-flip-card-front,
+.about-team-flip-card-back {
+  backface-visibility: hidden;
+}
+
+.about-team-flip-card-back {
+  background: linear-gradient(145deg, #2f2f2f, #1f1f1f);
+}
+
 
     /* Values Section */
     .values {
@@ -257,6 +327,19 @@
     .value-card p {
       color: #ccc;
     }
+
+    .value-card {
+  background: linear-gradient(145deg, #303030, #262626);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.value-card:hover {
+  border-color: var(--accent);
+}
+
+.value-icon {
+  box-shadow: 0 0 20px rgba(255, 99, 71, 0.4);
+}
 
     /* Team Section */
     .team {
@@ -370,6 +453,18 @@
       opacity: 0.9;
     }
 
+    .stats-enhanced {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 99, 71, 0.08),
+    transparent
+  );
+}
+
+.stat-circle-number {
+  text-shadow: 0 0 15px rgba(255, 99, 71, 0.5);
+}
+
     /* CTA Section */
     .cta {
       padding: 100px 0;
@@ -406,6 +501,140 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
     }
+
+    .cta {
+  border-top: 1px solid rgba(255, 99, 71, 0.2);
+}
+
+.cta-btn {
+  letter-spacing: 1px;
+}
+
+.cta-btn:hover {
+  background: linear-gradient(90deg, #ff6347, #ff4500);
+}
+
+    /* ================= ABOUT PAGE POLISH ================= */
+
+/* Improve text readability */
+.about-text p,
+.section-title p {
+  color: #e6c1b0;
+  font-size: 1.05rem;
+}
+
+/* ================= GLOBAL POLISH ================= */
+:root {
+  --accent: #ff6347;
+  --accent-dark: #ff4500;
+  --text-soft: #e8c3b3;
+  --bg-card: #2f2f2f;
+}
+
+p {
+  letter-spacing: 0.3px;
+}
+
+h1, h2, h3 {
+  letter-spacing: 0.6px;
+}
+
+
+/* Headings glow refinement */
+.section-title h2 {
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  position: relative;
+}
+
+.section-title h2::after {
+  content: "";
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6347, #ff4500);
+  display: block;
+  margin: 12px auto 0;
+  border-radius: 5px;
+}
+
+/* About content spacing */
+.about-content {
+  gap: 60px;
+}
+
+/* About image – smoother glass glow */
+.about-image {
+  background: radial-gradient(
+    circle,
+    rgba(255, 99, 71, 0.35),
+    rgba(0, 0, 0, 0.9)
+  );
+  box-shadow: 0 0 60px rgba(255, 99, 71, 0.25);
+}
+
+/* Image hover refinement */
+.about-image:hover {
+  transform: scale(1.03);
+}
+
+/* About heading accent */
+.about-text h3 {
+  position: relative;
+}
+
+.about-text h3::before {
+  content: "";
+  position: absolute;
+  left: -15px;
+  top: 6px;
+  width: 4px;
+  height: 70%;
+  background: #ff6347;
+  border-radius: 10px;
+}
+
+/* Values cards polish */
+.value-card {
+  background: linear-gradient(145deg, #2f2f2f, #262626);
+}
+
+.value-card:hover {
+  border-color: #ff6347;
+}
+
+/* Team section tone consistency */
+.team {
+  background: linear-gradient(
+    to bottom,
+    #2b2b2b,
+    #252525
+  );
+}
+
+/* CTA improvement */
+.cta {
+  background: radial-gradient(
+    circle,
+    rgba(255, 99, 71, 0.15),
+    transparent 70%
+  );
+}
+
+/* Better mobile spacing */
+@media (max-width: 768px) {
+  .about {
+    padding: 70px 0;
+  }
+
+  .about-content {
+    gap: 40px;
+  }
+
+  .about-text h3::before {
+    display: none;
+  }
+}
+
 
     /* Animations */
     @keyframes fadeInUp {
@@ -464,8 +693,25 @@
         font-size: 2rem;
       }
 
+      @media (max-width: 768px) {
+  .about-text p {
+    font-size: 1rem;
+  }
+
+  .hero {
+    padding: 80px 20px;
+  }
+
+  .value-card {
+    padding: 30px 20px;
+  }
+}
+
+
+
       /* Body padding-top handled by navbar.css responsive styles */
     }
+
   </style>
   <link rel="stylesheet" href="../css/components/floating-button.css" />
 </head>
@@ -497,10 +743,13 @@
         </div>
         <br>
         <p>
-          <bold>
-            Your trusted partner for safe and reliable vehicle transportation
-            across India
-          </bold>
+          <p>
+  <strong>
+    Your trusted partner for safe and reliable vehicle transportation
+    across India
+  </strong>
+</p>
+
 
         </p>
       </div>

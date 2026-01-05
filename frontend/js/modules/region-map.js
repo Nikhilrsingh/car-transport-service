@@ -1,422 +1,358 @@
-// Interactive India Map with Pin Functionality
+// Leaflet India Map with City Markers
+let map = null;
+let markers = [];
+let currentFilter = 'all';
+
+// India bounds for fitting the whole country
+const indiaBounds = [
+  [6.5, 68.0],   // Southwest corner (bottom-left)
+  [35.5, 97.5]   // Northeast corner (top-right)
+];
+
+// City data with coordinates
+const cities = [
+  // North India
+  { id: 'delhi', name: 'Delhi', lat: 28.6139, lng: 77.2090, region: 'north', major: true, transports: '1000+', price: '₹4,999' },
+  { id: 'jaipur', name: 'Jaipur', lat: 26.9124, lng: 75.7873, region: 'north', major: false, transports: '600+', price: '₹4,299' },
+  { id: 'lucknow', name: 'Lucknow', lat: 26.8467, lng: 80.9462, region: 'north', major: false, transports: '450+', price: '₹4,799' },
+  { id: 'chandigarh', name: 'Chandigarh', lat: 30.7333, lng: 76.7794, region: 'north', major: false, transports: '400+', price: '₹4,499' },
+  { id: 'agra', name: 'Agra', lat: 27.1767, lng: 78.0081, region: 'north', major: false, transports: '500+', price: '₹3,999' },
+  { id: 'amritsar', name: 'Amritsar', lat: 31.6340, lng: 74.8723, region: 'north', major: false, transports: '300+', price: '₹5,299' },
+  { id: 'varanasi', name: 'Varanasi', lat: 25.3176, lng: 82.9739, region: 'north', major: false, transports: '350+', price: '₹5,699' },
+  
+  // South India
+  { id: 'bangalore', name: 'Bangalore', lat: 12.9716, lng: 77.5946, region: 'south', major: true, transports: '900+', price: '₹6,999' },
+  { id: 'chennai', name: 'Chennai', lat: 13.0827, lng: 80.2707, region: 'south', major: true, transports: '800+', price: '₹7,499' },
+  { id: 'hyderabad', name: 'Hyderabad', lat: 17.3850, lng: 78.4867, region: 'south', major: true, transports: '850+', price: '₹6,499' },
+  { id: 'coimbatore', name: 'Coimbatore', lat: 11.0168, lng: 76.9558, region: 'south', major: false, transports: '400+', price: '₹6,799' },
+  { id: 'kochi', name: 'Kochi', lat: 9.9312, lng: 76.2673, region: 'south', major: false, transports: '350+', price: '₹7,299' },
+  { id: 'madurai', name: 'Madurai', lat: 9.9252, lng: 78.1198, region: 'south', major: false, transports: '300+', price: '₹7,299' },
+  
+  // East India
+  { id: 'kolkata', name: 'Kolkata', lat: 22.5726, lng: 88.3639, region: 'east', major: true, transports: '800+', price: '₹5,999' },
+  { id: 'bhubaneswar', name: 'Bhubaneswar', lat: 20.2961, lng: 85.8245, region: 'east', major: false, transports: '400+', price: '₹6,799' },
+  { id: 'patna', name: 'Patna', lat: 25.5941, lng: 85.1376, region: 'east', major: false, transports: '450+', price: '₹5,799' },
+  { id: 'guwahati', name: 'Guwahati', lat: 26.1445, lng: 91.7362, region: 'east', major: false, transports: '250+', price: '₹7,999' },
+  { id: 'ranchi', name: 'Ranchi', lat: 23.3441, lng: 85.3096, region: 'east', major: false, transports: '300+', price: '₹6,299' },
+  
+  // West India
+  { id: 'mumbai', name: 'Mumbai', lat: 19.0760, lng: 72.8777, region: 'west', major: true, transports: '1200+', price: '₹5,499' },
+  { id: 'pune', name: 'Pune', lat: 18.5204, lng: 73.8567, region: 'west', major: true, transports: '700+', price: '₹5,299' },
+  { id: 'ahmedabad', name: 'Ahmedabad', lat: 23.0225, lng: 72.5714, region: 'west', major: true, transports: '650+', price: '₹5,799' },
+  { id: 'surat', name: 'Surat', lat: 21.1702, lng: 72.8311, region: 'west', major: false, transports: '500+', price: '₹5,699' },
+  { id: 'nagpur', name: 'Nagpur', lat: 21.1458, lng: 79.0882, region: 'west', major: false, transports: '450+', price: '₹5,999' },
+  { id: 'vadodara', name: 'Vadodara', lat: 22.3072, lng: 73.1812, region: 'west', major: false, transports: '380+', price: '₹6,199' },
+  { id: 'goa', name: 'Goa', lat: 15.2993, lng: 74.1240, region: 'west', major: false, transports: '300+', price: '₹6,499' }
+];
+
+// Region colors
+const regionColors = {
+  north: '#4a90e2',
+  south: '#e74c3c',
+  east: '#f39c12',
+  west: '#16a085'
+};
+
 function initRegionMap() {
-  const mapContainer = document.getElementById('mapContainer');
-  if (!mapContainer) return;
+  const mapContainer = document.getElementById('leafletMap');
+  if (!mapContainer) {
+    console.log('Leaflet map container not found');
+    return;
+  }
+  
+  // Check if Leaflet is loaded
+  if (typeof L === 'undefined') {
+    console.error('Leaflet library not loaded');
+    mapContainer.innerHTML = '<p style="text-align: center; padding: 100px 20px; color: #666;">Map loading failed. Please refresh the page.</p>';
+    return;
+  }
 
-  // Initialize city pins functionality
-  initCityPins();
-  
-  // Initialize connection lines
-  initConnectionLines();
-  
-  // Map controls functionality
-  initMapControls();
-  
-  // Update active filter badge
-  updateActiveFilterBadge('all');
+  try {
+    // Initialize Leaflet map centered on India
+    map = L.map('leafletMap', {
+      center: [22.5, 78.9],
+      zoom: 5,
+      minZoom: 4,
+      maxZoom: 10,
+      zoomControl: false,
+      scrollWheelZoom: true
+    });
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Force map to recalculate size and fit India bounds
+    setTimeout(() => {
+      map.invalidateSize();
+      // Fit the entire India in view
+      map.fitBounds(indiaBounds, { padding: [20, 20] });
+    }, 100);
+
+    // Add city markers
+    addCityMarkers();
+
+    // Initialize custom controls
+    initMapControls();
+
+    // Initialize legend interactions
+    initLegendInteractions();
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (map) map.invalidateSize();
+    });
+    
+    console.log('Leaflet map initialized successfully');
+  } catch (error) {
+    console.error('Error initializing map:', error);
+    mapContainer.innerHTML = '<p style="text-align: center; padding: 100px 20px; color: #666;">Map loading failed. Please refresh the page.</p>';
+  }
 }
 
-// Initialize city pins with hover and click functionality
-function initCityPins() {
-  const cityPins = document.querySelectorAll('.pin-marker');
+function createCustomIcon(city) {
+  const color = city.major ? '#ff6b35' : regionColors[city.region];
   
-  cityPins.forEach(pin => {
-    const cityId = pin.getAttribute('data-city');
-    const cityData = getCityData(cityId);
-    
-    if (!cityData) return;
-    
-    // Find the tooltip
-    const pinContainer = pin.parentElement;
-    const tooltip = pinContainer.querySelector('.pin-tooltip');
-    
-    // Show tooltip on hover
-    pin.addEventListener('mouseenter', function(e) {
-      if (tooltip) {
-        tooltip.style.opacity = '1';
-        tooltip.style.visibility = 'visible';
-        tooltip.style.transform = 'translateX(-50%) translateY(-5px)';
-      }
-      
-      // Add glow effect
-      this.style.filter = 'drop-shadow(0 0 15px rgba(255, 107, 53, 0.8))';
-    });
-    
-    // Hide tooltip on mouse leave
-    pin.addEventListener('mouseleave', function() {
-      if (tooltip) {
-        tooltip.style.opacity = '0';
-        tooltip.style.visibility = 'hidden';
-        tooltip.style.transform = 'translateX(-50%)';
-      }
-      
-      // Remove glow effect
-      this.style.filter = 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))';
-    });
-    
-    // Click to navigate to city page
-    pin.addEventListener('click', function(e) {
-      e.stopPropagation();
-      
-      // Add click animation
-      this.style.transform = 'translateY(-10px) scale(1.3)';
-      setTimeout(() => {
-        this.style.transform = 'translateY(-10px) scale(1.2)';
-      }, 200);
-      
-      // Navigate after delay
-      setTimeout(() => {
-        window.location.href = cityData.link;
-      }, 300);
-    });
-  });
-  
-  // Legend hover effects
-  const legendItems = document.querySelectorAll('.legend-item[data-region]');
-  legendItems.forEach(item => {
-    const region = item.getAttribute('data-region');
-    
-    item.addEventListener('mouseenter', () => {
-      highlightRegionPins(region);
-    });
-    
-    item.addEventListener('mouseleave', () => {
-      resetPins();
-    });
-    
-    item.addEventListener('click', () => {
-      const filterTab = document.querySelector(`.filter-tab[data-filter="${region}"]`);
-      if (filterTab) {
-        filterTab.click();
-        updateActiveFilterBadge(region);
-      }
-    });
+  return L.divIcon({
+    className: 'custom-marker',
+    html: `
+      <div class="custom-pin ${city.major ? 'major' : city.region}">
+        <div class="pin-head" style="background: linear-gradient(135deg, ${color}, ${lightenColor(color, 20)});">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+      </div>
+    `,
+    iconSize: [30, 40],
+    iconAnchor: [15, 40],
+    popupAnchor: [0, -40]
   });
 }
 
-// Initialize animated connection lines between major cities
-function initConnectionLines() {
-  const connectionsOverlay = document.getElementById('connectionsOverlay');
-  if (!connectionsOverlay) return;
+function lightenColor(color, percent) {
+  const num = parseInt(color.replace('#', ''), 16);
+  const amt = Math.round(2.55 * percent);
+  const R = (num >> 16) + amt;
+  const G = (num >> 8 & 0x00FF) + amt;
+  const B = (num & 0x0000FF) + amt;
+  return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+    (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+    (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+}
 
-  // Major routes between cities
-  const connections = [
-    { from: 'delhi', to: 'mumbai' },
-    { from: 'delhi', to: 'bangalore' },
-    { from: 'delhi', to: 'kolkata' },
-    { from: 'mumbai', to: 'bangalore' },
-    { from: 'mumbai', to: 'chennai' },
-    { from: 'bangalore', to: 'chennai' },
-    { from: 'kolkata', to: 'chennai' },
-    { from: 'hyderabad', to: 'bangalore' },
-    { from: 'hyderabad', to: 'mumbai' }
-  ];
+function addCityMarkers() {
+  markers = [];
+  
+  cities.forEach(city => {
+    const marker = L.marker([city.lat, city.lng], {
+      icon: createCustomIcon(city)
+    });
 
-  connections.forEach(conn => {
-    const fromPin = document.querySelector(`.city-pin[data-city="${conn.from}"]`);
-    const toPin = document.querySelector(`.city-pin[data-city="${conn.to}"]`);
-    
-    if (fromPin && toPin) {
-      const fromRect = fromPin.getBoundingClientRect();
-      const toRect = toPin.getBoundingClientRect();
-      const containerRect = connectionsOverlay.getBoundingClientRect();
-      
-      // Calculate positions relative to container
-      const x1 = fromRect.left - containerRect.left + fromRect.width / 2;
-      const y1 = fromRect.top - containerRect.top + fromRect.height / 2;
-      const x2 = toRect.left - containerRect.left + toRect.width / 2;
-      const y2 = toRect.top - containerRect.top + toRect.height / 2;
-      
-      // Create connection line
-      const line = document.createElement('div');
-      line.className = 'connection-line';
-      
-      // Calculate length and angle
-      const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-      const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-      
-      // Set line properties
-      line.style.width = `${length}px`;
-      line.style.left = `${x1}px`;
-      line.style.top = `${y1}px`;
-      line.style.transform = `rotate(${angle}deg)`;
-      
-      // Random delay for animation
-      line.style.animationDelay = `${Math.random() * 2}s`;
-      
-      connectionsOverlay.appendChild(line);
-    }
+    const popupContent = `
+      <div class="city-popup">
+        <h4>${city.name}</h4>
+        <span class="region-badge ${city.region}">${city.region.charAt(0).toUpperCase() + city.region.slice(1)} India</span>
+        <p style="margin: 8px 0; font-size: 0.85rem; color: #666;">
+          <i class="fas fa-truck-moving"></i> ${city.transports} transports<br>
+          <strong>From ${city.price}</strong>
+        </p>
+        <a href="./pages/city.html?city=${city.id}" class="view-city-btn">
+          View Details <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    `;
+
+    marker.bindPopup(popupContent, {
+      maxWidth: 200,
+      className: 'city-popup-wrapper'
+    });
+
+    marker.cityData = city;
+    markers.push(marker);
+    marker.addTo(map);
   });
 }
 
-// Helper function to get city data
-function getCityData(cityId) {
-  const cityDataMap = {
-    delhi: { 
-      name: "Delhi", 
-      region: "north", 
-      color: "#4a90e2", 
-      transports: "1200+", 
-      routes: "150+", 
-      link: "./pages/city.html?city=delhi" 
-    },
-    mumbai: { 
-      name: "Mumbai", 
-      region: "west", 
-      color: "#16a085", 
-      transports: "1500+", 
-      routes: "200+", 
-      link: "./pages/city.html?city=mumbai" 
-    },
-    bangalore: { 
-      name: "Bangalore", 
-      region: "south", 
-      color: "#e74c3c", 
-      transports: "1100+", 
-      routes: "140+", 
-      link: "./pages/city.html?city=bangalore" 
-    },
-    kolkata: { 
-      name: "Kolkata", 
-      region: "east", 
-      color: "#f39c12", 
-      transports: "900+", 
-      routes: "120+", 
-      link: "./pages/city.html?city=kolkata" 
-    },
-    chennai: { 
-      name: "Chennai", 
-      region: "south", 
-      color: "#e74c3c", 
-      transports: "1000+", 
-      routes: "130+", 
-      link: "./pages/city.html?city=chennai" 
-    },
-    hyderabad: { 
-      name: "Hyderabad", 
-      region: "south", 
-      color: "#e74c3c", 
-      transports: "950+", 
-      routes: "110+", 
-      link: "./pages/city.html?city=hyderabad" 
-    },
-    pune: { 
-      name: "Pune", 
-      region: "west", 
-      color: "#16a085", 
-      transports: "600+", 
-      routes: "80+", 
-      link: "./pages/city.html?city=pune" 
-    },
-    ahmedabad: { 
-      name: "Ahmedabad", 
-      region: "west", 
-      color: "#16a085", 
-      transports: "700+", 
-      routes: "90+", 
-      link: "./pages/city.html?city=ahmedabad" 
-    },
-    jaipur: { 
-      name: "Jaipur", 
-      region: "north", 
-      color: "#4a90e2", 
-      transports: "600+", 
-      routes: "70+", 
-      link: "./pages/city.html?city=jaipur" 
-    },
-    lucknow: { 
-      name: "Lucknow", 
-      region: "north", 
-      color: "#4a90e2", 
-      transports: "450+", 
-      routes: "60+", 
-      link: "./pages/city.html?city=lucknow" 
-    }
-  };
+function filterMarkers(region) {
+  currentFilter = region;
   
-  return cityDataMap[cityId];
-}
-
-// Highlight pins from a specific region
-function highlightRegionPins(region) {
-  const cityPins = document.querySelectorAll('.pin-marker');
-  cityPins.forEach(pin => {
-    const cityId = pin.getAttribute('data-city');
-    const cityData = getCityData(cityId);
+  markers.forEach(marker => {
+    const city = marker.cityData;
     
-    if (cityData && cityData.region === region) {
-      pin.style.transform = 'translateY(-10px) scale(1.3)';
-      pin.style.filter = 'drop-shadow(0 0 15px rgba(255, 107, 53, 0.8))';
+    if (region === 'all' || city.region === region) {
+      marker.addTo(map);
+      marker.setOpacity(1);
     } else {
-      pin.style.opacity = '0.3';
-      pin.style.filter = 'none';
+      marker.setOpacity(0.3);
+    }
+  });
+
+  // Update legend active state
+  document.querySelectorAll('.legend-item[data-region]').forEach(item => {
+    item.classList.remove('active');
+    if (item.dataset.region === region) {
+      item.classList.add('active');
     }
   });
 }
 
-// Reset all pins to normal state
-function resetPins() {
-  const cityPins = document.querySelectorAll('.pin-marker');
-  cityPins.forEach(pin => {
-    pin.style.transform = 'translateY(0) scale(1)';
-    pin.style.filter = 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))';
-    pin.style.opacity = '1';
-  });
-}
-
-// Initialize map controls
 function initMapControls() {
-  const indiaMap = document.getElementById('indiaMap');
-  const indiaMapImage = document.getElementById('indiaMapImage');
-  
-  if (!indiaMap || !indiaMapImage) return;
-
-  // Zoom and Pan Controls
-  let currentZoom = 1;
-  let currentX = 0;
-  let currentY = 0;
-
-  // Zoom In
   const zoomInBtn = document.getElementById('zoomInBtn');
+  const zoomOutBtn = document.getElementById('zoomOutBtn');
+  const resetMapBtn = document.getElementById('resetMapBtn');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+
   if (zoomInBtn) {
     zoomInBtn.addEventListener('click', () => {
-      if (currentZoom < 3) {
-        currentZoom += 0.3;
-        updateMapTransform();
-      }
+      map.zoomIn();
     });
   }
-  
-  // Zoom Out
-  const zoomOutBtn = document.getElementById('zoomOutBtn');
+
   if (zoomOutBtn) {
     zoomOutBtn.addEventListener('click', () => {
-      if (currentZoom > 0.5) {
-        currentZoom -= 0.3;
-        updateMapTransform();
-      }
+      map.zoomOut();
     });
   }
-  
-  // Reset Map
-  const resetMapBtn = document.getElementById('resetMapBtn');
+
   if (resetMapBtn) {
     resetMapBtn.addEventListener('click', () => {
-      currentZoom = 1;
-      currentX = 0;
-      currentY = 0;
-      updateMapTransform();
+      // Fit entire India in view
+      map.fitBounds(indiaBounds, { padding: [20, 20] });
+      filterMarkers('all');
+      resetMarkerStyles();
     });
   }
-  
-  // Fullscreen Toggle
-  const fullscreenBtn = document.getElementById('fullscreenBtn');
+
   if (fullscreenBtn) {
     fullscreenBtn.addEventListener('click', () => {
-      const mapContainer = document.querySelector('.map-container');
+      const mapLayoutContainer = document.querySelector('.map-layout-container');
+      
       if (!document.fullscreenElement) {
-        mapContainer.requestFullscreen().catch(err => {
+        mapLayoutContainer.requestFullscreen().then(() => {
+          fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+          fullscreenBtn.title = "Exit Fullscreen";
+          // Invalidate map size after fullscreen
+          setTimeout(() => map.invalidateSize(), 100);
+        }).catch(err => {
           console.log(`Error attempting to enable fullscreen: ${err.message}`);
         });
-        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
-        fullscreenBtn.title = "Exit Fullscreen";
       } else {
-        document.exitFullscreen();
-        fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-        fullscreenBtn.title = "Fullscreen";
+        document.exitFullscreen().then(() => {
+          fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+          fullscreenBtn.title = "Fullscreen";
+          setTimeout(() => map.invalidateSize(), 100);
+        });
       }
     });
   }
-  
-  function updateMapTransform() {
-    if (indiaMap) {
-      indiaMap.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentZoom})`;
-      indiaMap.style.transition = 'transform 0.3s ease';
-      
-      // Scale the city pins as well
-      const cityPins = document.querySelectorAll('.city-pin');
-      cityPins.forEach(pin => {
-        pin.style.transform = `translate(-50%, -100%) scale(${1/currentZoom})`;
-      });
-    }
-  }
-  
-  // Pan with mouse drag
-  let isDragging = false;
-  let startX, startY;
-  
-  indiaMap.addEventListener('mousedown', (e) => {
-    if (currentZoom > 1) {
-      isDragging = true;
-      startX = e.clientX - currentX;
-      startY = e.clientY - currentY;
-      indiaMap.style.cursor = 'grabbing';
-      e.preventDefault();
-    }
-  });
-  
-  document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-      currentX = e.clientX - startX;
-      currentY = e.clientY - startY;
-      updateMapTransform();
-    }
-  });
-  
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-    indiaMap.style.cursor = 'grab';
-  });
-  
-  indiaMap.addEventListener('mouseleave', () => {
-    isDragging = false;
-    indiaMap.style.cursor = 'default';
-  });
 
-  // Mouse wheel zoom
-  indiaMap.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if (e.deltaY < 0 && currentZoom < 3) {
-      currentZoom += 0.1;
-    } else if (e.deltaY > 0 && currentZoom > 0.5) {
-      currentZoom -= 0.1;
-    }
-    updateMapTransform();
-  }, { passive: false });
+  // Handle fullscreen change
+  document.addEventListener('fullscreenchange', () => {
+    setTimeout(() => map.invalidateSize(), 100);
+  });
 }
 
-// Update active filter badge on map legend
-function updateActiveFilterBadge(filter) {
-  const badge = document.getElementById('activeFilterBadge');
-  const text = document.getElementById('activeFilterText');
+function initLegendInteractions() {
+  const legendItems = document.querySelectorAll('.legend-item[data-region]');
   
-  if (!badge || !text) return;
-  
-  const filterNames = {
-    'all': 'All Regions',
-    'north': 'North India',
-    'south': 'South India',
-    'east': 'East India',
-    'west': 'West India'
-  };
-  
-  if (filter === 'all') {
-    badge.style.display = 'none';
-  } else {
-    badge.style.display = 'inline-flex';
-    text.textContent = filterNames[filter] || filter;
+  legendItems.forEach(item => {
+    // Hover effect - make pins pop out
+    item.addEventListener('mouseenter', () => {
+      const region = item.dataset.region;
+      highlightRegionMarkers(region);
+    });
     
-    // Update badge color based on region
-    const colors = {
-      'north': '#4a90e2',
-      'south': '#e74c3c',
-      'east': '#f39c12',
-      'west': '#16a085'
-    };
-    badge.style.background = colors[filter] || '#ff6b35';
-  }
+    // Mouse leave - reset pins
+    item.addEventListener('mouseleave', () => {
+      if (currentFilter === 'all') {
+        resetMarkerStyles();
+      } else {
+        // Keep the filtered state
+        highlightRegionMarkers(currentFilter);
+      }
+    });
+    
+    // Click to filter
+    item.addEventListener('click', () => {
+      const region = item.dataset.region;
+      
+      // Toggle filter
+      if (currentFilter === region) {
+        filterMarkers('all');
+        resetMarkerStyles();
+        // Reset view to show all India
+        map.fitBounds(indiaBounds, { padding: [20, 20] });
+      } else {
+        filterMarkers(region);
+        highlightRegionMarkers(region);
+        
+        // Zoom to region
+        const regionCities = cities.filter(c => c.region === region);
+        if (regionCities.length > 0) {
+          const bounds = L.latLngBounds(regionCities.map(c => [c.lat, c.lng]));
+          map.fitBounds(bounds, { padding: [50, 50] });
+        }
+      }
+    });
+  });
 }
 
-// Initialize on DOM load
-document.addEventListener('DOMContentLoaded', initRegionMap);
+// Highlight markers for a specific region (make them pop out)
+function highlightRegionMarkers(region) {
+  markers.forEach(marker => {
+    const city = marker.cityData;
+    const markerElement = marker.getElement();
+    
+    if (markerElement) {
+      const pinElement = markerElement.querySelector('.custom-pin');
+      
+      if (city.region === region) {
+        // Make this region's pins pop out
+        marker.setZIndexOffset(1000);
+        if (pinElement) {
+          pinElement.classList.add('highlighted');
+        }
+      } else {
+        // Dim other pins
+        marker.setZIndexOffset(0);
+        if (pinElement) {
+          pinElement.classList.remove('highlighted');
+          pinElement.classList.add('dimmed');
+        }
+      }
+    }
+  });
+}
+
+// Reset all marker styles
+function resetMarkerStyles() {
+  markers.forEach(marker => {
+    const markerElement = marker.getElement();
+    marker.setZIndexOffset(0);
+    
+    if (markerElement) {
+      const pinElement = markerElement.querySelector('.custom-pin');
+      if (pinElement) {
+        pinElement.classList.remove('highlighted', 'dimmed');
+      }
+    }
+  });
+}
+
+// Initialize when region section is loaded (it's loaded dynamically)
 document.addEventListener('regionSectionLoaded', initRegionMap);
+
+// Also try on DOMContentLoaded in case the element already exists
+document.addEventListener('DOMContentLoaded', () => {
+  // Small delay to ensure element is ready
+  setTimeout(() => {
+    if (document.getElementById('leafletMap') && !map) {
+      initRegionMap();
+    }
+  }, 500);
+});
+
+// Export for module usage
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { initRegionMap };
+}
