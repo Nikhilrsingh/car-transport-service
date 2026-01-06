@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config(); // MUST be first
+dotenv.config();
 
 import express from "express";
 import cors from "cors";
@@ -7,7 +7,10 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import passport from "passport";
 import session from "cookie-session";
-import "./config/passport.js"; // <-- import after dotenv.config()
+import "./config/passport.js"; 
+import contactRoutes from './routes/contact.routes.js'
+import feedbackRoutes from "./routes/feedback.routes.js";
+
 
 // Optional: check if env vars are loaded
 console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
@@ -32,6 +35,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/feedbacks", feedbackRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 
