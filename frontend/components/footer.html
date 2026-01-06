@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/components/footer.css" />
+<link rel="stylesheet" href="../css/components/footer.css?v=4" />
 <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
 <link rel="stylesheet" href="../css/components/backtoBottom.css" />
 <link rel="preload" href="../assets/images/car-footer.png" as="image" />
@@ -162,7 +162,7 @@
     </div>
   </div>
 
-  <!-- Sticky Mini Footer (mobile) -->
+  <!-- Sticky Mini Footer (mobile) - Now includes FAB functionality -->
   <div class="mini-sticky-footer" role="region" aria-label="Quick contact bar">
     <a href="tel:+919372693389" class="mini-call">
       <i class="fas fa-phone"></i>
@@ -172,16 +172,35 @@
       <i class="fas fa-bolt"></i>
       <span>Quote</span>
     </a>
-    <button class="mini-up" aria-controls="footer-main" aria-expanded="false">
-      <i class="fas fa-chevron-up"></i>
-      <span>Open</span>
+    <button class="mini-fab-trigger" id="miniFabTrigger" aria-label="Open actions menu" aria-expanded="false">
+      <i class="fas fa-plus"></i>
+      <span>More</span>
+    </button>
+  </div>
+
+  <!-- Mobile FAB Actions (shown when mini-fab-trigger is clicked) -->
+  <div class="mobile-fab-actions" id="mobileFabActions">
+    <button class="mobile-fab-btn" id="mobileFabQuote" data-tooltip="Get Quote">
+      <i class="fas fa-file-invoice-dollar"></i>
+    </button>
+    <button class="mobile-fab-btn" id="mobileFabBook" data-tooltip="Book Now">
+      <i class="fas fa-calendar-check"></i>
+    </button>
+    <a href="https://wa.me/919372693389" class="mobile-fab-btn" data-tooltip="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="mobile-fab-btn" id="mobileFabFeedback" data-tooltip="Feedback">
+      <i class="fas fa-star"></i>
+    </button>
+    <button class="mobile-fab-btn" id="mobileFabChat" data-tooltip="Chat">
+      <i class="fas fa-comments"></i>
     </button>
   </div>
 
 </footer>
 
 <!-- 🚀 Modern Floating Action Menu (FAB) -->
-<link rel="stylesheet" href="../css/components/floating-action-menu.css?v=3" />
+<link rel="stylesheet" href="../css/components/floating-action-menu.css?v=6" />
 
 <!-- Main FAB Button (Bottom Left Corner) -->
 <div class="fab-container">
@@ -211,14 +230,14 @@
       <i class="fas fa-phone"></i>
     </a>
 
-    <!-- Chatbot -->
-    <button class="fab-action-btn" id="fabChatBtn" data-tooltip="Chat with us">
-      <i class="fas fa-comments"></i>
+    <!-- Feedback -->
+    <button class="fab-action-btn" id="fabFeedbackBtn" data-tooltip="Feedback">
+      <i class="fas fa-star"></i>
     </button>
 
-    <!-- Feedback -->
-    <button class="fab-action-btn" id="fabFeedbackBtn" data-tooltip="Give Feedback">
-      <i class="fas fa-comment-dots"></i>
+    <!-- Chatbot -->
+    <button class="fab-action-btn" id="fabChatBtn" data-tooltip="Chat">
+      <i class="fas fa-comments"></i>
     </button>
   </div>
 </div>
@@ -229,6 +248,17 @@
 <link rel="stylesheet" href="../css/components/bottom-action-bar.css?v=3" />
 
 <div class="bottom-action-bar-fixed">
+  <!-- Left Section: Clock and Chatbot -->
+  <div class="bottom-bar-left">
+    <!-- Digital Clock -->
+    <div class="bottom-bar-clock" id="bottomBarClock"></div>
+    
+    <!-- Chatbot Icon (next to clock) -->
+    <button class="bottom-bar-chat-icon" id="bottomChatBtn" aria-label="Open Chatbot" title="Chat with us">
+      <i class="fas fa-comments" aria-hidden="true"></i>
+    </button>
+  </div>
+
   <!-- WhatsApp Button -->
   <a href="https://wa.me/919372693389" class="bottom-action-btn whatsapp" aria-label="Contact via WhatsApp">
     <i class="fab fa-whatsapp"></i>

@@ -28,8 +28,8 @@
     :root {
       --orange: #ff6347;
       --bg: #1a1a1a;
-      --text: #f5f5f5;
-      --muted: #aaaaaa;
+      --text: #ffffff;
+      --muted: #d2d2d2;
       --card-bg: #2b2b2b;
       --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
       --radius: 12px;
@@ -159,7 +159,7 @@
       transition: all 0.3s ease;
       border: 2px solid transparent;
       background: #333;
-      color: var(--text);
+      color: white;
     }
 
     .tag-badge:hover {
@@ -216,6 +216,7 @@
 
     .category-item {
       padding: 10px 15px;
+      color:white;
       margin-bottom: 8px;
       border-radius: 8px;
       cursor: pointer;
@@ -417,13 +418,13 @@
     }
 
     .meta-item {
+      color:#f98f69;
       display: flex;
       align-items: center;
       gap: 5px;
     }
 
     .card-excerpt {
-      color: #ccc;
       line-height: 1.6;
       flex: 1;
     }
@@ -522,6 +523,124 @@
       .blog-search-wrapper {
         max-width: 100%;
       }
+    }
+
+    /* ====================================
+       BLOG PAGE - Light Mode Styles
+       ==================================== */
+    body[data-theme="light"] {
+      background: #f8f9fa !important;
+      color: #333 !important;
+    }
+
+    body[data-theme="light"] .blog-hero {
+      background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+    }
+
+    body[data-theme="light"] .blog-hero h1 {
+      background: linear-gradient(135deg, #ffffff, #f0f0f0) !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+    }
+
+    body[data-theme="light"] .blog-hero p {
+      color: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    body[data-theme="light"] .blog-search-input {
+      background: #ffffff !important;
+      color: #333 !important;
+      border: 2px solid #ddd !important;
+    }
+
+    body[data-theme="light"] .blog-search-input::placeholder {
+      color: #888 !important;
+    }
+
+    body[data-theme="light"] .blog-search-input:focus {
+      border-color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .sort-dropdown {
+      background: #ffffff !important;
+      color: #333 !important;
+      border: 2px solid #ddd !important;
+    }
+
+    body[data-theme="light"] .sort-dropdown:focus {
+      border-color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .tag-badge {
+      background: #ffffff !important;
+      color: #333 !important;
+      border: 2px solid #ddd !important;
+    }
+
+    body[data-theme="light"] .tag-badge:hover {
+      border-color: #ff6347 !important;
+      color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .tag-badge.active {
+      background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+      color: white !important;
+      border-color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .blog-sidebar {
+      background: #ffffff !important;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    body[data-theme="light"] .sidebar-title {
+      color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .category-item {
+      color: #333 !important;
+      background: rgba(0, 0, 0, 0.02) !important;
+    }
+
+    body[data-theme="light"] .category-item:hover {
+      background: rgba(255, 99, 71, 0.1) !important;
+    }
+
+    body[data-theme="light"] .category-item.active {
+      background: linear-gradient(135deg, rgba(255, 99, 71, 0.15), rgba(255, 69, 0, 0.1)) !important;
+    }
+
+    body[data-theme="light"] .card {
+      background: #ffffff !important;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    body[data-theme="light"] .card:hover {
+      box-shadow: 0 10px 30px rgba(255, 99, 71, 0.15) !important;
+    }
+
+    body[data-theme="light"] .card-title {
+      color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .card-meta {
+      color: #666 !important;
+    }
+
+    body[data-theme="light"] .meta-item {
+      color: #888 !important;
+    }
+
+    body[data-theme="light"] .card-excerpt {
+      color: #555 !important;
+    }
+
+    body[data-theme="light"] .no-results {
+      color: #666 !important;
+    }
+
+    body[data-theme="light"] .no-results h3 {
+      color: #333 !important;
     }
   </style>
 </head>

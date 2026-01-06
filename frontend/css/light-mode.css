@@ -22,31 +22,20 @@ body {
 
 /* Navbar visibility in light theme */
 body[data-theme="light"] .header {
-  background: rgba(10, 10, 10, 0.96) !important;
-  box-shadow:  0 4px 24px rgba(0, 0, 0, 0.4) !important;
-}
-body[data-theme="light"] .nav-link,
-body[data-theme="light"] .login-btn,
-body[data-theme="light"] .enquiry-link,
-body[data-theme="light"] .mobile-close-btn,
-body[data-theme="light"] .mobile-login-btn {
-  color: #f5f5f5 !important;
-}
-body[data-theme="light"] .nav-link i,
-body[data-theme="light"] .action-nav i {
-  color: #ff6347 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Search bar visibility in light theme */
 body[data-theme="light"] .search-bar {
-  background: rgba(0, 0, 0, 0.08) !important;
-  border-color: rgba(0, 0, 0, 0.15) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 body[data-theme="light"] .search-bar input {
-  color: #fff9f9 !important;
+  color: #333 !important;
 }
 body[data-theme="light"] .search-bar input::placeholder {
-  color: rgb(255, 253, 253) !important;
+  color: #888 !important;
 }
 body[data-theme="light"] .search-bar i {
   color: rgba(0, 0, 0, 0.6) !important;
@@ -84,7 +73,124 @@ body[data-theme="light"] #theme-toggle i {
   color: var(--footer-text);
 }
 
-/* Hero Section - Light overlay for dark text visibility */
+/* Hero Section - Light Mode - Clean Professional Look */
+body[data-theme="light"] .hero {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%) !important;
+}
+
+body[data-theme="light"] .hero::before {
+  background: 
+    radial-gradient(ellipse at 30% 20%, rgba(255, 99, 71, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(255, 140, 0, 0.04) 0%, transparent 50%) !important;
+}
+
+body[data-theme="light"] .hero-badge {
+  background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%) !important;
+  border: none !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .hero-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .title-line {
+  color: #1a1a1a !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="light"] .title-line:nth-child(2) {
+  color: #2d2d2d !important;
+}
+
+body[data-theme="light"] .title-line:nth-child(3) {
+  color: #3d3d3d !important;
+}
+
+body[data-theme="light"] .title-line.highlight {
+  background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 2px 10px rgba(255, 99, 71, 0.3)) !important;
+}
+
+body[data-theme="light"] .hero-sub-title {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .hero-sub-title span {
+  background: linear-gradient(135deg, rgba(255, 99, 71, 0.1) 0%, rgba(255, 140, 0, 0.08) 100%) !important;
+  border: 1px solid rgba(255, 99, 71, 0.2) !important;
+  color: #ff5733 !important;
+  font-weight: 600 !important;
+}
+
+body[data-theme="light"] .hero-description {
+  color: #555 !important;
+  font-weight: 400 !important;
+}
+
+body[data-theme="light"] .stat {
+  background: #fff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+body[data-theme="light"] .stat:hover {
+  background: #fff !important;
+  border-color: rgba(255, 99, 71, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(255, 99, 71, 0.12) !important;
+  transform: translateY(-3px) !important;
+}
+
+body[data-theme="light"] .stat-number {
+  color: #ff5733 !important;
+  text-shadow: none !important;
+  font-weight: 800 !important;
+}
+
+body[data-theme="light"] .stat-label {
+  color: #666 !important;
+  font-weight: 500 !important;
+}
+
+body[data-theme="light"] .cta-btn.primary {
+  background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 25px rgba(255, 99, 71, 0.35) !important;
+}
+
+body[data-theme="light"] .cta-btn.primary:hover {
+  box-shadow: 0 12px 35px rgba(255, 99, 71, 0.45) !important;
+}
+
+body[data-theme="light"] .cta-btn.secondary {
+  background: #fff !important;
+  color: #333 !important;
+  border: 2px solid #e0e0e0 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06) !important;
+}
+
+body[data-theme="light"] .cta-btn.secondary:hover {
+  background: #fff !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+  box-shadow: 0 6px 20px rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .cta-btn.outline {
+  background: transparent !important;
+  color: #ff6347 !important;
+  border: 2px solid #ff6347 !important;
+}
+
+body[data-theme="light"] .cta-btn.outline:hover {
+  background: #ff6347 !important;
+  color: #fff !important;
+}
+
 .hero-overlay {
   background: linear-gradient(135deg,
       rgba(0, 0, 0, 0.45) 0%,
@@ -270,23 +376,109 @@ body[data-theme="light"] .footer-toggle {
   border-color: rgba(0,0,0,0.06) !important;
 }
 
-/* Quote Card - Light Theme */
+/* Quote Card - Light Theme - Clean White Design */
 body[data-theme="light"] .quote-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(250, 250, 250, 0.98)) !important;
-  border-color: rgba(255, 99, 71, 0.2) !important;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 20px rgba(255, 99, 71, 0.1) !important;
+  background: #fff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02) !important;
 }
 
 body[data-theme="light"] .quote-card:hover {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12), 0 0 30px rgba(255, 99, 71, 0.15) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] .quote-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
 }
 
 body[data-theme="light"] .quote-header h3 {
   color: #1a1a1a !important;
+  font-weight: 700 !important;
 }
 
 body[data-theme="light"] .quote-header p {
+  color: #ff5733 !important;
+  font-weight: 500 !important;
+}
+
+body[data-theme="light"] .form-group label {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .form-group label i {
   color: #ff6347 !important;
+}
+
+body[data-theme="light"] .quote-card .form-group input,
+body[data-theme="light"] .quote-card .form-group select {
+  background: #f8f9fa !important;
+  border: 1px solid #e0e0e0 !important;
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .quote-card .form-group input:focus,
+body[data-theme="light"] .quote-card .form-group select:focus {
+  border-color: #ff6347 !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] .quote-card .form-group input::placeholder {
+  color: #999 !important;
+}
+
+body[data-theme="light"] .step-progress {
+  background: rgba(255, 99, 71, 0.05) !important;
+  border-color: rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] .step-number {
+  background: #f0f0f0 !important;
+  border-color: #ddd !important;
+  color: #888 !important;
+}
+
+body[data-theme="light"] .step.active .step-number {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  border-color: #ff6347 !important;
+  color: #fff !important;
+}
+
+body[data-theme="light"] .step-label {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .step.active .step-label {
+  color: #ff6347 !important;
+  font-weight: 600 !important;
+}
+
+body[data-theme="light"] .step-line {
+  background: #e0e0e0 !important;
+}
+
+body[data-theme="light"] .distance-display {
+  background: rgba(34, 197, 94, 0.08) !important;
+  border-color: rgba(34, 197, 94, 0.2) !important;
+  color: #16a34a !important;
+}
+
+body[data-theme="light"] .quote-next,
+body[data-theme="light"] .quote-form-submit-btn {
+  background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .quote-form-back-btn {
+  background: #f5f5f5 !important;
+  color: #555 !important;
+  border: 1px solid #ddd !important;
+}
+
+body[data-theme="light"] .quote-form-back-btn:hover {
+  background: #eee !important;
+  border-color: #ccc !important;
 }
 
 /* Step Progress - Light Theme */
@@ -547,4 +739,1350 @@ body[data-theme="light"] .card {
 body[data-theme="light"] .service-card p,
 body[data-theme="light"] .service-card h3 {
     color: #1a1a1a !important;                         /* Fix faded text */
+}
+
+
+/* Bottom Action Bar - Light Theme Contrast */
+body[data-theme="light"] .bottom-action-bar-fixed {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock .clock-time {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock .clock-date {
+  color: #666 !important;
+}
+
+/* Back to Top/Bottom buttons - Light Theme */
+body[data-theme="light"] .back-to-top,
+body[data-theme="light"] .back-to-bottom,
+body[data-theme="light"] .scroll-button {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.35) !important;
+}
+
+body[data-theme="light"] .back-to-top:hover,
+body[data-theme="light"] .back-to-bottom:hover,
+body[data-theme="light"] .scroll-button:hover {
+  box-shadow: 0 6px 20px rgba(255, 99, 71, 0.45) !important;
+}
+
+/* FAB Button - Light Theme */
+body[data-theme="light"] .fab-main {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.35) !important;
+}
+
+body[data-theme="light"] .fab-main:hover {
+  box-shadow: 0 6px 20px rgba(255, 99, 71, 0.45) !important;
+}
+
+body[data-theme="light"] .fab-action-btn {
+  background: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+body[data-theme="light"] .fab-action-btn:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* ====================================
+   UPBAR - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .upbar {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .upbar::before {
+  background: linear-gradient(90deg, transparent, #ff6347, #ff4500, #ff6347, transparent) !important;
+}
+
+body[data-theme="light"] .upbar-btn {
+  color: #333 !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .upbar-btn i {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .track-btn:hover {
+  background: rgba(255, 99, 71, 0.1) !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .track-btn:hover i {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .help-btn:hover {
+  background: rgba(0, 174, 239, 0.1) !important;
+  border-color: #00aeef !important;
+  color: #00aeef !important;
+}
+
+body[data-theme="light"] .help-btn:hover i {
+  color: #00aeef !important;
+}
+
+body[data-theme="light"] .upbar-btn::after {
+  background: rgba(50, 50, 50, 0.95) !important;
+}
+
+/* ====================================
+   NAVBAR - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .navbar {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%) !important;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .nav-link {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .nav-link i {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .nav-link:hover {
+  background: rgba(255, 99, 71, 0.08) !important;
+  color: #ff6347 !important;
+  transform: translateY(-1px);
+}
+
+body[data-theme="light"] .nav-link:hover i {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .nav-link.active {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: white !important;
+}
+
+body[data-theme="light"] .nav-link.active i {
+  color: white !important;
+}
+
+/* Search bar in light mode navbar */
+body[data-theme="light"] .search-bar {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+body[data-theme="light"] .search-bar input {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .search-bar input::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .search-bar i {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .search-bar:focus-within {
+  background: rgba(255, 99, 71, 0.05) !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .search-bar:focus-within i {
+  color: #ff6347 !important;
+}
+
+/* Login button in light mode */
+body[data-theme="light"] .login-btn {
+  color: #333 !important;
+  border-color: rgba(255, 99, 71, 0.4) !important;
+}
+
+body[data-theme="light"] .login-btn i {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .login-btn:hover {
+  background: rgba(255, 99, 71, 0.1) !important;
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+
+/* Dropdown menu in light mode */
+body[data-theme="light"] .dropdown-menu {
+  background: #ffffff !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .dropdown-menu a {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .dropdown-menu a:hover {
+  background: rgba(255, 99, 71, 0.1) !important;
+  color: #ff6347 !important;
+}
+
+/* Dropdown nav active state in light mode */
+body[data-theme="light"] .dropdown-nav.active > .nav-link,
+body[data-theme="light"] .dropdown-nav.active > [data-dropdown-btn] {
+  background: rgba(255, 99, 71, 0.12) !important;
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .dropdown-nav.active > .nav-link i,
+body[data-theme="light"] .dropdown-nav.active > [data-dropdown-btn] i {
+  color: #ff6347 !important;
+  -webkit-text-fill-color: #ff6347 !important;
+}
+
+/* Mobile menu button bars */
+body[data-theme="light"] .menu-bar {
+  background: #333 !important;
+}
+
+/* Nav actions border */
+body[data-theme="light"] .nav-actions {
+  border-left-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Tooltips in light mode */
+body[data-theme="light"] .nav-link::after,
+body[data-theme="light"] .upbar-btn::after {
+  background: rgba(50, 50, 50, 0.95) !important;
+  color: white !important;
+}
+
+
+/* ====================================
+   FOOTER - Light Mode Comprehensive Styles
+   ==================================== */
+body[data-theme="light"] .footer,
+body[data-theme="light"] footer.footer {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%) !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .footer-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .footer-heading,
+body[data-theme="light"] .footer-brand {
+  color: #222 !important;
+}
+
+body[data-theme="light"] .footer-about p,
+body[data-theme="light"] .footer-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .footer-links a,
+body[data-theme="light"] .footer-links li a {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .footer-links a:hover {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .contact-info li,
+body[data-theme="light"] .contact-info span,
+body[data-theme="light"] .contact-info a {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .contact-info i {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .social-links a {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #555 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .social-links a:hover {
+  background: #ff6347 !important;
+  color: white !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .footer-bottom {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .footer-bottom-content,
+body[data-theme="light"] .copyright,
+body[data-theme="light"] .footer-bottom-links a {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .footer-bottom-links a:hover {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .payment-methods i {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .accordion-header {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .accordion-icon {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .footer-road {
+  background: linear-gradient(to bottom, #ddd 0%, #ccc 100%) !important;
+}
+
+body[data-theme="light"] .cities-search-input {
+  background: #fff !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+body[data-theme="light"] .cities-search-input input {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .cities-search-input input::placeholder {
+  color: #888 !important;
+}
+
+/* Bottom Action Bar Light Mode */
+body[data-theme="light"] .bottom-action-bar-fixed {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock {
+  color: #333 !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock .clock-time {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock .clock-date {
+  color: #666 !important;
+}
+
+
+/* ====================================
+   SLIDER FEATURE GRID - Light Mode
+   ==================================== */
+body[data-theme="light"] .slider-feature-grid .feature-box {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .slider-feature-grid .feature-box:hover {
+  background: #ffffff !important;
+  border-color: rgba(255, 99, 71, 0.4) !important;
+  box-shadow: 0 12px 35px rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .slider-feature-grid .feature-box h3 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .slider-feature-grid .feature-box p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .grid-slider {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+
+/* ====================================
+   MOBILE FAB - Light Mode
+   ==================================== */
+body[data-theme="light"] .mini-sticky-footer {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .mini-sticky-footer a,
+body[data-theme="light"] .mini-sticky-footer button {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .mini-sticky-footer a:hover,
+body[data-theme="light"] .mini-sticky-footer button:hover {
+  background: rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] .mini-sticky-footer i {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .mini-sticky-footer span {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .mini-fab-trigger.active {
+  background: rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .mobile-fab-actions {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(255, 99, 71, 0.2) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+}
+
+
+/* ====================================
+   CAREERS PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .careers-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .why-work-with-us {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .benefit-card {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .benefit-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .benefit-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .current-openings {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .job-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .job-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .job-description {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .job-requirements {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .job-requirements strong {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .driver-section {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .training-programs {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .training-card {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .training-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .training-card p,
+body[data-theme="light"] .training-card li {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .company-culture {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .culture-card {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .culture-card:hover {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .culture-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .culture-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .employee-testimonials {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .testimonial-card {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .testimonial-text {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .author-info h4 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .franchise-opportunities {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .franchise-info h3,
+body[data-theme="light"] .franchise-benefits h4,
+body[data-theme="light"] .franchise-requirements h4 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .franchise-info p,
+body[data-theme="light"] .franchise-benefits li,
+body[data-theme="light"] .franchise-requirements li {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .modal-content {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .modal-content h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .modal-subtitle {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .form-group label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .form-group input,
+body[data-theme="light"] .form-group select,
+body[data-theme="light"] .form-group textarea {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+/* ====================================
+   NETWORK PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .network-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .network-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .network-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .network-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .network-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .stats-section {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .stat-card {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .stat-card h3 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .stat-card p {
+  color: #555 !important;
+}
+
+/* ====================================
+   HOW IT WORKS PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .how-it-works-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .steps-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .step-card {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .step-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .step-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .process-section {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .process-item h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .process-item p {
+  color: #555 !important;
+}
+
+/* ====================================
+   PRICING CALCULATOR PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .calculator-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .calculator-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .calculator-card {
+  background: #ffffff !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .calculator-card h2,
+body[data-theme="light"] .calculator-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .calculator-card label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .calculator-card input,
+body[data-theme="light"] .calculator-card select {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .price-result {
+  background: #f8f9fa !important;
+  border-color: rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .price-result h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .price-amount {
+  color: #ff6347 !important;
+}
+
+/* ====================================
+   PRESS & MEDIA PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .press-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .press-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .press-card {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .press-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .press-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .media-kit-section {
+  background: #ffffff !important;
+}
+
+/* ====================================
+   EMERGENCY SUPPORT PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .emergency-hero {
+  background: linear-gradient(135deg, #dc3545 0%, #ff6347 100%) !important;
+}
+
+body[data-theme="light"] .emergency-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .emergency-card {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .emergency-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .emergency-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .contact-section {
+  background: #ffffff !important;
+}
+
+/* ====================================
+   FAQ PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .faq-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .faq-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .faq-item {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .faq-question {
+  color: #1a1a1a !important;
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .faq-question:hover {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .faq-answer {
+  color: #555 !important;
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .faq-category-title {
+  color: #1a1a1a !important;
+}
+
+/* ====================================
+   BOOKING PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .booking-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .booking-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .booking-form-container {
+  background: #ffffff !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .booking-form-container h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .booking-form label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .booking-form input,
+body[data-theme="light"] .booking-form select,
+body[data-theme="light"] .booking-form textarea {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .booking-form input:focus,
+body[data-theme="light"] .booking-form select:focus,
+body[data-theme="light"] .booking-form textarea:focus {
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .booking-summary {
+  background: #f8f9fa !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .booking-summary h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .booking-summary p {
+  color: #555 !important;
+}
+
+/* ====================================
+   LOGIN PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .login-container {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .login-card {
+  background: #ffffff !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .login-card h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .login-form label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .login-form input {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+/* ====================================
+   CITY PAGE - Light Mode
+   ==================================== */
+body[data-theme="light"] .city-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .city-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .city-card {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .city-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .city-card p {
+  color: #555 !important;
+}
+
+/* ====================================
+   PRIVACY & TERMS PAGES - Light Mode
+   ==================================== */
+body[data-theme="light"] .legal-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .legal-content {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .legal-content h1,
+body[data-theme="light"] .legal-content h2,
+body[data-theme="light"] .legal-content h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .legal-content p,
+body[data-theme="light"] .legal-content li {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .legal-section {
+  background: #f8f9fa !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ====================================
+   GLOBAL SECTION BACKGROUNDS - Light Mode
+   ==================================== */
+body[data-theme="light"] section {
+  background-color: #ffffff;
+}
+
+body[data-theme="light"] section:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .section-subtitle {
+  color: #555 !important;
+}
+
+/* ====================================
+   CARDS & CONTAINERS - Light Mode
+   ==================================== */
+body[data-theme="light"] .card,
+body[data-theme="light"] .info-card,
+body[data-theme="light"] .feature-card,
+body[data-theme="light"] .service-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .card h3,
+body[data-theme="light"] .info-card h3,
+body[data-theme="light"] .feature-card h3,
+body[data-theme="light"] .service-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .card p,
+body[data-theme="light"] .info-card p,
+body[data-theme="light"] .feature-card p,
+body[data-theme="light"] .service-card p {
+  color: #555 !important;
+}
+
+/* ====================================
+   FORMS - Light Mode Global
+   ==================================== */
+body[data-theme="light"] input,
+body[data-theme="light"] select,
+body[data-theme="light"] textarea {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] input::placeholder,
+body[data-theme="light"] textarea::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] input:focus,
+body[data-theme="light"] select:focus,
+body[data-theme="light"] textarea:focus {
+  border-color: #ff6347 !important;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] label {
+  color: #333 !important;
+}
+
+/* ====================================
+   BUTTONS - Light Mode Global
+   ==================================== */
+body[data-theme="light"] .btn-primary,
+body[data-theme="light"] .submit-btn,
+body[data-theme="light"] .cta-button {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .btn-secondary {
+  background: #ffffff !important;
+  color: #333 !important;
+  border-color: #ddd !important;
+}
+
+body[data-theme="light"] .btn-secondary:hover {
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+
+/* ====================================
+   MIDDLE NAVBAR - Light Mode
+   ==================================== */
+body[data-theme="light"] .middle-navbar {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+body[data-theme="light"] .middle-navbar .logo-text {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .middle-navbar .tagline {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .middle-navbar .contact-item {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .middle-navbar .contact-item i {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .middle-navbar .contact-item:hover {
+  color: #ff6347 !important;
+}
+
+/* ====================================
+   MOBILE NAVIGATION - Light Mode
+   ==================================== */
+body[data-theme="light"] .mobile-nav {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .mobile-nav-link {
+  color: #333 !important;
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .mobile-nav-link:hover {
+  background: rgba(255, 99, 71, 0.1) !important;
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .mobile-nav-link.active {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .mobile-dropdown-menu {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .mobile-dropdown-menu a {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .mobile-dropdown-menu a:hover {
+  color: #ff6347 !important;
+}
+
+/* ====================================
+   SCROLL BUTTONS - Light Mode
+   ==================================== */
+body[data-theme="light"] #backToTop,
+body[data-theme="light"] #backToBottom,
+body[data-theme="light"] .back-to-top,
+body[data-theme="light"] .back-to-bottom {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4) !important;
+}
+
+body[data-theme="light"] #backToTop:hover,
+body[data-theme="light"] #backToBottom:hover,
+body[data-theme="light"] .back-to-top:hover,
+body[data-theme="light"] .back-to-bottom:hover {
+  box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5) !important;
+}
+
+/* ====================================
+   TESTIMONIALS SECTION - Light Mode
+   ==================================== */
+body[data-theme="light"] .testimonials-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .testimonials-section .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .testimonials-section p {
+  color: #555 !important;
+}
+
+/* ====================================
+   CONTACT CTA SECTION - Light Mode
+   ==================================== */
+body[data-theme="light"] .contact-cta {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .cta-form-box {
+  background: #f8f9fa !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .form-header h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .form-header p {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .input-group {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+}
+
+body[data-theme="light"] .input-group i {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .input-group input,
+body[data-theme="light"] .input-group select {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .form-footer p {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .contact-link {
+  color: #ff6347 !important;
+}
+
+
+/* ====================================
+   FAQ PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .faq-section {
+  background-color: #f8f9fa !important;
+}
+
+body[data-theme="light"] .faq-item {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .faq-question {
+  background: rgba(255, 99, 71, 0.08) !important;
+}
+
+body[data-theme="light"] .faq-question:hover {
+  background: rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .faq-question h4 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .faq-answer {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .faq-answer p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .faq-search-input {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .faq-search-input:focus {
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .faq-search-input::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .faq-category-btn {
+  background: #ffffff !important;
+  color: #333 !important;
+  border-color: #ddd !important;
+}
+
+body[data-theme="light"] .faq-category-btn:hover,
+body[data-theme="light"] .faq-category-btn.active {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  border-color: #ff6347 !important;
+}
+
+/* ====================================
+   BLOG PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .blog-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .blog-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .blog-card {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .blog-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .blog-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .blog-meta {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .blog-categories,
+body[data-theme="light"] .category-filter {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .category-btn,
+body[data-theme="light"] .filter-btn {
+  background: #f8f9fa !important;
+  color: #333 !important;
+  border: 1px solid #ddd !important;
+}
+
+body[data-theme="light"] .category-btn:hover,
+body[data-theme="light"] .category-btn.active,
+body[data-theme="light"] .filter-btn:hover,
+body[data-theme="light"] .filter-btn.active {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .blog-sidebar {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .sidebar-widget {
+  background: #f8f9fa !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .sidebar-widget h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .sidebar-widget a {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .sidebar-widget a:hover {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .tag {
+  background: #f0f0f0 !important;
+  color: #555 !important;
+}
+
+body[data-theme="light"] .tag:hover {
+  background: #ff6347 !important;
+  color: #ffffff !important;
+}
+
+/* ====================================
+   BACK TO TOP/BOTTOM BUTTONS - Light Mode
+   ==================================== */
+body[data-theme="light"] .back-to-top,
+body[data-theme="light"] .back-to-bottom,
+body[data-theme="light"] #backToTop,
+body[data-theme="light"] #backToBottom {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4) !important;
+  border: none !important;
+}
+
+body[data-theme="light"] .back-to-top:hover,
+body[data-theme="light"] .back-to-bottom:hover,
+body[data-theme="light"] #backToTop:hover,
+body[data-theme="light"] #backToBottom:hover {
+  box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* ====================================
+   FEEDBACK MODAL - Light Mode
+   ==================================== */
+body[data-theme="light"] .feedback-modal {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+body[data-theme="light"] .feedback-modal-content {
+  background: #ffffff !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2) !important;
+}
+
+body[data-theme="light"] .feedback-header h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .feedback-header p {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .feedback-input label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .feedback-input input,
+body[data-theme="light"] .feedback-input textarea {
+  background: #f8f9fa !important;
+  border: 1px solid #ddd !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .feedback-input input:focus,
+body[data-theme="light"] .feedback-input textarea:focus {
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .feedback-input input::placeholder,
+body[data-theme="light"] .feedback-input textarea::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .rating-title p {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .close-feedback {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .close-feedback:hover {
+  color: #ff6347 !important;
 }
