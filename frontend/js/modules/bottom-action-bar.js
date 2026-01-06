@@ -1,6 +1,6 @@
 /* ====================================
    BOTTOM ACTION BAR SCRIPT
-   Handles Get Quote button and body padding
+   Handles Get Quote button, clock, and body padding
    ==================================== */
 
 (function () {
@@ -19,12 +19,59 @@
     // Add class to body for proper padding
     document.body.classList.add('has-bottom-bar');
 
+    // Initialize clock
+    initClock();
+
     // Handle Get Quote button click
     const bottomQuoteBtn = document.getElementById('bottomQuoteBtn');
     if (bottomQuoteBtn) {
       bottomQuoteBtn.addEventListener('click', handleQuoteClick);
       console.log('Bottom Action Bar: Quote button event listener added');
     }
+
+    // Handle Chatbot button click
+    const bottomChatBtn = document.getElementById('bottomChatBtn');
+    if (bottomChatBtn) {
+      bottomChatBtn.addEventListener('click', handleChatbotClick);
+      console.log('Bottom Action Bar: Chatbot button event listener added');
+    }
+  }
+
+  function initClock() {
+    const clockElement = document.getElementById('bottomBarClock');
+    if (!clockElement) {
+      console.log('Bottom Action Bar: Clock element not found');
+      return;
+    }
+
+    function updateClock() {
+      const now = new Date();
+      
+      // Format time in 12-hour format with AM/PM
+      const time = now.toLocaleTimeString('en-US', {
+        hour12: true,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      
+      // Format date (Mon 5 Jan)
+      const day = now.toLocaleDateString('en-US', { weekday: 'short' });
+      const date = now.getDate();
+      const month = now.toLocaleDateString('en-US', { month: 'short' });
+      const dateStr = `${day} ${date} ${month}`;
+      
+      // Update clock HTML
+      clockElement.innerHTML = `
+        <span class="clock-time">${time}</span>
+        <span class="clock-date">${dateStr}</span>
+      `;
+    }
+
+    // Update immediately and then every second
+    updateClock();
+    setInterval(updateClock, 1000);
+    console.log('Bottom Action Bar: Clock initialized');
   }
 
   function handleQuoteClick() {
@@ -55,6 +102,28 @@
         window.location.href = '../index.html#quote';
       } else {
         window.location.href = 'index.html#quote';
+      }
+    }
+  }
+
+  function handleChatbotClick() {
+    console.log('Bottom Action Bar: Chatbot button clicked');
+    
+    // Try to open the chatbot modal
+    const chatbotModal = document.getElementById('chatbotModal');
+    if (chatbotModal) {
+      chatbotModal.classList.add('active');
+      chatbotModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      console.log('Bottom Action Bar: Chatbot modal opened');
+    } else {
+      // Fallback: trigger the FAB chatbot button if it exists
+      const fabChatBtn = document.getElementById('fabChatBtn');
+      if (fabChatBtn) {
+        fabChatBtn.click();
+        console.log('Bottom Action Bar: Triggered FAB chatbot button');
+      } else {
+        console.log('Bottom Action Bar: No chatbot modal or FAB button found');
       }
     }
   }

@@ -958,3 +958,48 @@ section {
         left: 20px;
     }
 }
+
+
+/* ====================================
+   EMERGENCY SUPPORT PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .emergency-hero {
+  background: linear-gradient(135deg, #dc3545 0%, #ff6347 100%) !important;
+}
+
+body[data-theme="light"] .emergency-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .emergency-card,
+body[data-theme="light"] .support-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .emergency-card h3,
+body[data-theme="light"] .support-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .emergency-card p,
+body[data-theme="light"] .support-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .contact-section {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .hotline-number {
+  color: #dc3545 !important;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .section-subtitle {
+  color: #555 !important;
+}

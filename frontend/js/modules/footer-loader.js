@@ -48,6 +48,9 @@
         
         // Load Bottom Action Bar script
         loadBottomActionBarJS(isInPagesFolder);
+        
+        // Load Smart Scroll Button script
+        loadScrollButtonJS(isInPagesFolder);
       })
       .catch(err => {
         console.error('Failed to load footer:', err);
@@ -59,21 +62,23 @@
         const yearSpan = document.getElementById('current-year');
         if (yearSpan) {
           yearSpan.textContent = new Date().getFullYear();
-        loadBottomActionBarJS(isInPagesFolder);
         }
         loadFooterJS(isInPagesFolder);
         loadFABJS(isInPagesFolder);
+        loadBottomActionBarJS(isInPagesFolder);
+        loadScrollButtonJS(isInPagesFolder);
       });
   }
 
   function loadFooterCSS(isInPagesFolder) {
     const cssBasePath = isInPagesFolder ? '../css/components/' : './css/components/';
-    const cssFiles = ['footer.css', 'back-to-top-button.css', 'backtoBottom.css', 'floating-action-menu.css', 'bottom-action-bar.css'];
+    const cssFiles = ['footer.css', 'scroll-button.css?v=5', 'floating-action-menu.css?v=6', 'bottom-action-bar.css?v=4'];
     
     cssFiles.forEach(cssFile => {
       const cssPath = cssBasePath + cssFile;
-      // Check if CSS is already loaded
-      const existingLink = document.querySelector(`link[href*="${cssFile}"]`);
+      // Check if CSS is already loaded (without version)
+      const baseFileName = cssFile.split('?')[0];
+      const existingLink = document.querySelector(`link[href*="${baseFileName}"]`);
       if (!existingLink) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -121,6 +126,33 @@
     };
     script.onerror = function() {
       console.error('Failed to load Bottom Action Bar script');
+    };
+    document.body.appendChild(script);
+  }
+
+  function loadScrollButtonJS(isInPagesFolder) {
+    // First create the button element if it doesn't exist
+    if (!document.getElementById('smartScrollBtn')) {
+      const button = document.createElement('button');
+      button.className = 'scroll-button';
+      button.id = 'smartScrollBtn';
+      button.setAttribute('aria-label', 'Scroll');
+      button.setAttribute('data-tooltip', 'Back to Top');
+      button.innerHTML = '<i class="fas fa-arrow-up"></i>';
+      document.body.appendChild(button);
+    }
+    
+    const existing = document.getElementById('scroll-button-script');
+    if (existing) return;
+    const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
+    const script = document.createElement('script');
+    script.src = jsBasePath + 'scroll-button.js?v=4';
+    script.id = 'scroll-button-script';
+    script.onload = function() {
+      console.log('Scroll Button script loaded successfully');
+    };
+    script.onerror = function() {
+      console.error('Failed to load Scroll Button script');
     };
     document.body.appendChild(script);
   }
