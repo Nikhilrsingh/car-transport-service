@@ -10,7 +10,6 @@ export const submitContact = async (req, res, next) => {
   try {
     let { name, phone, email, vehicle, service, message } = req.body;
 
-    // 🧼 Trim inputs
     name = name?.trim();
     email = email?.trim().toLowerCase();
     message = message?.trim();
@@ -22,11 +21,11 @@ export const submitContact = async (req, res, next) => {
       });
     }
 
-    // 🖼️ Images (future-ready)
-    const images = req.files?.map((file) => ({
-      url: file.path,
-      publicId: file.filename,
-    })) || [];
+    const images =
+      req.files?.map((file) => ({
+        url: file.path,
+        publicId: file.filename,
+      })) || [];
 
     const contact = await Contact.create({
       name,
@@ -38,25 +37,23 @@ export const submitContact = async (req, res, next) => {
       images,
     });
 
-    // 📧 Notify admin
-    await sendEmail({
+    // 🔥 NON-BLOCKING EMAIL
+    sendEmail({
       subject: "📩 New Contact Form Submission",
       html: `
         <h2>New Contact Received</h2>
-        <hr />
         <p><strong>Name:</strong> ${contact.name}</p>
         <p><strong>Email:</strong> ${contact.email}</p>
         <p><strong>Phone:</strong> ${contact.phone}</p>
         <p><strong>Vehicle:</strong> ${contact.vehicle}</p>
         <p><strong>Service:</strong> ${contact.service}</p>
-        <p><strong>Message:</strong></p>
         <p>${contact.message}</p>
-        <br/>
-        <small>Submitted on ${new Date(contact.createdAt).toLocaleString()}</small>
       `,
+    }).catch((err) => {
+      console.error("Email failed but contact saved:", err.message);
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Message sent successfully",
     });
@@ -64,6 +61,7 @@ export const submitContact = async (req, res, next) => {
     next(error);
   }
 };
+
 
 /**
  * @desc    Get all contact messages
@@ -96,7 +94,15 @@ export const updateContactStatus = async (req, res, next) => {
     const { status } = req.body;
 
     const allowedStatus = ["new", "in-progress", "resolved"];
-    if (status && !allowedStatus.includes(status)) {
+
+    if (!status) {
+      return res.status(400).json({
+        success: false,
+        message: "Status is required",
+      });
+    }
+
+    if (!allowedStatus.includes(status)) {
       return res.status(400).json({
         success: false,
         message: "Invalid status value",
@@ -105,7 +111,7 @@ export const updateContactStatus = async (req, res, next) => {
 
     const contact = await Contact.findByIdAndUpdate(
       req.params.id,
-      { status },
+      { $set: { status } }, // ✅ safe update
       { new: true, runValidators: true }
     );
 
