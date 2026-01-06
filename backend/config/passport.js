@@ -6,7 +6,7 @@ import { generateToken } from "../utils/jwt.js";
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.GOOGLE_CLIENT_ID,
+      clientID: "620548029150-9ag0gkroqkms1h8drq3amnftouujk4p0.apps.googleusercontent.com",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
