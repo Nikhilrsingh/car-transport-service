@@ -2,6 +2,10 @@
 (function () {
   'use strict';
 
+  let retryCount = 0;
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY = 2000;
+
   /**
    * Loads the navbar HTML into the page from components/navbar.html
    */
@@ -24,6 +28,9 @@
       const res = await fetch(navbarUrl, { cache: 'no-store' });
       if (!res.ok) throw new Error(`Failed to fetch navbar: ${res.status}`);
       const navbarHTML = await res.text();
+      
+      // Reset retry count on success
+      retryCount = 0;
 
       // Insert the HTML
       navbarContainer.innerHTML = navbarHTML;
@@ -54,9 +61,36 @@
       // Ensure digital clock exists on pages that don't include it directly
       ensureClock(base);
     } catch (err) {
-      console.error(err);
+      console.error('Navbar load error:', err);
+      
+      // Retry loading if retries remaining
+      if (retryCount < MAX_RETRIES) {
+        retryCount++;
+        console.log(`Retrying navbar load (${retryCount}/${MAX_RETRIES})...`);
+        setTimeout(loadNavbar, RETRY_DELAY);
+      }
     }
   }
+  
+  // Retry loading navbar when coming back online
+  window.addEventListener('online', () => {
+    const navbarContainer = document.getElementById('navbar-container');
+    if (navbarContainer && !navbarContainer.innerHTML.trim()) {
+      retryCount = 0;
+      loadNavbar();
+    }
+  });
+  
+  // Retry when tab becomes visible if navbar is empty
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && navigator.onLine) {
+      const navbarContainer = document.getElementById('navbar-container');
+      if (navbarContainer && !navbarContainer.innerHTML.trim()) {
+        retryCount = 0;
+        loadNavbar();
+      }
+    }
+  });
 
   // Removed static HTML template to eliminate duplication with components/navbar.html
 

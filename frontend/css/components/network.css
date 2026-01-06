@@ -389,3 +389,63 @@ section {
         justify-content: center;
     }
 }
+
+
+/* ====================================
+   NETWORK PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .network-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .network-section,
+body[data-theme="light"] .coverage-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .network-card,
+body[data-theme="light"] .coverage-card,
+body[data-theme="light"] .hub-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .network-card h3,
+body[data-theme="light"] .coverage-card h3,
+body[data-theme="light"] .hub-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .network-card p,
+body[data-theme="light"] .coverage-card p,
+body[data-theme="light"] .hub-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .stats-section {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .stat-card {
+  background: #f8f9fa !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .stat-card h3,
+body[data-theme="light"] .stat-number {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .stat-card p,
+body[data-theme="light"] .stat-label {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .section-subtitle {
+  color: #555 !important;
+}

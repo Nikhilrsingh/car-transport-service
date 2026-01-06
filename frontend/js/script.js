@@ -287,6 +287,22 @@ window.addEventListener("load", () => {
     preloader.classList.add("fade-out");
     setTimeout(() => {
       preloader.style.display = "none";
+      
+      // Show floating elements after preloader is done
+      document.body.classList.add('loaded');
+      
+      // Show FAB container
+      const fabContainer = document.querySelector('.fab-container');
+      if (fabContainer) fabContainer.classList.add('visible');
+      
+      // Show scroll button
+      const scrollBtn = document.getElementById('smartScrollBtn');
+      if (scrollBtn) scrollBtn.classList.add('loaded');
+      
+      // Show TOC sidebar
+      const tocSidebar = document.querySelector('.sticky-toc');
+      if (tocSidebar) tocSidebar.classList.add('loaded');
+      
     }, 800);
   }, 1000);
 });

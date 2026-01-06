@@ -937,3 +937,49 @@ section {
     }
 }
 
+
+
+/* ====================================
+   PRESS & MEDIA PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .press-hero,
+body[data-theme="light"] .media-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .press-section,
+body[data-theme="light"] .media-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .press-card,
+body[data-theme="light"] .media-card,
+body[data-theme="light"] .news-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .press-card h3,
+body[data-theme="light"] .media-card h3,
+body[data-theme="light"] .news-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .press-card p,
+body[data-theme="light"] .media-card p,
+body[data-theme="light"] .news-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .media-kit-section {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .section-subtitle {
+  color: #555 !important;
+}
