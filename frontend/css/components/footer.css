@@ -1076,3 +1076,117 @@ footer.footer,
     display: flex;
   }
 }
+
+
+/* ====================================
+   FOOTER - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] footer.footer,
+body[data-theme="light"] #footer-container footer.footer,
+body[data-theme="light"] #footer-container .footer {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%) !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .footer-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .footer-heading,
+body[data-theme="light"] .footer-brand {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .footer-about p,
+body[data-theme="light"] .footer-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .footer-links a,
+body[data-theme="light"] .footer-links li a {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .footer-links a:hover {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .contact-info li,
+body[data-theme="light"] .contact-info span,
+body[data-theme="light"] .contact-info a {
+  color: #444 !important;
+}
+
+body[data-theme="light"] .contact-info i {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .social-links a {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #555 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .social-links a:hover {
+  background: #ff6347 !important;
+  color: white !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .footer-bottom {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .footer-bottom-content,
+body[data-theme="light"] .copyright,
+body[data-theme="light"] .footer-bottom-links a {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .footer-bottom-links a:hover {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .payment-methods i {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .newsletter-animated input,
+body[data-theme="light"] .newsletter-form input,
+body[data-theme="light"] .footer input[type="email"] {
+  background: #ffffff !important;
+  color: #333 !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+body[data-theme="light"] .newsletter-animated input::placeholder,
+body[data-theme="light"] .newsletter-form input::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .newsletter-animated button,
+body[data-theme="light"] .newsletter-form button {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .footer-road {
+  background: linear-gradient(to bottom, #ddd 0%, #ccc 100%) !important;
+}
+
+body[data-theme="light"] .accordion-header {
+  color: #333 !important;
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .accordion-icon {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .accordion-content {
+  background: #ffffff !important;
+  color: #555 !important;
+}

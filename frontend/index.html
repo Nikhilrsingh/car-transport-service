@@ -530,18 +530,36 @@
 
   <!-- Preloader hide -->
   <script>
-    window.addEventListener("load", () => {
+    (function() {
       const preloader = document.getElementById("preloader");
-      setTimeout(() => {
+      let preloaderHidden = false;
+      
+      function hidePreloader() {
+        if (preloaderHidden || !preloader) return;
+        preloaderHidden = true;
         preloader.classList.add("fade-out");
         setTimeout(() => {
           preloader.style.display = "none";
         }, 800);
-      }, 1000);
-    });
+      }
+      
+      // Hide on window load (ideal case)
+      window.addEventListener("load", () => {
+        setTimeout(hidePreloader, 500);
+      });
+      
+      // Fallback: hide after 5 seconds max to prevent infinite loading
+      setTimeout(hidePreloader, 5000);
+      
+      // Also hide when DOM is ready + a short delay (covers most cases)
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(hidePreloader, 3000);
+      });
+    })();
   </script>
 
   <!-- Core modules -->
+  <script src="js/modules/auto-slider.js"></script>
   <script src="js/modules/navbar-loader.js?v=2"></script>
   <script src="js/modules/footer-loader.js"></script>
   <script src="js/script.js"></script>

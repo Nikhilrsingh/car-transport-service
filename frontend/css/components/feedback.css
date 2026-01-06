@@ -141,3 +141,87 @@ body{
 
 /* helper: truncate long messages on smaller cards */
 .testimonial-message.truncated{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;line-clamp:5}
+
+
+/* ====================================
+   FEEDBACK PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] {
+  --bg: #f8f9fa;
+  --card: #ffffff;
+  --muted: #666;
+  --surface: #f0f0f0;
+  --text: #333;
+}
+
+body[data-theme="light"] .feedback-header {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .feedback-header h1 {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .feedback-header p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body[data-theme="light"] .enhanced-header {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .feedback-form {
+  background: #ffffff !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .feedback-form label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .feedback-form input,
+body[data-theme="light"] .feedback-form textarea {
+  background: #f8f9fa !important;
+  color: #333 !important;
+  border: 1px solid #ddd !important;
+}
+
+body[data-theme="light"] .feedback-form input:focus,
+body[data-theme="light"] .feedback-form textarea:focus {
+  border-color: #ff6347 !important;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] .feedback-form input::placeholder,
+body[data-theme="light"] .feedback-form textarea::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .testimonial-card {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .testimonial-message {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .testimonial-time {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .comments-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .comment {
+  background: #ffffff !important;
+  color: #333 !important;
+  border: 1px solid #eee !important;
+}
+
+body[data-theme="light"] .comment-form input {
+  background: #ffffff !important;
+  border: 1px solid #ddd !important;
+  color: #333 !important;
+}

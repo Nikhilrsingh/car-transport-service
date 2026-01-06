@@ -24,9 +24,16 @@
 }
 
 /* Bottom Bar Clock - positioned on the left */
-.bottom-bar-clock {
+.bottom-bar-left {
   position: absolute;
   left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+}
+
+.bottom-bar-clock {
   font-size: 12px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
@@ -38,7 +45,25 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  z-index: 1;
+}
+
+/* Chatbot Icon - simple icon next to clock */
+.bottom-bar-chat-icon {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-bar-chat-icon:hover {
+  color: #ff6347;
+  transform: scale(1.1);
 }
 
 .bottom-bar-clock .clock-time {
@@ -217,4 +242,43 @@
   body.has-bottom-bar {
     padding-bottom: 58px;
   }
+}
+
+
+/* ====================================
+   BOTTOM ACTION BAR - Light Mode
+   ==================================== */
+body[data-theme="light"] .bottom-action-bar-fixed {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .bottom-action-bar-fixed::before {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.02) 0%, 
+    rgba(0, 0, 0, 0.01) 100%) !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock {
+  color: #333 !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock .clock-time {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock .clock-date {
+  color: #666 !important;
+}
+
+/* Light mode for chatbot icon */
+body[data-theme="light"] .bottom-bar-chat-icon {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .bottom-bar-chat-icon:hover {
+  color: #ff6347 !important;
 }
