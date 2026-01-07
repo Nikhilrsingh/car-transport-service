@@ -1,4 +1,5 @@
 import Contact from "../models/contact.model.js";
+import sendEmail from "../utils/sendEmail.js";
 
 /**
  * @desc    Submit contact form
@@ -7,16 +8,12 @@ import Contact from "../models/contact.model.js";
  */
 export const submitContact = async (req, res, next) => {
   try {
-    const {
-      name,
-      phone,
-      email,
-      vehicle,
-      service,
-      message,
-    } = req.body;
+    let { name, phone, email, vehicle, service, message } = req.body;
 
-    // Basic validation (extra safety beyond Mongoose)
+    name = name?.trim();
+    email = email?.trim().toLowerCase();
+    message = message?.trim();
+
     if (!name || !phone || !email || !vehicle || !service || !message) {
       return res.status(400).json({
         success: false,
@@ -24,13 +21,11 @@ export const submitContact = async (req, res, next) => {
       });
     }
 
-    // Images placeholder (for future Multer/Cloudinary)
-    const images = req.files
-      ? req.files.map((file) => ({
-          url: file.path,
-          publicId: file.filename,
-        }))
-      : [];
+    const images =
+      req.files?.map((file) => ({
+        url: file.path,
+        publicId: file.filename,
+      })) || [];
 
     const contact = await Contact.create({
       name,
@@ -42,24 +37,42 @@ export const submitContact = async (req, res, next) => {
       images,
     });
 
-    res.status(201).json({
+    // 🔥 NON-BLOCKING EMAIL
+    sendEmail({
+      subject: "📩 New Contact Form Submission",
+      html: `
+        <h2>New Contact Received</h2>
+        <p><strong>Name:</strong> ${contact.name}</p>
+        <p><strong>Email:</strong> ${contact.email}</p>
+        <p><strong>Phone:</strong> ${contact.phone}</p>
+        <p><strong>Vehicle:</strong> ${contact.vehicle}</p>
+        <p><strong>Service:</strong> ${contact.service}</p>
+        <p>${contact.message}</p>
+      `,
+    }).catch((err) => {
+      console.error("Email failed but contact saved:", err.message);
+    });
+
+    return res.status(201).json({
       success: true,
       message: "Message sent successfully",
-      data: contact,
     });
   } catch (error) {
     next(error);
   }
 };
 
+
 /**
- * @desc    Get all contact messages (Admin)
+ * @desc    Get all contact messages
  * @route   GET /api/contact
  * @access  Admin (future)
  */
 export const getAllContacts = async (req, res, next) => {
   try {
-    const contacts = await Contact.find().sort({ createdAt: -1 });
+    const contacts = await Contact.find()
+      .sort({ createdAt: -1 })
+      .select("-__v");
 
     res.status(200).json({
       success: true,
@@ -80,7 +93,27 @@ export const updateContactStatus = async (req, res, next) => {
   try {
     const { status } = req.body;
 
-    const contact = await Contact.findById(req.params.id);
+    const allowedStatus = ["new", "in-progress", "resolved"];
+
+    if (!status) {
+      return res.status(400).json({
+        success: false,
+        message: "Status is required",
+      });
+    }
+
+    if (!allowedStatus.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid status value",
+      });
+    }
+
+    const contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { $set: { status } }, // ✅ safe update
+      { new: true, runValidators: true }
+    );
 
     if (!contact) {
       return res.status(404).json({
@@ -88,9 +121,6 @@ export const updateContactStatus = async (req, res, next) => {
         message: "Contact message not found",
       });
     }
-
-    contact.status = status || contact.status;
-    await contact.save();
 
     res.status(200).json({
       success: true,
