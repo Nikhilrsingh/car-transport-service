@@ -157,3 +157,5 @@ window.handleSignup = handleSignup;
 window.handleSocialLogin = handleSocialLogin;
 window.togglePassword = togglePassword;
 window.switchTab = switchTab;
+
+ 

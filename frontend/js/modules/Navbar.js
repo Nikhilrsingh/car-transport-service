@@ -98,3 +98,5 @@ function logout() {
 // Expose functions globally
 window.updateAuthUI = updateAuthUI;
 window.logout = logout;
+
+  
