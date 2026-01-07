@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config(); // MUST be first
+dotenv.config();
 
 import express from "express";
 import cors from "cors";
@@ -9,6 +9,7 @@ import passport from "passport";
 import session from "cookie-session";
 import "./config/passport.js"; 
 import contactRoutes from './routes/contact.routes.js'
+import feedbackRoutes from "./routes/feedback.routes.js";
 
 
 // Optional: check if env vars are loaded
@@ -35,6 +36,7 @@ app.use(passport.session());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/feedbacks", feedbackRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 
