@@ -1,0 +1,104 @@
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        margin: 0;
+        padding: 0;
+      }
+
+      header,
+      footer {
+        text-align: center;
+        background: #000;
+        color: #fff;
+        padding: 1rem 0;
+      }
+
+      .city-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        background: #fff;
+        border-radius: 8px;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .city-container img {
+        width: 50%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+      .description {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+      .description h1 {
+        text-align: center;
+        margin-top: 1rem;
+        color: #333;
+      }
+
+      .description p {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+      }
+      @media screen and (max-width: 670px) {
+        .city-container {
+          flex-direction: column;
+        }
+        .city-container img {
+          width: 80%;
+        }
+      }
+      /* Calculator */
+      .card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin: 30px auto;
+        max-width: 900px;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-direction: column;
+      }
+      .card h3 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      input,
+      select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .btn button{
+        margin: 10px auto;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 2px soslid rgba(0, 0, 0, 0.1);
+        outline: none;
+        font-size: 23px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      }
+ 
