@@ -3,6 +3,9 @@
  * Handles authentication, password management, and user interactions
  */
 
+const API_BASE = "http://localhost:3000/api/auth";
+
+
 // ============================================
 // LOCAL STORAGE MANAGEMENT
 // ============================================
@@ -151,70 +154,75 @@ function switchTab(tab) {
  * Handle login form submission
  * @param {Event} event - Form submit event
  */
-function handleLogin(event) {
+async function handleLogin(event) {
     event.preventDefault();
     
     const form = event.target;
-    const email = form.querySelector('input[type="email"]').value;
-    const password = form.querySelector('input[type="password"]').value;
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const password = form.querySelector('input[type="password"]').value.trim();
     const rememberMe = document.getElementById('remember').checked;
 
-    // Basic validation
     if (!email || !password) {
         showNotification('Please fill in all fields', 'error');
         return;
     }
 
-    // Email validation
     if (!isValidEmail(email)) {
-        showNotification('Please enter a valid email address', 'error');
+        showNotification('Invalid email address', 'error');
         return;
     }
 
-    // Save remember me preference
     saveRememberMe(email, rememberMe);
 
-    // Simulate authentication (replace with actual API call)
-    showNotification('Logging in...', 'info');
-    
-    // TODO: Replace with actual authentication API call
-    setTimeout(() => {
-        // Mock successful login
-        const mockUser = {
-            email: email,
-            name: 'User',
-            loginTime: new Date().toISOString()
-        };
-        
-        // Save user session
-        sessionStorage.setItem('currentUser', JSON.stringify(mockUser));
-        
-        showNotification('Login successful! Redirecting...', 'success');
-        
-        // Redirect to dashboard or home page
+    try {
+        showNotification('Logging in...', 'info');
+
+        const res = await fetch(`${API_BASE}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+            showNotification(data.message || 'Login failed', 'error');
+            return;
+        }
+
+        // Save token
+        localStorage.setItem('token', data.data.token);
+
+        showNotification(`Welcome back, ${email}!`, 'success');
+
+        // Redirect to dashboard or homepage
         setTimeout(() => {
             window.location.href = '../index.html';
-        }, 1500);
-    }, 1000);
+        }, 1000);
+
+    } catch (err) {
+        console.error(err);
+        showNotification('Something went wrong. Try again!', 'error');
+    }
 }
+
 
 /**
  * Handle signup form submission
  * @param {Event} event - Form submit event
  */
-function handleSignup(event) {
+async function handleSignup(event) {
     event.preventDefault();
-    
+
     const form = event.target;
-    const firstName = form.querySelectorAll('input[type="text"]')[0].value;
-    const lastName = form.querySelectorAll('input[type="text"]')[1].value;
-    const email = form.querySelector('input[type="email"]').value;
-    const phone = form.querySelector('input[type="tel"]').value;
-    const password = document.getElementById('signup-password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
+    const firstName = form.querySelectorAll('input[type="text"]')[0].value.trim();
+    const lastName = form.querySelectorAll('input[type="text"]')[1].value.trim();
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const phone = form.querySelector('input[type="tel"]').value.trim();
+    const password = document.getElementById('signup-password').value.trim();
+    const confirmPassword = document.getElementById('confirm-password').value.trim();
     const termsAccepted = document.getElementById('terms').checked;
 
-    // Validation checks
     if (!firstName || !lastName || !email || !phone || !password || !confirmPassword) {
         showNotification('Please fill in all required fields', 'error');
         return;
@@ -226,12 +234,12 @@ function handleSignup(event) {
     }
 
     if (!isValidEmail(email)) {
-        showNotification('Please enter a valid email address', 'error');
+        showNotification('Invalid email address', 'error');
         return;
     }
 
     if (!isValidPhone(phone)) {
-        showNotification('Please enter a valid 10-digit phone number', 'error');
+        showNotification('Enter a valid 10-digit phone number', 'error');
         return;
     }
 
@@ -240,36 +248,43 @@ function handleSignup(event) {
         return;
     }
 
-    if (password.length < 8) {
-        showNotification('Password must be at least 8 characters long', 'error');
-        return;
-    }
+    try {
+        showNotification('Creating account...', 'info');
 
-    // Simulate signup (replace with actual API call)
-    showNotification('Creating account...', 'info');
-    
-    // TODO: Replace with actual signup API call
-    setTimeout(() => {
-        const newUser = {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            phone: phone,
-            createdAt: new Date().toISOString()
-        };
-        
-        // Mock email verification
-        showNotification('Account created! Please check your email for verification.', 'success');
-        
-        // Switch to login tab after successful signup
+        const res = await fetch(`${API_BASE}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: firstName + " " + lastName,
+                email,
+                phone,
+                password
+            })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+            showNotification(data.message || 'Signup failed', 'error');
+            return;
+        }
+
+        localStorage.setItem('token', data.data.token);
+
+        showNotification(`Account created for ${firstName}!`, 'success');
+
         setTimeout(() => {
             switchTab('login');
-            // Pre-fill email in login form
             const loginEmail = document.querySelector('#login-form input[type="email"]');
             if (loginEmail) loginEmail.value = email;
-        }, 2000);
-    }, 1000);
+        }, 1000);
+
+    } catch (err) {
+        console.error(err);
+        showNotification('Something went wrong. Try again!', 'error');
+    }
 }
+
 
 // ============================================
 // SOCIAL LOGIN HANDLERS
@@ -280,22 +295,89 @@ function handleSignup(event) {
  * @param {string} provider - Social login provider
  */
 function handleSocialLogin(provider) {
-    showNotification(`Initiating ${provider} login...`, 'info');
+
+        if (provider === "google") {
+            const redirectUri = encodeURIComponent(window.location.origin + "/auth-callback.html"); // your redirect page
+            window.location.href = `${API_BASE}/google`
+
+        }
     
-    // TODO: Implement actual OAuth flows
-    if (provider === 'google') {
-        // Google OAuth implementation
-        // window.location.href = '/auth/google';
-        showNotification('Google OAuth integration coming soon!', 'info');
-    } else if (provider === 'facebook') {
-        // Facebook OAuth implementation
-        // window.location.href = '/auth/facebook';
-        showNotification('Facebook OAuth integration coming soon!', 'info');
-    } else if (provider === 'phone') {
-        // Phone OTP authentication
-        showNotification('Phone OTP authentication coming soon!', 'info');
+     else if (provider === 'phone') {
+        // Prompt for phone number and send OTP via backend
+        const phone = prompt("Enter your 10-digit phone number:");
+        if (!phone) return;
+
+        if (!isValidPhone(phone)) {
+            showNotification("Enter a valid 10-digit phone number", "error");
+            return;
+        }
+
+        showNotification("Sending OTP...", "info");
+
+        fetch(`${API_BASE}/phone-login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phone })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (!data.success) {
+                showNotification(data.message || "OTP send failed", "error");
+                return;
+            }
+
+            const otp = prompt("Enter the OTP sent to your phone:");
+            if (!otp) return;
+
+            // Verify OTP with backend
+            fetch(`${API_BASE}/phone-verify`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone, otp })
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (!result.success) {
+                    showNotification(result.message || "OTP verification failed", "error");
+                    return;
+                }
+
+                localStorage.setItem("token", result.data.token);
+                showNotification("Login successful!", "success");
+                setTimeout(() => window.location.href = "../index.html", 1000);
+            })
+            .catch(err => {
+                console.error(err);
+                showNotification("Something went wrong. Try again!", "error");
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            showNotification("Something went wrong. Try again!", "error");
+        });
     }
 }
+
+// ============================================
+// HANDLE GOOGLE OAUTH TOKEN ON LOGIN PAGE
+// ============================================
+
+// Check if redirected from Google OAuth with a token
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get("token");
+
+if (token) {
+    // Save token to localStorage
+    localStorage.setItem("token", token);
+
+    // Optional: clean up URL by removing the token query
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+    // Redirect to dashboard
+    window.location.href = "../index.html";
+}
+
+
 
 // ============================================
 // PASSWORD RESET

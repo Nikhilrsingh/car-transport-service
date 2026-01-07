@@ -1,57 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harihar Car Carriers</title>
+    <base href="./" />
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+    <link rel="stylesheet" href="./css/components/testimonial.css" />
+    <link rel="stylesheet" href="./css/components/rating.css" />
+    <link rel="stylesheet" href="./css/components/tracking.css" />
+    <link rel="stylesheet" href="./css/components/navbar.css" />
+    <link rel="stylesheet" href="./css/components/middle-navbar.css" />
+    <link rel="stylesheet" href="./css/components/footer.css" />
+    <link rel="stylesheet" href="./css/components/quote-modal.css" />
+    <link rel="stylesheet" href="./css/components/chatbot-modal.css" />
+    <link rel="stylesheet" href="./css/components/backtoBottom.css" />
+    <link rel="stylesheet" href="./css/components/back-to-top-button.css" />
+    <link rel="stylesheet" href="./css/components/digital-clock.css" />
+    <link rel="stylesheet" href="./css/components/animations.css" />
+    <link rel="stylesheet" href="./css/components/region-enhanced.css" />
+    <link rel="stylesheet" href="./css/components/map-enhancements.css" />
+    <link rel="stylesheet" href="./css/components/loading-indicators.css" />
+    <link rel="stylesheet" href="./css/components/floating-action-menu.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components/floating-feedback-button.css" />
+    <!-- Theme Toggle Link (must be in <head>) -->
+    <link id="theme-style" rel="stylesheet" href="css/light-mode.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Before </head> -->
+    <link rel="stylesheet" href="css/components/glowing-input.css" />
+  </head>
 
-  <title>Harihar Car Carriers</title>
-  <base href="./" />
-
-  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
-
-  <!-- Component CSS -->
-  <link rel="stylesheet" href="css/components/testimonial.css" />
-  <link rel="stylesheet" href="css/components/rating.css" />
-  <link rel="stylesheet" href="css/components/tracking.css" />
-  <link rel="stylesheet" href="css/components/navbar.css?v=12" />
-  <link rel="stylesheet" href="css/components/middle-navbar.css?v=2" />
-  <link rel="stylesheet" href="css/components/footer.css" />
-  <link rel="stylesheet" href="css/components/quote-modal.css" />
-  <link rel="stylesheet" href="css/components/chatbot-modal.css" />
-  <link rel="stylesheet" href="css/components/digital-clock.css" />
-  <link rel="stylesheet" href="css/components/animations.css" />
-  <link rel="stylesheet" href="css/components/region-enhanced.css" />
-  <link rel="stylesheet" href="css/components/map-enhancements.css" />
-  <link rel="stylesheet" href="css/components/loading-indicators.css" />
-  <link rel="stylesheet" href="css/components/floating-action-menu.css?v=6" />
-  <link rel="stylesheet" href="css/components/floating-button.css" />
-  <link rel="stylesheet" href="css/components/floating-call-button.css" />
-  <link rel="stylesheet" href="css/components/floating-whatsapp-button.css" />
-  <link rel="stylesheet" href="css/components/floating-chatbot-button.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <link rel="stylesheet" href="css/styles.css?v=14" />
-  <link rel="stylesheet" href="css/components/floating-feedback-button.css?v=2" />
-  <link rel="stylesheet" href="css/components/sticky-quote-button.css?v=2" />
-  <link rel="stylesheet" href="css/components/glowing-input.css" />
-
-  <!-- Theme Toggle Link (must be in <head>) -->
-  <link id="theme-style" rel="stylesheet" href="css/light-mode.css?v=14" />
-</head>
-
-<body class="neon-theme">
-  <!-- 🌟 Enhanced Preloader -->
-  <div id="preloader">
-    <div class="preloader-content">
-      <div class="logo-container">
-        <img src="assets/images/left-logo-w-bt.png" alt="Harihar Car Carriers" />
-      </div>
-      <div class="loading-text">Loading</div>
-      <div class="dots"><span></span><span></span><span></span></div>
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
+  <body class="neon-theme">
+    <!-- 🌟 Enhanced Preloader -->
+    <div id="preloader">
+      <div class="preloader-content">
+        <div class="logo-container">
+          <img
+            src="assets/images/left-logo-w-bt.png"
+            alt="Harihar Car Carriers"
+          />
+        </div>
+        <div class="loading-text">Loading</div>
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -443,176 +441,101 @@
     </div>
   </section>
 
-  <!-- Region-Wise Presence Section Container - Loaded dynamically -->
-  <div id="region-container"></div>
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
 
-  <!-- 💬 Feedback Modal -->
-  <div id="feedbackModal" class="feedback-modal">
-    <div class="feedback-modal-content">
-      <span id="closeFeedback" class="close-feedback">&times;</span>
+    <!-- Scripts: single consolidated block -->
+
+    <div id="car" class="car">🏎️</div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Top to Bottom Button -->
+    <button class="back-to-bottom" id="backToBottom">
+      <i class="fas fa-arrow-down"></i>
+    </button>
+
+    <!-- Scripts -->
+    <!-- Loading State Manager - Must load first -->
+    <script src="js/modules/loading-state-manager.js"></script>
+    <!-- Page Navigation Loader - Must load after loading-state-manager -->
+    <script src="js/modules/page-navigation-loader.js"></script>
+    <script src="js/modules/navbar-loader.js?v=2"></script>
+    <script src="js/modules/footer-loader.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/modules/hero-animations.js"></script>
+    <script src="js/modules/Services.js"></script>
+    <script src="js/modules/tracking.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/modal.js"></script>
+    <script src="js/modules/quote-modal.js"></script>
+    <script src="js/modules/chatbot-modal.js"></script>
+    <script src="js/modules/back-to-top-button.js"></script>
+    <script src="js/modules/backtoBottom.js"></script>
+    <script src="js/modules/feedback-modal.js"></script>
+    <script src="js/modules/testimonial.js"></script>
+    <script src="js/modules/rating.js"></script>
+    <script src="js/modules/region-loader.js"></script>
+    <script src="js/modules/region-search.js?v=3"></script>
+    <script src="js/modules/region-map.js?v=4"></script>
+    <script src="js/modules/region-enhancements.js"></script>
+    <!-- Unified theme handler for all pages -->
+    <script src="js/modules/themes.js"></script>
+    <script src="js/modules/digital-clock.js"></script>
+    <script src="js/modules/scroll-animations.js"></script>
+    <script src="js/modules/glow-inputs.js"></script>
+
+    <!-- Cookie Popup -->
+    <div id="cookie-popup" class="cookie-popup">
+      <p>
+        We use cookies to enhance your browsing experience.
+        <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
+      </p>
 
       <!-- Header -->
       <div class="feedback-header">
         <h2>💬 Your Feedback Matters</h2>
         <p>Help us improve your car transport experience</p>
       </div>
-
-      <form id="feedbackForm">
-        <!-- Name -->
-        <div class="feedback-input">
-          <label for="name">
-            <i class="fas fa-user"></i> Name
-          </label>
-          <input type="text" id="name" name="name" placeholder="Enter your name" required />
-        </div>
-
-        <!-- Email -->
-        <div class="feedback-input">
-          <label for="email">
-            <i class="fas fa-envelope"></i> Email
-          </label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required />
-        </div>
-
-        <!-- Rating -->
-        <div class="rating-title">
-          <p>How was your experience?</p>
-        </div>
-        <div class="feedback-stars" id="starContainer">
-          <i class="far fa-star star" data-value="1"></i>
-          <i class="far fa-star star" data-value="2"></i>
-          <i class="far fa-star star" data-value="3"></i>
-          <i class="far fa-star star" data-value="4"></i>
-          <i class="far fa-star star" data-value="5"></i>
-        </div>
-
-        <!-- Feedback Text -->
-        <div class="feedback-input">
-          <label for="feedbackText">
-            <i class="fas fa-comment-dots"></i> Your Feedback
-          </label>
-          <textarea id="feedbackText" name="feedbackText" rows="4"
-            placeholder="Tell us what you liked or what we can improve..." required></textarea>
-        </div>
-
-        <!-- Submit -->
-        <button type="submit">
-          <i class="fas fa-paper-plane"></i>
-          Submit Feedback
-        </button>
-      </form>
     </div>
-  </div>
 
+    <!-- Scripts -->
+    <!-- Loading State Manager - Must load first -->
+    <script src="js/modules/loading-state-manager.js"></script>
+    <!-- Page Navigation Loader - Must load after loading-state-manager -->
+    <script src="js/modules/page-navigation-loader.js"></script>
+    <script src="js/modules/preloader.js"></script>
+    <script src="js/modules/navbar-loader.js?v=2"></script>
+    <script src="js/modules/footer-loader.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/modules/hero-animations.js"></script>
+    <script src="js/modules/Services.js"></script>
+    <script src="js/modules/tracking.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/modal.js"></script>
+    <script src="js/modules/quote-modal.js"></script>
+    <script src="js/modules/chatbot-modal.js"></script>
+    <script src="js/modules/back-to-top-button.js"></script>
+    <script src="js/modules/backtoBottom.js"></script>
+    <script src="js/modules/feedback-modal.js"></script>
+    <script src="js/modules/testimonial.js"></script>
+    <script src="js/modules/rating.js"></script>
+    <script src="js/modules/region-loader.js"></script>
+    <script src="js/modules/region-search.js?v=3"></script>
+    <script src="js/modules/region-map.js?v=4"></script>
+    <script src="js/modules/region-enhancements.js"></script>
+    <!-- Unified theme handler for all pages -->
+    <script src="js/modules/themes.js"></script>
+    <script src="js/modules/digital-clock.js"></script>
+    <script src="js/modules/scroll-animations.js"></script>
+    <script src="js/modules/glow-inputs.js"></script>
+    <script src="js/modules/cookie-popup.js"></script>
 
-  <!-- Footer Section -->
-  <div id="footer-container"></div>
+  
 
-  <!-- Car emoji element -->
-  <div id="car" class="car">🏎️</div>
-
-  <!-- Cookie Popup (single instance) -->
-  <div id="cookie-popup" class="cookie-popup">
-    <p>
-      We use cookies to enhance your browsing experience.
-      <a href="pages/privacy-policy.html" target="_blank">Learn More</a>
-    </p>
-    <div class="button-group">
-      <button id="reject-cookie" class="reject-btn">Reject</button>
-      <button id="accept-cookie" class="accept-btn">Accept</button>
-    </div>
-  </div>
-
-  <!-- Scripts: single consolidated block -->
-  <!-- Loading & navigation -->
-  <script src="js/modules/loading-state-manager.js"></script>
-  <script src="js/modules/page-navigation-loader.js"></script>
-
-  <!-- Preloader hide -->
-  <script>
-    (function() {
-      const preloader = document.getElementById("preloader");
-      let preloaderHidden = false;
-      
-      function hidePreloader() {
-        if (preloaderHidden || !preloader) return;
-        preloaderHidden = true;
-        preloader.classList.add("fade-out");
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 800);
-      }
-      
-      // Hide on window load (ideal case)
-      window.addEventListener("load", () => {
-        setTimeout(hidePreloader, 500);
-      });
-      
-      // Fallback: hide after 5 seconds max to prevent infinite loading
-      setTimeout(hidePreloader, 5000);
-      
-      // Also hide when DOM is ready + a short delay (covers most cases)
-      document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(hidePreloader, 3000);
-      });
-    })();
-  </script>
-
-  <!-- Core modules -->
-  <script src="js/modules/auto-slider.js"></script>
-  <script src="js/modules/navbar-loader.js?v=2"></script>
-  <script src="js/modules/footer-loader.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/modules/hero-animations.js"></script>
-  <script src="js/modules/Services.js"></script>
-  <script src="js/modules/tracking.js"></script>
-  <script src="js/modules/search.js"></script>
-  <script src="js/modules/modal.js"></script>
-  <script src="js/modules/quote-modal.js"></script>
-  <script src="js/modules/chatbot-modal.js"></script>
-  <script src="js/modules/feedback-modal.js"></script>
-  <script src="js/modules/testimonial.js"></script>
-  <script src="js/modules/rating.js"></script>
-  <script src="js/modules/region-loader.js"></script>
-  <script src="js/modules/region-search.js?v=3"></script>
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="js/modules/region-map.js?v=5"></script>
-  <script src="js/modules/region-enhancements.js"></script>
-
-  <!-- Theme & UI enhancements -->
-  <script src="js/modules/themes.js"></script>
-  <script src="js/modules/digital-clock.js"></script>
-  <script src="js/modules/scroll-animations.js"></script>
-  <script src="js/modules/glow-inputs.js"></script>
-  <script src="js/modules/floating-book-button.js"></script>
-  <script src="js/modules/floating-call-button.js"></script>
-  <script src="js/modules/floating-whatsapp-button.js"></script>
-  <script src="js/modules/sticky-quote-button.js"></script>
-  <script src="js/modules/floating-chatbot-button.js"></script>
-  <script src="js/modules/sticky-toc.js"></script>
-  <script src="js/modules/keyboard-section-navigation.js"></script>
-
-  <!-- Cookie popup script -->
-  <script>
-    const popup = document.getElementById("cookie-popup");
-    const acceptBtn = document.getElementById("accept-cookie");
-    const rejectBtn = document.getElementById("reject-cookie");
-
-    if (!localStorage.getItem("cookieDecision")) {
-      popup.style.display = "flex";
-    }
-
-    acceptBtn.addEventListener("click", () => {
-      localStorage.setItem("cookieDecision", "accepted");
-      popup.style.display = "none";
-    });
-
-    rejectBtn.addEventListener("click", () => {
-      localStorage.setItem("cookieDecision", "rejected");
-      popup.style.display = "none";
-    });
-  </script>
 </body>
 
 </html>
