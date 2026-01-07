@@ -9,60 +9,15 @@
     <link rel="stylesheet" href="../css/components/loading-indicators.css">
     <link rel="stylesheet" href="../css/components/login.css">
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
-    <link rel="stylesheet" href="css/components/quote-modal.css">
-    <link rel="stylesheet" href="css/components/bottom-fixed-container.css"/>
-     <style>
-        .theme-toggle-left {
-            position: fixed;
-            top: 24px;
-            left: 110px;
-
-            width: 42px;
-            height: 42px;
-
-            border-radius: 50%;
-            border: none;
-
-            background: #222;
-            color: #fff;
-
-            font-size: 18px;
-            cursor: pointer;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 1000;
-        }
-
-        body.dark-theme {
-            background-color: #121212;
-            color: #eaeaea;
-        }
-
-        body.dark-theme .login-auth-card {
-            background: #1e1e1e;
-        }
-
-        body.dark-theme input {
-            background: #2a2a2a;
-            color: #fff;
-            border-color: #444;
-        }
-
-        body.dark-theme .theme-toggle-left {
-            background: #f5f5f5;
-            color: #111;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/components/quote-modal.css">
+    <link rel="stylesheet" href="../css/components/bottom-fixed-container.css"/>
+    <link rel="stylesheet" href="../css/pages/login.css">
+    
 </head>
-
 <body class="login-page-body">
-    <button class="login-back-button" onclick="goBack()">Back</button>
-    <button class="theme-toggle-left" onclick="toggleTheme()">🌙</button>
+
+    <button class="login-back-button">Back</button>
+    <button class="theme-toggle-left">🌙</button>
 
     <div class="login-container">
         <div class="login-logo-section">
@@ -75,8 +30,8 @@
 
         <div class="login-auth-card">
             <div class="login-form-tabs">
-                <button class="login-tab-btn active" onclick="switchTab('login')">Login</button>
-                <button class="login-tab-btn" onclick="switchTab('signup')">Sign Up</button>
+                <button class="login-tab-btn active">Login</button>
+                <button class="login-tab-btn">Sign Up</button>
             </div>
 
             <!-- Login Form -->
@@ -85,8 +40,7 @@
                     <h2>Welcome Back</h2>
                     <p>Sign in to access your account</p>
                 </div>
-
-                <form onsubmit="handleLogin(event)">
+                <form id="loginForm">
                     <div class="login-form-group">
                         <label>Email Address <span class="login-required">*</span></label>
                         <div class="login-input-wrapper">
@@ -94,20 +48,17 @@
                             <input type="email" class="login-form-control" placeholder="Enter your email" required>
                         </div>
                     </div>
-
                     <div class="login-form-group">
                         <label>Password <span class="login-required">*</span></label>
                         <div class="login-input-wrapper">
                             <span class="login-input-icon">🔒</span>
                             <input type="password" id="login-password" class="login-form-control"
                                 placeholder="Enter your password" required>
-                            <button type="button" class="login-password-toggle"
-                                onclick="togglePassword('login-password', this)">
+                            <button type="button" class="login-password-toggle">
                                 <span class="eye-icon">👁️</span>
                             </button>
                         </div>
                     </div>
-
                     <div class="login-form-options">
                         <div class="login-checkbox-wrapper">
                             <input type="checkbox" id="remember">
@@ -115,25 +66,15 @@
                         </div>
                         <a href="#" class="login-forgot-link">Forgot Password?</a>
                     </div>
-
                     <button type="submit" class="login-submit-btn">Login to Account</button>
                 </form>
-
-                <div class="login-divider">
-                    <span>Or continue with</span>
-                </div>
-
+                <div class="login-divider"><span>Or continue with</span></div>
                 <div class="login-social-login">
-                    <button class="login-social-btn" onclick="handleSocialLogin('google')">
-                        <span>G</span> Google
-                    </button>
-                    <button class="login-social-btn" onclick="handleSocialLogin('phone')">
-                        <span>📱</span> Phone
-                    </button>
+                    <button class="login-social-btn" data-social="google"><span>G</span> Google</button>
+                    <button class="login-social-btn" data-social="phone"><span>📱</span> Phone</button>
                 </div>
-
                 <div class="login-auth-footer">
-                    Don't have an account? <a href="#" onclick="switchTab('signup'); return false;">Sign Up</a>
+                    Don't have an account? <a href="#" class="switch-tab" data-tab="signup">Sign Up</a>
                 </div>
             </div>
 
@@ -143,8 +84,7 @@
                     <h2>Create Account</h2>
                     <p>Join us for reliable vehicle transportation</p>
                 </div>
-
-                <form onsubmit="handleSignup(event)">
+                <form id="signupForm">
                     <div class="login-name-group">
                         <div class="login-form-group">
                             <label>First Name <span class="login-required">*</span></label>
@@ -153,7 +93,6 @@
                                 <input type="text" class="login-form-control" placeholder="First name" required>
                             </div>
                         </div>
-
                         <div class="login-form-group">
                             <label>Last Name <span class="login-required">*</span></label>
                             <div class="login-input-wrapper">
@@ -162,7 +101,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="login-form-group">
                         <label>Email Address <span class="login-required">*</span></label>
                         <div class="login-input-wrapper">
@@ -170,7 +108,6 @@
                             <input type="email" class="login-form-control" placeholder="Enter your email" required>
                         </div>
                     </div>
-
                     <div class="login-form-group">
                         <label>Phone Number <span class="login-required">*</span></label>
                         <div class="login-input-wrapper">
@@ -178,15 +115,13 @@
                             <input type="tel" class="login-form-control" placeholder="Enter 10-digit number" required>
                         </div>
                     </div>
-
                     <div class="login-form-group">
                         <label>Password <span class="login-required">*</span></label>
                         <div class="login-input-wrapper">
                             <span class="login-input-icon">🔒</span>
                             <input type="password" id="signup-password" class="login-form-control"
-                                placeholder="Create password" required oninput="checkPasswordStrength(this.value)">
-                            <button type="button" class="login-password-toggle"
-                                onclick="togglePassword('signup-password', this)">
+                                placeholder="Create password" required>
+                            <button type="button" class="login-password-toggle">
                                 <span class="eye-icon">👁️</span>
                             </button>
                         </div>
@@ -197,80 +132,96 @@
                             <span class="login-strength-text" id="strength-text"></span>
                         </div>
                     </div>
-
                     <div class="login-form-group">
                         <label>Confirm Password <span class="login-required">*</span></label>
                         <div class="login-input-wrapper">
                             <span class="login-input-icon">🔒</span>
                             <input type="password" id="confirm-password" class="login-form-control"
                                 placeholder="Confirm password" required>
-                            <button type="button" class="login-password-toggle"
-                                onclick="togglePassword('confirm-password', this)">
+                            <button type="button" class="login-password-toggle">
                                 <span class="eye-icon">👁️</span>
                             </button>
                         </div>
                     </div>
-
                     <div class="login-form-options" style="justify-content: flex-start;">
                         <div class="login-checkbox-wrapper">
                             <input type="checkbox" id="terms" required>
                             <label for="terms">I agree to Terms & Conditions</label>
                         </div>
                     </div>
-
                     <button type="submit" class="login-submit-btn">Create Account</button>
                 </form>
-
-                <div class="login-divider">
-                    <span>Or sign up with</span>
-                </div>
-
+                <div class="login-divider"><span>Or sign up with</span></div>
                 <div class="login-social-login">
-                    <button class="login-social-btn" onclick="handleSocialLogin('google')">
-                        <span>G</span> Google
-                    </button>
-                    <button class="login-social-btn" onclick="handleSocialLogin('phone')">
-                        <span>📱</span> Phone
-                    </button>
+                    <button class="login-social-btn" data-social="google"><span>G</span> Google</button>
+                    <button class="login-social-btn" data-social="phone"><span>📱</span> Phone</button>
                 </div>
-
                 <div class="login-auth-footer">
-                    Already have an account? <a href="#" onclick="switchTab('login'); return false;">Login</a>
+                    Already have an account? <a href="#" class="switch-tab" data-tab="login">Login</a>
                 </div>
             </div>
         </div>
     </div>
 
-    
     <script src="../js/modules/login.js"></script>
     <script src="js/modules/quote-modal.js"></script>
     <script src="js/modules/bottom-fixed-loader.js"></script>
     <script src="js/modules/sticky-quote-button.js"></script>
-     <script>
-        function toggleTheme() {
-            document.body.classList.toggle("dark-theme");
+    <script>
+        // Attach all events dynamically
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginForm = document.getElementById("loginForm");
+            const signupForm = document.getElementById("signupForm");
+            const themeToggle = document.querySelector(".theme-toggle-left");
 
-            const btn = document.querySelector(".theme-toggle-left");
+            // Form submissions
+            loginForm.addEventListener("submit", handleLogin);
+            signupForm.addEventListener("submit", handleSignup);
 
-            if (document.body.classList.contains("dark-theme")) {
-                btn.textContent = "☀️";
-                localStorage.setItem("theme", "dark");
-            } else {
-                btn.textContent = "🌙";
-                localStorage.setItem("theme", "light");
-            }
-        }
+            // Password toggle buttons
+            document.querySelectorAll(".login-password-toggle").forEach(btn => {
+                const input = btn.previousElementSibling;
+                btn.addEventListener("click", () => togglePassword(input.id, btn));
+            });
 
-        window.addEventListener("DOMContentLoaded", () => {
+            // Tab switching
+            document.querySelectorAll(".switch-tab").forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    switchTab(btn.dataset.tab);
+                });
+            });
+
+            document.querySelectorAll(".login-tab-btn").forEach((btn, idx) => {
+                btn.addEventListener("click", () => {
+                    switchTab(idx === 0 ? "login" : "signup");
+                });
+            });
+
+            // Social login buttons
+            document.querySelectorAll(".login-social-btn").forEach(btn => {
+                btn.addEventListener("click", () => handleSocialLogin(btn.dataset.social));
+            });
+
+            // Theme toggle
+            themeToggle.addEventListener("click", () => {
+                document.body.classList.toggle("dark-theme");
+                if (document.body.classList.contains("dark-theme")) {
+                    themeToggle.textContent = "☀️";
+                    localStorage.setItem("theme", "dark");
+                } else {
+                    themeToggle.textContent = "🌙";
+                    localStorage.setItem("theme", "light");
+                }
+            });
+
+            // Load saved theme
             const savedTheme = localStorage.getItem("theme");
-            const btn = document.querySelector(".theme-toggle-left");
-
             if (savedTheme === "dark") {
                 document.body.classList.add("dark-theme");
-                btn.textContent = "☀️";
+                themeToggle.textContent = "☀️";
             }
         });
     </script>
-
 </body>
 </html>
