@@ -448,7 +448,7 @@
 
         .addon-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(157px,1fr));
+            grid-template-columns: repeat(auto-fit,minmax(170px,1fr));
             gap: 20px; 
             margin-top: 15px;
         }
@@ -476,7 +476,7 @@
         .addon-top-row {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 12px;
         margin-bottom: 8px;
         }
 
@@ -500,7 +500,7 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        gap:5px;
+        gap:7px;
         }
 
         .addon-desc {
@@ -1830,7 +1830,7 @@
                                         </div>
                                     </div>
                                     <div class="addon-item" onclick="toggleAddon(this, 'express', 2000)">
-                                        <div>
+                                        <div class="addon-top-row">
                                             <input type="checkbox" class="addon-checkbox" id="addonExpress" name="addons"
                                             value="express">
                                             <i class="fas fa-bolt addon-icon"></i>
@@ -2057,39 +2057,47 @@
                     </div>
 
                     <!-- Popular Routes -->
-                    <div class="popular-routes" style="margin-bottom: 20px;">
-                        <h5><i class="fas fa-fire" style="color: #ff6347;"></i> Popular Routes</h5>
-                        <div class="route-item" style="cursor: pointer;" onclick="fillRoute('Mumbai', 'Delhi')">
-                            <div class="route-cities">
-                                <span>Mumbai</span>
-                                <i class="fas fa-arrow-right route-arrow"></i>
-                                <span>Delhi</span>
-                            </div>
-                            <div class="route-stats">
-                                <span class="route-stat"><strong>1,424</strong> km</span>
-                                <span class="peak-indicator high"><i class="fas fa-fire"></i> High Demand</span>
-                            </div>
-                        </div>
-                        <div class="route-item" style="cursor: pointer;" onclick="fillRoute('Bangalore', 'Hyderabad')">
-                            <div class="route-cities">
-                                <span>Bangalore</span>
-                                <i class="fas fa-arrow-right route-arrow"></i>
-                                <span>Hyderabad</span>
-                            </div>
-                            <div class="route-stats">
-                                <span class="route-stat"><strong>569</strong> km</span>
-                            </div>
-                        </div>
-                        <div class="route-item" style="cursor: pointer;" onclick="fillRoute('Pune', 'Goa')">
-                            <div class="route-cities">
-                                <span>Pune</span>
-                                <i class="fas fa-arrow-right route-arrow"></i>
-                                <span>Goa</span>
-                            </div>
-                            <div class="route-stats">
-                                <span class="route-stat"><strong>464</strong> km</span>
-                                <span class="peak-indicator"><i class="fas fa-chart-line"></i> Trending</span>
-                            </div>
+                    <div class="popular-routes">
+                        <h5 class="pr-header"><i class="fas fa-fire pr-icon"></i> Popular Routes</h5>
+                        <div class="pr-list">
+                            <button class="route-item" type="button" onclick="fillRoute('Mumbai', 'Delhi')">
+                                <div class="route-left">
+                                    <div class="route-cities">
+                                        <span class="city from">Mumbai</span>
+                                        <i class="fas fa-arrow-right route-arrow"></i>
+                                        <span class="city to">Delhi</span>
+                                    </div>
+                                    <div class="route-meta"><span class="route-distance"><strong>1,424</strong> km</span></div>
+                                </div>
+                                <div class="route-badges">
+                                    <span class="badge high"><i class="fas fa-fire"></i> High Demand</span>
+                                </div>
+                            </button>
+
+                            <button class="route-item" type="button" onclick="fillRoute('Bangalore', 'Hyderabad')">
+                                <div class="route-left">
+                                    <div class="route-cities">
+                                        <span class="city from">Bangalore</span>
+                                        <i class="fas fa-arrow-right route-arrow"></i>
+                                        <span class="city to">Hyderabad</span>
+                                    </div>
+                                    <div class="route-meta"><span class="route-distance"><strong>569</strong> km</span></div>
+                                </div>
+                            </button>
+
+                            <button class="route-item" type="button" onclick="fillRoute('Pune', 'Goa')">
+                                <div class="route-left">
+                                    <div class="route-cities">
+                                        <span class="city from">Pune</span>
+                                        <i class="fas fa-arrow-right route-arrow"></i>
+                                        <span class="city to">Goa</span>
+                                    </div>
+                                    <div class="route-meta"><span class="route-distance"><strong>464</strong> km</span></div>
+                                </div>
+                                <div class="route-badges">
+                                    <span class="badge trending"><i class="fas fa-chart-line"></i> Trending</span>
+                                </div>
+                            </button>
                         </div>
                     </div>
 
@@ -2097,43 +2105,6 @@
                     <div class="distance-estimate" id="distanceEstimate">
                         <div class="label">Estimated Distance</div>
                         <div class="distance" style="color: #666;">Select cities to calculate</div>
-                    </div>
-
-                    <!-- Popular Routes -->
-                    <div class="popular-routes" style="margin-bottom: 20px;">
-                        <h5><i class="fas fa-fire" style="color: #ff6347;"></i> Popular Routes</h5>
-                        <div class="route-item" style="cursor: pointer;" onclick="fillRoute('Mumbai', 'Delhi')">
-                            <div class="route-cities">
-                                <span>Mumbai</span>
-                                <i class="fas fa-arrow-right route-arrow"></i>
-                                <span>Delhi</span>
-                            </div>
-                            <div class="route-stats">
-                                <span class="route-stat"><strong>1,424</strong> km</span>
-                                <span class="peak-indicator high"><i class="fas fa-fire"></i> High Demand</span>
-                            </div>
-                        </div>
-                        <div class="route-item" style="cursor: pointer;" onclick="fillRoute('Bangalore', 'Hyderabad')">
-                            <div class="route-cities">
-                                <span>Bangalore</span>
-                                <i class="fas fa-arrow-right route-arrow"></i>
-                                <span>Hyderabad</span>
-                            </div>
-                            <div class="route-stats">
-                                <span class="route-stat"><strong>569</strong> km</span>
-                            </div>
-                        </div>
-                        <div class="route-item" style="cursor: pointer;" onclick="fillRoute('Pune', 'Goa')">
-                            <div class="route-cities">
-                                <span>Pune</span>
-                                <i class="fas fa-arrow-right route-arrow"></i>
-                                <span>Goa</span>
-                            </div>
-                            <div class="route-stats">
-                                <span class="route-stat"><strong>464</strong> km</span>
-                                <span class="peak-indicator"><i class="fas fa-chart-line"></i> Trending</span>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Booking Details -->

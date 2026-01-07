@@ -777,6 +777,9 @@
     box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
 }
 
+.waypoints-section{
+    margin-top:10px;
+}
 .waypoints-list {
     display: flex;
     flex-direction: column;
@@ -796,6 +799,113 @@
 
 .waypoint-item:hover {
     border-color: #ff6347;
+}
+
+/* Popular Routes */
+.popular-routes {
+    margin-bottom: 20px;
+}
+.popular-routes .pr-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffd9c8;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+.pr-header .pr-icon {
+    color: #ff6347;
+    font-size: 1rem;
+}
+.pr-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.route-item {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: linear-gradient(145deg, #1a1a1a, #242424);
+    border: 1px solid #3a3a3a;
+    padding: 12px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    width: 100%;
+    text-align: left;
+    color: inherit;
+}
+.route-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 99, 71, 0.15);
+}
+.route-item:focus {
+    outline: 3px solid rgba(255, 99, 71, 0.12);
+}
+.route-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+}
+.route-cities {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: white;
+}
+.route-arrow {
+    color: #ff6347;
+    margin: 0 6px;
+}
+.route-meta {
+    color: #bbb;
+    font-size: 0.85rem;
+}
+.route-distance strong {
+    color: white;
+}
+.route-badges {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+.badge i {
+    font-size: 0.85rem;
+}
+.badge.high {
+    background: linear-gradient(90deg, #ff7a59, #ff6347);
+    color: white;
+    box-shadow: 0 6px 18px rgba(255, 99, 71, 0.12);
+}
+.badge.trending {
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffd6b8;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+@media (max-width: 768px) {
+    .route-cities { font-size: 0.95rem; }
+    .route-meta { font-size: 0.8rem; }
+    .popular-routes .pr-header { font-size: 0.95rem; }
+    .route-item { padding: 10px; }
 }
 
 .waypoint-number {
