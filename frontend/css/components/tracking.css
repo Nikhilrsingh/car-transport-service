@@ -1360,4 +1360,340 @@ input[type="text"]::placeholder {
   }
 }
 
+/* =========================
+   LIGHT MODE STYLES
+   ======================== */
 
+/* Support multiple possible theme toggles */
+html[data-theme="light"] body,
+body[data-theme="light"],
+body.light,
+body.light-mode,
+body.light-theme {
+  background: #f6f7fb !important;
+  color: #111827 !important;
+}
+
+/* Header */
+html[data-theme="light"] .page-header,
+body[data-theme="light"] .page-header,
+body.light .page-header,
+body.light-mode .page-header,
+body.light-theme .page-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%) !important;
+}
+html[data-theme="light"] .page-header h1,
+body[data-theme="light"] .page-header h1,
+body.light .page-header h1,
+body.light-mode .page-header h1,
+body.light-theme .page-header h1 {
+  color: #111827 !important;
+}
+html[data-theme="light"] .page-header .subtitle,
+body[data-theme="light"] .page-header .subtitle,
+body.light .page-header .subtitle,
+body.light-mode .page-header .subtitle,
+body.light-theme .page-header .subtitle {
+  color: #374151 !important;
+}
+html[data-theme="light"] .breadcrumb span,
+body[data-theme="light"] .breadcrumb span,
+body.light .breadcrumb span,
+body.light-mode .breadcrumb span,
+body.light-theme .breadcrumb span {
+  color: #6b7280 !important;
+}
+
+/* Main cards/sections */
+html[data-theme="light"] .tracking-card,
+html[data-theme="light"] .tracking-info,
+html[data-theme="light"] .timeline,
+html[data-theme="light"] #notificationSection,
+html[data-theme="light"] #deliveryProofSection,
+html[data-theme="light"] #deliveryProofUploadSection,
+body[data-theme="light"] .tracking-card,
+body[data-theme="light"] .tracking-info,
+body[data-theme="light"] .timeline,
+body[data-theme="light"] #notificationSection,
+body[data-theme="light"] #deliveryProofSection,
+body[data-theme="light"] #deliveryProofUploadSection,
+body.light .tracking-card,
+body.light .tracking-info,
+body.light .timeline,
+body.light #notificationSection,
+body.light #deliveryProofSection,
+body.light #deliveryProofUploadSection,
+body.light-mode .tracking-card,
+body.light-mode .tracking-info,
+body.light-mode .timeline,
+body.light-mode #notificationSection,
+body.light-mode #deliveryProofSection,
+body.light-mode #deliveryProofUploadSection,
+body.light-theme .tracking-card,
+body.light-theme .tracking-info,
+body.light-theme .timeline,
+body.light-theme #notificationSection,
+body.light-theme #deliveryProofSection,
+body.light-theme #deliveryProofUploadSection {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Text inside cards */
+html[data-theme="light"] .card-header h2,
+html[data-theme="light"] .tracking-info h2,
+html[data-theme="light"] .timeline h2,
+html[data-theme="light"] .info-item p,
+body[data-theme="light"] .card-header h2,
+body[data-theme="light"] .tracking-info h2,
+body[data-theme="light"] .timeline h2,
+body[data-theme="light"] .info-item p,
+body.light .card-header h2,
+body.light .tracking-info h2,
+body.light .timeline h2,
+body.light .info-item p,
+body.light-mode .card-header h2,
+body.light-mode .tracking-info h2,
+body.light-mode .timeline h2,
+body.light-mode .info-item p,
+body.light-theme .card-header h2,
+body.light-theme .tracking-info h2,
+body.light-theme .timeline h2,
+body.light-theme .info-item p {
+  color: #111827 !important;
+}
+
+html[data-theme="light"] .card-header p,
+html[data-theme="light"] label,
+html[data-theme="light"] .timeline-content p,
+html[data-theme="light"] .info-item h3,
+html[data-theme="light"] .notification-option,
+html[data-theme="light"] .checkbox-wrapper label,
+body[data-theme="light"] .card-header p,
+body[data-theme="light"] label,
+body[data-theme="light"] .timeline-content p,
+body[data-theme="light"] .info-item h3,
+body[data-theme="light"] .notification-option,
+body[data-theme="light"] .checkbox-wrapper label,
+body.light .card-header p,
+body.light label,
+body.light .timeline-content p,
+body.light .info-item h3,
+body.light .notification-option,
+body.light .checkbox-wrapper label,
+body.light-mode .card-header p,
+body.light-mode label,
+body.light-mode .timeline-content p,
+body.light-mode .info-item h3,
+body.light-mode .notification-option,
+body.light-mode .checkbox-wrapper label,
+body.light-theme .card-header p,
+body.light-theme label,
+body.light-theme .timeline-content p,
+body.light-theme .info-item h3,
+body.light-theme .notification-option,
+body.light-theme .checkbox-wrapper label {
+  color: #4b5563 !important;
+}
+
+/* Inputs */
+html[data-theme="light"] input[type="text"],
+html[data-theme="light"] input[type="email"],
+html[data-theme="light"] input[type="tel"],
+html[data-theme="light"] input[type="file"],
+body[data-theme="light"] input[type="text"],
+body[data-theme="light"] input[type="email"],
+body[data-theme="light"] input[type="tel"],
+body[data-theme="light"] input[type="file"],
+body.light input[type="text"],
+body.light input[type="email"],
+body.light input[type="tel"],
+body.light input[type="file"],
+body.light-mode input[type="text"],
+body.light-mode input[type="email"],
+body.light-mode input[type="tel"],
+body.light-mode input[type="file"],
+body.light-theme input[type="text"],
+body.light-theme input[type="email"],
+body.light-theme input[type="tel"],
+body.light-theme input[type="file"] {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #d1d5db !important;
+}
+html[data-theme="light"] input::placeholder,
+body[data-theme="light"] input::placeholder,
+body.light input::placeholder,
+body.light-mode input::placeholder,
+body.light-theme input::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Muted text helper */
+.text-muted {
+  color: #c0c0c0;
+}
+html[data-theme="light"] .text-muted,
+body[data-theme="light"] .text-muted,
+body.light .text-muted,
+body.light-mode .text-muted,
+body.light-theme .text-muted {
+  color: #4b5563;
+}
+
+/* =======================
+   Section‑specific cards
+   ======================= */
+
+/* Sample IDs bar */
+html[data-theme="light"] .sample-ids,
+body[data-theme="light"] .sample-ids,
+body.light .sample-ids,
+body.light-mode .sample-ids,
+body.light-theme .sample-ids {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+html[data-theme="light"] .sample-ids .id-code,
+body[data-theme="light"] .sample-ids .id-code,
+body.light .sample-ids .id-code,
+body.light-mode .sample-ids .id-code,
+body.light-theme .sample-ids .id-code {
+  background: #f3f4f6 !important;
+  color: #ef4444 !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Route info box */
+html[data-theme="light"] .route-info,
+body[data-theme="light"] .route-info,
+body.light .route-info,
+body.light-mode .route-info,
+body.light-theme .route-info {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+html[data-theme="light"] .route-info h3,
+html[data-theme="light"] .route-info p,
+body[data-theme="light"] .route-info h3,
+body[data-theme="light"] .route-info p,
+body.light .route-info h3,
+body.light .route-info p,
+body.light-mode .route-info h3,
+body.light-mode .route-info p,
+body.light-theme .route-info h3,
+body.light-theme .route-info p {
+  color: #111827 !important;
+}
+
+/* Notification cards */
+html[data-theme="light"] .notification-option,
+body[data-theme="light"] .notification-option,
+body.light .notification-option,
+body.light-mode .notification-option,
+body.light-theme .notification-option {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+html[data-theme="light"] .notification-option h4,
+body[data-theme="light"] .notification-option h4,
+body.light .notification-option h4,
+body.light-mode .notification-option h4,
+body.light-theme .notification-option h4 {
+  color: #ea580c !important;
+}
+html[data-theme="light"] .checkbox-wrapper label,
+body[data-theme="light"] .checkbox-wrapper label,
+body.light .checkbox-wrapper label,
+body.light-mode .checkbox-wrapper label,
+body.light-theme .checkbox-wrapper label {
+  color: #374151 !important;
+}
+
+/* Delivery proof / upload cards */
+html[data-theme="light"] .proof-item,
+body[data-theme="light"] .proof-item,
+body.light .proof-item,
+body.light-mode .proof-item,
+body.light-theme .proof-item,
+html[data-theme="light"] .upload-item,
+body[data-theme="light"] .upload-item,
+body.light .upload-item,
+body.light-mode .upload-item,
+body.light-theme .upload-item {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+html[data-theme="light"] .proof-item span,
+body[data-theme="light"] .proof-item span,
+body.light .proof-item span,
+body.light-mode .proof-item span,
+body.light-theme .proof-item span,
+html[data-theme="light"] .upload-item label,
+body[data-theme="light"] .upload-item label,
+body.light .upload-item label,
+body.light-mode .upload-item label,
+body.light-theme .upload-item label {
+  color: #374151 !important;
+}
+
+/* Inputs inside those blocks */
+html[data-theme="light"] #notificationPhone,
+html[data-theme="light"] #notificationEmail,
+html[data-theme="light"] #receiverName,
+html[data-theme="light"] #receiverComments,
+html[data-theme="light"] #deliveryPhoto,
+html[data-theme="light"] #deliverySignature,
+body[data-theme="light"] #notificationPhone,
+body[data-theme="light"] #notificationEmail,
+body[data-theme="light"] #receiverName,
+body[data-theme="light"] #receiverComments,
+body[data-theme="light"] #deliveryPhoto,
+body[data-theme="light"] #deliverySignature,
+body.light #notificationPhone,
+body.light #notificationEmail,
+body.light #receiverName,
+body.light #receiverComments,
+body.light #deliveryPhoto,
+body.light #deliverySignature,
+body.light-mode #notificationPhone,
+body.light-mode #notificationEmail,
+body.light-mode #receiverName,
+body.light-mode #receiverComments,
+body.light-mode #deliveryPhoto,
+body.light-mode #deliverySignature,
+body.light-theme #notificationPhone,
+body.light-theme #notificationEmail,
+body.light-theme #receiverName,
+body.light-theme #receiverComments,
+body.light-theme #deliveryPhoto,
+body.light-theme #deliverySignature {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #d1d5db !important;
+}
+
+/* Voice status box */
+html[data-theme="light"] .voice-status,
+body[data-theme="light"] .voice-status,
+body.light .voice-status,
+body.light-mode .voice-status,
+body.light-theme .voice-status {
+  background: #ffe7d6 !important;
+  border-color: #fdba74 !important;
+}
+html[data-theme="light"] .voice-status .status-text,
+body[data-theme="light"] .voice-status .status-text,
+body.light .voice-status .status-text,
+body.light-mode .voice-status .status-text,
+body.light-theme .voice-status .status-text {
+  color: #111827 !important;
+}
+html[data-theme="light"] .voice-status .pulse-dot,
+body[data-theme="light"] .voice-status .pulse-dot,
+body.light .voice-status .pulse-dot,
+body.light-mode .voice-status .pulse-dot,
+body.light-theme .voice-status .pulse-dot {
+  background: #22c55e !important;
+}
