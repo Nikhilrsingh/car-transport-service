@@ -2,6 +2,36 @@
    ABOUT PAGE ENHANCEMENTS
    ================================ */
 
+   /*  VISIBILITY FOR HERO SECTION */
+.hero {
+  background-color: #2c3e50 !important; 
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/images/about-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  padding: 120px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  color: #ff6347 !important; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  margin-bottom: 20px;
+}
+
+.hero p {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+
 /* for giving container spacing from left and right */
 .container {
   width: 80vw;
@@ -112,6 +142,18 @@
   display: block;
   transition: transform 0.6s ease, filter 0.4s ease;
 }
+/* Member image position fixed (both for desktop as well as mobile view) */
+.team-grid>.about-team-flip-card:nth-of-type(2) .about-member-image-wrapper img{
+  object-position: center 20%;
+}
+.team-grid>.about-team-flip-card:nth-of-type(3) .about-member-image-wrapper img {
+  object-position: center 5%;
+}
+.team-grid>.about-team-flip-card:nth-of-type(1) .about-member-image-wrapper img,
+.team-grid>.about-team-flip-card:nth-of-type(4) .about-member-image-wrapper img {
+  object-position: center 35%;
+}
+
 
 .about-member-image-wrapper:hover img {
   transform: scale(1.08);
@@ -567,15 +609,16 @@
 
 .stat-circle-label {
   font-size: 0.9rem;
-  color: #fff;
+  color: #333; 
   font-weight: 600;
 }
 
 .stat-circle-description {
-  color: #ccc;
+  color: #555; 
   font-size: 1rem;
   margin-top: 10px;
 }
+
 
 /* Milestone Timeline */
 .milestone-timeline {
@@ -640,10 +683,11 @@
 
 .milestone-achievement {
   font-size: 0.9rem;
-  color: #ccc;
+  color: #555; 
   max-width: 140px;
   margin: 0 auto;
 }
+
 
 /* ================================
    VALUES/MISSION - ENHANCED
@@ -1138,4 +1182,34 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* =========================================
+   DARK MODE TEXT FIX
+   ========================================= */
+
+/* Use multiple selectors to ensure we catch the active theme class */
+body.dark-mode .stat-circle-label,
+body.dark-theme .stat-circle-label,
+body.dark .stat-circle-label,
+html.dark .stat-circle-label,
+[data-theme="dark"] .stat-circle-label {
+  color: #fff !important; 
+}
+
+body.dark-mode .stat-circle-description,
+body.dark-theme .stat-circle-description,
+body.dark .stat-circle-description,
+html.dark .stat-circle-description,
+[data-theme="dark"] .stat-circle-description {
+  color: #e0e0e0 !important; 
+}
+
+body.dark-mode .milestone-achievement,
+body.dark-theme .milestone-achievement,
+body.dark .milestone-achievement,
+html.dark .milestone-achievement,
+[data-theme="dark"] .milestone-achievement {
+  color: #e0e0e0 !important; 
 }
