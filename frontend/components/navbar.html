@@ -322,25 +322,44 @@
 
           <!-- Theme Toggle: placed after Enquiry and before Login -->
           <div class="nav-theme-toggle">
-            <button id="theme-toggle" aria-label="Toggle theme" class="nav-theme-btn" data-tooltip="Toggle theme">
+            <button id="theme-toggle" aria-label="Toggle theme" class="nav-theme-btn">
               <i id="theme-icon" class="fas fa-sun"></i>
             </button>
           </div>
         </div>
 
-        <div class="nav-actions">
+        <!-- <div class="nav-actions">
           <a href="../pages/login.html" class="login-btn" data-tooltip="Login">
             <i class="fas fa-user"></i>
             <span>Login</span>
           </a>
-        </div>
+        </div> -->
+
+        <!-- Replace your nav-actions section with this -->
+<!-- Replace your nav-actions section with this -->
+<div class="nav-actions">
+  <!-- Login Button (shown when logged out) -->
+  <a href="../pages/login.html" id="loginBtn" class="login-btn" data-tooltip="Login" style="display: inline-block;">
+    <i class="fas fa-user"></i>
+    <span>Login</span>
+  </a>
+
+  <!-- Profile Section (shown when logged in) -->
+  <div id="profile" class="hidden" style="display: none; align-items: center; gap: 10px; color: var(--text-color, #333);">
+    <span id="userEmail" style="margin-right: 10px; font-weight: 500;"></span>
+    <a href="#" id="logoutBtn" class="login-btn" data-tooltip="Logout" style="text-decoration: none;">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+</div>
+
       </nav>
       <!-- Mobile Menu Button -->
       <button
         class="mobile-menu-btn"
         id="mobileMenuBtn"
         aria-label="Toggle mobile menu"
-        data-tooltip="Menu"
       >
         <span class="menu-bar"></span>
         <span class="menu-bar"></span>
@@ -360,7 +379,6 @@
         class="mobile-close-btn"
         id="mobileCloseBtn"
         aria-label="Close mobile menu"
-        data-tooltip="Close"
       >
         <i class="fas fa-times"></i>
       </button>
@@ -518,3 +536,6 @@
   <!-- Navigation Overlay -->
   <div class="nav-overlay" id="navOverlay"></div>
 </header>
+
+
+<script src="../js/modules/Navbar.js"></script>

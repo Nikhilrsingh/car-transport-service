@@ -58,6 +58,9 @@
       // Set active link
       setActiveLink();
 
+      // CRITICAL: Initialize auth UI after navbar is fully loaded
+      initializeAuthUI();
+
       // Ensure digital clock exists on pages that don't include it directly
       ensureClock(base);
     } catch (err) {
@@ -92,7 +95,97 @@
     }
   });
 
-  // Removed static HTML template to eliminate duplication with components/navbar.html
+  /**
+   * Initialize authentication UI
+   * This runs AFTER the navbar HTML is loaded into the DOM
+   */
+  function initializeAuthUI() {
+    const loginBtn = document.getElementById("loginBtn");
+    const profile = document.getElementById("profile");
+    const userEmailSpan = document.getElementById("userEmail");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // If navbar auth elements are not present, exit
+    if (!loginBtn || !profile) {
+      console.warn('Auth elements not found in navbar');
+      return;
+    }
+
+    // Update the UI based on current auth state
+    updateAuthUI();
+
+    // Set up logout button handler
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleLogout();
+      });
+    }
+  }
+
+  /**
+   * Update auth UI based on login state
+   */
+  function updateAuthUI() {
+    const loginBtn = document.getElementById("loginBtn");
+    const profile = document.getElementById("profile");
+    const userEmailSpan = document.getElementById("userEmail");
+
+    if (!loginBtn || !profile) return;
+
+    // Check for authentication
+    const token = localStorage.getItem("token");
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const userEmail = localStorage.getItem("userEmail");
+
+    if (token && isLoggedIn && userEmail) {
+      // User is logged in
+      loginBtn.style.display = "none";
+      profile.style.display = "flex";
+      profile.classList.remove("hidden");
+      if (userEmailSpan) {
+        userEmailSpan.textContent = userEmail;
+      }
+    } else {
+      // User is not logged in
+      if (!token || !isLoggedIn) {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("token");
+      }
+      loginBtn.style.display = "inline-block";
+      profile.style.display = "none";
+      profile.classList.add("hidden");
+    }
+  }
+
+  /**
+   * Handle logout
+   */
+  function handleLogout() {
+    // Clear all auth data
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("token");
+    
+    // Update UI immediately
+    updateAuthUI();
+    
+    // Show notification if available
+    if (typeof showNotification === 'function') {
+      showNotification("Logged out successfully", "success");
+    }
+    
+    // Determine correct path for redirect
+    const currentPath = window.location.pathname;
+    const isInPagesFolder = currentPath.toLowerCase().includes('/pages/');
+    const loginPath = isInPagesFolder ? "./login.html" : "./pages/login.html";
+    
+    // Redirect to login page
+    setTimeout(() => {
+      window.location.href = loginPath;
+    }, 300);
+  }
 
   /**
    * Fixes paths in navbar for root-level pages (index.html, services.html)
@@ -178,7 +271,6 @@
         e.stopPropagation();
         currentdropdown = e.target.closest('[data-dropdown]');
         currentdropdown.classList.toggle('active');
-        console.log('Dropdown toggled:', currentdropdown.classList.contains('active') ? 'open' : 'closed');
       }
 
       // close all already opened dropdown
@@ -188,7 +280,7 @@
       });
     });
 
-    // Header scroll effect - Hide upbar and middle navbar, keep main navbar sticky
+    // Header scroll effect
     let lastScroll = 0;
     const header = document.querySelector('.header');
     const middleNavbar = document.querySelector('.middle-navbar');
@@ -200,12 +292,10 @@
         const currentScroll = window.pageYOffset;
 
         if (currentScroll <= 100) {
-          // At top - show all bars
           if (upbar) upbar.classList.remove('hidden');
           if (middleNavbar) middleNavbar.classList.remove('hidden');
           if (mainNavbar) mainNavbar.classList.remove('scrolled');
         } else {
-          // Scrolled down - hide upbar and middle navbar, keep main navbar at top
           if (upbar) upbar.classList.add('hidden');
           if (middleNavbar) middleNavbar.classList.add('hidden');
           if (mainNavbar) mainNavbar.classList.add('scrolled');
@@ -244,9 +334,8 @@
    */
   function ensureClock(basePath) {
     const existingClock = document.getElementById('mac-clock');
-    if (existingClock) return; // Page already has a clock
+    if (existingClock) return;
 
-    // Add CSS for clock if not already present
     const existingLink = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
       .some(l => (l.getAttribute('href') || '').includes('digital-clock.css'));
     if (!existingLink) {
@@ -256,7 +345,6 @@
       document.head.appendChild(link);
     }
 
-    // Add clock markup
     const clock = document.createElement('div');
     clock.id = 'mac-clock';
     const span = document.createElement('span');
@@ -264,13 +352,10 @@
     clock.appendChild(span);
     document.body.appendChild(clock);
 
-    // Start clock updates
     function updateClock() {
       const clockFull = document.getElementById('clock-full');
-
       if (clockFull) {
         const now = new Date();
-
         const day = now.toLocaleDateString('en-US', { weekday: 'short' });
         const date = now.getDate();
         const month = now.toLocaleDateString('en-US', { month: 'short' });
@@ -280,13 +365,11 @@
           minute: '2-digit',
           second: '2-digit'
         });
-
         const formatted = `${day} ${date} ${month} ${time}`;
         clockFull.textContent = formatted;
       }
     }
 
-    // Start clock
     setTimeout(() => {
       updateClock();
       setInterval(updateClock, 1000);
@@ -314,6 +397,10 @@
       document.head.appendChild(link);
     }
   }
+
+  // Expose auth functions globally for other scripts to use
+  window.updateAuthUI = updateAuthUI;
+  window.handleLogout = handleLogout;
 
   // Load navbar when DOM is ready
   if (document.readyState === 'loading') {
