@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/components/about.css">
     
+    <!-- Component CSS - Load directly -->
+    <link rel="stylesheet" href="css/components/floating-action-menu.css">
+    <link rel="stylesheet" href="css/components/bottom-action-bar.css">
+    <link rel="stylesheet" href="css/components/scroll-button.css">
+    
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="css/light-mode.css" />
     
@@ -106,7 +111,7 @@
         }
     </style>
 </head>
-<body data-theme="light">
+<body data-theme="light" class="loaded">
     <!-- Test Controls Panel -->
     <div class="test-controls">
         <h3>🔧 Test Controls</h3>
@@ -177,11 +182,64 @@
         </div>
     </div>
 
+    <!-- FAB Menu - Added directly -->
+    <div class="fab-container">
+        <button class="fab-main" id="fabMain" aria-label="Open actions menu" aria-expanded="false">
+            <i class="fas fa-plus fab-icon"></i>
+        </button>
+        <div class="fab-actions" id="fabActions">
+            <button class="fab-action-btn" id="fabQuoteBtn" data-tooltip="Get Quote">
+                <i class="fas fa-file-invoice-dollar"></i>
+            </button>
+            <button class="fab-action-btn" id="fabBookBtn" data-tooltip="Book Now">
+                <i class="fas fa-calendar-check"></i>
+            </button>
+            <a href="https://wa.me/919372693389" class="fab-action-btn" data-tooltip="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="tel:+919372693389" class="fab-action-btn" data-tooltip="Call Us">
+                <i class="fas fa-phone"></i>
+            </a>
+            <button class="fab-action-btn" id="fabFeedbackBtn" data-tooltip="Feedback">
+                <i class="fas fa-star"></i>
+            </button>
+            <button class="fab-action-btn" id="fabChatBtn" data-tooltip="Chat">
+                <i class="fas fa-comments"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bottom Action Bar - Added directly -->
+    <div class="bottom-action-bar-fixed">
+        <div class="bottom-bar-left">
+            <div class="bottom-bar-clock" id="bottomBarClock"></div>
+            <button class="bottom-bar-chat-icon" id="bottomChatBtn" aria-label="Open Chatbot" title="Chat with us">
+                <i class="fas fa-comments" aria-hidden="true"></i>
+            </button>
+        </div>
+        <a href="https://wa.me/919372693389" class="bottom-action-btn whatsapp" aria-label="Contact via WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <button id="bottomQuoteBtn" class="bottom-action-btn quote" aria-label="Get Quote">
+            Get Quote
+        </button>
+        <a href="tel:+919372693389" class="bottom-action-btn call" aria-label="Call Us">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
+
+    <!-- Scroll Button - Added directly -->
+    <button class="scroll-button visible" id="smartScrollBtn" aria-label="Scroll" data-tooltip="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Footer Container -->
     <div id="footer-container"></div>
 
-    <!-- Scripts -->
-    <script src="js/modules/footer-loader.js"></script>
+    <!-- Scripts - Load directly -->
+    <script src="js/modules/floating-action-menu.js"></script>
+    <script src="js/modules/bottom-action-bar.js"></script>
+    <script src="js/modules/scroll-button.js"></script>
     
     <script>
         function addStatus(message, type = 'info') {
@@ -280,13 +338,9 @@
         
         // Auto-run tests on load
         window.addEventListener('load', () => {
-            // Simulate preloader completion by adding 'loaded' class
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-                addStatus('Page loaded, running initial checks...', 'info');
-            }, 500);
-            setTimeout(checkComponents, 1500);
-            setTimeout(checkComponents, 3000); // Check again after components load
+            addStatus('Page loaded, running initial checks...', 'info');
+            setTimeout(checkComponents, 500);
+            setTimeout(checkComponents, 2000); // Check again after components load
         });
         
         // Initialize theme from localStorage

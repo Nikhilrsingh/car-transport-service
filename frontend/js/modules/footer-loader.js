@@ -34,7 +34,7 @@
         // Remove CSS link tags from fetched HTML (we load CSS separately)
         const cleanHTML = html.replace(/<link[^>]*>/gi, '');
         // Remove script tags as they won't execute in innerHTML
-        const cleanHTMLNoScripts = cleanHTML.replace(/<script[^>]*>.*?<\/script>/gi, '');
+        const cleanHTMLNoScripts = cleanHTML.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
         footerContainer.innerHTML = cleanHTMLNoScripts;
 
         if (!isInPagesFolder) {
@@ -116,18 +116,22 @@
       console.log('FAB script already loaded');
       return;
     }
-    const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
-    const script = document.createElement('script');
-    script.src = jsBasePath + 'floating-action-menu.js';
-    script.id = 'fab-script';
-    console.log('Loading FAB script from:', script.src);
-    script.onload = function() {
-      console.log('FAB script loaded successfully');
-    };
-    script.onerror = function() {
-      console.error('Failed to load FAB script from:', script.src);
-    };
-    document.body.appendChild(script);
+    
+    // Small delay to ensure HTML is in DOM
+    setTimeout(() => {
+      const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
+      const script = document.createElement('script');
+      script.src = jsBasePath + 'floating-action-menu.js';
+      script.id = 'fab-script';
+      console.log('Loading FAB script from:', script.src);
+      script.onload = function() {
+        console.log('FAB script loaded successfully');
+      };
+      script.onerror = function() {
+        console.error('Failed to load FAB script from:', script.src);
+      };
+      document.body.appendChild(script);
+    }, 100);
   }
 
   function loadBottomActionBarJS(isInPagesFolder) {
@@ -136,18 +140,22 @@
       console.log('Bottom Action Bar script already loaded');
       return;
     }
-    const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
-    const script = document.createElement('script');
-    script.src = jsBasePath + 'bottom-action-bar.js';
-    script.id = 'bottom-action-bar-script';
-    console.log('Loading Bottom Action Bar script from:', script.src);
-    script.onload = function() {
-      console.log('Bottom Action Bar script loaded successfully');
-    };
-    script.onerror = function() {
-      console.error('Failed to load Bottom Action Bar script from:', script.src);
-    };
-    document.body.appendChild(script);
+    
+    // Small delay to ensure HTML is in DOM
+    setTimeout(() => {
+      const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
+      const script = document.createElement('script');
+      script.src = jsBasePath + 'bottom-action-bar.js';
+      script.id = 'bottom-action-bar-script';
+      console.log('Loading Bottom Action Bar script from:', script.src);
+      script.onload = function() {
+        console.log('Bottom Action Bar script loaded successfully');
+      };
+      script.onerror = function() {
+        console.error('Failed to load Bottom Action Bar script from:', script.src);
+      };
+      document.body.appendChild(script);
+    }, 100);
   }
 
   function loadScrollButtonJS(isInPagesFolder) {
@@ -168,18 +176,22 @@
       console.log('Scroll Button script already loaded');
       return;
     }
-    const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
-    const script = document.createElement('script');
-    script.src = jsBasePath + 'scroll-button.js?v=4';
-    script.id = 'scroll-button-script';
-    console.log('Loading Scroll Button script from:', script.src);
-    script.onload = function() {
-      console.log('Scroll Button script loaded successfully');
-    };
-    script.onerror = function() {
-      console.error('Failed to load Scroll Button script from:', script.src);
-    };
-    document.body.appendChild(script);
+    
+    // Small delay to ensure HTML is in DOM
+    setTimeout(() => {
+      const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
+      const script = document.createElement('script');
+      script.src = jsBasePath + 'scroll-button.js?v=4';
+      script.id = 'scroll-button-script';
+      console.log('Loading Scroll Button script from:', script.src);
+      script.onload = function() {
+        console.log('Scroll Button script loaded successfully');
+      };
+      script.onerror = function() {
+        console.error('Failed to load Scroll Button script from:', script.src);
+      };
+      document.body.appendChild(script);
+    }, 100);
   }
 
   // This is the single, correct function for your footer HTML

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Floating Menus Test</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Component CSS - Direct links -->
+    <link rel="stylesheet" href="css/components/floating-action-menu.css">
+    <link rel="stylesheet" href="css/components/bottom-action-bar.css">
+    <link rel="stylesheet" href="css/components/scroll-button.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 200vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+        }
+        
+        .test-info {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        
+        h1 { color: #ff6347; }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 5px;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            z-index: 100000;
+        }
+        
+        .status h3 { margin: 0 0 10px 0; color: #ff6347; }
+        .status p { margin: 5px 0; font-size: 14px; }
+        .status .ok { color: #4ade80; }
+        .status .fail { color: #f87171; }
+    </style>
+</head>
+<body class="loaded">
+    <div class="test-info">
+        <h1>🧪 Simple Floating Menus Test</h1>
+        <p>This page tests the floating menus with direct HTML (no dynamic loading).</p>
+        
+        <h2>Expected Components:</h2>
+        <ul class="checklist">
+            <li>✅ <strong>FAB Button</strong> - Orange "+" button in bottom-right corner (desktop only)</li>
+            <li>✅ <strong>Bottom Action Bar</strong> - Fixed bar at bottom with clock and buttons (desktop only)</li>
+            <li>✅ <strong>Scroll Button</strong> - Arrow button that appears when scrolling</li>
+        </ul>
+        
+        <h2>Test Instructions:</h2>
+        <ol>
+            <li>Look for the orange FAB button in the bottom-right corner</li>
+            <li>Click the FAB button - it should expand to show more options</li>
+            <li>Look for the bottom action bar with clock and "Get Quote" button</li>
+            <li>Scroll down - the scroll button should appear</li>
+        </ol>
+        
+        <p style="margin-top: 50px;">Scroll down to test the scroll button...</p>
+        <div style="height: 500px;"></div>
+        <p>Keep scrolling...</p>
+        <div style="height: 500px;"></div>
+        <p>Almost there...</p>
+        <div style="height: 500px;"></div>
+        <p>Bottom of page! The scroll button should now point UP.</p>
+    </div>
+
+    <!-- Status Panel -->
+    <div class="status" id="status">
+        <h3>Component Status</h3>
+        <p id="fabStatus">FAB: Checking...</p>
+        <p id="barStatus">Bottom Bar: Checking...</p>
+        <p id="scrollStatus">Scroll Button: Checking...</p>
+    </div>
+
+    <!-- FAB Menu - Direct HTML -->
+    <div class="fab-container visible">
+        <button class="fab-main" id="fabMain" aria-label="Open actions menu" aria-expanded="false">
+            <i class="fas fa-plus fab-icon"></i>
+        </button>
+        <div class="fab-actions" id="fabActions">
+            <button class="fab-action-btn" id="fabQuoteBtn" data-tooltip="Get Quote">
+                <i class="fas fa-file-invoice-dollar"></i>
+            </button>
+            <button class="fab-action-btn" id="fabBookBtn" data-tooltip="Book Now">
+                <i class="fas fa-calendar-check"></i>
+            </button>
+            <a href="https://wa.me/919372693389" class="fab-action-btn" data-tooltip="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="tel:+919372693389" class="fab-action-btn" data-tooltip="Call Us">
+                <i class="fas fa-phone"></i>
+            </a>
+            <button class="fab-action-btn" id="fabFeedbackBtn" data-tooltip="Feedback">
+                <i class="fas fa-star"></i>
+            </button>
+            <button class="fab-action-btn" id="fabChatBtn" data-tooltip="Chat">
+                <i class="fas fa-comments"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bottom Action Bar - Direct HTML -->
+    <div class="bottom-action-bar-fixed">
+        <div class="bottom-bar-left">
+            <div class="bottom-bar-clock" id="bottomBarClock">
+                <span class="clock-time">--:--:--</span>
+                <span class="clock-date">--- -- ---</span>
+            </div>
+            <button class="bottom-bar-chat-icon" id="bottomChatBtn" aria-label="Open Chatbot">
+                <i class="fas fa-comments"></i>
+            </button>
+        </div>
+        <a href="https://wa.me/919372693389" class="bottom-action-btn whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <button id="bottomQuoteBtn" class="bottom-action-btn quote">
+            Get Quote
+        </button>
+        <a href="tel:+919372693389" class="bottom-action-btn call">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
+
+    <!-- Scroll Button - Direct HTML -->
+    <button class="scroll-button" id="smartScrollBtn" aria-label="Scroll" data-tooltip="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts - Direct links -->
+    <script src="js/modules/floating-action-menu.js"></script>
+    <script src="js/modules/bottom-action-bar.js"></script>
+    <script src="js/modules/scroll-button.js"></script>
+    
+    <script>
+        // Check component status
+        function checkStatus() {
+            const fab = document.querySelector('.fab-container');
+            const fabMain = document.getElementById('fabMain');
+            const bar = document.querySelector('.bottom-action-bar-fixed');
+            const scroll = document.getElementById('smartScrollBtn');
+            
+            document.getElementById('fabStatus').innerHTML = 
+                fab && fabMain ? '<span class="ok">✅ FAB: Found</span>' : '<span class="fail">❌ FAB: Missing</span>';
+            
+            document.getElementById('barStatus').innerHTML = 
+                bar ? '<span class="ok">✅ Bottom Bar: Found</span>' : '<span class="fail">❌ Bottom Bar: Missing</span>';
+            
+            document.getElementById('scrollStatus').innerHTML = 
+                scroll ? '<span class="ok">✅ Scroll Button: Found</span>' : '<span class="fail">❌ Scroll Button: Missing</span>';
+        }
+        
+        // Run check after page loads
+        window.addEventListener('load', function() {
+            setTimeout(checkStatus, 500);
+        });
+        
+        // Also check immediately
+        checkStatus();
+    </script>
+</body>
+</html>

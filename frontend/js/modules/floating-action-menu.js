@@ -35,6 +35,7 @@
     
     const fabMain = document.getElementById('fabMain');
     const fabActions = document.getElementById('fabActions');
+    const fabContainer = document.querySelector('.fab-container');
     const fabQuoteBtn = document.getElementById('fabQuoteBtn');
     const fabBookBtn = document.getElementById('fabBookBtn');
     const fabChatBtn = document.getElementById('fabChatBtn');
@@ -44,6 +45,35 @@
     if (!fabMain || !fabActions) {
       console.log('FAB: Elements not found on this page');
       return;
+    }
+
+    // Make FAB visible (in case preloader hasn't done it)
+    // Wait for page to be loaded or after a short delay
+    function showFAB() {
+      if (fabContainer) {
+        fabContainer.classList.add('visible');
+        console.log('FAB: Made visible');
+      }
+    }
+    
+    // Show FAB when page is loaded or after delay
+    if (document.body.classList.contains('loaded')) {
+      showFAB();
+    } else {
+      // Wait for loaded class or timeout
+      const observer = new MutationObserver((mutations) => {
+        if (document.body.classList.contains('loaded')) {
+          showFAB();
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+      
+      // Fallback: show after 2 seconds regardless
+      setTimeout(showFAB, 2000);
+      
+      // Also show on window load
+      window.addEventListener('load', () => setTimeout(showFAB, 500));
     }
 
     console.log('FAB: Elements found, setting up event listeners');
