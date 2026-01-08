@@ -175,14 +175,37 @@
       closeFAB();
       
       setTimeout(() => {
-        // Trigger chatbot modal if it exists
-        const chatbotModal = document.getElementById('chatbotModal');
+        // Trigger chatbot modal using the correct ID
+        const chatbotModal = document.getElementById('chatbot-modal-overlay');
         
         if (chatbotModal) {
           console.log('Opening chatbot modal');
+          chatbotModal.classList.add('active');
           chatbotModal.style.display = 'flex';
+          
+          // Focus on the input field
+          setTimeout(() => {
+            const chatInput = document.getElementById('chatbot-input');
+            if (chatInput) {
+              chatInput.focus();
+            }
+          }, 300);
         } else {
-          console.log('Chatbot modal not found');
+          // Try to initialize the chatbot modal if it doesn't exist
+          if (window.chatbotModal && window.chatbotModal.init) {
+            console.log('Initializing chatbot modal');
+            window.chatbotModal.init();
+            // Try again after initialization
+            setTimeout(() => {
+              const modal = document.getElementById('chatbot-modal-overlay');
+              if (modal) {
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+              }
+            }, 100);
+          } else {
+            console.log('Chatbot modal not found and cannot be initialized');
+          }
         }
       }, 100);
     }

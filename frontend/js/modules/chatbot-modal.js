@@ -5,17 +5,32 @@
 (function () {
     'use strict';
 
-    // Sample responses for the dummy chatbot
-    const botResponses = [
-        "Hello! How can I help you today?",
-        "I'm here to assist you with any questions about our car transport services.",
-        "You can ask me about pricing, booking, tracking, or general inquiries.",
-        "Feel free to ask anything - what would you like to know?",
-        "Is there anything specific about our services you'd like to know?",
-        "Thank you for reaching out! How can we assist you?"
-    ];
+    // Predefined Questions and Answers for Rule-Based Chatbot
+    const predefinedQA = {
+        "what services do you provide": "We provide safe and reliable car transportation services across multiple cities in India, including door-to-door pickup and delivery.",
+        "how much does car transport cost": "Car transport charges depend on distance, vehicle type, and route. For exact pricing, please contact our support team.",
+        "do you provide door-to-door service": "Yes, we offer complete door-to-door car pickup and delivery services.",
+        "how long does car delivery take": "Delivery usually takes between 3 to 10 days depending on distance and route conditions.",
+        "is my car safe during transport": "Yes. Your car is transported using professional carriers and handled by trained staff to ensure maximum safety.",
+        "do you provide insurance coverage": "Yes, insurance coverage is provided to protect your vehicle during transportation.",
+        "what documents are required": "A copy of the vehicle RC and a valid ID proof are required at the time of pickup.",
+        "can i keep personal items inside the car": "No. Personal belongings should be removed before transportation for safety reasons.",
+        "how can i track my car": "Tracking details are shared after booking. For tracking updates, please contact our support team.",
+        "which cities do you serve": "We provide car transport services across multiple cities in India. Please contact our team to confirm availability.",
+        "how do i book car transport": "You can book our services by contacting our customer support team through the website.",
+        "what payment methods are accepted": "Multiple payment methods are accepted. Please contact our support team for payment-related details.",
+        "can i cancel my booking": "Yes, booking cancellations are allowed. Cancellation charges may apply. Please contact our support team for details.",
+        "what if my car gets damaged": "In rare cases of damage, insurance assistance is provided. Please contact our support team immediately.",
+        "how can i contact customer support": "You can contact our customer support team using the phone number or email provided on the website. Support is available 24/7."
+    };
 
-    let messageCount = 0;
+    // Fallback response for out-of-scope questions
+    const fallbackResponse = "I’m unable to help with this request. Please contact our customer support team using the information available on the website.";
+
+    // Greeting message
+    const greetingMessage = "Hello 👋 Welcome to Harihar Car Transport Service. This chatbot can answer basic questions about our services. Please choose a question from the available options.";
+
+    let isFirstMessage = true;
 
     /**
      * Initialize Chatbot Modal
@@ -54,7 +69,7 @@
                         <div class="chatbot-messages" id="chatbot-messages">
                             <div class="message bot-message initial">
                                 <div class="message-content">
-                                    <p>Hello! 👋 Welcome to Harihar Car Carriers. I'm your AI assistant. How can I help you today?</p>
+                                    <p>Hello 👋 Welcome to Harihar Car Transport Service. This chatbot can answer basic questions about our services. Please choose a question from the available options.</p>
                                 </div>
                                 <span class="message-time">Just now</span>
                             </div>
@@ -84,13 +99,22 @@
                             </div>
                         </form>
                         <div class="chatbot-help-text">
-                            💡 Tip: Type your question or use quick replies below
+                            💡 Select a question below or type your question
                         </div>
                         <div class="chatbot-quick-replies">
-                            <button class="quick-reply" data-message="What are your services?">Services</button>
-                            <button class="quick-reply" data-message="How much does it cost?">Pricing</button>
-                            <button class="quick-reply" data-message="How do I book?">Booking</button>
+                            <button class="quick-reply" data-message="What services do you provide?">Services</button>
+                            <button class="quick-reply" data-message="How much does car transport cost?">Pricing</button>
+                            <button class="quick-reply" data-message="Do you provide door-to-door service?">Door-to-Door</button>
+                            <button class="quick-reply" data-message="How long does car delivery take?">Delivery Time</button>
+                            <button class="quick-reply" data-message="Is my car safe during transport?">Safety</button>
+                            <button class="quick-reply" data-message="Do you provide insurance coverage?">Insurance</button>
+                            <button class="quick-reply" data-message="What documents are required?">Documents</button>
                             <button class="quick-reply" data-message="How can I track my car?">Tracking</button>
+                            <button class="quick-reply" data-message="Which cities do you serve?">Cities</button>
+                            <button class="quick-reply" data-message="How do I book car transport?">Booking</button>
+                            <button class="quick-reply" data-message="What payment methods are accepted?">Payment</button>
+                            <button class="quick-reply" data-message="Can I cancel my booking?">Cancellation</button>
+                            <button class="quick-reply" data-message="How can I contact customer support?">Contact Support</button>
                         </div>
                     </div>
                 </div>
@@ -189,9 +213,9 @@
             sendBtn.disabled = true;
         }
 
-        // Simulate bot response delay
+        // Add bot response with slight delay
         setTimeout(() => {
-            addBotMessage(messagesContainer);
+            addBotMessage(messagesContainer, message);
             if (sendBtn) {
                 sendBtn.disabled = false;
             }
@@ -227,15 +251,68 @@
     }
 
     /**
+     * Find matching answer for user question
+     * @param {string} userMessage - The user's message
+     * @returns {string} Bot response
+     */
+    function findAnswer(userMessage) {
+        const normalizedMessage = userMessage.toLowerCase().trim();
+        
+        // Check for exact or partial matches in predefined questions
+        for (const [question, answer] of Object.entries(predefinedQA)) {
+            if (normalizedMessage.includes(question) || question.includes(normalizedMessage)) {
+                return answer;
+            }
+        }
+        
+        // Check for keyword matches
+        const keywords = {
+            "service": "We provide safe and reliable car transportation services across multiple cities in India, including door-to-door pickup and delivery.",
+            "cost": "Car transport charges depend on distance, vehicle type, and route. For exact pricing, please contact our support team.",
+            "price": "Car transport charges depend on distance, vehicle type, and route. For exact pricing, please contact our support team.",
+            "pricing": "Car transport charges depend on distance, vehicle type, and route. For exact pricing, please contact our support team.",
+            "door": "Yes, we offer complete door-to-door car pickup and delivery services.",
+            "delivery": "Delivery usually takes between 3 to 10 days depending on distance and route conditions.",
+            "time": "Delivery usually takes between 3 to 10 days depending on distance and route conditions.",
+            "safe": "Yes. Your car is transported using professional carriers and handled by trained staff to ensure maximum safety.",
+            "safety": "Yes. Your car is transported using professional carriers and handled by trained staff to ensure maximum safety.",
+            "insurance": "Yes, insurance coverage is provided to protect your vehicle during transportation.",
+            "document": "A copy of the vehicle RC and a valid ID proof are required at the time of pickup.",
+            "personal": "No. Personal belongings should be removed before transportation for safety reasons.",
+            "items": "No. Personal belongings should be removed before transportation for safety reasons.",
+            "track": "Tracking details are shared after booking. For tracking updates, please contact our support team.",
+            "cities": "We provide car transport services across multiple cities in India. Please contact our team to confirm availability.",
+            "city": "We provide car transport services across multiple cities in India. Please contact our team to confirm availability.",
+            "book": "You can book our services by contacting our customer support team through the website.",
+            "booking": "You can book our services by contacting our customer support team through the website.",
+            "payment": "Multiple payment methods are accepted. Please contact our support team for payment-related details.",
+            "cancel": "Yes, booking cancellations are allowed. Cancellation charges may apply. Please contact our support team for details.",
+            "damage": "In rare cases of damage, insurance assistance is provided. Please contact our support team immediately.",
+            "contact": "You can contact our customer support team using the phone number or email provided on the website. Support is available 24/7.",
+            "support": "You can contact our customer support team using the phone number or email provided on the website. Support is available 24/7."
+        };
+        
+        for (const [keyword, answer] of Object.entries(keywords)) {
+            if (normalizedMessage.includes(keyword)) {
+                return answer;
+            }
+        }
+        
+        // Return fallback response if no match found
+        return fallbackResponse;
+    }
+
+    /**
      * Add Bot Message to Chat
      * @param {HTMLElement} container - The messages container
+     * @param {string} userMessage - The user's message to respond to
      */
-    function addBotMessage(container) {
+    function addBotMessage(container, userMessage = '') {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message bot-message';
 
-        // Get a random response
-        const response = botResponses[Math.floor(Math.random() * botResponses.length)];
+        // Get appropriate response based on user message
+        const response = findAnswer(userMessage);
         const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
         messageDiv.innerHTML = `
@@ -247,8 +324,6 @@
 
         container.appendChild(messageDiv);
         scrollToBottom(container);
-
-        messageCount++;
     }
 
     /**
