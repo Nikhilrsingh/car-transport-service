@@ -337,6 +337,22 @@
     transform: translateY(-50%) scale(1.1);
 }
 
+body.dark-theme .login-form-control {
+    color: #ffffff;
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-theme .login-form-control::placeholder {
+    color: #bdbdbd;
+}
+
+/* Fix browser autofill text (Chrome) */
+body.dark-theme .login-form-control:-webkit-autofill {
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 /* ============================================================================
    8. PASSWORD STRENGTH METER
    ============================================================================ */
