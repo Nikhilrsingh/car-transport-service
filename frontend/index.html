@@ -528,33 +528,98 @@
   <script src="js/modules/loading-state-manager.js"></script>
   <script src="js/modules/page-navigation-loader.js"></script>
 
-  <!-- Preloader hide -->
+  <!-- Enhanced Preloader Logic -->
   <script>
     (function() {
       const preloader = document.getElementById("preloader");
       let preloaderHidden = false;
+      let hideTimeout = null;
       
       function hidePreloader() {
         if (preloaderHidden || !preloader) return;
         preloaderHidden = true;
+        
+        // Clear any existing timeout
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+        }
+        
         preloader.classList.add("fade-out");
         setTimeout(() => {
-          preloader.style.display = "none";
+          if (preloader) {
+            preloader.style.display = "none";
+          }
         }, 800);
       }
       
+      function shouldShowPreloader() {
+        // Don't show preloader if page is loaded from cache (back/forward navigation)
+        if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
+          return false;
+        }
+        
+        // Don't show preloader if page is already loaded
+        if (document.readyState === 'complete') {
+          return false;
+        }
+        
+        // Don't show preloader if coming from same origin (internal navigation)
+        if (document.referrer && new URL(document.referrer).origin === window.location.origin) {
+          const referrerPath = new URL(document.referrer).pathname;
+          // If coming from login page, don't show preloader
+          if (referrerPath.includes('login.html')) {
+            return false;
+          }
+        }
+        
+        return true;
+      }
+      
+      // Check if we should show preloader at all
+      if (!shouldShowPreloader()) {
+        hidePreloader();
+        return;
+      }
+      
+      // Handle page visibility changes (tab switching)
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && document.readyState === 'complete') {
+          hidePreloader();
+        }
+      });
+      
+      // Handle browser back/forward navigation
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted || document.readyState === 'complete') {
+          // Page was loaded from cache
+          hidePreloader();
+        }
+      });
+      
       // Hide on window load (ideal case)
       window.addEventListener("load", () => {
-        setTimeout(hidePreloader, 500);
+        hideTimeout = setTimeout(hidePreloader, 300);
       });
       
-      // Fallback: hide after 5 seconds max to prevent infinite loading
-      setTimeout(hidePreloader, 5000);
-      
-      // Also hide when DOM is ready + a short delay (covers most cases)
+      // Hide when DOM is ready if page is already complete
       document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(hidePreloader, 3000);
+        if (document.readyState === 'complete') {
+          hideTimeout = setTimeout(hidePreloader, 100);
+        } else {
+          hideTimeout = setTimeout(hidePreloader, 2000);
+        }
       });
+      
+      // Fallback: hide after 4 seconds max to prevent infinite loading
+      setTimeout(hidePreloader, 4000);
+      
+      // Handle navigation away from page
+      window.addEventListener('beforeunload', () => {
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+        }
+      });
+      
     })();
   </script>
 
@@ -579,6 +644,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="js/modules/region-map.js?v=5"></script>
   <script src="js/modules/region-enhancements.js"></script>
+  <script src="js/modules/region-pagination.js"></script>
 
   <!-- Theme & UI enhancements -->
   <script src="js/modules/themes.js"></script>
