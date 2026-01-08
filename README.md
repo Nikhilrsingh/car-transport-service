@@ -161,7 +161,10 @@ git push origin feature-name
 > 📚 **Read More:**  
 > - [Contributing Guidelines](docs/CONTRIBUTING.md)  
 > - [Project Roadmap](docs/ROADMAP.md)  
-> - [Design Guidelines](docs/DESIGN_GUIDELINES.md)
+> - [Design Guidelines](docs/DESIGN_GUIDELINES.md)  
+> - [Folder Structure](docs/FOLDER_STRUCTURE.md)  
+> - [Coding Guidelines](docs/CODING_GUIDELINES.md)  
+> - [Naming Conventions](docs/NAMING_CONVENTIONS.md)
 
 > ⭐ Don't forget to **star** the repo if you like this project!
 
