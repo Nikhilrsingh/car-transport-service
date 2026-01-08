@@ -74,9 +74,17 @@ body[data-theme="light"] #theme-toggle i {
   color: var(--footer-text);
 }
 
+<<<<<<< Updated upstream
 /* Hero Section - Light Mode - For pages WITHOUT background images (home page quote section, etc.) */
 /* NOTE: Pages with background images (About, etc.) have their own specific styles in the About Page section below */
 /* This general style should NOT override background images - use more specific selectors for image-based heroes */
+=======
+/* Hero Section - Light Mode - Clean Professional Look */
+/* Note: Pages with background images (like about.html) should override this in their page-specific CSS */
+body[data-theme="light"] .hero:not(.has-bg-image) {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%) !important;
+}
+>>>>>>> Stashed changes
 
 body[data-theme="light"] .hero::before {
   background: 

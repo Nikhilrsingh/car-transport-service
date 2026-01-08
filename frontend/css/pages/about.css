@@ -683,3 +683,43 @@ padding: 30px 20px;
   /* Body padding-top handled by navbar.css responsive styles */
 }
 
+
+
+/* ====================================
+   ABOUT PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .hero.has-bg-image {
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)),
+    url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+body[data-theme="light"] .hero.has-bg-image::after {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 99, 71, 0.12),
+    rgba(0, 0, 0, 0.4)
+  ) !important;
+}
+
+body[data-theme="light"] .hero.has-bg-image h1 {
+  color: #ff6347 !important;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+body[data-theme="light"] .hero.has-bg-image p {
+  color: #fff !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+body[data-theme="light"] .hero.has-bg-image .hero-btn {
+  background-color: #ff6347 !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .hero.has-bg-image .hero-btn:hover {
+  background-color: #ff4500 !important;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4) !important;
+}
