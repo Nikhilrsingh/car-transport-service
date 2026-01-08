@@ -152,16 +152,11 @@ class BookingManager {
     }
 
     updateProgressBar() {
-        const progress = ((this.currentStep - 1) / (this.totalSteps - 1)) * 100;
         const progressFill = document.getElementById('progressFill');
-        const progressPercentage = document.getElementById('progressPercentage');
-        
+        const percentage = Math.round((this.currentStep / this.totalSteps) * 100);
+
         if (progressFill) {
-            progressFill.style.width = progress + '%';
-        }
-        
-        if (progressPercentage) {
-            progressPercentage.textContent = Math.round((this.currentStep / this.totalSteps) * 100) + '% Complete';
+            progressFill.style.width = percentage + '%';
         }
     }
 
