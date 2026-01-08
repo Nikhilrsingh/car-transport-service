@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Fix Test - Floating Menus & About Background</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components/about.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="css/light-mode.css" />
+    
+    <style>
+        .test-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
+            max-width: 350px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .test-controls h3 {
+            margin: 0 0 15px 0;
+            color: #ff6347;
+        }
+        
+        .test-controls button {
+            background: linear-gradient(135deg, #ff6347, #ff4500);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+        }
+        
+        .status-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .status-item {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .status-item.success { color: #4ade80; }
+        .status-item.error { color: #f87171; }
+        .status-item.warning { color: #fbbf24; }
+        
+        .test-content {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .scroll-area {
+            height: 600px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        body[data-theme="light"] .test-content {
+            color: #333;
+        }
+        
+        body[data-theme="dark"] .test-content {
+            color: #fff;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Test Controls Panel -->
+    <div class="test-controls">
+        <h3>🔧 Test Controls</h3>
+        
+        <div>
+            <strong>Theme:</strong>
+            <button onclick="switchTheme('light')">☀️ Light</button>
+            <button onclick="switchTheme('dark')">🌙 Dark</button>
+        </div>
+        
+        <div style="margin-top: 10px;">
+            <strong>Tests:</strong>
+            <button onclick="runAllTests()">🧪 Run All</button>
+            <button onclick="checkComponents()">🔍 Check</button>
+        </div>
+        
+        <div class="status-box" id="statusBox">
+            <div class="status-item">Ready to test...</div>
+        </div>
+    </div>
+
+    <!-- Hero Section (About Page Style) -->
+    <section class="hero about-hero">
+        <div class="container">
+            <h1>About Page Hero Test</h1>
+            <p>This hero section should display a background IMAGE in both light and dark modes.</p>
+            <p><strong>Expected:</strong> Background image (banner.jpg) visible with appropriate overlay</p>
+            <a href="#" class="hero-btn">Test Button</a>
+        </div>
+    </section>
+
+    <!-- Test Content -->
+    <div class="test-content">
+        <div class="test-section">
+            <h2>🎯 Issue 1: Floating Menus Test</h2>
+            <p>Check for the following components:</p>
+            <ul>
+                <li><strong>FAB Menu:</strong> Circular "+" button in bottom-right corner</li>
+                <li><strong>Bottom Action Bar:</strong> Fixed bar at bottom with clock, quote button, etc.</li>
+                <li><strong>Smart Scroll Button:</strong> Arrow button that appears when scrolling</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h2>🎨 Issue 2: About Page Background Test</h2>
+            <p>The hero section above should show:</p>
+            <ul>
+                <li><strong>Light Mode:</strong> Background image with light overlay (readable dark text)</li>
+                <li><strong>Dark Mode:</strong> Background image with dark overlay (readable light text)</li>
+            </ul>
+            <p>Toggle between themes using the controls above to verify.</p>
+        </div>
+        
+        <div class="scroll-area">
+            <div>
+                <h3>📜 Scroll Test Area</h3>
+                <p>Scroll down to test the smart scroll button.</p>
+                <p style="font-size: 48px;">⬇️</p>
+            </div>
+            <div>
+                <h3>🔄 Middle Section</h3>
+                <p>The scroll button should change direction based on position.</p>
+            </div>
+            <div>
+                <h3>⬆️ Bottom Section</h3>
+                <p>At the bottom, click the scroll button to go back to top.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/modules/footer-loader.js"></script>
+    
+    <script>
+        function addStatus(message, type = 'info') {
+            const box = document.getElementById('statusBox');
+            const item = document.createElement('div');
+            item.className = `status-item ${type}`;
+            item.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            box.insertBefore(item, box.firstChild);
+            console.log(message);
+        }
+        
+        function switchTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            const themeLink = document.getElementById('theme-style');
+            themeLink.href = `css/${theme}-mode.css`;
+            localStorage.setItem('theme', theme);
+            addStatus(`Switched to ${theme} mode`, 'success');
+            
+            // Check hero background
+            setTimeout(checkHeroBackground, 500);
+        }
+        
+        function checkHeroBackground() {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const style = window.getComputedStyle(hero);
+                const bg = style.backgroundImage;
+                const hasImage = bg && bg.includes('banner.jpg');
+                
+                if (hasImage) {
+                    addStatus('✅ Hero has background image', 'success');
+                } else {
+                    addStatus('❌ Hero missing background image: ' + bg.substring(0, 50), 'error');
+                }
+            }
+        }
+        
+        function checkComponents() {
+            addStatus('Checking components...', 'info');
+            
+            // Check FAB
+            const fab = document.querySelector('.fab-container');
+            const fabMain = document.getElementById('fabMain');
+            addStatus(fab ? '✅ FAB Container found' : '❌ FAB Container missing', fab ? 'success' : 'error');
+            addStatus(fabMain ? '✅ FAB Main button found' : '❌ FAB Main button missing', fabMain ? 'success' : 'error');
+            
+            // Check Bottom Action Bar
+            const bottomBar = document.querySelector('.bottom-action-bar-fixed');
+            const bottomQuote = document.getElementById('bottomQuoteBtn');
+            addStatus(bottomBar ? '✅ Bottom Action Bar found' : '❌ Bottom Action Bar missing', bottomBar ? 'success' : 'error');
+            addStatus(bottomQuote ? '✅ Bottom Quote button found' : '❌ Bottom Quote button missing', bottomQuote ? 'success' : 'error');
+            
+            // Check Scroll Button
+            const scrollBtn = document.getElementById('smartScrollBtn');
+            addStatus(scrollBtn ? '✅ Scroll Button found' : '❌ Scroll Button missing', scrollBtn ? 'success' : 'error');
+            
+            // Check Hero Background
+            checkHeroBackground();
+        }
+        
+        function runAllTests() {
+            addStatus('Running all tests...', 'info');
+            checkComponents();
+            
+            // Test FAB click
+            setTimeout(() => {
+                const fabMain = document.getElementById('fabMain');
+                if (fabMain) {
+                    fabMain.click();
+                    setTimeout(() => {
+                        const fabActions = document.getElementById('fabActions');
+                        if (fabActions && fabActions.classList.contains('active')) {
+                            addStatus('✅ FAB menu opens correctly', 'success');
+                            fabMain.click(); // Close it
+                        } else {
+                            addStatus('❌ FAB menu did not open', 'error');
+                        }
+                    }, 300);
+                }
+            }, 500);
+            
+            // Test scroll button visibility
+            setTimeout(() => {
+                window.scrollTo(0, 500);
+                setTimeout(() => {
+                    const scrollBtn = document.getElementById('smartScrollBtn');
+                    if (scrollBtn && scrollBtn.classList.contains('visible')) {
+                        addStatus('✅ Scroll button visible after scrolling', 'success');
+                    } else {
+                        addStatus('⚠️ Scroll button not visible after scrolling', 'warning');
+                    }
+                    window.scrollTo(0, 0);
+                }, 500);
+            }, 1000);
+        }
+        
+        // Auto-run tests on load
+        window.addEventListener('load', () => {
+            // Simulate preloader completion by adding 'loaded' class
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+                addStatus('Page loaded, running initial checks...', 'info');
+            }, 500);
+            setTimeout(checkComponents, 1500);
+            setTimeout(checkComponents, 3000); // Check again after components load
+        });
+        
+        // Initialize theme from localStorage
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        switchTheme(savedTheme);
+    </script>
+</body>
+</html>

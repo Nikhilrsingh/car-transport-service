@@ -12,18 +12,25 @@
     const path = window.location.pathname;
     const isInPagesFolder = path.includes('/pages/');
 
+    console.log('Footer Loader: Starting load process...');
+    console.log('Footer Loader: Current path:', path);
+    console.log('Footer Loader: Is in pages folder:', isInPagesFolder);
+
     // Load CSS into head if not already loaded
     loadFooterCSS(isInPagesFolder);
 
     // Fetch footer.html instead of using hardcoded template
     const footerPath = isInPagesFolder ? '../components/footer.html' : './components/footer.html';
+    console.log('Footer Loader: Attempting to fetch:', footerPath);
     
     fetch(footerPath)
       .then(response => {
+        console.log('Footer Loader: Fetch response status:', response.status);
         if (!response.ok) throw new Error('Footer not found');
         return response.text();
       })
       .then(html => {
+        console.log('Footer Loader: Footer HTML loaded successfully');
         // Remove CSS link tags from fetched HTML (we load CSS separately)
         const cleanHTML = html.replace(/<link[^>]*>/gi, '');
         // Remove script tags as they won't execute in innerHTML
@@ -40,6 +47,8 @@
           yearSpan.textContent = new Date().getFullYear();
         }
 
+        console.log('Footer Loader: Loading additional components...');
+        
         // Load footer interaction script once
         loadFooterJS(isInPagesFolder);
         
@@ -51,9 +60,12 @@
         
         // Load Smart Scroll Button script
         loadScrollButtonJS(isInPagesFolder);
+        
+        console.log('Footer Loader: All components loaded successfully');
       })
       .catch(err => {
         console.error('Failed to load footer:', err);
+        console.log('Footer Loader: Using fallback template');
         // Fallback to inline template if fetch fails
         footerContainer.innerHTML = getFooterHTML();
         if (!isInPagesFolder) {
@@ -100,32 +112,40 @@
 
   function loadFABJS(isInPagesFolder) {
     const existing = document.getElementById('fab-script');
-    if (existing) return;
+    if (existing) {
+      console.log('FAB script already loaded');
+      return;
+    }
     const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
     const script = document.createElement('script');
     script.src = jsBasePath + 'floating-action-menu.js';
     script.id = 'fab-script';
+    console.log('Loading FAB script from:', script.src);
     script.onload = function() {
       console.log('FAB script loaded successfully');
     };
     script.onerror = function() {
-      console.error('Failed to load FAB script');
+      console.error('Failed to load FAB script from:', script.src);
     };
     document.body.appendChild(script);
   }
 
   function loadBottomActionBarJS(isInPagesFolder) {
     const existing = document.getElementById('bottom-action-bar-script');
-    if (existing) return;
+    if (existing) {
+      console.log('Bottom Action Bar script already loaded');
+      return;
+    }
     const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
     const script = document.createElement('script');
     script.src = jsBasePath + 'bottom-action-bar.js';
     script.id = 'bottom-action-bar-script';
+    console.log('Loading Bottom Action Bar script from:', script.src);
     script.onload = function() {
       console.log('Bottom Action Bar script loaded successfully');
     };
     script.onerror = function() {
-      console.error('Failed to load Bottom Action Bar script');
+      console.error('Failed to load Bottom Action Bar script from:', script.src);
     };
     document.body.appendChild(script);
   }
@@ -133,6 +153,7 @@
   function loadScrollButtonJS(isInPagesFolder) {
     // First create the button element if it doesn't exist
     if (!document.getElementById('smartScrollBtn')) {
+      console.log('Creating smart scroll button element');
       const button = document.createElement('button');
       button.className = 'scroll-button';
       button.id = 'smartScrollBtn';
@@ -143,16 +164,20 @@
     }
     
     const existing = document.getElementById('scroll-button-script');
-    if (existing) return;
+    if (existing) {
+      console.log('Scroll Button script already loaded');
+      return;
+    }
     const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
     const script = document.createElement('script');
     script.src = jsBasePath + 'scroll-button.js?v=4';
     script.id = 'scroll-button-script';
+    console.log('Loading Scroll Button script from:', script.src);
     script.onload = function() {
       console.log('Scroll Button script loaded successfully');
     };
     script.onerror = function() {
-      console.error('Failed to load Scroll Button script');
+      console.error('Failed to load Scroll Button script from:', script.src);
     };
     document.body.appendChild(script);
   }
@@ -279,7 +304,76 @@ function getFooterHTML() {
       <span>Open</span>
     </button>
   </div>
-</footer>`;
+</footer>
+
+<!-- 🚀 Modern Floating Action Menu (FAB) -->
+<div class="fab-container">
+  <button class="fab-main" id="fabMain" aria-label="Open actions menu" aria-expanded="false">
+    <i class="fas fa-plus fab-icon"></i>
+  </button>
+
+  <!-- Action Buttons (hidden by default) -->
+  <div class="fab-actions" id="fabActions">
+    <!-- Get Quote -->
+    <button class="fab-action-btn" id="fabQuoteBtn" data-tooltip="Get Quote">
+      <i class="fas fa-file-invoice-dollar"></i>
+    </button>
+
+    <!-- Book Now -->
+    <button class="fab-action-btn" id="fabBookBtn" data-tooltip="Book Now">
+      <i class="fas fa-calendar-check"></i>
+    </button>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/919372693389" class="fab-action-btn" data-tooltip="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Call -->
+    <a href="tel:+919372693389" class="fab-action-btn" data-tooltip="Call Us">
+      <i class="fas fa-phone"></i>
+    </a>
+
+    <!-- Feedback -->
+    <button class="fab-action-btn" id="fabFeedbackBtn" data-tooltip="Feedback">
+      <i class="fas fa-star"></i>
+    </button>
+
+    <!-- Chatbot -->
+    <button class="fab-action-btn" id="fabChatBtn" data-tooltip="Chat">
+      <i class="fas fa-comments"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Bottom Action Bar (desktop only) -->
+<div class="bottom-action-bar-fixed">
+  <!-- Left Section: Clock and Chatbot -->
+  <div class="bottom-bar-left">
+    <!-- Digital Clock -->
+    <div class="bottom-bar-clock" id="bottomBarClock"></div>
+    
+    <!-- Chatbot Icon (next to clock) -->
+    <button class="bottom-bar-chat-icon" id="bottomChatBtn" aria-label="Open Chatbot" title="Chat with us">
+      <i class="fas fa-comments" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/919372693389" class="bottom-action-btn whatsapp" aria-label="Contact via WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Get Quote Button (Center) -->
+  <button id="bottomQuoteBtn" class="bottom-action-btn quote" aria-label="Get Quote">
+    Get Quote
+  </button>
+
+  <!-- Call Button -->
+  <a href="tel:+919372693389" class="bottom-action-btn call" aria-label="Call Us">
+    <i class="fas fa-phone-alt"></i>
+  </a>
+</div>`;
 }
 
   function fixPathsForRootPage(container) {
@@ -317,5 +411,32 @@ function getFooterHTML() {
     document.addEventListener('DOMContentLoaded', loadFooter);
   } else {
     loadFooter();
+  }
+  
+  // Also load the component initializer as a safety mechanism
+  function loadComponentInitializer() {
+    const existing = document.getElementById('component-initializer-script');
+    if (existing) return;
+    
+    const path = window.location.pathname;
+    const isInPagesFolder = path.includes('/pages/');
+    const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
+    
+    const script = document.createElement('script');
+    script.src = jsBasePath + 'component-initializer.js';
+    script.id = 'component-initializer-script';
+    script.onload = function() {
+      console.log('Component Initializer script loaded');
+    };
+    document.body.appendChild(script);
+  }
+  
+  // Load component initializer after a short delay
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(loadComponentInitializer, 100);
+    });
+  } else {
+    setTimeout(loadComponentInitializer, 100);
   }
 })();

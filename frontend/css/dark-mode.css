@@ -556,3 +556,412 @@ body[data-theme="dark"] #footer-container {
   background-color: var(--footer-bg) !important;
   color: var(--footer-text);
 }
+/* ====================================
+   ABOUT PAGE - Dark Mode Styles
+   ==================================== */
+
+/* About Page Hero Section */
+body[data-theme="dark"] .about .hero {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f1115 100%) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .hero h1 {
+  color: #ff6347 !important;
+  text-shadow: 0 2px 10px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="dark"] .hero p {
+  color: #f0f0f0 !important;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) !important;
+}
+
+body[data-theme="dark"] .hero-btn {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4) !important;
+}
+
+body[data-theme="dark"] .hero-btn:hover {
+  background: linear-gradient(135deg, #ff4500, #e63900) !important;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.5) !important;
+}
+
+/* About Section */
+body[data-theme="dark"] .about {
+  background: linear-gradient(to bottom, #2b2b2b, #242424) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .about .section-title h2 {
+  color: #ff8667 !important;
+  text-shadow: 0 0 10px rgba(255, 99, 71, 0.6) !important;
+}
+
+body[data-theme="dark"] .about .section-title p {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .about-text {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .about-text h3 {
+  color: #ff6347 !important;
+  text-shadow: 0 0 15px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="dark"] .about-text p {
+  color: #e8c3b3 !important;
+}
+
+/* About Image - Enhanced for dark mode */
+body[data-theme="dark"] .about-image {
+  background: radial-gradient(
+    circle,
+    rgba(255, 99, 71, 0.35),
+    rgba(0, 0, 0, 0.9)
+  ) !important;
+  box-shadow: 0 0 60px rgba(255, 99, 71, 0.25) !important;
+  border: 2px solid rgba(255, 99, 71, 0.2) !important;
+}
+
+body[data-theme="dark"] .about-image:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+  border-color: rgba(255, 99, 71, 0.4) !important;
+}
+
+body[data-theme="dark"] .about-image img {
+  filter: brightness(1.05) contrast(1.05) !important;
+}
+
+/* Values Section */
+body[data-theme="dark"] .values {
+  background: linear-gradient(to bottom, #2b2b2b, #252525) !important;
+}
+
+body[data-theme="dark"] .values .section-title h2 {
+  color: #ff8667 !important;
+}
+
+body[data-theme="dark"] .values .section-title p {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .value-card {
+  background: linear-gradient(145deg, #2f2f2f, #262626) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+body[data-theme="dark"] .value-card:hover {
+  background: linear-gradient(145deg, #303030, #262626) !important;
+  border-color: #ff6347 !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+body[data-theme="dark"] .value-card h3 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .value-card p {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .value-icon {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 0 20px rgba(255, 99, 71, 0.4) !important;
+}
+
+/* Enhanced Values Section */
+body[data-theme="dark"] .values-enhanced {
+  background: linear-gradient(to bottom, rgba(255, 99, 71, 0.08), transparent) !important;
+}
+
+body[data-theme="dark"] .value-icon-wrapper {
+  background: rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="dark"] .value-icon-morph {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+}
+
+body[data-theme="dark"] .value-tooltip {
+  background: rgba(50, 50, 50, 0.95) !important;
+  color: white !important;
+}
+
+/* Team Section */
+body[data-theme="dark"] .team {
+  background: linear-gradient(to bottom, #2b2b2b, #252525) !important;
+  color: #c78a70 !important;
+}
+
+body[data-theme="dark"] .team .section-title h2 {
+  color: #ff8667 !important;
+}
+
+body[data-theme="dark"] .team .section-title p {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .team-member {
+  background: #2b2b2b !important;
+  border: 1px solid #333 !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+body[data-theme="dark"] .team-member:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+body[data-theme="dark"] .member-info {
+  color: #c78a70 !important;
+}
+
+body[data-theme="dark"] .member-info h3 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .member-info p {
+  color: #ff6347 !important;
+}
+
+/* Team Flip Cards */
+body[data-theme="dark"] .about-team-flip-card-front {
+  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%) !important;
+}
+
+body[data-theme="dark"] .about-team-flip-card-back {
+  background: linear-gradient(145deg, #2f2f2f, #1f1f1f) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .about-team-flip-card-back h3 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .about-member-front-info h3 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .about-member-role {
+  color: #ff6347 !important;
+}
+
+body[data-theme="dark"] .about-member-bio {
+  color: #f0f0f0 !important;
+}
+
+body[data-theme="dark"] .about-member-highlights li {
+  color: #e0e0e0 !important;
+}
+
+body[data-theme="dark"] .about-social-icon {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body[data-theme="dark"] .about-social-icon:hover {
+  background: #ff6347 !important;
+  color: #ffffff !important;
+}
+
+/* Skill Bars */
+body[data-theme="dark"] .about-skill-name,
+body[data-theme="dark"] .skill-name {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .about-skill-progress,
+body[data-theme="dark"] .skill-progress {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body[data-theme="dark"] .about-skill-progress-bar,
+body[data-theme="dark"] .skill-progress-bar {
+  background: linear-gradient(90deg, #ff6347, #ff4500) !important;
+}
+
+/* Stats Section Enhanced */
+body[data-theme="dark"] .stats-enhanced {
+  background: linear-gradient(to bottom, rgba(255, 99, 71, 0.08), transparent) !important;
+}
+
+body[data-theme="dark"] .stats-enhanced .section-title h2 {
+  color: #ff8667 !important;
+}
+
+body[data-theme="dark"] .stats-enhanced .section-title p {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .stat-circle-item {
+  background: #2f2f2f !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+body[data-theme="dark"] .stat-circle-number {
+  color: #ff6347 !important;
+  text-shadow: 0 0 15px rgba(255, 99, 71, 0.5) !important;
+}
+
+body[data-theme="dark"] .stat-circle-label {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .stat-circle-description {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .stat-circle-bg {
+  stroke: rgba(255, 255, 255, 0.1) !important;
+}
+
+body[data-theme="dark"] .stat-circle-progress {
+  stroke: url(#gradient) !important;
+}
+
+/* Milestone Timeline */
+body[data-theme="dark"] .milestone-timeline h3 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="dark"] .timeline-milestone {
+  background: #2f2f2f !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body[data-theme="dark"] .milestone-marker {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+}
+
+body[data-theme="dark"] .milestone-year {
+  color: #ff6347 !important;
+}
+
+body[data-theme="dark"] .milestone-achievement {
+  color: #e0e0e0 !important;
+}
+
+/* Animated Infographic */
+body[data-theme="dark"] .animated-infographic {
+  background: #2b2b2b !important;
+}
+
+body[data-theme="dark"] .animated-infographic h3 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="dark"] .infographic-label {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .infographic-bar {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body[data-theme="dark"] .infographic-bar-fill {
+  background: linear-gradient(90deg, #ff6347, #ff4500) !important;
+}
+
+/* Company Timeline Section */
+body[data-theme="dark"] .company-timeline {
+  background: linear-gradient(to bottom, #2b2b2b, #252525) !important;
+}
+
+body[data-theme="dark"] .company-timeline .section-title h2 {
+  color: #ff8667 !important;
+}
+
+body[data-theme="dark"] .company-timeline .section-title p {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .timeline-line {
+  background: linear-gradient(180deg, #ff6347 0%, #ff4500 100%) !important;
+}
+
+body[data-theme="dark"] .timeline-item {
+  background: #333 !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body[data-theme="dark"] .timeline-content h3 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="dark"] .timeline-content p {
+  color: #ccc !important;
+}
+
+body[data-theme="dark"] .timeline-year {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  border: 5px solid #1a1a1a !important;
+}
+
+body[data-theme="dark"] .timeline-tag {
+  background: rgba(255, 99, 71, 0.2) !important;
+  color: #ff6347 !important;
+  border: 1px solid rgba(255, 99, 71, 0.3) !important;
+}
+
+/* CTA Section */
+body[data-theme="dark"] .cta {
+  background: radial-gradient(circle, rgba(255, 99, 71, 0.15), transparent 70%) !important;
+}
+
+body[data-theme="dark"] .cta h2 {
+  color: #c78a70 !important;
+}
+
+body[data-theme="dark"] .cta p {
+  color: #ae4c4c !important;
+}
+
+body[data-theme="dark"] .cta-btn {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="dark"] .cta-btn:hover {
+  background: linear-gradient(90deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4) !important;
+}
+
+/* Section Divider */
+body[data-theme="dark"] .section-divider {
+  background: linear-gradient(90deg, transparent, #444, transparent) !important;
+}
+
+/* About Content Spacing and Typography */
+body[data-theme="dark"] .about-content {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .about-text h3::before {
+  background: #ff6347 !important;
+}
+
+/* Responsive adjustments for dark mode */
+@media (max-width: 768px) {
+  body[data-theme="dark"] .about {
+    background: linear-gradient(to bottom, #2b2b2b, #242424) !important;
+  }
+  
+  body[data-theme="dark"] .values {
+    background: linear-gradient(to bottom, #2b2b2b, #252525) !important;
+  }
+  
+  body[data-theme="dark"] .team {
+    background: linear-gradient(to bottom, #2b2b2b, #252525) !important;
+  }
+  
+  body[data-theme="dark"] .company-timeline {
+    background: linear-gradient(to bottom, #2b2b2b, #252525) !important;
+  }
+}

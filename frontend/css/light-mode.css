@@ -67,16 +67,16 @@ body[data-theme="light"] #theme-toggle i {
   color: #ff6347 !important;
 }
 
+
 /* footer example */
 .footer {
   background: var(--footer-bg);
   color: var(--footer-text);
 }
 
-/* Hero Section - Light Mode - Clean Professional Look */
-body[data-theme="light"] .hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%) !important;
-}
+/* Hero Section - Light Mode - For pages WITHOUT background images (home page quote section, etc.) */
+/* NOTE: Pages with background images (About, etc.) have their own specific styles in the About Page section below */
+/* This general style should NOT override background images - use more specific selectors for image-based heroes */
 
 body[data-theme="light"] .hero::before {
   background: 
@@ -2085,4 +2085,420 @@ body[data-theme="light"] .close-feedback {
 
 body[data-theme="light"] .close-feedback:hover {
   color: #ff6347 !important;
+}
+
+/* ====================================
+   ABOUT PAGE - Light Mode Styles
+   ==================================== */
+
+/* About Page Hero Section - PRESERVE BACKGROUND IMAGE */
+/* The hero section on the About page should show the same background image in both light and dark modes */
+/* Only the overlay opacity/color should change for readability */
+/* Uses .about-hero class to specifically target the About page hero */
+
+body[data-theme="light"] .about-hero,
+body[data-theme="light"] .hero.about-hero {
+  /* Use the same background image as dark mode with a lighter overlay for readability */
+  background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(248, 249, 250, 0.65)), url('../../assets/images/banner.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+}
+
+/* About page hero text styling for light mode */
+body[data-theme="light"] .about-hero h1 {
+  color: #1a1a1a !important;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8) !important;
+}
+
+body[data-theme="light"] .about-hero p {
+  color: #333 !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+}
+
+body[data-theme="light"] .hero-btn {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4) !important;
+}
+
+body[data-theme="light"] .hero-btn:hover {
+  background: linear-gradient(135deg, #ff4500, #e63900) !important;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.5) !important;
+}
+
+/* About Section */
+body[data-theme="light"] .about {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .about .section-title h2 {
+  color: #1a1a1a !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="light"] .about .section-title p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .about-text {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .about-text h3 {
+  color: #ff6347 !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="light"] .about-text p {
+  color: #555 !important;
+}
+
+/* About Image - Fix for light mode */
+body[data-theme="light"] .about-image {
+  background: radial-gradient(
+    circle,
+    rgba(255, 99, 71, 0.1),
+    rgba(255, 255, 255, 0.95)
+  ) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  border: 2px solid rgba(255, 99, 71, 0.2) !important;
+}
+
+body[data-theme="light"] .about-image:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 99, 71, 0.4) !important;
+}
+
+body[data-theme="light"] .about-image img {
+  filter: brightness(1.1) contrast(1.05) !important;
+}
+
+/* Values Section */
+body[data-theme="light"] .values {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .values .section-title h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .values .section-title p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .value-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .value-card:hover {
+  background: #ffffff !important;
+  border-color: rgba(255, 99, 71, 0.3) !important;
+  box-shadow: 0 10px 30px rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .value-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .value-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .value-icon {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3) !important;
+}
+
+/* Enhanced Values Section */
+body[data-theme="light"] .values-enhanced {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .value-icon-wrapper {
+  background: rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] .value-icon-morph {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+}
+
+body[data-theme="light"] .value-tooltip {
+  background: rgba(50, 50, 50, 0.95) !important;
+  color: white !important;
+}
+
+/* Team Section */
+body[data-theme="light"] .team {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .team .section-title h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .team .section-title p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .team-member {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .team-member:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+body[data-theme="light"] .member-info {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .member-info h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .member-info p {
+  color: #ff6347 !important;
+}
+
+/* Team Flip Cards */
+body[data-theme="light"] .about-team-flip-card-front {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .about-team-flip-card-back {
+  background: linear-gradient(145deg, #f8f9fa, #ffffff) !important;
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .about-team-flip-card-back h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .about-member-front-info h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .about-member-role {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .about-member-bio {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .about-member-highlights li {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .about-social-icon {
+  background: rgba(255, 99, 71, 0.1) !important;
+  color: #ff6347 !important;
+  border: 1px solid rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .about-social-icon:hover {
+  background: #ff6347 !important;
+  color: #ffffff !important;
+}
+
+/* Skill Bars */
+body[data-theme="light"] .about-skill-name,
+body[data-theme="light"] .skill-name {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .about-skill-progress,
+body[data-theme="light"] .skill-progress {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .about-skill-progress-bar,
+body[data-theme="light"] .skill-progress-bar {
+  background: linear-gradient(90deg, #ff6347, #ff4500) !important;
+}
+
+/* Stats Section Enhanced */
+body[data-theme="light"] .stats-enhanced {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .stats-enhanced .section-title h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .stats-enhanced .section-title p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .stat-circle-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .stat-circle-number {
+  color: #ff6347 !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="light"] .stat-circle-label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .stat-circle-description {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .stat-circle-bg {
+  stroke: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .stat-circle-progress {
+  stroke: url(#gradient) !important;
+}
+
+/* Milestone Timeline */
+body[data-theme="light"] .milestone-timeline h3 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .timeline-milestone {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .milestone-marker {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+}
+
+body[data-theme="light"] .milestone-year {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .milestone-achievement {
+  color: #555 !important;
+}
+
+/* Animated Infographic */
+body[data-theme="light"] .animated-infographic h3 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .infographic-label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .infographic-bar {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .infographic-bar-fill {
+  background: linear-gradient(90deg, #ff6347, #ff4500) !important;
+}
+
+/* Company Timeline Section */
+body[data-theme="light"] .company-timeline {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .company-timeline .section-title h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .company-timeline .section-title p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .timeline-line {
+  background: rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .timeline-item {
+  background: #f8f9fa !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .timeline-content h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .timeline-content p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .timeline-year {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .timeline-tag {
+  background: rgba(255, 99, 71, 0.1) !important;
+  color: #ff6347 !important;
+  border: 1px solid rgba(255, 99, 71, 0.3) !important;
+}
+
+/* CTA Section */
+body[data-theme="light"] .cta {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .cta h2 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .cta p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .cta-btn {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .cta-btn:hover {
+  background: linear-gradient(135deg, #ff4500, #e63900) !important;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4) !important;
+}
+
+/* Section Divider */
+body[data-theme="light"] .section-divider {
+  background: linear-gradient(90deg, transparent, rgba(255, 99, 71, 0.3), transparent) !important;
+}
+
+/* About Content Spacing and Typography */
+body[data-theme="light"] .about-content {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .about-text h3::before {
+  background: #ff6347 !important;
+}
+
+/* Responsive adjustments for light mode */
+@media (max-width: 768px) {
+  body[data-theme="light"] .about {
+    background: #ffffff !important;
+  }
+  
+  body[data-theme="light"] .values {
+    background: #f8f9fa !important;
+  }
+  
+  body[data-theme="light"] .team {
+    background: #ffffff !important;
+  }
+  
+  body[data-theme="light"] .company-timeline {
+    background: #f8f9fa !important;
+  }
 }
