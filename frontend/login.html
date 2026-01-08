@@ -580,7 +580,14 @@
           alert("Please fill in all fields!");
           return;
         }
+        
+        // Simulate successful login and redirect to home
         alert(`Welcome back, ${email}!`);
+        
+        // Add a small delay to show the success message, then redirect
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
       }
 
       function signup() {
@@ -591,12 +598,38 @@
           alert("Please fill all fields!");
           return;
         }
+        
+        // Simulate successful signup and redirect to home
         alert(`Account created for ${name}!`);
+        
+        // Add a small delay to show the success message, then redirect
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
       }
 
       function continueWithGoogle() {
         alert("Redirecting to Google Sign-In...");
+        
+        // Simulate Google auth and redirect
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
       }
+      
+      // Handle browser back button navigation
+      window.addEventListener('pageshow', (event) => {
+        // Clear any loading states when page is shown from cache
+        if (event.persisted) {
+          // Page was loaded from back/forward cache
+          document.body.style.opacity = '1';
+        }
+      });
+      
+      // Ensure page is fully visible when loaded
+      window.addEventListener('load', () => {
+        document.body.style.opacity = '1';
+      });
     </script>
 
     <!-- Top to Bottom Button -->
