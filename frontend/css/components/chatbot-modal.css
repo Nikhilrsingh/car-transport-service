@@ -677,21 +677,26 @@
 
 /* Quick Replies */
 .chatbot-quick-replies {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 6px;
+    max-height: 120px;
+    overflow-y: auto;
 }
 
 .quick-reply {
-    padding: 8px 12px;
+    padding: 6px 10px;
     background: #2a2a2a;
     border: 1px solid #ff6b35;
-    border-radius: 16px;
-    font-size: 12px;
+    border-radius: 14px;
+    font-size: 11px;
     cursor: pointer;
     color: #ff6b35;
     font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
@@ -737,6 +742,16 @@
 
     .chatbot-input-area {
         padding: 12px;
+    }
+
+    .chatbot-quick-replies {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 4px;
+    }
+
+    .quick-reply {
+        padding: 5px 8px;
+        font-size: 10px;
     }
 }
 

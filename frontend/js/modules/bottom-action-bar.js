@@ -109,12 +109,20 @@
   function handleChatbotClick() {
     console.log('Bottom Action Bar: Chatbot button clicked');
     
-    // Try to open the chatbot modal
-    const chatbotModal = document.getElementById('chatbotModal');
+    // Try to open the chatbot modal using the correct ID
+    const chatbotModal = document.getElementById('chatbot-modal-overlay');
     if (chatbotModal) {
       chatbotModal.classList.add('active');
       chatbotModal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+      
+      // Focus on the input field
+      setTimeout(() => {
+        const chatInput = document.getElementById('chatbot-input');
+        if (chatInput) {
+          chatInput.focus();
+        }
+      }, 300);
+      
       console.log('Bottom Action Bar: Chatbot modal opened');
     } else {
       // Fallback: trigger the FAB chatbot button if it exists
@@ -123,7 +131,20 @@
         fabChatBtn.click();
         console.log('Bottom Action Bar: Triggered FAB chatbot button');
       } else {
-        console.log('Bottom Action Bar: No chatbot modal or FAB button found');
+        // If no modal exists, try to initialize it
+        if (window.chatbotModal && window.chatbotModal.init) {
+          window.chatbotModal.init();
+          // Try again after initialization
+          setTimeout(() => {
+            const modal = document.getElementById('chatbot-modal-overlay');
+            if (modal) {
+              modal.classList.add('active');
+              modal.style.display = 'flex';
+            }
+          }, 100);
+        } else {
+          console.log('Bottom Action Bar: No chatbot modal or FAB button found');
+        }
       }
     }
   }

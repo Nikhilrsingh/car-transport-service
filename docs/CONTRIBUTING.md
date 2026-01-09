@@ -64,6 +64,9 @@ This project and everyone participating in it is governed by our Code of Conduct
 ## Development Workflow
 
 ### Project Structure
+
+For detailed folder structure, see [FOLDER_STRUCTURE.md](./FOLDER_STRUCTURE.md)
+
 ```
 frontend/          # All frontend code
 ├── index.html     # Main entry point
@@ -73,7 +76,7 @@ frontend/          # All frontend code
 ├── assets/        # Images, icons, fonts
 └── components/    # Reusable HTML components
 
-backend/           # Backend code (planned)
+backend/           # Backend code
 docs/              # Documentation
 scripts/           # Build/deployment scripts
 ```
@@ -99,27 +102,34 @@ scripts/           # Build/deployment scripts
 
 ## Style Guidelines
 
-### HTML
+For comprehensive coding guidelines, see:
+- [Coding Guidelines](./CODING_GUIDELINES.md) - Detailed code style and best practices
+- [Naming Conventions](./NAMING_CONVENTIONS.md) - File, variable, and function naming standards
+
+### Quick Reference
+
+**HTML**
 - Use semantic HTML5 elements
 - Proper indentation (2 spaces)
 - Include alt text for images
-- Use meaningful class names
+- Use meaningful class names (BEM methodology)
 
-### CSS
+**CSS**
 - Follow BEM naming convention when possible
 - Use CSS variables for colors and spacing
 - Mobile-first responsive design
 - Comment complex styles
 
-### JavaScript
+**JavaScript**
 - Use modern ES6+ syntax
 - Meaningful variable and function names
 - Add comments for complex logic
 - Avoid global variables
 
-### File Naming
+**File Naming**
 - Use lowercase with hyphens: `booking-form.html`
 - Be descriptive: `hero-animations.js` not `anim.js`
+- See [Naming Conventions](./NAMING_CONVENTIONS.md) for details
 
 ## Commit Guidelines
 

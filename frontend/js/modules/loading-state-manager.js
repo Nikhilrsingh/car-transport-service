@@ -97,19 +97,39 @@ class LoadingStateManager {
      * Setup page load listeners
      */
     setupPageLoadListeners() {
-        // Show loading when page starts loading
-        window.addEventListener('beforeunload', () => {
-            this.show();
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                // Page became visible, hide any loading indicators
+                this.hide();
+            }
+        });
+
+        // Handle browser back/forward navigation
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                // Page was loaded from back/forward cache, hide loading immediately
+                this.hide();
+            }
+        });
+
+        // Show loading when navigating away (but not for back/forward)
+        window.addEventListener('beforeunload', (event) => {
+            // Only show loading for actual navigation, not page refresh or back/forward
+            if (performance.navigation.type !== performance.navigation.TYPE_BACK_FORWARD) {
+                this.show();
+            }
         });
 
         // Hide loading when page fully loads
         window.addEventListener('load', () => {
-            setTimeout(() => this.hide(), 500);
+            setTimeout(() => this.hide(), 300);
         });
 
-        // Hide on navigation away
-        window.addEventListener('pagehide', () => {
-            this.show();
+        // Handle popstate events (back/forward navigation)
+        window.addEventListener('popstate', () => {
+            // Hide loading immediately on back/forward navigation
+            this.hide();
         });
     }
 

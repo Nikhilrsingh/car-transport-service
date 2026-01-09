@@ -36,10 +36,12 @@
 
     <!-- Booking Modals CSS -->
     <link rel="stylesheet" href="../css/components/booking-modals.css">
+    <link rel="stylesheet" href="../css/pages/booking.css">
 
     <!-- Lottie Animation -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <link rel="stylesheet" href="../css/components/glowing-input.css">
+    <link rel="stylesheet" href="../css/pages/booking.css">
 
 
     <style>
@@ -2664,23 +2666,6 @@
     <script src="../js/modules/booking-modals.js"></script>
 
     <script>
-        // ========================================
-        // GLOBAL VARIABLES
-        // ========================================
-        let map;
-        let pickupMarker;
-        let dropMarker;
-        let routingControl;
-        let pickupCoords = null;
-        let dropCoords = null;
-        let selectingPickup = false;
-        let selectingDrop = false;
-        let currentStep = 1;
-        let formData = {};
-        let autoSaveTimeout = null;
-        let estimatedDistance = 0;
-        let estimatedDuration = 0;
-
         // Advanced Map Features
         let satelliteLayer = null;
         let streetLayer = null;
@@ -5115,6 +5100,7 @@
   
   <!-- 🚀 Floating Action Menu loaded via footer component -->
    <script src="../js/script.js"></script>
+   <script src="../js/modules/booking.js"></script>
 </body>
 
 </html>

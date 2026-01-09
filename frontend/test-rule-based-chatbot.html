@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule-Based Chatbot Test - Harihar Car Carriers</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chatbot Modal CSS -->
+    <link rel="stylesheet" href="css/components/chatbot-modal.css" />
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .test-button {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px;
+            transition: transform 0.2s ease;
+        }
+        
+        .test-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+        }
+        
+        .status.success {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+        }
+        
+        .status.error {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .test-questions {
+            text-align: left;
+            margin: 20px 0;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+        
+        .test-questions h3 {
+            color: #ff6b35;
+            margin-top: 0;
+        }
+        
+        .test-questions ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .test-questions li {
+            padding: 5px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .test-questions li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🤖 Rule-Based Chatbot Test</h1>
+        <p>Test the new rule-based chatbot system for Harihar Car Transport Service</p>
+        
+        <button class="test-button" onclick="openChatbot()">
+            <i class="fas fa-comments"></i> Open Chatbot
+        </button>
+        
+        <div id="status" class="status">
+            <strong>Status:</strong> Ready to test
+        </div>
+        
+        <div class="test-questions">
+            <h3>📋 Test Questions to Try:</h3>
+            <ul>
+                <li><strong>Services:</strong> "What services do you provide?"</li>
+                <li><strong>Pricing:</strong> "How much does car transport cost?"</li>
+                <li><strong>Door-to-Door:</strong> "Do you provide door-to-door service?"</li>
+                <li><strong>Delivery Time:</strong> "How long does car delivery take?"</li>
+                <li><strong>Safety:</strong> "Is my car safe during transport?"</li>
+                <li><strong>Insurance:</strong> "Do you provide insurance coverage?"</li>
+                <li><strong>Documents:</strong> "What documents are required?"</li>
+                <li><strong>Personal Items:</strong> "Can I keep personal items inside the car?"</li>
+                <li><strong>Tracking:</strong> "How can I track my car?"</li>
+                <li><strong>Cities:</strong> "Which cities do you serve?"</li>
+                <li><strong>Booking:</strong> "How do I book car transport?"</li>
+                <li><strong>Payment:</strong> "What payment methods are accepted?"</li>
+                <li><strong>Cancellation:</strong> "Can I cancel my booking?"</li>
+                <li><strong>Damage:</strong> "What if my car gets damaged?"</li>
+                <li><strong>Support:</strong> "How can I contact customer support?"</li>
+                <li><strong>Out of Scope:</strong> "What's the weather like?" (should trigger fallback)</li>
+            </ul>
+        </div>
+        
+        <div class="test-questions">
+            <h3>✅ Expected Behavior:</h3>
+            <ul>
+                <li>Chatbot opens with greeting message</li>
+                <li>Quick reply buttons show predefined questions</li>
+                <li>Clicking buttons or typing questions gives specific answers</li>
+                <li>Out-of-scope questions trigger fallback response</li>
+                <li>No follow-up questions or data collection</li>
+                <li>Professional, short responses</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chatbot Modal Script -->
+    <script src="js/modules/chatbot-modal.js"></script>
+    
+    <script>
+        function openChatbot() {
+            const modal = document.getElementById('chatbot-modal-overlay');
+            if (modal) {
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+                
+                // Focus on input
+                setTimeout(() => {
+                    const input = document.getElementById('chatbot-input');
+                    if (input) {
+                        input.focus();
+                    }
+                }, 300);
+                
+                updateStatus('Chatbot opened successfully!', 'success');
+            } else {
+                updateStatus('Error: Chatbot modal not found', 'error');
+            }
+        }
+        
+        function updateStatus(message, type = '') {
+            const status = document.getElementById('status');
+            status.innerHTML = `<strong>Status:</strong> ${message}`;
+            status.className = `status ${type}`;
+        }
+        
+        // Check if chatbot loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const modal = document.getElementById('chatbot-modal-overlay');
+                if (modal) {
+                    updateStatus('Chatbot loaded successfully! Click the button to test.', 'success');
+                } else {
+                    updateStatus('Error: Chatbot failed to load', 'error');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

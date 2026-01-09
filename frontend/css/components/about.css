@@ -2,6 +2,37 @@
    ABOUT PAGE ENHANCEMENTS
    ================================ */
 
+   /*  VISIBILITY FOR HERO SECTION */
+.hero.about-hero,
+.about-hero {
+  background-color: #2c3e50 !important; 
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../assets/images/banner.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  
+  padding: 120px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.about-hero h1 {
+  color: #ff6347 !important; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  margin-bottom: 20px;
+}
+
+.about-hero p {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+
 /* for giving container spacing from left and right */
 .container {
   width: 80vw;
@@ -172,250 +203,60 @@
 }
 
 .about-member-front-info .about-member-role {
+  color: #ff6347;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
 
-  /* Skill Bars on Front Card */
-  .about-skill-bars {
-    margin-top: 15px;
+/* Skill Bars on Front Card */
+.about-skill-bars {
+  margin-top: 15px;
+}
+
+.about-skill-bar {
+  margin-bottom: 12px;
+  animation: slideInLeft 0.6s ease backwards;
+}
+
+.about-skill-bar:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.about-skill-bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.about-skill-bar:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
   }
-
-  .about-skill-bar {
-    margin-bottom: 12px;
-    animation: slideInLeft 0.6s ease backwards;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
+}
 
-  .about-skill-bar:nth-child(1) {
-    animation-delay: 0.1s;
-  }
+.about-skill-name {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-bottom: 5px;
+}
 
-  .about-skill-bar:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-
-  .about-skill-bar:nth-child(3) {
-    animation-delay: 0.3s;
-  }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .about-skill-name {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: #ccc;
-    margin-bottom: 5px;
-  }
-
-  .about-skill-progress {
-    width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-
-    /* Back Card Content */
-    .about-member-bio {
-      color: #fff;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 20px;
-      text-align: left;
-      animation: fadeInUp 0.6s ease backwards;
-      animation-delay: 0.2s;
-    }
-
-    .about-member-highlights {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 20px;
-    }
-
-    .about-member-highlights li {
-      color: #fff;
-      font-size: 0.9rem;
-      margin-bottom: 8px;
-      padding-left: 25px;
-      position: relative;
-      text-align: left;
-      animation: fadeInLeft 0.5s ease backwards;
-      transition: transform 0.3s ease, padding-left 0.3s ease;
-    }
-
-    .about-member-highlights li:nth-child(1) {
-      animation-delay: 0.3s;
-    }
-
-    .about-member-highlights li:nth-child(2) {
-
-      /* Social Icons with Animations */
-      .about-member-social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-top: auto;
-      }
-
-      .about-social-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 1.1rem;
-        transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-        animation: bounceIn 0.6s ease backwards;
-      }
-
-      .about-social-icon:nth-child(1) {
-        animation-delay: 0.7s;
-      }
-
-      .about-social-icon:nth-child(2) {
-        animation-delay: 0.8s;
-      }
-
-      .about-social-icon:nth-child(3) {
-        animation-delay: 0.9s;
-      }
-
-      .about-social-icon:nth-child(4) {
-        animation-delay: 1s;
-      }
-
-      @keyframes bounceIn {
-        0% {
-          opacity: 0;
-          transform: scale(0.3) rotate(-180deg);
-        }
-
-        50% {
-          transform: scale(1.1);
-        }
-
-        100% {
-          opacity: 1;
-          transform: scale(1) rotate(0);
-        }
-      }
-
-      .about-social-icon::before {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 100%;
-        background: #fff;
-        transition: width 0.4s ease;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: -1;
-        border-radius: 50%;
-      }
-
-      .about-social-icon:hover::before {
-        width: 100%;
-      }
-
-      .about-social-icon::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        border: 2px solid #fff;
-        opacity: 0;
-        transform: scale(1);
-        transition: all 0.4s ease;
-      }
-
-      .about-social-icon:hover::after {
-        opacity: 1;
-        transform: scale(1.3);
-        opacity: 0;
-      }
-
-      .about-social-icon:hover {
-        color: #ff6347;
-        transform: translateY(-5px) scale(1.1);
-        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
-      }
-
-      .about-social-icon i {
-        position: relative;
-        z-index: 1;
-        transition: transform 0.3s ease;
-      }
-
-      .about-social-icon:hover i {
-        transform: rotate(360deg);
-      }
-
-      font-weight: bold;
-      font-size: 1.1rem;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.2);
-      }
-    }
-
-    transition: width 1.5s cubic-bezier(0.4, 0.0, 0.2, 1);
-    width: 0;
-    box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .about-skill-progress-bar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent);
-    animation: shine 1.5s infinite;
-  }
-
-  @keyframes shine {
-    0% {
-      transform: translateX(-100%);
-    }
-
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
+.about-skill-progress {
+  width: 100%;
+  height: 6px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 .about-skill-progress-bar {
@@ -424,6 +265,32 @@
   border-radius: 10px;
   transition: width 1.5s cubic-bezier(0.4, 0.0, 0.2, 1);
   width: 0;
+  box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-skill-progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .about-team-flip-card.animate .about-skill-progress-bar {
@@ -437,6 +304,8 @@
   line-height: 1.7;
   margin-bottom: 20px;
   text-align: left;
+  animation: fadeInUp 0.6s ease backwards;
+  animation-delay: 0.2s;
 }
 
 .about-member-highlights {
@@ -452,6 +321,24 @@
   padding-left: 25px;
   position: relative;
   text-align: left;
+  animation: fadeInLeft 0.5s ease backwards;
+  transition: transform 0.3s ease, padding-left 0.3s ease;
+}
+
+.about-member-highlights li:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.about-member-highlights li:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.about-member-highlights li:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.about-member-highlights li:nth-child(4) {
+  animation-delay: 0.6s;
 }
 
 .about-member-highlights li::before {
@@ -485,6 +372,37 @@
   transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  animation: bounceIn 0.6s ease backwards;
+}
+
+.about-social-icon:nth-child(1) {
+  animation-delay: 0.7s;
+}
+
+.about-social-icon:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.about-social-icon:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+.about-social-icon:nth-child(4) {
+  animation-delay: 1s;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-180deg);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
 }
 
 .about-social-icon::before {
@@ -497,15 +415,45 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: -1;
+  border-radius: 50%;
 }
 
 .about-social-icon:hover::before {
   width: 100%;
 }
 
+.about-social-icon::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  opacity: 0;
+  transform: scale(1);
+  transition: all 0.4s ease;
+}
+
+.about-social-icon:hover::after {
+  opacity: 1;
+  transform: scale(1.3);
+  opacity: 0;
+}
+
 .about-social-icon:hover {
   color: #ff6347;
-  transform: translateY(-5px) rotate(360deg);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+}
+
+.about-social-icon i {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.about-social-icon:hover i {
+  transform: rotate(360deg);
 }
 
 /* ================================
@@ -579,15 +527,16 @@
 
 .stat-circle-label {
   font-size: 0.9rem;
-  color: #fff;
+  color: #333; 
   font-weight: 600;
 }
 
 .stat-circle-description {
-  color: #ccc;
+  color: #555; 
   font-size: 1rem;
   margin-top: 10px;
 }
+
 
 /* Milestone Timeline */
 .milestone-timeline {
@@ -652,10 +601,11 @@
 
 .milestone-achievement {
   font-size: 0.9rem;
-  color: #ccc;
+  color: #555; 
   max-width: 140px;
   margin: 0 auto;
 }
+
 
 /* ================================
    VALUES/MISSION - ENHANCED
@@ -1150,4 +1100,34 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* =========================================
+   DARK MODE TEXT FIX
+   ========================================= */
+
+/* Use multiple selectors to ensure we catch the active theme class */
+body.dark-mode .stat-circle-label,
+body.dark-theme .stat-circle-label,
+body.dark .stat-circle-label,
+html.dark .stat-circle-label,
+[data-theme="dark"] .stat-circle-label {
+  color: #fff !important; 
+}
+
+body.dark-mode .stat-circle-description,
+body.dark-theme .stat-circle-description,
+body.dark .stat-circle-description,
+html.dark .stat-circle-description,
+[data-theme="dark"] .stat-circle-description {
+  color: #e0e0e0 !important; 
+}
+
+body.dark-mode .milestone-achievement,
+body.dark-theme .milestone-achievement,
+body.dark .milestone-achievement,
+html.dark .milestone-achievement,
+[data-theme="dark"] .milestone-achievement {
+  color: #e0e0e0 !important; 
 }

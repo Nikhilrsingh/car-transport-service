@@ -20,43 +20,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   
   <link id="theme-style" rel="stylesheet" href="../css/light-mode.css" />
+  <link rel="stylesheet" href="../css/pages/explore-cities.css">
 
-  <style>
-    /* Page-specific overrides */
-    body {
-      padding-top: 0; /* Navbar loader handles spacing */
-    }
-    
-    .explore-hero {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      padding: 120px 0 60px;
-      text-align: center;
-      color: white;
-      margin-bottom: 40px;
-    }
-    
-    .explore-hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-    
-    .explore-hero p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Ensure filter section stands out */
-    .region-filters-search {
-      margin-top: -50px;
-      position: relative;
-      z-index: 10;
-      background: var(--bg-primary);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    }
-  </style>
+  
 </head>
 
 <body>
@@ -279,6 +245,32 @@
         }, 800);
       }
     });
+  </script>
+  <script>
+    // View toggle: grid <-> list
+document.addEventListener("DOMContentLoaded", () => {
+  const regionGrid = document.getElementById("regionGrid");
+  const viewButtons = document.querySelectorAll(".view-btn");
+
+  if (!regionGrid || !viewButtons.length) return;
+
+  // default view
+  regionGrid.setAttribute("data-view", "grid");
+
+  viewButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const view = btn.dataset.view; // "grid" or "list"
+
+      // toggle button active state
+      viewButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // switch view on the grid
+      regionGrid.setAttribute("data-view", view);
+    });
+  });
+});
+
   </script>
 </body>
 </html>
