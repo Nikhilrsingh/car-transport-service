@@ -737,7 +737,16 @@
               </div>
               <div class="input-group">
                 <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="+91XXXXXXXXXX"
+                  inputmode="tel"
+                  autocomplete="tel"
+                />
+
                 <span class="error-message"></span>
               </div>
             </div>
