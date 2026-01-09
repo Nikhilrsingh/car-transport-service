@@ -979,9 +979,26 @@ left: 100%;
     display: none !important;
   }
   
+  
   .nav-theme-toggle {
     display: none !important;
   }
+
+  .mobile-theme-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #ff6347;
+    margin-left: 8px;
+    z-index: 1002;
+  }
+  .mobile-theme-btn i { font-size: 16px; }
+  .mobile-theme-btn:hover { background: rgba(255,99,71,0.08); border-color: #ff6347; }
 
   .mobile-menu-btn {
     display: flex !important;
@@ -1201,6 +1218,9 @@ left: 100%;
   position: relative;
   overflow: hidden;
 }
+
+/* mobile theme button hidden on large screens by default */
+.mobile-theme-btn { display: none; }
 
 .theme-toggle button::before {
   content: "";
