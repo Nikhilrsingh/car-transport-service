@@ -310,7 +310,20 @@
         }
     }
 
+    // Phone Number Formatting
+    function formatPhoneNumber() {
+        const phoneInput = document.getElementById('phone');
+        if (!phoneInput) return;
 
+        let value = phoneInput.value.replace(/\D/g, '');
+        
+        // Limit to 10 digits
+        if (value.length > 10) {
+            value = value.substring(0, 12);
+        }
+
+        phoneInput.value = value;
+    }
 
     // Character Counter
     function updateCharCounter() {

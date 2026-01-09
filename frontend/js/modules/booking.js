@@ -12,10 +12,10 @@ class BookingManager {
         this.validationRules = {
             fullName: (val) => val.trim().length >= 2,
             phone: (val) => {
-                const phone = val.replace(/\D/g, '');
-                return /^[6-9]\d{9}$/.test(phone);
+                const cleaned = val.replace(/\s+/g, '');
+                console.log("PHONE VALUE:", cleaned);
+                return /^\+91[6-9]\d{9}$/.test(cleaned);
             },
-
             email: (val) => {
                 const trimmed = val.trim();
 
@@ -70,8 +70,8 @@ class BookingManager {
 
     setupEventListeners() {
         // Form input validation
-        const validationFields = ['fullName', 'phone', 'email', 'password', 'vehicleType',
-                          'pickupCity', 'dropCity', 'pickupDate'];
+        const validationFields = ['fullName', 'phone', 'email', 'vehicleType', 
+                                  'pickupLocation', 'dropLocation', 'pickupDate'];
         
         validationFields.forEach(field => {
             const input = document.getElementById(field);
@@ -235,7 +235,7 @@ class BookingManager {
         let fields = [];
 
         if (step === 1) {
-            fields = ['fullName', 'phone', 'email', 'vehicleType'];
+            fields = ['fullName', 'phone', 'email', 'password', 'vehicleType'];
         } else if (step === 2) {
             fields = ['pickupCity', 'dropCity', 'pickupDate'];
         }
@@ -287,7 +287,7 @@ class BookingManager {
     getErrorMessage(field) {
         const messages = {
             fullName: 'Please enter your full name (min 2 characters)',
-            phone: 'Please enter a valid Indian phone number (XXXXXXXXXX)',
+            phone: 'Please enter a valid 10-digit Indian phone number',
             email: 'Please enter a valid email address',
             password: 'Please enter a valid password (min 8 characters)',
             vehicleType: 'Please select vehicle type',
