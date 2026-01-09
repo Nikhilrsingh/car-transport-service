@@ -12,10 +12,16 @@ const SmartScrollButton = (() => {
 
     function init() {
         const button = document.getElementById(BUTTON_ID);
-        if (!button) return;
+        if (!button) {
+            console.log('SmartScrollButton: Button not found, will retry...');
+            return;
+        }
+
+        console.log('SmartScrollButton: Initializing...');
 
         // Check if page is already loaded (body has 'loaded' class)
-        if (document.body.classList.contains('loaded')) {
+        // Also consider page loaded if document.readyState is 'complete'
+        if (document.body.classList.contains('loaded') || document.readyState === 'complete') {
             isPageLoaded = true;
             button.classList.add(LOADED_CLASS);
         }
@@ -32,6 +38,16 @@ const SmartScrollButton = (() => {
         });
         observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
+        // Also mark as loaded after window load event (fallback for pages without preloader)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                isPageLoaded = true;
+                button.classList.add(LOADED_CLASS);
+                handleScroll(button);
+                console.log('SmartScrollButton: Page loaded, button activated');
+            }, 100);
+        });
+
         attachEventListeners(button);
         handleScroll(button);
     }
@@ -47,7 +63,7 @@ const SmartScrollButton = (() => {
 
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = scrollTop / docHeight;
+        const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
 
         // Always show button except when at very top (0-50px) or very bottom (within 50px)
         if (scrollTop > 50 && scrollTop < docHeight - 50) {
