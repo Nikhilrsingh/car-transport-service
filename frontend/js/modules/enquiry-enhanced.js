@@ -313,7 +313,7 @@
         
         // Limit to 10 digits
         if (value.length > 10) {
-            value = value.substring(0, 10);
+            value = value.substring(0, 12);
         }
 
         phoneInput.value = value;

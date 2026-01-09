@@ -1669,12 +1669,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
-                                    <input type="tel" id="phone" name="phone" required
-                                        placeholder="Enter 10-digit number">
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        required
+                                        placeholder="+91XXXXXXXXXX"
+                                        inputmode="tel"
+                                        autocomplete="tel"
+                                    >
                                     <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="phoneError">Please enter a valid 10-digit phone
-                                        number</div>
+                                    <div class="error-message" id="phoneError">
+                                        Please enter a valid Indian phone number (+91XXXXXXXXXX)
+                                    </div>
                                 </div>
+
                             </div>
 
                             <div class="form-group">
@@ -2882,7 +2891,7 @@
 
             if (step === 1) {
                 // Validate personal and vehicle info
-                const fields = ['fullName', 'phone', 'email', 'vehicleType'];
+                const fields = ['fullName', 'phone', 'email', 'password', 'vehicleType'];
                 fields.forEach(field => {
                     const input = document.getElementById(field);
                     if (!validateField(field, input.value)) {
@@ -3081,8 +3090,24 @@
         function validateField(fieldName, value) {
             const validators = {
                 fullName: (val) => val.trim().length >= 2,
-                phone: (val) => /^[6-9]\d{9}$/.test(val.replace(/\D/g, '')),
-                email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+                phone: (val) => {
+                    const cleaned = val.replace(/\s+/g, '');
+                    console.log("PHONE VALUE:", cleaned);
+                    return /^\+91[6-9]\d{9}$/.test(cleaned);
+
+                },
+
+
+                email: (val) => {
+                    const trimmed = val.trim();
+
+                    // 1️⃣ reject if whitespace exists anywhere
+                    if (/\s/.test(val)) return false;
+
+                    // 2️⃣ validate email format
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+                },
+
                 vehicleType: (val) => val.trim() !== '',
                 pickupCity: (val) => val.trim() !== '',
                 dropCity: (val) => val.trim() !== '',
@@ -3127,8 +3152,9 @@
         function getErrorMessage(field) {
             const messages = {
                 fullName: 'Please enter your full name (min 2 characters)',
-                phone: 'Please enter a valid 10-digit Indian phone number',
+                phone: 'Please enter a valid Indian phone number (+91XXXXXXXXXX)',
                 email: 'Please enter a valid email address',
+                password: 'Please enter a valid password (min 8 characters)',
                 vehicleType: 'Please select vehicle type',
                 pickupCity: 'Please select pickup city',
                 dropCity: 'Please select drop city',
@@ -4663,7 +4689,8 @@
             });
 
             // Add input event listeners for real-time validation
-            const validationFields = ['fullName', 'phone', 'email', 'vehicleType', 'pickupCity', 'dropCity', 'pickupDate'];
+            const validationFields = ['fullName', 'phone', 'email', 'password', 'vehicleType',
+                          'pickupLocation', 'dropLocation', 'pickupDate'];
 
             validationFields.forEach(field => {
                 const input = document.getElementById(field);
@@ -4688,7 +4715,7 @@
             phoneInput.addEventListener('input', function (e) {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length > 0) {
-                    value = value.substring(0, 10);
+                    value = value.substring(0, 12);
                     if (value.length > 5) {
                         value = value.substring(0, 5) + ' ' + value.substring(5);
                     }
@@ -5016,13 +5043,16 @@
     <script src="../js/modules/footer-loader.js"></script>
 
     <!-- 🌟 Bottom Fixed Action Bar -->
-   <link rel="stylesheet" href="../css/components/footer.css" />
-  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
-  <link rel="stylesheet" href="../css/components/quote-modal.css" />
-  <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
-  
-  <!-- 🚀 Floating Action Menu loaded via footer component -->
-   <script src="../js/script.js"></script>
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+    <link rel="stylesheet" href="../css/components/quote-modal.css" />
+    <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
+    
+    <!-- 🚀 Floating Action Menu loaded via footer component -->
+    <script src="../js/modules/booking-modals.js"></script>
+    <script src="../js/modules/booking.js"></script>
+    <script src="../js/script.js"></script>
+
 </body>
 
 </html>
