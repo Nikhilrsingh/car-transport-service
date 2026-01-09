@@ -1,6 +1,6 @@
 /* ====================================
    COMPONENT INITIALIZER
-   Ensures FAB, Bottom Action Bar, and Scroll Button are available on all pages
+   Ensures FAB, Bottom Action Bar, Scroll Button, and Chatbot are available on all pages
    This is a global safety mechanism that works independently of footer-loader
    ==================================== */
 
@@ -19,17 +19,19 @@
     const fabContainer = document.querySelector('.fab-container');
     const bottomBar = document.querySelector('.bottom-action-bar-fixed');
     const scrollBtn = document.getElementById('smartScrollBtn');
+    const chatbotModal = document.getElementById('chatbot-modal-overlay');
 
     const componentsLoaded = {
       fab: !!fabContainer,
       bottomBar: !!bottomBar,
-      scrollBtn: !!scrollBtn
+      scrollBtn: !!scrollBtn,
+      chatbot: !!chatbotModal
     };
 
     console.log('Component Initializer: Component status:', componentsLoaded);
 
     // If all components are loaded, ensure scripts are initialized
-    if (componentsLoaded.fab && componentsLoaded.bottomBar && componentsLoaded.scrollBtn) {
+    if (componentsLoaded.fab && componentsLoaded.bottomBar && componentsLoaded.scrollBtn && componentsLoaded.chatbot) {
       console.log('Component Initializer: All components loaded successfully');
       // Ensure scripts are loaded even if HTML exists
       loadComponentScripts();
@@ -61,7 +63,7 @@
     // Load CSS if not already loaded
     loadComponentCSS();
 
-    // Load the JavaScript for the components
+    // Load the JavaScript for the components (including chatbot)
     loadComponentScripts();
 
     // If footer hasn't loaded yet and we haven't reached max attempts, schedule another check
@@ -173,7 +175,9 @@
     const cssFiles = [
       'floating-action-menu.css',
       'bottom-action-bar.css',
-      'scroll-button.css'
+      'scroll-button.css',
+      'chatbot-modal.css',
+      'floating-chatbot-button.css'
     ];
     
     cssFiles.forEach(cssFile => {
@@ -209,6 +213,11 @@
     // Load Scroll Button script
     if (!document.getElementById('scroll-button-script')) {
       loadScript(jsBasePath + 'scroll-button.js', 'scroll-button-script');
+    }
+
+    // Load Chatbot Modal script
+    if (!document.getElementById('chatbot-modal-script')) {
+      loadScript(jsBasePath + 'chatbot-modal.js', 'chatbot-modal-script');
     }
   }
 
