@@ -231,6 +231,8 @@
   <script src="../js/modules/region-enhancements.js"></script>
   <script src="../js/modules/themes.js"></script>
   <script src="../js/modules/glow-inputs.js"></script>
+  <!-- Component Initializer - Ensures global components (FAB, Chatbot, etc.) are available -->
+  <script src="../js/modules/component-initializer.js"></script>
 
   <script>
     // Fade out preloader
@@ -245,6 +247,32 @@
         }, 800);
       }
     });
+  </script>
+  <script>
+    // View toggle: grid <-> list
+document.addEventListener("DOMContentLoaded", () => {
+  const regionGrid = document.getElementById("regionGrid");
+  const viewButtons = document.querySelectorAll(".view-btn");
+
+  if (!regionGrid || !viewButtons.length) return;
+
+  // default view
+  regionGrid.setAttribute("data-view", "grid");
+
+  viewButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const view = btn.dataset.view; // "grid" or "list"
+
+      // toggle button active state
+      viewButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // switch view on the grid
+      regionGrid.setAttribute("data-view", view);
+    });
+  });
+});
+
   </script>
 </body>
 </html>
