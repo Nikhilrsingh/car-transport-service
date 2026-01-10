@@ -3133,3 +3133,34 @@ button:active,
   background: linear-gradient(135deg, #00b4d8, #48cae4);
   box-shadow: 0 10px 25px rgba(0, 180, 216, 0.5);
 }
+/* Print-friendly global styles */
+@media print {
+  /* Hide unwanted sections */
+  nav, .slider, button, .animations, .cta {
+    display: none !important;
+  }
+
+  /* Set backgrounds to white and text to black */
+  body, html {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Resize images for print */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Remove shadows and borders that don't print well */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+  }
+
+  /* Ensure text alignment is proper */
+  h1, h2, h3, h4, h5, h6, p {
+    text-align: left !important;
+  }
+}
