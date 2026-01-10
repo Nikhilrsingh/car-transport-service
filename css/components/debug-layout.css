@@ -1,0 +1,48 @@
+/* =========================================
+   CSS Debug Layout Mode
+   Enable by adding `debug-layout` class
+   to <body>
+   ========================================= */
+
+/* 1️⃣ Outline ALL elements */
+body.debug-layout * {
+  outline: 1px solid rgba(255, 0, 0, 0.4);
+}
+
+/* 2️⃣ Images */
+body.debug-layout img {
+  outline: 2px dashed rgba(0, 128, 255, 0.8);
+  background-color: rgba(0, 128, 255, 0.08);
+}
+
+/* 3️⃣ Buttons & Links */
+body.debug-layout button,
+body.debug-layout a {
+  outline: 2px solid rgba(0, 200, 0, 0.8);
+  background-color: rgba(0, 200, 0, 0.08);
+}
+
+/* 4️⃣ Sections & Containers */
+body.debug-layout section,
+body.debug-layout header,
+body.debug-layout footer,
+body.debug-layout main,
+body.debug-layout nav,
+body.debug-layout aside,
+body.debug-layout div {
+  outline: 2px dotted rgba(255, 165, 0, 0.8);
+  background-color: rgba(255, 165, 0, 0.05);
+}
+
+/* 5️⃣ Form Elements */
+body.debug-layout input,
+body.debug-layout textarea,
+body.debug-layout select {
+  outline: 2px solid rgba(128, 0, 128, 0.8);
+  background-color: rgba(128, 0, 128, 0.06);
+}
+
+/* 6️⃣ Prevent layout breaking */
+body.debug-layout * {
+  box-sizing: border-box;
+}
