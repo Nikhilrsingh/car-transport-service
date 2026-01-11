@@ -976,16 +976,20 @@ left: 100%;
   }
   
   .nav-right-section {
-    display: none !important;
+    display: flex !important;
+    align-items: center;
   }
   
   
   .nav-theme-toggle {
-    display: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content:center;
+    margin-left: 8px;
   }
 
   .mobile-theme-btn {
-    display: flex !important;
+    display: none !important;
     align-items: center;
     justify-content: center;
     width: 36px;
