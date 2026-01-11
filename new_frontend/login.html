@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Portal | Harihar Car Carriers</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Theme CSS -->
+    <style>
+        :root {
+            --primary: #00f3ff;
+            --secondary: #ff00c3;
+            --accent: #00ff9d;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --light: #f0f8ff;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .neon-border {
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3),
+                        inset 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px var(--primary),
+                        0 0 40px rgba(0, 243, 255, 0.3),
+                        0 0 60px rgba(0, 243, 255, 0.1);
+        }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px var(--primary); }
+            50% { box-shadow: 0 0 25px var(--primary); }
+        }
+        
+        .scan-line {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scan-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        .cyber-grid {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 255, 157, 0.1) 0%, transparent 50%);
+        }
+        
+        .portal-glow {
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.2) 0%, transparent 70%);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+        
+        .auth-form {
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 26, 0.7);
+        }
+        
+        .input-glow:focus {
+            box-shadow: 0 0 15px var(--primary),
+                        inset 0 0 10px rgba(0, 243, 255, 0.2);
+        }
+        
+        .biometric-ring {
+            border: 2px solid transparent;
+            background: linear-gradient(var(--darker), var(--darker)) padding-box,
+                        linear-gradient(45deg, var(--primary), var(--accent), var(--secondary)) border-box;
+        }
+        
+        .hologram-effect {
+            background: linear-gradient(45deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="relative overflow-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 grid-pattern -z-20"></div>
+    <div class="fixed inset-0 cyber-grid -z-20"></div>
+    
+    <!-- Floating Particles -->
+    <div id="particles" class="fixed inset-0 -z-10"></div>
+    
+    <!-- Portal Glow Effect -->
+    <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] portal-glow -z-10 rounded-full"></div>
+    
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#0a0a1a]/90 backdrop-blur-md border-b border-[#00f3ff]/20">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center">
+                    <i class="fas fa-user-astronaut text-[#050510] text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-orbitron text-xl font-bold gradient-text">QUANTUM PORTAL</h1>
+                    <p class="text-xs text-[#00f3ff]/70">HARIHAR CAR CARRIERS</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="px-4 py-2 border border-[#00f3ff] text-[#00f3ff] rounded-lg hover:bg-[#00f3ff]/10 transition-all text-sm">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to Main
+                </a>
+                <div class="w-3 h-3 rounded-full bg-[#00ff9d] animate-pulse"></div>
+                <span class="text-xs text-[#00ff9d] font-semibold">SYSTEM SECURE</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Portal Container -->
+    <main class="min-h-screen flex items-center justify-center px-6 pt-20 pb-10">
+        <div class="container max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Side - Branding & Features -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-block px-4 py-2 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-8 floating">
+                        <span class="text-[#00f3ff] font-orbitron text-sm">
+                            <i class="fas fa-shield-alt mr-2"></i> QUANTUM SECURED
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-6xl font-orbitron font-bold mb-6">
+                        <span class="gradient-text">WELCOME TO</span>
+                        <span class="block text-white">THE PORTAL</span>
+                    </h1>
+                    
+                    <p class="text-xl text-[#f0f8ff]/70 mb-8 max-w-xl">
+                        Access the future of vehicle transportation. Our quantum-secured authentication ensures your data travels through encrypted dimensions.
+                    </p>
+                    
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-fingerprint text-[#050510] text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-1">Biometric Security</h3>
+                                <p class="text-[#f0f8ff]/70">Multi-factor authentication with quantum encryption.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ff00c3] to-[#9600ff] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-satellite text-[#050510] text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-1">Real-time Tracking</h3>
+                                <p class="text-[#f0f8ff]/70">Monitor your vehicle transport from any dimension.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00ff9d] to-[#00bcd4] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-robot text-[#050510] text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-1">AI Assistant</h3>
+                                <p class="text-[#f0f8ff]/70">Quantum AI support available 24/7 across all time zones.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <div class="px-4 py-2 rounded-lg bg-[#0a0a1a]/50 border border-[#00f3ff]/20">
+                            <div class="text-2xl font-orbitron text-white">5K+</div>
+                            <div class="text-xs text-[#00f3ff]/70">Secure Users</div>
+                        </div>
+                        <div class="px-4 py-2 rounded-lg bg-[#0a0a1a]/50 border border-[#00f3ff]/20">
+                            <div class="text-2xl font-orbitron text-white">99.9%</div>
+                            <div class="text-xs text-[#00f3ff]/70">Uptime</div>
+                        </div>
+                        <div class="px-4 py-2 rounded-lg bg-[#0a0a1a]/50 border border-[#00f3ff]/20">
+                            <div class="text-2xl font-orbitron text-white">256-bit</div>
+                            <div class="text-xs text-[#00f3ff]/70">Encryption</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Auth Forms -->
+                <div class="relative">
+                    <!-- Portal Ring -->
+                    <div class="absolute -inset-4 rounded-3xl biometric-ring -z-10"></div>
+                    
+                    <!-- Main Auth Container -->
+                    <div class="auth-form rounded-2xl neon-border p-1 relative overflow-hidden">
+                        <div class="scan-line"></div>
+                        <div class="bg-gradient-to-b from-[#0a0a1a] to-[#050510] rounded-2xl p-8">
+                            <!-- Tabs -->
+                            <div class="flex mb-8 border-b border-[#00f3ff]/20">
+                                <button id="login-tab" class="flex-1 py-4 font-orbitron text-lg transition-all relative group">
+                                    <span class="text-white group-[.active]:text-[#00f3ff]">QUANTUM LOGIN</span>
+                                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00f3ff] to-transparent group-[.active]:h-1 transition-all"></div>
+                                </button>
+                                <button id="signup-tab" class="flex-1 py-4 font-orbitron text-lg transition-all relative group">
+                                    <span class="text-white group-[.active]:text-[#00f3ff]">CREATE PORTAL</span>
+                                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00ff9d] to-transparent group-[.active]:h-1 transition-all"></div>
+                                </button>
+                            </div>
+                            
+                            <!-- Login Form -->
+                            <div id="login-form" class="auth-form-section active">
+                                <div class="text-center mb-8">
+                                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-user-astronaut text-3xl text-[#050510]"></i>
+                                    </div>
+                                    <h2 class="font-orbitron text-2xl text-white mb-2">ACCESS GRANTED</h2>
+                                    <p class="text-[#00f3ff]/70">Enter your quantum credentials</p>
+                                </div>
+                                
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-3">
+                                            <i class="fas fa-at text-[#00f3ff] mr-2"></i>
+                                            QUANTUM EMAIL
+                                        </label>
+                                        <div class="relative">
+                                            <input type="email" id="login-email" class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none input-glow transition-all" placeholder="user@quantum.portal">
+                                            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#00f3ff]">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-white font-semibold mb-3">
+                                            <i class="fas fa-key text-[#00f3ff] mr-2"></i>
+                                            ENCRYPTION KEY
+                                        </label>
+                                        <div class="relative">
+                                            <input type="password" id="login-password" class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none input-glow transition-all" placeholder="••••••••••••">
+                                            <button onclick="togglePassword('login-password', this)" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#00f3ff] hover:text-[#00ff9d] transition-colors">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center">
+                                        <label class="flex items-center cursor-pointer">
+                                            <div class="relative">
+                                                <input type="checkbox" id="remember" class="sr-only">
+                                                <div class="w-5 h-5 rounded border border-[#00f3ff]/50 bg-[#050510] flex items-center justify-center">
+                                                    <i class="fas fa-check text-[#00f3ff] text-xs hidden"></i>
+                                                </div>
+                                            </div>
+                                            <span class="ml-3 text-sm text-[#f0f8ff]/70">Remember this device</span>
+                                        </label>
+                                        
+                                        <a href="#" class="text-sm text-[#00f3ff] hover:text-[#00ff9d] transition-colors">
+                                            <i class="fas fa-key mr-1"></i>
+                                            Forgot Encryption?
+                                        </a>
+                                    </div>
+                                    
+                                    <button onclick="quantumLogin()" class="w-full py-4 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-orbitron font-bold rounded-xl hover:shadow-[0_0_30px_rgba(0,243,255,0.8)] transition-all pulse-glow group">
+                                        <span class="group-hover:scale-105 transition-transform block">INITIATE QUANTUM LOGIN</span>
+                                        <div class="text-xs opacity-70">Secure connection established</div>
+                                    </button>
+                                    
+                                    <div class="relative my-8">
+                                        <div class="absolute inset-0 flex items-center">
+                                            <div class="w-full border-t border-[#00f3ff]/20"></div>
+                                        </div>
+                                        <div class="relative flex justify-center text-sm">
+                                            <span class="px-4 bg-[#0a0a1a] text-[#00f3ff]/70">OR USE QUANTUM AUTH</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <button onclick="biometricAuth()" class="w-full py-4 border-2 border-[#ff00c3] text-[#ff00c3] font-orbitron font-bold rounded-xl hover:bg-[#ff00c3]/10 transition-all group">
+                                        <div class="flex items-center justify-center">
+                                            <div class="w-8 h-8 rounded-full border-2 border-[#ff00c3] flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                                <i class="fas fa-fingerprint"></i>
+                                            </div>
+                                            <span>BIOMETRIC VERIFICATION</span>
+                                        </div>
+                                        <div class="text-xs opacity-70 mt-2">Facial recognition or fingerprint</div>
+                                    </button>
+                                    
+                                    <div class="text-center mt-8">
+                                        <p class="text-[#f0f8ff]/70">
+                                            Not in our quantum network? 
+                                            <a href="#" onclick="showSignup()" class="text-[#00f3ff] hover:text-[#00ff9d] transition-colors font-semibold">
+                                                Create Portal
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Signup Form -->
+                            <div id="signup-form" class="auth-form-section">
+                                <div class="text-center mb-8">
+                                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#ff00c3] to-[#9600ff] flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-user-plus text-3xl text-[#050510]"></i>
+                                    </div>
+                                    <h2 class="font-orbitron text-2xl text-white mb-2">CREATE PORTAL</h2>
+                                    <p class="text-[#00f3ff]/70">Join the quantum network</p>
+                                </div>
+                                
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-3">
+                                            <i class="fas fa-id-card text-[#00f3ff] mr-2"></i>
+                                            QUANTUM IDENTITY
+                                        </label>
+                                        <div class="relative">
+                                            <input type="text" id="signup-name" class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none input-glow transition-all" placeholder="Enter your full name">
+                                            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#00f3ff]">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-white font-semibold mb-3">
+                                            <i class="fas fa-at text-[#00f3ff] mr-2"></i>
+                                            QUANTUM ADDRESS
+                                        </label>
+                                        <div class="relative">
+                                            <input type="email" id="signup-email" class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none input-glow transition-all" placeholder="user@quantum.portal">
+                                            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#00f3ff]">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-white font-semibold mb-3">
+                                            <i class="fas fa-key text-[#00f3ff] mr-2"></i>
+                                            ENCRYPTION SEED
+                                        </label>
+                                        <div class="relative">
+                                            <input type="password" id="signup-password" class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none input-glow transition-all" placeholder="Minimum 8 quantum characters">
+                                            <button onclick="togglePassword('signup-password', this)" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#00f3ff] hover:text-[#00ff9d] transition-colors">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="mt-2 flex items-center text-sm text-[#00f3ff]/70">
+                                            <i class="fas fa-info-circle mr-2"></i>
+                                            Use letters, numbers, and quantum symbols
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-white font-semibold mb-3">
+                                            <i class="fas fa-sync-alt text-[#00f3ff] mr-2"></i>
+                                            VERIFY ENCRYPTION
+                                        </label>
+                                        <div class="relative">
+                                            <input type="password" id="signup-confirm" class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none input-glow transition-all" placeholder="Re-enter encryption seed">
+                                            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#00f3ff]">
+                                                <i class="fas fa-shield-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="relative mt-1">
+                                            <input type="checkbox" id="terms" class="sr-only">
+                                            <div class="w-5 h-5 rounded border border-[#00f3ff]/50 bg-[#050510] flex items-center justify-center cursor-pointer">
+                                                <i class="fas fa-check text-[#00f3ff] text-xs hidden"></i>
+                                            </div>
+                                        </div>
+                                        <label for="terms" class="ml-3 text-sm text-[#f0f8ff]/70 cursor-pointer">
+                                            I accept the <a href="#" class="text-[#00f3ff] hover:text-[#00ff9d]">Quantum Terms</a> and 
+                                            <a href="#" class="text-[#00f3ff] hover:text-[#00ff9d]">Data Encryption Protocol</a>
+                                        </label>
+                                    </div>
+                                    
+                                    <button onclick="createQuantumPortal()" class="w-full py-4 bg-gradient-to-r from-[#ff00c3] to-[#9600ff] text-white font-orbitron font-bold rounded-xl hover:shadow-[0_0_30px_rgba(255,0,195,0.8)] transition-all pulse-glow group">
+                                        <span class="group-hover:scale-105 transition-transform block">GENERATE QUANTUM PORTAL</span>
+                                        <div class="text-xs opacity-90">Secure registration in progress</div>
+                                    </button>
+                                    
+                                    <div class="text-center mt-8">
+                                        <p class="text-[#f0f8ff]/70">
+                                            Already have quantum access? 
+                                            <a href="#" onclick="showLogin()" class="text-[#00f3ff] hover:text-[#00ff9d] transition-colors font-semibold">
+                                                Login to Portal
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Security Badge -->
+                    <div class="mt-6 flex items-center justify-center space-x-4">
+                        <div class="flex items-center text-sm text-[#00ff9d]">
+                            <i class="fas fa-shield-check mr-2"></i>
+                            <span>256-bit Quantum Encryption</span>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-[#00ff9d] animate-pulse"></div>
+                        <div class="flex items-center text-sm text-[#00ff9d]">
+                            <i class="fas fa-server mr-2"></i>
+                            <span>Zero-Knowledge Protocol</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Quantum Loading Overlay -->
+    <div id="quantum-loading" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center">
+        <div class="text-center">
+            <div class="w-32 h-32 rounded-full border-4 border-transparent border-t-[#00f3ff] border-r-[#00ff9d] animate-spin mx-auto mb-8"></div>
+            <h3 class="font-orbitron text-2xl text-white mb-4">ESTABLISHING QUANTUM LINK</h3>
+            <p class="text-[#00f3ff]/70">Encrypting connection across dimensions...</p>
+            <div class="mt-6 w-64 h-1 bg-[#0a0a1a] rounded-full overflow-hidden mx-auto">
+                <div id="quantum-progress" class="h-full bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] w-0 transition-all duration-1000"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Portal -->
+    <div id="portal-success" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden items-center justify-center">
+        <div class="text-center max-w-lg">
+            <div class="w-40 h-40 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mx-auto mb-8">
+                <i class="fas fa-check text-6xl text-[#050510]"></i>
+            </div>
+            <h2 class="font-orbitron text-4xl text-white mb-6">
+                <span class="gradient-text">PORTAL ACCESSED</span>
+            </h2>
+            <p class="text-xl text-[#f0f8ff]/70 mb-8">
+                Quantum connection established successfully. Redirecting to the main interface...
+            </p>
+            <div class="mt-8">
+                <div class="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold">
+                    <i class="fas fa-rocket mr-3"></i>
+                    PREPARING FOR LAUNCH
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = Math.random() * 4 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random color
+                const colors = ['#00f3ff', '#00ff9d', '#ff00c3', '#9600ff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                particlesContainer.appendChild(particle);
+                
+                // Animate
+                animateParticle(particle);
+            }
+        }
+        
+        function animateParticle(particle) {
+            const duration = Math.random() * 20 + 10;
+            const xMovement = (Math.random() - 0.5) * 100;
+            const yMovement = (Math.random() - 0.5) * 100;
+            
+            particle.animate([
+                { transform: 'translate(0, 0)', opacity: particle.style.opacity },
+                { transform: `translate(${xMovement}px, ${yMovement}px)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                iterations: Infinity,
+                direction: 'alternate'
+            });
+        }
+        
+        // Tab switching
+        const loginTab = document.getElementById('login-tab');
+        const signupTab = document.getElementById('signup-tab');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        
+        loginTab.addEventListener('click', showLogin);
+        signupTab.addEventListener('click', showSignup);
+        
+        function showLogin() {
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+        }
+        
+        function showSignup() {
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+            signupTab.classList.add('active');
+            loginTab.classList.remove('active');
+        }
+        
+        // Password toggle
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+        
+        // Checkbox functionality
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checkIcon = this.parentElement.querySelector('.fa-check');
+                if (this.checked) {
+                    checkIcon.classList.remove('hidden');
+                } else {
+                    checkIcon.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Quantum login
+        function quantumLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (!email || !password) {
+                showNotification('Quantum field empty!', 'error');
+                return;
+            }
+            
+            showQuantumLoading();
+            
+            // Simulate quantum authentication
+            setTimeout(() => {
+                hideQuantumLoading();
+                showPortalSuccess();
+                
+                // Redirect after success
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2500);
+            }, 2000);
+        }
+        
+        // Create quantum portal
+        function createQuantumPortal() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            const terms = document.getElementById('terms').checked;
+            
+            if (!name || !email || !password || !confirm) {
+                showNotification('All quantum fields required!', 'error');
+                return;
+            }
+            
+            if (password !== confirm) {
+                showNotification('Encryption seeds do not match!', 'error');
+                return;
+            }
+            
+            if (!terms) {
+                showNotification('Accept quantum terms to proceed', 'error');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showNotification('Encryption seed too weak!', 'error');
+                return;
+            }
+            
+            showQuantumLoading();
+            
+            // Simulate portal creation
+            setTimeout(() => {
+                hideQuantumLoading();
+                showPortalSuccess();
+                
+                // Redirect after success
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2500);
+            }, 2000);
+        }
+        
+        // Biometric authentication
+        function biometricAuth() {
+            showNotification('Initializing biometric scan...', 'info');
+            
+            // Simulate biometric scan
+            setTimeout(() => {
+                showQuantumLoading();
+                
+                setTimeout(() => {
+                    hideQuantumLoading();
+                    showPortalSuccess();
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2500);
+                }, 1500);
+            }, 1000);
+        }
+        
+        // Loading overlay
+        function showQuantumLoading() {
+            const loading = document.getElementById('quantum-loading');
+            const progress = document.getElementById('quantum-progress');
+            
+            loading.classList.remove('hidden');
+            loading.style.display = 'flex';
+            
+            // Animate progress bar
+            setTimeout(() => {
+                progress.style.width = '100%';
+            }, 100);
+        }
+        
+        function hideQuantumLoading() {
+            const loading = document.getElementById('quantum-loading');
+            const progress = document.getElementById('quantum-progress');
+            
+            loading.classList.add('hidden');
+            progress.style.width = '0%';
+        }
+        
+        // Success portal
+        function showPortalSuccess() {
+            const success = document.getElementById('portal-success');
+            success.classList.remove('hidden');
+            success.style.display = 'flex';
+        }
+        
+        // Notification system
+        function showNotification(message, type) {
+            // Remove existing notifications
+            const existing = document.querySelector('.quantum-notification');
+            if (existing) existing.remove();
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = `quantum-notification fixed top-6 right-6 px-6 py-4 rounded-xl border backdrop-blur-md z-50 transform transition-transform duration-300`;
+            
+            // Set style based on type
+            if (type === 'error') {
+                notification.classList.add('border-[#ff4757]', 'bg-[#0a0a1a]/90');
+                notification.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff4757] to-[#ff6b81] flex items-center justify-center mr-4">
+                            <i class="fas fa-exclamation-circle text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">QUANTUM ERROR</h4>
+                            <p class="text-sm text-[#f0f8ff]/70">${message}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                notification.classList.add('border-[#00f3ff]', 'bg-[#0a0a1a]/90');
+                notification.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mr-4">
+                            <i class="fas fa-info-circle text-[#050510]"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">QUANTUM SYSTEM</h4>
+                            <p class="text-sm text-[#f0f8ff]/70">${message}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 10);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            showLogin(); // Default to login
+            
+            // Add animation to inputs on focus
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('input-glow');
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('input-glow');
+                });
+            });
+            
+            // Initialize checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                const checkIcon = document.createElement('i');
+                checkIcon.className = 'fas fa-check text-[#00f3ff] text-xs hidden';
+                checkbox.parentElement.appendChild(checkIcon);
+            });
+            
+            // Add hologram effect to form
+            const form = document.querySelector('.auth-form');
+            setInterval(() => {
+                form.classList.toggle('hologram-effect');
+                setTimeout(() => {
+                    form.classList.toggle('hologram-effect');
+                }, 300);
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

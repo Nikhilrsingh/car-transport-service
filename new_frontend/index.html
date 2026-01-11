@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harihar Car Carriers | Futuristic Vehicle Transport</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js for 3D models -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #00f3ff;
+            --secondary: #ff00c3;
+            --accent: #00ff9d;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --light: #f0f8ff;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .neon-border {
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3),
+                        inset 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px var(--primary),
+                        0 0 40px rgba(0, 243, 255, 0.3),
+                        0 0 60px rgba(0, 243, 255, 0.1);
+        }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .car-track {
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 20px,
+                rgba(0, 243, 255, 0.1) 20px,
+                rgba(0, 243, 255, 0.1) 40px
+            );
+        }
+        
+        .scroll-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .scroll-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px var(--primary); }
+            50% { box-shadow: 0 0 25px var(--primary); }
+        }
+        
+        .scan-line {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scan-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 5px;
+        }
+        
+        /* 3D Model Container */
+        #model-container {
+            perspective: 1000px;
+        }
+        
+        .model-rotate {
+            transform-style: preserve-3d;
+            animation: rotateModel 20s infinite linear;
+        }
+        
+        @keyframes rotateModel {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 grid-pattern -z-10"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-transparent via-[#050510] to-[#0a0a1a] -z-10"></div>
+    
+    <!-- Floating Particles -->
+    <div id="particles" class="fixed inset-0 -z-10"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#0a0a1a]/80 backdrop-blur-md border-b border-[#00f3ff]/20">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center">
+                    <i class="fas fa-car text-[#050510] text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-orbitron text-xl font-bold gradient-text">HARIHAR CAR CARRIERS</h1>
+                    <p class="text-xs text-[#00f3ff]/70">FUTURE OF VEHICLE TRANSPORT</p>
+                </div>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors font-semibold relative group">
+                    Home
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00f3ff] group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#services" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors font-semibold relative group">
+                    Services
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00f3ff] group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#tracking" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors font-semibold relative group">
+                    Live Tracking
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00f3ff] group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#pricing" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors font-semibold relative group">
+                    Pricing
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00f3ff] group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#contact" class="px-6 py-2 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold rounded-full hover:shadow-[0_0_25px_rgba(0,243,255,0.7)] transition-all duration-300">
+                    GET QUOTE
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-[#00f3ff]">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 bg-[#0a0a1a]/95 backdrop-blur-md border-t border-[#00f3ff]/20 hidden">
+            <div class="flex flex-col p-6 space-y-6">
+                <a href="#home" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors font-semibold text-lg">Home</a>
+                <a href="#services" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors font-semibold text-lg">Services</a>
+                <a href="#tracking" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors font-semibold text-lg">Live Tracking</a>
+                <a href="#pricing" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors font-semibold text-lg">Pricing</a>
+                <a href="#contact" class="px-6 py-3 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold rounded-full text-center">GET QUOTE</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden">
+        <!-- Animated Car Track -->
+        <div class="absolute inset-0 car-track opacity-30"></div>
+        
+        <!-- 3D Car Model Container -->
+        <div id="model-container" class="absolute right-10 top-1/4 w-96 h-96 hidden lg:block">
+            <div class="w-full h-full flex items-center justify-center">
+                <!-- Placeholder for 3D car model - In real implementation, load a Three.js model -->
+                <div class="model-rotate w-64 h-64 relative">
+                    <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-[#00f3ff]/20 to-[#00ff9d]/10 border border-[#00f3ff]/30 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-car text-6xl text-[#00f3ff] mb-4"></i>
+                            <p class="text-[#00f3ff] font-orbitron">3D CAR MODEL</p>
+                            <p class="text-xs text-[#00f3ff]/70">Interactive 3D Visualization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="container mx-auto px-6 z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-section">
+                    <div class="inline-block px-4 py-2 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6">
+                        <span class="text-[#00f3ff] font-orbitron text-sm">
+                            <i class="fas fa-rocket mr-2"></i> FUTURE OF TRANSPORT
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-orbitron font-bold mb-6">
+                        <span class="gradient-text">REDEFINING</span>
+                        <span class="block text-white">VEHICLE TRANSPORT</span>
+                    </h1>
+                    
+                    <p class="text-xl text-[#f0f8ff]/80 mb-8 max-w-2xl">
+                        Experience the next generation of car transportation with our AI-powered logistics, real-time quantum tracking, and zero-emission transport carriers.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-12">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center">
+                                <i class="fas fa-bolt text-[#050510]"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white">24-Hour Delivery</p>
+                                <p class="text-sm text-[#00f3ff]/70">Fast & Secure</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-[#050510]"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white">100% Insured</p>
+                                <p class="text-sm text-[#00f3ff]/70">Full Coverage</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="px-8 py-4 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-orbitron font-bold rounded-full hover:shadow-[0_0_30px_rgba(0,243,255,0.8)] transition-all duration-300 flex items-center">
+                            <span>BOOK TRANSPORT</span>
+                            <i class="fas fa-arrow-right ml-3"></i>
+                        </a>
+                        <a href="#tracking" class="px-8 py-4 neon-border text-white font-orbitron font-bold rounded-full hover:bg-[#00f3ff]/10 transition-all duration-300 flex items-center">
+                            <i class="fas fa-satellite-dish mr-3"></i>
+                            <span>LIVE TRACKING</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+            <div class="flex flex-col items-center">
+                <span class="text-[#00f3ff] mb-2 text-sm font-orbitron">SCROLL TO EXPLORE</span>
+                <div class="w-6 h-10 rounded-full border-2 border-[#00f3ff]/50 flex justify-center p-1">
+                    <div class="w-1 h-3 bg-gradient-to-b from-[#00f3ff] to-transparent rounded-full animate-bounce"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="scroll-section text-center p-6 rounded-2xl neon-border bg-[#0a0a1a]/50">
+                    <div class="text-5xl font-orbitron font-bold gradient-text mb-2">5K+</div>
+                    <p class="text-white font-semibold">Vehicles Transported</p>
+                    <div class="mt-4 h-1 w-20 mx-auto bg-gradient-to-r from-[#00f3ff] to-[#00ff9d]"></div>
+                </div>
+                <div class="scroll-section text-center p-6 rounded-2xl neon-border bg-[#0a0a1a]/50">
+                    <div class="text-5xl font-orbitron font-bold gradient-text mb-2">50+</div>
+                    <p class="text-white font-semibold">Cities Connected</p>
+                    <div class="mt-4 h-1 w-20 mx-auto bg-gradient-to-r from-[#00f3ff] to-[#00ff9d]"></div>
+                </div>
+                <div class="scroll-section text-center p-6 rounded-2xl neon-border bg-[#0a0a1a]/50">
+                    <div class="text-5xl font-orbitron font-bold gradient-text mb-2">98%</div>
+                    <p class="text-white font-semibold">Satisfaction Rate</p>
+                    <div class="mt-4 h-1 w-20 mx-auto bg-gradient-to-r from-[#00f3ff] to-[#00ff9d]"></div>
+                </div>
+                <div class="scroll-section text-center p-6 rounded-2xl neon-border bg-[#0a0a1a]/50">
+                    <div class="text-5xl font-orbitron font-bold gradient-text mb-2">24/7</div>
+                    <p class="text-white font-semibold">Support Available</p>
+                    <div class="mt-4 h-1 w-20 mx-auto bg-gradient-to-r from-[#00f3ff] to-[#00ff9d]"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#050510]/50 to-transparent -z-10"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-2 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6">
+                    <span class="text-[#00f3ff] font-orbitron text-sm">
+                        <i class="fas fa-cogs mr-2"></i> OUR SERVICES
+                    </span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                    <span class="gradient-text">FUTURISTIC</span>
+                    <span class="text-white block">TRANSPORT SOLUTIONS</span>
+                </h2>
+                <p class="text-xl text-[#f0f8ff]/70 max-w-3xl mx-auto">
+                    Leveraging cutting-edge technology to deliver unparalleled vehicle transportation services.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="scroll-section group p-8 rounded-2xl neon-border bg-[#0a0a1a]/50 hover:bg-gradient-to-br hover:from-[#00f3ff]/5 hover:to-[#00ff9d]/5 transition-all duration-500">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-satellite text-2xl text-[#050510]"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold text-white mb-4">Quantum Tracking</h3>
+                    <p class="text-[#f0f8ff]/70 mb-6">Real-time AI-powered tracking with predictive arrival times and live vehicle monitoring.</p>
+                    <div class="flex items-center text-[#00f3ff] font-semibold">
+                        <span>Explore Tech</span>
+                        <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform duration-300"></i>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="scroll-section group p-8 rounded-2xl neon-border bg-[#0a0a1a]/50 hover:bg-gradient-to-br hover:from-[#00f3ff]/5 hover:to-[#00ff9d]/5 transition-all duration-500">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-robot text-2xl text-[#050510]"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold text-white mb-4">AI Logistics</h3>
+                    <p class="text-[#f0f8ff]/70 mb-6">Smart route optimization and load balancing using advanced artificial intelligence algorithms.</p>
+                    <div class="flex items-center text-[#00f3ff] font-semibold">
+                        <span>Explore Tech</span>
+                        <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform duration-300"></i>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="scroll-section group p-8 rounded-2xl neon-border bg-[#0a0a1a]/50 hover:bg-gradient-to-br hover:from-[#00f3ff]/5 hover:to-[#00ff9d]/5 transition-all duration-500">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-bolt text-2xl text-[#050510]"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold text-white mb-4">Eco Carriers</h3>
+                    <p class="text-[#f0f8ff]/70 mb-6">Zero-emission electric transport carriers with advanced safety and stabilization systems.</p>
+                    <div class="flex items-center text-[#00f3ff] font-semibold">
+                        <span>Explore Tech</span>
+                        <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform duration-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Live Tracking Section -->
+    <section id="tracking" class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-section">
+                    <div class="inline-block px-4 py-2 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6">
+                        <span class="text-[#00f3ff] font-orbitron text-sm">
+                            <i class="fas fa-satellite-dish mr-2"></i> LIVE TRACKING
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                        <span class="gradient-text">REAL-TIME</span>
+                        <span class="text-white block">VEHICLE MONITORING</span>
+                    </h2>
+                    
+                    <p class="text-xl text-[#f0f8ff]/70 mb-8">
+                        Track your vehicle in real-time with our quantum satellite system. Get live updates, route optimization, and predictive ETA.
+                    </p>
+                    
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-[#050510]"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg mb-1">Live GPS Tracking</h4>
+                                <p class="text-[#f0f8ff]/70">Pinpoint accuracy with real-time location updates every 30 seconds.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-chart-line text-[#050510]"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg mb-1">Predictive Analytics</h4>
+                                <p class="text-[#f0f8ff]/70">AI calculates optimal routes and predicts exact delivery times.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <input type="text" placeholder="Enter Tracking ID" class="w-full py-4 px-6 rounded-xl bg-[#0a0a1a] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none focus:border-[#00f3ff] focus:shadow-[0_0_20px_rgba(0,243,255,0.3)] transition-all">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 py-3 px-6 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold rounded-lg hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all">
+                            TRACK
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="scroll-section">
+                    <!-- Mockup Tracking Interface -->
+                    <div class="relative rounded-2xl overflow-hidden neon-border bg-[#0a0a1a]/50 p-1">
+                        <div class="scan-line rounded-2xl"></div>
+                        <div class="bg-[#0a0a1a] p-6 rounded-2xl">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-orbitron text-xl text-white">ACTIVE TRANSPORT MAP</h3>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-[#00ff9d]"></div>
+                                    <span class="text-sm text-[#00ff9d]">LIVE</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Map Visualization -->
+                            <div class="h-64 rounded-xl bg-gradient-to-br from-[#050510] to-[#0a0a1a] border border-[#00f3ff]/20 flex items-center justify-center mb-6">
+                                <div class="text-center">
+                                    <i class="fas fa-map text-5xl text-[#00f3ff]/30 mb-4"></i>
+                                    <p class="text-[#00f3ff]/50 font-orbitron">INTERACTIVE MAP</p>
+                                    <p class="text-xs text-[#00f3ff]/30">Real-time vehicle positions</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Tracking Info -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-4 rounded-xl bg-[#050510] border border-[#00f3ff]/10">
+                                    <p class="text-sm text-[#00f3ff]/70 mb-1">VEHICLE ID</p>
+                                    <p class="font-orbitron text-white">HCC-7823</p>
+                                </div>
+                                <div class="p-4 rounded-xl bg-[#050510] border border-[#00f3ff]/10">
+                                    <p class="text-sm text-[#00f3ff]/70 mb-1">CURRENT LOCATION</p>
+                                    <p class="font-orbitron text-white">HYDERABAD</p>
+                                </div>
+                                <div class="p-4 rounded-xl bg-[#050510] border border-[#00f3ff]/10">
+                                    <p class="text-sm text-[#00f3ff]/70 mb-1">DESTINATION</p>
+                                    <p class="font-orbitron text-white">BANGALORE</p>
+                                </div>
+                                <div class="p-4 rounded-xl bg-[#050510] border border-[#00f3ff]/10">
+                                    <p class="text-sm text-[#00f3ff]/70 mb-1">ETA</p>
+                                    <p class="font-orbitron text-white">12 H 34 M</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-2 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6">
+                    <span class="text-[#00f3ff] font-orbitron text-sm">
+                        <i class="fas fa-tags mr-2"></i> TRANSPARENT PRICING
+                    </span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                    <span class="gradient-text">FUTURE-FORWARD</span>
+                    <span class="text-white block">PRICING PLANS</span>
+                </h2>
+                <p class="text-xl text-[#f0f8ff]/70 max-w-3xl mx-auto">
+                    Choose from our range of high-tech transport solutions tailored to your needs.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Plan 1 -->
+                <div class="scroll-section group p-8 rounded-2xl neon-border bg-[#0a0a1a]/50 hover:scale-105 transition-all duration-500">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-orbitron font-bold text-white mb-2">STANDARD</h3>
+                        <div class="text-5xl font-orbitron font-bold gradient-text">₹8,999</div>
+                        <p class="text-[#00f3ff]/70">Per Vehicle</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Basic GPS Tracking</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">5-Day Delivery Window</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Standard Insurance</span>
+                        </li>
+                        <li class="flex items-center opacity-50">
+                            <i class="fas fa-times text-[#ff00c3] mr-3"></i>
+                            <span class="text-[#f0f8ff]/50">AI Route Optimization</span>
+                        </li>
+                        <li class="flex items-center opacity-50">
+                            <i class="fas fa-times text-[#ff00c3] mr-3"></i>
+                            <span class="text-[#f0f8ff]/50">Priority Support</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full py-3 rounded-xl bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all">
+                        SELECT PLAN
+                    </button>
+                </div>
+                
+                <!-- Plan 2 (Featured) -->
+                <div class="scroll-section group p-8 rounded-2xl relative bg-gradient-to-br from-[#00f3ff]/10 to-[#00ff9d]/10 border-2 border-[#00f3ff] hover:scale-105 transition-all duration-500">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <div class="px-4 py-1 rounded-full bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold text-sm">
+                            MOST POPULAR
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-orbitron font-bold text-white mb-2">PREMIUM</h3>
+                        <div class="text-5xl font-orbitron font-bold gradient-text">₹14,999</div>
+                        <p class="text-[#00f3ff]/70">Per Vehicle</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Quantum Real-time Tracking</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">2-Day Express Delivery</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Full Coverage Insurance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">AI Route Optimization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Priority 24/7 Support</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full py-3 rounded-xl bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold hover:shadow-[0_0_25px_rgba(0,243,255,0.7)] transition-all neon-glow">
+                        SELECT PLAN
+                    </button>
+                </div>
+                
+                <!-- Plan 3 -->
+                <div class="scroll-section group p-8 rounded-2xl neon-border bg-[#0a0a1a]/50 hover:scale-105 transition-all duration-500">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-orbitron font-bold text-white mb-2">ENTERPRISE</h3>
+                        <div class="text-5xl font-orbitron font-bold gradient-text">Custom</div>
+                        <p class="text-[#00f3ff]/70">Bulk & Fleet Solutions</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Multi-Vehicle Tracking</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Custom Delivery Scheduling</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Premium Insurance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">Dedicated Account Manager</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-[#00ff9d] mr-3"></i>
+                            <span class="text-[#f0f8ff]/80">API Integration</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full py-3 rounded-xl bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all">
+                        CONTACT SALES
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quote Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#050510]/30 to-transparent -z-10"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="scroll-section text-center mb-16">
+                    <div class="inline-block px-4 py-2 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6">
+                        <span class="text-[#00f3ff] font-orbitron text-sm">
+                            <i class="fas fa-calculator mr-2"></i> INSTANT QUOTE
+                        </span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                        <span class="gradient-text">GET YOUR</span>
+                        <span class="text-white block">CUSTOM QUOTE</span>
+                    </h2>
+                    <p class="text-xl text-[#f0f8ff]/70">
+                        Calculate your transport cost in seconds with our AI-powered quote engine.
+                    </p>
+                </div>
+                
+                <div class="scroll-section rounded-2xl overflow-hidden neon-border bg-[#0a0a1a]/50">
+                    <div class="p-8 md:p-12">
+                        <form id="quoteForm" class="space-y-8">
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <label class="block text-white font-semibold mb-3">
+                                        <i class="fas fa-map-marker-alt text-[#00f3ff] mr-2"></i>
+                                        PICKUP LOCATION
+                                    </label>
+                                    <input type="text" placeholder="Enter pickup city" class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none focus:border-[#00f3ff] focus:shadow-[0_0_20px_rgba(0,243,255,0.3)] transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-white font-semibold mb-3">
+                                        <i class="fas fa-flag-checkered text-[#00f3ff] mr-2"></i>
+                                        DESTINATION
+                                    </label>
+                                    <input type="text" placeholder="Enter destination city" class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none focus:border-[#00f3ff] focus:shadow-[0_0_20px_rgba(0,243,255,0.3)] transition-all">
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <label class="block text-white font-semibold mb-3">
+                                        <i class="fas fa-car text-[#00f3ff] mr-2"></i>
+                                        VEHICLE TYPE
+                                    </label>
+                                    <select class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white focus:outline-none focus:border-[#00f3ff] focus:shadow-[0_0_20px_rgba(0,243,255,0.3)] transition-all">
+                                        <option value="" class="bg-[#050510]">Select Vehicle Type</option>
+                                        <option value="hatchback" class="bg-[#050510]">Hatchback</option>
+                                        <option value="sedan" class="bg-[#050510]">Sedan</option>
+                                        <option value="suv" class="bg-[#050510]">SUV</option>
+                                        <option value="luxury" class="bg-[#050510]">Luxury Vehicle</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-white font-semibold mb-3">
+                                        <i class="fas fa-bolt text-[#00f3ff] mr-2"></i>
+                                        TRANSPORT TYPE
+                                    </label>
+                                    <select class="w-full py-4 px-6 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white focus:outline-none focus:border-[#00f3ff] focus:shadow-[0_0_20px_rgba(0,243,255,0.3)] transition-all">
+                                        <option value="" class="bg-[#050510]">Select Transport Type</option>
+                                        <option value="standard" class="bg-[#050510]">Standard (5-7 days)</option>
+                                        <option value="express" class="bg-[#050510]">Express (2-3 days)</option>
+                                        <option value="priority" class="bg-[#050510]">Priority (24 hours)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center pt-8">
+                                <button type="submit" class="px-12 py-4 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-orbitron font-bold rounded-full hover:shadow-[0_0_30px_rgba(0,243,255,0.8)] transition-all duration-300 text-xl">
+                                    <i class="fas fa-bolt mr-3"></i>
+                                    CALCULATE QUOTE
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Quote Result -->
+                    <div id="quoteResult" class="hidden p-8 border-t border-[#00f3ff]/20">
+                        <div class="flex flex-col md:flex-row items-center justify-between">
+                            <div>
+                                <h3 class="font-orbitron text-2xl text-white mb-2">YOUR QUOTE IS READY</h3>
+                                <p class="text-[#00f3ff]/70">Hyderabad → Bangalore • SUV • Express Delivery</p>
+                            </div>
+                            <div class="mt-6 md:mt-0">
+                                <div class="text-4xl font-orbitron font-bold gradient-text">₹12,499</div>
+                                <p class="text-center text-[#00f3ff]/70">Including all charges</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 flex flex-col md:flex-row justify-center gap-4">
+                            <button class="px-8 py-3 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold rounded-full hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                BOOK NOW
+                            </button>
+                            <button id="resetQuote" class="px-8 py-3 border border-[#00f3ff] text-[#00f3ff] font-bold rounded-full hover:bg-[#00f3ff]/10 transition-all">
+                                <i class="fas fa-redo mr-2"></i>
+                                NEW QUOTE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="pt-20 pb-10 relative border-t border-[#00f3ff]/20">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center">
+                            <i class="fas fa-car text-[#050510]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-xl font-bold text-white">HARIHAR CAR CARRIERS</h3>
+                            <p class="text-xs text-[#00f3ff]/70">FUTURE OF TRANSPORT</p>
+                        </div>
+                    </div>
+                    <p class="text-[#f0f8ff]/70 mb-6">
+                        Redefining vehicle transportation with cutting-edge technology, AI logistics, and quantum tracking systems.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#00f3ff]/30 flex items-center justify-center text-[#00f3ff] hover:bg-[#00f3ff] hover:text-[#050510] transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#00f3ff]/30 flex items-center justify-center text-[#00f3ff] hover:bg-[#00f3ff] hover:text-[#050510] transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#00f3ff]/30 flex items-center justify-center text-[#00f3ff] hover:bg-[#00f3ff] hover:text-[#050510] transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#00f3ff]/30 flex items-center justify-center text-[#00f3ff] hover:bg-[#00f3ff] hover:text-[#050510] transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-orbitron text-white text-lg mb-6">QUICK LINKS</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#home" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Home</a></li>
+                        <li><a href="#services" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Services</a></li>
+                        <li><a href="#tracking" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Live Tracking</a></li>
+                        <li><a href="#pricing" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Pricing</a></li>
+                        <li><a href="#contact" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Get Quote</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="font-orbitron text-white text-lg mb-6">OUR SERVICES</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Quantum Tracking</a></li>
+                        <li><a href="#" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">AI Logistics</a></li>
+                        <li><a href="#" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Eco Carriers</a></li>
+                        <li><a href="#" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Door-to-Door Delivery</a></li>
+                        <li><a href="#" class="text-[#f0f8ff]/70 hover:text-[#00f3ff] transition-colors">Vehicle Insurance</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-orbitron text-white text-lg mb-6">CONTACT US</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-[#00f3ff] mr-3 mt-1"></i>
+                            <span class="text-[#f0f8ff]/70">Tech Park, Hyderabad, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-[#00f3ff] mr-3"></i>
+                            <span class="text-[#f0f8ff]/70">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-[#00f3ff] mr-3"></i>
+                            <span class="text-[#f0f8ff]/70">info@hariharcarriers.tech</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-[#00f3ff] mr-3"></i>
+                            <span class="text-[#f0f8ff]/70">24/7 Customer Support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-[#00f3ff]/20 text-center">
+                <p class="text-[#f0f8ff]/70">
+                    &copy; 2023 Harihar Car Carriers. All rights reserved. | 
+                    <a href="#" class="text-[#00f3ff] hover:underline">Privacy Policy</a> | 
+                    <a href="#" class="text-[#00f3ff] hover:underline">Terms of Service</a>
+                </p>
+                <p class="mt-2 text-sm text-[#00f3ff]/50">
+                    Designed with <i class="fas fa-heart text-[#ff00c3]"></i> for the future of transportation
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 flex flex-col items-end space-y-4 z-40">
+        <button id="chatbotBtn" class="w-14 h-14 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] text-[#050510] flex items-center justify-center text-xl shadow-lg hover:shadow-[0_0_25px_rgba(0,243,255,0.7)] hover:scale-110 transition-all duration-300 pulse-glow">
+            <i class="fas fa-robot"></i>
+        </button>
+        
+        <button id="whatsappBtn" class="w-14 h-14 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white flex items-center justify-center text-xl shadow-lg hover:shadow-[0_0_25px_rgba(37,211,102,0.7)] hover:scale-110 transition-all duration-300">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+        
+        <button id="quoteBtn" class="w-14 h-14 rounded-full bg-gradient-to-br from-[#ff00c3] to-[#9600ff] text-white flex items-center justify-center text-xl shadow-lg hover:shadow-[0_0_25px_rgba(255,0,195,0.7)] hover:scale-110 transition-all duration-300">
+            <i class="fas fa-calculator"></i>
+        </button>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+        
+        // Quote Form Submission
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('quoteResult').classList.remove('hidden');
+            document.getElementById('quoteForm').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Reset Quote
+        document.getElementById('resetQuote').addEventListener('click', function() {
+            document.getElementById('quoteResult').classList.add('hidden');
+            document.getElementById('quoteForm').reset();
+        });
+        
+        // Scroll Animation
+        function checkScroll() {
+            const sections = document.querySelectorAll('.scroll-section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.85) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // Initialize GSAP ScrollTrigger
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate elements on scroll
+            gsap.utils.toArray('.scroll-section').forEach(section => {
+                gsap.from(section, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+            
+            // Parallax effect for background
+            gsap.to('.grid-pattern', {
+                backgroundPosition: '500px 500px',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: true
+                }
+            });
+        }
+        
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'absolute rounded-full';
+                
+                // Random size between 1-4px
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random color (blue/cyan shades)
+                const colors = ['#00f3ff', '#00ff9d', '#0099ff', '#00ccff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                // Add to container
+                particlesContainer.appendChild(particle);
+                
+                // Animate particle
+                animateParticle(particle);
+            }
+        }
+        
+        function animateParticle(particle) {
+            const startX = parseFloat(particle.style.left);
+            const startY = parseFloat(particle.style.top);
+            
+            // Random movement
+            const xMovement = (Math.random() - 0.5) * 20;
+            const yMovement = (Math.random() - 0.5) * 20;
+            const duration = Math.random() * 10 + 10;
+            
+            // Use GSAP if available, otherwise use CSS
+            if (typeof gsap !== 'undefined') {
+                gsap.to(particle, {
+                    x: `${xMovement}%`,
+                    y: `${yMovement}%`,
+                    duration: duration,
+                    ease: 'sine.inOut',
+                    yoyo: true,
+                    repeat: -1
+                });
+            } else {
+                // Fallback CSS animation
+                particle.style.transition = `all ${duration}s ease-in-out infinite alternate`;
+                setInterval(() => {
+                    particle.style.transform = `translate(${xMovement}px, ${yMovement}px)`;
+                    setTimeout(() => {
+                        particle.style.transform = 'translate(0, 0)';
+                    }, duration * 500);
+                }, duration * 1000);
+            }
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            checkScroll();
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href === '#') return;
+                    
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Floating button actions
+            document.getElementById('chatbotBtn').addEventListener('click', function() {
+                alert('AI Chatbot activated! This would open a conversation with our virtual assistant.');
+            });
+            
+            document.getElementById('whatsappBtn').addEventListener('click', function() {
+                window.open('https://wa.me/919876543210?text=Hello%20Harihar%20Car%20Carriers,%20I%20need%20information%20about%20vehicle%20transport.', '_blank');
+            });
+            
+            document.getElementById('quoteBtn').addEventListener('click', function() {
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

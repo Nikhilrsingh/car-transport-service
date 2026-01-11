@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Genesis | Harihar Car Carriers</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom Theme CSS -->
+    <style>
+        :root {
+            --primary: #00f3ff;
+            --secondary: #ff00c3;
+            --accent: #00ff9d;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --light: #f0f8ff;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .neon-border {
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3),
+                        inset 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .scan-line {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scan-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        .hologram-effect {
+            background: linear-gradient(45deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+        
+        .quantum-grid {
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(0, 243, 255, 0.1) 50%, transparent 51%),
+                linear-gradient(transparent 49%, rgba(0, 243, 255, 0.1) 50%, transparent 51%);
+            background-size: 50px 50px;
+        }
+        
+        .timeline-node {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0.2; }
+        }
+        
+        .value-card {
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.8), rgba(5, 5, 16, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .value-card:hover::before {
+            left: 100%;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+        }
+        
+        .team-card {
+            background: linear-gradient(145deg, rgba(10, 10, 26, 0.9), rgba(5, 5, 16, 0.95));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(0, 243, 255, 0.3);
+        }
+        
+        .team-avatar {
+            border: 2px solid transparent;
+            background: linear-gradient(var(--darker), var(--darker)) padding-box,
+                        linear-gradient(45deg, var(--primary), var(--accent), var(--secondary)) border-box;
+        }
+        
+        .stats-glow {
+            box-shadow: 0 0 20px var(--primary),
+                        0 0 40px rgba(0, 243, 255, 0.2);
+        }
+        
+        .timeline-path {
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            width: 4px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-path {
+                left: 30px;
+            }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
+        }
+        
+        .cyber-grid {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 255, 157, 0.1) 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#0a0a1a]/90 backdrop-blur-md border-b border-[#00f3ff]/20">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center">
+                    <i class="fas fa-rocket text-[#050510] text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-orbitron text-xl font-bold gradient-text">QUANTUM GENESIS</h1>
+                    <p class="text-xs text-[#00f3ff]/70">HARIHAR CAR CARRIERS</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors relative group">
+                    <span class="group-hover:scale-110 transition-transform">Home</span>
+                    <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00f3ff] group-hover:w-full transition-all duration-300"></div>
+                </a>
+                <a href="#timeline" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors relative group">
+                    <span class="group-hover:scale-110 transition-transform">Timeline</span>
+                    <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00f3ff] group-hover:w-full transition-all duration-300"></div>
+                </a>
+                <a href="#team" class="text-[#f0f8ff] hover:text-[#00f3ff] transition-colors relative group">
+                    <span class="group-hover:scale-110 transition-transform">Quantum Crew</span>
+                    <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00f3ff] group-hover:w-full transition-all duration-300"></div>
+                </a>
+                <a href="login.html" class="px-6 py-2 border border-[#00f3ff] text-[#00f3ff] rounded-lg hover:bg-[#00f3ff]/10 transition-all">
+                    <i class="fas fa-user-astronaut mr-2"></i>
+                    Portal Access
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 grid-pattern -z-10"></div>
+        <div class="absolute inset-0 cyber-grid -z-10"></div>
+        
+        <!-- Floating Particles -->
+        <div id="particles" class="absolute inset-0 -z-10"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block px-6 py-3 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-8 floating">
+                    <span class="text-[#00f3ff] font-orbitron text-sm">
+                        <i class="fas fa-infinity mr-2"></i> OUR QUANTUM JOURNEY
+                    </span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-orbitron font-bold mb-6">
+                    <span class="gradient-text">REDEFINING</span>
+                    <span class="block text-white">TRANSPORT REALITY</span>
+                </h1>
+                
+                <div class="typewriter-container mb-8">
+                    <p class="text-2xl text-[#f0f8ff]/80 typewriter">
+                        Where innovation meets transportation across dimensions
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6 mb-12">
+                    <div class="px-6 py-3 rounded-xl bg-[#0a0a1a]/50 border border-[#00f3ff]/20">
+                        <div class="text-3xl font-orbitron gradient-text">5K+</div>
+                        <div class="text-sm text-[#00f3ff]/70">Quantum Transports</div>
+                    </div>
+                    <div class="px-6 py-3 rounded-xl bg-[#0a0a1a]/50 border border-[#00f3ff]/20">
+                        <div class="text-3xl font-orbitron gradient-text">50+</div>
+                        <div class="text-sm text-[#00f3ff]/70">City Networks</div>
+                    </div>
+                    <div class="px-6 py-3 rounded-xl bg-[#0a0a1a]/50 border border-[#00f3ff]/20">
+                        <div class="text-3xl font-orbitron gradient-text">99.8%</div>
+                        <div class="text-sm text-[#00f3ff]/70">Success Rate</div>
+                    </div>
+                </div>
+                
+                <a href="#mission" class="px-8 py-4 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-orbitron font-bold rounded-xl hover:shadow-[0_0_30px_rgba(0,243,255,0.8)] transition-all group">
+                    <span class="group-hover:scale-105 transition-transform">EXPLORE OUR MISSION</span>
+                    <i class="fas fa-arrow-down ml-3 group-hover:translate-y-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="py-20 relative">
+        <div class="absolute inset-0 hologram-effect opacity-30 -z-10"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <!-- 3D Visualization Container -->
+                    <div class="rounded-2xl overflow-hidden neon-border p-1">
+                        <div class="scan-line"></div>
+                        <div class="bg-gradient-to-br from-[#0a0a1a] to-[#050510] p-8 rounded-2xl">
+                            <div class="text-center mb-6">
+                                <h3 class="font-orbitron text-2xl text-white mb-2">QUANTUM VISUALIZATION</h3>
+                                <p class="text-[#00f3ff]/70">Our Network Expansion</p>
+                            </div>
+                            <div class="h-64 rounded-lg bg-gradient-to-br from-[#050510] to-[#0a0a1a] border border-[#00f3ff]/20 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i class="fas fa-network-wired text-5xl text-[#00f3ff]/30 mb-4"></i>
+                                    <p class="text-[#00f3ff]/50 font-orbitron">INTERACTIVE 3D NETWORK</p>
+                                    <p class="text-xs text-[#00f3ff]/30">Real-time quantum connections</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 mt-6">
+                                <div class="text-center p-3 rounded-lg bg-[#050510] border border-[#00f3ff]/10">
+                                    <div class="text-lg font-orbitron text-white">256</div>
+                                    <div class="text-xs text-[#00f3ff]/70">Active Nodes</div>
+                                </div>
+                                <div class="text-center p-3 rounded-lg bg-[#050510] border border-[#00f3ff]/10">
+                                    <div class="text-lg font-orbitron text-white">98.7%</div>
+                                    <div class="text-xs text-[#00f3ff]/70">Uptime</div>
+                                </div>
+                                <div class="text-center p-3 rounded-lg bg-[#050510] border border-[#00f3ff]/10">
+                                    <div class="text-lg font-orbitron text-white">50ms</div>
+                                    <div class="text-xs text-[#00f3ff]/70">Response Time</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="inline-block px-4 py-2 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6">
+                        <span class="text-[#00f3ff] font-orbitron text-sm">
+                            <i class="fas fa-bullseye mr-2"></i> OUR QUANTUM MISSION
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                        <span class="gradient-text">BEYOND</span>
+                        <span class="block text-white">TRANSPORTATION</span>
+                    </h2>
+                    
+                    <p class="text-xl text-[#f0f8ff]/70 mb-6">
+                        We don't just move vehicles; we transport possibilities across the quantum fabric of India's transportation network.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-atom text-[#050510] text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-1">Quantum Innovation</h3>
+                                <p class="text-[#f0f8ff]/70">Pioneering AI-driven logistics and quantum tracking systems.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ff00c3] to-[#9600ff] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-leaf text-[#050510] text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-1">Eco-Conscious Future</h3>
+                                <p class="text-[#f0f8ff]/70">Zero-emission transport carriers powered by clean energy.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00ff9d] to-[#00bcd4] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-users text-[#050510] text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-1">Human-Centered AI</h3>
+                                <p class="text-[#f0f8ff]/70">Technology that enhances, not replaces, human expertise.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-20 relative">
+        <div class="absolute inset-0 quantum-grid opacity-20 -z-10"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-block px-6 py-3 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6 floating">
+                    <span class="text-[#00f3ff] font-orbitron text-sm">
+                        <i class="fas fa-history mr-2"></i> QUANTUM TIMELINE
+                    </span>
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                    <span class="gradient-text">OUR EVOLUTION</span>
+                    <span class="block text-white">THROUGH TIME</span>
+                </h2>
+                <p class="text-xl text-[#f0f8ff]/70 max-w-3xl mx-auto">
+                    A journey from traditional transport to quantum logistics excellence.
+                </p>
+            </div>
+            
+            <!-- Timeline -->
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Vertical Line -->
+                <div class="timeline-path h-full absolute top-0"></div>
+                
+                <!-- Timeline Items -->
+                <div class="space-y-16">
+                    <!-- 2018 -->
+                    <div class="relative flex items-center">
+                        <div class="w-1/2 pr-12 text-right">
+                            <div class="p-6 rounded-2xl bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20">
+                                <div class="text-sm text-[#00f3ff] font-orbitron mb-2">QUANTUM GENESIS</div>
+                                <h3 class="text-xl font-bold text-white mb-2">2018 - The Beginning</h3>
+                                <p class="text-[#f0f8ff]/70">Founded with 3 quantum carriers and a vision to revolutionize transport.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2">
+                            <div class="timeline-node"></div>
+                        </div>
+                        <div class="w-1/2 pl-12">
+                            <div class="text-3xl font-orbitron gradient-text">3</div>
+                            <div class="text-sm text-[#00f3ff]/70">Initial Carriers</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2020 -->
+                    <div class="relative flex items-center">
+                        <div class="w-1/2 pr-12 text-right">
+                            <div class="text-3xl font-orbitron gradient-text">25+</div>
+                            <div class="text-sm text-[#00f3ff]/70">Cities Connected</div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2">
+                            <div class="timeline-node"></div>
+                        </div>
+                        <div class="w-1/2 pl-12">
+                            <div class="p-6 rounded-2xl bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20">
+                                <div class="text-sm text-[#00f3ff] font-orbitron mb-2">QUANTUM EXPANSION</div>
+                                <h3 class="text-xl font-bold text-white mb-2">2020 - Network Growth</h3>
+                                <p class="text-[#f0f8ff]/70">Expanded to 25+ cities with quantum tracking implementation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2022 -->
+                    <div class="relative flex items-center">
+                        <div class="w-1/2 pr-12 text-right">
+                            <div class="p-6 rounded-2xl bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20">
+                                <div class="text-sm text-[#00f3ff] font-orbitron mb-2">AI INTEGRATION</div>
+                                <h3 class="text-xl font-bold text-white mb-2">2022 - Quantum AI</h3>
+                                <p class="text-[#f0f8ff]/70">Implemented AI-driven logistics and predictive routing systems.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2">
+                            <div class="timeline-node"></div>
+                        </div>
+                        <div class="w-1/2 pl-12">
+                            <div class="text-3xl font-orbitron gradient-text">98%</div>
+                            <div class="text-sm text-[#00f3ff]/70">Efficiency Boost</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2024 -->
+                    <div class="relative flex items-center">
+                        <div class="w-1/2 pr-12 text-right">
+                            <div class="text-3xl font-orbitron gradient-text">5K+</div>
+                            <div class="text-sm text-[#00f3ff]/70">Transports</div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2">
+                            <div class="timeline-node"></div>
+                        </div>
+                        <div class="w-1/2 pl-12">
+                            <div class="p-6 rounded-2xl bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20">
+                                <div class="text-sm text-[#00f3ff] font-orbitron mb-2">QUANTUM PRESENT</div>
+                                <h3 class="text-xl font-bold text-white mb-2">2024 - Present Day</h3>
+                                <p class="text-[#f0f8ff]/70">Leading India's transport revolution with zero-emission quantum carriers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-block px-6 py-3 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6 floating">
+                    <span class="text-[#00f3ff] font-orbitron text-sm">
+                        <i class="fas fa-stars mr-2"></i> QUANTUM VALUES
+                    </span>
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                    <span class="gradient-text">OUR CORE</span>
+                    <span class="block text-white">PRINCIPLES</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Value 1 -->
+                <div class="value-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-shield-alt text-2xl text-[#050510]"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron text-white text-center mb-4">Quantum Security</h3>
+                    <p class="text-[#f0f8ff]/70 text-center mb-6">
+                        256-bit encryption for all transport data with zero-knowledge protocols.
+                    </p>
+                    <div class="text-center">
+                        <span class="inline-block px-3 py-1 rounded-full bg-[#00f3ff]/10 text-[#00f3ff] text-sm">
+                            ISO 27001 Certified
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Value 2 -->
+                <div class="value-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ff00c3] to-[#9600ff] flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-bolt text-2xl text-[#050510]"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron text-white text-center mb-4">Lightning Speed</h3>
+                    <p class="text-[#f0f8ff]/70 text-center mb-6">
+                        AI-optimized routes reduce transport time by 40% across all networks.
+                    </p>
+                    <div class="text-center">
+                        <span class="inline-block px-3 py-1 rounded-full bg-[#ff00c3]/10 text-[#ff00c3] text-sm">
+                            < 24hr Delivery
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Value 3 -->
+                <div class="value-card p-8 rounded-2xl">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00ff9d] to-[#00bcd4] flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-leaf text-2xl text-[#050510]"></i>
+                    </div>
+                    <h3 class="text-2xl font-orbitron text-white text-center mb-4">Eco Quantum</h3>
+                    <p class="text-[#f0f8ff]/70 text-center mb-6">
+                        Zero-emission carriers powered by renewable quantum energy sources.
+                    </p>
+                    <div class="text-center">
+                        <span class="inline-block px-3 py-1 rounded-full bg-[#00ff9d]/10 text-[#00ff9d] text-sm">
+                            Carbon Neutral
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#050510]/30 to-transparent -z-10"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-block px-6 py-3 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6 floating">
+                    <span class="text-[#00f3ff] font-orbitron text-sm">
+                        <i class="fas fa-users mr-2"></i> QUANTUM CREW
+                    </span>
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                    <span class="gradient-text">MEET OUR</span>
+                    <span class="block text-white">QUANTUM ARCHITECTS</span>
+                </h2>
+                <p class="text-xl text-[#f0f8ff]/70 max-w-3xl mx-auto">
+                    The brilliant minds behind India's most advanced transport network.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="team-card p-8 rounded-2xl text-center">
+                    <div class="w-24 h-24 rounded-full team-avatar mx-auto mb-6">
+                        <div class="w-full h-full rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center">
+                            <i class="fas fa-user-astronaut text-3xl text-[#050510]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-orbitron text-white mb-2">ARJUN SHARMA</h3>
+                    <div class="text-sm text-[#00f3ff] font-semibold mb-4">QUANTUM CEO</div>
+                    <p class="text-[#f0f8ff]/70 mb-6">
+                        Visionary leader pioneering quantum transport systems across India.
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#00f3ff]/30 flex items-center justify-center text-[#00f3ff] hover:bg-[#00f3ff] hover:text-[#050510] transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#00f3ff]/30 flex items-center justify-center text-[#00f3ff] hover:bg-[#00f3ff] hover:text-[#050510] transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-card p-8 rounded-2xl text-center">
+                    <div class="w-24 h-24 rounded-full team-avatar mx-auto mb-6">
+                        <div class="w-full h-full rounded-full bg-gradient-to-br from-[#ff00c3] to-[#9600ff] flex items-center justify-center">
+                            <i class="fas fa-robot text-3xl text-[#050510]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-orbitron text-white mb-2">PRIYA MEHTA</h3>
+                    <div class="text-sm text-[#ff00c3] font-semibold mb-4">AI ARCHITECT</div>
+                    <p class="text-[#f0f8ff]/70 mb-6">
+                        Designs quantum neural networks for predictive transport logistics.
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#ff00c3]/30 flex items-center justify-center text-[#ff00c3] hover:bg-[#ff00c3] hover:text-[#050510] transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#ff00c3]/30 flex items-center justify-center text-[#ff00c3] hover:bg-[#ff00c3] hover:text-[#050510] transition-all">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-card p-8 rounded-2xl text-center">
+                    <div class="w-24 h-24 rounded-full team-avatar mx-auto mb-6">
+                        <div class="w-full h-full rounded-full bg-gradient-to-br from-[#00ff9d] to-[#00bcd4] flex items-center justify-center">
+                            <i class="fas fa-satellite text-3xl text-[#050510]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-orbitron text-white mb-2">RAJ PATEL</h3>
+                    <div class="text-sm text-[#00ff9d] font-semibold mb-4">QUANTUM ENGINEER</div>
+                    <p class="text-[#f0f8ff]/70 mb-6">
+                        Develops zero-emission carriers and quantum tracking systems.
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#00ff9d]/30 flex items-center justify-center text-[#00ff9d] hover:bg-[#00ff9d] hover:text-[#050510] transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#050510] border border-[#00ff9d]/30 flex items-center justify-center text-[#00ff9d] hover:bg-[#00ff9d] hover:text-[#050510] transition-all">
+                            <i class="fas fa-flask"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="rounded-3xl overflow-hidden neon-border">
+                <div class="bg-gradient-to-br from-[#0a0a1a] to-[#050510] p-12 text-center">
+                    <div class="inline-block px-6 py-3 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-8">
+                        <span class="text-[#00f3ff] font-orbitron text-sm">
+                            <i class="fas fa-rocket mr-2"></i> JOIN THE QUANTUM REVOLUTION
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                        <span class="gradient-text">READY TO TRANSPORT</span>
+                        <span class="block text-white">INTO THE FUTURE?</span>
+                    </h2>
+                    
+                    <p class="text-xl text-[#f0f8ff]/70 max-w-2xl mx-auto mb-10">
+                        Experience quantum-speed vehicle transportation with zero-emission carriers and AI-powered logistics.
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="index.html#quote" class="px-8 py-4 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-orbitron font-bold rounded-xl hover:shadow-[0_0_30px_rgba(0,243,255,0.8)] transition-all group">
+                            <span class="group-hover:scale-105 transition-transform">GET QUANTUM QUOTE</span>
+                            <i class="fas fa-bolt ml-3"></i>
+                        </a>
+                        
+                        <a href="login.html" class="px-8 py-4 border-2 border-[#ff00c3] text-[#ff00c3] font-orbitron font-bold rounded-xl hover:bg-[#ff00c3]/10 transition-all group">
+                            <span class="group-hover:scale-105 transition-transform">ACCESS PORTAL</span>
+                            <i class="fas fa-user-astronaut ml-3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = Math.random() * 5 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random color
+                const colors = ['#00f3ff', '#00ff9d', '#ff00c3', '#9600ff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                particlesContainer.appendChild(particle);
+                
+                // Animate
+                animateParticle(particle);
+            }
+        }
+        
+        function animateParticle(particle) {
+            const duration = Math.random() * 20 + 10;
+            const xMovement = (Math.random() - 0.5) * 200;
+            const yMovement = (Math.random() - 0.5) * 200;
+            
+            particle.animate([
+                { transform: 'translate(0, 0)', opacity: particle.style.opacity },
+                { transform: `translate(${xMovement}px, ${yMovement}px)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                iterations: Infinity,
+                direction: 'alternate'
+            });
+        }
+        
+        // Initialize GSAP ScrollTrigger
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate timeline items on scroll
+            gsap.utils.toArray('.timeline-node').forEach((node, i) => {
+                gsap.from(node, {
+                    scale: 0,
+                    opacity: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: node,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+            
+            // Animate value cards
+            gsap.utils.toArray('.value-card').forEach((card, i) => {
+                gsap.from(card, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    delay: i * 0.2,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+            
+            // Animate team cards
+            gsap.utils.toArray('.team-card').forEach((card, i) => {
+                gsap.from(card, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    delay: i * 0.2,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+            
+            // Parallax effect
+            gsap.to('.grid-pattern', {
+                backgroundPosition: '500px 500px',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: true
+                }
+            });
+        }
+        
+        // Initialize typewriter effect
+        function initTypewriter() {
+            const typewriter = document.querySelector('.typewriter');
+            if (typewriter) {
+                setTimeout(() => {
+                    typewriter.style.animation = 'none';
+                    setTimeout(() => {
+                        typewriter.style.animation = 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite';
+                    }, 100);
+                }, 4000); // Restart animation after 4 seconds
+            }
+        }
+        
+        // Initialize everything on load
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initTypewriter();
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href === '#') return;
+                    
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add hover effects to team cards
+            document.querySelectorAll('.team-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Add interactive effect to timeline nodes
+            document.querySelectorAll('.timeline-node').forEach(node => {
+                node.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.5)';
+                });
+                
+                node.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Create hologram effect for mission section
+            const missionSection = document.querySelector('.hologram-effect');
+            if (missionSection) {
+                setInterval(() => {
+                    missionSection.style.opacity = '0.5';
+                    setTimeout(() => {
+                        missionSection.style.opacity = '0.3';
+                    }, 500);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Interface Test Suite | Harihar Car Carriers</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Theme CSS -->
+    <style>
+        :root {
+            --primary: #00f3ff;
+            --secondary: #ff00c3;
+            --accent: #00ff9d;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --light: #f0f8ff;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .neon-border {
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3),
+                        inset 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px var(--primary),
+                        0 0 40px rgba(0, 243, 255, 0.3),
+                        0 0 60px rgba(0, 243, 255, 0.1);
+        }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .scan-line {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scan-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px var(--primary); }
+            50% { box-shadow: 0 0 25px var(--primary); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+        
+        .status-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 2px;
+        }
+        
+        .status-success {
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+        
+        .status-warning {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        .status-error {
+            background: rgba(244, 67, 54, 0.1);
+            color: #f44336;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+        
+        .status-info {
+            background: rgba(0, 150, 255, 0.1);
+            color: #0096ff;
+            border: 1px solid rgba(0, 150, 255, 0.3);
+        }
+        
+        .test-terminal {
+            background: #0a0a1a;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--primary);
+        }
+        
+        .terminal-line {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .terminal-prompt {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+        
+        .component-card {
+            transition: all 0.3s ease;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+        }
+        
+        .ai-badge {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 grid-pattern -z-10"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-transparent via-[#050510] to-[#0a0a1a] -z-10"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#0a0a1a]/90 backdrop-blur-md border-b border-[#00f3ff]/20">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center">
+                    <i class="fas fa-robot text-[#050510] text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-orbitron text-xl font-bold gradient-text">QUANTUM TEST SUITE</h1>
+                    <p class="text-xs text-[#00f3ff]/70">HARIHAR CAR CARRIERS AI</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <span class="status-chip status-success">
+                    <i class="fas fa-circle mr-2 text-xs"></i>
+                    SYSTEM ONLINE
+                </span>
+                <a href="index.html" class="px-4 py-2 border border-[#00f3ff] text-[#00f3ff] rounded-lg hover:bg-[#00f3ff]/10 transition-all">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to Main
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-20 px-6">
+        <div class="container mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <div class="inline-block px-4 py-2 rounded-full bg-[#00f3ff]/10 border border-[#00f3ff]/30 mb-6 floating">
+                    <span class="text-[#00f3ff] font-orbitron text-sm">
+                        <i class="fas fa-microchip mr-2"></i> QUANTUM INTERFACE TEST
+                    </span>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl font-orbitron font-bold mb-6">
+                    <span class="gradient-text">AI COMPONENTS</span>
+                    <span class="block text-white">TESTING SUITE</span>
+                </h1>
+                
+                <p class="text-xl text-[#f0f8ff]/70 max-w-3xl mx-auto">
+                    Diagnostic interface for testing Quantum Chatbot, Floating Action Systems, and AI integration components.
+                </p>
+            </div>
+
+            <!-- Test Dashboard -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Test Panel -->
+                <div class="rounded-2xl neon-border bg-[#0a0a1a]/50 p-8">
+                    <div class="flex items-center mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mr-4">
+                            <i class="fas fa-vial text-[#050510] text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-orbitron text-2xl text-white">Manual Tests</h2>
+                            <p class="text-[#00f3ff]/70">Execute diagnostic procedures</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <button onclick="testChatbot()" class="w-full p-4 rounded-xl bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20 hover:border-[#00f3ff] hover:shadow-[0_0_20px_rgba(0,243,255,0.2)] transition-all flex items-center justify-between group">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-lg bg-[#00f3ff]/10 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-robot text-[#00f3ff]"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-white">Quantum Chatbot Test</h3>
+                                    <p class="text-sm text-[#00f3ff]/70">AI conversation interface</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-[#00f3ff] group-hover:translate-x-2 transition-transform"></i>
+                        </button>
+                        
+                        <button onclick="testFAB()" class="w-full p-4 rounded-xl bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20 hover:border-[#00f3ff] hover:shadow-[0_0_20px_rgba(0,243,255,0.2)] transition-all flex items-center justify-between group">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-lg bg-[#00f3ff]/10 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-layer-group text-[#00f3ff]"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-white">FAB System Test</h3>
+                                    <p class="text-sm text-[#00f3ff]/70">Floating Action Menu</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-[#00f3ff] group-hover:translate-x-2 transition-transform"></i>
+                        </button>
+                        
+                        <button onclick="runAllTests()" class="w-full p-4 rounded-xl bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#ff00c3]/20 hover:border-[#ff00c3] hover:shadow-[0_0_20px_rgba(255,0,195,0.2)] transition-all flex items-center justify-between group">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-lg bg-[#ff00c3]/10 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-bolt text-[#ff00c3]"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-white">Full Diagnostic Scan</h3>
+                                    <p class="text-sm text-[#ff00c3]/70">Run all tests automatically</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-play-circle text-[#ff00c3] group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Status Panel -->
+                <div class="rounded-2xl neon-border bg-[#0a0a1a]/50 p-8">
+                    <div class="flex items-center mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00ff9d] to-[#00f3ff] flex items-center justify-center mr-4">
+                            <i class="fas fa-chart-network text-[#050510] text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-orbitron text-2xl text-white">System Status</h2>
+                            <p class="text-[#00f3ff]/70">Real-time component monitoring</p>
+                        </div>
+                    </div>
+                    
+                    <div id="status-panel" class="space-y-4">
+                        <!-- Status will be populated here -->
+                        <div class="p-4 rounded-lg bg-[#050510] border border-[#00f3ff]/10">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-white font-semibold">Initializing diagnostics...</span>
+                                <div class="w-3 h-3 rounded-full bg-[#00ff9d] animate-pulse"></div>
+                            </div>
+                            <div class="h-2 bg-[#0a0a1a] rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] animate-pulse" style="width: 30%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-4 rounded-lg bg-[#050510]/50 border border-[#00f3ff]/10">
+                        <h3 class="font-orbitron text-white mb-3">Test Results</h3>
+                        <div id="test-results">
+                            <p class="text-[#00f3ff]/70 text-sm">No tests executed yet. Run diagnostics to begin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation Panel -->
+            <div class="rounded-2xl neon-border bg-[#0a0a1a]/50 p-8 mb-12">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#9600ff] to-[#ff00c3] flex items-center justify-center mr-4">
+                        <i class="fas fa-network-wired text-[#050510] text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-orbitron text-2xl text-white">Navigation Tests</h2>
+                        <p class="text-[#00f3ff]/70">Verify page routing and transitions</p>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <a href="index.html" class="p-5 rounded-xl bg-gradient-to-br from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20 hover:border-[#00f3ff] hover:shadow-[0_0_20px_rgba(0,243,255,0.2)] transition-all group text-center">
+                        <div class="w-12 h-12 rounded-lg bg-[#00f3ff]/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-home text-[#00f3ff] text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-white mb-2">Home Portal</h3>
+                        <p class="text-sm text-[#00f3ff]/70">Return to main interface</p>
+                    </a>
+                    
+                    <a href="login.html" class="p-5 rounded-xl bg-gradient-to-br from-[#0a0a1a] to-[#050510] border border-[#00ff9d]/20 hover:border-[#00ff9d] hover:shadow-[0_0_20px_rgba(0,255,157,0.2)] transition-all group text-center">
+                        <div class="w-12 h-12 rounded-lg bg-[#00ff9d]/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-user-shield text-[#00ff9d] text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-white mb-2">Quantum Login</h3>
+                        <p class="text-sm text-[#00ff9d]/70">Authentication portal</p>
+                    </a>
+                    
+                    <a href="pages/about.html" class="p-5 rounded-xl bg-gradient-to-br from-[#0a0a1a] to-[#050510] border border-[#ff00c3]/20 hover:border-[#ff00c3] hover:shadow-[0_0_20px_rgba(255,0,195,0.2)] transition-all group text-center">
+                        <div class="w-12 h-12 rounded-lg bg-[#ff00c3]/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-info-circle text-[#ff00c3] text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-white mb-2">System Info</h3>
+                        <p class="text-sm text-[#ff00c3]/70">About quantum systems</p>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Component Diagnostics -->
+            <div class="rounded-2xl neon-border bg-[#0a0a1a]/50 p-8">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ffc107] to-[#ff9800] flex items-center justify-center mr-4">
+                        <i class="fas fa-cogs text-[#050510] text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-orbitron text-2xl text-white">Component Diagnostics</h2>
+                        <p class="text-[#00f3ff]/70">Check all AI interface components</p>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="component-dashboard">
+                    <!-- Components will be populated here -->
+                </div>
+                
+                <div class="mt-8">
+                    <button onclick="checkComponents()" class="px-6 py-3 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-orbitron font-bold rounded-lg hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all">
+                        <i class="fas fa-sync-alt mr-3"></i>
+                        RUN COMPONENT SCAN
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Terminal Output -->
+            <div class="mt-12">
+                <div class="flex items-center mb-4">
+                    <div class="w-8 h-8 rounded-full bg-[#00ff9d] flex items-center justify-center mr-3">
+                        <i class="fas fa-terminal text-[#050510]"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl text-white">Diagnostic Terminal</h3>
+                </div>
+                
+                <div class="test-terminal scan-line rounded-xl">
+                    <div id="terminal-output" class="space-y-2">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">quantum-test@ai-suite:~$</span>
+                            <span class="text-white">Initializing Quantum Test Suite...</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">quantum-test@ai-suite:~$</span>
+                            <span class="text-[#00ff9d]">System Time: <span id="terminal-time">--:--:--</span></span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">quantum-test@ai-suite:~$</span>
+                            <span class="text-white">Type 'help' for available commands</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-[#00f3ff]/20">
+                        <div class="flex">
+                            <span class="terminal-prompt">>_</span>
+                            <input type="text" id="terminal-input" class="flex-1 bg-transparent border-none outline-none text-white" placeholder="Enter diagnostic command..." onkeypress="handleTerminalCommand(event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Floating Action System -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <div class="flex flex-col items-end space-y-4">
+            <!-- Main FAB -->
+            <button id="fabMain" class="w-16 h-16 rounded-full bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] text-[#050510] flex items-center justify-center text-2xl shadow-2xl hover:shadow-[0_0_30px_rgba(0,243,255,0.8)] hover:scale-110 transition-all duration-300 pulse-glow">
+                <i class="fas fa-plus"></i>
+            </button>
+            
+            <!-- Sub FABs -->
+            <div id="fabMenu" class="space-y-3 hidden">
+                <button id="fabChatBtn" class="w-14 h-14 rounded-full bg-gradient-to-br from-[#ff00c3] to-[#9600ff] text-white flex items-center justify-center text-xl shadow-lg hover:shadow-[0_0_25px_rgba(255,0,195,0.7)] hover:scale-110 transition-all duration-300">
+                    <i class="fas fa-robot"></i>
+                </button>
+                <button id="fabTestBtn" class="w-14 h-14 rounded-full bg-gradient-to-br from-[#ff9800] to-[#ffc107] text-white flex items-center justify-center text-xl shadow-lg hover:shadow-[0_0_25px_rgba(255,152,0,0.7)] hover:scale-110 transition-all duration-300">
+                    <i class="fas fa-bolt"></i>
+                </button>
+                <button id="fabReportBtn" class="w-14 h-14 rounded-full bg-gradient-to-br from-[#00ff9d] to-[#00bcd4] text-white flex items-center justify-center text-xl shadow-lg hover:shadow-[0_0_25px_rgba(0,255,157,0.7)] hover:scale-110 transition-all duration-300">
+                    <i class="fas fa-chart-bar"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Action Bar -->
+    <div class="bottom-action-bar-fixed fixed bottom-0 left-0 right-0 bg-[#0a0a1a]/95 backdrop-blur-md border-t border-[#00f3ff]/20 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mr-3">
+                            <i class="fas fa-clock text-[#050510]"></i>
+                        </div>
+                        <div>
+                            <div id="digital-clock" class="font-orbitron text-xl text-white">00:00:00</div>
+                            <div class="text-xs text-[#00f3ff]/70">QUANTUM TIME</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 rounded-full bg-[#00ff9d] mr-2 animate-pulse"></div>
+                        <span class="text-[#00ff9d] text-sm font-semibold">SYSTEM ACTIVE</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="bottomChatBtn" class="px-6 py-3 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold rounded-lg hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all flex items-center">
+                        <i class="fas fa-robot mr-3"></i>
+                        QUANTUM CHAT
+                    </button>
+                    
+                    <button onclick="runAllTests()" class="px-6 py-3 border border-[#ff00c3] text-[#ff00c3] font-bold rounded-lg hover:bg-[#ff00c3]/10 transition-all flex items-center">
+                        <i class="fas fa-play-circle mr-3"></i>
+                        RUN TESTS
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quantum Chatbot Modal -->
+    <div id="chatbot-modal-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div class="relative w-full max-w-2xl bg-gradient-to-br from-[#0a0a1a] to-[#050510] rounded-2xl border border-[#00f3ff]/30 shadow-2xl overflow-hidden">
+            <div class="scan-line"></div>
+            
+            <!-- Header -->
+            <div class="p-6 border-b border-[#00f3ff]/20">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#00ff9d] flex items-center justify-center mr-4">
+                            <i class="fas fa-robot text-[#050510] text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-xl text-white">QUANTUM CHATBOT</h3>
+                            <p class="text-[#00f3ff]/70">AI Diagnostic Assistant</p>
+                        </div>
+                    </div>
+                    <button onclick="closeChatbot()" class="w-10 h-10 rounded-full border border-[#00f3ff]/30 text-[#00f3ff] hover:bg-[#00f3ff]/10 flex items-center justify-center transition-all">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chat Messages -->
+            <div class="p-6 h-96 overflow-y-auto">
+                <div class="space-y-4">
+                    <div class="flex justify-start">
+                        <div class="max-w-xs md:max-w-md p-4 rounded-2xl rounded-tl-none bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20">
+                            <p class="text-white">Hello! I'm your Quantum AI assistant. I can help you run diagnostics, test components, or answer questions about the test suite.</p>
+                            <div class="mt-3 text-xs text-[#00f3ff]/70">AI Assistant • Just now</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-start">
+                        <div class="max-w-xs md:max-w-md p-4 rounded-2xl rounded-tl-none bg-gradient-to-r from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20">
+                            <p class="text-white">Try asking me about:
+                            <br>• Component status
+                            <br>• Running specific tests
+                            <br>• Navigation issues
+                            <br>• Test results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="p-6 border-t border-[#00f3ff]/20">
+                <div class="flex space-x-4">
+                    <input type="text" id="chatbot-input" class="flex-1 py-3 px-4 rounded-xl bg-[#050510] border border-[#00f3ff]/30 text-white placeholder-[#00f3ff]/50 focus:outline-none focus:border-[#00f3ff] focus:shadow-[0_0_15px_rgba(0,243,255,0.2)] transition-all" placeholder="Type your question...">
+                    <button onclick="sendChatMessage()" class="px-6 py-3 bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] text-[#050510] font-bold rounded-xl hover:shadow-[0_0_15px_rgba(0,243,255,0.5)] transition-all">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Initialize components
+        const components = [
+            { id: 'chatbot-modal', name: 'Chatbot Modal', status: 'pending' },
+            { id: 'fab-menu', name: 'FAB Menu', status: 'pending' },
+            { id: 'bottom-action-bar', name: 'Bottom Action Bar', status: 'pending' },
+            { id: 'terminal', name: 'Diagnostic Terminal', status: 'pending' },
+            { id: 'clock', name: 'Quantum Clock', status: 'pending' },
+            { id: 'navigation', name: 'Navigation System', status: 'pending' }
+        ];
+        
+        // Terminal commands
+        const terminalCommands = {
+            'help': 'Available commands: status, test all, test chatbot, test fab, clear, time',
+            'status': 'Running component diagnostics...',
+            'test all': 'Initiating full system diagnostic...',
+            'test chatbot': 'Opening Quantum Chatbot interface...',
+            'test fab': 'Testing Floating Action System...',
+            'clear': 'Clearing terminal output...',
+            'time': `Current system time: ${new Date().toLocaleTimeString()}`
+        };
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeClock();
+            populateComponentDashboard();
+            updateStatusPanel();
+            
+            // Set up FAB toggle
+            document.getElementById('fabMain').addEventListener('click', function() {
+                const menu = document.getElementById('fabMenu');
+                menu.classList.toggle('hidden');
+                this.classList.toggle('pulse-glow');
+                logToTerminal('FAB menu toggled');
+            });
+            
+            // Set up FAB buttons
+            document.getElementById('fabChatBtn').addEventListener('click', testChatbot);
+            document.getElementById('fabTestBtn').addEventListener('click', runAllTests);
+            document.getElementById('fabReportBtn').addEventListener('click', generateReport);
+            
+            // Set up bottom chat button
+            document.getElementById('bottomChatBtn').addEventListener('click', testChatbot);
+            
+            // Run initial check after a delay
+            setTimeout(checkComponents, 1000);
+        });
+        
+        // Test Functions
+        function testChatbot() {
+            logToTerminal('Opening Quantum Chatbot...');
+            const modal = document.getElementById('chatbot-modal-overlay');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.style.display = 'flex';
+                
+                // Update component status
+                updateComponentStatus('chatbot-modal', 'success');
+                logToTerminal('✅ Chatbot modal opened successfully');
+                updateTestResults('Chatbot Modal Test', '✅ PASSED', 'Chatbot interface loaded correctly.');
+            } else {
+                updateComponentStatus('chatbot-modal', 'error');
+                logToTerminal('❌ Chatbot modal not found');
+                updateTestResults('Chatbot Modal Test', '❌ FAILED', 'Chatbot modal element missing.');
+            }
+        }
+        
+        function closeChatbot() {
+            const modal = document.getElementById('chatbot-modal-overlay');
+            if (modal) {
+                modal.classList.add('hidden');
+                logToTerminal('Chatbot closed');
+            }
+        }
+        
+        function sendChatMessage() {
+            const input = document.getElementById('chatbot-input');
+            const message = input.value.trim();
+            if (message) {
+                logToTerminal(`User message: "${message}"`);
+                input.value = '';
+                // Simulate AI response
+                setTimeout(() => {
+                    logToTerminal('AI: Processing query...');
+                }, 1000);
+            }
+        }
+        
+        function testFAB() {
+            logToTerminal('Testing Floating Action System...');
+            const fab = document.getElementById('fabMain');
+            if (fab) {
+                fab.click();
+                setTimeout(() => fab.click(), 1000); // Toggle twice
+                
+                updateComponentStatus('fab-menu', 'success');
+                logToTerminal('✅ FAB system functional');
+                updateTestResults('FAB System Test', '✅ PASSED', 'Floating Action Menu responsive.');
+            } else {
+                updateComponentStatus('fab-menu', 'error');
+                logToTerminal('❌ FAB system not found');
+                updateTestResults('FAB System Test', '❌ FAILED', 'FAB elements missing.');
+            }
+        }
+        
+        function checkComponents() {
+            logToTerminal('Running component diagnostics...');
+            
+            // Check each component
+            const chatbotModal = document.getElementById('chatbot-modal-overlay');
+            updateComponentStatus('chatbot-modal', chatbotModal ? 'success' : 'error');
+            
+            const fab = document.getElementById('fabMain');
+            updateComponentStatus('fab-menu', fab ? 'success' : 'error');
+            
+            const bottomBar = document.querySelector('.bottom-action-bar-fixed');
+            updateComponentStatus('bottom-action-bar', bottomBar ? 'success' : 'error');
+            
+            const terminal = document.getElementById('terminal-output');
+            updateComponentStatus('terminal', terminal ? 'success' : 'error');
+            
+            const clock = document.getElementById('digital-clock');
+            updateComponentStatus('clock', clock ? 'success' : 'error');
+            
+            updateComponentStatus('navigation', 'success');
+            
+            logToTerminal('Component diagnostics complete');
+            updateTestResults('Component Diagnostics', '✅ COMPLETE', 'All components scanned.');
+        }
+        
+        function runAllTests() {
+            logToTerminal('=== STARTING FULL SYSTEM DIAGNOSTIC ===');
+            testChatbot();
+            setTimeout(testFAB, 500);
+            setTimeout(checkComponents, 1000);
+            setTimeout(() => {
+                logToTerminal('=== SYSTEM DIAGNOSTIC COMPLETE ===');
+                updateTestResults('Full System Diagnostic', '✅ COMPLETE', 'All tests executed successfully.');
+            }, 1500);
+        }
+        
+        function generateReport() {
+            logToTerminal('Generating diagnostic report...');
+            const timestamp = new Date().toISOString();
+            const report = `=== QUANTUM TEST SUITE REPORT ===
+Timestamp: ${timestamp}
+Components Tested: ${components.length}
+Status: ${components.filter(c => c.status === 'success').length}/${components.length} OK
+System: Online
+Recommendation: All systems operational`;
+            
+            updateTestResults('Diagnostic Report', '📊 GENERATED', 'Report created successfully.');
+            logToTerminal('Report generated. Check test results panel.');
+        }
+        
+        // Utility Functions
+        function initializeClock() {
+            function updateClock() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+                const clockElement = document.getElementById('digital-clock');
+                const terminalTime = document.getElementById('terminal-time');
+                
+                if (clockElement) clockElement.textContent = timeString;
+                if (terminalTime) terminalTime.textContent = timeString;
+            }
+            
+            updateClock();
+            setInterval(updateClock, 1000);
+            updateComponentStatus('clock', 'success');
+        }
+        
+        function populateComponentDashboard() {
+            const dashboard = document.getElementById('component-dashboard');
+            dashboard.innerHTML = components.map(comp => `
+                <div class="component-card p-5 rounded-xl bg-gradient-to-br from-[#0a0a1a] to-[#050510] border border-[#00f3ff]/20">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-white">${comp.name}</h3>
+                        <span class="status-chip status-${comp.status}">
+                            ${comp.status === 'success' ? '✅' : comp.status === 'error' ? '❌' : '⏳'}
+                        </span>
+                    </div>
+                    <div class="h-2 bg-[#0a0a1a] rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] transition-all duration-500" 
+                             style="width: ${comp.status === 'success' ? '100%' : comp.status === 'error' ? '30%' : '60%'}"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function updateComponentStatus(componentId, status) {
+            const component = components.find(c => c.id === componentId);
+            if (component) {
+                component.status = status;
+                populateComponentDashboard();
+                updateStatusPanel();
+            }
+        }
+        
+        function updateStatusPanel() {
+            const panel = document.getElementById('status-panel');
+            const successCount = components.filter(c => c.status === 'success').length;
+            const totalCount = components.length;
+            const percentage = Math.round((successCount / totalCount) * 100);
+            
+            panel.innerHTML = `
+                <div class="p-4 rounded-lg bg-[#050510] border border-[#00f3ff]/10">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-white font-semibold">System Health</span>
+                        <span class="text-${percentage >= 80 ? '[#00ff9d]' : percentage >= 50 ? '[#ffc107]' : '[#f44336]'} font-bold">${percentage}%</span>
+                    </div>
+                    <div class="h-2 bg-[#0a0a1a] rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-[#00f3ff] to-[#00ff9d] transition-all duration-1000" 
+                             style="width: ${percentage}%"></div>
+                    </div>
+                    <div class="flex justify-between mt-2 text-xs text-[#00f3ff]/70">
+                        <span>${successCount}/${totalCount} Components OK</span>
+                        <span>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function updateTestResults(testName, status, message) {
+            const resultsDiv = document.getElementById('test-results');
+            const color = status.includes('✅') ? '[#00ff9d]' : status.includes('❌') ? '[#f44336]' : '[#00f3ff]';
+            
+            resultsDiv.innerHTML = `
+                <div class="mb-4 p-4 rounded-lg bg-[#050510] border border-${color}/20">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold text-white">${testName}</span>
+                        <span class="text-${color} font-bold">${status}</span>
+                    </div>
+                    <p class="text-sm text-[#00f3ff]/70">${message}</p>
+                    <div class="text-xs text-${color}/70 mt-2">${new Date().toLocaleTimeString()}</div>
+                </div>
+                ${resultsDiv.innerHTML}
+            `;
+        }
+        
+        function logToTerminal(message) {
+            const terminal = document.getElementById('terminal-output');
+            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            
+            terminal.innerHTML += `
+                <div class="terminal-line">
+                    <span class="terminal-prompt">quantum-test@ai-suite:~$</span>
+                    <span class="${message.includes('✅') ? 'text-[#00ff9d]' : message.includes('❌') ? 'text-[#f44336]' : 'text-white'}">${message}</span>
+                    <span class="ml-auto text-xs text-[#00f3ff]/50">${timestamp}</span>
+                </div>
+            `;
+            
+            // Scroll to bottom
+            terminal.parentElement.scrollTop = terminal.parentElement.scrollHeight;
+        }
+        
+        function handleTerminalCommand(event) {
+            if (event.key === 'Enter') {
+                const input = document.getElementById('terminal-input');
+                const command = input.value.trim().toLowerCase();
+                input.value = '';
+                
+                if (command) {
+                    logToTerminal(`> ${command}`);
+                    
+                    if (terminalCommands[command]) {
+                        if (command === 'clear') {
+                            document.getElementById('terminal-output').innerHTML = '';
+                        } else if (command === 'test all') {
+                            runAllTests();
+                        } else if (command === 'test chatbot') {
+                            testChatbot();
+                        } else if (command === 'test fab') {
+                            testFAB();
+                        } else {
+                            logToTerminal(terminalCommands[command]);
+                        }
+                    } else {
+                        logToTerminal(`Unknown command: "${command}". Type 'help' for available commands.`);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
