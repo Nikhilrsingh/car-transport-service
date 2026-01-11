@@ -100,6 +100,24 @@ body[data-theme="light"] #theme-toggle i {
   color: var(--footer-text);
 }
 
+/* ====================================
+   HERO SECTION - LIGHT MODE
+   ==================================== */
+
+/* Main hero background - light mode */
+body[data-theme="light"] .hero {
+  background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 50%, #f0f2f5 100%) !important;
+}
+
+body[data-theme="light"] .hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 99, 71, 0.05) 50%,
+    rgba(255, 255, 255, 0.7) 100%
+  ) !important;
+}
+
 /* Hero Section - Light Mode - For pages WITHOUT background images (home page quote section, etc.) */
 /* NOTE: Pages with background images (About, etc.) have their own specific styles in the About Page section below */
 /* This general style should NOT override background images - use more specific selectors for image-based heroes */
@@ -114,7 +132,18 @@ body[data-theme="light"] .hero-badge {
   background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%) !important;
   border: none !important;
   color: #fff !important;
-  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4) !important;
+  backdrop-filter: none !important;
+}
+
+body[data-theme="light"] .hero-badge i {
+  color: #fff !important;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+body[data-theme="light"] .hero-badge span {
+  color: #fff !important;
+  font-weight: 600;
 }
 
 body[data-theme="light"] .hero-title {
@@ -236,11 +265,7 @@ body[data-theme="light"] .cta-btn.outline:hover {
   text-shadow:0 2px 6px rgba(0, 0, 0, 0.7) !important;
 }
 
-.hero-badge {
-  color:#ffffff !important;
-  background: rgba(255, 99, 71, 0.35) !important;
-  border-color: rgba(255, 99, 71, 0.8)  !important;
-}
+/* Default hero-badge styling removed - using theme-specific styles only */
 
 .stat-number {
   color:  #ffb399 !important;
@@ -2627,27 +2652,57 @@ body[data-theme="light"] .member-info p {
   color: #ff6347 !important;
 }
 
-/* Team Flip Cards */
+/* ====================================
+   TEAM FLIP CARDS - LIGHT MODE
+   ==================================== */
+
+/* Main flip card container */
+body[data-theme="light"] .about-team-flip-card {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .about-team-flip-card:hover {
+  box-shadow: 0 8px 30px rgba(255, 99, 71, 0.2) !important;
+}
+
+/* Front of card - light mode */
 body[data-theme="light"] .about-team-flip-card-front {
-  background: #ffffff !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
-body[data-theme="light"] .about-team-flip-card-back {
-  background: linear-gradient(145deg, #f8f9fa, #ffffff) !important;
-  color: #1a1a1a !important;
+body[data-theme="light"] .about-team-flip-card:hover .about-team-flip-card-front,
+body[data-theme="light"] .about-team-flip-card:hover .about-team-flip-card-back {
+  box-shadow: 0 16px 40px rgba(255, 99, 71, 0.15) !important;
 }
 
-body[data-theme="light"] .about-team-flip-card-back h3 {
-  color: #1a1a1a !important;
+/* Front card info section */
+body[data-theme="light"] .about-member-front-info {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 body[data-theme="light"] .about-member-front-info h3 {
   color: #1a1a1a !important;
 }
 
+body[data-theme="light"] .about-team-flip-card:hover .about-member-front-info h3 {
+  color: #ff6347 !important;
+}
+
 body[data-theme="light"] .about-member-role {
   color: #ff6347 !important;
+}
+
+/* Back of card - light mode */
+body[data-theme="light"] .about-team-flip-card-back {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+  color: #1a1a1a !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .about-team-flip-card-back h3 {
+  color: #1a1a1a !important;
 }
 
 body[data-theme="light"] .about-member-bio {
@@ -2658,31 +2713,40 @@ body[data-theme="light"] .about-member-highlights li {
   color: #666 !important;
 }
 
-body[data-theme="light"] .about-social-icon {
+/* Social icons */
+body[data-theme="light"] .about-social-icon,
+body[data-theme="light"] .social-icon {
   background: rgba(255, 99, 71, 0.1) !important;
   color: #ff6347 !important;
-  border: 1px solid rgba(255, 99, 71, 0.3) !important;
+  border: 1px solid rgba(255, 99, 71, 0.2) !important;
 }
 
-body[data-theme="light"] .about-social-icon:hover {
+body[data-theme="light"] .about-social-icon::before,
+body[data-theme="light"] .social-icon::before {
   background: #ff6347 !important;
-  color: #ffffff !important;
 }
 
-/* Skill Bars */
+body[data-theme="light"] .about-social-icon:hover,
+body[data-theme="light"] .social-icon:hover {
+  color: #ffffff !important;
+  box-shadow: 0 10px 20px rgba(255, 99, 71, 0.3) !important;
+}
+
+/* Skill Bars - Light Mode */
 body[data-theme="light"] .about-skill-name,
 body[data-theme="light"] .skill-name {
-  color: #333 !important;
+  color: #2d2d2d !important;
 }
 
 body[data-theme="light"] .about-skill-progress,
 body[data-theme="light"] .skill-progress {
-  background: rgba(0, 0, 0, 0.1) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
 }
 
 body[data-theme="light"] .about-skill-progress-bar,
 body[data-theme="light"] .skill-progress-bar {
   background: linear-gradient(90deg, #ff6347, #ff4500) !important;
+  box-shadow: 0 2px 8px rgba(255, 99, 71, 0.3) !important;
 }
 
 /* Stats Section Enhanced */
@@ -2747,21 +2811,49 @@ body[data-theme="light"] .milestone-achievement {
   color: #555 !important;
 }
 
-/* Animated Infographic */
+/* ================================
+   PERFORMANCE METRICS - LIGHT MODE
+   ================================= */
+
+/* Main container */
+body[data-theme="light"] .animated-infographic {
+  background: #f8f9fa !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
 body[data-theme="light"] .animated-infographic h3 {
   color: #ff6347 !important;
 }
 
+/* Labels and text */
 body[data-theme="light"] .infographic-label {
-  color: #333 !important;
+  color: #2d2d2d !important;
 }
 
+body[data-theme="light"] .infographic-label span {
+  color: #333333 !important;
+}
+
+body[data-theme="light"] .infographic-label span:first-child {
+  color: #333333 !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="light"] .percentage-value {
+  color: #ff6347 !important;
+}
+
+/* Bars */
 body[data-theme="light"] .infographic-bar {
-  background: rgba(0, 0, 0, 0.1) !important;
+  background: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 body[data-theme="light"] .infographic-bar-fill {
-  background: linear-gradient(90deg, #ff6347, #ff4500) !important;
+  background: linear-gradient(90deg, #ff7a3c, #ff4b1f) !important;
+  box-shadow: 0 0 15px rgba(255, 120, 60, 0.5) !important;
 }
 
 /* Company Timeline Section */
