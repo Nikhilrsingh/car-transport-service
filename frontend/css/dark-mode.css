@@ -258,6 +258,29 @@ body[data-theme="dark"] .hero-actions .cta-btn.outline:hover {
   color: #ffffff !important;
 }
 
+/* Hero badge - Trusted by 5000+ Customers */
+body[data-theme="dark"] .hero-badge {
+  background: rgba(255, 107, 61, 0.2) !important;
+  border: 1px solid rgba(255, 107, 61, 0.5) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(255, 107, 61, 0.25) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+body[data-theme="dark"] .hero-badge:hover {
+  background: rgba(255, 107, 61, 0.3) !important;
+  border-color: rgba(255, 107, 61, 0.7) !important;
+}
+
+body[data-theme="dark"] .hero-badge i {
+  color: #ff6b3d !important;
+}
+
+body[data-theme="dark"] .hero-badge span {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
 /* Quote card (Get Instant Quote) */
 body[data-theme="dark"] .quote-card {
   background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(20, 20, 20, 0.95)) !important;
@@ -786,51 +809,90 @@ body[data-theme="dark"] .member-info p {
   color: #ff6347 !important;
 }
 
-/* Team Flip Cards */
+/* ====================================
+   TEAM FLIP CARDS - DARK MODE
+   ==================================== */
+
+/* Main flip card container */
+body[data-theme="dark"] .about-team-flip-card {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}
+
+body[data-theme="dark"] .about-team-flip-card:hover {
+  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.6) !important;
+}
+
+/* Front of card - dark mode */
 body[data-theme="dark"] .about-team-flip-card-front {
   background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%) !important;
+  border: 1px solid rgba(255, 99, 71, 0.2) !important;
 }
 
-body[data-theme="dark"] .about-team-flip-card-back {
-  background: linear-gradient(145deg, #2f2f2f, #1f1f1f) !important;
-  color: #ffffff !important;
+body[data-theme="dark"] .about-team-flip-card:hover .about-team-flip-card-front,
+body[data-theme="dark"] .about-team-flip-card:hover .about-team-flip-card-back {
+  box-shadow: 0 16px 40px rgba(255, 99, 71, 0.4) !important;
 }
 
-body[data-theme="dark"] .about-team-flip-card-back h3 {
-  color: #ffffff !important;
+/* Front card info section */
+body[data-theme="dark"] .about-member-front-info {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 body[data-theme="dark"] .about-member-front-info h3 {
   color: #ffffff !important;
 }
 
+body[data-theme="dark"] .about-team-flip-card:hover .about-member-front-info h3 {
+  color: #ff6347 !important;
+}
+
 body[data-theme="dark"] .about-member-role {
   color: #ff6347 !important;
 }
 
-body[data-theme="dark"] .about-member-bio {
-  color: #f0f0f0 !important;
+/* Back of card - dark mode */
+body[data-theme="dark"] .about-team-flip-card-back {
+  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 99, 71, 0.2) !important;
 }
 
-body[data-theme="dark"] .about-member-highlights li {
+body[data-theme="dark"] .about-team-flip-card-back h3 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .about-member-bio {
   color: #e0e0e0 !important;
 }
 
-body[data-theme="dark"] .about-social-icon {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+body[data-theme="dark"] .about-member-highlights li {
+  color: #d0d0d0 !important;
 }
 
-body[data-theme="dark"] .about-social-icon:hover {
-  background: #ff6347 !important;
+/* Social icons */
+body[data-theme="dark"] .about-social-icon,
+body[data-theme="dark"] .social-icon {
+  background: rgba(255, 255, 255, 0.1) !important;
   color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Skill Bars */
+body[data-theme="dark"] .about-social-icon::before,
+body[data-theme="dark"] .social-icon::before {
+  background: #fff !important;
+}
+
+body[data-theme="dark"] .about-social-icon:hover,
+body[data-theme="dark"] .social-icon:hover {
+  color: #ff6347 !important;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Skill Bars - Dark Mode */
 body[data-theme="dark"] .about-skill-name,
 body[data-theme="dark"] .skill-name {
-  color: #ccc !important;
+  color: #e0e0e0 !important;
 }
 
 body[data-theme="dark"] .about-skill-progress,
