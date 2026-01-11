@@ -5,6 +5,32 @@
   --footer-text: #222222;
   --accent: #ff6b3d;
   --glass-opacity: 0.85;
+
+  /* Progress bar variables (Light theme) */
+  --progress-card-bg: #ffffff;
+  --progress-border: rgba(0,0,0,0.06);
+  --progress-line-bg: rgba(0,0,0,0.08);
+  --progress-fill-start: #ff7a56;
+  --progress-fill-end: #ff4b17;
+  --progress-accent: #ff6347;
+  --step-bg: #f5f5f5;
+  --step-border: rgba(0,0,0,0.08);
+  --step-completed-bg: #4CAF50;
+  --step-label: #6b6b6b;
+  --progress-shadow: 0 6px 18px rgba(16,16,16,0.04);
+
+  /* Pill / percentage variables */
+  --progress-pill-bg: rgba(255,99,71,0.06);
+  --progress-pill-border: rgba(255,99,71,0.12);
+  --step-number-color: #2d2d2d;
+
+  /* Card / component variables (Light theme) */
+  --card-bg-soft: #fff6f2; /* warm off-white */
+  --card-border-dark: rgba(0,0,0,0.12);
+  --card-border-weight: 1.5px;
+  --card-shadow-soft: 0 6px 18px rgba(12,12,12,0.04);
+  --card-text: #111111;
+  --card-text-muted: #5b4d44;
 }
 
 /* Light Mode Color Palette Override */
@@ -74,17 +100,9 @@ body[data-theme="light"] #theme-toggle i {
   color: var(--footer-text);
 }
 
-<<<<<<< Updated upstream
 /* Hero Section - Light Mode - For pages WITHOUT background images (home page quote section, etc.) */
 /* NOTE: Pages with background images (About, etc.) have their own specific styles in the About Page section below */
 /* This general style should NOT override background images - use more specific selectors for image-based heroes */
-=======
-/* Hero Section - Light Mode - Clean Professional Look */
-/* Note: Pages with background images (like about.html) should override this in their page-specific CSS */
-body[data-theme="light"] .hero:not(.has-bg-image) {
-  background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%) !important;
-}
->>>>>>> Stashed changes
 
 body[data-theme="light"] .hero::before {
   background: 
@@ -1559,9 +1577,13 @@ body[data-theme="light"] .booking-form textarea:focus {
   border-color: #ff6347 !important;
 }
 
+body[data-theme="light"] .booking-summary-fade-in .summary-header h3{
+  color:#5b4d44;
+}
+
 body[data-theme="light"] .booking-summary {
   background: #f8f9fa !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: black!important;
 }
 
 body[data-theme="light"] .booking-summary h3 {
@@ -1700,7 +1722,7 @@ body[data-theme="light"] .service-card p {
 body[data-theme="light"] input,
 body[data-theme="light"] select,
 body[data-theme="light"] textarea {
-  background: #ffffff !important;
+  background: #eeeeef!important;
   border-color: #ddd !important;
   color: #333 !important;
 }
@@ -1729,6 +1751,13 @@ body[data-theme="light"] .submit-btn,
 body[data-theme="light"] .cta-button {
   background: linear-gradient(135deg, #ff6347, #ff4500) !important;
   color: #ffffff !important;
+}
+
+body[data-theme="light"] .btn-primary:hover,
+body[data-theme="light"] .submit-btn:hover,
+body[data-theme="light"] .cta-button:hover {
+  background: linear-gradient(135deg, #ff4500, #ff6347) !important;
+  box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4) !important;
 }
 
 body[data-theme="light"] .btn-secondary {
@@ -1879,6 +1908,75 @@ body[data-theme="light"] .form-footer p {
 
 body[data-theme="light"] .contact-link {
   color: #ff6347 !important;
+}
+
+/* ====================================
+   CONTACT PAGE FORM - Light Mode Fix
+   ==================================== */
+body[data-theme="light"] .contact-form-container {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .contact-form .input-group label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .contact-form .input-group input,
+body[data-theme="light"] .contact-form .input-group select,
+body[data-theme="light"] .contact-form .input-group textarea {
+  background: #f8f9fa !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .contact-form .input-group input::placeholder,
+body[data-theme="light"] .contact-form .input-group textarea::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .contact-form .input-group input:focus,
+body[data-theme="light"] .contact-form .input-group select:focus,
+body[data-theme="light"] .contact-form .input-group textarea:focus {
+  background: #ffffff !important;
+  border-color: #ff6347 !important;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1) !important;
+}
+
+body[data-theme="light"] .file-upload-area {
+  background: #f8f9fa !important;
+  border-color: #ddd !important;
+}
+
+body[data-theme="light"] .upload-text h4 {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .upload-text p {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .info-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+body[data-theme="light"] .info-header h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .info-content p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .hours-list li {
+  border-bottom-color: #ddd !important;
+}
+
+body[data-theme="light"] .hours-list .day {
+  color: #666 !important;
 }
 
 
@@ -2067,29 +2165,282 @@ body[data-theme="light"] .feedback-input label {
 }
 
 body[data-theme="light"] .feedback-input input,
+/* ===== Booking page: Light-mode component card styles ===== */
+
+body[data-theme="light"] .addon-services,
+body[data-theme="light"] .price-calculator,
+body[data-theme="light"] .popular-routes,
+body[data-theme="light"] .distance-estimate,
+body[data-theme="light"] .summary-section,
+body[data-theme="light"] .delivery-estimate,
+body[data-theme="light"] .map-container-wrapper,
+body[data-theme="light"] .waypoints-section,
+body[data-theme="light"] .booking-summary,
+body[data-theme="light"] .review-summary {
+  background: var(--card-bg-soft, #fff6f2);
+  border: var(--card-border-weight, 1.5px) solid var(--card-border-dark, rgba(51,51,51,0.4));
+  border-radius: 8px;
+  padding: 14px;
+  box-shadow: var(--card-shadow-soft, 0 6px 18px rgba(12,12,12,0.04));
+  color: var(--card-text, #111111);
+}
+
+/* addon items */
+body[data-theme="light"] .addon-item {
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), var(--card-bg-soft,#fff6f2));
+  color: var(--card-text, #111111);
+  border: var(--card-border-weight,1.5px) solid  rgb(51,51,51,0.5);
+}
+
+body[data-theme="light"] .addon-desc{
+  color: var(--card-text-muted, #5b4d44);
+}
+body[data-theme="light"] .addon-item:hover {
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), #fffefc);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(16,16,16,0.08);
+}
+
+/* price summary rows */
+body[data-theme="light"] .price-slider-group {
+  border-bottom: 1px solid rgba(51,51,51,0.12);
+  padding-bottom: 10px;
+}
+body[data-theme="light"] .price-slider-group .slider-label {
+  color: var(--card-text-muted, #5b4d44);
+}
+
+body[data-theme="light"] .price-item {
+    color: var(--card-text-muted, #5b4d44);
+}
+body[data-theme="light"] .price-calculator h4,
+body[data-theme="light"] .summary-header h3 {
+  color: var(--accent, #ff6b3d);
+  margin-bottom: 10px;
+}
+
+
+body[data-theme="light"] .summary-header h3,
+body[data-theme="light"] .review-summary h4 {
+  color: #6b0808 !important;
+}
+body[data-theme="light"] .summary-header i,
+body[data-theme="light"] .review-summary h4 i {
+  color: #6b0808 !important;
+}
+
+body[data-theme="light"] .price-summary,
+body[data-theme="light"] .summary-section {
+  background: transparent;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+body[data-theme="light"] .delivery-estimate {
+  border-color: rgba(34, 197, 94, 0.25) !important;
+  color: #16a34a !important;
+}
+body[data-theme="light"] .delivery-estimate .date {
+  color: #15803d !important;
+  font-weight: 600;
+}
+
+body[data-theme="light"] .popular-routes h5  {
+  color: var(--accent, #ff6b3d);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+body[data-theme="light"] .popular-routes .pr-header {
+  color: rgba(0,0,0,0.65);
+}
+body[data-theme="light"] .popular-routes .pr-header .pr-icon {
+  color: var(--accent, #ff6b3d);
+}
+
+body[data-theme="light"] .popular-routes .pr-list .route-item {
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), var(--card-bg-soft,#fff6f2));
+  border: var(--card-border-weight,1.5px) solid rgba(0,0,0,0.06);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color: var(--card-text, #111111);
+}
+
+body[data-theme="light"] .route-cities, body[data-theme="light"] .route-meta {
+  color: #2d2d2d;
+}
+
+body[data-theme="light"] .route-item:hover {
+  background: linear-gradient(180deg, #fffefc, rgba(255, 240, 235, 0.9));
+  box-shadow: 0 8px 20px rgba(16,16,16,0.06);
+  transform: translateY(-3px);
+}
+
+body[data-theme="light"] .route-distance strong,
+body[data-theme="light"] .distance-display strong,
+body[data-theme="light"] .distance-estimate .distance,
+body[data-theme="light"] .distance-estimate .time {
+  color: var(--card-text, #111111) !important;
+}
+
+body[data-theme="light"] .distance.distance-select-hint {
+  color: var(--success-color, #10b981) !important;
+  font-weight: 600;
+}
+
+body[data-theme="light"] .route-badges .badge {
+  background: rgba(255,99,71,0.08);
+  color: var(--accent, #ff6b3d);
+  border: 1px solid rgba(255,99,71,0.12);
+}
+
+body[data-theme="light"] .route-badges .badge.high {
+  background: linear-gradient(90deg, #ff7a59, #ff6347);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255,99,71,0.12);
+  border: none;
+}
+
+body[data-theme="light"] .route-badges .badge.trending {
+  background: rgba(255, 99, 71, 0.06);
+  color: var(--accent, #ff6b3d);
+  border: 1px solid rgba(255,99,71,0.12);
+}
+
+
+/* delivery & distance labels */
+body[data-theme="light"] .delivery-estimate .label,
+body[data-theme="light"] .distance-estimate .label {
+  color: var(--card-text-muted, #5b4d44);
+  font-weight: 700;
+}
+body[data-theme="light"] .delivery-estimate .date,
+body[data-theme="light"] .distance-estimate .distance,
+body[data-theme="light"] .distance-estimate .time {
+  color: var(--card-text, #111111);
+  font-weight: 600;
+}
+
+/* summary labels and values (light mode overrides default dark-mode styles) */
+body[data-theme="light"] .summary-label {
+  color: var(--card-text-muted, #5b4d44) !important;
+}
+body[data-theme="light"] .summary-value {
+  color: var(--card-text, #111111) !important;
+}
+body[data-theme="light"] .summary-value.empty {
+  color: rgba(17,17,17,0.45) !important;
+}
+
+/* summary buttons */
+body[data-theme="light"] .summary-actions { display:flex; gap:10px; }
+body[data-theme="light"] .summary-btn {
+  background: linear-gradient(135deg, var(--accent,#ff6b35), #ff4a20);
+  color: #fff;
+  border: var(--card-border-weight,1.5px) solid var(--card-border-dark, rgba(0,0,0,0.12));
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(255,107,61,0.12);
+}
+body[data-theme="light"] .summary-btn.btn-download {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  border: none;
+  box-shadow: 0 8px 20px rgba(16,185,129,0.12);
+  color: #fff;
+}
+
+/* Light-mode download/button overrides */
+body[data-theme="light"] .btn-download {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  color: #fff;
+  border: none;
+}
+body[data-theme="light"] .btn-download:hover {
+  background: linear-gradient(135deg, #2bb673, #059669);
+}
+body[data-theme="light"] .download-asset-btn {
+  background: linear-gradient(135deg, #34d399, #10b981) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(16,185,129,0.12);
+}
+body[data-theme="light"] .download-asset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16,185,129,0.18);
+}
+
+/* map container */
+body[data-theme="light"] .map-container-wrapper {
+  padding: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+body[data-theme="light"] .map-container {
+  border-radius: 10px;
+  border: var(--card-border-weight,1.5px) solid var(--card-border-dark, rgba(0,0,0,0.12));
+  height: 320px;
+}
+body[data-theme="light"] .map-container-wrapper.fade-in {
+  border-color: rgb(74, 74, 73);
+}
+
+body[data-theme="light"] .map-header h3 {
+  color: var(--accent, #ff6b3d);
+  margin-bottom: 10px;
+}
+body[data-theme="light"] .map-header p {
+  color: #5d4b44;
+  margin-bottom: 10px;
+}
+body[data-theme="light"] #map {
+  border-color: #ffffff;
+}
+body[data-theme="light"] .map-3d-indicator
+{
+  margin-top: 9px;
+  color:#5b4d44
+}
+
+body[data-theme="light"] .map-control-btn {
+  color:#5b4d44;
+  margin-bottom: 10px;
+  background-color: #ffdbbb;
+}
+/* waypoints list */
+body[data-theme="light"] .waypoints-list .waypoint-item {
+  background: rgba(255,255,255,0.85);
+  border: var(--card-border-weight,1.5px) solid var(--card-border-dark, rgba(0,0,0,0.12));
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color: var(--card-text, #111111);
+}
+
+/* Accessibility: subtle focus */
+body[data-theme="light"] .addon-item:focus,
+body[data-theme="light"] .summary-btn:focus,
+body[data-theme="light"] .waypoint-item:focus {
+  outline: 2px solid rgba(255,99,71,0.12);
+  outline-offset: 2px;
+}
+
+/* ===== end booking light-mode overrides ===== */
+
+
 body[data-theme="light"] .feedback-input textarea {
   background: #f8f9fa !important;
   border: 1px solid #ddd !important;
   color: #333 !important;
 }
 
-body[data-theme="light"] .feedback-input input:focus,
-body[data-theme="light"] .feedback-input textarea:focus {
-  border-color: #ff6347 !important;
-}
-
-body[data-theme="light"] .feedback-input input::placeholder,
-body[data-theme="light"] .feedback-input textarea::placeholder {
-  color: #888 !important;
-}
-
-body[data-theme="light"] .rating-title p {
-  color: #333 !important;
-}
-
-body[data-theme="light"] .close-feedback {
-  color: #666 !important;
-}
 
 body[data-theme="light"] .close-feedback:hover {
   color: #ff6347 !important;
@@ -2144,7 +2495,7 @@ body[data-theme="light"] .about {
 
 body[data-theme="light"] .about .section-title h2 {
   color: #1a1a1a !important;
-  text-shadow: none !important;
+  text-shadow: 0 0 10px rgba(255, 99, 71, 0.6) !important;
 }
 
 body[data-theme="light"] .about .section-title p {

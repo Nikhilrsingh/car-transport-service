@@ -1,0 +1,76 @@
+import Enquiry from "../models/enquiry.model.js";
+import { sendEnquiryEmail } from "../utils/sendEmail.js";
+
+const generateReferenceNumber = () => {
+  return `ENQ${Date.now()}`;
+};
+
+export const createEnquiry = async (req, res) => {
+  try {
+    const referenceNumber = generateReferenceNumber();
+
+    // Save enquiry in MongoDB
+    const enquiry = await Enquiry.create({
+      referenceNumber,
+      ...req.body,
+      documents: req.files?.map(file => ({
+        filename: file.originalname,
+        path: file.path,
+        size: file.size,
+      })) || []
+    });
+
+    // Send email (non-blocking, without attachments)
+    sendEnquiryEmail({
+      subject: `📨 New Enquiry: ${referenceNumber}`,
+      html: `
+        <h2>New Enquiry Received</h2>
+        <p><strong>Reference Number:</strong> ${referenceNumber}</p>
+        <p><strong>Name:</strong> ${enquiry.name || "N/A"}</p>
+        <p><strong>Email:</strong> ${enquiry.email || "N/A"}</p>
+        <p><strong>Phone:</strong> ${enquiry.phone || "N/A"}</p>
+        <p><strong>Message:</strong></p>
+        <p>${enquiry.message || "N/A"}</p>
+        <p><strong>Documents:</strong> ${enquiry.documents.length}</p>
+      `
+    }).catch(err => console.error("Enquiry email failed:", err.message));
+
+    res.status(201).json({
+      success: true,
+      message: "Enquiry submitted successfully",
+      referenceNumber
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
+
+export const getEnquiryByReference = async (req, res) => {
+  try {
+    const enquiry = await Enquiry.findOne({
+      referenceNumber: req.params.reference
+    });
+
+    if (!enquiry) {
+      return res.status(404).json({
+        success: false,
+        message: "Enquiry not found"
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: enquiry
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};

@@ -449,3 +449,120 @@ body[data-theme="light"] .section-title {
 body[data-theme="light"] .section-subtitle {
   color: #555 !important;
 }
+
+
+/* ====================================
+   NETWORK PAGE - Dark Mode Styles
+   ==================================== */
+
+/* Hero in dark mode */
+body[data-theme="dark"] .network-hero {
+  background: linear-gradient(135deg, #111827 0%, #020617 100%) !important;
+}
+
+body[data-theme="dark"] .hero-overlay {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+body[data-theme="dark"] .hero-title,
+body[data-theme="dark"] .hero-subtitle {
+  color: #f9fafb !important;
+}
+
+body[data-theme="dark"] .cta-button {
+  background: #f97316;
+  color: #0b1120;
+}
+
+body[data-theme="dark"] .cta-button:hover {
+  background: #fde68a;
+  color: #7c2d12;
+}
+
+/* Section backgrounds */
+body[data-theme="dark"] .coverage-section,
+body[data-theme="dark"] .contact-cta-section {
+  background: #020617 !important; 
+}
+
+body[data-theme="dark"] .regional-offices {
+  background: #020617 !important;
+}
+
+body[data-theme="dark"] .network-stats {
+  background: linear-gradient(135deg, #020617 0%, #111827 100%) !important;
+}
+
+/* Cards */
+body[data-theme="dark"] .coverage-card,
+body[data-theme="dark"] .office-card {
+  background: #020617 !important;
+  border-color: rgba(148, 163, 184, 0.35) !important;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.9) !important;
+}
+
+body[data-theme="dark"] .coverage-card h3,
+body[data-theme="dark"] .office-header h3 {
+  color: #e5e7eb !important;
+}
+
+body[data-theme="dark"] .coverage-card p,
+body[data-theme="dark"] .detail-item,
+body[data-theme="dark"] .detail-item a {
+  color: #9ca3af !important;
+}
+
+body[data-theme="dark"] .detail-item:last-child {
+  color: #6b7280 !important;
+}
+
+/* Icons */
+body[data-theme="dark"] .coverage-icon,
+body[data-theme="dark"] .office-icon {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #0b1120;
+}
+
+/* Stats */
+body[data-theme="dark"] .stat-number {
+  color: #fbbf24 !important;
+}
+
+body[data-theme="dark"] .stat-label,
+body[data-theme="dark"] .network-stats .section-subtitle {
+  color: #e5e7eb !important;
+}
+
+/* Section titles/subtitles */
+body[data-theme="dark"] .section-title {
+  color: #f9fafb !important;
+}
+
+body[data-theme="dark"] .section-subtitle {
+  color: #9ca3af !important;
+}
+
+/* Contact buttons */
+body[data-theme="dark"] .contact-cta-section p {
+  color: #9ca3af !important;
+}
+
+body[data-theme="dark"] .contact-btn.primary {
+  background: #f97316;
+  color: #0b1120;
+}
+
+body[data-theme="dark"] .contact-btn.primary:hover {
+  background: #fb923c;
+}
+
+body[data-theme="dark"] .contact-btn.secondary {
+  background: transparent;
+  color: #f97316;
+  border-color: #f97316;
+}
+
+body[data-theme="dark"] .contact-btn.secondary:hover {
+  background: #f97316;
+  color: #0b1120;
+}
