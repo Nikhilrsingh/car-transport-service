@@ -1,5 +1,5 @@
 import Contact from "../models/contact.model.js";
-import sendEmail from "../utils/sendEmail.js";
+import { sendContactEmail } from "../utils/sendEmail.js";
 
 /**
  * @desc    Submit contact form
@@ -38,7 +38,7 @@ export const submitContact = async (req, res, next) => {
     });
 
     // 🔥 NON-BLOCKING EMAIL
-    sendEmail({
+    sendContactEmail({
       subject: "📩 New Contact Form Submission",
       html: `
         <h2>New Contact Received</h2>
@@ -61,7 +61,6 @@ export const submitContact = async (req, res, next) => {
     next(error);
   }
 };
-
 
 /**
  * @desc    Get all contact messages
@@ -111,7 +110,7 @@ export const updateContactStatus = async (req, res, next) => {
 
     const contact = await Contact.findByIdAndUpdate(
       req.params.id,
-      { $set: { status } }, // ✅ safe update
+      { $set: { status } },
       { new: true, runValidators: true }
     );
 

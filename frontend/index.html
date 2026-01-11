@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="css/components/glowing-input.css" />
 
   <!-- Theme Toggle Link (must be in <head>) -->
-  <link id="theme-style" rel="stylesheet" href="css/light-mode.css?v=14" />
+  <link id="theme-style" rel="stylesheet" href="css/light-mode.css?v=15" />
 </head>
 
 <body class="neon-theme">
@@ -63,7 +63,7 @@
   <div id="navbar-container"></div>
 
   <!--  Automated Image Slider Section & features -->
-  <section class="slider-feature-grid">
+  <section id="features" class="slider-feature-grid">
     <div class="feature-box left-top fade-in">
       🚗
       <h3>Fast Delivery</h3>
@@ -337,7 +337,7 @@
   </section>
 
   <!-- Pricing CTA -->
-  <div class="pricing-cta-section fade-in">
+  <section id="pricing-plans" class="pricing-cta-section fade-in">
     <div class="pricing-cta-content">
       <h3>Compare Our Pricing Plans</h3>
       <p>
@@ -349,7 +349,7 @@
         <span>View Pricing Plans</span>
       </a>
     </div>
-  </div>
+  </section>
 
   <!-- Testimonials Section -->
   <section class="testimonials-section" id="testimonials">
@@ -370,7 +370,7 @@
   </section>
 
   <!-- Contact CTA Section -->
-  <section class="contact-cta">
+  <section id="contact" class="contact-cta">
     <div class="container">
       <div class="cta-content">
         <div class="cta-text fade-in">
@@ -444,7 +444,10 @@
   </section>
 
   <!-- Region-Wise Presence Section Container - Loaded dynamically -->
-  <div id="region-container"></div>
+  <section id="presence">
+    <h2 class="visually-hidden">Our Pan-India Presence</h2>
+    <div id="region-container"></div>
+  </section>
 
   <!-- 💬 Feedback Modal -->
   <div id="feedbackModal" class="feedback-modal">
