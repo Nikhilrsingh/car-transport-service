@@ -1,0 +1,42 @@
+/* ===================================================================
+   [ENHANCEMENT] CSS-Only Safe Tap Zones for Mobile Users
+   Description:
+   Improves touch accuracy for buttons, links, and CTAs on mobile
+   devices (coarse pointers) without changing visual layout.
+   =================================================================== */
+
+@media (pointer: coarse) {
+
+  /* Target all interactive elements */
+  button,
+  a,
+  .cta-btn {
+    position: relative; /* Required for ::before absolute positioning */
+    min-width: 44px;    /* Ensure minimum touch width */
+    min-height: 44px;   /* Ensure minimum touch height */
+  }
+
+  /* Invisible tap buffer using ::before pseudo-element */
+  button::before,
+  a::before,
+  .cta-btn::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    pointer-events: auto; /* Make expanded area tappable */
+    background: transparent;
+    z-index: 1; /* Ensure it sits above the element for touch, but invisible */
+  }
+
+  /* Optional: visual debug mode - remove in production */
+  /* 
+  button::before,
+  a::before,
+  .cta-btn::before {
+    border: 1px dashed red;
+  } 
+  */
+}
