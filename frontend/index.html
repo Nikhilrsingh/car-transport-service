@@ -36,7 +36,6 @@
   <link rel="stylesheet" href="css/components/floating-feedback-button.css?v=2" />
   <link rel="stylesheet" href="css/components/sticky-quote-button.css?v=2" />
   <link rel="stylesheet" href="css/components/glowing-input.css" />
-  <link rel="stylesheet" href="css/components/sticky-toc.css" />
 
   <!-- Theme Toggle Link (must be in <head>) -->
   <link id="theme-style" rel="stylesheet" href="css/light-mode.css?v=14" />
@@ -130,7 +129,7 @@
   </section>
 
   <!-- Hero Section -->
-  <section id="quote" class="hero">
+  <section id="home" class="hero">
     <div class="hero-background"></div>
     <div class="hero-content">
       <div class="container">
@@ -192,7 +191,7 @@
           </div>
 
           <!-- Right Side: Quick Quote Form -->
-          <div class="hero-quote" id="quote-form">
+          <div class="hero-quote" id="quote">
             <div class="quote-card">
               <div class="quote-header">
                 <h3>Get Instant Quote</h3>
@@ -338,7 +337,7 @@
   </section>
 
   <!-- Pricing CTA -->
-  <section id="pricing" class="pricing-cta-section fade-in">
+  <section id="pricing-plans" class="pricing-cta-section fade-in">
     <div class="pricing-cta-content">
       <h3>Compare Our Pricing Plans</h3>
       <p>
@@ -445,7 +444,10 @@
   </section>
 
   <!-- Region-Wise Presence Section Container - Loaded dynamically -->
-  <div id="region-container" data-section-title="Our Pan-India Presence"></div>
+  <section id="presence">
+    <h2 class="visually-hidden">Our Pan-India Presence</h2>
+    <div id="region-container"></div>
+  </section>
 
   <!-- 💬 Feedback Modal -->
   <div id="feedbackModal" class="feedback-modal">
