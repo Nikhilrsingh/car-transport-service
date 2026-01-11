@@ -1,4 +1,5 @@
 import express from "express";
+import upload from "../middleware/upload.js";
 import {
   submitContact,
   getAllContacts,
@@ -8,7 +9,11 @@ import {
 const router = express.Router();
 
 // Public route (form submission)
-router.post("/", submitContact);
+router.post(
+  "/",
+  upload.array("images", 5), // Allow up to 5 images with field name "images"
+  submitContact
+);
 
 // Admin routes (future auth middleware)
 router.get("/", getAllContacts);
