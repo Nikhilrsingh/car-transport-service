@@ -262,31 +262,82 @@ section {
 
 .network-stats .section-title,
 .network-stats .section-subtitle {
-    color: var(--white);
+    color: #ffffff !important;
+    opacity: 1 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    margin-top: 3rem;
 }
 
 .stat-item {
-    text-align: center;
+  text-align: center;
+  padding: 32px 20px;
+  border-radius: 20px;
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+
+  transition: all 0.35s ease;
 }
+
+.stat-item:hover{
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+.stat-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.stat-item:hover::before {
+  opacity: 1;
+}
+
 
 .stat-number {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--white);
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+
+  background: linear-gradient(135deg, #ffedd5, #fb923c);
+
+  /*Webkit support */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-.stat-label {
-    font-size: 1.1rem;
-    opacity: 0.95;
+.network-stats .stat-label {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.95);
+  text-transform: uppercase;
 }
+
 
 /* Contact CTA Section */
 .contact-cta-section {
@@ -438,16 +489,18 @@ body[data-theme="light"] .stat-number {
 }
 
 body[data-theme="light"] .stat-card p,
-body[data-theme="light"] .stat-label {
-  color: #555 !important;
+body[data-theme="light"] .network-stats .stat-label {
+  color: #1a1a1a !important;
+  text-shadow: none !important;
 }
 
 body[data-theme="light"] .section-title {
   color: #1a1a1a !important;
 }
 
-body[data-theme="light"] .section-subtitle {
-  color: #555 !important;
+body[data-theme="light"] .network-stats .section-subtitle {
+  color: #1a1a1a !important;
+  text-shadow: none !important;
 }
 
 
