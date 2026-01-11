@@ -1,0 +1,285 @@
+/* Testimonials Section Styles */
+.testimonials-section .container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* Keep section title generic because it's used in multiple places */
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+  margin-top: 60px;
+}
+
+.section-title h2 {
+  font-size: var(--h2-size, 2.5rem);
+  margin-bottom: 15px;
+  color: var(--primary-color, #ff6347);
+}
+
+.section-title p {
+  color: #e8e8e8;
+  margin: 0 auto;
+}
+
+/* Testimonial Slider */
+.testimonial-slider {
+  max-width: 800px;
+  margin: 0 auto 80px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Draggable track */
+.slider-container {
+  display: flex;
+  transition: transform 0.3s var(--ease-decelerate, ease-out);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  will-change: transform;
+}
+
+/* Cursor feedback while dragging */
+.slider-container:active {
+  cursor: grabbing;
+}
+
+/* Individual testimonial slide */
+.testimonial-card {
+  flex: 0 0 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 40px;
+  margin-top: 10px;
+  border-radius: 15px;
+  box-shadow: var(--shadow-card, 0 10px 30px rgba(0, 0, 0, 0.3));
+  text-align: center;
+  border: 2px solid transparent;
+  background: #2b2b2b;
+  transition:
+    border-color var(--motion-medium, 250ms) var(--ease-standard, ease),
+    transform var(--motion-medium, 250ms) var(--ease-standard, ease),
+    box-shadow var(--motion-medium, 250ms) var(--ease-standard, ease);
+}
+
+/* Prevent image drag / selection inside cards for smoother swipes */
+.testimonial-card img {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hover elevation */
+.testimonial-card:hover {
+  border-color: var(--primary-color, #ff6347);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg, 0 12px 36px rgba(0, 0, 0, 0.35));
+}
+
+/* Quote mark decoration */
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 4rem;
+  color: var(--primary-color, #ff6347);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+}
+
+/* Make sure the card can host ::before absolutely */
+.testimonial-card {
+  position: relative;
+}
+
+/* Rating stars */
+.rating {
+  margin-bottom: 20px;
+}
+
+.rating i {
+  color: #ffd700;
+  margin: 0 2px;
+}
+
+/* Testimonial text */
+.testimonial-text {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.8;
+  font-style: italic;
+  color: #ccc;
+}
+
+/* Client info layout */
+.client-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.client-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--primary-color, #ff6347);
+}
+
+.client-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.client-details h4 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.client-details p {
+  color: var(--primary-color, #ff6347);
+  font-size: 0.9rem;
+}
+
+/* Slider Controls (arrows + dots) */
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.slider-btn {
+  background: var(--primary-color, #ff6347);
+  color: #ffffff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition:
+    background var(--motion-medium, 250ms) var(--ease-standard, ease),
+    transform var(--motion-medium, 250ms) var(--ease-standard, ease),
+    box-shadow var(--motion-medium, 250ms) var(--ease-standard, ease);
+  box-shadow: var(--shadow-sm, 0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.slider-btn:hover {
+  background: #ff5313;
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md, 0 6px 16px rgba(0, 0, 0, 0.2));
+}
+
+/* Pagination dots wrapper */
+.slider-dots {
+  display: flex;
+  gap: 10px;
+}
+
+/* Dot styling (keep class name .dot because HTML already uses it) */
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #555;
+  cursor: pointer;
+  transition:
+    background var(--motion-medium, 250ms) var(--ease-standard, ease),
+    transform var(--motion-medium, 250ms) var(--ease-standard, ease),
+    box-shadow var(--motion-medium, 250ms) var(--ease-standard, ease);
+}
+
+.dot.active {
+  background: var(--primary-color, #ff6347);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(255, 99, 71, 0.25);
+}
+
+.dot:hover {
+  background: #777;
+}
+
+/* Testimonials Grid (static cards below slider) */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.grid-testimonial {
+  background: #2b2b2b;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: var(--shadow-card, 0 5px 20px rgba(0, 0, 0, 0.2));
+  transition:
+    transform var(--motion-medium, 250ms) var(--ease-standard, ease),
+    box-shadow var(--motion-medium, 250ms) var(--ease-standard, ease);
+  border-left: 4px solid var(--primary-color, #ff6347);
+}
+
+.grid-testimonial:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg, 0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+.grid-rating {
+  margin-bottom: 15px;
+}
+
+.grid-testimonial .testimonial-text {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.grid-client-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.grid-client-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.grid-client-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .testimonials-section {
+    padding: 60px 0;
+  }
+
+  .section-title h2 {
+    font-size: 2rem;
+  }
+
+  .testimonial-card {
+    padding: 20px 15px;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

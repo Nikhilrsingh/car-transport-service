@@ -1,0 +1,14 @@
+/* ====================================
+   FLOATING CHATBOT BUTTON STYLES
+   Hidden - functionality moved to FAB menu
+   ==================================== */
+
+/* Button Container - Hidden by default */
+#floating-chatbot-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+}

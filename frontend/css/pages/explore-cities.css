@@ -1,0 +1,184 @@
+/* explore-cities.css — page‑specific + view layouts */
+
+/* ----- Page basics (keep hero, filters same) ----- */
+body {
+  padding-top: 0;
+}
+
+.explore-hero {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  padding: 120px 0 60px;
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.explore-hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.explore-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Filter box shadow */
+.region-filters-search {
+  margin-top: -50px;
+  position: relative;
+  z-index: 10;
+  background: var(--bg-primary);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+/* --------------------------------------------------
+   GRID VIEW  (data-view="grid")
+   Default: your original card grid, just with
+   the region badge centered under the city name.
+   -------------------------------------------------- */
+
+.region-grid[data-view="grid"] .region-card {
+  /* rely mostly on existing component styles */
+}
+
+/* Center city name + region badge */
+.region-grid[data-view="grid"] .city-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.region-grid[data-view="grid"] .city-name {
+  text-align: center;
+  width: 100%;
+}
+
+.region-grid[data-view="grid"] .region-badge {
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------
+   LIST VIEW  (data-view="list")
+   2 cards per row on desktop
+   1 per row on tablet/mobile
+   -------------------------------------------------- */
+
+/* 2 columns in list view */
+.region-grid[data-view="list"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Card layout in list view */
+.region-grid[data-view="list"] .region-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--bg-primary, #ffffff);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.region-grid[data-view="list"] .region-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-color, #ff6b35);
+}
+
+/* Icon smaller for compact list cards */
+.region-grid[data-view="list"] .city-thumbnail {
+  width: 52px;
+  height: 52px;
+  font-size: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 183, 3, 0.1));
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Name + badge on the left */
+.region-grid[data-view="list"] .city-content {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.region-grid[data-view="list"] .city-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Region badge styles reuse your theme colors */
+.region-grid[data-view="list"] .region-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+
+/* Stats + price aligned right */
+.region-grid[data-view="list"] .city-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.region-grid[data-view="list"] .stat-item {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.region-grid[data-view="list"] .pricing-badge {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #b63b12;
+  background: rgba(255, 107, 53, 0.1);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* Tablet + mobile: list view falls back to 1 column */
+@media (max-width: 900px) {
+  .region-grid[data-view="list"] {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .region-grid[data-view="list"] .region-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .region-grid[data-view="list"] .city-content {
+    width: 100%;
+  }
+
+  .region-grid[data-view="list"] .city-stats {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 0;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+  }
+}

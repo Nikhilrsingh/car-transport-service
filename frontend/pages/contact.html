@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Harihar Car Carriers</title>
+  <base href="./" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="stylesheet" href="../css/components/navbar.css" />    <link rel="stylesheet" href="../css/components/middle-navbar.css" />  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+  <link rel="stylesheet" href="../css/components/footer.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <!-- <link rel="stylesheet" href="../css/components/floating-call-button.css">
+  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css">
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css"> -->
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css">
+  <link rel="stylesheet" href="../css/components/quote-modal.css">
+  <link rel="stylesheet" href="../css/components/chatbot-modal.css">
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+  <link rel="stylesheet" href="../css/components/backtoBottom.css">
+  <link rel="stylesheet" href="../css/components/animations.css">
+  <link rel="stylesheet" href="../css/components/contact.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/components/glowing-input.css">
+  <link rel="stylesheet" href="../css/pages/contact.css">
+
+  
+  <link rel="stylesheet" href="../css/components/floating-button.css">
+</head>
+
+<body>
+  <!-- Navbar Container - Loaded dynamically -->
+  <div id="navbar-container"></div>
+
+  <!-- Hero Section -->
+  <section class="contact-hero">
+    <div class="container">
+      <h1 class="fade-in">Get In Touch With Us</h1>
+      <p class="fade-in fade-in-delay-1">
+        We're here to help you with all your vehicle transportation needs.
+        Contact us for quotes, support, or any questions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Contact Information</h2>
+        <p>
+          Multiple ways to reach us. We're always available to assist you.
+        </p>
+      </div>
+
+      <div class="contact-content">
+        <!-- Contact Info -->
+        <div class="contact-info-pg fade-in">
+          <div class="info-card">
+            <div class="info-header">
+              <div class="info-icon">
+                <i class="fa-solid fa-phone-volume"></i>
+              </div>
+              <h3>Phone & WhatsApp</h3>
+            </div>
+            <div class="info-content">
+              <p><strong>Customer Support:</strong> +91 9372693389</p>
+              <p><strong>Sales & Quotes:</strong> +91 9372693389</p>
+              <p><strong>Emergency:</strong> +91 9372693389</p>
+            </div>
+            <div class="info-actions">
+              <button class="info-action-btn" data-action="call" data-value="+919372693389">
+                <i class="fas fa-phone"></i>
+                <span>Call</span>
+              </button>
+              <button class="info-action-btn" data-action="copy" data-value="+91 9372693389">
+                <i class="fas fa-copy"></i>
+                <span>Copy</span>
+              </button>
+              <button class="info-action-btn" data-action="qr" data-value="tel:+919372693389">
+                <i class="fas fa-qrcode"></i>
+                <span>QR Code</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="info-card fade-in fade-in-delay-1">
+            <div class="info-header">
+              <div class="info-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <h3>Email Address</h3>
+            </div>
+            <div class="info-content">
+              <p>
+                <strong>General Inquiries:</strong>
+                hariharcarcarrier@gmail.com
+              </p>
+              <p>
+                <strong>Customer Support:</strong>
+                hariharcarcarrier@gmail.com
+              </p>
+              <p>
+                <strong>Partnerships:</strong> hariharcarcarrier@gmail.com
+              </p>
+            </div>
+            <div class="info-actions">
+              <button class="info-action-btn" data-action="email" data-value="hariharcarcarrier@gmail.com">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+              </button>
+              <button class="info-action-btn" data-action="copy" data-value="hariharcarcarrier@gmail.com">
+                <i class="fas fa-copy"></i>
+                <span>Copy</span>
+              </button>
+              <button class="info-action-btn" data-action="qr" data-value="mailto:hariharcarcarrier@gmail.com">
+                <i class="fas fa-qrcode"></i>
+                <span>QR Code</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="info-card fade-in fade-in-delay-2">
+            <div class="info-header">
+              <div class="info-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <h3>Office Address</h3>
+            </div>
+            <div class="info-content">
+              <p><strong>Head Office:</strong></p>
+              <p>
+                123 Transport Nagar, Sitabuldi, Nagpur, Maharashtra - 440001
+              </p>
+              <p><strong>Branch Office:</strong></p>
+              <p>45 Car Market, Mumbai Highway, Pune, Maharashtra - 411001</p>
+            </div>
+          </div>
+
+          <div class="info-card fade-in fade-in-delay-3">
+            <div class="info-header">
+              <div class="info-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h3>Operating Hours</h3>
+            </div>
+            <div class="info-content">
+              <ul class="hours-list" id="hourslist">
+                <li data-day="1-5">
+                  <span class="day">Monday - Friday</span>
+                  <span class="time" data-open="08:00" data-close="22:00">8:00 AM - 10:00 PM</span>
+                  <span class="status-badge"></span>
+                </li>
+                <li data-day="6">
+                  <span class="day">Saturday</span>
+                  <span class="time" data-open="09:00" data-close="20:00">9:00 AM - 8:00 PM</span>
+                  <span class="status-badge"></span>
+                </li>
+                <li data-day="0">
+                  <span class="day">Sunday</span>
+                  <span class="time" data-open="09:00" data-close="18:00">9:00 AM - 6:00 PM</span>
+                  <span class="status-badge"></span>
+                </li>
+                <li data-day="0-6">
+                  <span class="day">Emergency Service</span>
+                  <span class="time" data-open="00:00" data-close="23:59">24/7 Available</span>
+                  <span class="status-badge open">Open Now</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-card fade-in fade-in-delay-4">
+            <div class="info-header">
+              <div class="info-icon">
+                <i class="fas fa-comments"></i>
+              </div>
+              <h3>Alternative Contacts</h3>
+            </div>
+            <div class="info-content">
+              <div class="social-links">
+                <a href="https://facebook.com/hariharcarcarriers" target="_blank" rel="noopener"
+                  class="social-link facebook">
+                  <i class="fab fa-facebook-f"></i>
+                  <!-- <span>Facebook</span> -->
+                </a>
+                <a href="https://twitter.com/hariharcarriers" target="_blank" rel="noopener"
+                  class="social-link twitter">
+                  <i class="fab fa-twitter"></i>
+                  <!-- <span>Twitter</span> -->
+                </a>
+                <a href="https://instagram.com/hariharcarcarriers" target="_blank" rel="noopener"
+                  class="social-link instagram">
+                  <i class="fab fa-instagram"></i>
+                  <!-- <span>Instagram</span> -->
+                </a>
+                <a href="https://linkedin.com/company/hariharcarcarriers" target="_blank" rel="noopener"
+                  class="social-link linkedin">
+                  <i class="fab fa-linkedin-in"></i>
+                  <!-- <span>LinkedIn</span> -->
+                </a>
+              </div>
+              <!-- Live chat button removed - handled by FAB menu -->
+              <!-- <button class="live-chat-btn" id="liveChatBtn">
+                <i class="fas fa-comments"></i>
+                <span>Start Live Chat</span>
+                <span class="online-indicator"></span>
+              </button> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-container fade-in">
+          <div class="form-header">
+            <h3>Send Us a Message</h3>
+            <p class="response-time"><i class="fas fa-clock"></i> We typically respond within 2 hours</p>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="input-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required />
+                <span class="error-message"></span>
+              </div>
+              <div class="input-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required />
+                <span class="error-message"></span>
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required />
+              <span class="error-message"></span>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label for="vehicle">Vehicle Type *</label>
+                <select id="vehicle" name="vehicle" required>
+                  <option value="">Select Vehicle Type</option>
+                  <option value="hatchback">Hatchback</option>
+                  <option value="sedan">Sedan</option>
+                  <option value="suv">SUV</option>
+                  <option value="luxury">Luxury Car</option>
+                  <option value="bike">Bike</option>
+                  <option value="commercial">Commercial Vehicle</option>
+                </select>
+                <span class="error-message"></span>
+              </div>
+              <div class="input-group">
+                <label for="service">Service Type *</label>
+                <select id="service" name="service" required>
+                  <option value="">Select Service</option>
+                  <option value="quote">Get Quote</option>
+                  <option value="booking">Book Transport</option>
+                  <option value="support">Customer Support</option>
+                  <option value="complaint">Complaint</option>
+                  <option value="other">Other</option>
+                </select>
+                <span class="error-message"></span>
+              </div>
+            </div>
+            <div class="input-group full-width">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" placeholder="Tell us about your requirements..." maxlength="500"
+                required></textarea>
+              <span class="error-message"></span>
+              <div class="char-counter">0/500 characters</div>
+              <div class="email-suggestion"></div>
+            </div>
+            <div class="input-group full-width">
+              <label>Upload Images (Optional)</label>
+              <div class="file-upload-area">
+                <input type="file" id="fileUpload" accept="image/*" multiple>
+                <div class="upload-icon">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                  <h4>Drag & Drop Images Here</h4>
+                  <p>or click to browse (Max 5MB per file)</p>
+                </div>
+              </div>
+              <div class="file-preview-container"></div>
+            </div>
+            <div class="form-success-message">
+              <i class="fas fa-check-circle"></i>
+              <span>Message sent successfully!</span>
+            </div>
+            <div class="typing-indicator">
+              <span>Processing your message</span>
+              <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">
+              <span>Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Find Us Here</h2>
+        <p>Visit our office or schedule a meeting with our team</p>
+      </div>
+      <div class="map-container fade-in">
+        <div class="map-loading">
+          <div class="map-spinner"></div>
+        </div>
+        <div class="map-controls">
+          <button class="map-control-btn" id="mapStyleSwitcher">
+            <i class="fas fa-satellite"></i>
+            <span>Satellite</span>
+          </button>
+        </div>
+        <div class="map-marker">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="map-info-window">
+          <div class="map-info-content">
+            <h4>Harihar Car Carriers</h4>
+            <p>123 Transport Nagar, Sitabuldi, Nagpur</p>
+            <button class="directions-btn">
+              <i class="fas fa-directions"></i>
+              <span>Get Directions</span>
+            </button>
+          </div>
+        </div>
+        <iframe class="map-embed" title="Harihar Car Carriers - Dummy Location"
+          src="https://www.google.com/maps?q=21.1458,79.0882&z=14&output=embed&t=m" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" aria-label="Map showing dummy location in Nagpur"></iframe>
+      </div>
+      <div class="map-actions">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=21.1458%2C79.0882" target="_blank"
+          rel="noopener noreferrer" class="cta-btn secondary"
+          aria-label="Open directions to our location in Google Maps">
+          <i class="fas fa-directions"></i>
+          <span>View on Google Maps</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section now in faq page -->
+
+  <!-- CTA Section -->
+  <section class="contact-cta">
+    <div class="container">
+      <h2 class="fade-in">Ready to Transport Your Vehicle?</h2>
+      <p class="fade-in fade-in-delay-1">
+        Get started with our reliable and secure vehicle transportation
+        services today.
+      </p>
+      <div class="cta-buttons fade-in fade-in-delay-2">
+        <a href="#quote" class="cta-btn primary">
+          <i class="fas fa-calculator"></i>
+          <span>Get Instant Quote</span>
+        </a>
+        <a href="tel:+919372693389" class="cta-btn secondary">
+          <i class="fas fa-phone"></i>
+          <span>Call Us Now</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <div id="footer-container"></div>
+
+  <script src="../js/modules/search.js"></script>
+  <!-- Loading State Manager - Must load first -->
+  <script src="../js/modules/loading-state-manager.js"></script>
+  <!-- Page Navigation Loader - Must load after loading-state-manager -->
+  <script src="../js/modules/page-navigation-loader.js"></script>
+  <script src="../js/modules/navbar-loader.js?v=2"></script>
+
+  <script src="../js/modules/footer-loader.js"></script>
+  <script src="../js/modules/themes.js"></script>
+  <!-- Floating buttons removed - handled by FAB menu in footer -->
+  <!-- Floating buttons removed - handled by FAB menu in footer -->
+  <!-- <script src="../js/modules/floating-book-button.js"></script>
+  <script src="../js/modules/floating-call-button.js"></script>
+  <script src="../js/modules/floating-whatsapp-button.js"></script> -->
+  <script src="../js/modules/quote-modal.js"></script>
+  <script src="../js/modules/sticky-quote-button.js"></script>
+  <!-- <script src="../js/modules/floating-chatbot-button.js"></script> -->
+  <script src="../js/modules/chatbot-modal.js"></script>
+  <script src="../js/modules/back-to-top-button.js"></script>
+  <script src="../js/modules/backtoBottom.js"></script>
+  <script src="../js/modules/scroll-animations.js"></script>
+  <script src="../js/modules/contact-enhanced.js"></script>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Top to Bottom Button -->
+  <button class="back-to-bottom" id="backToBottom">
+    <i class="fas fa-arrow-down"></i>
+  </button>
+
+  <!-- 🌟 Bottom Fixed Action Bar -->
+   <link rel="stylesheet" href="../css/components/footer.css" />
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+  <link rel="stylesheet" href="../css/components/quote-modal.css" />
+  <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
+  
+  <!-- 🚀 Floating Action Menu loaded via footer component -->
+
+</body>
+
+</html>
+
+</html>

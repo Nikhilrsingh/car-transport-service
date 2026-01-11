@@ -1,0 +1,14 @@
+/* ====================================
+   STICKY QUOTE NOW BUTTON STYLES
+   Hidden - functionality moved to bottom action bar
+   ==================================== */
+
+/* Button Container - Hidden by default */
+#sticky-quote-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+}

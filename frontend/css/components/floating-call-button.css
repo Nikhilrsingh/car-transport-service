@@ -1,0 +1,14 @@
+/* ====================================
+   FLOATING CALL US BUTTON STYLES
+   Hidden - functionality moved to bottom action bar and FAB
+   ==================================== */
+
+/* Button Container - Hidden by default */
+#floating-call-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+}

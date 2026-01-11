@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributors | Harihar Car Carriers</title>
+  <base href="./" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/middle-navbar.css" />
+  <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+  <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+  <link rel="stylesheet" href="../css/components/backtoBottom.css" />
+  <link rel="stylesheet" href="../css/components/contributors.css" />
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/components/glowing-input.css">
+  <link rel="stylesheet" href="../css/components/floating-button.css" />
+</head>
+
+<body>
+  <div id="navbar-container"></div>
+
+  <main class="main-content">
+    <section class="contributors-hero">
+      <div class="container">
+        <h1>Our Amazing Contributors</h1>
+        <p>
+          Meet the talented developers and contributors who help make Harihar
+          Car Carriers better every day
+        </p>
+      </div>
+      
+      <div class="contributor-container">
+        <h1>🌟 GitHub Contributors Dashboard</h1>
+        
+        <div id="stats">
+          <div class="stat-box">
+            <h3>Contributors</h3>
+            <p id="totalContributors">0</p>
+          </div>
+          <div class="stat-box">
+            <h3>Commits</h3>
+            <p id="totalCommits">0</p>
+          </div>
+          <div class="stat-box">
+            <h3>Total PRs</h3>
+            <p id="totalPRs">0</p>
+          </div>
+          <div class="stat-box">
+            <h3>Total Points</h3>
+            <p id="totalPoints">0</p>
+          </div>
+          <div class="stat-box">
+            <h3>Stars</h3>
+            <p id="totalStars">0</p>
+          </div>
+          <div class="stat-box">
+            <h3>Forks</h3>
+            <p id="totalForks">0</p>
+          </div>
+        </div>
+
+        <div id="projectLeadContainer" style="display: flex; justify-content: center; margin: 3rem 0;">
+          <div class="contributor special-lead">
+            <div class="lead-badge" style="margin-bottom: 10px;">👑 Project Lead</div>
+            <img src="https://avatars.githubusercontent.com/Nikhilrsingh" alt="Nikhil R. Singh">
+            <h3 style="margin: 10px 0;">Nikhil R. Singh</h3>
+            <p>Leading the project vision.</p>
+            <a href="https://github.com/Nikhilrsingh" target="_blank"><i class="fab fa-github"></i> View Profile</a>
+          </div>
+        </div>
+
+        <div class="search-contributor">
+          <input type="text" id="searchInput" placeholder="Search contributor..." />
+          <select id="sortBy" class="filter-select">
+            <option value="contributions">Most Contributions</option>
+            <option value="alphabetical">Alphabetical</option>
+            <option value="recent">Recent Activity</option>
+          </select>
+          <select id="filterLevel" class="filter-select">
+            <option value="all">All Contributors</option>
+            <option value="top10">Top 10</option>
+            <option value="gold">🥇 Gold League</option>
+            <option value="silver">🥈 Silver League</option>
+            <option value="bronze">🥉 Bronze League</option>
+            <option value="new">New Contributors</option>
+          </select>
+        </div>
+
+        <div id="spinner">
+          <div class="spinner-circle"></div>
+        </div>
+
+        <div id="contributorsList" class="contributors-grid"></div>
+
+        <div id="controls">
+          <button id="prevPage">⬅️ Prev</button>
+          <span>Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+          <button id="nextPage">Next ➡️</button>
+          <button id="refreshData" title="Refresh data">🔄 Refresh</button>
+        </div>
+
+        <div id="activityTimeline" class="timeline-container">
+          <h2>Recent Activity</h2>
+          <div id="timelineContent" class="timeline-content"></div>
+        </div>
+
+        <p id="errorMessage"></p>
+      </div>
+    </section>
+
+    <section class="contribute-section" style="padding: 50px 0; text-align: center">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 40px">
+          <h2>Want to Contribute?</h2>
+          <p>Join our community and help improve Harihar Car Carriers</p>
+        </div>
+
+        <div class="contribute-steps" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 25px;">
+          <div class="step-card">
+            <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+            <h3>Create an Issue</h3>
+            <p>Start by creating an issue describing your change.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon"><i class="fab fa-github"></i></div>
+            <h3>Fork the Repo</h3>
+            <p>Fork the repository to your GitHub account.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon"><i class="fas fa-code-branch"></i></div>
+            <h3>Create Branch</h3>
+            <p>Create a feature branch for your changes.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon"><i class="fas fa-code"></i></div>
+            <h3>Make Changes</h3>
+            <p>Implement your features or bug fixes.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon"><i class="fas fa-upload"></i></div>
+            <h3>Submit PR</h3>
+            <p>Create a pull request for review.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="contributorModal" class="contributor-modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-header">
+        <img id="modalAvatar" class="modal-avatar" src="" alt="">
+        <div class="modal-info">
+          <h2 id="modalName">Username</h2>
+          <p id="modalLeague" class="modal-subtitle">League</p>
+        </div>
+      </div>
+      <div class="modal-stats">
+        <div class="modal-stat">
+          <i class="fas fa-trophy"></i>
+          <span id="modalRank">#0</span>
+          <p>Rank</p>
+        </div>
+        <div class="modal-stat">
+          <i class="fas fa-star"></i>
+          <span id="modalPoints">0</span>
+          <p>Points</p>
+        </div>
+        <div class="modal-stat">
+          <i class="fas fa-code-branch"></i>
+          <span id="modalPRs">0</span>
+          <p>PRs</p>
+        </div>
+        <div class="modal-stat">
+          <i class="fas fa-code"></i>
+          <span id="modalCommits">0</span>
+          <p>Commits</p>
+        </div>
+      </div>
+      <div class="modal-actions">
+          <a id="viewPrBtn" href="#" target="_blank" class="modal-btn primary">
+              <i class="fas fa-code-branch"></i> View Pull Requests
+          </a>
+          <a id="modalGithubLink" href="#" target="_blank" class="modal-btn secondary">
+              <i class="fab fa-github"></i> GitHub Profile
+          </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-container"></div>
+
+  <script src="../js/modules/loading-state-manager.js"></script>
+  <script src="../js/modules/page-navigation-loader.js"></script>
+  <script src="../js/modules/navbar-loader.js?v=2"></script>
+  <script src="../js/modules/footer-loader.js"></script>
+  <script src="../js/modules/themes.js"></script>
+  <script src="../js/modules/contribute.js"></script>
+  <script src="../js/modules/floating-chatbot-button.js"></script>
+  <script src="../js/modules/chatbot-modal.js"></script>
+  <script src="../js/modules/back-to-top-button.js"></script>
+  <script src="../js/modules/backtoBottom.js"></script>
+
+  <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+  <button class="back-to-bottom" id="backToBottom"><i class="fas fa-arrow-down"></i></button>
+</body>
+</html>

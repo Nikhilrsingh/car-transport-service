@@ -1,0 +1,129 @@
+/* Smart Scroll Button - Switches between up/down */
+
+.scroll-button {
+    position: fixed !important;
+    bottom: 6px !important;
+    right: 20px !important;
+    width: 50px !important;
+    height: 50px !important;
+    background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.2rem !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease, visibility 0.3s ease !important;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 99999 !important;
+    box-shadow: 0 4px 20px rgba(255, 99, 71, 0.4) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    line-height: 1 !important;
+}
+
+.scroll-button.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.scroll-button:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 25px rgba(255, 99, 71, 0.6) !important;
+}
+
+.scroll-button:active {
+    transform: scale(0.95) !important;
+}
+
+/* Icon styling */
+.scroll-button i {
+    transition: transform 0.3s ease !important;
+    font-size: 1.2rem !important;
+    color: white !important;
+    line-height: 1 !important;
+}
+
+.scroll-button.scroll-down i {
+    transform: rotate(180deg) !important;
+}
+
+/* Tooltip - positioned above button */
+.scroll-button[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    letter-spacing: 0.5px;
+    z-index: 100000;
+}
+
+.scroll-button[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Remove any ::before pseudo element */
+.scroll-button::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .scroll-button {
+        bottom: 70px !important;
+        right: 20px !important;
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 1rem !important;
+    }
+
+    .scroll-button i {
+        font-size: 1rem !important;
+    }
+
+    .scroll-button[data-tooltip]::after {
+        bottom: 55px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+
+/* ====================================
+   SCROLL BUTTON - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .scroll-button {
+    background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 20px rgba(255, 99, 71, 0.35) !important;
+}
+
+body[data-theme="light"] .scroll-button:hover {
+    box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5) !important;
+}
+
+body[data-theme="light"] .scroll-button i {
+    color: #ffffff !important;
+}
+
+body[data-theme="light"] .scroll-button[data-tooltip]::after {
+    background-color: rgba(50, 50, 50, 0.95) !important;
+}

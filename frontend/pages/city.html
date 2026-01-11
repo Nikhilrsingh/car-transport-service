@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Transport Service</title>
+    <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+    <!-- <link rel="stylesheet" href="../css/styles.css" /> -->
+    <link rel="stylesheet" href="../css/components/glowing-input.css" />
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/pages/city.css">
+
+    <!-- Basic meta -->
+    <meta
+      name="description"
+      content="Car Transport Service - Reliable car shipping across India."
+    />
+    <meta
+      name="keywords"
+      content="car transport, vehicle transport, car movers India"
+    />
+
+    
+  </head>
+
+  <body>
+    <header>
+      <h2>Car Transport Service 🚗</h2>
+    </header>
+
+    <main class="city-container">
+      <img id="cityImage" src="" alt="City Image" />
+      <div class="description">
+        <h1 id="cityTitle">Loading...</h1>
+        <p id="cityDescription">Please wait while we load city details.</p>
+      </div>
+    </main>
+    <!-- Calculator -->
+    <section class="card">
+      <h3>Instant Price Calculator</h3>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Pickup City</label><input id="myCity" name="pickup" />
+        </div>
+        <div class="form-group"><label>Drop City</label><input /></div>
+        <div class="form-group">
+          <label>Car Type</label
+          ><select>
+            <option value="">--Please choose an option--</option>
+            <option>Hatchback</option>
+            <option>Sedan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Transport Type</label
+          ><select>
+            <option>Open</option>
+            <option>Closed</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Distance (km)</label
+          ><input type="number" placeholder="Enter Distance" />
+        </div>
+        <div class="form-group">
+          <label>Add-ons</label>
+          <div class="div">
+            <input type="checkbox" /> Door Pickup &nbsp;
+            <input type="checkbox" /> Insurance
+          </div>
+        </div>
+      </div>
+      <div class="btn">
+        <button type="submit">Submit</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Car Transport Service. All rights reserved.</p>
+    </footer>
+
+    <!-- Footer Container for consistent footer -->
+    <div id="footer-container"></div>
+
+    <script>
+      // --- Fetch city from URL ---
+      const params = new URLSearchParams(window.location.search);
+      const citySlug = params.get("city");
+
+      // --- Load data ---
+      fetch("../assets/data/cities.json")
+        .then((res) => res.json())
+        .then((cities) => {
+          const city = cities.find((c) => c.slug === citySlug);
+          if (city) {
+            document.title = city.name + " | Car Transport Service";
+            document.getElementById("cityTitle").textContent = city.name;
+            document.getElementById("cityDescription").textContent =
+              city.description;
+            document.getElementById("cityImage").src = "../" + city.image;
+
+            // form validation
+            document.getElementById("myCity").value = city.name;  
+            
+            const drop=document.querySelector('div.form-group:nth-child(2) input').value.trim();
+            const distance=document.querySelector('input[type="number"]').value.trim();
+            let errors=[];
+
+ 
+            if(drop==='') errors.push('Drop city is required');
+            if(distance==='' || distance<=0) errors.push('Valid distance is required');
+
+
+            // if(errors.length>0){alert(errors.join("")); 
+            
+            // alert('Form submitted successfully!'); 
+          } else {
+            document.getElementById("cityTitle").textContent = "City Not Found";
+            document.getElementById("cityDescription").textContent =
+              "Sorry, the requested city could not be found.";
+            document.getElementById("cityImage").style.display = "none";
+          }
+        })
+        .catch(() => {
+          document.getElementById("cityTitle").textContent =
+            "Error Loading City Data";
+          document.getElementById("cityDescription").textContent =
+            "Please try again later.";
+        });
+    </script>
+
+    <!-- 🌟 Bottom Fixed Action Bar -->
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+    <link rel="stylesheet" href="../css/components/quote-modal.css" />
+    <link
+      rel="stylesheet"
+      href="../css/components/bottom-fixed-container.css"
+    />
+
+    <script src="../js/modules/modal.js"></script>
+    <script src="../js/modules/quote-modal.js"></script>
+    <script src="../js/modules/footer-loader.js"></script>
+    <script src="../js/modules/themes.js"></script>
+    <!-- Component Initializer - Ensures global components (FAB, Chatbot, etc.) are available -->
+    <script src="../js/modules/component-initializer.js"></script>
+  </body>
+</html>

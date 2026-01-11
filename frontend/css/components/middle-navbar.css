@@ -1,0 +1,257 @@
+/* ===============================
+   Middle Navbar Styles
+================================ */
+.middle-navbar {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: fixed;
+  top: 45px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hide middle navbar when scrolled */
+.middle-navbar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===============================
+   Container
+================================ */
+.middle-navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 40px;
+  height: 80px;
+  gap: 15px;
+}
+
+/* ===============================
+   Left : Main Logo
+================================ */
+.middle-navbar-left {
+  flex: 0 0 auto;
+}
+
+.middle-navbar-logo {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.middle-navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+/* ===============================
+   Center : Certified Logo / Banner
+================================ */
+.middle-navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.middle-navbar-banner {
+  height: 80px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  transform-origin: center;
+  transform: scale(1.25);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+/* ✅ CERTIFIED LOGO HOVER EFFECT */
+.middle-navbar-banner:hover {
+  transform: scale(1.35);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+  cursor: pointer;
+}
+
+/* ===============================
+   Right : Contact Info
+================================ */
+.middle-navbar-right {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.middle-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: transparent;
+  color: #000;
+}
+
+.middle-contact-item i {
+  font-size: 1.4rem;
+  transition: transform 0.18s ease;
+}
+
+/* Small icon lift on hover */
+.middle-contact-item:hover i {
+  transform: translateY(-2px);
+}
+
+.contact-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.contact-number {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.contact-number-alt {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.contact-sub {
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* WhatsApp & Email Icons */
+.whatsapp-link i,
+.email-link i {
+  color: #ff0000;
+}
+
+/* ===============================
+   Dark Mode
+================================ */
+body.dark-mode .middle-navbar,
+body[data-theme="dark"] .middle-navbar {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+  border-bottom: 1px solid #444 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .middle-navbar-logo,
+body.dark-mode .middle-navbar-banner,
+body[data-theme="dark"] .middle-navbar-logo,
+body[data-theme="dark"] .middle-navbar-banner {
+  filter: brightness(0.95);
+}
+
+body.dark-mode .middle-contact-item,
+body[data-theme="dark"] .middle-contact-item {
+  color: #fff !important;
+}
+
+body.dark-mode .contact-number,
+body.dark-mode .contact-sub,
+body[data-theme="dark"] .contact-number,
+body[data-theme="dark"] .contact-sub {
+  color: #fff !important;
+}
+
+/* ===============================
+   Scrolled State
+================================ */
+.middle-navbar.scrolled {
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+}
+
+.middle-navbar.scrolled .middle-navbar-logo,
+.middle-navbar.scrolled .middle-navbar-banner {
+  height: 48px;
+}
+
+/* ===============================
+   Responsive Design
+================================ */
+@media (max-width: 1024px) {
+  .middle-navbar-container {
+    padding: 6px 20px;
+  }
+
+  .middle-navbar-logo {
+    height: 50px;
+  }
+
+  .middle-navbar-banner {
+    height: 45px;
+    transform: scale(1.15);
+  }
+}
+
+@media (max-width: 768px) {
+  .middle-navbar {
+    top: 32px; /* Below smaller upbar */
+  }
+  
+  .middle-navbar-container {
+    flex-wrap: wrap;
+    padding: 6px 10px;
+    gap: 6px;
+    height: auto;
+    min-height: 70px;
+  }
+
+  .middle-navbar-left {
+    order: 1;
+    flex: 0 0 auto;
+  }
+
+  .middle-navbar-right {
+    order: 2;
+    gap: 6px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .middle-navbar-center {
+    order: 3;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .middle-navbar-logo {
+    height: 45px;
+  }
+
+  .middle-navbar-banner {
+    height: 30px;
+    transform: scale(1.1);
+  }
+
+  /* Disable excessive hover zoom on mobile */
+  .middle-navbar-banner:hover {
+    transform: scale(1.15);
+  }
+  
+  /* Contact info mobile */
+  .middle-contact-item {
+    padding: 0 4px;
+  }
+  
+  .middle-contact-item i {
+    font-size: 1.1rem;
+  }
+  
+  .contact-text {
+    display: none;
+  }
+}

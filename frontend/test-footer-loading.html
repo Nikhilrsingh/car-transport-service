@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Loading Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 5px 0; border-radius: 4px; font-family: monospace; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+        .info { background: #e3f2fd; color: #1565c0; }
+    </style>
+</head>
+<body>
+    <h1>Footer Loading Debug Test</h1>
+    <div id="logs"></div>
+    
+    <h2>Test Content</h2>
+    <p>This page tests the footer loading mechanism.</p>
+    
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+    
+    <script>
+        function log(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            logs.appendChild(div);
+            console.log(message);
+        }
+        
+        // Override console methods to capture logs
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            log(args.join(' '), 'success');
+            originalLog.apply(console, args);
+        };
+        
+        console.error = function(...args) {
+            log(args.join(' '), 'error');
+            originalError.apply(console, args);
+        };
+        
+        log('Starting footer loading test...', 'info');
+        
+        // Check if footer container exists
+        const footerContainer = document.getElementById('footer-container');
+        log(`Footer container found: ${!!footerContainer}`, footerContainer ? 'success' : 'error');
+        
+        // Monitor for changes to footer container
+        if (footerContainer) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        log(`Footer container content changed. Children: ${footerContainer.children.length}`, 'info');
+                        
+                        // Check for specific elements
+                        const fabContainer = document.querySelector('.fab-container');
+                        const bottomBar = document.querySelector('.bottom-action-bar-fixed');
+                        
+                        if (fabContainer) log('FAB container detected!', 'success');
+                        if (bottomBar) log('Bottom action bar detected!', 'success');
+                    }
+                });
+            });
+            
+            observer.observe(footerContainer, {
+                childList: true,
+                subtree: true
+            });
+        }
+        
+        // Load the footer loader script
+        log('Loading footer-loader.js...', 'info');
+    </script>
+    
+    <script src="js/modules/footer-loader.js"></script>
+    
+    <script>
+        // Check after a delay
+        setTimeout(() => {
+            log('Checking final state after 3 seconds...', 'info');
+            
+            const footerContainer = document.getElementById('footer-container');
+            const fabContainer = document.querySelector('.fab-container');
+            const bottomBar = document.querySelector('.bottom-action-bar-fixed');
+            const scrollBtn = document.getElementById('smartScrollBtn');
+            
+            log(`Footer has content: ${footerContainer && footerContainer.innerHTML.trim().length > 0}`, 'info');
+            log(`FAB container exists: ${!!fabContainer}`, fabContainer ? 'success' : 'error');
+            log(`Bottom action bar exists: ${!!bottomBar}`, bottomBar ? 'success' : 'error');
+            log(`Scroll button exists: ${!!scrollBtn}`, scrollBtn ? 'success' : 'error');
+            
+            // Check for loaded scripts
+            const fabScript = document.getElementById('fab-script');
+            const bottomScript = document.getElementById('bottom-action-bar-script');
+            const scrollScript = document.getElementById('scroll-button-script');
+            
+            log(`FAB script loaded: ${!!fabScript}`, fabScript ? 'success' : 'error');
+            log(`Bottom action bar script loaded: ${!!bottomScript}`, bottomScript ? 'success' : 'error');
+            log(`Scroll button script loaded: ${!!scrollScript}`, scrollScript ? 'success' : 'error');
+        }, 3000);
+    </script>
+</body>
+</html>
