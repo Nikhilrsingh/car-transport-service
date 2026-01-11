@@ -1,473 +1,540 @@
-// sticky-toc.js
-/**
- * Sticky Table of Contents (TOC) with Vertical Dragging on Right Side
- * 
- * CHANGES:
- * - OLD: Fixed position at top: 100px, right: 0 (hardcoded, non-adjustable)
- * - NEW: Vertically draggable wrapper along right edge (top to bottom)
- * - FIXED: Single click/tap to toggle (no double-click required)
- * - FIXED: Works properly on mobile with tap and drag
- * 
- * Features:
- * - Vertical dragging (up/down) along the right side of the page (top to bottom)
- * - TOC content is HIDDEN during drag (only button visible for dragging)
- * - Always stays fixed to right: 0 (cannot move horizontally)
- * - Position saved to localStorage and restored on page reload
- * - Boundary checking to prevent going off-screen (top to bottom)
- * - Click/tap to toggle expand/collapse, drag up/down to reposition
- * - Works on desktop (mouse) and mobile (touch)
- */
+/* ====================================
+   STICKY TABLE OF CONTENTS (TOC)
+   Global "On This Page" Navigation
+   Works on all pages with sections
+   ==================================== */
+
 (() => {
-  const headings = Array.from(document.querySelectorAll("h2, h3"));
-  if (!headings.length) return;
+  'use strict';
 
-  // Check saved state - loads user's preferred vertical position
-  const isCollapsed = localStorage.getItem("tocSidebarCollapsed") === "true";
-  const savedTop = localStorage.getItem("tocWrapperTop");
-  
-  // OLD: hardcoded top: 100px, right: 0 - NOW DISABLED
-  // NEW: uses saved top position or defaults (user can drag vertically)
-  const initialTop = savedTop ? parseInt(savedTop, 10) : 100;
-
-  // Create wrapper container - VERTICALLY DRAGGABLE on right side
-  const wrapper = document.createElement("div");
-  wrapper.id = "toc-wrapper";
-  wrapper.className = "toc-wrapper";
-  
-  // Set initial position - ALWAYS fixed to right side
-  const wrapperStyles = {
-    position: "fixed",
-    // OLD: top: "100px" - DISABLED, now uses dynamic top position
-    top: `${initialTop}px`, // User-adjustable via vertical dragging
-    right: "0", // ALWAYS fixed to right side - never changes
-    zIndex: "9999",
-    display: "flex",
-    alignItems: "flex-start",
-    transition: "transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease",
-    opacity: "0",
-    visibility: "hidden"
+  // Configuration
+  const CONFIG = {
+    minSections: 2,           // Minimum sections required to show TOC
+    scrollOffset: 100,        // Offset for scroll position detection
+    sidebarWidth: '260px',
+    maxHeight: '70vh',
+    storageKey: 'tocSidebarCollapsed',
+    accentColor: '#ff6347',
+    showOnMobile: false,      // Hide on mobile by default
+    mobileBreakpoint: 768,
+    // Custom titles for specific pages/sections
+    customTitles: {
+      'features': 'Features',
+      'home': 'Home',
+      'quote': 'Get Instant Quote',
+      'pricing-plans': 'Compare Our Pricing Plans',
+      'testimonials': 'What Our Customers Say',
+      'contact': 'Get In Touch',
+      'presence': 'Our Pan-India Presence'
+    }
   };
-  
-  // Apply collapsed state with transform (only affects horizontal slide)
-  if (isCollapsed) {
-    wrapperStyles.transform = "translateX(calc(100% - 32px))";
-  } else {
-    wrapperStyles.transform = "translateX(0)";
-  }
-  
-  Object.assign(wrapper.style, wrapperStyles);
 
-  // Create toggle tab (arrow button)
-  const toggleTab = document.createElement("div");
-  toggleTab.id = "toc-toggle-tab";
-  Object.assign(toggleTab.style, {
-    width: "32px",
-    height: "40px",
-    background: "#ff6347",
-    borderRadius: "8px 0 0 8px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "grab",
-    boxShadow: "-2px 2px 8px rgba(0,0,0,0.15)",
-    flexShrink: "0",
-    userSelect: "none",
-    position: "relative"
-  });
-  
-  // Add visual indicator for dragging
-  toggleTab.title = "Click to toggle | Drag up/down to reposition (content hidden during drag)";
-
-  const arrow = document.createElement("span");
-  arrow.innerHTML = "&#9664;"; // Left arrow
-  Object.assign(arrow.style, {
-    color: "#fff",
-    fontSize: "14px",
-    transition: "transform 0.3s ease",
-    transform: isCollapsed ? "rotate(180deg)" : "rotate(0deg)"
-  });
-  toggleTab.appendChild(arrow);
-
-  // Create sidebar
-  const toc = document.createElement("div");
-  toc.id = "toc-sidebar";
-  Object.assign(toc.style, {
-    width: "260px",
-    maxHeight: "70vh",
-    overflowY: "auto",
-    background: "#ffffff",
-    border: "1px solid #ddd",
-    borderRadius: "8px 0 0 8px",
-    padding: "12px",
-    fontSize: "14px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-  });
-
-  const title = document.createElement("div");
-  title.textContent = "On this page";
-  Object.assign(title.style, {
-    fontWeight: "bold",
-    marginBottom: "10px",
-    color: "#333",
-    borderBottom: "2px solid #ff6347",
-    paddingBottom: "8px"
-  });
-  toc.appendChild(title);
-
-  const links = [];
-
-  headings.forEach((heading, index) => {
-    if (!heading.id) {
-      heading.id = `toc-section-${index}`;
-    }
-
-    const item = document.createElement("div");
-    item.textContent = heading.textContent;
-    item.dataset.target = heading.id;
-
-    Object.assign(item.style, {
-      cursor: "pointer",
-      padding: "6px",
-      borderRadius: "4px",
-      marginLeft: heading.tagName === "H3" ? "12px" : "0",
-      transition: "background 0.2s",
-      color: "#555"
-    });
-
-    item.addEventListener("click", () => {
-      document.getElementById(heading.id).scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
-
-    item.addEventListener("mouseenter", () => {
-      item.style.background = "#f5f5f5";
-    });
-    item.addEventListener("mouseleave", () => {
-      if (item.style.fontWeight !== "bold") {
-        item.style.background = "transparent";
+  // Find all navigable sections on the page
+  function findSections() {
+    const sections = [];
+    
+    // Strategy 1: Find sections with IDs that have h2 headings
+    document.querySelectorAll('section[id]').forEach((section) => {
+      const heading = section.querySelector('h2, .section-title h2');
+      if (heading) {
+        sections.push({
+          id: section.id,
+          title: heading.textContent.trim(),
+          element: section,
+          type: 'section'
+        });
       }
     });
 
-    toc.appendChild(item);
-    links.push(item);
-  });
-
-  // Assemble wrapper
-  wrapper.appendChild(toggleTab);
-  wrapper.appendChild(toc);
-  document.body.appendChild(wrapper);
-
-  // Show TOC after preloader finishes
-  function showToc() {
-    wrapper.style.opacity = "1";
-    wrapper.style.visibility = "visible";
-  }
-
-  // Check if page is already loaded
-  if (document.body.classList.contains('loaded')) {
-    showToc();
-  } else {
-    // Listen for when preloader finishes
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.target === document.body && document.body.classList.contains('loaded')) {
-          showToc();
-          observer.disconnect();
+    // Strategy 2: Find standalone h2 headings with IDs (if not enough sections found)
+    if (sections.length < CONFIG.minSections) {
+      document.querySelectorAll('h2[id]').forEach((heading) => {
+        // Skip if already captured via section
+        if (!sections.find(s => s.id === heading.id)) {
+          sections.push({
+            id: heading.id,
+            title: heading.textContent.trim(),
+            element: heading,
+            type: 'heading'
+          });
         }
       });
+    }
+
+    // Strategy 3: Find h2 headings inside sections and auto-generate IDs
+    if (sections.length < CONFIG.minSections) {
+      let autoIdCounter = 0;
+      document.querySelectorAll('section h2, .section-title h2').forEach((heading) => {
+        // Skip if heading or its parent section already has an ID we captured
+        const parentSection = heading.closest('section');
+        if (parentSection && sections.find(s => s.id === parentSection.id)) {
+          return;
+        }
+        if (sections.find(s => s.id === heading.id)) {
+          return;
+        }
+
+        // Generate ID if needed
+        let targetElement = parentSection || heading;
+        if (!targetElement.id) {
+          targetElement.id = `toc-section-${autoIdCounter++}`;
+        }
+
+        // Skip duplicates
+        if (sections.find(s => s.id === targetElement.id)) {
+          return;
+        }
+
+        sections.push({
+          id: targetElement.id,
+          title: heading.textContent.trim(),
+          element: targetElement,
+          type: parentSection ? 'section' : 'heading'
+        });
+      });
+    }
+
+    // Strategy 4: Look for common section patterns (hero, about, services, etc.)
+    if (sections.length < CONFIG.minSections) {
+      const commonPatterns = [
+        { selector: '.hero, #hero, [class*="hero"]', title: 'Hero' },
+        { selector: '#home', title: 'Home' },
+        { selector: '#about, .about', title: 'About' },
+        { selector: '#services, .services', title: 'Services' },
+        { selector: '#testimonials, .testimonials', title: 'Testimonials' },
+        { selector: '#contact, .contact', title: 'Contact' },
+        { selector: '#team, .team', title: 'Team' },
+        { selector: '#pricing, .pricing', title: 'Pricing' },
+        { selector: '#faq, .faq', title: 'FAQ' },
+        { selector: '#features, .features', title: 'Features' }
+      ];
+
+      commonPatterns.forEach(pattern => {
+        const element = document.querySelector(pattern.selector);
+        if (element && !sections.find(s => s.element === element)) {
+          if (!element.id) {
+            element.id = pattern.title.toLowerCase().replace(/\s+/g, '-');
+          }
+          
+          // Try to get a better title from the section
+          const heading = element.querySelector('h1, h2, h3');
+          let title = heading ? heading.textContent.trim() : pattern.title;
+          
+          // Use custom title if available
+          if (CONFIG.customTitles[element.id]) {
+            title = CONFIG.customTitles[element.id];
+          }
+          
+          sections.push({
+            id: element.id,
+            title: title,
+            element: element,
+            type: 'pattern'
+          });
+        }
+      });
+    }
+
+    // Filter out empty titles and duplicates
+    const uniqueSections = [];
+    const seenIds = new Set();
+    
+    sections.forEach(section => {
+      if (section.title && section.title.length > 0 && !seenIds.has(section.id)) {
+        // Use custom title if available
+        let finalTitle = section.title;
+        if (CONFIG.customTitles[section.id]) {
+          finalTitle = CONFIG.customTitles[section.id];
+        }
+        
+        seenIds.add(section.id);
+        uniqueSections.push({
+          ...section,
+          title: finalTitle
+        });
+      }
     });
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    // Sort by document position
+    uniqueSections.sort((a, b) => {
+      const posA = a.element.getBoundingClientRect().top;
+      const posB = b.element.getBoundingClientRect().top;
+      return posA - posB;
+    });
+
+    return uniqueSections;
   }
 
-  // Toggle functionality
-  let collapsed = isCollapsed;
-
-  function toggleToc() {
-    // Don't toggle if currently dragging
-    if (isDragging) return;
+  // Check if we should show TOC on this page
+  function shouldShowTOC() {
+    // Don't show on mobile if configured
+    if (!CONFIG.showOnMobile && window.innerWidth < CONFIG.mobileBreakpoint) {
+      return false;
+    }
     
-    collapsed = !collapsed;
-    localStorage.setItem("tocSidebarCollapsed", collapsed);
+    // Check if TOC already exists
+    if (document.getElementById('toc-wrapper')) {
+      return false;
+    }
 
-    // Update transform for collapse/expand slide effect (horizontal slide)
-    // Works with right positioning - slides in/out from right edge
-    if (collapsed) {
-      wrapper.style.transform = "translateX(calc(100% - 32px))";
-      arrow.style.transform = "rotate(180deg)";
+    return true;
+  }
+
+  // Create the TOC UI
+  function createTOC(sections) {
+    if (sections.length < CONFIG.minSections) {
+      console.log('TOC: Not enough sections found (' + sections.length + ')');
+      return null;
+    }
+
+    const isCollapsed = localStorage.getItem(CONFIG.storageKey) === 'true';
+
+    // Create wrapper container
+    const wrapper = document.createElement('div');
+    wrapper.id = 'toc-wrapper';
+    wrapper.className = 'toc-wrapper';
+    Object.assign(wrapper.style, {
+      position: 'fixed',
+      top: '100px',
+      right: '0',
+      zIndex: '9999',
+      display: 'flex',
+      alignItems: 'flex-start',
+      transition: 'transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease',
+      transform: isCollapsed ? 'translateX(calc(100% - 32px))' : 'translateX(0)',
+      opacity: '0',
+      visibility: 'hidden'
+    });
+
+    // Create toggle tab (arrow button)
+    const toggleTab = document.createElement('div');
+    toggleTab.id = 'toc-toggle-tab';
+    toggleTab.setAttribute('aria-label', 'Toggle table of contents');
+    toggleTab.setAttribute('role', 'button');
+    toggleTab.setAttribute('tabindex', '0');
+    Object.assign(toggleTab.style, {
+      width: '32px',
+      height: '40px',
+      background: CONFIG.accentColor,
+      borderRadius: '8px 0 0 8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
+      boxShadow: '-2px 2px 8px rgba(0,0,0,0.15)',
+      flexShrink: '0'
+    });
+
+    const arrow = document.createElement('span');
+    arrow.innerHTML = '&#9664;'; // Left arrow
+    Object.assign(arrow.style, {
+      color: '#fff',
+      fontSize: '14px',
+      transition: 'transform 0.3s ease',
+      transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)'
+    });
+    toggleTab.appendChild(arrow);
+
+    // Create sidebar
+    const toc = document.createElement('div');
+    toc.id = 'toc-sidebar';
+    toc.setAttribute('role', 'navigation');
+    toc.setAttribute('aria-label', 'On this page');
+    Object.assign(toc.style, {
+      width: CONFIG.sidebarWidth,
+      maxHeight: CONFIG.maxHeight,
+      overflowY: 'auto',
+      background: '#ffffff',
+      border: '1px solid #ddd',
+      borderRadius: '8px 0 0 8px',
+      padding: '12px',
+      fontSize: '14px',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+    });
+
+    // Title
+    const title = document.createElement('div');
+    title.textContent = 'On this page';
+    title.id = 'toc-title';
+    Object.assign(title.style, {
+      fontWeight: 'bold',
+      marginBottom: '10px',
+      color: '#333',
+      borderBottom: `2px solid ${CONFIG.accentColor}`,
+      paddingBottom: '8px'
+    });
+    toc.appendChild(title);
+
+    // Section counter
+    const counter = document.createElement('div');
+    counter.textContent = `${sections.length} sections`;
+    Object.assign(counter.style, {
+      fontSize: '11px',
+      color: '#888',
+      marginBottom: '10px'
+    });
+    toc.appendChild(counter);
+
+    // Create links
+    const links = [];
+    const linkList = document.createElement('div');
+    linkList.setAttribute('role', 'list');
+
+    sections.forEach((section, index) => {
+      const item = document.createElement('div');
+      item.setAttribute('role', 'listitem');
+      item.textContent = section.title.length > 30 
+        ? section.title.substring(0, 30) + '...' 
+        : section.title;
+      item.dataset.target = section.id;
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('aria-label', `Navigate to ${section.title}`);
+
+      Object.assign(item.style, {
+        cursor: 'pointer',
+        padding: '8px 6px',
+        borderRadius: '4px',
+        transition: 'background 0.2s, color 0.2s',
+        color: '#555',
+        borderLeft: '3px solid transparent',
+        marginBottom: '2px'
+      });
+
+      // Click handler
+      item.addEventListener('click', () => {
+        const targetElement = document.getElementById(section.id);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+
+      // Keyboard handler
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.click();
+        }
+      });
+
+      // Hover effects
+      item.addEventListener('mouseenter', () => {
+        if (!item.classList.contains('active')) {
+          item.style.background = '#f5f5f5';
+        }
+      });
+      item.addEventListener('mouseleave', () => {
+        if (!item.classList.contains('active')) {
+          item.style.background = 'transparent';
+        }
+      });
+
+      linkList.appendChild(item);
+      links.push({ item, section });
+    });
+
+    toc.appendChild(linkList);
+
+    // Assemble wrapper
+    wrapper.appendChild(toggleTab);
+    wrapper.appendChild(toc);
+
+    return { wrapper, toggleTab, arrow, links, toc };
+  }
+
+  // Initialize TOC
+  function initTOC() {
+    if (!shouldShowTOC()) {
+      return;
+    }
+
+    const sections = findSections();
+    console.log('TOC: Found', sections.length, 'sections');
+
+    if (sections.length < CONFIG.minSections) {
+      console.log('TOC: Not enough sections to display');
+      return;
+    }
+
+    const tocElements = createTOC(sections);
+    if (!tocElements) {
+      return;
+    }
+
+    const { wrapper, toggleTab, arrow, links, toc } = tocElements;
+    document.body.appendChild(wrapper);
+
+    // Show TOC function
+    function showToc() {
+      wrapper.style.opacity = '1';
+      wrapper.style.visibility = 'visible';
+    }
+
+    // Check if page is already loaded
+    if (document.body.classList.contains('loaded') || document.readyState === 'complete') {
+      setTimeout(showToc, 500);
     } else {
-      wrapper.style.transform = "translateX(0)";
-      arrow.style.transform = "rotate(0deg)";
+      // Listen for when preloader finishes
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.target === document.body && document.body.classList.contains('loaded')) {
+            showToc();
+            observer.disconnect();
+          }
+        });
+      });
+      observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+      // Fallback: show after window load
+      window.addEventListener('load', () => {
+        setTimeout(showToc, 1000);
+      });
     }
-  }
 
-  // Vertical dragging functionality (up/down along right edge only)
-  let isDragging = false;
-  let dragStartY = 0;
-  let dragStartTop = 0;
-  let hasDragged = false;
+    // Toggle functionality
+    let collapsed = localStorage.getItem(CONFIG.storageKey) === 'true';
 
-  // Mouse events for vertical dragging and clicking (toggle)
-  toggleTab.addEventListener("mousedown", (e) => {
-    if (e.button !== 0) return; // Only handle left mouse button
-    
-    e.preventDefault();
-    hasDragged = false;
-    dragStartY = e.clientY;
-    dragStartTop = parseInt(wrapper.style.top, 10) || initialTop;
-    
-    const handleMouseMove = (moveEvent) => {
-      // Only check vertical movement (ignore horizontal/X-axis)
-      const deltaY = Math.abs(moveEvent.clientY - dragStartY);
-      
-      // Increased threshold to 10px to better distinguish drag from click
-      if (deltaY > 10) {
-        if (!isDragging) {
-          isDragging = true;
-          hasDragged = true;
-          toggleTab.style.cursor = "grabbing";
-          
-          // Hide TOC content during drag (only show the drag button)
-          toc.style.display = "none";
-          toc.style.opacity = "0";
-          toc.style.visibility = "hidden";
-          
-          // Disable transform during drag (collapse slide effect)
-          // We'll re-apply transform after drag ends if collapsed
-          wrapper.style.transform = "translateX(0)";
-          wrapper.style.transition = "opacity 0.4s ease, visibility 0.4s ease";
-          wrapper.style.userSelect = "none";
-        }
-        
-        // Calculate new position based on VERTICAL drag distance only
-        const newDeltaY = moveEvent.clientY - dragStartY;
-        let newTop = dragStartTop + newDeltaY;
-        
-        // Use only toggleTab height for boundary calculation during drag (since content is hidden)
-        const toggleTabHeight = toggleTab.offsetHeight || 40;
-        
-        // Boundary limits (vertical only - allows dragging from top to bottom along right edge)
-        const minTop = 10; // Minimum distance from top
-        const maxTop = window.innerHeight - toggleTabHeight - 80; // Leave space at bottom (for navbar etc.)
-        
-        // Clamp position within bounds (vertical only)
-        newTop = Math.max(minTop, Math.min(maxTop, newTop));
-        
-        // Update position (only top - right stays at 0)
-        wrapper.style.top = `${newTop}px`;
-        // Ensure right stays at 0 (no horizontal movement)
-        wrapper.style.right = "0";
-        wrapper.style.left = ""; // Clear any left positioning
+    function toggleToc() {
+      collapsed = !collapsed;
+      localStorage.setItem(CONFIG.storageKey, collapsed);
+
+      if (collapsed) {
+        wrapper.style.transform = 'translateX(calc(100% - 32px))';
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        wrapper.style.transform = 'translateX(0)';
+        arrow.style.transform = 'rotate(0deg)';
       }
-    };
-    
-    const handleMouseUp = (upEvent) => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-      
-      if (isDragging) {
-        // End drag - show TOC content again
-        isDragging = false;
-        toggleTab.style.cursor = "grab";
-        wrapper.style.transition = "transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease";
-        wrapper.style.userSelect = "";
-        
-        // Show TOC content again (restore visibility)
-        // Use setTimeout to ensure smooth transition
-        setTimeout(() => {
-          // Restore content visibility - remove inline styles to restore default
-          toc.style.display = ""; // Remove inline style, defaults to block for div
-          toc.style.opacity = ""; // Remove inline style
-          toc.style.visibility = ""; // Remove inline style, defaults to visible
-        }, 50);
-        
-        // Re-apply transform if collapsed (restore collapse state)
-        if (collapsed) {
-          wrapper.style.transform = "translateX(calc(100% - 32px))";
-        }
-        
-        // Ensure right stays at 0
-        wrapper.style.right = "0";
-        wrapper.style.left = "";
-        
-        // Save vertical position to localStorage (only top, not left)
-        const finalTop = parseInt(wrapper.style.top, 10);
-        if (finalTop !== undefined && finalTop !== null) {
-          localStorage.setItem("tocWrapperTop", finalTop.toString());
-        }
-        // Clear any saved left position (not used for right-side dragging)
-        localStorage.removeItem("tocWrapperLeft");
-      } else if (!hasDragged) {
-        // No drag occurred, treat as click (toggle)
+    }
+
+    toggleTab.addEventListener('click', toggleToc);
+    toggleTab.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
         toggleToc();
       }
-    };
-    
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-  });
-
-  // Touch events for mobile vertical dragging (along right edge only)
-  let touchStartY = 0;
-  let touchStartTop = 0;
-  let touchHasDragged = false;
-
-  toggleTab.addEventListener("touchstart", (e) => {
-    touchStartY = e.touches[0].clientY;
-    touchStartTop = parseInt(wrapper.style.top, 10) || initialTop;
-    touchHasDragged = false;
-  }, { passive: true });
-
-  toggleTab.addEventListener("touchmove", (e) => {
-    const currentY = e.touches[0].clientY;
-    const deltaY = Math.abs(currentY - touchStartY);
-    
-    // Increased threshold to 15px to better distinguish drag from tap
-    if (deltaY > 15) {
-      touchHasDragged = true;
-      
-      if (!isDragging) {
-        isDragging = true;
-        toggleTab.style.cursor = "grabbing";
-        
-        // Hide TOC content during drag (only show the drag button)
-        toc.style.display = "none";
-        toc.style.opacity = "0";
-        toc.style.visibility = "hidden";
-        
-        // Disable transform during drag
-        wrapper.style.transform = "translateX(0)";
-        wrapper.style.transition = "opacity 0.4s ease, visibility 0.4s ease";
-        wrapper.style.userSelect = "none";
-      }
-      
-      // Prevent scrolling during drag
-      e.preventDefault();
-      
-      // Calculate new position based on VERTICAL drag distance only
-      const newDeltaY = currentY - touchStartY;
-      let newTop = touchStartTop + newDeltaY;
-      
-      // Use only toggleTab height for boundary calculation during drag
-      const toggleTabHeight = toggleTab.offsetHeight || 40;
-      
-      // Boundary limits (vertical only)
-      const minTop = 10;
-      const maxTop = window.innerHeight - toggleTabHeight - 80;
-      
-      // Clamp position within bounds
-      newTop = Math.max(minTop, Math.min(maxTop, newTop));
-      
-      // Update position (only top - right stays at 0)
-      wrapper.style.top = `${newTop}px`;
-      wrapper.style.right = "0";
-      wrapper.style.left = "";
-    }
-  }, { passive: false });
-
-  toggleTab.addEventListener("touchend", (e) => {
-    if (isDragging && touchHasDragged) {
-      // End drag - show TOC content again
-      isDragging = false;
-      toggleTab.style.cursor = "grab";
-      wrapper.style.transition = "transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease";
-      wrapper.style.userSelect = "";
-      
-      // Show TOC content again
-      setTimeout(() => {
-        toc.style.display = "";
-        toc.style.opacity = "";
-        toc.style.visibility = "";
-      }, 50);
-      
-      // Re-apply transform if collapsed
-      if (collapsed) {
-        wrapper.style.transform = "translateX(calc(100% - 32px))";
-      }
-      
-      // Ensure right stays at 0
-      wrapper.style.right = "0";
-      wrapper.style.left = "";
-      
-      // Save position
-      const finalTop = parseInt(wrapper.style.top, 10);
-      if (finalTop !== undefined && finalTop !== null) {
-        localStorage.setItem("tocWrapperTop", finalTop.toString());
-      }
-      localStorage.removeItem("tocWrapperLeft");
-    } else if (!touchHasDragged) {
-      // No drag detected - treat as tap (toggle)
-      // ALWAYS toggle on tap - user wants simple tap to open/close
-      toggleToc();
-    }
-    
-    // Reset state
-    touchHasDragged = false;
-    touchStartY = 0;
-    touchStartTop = 0;
-  }, { passive: true });
-  
-  // Also handle click event for any devices that trigger it
-  toggleTab.addEventListener("click", (e) => {
-    // Only handle if not currently dragging
-    if (!isDragging && !hasDragged) {
-      toggleToc();
-    }
-  });
-
-  // Update position on window resize to keep it in bounds (vertical only, right side fixed)
-  let resizeTimeout;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      const currentTop = parseInt(wrapper.style.top, 10) || initialTop;
-      // Use toggleTab height for boundary calculation (content is hidden during drag)
-      const toggleTabHeight = toggleTab.offsetHeight || 40;
-      
-      // Boundary limits (vertical only - allows dragging from top to bottom along right edge)
-      const minTop = 10; // Minimum distance from top
-      const maxTop = window.innerHeight - toggleTabHeight - 80; // Leave space at bottom (for navbar etc.)
-      
-      // Clamp position within bounds (vertical only)
-      let newTop = Math.max(minTop, Math.min(maxTop, currentTop));
-      
-      // Ensure right stays at 0
-      wrapper.style.right = "0";
-      wrapper.style.left = "";
-      
-      // Update position if it changed (vertical only)
-      if (newTop !== currentTop) {
-        wrapper.style.top = `${newTop}px`;
-        localStorage.setItem("tocWrapperTop", newTop.toString());
-      }
-    }, 100);
-  });
-
-  // Highlight active section while scrolling
-  function onScroll() {
-    let current = headings[0];
-
-    headings.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= 120) {
-        current = section;
-      }
     });
 
-    links.forEach((link) => {
-      if (link.dataset.target === current.id) {
-        link.style.background = "#e3f2fd";
-        link.style.fontWeight = "bold";
-        link.style.color = "#ff6347";
+    // Highlight active section while scrolling
+    function onScroll() {
+      let currentSection = null;
+      let minDistance = Infinity;
+
+      links.forEach(({ section }) => {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const distance = Math.abs(rect.top - CONFIG.scrollOffset);
+          
+          // Find the section closest to the scroll offset
+          if (rect.top <= CONFIG.scrollOffset + 50 && distance < minDistance) {
+            minDistance = distance;
+            currentSection = section;
+          }
+        }
+      });
+
+      // If no section is above the offset, use the first one
+      if (!currentSection && links.length > 0) {
+        currentSection = links[0].section;
+      }
+
+      // Update active states
+      links.forEach(({ item, section }) => {
+        if (currentSection && section.id === currentSection.id) {
+          item.classList.add('active');
+          item.style.background = '#e3f2fd';
+          item.style.fontWeight = 'bold';
+          item.style.color = CONFIG.accentColor;
+          item.style.borderLeftColor = CONFIG.accentColor;
+        } else {
+          item.classList.remove('active');
+          item.style.background = 'transparent';
+          item.style.fontWeight = 'normal';
+          item.style.color = '#555';
+          item.style.borderLeftColor = 'transparent';
+        }
+      });
+    }
+
+    // Throttled scroll handler
+    let scrollTimeout;
+    document.addEventListener('scroll', () => {
+      if (scrollTimeout) {
+        cancelAnimationFrame(scrollTimeout);
+      }
+      scrollTimeout = requestAnimationFrame(onScroll);
+    });
+
+    // Initial highlight
+    onScroll();
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (!CONFIG.showOnMobile && window.innerWidth < CONFIG.mobileBreakpoint) {
+          wrapper.style.display = 'none';
+        } else {
+          wrapper.style.display = 'flex';
+        }
+      }, 250);
+    });
+
+    // Apply dark mode styles if needed
+    function applyThemeStyles() {
+      const isDarkMode = document.body.classList.contains('dark-mode') || 
+                         document.documentElement.getAttribute('data-theme') === 'dark';
+      
+      if (isDarkMode) {
+        toc.style.background = '#1e1e1e';
+        toc.style.borderColor = '#333';
+        const titleEl = document.getElementById('toc-title');
+        if (titleEl) titleEl.style.color = '#fff';
+        links.forEach(({ item }) => {
+          if (!item.classList.contains('active')) {
+            item.style.color = '#ccc';
+          }
+        });
       } else {
-        link.style.background = "transparent";
-        link.style.fontWeight = "normal";
-        link.style.color = "#555";
+        toc.style.background = '#ffffff';
+        toc.style.borderColor = '#ddd';
+        const titleEl = document.getElementById('toc-title');
+        if (titleEl) titleEl.style.color = '#333';
+        links.forEach(({ item }) => {
+          if (!item.classList.contains('active')) {
+            item.style.color = '#555';
+          }
+        });
       }
-    });
+    }
+
+    // Watch for theme changes
+    const themeObserver = new MutationObserver(applyThemeStyles);
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    
+    // Initial theme application
+    applyThemeStyles();
+
+    console.log('TOC: Initialized successfully with', links.length, 'items');
   }
 
-  document.addEventListener("scroll", onScroll);
-  onScroll();
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initTOC, 100);
+    });
+  } else {
+    setTimeout(initTOC, 100);
+  }
+
+  // Export for manual initialization
+  window.StickyTOC = {
+    init: initTOC,
+    findSections: findSections
+  };
 })();
