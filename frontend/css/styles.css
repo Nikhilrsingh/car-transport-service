@@ -2053,7 +2053,7 @@ body {
 .cta-button[data-tooltip],
 #calculate-price-btn[data-tooltip],
 .submit-btn[data-tooltip] {
-  overflow: visible;
+  overflow: hidden;
   position: relative;
 }
 
@@ -3170,9 +3170,10 @@ html {
 }
 
 .submit-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px); 
   box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
   background: linear-gradient(135deg, #ff4500, var(--primary-color));
+  background: linear-gradient(135deg,var(--primary-color));
 }
 
 .submit-btn:active {
@@ -3205,10 +3206,19 @@ html {
   font-weight: 500;
   letter-spacing: 0.5px;
 }
+.contact-link i {
+  color: var(--primary-color);
+}
 
-.contact-link:hover {
+.contact-link:hover span{
+  color: var(--background-light);
+}
+.contact-link:hover i{
+  color: var(--background-light);
+}
+
+.contact-link:hover{
   background: var(--primary-color);
-  color: white;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
 }
@@ -4978,3 +4988,19 @@ section:last-of-type {
   visibility: visible !important;
 }
 
+/* Disable ALL hover visuals for submit-btn */
+.submit-btn:hover,
+.submit-btn:active,
+.submit-btn:focus {
+  background: linear-gradient(135deg, var(--primary-color), #ff4500) !important;
+  box-shadow: none !important;
+}
+
+/* Remove dark hover overlay */
+.submit-btn::before {
+  display: none !important;
+}
+
+.submit-btn{
+  background: linear-gradient(135deg, var(--primary-color), #ff4500) !important;
+}
