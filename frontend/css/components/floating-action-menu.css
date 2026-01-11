@@ -1,0 +1,229 @@
+/* ====================================
+   FLOATING ACTION MENU (FAB) STYLES
+   Modern expandable circular button
+   ==================================== */
+
+/* Container */
+.fab-container {
+  position: fixed !important;
+  bottom: 6px !important;
+  right: 90px !important;
+  z-index: 99998 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+/* Main FAB Button */
+.fab-main {
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  max-width: 50px !important;
+  max-height: 50px !important;
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 20px rgba(255, 99, 71, 0.4) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  position: relative !important;
+  z-index: 99999 !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.fab-main:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 25px rgba(255, 99, 71, 0.6) !important;
+}
+
+.fab-main:active {
+  transform: scale(0.95) !important;
+}
+
+/* FAB Icon - rotates when menu opens */
+.fab-icon {
+  font-size: 20px !important;
+  color: white !important;
+  transition: transform 0.3s ease !important;
+  line-height: 1 !important;
+}
+
+.fab-main[aria-expanded="true"] .fab-icon {
+  transform: rotate(45deg) !important;
+}
+
+/* Remove any ::before pseudo element from FAB main */
+.fab-main::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Action Buttons Container */
+.fab-actions {
+  position: absolute !important;
+  bottom: 60px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease !important;
+  pointer-events: none;
+  width: auto !important;
+}
+
+.fab-actions.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: all !important;
+}
+
+/* Individual Action Buttons */
+.fab-action-btn {
+  width: 45px !important;
+  height: 45px !important;
+  min-width: 45px !important;
+  min-height: 45px !important;
+  max-width: 45px !important;
+  max-height: 45px !important;
+  background: #fff !important;
+  border: none !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease !important;
+  text-decoration: none !important;
+  color: #333 !important;
+  font-size: 18px !important;
+  position: relative !important;
+  transform: scale(0);
+  opacity: 0;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Ensure icons inside buttons don't break circle */
+.fab-action-btn i {
+  font-size: 18px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.fab-actions.active .fab-action-btn {
+  transform: scale(1) !important;
+  opacity: 1 !important;
+}
+
+/* Stagger animation for action buttons */
+.fab-actions.active .fab-action-btn:nth-child(1) { transition-delay: 0.02s; }
+.fab-actions.active .fab-action-btn:nth-child(2) { transition-delay: 0.04s; }
+.fab-actions.active .fab-action-btn:nth-child(3) { transition-delay: 0.06s; }
+.fab-actions.active .fab-action-btn:nth-child(4) { transition-delay: 0.08s; }
+.fab-actions.active .fab-action-btn:nth-child(5) { transition-delay: 0.1s; }
+.fab-actions.active .fab-action-btn:nth-child(6) { transition-delay: 0.12s; }
+
+.fab-action-btn:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Icon colors for different actions */
+.fab-action-btn:nth-child(1) i { color: #2196F3 !important; } /* Get Quote - Blue */
+.fab-action-btn:nth-child(2) i { color: #9C27B0 !important; } /* Book Now - Purple */
+.fab-action-btn:nth-child(3) i { color: #25D366 !important; } /* WhatsApp - Green */
+.fab-action-btn:nth-child(4) i { color: #00BCD4 !important; } /* Call - Cyan */
+.fab-action-btn:nth-child(5) i { color: #FF9800 !important; } /* Feedback - Orange */
+.fab-action-btn:nth-child(6) i { color: #607D8B !important; } /* Chat - Blue Grey */
+
+/* Remove any ::before pseudo element */
+.fab-action-btn::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Tooltips - using ::after, positioned to the left */
+.fab-action-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 100000;
+}
+
+.fab-action-btn[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Responsive - HIDE FAB on mobile, use mini footer instead */
+@media (max-width: 768px) {
+  .fab-container {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Accessibility: Focus states */
+.fab-main:focus,
+.fab-action-btn:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+
+/* ====================================
+   FAB - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .fab-main {
+  box-shadow: 0 4px 20px rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .fab-main:hover {
+  box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5) !important;
+}
+
+body[data-theme="light"] .fab-action-btn {
+  background: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .fab-action-btn:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+body[data-theme="light"] .fab-tooltip {
+  background: rgba(50, 50, 50, 0.95) !important;
+  color: #ffffff !important;
+}

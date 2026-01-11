@@ -1,0 +1,416 @@
+// Navbar Loader Module - Dynamically loads navbar component on all pages
+(function () {
+  'use strict';
+
+  let retryCount = 0;
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY = 2000;
+
+  /**
+   * Loads the navbar HTML into the page from components/navbar.html
+   */
+  async function loadNavbar() {
+    const navbarContainer = document.getElementById('navbar-container');
+    
+    if (!navbarContainer) {
+      console.warn('Navbar container not found. Add <div id="navbar-container"></div> to your page.');
+      return;
+    }
+
+    // Determine the correct path based on current location
+    const path = window.location.pathname;
+    const isInPagesFolder = path.toLowerCase().includes('/pages/');
+    const base = isInPagesFolder ? '..' : '.';
+
+    // Fetch the navbar component
+    const navbarUrl = `${base}/components/navbar.html?v=${Date.now()}`;
+    try {
+      const res = await fetch(navbarUrl, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Failed to fetch navbar: ${res.status}`);
+      const navbarHTML = await res.text();
+      
+      // Reset retry count on success
+      retryCount = 0;
+
+      // Insert the HTML
+      navbarContainer.innerHTML = navbarHTML;
+
+      // Ensure navbar CSS is loaded from <head>
+      ensureNavbarCss(base);
+      ensureMiddleNavbarCss(base);
+
+      // Remove any CSS link tags left inside the container to avoid duplicates
+      navbarContainer.querySelectorAll('link[rel="stylesheet"]').forEach(l => {
+        const href = l.getAttribute('href') || '';
+        if (href.includes('css/components/navbar.css') || href.includes('css/components/middle-navbar.css')) {
+          l.parentElement && l.parentElement.removeChild(l);
+        }
+      });
+
+      // Fix paths for root pages
+      if (!isInPagesFolder) {
+        fixPathsForRootPage(navbarContainer);
+      }
+
+      // Initialize navbar functionality after loading
+      initializeNavbar();
+
+      // Set active link
+      setActiveLink();
+
+      // CRITICAL: Initialize auth UI after navbar is fully loaded
+      initializeAuthUI();
+
+      // Ensure digital clock exists on pages that don't include it directly
+      ensureClock(base);
+    } catch (err) {
+      console.error('Navbar load error:', err);
+      
+      // Retry loading if retries remaining
+      if (retryCount < MAX_RETRIES) {
+        retryCount++;
+        console.log(`Retrying navbar load (${retryCount}/${MAX_RETRIES})...`);
+        setTimeout(loadNavbar, RETRY_DELAY);
+      }
+    }
+  }
+  
+  // Retry loading navbar when coming back online
+  window.addEventListener('online', () => {
+    const navbarContainer = document.getElementById('navbar-container');
+    if (navbarContainer && !navbarContainer.innerHTML.trim()) {
+      retryCount = 0;
+      loadNavbar();
+    }
+  });
+  
+  // Retry when tab becomes visible if navbar is empty
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && navigator.onLine) {
+      const navbarContainer = document.getElementById('navbar-container');
+      if (navbarContainer && !navbarContainer.innerHTML.trim()) {
+        retryCount = 0;
+        loadNavbar();
+      }
+    }
+  });
+
+  /**
+   * Initialize authentication UI
+   * This runs AFTER the navbar HTML is loaded into the DOM
+   */
+  function initializeAuthUI() {
+    const loginBtn = document.getElementById("loginBtn");
+    const profile = document.getElementById("profile");
+    const userEmailSpan = document.getElementById("userEmail");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // If navbar auth elements are not present, exit
+    if (!loginBtn || !profile) {
+      console.warn('Auth elements not found in navbar');
+      return;
+    }
+
+    // Update the UI based on current auth state
+    updateAuthUI();
+
+    // Set up logout button handler
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleLogout();
+      });
+    }
+  }
+
+  /**
+   * Update auth UI based on login state
+   */
+  function updateAuthUI() {
+    const loginBtn = document.getElementById("loginBtn");
+    const profile = document.getElementById("profile");
+    const userEmailSpan = document.getElementById("userEmail");
+
+    if (!loginBtn || !profile) return;
+
+    // Check for authentication
+    const token = localStorage.getItem("token");
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const userEmail = localStorage.getItem("userEmail");
+
+    if (token && isLoggedIn && userEmail) {
+      // User is logged in
+      loginBtn.style.display = "none";
+      profile.style.display = "flex";
+      profile.classList.remove("hidden");
+      if (userEmailSpan) {
+        userEmailSpan.textContent = userEmail;
+      }
+    } else {
+      // User is not logged in
+      if (!token || !isLoggedIn) {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("token");
+      }
+      loginBtn.style.display = "inline-block";
+      profile.style.display = "none";
+      profile.classList.add("hidden");
+    }
+  }
+
+  /**
+   * Handle logout
+   */
+  function handleLogout() {
+    // Clear all auth data
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("token");
+    
+    // Update UI immediately
+    updateAuthUI();
+    
+    // Show notification if available
+    if (typeof showNotification === 'function') {
+      showNotification("Logged out successfully", "success");
+    }
+    
+    // Determine correct path for redirect
+    const currentPath = window.location.pathname;
+    const isInPagesFolder = currentPath.toLowerCase().includes('/pages/');
+    const loginPath = isInPagesFolder ? "./login.html" : "./pages/login.html";
+    
+    // Redirect to login page
+    setTimeout(() => {
+      window.location.href = loginPath;
+    }, 300);
+  }
+
+  /**
+   * Fixes paths in navbar for root-level pages (index.html, services.html)
+   */
+  function fixPathsForRootPage(container) {
+    // Fix image paths
+    const images = container.querySelectorAll('img');
+    images.forEach(img => {
+      const currentSrc = img.getAttribute('src');
+      if (currentSrc && currentSrc.startsWith('../')) {
+        img.setAttribute('src', currentSrc.replace(/^\.\.\//, './'));
+      }
+    });
+
+    // Fix link paths
+    const links = container.querySelectorAll('a[href]');
+    links.forEach(link => {
+      const currentHref = link.getAttribute('href');
+      if (currentHref && currentHref.startsWith('../')) {
+        link.setAttribute('href', currentHref.replace(/^\.\.\//, './'));
+      }
+    });
+
+    // Fix CSS link path
+    container.querySelectorAll('link[href]').forEach(cssLink => {
+      const currentHref = cssLink.getAttribute('href');
+      if (currentHref && currentHref.startsWith('../')) {
+        cssLink.setAttribute('href', currentHref.replace(/^\.{2}\//, './'));
+      }
+    });
+  }
+
+  /**
+   * Initialize navbar functionality (mobile menu, dropdowns, etc.)
+   */
+  function initializeNavbar() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+    const navOverlay = document.getElementById('navOverlay');
+
+    // Toggle mobile menu
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', function () {
+        this.classList.toggle('active');
+        if (mobileNav) mobileNav.classList.toggle('active');
+        if (navOverlay) navOverlay.classList.toggle('active');
+        document.body.style.overflow = (mobileNav && mobileNav.classList.contains('active')) ? 'hidden' : '';
+      });
+    }
+
+    // Close mobile menu
+    if (mobileCloseBtn) {
+      mobileCloseBtn.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close menu when clicking overlay
+    if (navOverlay) {
+      navOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    function closeMobileMenu() {
+      if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+      if (mobileNav) mobileNav.classList.remove('active');
+      if (navOverlay) navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close mobile menu when clicking on a link
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Dropdown functionality
+    document.addEventListener('click', e => {
+      const isDropdownButton = e.target.closest("[data-dropdown-btn]");
+      if (!isDropdownButton && e.target.closest('[data-dropdown]') != null) return;
+
+      let currentdropdown;
+      if (isDropdownButton) {
+        e.preventDefault();
+        e.stopPropagation();
+        currentdropdown = e.target.closest('[data-dropdown]');
+        currentdropdown.classList.toggle('active');
+      }
+
+      // close all already opened dropdown
+      document.querySelectorAll('[data-dropdown].active').forEach(dropdown => {
+        if (dropdown === currentdropdown) return;
+        dropdown.classList.remove('active');
+      });
+    });
+
+    // Header scroll effect
+    let lastScroll = 0;
+    const header = document.querySelector('.header');
+    const middleNavbar = document.querySelector('.middle-navbar');
+    const upbar = document.querySelector('.upbar');
+    const mainNavbar = document.querySelector('.navbar');
+
+    if (header) {
+      window.addEventListener('scroll', function () {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 100) {
+          if (upbar) upbar.classList.remove('hidden');
+          if (middleNavbar) middleNavbar.classList.remove('hidden');
+          if (mainNavbar) mainNavbar.classList.remove('scrolled');
+        } else {
+          if (upbar) upbar.classList.add('hidden');
+          if (middleNavbar) middleNavbar.classList.add('hidden');
+          if (mainNavbar) mainNavbar.classList.add('scrolled');
+        }
+
+        lastScroll = currentScroll;
+      });
+    }
+  }
+
+  /**
+   * Set active link based on current page
+   */
+  function setActiveLink() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+    navLinks.forEach(link => {
+      const linkHref = link.getAttribute('href');
+      if (!linkHref) return;
+
+      const linkPage = linkHref.split('/').pop();
+
+      if (linkPage === currentPage ||
+        (currentPage === '' && linkPage === 'index.html') ||
+        (currentPage === '/' && linkPage === 'index.html')) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  /**
+   * Ensure digital clock exists and is running if not present on page
+   */
+  function ensureClock(basePath) {
+    const existingClock = document.getElementById('mac-clock');
+    if (existingClock) return;
+
+    const existingLink = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+      .some(l => (l.getAttribute('href') || '').includes('digital-clock.css'));
+    if (!existingLink) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `${basePath}/css/components/digital-clock.css`;
+      document.head.appendChild(link);
+    }
+
+    const clock = document.createElement('div');
+    clock.id = 'mac-clock';
+    const span = document.createElement('span');
+    span.id = 'clock-full';
+    clock.appendChild(span);
+    document.body.appendChild(clock);
+
+    function updateClock() {
+      const clockFull = document.getElementById('clock-full');
+      if (clockFull) {
+        const now = new Date();
+        const day = now.toLocaleDateString('en-US', { weekday: 'short' });
+        const date = now.getDate();
+        const month = now.toLocaleDateString('en-US', { month: 'short' });
+        const time = now.toLocaleTimeString('en-US', {
+          hour12: true,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+        const formatted = `${day} ${date} ${month} ${time}`;
+        clockFull.textContent = formatted;
+      }
+    }
+
+    setTimeout(() => {
+      updateClock();
+      setInterval(updateClock, 1000);
+    }, 100);
+  }
+
+  function ensureNavbarCss(basePath) {
+    const exists = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+      .some(l => ((l.getAttribute('href') || '').includes('css/components/navbar.css')));
+    if (!exists) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `${basePath}/css/components/navbar.css`;
+      document.head.appendChild(link);
+    }
+  }
+
+  function ensureMiddleNavbarCss(basePath) {
+    const exists = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+      .some(l => ((l.getAttribute('href') || '').includes('css/components/middle-navbar.css')));
+    if (!exists) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `${basePath}/css/components/middle-navbar.css`;
+      document.head.appendChild(link);
+    }
+  }
+
+  // Expose auth functions globally for other scripts to use
+  window.updateAuthUI = updateAuthUI;
+  window.handleLogout = handleLogout;
+
+  // Load navbar when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      loadNavbar();
+    });
+  } else {
+    loadNavbar();
+  }
+
+})();
+
+  

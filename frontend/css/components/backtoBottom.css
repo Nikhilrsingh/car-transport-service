@@ -1,0 +1,65 @@
+/* 🔝 Back to Bottom Button - Hidden, replaced by smart scroll button */
+
+.back-to-bottom {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+.back-to-bottom.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-bottom:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5);
+}
+
+.back-to-bottom:active {
+    transform: scale(0.98);
+}
+
+/* Tooltip for back to bottom button */
+.back-to-bottom::before {
+    content: "Go to Bottom";
+    position: absolute;
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.back-to-bottom:hover::before {
+    opacity: 1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .back-to-bottom {
+        bottom: 20px;
+        right: 140px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+
+    .back-to-bottom::before {
+        bottom: 55px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}

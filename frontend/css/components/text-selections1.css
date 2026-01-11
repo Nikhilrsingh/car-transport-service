@@ -1,0 +1,30 @@
+/* ============================================================
+   GLOBAL CUSTOM TEXT SELECTION STYLING
+   Matches brand identity | Supports Light + Dark Mode
+   ============================================================ */
+
+/* --- Default Light Mode Selection Style --- */
+::selection {
+    background: #ff5722;      /* Brand orange highlight */
+    color: #ffffff;           /* White text for readability */
+}
+
+::-moz-selection {
+    background: #ff5722;
+    color: #ffffff;
+}
+
+/* ============================================================
+   DARK MODE SUPPORT — auto applied when <body class="dark-mode">
+   ============================================================ */
+body.dark-mode ::selection {
+    background: #00e0ff;      /* Neon cyan highlight for dark UI */
+    color: #000000;           /* Black readable text */
+}
+
+body.dark-mode ::-moz-selection {
+    background: #00e0ff;
+    color: #000000;
+}
+
+/* ============================================================ */
