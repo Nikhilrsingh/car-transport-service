@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Feedback & Reviews | Harihar Car Carriers</title>
     <base href="./" />
-  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
     <link rel="stylesheet" href="../css/components/navbar.css" />
     <link rel="stylesheet" href="../css/components/middle-navbar.css" />
     <link rel="stylesheet" href="../css/styles.css">
@@ -15,7 +15,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../css/components/glowing-input.css">
-
   </head>
   <body>
     <header>
@@ -75,6 +74,7 @@
           <button type="submit">Submit Feedback</button>
         </form>
       </div>
+
       <!-- Testimonials List -->
       <section class="testimonials-list" id="testimonialsList">
         <!-- Rendered by JS -->
@@ -98,7 +98,7 @@
           name: "Ravi Singh",
           stars: 5,
           message:
-            "I used this service last week and honestly the whole process was super smooth. The team kept me updated at every step and the delivery was right on time. I didn’t face any confusion or delay. I’ll definitely use it again when needed.",
+            "I used this service last week and honestly the whole process was super smooth. The team kept me updated at every step and the delivery was right on time. I didn't face any confusion or delay. I'll definitely use it again when needed.",
           time: "2025-11-10 09:02",
           comments: [
             { name: "Admin", text: "Thank you so much for trusting us!" },
@@ -111,7 +111,7 @@
           name: "Shruti Patel",
           stars: 4,
           message:
-            "This was my first time trying their service and I’m really impressed. The staff was polite, the communication was clear, and everything happened exactly as promised. It felt very professional and stress-free. Highly recommended from my side.",
+            "This was my first time trying their service and I'm really impressed. The staff was polite, the communication was clear, and everything happened exactly as promised. It felt very professional and stress-free. Highly recommended from my side.",
           time: "2025-11-12 15:25",
           comments: [],
         },
@@ -137,7 +137,7 @@
         testimonials.forEach((t, i) => {
           list.innerHTML += `
           <div class="testimonial-card" data-index="${i}">
-            <div style="display:flex; align-items:center">
+            <div class="testimonial-images">
               <img src="${t.pic}" alt="${t.name}" class="testimonial-pic">
               ${
                 t.product
@@ -152,7 +152,6 @@
                   t.stars
                 )}${"☆".repeat(5 - t.stars)}</span>
                 <span class="testimonial-time">${t.time}</span>
-                <button class="delete-btn" data-index="${i}" title="Delete Review"><i class="fa fa-trash"></i></button>
               </div>
               <div class="testimonial-message">${t.message}</div>
               <div class="comments-section" id="comments-${i}">
@@ -160,7 +159,7 @@
                 <div class="comment-list">${t.comments
                   .map(
                     (c) =>
-                      `<div class="comment"><small>${c.name}:</small> ${c.text}</div>`
+                      `<div class="comment"><span class="comment-author">${c.name}:</span> ${c.text}</div>`
                   )
                   .join("")}</div>
                 <form class="comment-form" data-index="${i}" onsubmit="return false">
@@ -172,13 +171,8 @@
           </div>
         `;
         });
-        document.querySelectorAll(".delete-btn").forEach((btn) => {
-          btn.onclick = function () {
-            const idx = this.getAttribute("data-index");
-            testimonials.splice(idx, 1);
-            renderTestimonials();
-          };
-        });
+
+        // Add comment form handlers
         document.querySelectorAll(".comment-form").forEach((form) => {
           form.onsubmit = function () {
             const idx = this.getAttribute("data-index");
@@ -221,6 +215,7 @@
           }
         });
       });
+
       function highlightStars(n) {
         document.querySelectorAll("#starRating .fa-star").forEach((star, i) => {
           star.className = i < n ? "fa-solid fa-star" : "fa-regular fa-star";
