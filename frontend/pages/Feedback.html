@@ -133,6 +133,7 @@
       function renderTestimonials() {
         const list = document.getElementById("testimonialsList");
         list.innerHTML = "";
+        list.style.marginBottom = "32px";
         testimonials.forEach((t, i) => {
           list.innerHTML += `
           <div class="testimonial-card" data-index="${i}">
@@ -265,6 +266,11 @@
         highlightStars(0);
         renderTestimonials();
       };
+
+      window.addEventListener("load", () => {
+        const overlay = document.querySelector(".loading-overlay");
+        if (overlay) overlay.remove();
+      });
     </script>
 
     <script src="../js/modules/search.js"></script>
@@ -279,16 +285,5 @@
     <!-- Component Initializer - Ensures global components (FAB, Chatbot, etc.) are available -->
     <script src="../js/modules/component-initializer.js"></script>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
-      <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Top to Bottom Button -->
-    <button class="back-to-bottom" id="backToBottom">
-      <i class="fas fa-arrow-down"></i>
-    </button>
-
-    <!-- 🚀 Floating Action Menu loaded via footer component -->
   </body>
 </html>
