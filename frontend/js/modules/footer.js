@@ -3,6 +3,7 @@
   "use strict";
 
   let allCities = [];
+  let defaultCitiesHTML = "";
 
   function ready(fn) {
     if (document.readyState === "loading")
@@ -22,86 +23,137 @@
       })
       .catch(() => {
         console.log("Using fallback cities data");
-        // Fallback cities data
+        // Fallback cities data - Alphabetically sorted
         allCities = [
           { slug: "agra", name: "Agra" },
           { slug: "ahmedabad", name: "Ahmedabad" },
+          { slug: "amritsar", name: "Amritsar" },
+          { slug: "asansol", name: "Asansol" },
           { slug: "bangalore", name: "Bangalore" },
+          { slug: "belgaum", name: "Belgaum" },
+          { slug: "bhopal", name: "Bhopal" },
+          { slug: "bhubaneswar", name: "Bhubaneswar" },
+          { slug: "chandigarh", name: "Chandigarh" },
           { slug: "chennai", name: "Chennai" },
+          { slug: "coimbatore", name: "Coimbatore" },
+          { slug: "cuttack", name: "Cuttack" },
+          { slug: "darjeeling", name: "Darjeeling" },
+          { slug: "dehradun", name: "Dehradun" },
           { slug: "delhi", name: "Delhi" },
+          { slug: "durgapur", name: "Durgapur" },
+          { slug: "erode", name: "Erode" },
+          { slug: "faridabad", name: "Faridabad" },
+          { slug: "ghaziabad", name: "Ghaziabad" },
+          { slug: "gurgaon", name: "Gurgaon" },
+          { slug: "guwahati", name: "Guwahati" },
+          { slug: "haridwar", name: "Haridwar" },
+          { slug: "haldwani", name: "Haldwani" },
+          { slug: "howrah", name: "Howrah" },
+          { slug: "hubli", name: "Hubli" },
           { slug: "hyderabad", name: "Hyderabad" },
+          { slug: "indore", name: "Indore" },
+          { slug: "jaipur", name: "Jaipur" },
+          { slug: "jalandhar", name: "Jalandhar" },
+          { slug: "jamshedpur", name: "Jamshedpur" },
+          { slug: "kanpur", name: "Kanpur" },
+          { slug: "kannur", name: "Kannur" },
+          { slug: "kochi", name: "Kochi" },
           { slug: "kolkata", name: "Kolkata" },
+          { slug: "kozhikode", name: "Kozhikode" },
+          { slug: "lucknow", name: "Lucknow" },
+          { slug: "ludhiana", name: "Ludhiana" },
+          { slug: "madurai", name: "Madurai" },
+          { slug: "mangalore", name: "Mangalore" },
+          { slug: "meerut", name: "Meerut" },
+          { slug: "mohali", name: "Mohali" },
           { slug: "mumbai", name: "Mumbai" },
+          { slug: "mysore", name: "Mysore" },
           { slug: "nagpur", name: "Nagpur" },
+          { slug: "nashik", name: "Nashik" },
+          { slug: "noida", name: "Noida" },
+          { slug: "patna", name: "Patna" },
           { slug: "pune", name: "Pune" },
+          { slug: "raipur", name: "Raipur" },
+          { slug: "ranchi", name: "Ranchi" },
+          { slug: "roorkee", name: "Roorkee" },
+          { slug: "salem", name: "Salem" },
+          { slug: "siliguri", name: "Siliguri" },
+          { slug: "surat", name: "Surat" },
+          { slug: "thrissur", name: "Thrissur" },
+          { slug: "tiruppur", name: "Tiruppur" },
+          { slug: "trichy", name: "Trichy" },
+          { slug: "trivandrum", name: "Trivandrum" },
+          { slug: "tumkur", name: "Tumkur" },
+          { slug: "udupi", name: "Udupi" },
+          { slug: "vadodara", name: "Vadodara" },
+          { slug: "varanasi", name: "Varanasi" },
+          { slug: "vijayawada", name: "Vijayawada" },
+          { slug: "visakhapatnam", name: "Visakhapatnam" },
+          { slug: "warangal", name: "Warangal" }
         ];
       });
   }
 
-  function performSearch(query) {
-    const searchResults = document.getElementById("footerSearchResults");
-    const popularCities = document.getElementById("popularCities");
+  function renderCityList(cities, popularCitiesEl) {
+    if (!popularCitiesEl) return;
 
-    if (!searchResults) return;
+    popularCitiesEl.innerHTML = `
+      <ul class="footer-links">
+        ${cities.map(city => `
+          <li>
+            <a href="../pages/city.html?city=${city.slug}" class="link-underline">
+              <i class="fas fa-city"></i> ${city.name}
+            </a>
+          </li>
+        `).join("")}
+      </ul>
+    `;
 
-    if (query.length < 2) {
-      hideSearchResults();
+    // Re-render Font Awesome icons for new DOM
+    if (window.FontAwesome && window.FontAwesome.dom) {
+      window.FontAwesome.dom.i2svg();
+    }
+  }
+
+  function performSearch(query, popularCitiesEl) {
+    if (!popularCitiesEl) return;
+
+    if (query.length === 0) {
+      // Restore default cities HTML
+      popularCitiesEl.innerHTML = defaultCitiesHTML;
       return;
     }
 
-    const filteredCities = allCities.filter(
-      (city) =>
-        city.name.toLowerCase().includes(query) ||
-        city.slug.toLowerCase().includes(query)
+    // Filter cities that start with the query (alphabet-wise)
+    const filteredCities = allCities.filter(city =>
+      city.name.toLowerCase().startsWith(query)
     );
 
-    displaySearchResults(filteredCities, searchResults, popularCities);
-  }
-
-  function displaySearchResults(cities, searchResults, popularCities) {
-    if (cities.length === 0) {
-      searchResults.innerHTML =
-        '<div class="city-search-item">No cities found</div>';
+    if (filteredCities.length === 0) {
+      // Show "No cities found" message
+      popularCitiesEl.innerHTML = `
+        <ul class="footer-links">
+          <li style="color: #999;">No cities found starting with "${query}"</li>
+        </ul>
+      `;
     } else {
-      searchResults.innerHTML = cities
-        .slice(0, 8)
-        .map(
-          (city) => `
-        <a href="./pages/city.html?city=${city.slug}" class="city-search-item">
-          <i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i>
-          ${city.name}
-        </a>
-      `
-        )
-        .join("");
-    }
-
-    searchResults.classList.add("active");
-    if (popularCities) {
-      popularCities.style.display = "none";
-    }
-  }
-
-  function hideSearchResults() {
-    const searchResults = document.getElementById("footerSearchResults");
-    const popularCities = document.getElementById("popularCities");
-
-    if (searchResults) {
-      searchResults.classList.remove("active");
-    }
-    if (popularCities) {
-      popularCities.style.display = "block";
+      // Render filtered results in the main list area
+      renderCityList(filteredCities, popularCitiesEl);
     }
   }
 
   function initFooterSearch(footer) {
     const searchInput = footer.querySelector("#footerCitySearch");
     const searchClear = footer.querySelector("#footerSearchClear");
+    const popularCities = footer.querySelector("#popularCities");
 
-    if (!searchInput) return;
+    if (!searchInput || !popularCities) return;
 
     // Load cities data
     loadCitiesData();
+
+    // Store default static cities HTML from the page
+    defaultCitiesHTML = popularCities.innerHTML;
 
     // Search input event
     searchInput.addEventListener("input", function (e) {
@@ -109,27 +161,44 @@
 
       if (query.length > 0) {
         searchClear.style.display = "flex";
-        performSearch(query);
+        performSearch(query, popularCities);
       } else {
         searchClear.style.display = "none";
-        hideSearchResults();
+        popularCities.innerHTML = defaultCitiesHTML;
       }
     });
 
     // Clear search
-    searchClear.addEventListener("click", function () {
-      searchInput.value = "";
-      searchClear.style.display = "none";
-      hideSearchResults();
-      searchInput.focus();
-    });
+    if (searchClear) {
+      searchClear.addEventListener("click", function () {
+        searchInput.value = "";
+        searchClear.style.display = "none";
+        popularCities.innerHTML = defaultCitiesHTML;
+        searchInput.focus();
+      });
+    }
 
-    // Click outside to close results
-    document.addEventListener("click", function (e) {
-      if (!e.target.closest(".cities-search-container")) {
-        hideSearchResults();
+    // Handle Escape key to clear search
+    searchInput.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        searchInput.value = "";
+        if (searchClear) searchClear.style.display = "none";
+        popularCities.innerHTML = defaultCitiesHTML;
+        searchInput.blur();
       }
     });
+
+    // Prevent form submission on Enter key
+    searchInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+      }
+    });
+
+    // Initialize clear button state
+    if (searchClear) {
+      searchClear.style.display = searchInput.value.trim() ? "flex" : "none";
+    }
   }
 
   // Mobile FAB functionality

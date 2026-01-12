@@ -1190,3 +1190,189 @@ body[data-theme="light"] .accordion-content {
   background: #ffffff !important;
   color: #555 !important;
 }
+
+body[data-theme="light"] .cities-search-input {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+body[data-theme="light"] .cities-search-input:focus-within {
+  border-color: #ff6347 !important;
+  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .cities-search-input input {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .cities-search-input input::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .cities-search-input i.fa-search {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .search-clear {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .search-clear:hover {
+  color: #ff6347 !important;
+  background: rgba(255, 99, 71, 0.1) !important;
+}
+
+
+.popular-cities ul.footer-links li:nth-child(1) { animation-delay: 0.05s; }
+.popular-cities ul.footer-links li:nth-child(2) { animation-delay: 0.1s; }
+.popular-cities ul.footer-links li:nth-child(3) { animation-delay: 0.15s; }
+.popular-cities ul.footer-links li:nth-child(4) { animation-delay: 0.2s; }
+.popular-cities ul.footer-links li:nth-child(5) { animation-delay: 0.25s; }
+.popular-cities ul.footer-links li:nth-child(6) { animation-delay: 0.3s; }
+.popular-cities ul.footer-links li:nth-child(7) { animation-delay: 0.35s; }
+.popular-cities ul.footer-links li:nth-child(8) { animation-delay: 0.4s; }
+.popular-cities ul.footer-links li:nth-child(9) { animation-delay: 0.45s; }
+.popular-cities ul.footer-links li:nth-child(10) { animation-delay: 0.5s; }
+
+@keyframes fadeInCity {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popular-cities ul.footer-links li {
+  animation: fadeInCity 0.3s ease forwards;
+  opacity: 0;
+}
+
+/* Popular cities container */
+.popular-cities {
+  margin-bottom: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 200px;
+}
+
+.popular-cities ul.footer-links {
+  transition: opacity 0.2s ease;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ============================================
+   FOOTER CITY SEARCH - CLEAN VERSION
+   ============================================ */
+
+/* Search Container */
+.cities-search-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+/* Search Input Wrapper - NO OUTLINES */
+.cities-search-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 8px !important;
+  padding: 6px 10px !important;
+  transition: all 0.3s ease !important;
+  width: 60%;
+  height: 40px;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove outline on focus */
+.cities-search-input:focus,
+.cities-search-input:focus-within {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(255, 107, 70, 0.15) !important;
+  outline: none !important;
+}
+
+/* Search icon */
+.cities-search-input i.fa-search {
+  color: var(--muted) !important;
+  margin-right: 8px;
+  font-size: 14px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* Input field - REMOVE ALL OUTLINES */
+.cities-search-input input {
+  flex: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--highlight) !important;
+  font-size: 0.9rem !important;
+  outline: none !important;
+  box-shadow: none !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.cities-search-input input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Remove ALL browser default focus styles */
+.cities-search-input input:focus,
+.cities-search-input input:focus-visible,
+.cities-search-input input:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Clear button */
+.search-clear {
+  cursor: pointer;
+  color: var(--muted) !important;
+  padding: 4px;
+  transition: color 0.2s ease, background 0.2s ease;
+  flex-shrink: 0;
+  display: none; /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 4px;
+}
+
+.search-clear:hover {
+  color: var(--accent) !important;
+  background: rgba(255, 107, 70, 0.1) !important;
+}
+
+.search-clear i {
+  font-size: 12px;
+}
+
+
+@media (max-width: 768px) {
+  .cities-search-input {
+    width: 100% !important;
+  }
+  
+  .cities-search-container {
+    justify-content: stretch;
+  }
+}
