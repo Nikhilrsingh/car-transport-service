@@ -147,6 +147,42 @@ body {
   border-color: var(--orange);
 }
 
+/* CLEAR FILTERS BUTTON */
+.clear-filters-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 2px solid rgba(255, 99, 71, 0.4);
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.3s ease;
+}
+
+.clear-filters-btn.active {
+  background: transparent;
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+.clear-filters-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Light theme tweak */
+body[data-theme="light"] .clear-filters-btn {
+  background: #ffffff;
+  color: #666;
+  border-color: #ddd;
+}
+
+body[data-theme="light"] .clear-filters-btn.active {
+  color: #ff6347;
+  border-color: #ff6347;
+}
+
+
 /* BLOG LAYOUT WITH SIDEBAR */
 .blog-main {
   padding: 20px;
