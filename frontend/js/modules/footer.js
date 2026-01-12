@@ -97,17 +97,22 @@
   function renderCityList(cities, popularCitiesEl) {
     if (!popularCitiesEl) return;
 
-    popularCitiesEl.innerHTML = `
-      <ul class="footer-links">
-        ${cities.map(city => `
-          <li>
-            <a href="../pages/city.html?city=${city.slug}" class="link-underline">
-              <i class="fas fa-city"></i> ${city.name}
-            </a>
-          </li>
-        `).join("")}
-      </ul>
-    `;
+    const BASE_PATH = "/frontend";
+    function cityUrl(slug) {
+      return `${BASE_PATH}/pages/city.html?city=${slug}`;
+    }
+  
+      popularCitiesEl.innerHTML = `
+        <ul class="footer-links">
+          ${cities.map(city => `
+            <li>
+              <a href="${cityUrl(city.slug)}" class="link-underline">
+                <i class="fas fa-city"></i> ${city.name}
+              </a>
+            </li>
+          `).join("")}
+        </ul>
+      `;
 
     // Re-render Font Awesome icons for new DOM
     if (window.FontAwesome && window.FontAwesome.dom) {
@@ -152,8 +157,14 @@
     // Load cities data
     loadCitiesData();
 
-    // Store default static cities HTML from the page
-    defaultCitiesHTML = popularCities.innerHTML;
+    const defaultCities = [
+      { slug: "mumbai", name: "Mumbai" },
+      { slug: "delhi", name: "Delhi" },
+      { slug: "bangalore", name: "Bangalore" },
+      { slug: "hyderabad", name: "Hyderabad" },
+      { slug: "kolkata", name: "Kolkata" }
+    ];
+    
 
     // Search input event
     searchInput.addEventListener("input", function (e) {
@@ -164,7 +175,7 @@
         performSearch(query, popularCities);
       } else {
         searchClear.style.display = "none";
-        popularCities.innerHTML = defaultCitiesHTML;
+        renderCityList(defaultCities, popularCities);
       }
     });
 
@@ -173,11 +184,10 @@
       searchClear.addEventListener("click", function () {
         searchInput.value = "";
         searchClear.style.display = "none";
-        popularCities.innerHTML = defaultCitiesHTML;
+        renderCityList(defaultCities, popularCities);
         searchInput.focus();
       });
-    }
-
+    }      
     // Handle Escape key to clear search
     searchInput.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
