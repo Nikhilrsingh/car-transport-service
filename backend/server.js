@@ -10,6 +10,8 @@ import session from "cookie-session";
 import "./config/passport.js"; 
 import contactRoutes from './routes/contact.routes.js'
 import feedbackRoutes from "./routes/feedback.routes.js";
+import enquiryRoutes from './routes/enquiry.routes.js'
+import emergencyRoutes from './routes/emergencyRequest.routes.js'
 
 
 // Optional: check if env vars are loaded
@@ -37,6 +39,8 @@ app.use(passport.session());
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/feedbacks", feedbackRoutes);
+app.use("/api/enquiries", enquiryRoutes);
+app.use("/api/emergencies", emergencyRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 

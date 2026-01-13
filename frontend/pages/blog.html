@@ -5,11 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Blog | Harihar Car Carriers</title>
-   <base href="./" />
+  <base href="./" />
   <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
   <link rel="icon" type="image/png" href="classic-car.png" />
   <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/components/navbar.css" />    <link rel="stylesheet" href="../css/components/middle-navbar.css" />  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/middle-navbar.css" /> <!-- Loading Indicators CSS -->
   <link rel="stylesheet" href="../css/components/loading-indicators.css" />
   <link rel="stylesheet" href="../css/components/footer.css" />
   <!-- <link rel="stylesheet" href="../css/components/floating-call-button.css" />
@@ -216,7 +217,7 @@
 
     .category-item {
       padding: 10px 15px;
-      color:white;
+      color: white;
       margin-bottom: 8px;
       border-radius: 8px;
       cursor: pointer;
@@ -418,7 +419,7 @@
     }
 
     .meta-item {
-      color:#f98f69;
+      color: #f98f69;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -679,12 +680,18 @@
     </div>
 
     <!-- TAG CLOUD -->
-    <div class="tag-cloud-container" id="tagCloud">
-      <span class="tag-badge" data-tag="safety">Safety</span>
-      <span class="tag-badge" data-tag="transport">Transport</span>
-      <span class="tag-badge" data-tag="tips">Tips</span>
-      <span class="tag-badge" data-tag="eco-friendly">Eco-Friendly</span>
-      <span class="tag-badge" data-tag="technology">Technology</span>
+    <div class="tag-cloud-container">
+      <button class="tag-badge" data-filter="all">All</button>
+      <button class="tag-badge" data-filter="safety">Safety</button>
+      <button class="tag-badge" data-filter="transport">Transport</button>
+      <button class="tag-badge" data-filter="tips">Tips</button>
+      <button class="tag-badge" data-filter="eco">Eco-Friendly</button>
+      <button class="tag-badge" data-filter="technology">Technology</button>
+
+      <!-- NEW CLEAR ALL BUTTON -->
+      <button id="clear-filters-btn" class="clear-filters-btn" disabled>
+        Clear all
+      </button>
     </div>
   </div>
 
@@ -1037,6 +1044,88 @@
   <script src="../js/modules/chatbot-modal.js"></script>
   <script src="../js/modules/back-to-top-button.js"></script>
   <script src="../js/modules/backtoBottom.js"></script>
+
+  <script>
+  // FILTER LOGIC WITH MULTI-SELECT + CLEAR ALL
+  const filterButtons = document.querySelectorAll('.tag-badge[data-filter]');
+  const clearFiltersBtn = document.getElementById('clear-filters-btn');
+  const cards = document.querySelectorAll('.card[data-category]');
+
+  let activeFilters = new Set(); // stores active filter keys except "all"
+
+  function updateClearButtonState() {
+    if (activeFilters.size === 0) {
+      clearFiltersBtn.disabled = true;
+      clearFiltersBtn.classList.remove('active');
+    } else {
+      clearFiltersBtn.disabled = false;
+      clearFiltersBtn.classList.add('active');
+    }
+  }
+
+  function applyFilters() {
+    if (activeFilters.size === 0 || activeFilters.has('all')) {
+      cards.forEach(card => {
+        card.style.display = '';
+      });
+      return;
+    }
+
+    cards.forEach(card => {
+      const cardCategories = card.getAttribute('data-category').toLowerCase().split(/\s+/);
+      const show = [...activeFilters].some(f => cardCategories.includes(f));
+      card.style.display = show ? '' : 'none';
+    });
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filterKey = btn.dataset.filter.toLowerCase();
+
+      if (filterKey === 'all') {
+        // Reset everything when ALL is clicked
+        activeFilters.clear();
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      } else {
+        // Toggle this filter
+        if (activeFilters.has(filterKey)) {
+          activeFilters.delete(filterKey);
+          btn.classList.remove('active');
+        } else {
+          activeFilters.add(filterKey);
+          btn.classList.add('active');
+        }
+
+        // "All" should not stay active when specific filters are chosen
+        const allBtn = document.querySelector('.tag-badge[data-filter="all"]');
+        if (allBtn) {
+          allBtn.classList.remove('active');
+        }
+        activeFilters.delete('all');
+      }
+
+      updateClearButtonState();
+      applyFilters();
+    });
+  });
+
+  clearFiltersBtn.addEventListener('click', () => {
+    activeFilters.clear();
+    filterButtons.forEach(b => b.classList.remove('active'));
+    const allBtn = document.querySelector('.tag-badge[data-filter="all"]');
+    if (allBtn) allBtn.classList.add('active');
+    updateClearButtonState();
+    applyFilters();
+  });
+
+  // Initial state: "All" selected
+  const allBtnInit = document.querySelector('.tag-badge[data-filter="all"]');
+  if (allBtnInit) {
+    allBtnInit.classList.add('active');
+  }
+</script>
+
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">
