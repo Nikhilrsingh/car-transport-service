@@ -234,7 +234,18 @@ section {
 
 .detail-item i {
     color: var(--primary-color);
+    flex: 0 0 18px;
     width: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.detail-item span,
+.detail-item a{
+  display: inline-block;
+  line-height: 1.4;
 }
 
 .detail-item a {
@@ -247,12 +258,51 @@ section {
     color: var(--primary-color);
 }
 
-.detail-item:last-child {
+.location-item{
     margin-top: 5px;
     font-style: italic;
     font-size: 0.9rem;
     color: #999;
 }
+.location-item{
+  align-items: flex-start;     /* icon top aligns with multi-line text */
+}
+
+.location-item i{
+  margin-top: 2px;            /* tiny nudge to match text baseline */
+}
+
+.location-item span,
+.location-item a{
+  text-align: left;
+}
+
+/*map button*/
+.location-item .map-open-link{
+  display: inline-block;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.location-item .map-open-link:hover{
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.location-item .map-open-link:active{
+  color: var(--primary-color);
+}
+.location-item .map-open-btn:hover{
+  color: var(--primary-color);
+  text-decoration: underline;
+} 
+
+
 
 /* Network Stats Section */
 .network-stats {
