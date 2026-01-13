@@ -2,97 +2,82 @@
 <link rel="stylesheet" href="../css/components/middle-navbar.css" />
 <header class="header">
   <div class="navbar-container">
+    <!-- Top Bar -->
     <div class="upbar">
-      <a
-        href="../pages/tracking.html"
-        class="upbar-btn track-btn"
-        data-tooltip="Track Your Car"
-      >
+      <a href="../pages/tracking.html" class="upbar-btn track-btn" data-tooltip="Track Your Car">
         <i class="fas fa-location-dot"></i>
         <span>Track</span>
       </a>
-      <a
-        href="../pages/emergency-support.html"
-        class="upbar-btn help-btn"
-        data-tooltip="Need Help?"
-      >
+      <a href="../pages/emergency-support.html" class="upbar-btn help-btn" data-tooltip="Need Help?">
         <i class="fas fa-headset"></i>
         <span>Help</span>
       </a>
     </div>
 
     <!-- Middle Navbar -->
-   <div class="middle-navbar">
-  <div class="middle-navbar-container">
-    <!-- Left: HCC Logo -->
-    <div class="middle-navbar-left">
-      <img src="../assets/icons/hcc logo.png" alt="HCC Logo" class="middle-navbar-logo" />
-    </div>
-
-    <!-- Center: Company Banner -->
-    <div class="middle-navbar-center">
-      <img src="../assets/icons/HCC.png" alt="Harihar Cargo Carriers" class="middle-navbar-banner" />
-    </div>
-
-    <!-- Right: Contact Info -->
-    <div class="middle-navbar-right">
-      <a href="https://wa.me/9372693389" target="_blank" class="middle-contact-item whatsapp-link">
-        <i class="fab fa-whatsapp"></i>
-        <div class="contact-text">
-          <span class="contact-number">+91-9372693389</span>
-          <span class="contact-number">+91-7972409656</span>
-          <small class="contact-sub">Call / Whatsapp Us</small>
+    <div class="middle-navbar">
+      <div class="middle-navbar-container">
+        <!-- Left: HCC Logo -->
+        <div class="middle-navbar-left">
+          <img src="../assets/icons/hcc logo.png" alt="HCC Logo" class="middle-navbar-logo" />
         </div>
-      </a>
-      <a href="mailto:hariharcarrier@gmail.com" class="middle-contact-item email-link">
-        <i class="fas fa-envelope"></i>
-        <div class="contact-text">
-          <span class="contact-number">hariharcarrier@gmail.com</span>
-          <small class="contact-sub">Email Us</small>
+
+        <!-- Center: Company Banner -->
+        <div class="middle-navbar-center">
+          <img src="../assets/icons/HCC.png" alt="Harihar Cargo Carriers" class="middle-navbar-banner" />
         </div>
-      </a>
+
+        <!-- Right: Contact Info -->
+        <div class="middle-navbar-right">
+          <a href="https://wa.me/9372693389" target="_blank" class="middle-contact-item whatsapp-link">
+            <i class="fab fa-whatsapp"></i>
+            <div class="contact-text">
+              <span class="contact-number">+91-9372693389</span>
+              <span class="contact-number">+91-7972409656</span>
+              <small class="contact-sub">Call / Whatsapp Us</small>
+            </div>
+          </a>
+          <a href="mailto:hariharcarrier@gmail.com" class="middle-contact-item email-link">
+            <i class="fas fa-envelope"></i>
+            <div class="contact-text">
+              <span class="contact-number">hariharcarrier@gmail.com</span>
+              <small class="contact-sub">Email Us</small>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-
+    <!-- Main Navigation Bar -->
     <div class="navbar">
       <!-- Left Logo -->
       <div class="logo-container left-logo">
-        <img
-          src="../assets/images/left-logo.jpg"
-          alt="Harihar Car Carriers"
-          class="logo-img"
-        />
+        <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
+      </div>
+
+      <div class="nav-theme-toggle">
+        <button id="theme-toggle" aria-label="Toggle theme" class="nav-theme-btn">
+          <i id="theme-icon" class="fas fa-sun"></i>
+        </button>
       </div>
 
       <!-- Desktop Navigation -->
       <nav class="desktop-nav" aria-label="Main navigation">
         <ul class="nav-list">
           <li class="nav-item">
-            <a
-              href="../index.html"
-              class="nav-link"
-              data-page="home"
-              data-tooltip="Home"
-            >
+            <a href="../index.html" class="nav-link" data-page="home" data-tooltip="Home">
               <i class="fas fa-home"></i>
               <span>Home</span>
             </a>
           </li>
           <li class="nav-item">
-            <a
-              href="../pages/about.html"
-              class="nav-link"
-              data-page="about"
-              data-tooltip="About"
-            >
+            <a href="../pages/about.html" class="nav-link" data-page="about" data-tooltip="About">
               <i class="fas fa-info-circle"></i>
               <span>About</span>
             </a>
           </li>
 
-          <!-- Dropdown for services -->
+          <!-- Services Dropdown -->
           <li class="nav-item dropdown-nav" data-dropdown>
             <button class="nav-link" data-dropdown-btn type="button">
               <i class="fas fa-truck-moving"></i>
@@ -101,80 +86,48 @@
             </button>
 
             <div class="dropdown-menu">
-              <ul style="list-style-type: none">
+              <ul>
                 <li class="nav-item">
-                  <a
-                    href="../services.html"
-                    class="nav-link"
-                    data-page="services"
-                    data-tooltip="Services"
-                  >
+                  <a href="../services.html" class="nav-link" data-page="services" data-tooltip="Services">
                     <i class="fas fa-truck-moving"></i>
                     <span>Our Services</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/how-it-works.html"
-                    class="nav-link"
-                    data-page="how-it-works"
-                    data-tooltip="How It Works"
-                  >
+                  <a href="../pages/how-it-works.html" class="nav-link" data-page="how-it-works"
+                    data-tooltip="How It Works">
                     <i class="fas fa-tasks"></i>
                     <span>How It Works</span>
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="../pages/booking.html"
-                    class="nav-link"
-                    data-page="booking"
-                    data-tooltip="Booking"
-                  >
+                <li class="nav-item">
+                  <a href="../pages/booking.html" class="nav-link" data-page="booking" data-tooltip="Booking">
                     <i class="fas fa-calendar-check"></i>
                     <span>Booking</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/pricing.html"
-                    class="nav-link"
-                    data-page="pricing"
-                    data-tooltip="Pricing"
-                  >
+                  <a href="../pages/pricing.html" class="nav-link" data-page="pricing" data-tooltip="Pricing">
                     <i class="fas fa-tags"></i>
                     <span>Pricing</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/pricing-calculator.html"
-                    class="nav-link"
-                    data-page="pricing-calculator"
-                    data-tooltip="Pricing Calculator"
-                  >
+                  <a href="../pages/pricing-calculator.html" class="nav-link" data-page="pricing-calculator"
+                    data-tooltip="Pricing Calculator">
                     <i class="fas fa-calculator"></i>
                     <span>Pricing Calculator</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/tracking.html"
-                    class="nav-link"
-                    data-page="tracking"
-                    data-tooltip="Track Your Car"
-                  >
+                  <a href="../pages/tracking.html" class="nav-link" data-page="tracking" data-tooltip="Track Your Car">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>Track Your Car</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/emergency-support.html"
-                    class="nav-link"
-                    data-page="emergency-support"
-                    data-tooltip="Emergency Support"
-                  >
+                  <a href="../pages/emergency-support.html" class="nav-link" data-page="emergency-support"
+                    data-tooltip="Emergency Support">
                     <i class="fas fa-life-ring"></i>
                     <span>Emergency Support</span>
                   </a>
@@ -184,17 +137,13 @@
           </li>
 
           <li class="nav-item">
-            <a
-              href="../pages/contact.html"
-              class="nav-link"
-              data-page="contact"
-              data-tooltip="Contact"
-            >
+            <a href="../pages/contact.html" class="nav-link" data-page="contact" data-tooltip="Contact">
               <i class="fas fa-phone"></i>
               <span>Contact</span>
             </a>
           </li>
 
+          <!-- More Dropdown -->
           <li class="nav-item dropdown-nav" data-dropdown>
             <button class="nav-link" data-dropdown-btn type="button">
               <i class="fa-solid fa-layer-group"></i>
@@ -203,89 +152,53 @@
             </button>
 
             <div class="dropdown-menu">
-              <ul style="list-style-type: none">
+              <ul>
                 <li class="nav-item">
-                  <a
-                    href="../pages/our-network.html"
-                    class="nav-link"
-                    data-page="network"
-                    data-tooltip="Our Network"
-                  >
+                  <a href="../pages/our-network.html" class="nav-link" data-page="network" data-tooltip="Our Network">
                     <i class="fas fa-network-wired"></i>
                     <span>Our Network</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/gallery.html"
-                    class="nav-link"
-                    data-page="gallery"
-                    data-tooltip="Gallery"
-                  >
+                  <a href="../pages/gallery.html" class="nav-link" data-page="gallery" data-tooltip="Gallery">
                     <i class="fas fa-images"></i>
                     <span>Gallery</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/contributors.html"
-                    class="nav-link"
-                    data-page="contributors"
-                    data-tooltip="Contributors"
-                  >
+                  <a href="../pages/contributors.html" class="nav-link" data-page="contributors"
+                    data-tooltip="Contributors">
                     <i class="fas fa-users"></i>
                     <span>Contributors</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/careers.html"
-                    class="nav-link"
-                    data-page="careers"
-                    data-tooltip="Careers"
-                  >
+                  <a href="../pages/careers.html" class="nav-link" data-page="careers" data-tooltip="Careers">
                     <i class="fas fa-briefcase"></i>
                     <span>Careers</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/faq.html"
-                    class="nav-link"
-                    data-page="faq"
-                    data-tooltip="FAQ"
-                  >
+                  <a href="../pages/faq.html" class="nav-link" data-page="faq" data-tooltip="FAQ">
                     <i class="fas fa-question-circle"></i>
                     <span>FAQ</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/press-media.html"
-                    class="nav-link"
-                    data-page="press-media"
-                    data-tooltip="Press & Media"
-                  >
+                  <a href="../pages/press-media.html" class="nav-link" data-page="press-media"
+                    data-tooltip="Press & Media">
                     <i class="fas fa-newspaper"></i>
                     <span>Press & Media</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/blog.html"
-                    class="nav-link blog-link"
-                    data-tooltip="Blog"
-                  >
+                  <a href="../pages/blog.html" class="nav-link" data-tooltip="Blog">
                     <i class="fas fa-blog"></i>
                     <span>Blog</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    href="../pages/Feedback.html"
-                    class="nav-link blog-link"
-                    data-tooltip="Feedback"
-                  >
+                  <a href="../pages/Feedback.html" class="nav-link" data-tooltip="Feedback">
                     <i class="fas fa-star"></i>
                     <span>Feedback</span>
                   </a>
@@ -295,80 +208,55 @@
           </li>
         </ul>
 
-        <!-- creating a div for left align navigation links  -->
+        <!-- Right Section: Search, Enquiry, Theme Toggle, Login -->
         <div class="nav-right-section">
           <!-- Search Bar -->
           <div class="search-container">
             <div class="search-bar">
-              <input
-                type="text"
-                id="navbarSearch"
-                placeholder="Search services..."
-                aria-label="Search services"
-              />
+              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services" />
               <i class="fas fa-search"></i>
             </div>
           </div>
 
+          <!-- Enquiry Button -->
           <div class="action-nav">
-            <a
-              href="../pages/enquiry.html"
-              class="enquiry-link"
-              data-tooltip="Enquiry"
-            >
+            <a href="../pages/enquiry.html" class="enquiry-link" data-tooltip="Enquiry">
               <i class="fas fa-question-circle"></i>
             </a>
           </div>
 
-          <!-- Theme Toggle: placed after Enquiry and before Login -->
+          <!-- Theme Toggle -->
           <div class="nav-theme-toggle">
             <button id="theme-toggle" aria-label="Toggle theme" class="nav-theme-btn">
               <i id="theme-icon" class="fas fa-sun"></i>
             </button>
           </div>
+
+          <!-- Login/Profile Section -->
+          <div class="nav-actions">
+            <!-- Login Button (shown when logged out) -->
+            <a href="../pages/login.html" id="loginBtn" class="login-btn" data-tooltip="Login">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
+
+            <!-- Profile Section (shown when logged in) -->
+            <div id="profile" class="profile-section hidden">
+              <span id="userEmail" class="user-email"></span>
+              <a href="#" id="logoutBtn" class="logout-btn" data-tooltip="Logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
         </div>
-
-        <!-- <div class="nav-actions">
-          <a href="../pages/login.html" class="login-btn" data-tooltip="Login">
-            <i class="fas fa-user"></i>
-            <span>Login</span>
-          </a>
-        </div> -->
-
-        <!-- Replace your nav-actions section with this -->
-<!-- Replace your nav-actions section with this -->
-<div class="nav-actions">
-  <!-- Login Button (shown when logged out) -->
-  <a href="../pages/login.html" id="loginBtn" class="login-btn" data-tooltip="Login" style="display: inline-block;">
-    <i class="fas fa-user"></i>
-    <span>Login</span>
-  </a>
-
-  <!-- Profile Section (shown when logged in) -->
-  <div id="profile" class="hidden" style="display: none; align-items: center; gap: 10px; color: var(--text-color, #333);">
-    <span id="userEmail" style="margin-right: 10px; font-weight: 500;"></span>
-    <a href="#" id="logoutBtn" class="login-btn" data-tooltip="Logout" style="text-decoration: none;">
-      <i class="fas fa-sign-out-alt"></i>
-      <span>Logout</span>
-    </a>
-  </div>
-</div>
-
       </nav>
-      <!-- Mobile Menu Button -->
-      <button
-        class="mobile-menu-btn"
-        id="mobileMenuBtn"
-        aria-label="Toggle mobile menu"
-      >
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
 
-      <!-- Mobile Theme Toggle (visible on small screens) -->
-      <button id="mobile-theme-toggle" aria-label="Toggle theme" class="nav-theme-btn mobile-theme-btn" data-tooltip="Toggle theme">
-        <i id="mobile-theme-icon" class="fas fa-sun"></i>
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
       </button>
     </div>
   </div>
@@ -380,11 +268,7 @@
         <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" />
         <span>Harihar Car Carriers</span>
       </div>
-      <button
-        class="mobile-close-btn"
-        id="mobileCloseBtn"
-        aria-label="Close mobile menu"
-      >
+      <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
         <i class="fas fa-times"></i>
       </button>
     </div>
@@ -393,15 +277,11 @@
     <div class="mobile-search-container">
       <div class="mobile-search-bar">
         <i class="fas fa-search"></i>
-        <input
-          type="text"
-          id="mobileSearch"
-          placeholder="Search services..."
-          aria-label="Search services"
-        />
+        <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services" />
       </div>
     </div>
 
+    <!-- Mobile Navigation List -->
     <ul class="mobile-nav-list">
       <li class="mobile-nav-item">
         <a href="../index.html" class="mobile-nav-link">
@@ -511,7 +391,15 @@
           <span>Blog</span>
         </a>
       </li>
+      <li class="mobile-nav-item">
+        <a href="../pages/Feedback.html" class="mobile-nav-link">
+          <i class="fas fa-star"></i>
+          <span>Feedback</span>
+        </a>
+      </li>
     </ul>
+
+    <!-- Mobile Action Buttons -->
     <div class="mobile-nav-actions">
       <a href="../pages/login.html" class="mobile-login-btn">
         <i class="fas fa-user"></i>
@@ -522,14 +410,16 @@
         <span>Book Instantly</span>
       </a>
     </div>
+
+    <!-- Mobile Contact Info -->
     <div class="mobile-contact-info">
       <div class="contact-item">
         <i class="fas fa-phone"></i>
-        <span>+91 98765 43210</span>
+        <span>+91-9372693389</span>
       </div>
       <div class="contact-item">
         <i class="fas fa-envelope"></i>
-        <span>info@hariharcarcarriers.com</span>
+        <span>hariharcarrier@gmail.com</span>
       </div>
       <div class="contact-item">
         <i class="fas fa-clock"></i>
@@ -542,7 +432,4 @@
   <div class="nav-overlay" id="navOverlay"></div>
 </header>
 
-
 <script src="../js/modules/Navbar.js"></script>
-
-  
