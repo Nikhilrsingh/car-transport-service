@@ -210,6 +210,14 @@ section {
     justify-content: center;
     font-size: 1.5rem;
     color: var(--white);
+    overflow: hidden;
+}
+
+.office-city-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .office-header h3 {
@@ -260,7 +268,6 @@ section {
 
 .location-item{
     margin-top: 5px;
-    font-style: italic;
     font-size: 0.9rem;
     color: #999;
 }
@@ -269,7 +276,8 @@ section {
 }
 
 .location-item i{
-  margin-top: 2px;            /* tiny nudge to match text baseline */
+  margin-top: 2px;           /* tiny nudge to match text baseline */
+  color: var(--primary-color);
 }
 
 .location-item span,
@@ -279,7 +287,7 @@ section {
 
 /*map button*/
 .location-item .map-open-link{
-  display: inline-block;
+  display: block;
   width: 100%;
   color: inherit;
   text-decoration: none;
@@ -287,21 +295,25 @@ section {
 
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  color: #555 !important;
 }
 
 .location-item .map-open-link:hover{
-  color: var(--primary-color);
-  text-decoration: underline;
+  color: var(--primary-color) !important;
+  text-decoration: underline !important;
 }
 
 .location-item .map-open-link:active{
   color: var(--primary-color);
 }
-.location-item .map-open-btn:hover{
-  color: var(--primary-color);
-  text-decoration: underline;
-} 
 
+
+.office-details .location-item .map-open-link{
+  font-weight: 800 !important;
+  color: #444 !important;
+}
 
 
 /* Network Stats Section */
@@ -615,4 +627,26 @@ body[data-theme="dark"] .contact-btn.secondary {
 body[data-theme="dark"] .contact-btn.secondary:hover {
   background: #f97316;
   color: #0b1120;
+}
+
+/* Ensure location link stays bold in both themes */
+body[data-theme="light"] .office-details .location-item .map-open-link{
+  font-weight: 700 !important;
+  color: #555 !important;
+}
+
+body[data-theme="dark"] .office-details .location-item .map-open-link{
+  font-weight: 700 !important;
+  color: #e5e7eb !important;
+}
+
+/* Force orange hover for office location link */
+.office-details .location-item .map-open-link{
+  color: #444;
+  text-decoration: none;
+}
+
+.office-details .location-item .map-open-link:hover{
+  color: var(--primary-color) !important;
+  text-decoration: underline !important;
 }
