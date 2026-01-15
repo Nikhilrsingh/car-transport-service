@@ -15,19 +15,19 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../css/components/glowing-input.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   </head>
   <body>
     <header>
-      <!-- Include your navbar here or load with JS -->
       <div id="navbar-container"></div>
     </header>
 
     <main>
       <div class="feedback-header enhanced-header">
         <h1>⭐ Customer Reviews & Feedback</h1>
-        <p>
-           Real experiences from customers who trusted Harihar Car Carriers
-        </p>
+        <p>Real experiences from customers who trusted Harihar Car Carriers</p>
       </div>
 
       <!-- Feedback Form -->
@@ -75,30 +75,40 @@
         </form>
       </div>
 
-      <!-- Testimonials List -->
-      <section class="testimonials-list" id="testimonialsList">
-        <!-- Rendered by JS -->
+      <!-- Testimonials Carousel -->
+      <section class="testimonials-carousel-section">
+        <div class="swiper testimonialsSwiper">
+          <div class="swiper-wrapper" id="swiperWrapper">
+            <!-- Testimonial slides will be dynamically inserted here -->
+          </div>
+          
+          <!-- Navigation arrows -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          
+          <!-- Pagination dots -->
+          <div class="swiper-pagination"></div>
+        </div>
       </section>
-
     </main>
 
     <!-- Footer -->
     <footer>
-      <!-- Your dynamic or static footer here -->
       <div id="footer-container"></div>
     </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
       // Load sample testimonials
       let testimonials = [
         {
           pic: "https://img.freepik.com/premium-photo/image-25-year-old-indian-man-that-is-smiling-camera_878783-7216.jpg?w=1060",
-          product:
-            "https://th.bing.com/th/id/R.b066440ede15d1b3c5da4098a46ad9ad?rik=24euCIHs4PjVmg&riu=http%3a%2f%2fwww.transportingcars.co.uk%2fwp-content%2fuploads%2f2022%2f04%2fIMG_20190103_131224-940x400-1-800x340.jpg&ehk=OkRTvIg%2bzy8OpMMGuMcql3y63GSEvNglQ8BXWW4hISE%3d&risl=&pid=ImgRaw&r=0",
+          product: "https://th.bing.com/th/id/R.b066440ede15d1b3c5da4098a46ad9ad?rik=24euCIHs4PjVmg&riu=http%3a%2f%2fwww.transportingcars.co.uk%2fwp-content%2fuploads%2f2022%2f04%2fIMG_20190103_131224-940x400-1-800x340.jpg&ehk=OkRTvIg%2bzy8OpMMGuMcql3y63GSEvNglQ8BXWW4hISE%3d&risl=&pid=ImgRaw&r=0",
           name: "Ravi Singh",
           stars: 5,
-          message:
-            "I used this service last week and honestly the whole process was super smooth. The team kept me updated at every step and the delivery was right on time. I didn't face any confusion or delay. I'll definitely use it again when needed.",
+          message: "I used this service last week and honestly the whole process was super smooth. The team kept me updated at every step and the delivery was right on time. I didn't face any confusion or delay. I'll definitely use it again when needed.",
           time: "2025-11-10 09:02",
           comments: [
             { name: "Admin", text: "Thank you so much for trusting us!" },
@@ -106,23 +116,19 @@
         },
         {
           pic: "https://randomuser.me/api/portraits/women/65.jpg",
-          product:
-            "https://paragonmovers.com/wp-content/uploads/2021/05/csc1.jpg",
+          product: "https://paragonmovers.com/wp-content/uploads/2021/05/csc1.jpg",
           name: "Shruti Patel",
           stars: 4,
-          message:
-            "This was my first time trying their service and I'm really impressed. The staff was polite, the communication was clear, and everything happened exactly as promised. It felt very professional and stress-free. Highly recommended from my side.",
+          message: "This was my first time trying their service and I'm really impressed. The staff was polite, the communication was clear, and everything happened exactly as promised. It felt very professional and stress-free. Highly recommended from my side.",
           time: "2025-11-12 15:25",
           comments: [],
         },
         {
           pic: "https://i.pinimg.com/originals/23/e3/f8/23e3f84e7bf2f39381873d37abe7944c.jpg",
-          product:
-            "https://tse4.mm.bing.net/th/id/OIP.jAsEPf6Ah_eyQtJ8l7ViggHaEW?cb=ucfimg2ucfimg=1&w=825&h=485&rs=1&pid=ImgDetMain&o=7&rm=3",
+          product: "https://tse4.mm.bing.net/th/id/OIP.jAsEPf6Ah_eyQtJ8l7ViggHaEW?cb=ucfimg2ucfimg=1&w=825&h=485&rs=1&pid=ImgDetMain&o=7&rm=3",
           name: "Jack",
           stars: 5,
-          message:
-            "I had a small issue with timing but their support team handled it quickly and politely. The overall experience was very good and worth the price. I appreciated how seriously they took customer satisfaction. I would happily return again.",
+          message: "I had a small issue with timing but their support team handled it quickly and politely. The overall experience was very good and worth the price. I appreciated how seriously they took customer satisfaction. I would happily return again.",
           time: "2025-11-10 09:02",
           comments: [
             { name: "Admin", text: "Thank you so much for trusting us!" },
@@ -130,47 +136,46 @@
         },
       ];
 
+      let swiper; // Store swiper instance globally
+
       function renderTestimonials() {
-        const list = document.getElementById("testimonialsList");
-        list.innerHTML = "";
-        list.style.marginBottom = "32px";
+        const wrapper = document.getElementById("swiperWrapper");
+        wrapper.innerHTML = "";
+        
         testimonials.forEach((t, i) => {
-          list.innerHTML += `
-          <div class="testimonial-card" data-index="${i}">
-            <div class="testimonial-images">
-              <img src="${t.pic}" alt="${t.name}" class="testimonial-pic">
-              ${
-                t.product
-                  ? `<img src="${t.product}" alt="Product" class="testimonial-product-img">`
-                  : ""
-              }
-            </div>
-            <div class="testimonial-main">
-              <div class="testimonial-header">
-                <span class="testimonial-name">${t.name}</span>
-                <span class="testimonial-stars">${"★".repeat(
-                  t.stars
-                )}${"☆".repeat(5 - t.stars)}</span>
-                <span class="testimonial-time">${t.time}</span>
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          slide.innerHTML = `
+            <div class="testimonial-card" data-index="${i}">
+              <div class="testimonial-images">
+                <img src="${t.pic}" alt="${t.name}" class="testimonial-pic">
+                ${t.product ? `<img src="${t.product}" alt="Product" class="testimonial-product-img">` : ""}
               </div>
-              <div class="testimonial-message">${t.message}</div>
-              <div class="comments-section" id="comments-${i}">
-                <b>Comments</b>
-                <div class="comment-list">${t.comments
-                  .map(
-                    (c) =>
-                      `<div class="comment"><span class="comment-author">${c.name}:</span> ${c.text}</div>`
-                  )
-                  .join("")}</div>
-                <form class="comment-form" data-index="${i}" onsubmit="return false">
-                  <input type="text" placeholder="Add a comment..." required>
-                  <button type="submit">Post</button>
-                </form>
+              <div class="testimonial-main">
+                <div class="testimonial-header">
+                  <span class="testimonial-name">${t.name}</span>
+                  <span class="testimonial-stars">${"★".repeat(t.stars)}${"☆".repeat(5 - t.stars)}</span>
+                  <span class="testimonial-time">${t.time}</span>
+                </div>
+                <div class="testimonial-message">${t.message}</div>
+                <div class="comments-section" id="comments-${i}">
+                  <b>Comments</b>
+                  <div class="comment-list">${t.comments.map(c => 
+                    `<div class="comment"><span class="comment-author">${c.name}:</span> ${c.text}</div>`
+                  ).join("")}</div>
+                  <form class="comment-form" data-index="${i}" onsubmit="return false">
+                    <input type="text" placeholder="Add a comment..." required>
+                    <button type="submit">Post</button>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
-        `;
+          `;
+          wrapper.appendChild(slide);
         });
+
+        // Reinitialize Swiper after adding new slides
+        initSwiper();
 
         // Add comment form handlers
         document.querySelectorAll(".comment-form").forEach((form) => {
@@ -185,12 +190,78 @@
         });
       }
 
+      function initSwiper() {
+        // Destroy existing swiper if it exists
+        if (swiper) {
+          swiper.destroy(true, true);
+        }
+
+        // Initialize Swiper
+        swiper = new Swiper(".testimonialsSwiper", {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          grabCursor: true,
+          loop: true,
+          
+          // Auto-rotation (pause on hover)
+          autoplay: {
+            delay: 6000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          },
+          
+          // Pagination dots
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            dynamicBullets: true,
+          },
+          
+          // Navigation arrows
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          
+          // Keyboard control
+          keyboard: {
+            enabled: true,
+            onlyInViewport: true,
+          },
+          
+          // Mouse wheel control
+          mousewheel: {
+            forceToAxis: true,
+          },
+          
+          // Smooth transitions
+          speed: 600,
+          effect: 'slide',
+          
+          // Responsive breakpoints
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 1,
+              spaceBetween: 40,
+            },
+          },
+        });
+      }
+
+      // Initial render
       renderTestimonials();
 
-      // Star rating handling (mouse + keyboard friendly)
+      // Star rating handling
       let currentStars = 0;
       document.querySelectorAll("#starRating .fa-star").forEach((star) => {
-        // make each star keyboard-focusable
         star.setAttribute('tabindex', '0');
         star.setAttribute('role', 'button');
         star.setAttribute('aria-label', (star.dataset && star.dataset.star) ? (star.dataset.star + ' star') : 'star');
@@ -207,7 +278,6 @@
           highlightStars(currentStars);
         });
 
-        // keyboard support (Enter or Space to select)
         star.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -225,28 +295,24 @@
       // Form submit
       document.getElementById("feedbackForm").onsubmit = function (e) {
         e.preventDefault();
-        const pic =
-          document.getElementById("picUrl").value ||
-          "https://randomuser.me/api/portraits/lego/1.jpg";
+        const pic = document.getElementById("picUrl").value || "https://randomuser.me/api/portraits/lego/1.jpg";
         const product = document.getElementById("productImgUrl").value || "";
         const name = document.getElementById("username").value.trim();
         const msg = document.getElementById("message").value.trim();
         const stars = currentStars;
+        
         if (!name || !msg || !stars) {
           alert("Please complete your review and select stars.");
           return;
         }
+        
         const now = new Date();
-        const timeStr =
-          now.getFullYear() +
-          "-" +
-          String(now.getMonth() + 1).padStart(2, "0") +
-          "-" +
-          String(now.getDate()).padStart(2, "0") +
-          " " +
-          String(now.getHours()).padStart(2, "0") +
-          ":" +
+        const timeStr = now.getFullYear() + "-" +
+          String(now.getMonth() + 1).padStart(2, "0") + "-" +
+          String(now.getDate()).padStart(2, "0") + " " +
+          String(now.getHours()).padStart(2, "0") + ":" +
           String(now.getMinutes()).padStart(2, "0");
+        
         testimonials.unshift({
           pic,
           product,
@@ -256,10 +322,14 @@
           time: timeStr,
           comments: [],
         });
+        
         this.reset();
         currentStars = 0;
         highlightStars(0);
         renderTestimonials();
+        
+        // Scroll to carousel section
+        document.querySelector('.testimonials-carousel-section').scrollIntoView({ behavior: 'smooth' });
       };
 
       window.addEventListener("load", () => {
@@ -269,16 +339,11 @@
     </script>
 
     <script src="../js/modules/search.js"></script>
-    <!-- Loading State Manager - Must load first -->
     <script src="../js/modules/loading-state-manager.js"></script>
-    <!-- Page Navigation Loader - Must load after loading-state-manager -->
     <script src="../js/modules/page-navigation-loader.js"></script>
     <script src="../js/modules/navbar-loader.js?v=2"></script>
-
     <script src="../js/modules/footer-loader.js"></script>
     <script src="../js/modules/themes.js"></script>
-    <!-- Component Initializer - Ensures global components (FAB, Chatbot, etc.) are available -->
     <script src="../js/modules/component-initializer.js"></script>
-
   </body>
 </html>
