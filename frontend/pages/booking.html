@@ -2681,6 +2681,7 @@
         let alternativeRoutesControls = [];
         let currentMapStyle = 'street';
         let streetViewActive = false;
+        
 
         // Blackout dates (holidays, maintenance days, etc.)
         const blackoutDates = [
@@ -2742,6 +2743,10 @@
         // ========================================
         // MULTI-STEP FORM MANAGEMENT
         // ========================================
+        let currentStep = 1; 
+        let pickupCoords = null; 
+        let dropCoords = null;
+        
         function nextStep() {
             if (!validateStep(currentStep)) {
                 showToast('Validation Error', 'Please fill all required fields correctly', 'error', 3000);
@@ -2801,7 +2806,7 @@
         // AUTO-SAVE TO LOCALSTORAGE
         // ========================================
         function autoSaveForm() {
-            const form = document.getElementById('bookingForm');
+            const form = document.getElementById('autoSaveForm');
             const formData = new FormData(form);
             const data = {
                 step: currentStep,
@@ -4872,25 +4877,31 @@
         // ========================================
         let selectedAddons = [];
         let addonsTotalPrice = 0;
+        let autoSaveTimeout = null;
+
 
         function toggleAddon(element, addonId, price) {
-            const checkbox = element.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
+          const checkbox = element.querySelector('input[type="checkbox"]');
+          if (event.target !== checkbox) {
+           checkbox.checked = !checkbox.checked;
+          }
 
-            if (checkbox.checked) {
-                element.classList.add('selected');
-                selectedAddons.push({ id: addonId, price: price });
-                addonsTotalPrice += price;
-            } else {
-                element.classList.remove('selected');
-                selectedAddons = selectedAddons.filter(a => a.id !== addonId);
-                addonsTotalPrice -= price;
-            }
+          if (checkbox.checked) {
+            element.classList.add('selected');
+            selectedAddons.push({ id: addonId, price: price });
+            addonsTotalPrice += price;
+          } else {
+            element.classList.remove('selected');
+            selectedAddons = selectedAddons.filter(a => a.id !== addonId);
+            addonsTotalPrice -= price;
+          }
 
-            updateAddonsDisplay();
-            updatePriceCalculation();
-            triggerAutoSave();
-        }
+          updateAddonsDisplay();
+          updatePriceCalculation();
+          triggerAutoSave(); 
+}
+
+
 
         function updateAddonsDisplay() {
             const addonsTotal = document.getElementById('addonsTotal');
