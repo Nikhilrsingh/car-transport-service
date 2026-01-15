@@ -72,3 +72,64 @@ export const getEmergencyRequestByReference = async (req, res) => {
     });
   }
 };
+
+/**
+ * @desc    Get all emergency requests (Admin dashboard)
+ * @route   GET /api/emergency
+ * @access  Admin (future)
+ */
+export const getAllEmergencyRequests = async (req, res) => {
+  try {
+    const {
+      page = 1,
+      limit = 10,
+      search = "",
+      urgency,
+      issueType,
+    } = req.query;
+
+    const query = {};
+
+    // 🔍 Search by name, email, phone, reference, location
+    if (search) {
+      query.$or = [
+        { fullName: { $regex: search, $options: "i" } },
+        { emailAddress: { $regex: search, $options: "i" } },
+        { phoneNumber: { $regex: search, $options: "i" } },
+        { referenceNumber: { $regex: search, $options: "i" } },
+        { currentLocation: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // 🚨 Filter by urgency
+    if (urgency) {
+      query.urgencyLevel = urgency;
+    }
+
+    // 🛠 Filter by issue type
+    if (issueType) {
+      query.issueType = issueType;
+    }
+
+    const total = await EmergencyRequest.countDocuments(query);
+
+    const requests = await EmergencyRequest.find(query)
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(Number(limit));
+
+    res.status(200).json({
+      success: true,
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      data: requests,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+

@@ -74,3 +74,51 @@ export const getEnquiryByReference = async (req, res) => {
     });
   }
 };
+
+/**
+ * @desc    Get all enquiries (Admin dashboard)
+ * @route   GET /api/enquiry
+ * @access  Admin (future)
+ */
+export const getAllEnquiries = async (req, res) => {
+  try {
+    const {
+      page = 1,
+      limit = 10,
+      search = "",
+    } = req.query;
+
+    const query = {};
+
+    // 🔍 Search by reference, name, email, phone
+    if (search) {
+      query.$or = [
+        { referenceNumber: { $regex: search, $options: "i" } },
+        { name: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+        { phone: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    const total = await Enquiry.countDocuments(query);
+
+    const enquiries = await Enquiry.find(query)
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(Number(limit));
+
+    res.status(200).json({
+      success: true,
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      data: enquiries,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+

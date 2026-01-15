@@ -72,14 +72,60 @@ export const createFeedback = async (req, res, next) => {
 
 
 // GET ALL FEEDBACKS
+/**
+ * @desc    Get all feedbacks (Admin dashboard)
+ * @route   GET /api/feedback
+ * @access  Admin (future)
+ */
 export const getAllFeedbacks = async (req, res, next) => {
   try {
-    const feedbacks = await Feedback.find().sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: feedbacks });
+    const {
+      page = 1,
+      limit = 10,
+      search = "",
+      status,
+      stars,
+    } = req.query;
+
+    const query = {};
+
+    // 🔍 Search by username or message
+    if (search) {
+      query.$or = [
+        { username: { $regex: search, $options: "i" } },
+        { message: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // ⭐ Filter by stars
+    if (stars) {
+      query.stars = Number(stars);
+    }
+
+    // 📌 Filter by status (pending, approved, rejected, etc.)
+    if (status) {
+      query.status = status;
+    }
+
+    const total = await Feedback.countDocuments(query);
+
+    const feedbacks = await Feedback.find(query)
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(Number(limit));
+
+    res.status(200).json({
+      success: true,
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      data: feedbacks,
+    });
   } catch (error) {
     next(error);
   }
 };
+
 
 // UPDATE STATUS
 export const updateFeedbackStatus = async (req, res, next) => {
@@ -127,3 +173,5 @@ export const deleteFeedback = async (req, res, next) => {
     next(error);
   }
 };
+
+

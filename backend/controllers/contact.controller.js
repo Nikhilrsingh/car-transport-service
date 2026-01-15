@@ -116,27 +116,63 @@ sendContactEmail({
     next(error);
   }
 };
-
 /**
- * @desc    Get all contact messages
+ * @desc    Get all contact messages (with pagination, search & filter)
  * @route   GET /api/contact
  * @access  Admin (future)
  */
 export const getAllContacts = async (req, res, next) => {
   try {
-    const contacts = await Contact.find()
+    const {
+      page = 1,
+      limit = 10,
+      search = "",
+      status,
+      service,
+    } = req.query;
+
+    const query = {};
+
+    // Search by name, email, phone, vehicle
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+        { phone: { $regex: search, $options: "i" } },
+        { vehicle: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // Filter by status
+    if (status) {
+      query.status = status;
+    }
+
+    // Filter by service
+    if (service) {
+      query.service = service;
+    }
+
+    const total = await Contact.countDocuments(query);
+
+    const contacts = await Contact.find(query)
       .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(Number(limit))
       .select("-__v");
 
     res.status(200).json({
       success: true,
-      count: contacts.length,
+      total,
+      page: Number(page),
+      limit: Number(limit),
       data: contacts,
     });
   } catch (error) {
     next(error);
   }
 };
+
 
 /**
  * @desc    Update contact status
@@ -184,3 +220,5 @@ export const updateContactStatus = async (req, res, next) => {
     next(error);
   }
 };
+
+
