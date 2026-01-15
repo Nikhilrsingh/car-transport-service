@@ -1795,10 +1795,47 @@
 
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
-                                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                                <input type="email" id="email" name="email" required placeholder="Enter your email" pattern="^[a-zA-Z0-9._+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$">
                                 <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
                                 <div class="error-message" id="emailError">Please enter a valid email address</div>
                             </div>
+
+                            <script>
+                                const emailInput = document.getElementById("email");
+                                const emailError = document.getElementById("emailError");
+                                const validationIcon = document.querySelector(".validation-icon i");
+                                // wrong domains list
+                                const wrongDomains = ["gmal.com", "gmial.com", "gnail.com", "yaho.com"];
+                                emailInput.addEventListener("input", function () {
+                                    const emailValue = emailInput.value.trim();
+                                    // email regex
+                                    const emailPattern = /^[a-zA-Z0-9._+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$/;
+                                    // Extract domain part
+                                    const domain = emailValue.split("@")[1];
+                                    if (!emailPattern.test(emailValue)) {
+                                        showError("Please enter a valid email address");
+                                    }
+                                    else if (wrongDomains.includes(domain)) {
+                                        showError("Did you mean gmail.com?");
+                                    }
+                                    else {
+                                         showSuccess();
+                                    }
+                                });
+                                function showError(message) {
+                                    emailError.style.display = "block";
+                                    emailError.textContent = message;
+                                    validationIcon.classList.remove("fa-check-circle");
+                                    validationIcon.classList.add("fa-times-circle");
+                                    validationIcon.style.color = "red";
+                                }
+                                function showSuccess() {
+                                    emailError.style.display = "none";
+                                    validationIcon.classList.remove("fa-times-circle");
+                                    validationIcon.classList.add("fa-check-circle");
+                                    validationIcon.style.color = "green";
+                                }
+                            </script>
 
                             <!-- Vehicle Information -->
                             <div class="form-row">
