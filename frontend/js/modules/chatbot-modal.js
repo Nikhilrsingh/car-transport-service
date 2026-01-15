@@ -94,7 +94,7 @@
                                     aria-label="Send message"
                                     title="Send message (Enter)"
                                 >
-                                    <i class="fas fa-paper-plane"></i>
+                                    <i class="fas fa-paper-plane" style="color: #ffffff;"></i>
                                 </button>
                             </div>
                         </form>

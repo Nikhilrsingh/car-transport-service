@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Vehicle Transport - Harihar Car Carriers</title>
-     <base href="./" />
-  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+    <title>Book Vehicle Transport | Harihar Car Carriers</title>
+    <meta name="description" content="Book your car or bike transport with Harihar Car Carriers. Easy online booking, competitive prices, and door-to-door delivery across India." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://nikhilrsingh.github.io/car-transport-service/pages/booking.html" />
+    <base href="./" />
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Navbar CSS -->
@@ -2678,6 +2681,7 @@
         let alternativeRoutesControls = [];
         let currentMapStyle = 'street';
         let streetViewActive = false;
+        
 
         // Blackout dates (holidays, maintenance days, etc.)
         const blackoutDates = [
@@ -2739,6 +2743,10 @@
         // ========================================
         // MULTI-STEP FORM MANAGEMENT
         // ========================================
+        let currentStep = 1; 
+        let pickupCoords = null; 
+        let dropCoords = null;
+        
         function nextStep() {
             if (!validateStep(currentStep)) {
                 showToast('Validation Error', 'Please fill all required fields correctly', 'error', 3000);
@@ -2798,7 +2806,7 @@
         // AUTO-SAVE TO LOCALSTORAGE
         // ========================================
         function autoSaveForm() {
-            const form = document.getElementById('bookingForm');
+            const form = document.getElementById('autoSaveForm');
             const formData = new FormData(form);
             const data = {
                 step: currentStep,
@@ -4869,25 +4877,31 @@
         // ========================================
         let selectedAddons = [];
         let addonsTotalPrice = 0;
+        let autoSaveTimeout = null;
+
 
         function toggleAddon(element, addonId, price) {
-            const checkbox = element.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
+          const checkbox = element.querySelector('input[type="checkbox"]');
+          if (event.target !== checkbox) {
+           checkbox.checked = !checkbox.checked;
+          }
 
-            if (checkbox.checked) {
-                element.classList.add('selected');
-                selectedAddons.push({ id: addonId, price: price });
-                addonsTotalPrice += price;
-            } else {
-                element.classList.remove('selected');
-                selectedAddons = selectedAddons.filter(a => a.id !== addonId);
-                addonsTotalPrice -= price;
-            }
+          if (checkbox.checked) {
+            element.classList.add('selected');
+            selectedAddons.push({ id: addonId, price: price });
+            addonsTotalPrice += price;
+          } else {
+            element.classList.remove('selected');
+            selectedAddons = selectedAddons.filter(a => a.id !== addonId);
+            addonsTotalPrice -= price;
+          }
 
-            updateAddonsDisplay();
-            updatePriceCalculation();
-            triggerAutoSave();
-        }
+          updateAddonsDisplay();
+          updatePriceCalculation();
+          triggerAutoSave(); 
+}
+
+
 
         function updateAddonsDisplay() {
             const addonsTotal = document.getElementById('addonsTotal');
