@@ -786,8 +786,17 @@ function updateStepDisplay() {
 
 function updateProgressBar() {
     const progress = ((currentStep - 1) / 2) * 100;
-    document.getElementById('progressFill').style.width = progress + '%';
-    document.getElementById('progressPercentage').textContent = Math.round((currentStep / 3) * 100) + '% Complete';
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressPercentage'); 
+
+    if (progressFill) {
+        progressFill.style.width = progress + '%';
+    }
+
+    // FIX: Check if the element exists before setting textContent
+    if (progressText) {
+        progressText.textContent = Math.round((currentStep / 3) * 100) + '% Complete';
+    }
 }
 
 // ========================================
@@ -847,35 +856,69 @@ function restoreFormData() {
     const savedData = localStorage.getItem('bookingDraft');
     if (!savedData) return;
 
-    const data = JSON.parse(savedData);
+    try {
+        const data = JSON.parse(savedData);
 
-    
-    if (data.isManualSave === true) {
-        const draftModal = document.getElementById('draftModal');
-        if (draftModal) {
-            draftModal.style.display = 'flex';
-            
-            
+        // ONLY show the modal if this was a manual save
+        if (data.isManualSave === true) {
+            const draftModal = document.getElementById('draftModal');
             const confirmBtn = document.getElementById('confirmResume');
-            if (confirmBtn) {
-                confirmBtn.onclick = () => {
-                    
-                    Object.keys(data.fields).forEach(key => {
-                        const input = document.getElementById(key);
-                        if (input) {
-                            input.value = data.fields[key];
-                            if (typeof validateField === 'function') validateField(key, input.value);
-                        }
-                    });
-                    
-                    window.currentStep = data.step;
-                    if (typeof updateStepDisplay === 'function') updateStepDisplay();
-                    draftModal.style.display = 'none';
-                };
+            const cancelBtn = document.getElementById('cancelResume'); // Make sure this ID matches your HTML
+
+            if (draftModal) {
+                draftModal.style.display = 'flex';
+                
+                // --- HANDLE RESUME BUTTON ---
+                if (confirmBtn) {
+                    confirmBtn.onclick = () => {
+                        // 1. Populate fields
+                        Object.keys(data.fields).forEach(key => {
+                            const input = document.getElementById(key);
+                            if (input) {
+                                input.value = data.fields[key];
+                                // Trigger manual validation styling safely
+                                if (typeof validateField === 'function') validateField(key, input.value);
+                            }
+                        });
+                        
+                        // 2. Sync Steps and UI
+                        window.currentStep = data.step || 2; // Usually step 2 if they clicked 'save'
+                        
+                        // Check if these functions exist before calling to prevent crashes
+                        if (typeof updateStepDisplay === 'function') updateStepDisplay();
+                        if (typeof updateProgressBar === 'function') updateProgressBar();
+                        if (typeof updateBookingSummary === 'function') updateBookingSummary();
+                        if (typeof calculateDistanceEstimate === 'function') calculateDistanceEstimate();
+
+                        draftModal.style.display = 'none';
+                        showToast('Restored', 'Welcome back! Your draft is loaded.', 'success');
+                    };
+                }
+
+                // --- HANDLE DISCARD BUTTON ---
+                if (cancelBtn) {
+                    cancelBtn.onclick = () => {
+                        localStorage.removeItem('bookingDraft'); 
+                        draftModal.style.display = 'none'; 
+                        showToast('Draft Discarded', 'Starting a new booking', 'info');
+                    };
+                }
             }
         }
+    } catch (e) {
+        console.error("Restoration error:", e);
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    restoreFormData();
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    restoreFormData();
+});
 
 function formatTimeAgo(date) {
     const now = new Date();
