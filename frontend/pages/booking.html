@@ -891,6 +891,7 @@
         border-radius: 5px;
         background: #444;
         outline: none;
+        appearance: none;
         -webkit-appearance: none;
       }
 
@@ -1904,24 +1905,12 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="email"
-                    ><i class="fas fa-envelope"></i> Email Address *</label
-                  >
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    placeholder="Enter your email"
-                  />
-                  <span class="validation-icon"
-                    ><i class="fas fa-check-circle"></i
-                  ></span>
-                  <div class="error-message" id="emailError">
-                    Please enter a valid email address
-                  </div>
-                </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                                <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                <div class="error-message" id="emailError">Please enter a valid email address</div>
+                            </div>
 
                 <!-- Vehicle Information -->
                 <div class="form-row">
