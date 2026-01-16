@@ -11,10 +11,10 @@ class BookingManager {
         this.validationRules = {
             fullName: (val) => val.trim().length >= 2,
             phone: (val) => {
-                const cleaned = val.replace(/\s+/g, '');
-                console.log("PHONE VALUE:", cleaned);
-                return /^\+91[6-9]\d{9}$/.test(cleaned);
+                const phone = val.replace(/\D/g, '');
+                return /^[6-9]\d{9}$/.test(phone);
             },
+
             email: (val) => {
                 const trimmed = val.trim();
 
@@ -68,8 +68,35 @@ class BookingManager {
 
         // Phone formatting
         const phoneInput = document.getElementById('phone');
+
         if (phoneInput) {
-            phoneInput.addEventListener('input', (e) => this.formatPhoneNumber(e));
+            phoneInput.addEventListener('input', () => {
+                const raw = phoneInput.value.replace(/\D/g, '');
+                const icon = phoneInput
+                    .closest('.phone-input-box')
+                    .querySelector('.validation-icon');
+                const error = phoneInput
+                    .closest('.phone-group')
+                    .querySelector('.error-message');
+
+                // reset everything first
+                phoneInput.classList.remove('valid', 'error');
+                icon.className = 'validation-icon';
+                icon.innerHTML = '';
+                error.textContent = '';
+
+                // invalid state
+                if (raw.length !== 10 || !/^[6-9]\d{9}$/.test(raw)) {
+                    phoneInput.classList.add('error');
+                    error.textContent = 'Please enter a valid 10-digit Indian phone number';
+                    return;
+                }
+
+                // valid state
+                phoneInput.classList.add('valid');
+                icon.classList.add('success');
+                icon.innerHTML = '<i class="fas fa-check-circle"></i>';
+            });
         }
 
         // Price calculator
@@ -237,7 +264,7 @@ class BookingManager {
     getErrorMessage(field) {
         const messages = {
             fullName: 'Please enter your full name (min 2 characters)',
-            phone: 'Please enter a valid Indian phone number (+91XXXXXXXXXX)',
+            phone: 'Please enter a valid Indian phone number (XXXXXXXXXX)',
             email: 'Please enter a valid email address',
             password: 'Please enter a valid password (min 8 characters)',
             vehicleType: 'Please select vehicle type',

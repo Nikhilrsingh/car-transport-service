@@ -155,15 +155,14 @@
             <div class="form-group">
               <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
               <input
-                type="tel"
+                type="text"
                 id="phone"
                 name="phone"
                 required
-                placeholder="+91XXXXXXXXXX"
-                inputmode="tel"
-                autocomplete="tel"
+                maxlength="10"
+                inputmode="numeric"
+                placeholder="Enter 10-digit number"
               />
-
               <span class="validation-icon"></span>
               <div class="error-message"></div>
               <div class="phone-format-hint">Format: 9372693389</div>
