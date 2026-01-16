@@ -90,7 +90,15 @@
 
             <div class="form-group">
               <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
-              <input type="tel" id="phone" name="phone" placeholder="10-digit number" required pattern="[0-9]{10}" />
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                required
+                maxlength="10"
+                inputmode="numeric"
+                placeholder="Enter 10-digit number"
+              />
               <span class="validation-icon"></span>
               <div class="error-message"></div>
               <div class="phone-format-hint">Format: 9372693389</div>

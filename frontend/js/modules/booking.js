@@ -10,8 +10,22 @@ class BookingManager {
         this.formData = {};
         this.validationRules = {
             fullName: (val) => val.trim().length >= 2,
-            phone: (val) => /^[6-9]\d{9}$/.test(val.replace(/\D/g, '')),
-            email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+            phone: (val) => {
+                const phone = val.replace(/\D/g, '');
+                return /^[6-9]\d{9}$/.test(phone);
+            },
+
+            email: (val) => {
+                const trimmed = val.trim();
+
+                // 1️⃣ reject if whitespace exists anywhere
+                if (/\s/.test(val)) return false;
+
+                // 2️⃣ validate email format
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+            },
+
+            password: (val) => val.trim().length >= 8,
             vehicleType: (val) => val.trim() !== '',
             pickupLocation: (val) => val.trim() !== '',
             dropLocation: (val) => val.trim() !== '',
@@ -29,8 +43,8 @@ class BookingManager {
 
     setupEventListeners() {
         // Form input validation
-        const validationFields = ['fullName', 'phone', 'email', 'vehicleType', 
-                                  'pickupLocation', 'dropLocation', 'pickupDate'];
+        const validationFields = ['fullName', 'phone', 'email', 'password', 'vehicleType',
+                          'pickupLocation', 'dropLocation', 'pickupDate'];
         
         validationFields.forEach(field => {
             const input = document.getElementById(field);
@@ -54,8 +68,35 @@ class BookingManager {
 
         // Phone formatting
         const phoneInput = document.getElementById('phone');
+
         if (phoneInput) {
-            phoneInput.addEventListener('input', (e) => this.formatPhoneNumber(e));
+            phoneInput.addEventListener('input', () => {
+                const raw = phoneInput.value.replace(/\D/g, '');
+                const icon = phoneInput
+                    .closest('.phone-input-box')
+                    .querySelector('.validation-icon');
+                const error = phoneInput
+                    .closest('.phone-group')
+                    .querySelector('.error-message');
+
+                // reset everything first
+                phoneInput.classList.remove('valid', 'error');
+                icon.className = 'validation-icon';
+                icon.innerHTML = '';
+                error.textContent = '';
+
+                // invalid state
+                if (raw.length !== 10 || !/^[6-9]\d{9}$/.test(raw)) {
+                    phoneInput.classList.add('error');
+                    error.textContent = 'Please enter a valid 10-digit Indian phone number';
+                    return;
+                }
+
+                // valid state
+                phoneInput.classList.add('valid');
+                icon.classList.add('success');
+                icon.innerHTML = '<i class="fas fa-check-circle"></i>';
+            });
         }
 
         // Price calculator
@@ -166,7 +207,7 @@ class BookingManager {
         let fields = [];
 
         if (step === 1) {
-            fields = ['fullName', 'phone', 'email', 'vehicleType'];
+            fields = ['fullName', 'phone', 'email', 'password', 'vehicleType'];
         } else if (step === 2) {
             fields = ['pickupLocation', 'dropLocation', 'pickupDate'];
         }
@@ -218,8 +259,9 @@ class BookingManager {
     getErrorMessage(field) {
         const messages = {
             fullName: 'Please enter your full name (min 2 characters)',
-            phone: 'Please enter a valid 10-digit Indian phone number',
+            phone: 'Please enter a valid Indian phone number (XXXXXXXXXX)',
             email: 'Please enter a valid email address',
+            password: 'Please enter a valid password (min 8 characters)',
             vehicleType: 'Please select vehicle type',
             pickupLocation: 'Please enter pickup location',
             dropLocation: 'Please enter drop location',
@@ -382,9 +424,9 @@ class BookingManager {
 
     // Utilities
     formatPhoneNumber(e) {
-        let value = e.target.value.replace(/\D/g, '');
+        let value = e.target.value.replace(/[^\d+]/g, '');
         if (value.length > 0) {
-            value = value.substring(0, 10);
+            value = value.substring(0, 12);
             if (value.length > 5) {
                 value = value.substring(0, 5) + ' ' + value.substring(5);
             }
