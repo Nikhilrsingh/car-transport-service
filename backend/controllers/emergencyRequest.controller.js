@@ -133,3 +133,140 @@ export const getAllEmergencyRequests = async (req, res) => {
   }
 };
 
+
+export const getEmergencyRequestById = async (req, res) => {
+  try {
+    const request = await EmergencyRequest.findById(req.params.id);
+
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: "Emergency request not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: request,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+export const updateEmergencyStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const allowed = ["new", "in-progress", "resolved"];
+
+    if (!allowed.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid status value",
+      });
+    }
+
+    const request = await EmergencyRequest.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    );
+
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: "Emergency request not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Status updated successfully",
+      data: request,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+export const toggleSeenStatus = async (req, res) => {
+  try {
+    const request = await EmergencyRequest.findById(req.params.id);
+
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: "Emergency request not found",
+      });
+    }
+
+    request.isSeen = !request.isSeen;
+    await request.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Seen status updated",
+      data: request,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+export const getEmergencyStats = async (req, res) => {
+  try {
+    const total = await EmergencyRequest.countDocuments();
+
+    const byStatus = await EmergencyRequest.aggregate([
+      { $group: { _id: "$status", count: { $sum: 1 } } },
+    ]);
+
+    const byUrgency = await EmergencyRequest.aggregate([
+      { $group: { _id: "$urgencyLevel", count: { $sum: 1 } } },
+    ]);
+
+    res.status(200).json({
+      success: true,
+      total,
+      byStatus,
+      byUrgency,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const deleteEmergencyRequest = async (req, res) => {
+  try {
+    const request = await EmergencyRequest.findByIdAndDelete(req.params.id);
+
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: "Emergency request not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Emergency request deleted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+

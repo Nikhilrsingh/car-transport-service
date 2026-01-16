@@ -175,3 +175,110 @@ export const deleteFeedback = async (req, res, next) => {
 };
 
 
+
+
+
+export const getFeedbackById = async (req, res, next) => {
+  try {
+    const feedback = await Feedback.findById(req.params.id);
+
+    if (!feedback) {
+      return res.status(404).json({
+        success: false,
+        message: "Feedback not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: feedback,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getPublicFeedbacks = async (req, res, next) => {
+  try {
+    const feedbacks = await Feedback.find({
+      status: "approved",
+    })
+      .sort({ createdAt: -1 })
+      .select("username stars message profilePic productImage");
+
+    res.status(200).json({
+      success: true,
+      data: feedbacks,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getFeedbackStats = async (req, res, next) => {
+  try {
+    const total = await Feedback.countDocuments();
+
+    const byStatus = await Feedback.aggregate([
+      { $group: { _id: "$status", count: { $sum: 1 } } },
+    ]);
+
+    const byStars = await Feedback.aggregate([
+      { $group: { _id: "$stars", count: { $sum: 1 } } },
+    ]);
+
+    res.status(200).json({
+      success: true,
+      total,
+      byStatus,
+      byStars,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+export const toggleFeaturedFeedback = async (req, res, next) => {
+  try {
+    const feedback = await Feedback.findById(req.params.id);
+
+    if (!feedback) {
+      return res.status(404).json({
+        success: false,
+        message: "Feedback not found",
+      });
+    }
+
+    feedback.isFeatured = !feedback.isFeatured;
+    await feedback.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Featured status updated",
+      data: feedback,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAverageRating = async (req, res, next) => {
+  try {
+    const result = await Feedback.aggregate([
+      { $match: { status: "approved" } },
+      {
+        $group: {
+          _id: null,
+          avgRating: { $avg: "$stars" },
+          totalRatings: { $sum: 1 },
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: result[0] || { avgRating: 0, totalRatings: 0 },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
