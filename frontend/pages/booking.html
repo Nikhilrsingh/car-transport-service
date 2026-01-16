@@ -1874,15 +1874,28 @@
                                     <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
                                     <div class="error-message" id="nameError">Please enter your full name</div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
-                                    <input type="tel" id="phone" name="phone" required
-                                        placeholder="Enter 10-digit number">
-                                    <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="phoneError">Please enter a valid 10-digit phone
-                                        number</div>
+                                <div class="form-group phone-group">
+                                    <label><i class="fas fa-phone"></i> Phone Number *</label>
+
+                                    <div class="phone-row">
+                                        <select class="country-code">
+                                            <option value="+91">+91 (India)</option>
+                                        </select>
+
+                                        <div class="phone-input-box">
+                                            <input
+                                                type="tel"
+                                                id="phone"
+                                                name="phone"
+                                                placeholder="92345 75818"
+                                                required
+                                            />
+                                            <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="error-message" id="phoneError">Please enter a valid 10-digit Indian phone number</div>
                                 </div>
-                            </div>
 
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
@@ -3215,6 +3228,7 @@
         let selectingPickup = false;
         let selectingDrop = false;
         let currentStep = 1;
+        let isSubmitting = false;
         let formData = {};
         let autoSaveTimeout = null;
         let estimatedDistance = 0;
@@ -3711,8 +3725,24 @@
         function validateField(fieldName, value) {
             const validators = {
                 fullName: (val) => val.trim().length >= 2,
-                phone: (val) => /^[6-9]\d{9}$/.test(val.replace(/\D/g, '')),
-                email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+                phone: (val) => {
+                    const cleaned = val.replace(/\s+/g, '');
+                    console.log("PHONE VALUE:", cleaned);
+                    return /^\+91[6-9]\d{9}$/.test(cleaned);
+
+                },
+
+
+                email: (val) => {
+                    const trimmed = val.trim();
+
+                    // 1️⃣ reject if whitespace exists anywhere
+                    if (/\s/.test(val)) return false;
+
+                    // 2️⃣ validate email format
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+                },
+
                 vehicleType: (val) => val.trim() !== '',
                 pickupCity: (val) => val.trim() !== '',
                 dropCity: (val) => val.trim() !== '',
@@ -3757,7 +3787,7 @@
         function getErrorMessage(field) {
             const messages = {
                 fullName: 'Please enter your full name (min 2 characters)',
-                phone: 'Please enter a valid 10-digit Indian phone number',
+                phone: 'Please enter a valid Indian phone number (+91XXXXXXXXXX)',
                 email: 'Please enter a valid email address',
                 vehicleType: 'Please select vehicle type',
                 pickupCity: 'Please select pickup city',
@@ -5313,12 +5343,12 @@
             const additionalInfo = document.getElementById('additionalInfo');
             additionalInfo.addEventListener('input', updateCharacterCount);
 
-            // Phone number formatting
+            // Phone number input handling (FIXED)
             const phoneInput = document.getElementById('phone');
             phoneInput.addEventListener('input', function (e) {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length > 0) {
-                    value = value.substring(0, 10);
+                    value = value.substring(0, 12);
                     if (value.length > 5) {
                         value = value.substring(0, 5) + ' ' + value.substring(5);
                     }
@@ -5356,12 +5386,19 @@
             bookingForm.addEventListener('submit', function (e) {
                 e.preventDefault();
 
+                // 🔒 DUPLICATE SUBMISSION PROTECTION
+                if (isSubmitting) return;
+                isSubmitting = true;
+
                 if (!validateStep(3)) {
                     showToast('Validation Error', 'Please check all fields', 'error', 3000);
+                    isSubmitting = false;
                     return;
                 }
 
                 submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
 
                 // Simulate API call

@@ -988,16 +988,35 @@
           </ul>
         </div>
 
-        <div class="franchise-card">
-          <h4>Requirements</h4>
-          <ul class="franchise-list">
-            <li><i class="fas fa-circle"></i>Minimum investment 150,000 - 250,000</li>
-            <li><i class="fas fa-circle"></i>Business management experience</li>
-            <li><i class="fas fa-circle"></i>Commitment to brand standards</li>
-            <li><i class="fas fa-circle"></i>Financial stability and good credit</li>
-          </ul>
-        </div>
-      </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="phone-input-wrapper">
+                        <select id="countryCode" class="country-code">
+                            <option value="+91" selected>🇮🇳 +91</option>
+                        </select>
+
+                        <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
+
+                            <input
+                                type="text"
+                                id="phone"
+                                name="phone"
+                                required
+                                maxlength="10"
+                                inputmode="numeric"
+                                placeholder="Enter 10-digit mobile number"
+                            />
+
+                            <span class="validation-icon"></span>
+                            <div class="error-message"></div>
+
+                    </div>
+                </div>
 
       <button class="franchise-btn" onclick="openFranchiseModal()">
         Request Franchise Information

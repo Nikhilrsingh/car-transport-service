@@ -12,10 +12,10 @@ class BookingManager {
         this.validationRules = {
             fullName: (val) => val.trim().length >= 2,
             phone: (val) => {
-                const cleaned = val.replace(/\s+/g, '');
-                console.log("PHONE VALUE:", cleaned);
-                return /^\+91[6-9]\d{9}$/.test(cleaned);
+                const phone = val.replace(/\D/g, '');
+                return /^[6-9]\d{9}$/.test(phone);
             },
+
             email: (val) => {
                 const trimmed = val.trim();
 
@@ -96,6 +96,7 @@ class BookingManager {
 
         // Phone formatting
         const phoneInput = document.getElementById('phone');
+
 
         if (phoneInput) {
             phoneInput.addEventListener('input', () => {
@@ -287,7 +288,7 @@ class BookingManager {
     getErrorMessage(field) {
         const messages = {
             fullName: 'Please enter your full name (min 2 characters)',
-            phone: 'Please enter a valid 10-digit Indian phone number',
+            phone: 'Please enter a valid Indian phone number (+91XXXXXXXXXX)',
             email: 'Please enter a valid email address',
             password: 'Please enter a valid password (min 8 characters)',
             vehicleType: 'Please select vehicle type',
