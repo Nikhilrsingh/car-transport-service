@@ -5,16 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Blog | Harihar Car Carriers</title>
-   <base href="./" />
+  <base href="./" />
   <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
   <link rel="icon" type="image/png" href="classic-car.png" />
   <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/components/navbar.css" />    <link rel="stylesheet" href="../css/components/middle-navbar.css" />  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/middle-navbar.css" />
   <link rel="stylesheet" href="../css/components/loading-indicators.css" />
   <link rel="stylesheet" href="../css/components/footer.css" />
-  <!-- <link rel="stylesheet" href="../css/components/floating-call-button.css" />
-  <link rel="stylesheet" href="../css/components/floating-whatsapp-button.css" />
-  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css" /> -->
   <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
   <link rel="stylesheet" href="../css/components/quote-modal.css" />
   <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
@@ -173,6 +171,29 @@
       border-color: var(--orange);
     }
 
+    /* CLEAR FILTERS BUTTON */
+    .clear-filters-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 2px solid rgba(255, 99, 71, 0.4);
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.3s ease;
+    }
+
+    .clear-filters-btn.active {
+      background: transparent;
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .clear-filters-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     /* BLOG LAYOUT WITH SIDEBAR */
     .blog-main {
       padding: 20px;
@@ -183,14 +204,38 @@
       gap: 30px;
     }
 
+    /* Added scrollbar to sidebar */
     .blog-sidebar {
       background: var(--card-bg);
       border-radius: var(--radius);
       padding: 25px;
-      height: fit-content;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      overflow-x: hidden;
       position: sticky;
       top: 100px;
       box-shadow: var(--shadow);
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 99, 71, 0.5) rgba(255, 255, 255, 0.1);
+    }
+
+    .blog-sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .blog-sidebar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    .blog-sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255, 99, 71, 0.5);
+      border-radius: 10px;
+    }
+
+    .blog-sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 99, 71, 0.8);
     }
 
     .sidebar-section {
@@ -216,7 +261,7 @@
 
     .category-item {
       padding: 10px 15px;
-      color:white;
+      color: white;
       margin-bottom: 8px;
       border-radius: 8px;
       cursor: pointer;
@@ -418,7 +463,7 @@
     }
 
     .meta-item {
-      color:#f98f69;
+      color: #f98f69;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -448,24 +493,27 @@
       flex: 1;
     }
 
+    /* ✅ FIXED: Softer Read More button */
     .btn.ghost {
-      border: 1px solid var(--orange);
-      color: var(--orange);
+      border: 1px solid #e85d4f;
+      color: #e85d4f;
+      background: transparent;
     }
 
     .btn.ghost:hover {
-      background: var(--orange);
+      background: #e85d4f;
       color: #fff;
+      border-color: #e85d4f;
     }
 
     .btn.primary {
-      background: linear-gradient(135deg, #ff6347, #ff4500);
+      background: linear-gradient(135deg, #d9534f, #c9302c);
       color: white;
     }
 
     .btn.primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+      box-shadow: 0 5px 15px rgba(217, 83, 79, 0.4);
     }
 
     /* NO RESULTS MESSAGE */
@@ -496,6 +544,8 @@
       .blog-sidebar {
         position: static;
         order: -1;
+        max-height: none;
+        overflow-y: visible;
       }
     }
 
@@ -524,16 +574,151 @@
         max-width: 100%;
       }
     }
+
+    /* ====================================
+       BLOG PAGE - Light Mode Styles
+       ==================================== */
+    body[data-theme="light"] {
+      background: #f8f9fa !important;
+      color: #333 !important;
+    }
+
+    body[data-theme="light"] .blog-hero {
+      background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+    }
+
+    body[data-theme="light"] .blog-hero h1 {
+      background: linear-gradient(135deg, #ffffff, #f0f0f0) !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+    }
+
+    body[data-theme="light"] .blog-hero p {
+      color: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    body[data-theme="light"] .blog-search-input {
+      background: #ffffff !important;
+      color: #333 !important;
+      border: 2px solid #ddd !important;
+    }
+
+    body[data-theme="light"] .blog-search-input::placeholder {
+      color: #888 !important;
+    }
+
+    body[data-theme="light"] .blog-search-input:focus {
+      border-color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .sort-dropdown {
+      background: #ffffff !important;
+      color: #333 !important;
+      border: 2px solid #ddd !important;
+    }
+
+    body[data-theme="light"] .sort-dropdown:focus {
+      border-color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .tag-badge {
+      background: #ffffff !important;
+      color: #333 !important;
+      border: 2px solid #ddd !important;
+    }
+
+    body[data-theme="light"] .tag-badge:hover {
+      border-color: #ff6347 !important;
+      color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .tag-badge.active {
+      background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+      color: white !important;
+      border-color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .clear-filters-btn {
+      background: #ffffff;
+      color: #666;
+      border-color: #ddd;
+    }
+
+    body[data-theme="light"] .clear-filters-btn.active {
+      color: #ff6347;
+      border-color: #ff6347;
+    }
+
+    body[data-theme="light"] .blog-sidebar {
+      background: #ffffff !important;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+      scrollbar-color: rgba(255, 99, 71, 0.4) rgba(0, 0, 0, 0.05);
+    }
+
+    body[data-theme="light"] .blog-sidebar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    body[data-theme="light"] .blog-sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255, 99, 71, 0.4);
+    }
+
+    body[data-theme="light"] .sidebar-title {
+      color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .category-item {
+      color: #333 !important;
+      background: rgba(0, 0, 0, 0.02) !important;
+    }
+
+    body[data-theme="light"] .category-item:hover {
+      background: rgba(255, 99, 71, 0.1) !important;
+    }
+
+    body[data-theme="light"] .category-item.active {
+      background: linear-gradient(135deg, rgba(255, 99, 71, 0.15), rgba(255, 69, 0, 0.1)) !important;
+    }
+
+    body[data-theme="light"] .card {
+      background: #ffffff !important;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    body[data-theme="light"] .card:hover {
+      box-shadow: 0 10px 30px rgba(255, 99, 71, 0.15) !important;
+    }
+
+    body[data-theme="light"] .card-title {
+      color: #ff6347 !important;
+    }
+
+    body[data-theme="light"] .card-meta {
+      color: #666 !important;
+    }
+
+    body[data-theme="light"] .meta-item {
+      color: #888 !important;
+    }
+
+    body[data-theme="light"] .card-excerpt {
+      color: #555 !important;
+    }
+
+    body[data-theme="light"] .no-results {
+      color: #666 !important;
+    }
+
+    body[data-theme="light"] .no-results h3 {
+      color: #333 !important;
+    }
   </style>
 </head>
 
 <body>
   <!-- Enhanced Navigation Component -->
-
   <!-- Navbar Container - Loaded dynamically -->
   <div id="navbar-container"></div>
-
-
 
   <!-- HERO -->
   <section class="blog-hero">
@@ -561,12 +746,18 @@
     </div>
 
     <!-- TAG CLOUD -->
-    <div class="tag-cloud-container" id="tagCloud">
-      <span class="tag-badge" data-tag="safety">Safety</span>
-      <span class="tag-badge" data-tag="transport">Transport</span>
-      <span class="tag-badge" data-tag="tips">Tips</span>
-      <span class="tag-badge" data-tag="eco-friendly">Eco-Friendly</span>
-      <span class="tag-badge" data-tag="technology">Technology</span>
+    <div class="tag-cloud-container">
+      <button class="tag-badge" data-filter="all">All</button>
+      <button class="tag-badge" data-filter="safety">Safety</button>
+      <button class="tag-badge" data-filter="transport">Transport</button>
+      <button class="tag-badge" data-filter="tips">Tips</button>
+      <button class="tag-badge" data-filter="eco">Eco-Friendly</button>
+      <button class="tag-badge" data-filter="technology">Technology</button>
+
+      <!-- NEW CLEAR ALL BUTTON -->
+      <button id="clear-filters-btn" class="clear-filters-btn" disabled>
+        Clear all
+      </button>
     </div>
   </div>
 
@@ -919,6 +1110,87 @@
   <script src="../js/modules/chatbot-modal.js"></script>
   <script src="../js/modules/back-to-top-button.js"></script>
   <script src="../js/modules/backtoBottom.js"></script>
+
+  <script>
+  // FILTER LOGIC WITH MULTI-SELECT + CLEAR ALL
+  const filterButtons = document.querySelectorAll('.tag-badge[data-filter]');
+  const clearFiltersBtn = document.getElementById('clear-filters-btn');
+  const cards = document.querySelectorAll('.card[data-category]');
+
+  let activeFilters = new Set(); // stores active filter keys except "all"
+
+  function updateClearButtonState() {
+    if (activeFilters.size === 0) {
+      clearFiltersBtn.disabled = true;
+      clearFiltersBtn.classList.remove('active');
+    } else {
+      clearFiltersBtn.disabled = false;
+      clearFiltersBtn.classList.add('active');
+    }
+  }
+
+  function applyFilters() {
+    if (activeFilters.size === 0 || activeFilters.has('all')) {
+      cards.forEach(card => {
+        card.style.display = '';
+      });
+      return;
+    }
+
+    cards.forEach(card => {
+      const cardCategories = card.getAttribute('data-category').toLowerCase().split(/\s+/);
+      const show = [...activeFilters].some(f => cardCategories.includes(f));
+      card.style.display = show ? '' : 'none';
+    });
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filterKey = btn.dataset.filter.toLowerCase();
+
+      if (filterKey === 'all') {
+        // Reset everything when ALL is clicked
+        activeFilters.clear();
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      } else {
+        // Toggle this filter
+        if (activeFilters.has(filterKey)) {
+          activeFilters.delete(filterKey);
+          btn.classList.remove('active');
+        } else {
+          activeFilters.add(filterKey);
+          btn.classList.add('active');
+        }
+
+        // "All" should not stay active when specific filters are chosen
+        const allBtn = document.querySelector('.tag-badge[data-filter="all"]');
+        if (allBtn) {
+          allBtn.classList.remove('active');
+        }
+        activeFilters.delete('all');
+      }
+
+      updateClearButtonState();
+      applyFilters();
+    });
+  });
+
+  clearFiltersBtn.addEventListener('click', () => {
+    activeFilters.clear();
+    filterButtons.forEach(b => b.classList.remove('active'));
+    const allBtn = document.querySelector('.tag-badge[data-filter="all"]');
+    if (allBtn) allBtn.classList.add('active');
+    updateClearButtonState();
+    applyFilters();
+  });
+
+  // Initial state: "All" selected
+  const allBtnInit = document.querySelector('.tag-badge[data-filter="all"]');
+  if (allBtnInit) {
+    allBtnInit.classList.add('active');
+  }
+</script>
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">

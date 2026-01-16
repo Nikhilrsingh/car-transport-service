@@ -1,89 +1,540 @@
-// sticky-toc.js
+/* ====================================
+   STICKY TABLE OF CONTENTS (TOC)
+   Global "On This Page" Navigation
+   Works on all pages with sections
+   ==================================== */
+
 (() => {
-  const headings = Array.from(document.querySelectorAll("h2, h3"));
-  if (!headings.length) return;
+  'use strict';
 
-  // Create sidebar
-  const toc = document.createElement("div");
-  toc.id = "toc-sidebar";
+  // Configuration
+  const CONFIG = {
+    minSections: 2,           // Minimum sections required to show TOC
+    scrollOffset: 100,        // Offset for scroll position detection
+    sidebarWidth: '260px',
+    maxHeight: '70vh',
+    storageKey: 'tocSidebarCollapsed',
+    accentColor: '#ff6347',
+    showOnMobile: false,      // Hide on mobile by default
+    mobileBreakpoint: 768,
+    // Custom titles for specific pages/sections
+    customTitles: {
+      'features': 'Features',
+      'home': 'Home',
+      'quote': 'Get Instant Quote',
+      'pricing-plans': 'Compare Our Pricing Plans',
+      'testimonials': 'What Our Customers Say',
+      'contact': 'Get In Touch',
+      'presence': 'Our Pan-India Presence'
+    }
+  };
 
-  // Inline styles (no external CSS needed)
-  Object.assign(toc.style, {
-    position: "fixed",
-    top: "100px",
-    right: "20px",
-    width: "260px",
-    maxHeight: "70vh",
-    overflowY: "auto",
-    background: "#ffffff",
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    padding: "12px",
-    fontSize: "14px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    zIndex: "9999"
-  });
+  // Find all navigable sections on the page
+  function findSections() {
+    const sections = [];
+    
+    // Strategy 1: Find sections with IDs that have h2 headings
+    document.querySelectorAll('section[id]').forEach((section) => {
+      const heading = section.querySelector('h2, .section-title h2');
+      if (heading) {
+        sections.push({
+          id: section.id,
+          title: heading.textContent.trim(),
+          element: section,
+          type: 'section'
+        });
+      }
+    });
 
-  const title = document.createElement("div");
-  title.textContent = "On this page";
-  title.style.fontWeight = "bold";
-  title.style.marginBottom = "10px";
-  toc.appendChild(title);
-
-  const links = [];
-
-  headings.forEach((heading, index) => {
-    if (!heading.id) {
-      heading.id = `toc-section-${index}`;
+    // Strategy 2: Find standalone h2 headings with IDs (if not enough sections found)
+    if (sections.length < CONFIG.minSections) {
+      document.querySelectorAll('h2[id]').forEach((heading) => {
+        // Skip if already captured via section
+        if (!sections.find(s => s.id === heading.id)) {
+          sections.push({
+            id: heading.id,
+            title: heading.textContent.trim(),
+            element: heading,
+            type: 'heading'
+          });
+        }
+      });
     }
 
-    const item = document.createElement("div");
-    item.textContent = heading.textContent;
-    item.dataset.target = heading.id;
+    // Strategy 3: Find h2 headings inside sections and auto-generate IDs
+    if (sections.length < CONFIG.minSections) {
+      let autoIdCounter = 0;
+      document.querySelectorAll('section h2, .section-title h2').forEach((heading) => {
+        // Skip if heading or its parent section already has an ID we captured
+        const parentSection = heading.closest('section');
+        if (parentSection && sections.find(s => s.id === parentSection.id)) {
+          return;
+        }
+        if (sections.find(s => s.id === heading.id)) {
+          return;
+        }
 
-    Object.assign(item.style, {
-      cursor: "pointer",
-      padding: "6px",
-      borderRadius: "4px",
-      marginLeft: heading.tagName === "H3" ? "12px" : "0",
-      transition: "background 0.2s"
-    });
+        // Generate ID if needed
+        let targetElement = parentSection || heading;
+        if (!targetElement.id) {
+          targetElement.id = `toc-section-${autoIdCounter++}`;
+        }
 
-    item.addEventListener("click", () => {
-      document.getElementById(heading.id).scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+        // Skip duplicates
+        if (sections.find(s => s.id === targetElement.id)) {
+          return;
+        }
+
+        sections.push({
+          id: targetElement.id,
+          title: heading.textContent.trim(),
+          element: targetElement,
+          type: parentSection ? 'section' : 'heading'
+        });
       });
-    });
+    }
 
-    toc.appendChild(item);
-    links.push(item);
-  });
+    // Strategy 4: Look for common section patterns (hero, about, services, etc.)
+    if (sections.length < CONFIG.minSections) {
+      const commonPatterns = [
+        { selector: '.hero, #hero, [class*="hero"]', title: 'Hero' },
+        { selector: '#home', title: 'Home' },
+        { selector: '#about, .about', title: 'About' },
+        { selector: '#services, .services', title: 'Services' },
+        { selector: '#testimonials, .testimonials', title: 'Testimonials' },
+        { selector: '#contact, .contact', title: 'Contact' },
+        { selector: '#team, .team', title: 'Team' },
+        { selector: '#pricing, .pricing', title: 'Pricing' },
+        { selector: '#faq, .faq', title: 'FAQ' },
+        { selector: '#features, .features', title: 'Features' }
+      ];
 
-  document.body.appendChild(toc);
+      commonPatterns.forEach(pattern => {
+        const element = document.querySelector(pattern.selector);
+        if (element && !sections.find(s => s.element === element)) {
+          if (!element.id) {
+            element.id = pattern.title.toLowerCase().replace(/\s+/g, '-');
+          }
+          
+          // Try to get a better title from the section
+          const heading = element.querySelector('h1, h2, h3');
+          let title = heading ? heading.textContent.trim() : pattern.title;
+          
+          // Use custom title if available
+          if (CONFIG.customTitles[element.id]) {
+            title = CONFIG.customTitles[element.id];
+          }
+          
+          sections.push({
+            id: element.id,
+            title: title,
+            element: element,
+            type: 'pattern'
+          });
+        }
+      });
+    }
 
-  // Highlight active section while scrolling
-  function onScroll() {
-    let current = headings[0];
-
-    headings.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= 120) {
-        current = section;
+    // Filter out empty titles and duplicates
+    const uniqueSections = [];
+    const seenIds = new Set();
+    
+    sections.forEach(section => {
+      if (section.title && section.title.length > 0 && !seenIds.has(section.id)) {
+        // Use custom title if available
+        let finalTitle = section.title;
+        if (CONFIG.customTitles[section.id]) {
+          finalTitle = CONFIG.customTitles[section.id];
+        }
+        
+        seenIds.add(section.id);
+        uniqueSections.push({
+          ...section,
+          title: finalTitle
+        });
       }
     });
 
-    links.forEach((link) => {
-      if (link.dataset.target === current.id) {
-        link.style.background = "#e3f2fd";
-        link.style.fontWeight = "bold";
-      } else {
-        link.style.background = "transparent";
-        link.style.fontWeight = "normal";
-      }
+    // Sort by document position
+    uniqueSections.sort((a, b) => {
+      const posA = a.element.getBoundingClientRect().top;
+      const posB = b.element.getBoundingClientRect().top;
+      return posA - posB;
     });
+
+    return uniqueSections;
   }
 
-  document.addEventListener("scroll", onScroll);
-  onScroll();
+  // Check if we should show TOC on this page
+  function shouldShowTOC() {
+    // Don't show on mobile if configured
+    if (!CONFIG.showOnMobile && window.innerWidth < CONFIG.mobileBreakpoint) {
+      return false;
+    }
+    
+    // Check if TOC already exists
+    if (document.getElementById('toc-wrapper')) {
+      return false;
+    }
+
+    return true;
+  }
+
+  // Create the TOC UI
+  function createTOC(sections) {
+    if (sections.length < CONFIG.minSections) {
+      console.log('TOC: Not enough sections found (' + sections.length + ')');
+      return null;
+    }
+
+    const isCollapsed = localStorage.getItem(CONFIG.storageKey) === 'true';
+
+    // Create wrapper container
+    const wrapper = document.createElement('div');
+    wrapper.id = 'toc-wrapper';
+    wrapper.className = 'toc-wrapper';
+    Object.assign(wrapper.style, {
+      position: 'fixed',
+      top: '100px',
+      right: '0',
+      zIndex: '9999',
+      display: 'flex',
+      alignItems: 'flex-start',
+      transition: 'transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease',
+      transform: isCollapsed ? 'translateX(calc(100% - 32px))' : 'translateX(0)',
+      opacity: '0',
+      visibility: 'hidden'
+    });
+
+    // Create toggle tab (arrow button)
+    const toggleTab = document.createElement('div');
+    toggleTab.id = 'toc-toggle-tab';
+    toggleTab.setAttribute('aria-label', 'Toggle table of contents');
+    toggleTab.setAttribute('role', 'button');
+    toggleTab.setAttribute('tabindex', '0');
+    Object.assign(toggleTab.style, {
+      width: '32px',
+      height: '40px',
+      background: CONFIG.accentColor,
+      borderRadius: '8px 0 0 8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
+      boxShadow: '-2px 2px 8px rgba(0,0,0,0.15)',
+      flexShrink: '0'
+    });
+
+    const arrow = document.createElement('span');
+    arrow.innerHTML = '&#9664;'; // Left arrow
+    Object.assign(arrow.style, {
+      color: '#fff',
+      fontSize: '14px',
+      transition: 'transform 0.3s ease',
+      transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)'
+    });
+    toggleTab.appendChild(arrow);
+
+    // Create sidebar
+    const toc = document.createElement('div');
+    toc.id = 'toc-sidebar';
+    toc.setAttribute('role', 'navigation');
+    toc.setAttribute('aria-label', 'On this page');
+    Object.assign(toc.style, {
+      width: CONFIG.sidebarWidth,
+      maxHeight: CONFIG.maxHeight,
+      overflowY: 'auto',
+      background: '#ffffff',
+      border: '1px solid #ddd',
+      borderRadius: '8px 0 0 8px',
+      padding: '12px',
+      fontSize: '14px',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+    });
+
+    // Title
+    const title = document.createElement('div');
+    title.textContent = 'On this page';
+    title.id = 'toc-title';
+    Object.assign(title.style, {
+      fontWeight: 'bold',
+      marginBottom: '10px',
+      color: '#333',
+      borderBottom: `2px solid ${CONFIG.accentColor}`,
+      paddingBottom: '8px'
+    });
+    toc.appendChild(title);
+
+    // Section counter
+    const counter = document.createElement('div');
+    counter.textContent = `${sections.length} sections`;
+    Object.assign(counter.style, {
+      fontSize: '11px',
+      color: '#888',
+      marginBottom: '10px'
+    });
+    toc.appendChild(counter);
+
+    // Create links
+    const links = [];
+    const linkList = document.createElement('div');
+    linkList.setAttribute('role', 'list');
+
+    sections.forEach((section, index) => {
+      const item = document.createElement('div');
+      item.setAttribute('role', 'listitem');
+      item.textContent = section.title.length > 30 
+        ? section.title.substring(0, 30) + '...' 
+        : section.title;
+      item.dataset.target = section.id;
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('aria-label', `Navigate to ${section.title}`);
+
+      Object.assign(item.style, {
+        cursor: 'pointer',
+        padding: '8px 6px',
+        borderRadius: '4px',
+        transition: 'background 0.2s, color 0.2s',
+        color: '#555',
+        borderLeft: '3px solid transparent',
+        marginBottom: '2px'
+      });
+
+      // Click handler
+      item.addEventListener('click', () => {
+        const targetElement = document.getElementById(section.id);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+
+      // Keyboard handler
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.click();
+        }
+      });
+
+      // Hover effects
+      item.addEventListener('mouseenter', () => {
+        if (!item.classList.contains('active')) {
+          item.style.background = '#f5f5f5';
+        }
+      });
+      item.addEventListener('mouseleave', () => {
+        if (!item.classList.contains('active')) {
+          item.style.background = 'transparent';
+        }
+      });
+
+      linkList.appendChild(item);
+      links.push({ item, section });
+    });
+
+    toc.appendChild(linkList);
+
+    // Assemble wrapper
+    wrapper.appendChild(toggleTab);
+    wrapper.appendChild(toc);
+
+    return { wrapper, toggleTab, arrow, links, toc };
+  }
+
+  // Initialize TOC
+  function initTOC() {
+    if (!shouldShowTOC()) {
+      return;
+    }
+
+    const sections = findSections();
+    console.log('TOC: Found', sections.length, 'sections');
+
+    if (sections.length < CONFIG.minSections) {
+      console.log('TOC: Not enough sections to display');
+      return;
+    }
+
+    const tocElements = createTOC(sections);
+    if (!tocElements) {
+      return;
+    }
+
+    const { wrapper, toggleTab, arrow, links, toc } = tocElements;
+    document.body.appendChild(wrapper);
+
+    // Show TOC function
+    function showToc() {
+      wrapper.style.opacity = '1';
+      wrapper.style.visibility = 'visible';
+    }
+
+    // Check if page is already loaded
+    if (document.body.classList.contains('loaded') || document.readyState === 'complete') {
+      setTimeout(showToc, 500);
+    } else {
+      // Listen for when preloader finishes
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.target === document.body && document.body.classList.contains('loaded')) {
+            showToc();
+            observer.disconnect();
+          }
+        });
+      });
+      observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+      // Fallback: show after window load
+      window.addEventListener('load', () => {
+        setTimeout(showToc, 1000);
+      });
+    }
+
+    // Toggle functionality
+    let collapsed = localStorage.getItem(CONFIG.storageKey) === 'true';
+
+    function toggleToc() {
+      collapsed = !collapsed;
+      localStorage.setItem(CONFIG.storageKey, collapsed);
+
+      if (collapsed) {
+        wrapper.style.transform = 'translateX(calc(100% - 32px))';
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        wrapper.style.transform = 'translateX(0)';
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    toggleTab.addEventListener('click', toggleToc);
+    toggleTab.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleToc();
+      }
+    });
+
+    // Highlight active section while scrolling
+    function onScroll() {
+      let currentSection = null;
+      let minDistance = Infinity;
+
+      links.forEach(({ section }) => {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const distance = Math.abs(rect.top - CONFIG.scrollOffset);
+          
+          // Find the section closest to the scroll offset
+          if (rect.top <= CONFIG.scrollOffset + 50 && distance < minDistance) {
+            minDistance = distance;
+            currentSection = section;
+          }
+        }
+      });
+
+      // If no section is above the offset, use the first one
+      if (!currentSection && links.length > 0) {
+        currentSection = links[0].section;
+      }
+
+      // Update active states
+      links.forEach(({ item, section }) => {
+        if (currentSection && section.id === currentSection.id) {
+          item.classList.add('active');
+          item.style.background = '#e3f2fd';
+          item.style.fontWeight = 'bold';
+          item.style.color = CONFIG.accentColor;
+          item.style.borderLeftColor = CONFIG.accentColor;
+        } else {
+          item.classList.remove('active');
+          item.style.background = 'transparent';
+          item.style.fontWeight = 'normal';
+          item.style.color = '#555';
+          item.style.borderLeftColor = 'transparent';
+        }
+      });
+    }
+
+    // Throttled scroll handler
+    let scrollTimeout;
+    document.addEventListener('scroll', () => {
+      if (scrollTimeout) {
+        cancelAnimationFrame(scrollTimeout);
+      }
+      scrollTimeout = requestAnimationFrame(onScroll);
+    });
+
+    // Initial highlight
+    onScroll();
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (!CONFIG.showOnMobile && window.innerWidth < CONFIG.mobileBreakpoint) {
+          wrapper.style.display = 'none';
+        } else {
+          wrapper.style.display = 'flex';
+        }
+      }, 250);
+    });
+
+    // Apply dark mode styles if needed
+    function applyThemeStyles() {
+      const isDarkMode = document.body.classList.contains('dark-mode') || 
+                         document.documentElement.getAttribute('data-theme') === 'dark';
+      
+      if (isDarkMode) {
+        toc.style.background = '#1e1e1e';
+        toc.style.borderColor = '#333';
+        const titleEl = document.getElementById('toc-title');
+        if (titleEl) titleEl.style.color = '#fff';
+        links.forEach(({ item }) => {
+          if (!item.classList.contains('active')) {
+            item.style.color = '#ccc';
+          }
+        });
+      } else {
+        toc.style.background = '#ffffff';
+        toc.style.borderColor = '#ddd';
+        const titleEl = document.getElementById('toc-title');
+        if (titleEl) titleEl.style.color = '#333';
+        links.forEach(({ item }) => {
+          if (!item.classList.contains('active')) {
+            item.style.color = '#555';
+          }
+        });
+      }
+    }
+
+    // Watch for theme changes
+    const themeObserver = new MutationObserver(applyThemeStyles);
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    
+    // Initial theme application
+    applyThemeStyles();
+
+    console.log('TOC: Initialized successfully with', links.length, 'items');
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initTOC, 100);
+    });
+  } else {
+    setTimeout(initTOC, 100);
+  }
+
+  // Export for manual initialization
+  window.StickyTOC = {
+    init: initTOC,
+    findSections: findSections
+  };
 })();

@@ -1,8 +1,23 @@
-/* 🎯 Floating "Book Now" Button */
+/* ====================================
+   FLOATING BOOK NOW BUTTON STYLES
+   Hidden - functionality moved to bottom action bar and FAB
+   ==================================== */
 
+/* Button Container - Hidden by default */
+.floating-book-btn,
+#floatingBookBtn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* Legacy styles below - kept for reference but button is hidden */
+/*
 .floating-book-btn {
     position: fixed;
-    /* move the Book button up so it does not overlap the Back-to-top button */
     bottom: 150px;
     right: 30px;
     width: 50px;

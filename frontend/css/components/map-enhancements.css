@@ -1,21 +1,29 @@
-/* Map Enhancement Styles */
+/* Leaflet Map Enhancement Styles */
 
 /* Map Header and Controls */
-.map-header {
+.map-section-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  position: relative;
   flex-wrap: wrap;
   gap: 15px;
 }
 
 .map-section-title {
   margin: 0 !important;
-  text-align: left !important;
+  text-align: center !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .map-controls {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   gap: 10px;
   background: #f8f9fa;
@@ -28,7 +36,7 @@
   width: 40px;
   height: 40px;
   border: none;
-  background: linear-gradient(135deg, var(--region-primary), var(--region-secondary));
+  background: linear-gradient(135deg, var(--region-primary, #ff6b35), var(--region-secondary, #ff9b6b));
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -49,615 +57,247 @@
   transform: translateY(0) scale(0.95);
 }
 
-/* Map Container Enhancements */
-.map-container {
-  cursor: grab;
-  user-select: none;
-}
-
-.map-container:active {
-  cursor: grabbing;
-}
-
-.map-container:fullscreen {
-  background: #1a1a2e !important;
+/* Main Layout Container */
+.map-layout-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 50px;
-}
-
-.map-container:fullscreen #indiaMap {
-  max-width: 90vw;
-  max-height: 90vh;
-  filter: drop-shadow(0 10px 30px rgba(255, 107, 53, 0.4));
-}
-
-#indiaMap {
-  transform-origin: center center;
-  will-change: transform;
-}
-
-/* Animated Connection Lines */
-.connection-lines {
-  pointer-events: none;
-}
-
-.connection {
-  stroke-linecap: round;
-}
-
-/* Enhanced Office Markers */
-.marker-group {
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.marker-pulse {
-  pointer-events: none;
-}
-
-.office-marker {
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 6px rgba(255, 107, 53, 0.4));
-}
-
-.office-marker.main-office {
-  stroke: #fff;
-  stroke-width: 2;
-}
-
-.office-marker.secondary-office {
-  stroke: #fff;
-  stroke-width: 1.5;
-}
-
-.marker-group:hover .office-marker {
-  filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.8));
-}
-
-/* Enhanced Tooltip */
-.marker-tooltip {
-  pointer-events: none;
-  transition: all 0.2s ease;
-}
-
-.marker-tooltip rect {
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
-}
-
-.marker-tooltip text {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Enhanced Legend */
-.map-legend {
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.legend-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--region-dark);
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.legend-title i {
-  color: var(--region-primary);
-  margin-right: 8px;
-}
-
-.active-filter-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, var(--region-primary), var(--region-secondary));
-  color: white;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
-  animation: slideInRight 0.3s ease;
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.active-filter-badge i {
-  font-size: 0.75rem;
-}
-
-.legend-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.legend-item {
-  cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.legend-item:hover {
-  background: rgba(255, 107, 53, 0.1);
-  transform: translateY(-2px);
-}
-
-.legend-item[data-region] {
-  position: relative;
-}
-
-.legend-item[data-region]:hover::after {
-  content: 'Click to filter';
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.7rem;
-  color: var(--region-primary);
-  white-space: nowrap;
-  font-weight: 600;
-}
-
-.legend-color.secondary {
-  width: 16px;
-  height: 16px;
-}
-
-/* Map Statistics */
-.map-stats {
-  display: flex;
-  justify-content: center;
   gap: 30px;
-  padding-top: 15px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  color: #555;
-}
-
-.stat-item i {
-  color: var(--region-primary);
-  font-size: 1.1rem;
-}
-
-.stat-item strong {
-  color: var(--region-dark);
-  font-size: 1.1rem;
-}
-
-/* State Hover Effects */
-.state {
-  transition: all 0.3s ease;
-  stroke: #333;
-  stroke-width: 1.5;
-}
-
-.state:hover {
-  cursor: pointer;
-  stroke: #fff !important;
-  stroke-width: 3 !important;
-  filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.8)) !important;
-}
-
-/* Dark Theme Support */
-body[data-theme="dark"] .map-controls {
-  background: #2a2a3e;
-}
-
-body[data-theme="dark"] .map-container {
-  background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
-}
-
-body[data-theme="dark"] .map-legend {
-  background: linear-gradient(135deg, #2a2a3e, #1a1a2e);
-}
-
-body[data-theme="dark"] .legend-title,
-body[data-theme="dark"] .legend-item,
-body[data-theme="dark"] .stat-item {
-  color: #e0e0e0;
-}
-
-body[data-theme="dark"] .stat-item strong {
-  color: #ffffff;
-}
-
-body[data-theme="dark"] .map-stats {
-  border-top-color: rgba(255, 255, 255, 0.1);
-}
-
-body[data-theme="dark"] .legend-item:hover {
-  background: rgba(255, 107, 53, 0.2);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .map-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .map-controls {
-    order: -1;
-    align-self: flex-end;
-  }
-  
-  .map-control-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 0.9rem;
-  }
-  
-  .legend-items {
-    gap: 10px;
-  }
-  
-  .legend-item {
-    font-size: 0.85rem;
-  }
-  
-  .map-stats {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .active-filter-badge {
-    font-size: 0.75rem;
-    padding: 5px 10px;
-  }
-}
-
-/* Modern India Map Styles */
-.modern-india-map {
-  position: relative;
+  align-items: stretch;
   width: 100%;
-  height: 500px;
-  background: linear-gradient(135deg, #f8fafc, #e8f4f8);
+  min-height: 450px;
+}
+
+/* Map Container */
+.map-container {
+  flex: 2;
+  position: relative;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  transition: all 0.3s ease;
-  transform-origin: center center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  min-height: 450px;
+  height: 450px;
+  background: #e5e3df;
 }
 
-.map-base {
-  position: relative;
+/* Leaflet Map */
+#leafletMap {
   width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 450px !important;
+  min-height: 450px;
+  border-radius: 15px;
+  z-index: 1;
+  background: #e5e3df;
 }
 
-.india-outline {
-  width: 80%;
-  height: auto;
-  max-width: 700px;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
-  transition: all 0.3s ease;
+/* Ensure Leaflet tiles are visible - override global img filters */
+.leaflet-container {
+  background: #e5e3df !important;
 }
 
-.india-outline:hover {
-  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.2));
-  transform: scale(1.01);
+.leaflet-container img {
+  filter: none !important;
+  opacity: 1 !important;
 }
 
-.india-land {
-  fill: #e8f4f8;
-  stroke: #4a90e2;
-  stroke-width: 2;
-  transition: all 0.3s ease;
+.leaflet-tile-pane {
+  z-index: 2;
 }
 
-.state-border {
-  stroke: #88b8ff;
-  stroke-width: 1;
-  fill: none;
-  stroke-dasharray: 3, 3;
+.leaflet-tile {
+  visibility: visible !important;
+  filter: none !important;
 }
 
-.connection-line {
-  stroke: #ff6b35;
-  stroke-width: 2;
-  stroke-dasharray: 5, 5;
-  stroke-linecap: round;
-  opacity: 0.7;
+.leaflet-marker-icon img,
+.leaflet-marker-shadow img {
+  filter: none !important;
 }
 
-/* City Pins Container */
-.city-pins-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+/* Custom Leaflet Marker Styles */
+.leaflet-marker-icon.custom-marker {
+  background: none;
+  border: none;
 }
 
-.city-pin {
-  position: absolute;
-  transform: translate(-50%, -100%);
-  pointer-events: auto;
-  z-index: 10;
-  transition: all 0.3s ease;
-}
-
-/* Pin Marker Styles */
-.pin-marker {
+.custom-pin {
+  width: 30px;
+  height: 40px;
   position: relative;
-  width: 40px;
-  height: 60px;
   cursor: pointer;
-  pointer-events: auto;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.pin-marker:hover {
-  transform: translateY(-10px) scale(1.2);
-  filter: drop-shadow(0 8px 16px rgba(255, 107, 53, 0.6));
+.custom-pin:hover {
+  transform: scale(1.2) translateY(-5px);
 }
 
-.pin-pulse {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  background: #ff6b35;
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-  opacity: 0.3;
+/* Highlighted state - pins pop out */
+.custom-pin.highlighted {
+  transform: scale(1.4) translateY(-8px);
+  filter: drop-shadow(0 6px 12px rgba(255, 107, 53, 0.6));
+  z-index: 1000 !important;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.1;
-  }
-  100% {
-    transform: scale(0.8);
-    opacity: 0.3;
-  }
+/* Dimmed state - other pins fade */
+.custom-pin.dimmed {
+  transform: scale(0.8);
+  opacity: 0.4;
+  filter: grayscale(50%);
 }
 
-.pin-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #ff6b35, #ff9b6b);
+.custom-pin .pin-head {
+  width: 30px;
+  height: 30px;
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.pin-icon i {
+.custom-pin .pin-head i {
   transform: rotate(45deg);
   color: white;
-  font-size: 18px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.pin-icon.secondary {
-  background: linear-gradient(135deg, #4a90e2, #6ba8ff);
-  width: 30px;
-  height: 30px;
-}
-
-.pin-icon.secondary i {
   font-size: 14px;
 }
 
-/* Region-specific pin colors */
-.pin-marker.delhi .pin-icon,
-.pin-marker.jaipur .pin-icon,
-.pin-marker.lucknow .pin-icon {
+.custom-pin.major .pin-head {
+  background: linear-gradient(135deg, #ff6b35, #ff9b6b);
+}
+
+.custom-pin.north .pin-head {
   background: linear-gradient(135deg, #4a90e2, #6ba8ff);
 }
 
-.pin-marker.mumbai .pin-icon,
-.pin-marker.pune .pin-icon,
-.pin-marker.ahmedabad .pin-icon {
-  background: linear-gradient(135deg, #16a085, #1abc9c);
-}
-
-.pin-marker.bangalore .pin-icon,
-.pin-marker.chennai .pin-icon,
-.pin-marker.hyderabad .pin-icon {
+.custom-pin.south .pin-head {
   background: linear-gradient(135deg, #e74c3c, #ff6b6b);
 }
 
-.pin-marker.kolkata .pin-icon {
+.custom-pin.east .pin-head {
   background: linear-gradient(135deg, #f39c12, #f1c40f);
 }
 
-/* Pin Tooltip */
-.pin-tooltip {
-  position: absolute;
-  top: -45px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 20;
-  pointer-events: none;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+.custom-pin.west .pin-head {
+  background: linear-gradient(135deg, #16a085, #1abc9c);
 }
 
-.pin-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: #1a1a2e transparent transparent transparent;
-}
-
-.city-pin:hover .pin-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(-5px);
-}
-
-/* Map Controls */
-.map-controls {
-  display: flex;
-  gap: 10px;
-  background: #f8f9fa;
-  padding: 8px;
+/* Leaflet Popup Styles */
+.leaflet-popup-content-wrapper {
   border-radius: 12px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.map-control-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: linear-gradient(135deg, var(--region-primary), var(--region-secondary));
+.leaflet-popup-content {
+  margin: 12px 16px;
+  font-family: inherit;
+}
+
+.city-popup {
+  text-align: center;
+  min-width: 150px;
+}
+
+.city-popup h4 {
+  margin: 0 0 8px 0;
+  color: #1a1a2e;
+  font-size: 1.1rem;
+}
+
+.city-popup .region-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
   color: white;
+  margin-bottom: 10px;
+}
+
+.city-popup .region-badge.north { background: #4a90e2; }
+.city-popup .region-badge.south { background: #e74c3c; }
+.city-popup .region-badge.east { background: #f39c12; }
+.city-popup .region-badge.west { background: #16a085; }
+
+.city-popup .view-city-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #ff6b35, #ff9b6b);
+  color: white;
+  text-decoration: none;
   border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
   transition: all 0.3s ease;
-  font-size: 1rem;
-  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
 }
 
-.map-control-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.5);
+.city-popup .view-city-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
 }
 
-.map-control-btn:active {
-  transform: translateY(0) scale(0.95);
-}
-
-/* Map Header */
-.map-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.map-section-title {
-  margin: 0 !important;
-  text-align: left !important;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.map-section-title i {
-  color: var(--region-primary);
-}
-
-/* Map Legend */
+/* Legend Container */
 .map-legend {
+  flex: 1;
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
   border-radius: 12px;
   padding: 20px;
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .legend-title {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--region-dark);
+  color: var(--region-dark, #1a1a2e);
   margin-bottom: 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .legend-title i {
-  color: var(--region-primary);
-  margin-right: 8px;
+  color: var(--region-primary, #ff6b35);
 }
 
 .legend-items {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 15px;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex: 1;
 }
 
 .legend-item {
   cursor: pointer;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 8px;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 0.9rem;
   color: #555;
 }
 
 .legend-item:hover {
   background: rgba(255, 107, 53, 0.1);
-  transform: translateY(-2px);
+  transform: translateX(5px);
+}
+
+.legend-item.active {
+  background: rgba(255, 107, 53, 0.15);
+  font-weight: 600;
 }
 
 .legend-color {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .legend-color.office {
@@ -665,68 +305,59 @@ body[data-theme="dark"] .legend-item:hover {
 }
 
 .legend-color.secondary {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
 }
 
 /* Map Statistics */
 .map-stats {
   display: flex;
-  justify-content: center;
-  gap: 30px;
+  flex-direction: column;
+  gap: 12px;
   padding-top: 15px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: auto;
 }
 
 .stat-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #555;
 }
 
 .stat-item i {
-  color: var(--region-primary);
-  font-size: 1.1rem;
+  color: var(--region-primary, #ff6b35);
+  font-size: 1rem;
 }
 
 .stat-item strong {
-  color: var(--region-dark);
-  font-size: 1.1rem;
+  color: var(--region-dark, #1a1a2e);
+  font-size: 1rem;
+}
+
+/* Fullscreen Styles */
+.map-layout-container:fullscreen {
+  background: #1a1a2e;
+  padding: 30px;
+  gap: 30px;
+}
+
+.map-layout-container:fullscreen .map-container {
+  flex: 2;
+}
+
+.map-layout-container:fullscreen .map-legend {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(248, 249, 250, 0.95), rgba(233, 236, 239, 0.95));
+}
+
+.map-layout-container:fullscreen #leafletMap {
+  min-height: calc(100vh - 60px);
 }
 
 /* Dark Theme Support */
-body[data-theme="dark"] .modern-india-map {
-  background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
-}
-
-body[data-theme="dark"] .india-outline {
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-}
-
-body[data-theme="dark"] .india-land {
-  fill: #2a2a3e;
-  stroke: #6ba8ff;
-}
-
-body[data-theme="dark"] .state-border {
-  stroke: #88b8ff;
-}
-
-body[data-theme="dark"] .connection-line {
-  stroke: #ff9b6b;
-  opacity: 0.8;
-}
-
-body[data-theme="dark"] .pin-tooltip {
-  background: linear-gradient(135deg, #2a2a3e, #3a3a4e);
-}
-
-body[data-theme="dark"] .pin-tooltip::after {
-  border-color: #2a2a3e transparent transparent transparent;
-}
-
 body[data-theme="dark"] .map-controls {
   background: #2a2a3e;
 }
@@ -755,18 +386,60 @@ body[data-theme="dark"] .legend-item:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .modern-india-map {
-    height: 400px;
+  .map-layout-container {
+    flex-direction: column;
+    gap: 20px;
   }
   
-  .map-header {
+  .map-container {
+    width: 100%;
+    min-height: 350px;
+  }
+  
+  #leafletMap {
+    min-height: 350px;
+  }
+  
+  .map-legend {
+    width: 100%;
+  }
+  
+  .map-section-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
   
   .map-controls {
-    order: -1;
-    align-self: flex-end;
+    position: static;
+    transform: none;
+  }
+  
+  .legend-items {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .legend-item {
+    flex: 1;
+    min-width: calc(50% - 4px);
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+  
+  .map-stats {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-container {
+    min-height: 300px;
+  }
+  
+  #leafletMap {
+    min-height: 300px;
   }
   
   .map-control-btn {
@@ -775,16 +448,13 @@ body[data-theme="dark"] .legend-item:hover {
     font-size: 0.9rem;
   }
   
-  .legend-items {
-    gap: 10px;
-  }
-  
   .legend-item {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    padding: 5px 8px;
   }
   
-  .map-stats {
-    flex-direction: column;
-    gap: 10px;
+  .legend-color {
+    width: 14px;
+    height: 14px;
   }
 }
