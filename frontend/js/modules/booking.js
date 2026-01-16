@@ -8,6 +8,7 @@ class BookingManager {
         this.currentStep = 1;
         this.totalSteps = 3;
         this.formData = {};
+        this.DRAFT_KEY = 'bookingFormDraft';
         this.validationRules = {
             fullName: (val) => val.trim().length >= 2,
             phone: (val) => {
@@ -39,6 +40,7 @@ class BookingManager {
         this.setupEventListeners();
         this.updateProgressBar();
         this.initializeDateInput();
+        this.restoreDraft();
     }
 
     setupEventListeners() {
@@ -52,6 +54,7 @@ class BookingManager {
                 input.addEventListener('input', () => {
                     this.validateField(field, input.value);
                     this.updateBookingSummary();
+                    this.saveDraft();
                 });
                 
                 input.addEventListener('blur', () => {
@@ -527,6 +530,8 @@ class BookingManager {
             if (form) {
                 form.reset();
             }
+            
+            localStorage.removeItem(this.DRAFT_KEY);
 
             this.currentStep = 1;
             this.updateStepDisplay();
@@ -537,10 +542,6 @@ class BookingManager {
                 window.clearRoute();
             }
 
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Confirm Booking</span>';
-            }
 
             this.showToast('Booking Confirmed!', `Your booking reference is ${reference}`, 'success', 5000);
         }, 2000);
@@ -580,6 +581,33 @@ class BookingManager {
         if (window.showToast) {
             window.showToast(title, message, type, duration);
         }
+    }
+    saveDraft() {
+        const form = document.getElementById('bookingForm');
+        if (!form) return;
+
+        const data = {};
+        new FormData(form).forEach((value, key) => {
+            data[key] = value;
+        });
+
+        localStorage.setItem(this.DRAFT_KEY, JSON.stringify(data));
+    }
+    restoreDraft() {
+        const saved = localStorage.getItem(this.DRAFT_KEY);
+        if (!saved) return;
+
+        const data = JSON.parse(saved);
+        const form = document.getElementById('bookingForm');
+        if (!form) return;
+
+        Object.keys(data).forEach(key => {
+            if (form.elements[key]) {
+                form.elements[key].value = data[key];
+            }
+        });
+
+        this.updateBookingSummary();
     }
 }
 
