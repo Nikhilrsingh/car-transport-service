@@ -3,13 +3,18 @@ import upload from "../middleware/upload.js";
 import {
   createFeedback,
   getAllFeedbacks,
+  getFeedbackById,
+  getPublicFeedbacks,
   updateFeedbackStatus,
-  deleteFeedback
+  deleteFeedback,
+  getFeedbackStats,
+  toggleFeaturedFeedback,
+  getAverageRating,
 } from "../controllers/feedback.controller.js";
 
 const router = express.Router();
 
-// Create feedback with images
+// Submit feedback (with images)
 router.post(
   "/",
   upload.fields([
@@ -19,13 +24,33 @@ router.post(
   createFeedback
 );
 
-// Get all feedback
+// Get approved feedbacks (for website)
+router.get("/public", getPublicFeedbacks);
+
+// Get average rating
+router.get("/average-rating", getAverageRating);
+
+/* =========================
+   ADMIN ROUTES (future auth)
+========================= */
+
+// Get all feedbacks (dashboard)
 router.get("/", getAllFeedbacks);
 
-// Approve / Reject
-router.put("/:id", updateFeedbackStatus);
+// Feedback statistics
+router.get("/stats", getFeedbackStats);
 
-// Delete feedback (also deletes images from Cloudinary)
+// Get single feedback
+router.get("/:id", getFeedbackById);
+
+// Update status (approve / reject / pending)
+router.patch("/:id/status", updateFeedbackStatus);
+
+// Toggle featured feedback
+router.patch("/:id/featured", toggleFeaturedFeedback);
+
+// Delete feedback (also deletes Cloudinary images)
 router.delete("/:id", deleteFeedback);
+
 
 export default router;

@@ -105,4 +105,34 @@ export const googleLogin = (req, res) => {
     }
   };
   
-  
+  /* ================= GET ALL USERS ================= */
+export const getAllUsers = async (req, res) => {
+  try {
+    const { page = 1, limit = 10, search = "" } = req.query;
+
+    const query = {
+      $or: [
+        { name: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+      ],
+    };
+
+    const users = await User.find(query)
+      .select("-password")              // never expose passwords
+      .skip((page - 1) * limit)
+      .limit(Number(limit))
+      .sort({ createdAt: -1 });
+
+    const total = await User.countDocuments(query);
+
+    success(res, 200, "Users fetched successfully", {
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      users,
+    });
+  } catch (err) {
+    error(res, 500, err.message);
+  }
+};
+

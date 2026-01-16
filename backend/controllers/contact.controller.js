@@ -116,27 +116,63 @@ sendContactEmail({
     next(error);
   }
 };
-
 /**
- * @desc    Get all contact messages
+ * @desc    Get all contact messages (with pagination, search & filter)
  * @route   GET /api/contact
  * @access  Admin (future)
  */
 export const getAllContacts = async (req, res, next) => {
   try {
-    const contacts = await Contact.find()
+    const {
+      page = 1,
+      limit = 10,
+      search = "",
+      status,
+      service,
+    } = req.query;
+
+    const query = {};
+
+    // Search by name, email, phone, vehicle
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+        { phone: { $regex: search, $options: "i" } },
+        { vehicle: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // Filter by status
+    if (status) {
+      query.status = status;
+    }
+
+    // Filter by service
+    if (service) {
+      query.service = service;
+    }
+
+    const total = await Contact.countDocuments(query);
+
+    const contacts = await Contact.find(query)
       .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(Number(limit))
       .select("-__v");
 
     res.status(200).json({
       success: true,
-      count: contacts.length,
+      total,
+      page: Number(page),
+      limit: Number(limit),
       data: contacts,
     });
   } catch (error) {
     next(error);
   }
 };
+
 
 /**
  * @desc    Update contact status
@@ -179,6 +215,92 @@ export const updateContactStatus = async (req, res, next) => {
       success: true,
       message: "Contact status updated",
       data: contact,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const getContactById = async (req, res, next) => {
+  try {
+    const contact = await Contact.findById(req.params.id).select("-__v");
+
+    if (!contact) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: contact,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteContact = async (req, res, next) => {
+  try {
+    const contact = await Contact.findByIdAndDelete(req.params.id);
+
+    if (!contact) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Contact deleted successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+export const toggleReadStatus = async (req, res, next) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+
+    if (!contact) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact not found",
+      });
+    }
+
+    contact.isRead = !contact.isRead;
+    await contact.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Read status updated",
+      data: contact,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+export const getContactStats = async (req, res, next) => {
+  try {
+    const stats = await Contact.aggregate([
+      {
+        $group: {
+          _id: "$status",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    const total = await Contact.countDocuments();
+
+    res.status(200).json({
+      success: true,
+      total,
+      stats,
     });
   } catch (error) {
     next(error);
