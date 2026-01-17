@@ -953,247 +953,60 @@
         </div>
     </section>
 
-    <!-- Partner/Franchise Opportunities -->
     <section class="franchise-opportunities">
-        <div class="container">
-            <h2 class="section-title fade-in">Partner & Franchise Opportunities</h2>
-            <p class="section-subtitle fade-in fade-in-delay-1">Grow with us as a business partner</p>
+  <div class="container franchise-wrapper">
+    <div class="franchise-main">
+      <h2 class="section-title fade-in">Partner &amp; Franchise Opportunities</h2>
+      <p class="section-subtitle fade-in fade-in-delay-1">
+        Grow with us as a business partner
+      </p>
 
-            <div class="franchise-content">
-                <div class="franchise-info fade-in fade-in-delay-1">
-                    <h3>Become a Franchise Partner</h3>
-                    <p>Join our expanding network and bring our trusted car transport services to your region. We
-                        provide comprehensive support to help you succeed.</p>
-
-                    <div class="franchise-benefits">
-                        <h4>What We Offer:</h4>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Established brand recognition</li>
-                            <li><i class="fas fa-check"></i> Comprehensive training program</li>
-                            <li><i class="fas fa-check"></i> Marketing and operational support</li>
-                            <li><i class="fas fa-check"></i> Proven business model</li>
-                            <li><i class="fas fa-check"></i> Technology and software systems</li>
-                            <li><i class="fas fa-check"></i> Ongoing assistance and mentorship</li>
-                        </ul>
-                    </div>
-
-                    <div class="franchise-requirements">
-                        <h4>Requirements:</h4>
-                        <ul>
-                            <li><i class="fas fa-circle"></i> Minimum investment: $150,000 - $250,000</li>
-                            <li><i class="fas fa-circle"></i> Business management experience</li>
-                            <li><i class="fas fa-circle"></i> Commitment to brand standards</li>
-                            <li><i class="fas fa-circle"></i> Financial stability and good credit</li>
-                        </ul>
-                    </div>
-
-                    <button class="franchise-btn" onclick="openFranchiseModal()">Request Franchise Information</button>
-                </div>
-
-                <div class="franchise-image fade-in fade-in-delay-2">
-                    <i class="fas fa-handshake"
-                        style="font-size: 200px; color: var(--primary-color); opacity: 0.1;"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Application Modal -->
-    <div id="applicationModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeApplicationModal()">&times;</span>
-            <h2>Job Application</h2>
-            <p class="modal-subtitle">Position: <span id="positionName"></span></p>
-
-            <form id="applicationForm" class="application-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">First Name *</label>
-                        <input type="text" id="firstName" name="firstName" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="lastName">Last Name *</label>
-                        <input type="text" id="lastName" name="lastName" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-
-                    <div class="phone-input-wrapper">
-                        <select id="countryCode" class="country-code">
-                            <option value="+91" selected>🇮🇳 +91</option>
-                        </select>
-
-                        <div class="form-group">
-                            <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
-
-                            <input
-                                type="text"
-                                id="phone"
-                                name="phone"
-                                required
-                                maxlength="10"
-                                inputmode="numeric"
-                                placeholder="Enter 10-digit mobile number"
-                            />
-
-                            <span class="validation-icon"></span>
-                            <div class="error-message"></div>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" id="address" name="address">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" id="city" name="city">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="state">State</label>
-                        <input type="text" id="state" name="state">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="zip">ZIP Code</label>
-                        <input type="text" id="zip" name="zip">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="resume">Resume/CV *</label>
-                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
-                    <small>Accepted formats: PDF, DOC, DOCX (Max 5MB)</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="coverLetter">Cover Letter</label>
-                    <textarea id="coverLetter" name="coverLetter" rows="6"
-                        placeholder="Tell us why you're interested in this position..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="experience">Years of Relevant Experience *</label>
-                    <select id="experience" name="experience" required>
-                        <option value="">Select...</option>
-                        <option value="0-1">0-1 years</option>
-                        <option value="1-3">1-3 years</option>
-                        <option value="3-5">3-5 years</option>
-                        <option value="5-10">5-10 years</option>
-                        <option value="10+">10+ years</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="availability">Available Start Date *</label>
-                    <input type="date" id="availability" name="availability" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="references">Professional References</label>
-                    <textarea id="references" name="references" rows="4"
-                        placeholder="Name, Position, Company, Phone (optional)"></textarea>
-                </div>
-
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" id="authorized" name="authorized" required>
-                    <label for="authorized">I am authorized to work in the United States *</label>
-                </div>
-
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" id="consent" name="consent" required>
-                    <label for="consent">I consent to a background check and drug screening if selected *</label>
-                </div>
-
-                <button type="submit" class="submit-btn">Submit Application</button>
-            </form>
-        </div>
+       <div class="franchise-image fade-in fade-in-delay-2">
+      <div class="franchise-image-circle">
+        <i class="fas fa-handshake"></i>
+      </div>
     </div>
 
-    <!-- Franchise Modal -->
-    <div id="franchiseModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeFranchiseModal()">&times;</span>
-            <h2>Franchise Information Request</h2>
-            <p class="modal-subtitle">Tell us about your interest in becoming a franchise partner</p>
+      <div class="franchise-intro fade-in fade-in-delay-1">
+        <h3>Become a Franchise Partner</h3>
+        <p>
+          Join our expanding network and bring our trusted car transport services to your region.
+          We provide comprehensive support to help you succeed.
+        </p>
+      </div>
 
-            <form id="franchiseForm" class="application-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="franchiseFirstName">First Name *</label>
-                        <input type="text" id="franchiseFirstName" name="franchiseFirstName" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="franchiseLastName">Last Name *</label>
-                        <input type="text" id="franchiseLastName" name="franchiseLastName" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="franchiseEmail">Email Address *</label>
-                        <input type="email" id="franchiseEmail" name="franchiseEmail" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="franchisePhone">Phone Number *</label>
-                        <input type="tel" id="franchisePhone" name="franchisePhone" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="targetLocation">Target Location/Region *</label>
-                    <input type="text" id="targetLocation" name="targetLocation" placeholder="City, State" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="investment">Available Investment Capital *</label>
-                    <select id="investment" name="investment" required>
-                        <option value="">Select range...</option>
-                        <option value="150-200k">$150,000 - $200,000</option>
-                        <option value="200-250k">$200,000 - $250,000</option>
-                        <option value="250k+">$250,000+</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="businessExperience">Business Experience *</label>
-                    <textarea id="businessExperience" name="businessExperience" rows="4"
-                        placeholder="Describe your business management experience..." required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="timeline">Expected Timeline *</label>
-                    <select id="timeline" name="timeline" required>
-                        <option value="">Select...</option>
-                        <option value="immediate">Immediate (0-3 months)</option>
-                        <option value="short">Short-term (3-6 months)</option>
-                        <option value="medium">Medium-term (6-12 months)</option>
-                        <option value="long">Long-term (12+ months)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="additionalInfo">Additional Information</label>
-                    <textarea id="additionalInfo" name="additionalInfo" rows="4"
-                        placeholder="Tell us more about your interest and qualifications..."></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Request Information</button>
-            </form>
+      <div class="franchise-grid">
+        <div class="franchise-card">
+          <h4>What We Offer</h4>
+          <ul class="franchise-list">
+            <li><i class="fas fa-check"></i>Established brand recognition</li>
+            <li><i class="fas fa-check"></i>Comprehensive training program</li>
+            <li><i class="fas fa-check"></i>Marketing and operational support</li>
+            <li><i class="fas fa-check"></i>Proven business model</li>
+            <li><i class="fas fa-check"></i>Technology and software systems</li>
+            <li><i class="fas fa-check"></i>Ongoing assistance and mentorship</li>
+          </ul>
         </div>
+
+        <div class="franchise-card">
+          <h4>Requirements</h4>
+          <ul class="franchise-list">
+            <li><i class="fas fa-circle"></i>Minimum investment 150,000 - 250,000</li>
+            <li><i class="fas fa-circle"></i>Business management experience</li>
+            <li><i class="fas fa-circle"></i>Commitment to brand standards</li>
+            <li><i class="fas fa-circle"></i>Financial stability and good credit</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="franchise-btn" onclick="openFranchiseModal()">
+        Request Franchise Information
+      </button>
     </div>
+
+  </div>
+</section>
+
 
     <!-- Footer -->
     <div id="footer-container"></div>
