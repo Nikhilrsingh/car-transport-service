@@ -1783,15 +1783,28 @@
                                     <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
                                     <div class="error-message" id="nameError">Please enter your full name</div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
-                                    <input type="tel" id="phone" name="phone" required
-                                        placeholder="Enter 10-digit number">
-                                    <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="phoneError">Please enter a valid 10-digit phone
-                                        number</div>
+                                <div class="form-group phone-group">
+                                    <label><i class="fas fa-phone"></i> Phone Number *</label>
+
+                                    <div class="phone-row">
+                                        <select class="country-code">
+                                            <option value="+91">+91 (India)</option>
+                                        </select>
+
+                                        <div class="phone-input-box">
+                                            <input
+                                                type="tel"
+                                                id="phone"
+                                                name="phone"
+                                                placeholder="92345 75818"
+                                                required
+                                            />
+                                            <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="error-message" id="phoneError">Please enter a valid 10-digit Indian phone number</div>
                                 </div>
-                            </div>
 
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
@@ -2681,6 +2694,7 @@
         let alternativeRoutesControls = [];
         let currentMapStyle = 'street';
         let streetViewActive = false;
+        
 
         // Blackout dates (holidays, maintenance days, etc.)
         const blackoutDates = [
@@ -2742,6 +2756,10 @@
         // ========================================
         // MULTI-STEP FORM MANAGEMENT
         // ========================================
+        let currentStep = 1; 
+        let pickupCoords = null; 
+        let dropCoords = null;
+        
         function nextStep() {
             if (!validateStep(currentStep)) {
                 showToast('Validation Error', 'Please fill all required fields correctly', 'error', 3000);
@@ -2801,7 +2819,7 @@
         // AUTO-SAVE TO LOCALSTORAGE
         // ========================================
         function autoSaveForm() {
-            const form = document.getElementById('bookingForm');
+            const form = document.getElementById('autoSaveForm');
             const formData = new FormData(form);
             const data = {
                 step: currentStep,
@@ -2961,7 +2979,7 @@
 
             if (step === 1) {
                 // Validate personal and vehicle info
-                const fields = ['fullName', 'phone', 'email', 'vehicleType'];
+                const fields = ['fullName', 'phone', 'email', 'password', 'vehicleType'];
                 fields.forEach(field => {
                     const input = document.getElementById(field);
                     if (!validateField(field, input.value)) {
@@ -3160,8 +3178,23 @@
         function validateField(fieldName, value) {
             const validators = {
                 fullName: (val) => val.trim().length >= 2,
-                phone: (val) => /^[6-9]\d{9}$/.test(val.replace(/\D/g, '')),
-                email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+                phone: (val) => {
+                    const phone = val.replace(/\D/g, '');
+                    return /^[6-9]\d{9}$/.test(phone);
+                },
+
+
+
+                email: (val) => {
+                    const trimmed = val.trim();
+
+                    // 1️⃣ reject if whitespace exists anywhere
+                    if (/\s/.test(val)) return false;
+
+                    // 2️⃣ validate email format
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+                },
+
                 vehicleType: (val) => val.trim() !== '',
                 pickupCity: (val) => val.trim() !== '',
                 dropCity: (val) => val.trim() !== '',
@@ -3206,8 +3239,9 @@
         function getErrorMessage(field) {
             const messages = {
                 fullName: 'Please enter your full name (min 2 characters)',
-                phone: 'Please enter a valid 10-digit Indian phone number',
+                phone: 'Please enter a valid Indian phone number (XXXXXXXXXX)',
                 email: 'Please enter a valid email address',
+                password: 'Please enter a valid password (min 8 characters)',
                 vehicleType: 'Please select vehicle type',
                 pickupCity: 'Please select pickup city',
                 dropCity: 'Please select drop city',
@@ -4742,7 +4776,8 @@
             });
 
             // Add input event listeners for real-time validation
-            const validationFields = ['fullName', 'phone', 'email', 'vehicleType', 'pickupCity', 'dropCity', 'pickupDate'];
+            const validationFields = ['fullName', 'phone', 'email', 'password', 'vehicleType',
+                          'pickupLocation', 'dropLocation', 'pickupDate'];
 
             validationFields.forEach(field => {
                 const input = document.getElementById(field);
@@ -4762,18 +4797,24 @@
             const additionalInfo = document.getElementById('additionalInfo');
             additionalInfo.addEventListener('input', updateCharacterCount);
 
-            // Phone number formatting
+            // Phone number input handling (FIXED)
             const phoneInput = document.getElementById('phone');
-            phoneInput.addEventListener('input', function (e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 0) {
-                    value = value.substring(0, 10);
-                    if (value.length > 5) {
-                        value = value.substring(0, 5) + ' ' + value.substring(5);
+            if (phoneInput) {
+
+                // block non-numeric keys
+                phoneInput.addEventListener('keypress', (e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                        e.preventDefault();
                     }
-                }
-                e.target.value = value;
-            });
+                });
+
+                // clean pasted input + trigger validation
+                phoneInput.addEventListener('input', () => {
+                    phoneInput.value = phoneInput.value.replace(/\D/g, '');
+                    validateField(phoneInput); // 🟢 green tick appears here
+                });
+            }
+
 
             // Vehicle type change - update pricing
             document.getElementById('vehicleType').addEventListener('change', function () {
@@ -4805,12 +4846,19 @@
             bookingForm.addEventListener('submit', function (e) {
                 e.preventDefault();
 
+                // 🔒 DUPLICATE SUBMISSION PROTECTION
+                if (isSubmitting) return;
+                isSubmitting = true;
+
                 if (!validateStep(3)) {
                     showToast('Validation Error', 'Please check all fields', 'error', 3000);
+                    isSubmitting = false;
                     return;
                 }
 
                 submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
 
                 // Simulate API call
@@ -4872,25 +4920,31 @@
         // ========================================
         let selectedAddons = [];
         let addonsTotalPrice = 0;
+        let autoSaveTimeout = null;
+
 
         function toggleAddon(element, addonId, price) {
-            const checkbox = element.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
+          const checkbox = element.querySelector('input[type="checkbox"]');
+          if (event.target !== checkbox) {
+           checkbox.checked = !checkbox.checked;
+          }
 
-            if (checkbox.checked) {
-                element.classList.add('selected');
-                selectedAddons.push({ id: addonId, price: price });
-                addonsTotalPrice += price;
-            } else {
-                element.classList.remove('selected');
-                selectedAddons = selectedAddons.filter(a => a.id !== addonId);
-                addonsTotalPrice -= price;
-            }
+          if (checkbox.checked) {
+            element.classList.add('selected');
+            selectedAddons.push({ id: addonId, price: price });
+            addonsTotalPrice += price;
+          } else {
+            element.classList.remove('selected');
+            selectedAddons = selectedAddons.filter(a => a.id !== addonId);
+            addonsTotalPrice -= price;
+          }
 
-            updateAddonsDisplay();
-            updatePriceCalculation();
-            triggerAutoSave();
-        }
+          updateAddonsDisplay();
+          updatePriceCalculation();
+          triggerAutoSave(); 
+}
+
+
 
         function updateAddonsDisplay() {
             const addonsTotal = document.getElementById('addonsTotal');
@@ -5098,6 +5152,7 @@
     <script src="../js/modules/themes.js"></script>
 
     <!-- 🌟 Bottom Fixed Action Bar -->
+
    <link rel="stylesheet" href="../css/components/footer.css" />
   <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
   <link rel="stylesheet" href="../css/components/quote-modal.css" />
@@ -5106,6 +5161,7 @@
   <!-- 🚀 Floating Action Menu loaded via footer component -->
    <script src="../js/script.js"></script>
    <script src="../js/modules/booking.js"></script>
+
 </body>
 
 </html>

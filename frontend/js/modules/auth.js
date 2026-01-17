@@ -2,6 +2,9 @@
 
 const API_BASE = "http://localhost:3000/api/auth";
 
+import { safeFetch } from "../http.js";
+
+
 // Show notifications
 function showNotification(message, type = "info") {
   const existing = document.querySelector(".auth-notification");
@@ -32,11 +35,12 @@ async function handleLogin(e) {
   }
 
   try {
-    const res = await fetch(`${API_BASE}/login`, {
+    const res = await safeFetch(`${API_BASE}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+    if (!res) return;
     const data = await res.json();
 
     if (res.ok && data.success) {
@@ -87,11 +91,12 @@ async function handleSignup(e) {
   showNotification("Creating account...", "info");
 
   try {
-    const res = await fetch(`${API_BASE}/register`, {
+    const res = await safeFetch(`${API_BASE}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password, phone }),
     });
+    if (!res) return;
     const data = await res.json();
 
     if (!res.ok || !data.success) {
