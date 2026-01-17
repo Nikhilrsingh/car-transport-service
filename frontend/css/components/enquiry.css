@@ -29,6 +29,8 @@ body {
     background-size: cover;
     background-position: center;
     position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
 }
 
 .enquiry-hero::before {
@@ -57,7 +59,6 @@ body {
 .enquiry-hero p {
     color: var(--muted);
     font-size: 1.3rem;
-    max-width: 700px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -91,11 +92,8 @@ body {
 /* Main Container */
 .enquiry-main-container {
     max-width: 1400px;
-    margin: -50px auto 60px;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 40px;
+    margin: 10px auto 20px;
+    padding: 0 5px;
     position: relative;
     z-index: 1;
 }
@@ -103,6 +101,8 @@ body {
 /* Form Container */
 .enquiry-form-container {
     background: var(--card-bg);
+    margin-top:10px;
+    margin-bottom: 25px;
     padding: 40px;
     border-radius: 20px;
     box-shadow: var(--shadow);
@@ -593,6 +593,7 @@ body {
 .enquiry-sidebar {
     position: sticky;
     top: 20px;
+    margin-bottom: 10px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
 }
@@ -1037,12 +1038,17 @@ body {
 }
 
 @media (max-width: 768px) {
+    .enquiry-hero {
+        padding: 120px 10px 60px;
+    }
+
     .enquiry-hero h1 {
         font-size: 2.5rem;
     }
 
     .enquiry-hero p {
         font-size: 1.1rem;
+        max-width: 95%;
     }
 
     .enquiry-stats {
@@ -1064,5 +1070,60 @@ body {
 
     .modal-content {
         padding: 40px 25px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .enquiry-hero {
+        padding: 100px 2px 50px;
+    }
+
+    .enquiry-hero h1 {
+        font-size: 2rem;
+    }
+
+    .enquiry-hero p {
+        font-size: 1rem;
+        max-width: 98%;
+    }
+
+    .enquiry-stats {
+        gap: 15px;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .enquiry-hero {
+        padding: 80px 2px 40px;
+    }
+
+    .enquiry-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .enquiry-hero p {
+        font-size: 0.9rem;
+        max-width: 100%;
+    }
+
+    .enquiry-stats {
+        gap: 10px;
+    }
+
+    .stat-number {
+        font-size: 1.3rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
     }
 }
