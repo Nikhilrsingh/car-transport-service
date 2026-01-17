@@ -210,6 +210,14 @@ section {
     justify-content: center;
     font-size: 1.5rem;
     color: var(--white);
+    overflow: hidden;
+}
+
+.office-city-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .office-header h3 {
@@ -234,7 +242,18 @@ section {
 
 .detail-item i {
     color: var(--primary-color);
+    flex: 0 0 18px;
     width: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.detail-item span,
+.detail-item a{
+  display: inline-block;
+  line-height: 1.4;
 }
 
 .detail-item a {
@@ -247,12 +266,55 @@ section {
     color: var(--primary-color);
 }
 
-.detail-item:last-child {
+.location-item{
     margin-top: 5px;
-    font-style: italic;
     font-size: 0.9rem;
     color: #999;
 }
+.location-item{
+  align-items: flex-start;     /* icon top aligns with multi-line text */
+}
+
+.location-item i{
+  margin-top: 2px;           /* tiny nudge to match text baseline */
+  color: var(--primary-color);
+}
+
+.location-item span,
+.location-item a{
+  text-align: left;
+}
+
+/*map button*/
+.location-item .map-open-link{
+  display: block;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  color: #555 !important;
+}
+
+.location-item .map-open-link:hover{
+  color: var(--primary-color) !important;
+  text-decoration: underline !important;
+}
+
+.location-item .map-open-link:active{
+  color: var(--primary-color);
+}
+
+
+.office-details .location-item .map-open-link{
+  font-weight: 800 !important;
+  color: #444 !important;
+}
+
 
 /* Network Stats Section */
 .network-stats {
@@ -618,4 +680,26 @@ body[data-theme="dark"] .contact-btn.secondary {
 body[data-theme="dark"] .contact-btn.secondary:hover {
   background: #f97316;
   color: #0b1120;
+}
+
+/* Ensure location link stays bold in both themes */
+body[data-theme="light"] .office-details .location-item .map-open-link{
+  font-weight: 700 !important;
+  color: #555 !important;
+}
+
+body[data-theme="dark"] .office-details .location-item .map-open-link{
+  font-weight: 700 !important;
+  color: #e5e7eb !important;
+}
+
+/* Force orange hover for office location link */
+.office-details .location-item .map-open-link{
+  color: #444;
+  text-decoration: none;
+}
+
+.office-details .location-item .map-open-link:hover{
+  color: var(--primary-color) !important;
+  text-decoration: underline !important;
 }

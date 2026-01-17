@@ -11,7 +11,7 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.4);
-    z-index: 1002;
+    z-index: 9999;
     align-items: flex-end;
     justify-content: flex-end;
     padding: 20px;
@@ -230,7 +230,6 @@
 .chatbot-input-area {
     border-top: 1px solid #444;
     padding: 16px;
-    background: #1a1a1a;
 }
 
 .chatbot-form {
@@ -269,10 +268,11 @@
 
 .chatbot-send-btn {
     width: 40px;
-    height: 40px;
+    height: 50px;
     border: none;
     background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
     color: white;
+    background-color: #575650 !important;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -312,6 +312,10 @@
     flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
+    color: #ffffff;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: #bfbfbf transparent;
 }
 
 .quick-reply {
@@ -412,11 +416,12 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.45);
-    z-index: 1002;
+    z-index: 9999;
     align-items: flex-end;
     justify-content: flex-end;
     padding: 20px;
     padding-right: 35px;
+    padding-bottom: 90px;
     animation: fadeIn 0.25s ease-out;
 }
 
@@ -610,7 +615,6 @@
 .chatbot-input-area {
     border-top: 1px solid #444;
     padding: 16px;
-    background: #1a1a1a;
 }
 
 .chatbot-input-wrapper {
@@ -642,7 +646,7 @@
 
 .chatbot-send-btn {
     width: 40px;
-    height: 40px;
+    height: 50px;
     border: none;
     background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
     color: white;
@@ -723,12 +727,13 @@
 @media (max-width: 768px) {
     .chatbot-modal-overlay {
         padding: 0;
+        padding-bottom: 50px;
     }
 
     .chatbot-modal {
         max-width: 100%;
-        height: 100vh;
-        max-height: 100vh;
+        height: calc(100vh - 70px);
+        max-height: calc(100vh - 70px);
         border-radius: 0;
     }
 
