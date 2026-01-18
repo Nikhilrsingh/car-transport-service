@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
 // ================= FORM DATA PERSISTENCE =================
 function saveFormData() {
   const bookingForm = document.getElementById("autoSaveForm");
@@ -259,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .classList.add("active");
 
     updateStepUI(1);
+
   });
 });
 
@@ -276,7 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
 
 // ================= PRELOADER =================
 window.addEventListener("load", () => {

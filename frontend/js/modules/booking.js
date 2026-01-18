@@ -235,7 +235,7 @@ class BookingManager {
         let fields = [];
 
         if (step === 1) {
-            fields = ['fullName', 'phone', 'email', 'vehicleType'];
+            fields = ['fullName', 'phone', 'email', 'password', 'vehicleType'];
         } else if (step === 2) {
             fields = ['pickupCity', 'dropCity', 'pickupDate'];
         }
