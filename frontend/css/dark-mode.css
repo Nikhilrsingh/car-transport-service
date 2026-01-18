@@ -1070,6 +1070,22 @@ body[data-theme="dark"] .about-text h3::before {
 }
 
 /* Responsive adjustments for dark mode */
+@media (max-width: 991px) {
+  body[data-theme="dark"] .middle-navbar-container {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+  }
+  
+  body[data-theme="dark"] .middle-navbar-right span,
+  body[data-theme="dark"] .middle-navbar-right a {
+    color: #ffffff !important;
+  }
+  
+  body[data-theme="dark"] .middle-navbar-right span:last-child,
+  body[data-theme="dark"] .middle-navbar-right div {
+    color: #c0c0c0 !important;
+  }
+}
+
 @media (max-width: 768px) {
   body[data-theme="dark"] .about {
     background: linear-gradient(to bottom, #2b2b2b, #242424) !important;
