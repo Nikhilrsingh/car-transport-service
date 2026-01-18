@@ -1996,13 +1996,6 @@ body[data-theme="light"] .info-content p {
   color: #555 !important;
 }
 
-body[data-theme="light"] .hours-list li {
-  border-bottom-color: #ddd !important;
-}
-
-body[data-theme="light"] .hours-list .day {
-  color: #666 !important;
-}
 
 
 /* ====================================
@@ -2993,24 +2986,36 @@ body:not(.dark-mode) .contact-info p {
 body[data-theme="light"] .hours-widget {
     background:#fce2d9;
     border: 1px solid #454343;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 body[data-theme="light"] .hours-widget .current-status {
     background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 body[data-theme="light"] .hours-widget h3 {
-    color:rgb(255, 111, 0);
+    color: var(--orange);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 body[data-theme="light"] .hours-widget .response-time {
     color: var(--color-text-muted, #b46e52);
+    margin-bottom: 5px;
+    font-size: small;
 }
 
-body[data-theme="light"] .hours-widget .hours-list li span.day {
-    color: #333 !important;
+body[data-theme="light"] .hours-list li span.day {
+    font-weight: 600;
+    color: rgb(255, 99, 71);
+    font-size: large;
 }
 
 /* Light mode styles for faq-widget */
@@ -3085,10 +3090,28 @@ body[data-theme="light"] .enquiry-form-container::before {
     background: linear-gradient(90deg, var(--accent, #ff6b3d), var(--accent, #ff6b3d));
 }
 
-body[data-theme="light"] .form-progress {
-    background: #f5f5f5;
+body[data-theme="light"] .enquiry-form-container h3 {
+    color: rgb(255, 111, 0);
 }
 .progress-bar{
   background: rgb(150, 150, 149);
 }
 
+body[data-theme="light"] .form-step-active {
+    color: var(--color-text-primary, #000000);
+    font-weight: 500;
+    border: 2px solid var(--card-border-dark, rgba(0,0,0,0.12));
+    border-radius: 15px;
+    padding: 15px;
+    padding-bottom: 20px;
+}
+
+body[data-theme="light"] .form-progress {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
