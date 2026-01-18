@@ -365,3 +365,30 @@
             border-color: #ff6347 !important;
             color: white !important;
         }
+
+    @media (max-width: 768px) {
+    .faq-item {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .faq-section {
+        padding: 50px 0;
+    }
+
+    .faq-categories {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    }
+
+    .faq-category-btn {
+        flex: 0 0 auto; 
+    }
+
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+}
