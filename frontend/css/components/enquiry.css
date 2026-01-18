@@ -145,11 +145,16 @@ body {
     align-items: center;
     justify-content: space-between;
 }
+.progress-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--orange);
+}
 
 .progress-bar {
     flex: 1;
     height: 8px;
-    background: #333;
+    background: #242323;
     border-radius: 10px;
     margin-right: 15px;
     overflow: hidden;
@@ -161,12 +166,6 @@ body {
     border-radius: 10px;
     width: 0%;
     transition: width 0.4s ease;
-}
-
-.progress-text {
-    color: var(--orange);
-    font-weight: 600;
-    font-size: 0.9rem;
 }
 
 /* Form Steps */
@@ -607,6 +606,7 @@ body {
 .top-row {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 }
 
 /* Bottom Row */
@@ -630,6 +630,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: large;
 }
 .hours-list {
     list-style: none;
@@ -792,6 +793,7 @@ body {
     display: flex;
     align-items:center;
     gap: 10px;
+    font-size: large;
 }
 
 .contact-option {
@@ -1063,6 +1065,10 @@ body {
     animation: spin 1s linear infinite;
 }
 
+
+.progress-bar {
+    background: rgb(150, 150, 149);
+}
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -1076,19 +1082,18 @@ body {
     align-items: stretch;
     gap: 30px;
   }
-
-  .enquiry-form-container,
-  .side-widgets {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  .enquiry-form-container {
+    flex: 2.5;
   }
 
   .side-widgets {
+    flex: 0.6;
     justify-content: space-between;
   }
 
-  .hours-widget,
+  .hours-widget{
+    flex: 1;
+  }
   .contact-widget {
     flex: 1;
   }
