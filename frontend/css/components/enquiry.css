@@ -266,8 +266,9 @@ body {
 
 .form-group input.valid,
 .form-group select.valid {
-    border-color: var(--success);
+    border-color: var(--success, #4CAF50);
     padding-right: 45px;
+    background: rgba(76, 175, 80, 0.1);
 }
 
 .form-group input.error,
@@ -607,6 +608,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  padding:10px;
 }
 
 /* Bottom Row */
@@ -868,6 +870,11 @@ body {
     padding: 15px;
     border-radius: 10px;
     text-align: center;
+    transition: all 0.3s ease;
+}
+.badge-item:hover {
+    background: rgba(241, 200, 200, 0.1);
+    transform: translateX(5px);
 }
 
 .badge-icon {
