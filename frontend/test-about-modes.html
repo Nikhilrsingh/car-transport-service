@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page Mode Test - Harihar Car Carriers</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components/navbar.css" />
+    <link rel="stylesheet" href="css/components/middle-navbar.css" />
+    <link rel="stylesheet" href="css/components/footer.css" />
+    <link rel="stylesheet" href="css/components/about.css" />
+    <link rel="stylesheet" href="css/pages/about.css">
+    
+    <!-- Theme CSS - will be loaded by themes.js -->
+    <link id="theme-style" rel="stylesheet" href="css/light-mode.css" />
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .test-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+        }
+        
+        .test-controls button {
+            background: #ff6347;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .test-controls button:hover {
+            background: #ff4500;
+        }
+        
+        .status-indicator {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .status-indicator.light {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        
+        .status-indicator.dark {
+            background: rgba(255, 99, 71, 0.2);
+            color: #ff6347;
+        }
+        
+        .image-test {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #ff6347;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .image-test img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-controls">
+        <h4>Theme Test Controls</h4>
+        <button onclick="switchToLight()">Light Mode</button>
+        <button onclick="switchToDark()">Dark Mode</button>
+        <button onclick="testImageLoad()">Test Image</button>
+        <div id="status" class="status-indicator">Current: Light Mode</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero about-hero">
+        <div class="container">
+            <h1 class="fade-in">Our Journey</h1>
+            <p class="fade-in delay-1">
+                With years of experience in vehicle transportation, we've built a
+                reputation for reliability, safety, and exceptional service across
+                India.
+            </p>
+            <a href="#team" class="hero-btn fade-in delay-2">Meet Our Team</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <div class="section-divider">
+                    <h2>About Harihar Car Carriers</h2>
+                </div>
+                <br>
+                <p>
+                    <strong>
+                        Your trusted partner for safe and reliable vehicle transportation
+                        across India
+                    </strong>
+                </p>
+            </div>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3>Transporting Your Vehicles with Care</h3>
+                    <p>
+                        Founded with a vision to revolutionize vehicle transportation in
+                        India, Harihar Car Carriers has grown from a small local service
+                        to a nationwide network trusted by thousands of customers.
+                    </p>
+                    <p>
+                        We understand that your vehicle is more than just transportation -
+                        it's an investment and often a cherished possession. That's why we
+                        treat every vehicle with the utmost care and professionalism.
+                    </p>
+                </div>
+                <div class="about-image fade-in delay-1">
+                    <img src="assets/images/left-logo-w-bt.png" alt="Our Car Carrier Fleet" id="testImage" />
+                </div>
+            </div>
+            
+            <!-- Image Test Section -->
+            <div class="image-test">
+                <h3>Image Loading Test</h3>
+                <p>The image below should load in both light and dark modes:</p>
+                <img src="assets/images/left-logo-w-bt.png" alt="Test Image" />
+                <p id="imageStatus">Image Status: Loading...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values values-enhanced">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Values</h2>
+                <p>The principles that drive everything we do</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card reveal-on-scroll">
+                    <div class="value-icon-wrapper">
+                        <div class="value-icon-morph">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>
+                        Your vehicle's safety is our top priority. We use state-of-the-art
+                        equipment and follow strict safety protocols.
+                    </p>
+                    <div class="value-tooltip">ISO 9001 Certified Safety Standards</div>
+                </div>
+
+                <div class="value-card reveal-on-scroll">
+                    <div class="value-icon-wrapper">
+                        <div class="value-icon-morph">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                    <h3>Timely Delivery</h3>
+                    <p>
+                        We understand the importance of time. Our efficient logistics
+                        ensure your vehicle arrives as promised.
+                    </p>
+                    <div class="value-tooltip">96% On-Time Delivery Rate</div>
+                </div>
+
+                <div class="value-card reveal-on-scroll">
+                    <div class="value-icon-wrapper">
+                        <div class="value-icon-morph">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                    </div>
+                    <h3>Customer Trust</h3>
+                    <p>
+                        We've built our reputation on reliability and transparency. Your
+                        trust is our most valuable asset.
+                    </p>
+                    <div class="value-tooltip">98% Customer Satisfaction Score</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="fade-in">Ready to Transport Your Vehicle?</h2>
+            <p class="fade-in delay-1">
+                Get a free, no-obligation quote for your vehicle transportation needs.
+            </p>
+            <a href="#" class="cta-btn fade-in delay-2">Get Quotation</a>
+        </div>
+    </section>
+
+    <!-- Theme Script -->
+    <script src="js/modules/themes.js"></script>
+    
+    <script>
+        function switchToLight() {
+            document.body.setAttribute('data-theme', 'light');
+            document.getElementById('theme-style').href = 'css/light-mode.css';
+            localStorage.setItem('theme', 'light');
+            updateStatus('light');
+        }
+        
+        function switchToDark() {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-style').href = 'css/dark-mode.css';
+            localStorage.setItem('theme', 'dark');
+            updateStatus('dark');
+        }
+        
+        function updateStatus(theme) {
+            const status = document.getElementById('status');
+            status.textContent = `Current: ${theme.charAt(0).toUpperCase() + theme.slice(1)} Mode`;
+            status.className = `status-indicator ${theme}`;
+        }
+        
+        function testImageLoad() {
+            const img = document.getElementById('testImage');
+            const status = document.getElementById('imageStatus');
+            
+            if (img.complete && img.naturalHeight !== 0) {
+                status.textContent = 'Image Status: ✅ Loaded Successfully';
+                status.style.color = '#4ade80';
+            } else {
+                status.textContent = 'Image Status: ❌ Failed to Load';
+                status.style.color = '#ef4444';
+            }
+        }
+        
+        // Test image loading on page load
+        window.addEventListener('load', function() {
+            setTimeout(testImageLoad, 1000);
+        });
+        
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            switchToDark();
+        } else {
+            switchToLight();
+        }
+    </script>
+</body>
+</html>

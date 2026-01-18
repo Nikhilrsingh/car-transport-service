@@ -493,71 +493,78 @@
     <div class="lightbox-thumbnails"></div>
   </div>
 
-  <!-- VEHICLE JOURNEY CAROUSEL -->
-  <section class="gallery-section">
-    <h2 style="text-align: center; color: #ff6347; margin-bottom: 40px;">
-      Vehicle Journey Tracking
-    </h2>
-    <div class="journey-carousel">
-      <div class="carousel-track">
-        <div class="carousel-slide">
-          <img src="../assets/images/gallery-7.jpg" alt="Step 1" />
-          <div class="carousel-slide-content">
-            <h3 class="carousel-slide-title">Step 1: Vehicle Pickup</h3>
-            <p class="carousel-slide-description">
-              Professional team arrives at your location for safe pickup
-            </p>
-          </div>
-        </div>
-
-        <div class="carousel-slide">
-          <img src="../assets/images/gallery-1.jpg" alt="Step 2" />
-          <div class="carousel-slide-content">
-            <h3 class="carousel-slide-title">Step 2: Secure Loading</h3>
-            <p class="carousel-slide-description">
-              Your vehicle is carefully loaded onto our specialized carrier
-            </p>
-          </div>
-        </div>
-
-        <div class="carousel-slide">
-          <img src="../assets/images/gallery-5.jpg" alt="Step 3" />
-          <div class="carousel-slide-content">
-            <h3 class="carousel-slide-title">Step 3: Safe Transport</h3>
-            <p class="carousel-slide-description">
-              Real-time tracking during the entire journey
-            </p>
-          </div>
-        </div>
-
-        <div class="carousel-slide">
-          <img src="../assets/images/gallery-3.jpg" alt="Step 4" />
-          <div class="carousel-slide-content">
-            <h3 class="carousel-slide-title">Step 4: Happy Delivery</h3>
-            <p class="carousel-slide-description">
-              Your vehicle delivered safely to your destination
-            </p>
-          </div>
+  <!-- VEHICLE JOURNEY TRACKING - ROADMAP STYLE -->
+<section class="gallery-section journey-roadmap-section">
+  <h2 style="text-align: center; color: #ff6347; margin-bottom: 60px;">
+    Vehicle Journey Tracking
+  </h2>
+  
+  <div class="journey-roadmap-container">
+    <!-- Step 1 -->
+    <div class="journey-step" data-step="1">
+      <div class="step-image-wrapper">
+        <img src="../assets/images/gallery-7.jpg" alt="Vehicle Pickup" class="step-image">
+        <div class="step-number">1</div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Vehicle Pickup</h3>
+        <p class="step-description">Professional team arrives at your location for safe pickup</p>
+        <div class="step-icon">
+          <i class="fas fa-map-marker-alt"></i>
         </div>
       </div>
+      <div class="step-connector"></div>
+    </div>
 
-      <div class="carousel-navigation">
-        <button class="carousel-btn carousel-prev" aria-label="Previous slide">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="carousel-btn carousel-next" aria-label="Next slide">
-          <i class="fas fa-chevron-right"></i>
-        </button>
+    <!-- Step 2 -->
+    <div class="journey-step" data-step="2">
+      <div class="step-image-wrapper">
+        <img src="../assets/images/gallery-1.jpg" alt="Secure Loading" class="step-image">
+        <div class="step-number">2</div>
       </div>
+      <div class="step-content">
+        <h3 class="step-title">Secure Loading</h3>
+        <p class="step-description">Your vehicle is carefully loaded onto our specialized carrier</p>
+        <div class="step-icon">
+          <i class="fas fa-truck-loading"></i>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+    </div>
 
-      <div class="carousel-indicators">
-        <div class="carousel-indicator active"></div>
-        <div class="carousel-indicator"></div>
-        <div class="carousel-indicator"></div>
-        <div class="carousel-indicator"></div>
+    <!-- Step 3 -->
+    <div class="journey-step" data-step="3">
+      <div class="step-image-wrapper">
+        <img src="../assets/images/gallery-5.jpg" alt="Safe Transport" class="step-image">
+        <div class="step-number">3</div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Safe Transport</h3>
+        <p class="step-description">Real-time tracking during the entire journey</p>
+        <div class="step-icon">
+          <i class="fas fa-route"></i>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="journey-step" data-step="4">
+      <div class="step-image-wrapper">
+        <img src="../assets/images/gallery-3.jpg" alt="Happy Delivery" class="step-image">
+        <div class="step-number">4</div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Happy Delivery</h3>
+        <p class="step-description">Your vehicle delivered safely to your destination</p>
+        <div class="step-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- FOOTER -->
   <div id="footer-container"></div>
@@ -581,8 +588,6 @@
   <script src="../js/modules/floating-whatsapp-button.js"></script> -->
   <!-- <script src="../js/modules/quote-modal.js"></script> -->
   <!-- <script src="../js/modules/sticky-quote-button.js"></script> -->
-  <script src="../js/modules/floating-chatbot-button.js"></script>
-  <script src="../js/modules/chatbot-modal.js"></script>
   <script src="../js/modules/back-to-top-button.js"></script>
   <script src="../js/modules/backtoBottom.js"></script>
 

@@ -937,3 +937,337 @@ section {
     }
 }
 
+
+
+/* ====================================
+   PRESS & MEDIA PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .press-hero,
+body[data-theme="light"] .media-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .press-section,
+body[data-theme="light"] .media-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .press-card,
+body[data-theme="light"] .media-card,
+body[data-theme="light"] .news-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .press-card h3,
+body[data-theme="light"] .media-card h3,
+body[data-theme="light"] .news-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .press-card p,
+body[data-theme="light"] .media-card p,
+body[data-theme="light"] .news-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .media-kit-section {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .section-subtitle {
+  color: #555 !important;
+}
+
+
+/* ====================================
+   DARK MODE STYLES
+==================================== */
+
+body[data-theme="dark"] {
+    background: #0f0f1e;
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .press-hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+}
+
+body[data-theme="dark"] .press-hero .hero-content {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .press-badge {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .hero-title,
+body[data-theme="dark"] .hero-subtitle {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .stat-item {
+    color: #ffffff;
+}
+
+/* Quick Links Dark Mode */
+body[data-theme="dark"] .quick-links {
+    background: #1a1a2e;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .quick-link-card {
+    background: #16213e;
+    color: #e0e0e0;
+    border-color: #2a2a3e;
+}
+
+body[data-theme="dark"] .quick-link-card:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+/* Sections Dark Mode */
+body[data-theme="dark"] .achievements-section,
+body[data-theme="dark"] .press-releases-section,
+body[data-theme="dark"] .brand-assets-section {
+    background: #0f0f1e;
+}
+
+body[data-theme="dark"] .certifications-section,
+body[data-theme="dark"] .media-coverage-section,
+body[data-theme="dark"] .media-contact-section {
+    background: #1a1a2e;
+}
+
+body[data-theme="dark"] .section-title {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .section-subtitle {
+    color: #b0b0b0;
+}
+
+/* Achievement Cards Dark Mode */
+body[data-theme="dark"] .achievement-card {
+    background: #16213e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .achievement-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="dark"] .achievement-content h3 {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .achievement-desc {
+    color: #b0b0b0;
+}
+
+body[data-theme="dark"] .achievement-year {
+    background: #2a2a3e;
+    color: #64b5f6;
+}
+
+/* Certification Cards Dark Mode */
+body[data-theme="dark"] .certification-card {
+    background: #16213e;
+    border-color: #2a2a3e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .certification-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+}
+
+body[data-theme="dark"] .certification-card h3 {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .certification-card p {
+    color: #b0b0b0;
+}
+
+body[data-theme="dark"] .cert-status.active {
+    background: rgba(40, 167, 69, 0.2);
+    color: #4caf50;
+}
+
+/* Press Release Cards Dark Mode */
+body[data-theme="dark"] .press-release-card {
+    background: #16213e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .press-release-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="dark"] .press-category {
+    background: #2a2a3e;
+    color: #64b5f6;
+}
+
+body[data-theme="dark"] .press-content h3 {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .press-content > p {
+    color: #b0b0b0;
+}
+
+body[data-theme="dark"] .press-views {
+    color: #808080;
+}
+
+/* Media Coverage Dark Mode */
+body[data-theme="dark"] .media-card {
+    background: #16213e;
+    border-left-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .media-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="dark"] .media-logo {
+    color: #64b5f6;
+}
+
+body[data-theme="dark"] .media-card h3 {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .media-excerpt {
+    color: #b0b0b0;
+}
+
+body[data-theme="dark"] .media-meta {
+    border-top-color: #2a2a3e;
+}
+
+body[data-theme="dark"] .media-date {
+    color: #808080;
+}
+
+body[data-theme="dark"] .media-link {
+    color: #ff8c69;
+}
+
+body[data-theme="dark"] .media-link:hover {
+    color: #ffa589;
+}
+
+/* Brand Assets Dark Mode */
+body[data-theme="dark"] .asset-card {
+    background: #16213e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .asset-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="dark"] .asset-preview {
+    background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%);
+}
+
+body[data-theme="dark"] .asset-preview i {
+    color: #64b5f6;
+}
+
+body[data-theme="dark"] .asset-format {
+    background: #2a2a3e;
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .asset-card h3 {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .asset-card > p {
+    color: #b0b0b0;
+}
+
+body[data-theme="dark"] .asset-includes li {
+    color: #b0b0b0;
+}
+
+body[data-theme="dark"] .usage-notice {
+    background: rgba(255, 193, 7, 0.15);
+    border-left-color: #ffc107;
+}
+
+body[data-theme="dark"] .usage-notice i {
+    color: #ffc107;
+}
+
+body[data-theme="dark"] .usage-notice p {
+    color: #ffd54f;
+}
+
+/* Contact Section Dark Mode */
+body[data-theme="dark"] .contact-card {
+    background: #16213e;
+    border-color: #2a2a3e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .contact-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="dark"] .contact-card h3 {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .contact-name {
+    color: #64b5f6;
+}
+
+body[data-theme="dark"] .contact-title,
+body[data-theme="dark"] .contact-details p {
+    color: #b0b0b0;
+}
+
+body[data-theme="dark"] .contact-form-wrapper {
+    background: #16213e;
+}
+
+body[data-theme="dark"] .contact-form-wrapper h3 {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .form-group label {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .form-group input,
+body[data-theme="dark"] .form-group select,
+body[data-theme="dark"] .form-group textarea {
+    background: #2a2a3e;
+    border-color: #3a3a4e;
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .form-group input:focus,
+body[data-theme="dark"] .form-group select:focus,
+body[data-theme="dark"] .form-group textarea:focus {
+    border-color: var(--primary-color);
+    background: #1a1a2e;
+}
+
+body[data-theme="dark"] .form-group input::placeholder,
+body[data-theme="dark"] .form-group textarea::placeholder {
+    color: #808080;
+}
