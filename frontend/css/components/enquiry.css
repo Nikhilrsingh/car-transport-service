@@ -13,6 +13,10 @@
     --danger: #ff3860;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: var(--bg);
     color: var(--text);
@@ -96,6 +100,9 @@ body {
     padding: 0 5px;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 /* Form Container */
@@ -108,6 +115,13 @@ body {
     box-shadow: var(--shadow);
     border: 1px solid #444;
     position: relative;
+}
+
+/* Side Widgets */
+.side-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .enquiry-form-container::before {
@@ -589,13 +603,17 @@ body {
     }
 }
 
-/* Sidebar */
-.enquiry-sidebar {
-    position: sticky;
-    top: 20px;
-    margin-bottom: 10px;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
+/* Top Row */
+.top-row {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bottom Row */
+.bottom-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Operating Hours Widget */
@@ -604,7 +622,6 @@ body {
     padding: 25px;
     border-radius: 15px;
     border: 1px solid #444;
-    margin-bottom: 20px;
 }
 
 .hours-widget h3 {
@@ -614,6 +631,21 @@ body {
     align-items: center;
     gap: 10px;
 }
+.hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.hours-list li span.day {
+    font-weight: 600;
+    color: rgb(255, 99, 71);
+    font-size: large;
+}
+.response-time {
+    margin-bottom: 5px;
+}
 
 .current-status {
     background: #1a1a1a;
@@ -622,6 +654,7 @@ body {
     margin-bottom: 15px;
     text-align: center;
 }
+
 
 .status-badge {
     display: inline-flex;
@@ -674,7 +707,6 @@ body {
     padding: 25px;
     border-radius: 15px;
     border: 1px solid #444;
-    margin-bottom: 20px;
 }
 
 .faq-widget h3 {
@@ -682,6 +714,7 @@ body {
     margin-bottom: 15px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -738,20 +771,26 @@ body {
     line-height: 1.6;
 }
 
+
+.bottom-row
+{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
 /* Contact Alternatives */
 .contact-widget {
     background: var(--card-bg);
     padding: 25px;
     border-radius: 15px;
     border: 1px solid #444;
-    margin-bottom: 20px;
 }
 
 .contact-widget h3 {
     color: var(--orange);
     margin-bottom: 15px;
     display: flex;
-    align-items: center;
+    align-items:center;
     gap: 10px;
 }
 
@@ -762,6 +801,7 @@ body {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -784,6 +824,10 @@ body {
     justify-content: center;
     font-size: 1.2rem;
     color: white;
+}
+
+.contact-info {
+    align-items:center;
 }
 
 .contact-info h4 {
@@ -1026,12 +1070,32 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .enquiry-main-container {
-        grid-template-columns: 1fr;
-    }
+@media (min-width: 1024px) {
+  .top-row {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 30px;
+  }
 
-    .enquiry-sidebar {
+  .enquiry-form-container,
+  .side-widgets {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .side-widgets {
+    justify-content: space-between;
+  }
+
+  .hours-widget,
+  .contact-widget {
+    flex: 1;
+  }
+}
+
+@media (max-width: 1023px) {
+    .bottom-row {
         position: static;
         max-height: none;
     }
