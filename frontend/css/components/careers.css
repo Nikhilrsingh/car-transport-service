@@ -122,7 +122,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    display: block; /* override global flex container */
+    display: block;
+    /* override global flex container */
 }
 
 section {
@@ -160,17 +161,27 @@ section {
 }
 
 .benefit-card {
-    background: var(--surface-color);
+    background: #ffffff;
+    ;
     padding: 30px;
     border-radius: 15px;
     text-align: center;
-    transition: all 0.3s ease;
+    pointer-events: auto;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1;
 }
 
 .benefit-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 15px rgba(255, 77, 77, 0.2);
+    border-color: #ff4d4d;
+    z-index: 10;
 }
 
 .benefit-icon {
@@ -184,6 +195,30 @@ section {
     justify-content: center;
     font-size: 2rem;
     color: #ffffff;
+}
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.2) rotate(-5deg);
+    color: #ff4d4d;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.benefit-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: rotate(45deg);
+    transition: 0.8s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.benefit-card:hover::after {
+    opacity: 1;
+    top: 0;
+    left: 0;
 }
 
 .benefit-card h3 {
@@ -600,139 +635,139 @@ section {
 
 /* Franchise / Partner Opportunities */
 .franchise-opportunities {
-  background: var(--bg-color);
+    background: var(--bg-color);
 }
 
 .franchise-content {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 32px;
-  align-items: center;
-  margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-top: 2rem;
 }
 
 .franchise-info h3 {
-  font-size: 2rem;
-  color: var(--text-color);
-  margin-bottom: 20px;
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
 }
 
 .franchise-info p {
-  color: var(--text-muted);
-  line-height: 1.8;
-  margin-bottom: 30px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 30px;
 }
 
 /* New split cards for offers & requirements */
 .franchise-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
 }
 
 .franchise-card {
-  background: var(--surface-muted);
-  border-radius: 12px;
-  padding: 20px 22px;
-  border-left: 4px solid var(--primary-color);
+    background: var(--surface-muted);
+    border-radius: 12px;
+    padding: 20px 22px;
+    border-left: 4px solid var(--primary-color);
 }
 
 .franchise-card h4 {
-  font-size: 1.3rem;
-  color: var(--text-color);
-  margin-bottom: 12px;
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-bottom: 12px;
 }
 
 .franchise-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .franchise-list li {
-  padding: 8px 0;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.98rem;
+    padding: 8px 0;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.98rem;
 }
 
 .franchise-list i {
-  font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 
 .franchise-list i.fa-check {
-  color: var(--success-color);
+    color: var(--success-color);
 }
 
 .franchise-list i.fa-circle {
-  color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 /* CTA button (reuses your palette) */
 .franchise-btn {
-  padding: 15px 40px;
-  background: var(--primary-color);
-  color: #ffffff;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 5px;
+    padding: 15px 40px;
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 5px;
 }
 
 .franchise-btn:hover {
-  background: var(--secondary-color);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Decorative handshake illustration */
 .franchise-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .franchise-image-circle {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.12),
-    rgba(0, 0, 0, 0)
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-color);
-  opacity: 0.12;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center,
+            rgba(255, 255, 255, 0.12),
+            rgba(0, 0, 0, 0));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    opacity: 0.12;
 }
 
 .franchise-image-circle i {
-  font-size: 160px;
+    font-size: 160px;
 }
 
 /* Responsive tweaks */
 @media (max-width: 1024px) {
-  .franchise-content {
-    grid-template-columns: 1fr;
-  }
+    .franchise-content {
+        grid-template-columns: 1fr;
+    }
 
-  .franchise-image {
-    order: -1; /* optional: show icon above text on tablet */
-  }
+    .franchise-image {
+        order: -1;
+        /* optional: show icon above text on tablet */
+    }
 }
 
 @media (max-width: 768px) {
-  .franchise-image {
-    display: none; /* hide large decoration on small screens */
-  }
+    .franchise-image {
+        display: none;
+        /* hide large decoration on small screens */
+    }
 }
 
 
@@ -885,6 +920,7 @@ section {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -895,6 +931,7 @@ section {
         transform: translateY(-50px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -906,6 +943,7 @@ section {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
