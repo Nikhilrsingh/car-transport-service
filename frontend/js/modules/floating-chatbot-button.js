@@ -1,144 +1,161 @@
 /* ====================================
-   FLOATING CHATBOT BUTTON MODULE
+   FLOATING CHATBOT BUTTON – IMPROVED
    ==================================== */
 
 (function () {
-    'use strict';
+  'use strict';
 
-    // Configuration
-    const BUTTON_ID = 'floating-chatbot-btn';
+  /* ---------------- CONFIG ---------------- */
+  const CONFIG = {
+    BUTTON_ID: 'floating-chatbot-btn',
+    MODAL_ID: 'chatbot-modal-overlay',
+    INPUT_ID: 'chatbot-input',
+    MESSAGE_AREA_ID: 'chatbot-messages',
+    CLICK_DELAY: 400,
+    PULSE_DURATION: 6000
+  };
 
-    /**
-     * Initialize Floating Chatbot Button
-     */
-    function initFloatingChatbotButton() {
-        // Check if button already exists
-        if (document.getElementById(BUTTON_ID)) {
-            return;
-        }
+  let isLocked = false;
+  let lastFocusedElement = null;
 
-        // Create the button element
-        const chatbotButton = document.createElement('button');
-        chatbotButton.id = BUTTON_ID;
-        chatbotButton.setAttribute('aria-label', 'Open chat support');
-        chatbotButton.setAttribute('title', 'Chat with us');
-        chatbotButton.type = 'button';
+  /* ---------------- UTILITIES ---------------- */
+  const $ = (id) => document.getElementById(id);
 
-        // Add chatbot icon (using Font Awesome)
-        const icon = document.createElement('i');
-        icon.className = 'fas fa-comments';
-        chatbotButton.appendChild(icon);
+  const prefersReducedMotion = () =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // Add button to body
-        document.body.appendChild(chatbotButton);
+  const debounceClick = (callback) => {
+    if (isLocked) return;
+    isLocked = true;
+    callback();
+    setTimeout(() => (isLocked = false), CONFIG.CLICK_DELAY);
+  };
 
-        // Add event listeners
-        addEventListeners(chatbotButton);
+  /* ---------------- BUTTON INIT ---------------- */
+  function initFloatingChatbotButton() {
+    if ($(CONFIG.BUTTON_ID)) return;
+
+    const button = document.createElement('button');
+    button.id = CONFIG.BUTTON_ID;
+    button.type = 'button';
+    button.setAttribute('aria-label', 'Open chat support');
+    button.setAttribute('aria-haspopup', 'dialog');
+    button.setAttribute('aria-expanded', 'false');
+    button.title = 'Chat with us';
+
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-comments';
+    icon.setAttribute('aria-hidden', 'true');
+    button.appendChild(icon);
+
+    document.body.appendChild(button);
+
+    addButtonEvents(button);
+  }
+
+  /* ---------------- EVENTS ---------------- */
+  function addButtonEvents(button) {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      debounceClick(openChatbotModal);
+    });
+
+    button.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        button.click();
+      }
+    });
+  }
+
+  /* ---------------- MODAL CONTROL ---------------- */
+  function openChatbotModal() {
+    const modal = $(CONFIG.MODAL_ID);
+    if (!modal) return;
+
+    lastFocusedElement = document.activeElement;
+
+    modal.style.display = 'flex';
+    requestAnimationFrame(() => modal.classList.add('active'));
+
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+
+    const button = $(CONFIG.BUTTON_ID);
+    button?.setAttribute('aria-expanded', 'true');
+
+    const chatArea = $(CONFIG.MESSAGE_AREA_ID);
+    if (chatArea) {
+      chatArea.setAttribute('aria-live', 'polite');
+      chatArea.setAttribute('aria-atomic', 'true');
     }
 
-    /**
-     * Add Event Listeners to the button
-     * @param {HTMLElement} button - The chatbot button element
-     */
-    function addEventListeners(button) {
-        // Handle keyboard accessibility (Enter and Space keys)
-        button.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                button.click();
-            }
-        });
+    setTimeout(() => {
+      $(CONFIG.INPUT_ID)?.focus();
+    }, 100);
 
-        // Click handler to open chatbot modal
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-            openChatbotModal();
-        });
+    document.addEventListener('keydown', escHandler);
+  }
 
-        // Prevent multiple rapid clicks
-        let isClickable = true;
-        button.addEventListener('click', function () {
-            if (!isClickable) return;
-            isClickable = false;
-            setTimeout(() => {
-                isClickable = true;
-            }, 300);
-        });
+  function closeChatbotModal() {
+    const modal = $(CONFIG.MODAL_ID);
+    if (!modal) return;
+
+    modal.classList.remove('active');
+    setTimeout(() => (modal.style.display = 'none'), 300);
+
+    const button = $(CONFIG.BUTTON_ID);
+    button?.setAttribute('aria-expanded', 'false');
+
+    lastFocusedElement?.focus();
+    document.removeEventListener('keydown', escHandler);
+  }
+
+  function toggleChatbotModal() {
+    const modal = $(CONFIG.MODAL_ID);
+    if (!modal || modal.style.display === 'none') {
+      openChatbotModal();
+    } else {
+      closeChatbotModal();
     }
+  }
 
-    /**
-     * Open Chatbot Modal
-     */
-    function openChatbotModal() {
-        const modal = document.getElementById('chatbot-modal-overlay');
-        if (modal) {
-            modal.style.display = 'flex';
-            modal.classList.add('active');
+  function escHandler(e) {
+    if (e.key === 'Escape') closeChatbotModal();
+  }
 
-            // Announce to screen readers
-            const chatArea = document.getElementById('chatbot-messages');
-            if (chatArea) {
-                chatArea.setAttribute('aria-live', 'polite');
-                chatArea.setAttribute('aria-atomic', 'true');
-            }
+  /* ---------------- ANIMATION ---------------- */
+  function animatePulse() {
+    if (prefersReducedMotion()) return;
 
-            // Focus on the input field
-            setTimeout(() => {
-                const input = document.getElementById('chatbot-input');
-                if (input) input.focus();
-            }, 100);
-        }
+    const button = $(CONFIG.BUTTON_ID);
+    if (!button) return;
+
+    button.classList.add('pulse');
+    setTimeout(() => button.classList.remove('pulse'), CONFIG.PULSE_DURATION);
+  }
+
+  /* ---------------- INIT ---------------- */
+  function initialize() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start);
+    } else {
+      start();
     }
+  }
 
-    /**
-     * Close Chatbot Modal
-     */
-    function closeChatbotModal() {
-        const modal = document.getElementById('chatbot-modal-overlay');
-        if (modal) {
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-    }
+  function start() {
+    initFloatingChatbotButton();
+    animatePulse();
+  }
 
-    /**
-     * Animate button pulse on load
-     */
-    function animatePulse() {
-        const button = document.getElementById(BUTTON_ID);
-        if (button) {
-            button.classList.add('pulse');
-            // Remove pulse after 6 seconds
-            setTimeout(() => {
-                button.classList.remove('pulse');
-            }, 6000);
-        }
-    }
+  /* ---------------- PUBLIC API ---------------- */
+  window.chatbotUI = {
+    open: openChatbotModal,
+    close: closeChatbotModal,
+    toggle: toggleChatbotModal,
+    init: initialize
+  };
 
-    /**
-     * Initialize when DOM is ready
-     */
-    function initialize() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function () {
-                initFloatingChatbotButton();
-                animatePulse();
-            });
-        } else {
-            initFloatingChatbotButton();
-            animatePulse();
-        }
-    }
-
-    // Expose public methods globally
-    window.chatbotUI = {
-        open: openChatbotModal,
-        close: closeChatbotModal,
-        init: initialize
-    };
-
-    // Initialize on script load
-    initialize();
+  initialize();
 })();

@@ -204,15 +204,21 @@
                 break;
 
             case 'phone':
-                const phoneRegex = /^[6-9]\d{9}$/;
-                if (!value) {
+                const cleaned = value.replace(/\D/g, '');
+                
+                // Reject repeating digits (0000000000, 9999999999)
+                if (!cleaned) {
                     isValid = false;
                     errorMessage = 'Please enter your phone number';
-                } else if (!phoneRegex.test(value.replace(/\D/g, ''))) {
+                } else if (!/^[6-9]\d{9}$/.test(cleaned)) {
                     isValid = false;
-                    errorMessage = 'Please enter a valid 10-digit phone number';
+                    errorMessage = 'Enter a valid 10-digit Indian mobile number';
+                } else if (/^(\d)\1{9}$/.test(cleaned)) {
+                    isValid = false;
+                    errorMessage = 'Invalid phone number';
                 }
                 break;
+
 
             case 'message':
                 if (!value || value.length < 10) {
@@ -304,20 +310,7 @@
         }
     }
 
-    // Phone Number Formatting
-    function formatPhoneNumber() {
-        const phoneInput = document.getElementById('phone');
-        if (!phoneInput) return;
 
-        let value = phoneInput.value.replace(/\D/g, '');
-        
-        // Limit to 10 digits
-        if (value.length > 10) {
-            value = value.substring(0, 10);
-        }
-
-        phoneInput.value = value;
-    }
 
     // Character Counter
     function updateCharCounter() {

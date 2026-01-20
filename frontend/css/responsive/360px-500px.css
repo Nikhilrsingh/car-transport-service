@@ -852,7 +852,12 @@
 
 @media (max-width: 480px) {
   .modern-india-map {
-    height: 350px;
+    height: 700px; /* Increased height for small screens */
+    margin: 15px 0; /* Reduced margin for smaller screens */
+  }
+  
+  .map-container {
+    padding: 5px; /* Minimal padding */
   }
   
   .map-controls {
@@ -1408,4 +1413,44 @@
     font-size: 15px;
     padding: 10px 18px;
   }
+}
+
+
+/* Hide desktop FAB on all mobile - use mini footer instead */
+@media (max-width: 768px) {
+  .fab-container {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+
+
+/*faq.css*/
+@media (max-width: 768px) {
+    .faq-item {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .faq-section {
+        padding: 50px 0;
+    }
+
+    .faq-categories {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    }
+
+    .faq-category-btn {
+        flex: 0 0 auto; 
+    }
+
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
 }

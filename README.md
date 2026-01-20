@@ -1,3 +1,25 @@
+## 🚨 Mandatory Contributor Registration
+
+Before starting any contribution, you MUST complete the registration form.
+
+👉 Registration Form: https://forms.gle/2aVtenoaHg65qi4G7
+
+⚠️ Pull Requests without registration will be closed.
+⚠️ Submitted data is confidential and visible only to the Project Admin.
+
+
+
+## 🧑‍💻 Open Source Contributors Welcome!
+
+Join our official Discord server to:
+- Ask and clear doubts
+- Discuss issues and Pull Requests
+- Get guidance from mentors
+- Collaborate with contributors
+
+👉 Discord: https://discord.gg/3FKndgyuJp
+
+
 > 🚘 **Fast • Safe • Reliable Car Transport Services Across India**�
 
 [![Open Source Love](https://img.shields.io/badge/Contributions-Welcome-brightgreen)](https://github.com/your-username/car-transport-website)  
@@ -139,7 +161,10 @@ git push origin feature-name
 > 📚 **Read More:**  
 > - [Contributing Guidelines](docs/CONTRIBUTING.md)  
 > - [Project Roadmap](docs/ROADMAP.md)  
-> - [Design Guidelines](docs/DESIGN_GUIDELINES.md)
+> - [Design Guidelines](docs/DESIGN_GUIDELINES.md)  
+> - [Folder Structure](docs/FOLDER_STRUCTURE.md)  
+> - [Coding Guidelines](docs/CODING_GUIDELINES.md)  
+> - [Naming Conventions](docs/NAMING_CONVENTIONS.md)
 
 > ⭐ Don't forget to **star** the repo if you like this project!
 

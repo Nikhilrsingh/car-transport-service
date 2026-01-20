@@ -1,14 +1,46 @@
 /* Careers Page Styles */
 
+/* =========================
+   THEME VARIABLES
+   ========================= */
+
+/* Light (default) theme */
 :root {
     --primary-color: #ff6b35;
     --secondary-color: #004e89;
-    --dark-color: #1a1a2e;
-    --light-color: #f5f5f5;
-    --white: #ffffff;
+
+    --bg-color: #f5f5f5;
+    --surface-color: #ffffff;
+    --surface-muted: #f0f0f0;
+
+    --text-color: #333333;
+    --text-muted: #666666;
+    --border-color: #dddddd;
+    --hero-overlay: rgba(0, 0, 0, 0.3);
+
     --success-color: #28a745;
-    --text-color: #333;
-    --border-color: #ddd;
+}
+
+/* Dark theme: apply when <html data-theme="dark"> or <body data-theme="dark"> */
+:root[data-theme="dark"],
+body[data-theme="dark"] {
+    --primary-color: #ff8a4a;
+    --secondary-color: #1b4d8f;
+
+    --bg-color: #050816;
+    --surface-color: #111827;
+    --surface-muted: #020617;
+
+    --text-color: #e5e7eb;
+    --text-muted: #9ca3af;
+    --border-color: #374151;
+    --hero-overlay: rgba(0, 0, 0, 0.6);
+}
+
+/* Base body styling so all sections inherit colors */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
 }
 
 /* Hero Section */
@@ -39,14 +71,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--hero-overlay);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
     text-align: center;
-    color: var(--white);
+    color: var(--text-color);
     max-width: 800px;
     padding: 0 20px;
 }
@@ -69,7 +101,7 @@
     display: inline-block;
     padding: 15px 40px;
     background: var(--primary-color);
-    color: var(--white);
+    color: #ffffff;
     text-decoration: none;
     border-radius: 50px;
     font-size: 1.1rem;
@@ -79,7 +111,7 @@
 }
 
 .cta-button:hover {
-    background: var(--white);
+    background: #ffffff;
     color: var(--primary-color);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -99,7 +131,7 @@ section {
 
 .section-title {
     font-size: 2.5rem;
-    color: var(--dark-color);
+    color: var(--text-color);
     text-align: center;
     margin-bottom: 1rem;
     font-weight: 700;
@@ -107,7 +139,7 @@ section {
 
 .section-subtitle {
     font-size: 1.2rem;
-    color: #666;
+    color: var(--text-muted);
     text-align: center;
     margin-bottom: 3rem;
     max-width: 700px;
@@ -117,7 +149,7 @@ section {
 
 /* Why Work With Us */
 .why-work-with-us {
-    background: var(--light-color);
+    background: var(--bg-color);
 }
 
 .benefits-grid {
@@ -128,7 +160,7 @@ section {
 }
 
 .benefit-card {
-    background: var(--white);
+    background: var(--surface-color);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
@@ -151,23 +183,23 @@ section {
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    color: var(--white);
+    color: #ffffff;
 }
 
 .benefit-card h3 {
     font-size: 1.5rem;
-    color: var(--dark-color);
+    color: var(--text-color);
     margin-bottom: 15px;
 }
 
 .benefit-card p {
-    color: #666;
+    color: var(--text-muted);
     line-height: 1.6;
 }
 
 /* Current Openings */
 .current-openings {
-    background: var(--white);
+    background: var(--bg-color);
 }
 
 .job-filters {
@@ -181,7 +213,7 @@ section {
 .filter-btn {
     padding: 12px 30px;
     border: 2px solid var(--primary-color);
-    background: var(--white);
+    background: var(--surface-color);
     color: var(--primary-color);
     border-radius: 50px;
     font-size: 1rem;
@@ -193,7 +225,7 @@ section {
 .filter-btn:hover,
 .filter-btn.active {
     background: var(--primary-color);
-    color: var(--white);
+    color: #ffffff;
 }
 
 .job-listings {
@@ -201,8 +233,9 @@ section {
     gap: 24px;
 }
 
+/* ORIGINAL job-card styles (base; overridden below for redesign) */
 .job-card {
-    background: var(--white);
+    background: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: 15px;
     padding: 30px;
@@ -226,7 +259,7 @@ section {
 
 .job-title {
     font-size: 1.8rem;
-    color: var(--dark-color);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
@@ -234,7 +267,7 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.95rem;
 }
 
@@ -251,7 +284,7 @@ section {
 .job-badge {
     padding: 8px 20px;
     background: var(--primary-color);
-    color: var(--white);
+    color: #ffffff;
     border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -267,20 +300,20 @@ section {
 }
 
 .job-description {
-    color: #666;
+    color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 20px;
 }
 
 .job-requirements {
-    background: var(--light-color);
+    background: var(--surface-muted);
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
 .job-requirements strong {
-    color: var(--dark-color);
+    color: var(--text-color);
     display: block;
     margin-bottom: 10px;
 }
@@ -293,7 +326,7 @@ section {
 
 .job-requirements li {
     padding: 5px 0;
-    color: #666;
+    color: var(--text-muted);
     position: relative;
     padding-left: 20px;
 }
@@ -309,7 +342,7 @@ section {
 .apply-btn {
     padding: 12px 30px;
     background: var(--primary-color);
-    color: var(--white);
+    color: #ffffff;
     border: none;
     border-radius: 50px;
     font-size: 1rem;
@@ -326,12 +359,12 @@ section {
 /* Driver Section */
 .driver-section {
     background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
-    color: var(--white);
+    color: #ffffff;
 }
 
 .driver-section .section-title,
 .driver-section .section-subtitle {
-    color: var(--white);
+    color: #ffffff;
 }
 
 .driver-content {
@@ -379,7 +412,7 @@ section {
 
 /* Training Programs */
 .training-programs {
-    background: var(--light-color);
+    background: var(--bg-color);
 }
 
 .training-grid {
@@ -390,7 +423,7 @@ section {
 }
 
 .training-card {
-    background: var(--white);
+    background: var(--surface-color);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
@@ -413,17 +446,17 @@ section {
     align-items: center;
     justify-content: center;
     font-size: 2.5rem;
-    color: var(--white);
+    color: #ffffff;
 }
 
 .training-card h3 {
     font-size: 1.5rem;
-    color: var(--dark-color);
+    color: var(--text-color);
     margin-bottom: 15px;
 }
 
 .training-card p {
-    color: #666;
+    color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -436,7 +469,7 @@ section {
 
 .training-card li {
     padding: 8px 0;
-    color: #666;
+    color: var(--text-muted);
     position: relative;
     padding-left: 25px;
 }
@@ -451,7 +484,7 @@ section {
 
 /* Company Culture */
 .company-culture {
-    background: var(--white);
+    background: var(--bg-color);
 }
 
 .culture-grid {
@@ -462,7 +495,7 @@ section {
 }
 
 .culture-card {
-    background: var(--light-color);
+    background: var(--surface-muted);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
@@ -470,7 +503,7 @@ section {
 }
 
 .culture-card:hover {
-    background: var(--white);
+    background: var(--surface-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transform: translateY(-5px);
 }
@@ -483,18 +516,18 @@ section {
 
 .culture-card h3 {
     font-size: 1.5rem;
-    color: var(--dark-color);
+    color: var(--text-color);
     margin-bottom: 15px;
 }
 
 .culture-card p {
-    color: #666;
+    color: var(--text-muted);
     line-height: 1.6;
 }
 
 /* Employee Testimonials */
 .employee-testimonials {
-    background: var(--light-color);
+    background: var(--bg-color);
 }
 
 .testimonials-carousel {
@@ -505,7 +538,7 @@ section {
 }
 
 .testimonial-card {
-    background: var(--white);
+    background: var(--surface-color);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -529,7 +562,7 @@ section {
 }
 
 .testimonial-text {
-    color: #666;
+    color: var(--text-muted);
     font-style: italic;
     line-height: 1.8;
     font-size: 1.05rem;
@@ -540,7 +573,7 @@ section {
     align-items: center;
     gap: 15px;
     padding-top: 20px;
-    border-top: 2px solid var(--light-color);
+    border-top: 2px solid var(--surface-muted);
 }
 
 .author-image {
@@ -550,7 +583,7 @@ section {
 
 .author-info h4 {
     font-size: 1.1rem;
-    color: var(--dark-color);
+    color: var(--text-color);
     margin-bottom: 5px;
 }
 
@@ -561,89 +594,147 @@ section {
 }
 
 .tenure {
-    color: #999;
+    color: var(--text-muted);
     font-size: 0.85rem;
 }
 
-/* Franchise Opportunities */
+/* Franchise / Partner Opportunities */
 .franchise-opportunities {
-    background: var(--white);
+  background: var(--bg-color);
 }
 
 .franchise-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 32px;
-    align-items: center;
-    margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .franchise-info h3 {
-    font-size: 2rem;
-    color: var(--dark-color);
-    margin-bottom: 20px;
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
 }
 
 .franchise-info p {
-    color: #666;
-    line-height: 1.8;
-    margin-bottom: 30px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 30px;
 }
 
-.franchise-benefits h4,
-.franchise-requirements h4 {
-    font-size: 1.3rem;
-    color: var(--dark-color);
-    margin-bottom: 15px;
+/* New split cards for offers & requirements */
+.franchise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
-.franchise-benefits ul,
-.franchise-requirements ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 30px;
+.franchise-card {
+  background: var(--surface-muted);
+  border-radius: 12px;
+  padding: 20px 22px;
+  border-left: 4px solid var(--primary-color);
 }
 
-.franchise-benefits li,
-.franchise-requirements li {
-    padding: 10px 0;
-    color: #666;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.franchise-card h4 {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  margin-bottom: 12px;
 }
 
-.franchise-benefits i {
-    color: var(--success-color);
+.franchise-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.franchise-requirements i {
-    color: var(--primary-color);
+.franchise-list li {
+  padding: 8px 0;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.98rem;
 }
 
+.franchise-list i {
+  font-size: 0.9rem;
+}
+
+.franchise-list i.fa-check {
+  color: var(--success-color);
+}
+
+.franchise-list i.fa-circle {
+  color: var(--primary-color);
+}
+
+/* CTA button (reuses your palette) */
 .franchise-btn {
-    padding: 15px 40px;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  padding: 15px 40px;
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 5px;
 }
 
 .franchise-btn:hover {
-    background: var(--secondary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Decorative handshake illustration */
 .franchise-image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.franchise-image-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.12),
+    rgba(0, 0, 0, 0)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  opacity: 0.12;
+}
+
+.franchise-image-circle i {
+  font-size: 160px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1024px) {
+  .franchise-content {
+    grid-template-columns: 1fr;
+  }
+
+  .franchise-image {
+    order: -1; /* optional: show icon above text on tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .franchise-image {
+    display: none; /* hide large decoration on small screens */
+  }
+}
+
 
 /* Modal Styles */
 .modal {
@@ -660,7 +751,7 @@ section {
 }
 
 .modal-content {
-    background-color: var(--white);
+    background-color: var(--surface-color);
     margin: 2% auto;
     padding: 40px;
     border-radius: 15px;
@@ -670,15 +761,16 @@ section {
     overflow-y: auto;
     animation: slideDown 0.3s ease;
     position: relative;
+    color: var(--text-color);
 }
 
 .modal-content h2 {
-    color: var(--dark-color);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
 .modal-subtitle {
-    color: #666;
+    color: var(--text-muted);
     margin-bottom: 30px;
     font-size: 1.1rem;
 }
@@ -689,7 +781,7 @@ section {
 }
 
 .close {
-    color: #aaa;
+    color: var(--text-muted);
     position: absolute;
     right: 20px;
     top: 20px;
@@ -701,7 +793,7 @@ section {
 
 .close:hover,
 .close:focus {
-    color: var(--dark-color);
+    color: var(--text-color);
 }
 
 /* Application Form */
@@ -724,7 +816,7 @@ section {
 
 .form-group label {
     font-weight: 600;
-    color: var(--dark-color);
+    color: var(--text-color);
     margin-bottom: 8px;
 }
 
@@ -736,6 +828,8 @@ section {
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    background: var(--surface-muted);
+    color: var(--text-color);
 }
 
 .form-group input:focus,
@@ -746,7 +840,7 @@ section {
 }
 
 .form-group small {
-    color: #999;
+    color: var(--text-muted);
     font-size: 0.85rem;
     margin-top: 5px;
 }
@@ -770,7 +864,7 @@ section {
 .submit-btn {
     padding: 15px 40px;
     background: var(--primary-color);
-    color: var(--white);
+    color: #ffffff;
     border: none;
     border-radius: 50px;
     font-size: 1.1rem;
@@ -782,7 +876,7 @@ section {
 
 .submit-btn:hover {
     background: var(--secondary-color);
-    transform: translateY(-2px);
+    transform: translateY(2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -823,11 +917,11 @@ section {
     .driver-content {
         grid-template-columns: 1fr;
     }
-    
+
     .franchise-content {
         grid-template-columns: 1fr;
     }
-    
+
     .franchise-image {
         display: none;
     }
@@ -837,41 +931,282 @@ section {
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.2rem;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .benefits-grid,
     .training-grid,
     .culture-grid,
     .testimonials-carousel {
         grid-template-columns: 1fr;
     }
-    
+
     .job-filters {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .filter-btn {
         width: 100%;
     }
-    
+
     .job-header {
         flex-direction: column;
     }
-    
+
     .modal-content {
         width: 95%;
         padding: 20px;
     }
-    
+
     .form-row {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   JOB CARD REDESIGN (applies to new markup)
+   ======================================== */
+
+.job-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.job-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+/* Header */
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--surface-muted);
+    margin-bottom: 0;
+}
+
+.job-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    min-width: 280px;
+}
+
+.job-header-right {
+    display: flex;
+    align-items: flex-start;
+}
+
+.job-title {
+    font-size: 1.75rem;
+    color: var(--text-color);
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.job-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.job-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.job-meta i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+/* Badge tweaks */
+.job-badge {
+    padding: 8px 18px;
+    background: var(--primary-color);
+    color: #ffffff;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.driver-badge {
+    background: var(--secondary-color);
+}
+
+/* Body */
+.job-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.job-description {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    margin-bottom: 0;
+}
+
+.job-body-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.job-body-column {
+    background: var(--surface-muted);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.job-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 12px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.job-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.job-points li {
+    position: relative;
+    padding-left: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.job-points li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Footer */
+.job-footer {
+    margin-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--surface-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.apply-btn {
+    padding: 12px 32px;
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.apply-btn:hover {
+    background: var(--secondary-color);
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.secondary-btn {
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: 2px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: rgba(255, 107, 53, 0.05);
+}
+
+/* Hide old requirements block when using new layout */
+.job-card .job-requirements {
+    display: none;
+}
+
+/* Responsive tweaks for redesigned cards */
+@media (max-width: 768px) {
+    .job-header {
+        flex-direction: column;
+    }
+
+    .job-body-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .job-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .apply-btn,
+    .secondary-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .job-title {
+        font-size: 1.4rem;
+    }
+
+    .job-meta {
+        flex-direction: column;
+        gap: 8px;
     }
 }

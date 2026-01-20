@@ -230,12 +230,18 @@
         /* Form Steps */
         .form-step {
             display: none;
+            flex-direction: column;
+            height: 100%;
         }
 
         .form-step.active {
-            display: block;
-            animation: slideIn 0.4s ease;
+            display: flex;
+            flex-direction: column;     /* 🔥 STACK VERTICALLY */
+            align-items: center;
+            animation: slideIn 0.4s ease;        /* 🔥 CENTER CONTENT */
         }
+
+
 
         @keyframes slideIn {
             from {
@@ -306,6 +312,7 @@
             display: flex;
             flex-direction: column;
             gap: 25px;
+            min-height: 100%;
         }
 
         .form-group {
@@ -434,33 +441,51 @@
 
         /* Navigation Buttons */
         .form-navigation {
+            position: sticky;
+            bottom: 20px;
+
             display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: 25px;
+            gap: 16px;
+
+            width: 100%;
+            max-width: 100%;
+            padding: 16px;
+
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 18px;
+
+            z-index: 50;
         }
 
+
+
+
         .booking-nav-btn {
-            flex: 1;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
+            flex: 1;                 /* 🔥 equal width buttons */
+            height: 52px;            /* 🔥 same as screenshot */
+            border-radius: 12px;
+
             font-family: "Poppins", sans-serif;
             font-size: 1rem;
             font-weight: 600;
+
             cursor: pointer;
             transition: all 0.3s ease;
+
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            min-height: 55px;
         }
 
+
+
         .booking-btn-prev {
-            background: #444;
-            color: white;
+            background: #777;
+            color: #eee;
         }
+
 
         .booking-btn-prev:hover {
             background: #555;
@@ -470,12 +495,15 @@
         .booking-btn-next {
             background: linear-gradient(135deg, #ff6347, #ff4500);
             color: white;
+            box-shadow: 0 12px 28px rgba(255, 99, 71, 0.35);
         }
 
         .booking-btn-next:hover {
-            transform: translateX(3px);
-            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 35px rgba(255, 99, 71, 0.45);
         }
+
+
 
         .booking-btn-prev:disabled,
         .booking-btn-next:disabled {
@@ -1552,8 +1580,27 @@
                 grid-template-columns: 1fr 1fr;
             }
 
+            /* FORCE addons to take full width */
             .addon-services {
-                padding: 15px;
+                grid-column: 1 / -1;      /* 🔥 THIS IS THE KEY */
+                width: 100%;
+                max-width: 720px;
+
+                margin: 40px auto 20px;
+                text-align: center;
+            }
+
+            /* Center addon cards */
+            .addon-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+
+            .addon-item {
+                width: 100%;
+                max-width: 560px;
             }
         }
 
@@ -1651,118 +1698,134 @@
                     </div>
 
                     <form class="booking-form" id="autoSaveForm">
-                        <!-- Step 1: Personal & Vehicle Details -->
-                        <div class="form-step active" data-step="1">
-                            <div class="step-header">
-                                <h3><i class="fas fa-user-circle"></i> Personal & Vehicle Information</h3>
-                                <p>Tell us about yourself and your vehicle</p>
-                            </div>
 
-                            <!-- Personal Information -->
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
-                                    <input type="text" id="fullName" name="fullName" required
-                                        placeholder="Enter your full name">
-                                    <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="nameError">Please enter your full name</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
-                                    <input type="tel" id="phone" name="phone" required
-                                        placeholder="Enter 10-digit number">
-                                    <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="phoneError">Please enter a valid 10-digit phone
-                                        number</div>
-                                </div>
-                            </div>
+                            <!-- Step 1: Personal & Vehicle Details -->
+                            <div class="form-step active" data-step="1">
 
-                            <div class="form-group">
-                                <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
-                                <input type="email" id="email" name="email" required placeholder="Enter your email">
-                                <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                <div class="error-message" id="emailError">Please enter a valid email address</div>
-                            </div>
-
-                            <!-- Vehicle Information -->
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type *</label>
-                                    <select id="vehicleType" name="vehicleType" required>
-                                        <option value="">Select Vehicle Type</option>
-                                        <option value="hatchback">Hatchback</option>
-                                        <option value="sedan">Sedan</option>
-                                        <option value="suv">SUV</option>
-                                        <option value="luxury">Luxury Car</option>
-                                        <option value="bike">Motorcycle</option>
-                                        <option value="commercial">Commercial Vehicle</option>
-                                    </select>
-                                    <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="vehicleError">Please select vehicle type</div>
+                                <div class="step-header">
+                                    <h3><i class="fas fa-user-circle"></i> Personal & Vehicle Information</h3>
+                                    <p>Tell us about yourself and your vehicle</p>
                                 </div>
-                                <div class="form-group">
-                                    <label for="vehicleModel"><i class="fas fa-cog"></i> Vehicle Model</label>
-                                    <input type="text" id="vehicleModel" name="vehicleModel"
-                                        placeholder="e.g., Hyundai Creta">
-                                </div>
-                            </div>
 
-                            <!-- Add-on Services -->
-                            <div class="addon-services">
-                                <h4><i class="fas fa-plus-circle"></i> Add-on Services (Optional)</h4>
-                                <div class="addon-grid">
-                                    <div class="addon-item" onclick="toggleAddon(this, 'cleaning', 500)">
-                                        <input type="checkbox" class="addon-checkbox" id="addonCleaning" name="addons"
-                                            value="cleaning">
-                                        <i class="fas fa-spray-can addon-icon"></i>
-                                        <div class="addon-info">
-                                            <div class="addon-name">Interior Cleaning</div>
-                                            <div class="addon-desc">Deep cleaning of vehicle interior</div>
-                                        </div>
-                                        <div class="addon-price">₹500</div>
+                                <!-- ===== ROW 1 : NAME + PHONE ===== -->
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
+                                        <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                                        <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                        <div class="error-message" id="nameError">Please enter your full name</div>
                                     </div>
-                                    <div class="addon-item" onclick="toggleAddon(this, 'detailing', 1500)">
-                                        <input type="checkbox" class="addon-checkbox" id="addonDetailing" name="addons"
-                                            value="detailing">
-                                        <i class="fas fa-star addon-icon"></i>
-                                        <div class="addon-info">
-                                            <div class="addon-name">Premium Detailing</div>
-                                            <div class="addon-desc">Complete exterior & interior detailing</div>
+
+                                    <div class="form-group phone-group">
+                                        <label><i class="fas fa-phone"></i> Phone Number *</label>
+                                        <div class="phone-row">
+                                            <select class="country-code">
+                                                <option value="+91">+91 (India)</option>
+                                            </select>
+                                            <div class="phone-input-box">
+                                                <input type="tel" id="phone" name="phone" placeholder="92345 75818" required />
+                                                <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                            </div>
                                         </div>
-                                        <div class="addon-price">₹1,500</div>
-                                    </div>
-                                    <div class="addon-item" onclick="toggleAddon(this, 'insurance', 800)">
-                                        <input type="checkbox" class="addon-checkbox" id="addonInsurance" name="addons"
-                                            value="insurance">
-                                        <i class="fas fa-shield-alt addon-icon"></i>
-                                        <div class="addon-info">
-                                            <div class="addon-name">Extra Insurance</div>
-                                            <div class="addon-desc">Additional coverage up to ₹5 lakhs</div>
+                                        <div class="error-message" id="phoneError">
+                                            Please enter a valid 10-digit Indian phone number
                                         </div>
-                                        <div class="addon-price">₹800</div>
-                                    </div>
-                                    <div class="addon-item" onclick="toggleAddon(this, 'express', 2000)">
-                                        <input type="checkbox" class="addon-checkbox" id="addonExpress" name="addons"
-                                            value="express">
-                                        <i class="fas fa-bolt addon-icon"></i>
-                                        <div class="addon-info">
-                                            <div class="addon-name">Express Delivery</div>
-                                            <div class="addon-desc">Priority delivery - 30% faster</div>
-                                        </div>
-                                        <div class="addon-price">₹2,000</div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-navigation">
-                                <button type="button" class="booking-nav-btn booking-btn-prev" disabled>
-                                    <i class="fas fa-arrow-left"></i> Previous
-                                </button>
-                                <button type="button" class="booking-nav-btn booking-btn-next" onclick="nextStep()">
-                                    Next <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <!-- ===== ROW 2 : EMAIL ===== -->
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+                                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                                        <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                                    </div>
+                                </div>
+
+                                <!-- ===== ROW 3 : VEHICLE ===== -->
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type *</label>
+                                        <select id="vehicleType" name="vehicleType" required>
+                                            <option value="">Select Vehicle Type</option>
+                                            <option value="hatchback">Hatchback</option>
+                                            <option value="sedan">Sedan</option>
+                                            <option value="suv">SUV</option>
+                                            <option value="luxury">Luxury Car</option>
+                                            <option value="bike">Motorcycle</option>
+                                            <option value="commercial">Commercial Vehicle</option>
+                                        </select>
+                                        <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                        <div class="error-message" id="vehicleError">Please select vehicle type</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="vehicleModel"><i class="fas fa-cog"></i> Vehicle Model</label>
+                                        <input type="text" id="vehicleModel" name="vehicleModel" placeholder="e.g., Hyundai Creta">
+                                    </div>
+                                </div>
+
+                                <!-- ===== ADD-ONS (OUTSIDE GRID) ===== -->
+                                <div class="addon-services">
+                                    <h4><i class="fas fa-plus-circle"></i> Add-on Services (Optional)</h4>
+
+                                    <div class="addon-grid">
+                                        <div class="addon-item" onclick="toggleAddon(this, 'cleaning', 500)">
+                                            <input type="checkbox" class="addon-checkbox">
+                                            <i class="fas fa-spray-can addon-icon"></i>
+                                            <div class="addon-info">
+                                                <div class="addon-name">Interior Cleaning</div>
+                                                <div class="addon-desc">Deep cleaning of vehicle interior</div>
+                                            </div>
+                                            <div class="addon-price">₹500</div>
+                                        </div>
+
+                                        <div class="addon-item" onclick="toggleAddon(this, 'detailing', 1500)">
+                                            <input type="checkbox" class="addon-checkbox">
+                                            <i class="fas fa-star addon-icon"></i>
+                                            <div class="addon-info">
+                                                <div class="addon-name">Premium Detailing</div>
+                                                <div class="addon-desc">Complete exterior & interior detailing</div>
+                                            </div>
+                                            <div class="addon-price">₹1,500</div>
+                                        </div>
+
+                                        <div class="addon-item" onclick="toggleAddon(this, 'insurance', 800)">
+                                            <input type="checkbox" class="addon-checkbox">
+                                            <i class="fas fa-shield-alt addon-icon"></i>
+                                            <div class="addon-info">
+                                                <div class="addon-name">Extra Insurance</div>
+                                                <div class="addon-desc">Additional coverage up to ₹5 lakhs</div>
+                                            </div>
+                                            <div class="addon-price">₹800</div>
+                                        </div>
+
+                                        <div class="addon-item" onclick="toggleAddon(this, 'express', 2000)">
+                                            <input type="checkbox" class="addon-checkbox">
+                                            <i class="fas fa-bolt addon-icon"></i>
+                                            <div class="addon-info">
+                                                <div class="addon-name">Express Delivery</div>
+                                                <div class="addon-desc">Priority delivery – 30% faster</div>
+                                            </div>
+                                            <div class="addon-price">₹2,000</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ===== NAVIGATION (AFTER ADD-ONS) ===== -->
+                                <div class="form-navigation">
+                                    <button type="button" class="booking-nav-btn booking-btn-prev" disabled>
+                                        <i class="fas fa-arrow-left"></i> Previous
+                                    </button>
+                                    <button type="button" class="booking-nav-btn booking-btn-next" onclick="nextStep()">
+                                        Next <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+
                             </div>
-                        </div>
+                        </form>
+
 
                         <!-- Step 2: Location & Schedule -->
                         <div class="form-step" data-step="2">
@@ -2585,6 +2648,7 @@
         let selectingPickup = false;
         let selectingDrop = false;
         let currentStep = 1;
+        let isSubmitting = false;
         let formData = {};
         let autoSaveTimeout = null;
         let estimatedDistance = 0;
@@ -2882,7 +2946,7 @@
 
             if (step === 1) {
                 // Validate personal and vehicle info
-                const fields = ['fullName', 'phone', 'email', 'vehicleType'];
+                const fields = ['fullName', 'phone', 'email', 'password', 'vehicleType'];
                 fields.forEach(field => {
                     const input = document.getElementById(field);
                     if (!validateField(field, input.value)) {
@@ -3081,8 +3145,23 @@
         function validateField(fieldName, value) {
             const validators = {
                 fullName: (val) => val.trim().length >= 2,
-                phone: (val) => /^[6-9]\d{9}$/.test(val.replace(/\D/g, '')),
-                email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+                phone: (val) => {
+                    const phone = val.replace(/\D/g, '');
+                    return /^[6-9]\d{9}$/.test(phone);
+                },
+
+
+
+                email: (val) => {
+                    const trimmed = val.trim();
+
+                    // 1️⃣ reject if whitespace exists anywhere
+                    if (/\s/.test(val)) return false;
+
+                    // 2️⃣ validate email format
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+                },
+
                 vehicleType: (val) => val.trim() !== '',
                 pickupCity: (val) => val.trim() !== '',
                 dropCity: (val) => val.trim() !== '',
@@ -3127,8 +3206,9 @@
         function getErrorMessage(field) {
             const messages = {
                 fullName: 'Please enter your full name (min 2 characters)',
-                phone: 'Please enter a valid 10-digit Indian phone number',
+                phone: 'Please enter a valid Indian phone number (XXXXXXXXXX)',
                 email: 'Please enter a valid email address',
+                password: 'Please enter a valid password (min 8 characters)',
                 vehicleType: 'Please select vehicle type',
                 pickupCity: 'Please select pickup city',
                 dropCity: 'Please select drop city',
@@ -4663,7 +4743,8 @@
             });
 
             // Add input event listeners for real-time validation
-            const validationFields = ['fullName', 'phone', 'email', 'vehicleType', 'pickupCity', 'dropCity', 'pickupDate'];
+            const validationFields = ['fullName', 'phone', 'email', 'password', 'vehicleType',
+                          'pickupLocation', 'dropLocation', 'pickupDate'];
 
             validationFields.forEach(field => {
                 const input = document.getElementById(field);
@@ -4683,18 +4764,24 @@
             const additionalInfo = document.getElementById('additionalInfo');
             additionalInfo.addEventListener('input', updateCharacterCount);
 
-            // Phone number formatting
+            // Phone number input handling (FIXED)
             const phoneInput = document.getElementById('phone');
-            phoneInput.addEventListener('input', function (e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 0) {
-                    value = value.substring(0, 10);
-                    if (value.length > 5) {
-                        value = value.substring(0, 5) + ' ' + value.substring(5);
+            if (phoneInput) {
+
+                // block non-numeric keys
+                phoneInput.addEventListener('keypress', (e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                        e.preventDefault();
                     }
-                }
-                e.target.value = value;
-            });
+                });
+
+                // clean pasted input + trigger validation
+                phoneInput.addEventListener('input', () => {
+                    phoneInput.value = phoneInput.value.replace(/\D/g, '');
+                    validateField(phoneInput); // 🟢 green tick appears here
+                });
+            }
+
 
             // Vehicle type change - update pricing
             document.getElementById('vehicleType').addEventListener('change', function () {
@@ -4726,12 +4813,19 @@
             bookingForm.addEventListener('submit', function (e) {
                 e.preventDefault();
 
+                // 🔒 DUPLICATE SUBMISSION PROTECTION
+                if (isSubmitting) return;
+                isSubmitting = true;
+
                 if (!validateStep(3)) {
                     showToast('Validation Error', 'Please check all fields', 'error', 3000);
+                    isSubmitting = false;
                     return;
                 }
 
                 submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
 
                 // Simulate API call
@@ -5016,12 +5110,16 @@
     <script src="../js/modules/footer-loader.js"></script>
 
     <!-- 🌟 Bottom Fixed Action Bar -->
-   <link rel="stylesheet" href="../css/components/footer.css" />
-  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
-  <link rel="stylesheet" href="../css/components/quote-modal.css" />
-  <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
-  
-  <!-- 🚀 Floating Action Menu loaded via footer component -->
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+    <link rel="stylesheet" href="../css/components/quote-modal.css" />
+    <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
+    
+    <!-- 🚀 Floating Action Menu loaded via footer component -->
+    <script src="../js/modules/booking-modals.js"></script>
+    <script src="../js/modules/booking.js"></script>
+    <script src="../js/script.js"></script>
+
 </body>
 
 </html>

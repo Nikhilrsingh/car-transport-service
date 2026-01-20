@@ -492,3 +492,236 @@ button:hover { background: #0056b3; }
     border-color: var(--primary);
 }
 .step-icon { font-size: 36px; margin-bottom: 10px; color: var(--primary); }
+
+
+/* ====================================
+   CONTRIBUTORS PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] {
+  background-color: #f8f9fa !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .contributors-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .contributors-hero h1 {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+body[data-theme="light"] .contributors-hero p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body[data-theme="light"] .contributor-container h1 {
+  background: linear-gradient(90deg, #ff6347, #333, #ff4500) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+body[data-theme="light"] .stat-box {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .stat-box h3 {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .stat-box p {
+  color: #333 !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="light"] #searchInput,
+body[data-theme="light"] .filter-select {
+  background: #ffffff !important;
+  color: #333 !important;
+  border: 1px solid #ddd !important;
+}
+
+body[data-theme="light"] .filter-select option {
+  background-color: #ffffff !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] #searchInput::placeholder {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .contributor {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .contributor:hover {
+  border-color: #ff6347 !important;
+  box-shadow: 0 10px 30px rgba(255, 99, 71, 0.15) !important;
+}
+
+body[data-theme="light"] .contributor .cont-name {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .contributor-stats {
+  background: #f8f9fa !important;
+  color: #555 !important;
+}
+
+body[data-theme="light"] .timeline-container {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .timeline-container h2 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .timeline-item {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .timeline-item:hover {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .timeline-info {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .modal-content {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa) !important;
+}
+
+body[data-theme="light"] .modal-info h2 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .modal-subtitle {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .modal-stat {
+  background: #f8f9fa !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .modal-stat span {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .modal-stat p {
+  color: #666 !important;
+}
+
+body[data-theme="light"] .step-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .step-card:hover {
+  border-color: #ff6347 !important;
+}
+
+/* Additional light mode styles for contributor container */
+body[data-theme="light"] .contributor-container {
+  background: #ffffff !important;
+  padding: 30px !important;
+  border-radius: 15px !important;
+  margin: 20px !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .special-lead {
+  background: linear-gradient(135deg, #fff8e1, #fffde7) !important;
+  color: #333 !important;
+  border: 2px solid gold !important;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3) !important;
+}
+
+body[data-theme="light"] .special-lead h3 {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .special-lead p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .special-lead a {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .lead-badge {
+  color: #b8860b !important;
+}
+
+body[data-theme="light"] #controls {
+  color: #333 !important;
+}
+
+body[data-theme="light"] #controls span {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .contribute-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .contribute-section h2 {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .contribute-section p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .step-card h3 {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .step-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] #errorMessage {
+  color: #dc3545 !important;
+}
+
+body[data-theme="light"] .tier-gold {
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), #ffffff) !important;
+}
+
+body[data-theme="light"] .tier-silver {
+  background: linear-gradient(145deg, rgba(192, 192, 192, 0.1), #ffffff) !important;
+}
+
+body[data-theme="light"] .tier-bronze {
+  background: linear-gradient(145deg, rgba(205, 127, 50, 0.1), #ffffff) !important;
+}
+
+body[data-theme="light"] .tier-contributor {
+  border: 1px solid #ddd !important;
+}
+
+/* Main content area light mode */
+body[data-theme="light"] .main-content {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] #projectLeadContainer {
+  background: transparent !important;
+}
+
+body[data-theme="light"] .search-contributor {
+  background: transparent !important;
+}
+
+body[data-theme="light"] #spinner .spinner-circle {
+  border-color: #ddd !important;
+  border-top-color: #ff6347 !important;
+}

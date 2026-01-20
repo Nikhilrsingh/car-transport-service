@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot & FAB Test Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/components/chatbot-modal.css" />
+    <link rel="stylesheet" href="css/components/floating-action-menu.css" />
+    <link rel="stylesheet" href="css/components/bottom-action-bar.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .test-button:hover {
+            background: #574bff;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .success { background: #e8f5e8; border-left: 4px solid #4caf50; }
+        .error { background: #ffeaea; border-left: 4px solid #f44336; }
+        .info { background: #e8f4fd; border-left: 4px solid #2196f3; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Chatbot & Floating Action Buttons Test</h1>
+        
+        <div class="info">
+            <h3>Test Instructions:</h3>
+            <ol>
+                <li>Click the "Test Chatbot" button below</li>
+                <li>Check if the chatbot modal opens correctly</li>
+                <li>Try typing a message and sending it</li>
+                <li>Look for the floating action menu (FAB) in the bottom right</li>
+                <li>Check the bottom action bar with clock and chat button</li>
+            </ol>
+        </div>
+
+        <h3>Manual Tests:</h3>
+        <button class="test-button" onclick="testChatbot()">Test Chatbot Modal</button>
+        <button class="test-button" onclick="testFAB()">Test FAB Menu</button>
+        <button class="test-button" onclick="checkComponents()">Check Components</button>
+        
+        <div id="test-results"></div>
+
+        <h3>Navigation Tests:</h3>
+        <a href="index.html" class="test-button">Go to Home Page</a>
+        <a href="login.html" class="test-button">Go to Login Page</a>
+        <a href="pages/about.html" class="test-button">Go to About Page</a>
+
+        <div class="info">
+            <h4>🔧 Components Status:</h4>
+            <div id="component-status"></div>
+        </div>
+    </div>
+
+    <!-- Footer Container for Dynamic Loading -->
+    <div id="footer-container"></div>
+
+    <!-- Load Scripts -->
+    <script src="js/modules/chatbot-modal.js"></script>
+    <script src="js/modules/footer-loader.js"></script>
+
+    <script>
+        function testChatbot() {
+            console.log('Testing chatbot...');
+            const modal = document.getElementById('chatbot-modal-overlay');
+            if (modal) {
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+                updateStatus('Chatbot modal opened successfully!', 'success');
+            } else {
+                updateStatus('Chatbot modal not found!', 'error');
+            }
+        }
+
+        function testFAB() {
+            console.log('Testing FAB...');
+            const fab = document.getElementById('fabMain');
+            if (fab) {
+                fab.click();
+                updateStatus('FAB menu toggled!', 'success');
+            } else {
+                updateStatus('FAB menu not found!', 'error');
+            }
+        }
+
+        function checkComponents() {
+            const results = [];
+            
+            // Check chatbot modal
+            const chatbotModal = document.getElementById('chatbot-modal-overlay');
+            results.push(`Chatbot Modal: ${chatbotModal ? '✅ Found' : '❌ Missing'}`);
+            
+            // Check FAB
+            const fab = document.getElementById('fabMain');
+            results.push(`FAB Menu: ${fab ? '✅ Found' : '❌ Missing'}`);
+            
+            // Check bottom action bar
+            const bottomBar = document.querySelector('.bottom-action-bar-fixed');
+            results.push(`Bottom Action Bar: ${bottomBar ? '✅ Found' : '❌ Missing'}`);
+            
+            // Check chatbot button in bottom bar
+            const chatBtn = document.getElementById('bottomChatBtn');
+            results.push(`Bottom Chat Button: ${chatBtn ? '✅ Found' : '❌ Missing'}`);
+            
+            // Check footer container
+            const footerContainer = document.getElementById('footer-container');
+            results.push(`Footer Container: ${footerContainer ? '✅ Found' : '❌ Missing'}`);
+            
+            document.getElementById('component-status').innerHTML = results.join('<br>');
+        }
+
+        function updateStatus(message, type) {
+            const resultsDiv = document.getElementById('test-results');
+            resultsDiv.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+
+        // Auto-check components on load
+        window.addEventListener('load', () => {
+            setTimeout(checkComponents, 2000); // Wait for dynamic loading
+        });
+
+        // Test chatbot button clicks
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'bottomChatBtn' || e.target.closest('#bottomChatBtn')) {
+                console.log('Bottom chat button clicked!');
+                updateStatus('Bottom chat button clicked!', 'info');
+            }
+            
+            if (e.target.id === 'fabChatBtn' || e.target.closest('#fabChatBtn')) {
+                console.log('FAB chat button clicked!');
+                updateStatus('FAB chat button clicked!', 'info');
+            }
+        });
+    </script>
+</body>
+</html>

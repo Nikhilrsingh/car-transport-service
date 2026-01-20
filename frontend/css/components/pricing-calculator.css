@@ -911,3 +911,144 @@ section {
         transform: translateY(0);
     }
 }
+
+
+/* ====================================
+   PRICING CALCULATOR PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .calculator-hero,
+body[data-theme="light"] .pricing-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .calculator-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .calculator-card,
+body[data-theme="light"] .calculator-container {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .calculator-card h2,
+body[data-theme="light"] .calculator-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .calculator-card label {
+  color: #333 !important;
+}
+
+body[data-theme="light"] .calculator-card input,
+body[data-theme="light"] .calculator-card select {
+  background: #ffffff !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+body[data-theme="light"] .calculator-card input:focus,
+body[data-theme="light"] .calculator-card select:focus {
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .price-result,
+body[data-theme="light"] .result-card {
+  background: #f8f9fa !important;
+  border-color: rgba(255, 99, 71, 0.3) !important;
+}
+
+body[data-theme="light"] .price-result h3,
+body[data-theme="light"] .result-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .price-amount,
+body[data-theme="light"] .total-price {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .section-subtitle {
+  color: #555 !important;
+}
+
+/* ====================================
+   PRICING CALCULATOR PAGE - Dark Mode Fix
+   ==================================== */
+   body[data-theme="dark"] {
+    --text-color: #eaeaea;
+    --border-color: #333;
+    --light-color: #1e1e2f;
+    --white: #161625;
+  }
+  
+  /* Plan Comparison Table */
+  body[data-theme="dark"] .comparison-table-wrapper {
+    background: #161625;
+  }
+  
+  body[data-theme="dark"] .comparison-table thead tr {
+    background: linear-gradient(135deg, #1f1f3a 0%, #2a2a4a 100%);
+  }
+  
+  body[data-theme="dark"] .comparison-table th,
+  body[data-theme="dark"] .comparison-table td {
+    color: #eaeaea;
+    border-bottom: 1px solid #333;
+  }
+  
+  body[data-theme="dark"] .feature-column {
+    color: #ffffff;
+  }
+  
+  /* Plan Header */
+  body[data-theme="dark"] .plan-header h3,
+  body[data-theme="dark"] .plan-header .plan-price {
+    color: #ffffff;
+  }
+  
+  body[data-theme="dark"] .plan-header i {
+    color: #ff8c5a;
+  }
+  
+  body[data-theme="dark"] .plan-badge {
+    background: #ff8c5a;
+    color: #000;
+  }
+  
+  /* Cards & Sections */
+  body[data-theme="dark"] .calculator-form,
+  body[data-theme="dark"] .price-summary,
+  body[data-theme="dark"] .discount-card,
+  body[data-theme="dark"] .offer-card,
+  body[data-theme="dark"] .faq-item {
+    background: #161625;
+    color: #eaeaea;
+    border-color: #333;
+  }
+  
+  /* Inputs */
+  body[data-theme="dark"] input,
+  body[data-theme="dark"] select {
+    background: #1f1f3a;
+    color: #ffffff;
+    border-color: #333;
+  }
+  
+  body[data-theme="dark"] input::placeholder {
+    color: #aaa;
+  }
+  
+  /* Muted text */
+  body[data-theme="dark"] .text-muted,
+  body[data-theme="dark"] .section-subtitle,
+  body[data-theme="dark"] .offer-period,
+  body[data-theme="dark"] .summary-note {
+    color: #b5b5b5;
+  }
+  

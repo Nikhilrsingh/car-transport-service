@@ -654,9 +654,27 @@
                         <input type="email" id="email" name="email" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" name="phone" required>
+                    <div class="phone-input-wrapper">
+                        <select id="countryCode" class="country-code">
+                            <option value="+91" selected>🇮🇳 +91</option>
+                        </select>
+
+                        <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
+
+                            <input
+                                type="text"
+                                id="phone"
+                                name="phone"
+                                required
+                                maxlength="10"
+                                inputmode="numeric"
+                                placeholder="Enter 10-digit mobile number"
+                            />
+
+                            <span class="validation-icon"></span>
+                            <div class="error-message"></div>
+
                     </div>
                 </div>
 
