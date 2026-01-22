@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initApplicationForm();
   initFranchiseForm();
   initSaveJobButtons();
+  initTestimonialsCarousel(); // NEW: Initialize Swiper carousel
 });
 
 // =========================
@@ -442,6 +443,76 @@ function initSaveJobButtons() {
       }
     });
   });
+}
+
+// =========================
+// Testimonials Carousel (Swiper)
+// =========================
+
+function initTestimonialsCarousel() {
+  // Ensure Swiper library is loaded
+  if (typeof Swiper === 'undefined') {
+    console.warn('Swiper is not loaded. Testimonials carousel will not initialize.');
+    return;
+  }
+
+  const carouselElement = document.querySelector('.testimonials-carousel');
+  if (!carouselElement) return;
+
+  const testimonialSwiper = new Swiper('.testimonials-carousel', {
+    slidesPerView: 1,
+    spaceBetween: 24,
+    loop: true,
+    grabCursor: true,
+
+    // Auto-rotation
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true // pause on hover for better UX
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+
+    // Pagination dots
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      dynamicBullets: true
+    },
+
+    // Keyboard control for accessibility
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true
+    },
+
+    // Responsive breakpoints
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 24
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 24
+      }
+    },
+
+    // Smooth animations
+    speed: 600,
+    effect: 'slide'
+  });
+
+  return testimonialSwiper;
 }
 
 // =========================
