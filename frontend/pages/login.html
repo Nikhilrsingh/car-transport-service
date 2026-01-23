@@ -1,40 +1,273 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Harihar Car Carriers</title>
-    <meta name="description" content="Login to your Harihar Car Carriers account to track shipments, manage bookings, and access your dashboard.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://nikhilrsingh.github.io/car-transport-service/pages/login.html">
+    <meta name="description" content="Login to your Harihar Car Carriers account.">
     <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/styles.css">
+    
     <link rel="stylesheet" href="../css/pages/login.css">
     <link rel="stylesheet" href="../css/components/login.css">
 
+    <style>
+        /* --- GLOBAL LAYOUT --- */
+        html { height: 100%; }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            
+            /* BACKGROUND FIX: 'fixed' prevents the gradient from breaking/partitioning */
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+            background-attachment: fixed; 
+            
+            color: #ffffff;
+            transition: background 0.5s ease, color 0.3s ease;
+        }
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        body[data-theme="light"] {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-attachment: fixed;
+            color: #333333;
+        }
+
+        /* --- LAYOUT CONTAINER --- */
+        .main-content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; 
+            padding-top: 100px;
+            padding-bottom: 50px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- LOGO SECTION --- */
+        .logo-section {
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .logo {
+            width: 80px; 
+            height: 80px;
+            background: rgba(0,0,0,0.2);
+            border: 2px solid var(--primary-brand);
+            border-radius: 50%;
+            padding: 5px; 
+            margin: 0 auto 10px;
+            box-shadow: 0 0 20px rgba(255, 99, 71, 0.2);
+        }
+        
+        .logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: #ffffff;
+        }
+        
+        /* Light Mode Brand Name */
+        body[data-theme="light"] .brand-name {
+            color: #333333;
+            text-shadow: none;
+        }
+
+        /* --- AUTH CARD --- */
+        .auth-card {
+            background: rgba(13, 25, 48, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            width: 100%;
+            box-sizing: border-box;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        
+        body[data-theme="light"] .auth-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0,0,0,0.1);
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- INPUT FIELDS & PADDING FIX --- */
+        .input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 50px;
+            /* PADDING FIX: 55px padding forces text to start AFTER the icon */
+            padding: 0 20px 0 55px !important; 
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            
+            /* Dark Mode Default */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #555;
+            color: #ffffff !important;
+        }
+
+        /* AUTOFILL FIX: Keeps background correct when browser fills password */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #1a1a2e inset !important; /* Dark Bg match */
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        /* Light Mode Input & Autofill */
+        body[data-theme="light"] .form-control { 
+            background: #ffffff; 
+            border: 1px solid #ccc; 
+            color: #333 !important; 
+        }
+
+        body[data-theme="light"] input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px #ffffff inset !important; /* White Bg match */
+            -webkit-text-fill-color: #333 !important;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 20px; 
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+            color: #cccccc;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        body[data-theme="light"] .input-icon { color: #888; }
+        
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #cccccc;
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        body[data-theme="light"] .password-toggle { color: #888; }
+        
+        /* Hide Placeholders */
+        input::placeholder { opacity: 0; }
+
+        /* --- TEXT COLORS --- */
+        body[data-theme="dark"] .form-header h2,
+        body[data-theme="dark"] .form-header p,
+        body[data-theme="dark"] label,
+        body[data-theme="dark"] .checkbox-wrapper label,
+        body[data-theme="dark"] .forgot-link,
+        body[data-theme="dark"] .form-footer,
+        body[data-theme="dark"] .form-footer a {
+            color: #ffffff !important;
+        }
+        
+        body[data-theme="light"] .form-header h2 { color: #333; }
+        body[data-theme="light"] .form-header p,
+        body[data-theme="light"] label,
+        body[data-theme="light"] .checkbox-wrapper label,
+        body[data-theme="light"] .forgot-link,
+        body[data-theme="light"] .form-footer {
+            color: #444;
+        }
+
+        /* --- NAV BUTTONS --- */
+        .nav-controls {
+            position: absolute; top: 20px; left: 20px; right: 20px;
+            display: flex; justify-content: space-between; z-index: 100;
+        }
+        .nav-btn {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary-brand);
+            color: var(--primary-brand);
+            padding: 8px 16px; border-radius: 30px;
+            cursor: pointer; backdrop-filter: blur(5px);
+            transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+            text-decoration: none; font-size: 0.9rem;
+        }
+        .nav-btn:hover { background: var(--primary-brand); color: white; }
+        
+        body[data-theme="light"] .nav-btn {
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--primary-brand);
+        }
+
+        /* --- COMPONENTS --- */
+        :root { --primary-brand: #ff6347; }
+        .tab-btn { color: #aaa; }
+        .tab-btn.active { color: var(--primary-brand); background: rgba(255, 99, 71, 0.1); border: 1px solid var(--primary-brand); }
+        .submit-btn { background: linear-gradient(90deg, #ff6347, #ff4500); border: none; color: white; box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4); }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6); }
+
+        .particles { pointer-events: none; position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; }
+        .particle { background: rgba(255, 99, 71, 0.3) !important; }
+
+    </style>
 </head>
-<body>
+<body data-theme="dark">
+
     <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
     </div>
 
-    <button class="back-button" onclick="window.history.back()">Back</button>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <div class="nav-controls">
+        <a href="../index.html" class="nav-btn">
+            <i class="fas fa-arrow-left"></i> Home
+        </a>
+        <button class="nav-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
 
-    <div class="container">
+    <div class="main-content-area">
         <div class="login-wrapper">
             <div class="logo-section">
                 <div class="logo">
-                    <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers Logo">
+                    <img src="../assets/images/left-logo.jpg" alt="Logo">
                 </div>
                 <div class="brand-name">Harihar Car Carriers</div>
-                <div class="brand-tagline">Trusted Vehicle Transportation</div>
             </div>
 
             <div class="auth-card">
@@ -43,27 +276,26 @@
                     <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
                 </div>
 
-                <!-- Login Form -->
                 <div id="login-form" class="form-content active">
                     <div class="form-header">
                         <h2>Welcome Back</h2>
-                        <p>Sign in to access your account</p>
+                        <p>Login to track your shipment</p>
                     </div>
                     <form onsubmit="handleLogin(event)">
                         <div class="form-group">
-                            <label>Email Address <span class="required">*</span></label>
+                            <label>Email</label>
                             <div class="input-wrapper">
-                                <input type="email" class="form-control" placeholder="Enter your email" required>
-                                <span class="input-icon">✉</span>
+                                <input type="email" class="form-control" placeholder="" required>
+                                <span class="input-icon"><i class="fas fa-envelope"></i></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Password <span class="required">*</span></label>
+                            <label>Password</label>
                             <div class="input-wrapper">
-                                <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
-                                <span class="input-icon">🔒</span>
-                                <button type="button" class="password-toggle" onclick="togglePassword('login-password', this)">
-                                    <span>👁️</span>
+                                <input type="password" id="login-pass" class="form-control" placeholder="" required>
+                                <span class="input-icon"><i class="fas fa-lock"></i></span>
+                                <button type="button" class="password-toggle" onclick="togglePassword('login-pass', this)">
+                                    <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                         </div>
@@ -74,104 +306,44 @@
                             </div>
                             <a href="#" class="forgot-link">Forgot Password?</a>
                         </div>
-                        <button type="submit" class="submit-btn">Login to Account</button>
+                        <button type="submit" class="submit-btn">Login</button>
                     </form>
-                    <div class="divider"><span>Or continue with</span></div>
-                    <div class="social-login">
-                        <button class="social-btn" onclick="handleSocialLogin('google')">
-                            <span style="color: #667eea; font-weight: bold;">G</span> Google
-                        </button>
-                        <button class="social-btn" onclick="handleSocialLogin('phone')">
-                            <span>📱</span> Phone
-                        </button>
-                    </div>
                     <div class="form-footer">
-                        Don't have an account? <a href="#" onclick="switchTab('signup'); return false;">Sign Up</a>
+                        Don't have an account? <a href="#" onclick="switchTab('signup')">Sign Up</a>
                     </div>
                 </div>
 
-                <!-- Signup Form -->
                 <div id="signup-form" class="form-content">
                     <div class="form-header">
-                        <h2>Create Account</h2>
-                        <p>Join us for reliable vehicle transportation</p>
+                        <h2>Join Us</h2>
+                        <p>Create an account to get started</p>
                     </div>
                     <form onsubmit="handleSignup(event)">
-                        <div class="name-group">
-                            <div class="form-group">
-                                <label>First Name <span class="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <input type="text" class="form-control" placeholder="First name" required>
-                                    <span class="input-icon">👤</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Last Name <span class="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <input type="text" class="form-control" placeholder="Last name" required>
-                                    <span class="input-icon">👤</span>
-                                </div>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="" required>
+                                <span class="input-icon"><i class="fas fa-user"></i></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Email Address <span class="required">*</span></label>
+                            <label>Email</label>
                             <div class="input-wrapper">
-                                <input type="email" class="form-control" placeholder="Enter your email" required>
-                                <span class="input-icon">✉</span>
+                                <input type="email" class="form-control" placeholder="" required>
+                                <span class="input-icon"><i class="fas fa-envelope"></i></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Phone Number <span class="required">*</span></label>
+                            <label>Password</label>
                             <div class="input-wrapper">
-                                <input type="tel" class="form-control" placeholder="Enter 10-digit number" required>
-                                <span class="input-icon">📞</span>
+                                <input type="password" class="form-control" placeholder="" required>
+                                <span class="input-icon"><i class="fas fa-lock"></i></span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Password <span class="required">*</span></label>
-                            <div class="input-wrapper">
-                                <input type="password" id="signup-password" class="form-control" placeholder="Create password" required oninput="checkPasswordStrength(this)">
-                                <span class="input-icon">🔒</span>
-                                <button type="button" class="password-toggle" onclick="togglePassword('signup-password', this)">
-                                    <span>👁️</span>
-                                </button>
-                            </div>
-                            <div class="password-strength">
-                                <div class="strength-bar">
-                                    <div class="strength-fill" id="strength-fill"></div>
-                                </div>
-                                <span class="strength-text" id="strength-text"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Confirm Password <span class="required">*</span></label>
-                            <div class="input-wrapper">
-                                <input type="password" id="confirm-password" class="form-control" placeholder="Confirm password" required>
-                                <span class="input-icon">🔒</span>
-                                <button type="button" class="password-toggle" onclick="togglePassword('confirm-password', this)">
-                                    <span>👁️</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-options" style="justify-content: flex-start;">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox" id="terms" required>
-                                <label for="terms">I agree to Terms & Conditions</label>
-                            </div>
-                        </div>
-                        <button type="submit" class="submit-btn">Create Account</button>
+                        <button type="submit" class="submit-btn" style="margin-top: 15px;">Create Account</button>
                     </form>
-                    <div class="divider"><span>Or sign up with</span></div>
-                    <div class="social-login">
-                        <button class="social-btn" onclick="handleSocialLogin('google')">
-                            <span style="color: #667eea; font-weight: bold;">G</span> Google
-                        </button>
-                        <button class="social-btn" onclick="handleSocialLogin('phone')">
-                            <span>📱</span> Phone
-                        </button>
-                    </div>
                     <div class="form-footer">
-                        Already have an account? <a href="#" onclick="switchTab('login'); return false;">Login</a>
+                        Already have an account? <a href="#" onclick="switchTab('login')">Login</a>
                     </div>
                 </div>
             </div>
@@ -179,127 +351,62 @@
     </div>
 
     <script>
-        // Toggle password visibility
-        function togglePassword(inputId, button) {
-            const input = document.getElementById(inputId);
+        // Tab Switching
+        function switchTab(tab) {
+            document.querySelectorAll('.form-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab + '-form').classList.add('active');
+            const index = tab === 'login' ? 0 : 1;
+            document.querySelectorAll('.tab-btn')[index].classList.add('active');
+        }
+
+        // Password Visibility
+        function togglePassword(id, btn) {
+            const input = document.getElementById(id);
+            const icon = btn.querySelector('i');
             if (input.type === 'password') {
                 input.type = 'text';
-                button.innerHTML = '<span>🙈</span>';
+                icon.className = 'fas fa-eye-slash';
             } else {
                 input.type = 'password';
-                button.innerHTML = '<span>👁️</span>';
+                icon.className = 'fas fa-eye';
             }
         }
 
-        // Switch between login and signup tabs
-        function switchTab(tab) {
-            const loginForm = document.getElementById('login-form');
-            const signupForm = document.getElementById('signup-form');
-            const tabs = document.querySelectorAll('.tab-btn');
-
-            if (tab === 'login') {
-                loginForm.classList.add('active');
-                signupForm.classList.remove('active');
-                tabs[0].classList.add('active');
-                tabs[1].classList.remove('active');
-            } else {
-                signupForm.classList.add('active');
-                loginForm.classList.remove('active');
-                tabs[1].classList.add('active');
-                tabs[0].classList.remove('active');
-            }
-        }
-
-        // Check password strength
-        function checkPasswordStrength(input) {
-            const password = input.value;
-            const strengthFill = document.getElementById('strength-fill');
-            const strengthText = document.getElementById('strength-text');
-            
-            let strength = 0;
-            if (password.length >= 8) strength++;
-            if (password.match(/[a-z]+/)) strength++;
-            if (password.match(/[A-Z]+/)) strength++;
-            if (password.match(/[0-9]+/)) strength++;
-            if (password.match(/[$@#&!]+/)) strength++;
-
-            const colors = ['#ff4444', '#ff8800', '#ffcc00', '#88cc00', '#00cc00'];
-            const texts = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
-            const widths = ['20%', '40%', '60%', '80%', '100%'];
-
-            if (password.length === 0) {
-                strengthFill.style.width = '0%';
-                strengthText.textContent = '';
-                return;
-            }
-
-            strengthFill.style.width = widths[strength - 1];
-            strengthFill.style.backgroundColor = colors[strength - 1];
-            strengthText.textContent = texts[strength - 1];
-            strengthText.style.color = colors[strength - 1];
-        }
-
-        // Handle login
-        function handleLogin(e) {
-            e.preventDefault();
-            alert('Login functionality would be implemented here');
-        }
-
-        // Handle signup
-        function handleSignup(e) {
-            e.preventDefault();
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-            
-            alert('Signup functionality would be implemented here');
-        }
-
-        // Handle social login
-        function handleSocialLogin(provider) {
-            alert(`${provider} login would be implemented here`);
-        }
-
-        // Toggle theme
+        // Theme Toggle Logic
         function toggleTheme() {
             const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
+            const icon = document.querySelector('.nav-controls button i');
+            const currentTheme = body.getAttribute('data-theme');
             
-            body.classList.toggle('dark-theme');
-            
-            if (body.classList.contains('dark-theme')) {
-                themeToggle.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeToggle.textContent = '🌙';
+            if (currentTheme === 'dark' || !currentTheme) {
+                // Switch to Light
+                body.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
+                icon.className = 'fas fa-sun';
+            } else {
+                // Switch to Dark
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.className = 'fas fa-moon';
             }
         }
 
-        // Load saved theme
+        // Initialize Theme
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            const themeToggle = document.querySelector('.theme-toggle');
-            
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-theme');
-                themeToggle.textContent = '☀️';
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            const icon = document.querySelector('.nav-controls button i');
+            if(savedTheme === 'light') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
             }
         });
+
+        // Mock Handlers
+        function handleLogin(e) { e.preventDefault(); alert('Login functionality coming soon!'); }
+        function handleSignup(e) { e.preventDefault(); alert('Signup functionality coming soon!'); }
     </script>
-
-<script src="../js/modules/login.js"></script>
-<script src="../js/modules/quote-modal.js"></script>
-<script src="../js/modules/bottom-fixed-loader.js"></script>
-<script src="../js/modules/sticky-quote-button.js"></script>
-<script type="module" src="../js/modules/auth.js"></script>
-
 </body>
 </html>
-
-
-
