@@ -149,37 +149,24 @@
       console.log('FAB: Menu closed');
     }
 
-    function handleQuoteClick() {
-      console.log('Quote button clicked');
-      closeFAB();
-      
-      // Small delay to ensure FAB closes smoothly
-      setTimeout(() => {
-        const currentPath = window.location.pathname;
-        const isIndexPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || !currentPath.includes('.html');
+   function handleQuoteClick() {
+  const quoteSection = document.querySelector('.hero-quote');
 
-        if (isIndexPage) {
-          // If on index.html, scroll to the quote section
-          console.log('Scrolling to quote section on index page');
-          const quoteSection = document.querySelector('.hero-quote');
-          if (quoteSection) {
-            quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            // Focus on the first input field
-            setTimeout(() => {
-              const firstInput = document.getElementById('fromCity');
-              if (firstInput) {
-                firstInput.focus();
-              }
-            }, 500);
-          }
-        } else {
-          // If on other pages, navigate to index.html with quote section anchor
-          console.log('Navigating to index page quote section');
-          window.location.href = getRelativePath('index.html#quote');
-        }
-      }, 100);
-    }
+  if (quoteSection) {
+    // If we are on index.html, just scroll down
+    closeFAB();
+    quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    // Focus the first input for better UX
+    setTimeout(() => {
+      const firstInput = document.getElementById('fromCity');
+      if (firstInput) firstInput.focus();
+    }, 600);
+  } else {
+    // If we are on booking.html or any other page, redirect to home with hash
+    window.location.href = '../index.html#quote';
+  }
+}
 
     function handleBookClick() {
       console.log('Book button clicked');

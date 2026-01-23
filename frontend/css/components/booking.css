@@ -155,10 +155,14 @@
 /* Form Steps Animation */
 .form-step {
     display: none;
+    flex-direction: column;
+    height: 100%;
 }
 
 .form-step.active {
-    display: block;
+    display: flex;  
+    flex-direction: column;     /* 🔥 STACK VERTICALLY */
+    align-items: center;        /* 🔥 THIS IS THE KEY */
     animation: slideIn 0.4s ease;
 }
 
@@ -247,54 +251,53 @@
 
 /* Navigation Buttons */
 .form-navigation {
+    position: sticky;
+    bottom: 20px;
+
     display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-top: 25px;
+    gap: 16px;
+
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    border-radius: 18px;
+
+    z-index: 50;
 }
 
-.nav-btn {
-    flex: 1;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    font-family: "Poppins", sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+
+
+.booking-btn-prev {
+    background: #777;
+    color: #eee;
 }
 
-.btn-prev {
-    background: #444;
-    color: white;
-}
-
-.btn-prev:hover {
+.booking-btn-prev:hover:not(:disabled) {
     background: #555;
     transform: translateX(-3px);
 }
 
-.btn-next {
+.booking-btn-next {
     background: linear-gradient(135deg, #ff6347, #ff4500);
     color: white;
+    box-shadow: 0 12px 28px rgba(255, 99, 71, 0.35);
 }
 
-.btn-next:hover {
-    transform: translateX(3px);
-    box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+.booking-btn-next:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 35px rgba(255, 99, 71, 0.45);
 }
 
-.btn-prev:disabled,
-.btn-next:disabled {
+.booking-btn-prev:disabled,
+.booking-btn-next:disabled {
     background: #333;
     cursor: not-allowed;
     opacity: 0.5;
 }
+
 
 /* Booking Summary Sidebar */
 .booking-summary {
@@ -661,9 +664,6 @@
         flex-direction: column;
     }
 
-    .nav-btn {
-        width: 100%;
-    }
 
     .price-calculator {
         padding: 15px;
@@ -1092,3 +1092,5 @@
         justify-content: center;
     }
 }
+
+

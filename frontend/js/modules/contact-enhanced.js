@@ -373,6 +373,8 @@
         return 'Please enter a valid 10-digit phone number';
       case 'email':
         return 'Please enter a valid email address';
+      case 'password':
+        return 'Please enter a valid password (min 8 characters)';
       case 'vehicle':
         return 'Please select a vehicle type';
       case 'service':
