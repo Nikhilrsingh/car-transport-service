@@ -1070,6 +1070,22 @@ body[data-theme="dark"] .about-text h3::before {
 }
 
 /* Responsive adjustments for dark mode */
+@media (max-width: 991px) {
+  body[data-theme="dark"] .middle-navbar-container {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+  }
+  
+  body[data-theme="dark"] .middle-navbar-right span,
+  body[data-theme="dark"] .middle-navbar-right a {
+    color: #ffffff !important;
+  }
+  
+  body[data-theme="dark"] .middle-navbar-right span:last-child,
+  body[data-theme="dark"] .middle-navbar-right div {
+    color: #c0c0c0 !important;
+  }
+}
+
 @media (max-width: 768px) {
   body[data-theme="dark"] .about {
     background: linear-gradient(to bottom, #2b2b2b, #242424) !important;
@@ -1087,3 +1103,162 @@ body[data-theme="dark"] .about-text h3::before {
     background: linear-gradient(to bottom, #2b2b2b, #252525) !important;
   }
 }
+
+
+/* ====================================
+   HOW IT WORKS PAGE - Dark Mode Styles
+   ==================================== */
+
+/* Sections Backgrounds */
+body[data-theme="dark"] .process-overview,
+body[data-theme="dark"] .timeline-expectations,
+body[data-theme="dark"] .faqs-section,
+body[data-theme="dark"] .process-steps,
+body[data-theme="dark"] .preparation-checklist 
+ {
+    background: #16191d !important;
+}
+
+/* Overview Cards */
+body[data-theme="dark"] .overview-card {
+    background: #1e2227 !important;
+    border: rgba(255, 255, 255, 0.05) !important;
+}
+
+body[data-theme="dark"] .overview-card h3 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .overview-card p {
+    color: #bdbdbd !important;
+}
+
+/* Step-by-Step Timeline */
+body[data-theme="dark"] .step-content {
+    background: #1e2227 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body[data-theme="dark"] .step-info h3 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .step-description,
+body[data-theme="dark"] .feature span {
+    color: #c0c0c0 !important;
+}
+
+body[data-theme="dark"] .step-icon {
+    background: #252a31 !important;
+}
+
+body[data-theme="dark"] .step-note,
+body[data-theme="dark"] .transport-options {
+    background: #252a31 !important;
+    color: #ff9b6b !important;
+}
+
+body[data-theme="dark"] .transport-type {
+    color: #c0c0c0 !important;
+}
+
+body[data-theme="dark"] .transport-type strong {
+    color: #ffffff !important;
+}
+
+/* Timeline Cards */
+body[data-theme="dark"] .timeline-card {
+    background: #1e2227 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body[data-theme="dark"] .timeline-card h3 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .timeline-card p,
+body[data-theme="dark"] .timeline-card li {
+    color: #bdbdbd !important;
+}
+
+body[data-theme="dark"] .timeline-note {
+    background: #1e2227 !important;
+    color: #c0c0c0 !important;
+}
+
+/* Preparation Checklist */
+body[data-theme="dark"] .checklist-section {
+    background: #1e2227 !important;
+}
+
+body[data-theme="dark"] .checklist-category h4,
+body[data-theme="dark"] .checklist-header h3 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .checklist-items label {
+    color: #bdbdbd !important;
+}
+
+body[data-theme="dark"] .checklist-items li {
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body[data-theme="dark"] .tip-card {
+    background: #1e2227 !important;
+}
+
+body[data-theme="dark"] .tip-card strong {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .tip-card p {
+    color: #bdbdbd !important;
+}
+
+/* FAQs */
+body[data-theme="dark"] .faq-item {
+    background: #1e2227 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body[data-theme="dark"] .faq-question h4 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .faq-answer p {
+    color: #bdbdbd !important;
+}
+
+body[data-theme="dark"] .faq-cta {
+    background: #16191d !important;
+}
+
+body[data-theme="dark"] .faq-cta p {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .faq-question{
+  background: #63332273 !important;
+}
+
+body[data-theme="dark"] .faq-question:hover {
+  background: #633322d3 !important;
+}
+
+/* Secondary Typography and Subtitles */
+body[data-theme="dark"] .section-subtitle {
+    color: #c0c0c0 !important;
+}
+
+body[data-theme="dark"] .section-title,
+body[data-theme="dark"] .how-it-works-hero .hero-title,
+body[data-theme="dark"] .process-overview .section-title,
+body[data-theme="dark"] .process-steps .section-title,
+body[data-theme="dark"] .timeline-expectations .section-title,
+body[data-theme="dark"] .preparation-checklist .section-title,
+body[data-theme="dark"] .checklist-tips h3,
+body[data-theme="dark"] .faqs-section .section-title {
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+} 
