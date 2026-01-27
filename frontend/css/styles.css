@@ -5059,7 +5059,7 @@ button:active,
   height: 5px;
   width: 0%;
   background-color: #f39c12; /* match your theme color */
-  z-index: 9999;
+  z-index: 20000;
   transition: width 0.25s ease-out;
 }
 
@@ -5814,4 +5814,57 @@ section:last-of-type {
 
 .hero-quote .quote-card:hover{
   transform: translateY(-10px);
+}
+/* frontend/css/components/careers.css */
+
+.benefit-card {
+  /* Fix 1: Use theme vars & removed stray semicolon */
+  background: var(--surface-color, #ffffff); 
+  border: 1px solid var(--color-gray-200, #e8e8e8);
+  border-radius: 16px;
+  padding: var(--space-lg, 24px);
+  cursor: pointer;
+  
+  /* Fix 5: Set base z-index */
+  position: relative;
+  z-index: var(--z-default, 1);
+
+  /* Performance-optimized transitions */
+  transition: transform 0.4s var(--ease-standard), 
+              box-shadow 0.3s ease, 
+              border-color 0.3s ease;
+}
+
+.benefit-card:hover {
+  /* Fix 3: Softened hover/shadow intensity */
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md), 0 0 15px var(--accent-color, rgba(255, 99, 71, 0.2));
+  
+  /* Fix 2: Use theme accent color for border/glow */
+  border-color: var(--accent-color, #ff6347);
+  
+  /* Fix 5: Elevate z-index to prevent neighbor overlap */
+  z-index: var(--z-content, 10);
+}
+
+/* Bouncy Icon Animation */
+.benefit-card:hover .benefit-icon {
+  transform: scale(1.1);
+  color: var(--accent-color, #ff6347);
+  transition: transform 0.3s var(--ease-standard);
+}
+
+/* Fix 4: Accessibility - Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .benefit-card,
+  .benefit-card:hover,
+  .benefit-card .benefit-icon {
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .benefit-card:hover {
+    box-shadow: var(--shadow-sm);
+    border-width: 2px;
+  }
 }
