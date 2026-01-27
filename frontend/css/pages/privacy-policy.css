@@ -35,7 +35,7 @@ header {
 }
 
 h2 {
-  color: #0a3d62;
+  color: #075b97;
   margin-bottom: 0.5rem;
 }
 
@@ -88,4 +88,10 @@ footer a:hover {
 .fade-in.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+
+/* Dark Mode Support */
+body[data-theme="dark"] .container {
+  background-color: #333;
 }
