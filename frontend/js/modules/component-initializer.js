@@ -1,6 +1,6 @@
 /* ====================================
    COMPONENT INITIALIZER
-   Ensures FAB, Bottom Action Bar, Scroll Button, and Chatbot are available on all pages
+   Ensures FAB, Bottom Action Bar, Scroll Button, Chatbot, and TOC are available on all pages
    This is a global safety mechanism that works independently of footer-loader
    ==================================== */
 
@@ -218,6 +218,11 @@
     // Load Chatbot Modal script
     if (!document.getElementById('chatbot-modal-script')) {
       loadScript(jsBasePath + 'chatbot-modal.js', 'chatbot-modal-script');
+    }
+
+    // Load Sticky TOC (On This Page) script
+    if (!document.getElementById('sticky-toc-script')) {
+      loadScript(jsBasePath + 'sticky-toc.js', 'sticky-toc-script');
     }
   }
 

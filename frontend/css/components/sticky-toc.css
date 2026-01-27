@@ -1,0 +1,45 @@
+/**
+ * Sticky Table of Contents (TOC) Styles
+ * 
+ * NOTE: The TOC wrapper is created dynamically by sticky-toc.js
+ * These styles provide base styling and ensure no conflicts
+ */
+
+/* Main TOC Wrapper - Fully Draggable 2D Positioning */
+#toc-wrapper.toc-wrapper {
+  /* Position and layout controlled by JavaScript */
+  /* Both X (left) and Y (top) positions are user-adjustable via dragging */
+  /* OLD: top: 100px, right: 0 (fixed) - NOW DISABLED */
+  /* NEW: Both top and left positions are dynamically set via JS and can be dragged anywhere */
+  
+  /* Ensure no conflicts with other fixed elements */
+  pointer-events: auto;
+  touch-action: none; /* Allow dragging on mobile (prevents scroll during drag) */
+}
+
+/* TOC Toggle Tab - Full 2D Draggable Handle */
+#toc-toggle-tab {
+  /* Dragging cursor states handled by JS */
+  /* cursor: grab (default) - indicates element can be dragged */
+  /* cursor: grabbing (while dragging) - indicates active drag */
+  /* Can be dragged in both X and Y directions */
+}
+
+/* TOC Sidebar Content */
+#toc-sidebar {
+  /* Styles are inline in JS for dynamic creation */
+  /* This file ensures no CSS conflicts */
+}
+
+/* Responsive adjustments - ensure TOC stays visible on smaller screens */
+@media (max-width: 768px) {
+  #toc-wrapper.toc-wrapper {
+    /* On mobile, ensure TOC doesn't overlap with navbar */
+    /* Minimum top position enforced by JS boundary checking */
+  }
+  
+  #toc-sidebar {
+    /* Mobile-friendly sizing handled by JS inline styles */
+    max-width: calc(100vw - 40px);
+  }
+}

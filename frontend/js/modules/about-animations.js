@@ -347,6 +347,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Sync performance metric percentage text with progress bar value
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".infographic-item").forEach(item => {
+    const bar = item.querySelector(".infographic-bar-fill");
+    const label = item.querySelector(".infographic-label .percentage-value");
+
+    let percentage = bar.dataset.percentage || 0;
+    percentage = Math.min(100, Math.max(0, percentage));
+
+    bar.style.setProperty("--bar-width", percentage+"%");
+    label.textContent = percentage+"%";
+  });
+});
+
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { AboutPageAnimations, AboutAnimationUtils };

@@ -149,26 +149,32 @@
     /**
      * Handle Book Now Click
      */
-    function handleBookNow() {
-        const fromCity = selectedFromCity;
-        const toCity = selectedToCity;
-        const vehicleType = document.getElementById('vehicleType').value;
-        const amount = document.getElementById('resultAmount').textContent;
-        
-        // Show confirmation message
-        const confirmed = confirm(
-            `🚗 Booking Summary\\n\\n` +
-            `Route: ${fromCity} → ${toCity}\\n` +
-            `Vehicle: ${vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1)}\\n` +
-            `Estimated Cost: ${amount}\\n\\n` +
-            `Would you like to proceed to the booking page?`
-        );
-        
-        if (confirmed) {
-            // Redirect to booking page
-            window.location.href = './pages/booking.html';
+    /**
+ * Handle Book Now Click - Smooth Transition to Booking Page
+ */
+   function handleBookNow() {
+      const fromCity = selectedFromCity;
+      const toCity = selectedToCity;
+      const vehicleType = document.getElementById('vehicleType').value;
+    
+      const bookingDraft = {
+        step: 1,
+        timestamp: new Date().toISOString(),
+        fields: {
+            pickupCity: fromCity,
+            dropCity: toCity,
+            vehicleType: vehicleType
         }
-    }
+      };
+
+    localStorage.setItem('bookingDraft', JSON.stringify(bookingDraft));
+
+    showNotification('Redirecting to secure booking page...', 'success');
+
+    setTimeout(() => {
+        window.location.href = './pages/booking.html';
+    }, 800);
+}
 
     /**
      * Handle Save for Later

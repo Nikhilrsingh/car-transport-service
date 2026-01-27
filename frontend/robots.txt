@@ -1,0 +1,26 @@
+# Robots.txt for Harihar Car Carriers
+# https://nikhilrsingh.github.io/car-transport-service
+
+User-agent: *
+Allow: /
+
+# Allow all major search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yahoo! Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemap location
+Sitemap: https://nikhilrsingh.github.io/car-transport-service/sitemap.xml

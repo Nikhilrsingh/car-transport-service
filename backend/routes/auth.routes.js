@@ -1,5 +1,5 @@
 import express from "express";
-import { register, login , logout , googleLogin} from "../controllers/auth.controller.js";
+import { register, login , logout , googleLogin, getAllUsers} from "../controllers/auth.controller.js";
 import passport from "passport";
 
 const router = express.Router();
@@ -19,6 +19,6 @@ router.get(
     res.redirect(`/auth-callback.html?token=${token}`); 
   }
 );
-  
+router.get("/users",  getAllUsers);
 
 export default router;

@@ -134,6 +134,8 @@ section {
     text-align: center;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    height: 100%;
 }
 
 .overview-card:hover {
@@ -505,7 +507,7 @@ section {
 }
 
 .checklist-items input[type="checkbox"] {
-    width: 20px;
+    width: 18px;
     height: 20px;
     cursor: pointer;
     accent-color: var(--success-color);
@@ -514,7 +516,7 @@ section {
 .checklist-items label {
     color: #666;
     cursor: pointer;
-    flex: 1;
+    flex: none;
 }
 
 .checklist-items input[type="checkbox"]:checked + label {
@@ -736,60 +738,50 @@ section {
 }
 
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .overview-cards,
-    .timeline-grid {
-        grid-template-columns: 1fr;
-    }
-    
+    /* Step 1: Adjust the container to make room for the line on the left */
     .step-item {
-        padding-left: 0;
-        padding-top: 100px;
+        padding-left: 50px; 
+        padding-top: 0;
+        margin-bottom: 40px;
+        text-align: left;
     }
-    
+
+    /* Step 2: Reposition the vertical line to the left */
     .step-item::before {
-        left: 50%;
-        transform: translateX(-50%);
-        top: 80px;
+        display: block !important; 
+        left: 20px; 
+        top: 40px; 
+        bottom: -40px; 
+        width: 2px;
+        background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
     }
-    
+
+    /* Step 3: Resize and reposition the step numbers */
     .step-number {
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
         top: 0;
+        transform: none; 
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+        z-index: 2;
     }
-    
-    .step-content:hover {
-        transform: translateY(-5px);
+
+    /* Step 4: Add a small indicator for the cards */
+    .step-content {
+        position: relative;
+        margin-left: 10px;
     }
-    
-    .step-features {
-        grid-template-columns: 1fr;
-    }
-    
-    .faq-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .cta-buttons {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .primary-cta-btn,
-    .secondary-cta-btn {
-        width: 100%;
+
+    /* Optional: Small arrow pointing from the line to the card */
+    .step-content::after {
+        content: '';
+        position: absolute;
+        left: -10px;
+        top: 15px;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-right: 10px solid var(--light-color);
     }
 }
 
@@ -852,3 +844,37 @@ body[data-theme="light"] .section-title {
 body[data-theme="light"] .section-subtitle {
   color: #555 !important;
 }
+
+/* Tablet and Mobile (up to 1024px) */
+@media (max-width: 1024px) {
+    .how-it-works-hero {
+        height: auto !important; 
+        min-height: 400px;      
+        padding: 120px 20px 80px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-content {
+        max-width: 90%;          
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.8rem !important; 
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem !important;
+        max-width: 600px;        
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+

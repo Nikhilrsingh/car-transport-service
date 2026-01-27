@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import { notFound, errorHandler } from "./middleware/error.middleware.js";
 import express from "express";
 import cors from "cors";
 import connectDB from "./config/db.js";
@@ -12,6 +13,7 @@ import contactRoutes from './routes/contact.routes.js'
 import feedbackRoutes from "./routes/feedback.routes.js";
 import enquiryRoutes from './routes/enquiry.routes.js'
 import emergencyRoutes from './routes/emergencyRequest.routes.js'
+
 
 
 // Optional: check if env vars are loaded
@@ -42,7 +44,9 @@ app.use("/api/feedbacks", feedbackRoutes);
 app.use("/api/enquiries", enquiryRoutes);
 app.use("/api/emergencies", emergencyRoutes);
 
-app.use((req, res) => res.status(404).json({ message: "Route not found" }));
+app.use(notFound)
+app.use(errorHandler);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

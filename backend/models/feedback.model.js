@@ -1,18 +1,29 @@
-// models/feedback.model.js
 import mongoose from "mongoose";
 
 const feedbackSchema = new mongoose.Schema(
   {
-    picUrl: {
-      type: String,
-      trim: true,
-      default: "",
+    profilePic: {
+      url: {
+        type: String,
+        default: "",
+      },
+      public_id: {
+        type: String,
+        default: "",
+      },
     },
-    productImgUrl: {
-      type: String,
-      trim: true,
-      default: "",
+
+    productImage: {
+      url: {
+        type: String,
+        default: "",
+      },
+      public_id: {
+        type: String,
+        default: "",
+      },
     },
+
     username: {
       type: String,
       required: [true, "User name is required"],
@@ -20,29 +31,29 @@ const feedbackSchema = new mongoose.Schema(
       minlength: 2,
       maxlength: 50,
     },
+
     stars: {
       type: Number,
       required: [true, "Star rating is required"],
       min: 1,
       max: 5,
     },
+
     message: {
       type: String,
       required: [true, "Feedback message is required"],
       trim: true,
       maxlength: 500,
     },
+
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"],
       default: "pending",
     },
   },
-  {
-    timestamps: true, 
-  }
+  { timestamps: true }
 );
 
 const Feedback = mongoose.model("Feedback", feedbackSchema);
-
 export default Feedback;
