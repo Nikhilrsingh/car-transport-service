@@ -95,7 +95,7 @@
         step1Next.addEventListener('click', () => validateAndNextStep());
         step2Back.addEventListener('click', () => goToStep(1));
         resetBtn.addEventListener('click', () => resetForm());
-        
+
         // Book Now handler
         if (bookNowBtn) {
             bookNowBtn.addEventListener('click', () => handleBookNow());
@@ -117,7 +117,7 @@
         toCityInput.addEventListener('input', () => updateDistance());
 
         // Handle select focus for floating label
-        vehicleTypeSelect.addEventListener('change', function() {
+        vehicleTypeSelect.addEventListener('change', function () {
             if (this.value) {
                 this.setAttribute('value', this.value);
             } else {
@@ -145,36 +145,36 @@
         }
         applyQuoteFromQuery();
     }
-    
+
     /**
      * Handle Book Now Click
      */
     /**
  * Handle Book Now Click - Smooth Transition to Booking Page
  */
-   function handleBookNow() {
-      const fromCity = selectedFromCity;
-      const toCity = selectedToCity;
-      const vehicleType = document.getElementById('vehicleType').value;
-    
-      const bookingDraft = {
-        step: 1,
-        timestamp: new Date().toISOString(),
-        fields: {
-            pickupCity: fromCity,
-            dropCity: toCity,
-            vehicleType: vehicleType
-        }
-      };
+    function handleBookNow() {
+        const fromCity = selectedFromCity;
+        const toCity = selectedToCity;
+        const vehicleType = document.getElementById('vehicleType').value;
 
-    localStorage.setItem('bookingDraft', JSON.stringify(bookingDraft));
+        const bookingDraft = {
+            step: 1,
+            timestamp: new Date().toISOString(),
+            fields: {
+                pickupCity: fromCity,
+                dropCity: toCity,
+                vehicleType: vehicleType
+            }
+        };
 
-    showNotification('Redirecting to secure booking page...', 'success');
+        localStorage.setItem('bookingDraft', JSON.stringify(bookingDraft));
 
-    setTimeout(() => {
-        window.location.href = './pages/booking.html';
-    }, 800);
-}
+        showNotification('Redirecting to secure booking page...', 'success');
+
+        setTimeout(() => {
+            window.location.href = './pages/booking.html';
+        }, 800);
+    }
 
     /**
      * Handle Save for Later
@@ -183,34 +183,34 @@
         if (!currentQuoteData) return;
 
         const saveLaterBtn = document.getElementById('saveLaterBtn');
-        
+
         // Get existing saved quotes
         let savedQuotes = JSON.parse(localStorage.getItem('savedQuotes') || '[]');
-        
+
         // Add current quote with timestamp
         const quoteToSave = {
             ...currentQuoteData,
             savedAt: new Date().toISOString(),
             id: Date.now()
         };
-        
+
         savedQuotes.push(quoteToSave);
-        
+
         // Limit to 10 saved quotes
         if (savedQuotes.length > 10) {
             savedQuotes = savedQuotes.slice(-10);
         }
-        
+
         // Save to localStorage
         localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
-        
+
         // Update button state
         saveLaterBtn.classList.add('saved');
         saveLaterBtn.innerHTML = '<i class="fas fa-check"></i><span>Saved!</span>';
-        
+
         // Show notification
         showNotification('Quote saved successfully! You can access it later from your saved quotes.', 'success');
-        
+
         // Reset button after 3 seconds
         setTimeout(() => {
             saveLaterBtn.classList.remove('saved');
@@ -240,7 +240,7 @@
         `;
         notification.textContent = message;
         document.body.appendChild(notification);
-        
+
         setTimeout(() => {
             notification.style.animation = 'slideOutRight 0.3s ease';
             setTimeout(() => notification.remove(), 300);
@@ -276,13 +276,13 @@
         const title = 'Your Car Transport Quote';
         const text = `${data.fromCity} → ${data.toCity} • ${data.vehicleType} • ₹${data.price.toLocaleString('en-IN')}`;
         if (navigator.share) {
-            navigator.share({ title, text, url: link }).catch(() => {});
+            navigator.share({ title, text, url: link }).catch(() => { });
             return;
         }
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(link).then(() => {
                 showNotification('Share link copied to clipboard', 'info');
-            }).catch(() => {});
+            }).catch(() => { });
         }
         const wa = `https://wa.me/?text=${encodeURIComponent(text + '\n' + link)}`;
         const mail = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n' + link)}`;
@@ -295,7 +295,7 @@
         const link = generateQuoteLink(data);
         navigator.clipboard.writeText(link).then(() => {
             showNotification('Link copied to clipboard', 'info');
-        }).catch(() => {});
+        }).catch(() => { });
     }
 
     function generateQuoteLink(data) {
@@ -317,13 +317,13 @@
         const title = 'Your Car Transport Quote';
         const text = `${currentQuoteData.fromCity} → ${currentQuoteData.toCity} • ${currentQuoteData.vehicleType} • ₹${currentQuoteData.price.toLocaleString('en-IN')}`;
         if (navigator.share) {
-            navigator.share({ title, text, url: link }).catch(() => {});
+            navigator.share({ title, text, url: link }).catch(() => { });
             return;
         }
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(link).then(() => {
                 showNotification('Share link copied to clipboard', 'info');
-            }).catch(() => {});
+            }).catch(() => { });
         }
         const wa = `https://wa.me/?text=${encodeURIComponent(text + '\n' + link)}`;
         const mail = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n' + link)}`;
@@ -361,21 +361,17 @@
      * Calculate Delivery Time
      */
     function calculateDeliveryTime(distance) {
-        // Estimate delivery based on distance
-        // Assuming average speed of 400-500 km per day for transport
-        const daysNeeded = Math.ceil(distance / 450);
-        
-        if (daysNeeded <= 1) {
-            return '1-2 days';
-        } else if (daysNeeded <= 3) {
-            return '2-3 days';
-        } else if (daysNeeded <= 5) {
-            return '3-5 days';
-        } else if (daysNeeded <= 7) {
-            return '5-7 days';
-        } else {
-            return '7-10 days';
-        }
+        // Estimate delivery based on distance as per issue #910
+        // Realistic transport distance: 200-300km per day
+        // Base buffer: 1-2 days for processing/pickup
+
+        const minTravelDays = Math.ceil(distance / 300);
+        const maxTravelDays = Math.ceil(distance / 200);
+
+        const minTotalDays = minTravelDays + 1;
+        const maxTotalDays = maxTravelDays + 2;
+
+        return `${minTotalDays}–${maxTotalDays} Days`;
     }
 
     /**
@@ -384,54 +380,72 @@
     function displayComparePrices(vehicleType, distance) {
         const comparePricesSection = document.getElementById('comparePricesSection');
         const priceOptions = document.getElementById('priceOptions');
-        
+
         if (!transportOptions[vehicleType]) {
             comparePricesSection.style.display = 'none';
             return;
         }
-        
+
         const options = transportOptions[vehicleType];
-        
+
         // Generate price option cards
         priceOptions.innerHTML = options.map((option, index) => {
             const price = Math.round(option.rate * distance);
+
+            // Calculate dynamic delivery days based on service level
+            let deliveryDays = '';
+            const minDays = Math.ceil(distance / 300);
+            const maxDays = Math.ceil(distance / 200);
+
+            if (option.name === 'Economy') {
+                deliveryDays = `${minDays + 3}–${maxDays + 5}`;
+            } else if (option.name === 'Express' || option.name === 'VIP' || option.name === 'Premium') {
+                deliveryDays = `${Math.max(1, minDays)}–${Math.max(2, maxDays + 1)}`;
+            } else { // Standard
+                deliveryDays = `${minDays + 1}–${maxDays + 2}`;
+            }
+
+            // Update option object for the click handler
+            option.calculatedDeliveryDays = deliveryDays;
+
             return `
                 <div class="price-option ${option.bestValue ? 'best-value' : ''}" data-option-index="${index}">
                     <div class="price-option-info">
                         <div class="price-option-name">${option.name}</div>
                         <div class="price-option-details">
-                            <i class="fas fa-clock"></i> ${option.deliveryDays} days • ${option.description}
+                            <i class="fas fa-clock"></i> ${deliveryDays} Days • ${option.description}
                         </div>
                     </div>
                     <div class="price-option-amount">₹${price.toLocaleString('en-IN')}</div>
                 </div>
             `;
         }).join('');
-        
+
         comparePricesSection.style.display = 'block';
-        
+
         // Add click handlers for price options
-        document.querySelectorAll('.price-option').forEach((option, index) => {
-            option.addEventListener('click', () => {
+        document.querySelectorAll('.price-option').forEach((optionEl, index) => {
+            optionEl.addEventListener('click', () => {
                 // Remove previous selection
                 document.querySelectorAll('.price-option').forEach(opt => opt.classList.remove('selected'));
-                
+
                 // Select this option
-                option.classList.add('selected');
-                
+                optionEl.classList.add('selected');
+
                 // Update main price display
                 const selectedOption = options[index];
                 const price = Math.round(selectedOption.rate * distance);
                 document.getElementById('resultAmount').textContent = `₹${price.toLocaleString('en-IN')}`;
-                
-                // Update delivery time
-                document.getElementById('deliveryTime').textContent = selectedOption.deliveryDays + ' days';
-                
+
+                // Update delivery time using the calculated value
+                const deliveryTimeDisplay = selectedOption.calculatedDeliveryDays + ' Days';
+                document.getElementById('deliveryTime').textContent = deliveryTimeDisplay;
+
                 // Update current quote data
                 if (currentQuoteData) {
                     currentQuoteData.selectedOption = selectedOption.name;
                     currentQuoteData.price = price;
-                    currentQuoteData.deliveryTime = selectedOption.deliveryDays + ' days';
+                    currentQuoteData.deliveryTime = deliveryTimeDisplay;
                 }
             });
         });
@@ -442,16 +456,16 @@
      */
     function setupAutocomplete(input, dropdownId) {
         const dropdown = document.getElementById(dropdownId);
-        
-        input.addEventListener('input', function() {
+
+        input.addEventListener('input', function () {
             const value = this.value.trim();
-            
+
             if (value.length < 1) {
                 dropdown.classList.remove('active');
                 return;
             }
 
-            const matches = indianCities.filter(city => 
+            const matches = indianCities.filter(city =>
                 city.toLowerCase().startsWith(value.toLowerCase())
             );
 
@@ -464,7 +478,7 @@
         });
 
         // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!input.contains(e.target) && !dropdown.contains(e.target)) {
                 dropdown.classList.remove('active');
             }
@@ -476,12 +490,12 @@
      */
     function displayAutocomplete(cities, dropdown, input) {
         // Filter out the other city if already selected
-        const otherInput = input.id === 'fromCity' 
-            ? document.getElementById('toCity') 
+        const otherInput = input.id === 'fromCity'
+            ? document.getElementById('toCity')
             : document.getElementById('fromCity');
         const otherCity = otherInput ? otherInput.value.trim() : '';
-        
-        const filteredCities = otherCity 
+
+        const filteredCities = otherCity
             ? cities.filter(city => city !== otherCity)
             : cities;
 
@@ -496,23 +510,23 @@
 
         // Add click handlers
         dropdown.querySelectorAll('.autocomplete-item').forEach(item => {
-            const selectCity = function(e) {
+            const selectCity = function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 const city = item.dataset.city;
                 input.value = city;
                 dropdown.classList.remove('active');
-                
+
                 // Store selected city
                 if (input.id === 'fromCity') {
                     selectedFromCity = city;
                 } else {
                     selectedToCity = city;
                 }
-                
+
                 updateDistance();
             };
-            
+
             item.addEventListener('click', selectCity);
             item.addEventListener('mousedown', selectCity);
         });
@@ -539,7 +553,7 @@
         }
 
         const distance = calculateDistance(fromCity, toCity);
-        
+
         if (distance) {
             distanceValue.textContent = `${distance} km`;
             distanceValue.style.color = '#4ade80';
@@ -667,13 +681,13 @@
         document.getElementById('vehicleType').removeAttribute('value');
         document.getElementById('distanceValue').textContent = '---';
         document.getElementById('deliveryTime').textContent = '---';
-        
+
         // Hide compare prices section
         const comparePricesSection = document.getElementById('comparePricesSection');
         if (comparePricesSection) {
             comparePricesSection.style.display = 'none';
         }
-        
+
         selectedFromCity = '';
         selectedToCity = '';
         currentQuoteData = null;
@@ -809,7 +823,7 @@
                                 <div class="delivery-time-display" id="modalDeliveryTimeDisplay">
                                     <i class="fas fa-clock"></i>
                                     <div class="time-info">
-                                        <span class="time-label">Estimated Delivery</span>
+                                        <span class="time-label">Expected Delivery:</span>
                                         <span class="time-value" id="modalDeliveryTime">---</span>
                                     </div>
                                 </div>
@@ -938,7 +952,7 @@
 
         // Handle select focus for floating label
         if (modalVehicleType) {
-            modalVehicleType.addEventListener('change', function() {
+            modalVehicleType.addEventListener('change', function () {
                 if (this.value) {
                     this.setAttribute('value', this.value);
                 } else {
@@ -982,12 +996,12 @@
                 modalVehicleType.removeAttribute('value');
                 document.getElementById('modalDistanceValue').textContent = '---';
                 document.getElementById('modalDeliveryTime').textContent = '---';
-                
+
                 const comparePricesSection = document.getElementById('modalComparePricesSection');
                 if (comparePricesSection) {
                     comparePricesSection.style.display = 'none';
                 }
-                
+
                 modalSelectedFromCity = '';
                 modalSelectedToCity = '';
                 modalQuoteData = null;
@@ -1004,7 +1018,7 @@
                     `Estimated Cost: ${document.getElementById('modalResultAmount').textContent}\\n\\n` +
                     `Would you like to proceed to the booking page?`
                 );
-                
+
                 if (confirmed) {
                     window.location.href = './pages/booking.html';
                 }
@@ -1021,19 +1035,19 @@
                     savedAt: new Date().toISOString(),
                     id: Date.now()
                 };
-                
+
                 savedQuotes.push(quoteToSave);
                 if (savedQuotes.length > 10) {
                     savedQuotes = savedQuotes.slice(-10);
                 }
-                
+
                 localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
-                
+
                 modalSaveLaterBtn.classList.add('saved');
                 modalSaveLaterBtn.innerHTML = '<i class="fas fa-check"></i><span>Saved!</span>';
-                
+
                 showNotification('Quote saved successfully!', 'success');
-                
+
                 setTimeout(() => {
                     modalSaveLaterBtn.classList.remove('saved');
                     modalSaveLaterBtn.innerHTML = '<i class="fas fa-bookmark"></i><span>Save for Later</span>';
@@ -1058,7 +1072,7 @@
             }
 
             const distance = calculateDistance(fromCity, toCity);
-            
+
             if (distance) {
                 distanceValue.textContent = `${distance} km`;
                 distanceValue.style.color = '#4ade80';
@@ -1088,7 +1102,7 @@
             // Update form steps in modal
             const modalFormSteps = document.querySelectorAll('#quoteForm .form-step');
             console.log('Modal form steps found:', modalFormSteps.length);
-            
+
             modalFormSteps.forEach((el) => {
                 el.classList.remove('active');
                 const elStep = parseInt(el.dataset.step);
@@ -1102,7 +1116,7 @@
         }
 
         // Store functions for modal quote calculation
-        window.calculateModalQuote = function() {
+        window.calculateModalQuote = function () {
             const vehicleType = modalVehicleType.value;
             const fromCity = modalSelectedFromCity;
             const toCity = modalSelectedToCity;
@@ -1127,8 +1141,8 @@
             document.getElementById('modalResultDistance').textContent = `${distance} km`;
             document.getElementById('modalResultVehicle').textContent = vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1);
             document.getElementById('modalResultAmount').textContent = `₹${estimatedPrice.toLocaleString('en-IN')}`;
-                    animateAmount('#modalResultAmount');
-                    document.getElementById('modalDeliveryTime').textContent = deliveryTime;
+            animateAmount('#modalResultAmount');
+            document.getElementById('modalDeliveryTime').textContent = deliveryTime;
 
             // Store modal quote data
             modalQuoteData = {
@@ -1152,45 +1166,64 @@
         function displayModalComparePrices(vehicleType, distance) {
             const comparePricesSection = document.getElementById('modalComparePricesSection');
             const priceOptions = document.getElementById('modalPriceOptions');
-            
+
             if (!transportOptions[vehicleType]) {
                 comparePricesSection.style.display = 'none';
                 return;
             }
-            
+
             const options = transportOptions[vehicleType];
-            
+
             priceOptions.innerHTML = options.map((option, index) => {
                 const price = Math.round(option.rate * distance);
+
+                // Calculate dynamic delivery days based on service level
+                let deliveryDays = '';
+                const minDays = Math.ceil(distance / 300);
+                const maxDays = Math.ceil(distance / 200);
+
+                if (option.name === 'Economy') {
+                    deliveryDays = `${minDays + 3}–${maxDays + 5}`;
+                } else if (option.name === 'Express' || option.name === 'VIP' || option.name === 'Premium') {
+                    deliveryDays = `${Math.max(1, minDays)}–${Math.max(2, maxDays + 1)}`;
+                } else { // Standard
+                    deliveryDays = `${minDays + 1}–${maxDays + 2}`;
+                }
+
+                // Update option object for the click handler
+                option.calculatedDeliveryDays = deliveryDays;
+
                 return `
                     <div class="price-option ${option.bestValue ? 'best-value' : ''}" data-option-index="${index}">
                         <div class="price-option-info">
                             <div class="price-option-name">${option.name}</div>
                             <div class="price-option-details">
-                                <i class="fas fa-clock"></i> ${option.deliveryDays} days • ${option.description}
+                                <i class="fas fa-clock"></i> ${deliveryDays} Days • ${option.description}
                             </div>
                         </div>
                         <div class="price-option-amount">₹${price.toLocaleString('en-IN')}</div>
                     </div>
                 `;
             }).join('');
-            
+
             comparePricesSection.style.display = 'block';
-            
-            document.querySelectorAll('#modalPriceOptions .price-option').forEach((option, index) => {
-                option.addEventListener('click', () => {
+
+            document.querySelectorAll('#modalPriceOptions .price-option').forEach((optionEl, index) => {
+                optionEl.addEventListener('click', () => {
                     document.querySelectorAll('#modalPriceOptions .price-option').forEach(opt => opt.classList.remove('selected'));
-                    option.classList.add('selected');
-                    
+                    optionEl.classList.add('selected');
+
                     const selectedOption = options[index];
                     const price = Math.round(selectedOption.rate * distance);
                     document.getElementById('modalResultAmount').textContent = `₹${price.toLocaleString('en-IN')}`;
-                    document.getElementById('modalDeliveryTime').textContent = selectedOption.deliveryDays + ' days';
-                    
+                    // Update delivery time using the calculated value
+                    const deliveryTimeDisplay = selectedOption.calculatedDeliveryDays + ' Days';
+                    document.getElementById('modalDeliveryTime').textContent = deliveryTimeDisplay;
+
                     if (modalQuoteData) {
                         modalQuoteData.selectedOption = selectedOption.name;
                         modalQuoteData.price = price;
-                        modalQuoteData.deliveryTime = selectedOption.deliveryDays + ' days';
+                        modalQuoteData.deliveryTime = deliveryTimeDisplay;
                     }
                 });
             });
@@ -1207,22 +1240,22 @@
         // Reset form
         if (form) {
             form.reset();
-            
+
             // Reset modal fields
             const modalFromCity = document.getElementById('modalFromCity');
             const modalToCity = document.getElementById('modalToCity');
             const modalVehicleType = document.getElementById('modalVehicleType');
-            
+
             if (modalFromCity) modalFromCity.value = '';
             if (modalToCity) modalToCity.value = '';
             if (modalVehicleType) {
                 modalVehicleType.value = '';
                 modalVehicleType.removeAttribute('value');
             }
-            
+
             const modalDistanceValue = document.getElementById('modalDistanceValue');
             if (modalDistanceValue) modalDistanceValue.textContent = '---';
-            
+
             // Reset to step 1
             const modalSteps = document.querySelectorAll('#modalStepProgress .step');
             modalSteps.forEach((el, index) => {
