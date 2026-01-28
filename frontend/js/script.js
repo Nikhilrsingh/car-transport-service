@@ -231,6 +231,24 @@ function updateStepUI(stepNumber) {
   });
 }
 
+//Progress Bar
+function handleScrollProgress() {
+  const progressBar = document.getElementById("scroll-progress");
+  if (!progressBar) return;
+
+  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  
+  if (height > 0) {
+    const scrolled = (winScroll / height) * 100;
+    progressBar.style.width = scrolled + "%";
+  }
+}
+
+window.addEventListener('scroll', handleScrollProgress);
+
+document.addEventListener('DOMContentLoaded', handleScrollProgress);
+
 
 // ================= VALIDATION =================
 function validateEmail(email) {
