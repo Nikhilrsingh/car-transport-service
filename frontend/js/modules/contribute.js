@@ -241,7 +241,14 @@ function applyFilters(searchTerm, sortType, levelType) {
     renderContributors(1);
 }
 
-// 5. Rendering
+// NEW FUNCTION: Get global rank from full leaderboard
+function getGlobalRank(contributor) {
+    // Find the contributor's position in the FULL allContributors array
+    // This ensures rank stays consistent regardless of filters
+    const sortedByPoints = [...allContributors].sort((a, b) => b.points - a.points);
+    return sortedByPoints.findIndex(c => c.id === contributor.id) + 1;
+}
+
 function renderContributors(page) {
     const grid = document.getElementById('contributorsList');
     if (!grid) return;
@@ -258,7 +265,7 @@ function renderContributors(page) {
     }
 
     itemsToShow.forEach((c, index) => {
-        const rank = start + index + 1;
+        const rank = getGlobalRank(c); 
         const league = getLeagueData(c.points);
 
         const card = document.createElement('div');
