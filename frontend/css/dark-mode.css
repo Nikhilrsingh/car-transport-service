@@ -1262,3 +1262,92 @@ body[data-theme="dark"] .faqs-section .section-title {
     color: #ffffff !important;
     text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 } 
+
+
+/* ====================================
+   EMERGENCY SUPPORT - Dark Mode 
+   ==================================== */
+
+/* Section Backgrounds */
+body[data-theme="dark"] .emergency-hotline,
+body[data-theme="dark"] .live-chat-section,
+body[data-theme="dark"] .emergency-contact,
+body[data-theme="dark"] .emergency-procedures,
+body[data-theme="dark"] .roadside-assistance,
+body[data-theme="dark"] .support-hours,
+body[data-theme="dark"] .emergency-faq {
+    background: #16191d !important;
+}
+
+/* Card Backgrounds and Borders */
+body[data-theme="dark"] .hotline-card,
+body[data-theme="dark"] .chat-preview,
+body[data-theme="dark"] .emergency-form,
+body[data-theme="dark"] .sidebar-card,
+body[data-theme="dark"] .procedure-card,
+body[data-theme="dark"] .assistance-card,
+body[data-theme="dark"] .hours-card,
+body[data-theme="dark"] .faq-item {
+    background: #1e2227 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+/* Text Colors - Titles */
+body[data-theme="dark"] .section-title,
+body[data-theme="dark"] .hotline-card h3,
+body[data-theme="dark"] .chat-feature h4,
+body[data-theme="dark"] .procedure-card h3,
+body[data-theme="dark"] .assistance-card h3,
+body[data-theme="dark"] .hours-card h3,
+body[data-theme="dark"] .faq-item h3,
+body[data-theme="dark"] .message-sender,
+body[data-theme="dark"] .sidebar-card h4,
+body[data-theme="dark"] .form-group label {
+    color: #ffffff !important;
+}
+
+/* Text Colors - Subtitles and Body */
+body[data-theme="dark"] .section-subtitle,
+body[data-theme="dark"] .hotline-description,
+body[data-theme="dark"] .hotline-alt,
+body[data-theme="dark"] .chat-feature p,
+body[data-theme="dark"] .procedure-steps li,
+body[data-theme="dark"] .assistance-card > p,
+body[data-theme="dark"] .assistance-features li,
+body[data-theme="dark"] .hours-description,
+body[data-theme="dark"] .hours-time,
+body[data-theme="dark"] .faq-item p,
+body[data-theme="dark"] .sidebar-card p {
+    color: #bdbdbd !important;
+}
+
+/* Live Chat Specifics */
+body[data-theme="dark"] .chat-messages {
+    background: #111418 !important;
+}
+
+body[data-theme="dark"] .message-text {
+    background: #252a31 !important;
+    color: #ffffff !important;
+}
+
+/* Support Hours Urgency */
+body[data-theme="dark"] .hours-card.priority {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%) !important;
+    border: 2px solid var(--danger-color) !important;
+}
+
+/* Form Inputs */
+body[data-theme="dark"] .emergency-form input,
+body[data-theme="dark"] .emergency-form select,
+body[data-theme="dark"] .emergency-form textarea {
+    background: #252a31 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+/* Hero Section Adjustments */
+body[data-theme="dark"] .emergency-hero .hero-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
