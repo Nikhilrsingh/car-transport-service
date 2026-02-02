@@ -98,6 +98,20 @@
         document.head.appendChild(link);
       }
     });
+
+    // Ensure Font Awesome is available on pages that load footer dynamically.
+    // Some pages (e.g., blog/explore-cities) include FA directly, but many city pages do not,
+    // which causes <i class="fab fa-..."> icons to render as invisible. We inject the CDN link when missing.
+    const faHref = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    const hasFA = !!document.querySelector('link[href*="font-awesome"]') || !!document.querySelector('link[href*="fontawesome"]') || !!document.querySelector('link[href*="all.min.css"]');
+    if (!hasFA) {
+      const faLink = document.createElement('link');
+      faLink.rel = 'stylesheet';
+      faLink.href = faHref;
+      faLink.crossOrigin = 'anonymous';
+      document.head.appendChild(faLink);
+      console.log('Footer Loader: Injected Font Awesome stylesheet for icon rendering');
+    }
   }
 
   function loadFooterJS(isInPagesFolder) {
