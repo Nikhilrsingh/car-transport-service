@@ -717,6 +717,82 @@
   <script src="js/modules/loading-state-manager.js"></script>
   <script src="js/modules/page-navigation-loader.js"></script>
 
+  <script>
+  let cities = [];
+
+  const nextBtn = document.getElementById("step1Next");
+  nextBtn.disabled = true;
+
+  fetch("/frontend/assets/data/cities.json")
+    .then(res => res.json())
+    .then(data => {
+      cities = data.map(c =>
+        c.name.replace("Car Transport in ", "")
+      );
+
+      // Setup autocompletes after cities are loaded
+      setupAutocomplete("fromCity", "fromCityDropdown");
+      setupAutocomplete("toCity", "toCityDropdown");
+    });
+
+  function isValidCity(value) {
+    return cities.some(
+      city => city.toLowerCase() === value.toLowerCase()
+    );
+  }
+
+  function updateNextButton() {
+    const fromCity = document.getElementById("fromCity").value;
+    const toCity = document.getElementById("toCity").value;
+
+    nextBtn.disabled = !(isValidCity(fromCity) && isValidCity(toCity));
+  }
+
+  function setupAutocomplete(inputId, dropdownId) {
+    const input = document.getElementById(inputId);
+    const dropdown = document.getElementById(dropdownId);
+
+    input.addEventListener("input", () => {
+      const value = input.value.toLowerCase();
+      dropdown.innerHTML = "";
+
+      if (!value) {
+        updateNextButton();
+        return;
+      }
+
+      const matches = cities.filter(city =>
+        city.toLowerCase().startsWith(value)
+      );
+
+      matches.forEach(city => {
+        const div = document.createElement("div");
+        div.textContent = city;
+
+        div.addEventListener("mousedown", () => {
+          input.value = city;
+          dropdown.innerHTML = "";
+          updateNextButton(); 
+        });
+
+        dropdown.appendChild(div);
+      });
+
+      updateNextButton();
+    });
+
+    input.addEventListener("blur", () => {
+      if (input.value && !isValidCity(input.value)) {
+        input.value = "";
+        alert("Service not available in this city");
+      } else {
+        updateNextButton();
+      }
+    });
+  }
+</script>
+
+
   <!-- Enhanced Preloader Logic -->
   <script>
     (function() {
