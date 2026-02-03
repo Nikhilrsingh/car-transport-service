@@ -3484,6 +3484,79 @@ html {
   color: #666;
 }
 
+/* Phone Validation Styles */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.input-group input.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.input-group input.error {
+  border-color: #ff4444 !important;
+  background: rgba(255, 68, 68, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.2) !important;
+}
+
+.input-group input.success {
+  border-color: #4CAF50 !important;
+  background: rgba(76, 175, 80, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2) !important;
+}
+
+.phone-error-message {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff4444;
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.phone-error-message.show {
+  opacity: 1;
+}
+
+.phone-success-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4CAF50;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.phone-success-icon.show {
+  opacity: 1;
+}
+
 .submit-btn {
   background: linear-gradient(135deg, var(--primary-color), #ff4500);
   color: white;
