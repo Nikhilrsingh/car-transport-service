@@ -519,50 +519,84 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="emergency-faq">
-        <div class="container">
-            <h2 class="section-title fade-in">Emergency Support FAQs</h2>
+    <!-- FAQ Section with Accordion -->
+<section class="emergency-faq">
+    <div class="container">
+        <h2 class="section-title fade-in">Emergency Support FAQs</h2>
+        <p class="section-subtitle fade-in fade-in-delay-1">Find quick answers to common emergency questions</p>
 
-            <div class="faq-grid fade-in fade-in-delay-1">
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> What qualifies as an emergency?</h3>
-                    <p>Emergencies include accidents, vehicle breakdowns, significant delays, vehicle damage, safety
-                        concerns, or any situation requiring immediate assistance.</p>
+        <!-- Optional: Search Bar -->
+        <div class="faq-search-wrapper fade-in fade-in-delay-2">
+            <div class="faq-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="faqSearch" placeholder="Search FAQs..." aria-label="Search FAQs">
+            </div>
+        </div>
+
+        <!-- Accordion Container -->
+        <div class="faq-accordion fade-in fade-in-delay-3">
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header" aria-expanded="false" aria-controls="faq1">
+                    <span class="faq-question">What qualifies as an emergency?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-accordion-content" id="faq1">
+                    <p>Emergencies include accidents, vehicle breakdowns, significant delays, vehicle damage, safety concerns, or any situation requiring immediate assistance.</p>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> How quickly will someone respond?</h3>
-                    <p>Emergency calls are answered immediately 24/7. Critical situations receive response within 15-30
-                        minutes. Non-critical emergencies within 1-2 hours.</p>
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header" aria-expanded="false" aria-controls="faq2">
+                    <span class="faq-question">How quickly will someone respond?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-accordion-content" id="faq2">
+                    <p>Emergency calls are answered immediately 24/7. Critical situations receive response within 15-30 minutes. Non-critical emergencies within 1-2 hours.</p>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> Is emergency support free?</h3>
-                    <p>Emergency support is included in all transport services. Roadside assistance may have additional
-                        costs depending on the service required.</p>
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header" aria-expanded="false" aria-controls="faq3">
+                    <span class="faq-question">Is emergency support free?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-accordion-content" id="faq3">
+                    <p>Emergency support is included in all transport services. Roadside assistance may have additional costs depending on the service required.</p>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> What if I can't reach anyone?</h3>
-                    <p>If you cannot reach us (unlikely), call 911 for immediate safety concerns, then try our backup
-                        emergency number or submit an emergency form online.</p>
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header" aria-expanded="false" aria-controls="faq4">
+                    <span class="faq-question">What if I can't reach anyone?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-accordion-content" id="faq4">
+                    <p>If you cannot reach us (unlikely), call 911 for immediate safety concerns, then try our backup emergency number or submit an emergency form online.</p>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> Can I track my emergency request?</h3>
-                    <p>Yes, all emergency requests receive a tracking number. You'll get SMS and email updates
-                        throughout the resolution process.</p>
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header" aria-expanded="false" aria-controls="faq5">
+                    <span class="faq-question">Can I track my emergency request?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-accordion-content" id="faq5">
+                    <p>Yes, all emergency requests receive a tracking number. You'll get SMS and email updates throughout the resolution process.</p>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> What information should I have ready?</h3>
-                    <p>Have your booking ID, current location, contact information, and a description of the emergency
-                        ready when you call or chat.</p>
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header" aria-expanded="false" aria-controls="faq6">
+                    <span class="faq-question">What information should I have ready?</span>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-accordion-content" id="faq6">
+                    <p>Have your booking ID, current location, contact information, and a description of the emergency ready when you call or chat.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <div id="footer-container"></div>
