@@ -411,12 +411,75 @@ header.sticky {
 /* Modals */
 .modal {
   position: fixed;
-  z-index: var(--z-modal);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  /* Use flex-start so long forms don't get cut off at the top */
+  align-items: flex-start;
+  padding: 40px 20px;
+  /* Fix: Enable vertical scrolling for the overlay */
+  overflow-y: auto;
+  z-index: var(--z-modal, 600);
+  backdrop-filter: blur(8px);
 }
 
 .modal-content {
   position: relative;
   z-index: var(--z-modal-content);
+}
+
+.quote-card {
+  position: relative;
+  z-index: var(--z-modal-content, 650);
+  margin-top: 20px;
+  margin-bottom: 40px;
+  /* Ensure it has a maximum width for readability */
+  width: 100%;
+  max-width: 520px;
+}
+
+/* 3. The missing Close (X) Button */
+.close-modal {
+  position: absolute;
+  /* Place outside or inside top-right corner */
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  background: var(--primary-color, #ff6347);
+  color: #ffffff;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* Ensure it sits on top of all form content */
+  z-index: 700;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s var(--ease-standard);
+}
+
+.close-modal:hover {
+  transform: rotate(90deg) scale(1.1);
+  background: var(--color-primary-dark, #ff4500);
+}
+
+/* 4. Scrollbar styling for better UX */
+.modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
 }
 
 /* Alerts */
@@ -5188,7 +5251,7 @@ button:active,
   width: 0%;
   background-color: #f39c12;
   /* match your theme color */
-  z-index: 20000;
+  z-index: 9999;
   transition: width 0.25s ease-out;
 }
 
