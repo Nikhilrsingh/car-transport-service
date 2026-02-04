@@ -236,11 +236,10 @@
 
         .form-step.active {
             display: flex;
-            flex-direction: column;     /* 🔥 STACK VERTICALLY */
-            align-items: center;
-            animation: slideIn 0.4s ease;        /* 🔥 CENTER CONTENT */
+            flex-direction: column;
+            align-items: stretch;   /* ✅ DEFAULT & CORRECT */
+            animation: slideIn 0.4s ease;
         }
-
 
 
         @keyframes slideIn {
@@ -1697,7 +1696,7 @@
                         <div class="progress-percentage" id="progressPercentage">33% Complete</div>
                     </div>
 
-                    <form class="booking-form" id="autoSaveForm">
+                    <form class="booking-form" id="bookingForm">
 
                             <!-- Step 1: Personal & Vehicle Details -->
                             <div class="form-step active" data-step="1">
@@ -1735,11 +1734,23 @@
 
                                 <!-- ===== ROW 2 : EMAIL ===== -->
                                 <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
-                                        <input type="email" id="email" name="email" required placeholder="Enter your email">
-                                        <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                                    <div class="form-group full-width">
+                                        <label for="email">
+                                            <i class="fas fa-envelope"></i> Email Address *
+                                        </label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            required
+                                            placeholder="Enter your email"
+                                        >
+                                        <span class="validation-icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </span>
+                                        <div class="error-message" id="emailError">
+                                            Please enter a valid email address
+                                        </div>
                                     </div>
                                 </div>
 
