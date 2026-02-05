@@ -282,77 +282,191 @@
         </div>
     </section>
 
-    <!-- Emergency Procedures -->
+    <!-- Emergency Procedures - REDESIGNED -->
     <section class="emergency-procedures">
         <div class="container">
-            <h2 class="section-title fade-in">What to Do in Case of Emergency</h2>
-            <p class="section-subtitle fade-in fade-in-delay-1">Step-by-step guides for common emergency situations</p>
+            <!-- Sticky Header for Mobile -->
+            <div class="emergency-procedures-header">
+                <h2 class="section-title fade-in">What to Do in Case of Emergency</h2>
+                <p class="section-subtitle fade-in fade-in-delay-1">Follow these steps during an emergency – or call our 24/7 hotline immediately</p>
+                <div class="emergency-quick-call">
+                    <a href="tel:+919372693389" class="emergency-header-btn">
+                        <i class="fas fa-phone-alt"></i>
+                        Emergency: +919372693389
+                    </a>
+                </div>
+            </div>
 
             <div class="procedures-grid fade-in fade-in-delay-2">
-                <div class="procedure-card">
-                    <div class="procedure-number">1</div>
-                    <div class="procedure-icon">
-                        <i class="fas fa-car-crash"></i>
+                <!-- Card 1: Accident -->
+                <div class="procedure-card accident-card">
+                    <div class="procedure-header">
+                        <div class="procedure-icon-wrapper">
+                            <div class="procedure-number">1</div>
+                            <div class="procedure-icon">
+                                <i class="fas fa-car-crash"></i>
+                            </div>
+                        </div>
+                        <h3>In Case of Accident</h3>
                     </div>
-                    <h3>In Case of Accident</h3>
-                    <ul class="procedure-steps">
-                        <li><i class="fas fa-check-circle"></i> Ensure everyone's safety first</li>
-                        <li><i class="fas fa-check-circle"></i> Call emergency services if needed (911)</li>
-                        <li><i class="fas fa-check-circle"></i> Contact our emergency hotline immediately</li>
-                        <li><i class="fas fa-check-circle"></i> Take photos of the scene and damage</li>
-                        <li><i class="fas fa-check-circle"></i> Do not move vehicles unless necessary</li>
-                        <li><i class="fas fa-check-circle"></i> Exchange information with other parties</li>
-                        <li><i class="fas fa-check-circle"></i> File a police report</li>
-                    </ul>
+
+                    <div class="procedure-content">
+                        <div class="primary-action">
+                            <div class="action-badge">First Action</div>
+                            <p><i class="fas fa-shield-alt"></i> <strong>Ensure everyone's safety first</strong></p>
+                        </div>
+
+                        <ol class="procedure-steps-list">
+                            <li><strong>Call 911</strong> if anyone is injured</li>
+                            <li><strong>Contact us</strong> at +919372693389 immediately</li>
+                            <li><strong>Document</strong> the scene with photos</li>
+                            <li><strong>Exchange information</strong> with other parties</li>
+                        </ol>
+
+                        <button class="more-tips-toggle" onclick="toggleTips(this)">
+                            <i class="fas fa-plus-circle"></i> More tips
+                        </button>
+
+                        <div class="additional-tips" style="display: none;">
+                            <ul>
+                                <li>Do not move vehicles unless necessary</li>
+                                <li>File a police report for insurance</li>
+                                <li>Avoid admitting fault at the scene</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="tel:+919372693389" class="procedure-cta-btn">
+                        <i class="fas fa-phone"></i> Call Emergency Line
+                    </a>
                 </div>
 
-                <div class="procedure-card">
-                    <div class="procedure-number">2</div>
-                    <div class="procedure-icon">
-                        <i class="fas fa-clock"></i>
+                <!-- Card 2: Delivery Delays -->
+                <div class="procedure-card delay-card">
+                    <div class="procedure-header">
+                        <div class="procedure-icon-wrapper">
+                            <div class="procedure-number">2</div>
+                            <div class="procedure-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <h3>Delivery Delays</h3>
                     </div>
-                    <h3>Delivery Delays</h3>
-                    <ul class="procedure-steps">
-                        <li><i class="fas fa-check-circle"></i> Check real-time tracking for updates</li>
-                        <li><i class="fas fa-check-circle"></i> Contact customer support for status</li>
-                        <li><i class="fas fa-check-circle"></i> Review your delivery timeline</li>
-                        <li><i class="fas fa-check-circle"></i> Request revised ETA from our team</li>
-                        <li><i class="fas fa-check-circle"></i> Document delay for insurance purposes</li>
-                        <li><i class="fas fa-check-circle"></i> Discuss compensation if applicable</li>
-                    </ul>
+
+                    <div class="procedure-content">
+                        <div class="primary-action">
+                            <div class="action-badge">First Action</div>
+                            <p><i class="fas fa-map-marker-alt"></i> <strong>Check real-time tracking for updates</strong></p>
+                        </div>
+
+                        <ol class="procedure-steps-list">
+                            <li><strong>Contact support</strong> for current status</li>
+                            <li><strong>Request revised ETA</strong> from our team</li>
+                            <li><strong>Review</strong> your delivery timeline</li>
+                            <li><strong>Document delay</strong> for records</li>
+                        </ol>
+
+                        <button class="more-tips-toggle" onclick="toggleTips(this)">
+                            <i class="fas fa-plus-circle"></i> More tips
+                        </button>
+
+                        <div class="additional-tips" style="display: none;">
+                            <ul>
+                                <li>Ask about compensation if applicable</li>
+                                <li>Get written confirmation of new delivery date</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="tel:+919372693389" class="procedure-cta-btn">
+                        <i class="fas fa-phone"></i> Call Emergency Line
+                    </a>
                 </div>
 
-                <div class="procedure-card">
-                    <div class="procedure-number">3</div>
-                    <div class="procedure-icon">
-                        <i class="fas fa-exclamation-circle"></i>
+                <!-- Card 3: Vehicle Damage -->
+                <div class="procedure-card damage-card">
+                    <div class="procedure-header">
+                        <div class="procedure-icon-wrapper">
+                            <div class="procedure-number">3</div>
+                            <div class="procedure-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                        </div>
+                        <h3>Vehicle Damage</h3>
                     </div>
-                    <h3>Vehicle Damage</h3>
-                    <ul class="procedure-steps">
-                        <li><i class="fas fa-check-circle"></i> Inspect vehicle upon delivery</li>
-                        <li><i class="fas fa-check-circle"></i> Document all damage with photos</li>
-                        <li><i class="fas fa-check-circle"></i> Note damage on delivery receipt</li>
-                        <li><i class="fas fa-check-circle"></i> Contact us within 24 hours</li>
-                        <li><i class="fas fa-check-circle"></i> File insurance claim immediately</li>
-                        <li><i class="fas fa-check-circle"></i> Keep all documentation safe</li>
-                        <li><i class="fas fa-check-circle"></i> Get repair estimates from certified shops</li>
-                    </ul>
+
+                    <div class="procedure-content">
+                        <div class="primary-action">
+                            <div class="action-badge">First Action</div>
+                            <p><i class="fas fa-search"></i> <strong>Inspect vehicle thoroughly upon delivery</strong></p>
+                        </div>
+
+                        <ol class="procedure-steps-list">
+                            <li><strong>Take photos</strong> of all damage immediately</li>
+                            <li><strong>Note damage</strong> on delivery receipt</li>
+                            <li><strong>Call us within 24 hours</strong> at +919372693389</li>
+                            <li><strong>File insurance claim</strong> right away</li>
+                        </ol>
+
+                        <button class="more-tips-toggle" onclick="toggleTips(this)">
+                            <i class="fas fa-plus-circle"></i> More tips
+                        </button>
+
+                        <div class="additional-tips" style="display: none;">
+                            <ul>
+                                <li>Keep all documentation safe</li>
+                                <li>Get repair estimates from certified shops</li>
+                                <li>Do not start repairs before claim approval</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="tel:+919372693389" class="procedure-cta-btn">
+                        <i class="fas fa-phone"></i> Call Emergency Line
+                    </a>
                 </div>
 
-                <div class="procedure-card">
-                    <div class="procedure-number">4</div>
-                    <div class="procedure-icon">
-                        <i class="fas fa-wrench"></i>
+                <!-- Card 4: Vehicle Breakdown -->
+                <div class="procedure-card breakdown-card">
+                    <div class="procedure-header">
+                        <div class="procedure-icon-wrapper">
+                            <div class="procedure-number">4</div>
+                            <div class="procedure-icon">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                        </div>
+                        <h3>Vehicle Breakdown</h3>
                     </div>
-                    <h3>Vehicle Breakdown</h3>
-                    <ul class="procedure-steps">
-                        <li><i class="fas fa-check-circle"></i> Move to safe location if possible</li>
-                        <li><i class="fas fa-check-circle"></i> Call roadside assistance immediately</li>
-                        <li><i class="fas fa-check-circle"></i> Provide exact location details</li>
-                        <li><i class="fas fa-check-circle"></i> Stay with vehicle until help arrives</li>
-                        <li><i class="fas fa-check-circle"></i> Follow driver's safety instructions</li>
-                        <li><i class="fas fa-check-circle"></i> Get estimated repair time</li>
-                    </ul>
+
+                    <div class="procedure-content">
+                        <div class="primary-action">
+                            <div class="action-badge">First Action</div>
+                            <p><i class="fas fa-car"></i> <strong>Move to safe location if possible</strong></p>
+                        </div>
+
+                        <ol class="procedure-steps-list">
+                            <li><strong>Call roadside assistance</strong> immediately</li>
+                            <li><strong>Provide exact location</strong> details</li>
+                            <li><strong>Stay with vehicle</strong> until help arrives</li>
+                            <li><strong>Follow safety instructions</strong> from driver</li>
+                        </ol>
+
+                        <button class="more-tips-toggle" onclick="toggleTips(this)">
+                            <i class="fas fa-plus-circle"></i> More tips
+                        </button>
+
+                        <div class="additional-tips" style="display: none;">
+                            <ul>
+                                <li>Turn on hazard lights immediately</li>
+                                <li>Use warning triangles if available</li>
+                                <li>Get estimated repair time from technician</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="tel:+919372693389" class="procedure-cta-btn">
+                        <i class="fas fa-phone"></i> Call Emergency Line
+                    </a>
                 </div>
             </div>
         </div>
@@ -627,6 +741,23 @@
     <!-- Component Initializer - Ensures global components (FAB, Chatbot, etc.) are available -->
     <script src="../js/modules/component-initializer.js"></script>
     <script src="../js/script.js"></script>
+
+    <!-- Emergency Procedures Toggle Script -->
+    <script>
+        function toggleTips(button) {
+            const card = button.closest('.procedure-card');
+            const tipsDiv = card.querySelector('.additional-tips');
+            const icon = button.querySelector('i');
+
+            if (tipsDiv.style.display === 'none') {
+                tipsDiv.style.display = 'block';
+                button.innerHTML = '<i class="fas fa-minus-circle"></i> Less tips';
+            } else {
+                tipsDiv.style.display = 'none';
+                button.innerHTML = '<i class="fas fa-plus-circle"></i> More tips';
+            }
+        }
+    </script>
     <!-- 🚀 Floating Action Menu loaded via footer component -->
 </body>
 
