@@ -11,6 +11,12 @@
     --warning-color: #ffc107;
     --text-color: #333;
     --border-color: #ddd;
+
+    /* New Emergency Colors */
+    --accident-color: #dc3545;
+    --delay-color: #ffc107;
+    --damage-color: #ff6b35;
+    --breakdown-color: #004e89;
 }
 
 /* Hero Section */
@@ -103,7 +109,6 @@
 }
 
 /* Button Alignment */
-
 .live-chat-btn {
     padding: 1.1rem 2.5rem;
     border-radius: 50px;
@@ -134,7 +139,6 @@
     box-shadow: 0 12px 25px rgba(220, 53, 69, 0.4); 
 }
 
-/* 3. Icon Animation inside Button */
 .emergency-call-btn i {
     transition: transform 0.3s ease;
 }
@@ -313,7 +317,6 @@ section {
     text-align: left;    
     width: 100%;
     max-width: 500px;
-    
 }
 
 .chat-feature i {
@@ -582,39 +585,109 @@ section {
     transform: translateY(-2px);
 }
 
-/* Emergency Procedures */
+/* ============================================================
+   REDESIGNED EMERGENCY PROCEDURES SECTION
+   ============================================================ */
+
 .emergency-procedures {
     background: var(--light-color);
     padding: 80px 0;
 }
 
-.procedures-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
+/* Sticky Header for Mobile */
+.emergency-procedures-header {
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
+.emergency-quick-call {
+    margin-top: 1.5rem;
+}
+
+.emergency-header-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 2rem;
+    background: var(--danger-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.emergency-header-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+}
+
+.emergency-header-btn i {
+    animation: pulse 2s infinite;
+}
+
+/* Procedures Grid - 2x2 Layout */
+.procedures-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Procedure Cards - Redesigned */
 .procedure-card {
     background: var(--white);
-    padding: 3rem 2rem 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    position: relative;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    border-top: 5px solid var(--primary-color);
+    border-left: 5px solid var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .procedure-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Color-coded Cards */
+.procedure-card.accident-card {
+    border-left-color: var(--accident-color);
+}
+
+.procedure-card.delay-card {
+    border-left-color: var(--delay-color);
+}
+
+.procedure-card.damage-card {
+    border-left-color: var(--damage-color);
+}
+
+.procedure-card.breakdown-card {
+    border-left-color: var(--breakdown-color);
+}
+
+/* Card Header */
+.procedure-header {
+    margin-bottom: 1.5rem;
+}
+
+.procedure-icon-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
 }
 
 .procedure-number {
-    position: absolute;
-    top: -20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     background: var(--secondary-color);
     color: var(--white);
     border-radius: 12px;
@@ -623,55 +696,340 @@ section {
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 800;
-    box-shadow: 0 5px 15px rgba(0, 78, 137, 0.3);
+    flex-shrink: 0;
+}
+
+.accident-card .procedure-number {
+    background: var(--accident-color);
+}
+
+.delay-card .procedure-number {
+    background: var(--delay-color);
+    color: var(--dark-color);
+}
+
+.damage-card .procedure-number {
+    background: var(--damage-color);
+}
+
+.breakdown-card .procedure-number {
+    background: var(--breakdown-color);
 }
 
 .procedure-icon {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     background: rgba(255, 107, 53, 0.1);
-    border-radius: 15px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+}
+
+.accident-card .procedure-icon {
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.accident-card .procedure-icon i {
+    color: var(--accident-color);
+}
+
+.delay-card .procedure-icon {
+    background: rgba(255, 193, 7, 0.15);
+}
+
+.delay-card .procedure-icon i {
+    color: var(--delay-color);
+}
+
+.damage-card .procedure-icon {
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.damage-card .procedure-icon i {
+    color: var(--damage-color);
+}
+
+.breakdown-card .procedure-icon {
+    background: rgba(0, 78, 137, 0.1);
+}
+
+.breakdown-card .procedure-icon i {
+    color: var(--breakdown-color);
 }
 
 .procedure-icon i {
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: var(--primary-color);
 }
 
 .procedure-card h3 {
-    font-size: 1.6rem;
-    margin-bottom: 1.25rem;
-    color: var(--secondary-color);
+    font-size: 1.5rem;
     font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
 }
 
-.procedure-steps {
+/* Primary Action - Highlighted */
+.primary-action {
+    background: rgba(255, 107, 53, 0.08);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.accident-card .primary-action {
+    background: rgba(220, 53, 69, 0.08);
+}
+
+.delay-card .primary-action {
+    background: rgba(255, 193, 7, 0.12);
+}
+
+.damage-card .primary-action {
+    background: rgba(255, 107, 53, 0.08);
+}
+
+.breakdown-card .primary-action {
+    background: rgba(0, 78, 137, 0.08);
+}
+
+.action-badge {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.375rem 0.875rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+}
+
+.accident-card .action-badge {
+    background: var(--accident-color);
+}
+
+.delay-card .action-badge {
+    background: var(--delay-color);
+    color: var(--dark-color);
+}
+
+.damage-card .action-badge {
+    background: var(--damage-color);
+}
+
+.breakdown-card .action-badge {
+    background: var(--breakdown-color);
+}
+
+.primary-action p {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.primary-action i {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.accident-card .primary-action i {
+    color: var(--accident-color);
+}
+
+.delay-card .primary-action i {
+    color: var(--delay-color);
+}
+
+.damage-card .primary-action i {
+    color: var(--damage-color);
+}
+
+.breakdown-card .primary-action i {
+    color: var(--breakdown-color);
+}
+
+/* Procedure Steps List */
+.procedure-content {
+    flex: 1;
+}
+
+.procedure-steps-list {
     list-style: none;
     padding: 0;
+    margin: 0 0 1.25rem 0;
+    counter-reset: step-counter 1;
 }
 
-.procedure-steps li {
+.procedure-steps-list li {
     display: flex;
     align-items: flex-start;
-    gap: 0.8rem;
-    padding: 0.6rem 0;
-    color: var(--text-color);
+    gap: 0.875rem;
+    padding: 0.75rem 0;
     font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-color);
     border-bottom: 1px solid #eee;
+    counter-increment: step-counter;
+    position: relative;
 }
 
-.procedure-steps li:last-child {
+.procedure-steps-list li:last-child {
     border-bottom: none;
 }
 
-.procedure-steps i {
-    color: var(--success-color);
-    margin-top: 4px;
+.procedure-steps-list li::before {
+    content: counter(step-counter) ".";
+    font-weight: 700;
+    color: var(--secondary-color);
+    min-width: 20px;
+    flex-shrink: 0;
+}
+
+.accident-card .procedure-steps-list li::before {
+    color: var(--accident-color);
+}
+
+.delay-card .procedure-steps-list li::before {
+    color: var(--delay-color);
+}
+
+.damage-card .procedure-steps-list li::before {
+    color: var(--damage-color);
+}
+
+.breakdown-card .procedure-steps-list li::before {
+    color: var(--breakdown-color);
+}
+
+.procedure-steps-list li strong {
+    color: var(--text-color);
+}
+
+/* More Tips Toggle Button */
+.more-tips-toggle {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.more-tips-toggle:hover {
+    background: var(--light-color);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.more-tips-toggle i {
     font-size: 1rem;
+}
+
+/* Additional Tips - Collapsible */
+.additional-tips {
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease;
+}
+
+.additional-tips ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.additional-tips li {
+    padding: 0.5rem 0;
+    padding-left: 1.75rem;
+    position: relative;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.additional-tips li::before {
+    content: '•';
+    position: absolute;
+    left: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* CTA Button */
+.procedure-cta-btn {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.accident-card .procedure-cta-btn {
+    background: var(--accident-color);
+}
+
+.delay-card .procedure-cta-btn {
+    background: var(--delay-color);
+    color: var(--dark-color);
+}
+
+.damage-card .procedure-cta-btn {
+    background: var(--damage-color);
+}
+
+.breakdown-card .procedure-cta-btn {
+    background: var(--breakdown-color);
+}
+
+.procedure-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.accident-card .procedure-cta-btn:hover {
+    background: #c82333;
+}
+
+.delay-card .procedure-cta-btn:hover {
+    background: #e0a800;
+}
+
+.damage-card .procedure-cta-btn:hover {
+    background: #e55a1f;
+}
+
+.breakdown-card .procedure-cta-btn:hover {
+    background: #003d6b;
 }
 
 /* Roadside Assistance */
@@ -709,6 +1067,7 @@ section {
     gap: 1rem; 
     margin-bottom: 1rem;
 }
+
 .assistance-icon {
     width: 50px;
     height: 50px;
@@ -844,7 +1203,6 @@ section {
     margin-top: 1rem;
 }
 
-/* FAQ Section */
 /* FAQ Section - Accordion Style */
 .emergency-faq {
     background: var(--light-color);
@@ -978,25 +1336,6 @@ section {
     display: none;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .faq-accordion-header {
-        padding: 1.25rem 1.5rem;
-    }
-
-    .faq-question {
-        font-size: 1rem;
-    }
-
-    .faq-accordion-content.active {
-        padding: 0 1.5rem 1.25rem;
-    }
-
-    .faq-search input {
-        padding: 0.875rem 0.875rem 0.875rem 3rem;
-    }
-}
-
 /* Live Chat Widget */
 .chat-widget {
     position: fixed;
@@ -1071,45 +1410,38 @@ section {
     }
 }
 
-/* Responsive Design */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   ============================================================ */
+
 @media (max-width: 1024px) {
     .chat-wrapper,
     .contact-form-wrapper {
         grid-template-columns: 1fr;
     }
+
+    .procedures-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
 }
 
-@media (max-width: 600px) {
-    .assistance-grid {
-        grid-template-columns: 1fr !important;
-    }
-    
-    .assistance-card {
-        padding: 1.25rem;
-    }
-
-    .assistance-header {
-        flex-direction: row; 
-        align-items: center;
-    }
-
-    .assistance-icon {
-        width: 45px;
-        height: 45px;
-        min-width: 45px;
-    }
-
-    .assistance-card h3 {
-        font-size: 1.2rem;
-    }
-}
 @media (max-width: 768px) {
     .emergency-hero {
         height: auto !important; 
         min-height: 500px;
         padding: 60px 20px;
     }
-    
+
     .emergency-hero .hero-title {
         font-size: 2.2rem;
         margin-bottom: 1rem;
@@ -1146,35 +1478,86 @@ section {
     }
 
     .hotline-grid, 
-    .procedures-grid, 
     .hours-grid, 
-    .faq-grid, 
     .form-row {
         grid-template-columns: 1fr !important;
     }
 
-   
+    .procedures-grid {
+        grid-template-columns: 1fr !important;
+    }
+
     .chat-widget {
         width: calc(100% - 40px);
         right: 20px;
         left: 20px;
     }
+
+    .faq-accordion-header {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+    }
+
+    .faq-accordion-content.active {
+        padding: 0 1.5rem 1.25rem;
+    }
+
+    .faq-search input {
+        padding: 0.875rem 0.875rem 0.875rem 3rem;
+    }
 }
 
+@media (max-width: 600px) {
+    .assistance-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .assistance-card {
+        padding: 1.25rem;
+    }
+
+    .assistance-header {
+        flex-direction: row; 
+        align-items: center;
+    }
+
+    .assistance-icon {
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+    }
+
+    .assistance-card h3 {
+        font-size: 1.2rem;
+    }
+}
 
 @media (max-width: 480px) {
     .emergency-hero .hero-title {
         font-size: 1.8rem;
     }
-    
+
     .emergency-badge {
         padding: 0.5rem 1.2rem;
         font-size: 0.8rem;
     }
+
+    .procedure-card {
+        padding: 1.5rem;
+    }
+
+    .procedure-icon-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
 }
 
 /* ============================================================
-   ULTIMATE EMERGENCY HERO FIX - LIGHT MODE
+   LIGHT MODE THEME FIX
    ============================================================ */
 body[data-theme="light"] section.emergency-hero {
     background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%) !important;
@@ -1188,7 +1571,6 @@ body[data-theme="light"] section.emergency-hero p.hero-subtitle {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
     background: transparent !important;
 }
-
 
 body[data-theme="light"] section.emergency-hero .emergency-badge,
 body[data-theme="light"] section.emergency-hero .emergency-badge span,
