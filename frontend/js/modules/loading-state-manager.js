@@ -97,19 +97,39 @@ class LoadingStateManager {
      * Setup page load listeners
      */
     setupPageLoadListeners() {
-        // Show loading when page starts loading
-        window.addEventListener('beforeunload', () => {
-            this.show();
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                // Page became visible, hide any loading indicators
+                this.hide();
+            }
+        });
+
+        // Handle browser back/forward navigation
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                // Page was loaded from back/forward cache, hide loading immediately
+                this.hide();
+            }
+        });
+
+        // Show loading when navigating away (but not for back/forward)
+        window.addEventListener('beforeunload', (event) => {
+            // Only show loading for actual navigation, not page refresh or back/forward
+            if (performance.navigation.type !== performance.navigation.TYPE_BACK_FORWARD) {
+                this.show();
+            }
         });
 
         // Hide loading when page fully loads
         window.addEventListener('load', () => {
-            setTimeout(() => this.hide(), 500);
+            setTimeout(() => this.hide(), 300);
         });
 
-        // Hide on navigation away
-        window.addEventListener('pagehide', () => {
-            this.show();
+        // Handle popstate events (back/forward navigation)
+        window.addEventListener('popstate', () => {
+            // Hide loading immediately on back/forward navigation
+            this.hide();
         });
     }
 
@@ -349,6 +369,16 @@ class NetworkDetector {
         // Listen for online/offline events
         window.addEventListener('online', () => this.onOnline());
         window.addEventListener('offline', () => this.onOffline());
+        
+        // Check network status on page load
+        this.checkInitialStatus();
+        
+        // Check network status when tab becomes visible again
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                this.checkInitialStatus();
+            }
+        });
     }
 
     checkNetworkSpeed() {
@@ -360,16 +390,32 @@ class NetworkDetector {
             this.isSlowNetwork = loadTime > 3000; // More than 3 seconds = slow
         }
     }
+    
+    checkInitialStatus() {
+        if (!navigator.onLine) {
+            this.showOfflineIndicator();
+        } else {
+            this.removeOfflineIndicator();
+        }
+    }
 
     onOnline() {
         console.log('Network: Online');
-        // Optionally reload content if needed
+        this.removeOfflineIndicator();
+        // Refresh the page to reload any failed resources
+        window.location.reload();
     }
 
     onOffline() {
         console.log('Network: Offline');
-        // Show offline indicator
         this.showOfflineIndicator();
+    }
+    
+    removeOfflineIndicator() {
+        const indicator = document.querySelector('.offline-indicator');
+        if (indicator) {
+            indicator.remove();
+        }
     }
 
     showOfflineIndicator() {
@@ -377,18 +423,37 @@ class NetworkDetector {
 
         const indicator = document.createElement('div');
         indicator.className = 'offline-indicator';
+        indicator.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 99999;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        `;
         indicator.innerHTML = `
-      <div style="padding: 12px; background: #f39c12; color: white; text-align: center;">
-        You are offline. Some features may be limited.
-      </div>
-    `;
-        document.body.insertBefore(indicator, document.body.firstChild);
-
-        setTimeout(() => {
-            if (navigator.onLine) {
-                indicator.remove();
-            }
-        }, 5000);
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+            <span>You are offline. Waiting for connection...</span>
+        `;
+        document.body.appendChild(indicator);
     }
 }
 

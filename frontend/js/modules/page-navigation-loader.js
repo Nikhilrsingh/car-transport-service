@@ -16,6 +16,33 @@ class PageNavigationLoader {
         this.setupInternalNavigation();
         this.setupExternalLinkNavigation();
         this.setupAjaxIntegration();
+        this.setupNavigationStateHandling();
+    }
+
+    /**
+     * Setup navigation state handling for back/forward navigation
+     */
+    setupNavigationStateHandling() {
+        // Handle browser back/forward navigation
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                // Page was loaded from back/forward cache
+                this.cancel();
+            }
+        });
+
+        // Handle popstate events (back/forward navigation)
+        window.addEventListener('popstate', () => {
+            this.cancel();
+        });
+
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                // Page became visible, cancel any loading states
+                this.cancel();
+            }
+        });
     }
 
     /**
@@ -100,9 +127,14 @@ class PageNavigationLoader {
      * Handle navigation to external pages with loading indicator
      */
     handleExternalNavigation(link) {
+        // Don't show loading for back/forward navigation
+        if (performance.navigation && performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
+            return;
+        }
+
         this.isNavigating = true;
 
-        // Show loading indicator
+        // Show loading indicator only for actual navigation
         if (loadingManager) {
             loadingManager.show();
         }
