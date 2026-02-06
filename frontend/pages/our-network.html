@@ -8,7 +8,7 @@
         content="Explore Harihar Car Carriers' network of offices across India. Fast coordination, reliable service, and seamless customer support.">
     <title>Our Network - Car Transport Service</title>
     <base href="./" />
-  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/components/header.css">
     <link rel="stylesheet" href="../css/components/navbar.css" />
@@ -95,7 +95,7 @@
                 <div class="office-card fade-in fade-in-delay-1">
                     <div class="office-header">
                         <div class="office-icon">
-                            <img class="office-city-img" src="../assets/images/cities/Delhi.jpg" alt="Delhi landmark">
+                            <img class="office-city-img" src="../assets/images/cities/delhi.jpg" alt="Delhi landmark">
                         </div>
                         <h3>Delhi Office</h3>
                     </div>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="detail-item location-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <a class="map-open-link" href="#" data-city="Delhi, India" >
+                            <a class="map-open-link" href="#" data-city="Delhi, India">
                                 Head Office • North India coordination
                             </a>
                         </div>
@@ -120,7 +120,7 @@
                 <div class="office-card fade-in fade-in-delay-2">
                     <div class="office-header">
                         <div class="office-icon">
-                            <img class="office-city-img" src="../assets/images/cities/Mumbai.jpg" alt="Mumbai landmark">
+                            <img class="office-city-img" src="../assets/images/cities/mumbai.jpg" alt="Mumbai landmark">
                         </div>
                         <h3>Mumbai Office</h3>
                     </div>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="detail-item location-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <a class="map-open-link" href="#" data-city="Mumbai, India " >
+                            <a class="map-open-link" href="#" data-city="Mumbai, India ">
                                 Western Region Hub • Fast port connectivity
                             </a>
                         </div>
@@ -145,7 +145,8 @@
                 <div class="office-card fade-in fade-in-delay-3">
                     <div class="office-header">
                         <div class="office-icon">
-                            <img class="office-city-img" src="../assets/images/cities/Bengaluru.jpg" alt="Bengaluru landmark">
+                            <img class="office-city-img" src="../assets/images/cities/bangalore.jpg"
+                                alt="Bengaluru landmark">
                         </div>
                         <h3>Bengaluru Office</h3>
                     </div>
@@ -160,7 +161,7 @@
                         </div>
                         <div class="detail-item location-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <a class="map-open-link" href="#" data-city="Bengaluru, India" >
+                            <a class="map-open-link" href="#" data-city="Bengaluru, India">
                                 South Operations Center • Tech corridor support
                             </a>
                         </div>
@@ -170,7 +171,8 @@
                 <div class="office-card fade-in fade-in-delay-4">
                     <div class="office-header">
                         <div class="office-icon">
-                            <img class="office-city-img" src="../assets/images/cities/Kolkata.jpg" alt="Kolkata landmark">
+                            <img class="office-city-img" src="../assets/images/cities/kolkata.jpg"
+                                alt="Kolkata landmark">
                         </div>
                         <h3>Kolkata Office</h3>
                     </div>
@@ -185,7 +187,7 @@
                         </div>
                         <div class="detail-item location-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <a class="map-open-link" href="#" data-city="Kolkata, India" >
+                            <a class="map-open-link" href="#" data-city="Kolkata, India">
                                 East Coordination Office • Seamless east-bound routes
                             </a>
                         </div>
@@ -195,7 +197,8 @@
                 <div class="office-card fade-in fade-in-delay-4">
                     <div class="office-header">
                         <div class="office-icon">
-                            <img class="office-city-img" src="../assets/images/cities/Hyderabad.jpg" alt="Hyderabad landmark"></img>
+                            <img class="office-city-img" src="../assets/images/cities/hyderabad.jpg"
+                                alt="Hyderabad landmark"></img>
                         </div>
                         <h3>Hyderabad Office</h3>
                     </div>
@@ -210,8 +213,8 @@
                         </div>
                         <div class="detail-item location-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <a class="map-open-link" href="#" data-city="Hyderabad, India" >
-                               Telangana & AP Support • Central south coverage 
+                            <a class="map-open-link" href="#" data-city="Hyderabad, India">
+                                Telangana & AP Support • Central south coverage
                             </a>
                         </div>
                     </div>
@@ -220,7 +223,8 @@
                 <div class="office-card fade-in fade-in-delay-4">
                     <div class="office-header">
                         <div class="office-icon">
-                            <img class="office-city-img" src="../assets/images/cities/Chennai.JPG" alt="Chennai landmark"></img>
+                            <img class="office-city-img" src="../assets/images/cities/chennai.jpg"
+                                alt="Chennai landmark"></img>
                         </div>
                         <h3>Chennai Office</h3>
                     </div>
@@ -235,7 +239,7 @@
                         </div>
                         <div class="detail-item location-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <a class="map-open-link" href="#" data-city="Chennai, India" >
+                            <a class="map-open-link" href="#" data-city="Chennai, India">
                                 Tamil Nadu Hub • Port and automotive corridor
                             </a>
                         </div>
@@ -314,37 +318,37 @@
     <!-- 🚀 Floating Action Menu loaded via footer component -->
 
 
-<script>
-    async function openMapForCity(query) {
-        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`;
-      
-        const res = await fetch(url, { headers: { "Accept": "application/json" } });
-        const data = await res.json();
-      
-        if (!data || data.length === 0) {
-            alert("Location not found.");
-            return;
-          }
-      
-        const lat = data[0].lat;
-        const lon = data[0].lon;
-        const osmUrl = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=12/${lat}/${lon}`;
-      
-        const win = window.open(osmUrl, "_blank", "noopener,noreferrer");
-        if (!win) window.location.href = osmUrl;
+    <script>
+        async function openMapForCity(query) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`;
+
+            const res = await fetch(url, { headers: { "Accept": "application/json" } });
+            const data = await res.json();
+
+            if (!data || data.length === 0) {
+                alert("Location not found.");
+                return;
+            }
+
+            const lat = data[0].lat;
+            const lon = data[0].lon;
+            const osmUrl = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=12/${lat}/${lon}`;
+
+            const win = window.open(osmUrl, "_blank", "noopener,noreferrer");
+            if (!win) window.location.href = osmUrl;
         }
-      
-    document.addEventListener("click", (e) => {
-        const link = e.target.closest(".map-open-link");
-        if (!link) return;
-      
-        e.preventDefault(); // stops "#" jump
-        openMapForCity(link.dataset.city);
-    });
-</script>
- <script src="../js/script.js"></script>     
-      
-      
+
+        document.addEventListener("click", (e) => {
+            const link = e.target.closest(".map-open-link");
+            if (!link) return;
+
+            e.preventDefault(); // stops "#" jump
+            openMapForCity(link.dataset.city);
+        });
+    </script>
+    <script src="../js/script.js"></script>
+
+
 </body>
 
 </html>
