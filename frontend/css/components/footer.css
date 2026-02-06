@@ -930,3 +930,21 @@ footer.footer,
     display: flex;
   }
 }
+.site-footer {
+  background: var(--footer-bg, #0f1113);
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.site-footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.site-footer .social-icons i {
+  font-size: 18px;
+  color: #fff;
+}
