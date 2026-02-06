@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login & Signup</title>
+    <title>Login | Harihar Car Carriers</title>
+    <meta name="description" content="Login to your Harihar Car Carriers account to track shipments, manage bookings, and access your dashboard." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://nikhilrsingh.github.io/car-transport-service/login.html" />
     <base href="./" />
     <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
     <link rel="stylesheet" href="css/components/floating-call-button.css" />
@@ -580,7 +583,14 @@
           alert("Please fill in all fields!");
           return;
         }
+        
+        // Simulate successful login and redirect to home
         alert(`Welcome back, ${email}!`);
+        
+        // Add a small delay to show the success message, then redirect
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
       }
 
       function signup() {
@@ -591,12 +601,38 @@
           alert("Please fill all fields!");
           return;
         }
+        
+        // Simulate successful signup and redirect to home
         alert(`Account created for ${name}!`);
+        
+        // Add a small delay to show the success message, then redirect
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
       }
 
       function continueWithGoogle() {
         alert("Redirecting to Google Sign-In...");
+        
+        // Simulate Google auth and redirect
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
       }
+      
+      // Handle browser back button navigation
+      window.addEventListener('pageshow', (event) => {
+        // Clear any loading states when page is shown from cache
+        if (event.persisted) {
+          // Page was loaded from back/forward cache
+          document.body.style.opacity = '1';
+        }
+      });
+      
+      // Ensure page is fully visible when loaded
+      window.addEventListener('load', () => {
+        document.body.style.opacity = '1';
+      });
     </script>
 
     <!-- Top to Bottom Button -->
@@ -604,17 +640,33 @@
       <i class="fas fa-arrow-down"></i>
     </button>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="js/modules/floating-call-button.js"></script>
     <script src="js/modules/back-to-top-button.js"></script>
     <script src="js/modules/backtoBottom.js"></script>
 
     <!-- 🌟 Bottom Fixed Action Bar -->
-  <link rel="stylesheet" href="../css/components/footer.css" />
-  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
-  <link rel="stylesheet" href="../css/components/quote-modal.css" />
-  <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
-  <script src="../js/modules/modal.js"></script>
-  <script src="../js/modules/quote-modal.js"></script>
-  <script src="../js/modules/bottom-fixed-loader.js"></script>
+    <link rel="stylesheet" href="css/components/footer.css" />
+    <link rel="stylesheet" href="css/components/sticky-quote-button.css" />
+    <link rel="stylesheet" href="css/components/quote-modal.css" />
+    <link rel="stylesheet" href="css/components/bottom-fixed-container.css">
+    <link rel="stylesheet" href="css/components/chatbot-modal.css" />
+    <link rel="stylesheet" href="css/components/floating-action-menu.css" />
+    <link rel="stylesheet" href="css/components/bottom-action-bar.css" />
+    
+    <!-- Footer Container for Dynamic Loading -->
+    <div id="footer-container"></div>
+    
+    <!-- Load Scripts -->
+    <script src="js/modules/modal.js"></script>
+    <script src="js/modules/quote-modal.js"></script>
+    <script src="js/modules/chatbot-modal.js"></script>
+    <script src="js/modules/footer-loader.js"></script>
+    <!-- Component Initializer - Ensures global components (FAB, Chatbot, etc.) are available -->
+    <script src="js/modules/component-initializer.js"></script>
   </body>
 </html>

@@ -1,44 +1,28 @@
 /* === Floating Feedback Button === */
-/* Target both legacy standalone button and FAB action button used on index */
-#fabFeedbackBtn,
+/* Standalone floating feedback button (legacy) - Hidden, functionality moved to FAB */
 .floating-feedback-btn {
-  position: fixed;
-  bottom: 130px; /* above Get Quote */
-  left: 25px;
-  background: linear-gradient(135deg, #ff9800, #ffb74d);
-  color: white;
-  border-radius: 50%;
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  z-index: 9999;
-  border: none;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
 }
 
-.floating-feedback-btn:hover,
-#fabFeedbackBtn:hover {
+.floating-feedback-btn:hover {
   transform: scale(1.12) rotate(-6deg);
   box-shadow:
     0 12px 30px rgba(255, 152, 0, 0.7),
     0 0 18px rgba(255, 183, 77, 0.8);
 }
 
-.floating-feedback-btn i,
-#fabFeedbackBtn i {
+.floating-feedback-btn i {
   animation: iconBounce 2s infinite;
 }
 
 /* Tooltip text */
-/* Tooltip: prefer data-tooltip attribute when present (used by FAB markup). Fallback to the pseudo-content for legacy .floating-feedback-btn */
-#fabFeedbackBtn[data-tooltip]::after,
 .floating-feedback-btn::after {
-  content: attr(data-tooltip);
+  content: "Feedback";
   position: absolute;
   left: 75px;
   white-space: nowrap;
@@ -53,12 +37,8 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Provide fallback text for legacy markup without data-tooltip */
-.floating-feedback-btn::after { content: "Feedback"; }
-
 /* Tooltip arrow */
-.floating-feedback-btn::before,
-#fabFeedbackBtn::before {
+.floating-feedback-btn::before {
   content: "";
   position: absolute;
   left: 65px;
@@ -69,16 +49,13 @@
 }
 
 .floating-feedback-btn:hover::after,
-.floating-feedback-btn:hover::before,
-#fabFeedbackBtn:hover::after,
-#fabFeedbackBtn:hover::before {
+.floating-feedback-btn:hover::before {
   opacity: 1;
   transform: translateX(0);
 }
 
 /* Optional notification dot */
-.floating-feedback-btn .notify-dot,
-#fabFeedbackBtn .notify-dot {
+.floating-feedback-btn .notify-dot {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -113,7 +90,6 @@
 }
 
 /* Accessibility: focus styles */
-#fabFeedbackBtn:focus,
 .floating-feedback-btn:focus {
   outline: none;
   box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.18), 0 8px 20px rgba(0,0,0,0.18);
@@ -122,9 +98,7 @@
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .floating-feedback-btn i,
-  #fabFeedbackBtn i,
-  .floating-feedback-btn,
-  #fabFeedbackBtn {
+  .floating-feedback-btn {
     animation: none !important;
     transition: none !important;
   }
@@ -132,7 +106,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-  #fabFeedbackBtn,
   .floating-feedback-btn {
     bottom: 100px;
     left: 14px;
@@ -142,13 +115,11 @@
   }
 
   /* Move tooltip above on very narrow screens */
-  #fabFeedbackBtn::after,
   .floating-feedback-btn::after {
     left: auto;
     right: 14px;
     transform: translateX(10px);
   }
-  #fabFeedbackBtn::before,
   .floating-feedback-btn::before {
     left: auto;
     right: 24px;
@@ -159,7 +130,6 @@
 
 /* High contrast preference: stronger outline */
 @media (prefers-contrast: more) {
-  #fabFeedbackBtn,
   .floating-feedback-btn {
     box-shadow: none;
     outline: 3px solid #ffb74d;

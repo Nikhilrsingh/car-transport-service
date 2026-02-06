@@ -296,7 +296,9 @@
 .input-group input.success,
 .input-group select.success,
 .input-group textarea.success {
-  border-color: #4CAF50;
+  border-color: #4CAF50 !important;
+  background: rgba(76, 175, 80, 0.05) !important;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2) !important;
 }
 
 .input-group .success-icon {
@@ -803,4 +805,79 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ================= PHONE VALIDATION ENHANCEMENTS ================= */
+
+/* Shake animation for invalid input */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.input-group input.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Enhanced error state for phone inputs */
+.input-group input[type="tel"].error {
+  border-color: #ff4444 !important;
+  background: rgba(255, 68, 68, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1);
+}
+
+/* Success state for valid phone inputs */
+.input-group input[type="tel"].success {
+  border-color: #4CAF50 !important;
+  background: rgba(76, 175, 80, 0.05) !important;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+/* Phone validation error message */
+.input-group .phone-error-message {
+  color: #ff4444;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: none;
+  font-weight: 500;
+  animation: slideDown 0.3s ease;
+}
+
+.input-group .phone-error-message.show {
+  display: block;
+}
+
+/* Phone validation success icon */
+.input-group .phone-success-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4CAF50;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.input-group .phone-success-icon.show {
+  opacity: 1;
 }

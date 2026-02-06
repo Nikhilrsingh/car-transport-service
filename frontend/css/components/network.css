@@ -210,6 +210,14 @@ section {
     justify-content: center;
     font-size: 1.5rem;
     color: var(--white);
+    overflow: hidden;
+}
+
+.office-city-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .office-header h3 {
@@ -234,7 +242,18 @@ section {
 
 .detail-item i {
     color: var(--primary-color);
+    flex: 0 0 18px;
     width: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.detail-item span,
+.detail-item a{
+  display: inline-block;
+  line-height: 1.4;
 }
 
 .detail-item a {
@@ -247,12 +266,55 @@ section {
     color: var(--primary-color);
 }
 
-.detail-item:last-child {
+.location-item{
     margin-top: 5px;
-    font-style: italic;
     font-size: 0.9rem;
     color: #999;
 }
+.location-item{
+  align-items: flex-start;     /* icon top aligns with multi-line text */
+}
+
+.location-item i{
+  margin-top: 2px;           /* tiny nudge to match text baseline */
+  color: var(--primary-color);
+}
+
+.location-item span,
+.location-item a{
+  text-align: left;
+}
+
+/*map button*/
+.location-item .map-open-link{
+  display: block;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  color: #555 !important;
+}
+
+.location-item .map-open-link:hover{
+  color: var(--primary-color) !important;
+  text-decoration: underline !important;
+}
+
+.location-item .map-open-link:active{
+  color: var(--primary-color);
+}
+
+
+.office-details .location-item .map-open-link{
+  font-weight: 800 !important;
+  color: #444 !important;
+}
+
 
 /* Network Stats Section */
 .network-stats {
@@ -262,31 +324,82 @@ section {
 
 .network-stats .section-title,
 .network-stats .section-subtitle {
-    color: var(--white);
+    color: #ffffff !important;
+    opacity: 1 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    margin-top: 3rem;
 }
 
 .stat-item {
-    text-align: center;
+  text-align: center;
+  padding: 32px 20px;
+  border-radius: 20px;
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+
+  transition: all 0.35s ease;
 }
+
+.stat-item:hover{
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+.stat-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.stat-item:hover::before {
+  opacity: 1;
+}
+
 
 .stat-number {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--white);
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+
+  background: linear-gradient(135deg, #ffedd5, #fb923c);
+
+  /*Webkit support */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-.stat-label {
-    font-size: 1.1rem;
-    opacity: 0.95;
+.network-stats .stat-label {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.95);
+  text-transform: uppercase;
 }
+
 
 /* Contact CTA Section */
 .contact-cta-section {
@@ -388,4 +501,205 @@ section {
         width: 100%;
         justify-content: center;
     }
+}
+
+
+/* ====================================
+   NETWORK PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .network-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .network-section,
+body[data-theme="light"] .coverage-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .network-card,
+body[data-theme="light"] .coverage-card,
+body[data-theme="light"] .hub-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme="light"] .network-card h3,
+body[data-theme="light"] .coverage-card h3,
+body[data-theme="light"] .hub-card h3 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .network-card p,
+body[data-theme="light"] .coverage-card p,
+body[data-theme="light"] .hub-card p {
+  color: #555 !important;
+}
+
+body[data-theme="light"] .stats-section {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .stat-card {
+  background: #f8f9fa !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .stat-card h3,
+body[data-theme="light"] .stat-number {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .stat-card p,
+body[data-theme="light"] .network-stats .stat-label {
+  color: #1a1a1a !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="light"] .section-title {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .network-stats .section-subtitle {
+  color: #1a1a1a !important;
+  text-shadow: none !important;
+}
+
+
+/* ====================================
+   NETWORK PAGE - Dark Mode Styles
+   ==================================== */
+
+/* Hero in dark mode */
+body[data-theme="dark"] .network-hero {
+  background: linear-gradient(135deg, #111827 0%, #020617 100%) !important;
+}
+
+body[data-theme="dark"] .hero-overlay {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+body[data-theme="dark"] .hero-title,
+body[data-theme="dark"] .hero-subtitle {
+  color: #f9fafb !important;
+}
+
+body[data-theme="dark"] .cta-button {
+  background: #f97316;
+  color: #0b1120;
+}
+
+body[data-theme="dark"] .cta-button:hover {
+  background: #fde68a;
+  color: #7c2d12;
+}
+
+/* Section backgrounds */
+body[data-theme="dark"] .coverage-section,
+body[data-theme="dark"] .contact-cta-section {
+  background: #020617 !important; 
+}
+
+body[data-theme="dark"] .regional-offices {
+  background: #020617 !important;
+}
+
+body[data-theme="dark"] .network-stats {
+  background: linear-gradient(135deg, #020617 0%, #111827 100%) !important;
+}
+
+/* Cards */
+body[data-theme="dark"] .coverage-card,
+body[data-theme="dark"] .office-card {
+  background: #020617 !important;
+  border-color: rgba(148, 163, 184, 0.35) !important;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.9) !important;
+}
+
+body[data-theme="dark"] .coverage-card h3,
+body[data-theme="dark"] .office-header h3 {
+  color: #e5e7eb !important;
+}
+
+body[data-theme="dark"] .coverage-card p,
+body[data-theme="dark"] .detail-item,
+body[data-theme="dark"] .detail-item a {
+  color: #9ca3af !important;
+}
+
+body[data-theme="dark"] .detail-item:last-child {
+  color: #6b7280 !important;
+}
+
+/* Icons */
+body[data-theme="dark"] .coverage-icon,
+body[data-theme="dark"] .office-icon {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #0b1120;
+}
+
+/* Stats */
+body[data-theme="dark"] .stat-number {
+  color: #fbbf24 !important;
+}
+
+body[data-theme="dark"] .stat-label,
+body[data-theme="dark"] .network-stats .section-subtitle {
+  color: #e5e7eb !important;
+}
+
+/* Section titles/subtitles */
+body[data-theme="dark"] .section-title {
+  color: #f9fafb !important;
+}
+
+body[data-theme="dark"] .section-subtitle {
+  color: #9ca3af !important;
+}
+
+/* Contact buttons */
+body[data-theme="dark"] .contact-cta-section p {
+  color: #9ca3af !important;
+}
+
+body[data-theme="dark"] .contact-btn.primary {
+  background: #f97316;
+  color: #0b1120;
+}
+
+body[data-theme="dark"] .contact-btn.primary:hover {
+  background: #fb923c;
+}
+
+body[data-theme="dark"] .contact-btn.secondary {
+  background: transparent;
+  color: #f97316;
+  border-color: #f97316;
+}
+
+body[data-theme="dark"] .contact-btn.secondary:hover {
+  background: #f97316;
+  color: #0b1120;
+}
+
+/* Ensure location link stays bold in both themes */
+body[data-theme="light"] .office-details .location-item .map-open-link{
+  font-weight: 700 !important;
+  color: #555 !important;
+}
+
+body[data-theme="dark"] .office-details .location-item .map-open-link{
+  font-weight: 700 !important;
+  color: #e5e7eb !important;
+}
+
+/* Force orange hover for office location link */
+.office-details .location-item .map-open-link{
+  color: #444;
+  text-decoration: none;
+}
+
+.office-details .location-item .map-open-link:hover{
+  color: var(--primary-color) !important;
+  text-decoration: underline !important;
 }

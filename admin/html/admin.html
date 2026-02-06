@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Car Carrier Services</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo-section">
+      <i class="fas fa-truck-moving" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+      <h2>CarCarrier</h2>
+      <p>Admin Panel</p>
+    </div>
+    
+    <nav>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="contacts.html" class="nav-link">
+            <i class="fas fa-address-book"></i>
+            <span>Contact Requests</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="enquiries.html" class="nav-link">
+            <i class="fas fa-file-invoice"></i>
+            <span>Enquiries</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="emergencies.html" class="nav-link">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Emergency Requests</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="feedbacks.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Feedbacks</span>
+          </a>
+        </li>
+       
+        
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <div class="user-info">
+        <div>
+          <div style="font-weight: 600; color: var(--text-primary);" id="userName">Admin User</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);" id="userEmail">admin@carcarrier.com</div>
+        </div>
+        <div class="user-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboardSection">
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div>
+              <div class="stat-value" id="totalContacts">0</div>
+              <div class="stat-label">Contact Requests</div>
+            </div>
+            <div class="stat-icon">
+              <i class="fas fa-address-book"></i>
+            </div>
+          </div>
+          <span class="stat-change positive">
+            <i class="fas fa-arrow-up"></i> View All
+          </span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div>
+              <div class="stat-value" id="totalEnquiries">0</div>
+              <div class="stat-label">Enquiries</div>
+            </div>
+            <div class="stat-icon">
+              <i class="fas fa-file-invoice"></i>
+            </div>
+          </div>
+          <span class="stat-change positive">
+            <i class="fas fa-arrow-up"></i> View All
+          </span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div>
+              <div class="stat-value" id="totalEmergencies">0</div>
+              <div class="stat-label">Emergency Requests</div>
+            </div>
+            <div class="stat-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+          </div>
+          <span class="stat-change warning">
+            <i class="fas fa-exclamation-circle"></i> Urgent
+          </span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div>
+              <div class="stat-value" id="totalFeedbacks">0</div>
+              <div class="stat-label">Feedbacks</div>
+            </div>
+            <div class="stat-icon">
+              <i class="fas fa-comment-dots"></i>
+            </div>
+          </div>
+          <span class="stat-change positive">
+            <i class="fas fa-arrow-up"></i> View All
+          </span>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">Recent Contact Requests</h2>
+          <a href="contacts.html" class="btn btn-primary">
+            <i class="fas fa-eye"></i> View All
+          </a>
+        </div>
+        
+        <div id="recentContactsTable">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading recent contacts...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Emergencies -->
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">Recent Emergency Requests</h2>
+          <a href="emergencies.html" class="btn btn-primary">
+            <i class="fas fa-eye"></i> View All
+          </a>
+        </div>
+        
+        <div id="recentEmergenciesTable">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading emergency requests...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/uiHelper.js"></script>
+  <script src="../js/dashboard.js"></script>
+  
+</body>
+</html>

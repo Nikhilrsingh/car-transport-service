@@ -371,6 +371,64 @@ if (issueTypeSelect && urgencySelect) {
     });
 }
 
+// FAQ Accordion Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const faqHeaders = document.querySelectorAll('.faq-accordion-header');
+    const faqSearch = document.getElementById('faqSearch');
+
+    // Accordion Toggle
+    faqHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+            // Close all other accordions (optional - remove if you want multiple open)
+            faqHeaders.forEach(h => {
+                if (h !== this) {
+                    h.setAttribute('aria-expanded', 'false');
+                    h.nextElementSibling.classList.remove('active');
+                }
+            });
+
+            // Toggle current accordion
+            this.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        });
+
+        // Keyboard navigation
+        header.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    // Search Functionality
+    if (faqSearch) {
+        faqSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            const faqItems = document.querySelectorAll('.faq-accordion-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-accordion-content p').textContent.toLowerCase();
+
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+            // If search is empty, show all
+            if (searchTerm === '') {
+                faqItems.forEach(item => item.classList.remove('hidden'));
+            }
+        });
+    }
+});
+
 // Export functions for global access
 window.openLiveChat = openLiveChat;
 window.closeLiveChat = closeLiveChat;

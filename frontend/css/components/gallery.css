@@ -906,110 +906,324 @@
 }
 
 /* ========================================
-   IMAGE CAROUSEL
-   ======================================== */
-.journey-carousel {
+   JOURNEY ROADMAP STYLES
+======================================== */
+
+.journey-roadmap-section {
+  padding: 80px 5%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2b2b2b 100%);
   position: relative;
-  width: 100%;
   overflow: hidden;
-  border-radius: var(--gallery-radius);
-  background: var(--gallery-dark);
 }
 
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-.carousel-slide {
-  min-width: 100%;
-  position: relative;
-}
-
-.carousel-slide img {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-}
-
-.carousel-slide-content {
+.journey-roadmap-section::before {
+  content: "";
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-  padding: 40px 30px 20px;
-  color: white;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,99,71,0.1)"/></svg>');
+  background-size: 30px 30px;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
-.carousel-slide-title {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.carousel-slide-description {
-  color: var(--gallery-muted);
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.carousel-navigation {
-  position: absolute;
-  top: 50%;
-  width: 100%;
+.journey-roadmap-container {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
-  transform: translateY(-50%);
-  z-index: 10;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  gap: 20px;
 }
 
-.carousel-btn {
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: var(--gallery-transition);
+/* Individual Journey Step */
+.journey-step {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: stepFadeIn 0.6s ease forwards;
 }
 
-.carousel-btn:hover {
-  background: var(--gallery-primary);
-  border-color: var(--gallery-primary);
+.journey-step:nth-child(1) { animation-delay: 0.1s; }
+.journey-step:nth-child(2) { animation-delay: 0.3s; }
+.journey-step:nth-child(3) { animation-delay: 0.5s; }
+.journey-step:nth-child(4) { animation-delay: 0.7s; }
+
+@keyframes stepFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Step Image Wrapper */
+.step-image-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid var(--gallery-primary);
+  box-shadow: 0 10px 30px rgba(255, 99, 71, 0.3);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.step-image-wrapper:hover {
+  transform: scale(1.08);
+  box-shadow: 0 15px 40px rgba(255, 99, 71, 0.5);
+  border-width: 6px;
+}
+
+.step-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.step-image-wrapper:hover .step-image {
   transform: scale(1.1);
 }
 
-.carousel-indicators {
+/* Step Number Badge */
+.step-number {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10;
-}
-
-.carousel-indicator {
-  width: 12px;
-  height: 12px;
-  background: rgba(255, 255, 255, 0.3);
+  top: -10px;
+  right: -10px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--gallery-primary), var(--gallery-secondary));
   border-radius: 50%;
-  cursor: pointer;
-  transition: var(--gallery-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  border: 3px solid #1a1a1a;
 }
 
-.carousel-indicator.active {
-  background: var(--gallery-primary);
-  transform: scale(1.3);
+/* Step Content */
+.step-content {
+  text-align: center;
+  max-width: 250px;
 }
+
+.step-title {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+
+.journey-step:hover .step-title {
+  color: var(--gallery-primary);
+}
+
+.step-description {
+  color: var(--gallery-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 99, 71, 0.1);
+  border: 2px solid var(--gallery-primary);
+  border-radius: 50%;
+  color: var(--gallery-primary);
+  font-size: 1.2rem;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.journey-step:hover .step-icon {
+  background: var(--gallery-primary);
+  color: white;
+  transform: rotate(360deg);
+}
+
+/* Dotted Connector Line */
+.step-connector {
+  position: absolute;
+  top: 90px;
+  left: calc(50% + 90px);
+  width: calc(100% - 40px);
+  height: 3px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--gallery-primary) 0px,
+    var(--gallery-primary) 15px,
+    transparent 15px,
+    transparent 30px
+  );
+  z-index: -1;
+  opacity: 0;
+  animation: lineAppear 0.8s ease forwards;
+  animation-delay: 0.9s;
+}
+
+.journey-step:last-child .step-connector {
+  display: none;
+}
+
+@keyframes lineAppear {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animated Arrow on Connector */
+.step-connector::after {
+  content: "→";
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gallery-primary);
+  font-size: 1.8rem;
+  font-weight: bold;
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50%) translateX(8px);
+    opacity: 0.6;
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 1024px) {
+  .journey-roadmap-container {
+    gap: 15px;
+  }
+  
+  .step-image-wrapper {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .step-connector {
+    top: 75px;
+    left: calc(50% + 75px);
+  }
+  
+  .step-number {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .journey-roadmap-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+  
+  .journey-step {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Vertical Connector for Mobile */
+  .step-connector {
+    top: auto;
+    left: 50%;
+    bottom: -60px;
+    width: 3px;
+    height: 50px;
+    transform: translateX(-50%);
+    background-image: repeating-linear-gradient(
+      to bottom,
+      var(--gallery-primary) 0px,
+      var(--gallery-primary) 15px,
+      transparent 15px,
+      transparent 30px
+    );
+  }
+  
+  .step-connector::after {
+    content: "↓";
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: -25px;
+    transform: translateX(-50%);
+  }
+  
+  @keyframes arrowPulse {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(-50%) translateY(8px);
+      opacity: 0.6;
+    }
+  }
+  
+  .step-image-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .step-title {
+    font-size: 1.5rem;
+  }
+  
+  .step-description {
+    font-size: 1rem;
+  }
+}
+
+/* Light Mode Support */
+body[data-theme="light"] .journey-roadmap-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+body[data-theme="light"] .step-number {
+  border-color: #f8f9fa;
+}
+
+body[data-theme="light"] .step-title {
+  color: #333;
+}
+
+body[data-theme="light"] .journey-step:hover .step-title {
+  color: var(--gallery-primary);
+}
+
+body[data-theme="light"] .step-description {
+  color: #666;
+}
+
 
 /* ========================================
    ANIMATIONS
@@ -1183,4 +1397,98 @@
   .carousel-btn {
     border-width: 3px;
   }
+}
+
+
+/* ====================================
+   GALLERY PAGE - Light Mode Styles
+   ==================================== */
+body[data-theme="light"] .enhanced-gallery-hero {
+  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-hero::before {
+  opacity: 0.1 !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-hero h1 {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-hero p {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-section {
+  background: #f8f9fa !important;
+}
+
+body[data-theme="light"] .filter-btn {
+  background: #ffffff !important;
+  color: #333 !important;
+  border: 2px solid #ddd !important;
+}
+
+body[data-theme="light"] .filter-btn:hover {
+  border-color: #ff6347 !important;
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .filter-btn.active {
+  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+  color: #ffffff !important;
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .search-input-wrapper input {
+  background: #ffffff !important;
+  color: #333 !important;
+  border: 2px solid #ddd !important;
+}
+
+body[data-theme="light"] .search-input-wrapper input:focus {
+  border-color: #ff6347 !important;
+}
+
+body[data-theme="light"] .search-input-wrapper i {
+  color: #888 !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-item {
+  background: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-image-container {
+  background: linear-gradient(135deg, #f0f0f0, #e8e8e8) !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-title {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .enhanced-gallery-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body[data-theme="light"] .gallery-section {
+  background: #f0f2f5 !important;
+}
+
+body[data-theme="light"] .gallery-section h2 {
+  color: #ff6347 !important;
+}
+
+body[data-theme="light"] .carousel-slide-content {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent) !important;
+}
+
+body[data-theme="light"] .carousel-slide-title {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .carousel-slide-description {
+  color: rgba(255, 255, 255, 0.9) !important;
 }

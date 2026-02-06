@@ -61,7 +61,6 @@
   margin: 0 auto;
   padding: 0 20px;
   display: block !important;
-  /* Override global flex container */
 }
 
 .region-section::before {
@@ -209,6 +208,7 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+  text-align: center;
 }
 
 .popular-city-card::before {
@@ -232,10 +232,25 @@
 }
 
 .popular-city-icon {
-  font-size: 3rem;
+  width: 80px;
+  height: 80px;
   margin-bottom: 15px;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  margin: 0 auto 15px auto; 
+}
+
+.popular-city-icon img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  animation: bounce 2s ease-in-out infinite;
+  animation: bounce 2s ease-in-out infinite; /* bounce stays */
 }
 
 @keyframes bounce {
@@ -1016,9 +1031,18 @@
   }
   
   .popular-cities-section,
-  .region-filters-search,
-  .india-map-section {
+  .region-filters-search {
     padding: 25px;
+  }
+  
+  .india-map-section {
+    padding: 20px 15px; /* Further reduced padding for mobile */
+    margin-bottom: 30px;
+  }
+  
+  .map-container {
+    padding: 0; /* Remove padding for mobile */
+    min-height: auto; /* Let container adapt to image */
   }
   
   .popular-cities-grid {
@@ -1357,10 +1381,21 @@
 .india-map-section {
   background: var(--region-white);
   border-radius: 20px;
-  padding: 30px;
+  padding: 30px 20px;
   margin-bottom: 40px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease 0.15s both;
+  overflow: visible;
+  position: relative;
+}
+
+/* Centered Header */
+.map-section-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
 }
 
 .map-section-title {
@@ -1368,7 +1403,7 @@
   font-size: 1.8rem;
   font-weight: 600;
   color: var(--region-dark);
-  margin-bottom: 24px;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1379,53 +1414,53 @@
   color: var(--region-primary);
 }
 
+/* Map Controls positioned absolutely */
+.map-controls {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 10px;
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Layout Container */
+.map-layout-container {
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+  min-height: 450px;
+}
+
+/* Map Container */
 .map-container {
-  max-width: 600px;
-  margin: 0 auto;
+  flex: 2;
   position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  min-height: 450px;
+  height: 450px;
+  background: #e5e3df;
 }
 
-#indiaMap {
+/* Leaflet Map */
+#leafletMap {
   width: 100%;
-  height: auto;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  height: 450px;
+  background: #e5e3df;
 }
 
-.state {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  stroke: #ffffff;
-  stroke-width: 1.5;
-}
-
-.state:hover {
-  opacity: 1 !important;
-  filter: brightness(1.2);
-  stroke-width: 2.5;
-  transform-origin: center;
-}
-
-.office-marker {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  animation: markerPulse 2s ease-in-out infinite;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
-.office-marker:hover {
-  filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.6));
-}
-
-@keyframes markerPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-.marker-tooltip rect {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-}
-
+/* Legend Container */
 .map-legend {
+  flex: 1;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

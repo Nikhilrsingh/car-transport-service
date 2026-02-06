@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found</title>
+
+  <!-- reuse your existing global css if any (optional) -->
+  <!-- <link rel="stylesheet" href="./css/style.css" /> -->
+
+  <link rel="stylesheet" href="./css/error.css" />
+</head>
+<body class="error-body">
+  <main class="error-wrap">
+    <section class="card" aria-labelledby="title">
+        <div class="art transport" aria-hidden="true">
+            <div class="sky"></div>
+          
+            <!-- moving road -->
+            <div class="road">
+              <div class="lane"></div>
+              <div class="lane"></div>
+              <div class="lane"></div>
+            </div>
+          
+            <!-- floating destination pin -->
+            <div class="pin">
+              <span class="pin-dot"></span>
+            </div>
+          
+            <!-- Car SVG (moves + subtle bounce) -->
+            <div class="car">
+              <svg viewBox="0 0 220 90" role="img" aria-label="Car">
+                <defs>
+                  <linearGradient id="carBody" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#6A95FF"/>
+                    <stop offset="0.55" stop-color="#D04CFF"/>
+                    <stop offset="1" stop-color="#FF78C8"/>
+                  </linearGradient>
+          
+                  <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="rgba(255,255,255,0.85)"/>
+                    <stop offset="1" stop-color="rgba(255,255,255,0.18)"/>
+                  </linearGradient>
+          
+                  <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feColorMatrix in="blur" type="matrix"
+                      values="1 0 0 0 0
+                              0 1 0 0 0
+                              0 0 1 0 0
+                              0 0 0 .55 0" result="glow"/>
+                    <feMerge>
+                      <feMergeNode in="glow"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+          
+                <!-- shadow -->
+                <ellipse cx="110" cy="76" rx="78" ry="10" fill="rgba(0,0,0,0.35)"/>
+          
+                <!-- body -->
+                <path filter="url(#softGlow)"
+                  d="M25 58
+                     C28 42 42 34 62 34
+                     L90 34
+                     C98 23 112 17 130 17
+                     L150 17
+                     C165 17 176 23 186 34
+                     L198 34
+                     C209 34 216 40 216 52
+                     L216 62
+                     C216 68 212 72 206 72
+                     L22 72
+                     C15 72 12 67 13 61
+                     L25 58 Z"
+                  fill="url(#carBody)" />
+          
+                <!-- highlights -->
+                <path d="M38 52 C50 37 66 32 92 32"
+                      stroke="rgba(255,255,255,0.22)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M112 24 L152 24"
+                      stroke="rgba(255,255,255,0.18)" stroke-width="4" stroke-linecap="round"/>
+          
+                <!-- windows -->
+                <path d="M98 34
+                         C105 25 115 21 128 21
+                         L150 21
+                         C160 21 168 25 175 34
+                         Z"
+                      fill="url(#glass)" opacity="0.95"/>
+          
+                <!-- headlights -->
+                <circle cx="26" cy="60" r="4" fill="rgba(255,255,255,0.85)"/>
+                <circle cx="26" cy="60" r="10" fill="rgba(255,255,255,0.10)"/>
+          
+                <!-- wheels -->
+                <g class="wheel">
+                  <circle cx="70" cy="72" r="14" fill="rgba(10,12,20,0.9)"/>
+                  <circle cx="70" cy="72" r="9" fill="rgba(255,255,255,0.22)"/>
+                  <circle cx="70" cy="72" r="3" fill="rgba(255,255,255,0.55)"/>
+                </g>
+                <g class="wheel">
+                  <circle cx="160" cy="72" r="14" fill="rgba(10,12,20,0.9)"/>
+                  <circle cx="160" cy="72" r="9" fill="rgba(255,255,255,0.22)"/>
+                  <circle cx="160" cy="72" r="3" fill="rgba(255,255,255,0.55)"/>
+                </g>
+          
+                <!-- small package box (transport vibe) -->
+                <rect x="152" y="38" width="22" height="16" rx="3"
+                      fill="rgba(255,255,255,0.20)" stroke="rgba(255,255,255,0.25)"/>
+                <path d="M152 46 L174 46" stroke="rgba(255,255,255,0.25)" />
+              </svg>
+            </div>
+          
+            <!-- speed streaks -->
+            <div class="streaks">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          
+
+      <div class="content">
+        <p class="code">404</p>
+        <h1 id="title">Page not found</h1>
+        <p class="desc">
+          The page you’re looking for doesn’t exist or was moved.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="./index.html">Go Home</a>
+          <button class="btn" type="button" onclick="history.back()">Go Back</button>
+        </div>
+
+        <p class="hint">
+          Tip: check the URL, or return to the homepage.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
