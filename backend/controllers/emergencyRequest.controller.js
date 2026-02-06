@@ -1,9 +1,12 @@
 import EmergencyRequest from "../models/emergencyRequest.model.js";
 import { sendEmergencyEmail } from "../utils/sendEmail.js";
 
+import crypto from "crypto"; // For generating unique reference numbers
+
 const generateReferenceNumber = () => {
-  return `EMG${Date.now()}`;
+  return `EMG-${crypto.randomUUID()}`; // Fixed the function to generate a unique reference number using UUID
 };
+
 
 export const createEmergencyRequest = async (req, res) => {
   try {
