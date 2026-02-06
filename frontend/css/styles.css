@@ -4166,9 +4166,12 @@ html {
 
 .social-links {
   display: flex;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 0;     /* ✅ remove unwanted gap */
+  padding-top: 0;
+  justify-content: center;
 }
+
 
 .social-links a {
   width: 45px;
