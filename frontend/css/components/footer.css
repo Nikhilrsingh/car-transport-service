@@ -3,7 +3,7 @@ footer.footer,
 #footer-container footer.footer,
 #footer-container .footer {
   color: #e0e0e0;
-  padding: 60px 0 0;
+  padding: 16px 0 0;
   border-top: 3px solid #ff6347;
   position: relative;
   overflow: hidden;
@@ -34,7 +34,7 @@ footer .container {
 .footer-content.footer-grid {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 40px 24px;
+  padding: 0 40px 4px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
@@ -608,7 +608,7 @@ footer.footer,
 #footer-container .footer {
   background: var(--footer-bg, var(--bg, #0f1113));
   color: var(--footer-text, var(--text, #d0d0d0));
-  padding-top: 60px;
+  padding-top: 8px;
 
   /* Local semantic variables for footer internals */
   --card: var(--footer-card, rgba(255, 255, 255, 0.05));
@@ -1392,4 +1392,11 @@ body[data-theme="light"] .search-clear:hover {
   .cities-search-container {
     justify-content: stretch;
   }
+}
+.copyright {
+  text-align: center;
+  width: 100%;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--muted, #ccc);
 }
