@@ -36,6 +36,40 @@ function validateIndianPhone(phone) {
 }
 
 
+// ================= CUSTOM TOAST FUNCTION =================
+function showContactToast(title, message) {
+  let container = document.querySelector('.custom-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'custom-toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'custom-toast';
+
+  toast.innerHTML = `
+    <i class="fas fa-check-circle"></i>
+    <div class="custom-toast-content">
+      <span class="custom-toast-title">${title}</span>
+      <span class="custom-toast-message">${message}</span>
+    </div>
+  `;
+
+  container.appendChild(toast);
+
+  // Auto remove
+  setTimeout(() => {
+    toast.classList.add('hide');
+    toast.addEventListener('animationend', () => {
+      toast.remove();
+      if (container.children.length === 0) {
+        // keep container or remove? keeping is fine
+      }
+    });
+  }, 4000);
+}
+
 // ================= CONTACT FORM =================
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contactForm");
@@ -139,7 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
       submitBtn.disabled = true;
 
       setTimeout(() => {
-        alert(
+        showContactToast(
+          "Request Received",
           `Thank you ${name}! Your request has been received. We'll contact you at ${phone}.`
         );
 
@@ -238,7 +273,7 @@ function handleScrollProgress() {
 
   const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  
+
   if (height > 0) {
     const scrolled = (winScroll / height) * 100;
     progressBar.style.width = scrolled + "%";
