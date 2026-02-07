@@ -270,15 +270,17 @@ section {
 
 /* Job Card Base Styles */
 .job-card {
-    background: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
-    padding: 32px;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .job-card:hover {
@@ -304,7 +306,7 @@ section {
     flex-direction: column;
     gap: 10px;
     flex: 1;
-    min-width: 280px;
+    min-width: 0px;
 }
 
 .job-header-right {
@@ -380,9 +382,12 @@ section {
 
 .job-body-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: 1fr;
     gap: 20px;
 }
+
+
+
 
 .job-body-column {
     background: var(--surface-muted);
@@ -940,12 +945,6 @@ section {
     }
 }
 
-@media (max-width: 768px) {
-    .franchise-image {
-        display: none;
-        /* hide large decoration on small screens */
-    }
-}
 
 
 /* Modal Styles */
@@ -1141,8 +1140,8 @@ section {
         order: -1;
     }
 }
-
 @media (max-width: 768px) {
+    /* Typography adjustments */
     .hero-title {
         font-size: 2.5rem;
     }
@@ -1155,13 +1154,14 @@ section {
         font-size: 2rem;
     }
 
+    /* Stack grids into single column */
     .benefits-grid,
     .training-grid,
     .culture-grid {
         grid-template-columns: 1fr;
     }
 
-    /* Testimonials carousel adjustments */
+    /* Testimonials carousel */
     .testimonials-carousel {
         padding: 0 50px;
     }
@@ -1185,10 +1185,12 @@ section {
         font-size: 2rem;
     }
 
+    /* Hide large decorative elements */
     .franchise-image {
         display: none;
     }
 
+    /* Job filters */
     .job-filters {
         flex-direction: column;
         align-items: stretch;
@@ -1198,17 +1200,22 @@ section {
         width: 100%;
     }
 
+    /* Job cards */
     .job-header {
         flex-direction: column;
+        padding-bottom: 12px;
     }
 
+    /* Hide dense job details to reduce clutter */
     .job-body-grid {
-        grid-template-columns: 1fr;
+        display: none;
     }
 
+    /* Footer buttons stacked */
     .job-footer {
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
     }
 
     .apply-btn,
@@ -1217,6 +1224,7 @@ section {
         text-align: center;
     }
 
+    /* Modal & forms */
     .modal-content {
         width: 95%;
         padding: 20px;
@@ -1226,6 +1234,7 @@ section {
         grid-template-columns: 1fr;
     }
 }
+
 
 @media (max-width: 480px) {
     .testimonials-carousel {
@@ -1238,12 +1247,17 @@ section {
         display: none;
     }
 
+    .job-card {
+        padding: 0.85rem;
+    }
+
     .job-title {
         font-size: 1.4rem;
     }
 
     .job-meta {
         flex-direction: column;
-        gap: 8px;
+        font-size: 0.85rem;
+        gap: 6px;
     }
 }

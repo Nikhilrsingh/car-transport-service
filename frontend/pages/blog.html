@@ -1141,7 +1141,7 @@
     cards.forEach(card => {
       const cardCategories = card.getAttribute('data-category').toLowerCase().split(/\s+/);
       const show = [...activeFilters].some(f => cardCategories.includes(f));
-      card.style.display = show ? '' : 'none';
+      card.style.display = show ? 'flex' : 'none';
     });
   }
 

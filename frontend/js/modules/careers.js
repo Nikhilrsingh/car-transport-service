@@ -60,11 +60,17 @@ function initJobFilters() {
       }
 
       // use default display from CSS; hide with none
-      card.style.display = show ? '' : 'none';
+      card.style.display = show ? 'flex' : 'none';
       if (show) {
         card.style.animation = 'fadeInUp 0.5s ease';
       }
     });
+    const anyVisible = [...jobCards].some(
+      (card) => card.style.display !== 'none'
+    );
+
+    emptyMessage.style.display = anyVisible ? 'none' : 'block';
+
   }
 
   filterButtons.forEach((button) => {
@@ -76,6 +82,21 @@ function initJobFilters() {
       applyFilter(category);
     });
   });
+    const listings = document.querySelector('.job-listings');
+
+    let emptyMessage = document.querySelector('.no-jobs-message');
+    if (!emptyMessage) {
+      emptyMessage = document.createElement('div');
+      emptyMessage.className = 'no-jobs-message';
+      emptyMessage.textContent = 'No jobs found for this category.';
+      emptyMessage.style.textAlign = 'center';
+      emptyMessage.style.padding = '40px';
+      emptyMessage.style.color = 'var(--text-muted)';
+      emptyMessage.style.fontSize = '1.1rem';
+      listings.appendChild(emptyMessage);
+    }
+
+
 
   // initial
   applyFilter('all');
@@ -439,8 +460,11 @@ function initSaveJobButtons() {
         .querySelector('.filter-btn.active')
         ?.getAttribute('data-category');
       if (activeFilter === 'saved') {
-        initJobFilters();
+        document
+          .querySelector('.filter-btn[data-category="saved"]')
+          ?.click();
       }
+
     });
   });
 }
