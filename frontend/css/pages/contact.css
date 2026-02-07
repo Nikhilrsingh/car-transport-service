@@ -89,7 +89,8 @@ body {
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px 40px; /* Reduced gap significantly */
+  gap: 30px 40px;
+  /* Reduced gap significantly */
   align-items: start;
 }
 
@@ -97,12 +98,14 @@ body {
 .contact-info-pg {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Reduced from 30px */
+  gap: 20px;
+  /* Reduced from 30px */
 }
 
 .info-card {
   background: #2b2b2b;
-  padding: 25px; /* Reduced from 30px */
+  padding: 25px;
+  /* Reduced from 30px */
   border-radius: 15px;
   border-left: 4px solid #ff6347;
   transition: all 0.3s ease;
@@ -117,11 +120,13 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 15px; /* Reduced from 20px */
+  margin-bottom: 15px;
+  /* Reduced from 20px */
 }
 
 .info-icon {
-  width: 50px; /* Reduced from 60px */
+  width: 50px;
+  /* Reduced from 60px */
   height: 50px;
   background: #ff6347;
   border-radius: 50%;
@@ -140,13 +145,15 @@ body {
 }
 
 .info-header h3 {
-  font-size: 1.3rem; /* Reduced from 1.4rem */
+  font-size: 1.3rem;
+  /* Reduced from 1.4rem */
   color: white;
 }
 
 .info-content p {
   color: #ccc;
-  margin-bottom: 8px; /* Reduced from 10px */
+  margin-bottom: 8px;
+  /* Reduced from 10px */
   line-height: 1.5;
   font-size: 0.95rem;
 }
@@ -164,7 +171,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0; /* Reduced from 8px */
+  padding: 6px 0;
+  /* Reduced from 8px */
   border-bottom: 1px solid #444;
 }
 
@@ -186,7 +194,8 @@ body {
 /* Contact Form */
 .contact-form-container {
   background: #2b2b2b;
-  padding: 30px; /* Reduced from 40px */
+  padding: 30px;
+  /* Reduced from 40px */
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   border: 1px solid #444;
@@ -205,11 +214,13 @@ body {
 
 .form-header {
   text-align: center;
-  margin-bottom: 25px; /* Reduced from 30px */
+  margin-bottom: 25px;
+  /* Reduced from 30px */
 }
 
 .form-header h3 {
-  font-size: 1.6rem; /* Reduced from 1.8rem */
+  font-size: 1.6rem;
+  /* Reduced from 1.8rem */
   color: white;
   margin-bottom: 8px;
 }
@@ -222,13 +233,15 @@ body {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 18px; /* Reduced from 20px */
+  gap: 18px;
+  /* Reduced from 20px */
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px; /* Reduced from 20px */
+  gap: 18px;
+  /* Reduced from 20px */
 }
 
 .input-group {
@@ -241,7 +254,8 @@ body {
 
 .input-group label {
   display: block;
-  margin-bottom: 6px; /* Reduced from 8px */
+  margin-bottom: 6px;
+  /* Reduced from 8px */
   color: #ccc;
   font-weight: 500;
   font-size: 0.95rem;
@@ -251,7 +265,8 @@ body {
 .input-group select,
 .input-group textarea {
   width: 100%;
-  padding: 12px; /* Reduced from 15px */
+  padding: 12px;
+  /* Reduced from 15px */
   background: #1a1a1a;
   border: 2px solid #444;
   border-radius: 10px;
@@ -272,14 +287,16 @@ body {
 
 .input-group textarea {
   resize: vertical;
-  min-height: 100px; /* Reduced from 120px */
+  min-height: 100px;
+  /* Reduced from 120px */
 }
 
 .submit-btn {
   background: linear-gradient(135deg, #ff6347, #ff4500);
   color: white;
   border: none;
-  padding: 15px 30px; /* Reduced from 18px */
+  padding: 15px 30px;
+  /* Reduced from 18px */
   border-radius: 10px;
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
@@ -303,7 +320,8 @@ body {
 /* MAP WRAPPER - Positioned in right column */
 .map-wrapper {
   grid-column: 2;
-  grid-row: 1 / span 10; /* Span across multiple rows */
+  grid-row: 1 / span 10;
+  /* Span across multiple rows */
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -477,7 +495,8 @@ body {
 
 /* CTA Section */
 .contact-cta {
-  padding: 80px 0; /* Reduced from 100px */
+  padding: 80px 0;
+  /* Reduced from 100px */
   background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
   text-align: center;
 }
@@ -531,13 +550,15 @@ body {
 /* Social Links Styling */
 .social-links {
   display: flex;
-  gap: 12px; /* Reduced from 15px */
+  gap: 12px;
+  /* Reduced from 15px */
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .social-link {
-  width: 40px; /* Reduced from 45px */
+  width: 40px;
+  /* Reduced from 45px */
   height: 40px;
   border-radius: 50%;
   display: flex;
@@ -573,15 +594,19 @@ body {
 /* Info Actions */
 .info-actions {
   display: flex;
-  gap: 8px; /* Reduced from 10px */
-  margin-top: 12px; /* Reduced from 15px */
+  gap: 8px;
+  /* Reduced from 10px */
+  margin-top: 12px;
+  /* Reduced from 15px */
   flex-wrap: wrap;
 }
 
 .info-action-btn {
   flex: 1;
-  min-width: 85px; /* Reduced from 90px */
-  padding: 8px 12px; /* Reduced from 10px 15px */
+  min-width: 85px;
+  /* Reduced from 90px */
+  padding: 8px 12px;
+  /* Reduced from 10px 15px */
   background: transparent;
   border: 2px solid #ff6347;
   color: #ff6347;
@@ -603,7 +628,8 @@ body {
 
 /* Status Badge */
 .status-badge {
-  padding: 3px 10px; /* Reduced from 4px 12px */
+  padding: 3px 10px;
+  /* Reduced from 4px 12px */
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -724,9 +750,13 @@ body {
 }
 
 @keyframes bounce {
-  0%, 80%, 100% {
+
+  0%,
+  80%,
+  100% {
     transform: scale(0);
   }
+
   40% {
     transform: scale(1);
   }
@@ -736,7 +766,8 @@ body {
 .file-upload-area {
   border: 2px dashed #444;
   border-radius: 10px;
-  padding: 30px; /* Reduced from 40px */
+  padding: 30px;
+  /* Reduced from 40px */
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -759,7 +790,8 @@ body {
 }
 
 .upload-icon {
-  font-size: 2.5rem; /* Reduced from 3rem */
+  font-size: 2.5rem;
+  /* Reduced from 3rem */
   color: #ff6347;
   margin-bottom: 12px;
 }
@@ -888,4 +920,95 @@ body {
 
 .fade-in-delay-4 {
   animation-delay: 0.4s;
+}
+
+/* =========================================
+   CUSTOM TOAST NOTIFICATION (Contact Form)
+   ========================================= */
+.custom-toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.custom-toast {
+  pointer-events: auto;
+  background: rgba(255, 99, 71, 0.95);
+  /* Brand Orange */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 300px;
+  transform: translateX(120%);
+  animation: toastSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-toast i {
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.custom-toast-content {
+  flex: 1;
+}
+
+.custom-toast-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.custom-toast-message {
+  font-size: 0.9rem;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+.custom-toast.hide {
+  animation: toastSlideOut 0.4s ease forwards;
+}
+
+@keyframes toastSlideIn {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  to {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .custom-toast-container {
+    right: 15px;
+    left: 15px;
+    top: 15px;
+  }
+
+  .custom-toast {
+    min-width: auto;
+    width: 100%;
+  }
 }
