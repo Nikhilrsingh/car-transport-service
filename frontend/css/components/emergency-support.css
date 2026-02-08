@@ -1577,3 +1577,87 @@ body[data-theme="light"] section.emergency-hero .emergency-badge span,
 body[data-theme="light"] section.emergency-hero .emergency-badge i {
     color: #ffffff !important;
 }
+
+/* ============================================================
+   DARK MODE THEME FIX - Emergency Support Page
+   ============================================================ */
+
+body[data-theme="dark"] {
+    background-color: var(--color-dark-bg, #0f1115) !important;
+    color: var(--color-dark-text-primary, #ffffff) !important;
+}
+
+/* 1. Sections Background */
+body[data-theme="dark"] .emergency-hotline,
+body[data-theme="dark"] .emergency-contact,
+body[data-theme="dark"] .roadside-assistance {
+    background-color: var(--color-dark-bg, #0f1115) !important;
+}
+
+body[data-theme="dark"] .live-chat-section,
+body[data-theme="dark"] .emergency-procedures,
+body[data-theme="dark"] .support-hours,
+body[data-theme="dark"] .emergency-faq {
+    background-color: var(--color-dark-surface, #1a1a1a) !important;
+}
+
+/* 2. FAQ Accordion Fix - */
+body[data-theme="dark"] .faq-accordion-item {
+    background: var(--color-dark-surface, #1a1a1a) !important;
+    border-color: var(--color-dark-border, #2d2d2d) !important;
+    box-shadow: none !important; 
+}
+
+
+body[data-theme="dark"] .faq-accordion-header,
+body[data-theme="dark"] .faq-accordion-header:hover,
+body[data-theme="dark"] .faq-accordion-header[aria-expanded="true"],
+body[data-theme="dark"] .faq-question,
+body[data-theme="dark"] .faq-question:hover {
+    background: transparent !important; 
+    color: #ffffff !important; 
+}
+body[data-theme="dark"] .faq-accordion-content p {
+    color: var(--color-dark-text-secondary, #f0f0f0) !important;
+    background: transparent !important;
+}
+body[data-theme="dark"] .faq-icon {
+    color: var(--primary-color, #ff6b35) !important;
+}
+
+/* 3. Cards & Sidebar Elements */
+body[data-theme="dark"] .hotline-card,
+body[data-theme="dark"] .procedure-card,
+body[data-theme="dark"] .sidebar-card,
+body[data-theme="dark"] .hours-card,
+body[data-theme="dark"] .chat-preview {
+    background: var(--color-dark-surface, #1a1a1a) !important;
+    border-color: var(--color-dark-border, #2d2d2d) !important;
+    color: var(--color-dark-text-primary, #ffffff) !important;
+}
+
+body[data-theme="dark"] .hotline-description,
+body[data-theme="dark"] .chat-feature p,
+body[data-theme="dark"] .hours-description,
+body[data-theme="dark"] .section-subtitle {
+    color: var(--color-dark-text-muted, #c0c0c0) !important;
+}
+
+/* 4. Form & Input Fixes */
+body[data-theme="dark"] .emergency-form {
+    background: var(--color-dark-bg, #0f1115) !important;
+}
+
+body[data-theme="dark"] .form-group input,
+body[data-theme="dark"] .form-group select,
+body[data-theme="dark"] .form-group textarea {
+    background: var(--color-dark-surface, #1a1a1a) !important;
+    border-color: var(--color-dark-border, #2d2d2d) !important;
+    color: white !important;
+}
+
+/* 5. Procedure List Fix */
+body[data-theme="dark"] .procedure-steps-list li {
+    border-bottom-color: var(--color-dark-border, #2d2d2d) !important;
+    color: var(--color-dark-text-secondary, #f0f0f0) !important;
+}
