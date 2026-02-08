@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,7 @@
         content="Compare car transport plans and calculate your pricing with our interactive calculator. Standard, Premium, and Express service options.">
     <title>Pricing Calculator - Car Transport Service</title>
     <base href="./" />
-  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/components/header.css">
     <link rel="stylesheet" href="../css/components/navbar.css" />
@@ -20,12 +19,11 @@
     <link rel="stylesheet" href="../css/components/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/components/glowing-input.css">
-
 </head>
 
 <body>
     <!-- Navbar -->
-     <div id="scroll-progress"></div>
+    <div id="scroll-progress"></div>
     <div id="navbar-container"></div>
 
     <!-- Hero Section -->
@@ -33,7 +31,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">Pricing Calculator</h1>
-            <p class="hero-subtitle">Compare Plans & Calculate Your Transport Cost</p>
+            <p class="hero-subtitle">Compare Plans &amp; Calculate Your Transport Cost</p>
         </div>
     </section>
 
@@ -344,7 +342,7 @@
     <!-- Bulk & Corporate Discounts -->
     <section class="discounts-section">
         <div class="container">
-            <h2 class="section-title fade-in">Bulk & Corporate Discounts</h2>
+            <h2 class="section-title fade-in">Bulk &amp; Corporate Discounts</h2>
             <p class="section-subtitle fade-in fade-in-delay-1">Save more when you ship multiple vehicles</p>
 
             <div class="discount-grid fade-in fade-in-delay-2">
@@ -469,34 +467,82 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- FAQ Section (Accordion) -->
     <section class="calculator-faq">
         <div class="container">
             <h2 class="section-title fade-in">Pricing FAQs</h2>
 
-            <div class="faq-grid fade-in fade-in-delay-1">
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> How is pricing calculated?</h3>
-                    <p>Our pricing is based on distance, vehicle type, service level, and any add-ons you select. The
-                        calculator above provides an instant estimate.</p>
+            <div class="faq-accordion fade-in fade-in-delay-1" role="region" aria-label="Pricing frequently asked questions">
+                <div class="faq-item-accordion">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            <i class="fas fa-question-circle"></i>
+                            How is pricing calculated?
+                        </span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer" hidden>
+                        <p>
+                            Our pricing is based on distance, vehicle type, service level, and any add-ons you select.
+                            The calculator above provides an instant estimate.
+                        </p>
+                    </div>
                 </div>
 
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> Are there hidden fees?</h3>
-                    <p>No! Our quotes include all costs. The only exception is if you request additional services after
-                        booking or if vehicle details were inaccurate.</p>
+                <div class="faq-item-accordion">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            <i class="fas fa-question-circle"></i>
+                            Are there hidden fees?
+                        </span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer" hidden>
+                        <p>
+                            No! Our quotes include all costs. The only exception is if you request additional services
+                            after booking or if vehicle details were inaccurate.
+                        </p>
+                    </div>
                 </div>
 
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> When do I pay?</h3>
-                    <p>We require a deposit to secure your booking, with the balance due upon delivery. We accept all
-                        major credit cards and payment plans.</p>
+                <div class="faq-item-accordion">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            <i class="fas fa-question-circle"></i>
+                            When do I pay?
+                        </span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer" hidden>
+                        <p>
+                            We require a deposit to secure your booking, with the balance due upon delivery. We accept
+                            all major credit cards and payment plans.
+                        </p>
+                    </div>
                 </div>
 
-                <div class="faq-item">
-                    <h3><i class="fas fa-question-circle"></i> Can I get a price match?</h3>
-                    <p>Yes! We offer price matching on comparable services. Contact us with a competitor's quote for
-                        review.</p>
+                <div class="faq-item-accordion">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            <i class="fas fa-question-circle"></i>
+                            Can I get a price match?
+                        </span>
+                        <span class="faq-icon" aria-hidden="true">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer" hidden>
+                        <p>
+                            Yes! We offer price matching on comparable services. Contact us with a competitor's quote
+                            for review.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -521,5 +567,4 @@
 
     <!-- 🚀 Floating Action Menu loaded via footer component -->
 </body>
-
 </html>
