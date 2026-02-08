@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initPlanSelection();
     initDiscountButtons();
     initOfferButtons();
+    initPricingFaqAccordion();
 });
 
 // Calculator Configuration
@@ -40,6 +41,8 @@ function initCalculator() {
     const calculateBtn = document.getElementById('calculateBtn');
     const inputs = document.querySelectorAll('input, select');
     
+    if (!calculateBtn) return;
+
     // Add event listeners to all inputs for real-time calculation
     inputs.forEach(input => {
         input.addEventListener('change', calculatePrice);
@@ -51,10 +54,13 @@ function initCalculator() {
         calculatePrice();
         
         // Scroll to summary
-        document.querySelector('.price-summary').scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'nearest' 
-        });
+        const summary = document.querySelector('.price-summary');
+        if (summary) {
+            summary.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'nearest' 
+            });
+        }
     });
     
     // Initial calculation
@@ -63,11 +69,18 @@ function initCalculator() {
 
 // Calculate Price Function
 function calculatePrice() {
+    const distanceInput = document.getElementById('distance');
+    const vehicleTypeSelect = document.getElementById('vehicleType');
+    const vehicleConditionSelect = document.getElementById('vehicleCondition');
+    const servicePlanInput = document.querySelector('input[name="servicePlan"]:checked');
+
+    if (!distanceInput || !vehicleTypeSelect || !vehicleConditionSelect || !servicePlanInput) return;
+
     // Get form values
-    const distance = parseFloat(document.getElementById('distance').value) || 500;
-    const vehicleType = document.getElementById('vehicleType').value;
-    const vehicleCondition = document.getElementById('vehicleCondition').value;
-    const servicePlan = document.querySelector('input[name="servicePlan"]:checked').value;
+    const distance = parseFloat(distanceInput.value) || 500;
+    const vehicleType = vehicleTypeSelect.value;
+    const vehicleCondition = vehicleConditionSelect.value;
+    const servicePlan = servicePlanInput.value;
     
     // Get selected addons
     const selectedAddons = Array.from(document.querySelectorAll('input[name="addon"]:checked'));
@@ -86,13 +99,17 @@ function calculatePrice() {
     // Calculate addon costs
     let addonTotal = 0;
     const addonsList = document.getElementById('addonsList');
-    addonsList.innerHTML = '';
+    if (addonsList) {
+        addonsList.innerHTML = '';
+    }
     
     selectedAddons.forEach(addon => {
         const addonValue = addon.value;
         const addonPrice = PRICING_CONFIG.addons[addonValue];
         addonTotal += addonPrice;
         
+        if (!addonsList) return;
+
         // Add to display
         const addonName = addon.parentElement.querySelector('h4').textContent;
         const addonRow = document.createElement('div');
@@ -107,9 +124,8 @@ function calculatePrice() {
     // Calculate subtotal
     let subtotal = baseCost + nonRunningFee + addonTotal;
     
-    // Apply discounts (could be based on promo codes, bulk orders, etc.)
+    // Apply discounts (example: 5% discount for distances over 1000 miles)
     let discount = 0;
-    // Example: 5% discount for distances over 1000 miles
     if (distance > 1000) {
         discount = subtotal * 0.05;
     }
@@ -118,37 +134,51 @@ function calculatePrice() {
     const total = subtotal - discount;
     
     // Update display
-    document.getElementById('baseCost').textContent = `$${baseCost.toFixed(2)}`;
+    const baseCostEl = document.getElementById('baseCost');
+    const vehicleTypeRow = document.getElementById('vehicleTypeRow');
+    const vehicleTypeCostEl = document.getElementById('vehicleTypeCost');
+    const conditionRow = document.getElementById('conditionRow');
+    const conditionCostEl = document.getElementById('conditionCost');
+    const discountRow = document.getElementById('discountRow');
+    const discountAmountEl = document.getElementById('discountAmount');
+    const totalCostEl = document.getElementById('totalCost');
+
+    if (baseCostEl) baseCostEl.textContent = `$${baseCost.toFixed(2)}`;
     
     // Show/hide vehicle type adjustment
-    const vehicleTypeRow = document.getElementById('vehicleTypeRow');
-    if (vehicleMultiplier !== 1.0) {
-        vehicleTypeRow.style.display = 'flex';
-        document.getElementById('vehicleTypeCost').textContent = `$${vehicleTypeAdjustment.toFixed(2)}`;
-    } else {
-        vehicleTypeRow.style.display = 'none';
+    if (vehicleTypeRow && vehicleTypeCostEl) {
+        if (vehicleMultiplier !== 1.0) {
+            vehicleTypeRow.style.display = 'flex';
+            vehicleTypeCostEl.textContent = `$${vehicleTypeAdjustment.toFixed(2)}`;
+        } else {
+            vehicleTypeRow.style.display = 'none';
+        }
     }
     
     // Show/hide condition fee
-    const conditionRow = document.getElementById('conditionRow');
-    if (nonRunningFee > 0) {
-        conditionRow.style.display = 'flex';
-        document.getElementById('conditionCost').textContent = `$${nonRunningFee.toFixed(2)}`;
-    } else {
-        conditionRow.style.display = 'none';
+    if (conditionRow && conditionCostEl) {
+        if (nonRunningFee > 0) {
+            conditionRow.style.display = 'flex';
+            conditionCostEl.textContent = `$${nonRunningFee.toFixed(2)}`;
+        } else {
+            conditionRow.style.display = 'none';
+        }
     }
     
     // Show/hide discount
-    const discountRow = document.getElementById('discountRow');
-    if (discount > 0) {
-        discountRow.style.display = 'flex';
-        document.getElementById('discountAmount').textContent = `-$${discount.toFixed(2)}`;
-    } else {
-        discountRow.style.display = 'none';
+    if (discountRow && discountAmountEl) {
+        if (discount > 0) {
+            discountRow.style.display = 'flex';
+            discountAmountEl.textContent = `-$${discount.toFixed(2)}`;
+        } else {
+            discountRow.style.display = 'none';
+        }
     }
     
     // Update total
-    document.getElementById('totalCost').textContent = `$${total.toFixed(2)}`;
+    if (totalCostEl) {
+        totalCostEl.textContent = `$${total.toFixed(2)}`;
+    }
 }
 
 // Plan Selection from Comparison Table
@@ -167,9 +197,12 @@ function initPlanSelection() {
             }
             
             // Scroll to calculator
-            document.querySelector('.price-calculator').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
+            const calculatorSection = document.querySelector('.price-calculator');
+            if (calculatorSection) {
+                calculatorSection.scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }
         });
     });
 }
@@ -178,10 +211,16 @@ function initPlanSelection() {
 const bookNowBtn = document.querySelector('.book-now-btn');
 if (bookNowBtn) {
     bookNowBtn.addEventListener('click', function() {
+        const totalEl = document.getElementById('totalCost');
+        const servicePlanInput = document.querySelector('input[name="servicePlan"]:checked');
+        const distanceInput = document.getElementById('distance');
+
+        if (!totalEl || !servicePlanInput || !distanceInput) return;
+
         // Get current quote details
-        const total = document.getElementById('totalCost').textContent;
-        const plan = document.querySelector('input[name="servicePlan"]:checked').value;
-        const distance = document.getElementById('distance').value;
+        const total = totalEl.textContent;
+        const plan = servicePlanInput.value;
+        const distance = distanceInput.value;
         
         // Store quote data
         const quoteData = {
@@ -207,15 +246,25 @@ if (bookNowBtn) {
 const saveQuoteBtn = document.querySelector('.save-quote-btn');
 if (saveQuoteBtn) {
     saveQuoteBtn.addEventListener('click', function() {
+        const totalEl = document.getElementById('totalCost');
+        const baseCostEl = document.getElementById('baseCost');
+        const servicePlanInput = document.querySelector('input[name="servicePlan"]:checked');
+        const distanceInput = document.getElementById('distance');
+        const vehicleTypeSelect = document.getElementById('vehicleType');
+        const fromZipInput = document.getElementById('fromZip');
+        const toZipInput = document.getElementById('toZip');
+
+        if (!totalEl || !baseCostEl || !servicePlanInput || !distanceInput || !vehicleTypeSelect) return;
+
         // Get current quote details
         const quoteData = {
-            total: document.getElementById('totalCost').textContent,
-            baseCost: document.getElementById('baseCost').textContent,
-            plan: document.querySelector('input[name="servicePlan"]:checked').value,
-            distance: document.getElementById('distance').value,
-            vehicleType: document.getElementById('vehicleType').value,
-            fromZip: document.getElementById('fromZip').value,
-            toZip: document.getElementById('toZip').value,
+            total: totalEl.textContent,
+            baseCost: baseCostEl.textContent,
+            plan: servicePlanInput.value,
+            distance: distanceInput.value,
+            vehicleType: vehicleTypeSelect.value,
+            fromZip: fromZipInput ? fromZipInput.value : '',
+            toZip: toZipInput ? toZipInput.value : '',
             addons: Array.from(document.querySelectorAll('input[name="addon"]:checked')).map(el => el.value),
             timestamp: new Date().toISOString()
         };
@@ -275,15 +324,19 @@ function initOfferButtons() {
     claimOfferBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const offerCard = this.closest('.offer-card');
-            const offerName = offerCard.querySelector('h3').textContent;
+            const offerNameEl = offerCard ? offerCard.querySelector('h3') : null;
+            const offerName = offerNameEl ? offerNameEl.textContent : 'Offer';
             
-            // Apply offer to calculator
+            // Apply offer to calculator (placeholder behaviour)
             showNotification(`${offerName} applied to your quote!`, 'success');
             
             // Scroll to calculator
-            document.querySelector('.price-calculator').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
+            const calculatorSection = document.querySelector('.price-calculator');
+            if (calculatorSection) {
+                calculatorSection.scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }
         });
     });
     
@@ -292,7 +345,6 @@ function initOfferButtons() {
             const btnText = this.textContent.trim();
             
             if (btnText === 'Notify Me') {
-                // Email notification signup
                 const email = prompt('Enter your email to be notified when this offer starts:');
                 if (email && isValidEmail(email)) {
                     console.log('Notification signup:', email);
@@ -301,11 +353,43 @@ function initOfferButtons() {
                     this.disabled = true;
                 }
             } else if (btnText === 'Learn More') {
-                // Show more info
                 const offerCard = this.closest('.offer-card');
-                const offerName = offerCard.querySelector('h3').textContent;
+                const offerNameEl = offerCard ? offerCard.querySelector('h3') : null;
+                const offerName = offerNameEl ? offerNameEl.textContent : 'This offer';
                 alert(`${offerName} - Contact us for more details about this seasonal offer.`);
             }
+        });
+    });
+}
+
+// Pricing FAQ Accordion
+function initPricingFaqAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item-accordion');
+    if (!faqItems.length) return;
+
+    faqItems.forEach((item) => {
+        const button = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        if (!button || !answer) return;
+
+        button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+            // Optional: single-open behaviour
+            faqItems.forEach((otherItem) => {
+                if (otherItem !== item) {
+                    const otherButton = otherItem.querySelector('.faq-question');
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    if (!otherButton || !otherAnswer) return;
+                    otherButton.setAttribute('aria-expanded', 'false');
+                    otherAnswer.hidden = true;
+                    otherItem.classList.remove('is-open');
+                }
+            });
+
+            button.setAttribute('aria-expanded', String(!isExpanded));
+            answer.hidden = isExpanded;
+            item.classList.toggle('is-open', !isExpanded);
         });
     });
 }
@@ -330,7 +414,7 @@ function showNotification(message, type = 'info') {
     };
     
     notification.innerHTML = `
-        <i class="fas ${icons[type]}"></i>
+        <i class="fas ${icons[type] || icons.info}"></i>
         <span>${message}</span>
     `;
     
@@ -338,7 +422,7 @@ function showNotification(message, type = 'info') {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: ${colors[type]};
+        background: ${colors[type] || colors.info};
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 8px;
@@ -357,7 +441,9 @@ function showNotification(message, type = 'info') {
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease';
         setTimeout(() => {
-            document.body.removeChild(notification);
+            if (notification.parentNode) {
+                document.body.removeChild(notification);
+            }
         }, 300);
     }, 4000);
 }
@@ -396,19 +482,32 @@ document.head.appendChild(style);
 
 // ZIP Code Auto-Distance Calculation (Mock)
 // In production, this would use a real geocoding API
-document.getElementById('fromZip').addEventListener('blur', updateDistance);
-document.getElementById('toZip').addEventListener('blur', updateDistance);
+const fromZipInput = document.getElementById('fromZip');
+const toZipInput = document.getElementById('toZip');
+
+if (fromZipInput) {
+    fromZipInput.addEventListener('blur', updateDistance);
+}
+if (toZipInput) {
+    toZipInput.addEventListener('blur', updateDistance);
+}
 
 function updateDistance() {
-    const fromZip = document.getElementById('fromZip').value;
-    const toZip = document.getElementById('toZip').value;
+    const fromZipEl = document.getElementById('fromZip');
+    const toZipEl = document.getElementById('toZip');
+    const distanceInput = document.getElementById('distance');
+    const distanceHint = document.querySelector('#distance + small');
+
+    if (!fromZipEl || !toZipEl || !distanceInput || !distanceHint) return;
+
+    const fromZip = fromZipEl.value;
+    const toZip = toZipEl.value;
     
     if (fromZip && toZip && fromZip.length >= 5 && toZip.length >= 5) {
         // Mock distance calculation
-        // In production, use Google Maps Distance Matrix API or similar
         const mockDistance = Math.floor(Math.random() * 2000) + 100;
-        document.getElementById('distance').value = mockDistance;
-        document.querySelector('#distance + small').textContent = `Approximately ${mockDistance} miles`;
+        distanceInput.value = mockDistance;
+        distanceHint.textContent = `Approximately ${mockDistance} miles`;
         
         // Recalculate price
         calculatePrice();
@@ -418,14 +517,16 @@ function updateDistance() {
 // Smooth scroll for internal links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
     });
 });
 
