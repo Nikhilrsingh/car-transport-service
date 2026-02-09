@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Route Weather Check | Harihar Car Carriers</title>
+  <meta name="description" content="Check weather conditions along your car transport route. Plan your vehicle shipment with real-time weather forecasts for all cities on your route." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nikhilrsingh.github.io/car-transport-service/pages/route-weather.html" />
+  <base href="./" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/middle-navbar.css" />
+  <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+  <link rel="stylesheet" href="../css/components/footer.css" />
+  <link rel="stylesheet" href="../css/components/floating-action-menu.css" />
+  <link rel="stylesheet" href="../css/components/bottom-action-bar.css" />
+  <link rel="stylesheet" href="../css/components/scroll-button.css" />
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css" />
+  <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+  <link rel="stylesheet" href="../css/components/backtoBottom.css" />
+  <link rel="stylesheet" href="../css/components/floating-button.css" />
+  <link rel="stylesheet" href="../css/components/route-weather.css" />
+  <link rel="stylesheet" href="../css/light-mode.css" />
+  <link rel="stylesheet" href="../css/dark-mode.css" />
+</head>
+
+<body>
+  <div id="scroll-progress"></div>
+  <!-- Navbar Container -->
+  <div id="navbar-container"></div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="page-header-content">
+      <h1><i class="fas fa-cloud-sun"></i> Route Weather Check</h1>
+      <p class="subtitle">Check weather conditions along your transport route</p>
+      <div class="breadcrumb">
+        <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+        <span>/</span>
+        <span>Route Weather</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="weather-check-section">
+
+      <!-- Monsoon Alert -->
+      <div class="monsoon-alert" id="monsoonAlert" style="display: none;">
+        <div class="alert-content">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div>
+            <h3>Monsoon Season Alert</h3>
+            <p>Heavy rains are common during June–September. Expect delays and plan accordingly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Card -->
+      <div class="weather-input-card" id="inputCard">
+        <div class="input-card-header">
+          <i class="fas fa-route"></i>
+          <div>
+            <h2>Check Your Route</h2>
+            <p>Select pickup and delivery cities to see current weather along the route</p>
+          </div>
+        </div>
+
+        <div class="weather-form">
+          <!-- Pickup City -->
+          <div class="form-group">
+            <label for="pickupCity">
+              <i class="fas fa-location-dot"></i> Pickup City
+            </label>
+            <input type="text" id="pickupCity" placeholder="e.g. Mumbai" autocomplete="off" />
+            <div class="city-suggestions" id="pickupSuggestions"></div>
+          </div>
+
+          <!-- Delivery City -->
+          <div class="form-group">
+            <label for="deliveryCity">
+              <i class="fas fa-flag-checkered"></i> Delivery City
+            </label>
+            <input type="text" id="deliveryCity" placeholder="e.g. Delhi" autocomplete="off" />
+            <div class="city-suggestions" id="deliverySuggestions"></div>
+          </div>
+
+          <!-- Check Button -->
+          <button class="btn-check-weather" id="checkWeatherBtn">
+            <i class="fas fa-magnifying-glass"></i>
+            <span>Check Weather</span>
+          </button>
+        </div>
+
+        <!-- Famous/Popular Routes -->
+        <div class="famous-routes">
+          <p class="routes-label"><i class="fas fa-fire-alt"></i> Famous Routes</p>
+          <div class="route-buttons-grid">
+            <button class="famous-route-btn" data-pickup="Mumbai" data-delivery="Delhi">
+              <i class="fas fa-truck"></i> Mumbai → Delhi
+            </button>
+            <button class="famous-route-btn" data-pickup="Bangalore" data-delivery="Hyderabad">
+              <i class="fas fa-truck"></i> Bangalore → Hyderabad
+            </button>
+            <button class="famous-route-btn" data-pickup="Kolkata" data-delivery="Delhi">
+              <i class="fas fa-truck"></i> Kolkata → Delhi
+            </button>
+            <button class="famous-route-btn" data-pickup="Delhi" data-delivery="Mumbai">
+              <i class="fas fa-truck"></i> Delhi → Mumbai
+            </button>
+            <button class="famous-route-btn" data-pickup="Hyderabad" data-delivery="Mumbai">
+              <i class="fas fa-truck"></i> Hyderabad → Mumbai
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div class="weather-loading" id="loadingState" style="display: none;">
+        <div class="weather-spinner"></div>
+        <p class="loading-text">Fetching weather data for your route...</p>
+      </div>
+
+      <!-- Error State -->
+      <div class="weather-error" id="errorState" style="display: none;">
+        <div class="error-icon"><i class="fas fa-cloud-bolt"></i></div>
+        <h3>Oops! Something went wrong</h3>
+        <p id="errorMessage">Could not fetch weather for the selected route</p>
+        <button class="btn-try-again" id="retryBtn">
+          <i class="fas fa-rotate-right"></i> Try Again
+        </button>
+      </div>
+
+      <!-- Weather Results -->
+      <div class="weather-results" id="weatherResults" style="display: none;">
+        <div class="results-header">
+          <h2><i class="fas fa-cloud-sun-rain"></i> Weather Along Your Route</h2>
+          <p class="route-label" id="routeLabel"></p>
+        </div>
+
+        <!-- Delay Warning -->
+        <div class="delay-banner" id="delayWarning"></div>
+
+        <!-- Weather Cards Grid -->
+        <div class="weather-cards-grid" id="weatherCardsGrid"></div>
+
+        <!-- New Route Button -->
+        <div class="results-actions">
+          <button class="btn-new-route" id="newRouteBtn">
+            <i class="fas fa-rotate-left"></i> Check Different Route
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="how-it-works-section">
+      <h3><i class="fas fa-lightbulb"></i> How It Works</h3>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">
+            <i class="fas fa-map-location-dot"></i>
+          </div>
+          <div class="step-number">1</div>
+          <h4>Select Route</h4>
+          <p>Choose your pickup and delivery cities</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+            <i class="fas fa-cloud-sun"></i>
+          </div>
+          <div class="step-number">2</div>
+          <h4>View Weather</h4>
+          <p>See current weather for all cities along your route</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+            <i class="fas fa-truck-fast"></i>
+          </div>
+          <div class="step-number">3</div>
+          <h4>Plan Trip</h4>
+          <p>Get delay estimates based on weather conditions</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="../js/modules/loading-state-manager.js"></script>
+  <script src="../js/modules/page-navigation-loader.js"></script>
+  <script src="../js/modules/navbar-loader.js?v=2"></script>
+  <script src="../js/modules/footer-loader.js"></script>
+  <script src="../js/modules/component-initializer.js"></script>
+  <script src="../js/modules/themes.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/modules/route-weather.js"></script>
+  <script src="../js/modules/floating-chatbot-button.js"></script>
+  <script src="../js/modules/chatbot-modal.js"></script>
+  <script src="../js/modules/back-to-top-button.js"></script>
+  <script src="../js/modules/backtoBottom.js"></script>
+  <script src="../js/modules/scroll-animations.js"></script>
+  <script src="../js/modules/bottom-fixed-loader.js"></script>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  <button class="back-to-bottom" id="backToBottom">
+    <i class="fas fa-arrow-down"></i>
+  </button>
+</body>
+
+</html>
