@@ -46,7 +46,7 @@
 
     function updateClock() {
       const now = new Date();
-      
+
       // Format time in 12-hour format with AM/PM
       const time = now.toLocaleTimeString('en-US', {
         hour12: true,
@@ -54,13 +54,13 @@
         minute: '2-digit',
         second: '2-digit'
       });
-      
+
       // Format date (Mon 5 Jan)
       const day = now.toLocaleDateString('en-US', { weekday: 'short' });
       const date = now.getDate();
       const month = now.toLocaleDateString('en-US', { month: 'short' });
       const dateStr = `${day} ${date} ${month}`;
-      
+
       // Update clock HTML
       clockElement.innerHTML = `
         <span class="clock-time">${time}</span>
@@ -86,7 +86,7 @@
       const quoteSection = document.querySelector('.hero-quote');
       if (quoteSection) {
         quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
+
         // Focus on the first input field
         setTimeout(() => {
           const firstInput = document.getElementById('fromCity');
@@ -108,13 +108,13 @@
 
   function handleChatbotClick() {
     console.log('Bottom Action Bar: Chatbot button clicked');
-    
+
     // Try to open the chatbot modal using the correct ID
     const chatbotModal = document.getElementById('chatbot-modal-overlay');
     if (chatbotModal) {
       chatbotModal.classList.add('active');
       chatbotModal.style.display = 'flex';
-      
+
       // Focus on the input field
       setTimeout(() => {
         const chatInput = document.getElementById('chatbot-input');
@@ -122,7 +122,7 @@
           chatInput.focus();
         }
       }, 300);
-      
+
       console.log('Bottom Action Bar: Chatbot modal opened');
     } else {
       // Fallback: trigger the FAB chatbot button if it exists

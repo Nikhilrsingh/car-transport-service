@@ -44,7 +44,7 @@
 
     // Add missing components regardless of footer state
     console.log('Component Initializer: Adding missing components...');
-    
+
     // Add missing FAB
     if (!componentsLoaded.fab) {
       addFABComponent();
@@ -79,9 +79,9 @@
       console.log('Component Initializer: FAB already exists, skipping');
       return;
     }
-    
+
     console.log('Component Initializer: Adding FAB component');
-    
+
     const fabHTML = `
       <div class="fab-container">
         <button class="fab-main" id="fabMain" aria-label="Open actions menu" aria-expanded="false">
@@ -121,9 +121,9 @@
       console.log('Component Initializer: Bottom Action Bar already exists, skipping');
       return;
     }
-    
+
     console.log('Component Initializer: Adding Bottom Action Bar component');
-    
+
     const bottomBarHTML = `
       <div class="bottom-action-bar-fixed">
         <div class="bottom-bar-left">
@@ -154,9 +154,9 @@
       console.log('Component Initializer: Scroll Button already exists, skipping');
       return;
     }
-    
+
     console.log('Component Initializer: Adding Scroll Button component');
-    
+
     const button = document.createElement('button');
     button.className = 'scroll-button';
     button.id = 'smartScrollBtn';
@@ -171,7 +171,7 @@
     const path = window.location.pathname;
     const isInPagesFolder = path.includes('/pages/');
     const cssBasePath = isInPagesFolder ? '../css/components/' : './css/components/';
-    
+
     const cssFiles = [
       'floating-action-menu.css',
       'bottom-action-bar.css',
@@ -179,7 +179,7 @@
       'chatbot-modal.css',
       'floating-chatbot-button.css'
     ];
-    
+
     cssFiles.forEach(cssFile => {
       // Check if CSS is already loaded
       const existingLink = document.querySelector(`link[href*="${cssFile}"]`);
@@ -195,7 +195,7 @@
 
   function loadComponentScripts() {
     console.log('Component Initializer: Loading component scripts');
-    
+
     const path = window.location.pathname;
     const isInPagesFolder = path.includes('/pages/');
     const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
@@ -230,10 +230,10 @@
     const script = document.createElement('script');
     script.src = src;
     script.id = id;
-    script.onload = function() {
+    script.onload = function () {
       console.log(`Component Initializer: ${id} loaded successfully`);
     };
-    script.onerror = function() {
+    script.onerror = function () {
       console.error(`Component Initializer: Failed to load ${id} from ${src}`);
     };
     document.body.appendChild(script);
@@ -256,7 +256,7 @@
   }
 
   // Also initialize when window loads (as a backup)
-  window.addEventListener('load', function() {
+  window.addEventListener('load', function () {
     setTimeout(initializeComponents, 500);
   });
 

@@ -15,7 +15,7 @@
 
   function init() {
     console.log('FAB: Initializing...');
-    
+
     // Check if there's a hash in the URL (e.g., #quote) and scroll to it
     if (window.location.hash === '#quote') {
       setTimeout(() => {
@@ -32,7 +32,7 @@
         }
       }, 300); // Delay to ensure page is fully loaded
     }
-    
+
     const fabMain = document.getElementById('fabMain');
     const fabActions = document.getElementById('fabActions');
     const fabContainer = document.querySelector('.fab-container');
@@ -55,7 +55,7 @@
         console.log('FAB: Made visible');
       }
     }
-    
+
     // Show FAB when page is loaded or after delay
     if (document.body.classList.contains('loaded')) {
       showFAB();
@@ -68,10 +68,10 @@
         }
       });
       observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-      
+
       // Fallback: show after 2 seconds regardless
       setTimeout(showFAB, 2000);
-      
+
       // Also show on window load
       window.addEventListener('load', () => setTimeout(showFAB, 500));
     }
@@ -149,33 +149,33 @@
       console.log('FAB: Menu closed');
     }
 
-   function handleQuoteClick() {
-  const quoteSection = document.querySelector('.hero-quote');
+    function handleQuoteClick() {
+      const quoteSection = document.querySelector('.hero-quote');
 
-  if (quoteSection) {
-    // If we are on index.html, just scroll down
-    closeFAB();
-    quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    
-    // Focus the first input for better UX
-    setTimeout(() => {
-      const firstInput = document.getElementById('fromCity');
-      if (firstInput) firstInput.focus();
-    }, 600);
-  } else {
-    // If we are on booking.html or any other page, redirect to home with hash
-    window.location.href = '../index.html#quote';
-  }
-}
+      if (quoteSection) {
+        // If we are on index.html, just scroll down
+        closeFAB();
+        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Focus the first input for better UX
+        setTimeout(() => {
+          const firstInput = document.getElementById('fromCity');
+          if (firstInput) firstInput.focus();
+        }, 600);
+      } else {
+        // If we are on booking.html or any other page, redirect to home with hash
+        window.location.href = '../index.html#quote';
+      }
+    }
 
     function handleBookClick() {
       console.log('Book button clicked');
       closeFAB();
-      
+
       setTimeout(() => {
         // Trigger booking modal or redirect to booking page
         const bookingModal = document.getElementById('bookingModal');
-        
+
         if (bookingModal) {
           console.log('Opening booking modal');
           bookingModal.style.display = 'flex';
@@ -190,16 +190,16 @@
     function handleChatClick() {
       console.log('Chat button clicked');
       closeFAB();
-      
+
       setTimeout(() => {
         // Trigger chatbot modal using the correct ID
         const chatbotModal = document.getElementById('chatbot-modal-overlay');
-        
+
         if (chatbotModal) {
           console.log('Opening chatbot modal');
           chatbotModal.classList.add('active');
           chatbotModal.style.display = 'flex';
-          
+
           // Focus on the input field
           setTimeout(() => {
             const chatInput = document.getElementById('chatbot-input');
@@ -230,11 +230,11 @@
     function handleFeedbackClick() {
       console.log('Feedback button clicked');
       closeFAB();
-      
+
       setTimeout(() => {
         // Trigger feedback modal if it exists
         const feedbackModal = document.getElementById('feedbackModal');
-        
+
         if (feedbackModal) {
           console.log('Opening feedback modal');
           feedbackModal.style.display = 'flex';
