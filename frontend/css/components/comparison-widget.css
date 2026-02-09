@@ -1,0 +1,397 @@
+/* ====================================
+   COMPETITOR COMPARISON WIDGET STYLES
+   "Us vs Them" Module
+   ==================================== */
+
+.comparison-widget {
+    margin-top: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.comparison-widget.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.comparison-widget-inner {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e0e0e0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.comparison-widget-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b35 0%, #ff4500 100%);
+}
+
+/* Header */
+.comparison-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.comparison-header h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 8px 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.comparison-header p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Table Structure */
+.comparison-table {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.comparison-table-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 16px;
+    background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
+    color: white;
+}
+
+.comparison-table-header > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+}
+
+.header-feature {
+    justify-content: flex-start;
+    padding-left: 12px;
+}
+
+.header-harihar i {
+    color: #4ade80;
+}
+
+.header-competitor i {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Table Body */
+.comparison-body {
+    padding: 12px;
+}
+
+.comparison-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 16px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+}
+
+.comparison-row:last-child {
+    border-bottom: none;
+}
+
+.comparison-row:hover {
+    background: #f8f9fa;
+    transform: translateX(4px);
+}
+
+.feature-name {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+}
+
+.harihar-value,
+.competitor-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.harihar-value {
+    background: #ecfdf5;
+    color: #059669;
+    font-weight: 600;
+}
+
+.harihar-value i {
+    color: #10b981;
+    font-size: 16px;
+}
+
+.competitor-value {
+    background: #fef2f2;
+    color: #dc2626;
+    font-weight: 500;
+}
+
+.competitor-value i {
+    color: #ef4444;
+    font-size: 16px;
+}
+
+.competitor-value.not-included {
+    opacity: 0.8;
+}
+
+/* Savings Badge */
+.comparison-savings {
+    margin-top: 20px;
+    padding: 16px;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 2px solid #ff6b35;
+    border-radius: 12px;
+    animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(255, 107, 53, 0);
+    }
+}
+
+.savings-badge {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.savings-badge i {
+    font-size: 32px;
+    color: #ff6b35;
+}
+
+.savings-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.savings-text strong {
+    font-size: 16px;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+}
+
+.savings-text span {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* CTA Button */
+.comparison-cta {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.comparison-book-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+}
+
+.comparison-book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(255, 107, 53, 0.5);
+}
+
+.comparison-book-btn:active {
+    transform: translateY(0);
+}
+
+.comparison-book-btn i {
+    font-size: 18px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .comparison-widget-inner {
+        padding: 16px;
+    }
+
+    .comparison-header h3 {
+        font-size: 20px;
+    }
+
+    .comparison-header p {
+        font-size: 13px;
+    }
+
+    .comparison-table-header {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .comparison-table-header > div {
+        font-size: 13px;
+    }
+
+    .header-feature {
+        display: none;
+    }
+
+    .comparison-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px 8px;
+    }
+
+    .feature-name {
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        padding: 8px;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+
+    .harihar-value,
+    .competitor-value {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .harihar-value::before {
+        content: "✓ Harihar: ";
+        font-weight: 700;
+        margin-right: 4px;
+    }
+
+    .competitor-value::before {
+        content: "⚠ Others: ";
+        font-weight: 700;
+        margin-right: 4px;
+    }
+
+    .savings-badge {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .savings-badge i {
+        font-size: 28px;
+    }
+
+    .savings-text strong {
+        font-size: 15px;
+    }
+
+    .savings-text span {
+        font-size: 12px;
+    }
+
+    .comparison-book-btn {
+        width: 100%;
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+}
+
+/* Dark Mode Support */
+body[data-theme="dark"] .comparison-widget-inner {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-color: #444;
+}
+
+body[data-theme="dark"] .comparison-header h3 {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .comparison-header p {
+    color: #aaa;
+}
+
+body[data-theme="dark"] .comparison-table {
+    background: #1a1a1a;
+}
+
+body[data-theme="dark"] .comparison-row {
+    border-bottom-color: #333;
+}
+
+body[data-theme="dark"] .comparison-row:hover {
+    background: #2a2a2a;
+}
+
+body[data-theme="dark"] .feature-name {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .harihar-value {
+    background: #064e3b;
+    color: #6ee7b7;
+}
+
+body[data-theme="dark"] .competitor-value {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+body[data-theme="dark"] .comparison-savings {
+    background: linear-gradient(135deg, #431407 0%, #7c2d12 100%);
+}
+
+body[data-theme="dark"] .savings-text strong {
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .savings-text span {
+    color: #d1d5db;
+}
+
+/* Print Styles */
+@media print {
+    .comparison-widget {
+        display: none;
+    }
+}

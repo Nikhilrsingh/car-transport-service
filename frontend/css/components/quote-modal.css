@@ -386,13 +386,64 @@
 .quote-form-submit-btn {
     background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4), 
+                0 2px 8px rgba(255, 69, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 107, 53, 0.5);
+}
+
+.quote-next::before,
+.quote-form-submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.quote-next:hover::before,
+.quote-form-submit-btn:hover::before {
+    left: 100%;
 }
 
 .quote-next:hover,
 .quote-form-submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6), 
+                0 4px 15px rgba(255, 69, 0, 0.5),
+                0 0 40px rgba(255, 107, 53, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #ff7f4d 0%, #ff5722 100%);
+    border-color: rgba(255, 127, 77, 0.8);
+}
+
+.quote-next:active,
+.quote-form-submit-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.4), 
+                inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.quote-next:focus,
+.quote-form-submit-btn:focus {
+    outline: none;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.5), 
+                0 2px 10px rgba(255, 69, 0, 0.4),
+                0 0 0 4px rgba(255, 107, 53, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.quote-next:disabled,
+.quote-form-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    pointer-events: none;
 }
 
 .quote-form-back-btn {

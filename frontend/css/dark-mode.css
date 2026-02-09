@@ -464,13 +464,38 @@ body[data-theme="dark"] .quote-next,
 body[data-theme="dark"] .quote-form-submit-btn {
   background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%) !important;
   color: #ffffff !important;
-  border: none !important;
-  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3) !important;
+  border: 1px solid rgba(255, 107, 53, 0.6) !important;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.5), 
+              0 2px 10px rgba(255, 69, 0, 0.4),
+              0 0 30px rgba(255, 107, 53, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
+
 body[data-theme="dark"] .quote-next:hover,
 body[data-theme="dark"] .quote-form-submit-btn:hover {
-  background: linear-gradient(135deg, #ff7f5c 0%, #ff6347 100%) !important;
-  box-shadow: 0 6px 25px rgba(255, 99, 71, 0.5) !important;
+  background: linear-gradient(135deg, #ff8556 0%, #ff5722 100%) !important;
+  box-shadow: 0 8px 35px rgba(255, 107, 53, 0.7), 
+              0 4px 20px rgba(255, 69, 0, 0.6),
+              0 0 50px rgba(255, 107, 53, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 133, 86, 0.9) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+body[data-theme="dark"] .quote-next:active,
+body[data-theme="dark"] .quote-form-submit-btn:active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 0 2px 12px rgba(255, 107, 53, 0.5), 
+              inset 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+body[data-theme="dark"] .quote-next:focus,
+body[data-theme="dark"] .quote-form-submit-btn:focus {
+  outline: none !important;
+  box-shadow: 0 4px 25px rgba(255, 107, 53, 0.6), 
+              0 2px 12px rgba(255, 69, 0, 0.5),
+              0 0 0 4px rgba(255, 107, 53, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
 
 /* Download buttons - Dark-theme overrides */

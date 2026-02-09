@@ -33,6 +33,52 @@
         'Ahmedabad': { 'Mumbai': 530, 'Delhi': 950, 'Bangalore': 1640, 'Hyderabad': 1270, 'Jaipur': 660, 'Surat': 270, 'Rajkot': 220 }
     };
 
+    // City GPS coordinates for accurate distance calculation (Haversine formula)
+    const cityCoordinates = {
+        'Mumbai': [19.0760, 72.8777],
+        'Delhi': [28.7041, 77.1025],
+        'Bangalore': [12.9716, 77.5946],
+        'Hyderabad': [17.3850, 78.4867],
+        'Ahmedabad': [23.0225, 72.5714],
+        'Chennai': [13.0827, 80.2707],
+        'Kolkata': [22.5726, 88.3639],
+        'Pune': [18.5204, 73.8567],
+        'Jaipur': [26.9124, 75.7873],
+        'Surat': [21.1702, 72.8311],
+        'Lucknow': [26.8467, 80.9462],
+        'Kanpur': [26.4499, 80.3319],
+        'Nagpur': [21.1458, 79.0882],
+        'Indore': [22.7196, 75.8577],
+        'Thane': [19.2183, 72.9781],
+        'Bhopal': [23.2599, 77.4126],
+        'Visakhapatnam': [17.6868, 83.2185],
+        'Patna': [25.5941, 85.1376],
+        'Vadodara': [22.3072, 73.1812],
+        'Ghaziabad': [28.6692, 77.4538],
+        'Ludhiana': [30.9010, 75.8573],
+        'Agra': [27.1767, 78.0081],
+        'Nashik': [19.9975, 73.7898],
+        'Meerut': [28.9845, 77.7064],
+        'Rajkot': [22.3039, 70.8022],
+        'Varanasi': [25.3176, 82.9739],
+        'Srinagar': [34.0837, 74.7973],
+        'Amritsar': [31.6340, 74.8723],
+        'Coimbatore': [11.0168, 76.9558],
+        'Jodhpur': [26.2389, 73.0243],
+        'Madurai': [9.9252, 78.1198],
+        'Chandigarh': [30.7333, 76.7794],
+        'Guwahati': [26.1445, 91.7362],
+        'Mysore': [12.2958, 76.6394],
+        'Gurgaon': [28.4595, 77.0266],
+        'Bhubaneswar': [20.2961, 85.8245],
+        'Kochi': [9.9312, 76.2673],
+        'Dehradun': [30.3165, 78.0322],
+        'Mangalore': [12.9141, 74.8560],
+        'Goa': [15.2993, 74.1240],
+        'Panaji': [15.4909, 73.8278],
+        'Vijayawada': [16.5062, 80.6480]
+    };
+
     // Pricing per km based on vehicle type
     const pricingRates = {
         'hatchback': 8,
@@ -558,23 +604,55 @@
             distanceValue.textContent = `${distance} km`;
             distanceValue.style.color = '#4ade80';
         } else {
-            // Estimate based on random if not in matrix
-            const estimatedDistance = Math.floor(Math.random() * 1500) + 300;
-            distanceValue.textContent = `~${estimatedDistance} km (estimated)`;
+            // Default fallback if city not found
+            distanceValue.textContent = `--- km`;
             distanceValue.style.color = '#fbbf24';
         }
     }
 
     /**
+     * Calculate distance using Haversine formula
+     * @param {number[]} coord1 - [latitude, longitude]
+     * @param {number[]} coord2 - [latitude, longitude]
+     * @returns {number} Distance in kilometers
+     */
+    function calculateHaversineDistance(coord1, coord2) {
+        const R = 6371; // Earth's radius in km
+        const lat1 = coord1[0] * Math.PI / 180;
+        const lat2 = coord2[0] * Math.PI / 180;
+        const deltaLat = (coord2[0] - coord1[0]) * Math.PI / 180;
+        const deltaLon = (coord2[1] - coord1[1]) * Math.PI / 180;
+
+        const a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+            Math.cos(lat1) * Math.cos(lat2) *
+            Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return Math.round(R * c);
+    }
+
+    /**
      * Calculate Distance Between Cities
+     * First checks distanceMatrix, then uses GPS coordinates (Haversine formula)
      */
     function calculateDistance(from, to) {
+        // Check predefined distance matrix first
         if (distanceMatrix[from] && distanceMatrix[from][to]) {
             return distanceMatrix[from][to];
         }
         if (distanceMatrix[to] && distanceMatrix[to][from]) {
             return distanceMatrix[to][from];
         }
+
+        // Fallback to GPS coordinate calculation
+        const fromCoords = cityCoordinates[from];
+        const toCoords = cityCoordinates[to];
+
+        if (fromCoords && toCoords) {
+            return calculateHaversineDistance(fromCoords, toCoords);
+        }
+
+        // If no data available, return null
         return null;
     }
 
@@ -638,7 +716,7 @@
             return;
         }
 
-        const distance = calculateDistance(fromCity, toCity) || Math.floor(Math.random() * 1500) + 300;
+        const distance = calculateDistance(fromCity, toCity) || 500;
         const rate = pricingRates[vehicleType];
         const basePrice = distance * rate;
         const estimatedPrice = Math.round(basePrice);
@@ -666,6 +744,13 @@
         // Display compare prices
         displayComparePrices(vehicleType, distance);
 
+        // Inject comparison widget after a short delay
+        setTimeout(() => {
+            if (window.ComparisonWidget) {
+                window.ComparisonWidget.inject('#quoteResult');
+            }
+        }, 800);
+
         // Go to result step
         goToStep(3);
     }
@@ -686,6 +771,11 @@
         const comparePricesSection = document.getElementById('comparePricesSection');
         if (comparePricesSection) {
             comparePricesSection.style.display = 'none';
+        }
+
+        // Remove comparison widget
+        if (window.ComparisonWidget) {
+            window.ComparisonWidget.remove();
         }
 
         selectedFromCity = '';
@@ -1002,6 +1092,11 @@
                     comparePricesSection.style.display = 'none';
                 }
 
+                // Remove comparison widget from modal
+                if (window.ComparisonWidget) {
+                    window.ComparisonWidget.remove();
+                }
+
                 modalSelectedFromCity = '';
                 modalSelectedToCity = '';
                 modalQuoteData = null;
@@ -1128,7 +1223,7 @@
                 return;
             }
 
-            const distance = calculateDistance(fromCity, toCity) || Math.floor(Math.random() * 1500) + 300;
+            const distance = calculateDistance(fromCity, toCity) || 500;
             const rate = pricingRates[vehicleType];
             const basePrice = distance * rate;
             const estimatedPrice = Math.round(basePrice);
@@ -1157,6 +1252,13 @@
 
             // Display compare prices
             displayModalComparePrices(vehicleType, distance);
+
+            // Inject comparison widget for modal
+            setTimeout(() => {
+                if (window.ComparisonWidget) {
+                    window.ComparisonWidget.inject('#modalQuoteResult');
+                }
+            }, 800);
 
             // Go to result step
             console.log('Moving to step 3');
@@ -1296,6 +1398,12 @@
     function closeQuoteModal() {
         const modal = document.getElementById('quoteModalOverlay');
         modal.classList.remove('active');
+
+        // Remove comparison widget when modal closes
+        if (window.ComparisonWidget) {
+            window.ComparisonWidget.remove();
+        }
+
         console.log('Quote modal closed');
     }
 
