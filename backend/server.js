@@ -8,11 +8,12 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import passport from "passport";
 import session from "cookie-session";
-import "./config/passport.js"; 
+import "./config/passport.js";
 import contactRoutes from './routes/contact.routes.js'
 import feedbackRoutes from "./routes/feedback.routes.js";
 import enquiryRoutes from './routes/enquiry.routes.js'
 import emergencyRoutes from './routes/emergencyRequest.routes.js'
+import inspectionRoutes from './routes/inspection.routes.js'
 
 
 
@@ -43,6 +44,7 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/feedbacks", feedbackRoutes);
 app.use("/api/enquiries", enquiryRoutes);
 app.use("/api/emergencies", emergencyRoutes);
+app.use("/api/inspections", inspectionRoutes);
 
 app.use(notFound)
 app.use(errorHandler);

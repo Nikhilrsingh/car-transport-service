@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vehicle Inspection Portal | Car Transport Service</title>
+  <meta name="description" content="Document vehicle condition with professional photo inspection before pickup and after delivery" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nikhilrsingh.github.io/car-transport-service/pages/vehicle-inspection.html" />
+  <base href="./" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/middle-navbar.css" />
+  <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+  <link rel="stylesheet" href="../css/components/footer.css" />
+  <link rel="stylesheet" href="../css/components/floating-action-menu.css" />
+  <link rel="stylesheet" href="../css/components/bottom-action-bar.css" />
+  <link rel="stylesheet" href="../css/components/scroll-button.css" />
+  <link rel="stylesheet" href="../css/components/floating-chatbot-button.css" />
+  <link rel="stylesheet" href="../css/components/chatbot-modal.css" />
+  <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
+  <link rel="stylesheet" href="../css/components/backtoBottom.css" />
+  <link rel="stylesheet" href="../css/components/floating-button.css" />
+  <link rel="stylesheet" href="../css/components/vehicle-inspection.css" />
+  <link rel="stylesheet" href="../css/light-mode.css" />
+  <link rel="stylesheet" href="../css/dark-mode.css" />
+</head>
+
+<body>
+  <div id="scroll-progress"></div>
+  <!-- Navbar Container -->
+  <div id="navbar-container"></div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="page-header-content">
+      <h1><i class="fas fa-camera"></i> Vehicle Inspection Portal</h1>
+      <p class="subtitle">Professional photo documentation for vehicle condition tracking</p>
+      <div class="breadcrumb">
+        <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+        <span>/</span>
+        <span>Vehicle Inspection</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="inspection-check-section">
+
+      <!-- Input Card -->
+      <div class="inspection-input-card" id="inputCard">
+        <div class="input-card-header">
+          <i class="fas fa-clipboard-check"></i>
+          <div>
+            <h2>New Vehicle Inspection</h2>
+            <p>Document vehicle condition with 6 photos and optional damage annotations</p>
+          </div>
+        </div>
+
+        <form id="inspection-form" class="inspection-form">
+          
+          <!-- Basic Information Grid -->
+          <div class="form-section">
+            <h3 class="section-title">Basic Information</h3>
+            <div class="form-grid">
+              
+              <div class="form-group">
+                <label for="vehicleNumber">
+                  <i class="fas fa-car"></i> Vehicle Number
+                </label>
+                <input 
+                  type="text" 
+                  id="vehicleNumber" 
+                  name="vehicleNumber" 
+                  placeholder="e.g., MH12AB1234"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="inspectionType">
+                  <i class="fas fa-clipboard-check"></i> Inspection Type
+                </label>
+                <select id="inspectionType" name="inspectionType" required>
+                  <option value="">-- Select Type --</option>
+                  <option value="pickup">Pickup (Before Transport)</option>
+                  <option value="delivery">Delivery (After Transport)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="driverName">
+                  <i class="fas fa-user"></i> Driver Name
+                </label>
+                <input 
+                  type="text" 
+                  id="driverName" 
+                  name="driverName" 
+                  placeholder="e.g., Rajesh Kumar"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="customerName">
+                  <i class="fas fa-user-tie"></i> Customer Name
+                </label>
+                <input 
+                  type="text" 
+                  id="customerName" 
+                  name="customerName" 
+                  placeholder="e.g., Amit Patel"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="odometerReading">
+                  <i class="fas fa-tachometer-alt"></i> Odometer Reading (km)
+                </label>
+                <input 
+                  type="number" 
+                  id="odometerReading" 
+                  name="odometerReading" 
+                  placeholder="e.g., 25000"
+                  min="0"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="fuelLevel">
+                  <i class="fas fa-gas-pump"></i> Fuel Level
+                </label>
+                <select id="fuelLevel" name="fuelLevel">
+                  <option value="">-- Select Level --</option>
+                  <option value="Empty">Empty</option>
+                  <option value="1/4">1/4 (Quarter Tank)</option>
+                  <option value="1/2">1/2 (Half Tank)</option>
+                  <option value="3/4">3/4 (Three Quarters)</option>
+                  <option value="Full">Full Tank</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Photo Upload Section -->
+          <div class="form-section">
+            <h3 class="section-title">Vehicle Photos (6 Required)</h3>
+            <p class="section-description">Upload photos from different angles. Click on uploaded photos to add damage annotations.</p>
+            
+            <div class="photos-grid">
+              
+              <!-- Front Photo -->
+              <div class="photo-slot" data-photo-type="front">
+                <div class="photo-upload-area">
+                  <input type="file" id="photo-front" accept="image/*" capture="environment" class="photo-input">
+                  <label for="photo-front" class="upload-label">
+                    <i class="fas fa-camera"></i>
+                    <span class="photo-label">Front View</span>
+                    <span class="upload-hint">Tap to capture</span>
+                  </label>
+                  <div class="photo-preview" style="display: none;">
+                    <img src="" alt="Front view preview" class="preview-image">
+                    <div class="photo-overlay">
+                      <button type="button" class="btn-annotate" title="Add Annotations">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn-remove" title="Remove Photo">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                    <canvas class="annotation-canvas"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Rear Photo -->
+              <div class="photo-slot" data-photo-type="rear">
+                <div class="photo-upload-area">
+                  <input type="file" id="photo-rear" accept="image/*" capture="environment" class="photo-input">
+                  <label for="photo-rear" class="upload-label">
+                    <i class="fas fa-camera"></i>
+                    <span class="photo-label">Rear View</span>
+                    <span class="upload-hint">Tap to capture</span>
+                  </label>
+                  <div class="photo-preview" style="display: none;">
+                    <img src="" alt="Rear view preview" class="preview-image">
+                    <div class="photo-overlay">
+                      <button type="button" class="btn-annotate" title="Add Annotations">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn-remove" title="Remove Photo">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                    <canvas class="annotation-canvas"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Left Side Photo -->
+              <div class="photo-slot" data-photo-type="leftSide">
+                <div class="photo-upload-area">
+                  <input type="file" id="photo-leftSide" accept="image/*" capture="environment" class="photo-input">
+                  <label for="photo-leftSide" class="upload-label">
+                    <i class="fas fa-camera"></i>
+                    <span class="photo-label">Left Side</span>
+                    <span class="upload-hint">Tap to capture</span>
+                  </label>
+                  <div class="photo-preview" style="display: none;">
+                    <img src="" alt="Left side preview" class="preview-image">
+                    <div class="photo-overlay">
+                      <button type="button" class="btn-annotate" title="Add Annotations">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn-remove" title="Remove Photo">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                    <canvas class="annotation-canvas"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Side Photo -->
+              <div class="photo-slot" data-photo-type="rightSide">
+                <div class="photo-upload-area">
+                  <input type="file" id="photo-rightSide" accept="image/*" capture="environment" class="photo-input">
+                  <label for="photo-rightSide" class="upload-label">
+                    <i class="fas fa-camera"></i>
+                    <span class="photo-label">Right Side</span>
+                    <span class="upload-hint">Tap to capture</span>
+                  </label>
+                  <div class="photo-preview" style="display: none;">
+                    <img src="" alt="Right side preview" class="preview-image">
+                    <div class="photo-overlay">
+                      <button type="button" class="btn-annotate" title="Add Annotations">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn-remove" title="Remove Photo">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                    <canvas class="annotation-canvas"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interior Photo -->
+              <div class="photo-slot" data-photo-type="interior">
+                <div class="photo-upload-area">
+                  <input type="file" id="photo-interior" accept="image/*" capture="environment" class="photo-input">
+                  <label for="photo-interior" class="upload-label">
+                    <i class="fas fa-camera"></i>
+                    <span class="photo-label">Interior</span>
+                    <span class="upload-hint">Tap to capture</span>
+                  </label>
+                  <div class="photo-preview" style="display: none;">
+                    <img src="" alt="Interior preview" class="preview-image">
+                    <div class="photo-overlay">
+                      <button type="button" class="btn-annotate" title="Add Annotations">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn-remove" title="Remove Photo">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                    <canvas class="annotation-canvas"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dashboard Photo -->
+              <div class="photo-slot" data-photo-type="dashboard">
+                <div class="photo-upload-area">
+                  <input type="file" id="photo-dashboard" accept="image/*" capture="environment" class="photo-input">
+                  <label for="photo-dashboard" class="upload-label">
+                    <i class="fas fa-camera"></i>
+                    <span class="photo-label">Dashboard</span>
+                    <span class="upload-hint">Tap to capture</span>
+                  </label>
+                  <div class="photo-preview" style="display: none;">
+                    <img src="" alt="Dashboard preview" class="preview-image">
+                    <div class="photo-overlay">
+                      <button type="button" class="btn-annotate" title="Add Annotations">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn-remove" title="Remove Photo">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                    <canvas class="annotation-canvas"></canvas>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Additional Notes -->
+          <div class="form-section">
+            <h3 class="section-title">Additional Notes</h3>
+            <div class="form-group">
+              <label for="generalNotes">
+                <i class="fas fa-sticky-note"></i> General Observations
+              </label>
+              <textarea 
+                id="generalNotes" 
+                name="generalNotes" 
+                rows="4" 
+                placeholder="Any additional notes about vehicle condition, damages, or special observations..."
+                maxlength="1000"
+              ></textarea>
+              <small class="char-count">0 / 1000</small>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-actions">
+            <button type="submit" class="btn-submit-inspection" id="submit-btn">
+              <i class="fas fa-save"></i>
+              <span>Submit Inspection</span>
+            </button>
+            <button type="button" class="btn-reset" id="reset-btn">
+              <i class="fas fa-redo"></i>
+              <span>Reset Form</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Loading State -->
+      <div class="inspection-loading" id="loadingState" style="display: none;">
+        <div class="inspection-spinner"></div>
+        <p class="loading-text">Uploading photos and saving inspection...</p>
+      </div>
+
+      <!-- Error State -->
+      <div class="inspection-error" id="errorState" style="display: none;">
+        <div class="error-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <h3>Oops! Something went wrong</h3>
+        <p id="errorMessage">Could not save the inspection</p>
+        <button class="btn-try-again" id="retryBtn">
+          <i class="fas fa-rotate-right"></i> Try Again
+        </button>
+      </div>
+
+      <!-- Success State -->
+      <div class="inspection-success" id="successState" style="display: none;">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <h3>Inspection Saved Successfully!</h3>
+        <p>Your vehicle inspection has been documented and saved.</p>
+        <div class="success-actions">
+          <button class="btn-new-inspection" id="newInspectionBtn">
+            <i class="fas fa-plus"></i> New Inspection
+          </button>
+        </div>
+      </div>
+
+      <!-- Past Inspections Section -->
+      <div class="past-inspections-section" id="historySection">
+        <div class="section-header-row">
+          <h2><i class="fas fa-history"></i> Past Inspections</h2>
+          <button class="btn-refresh-history" id="refreshHistoryBtn" title="Refresh">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+        </div>
+
+        <!-- History Loading -->
+        <div class="history-loading" id="historyLoading" style="display: flex;">
+          <div class="inspection-spinner"></div>
+          <p>Loading past inspections...</p>
+        </div>
+
+        <!-- History Empty State -->
+        <div class="history-empty" id="historyEmpty" style="display: none;">
+          <i class="fas fa-folder-open"></i>
+          <h4>No Inspections Yet</h4>
+          <p>Submitted inspections will appear here. Start by creating your first inspection above.</p>
+        </div>
+
+        <!-- History Grid -->
+        <div class="history-grid" id="historyGrid" style="display: none;">
+          <!-- Cards rendered by JS -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="history-pagination">
+          <button class="btn-page" id="prevPageBtn" disabled>
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span class="page-info" id="pageInfo">Page 1 of 1</span>
+          <button class="btn-page" id="nextPageBtn" disabled>
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- How It Works Section -->
+      <div class="how-it-works-section">
+        <h2><i class="fas fa-lightbulb"></i> How It Works</h2>
+        <div class="steps-grid">
+          
+          <div class="step-card">
+            <div class="step-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <h3>1. Capture Photos</h3>
+            <p>Take 6 photos of your vehicle from different angles (Front, Rear, Left, Right, Interior, Dashboard).</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-icon">
+              <i class="fas fa-edit"></i>
+            </div>
+            <h3>2. Mark Damages</h3>
+            <p>Click on photos to add annotations and mark any existing damages or points of interest.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-icon">
+              <i class="fas fa-save"></i>
+            </div>
+            <h3>3. Save Report</h3>
+            <p>Submit the inspection to generate a permanent record for pickup or delivery documentation.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+  </div>
+
+  <!-- Annotation Modal -->
+  <div class="modal" id="annotation-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-edit"></i> Add Annotations</h3>
+        <button class="modal-close" id="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-hint">Click on the image to mark damages or points of interest. Add notes for each marker.</p>
+        <div class="annotation-canvas-container">
+          <img src="" alt="Photo for annotation" id="annotation-image">
+          <canvas id="annotation-layer"></canvas>
+        </div>
+        <div class="annotation-list" id="annotation-list">
+          <!-- Annotations will be added here -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-save-annotations" id="save-annotations">
+          <i class="fas fa-check"></i> Save Annotations
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inspection Detail Modal -->
+  <div class="modal" id="detail-modal" style="display: none;">
+    <div class="modal-content modal-content-wide">
+      <div class="modal-header">
+        <h3><i class="fas fa-clipboard-check"></i> Inspection Details</h3>
+        <button class="modal-close" id="close-detail-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="detail-content">
+        <!-- Detail rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/modules/loading-state-manager.js"></script>
+  <script src="../js/modules/page-navigation-loader.js"></script>
+  <script src="../js/modules/navbar-loader.js?v=2"></script>
+  <script src="../js/modules/footer-loader.js"></script>
+  <script src="../js/modules/component-initializer.js"></script>
+  <script src="../js/modules/themes.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/modules/vehicle-inspection.js?v=3"></script>
+  <script src="../js/modules/floating-chatbot-button.js"></script>
+  <script src="../js/modules/chatbot-modal.js"></script>
+  <script src="../js/modules/back-to-top-button.js"></script>
+  <script src="../js/modules/backtoBottom.js"></script>
+  <script src="../js/modules/scroll-animations.js"></script>
+  <script src="../js/modules/bottom-fixed-loader.js"></script>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  <button class="back-to-bottom" id="backToBottom">
+    <i class="fas fa-arrow-down"></i>
+  </button>
+</body>
+
