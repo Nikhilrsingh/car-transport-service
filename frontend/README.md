@@ -6,6 +6,13 @@
 
 The frontend is a static website built with HTML, CSS, and JavaScript.
 
+## 🌟 Open Source Participation
+
+| Program | Program Name | Start Date | End Date |
+|--------|--------------|------------|----------|
+| ![SWOC](frontend/assets/images/swoc.png) | **Social Winter of Code (SWOC)** | 1 January 2026 | 1 March 2026 |
+
+
 ## 🚀 Quick Start
 
 ### Option 1: Open Directly
