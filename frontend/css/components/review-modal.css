@@ -1,0 +1,435 @@
+/* Review Form Modal Styles */
+
+.review-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.review-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.review-modal {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(20, 20, 20, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.review-modal-overlay.active .review-modal {
+  transform: scale(1) translateY(0);
+}
+
+[data-theme="light"] .review-modal {
+  background: white;
+  border-color: #e0e0e0;
+}
+
+/* Modal header */
+.review-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .review-modal-header {
+  border-bottom-color: #e0e0e0;
+}
+
+.review-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+[data-theme="light"] .review-modal-title {
+  color: #222;
+}
+
+.review-modal-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.review-modal-close:hover {
+  background: rgba(255, 59, 48, 0.2);
+  color: #ff3b30;
+  transform: rotate(90deg);
+}
+
+[data-theme="light"] .review-modal-close {
+  background: #f5f5f5;
+  color: #333;
+}
+
+[data-theme="light"] .review-modal-close:hover {
+  background: #ff3b30;
+  color: white;
+}
+
+/* Modal body */
+.review-modal-body {
+  padding: 24px;
+}
+
+/* Booking info */
+.review-booking-info {
+  background: rgba(255, 99, 71, 0.1);
+  border: 1px solid rgba(255, 99, 71, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+}
+
+[data-theme="light"] .review-booking-info {
+  background: rgba(255, 99, 71, 0.05);
+}
+
+.review-booking-ref {
+  font-size: 13px;
+  color: #ff6347;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.review-booking-route {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="light"] .review-booking-route {
+  color: #555;
+}
+
+/* Form groups */
+.review-form-group {
+  margin-bottom: 24px;
+}
+
+.review-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+[data-theme="light"] .review-form-label {
+  color: #333;
+}
+
+.review-form-label .required {
+  color: #ff3b30;
+  margin-left: 2px;
+}
+
+.review-form-hint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* Rating selector */
+.review-rating-selector {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.review-rating-selector:focus-within {
+  border-color: #ff6347;
+}
+
+[data-theme="light"] .review-rating-selector {
+  background: #f9f9f9;
+  border-color: #e0e0e0;
+}
+
+.review-rating-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  min-width: 80px;
+}
+
+[data-theme="light"] .review-rating-label {
+  color: #333;
+}
+
+/* Input fields */
+.review-form-input,
+.review-form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.review-form-input:focus,
+.review-form-textarea:focus {
+  outline: none;
+  border-color: #ff6347;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .review-form-input,
+[data-theme="light"] .review-form-textarea {
+  background: white;
+  border-color: #ddd;
+  color: #333;
+}
+
+[data-theme="light"] .review-form-input:focus,
+[data-theme="light"] .review-form-textarea:focus {
+  border-color: #ff6347;
+  background: white;
+}
+
+.review-form-textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.review-form-input::placeholder,
+.review-form-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="light"] .review-form-input::placeholder,
+[data-theme="light"] .review-form-textarea::placeholder {
+  color: #999;
+}
+
+/* Character counter */
+.review-char-counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #999;
+}
+
+.review-char-count.warn {
+  color: #ff9500;
+}
+
+.review-char-count.error {
+  color: #ff3b30;
+}
+
+/* Validation error */
+.review-form-error {
+  color: #ff3b30;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.review-form-error.show {
+  display: block;
+}
+
+/* Modal footer */
+.review-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px 24px;
+}
+
+.review-modal-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.review-modal-btn-cancel {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.review-modal-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] .review-modal-btn-cancel {
+  background: #f5f5f5;
+  color: #333;
+  border-color: #ddd;
+}
+
+[data-theme="light"] .review-modal-btn-cancel:hover {
+  background: #e0e0e0;
+}
+
+.review-modal-btn-submit {
+  background: linear-gradient(135deg, #ff6347, #ff8c42);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+}
+
+.review-modal-btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 99, 71, 0.4);
+}
+
+.review-modal-btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.review-modal-btn-submit.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.review-modal-btn-submit.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success message */
+.review-success-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.review-success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, #34c759, #30d158);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+  animation: successPop 0.5s ease;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.review-success-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+[data-theme="light"] .review-success-title {
+  color: #222;
+}
+
+.review-success-text {
+  font-size: 14px;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .review-modal-header,
+  .review-modal-body,
+  .review-modal-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .review-modal-title {
+    font-size: 20px;
+  }
+
+  .review-rating-selector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .review-modal-footer {
+    flex-direction: column;
+  }
+
+  .review-modal-btn {
+    width: 100%;
+  }
+}

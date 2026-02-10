@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Handle feedback submission
+  // Handle feedback submission — also saves as a review in localStorage
   feedbackForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -63,7 +63,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.getElementById("email").value.trim();
     const feedback = document.getElementById("feedbackText").value.trim();
 
-    alert(`⭐ Thanks, ${name}!\nRating: ${selectedRating} stars\n\nYour feedback:\n${feedback}`);
+    if (!name || !feedback || selectedRating === 0) {
+      alert("Please fill in your name, select a rating, and write your feedback.");
+      return;
+    }
+
+    // Save to localStorage as a review
+    try {
+      const STORAGE_KEY = "cargo_customer_reviews";
+      let reviews = [];
+      try {
+        reviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch { reviews = []; }
+
+      const newReview = {
+        _id: "fb_" + Date.now() + "_" + Math.random().toString(36).substring(2, 8),
+        user: { name: name },
+        rating: selectedRating,
+        title: "",
+        comment: feedback,
+        isVerified: false,
+        status: "approved",
+        helpfulCount: 0,
+        isOwn: true,
+        isDefault: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      reviews.unshift(newReview);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+
+      // Remember name for review modal too
+      localStorage.setItem("cargo_reviewer_name", name);
+
+      // Notify review modules to refresh
+      window.dispatchEvent(new CustomEvent("reviewSubmitted", { detail: { review: newReview } }));
+    } catch (err) {
+      console.error("Error saving feedback to localStorage:", err);
+    }
+
+    alert(`⭐ Thanks, ${name}!\nRating: ${selectedRating} stars\n\nYour feedback has been saved!`);
 
     // Reset modal
     feedbackModal.style.display = "none";

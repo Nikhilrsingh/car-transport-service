@@ -22,6 +22,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="css/components/glowing-input.css">
+    <link rel="stylesheet" href="css/components/star-rating.css" />
+    <link rel="stylesheet" href="css/components/review-card.css" />
+    <link rel="stylesheet" href="css/components/review-modal.css" />
+    <link rel="stylesheet" href="css/components/review-stats.css" />
+    <link rel="stylesheet" href="css/components/toast.css" />
+    <link rel="stylesheet" href="css/pages/reviews.css" />
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -288,6 +294,64 @@
       </div>
     </section>
 
+    <!-- Customer Reviews Section -->
+    <section id="reviews" class="customer-reviews-section" style="padding: 60px 20px;">
+      <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <div class="featured-reviews-header fade-in" style="margin-bottom: 32px;">
+          <div>
+            <h2 class="featured-reviews-title">Customer Reviews</h2>
+            <p style="color: #999; margin-top: 8px;">See what our customers say about our service</p>
+          </div>
+          <button id="writeReviewBtnServices" class="write-review-btn">✍️ Write a Review</button>
+        </div>
+
+        <!-- Filters and Stats -->
+        <div class="reviews-controls" style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
+          <!-- Sidebar with Stats -->
+          <div>
+            <div id="servicesReviewStats">
+              <!-- Stats will be loaded here -->
+            </div>
+          </div>
+
+          <!-- Main Reviews Area -->
+          <div>
+            <!-- Filter and Sort Controls -->
+            <div class="review-filters">
+              <button class="review-filter-btn active" data-rating="all">All Reviews</button>
+              <button class="review-filter-btn" data-rating="5">5 ★</button>
+              <button class="review-filter-btn" data-rating="4">4 ★</button>
+              <button class="review-filter-btn" data-rating="3">3 ★</button>
+              <button class="review-filter-btn" data-rating="2">2 ★</button>
+              <button class="review-filter-btn" data-rating="1">1 ★</button>
+              
+              <div class="review-sort">
+                <select class="review-sort-select" id="reviewSort">
+                  <option value="recent">Most Recent</option>
+                  <option value="highest">Highest Rated</option>
+                  <option value="helpful">Most Helpful</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-list" id="servicesReviewsList">
+              <!-- Reviews will be loaded here -->
+              <div class="reviews-empty" style="padding: 40px 20px; text-align: center;">
+                <div class="reviews-empty-icon">⭐</div>
+                <h3 class="reviews-empty-title">Loading reviews...</h3>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="review-pagination" id="reviewPagination" style="display: none;">
+              <!-- Pagination will be rendered here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA Section -->
     <section id="cta" class="cta-section ">
       <h2>Get a Free Quote Instantly</h2>
@@ -316,6 +380,12 @@
     <script src="js/modules/scroll-animations.js"></script>
     <!-- Component Initializer - Ensures global components (FAB, Chatbot, TOC, etc.) are available -->
     <script src="js/modules/component-initializer.js"></script>
+    
+    <!-- Review System -->
+    <script type="module" src="js/components/starRating.js"></script>
+    <script type="module" src="js/review.js"></script>
+    <script type="module" src="js/reviewForm.js"></script>
+    <script type="module" src="js/modules/services-reviews.js"></script>
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop">
