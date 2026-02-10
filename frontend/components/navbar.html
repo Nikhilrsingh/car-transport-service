@@ -256,6 +256,10 @@
 
             <!-- Profile Section (shown when logged in) -->
             <div id="profile" class="profile-section hidden">
+              <a href="../pages/dashboard.html" id="dashboardBtn" class="dashboard-btn" data-tooltip="Dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+              </a>
               <span id="userEmail" class="user-email"></span>
               <a href="#" id="logoutBtn" class="logout-btn" data-tooltip="Logout">
                 <i class="fas fa-sign-out-alt"></i>
@@ -415,10 +419,24 @@
 
     <!-- Mobile Action Buttons -->
     <div class="mobile-nav-actions">
-      <a href="../pages/login.html" class="mobile-login-btn">
+      <!-- Dashboard Link (shown when logged in) -->
+      <a href="../pages/dashboard.html" id="mobileDashboardBtn" class="mobile-dashboard-btn hidden">
+        <i class="fas fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+      </a>
+      
+      <!-- Login Button (shown when logged out) -->
+      <a href="../pages/login.html" id="mobileLoginBtn" class="mobile-login-btn">
         <i class="fas fa-user"></i>
         <span>Login</span>
       </a>
+      
+      <!-- Logout Button (shown when logged in) -->
+      <a href="#" id="mobileLogoutBtn" class="mobile-logout-btn hidden">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+      
       <a href="../pages/booking.html" class="mobile-cta-btn">
         <i class="fas fa-truck"></i>
         <span>Book Instantly</span>

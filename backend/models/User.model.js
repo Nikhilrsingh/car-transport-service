@@ -30,6 +30,18 @@ const userSchema = new mongoose.Schema(
       match: [/^\+91[6-9]\d{9}$/, "Invalid Indian phone number"],
     },
 
+    address: {
+      street: { type: String, trim: true },
+      city: { type: String, trim: true },
+      state: { type: String, trim: true },
+      pincode: { type: String, trim: true },
+    },
+
+    profilePicture: {
+      type: String,
+      default: "",
+    },
+
     googleId: String,
   },
   { timestamps: true }
