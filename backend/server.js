@@ -15,6 +15,7 @@ import enquiryRoutes from './routes/enquiry.routes.js'
 import emergencyRoutes from './routes/emergencyRequest.routes.js'
 import inspectionRoutes from './routes/inspection.routes.js'
 import bookingRoutes from './routes/booking.routes.js'
+import profileRoutes from './routes/profile.routes.js'
 
 
 
@@ -47,6 +48,7 @@ app.use("/api/enquiries", enquiryRoutes);
 app.use("/api/emergencies", emergencyRoutes);
 app.use("/api/inspections", inspectionRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/profile", profileRoutes);
 
 app.use(notFound)
 app.use(errorHandler);

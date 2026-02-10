@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Harihar Car Carriers</title>
+    <base href="./" />
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/middle-navbar.css">
+    <link rel="stylesheet" href="../css/components/loading-indicators.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        .dashboard-header {
+            margin-bottom: 40px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ff6347;
+        }
+
+        .dashboard-header p {
+            color: #999;
+            font-size: 1.1rem;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #222;
+            overflow-x: auto;
+            padding-bottom: 0;
+        }
+
+        .dashboard-tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            color: #999;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .dashboard-tab:hover {
+            color: #fff;
+        }
+
+        .dashboard-tab.active {
+            color: #ff6347;
+        }
+
+        .dashboard-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ff6347;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Overview Tab */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6347;
+            box-shadow: 0 5px 20px rgba(255, 99, 71, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ff6347;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .action-btn {
+            padding: 20px;
+            background: linear-gradient(135deg, #ff6347, #ff4500);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 99, 71, 0.4);
+        }
+
+        /* Bookings Tab */
+        .bookings-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .search-input, .filter-select {
+            padding: 12px 20px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .bookings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .booking-card {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .booking-card:hover {
+            border-color: #ff6347;
+            transform: translateX(5px);
+        }
+
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .booking-id {
+            font-weight: 700;
+            color: #ff6347;
+            font-size: 1.1rem;
+        }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-pending { background: #ff6347; color: white; }
+        .status-confirmed { background: #4caf50; color: white; }
+        .status-picked_up { background: #2196f3; color: white; }
+        .status-in_transit { background: #ff9800; color: white; }
+        .status-delivered { background: #4caf50; color: white; }
+        .status-cancelled { background: #666; color: white; }
+
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .booking-detail span {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Profile Tab */
+        .profile-container {
+            max-width: 800px;
+        }
+
+        .profile-picture-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 15px;
+        }
+
+        .profile-pic-wrapper {
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff6347;
+        }
+
+        .upload-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #ff6347;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-info h2 {
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: #999;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 20px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #ff6347;
+            box-shadow: 0 0 10px rgba(255, 99, 71, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .submit-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff6347, #ff4500);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 99, 71, 0.4);
+        }
+
+        /* Settings Tab */
+        .settings-section {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 20px;
+            color: #ff6347;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #333;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #ff6347;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active::after {
+            left: 33px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 25px;
+            background: #ff6347;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(400px); }
+            to { transform: translateX(0); }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+        }
+
+        .loading i {
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-tabs {
+                gap: 10px;
+            }
+
+            .dashboard-tab {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            .profile-picture-section {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Demo Mode Notice (shown when not logged in) -->
+        <div id="demoNotice" style="background: rgba(255, 99, 71, 0.1); border: 2px solid #ff6347; border-radius: 10px; padding: 15px; margin-bottom: 30px; display: none;">
+            <p style="margin: 0; color: #ff6347; font-weight: 600;">
+                <i class="fas fa-info-circle"></i> Demo Mode: You're viewing sample data. Login to see your actual data and make changes.
+            </p>
+        </div>
+
+        <div class="dashboard-header">
+            <h1>Welcome back, <span id="userName">User</span>! 👋</h1>
+            <p>Manage your bookings, profile, and settings all in one place</p>
+        </div>
+
+        <!-- Dashboard Tabs -->
+        <div class="dashboard-tabs">
+            <button class="dashboard-tab active" data-tab="overview">
+                <i class="fas fa-th-large"></i> Overview
+            </button>
+            <button class="dashboard-tab" data-tab="bookings">
+                <i class="fas fa-truck"></i> My Bookings
+            </button>
+            <button class="dashboard-tab" data-tab="profile">
+                <i class="fas fa-user"></i> Profile
+            </button>
+            <button class="dashboard-tab" data-tab="settings">
+                <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div class="tab-content active" id="overview-tab">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-box"></i></div>
+                    <div class="stat-value" id="totalBookings">0</div>
+                    <div class="stat-label">Total Bookings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-shipping-fast"></i></div>
+                    <div class="stat-value" id="activeShipments">0</div>
+                    <div class="stat-label">Active Shipments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-value" id="completedBookings">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-value" id="pendingBookings">0</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 20px; color: #ff6347;">Quick Actions</h3>
+            <div class="quick-actions">
+                <button class="action-btn" onclick="window.location.href='booking.html'">
+                    <i class="fas fa-plus"></i> New Booking
+                </button>
+                <button class="action-btn" onclick="switchTab('bookings')">
+                    <i class="fas fa-search"></i> Track Shipment
+                </button>
+                <button class="action-btn" onclick="window.location.href='contact.html'">
+                    <i class="fas fa-headset"></i> Contact Support
+                </button>
+            </div>
+        </div>
+
+        <!-- My Bookings Tab -->
+        <div class="tab-content" id="bookings-tab">
+            <div class="bookings-controls">
+                <input type="text" class="search-input" id="searchBooking" placeholder="Search by booking ID...">
+                <select class="filter-select" id="statusFilter">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="picked_up">Picked Up</option>
+                    <option value="in_transit">In Transit</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+
+            <div class="bookings-list" id="bookingsList">
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading your bookings...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Tab -->
+        <div class="tab-content" id="profile-tab">
+            <div class="profile-container">
+                <div class="profile-picture-section">
+                    <div class="profile-pic-wrapper">
+                        <img src="https://via.placeholder.com/120" alt="Profile" class="profile-pic" id="profilePic">
+                        <button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                        <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profileName">Loading...</h2>
+                        <p id="profileEmail">Loading...</p>
+                    </div>
+                </div>
+
+                <form id="profileForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="form-input" id="name" placeholder="Enter your name">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-input" id="email" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" class="form-input" id="phone" placeholder="+91XXXXXXXXXX">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Street Address</label>
+                        <input type="text" class="form-input" id="street" placeholder="Enter street address">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" class="form-input" id="city" placeholder="Enter city">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" class="form-input" id="state" placeholder="Enter state">
+                        </div>
+                        <div class="form-group">
+                            <label>Pincode</label>
+                            <input type="text" class="form-input" id="pincode" placeholder="Enter pincode">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+
+                <div class="settings-section" style="margin-top: 40px;">
+                    <h3>Change Password</h3>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" class="form-input" id="oldPassword" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" class="form-input" id="newPassword" placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password">
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-lock"></i> Change Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-content" id="settings-tab">
+            <div class="settings-section">
+                <h3>Theme Preferences</h3>
+                <div class="setting-item">
+                    <div>
+                        <strong>Dark Mode</strong>
+                        <p style="color: #999; font-size: 0.9rem;">Use dark theme across the app</p>
+                    </div>
+                    <div class="toggle-switch active" id="darkModeToggle"></div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Notification Preferences</h3>
+                <div class="setting-item">
+                    <div>
+                        <strong>Email Notifications</strong>
+                        <p style="color: #999; font-size: 0.9rem;">Receive updates via email</p>
+                    </div>
+                    <div class="toggle-switch active" id="emailNotifToggle"></div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <strong>Booking Updates</strong>
+                        <p style="color: #999; font-size: 0.9rem;">Get notified about booking status changes</p>
+                    </div>
+                    <div class="toggle-switch active" id="bookingNotifToggle"></div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <strong>Promotional Emails</strong>
+                        <p style="color: #999; font-size: 0.9rem;">Receive offers and promotions</p>
+                    </div>
+                    <div class="toggle-switch" id="promoNotifToggle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../js/modules/loading-state-manager.js"></script>
+    <script src="../js/modules/page-navigation-loader.js"></script>
+    <script src="../js/modules/navbar-loader.js?v=2"></script>
+    <script src="../js/modules/footer-loader.js"></script>
+    <script src="../js/script.js"></script>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+        let currentUser = null;
+
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            const token = localStorage.getItem('token');
+            
+            // Show demo notice if not logged in
+            if (!token) {
+                document.getElementById('demoNotice').style.display = 'block';
+            }
+            
+            // TEMPORARY: Allow access without login for testing
+            // TODO: Re-enable authentication when login system is fully implemented
+            // if (!token) {
+            //     showToast('Please login to access dashboard', 'error');
+            //     setTimeout(() => window.location.href = 'login.html', 2000);
+            //     return;
+            // }
+
+            await loadUserProfile();
+            await loadBookings();
+            setupEventListeners();
+        });
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.dashboard-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+
+            if (tabName === 'bookings') {
+                loadBookings();
+            }
+        }
+
+        // Load user profile
+        async function loadUserProfile() {
+            try {
+                const token = localStorage.getItem('token');
+                
+                // If no token, show demo user data
+                if (!token) {
+                    currentUser = {
+                        name: 'Demo User',
+                        email: 'demo@example.com',
+                        phone: '+91-9876543210',
+                        address: {
+                            street: '123 Demo Street',
+                            city: 'Mumbai',
+                            state: 'Maharashtra',
+                            pincode: '400001'
+                        },
+                        profilePicture: 'https://via.placeholder.com/120'
+                    };
+                    displayUserProfile(currentUser);
+                    return;
+                }
+                
+                const response = await fetch(`${API_BASE}/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    currentUser = data.data.user;
+                    displayUserProfile(currentUser);
+                } else {
+                    throw new Error(data.message || 'Failed to load profile');
+                }
+            } catch (error) {
+                console.error('Profile load error:', error);
+                // Show demo data on error
+                currentUser = {
+                    name: 'Demo User',
+                    email: 'demo@example.com',
+                    phone: '+91-9876543210'
+                };
+                displayUserProfile(currentUser);
+            }
+        }
+
+        // Display user profile
+        function displayUserProfile(user) {
+            document.getElementById('userName').textContent = user.name || 'User';
+            document.getElementById('profileName').textContent = user.name || 'User';
+            document.getElementById('profileEmail').textContent = user.email || '';
+            document.getElementById('name').value = user.name || '';
+            document.getElementById('email').value = user.email || '';
+            document.getElementById('phone').value = user.phone || '';
+            
+            if (user.address) {
+                document.getElementById('street').value = user.address.street || '';
+                document.getElementById('city').value = user.address.city || '';
+                document.getElementById('state').value = user.address.state || '';
+                document.getElementById('pincode').value = user.address.pincode || '';
+            }
+
+            if (user.profilePicture) {
+                document.getElementById('profilePic').src = user.profilePicture;
+            }
+        }
+
+        // Load bookings
+        async function loadBookings() {
+            try {
+                const token = localStorage.getItem('token');
+                
+                // If no token, show demo bookings
+                if (!token) {
+                    const demoBookings = [
+                        {
+                            _id: 'demo1',
+                            bookingReference: 'HCC-20260210-0001',
+                            fullName: 'Demo User',
+                            vehicleType: 'Sedan',
+                            pickupCity: 'Mumbai',
+                            dropCity: 'Delhi',
+                            pickupDate: new Date(),
+                            finalPrice: 15000,
+                            status: 'confirmed'
+                        },
+                        {
+                            _id: 'demo2',
+                            bookingReference: 'HCC-20260208-0042',
+                            fullName: 'Demo User',
+                            vehicleType: 'SUV',
+                            pickupCity: 'Bangalore',
+                            dropCity: 'Chennai',
+                            pickupDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+                            finalPrice: 12000,
+                            status: 'in_transit'
+                        },
+                        {
+                            _id: 'demo3',
+                            bookingReference: 'HCC-20260201-0013',
+                            fullName: 'Demo User',
+                            vehicleType: 'Hatchback',
+                            pickupCity: 'Pune',
+                            dropCity: 'Goa',
+                            pickupDate: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000),
+                            finalPrice: 8000,
+                            status: 'delivered'
+                        }
+                    ];
+                    displayBookings(demoBookings);
+                    updateStats(demoBookings);
+                    return;
+                }
+                
+                const response = await fetch(`${API_BASE}/bookings`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    displayBookings(data.data.bookings);
+                    updateStats(data.data.bookings);
+                } else {
+                    document.getElementById('bookingsList').innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-box-open"></i>
+                            <h3>No bookings yet</h3>
+                            <p>Start by creating your first booking</p>
+                            <button class="action-btn" onclick="window.location.href='booking.html'" style="margin-top: 20px;">
+                                <i class="fas fa-plus"></i> Create Booking
+                            </button>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Bookings load error:', error);
+                // Show demo data on error
+                const demoBookings = [
+                    {
+                        _id: 'demo1',
+                        bookingReference: 'HCC-20260210-0001',
+                        fullName: 'Demo User',
+                        vehicleType: 'Sedan',
+                        pickupCity: 'Mumbai',
+                        dropCity: 'Delhi',
+                        pickupDate: new Date(),
+                        finalPrice: 15000,
+                        status: 'pending'
+                    }
+                ];
+                displayBookings(demoBookings);
+                updateStats(demoBookings);
+            }
+        }
+
+        // Display bookings
+        function displayBookings(bookings) {
+            const container = document.getElementById('bookingsList');
+            
+            if (!bookings || bookings.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-box-open"></i>
+                        <h3>No bookings found</h3>
+                        <p>Start by creating your first booking</p>
+                        <button class="action-btn" onclick="window.location.href='booking.html'" style="margin-top: 20px;">
+                            <i class="fas fa-plus"></i> Create Booking
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = bookings.map(booking => `
+                <div class="booking-card" onclick="viewBookingDetails('${booking._id}')">
+                    <div class="booking-header">
+                        <div class="booking-id">${booking.bookingReference}</div>
+                        <span class="status-badge status-${booking.status}">${booking.status.replace('_', ' ').toUpperCase()}</span>
+                    </div>
+                    <div class="booking-details">
+                        <div class="booking-detail">
+                            <i class="fas fa-user"></i> ${booking.fullName}
+                        </div>
+                        <div class="booking-detail">
+                            <i class="fas fa-car"></i> ${booking.vehicleType}
+                        </div>
+                        <div class="booking-detail">
+                            <i class="fas fa-map-marker-alt"></i> ${booking.pickupCity} → ${booking.dropCity}
+                        </div>
+                        <div class="booking-detail">
+                            <i class="fas fa-calendar"></i> ${new Date(booking.pickupDate).toLocaleDateString()}
+                        </div>
+                        <div class="booking-detail">
+                            <i class="fas fa-rupee-sign"></i> ₹${booking.finalPrice}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update stats
+        function updateStats(bookings) {
+            const total = bookings.length;
+            const active = bookings.filter(b => ['confirmed', 'picked_up', 'in_transit'].includes(b.status)).length;
+            const completed = bookings.filter(b => b.status === 'delivered').length;
+            const pending = bookings.filter(b => b.status === 'pending').length;
+
+            document.getElementById('totalBookings').textContent = total;
+            document.getElementById('activeShipments').textContent = active;
+            document.getElementById('completedBookings').textContent = completed;
+            document.getElementById('pendingBookings').textContent = pending;
+        }
+
+        // View booking details
+        function viewBookingDetails(id) {
+            // For now, just show a toast. You can implement a modal later
+            showToast('Booking details coming soon!', 'info');
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Tab switching
+            document.querySelectorAll('.dashboard-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.dataset.tab;
+                    switchTab(tabName);
+                });
+            });
+
+            // Profile form
+            document.getElementById('profileForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await updateProfile();
+            });
+
+            // Password form
+            document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await changePassword();
+            });
+
+            // Profile picture upload
+            document.getElementById('profilePicInput').addEventListener('change', async (e) => {
+                await uploadProfilePicture(e.target.files[0]);
+            });
+
+            // Search bookings
+            document.getElementById('searchBooking').addEventListener('input', filterBookings);
+            document.getElementById('statusFilter').addEventListener('change', filterBookings);
+
+            // Toggle switches
+            document.querySelectorAll('.toggle-switch').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    toggle.classList.toggle('active');
+                    showToast('Setting updated', 'success');
+                });
+            });
+        }
+
+        // Update profile
+        async function updateProfile() {
+            try {
+                const token = localStorage.getItem('token');
+                
+                // If no token, show info message
+                if (!token) {
+                    showToast('Login required to update profile', 'error');
+                    return;
+                }
+                
+                const profileData = {
+                    name: document.getElementById('name').value,
+                    phone: document.getElementById('phone').value,
+                    address: {
+                        street: document.getElementById('street').value,
+                        city: document.getElementById('city').value,
+                        state: document.getElementById('state').value,
+                        pincode: document.getElementById('pincode').value
+                    }
+                };
+
+                const response = await fetch(`${API_BASE}/profile`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(profileData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    currentUser = data.data.user;
+                    displayUserProfile(currentUser);
+                    showToast('Profile updated successfully', 'success');
+                } else {
+                    throw new Error(data.message || 'Failed to update profile');
+                }
+            } catch (error) {
+                console.error('Update error:', error);
+                showToast(error.message, 'error');
+            }
+        }
+
+        // Change password
+        async function changePassword() {
+            try {
+                const oldPassword = document.getElementById('oldPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (newPassword !== confirmPassword) {
+                    showToast('Passwords do not match', 'error');
+                    return;
+                }
+
+                const token = localStorage.getItem('token');
+                
+                // If no token, show info message
+                if (!token) {
+                    showToast('Login required to change password', 'error');
+                    return;
+                }
+                const response = await fetch(`${API_BASE}/profile/change-password`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ oldPassword, newPassword })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showToast('Password changed successfully', 'success');
+                    document.getElementById('passwordForm').reset();
+                } else {
+                    throw new Error(data.message || 'Failed to change password');
+                }
+            } catch (error) {
+                console.error('Password change error:', error);
+                showToast(error.message, 'error');
+            }
+        }
+
+        // Upload profile picture
+        async function uploadProfilePicture(file) {
+            if (!file) return;
+
+            try {
+                const token = localStorage.getItem('token');
+                
+                // If no token, show info message
+                if (!token) {
+                    showToast('Login required to upload picture', 'error');
+                    return;
+                }
+                const formData = new FormData();
+                formData.append('profilePicture', file);
+
+                const response = await fetch(`${API_BASE}/profile/picture`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    document.getElementById('profilePic').src = data.data.profilePicture;
+                    showToast('Profile picture updated', 'success');
+                } else {
+                    throw new Error(data.message || 'Failed to upload picture');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                showToast(error.message, 'error');
+            }
+        }
+
+        // Filter bookings
+        function filterBookings() {
+            const searchTerm = document.getElementById('searchBooking').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            
+            const cards = document.querySelectorAll('.booking-card');
+            cards.forEach(card => {
+                const bookingId = card.querySelector('.booking-id').textContent.toLowerCase();
+                const status = card.querySelector('.status-badge').classList[1].replace('status-', '');
+                
+                const matchesSearch = bookingId.includes(searchTerm);
+                const matchesStatus = !statusFilter || status === statusFilter;
+                
+                card.style.display = (matchesSearch && matchesStatus) ? 'block' : 'none';
+            });
+        }
+
+        // Show toast
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.background = type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#ff6347';
+            toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i> ${message}`;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

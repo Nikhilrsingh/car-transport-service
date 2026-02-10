@@ -577,6 +577,109 @@ body {
   transform: translateY(-2px);
 }
 
+/* Profile Section */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-section.hidden {
+  display: none !important;
+}
+
+.dashboard-btn,
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  color: white;
+  text-decoration: none;
+  border: 2px solid rgba(255, 99, 71, 0.5);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  font-size: 1rem;
+  white-space: nowrap;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.dashboard-btn {
+  background: linear-gradient(135deg, rgba(255, 99, 71, 0.2), rgba(255, 69, 0, 0.2));
+  border-color: #ff6347;
+}
+
+.dashboard-btn i,
+.logout-btn i {
+  font-size: 1.1rem !important;
+  color: white;
+  display: inline-block !important;
+}
+
+.dashboard-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 99, 71, 0.3), rgba(255, 69, 0, 0.3));
+  border-color: #ff6347;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+}
+
+.logout-btn:hover {
+  background: rgba(255, 107, 53, 0.1);
+  border-color: #ff6347;
+  transform: translateY(-2px);
+}
+
+.user-email {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Mobile Dashboard & Logout Buttons */
+.mobile-dashboard-btn,
+.mobile-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  border: 2px solid rgba(255, 99, 71, 0.5);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 1rem;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.mobile-dashboard-btn {
+  background: linear-gradient(135deg, rgba(255, 99, 71, 0.2), rgba(255, 69, 0, 0.2));
+  border-color: #ff6347;
+}
+
+.mobile-dashboard-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 99, 71, 0.3), rgba(255, 69, 0, 0.3));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+}
+
+.mobile-logout-btn:hover {
+  background: rgba(255, 107, 53, 0.1);
+  border-color: #ff6347;
+  transform: translateY(-2px);
+}
+
+.mobile-dashboard-btn.hidden,
+.mobile-logout-btn.hidden {
+  display: none !important;
+}
+
+
 /* Call To Action (if used) */
 .cta-btn {
   display: flex !important;

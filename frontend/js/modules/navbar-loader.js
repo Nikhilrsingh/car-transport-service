@@ -11,7 +11,7 @@
    */
   async function loadNavbar() {
     const navbarContainer = document.getElementById('navbar-container');
-    
+
     if (!navbarContainer) {
       console.warn('Navbar container not found. Add <div id="navbar-container"></div> to your page.');
       return;
@@ -28,7 +28,7 @@
       const res = await fetch(navbarUrl, { cache: 'no-store' });
       if (!res.ok) throw new Error(`Failed to fetch navbar: ${res.status}`);
       const navbarHTML = await res.text();
-      
+
       // Reset retry count on success
       retryCount = 0;
 
@@ -65,7 +65,7 @@
       ensureClock(base);
     } catch (err) {
       console.error('Navbar load error:', err);
-      
+
       // Retry loading if retries remaining
       if (retryCount < MAX_RETRIES) {
         retryCount++;
@@ -74,7 +74,7 @@
       }
     }
   }
-  
+
   // Retry loading navbar when coming back online
   window.addEventListener('online', () => {
     const navbarContainer = document.getElementById('navbar-container');
@@ -83,7 +83,7 @@
       loadNavbar();
     }
   });
-  
+
   // Retry when tab becomes visible if navbar is empty
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible' && navigator.onLine) {
@@ -104,6 +104,7 @@
     const profile = document.getElementById("profile");
     const userEmailSpan = document.getElementById("userEmail");
     const logoutBtn = document.getElementById("logoutBtn");
+    const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
 
     // If navbar auth elements are not present, exit
     if (!loginBtn || !profile) {
@@ -114,9 +115,17 @@
     // Update the UI based on current auth state
     updateAuthUI();
 
-    // Set up logout button handler
+    // Set up logout button handler (desktop)
     if (logoutBtn) {
       logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleLogout();
+      });
+    }
+
+    // Set up logout button handler (mobile)
+    if (mobileLogoutBtn) {
+      mobileLogoutBtn.addEventListener("click", (e) => {
         e.preventDefault();
         handleLogout();
       });
@@ -130,6 +139,12 @@
     const loginBtn = document.getElementById("loginBtn");
     const profile = document.getElementById("profile");
     const userEmailSpan = document.getElementById("userEmail");
+    const dashboardBtn = document.getElementById("dashboardBtn");
+
+    // Mobile elements
+    const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+    const mobileDashboardBtn = document.getElementById("mobileDashboardBtn");
+    const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
 
     if (!loginBtn || !profile) return;
 
@@ -139,12 +154,29 @@
     const userEmail = localStorage.getItem("userEmail");
 
     if (token && isLoggedIn && userEmail) {
-      // User is logged in
+      // User is logged in - Desktop nav
       loginBtn.style.display = "none";
       profile.style.display = "flex";
       profile.classList.remove("hidden");
       if (userEmailSpan) {
         userEmailSpan.textContent = userEmail;
+      }
+      if (dashboardBtn) {
+        dashboardBtn.style.display = "flex";
+      }
+
+      // User is logged in - Mobile nav
+      if (mobileLoginBtn) {
+        mobileLoginBtn.style.display = "none";
+        mobileLoginBtn.classList.add("hidden");
+      }
+      if (mobileDashboardBtn) {
+        mobileDashboardBtn.style.display = "flex";
+        mobileDashboardBtn.classList.remove("hidden");
+      }
+      if (mobileLogoutBtn) {
+        mobileLogoutBtn.style.display = "flex";
+        mobileLogoutBtn.classList.remove("hidden");
       }
     } else {
       // User is not logged in
@@ -153,9 +185,28 @@
         localStorage.removeItem("userEmail");
         localStorage.removeItem("token");
       }
+
+      // Desktop nav
       loginBtn.style.display = "inline-block";
       profile.style.display = "none";
       profile.classList.add("hidden");
+      if (dashboardBtn) {
+        dashboardBtn.style.display = "none";
+      }
+
+      // Mobile nav
+      if (mobileLoginBtn) {
+        mobileLoginBtn.style.display = "flex";
+        mobileLoginBtn.classList.remove("hidden");
+      }
+      if (mobileDashboardBtn) {
+        mobileDashboardBtn.style.display = "none";
+        mobileDashboardBtn.classList.add("hidden");
+      }
+      if (mobileLogoutBtn) {
+        mobileLogoutBtn.style.display = "none";
+        mobileLogoutBtn.classList.add("hidden");
+      }
     }
   }
 
@@ -167,20 +218,20 @@
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userEmail");
     localStorage.removeItem("token");
-    
+
     // Update UI immediately
     updateAuthUI();
-    
+
     // Show notification if available
     if (typeof showNotification === 'function') {
       showNotification("Logged out successfully", "success");
     }
-    
+
     // Determine correct path for redirect
     const currentPath = window.location.pathname;
     const isInPagesFolder = currentPath.toLowerCase().includes('/pages/');
     const loginPath = isInPagesFolder ? "./login.html" : "./pages/login.html";
-    
+
     // Redirect to login page
     setTimeout(() => {
       window.location.href = loginPath;
@@ -413,4 +464,3 @@
 
 })();
 
-  
