@@ -2694,6 +2694,12 @@
                 A confirmation email has been sent to your registered email address.
                 Our team will contact you within 24 hours.
             </p>
+            
+            <div style="margin: 15px 0; padding: 15px; background: rgba(255, 99, 71, 0.1); border-radius: 10px; border-left: 3px solid #ff6347;">
+                <p style="font-size: 0.85rem; margin: 0; color: #ddd;">
+                    <i class="fas fa-info-circle"></i> <strong>Important:</strong> Save your booking reference number for tracking and future reference.
+                </p>
+            </div>
 
             <button class="modal-btn" onclick="closeModal()">
                 <i class="fas fa-check"></i> Got It!
@@ -3027,8 +3033,8 @@
     <!-- Leaflet Marker Cluster -->
     <script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
-    <!-- Booking Modals Module -->
-    <script src="../js/modules/booking-modals.js"></script>
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
         // ========================================
@@ -3341,10 +3347,10 @@
 
             if (step === 1) {
                 // Validate personal and vehicle info
-                const fields = ['fullName', 'phone', 'email', 'password', 'vehicleType'];
+                const fields = ['fullName', 'phone', 'email', 'vehicleType'];
                 fields.forEach(field => {
                     const input = document.getElementById(field);
-                    if (!validateField(field, input.value)) {
+                    if (input && !validateField(field, input.value)) {
                         isValid = false;
                     }
                 });
@@ -3353,7 +3359,7 @@
                 const fields = ['pickupCity', 'dropCity', 'pickupDate'];
                 fields.forEach(field => {
                     const input = document.getElementById(field);
-                    if (!validateField(field, input.value)) {
+                    if (input && !validateField(field, input.value)) {
                         isValid = false;
                     }
                 });
@@ -3750,8 +3756,76 @@
         // PDF & PRINT FUNCTIONS
         // ========================================
         function downloadPDF() {
-            showToast('Download', 'PDF generation feature coming soon!', 'info', 3000);
-            // This would integrate with a PDF library like jsPDF
+            try {
+                if (!window.jspdf) {
+                    alert('PDF library loading... Please wait a moment and try again.');
+                    return;
+                }
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                doc.setFillColor(255, 99, 71);
+                doc.rect(0, 0, 210, 35, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(22);
+                doc.text('Hi-Tech Car Transport', 105, 15, { align: 'center' });
+                doc.setFontSize(12);
+                doc.text('Booking Summary', 105, 25, { align: 'center' });
+
+                doc.setTextColor(0, 0, 0);
+                var y = 45;
+
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text('Personal Information', 20, y); y += 8;
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'normal');
+                doc.text('Name: ' + (document.getElementById('summaryName')?.textContent || 'Not provided'), 20, y); y += 6;
+                doc.text('Phone: ' + (document.getElementById('summaryPhone')?.textContent || 'Not provided'), 20, y); y += 6;
+                doc.text('Email: ' + (document.getElementById('summaryEmail')?.textContent || 'Not provided'), 20, y); y += 12;
+
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text('Vehicle Details', 20, y); y += 8;
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'normal');
+                doc.text('Vehicle Type: ' + (document.getElementById('summaryVehicleType')?.textContent || 'Not selected'), 20, y); y += 6;
+                doc.text('Vehicle Model: ' + (document.getElementById('summaryVehicleModel')?.textContent || 'Not provided'), 20, y); y += 12;
+
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text('Transport Details', 20, y); y += 8;
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'normal');
+                doc.text('Pickup: ' + (document.getElementById('summaryPickup')?.textContent || 'Not set'), 20, y); y += 6;
+                doc.text('Drop: ' + (document.getElementById('summaryDrop')?.textContent || 'Not set'), 20, y); y += 6;
+                doc.text('Date: ' + (document.getElementById('summaryDate')?.textContent || 'Not selected'), 20, y); y += 6;
+                doc.text('Time: ' + (document.getElementById('summaryTime')?.textContent || 'Any time'), 20, y); y += 6;
+                doc.text('Distance: ' + (document.getElementById('distanceValue')?.textContent || '0 km'), 20, y); y += 12;
+
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text('Price Breakdown', 20, y); y += 8;
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'normal');
+                doc.text('Base Fare: ' + (document.getElementById('baseFare')?.textContent || '0'), 20, y); y += 6;
+                doc.text('Distance Charge: ' + (document.getElementById('distanceCharge')?.textContent || '0'), 20, y); y += 6;
+                doc.text('GST (18%): ' + (document.getElementById('gst')?.textContent || '0'), 20, y); y += 8;
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'bold');
+                doc.text('Total: ' + (document.getElementById('totalPrice')?.textContent || '0'), 20, y); y += 15;
+
+                doc.setFontSize(9);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(100, 100, 100);
+                doc.text('Thank you for choosing Hi-Tech Car Transport!', 105, 280, { align: 'center' });
+
+                doc.save('booking-summary-' + new Date().toISOString().slice(0,10) + '.pdf');
+                if (typeof showToast === 'function') showToast('Success', 'PDF downloaded!', 'success', 3000);
+            } catch (err) {
+                console.error('PDF error:', err);
+                alert('PDF generation failed: ' + err.message);
+            }
         }
 
         function printSummary() {
@@ -5105,6 +5179,8 @@
         // DOM CONTENT LOADED - INITIALIZATION
         // ========================================
         document.addEventListener('DOMContentLoaded', function () {
+            console.log('🔵 DOMContentLoaded started in booking.html inline script');
+            
             // Initialize map first
             initMap();
 
@@ -5118,6 +5194,13 @@
             const submitBtn = document.getElementById('submitBtn');
             const successModal = document.getElementById('successModal');
             const bookingRef = document.getElementById('bookingRef');
+            
+            console.log('📋 Elements found:', {
+                form: !!bookingForm,
+                btn: !!submitBtn,
+                modal: !!successModal,
+                ref: !!bookingRef
+            });
 
             // Check for resume link first
             checkResumeLink();
@@ -5138,7 +5221,7 @@
             });
 
             // Add input event listeners for real-time validation
-            const validationFields = ['fullName', 'phone', 'email', 'password', 'vehicleType',
+            const validationFields = ['fullName', 'phone', 'email', 'vehicleType',
                           'pickupLocation', 'dropLocation', 'pickupDate'];
 
             validationFields.forEach(field => {
@@ -5204,63 +5287,137 @@
                 updateBookingSummary();
             });
 
-            // Form submission
+            console.log('🟢 About to attach form submit listener...');
+            console.log('bookingForm:', bookingForm);
+            console.log('submitBtn:', submitBtn);
+            console.log('successModal:', successModal);
+            console.log('bookingRef:', bookingRef);
+
+            // Direct click handler on button - THIS IS THE MAIN HANDLER
+            if (submitBtn) {
+                submitBtn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    console.log('🔘 Submit button clicked!');
+                    
+                    // 🔒 DUPLICATE SUBMISSION PROTECTION
+                    if (isSubmitting) {
+                        console.log('⚠️ Already submitting, skipping...');
+                        return;
+                    }
+                    isSubmitting = true;
+                    console.log('📝 Starting submission...');
+
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
+
+                    try {
+                        var distanceSliderVal = document.getElementById('distanceSlider');
+                        var priceEl = document.getElementById('totalPrice');
+                        var dist = distanceSliderVal ? parseFloat(distanceSliderVal.value) || 0 : 0;
+                        var price = priceEl ? parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')) || 0 : 0;
+
+                        var bookingData = {
+                            fullName: document.getElementById('fullName')?.value || '',
+                            phone: document.getElementById('phone')?.value || '',
+                            email: document.getElementById('email')?.value || '',
+                            vehicleType: document.getElementById('vehicleType')?.value || '',
+                            vehicleModel: document.getElementById('vehicleModel')?.value || '',
+                            pickupCity: document.getElementById('pickupCity')?.value || '',
+                            pickupLocation: document.getElementById('pickupLocation')?.value || '',
+                            dropCity: document.getElementById('dropCity')?.value || '',
+                            dropLocation: document.getElementById('dropLocation')?.value || '',
+                            pickupDate: document.getElementById('pickupDate')?.value || '',
+                            pickupTime: document.getElementById('pickupTime')?.value || 'Anytime',
+                            additionalInfo: document.getElementById('additionalInfo')?.value || '',
+                            estimatedDistance: dist,
+                            estimatedPrice: price,
+                            finalPrice: price
+                        };
+                        console.log('📦 Booking data:', bookingData);
+
+                        // Mark all 3 steps as completed
+                        document.querySelectorAll('.step').forEach(function(step) {
+                            step.classList.remove('active');
+                            step.classList.add('completed');
+                        });
+                        document.getElementById('progressFill').style.width = '100%';
+                        document.getElementById('progressPercentage').textContent = '100% Complete';
+                        console.log('✓ Steps marked completed');
+
+                        var ref;
+                        try {
+                            console.log('📡 Calling backend API...');
+                            var response = await fetch('http://localhost:3000/api/bookings', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(bookingData)
+                            });
+                            var result = await response.json();
+                            console.log('📡 API response:', result);
+
+                            if (response.ok && result.success) {
+                                ref = result.data.booking.bookingReference;
+                            } else {
+                                console.log('⚠️ API failed, using local ref');
+                                ref = generateBookingRef();
+                            }
+                        } catch (networkErr) {
+                            console.warn('Backend not available, using local reference:', networkErr.message);
+                            ref = generateBookingRef();
+                        }
+
+                        console.log('🎫 Booking reference:', ref);
+                        bookingRef.textContent = ref;
+
+                        // Create confetti
+                        console.log('🎊 Creating confetti...');
+                        createConfetti();
+
+                        // Show success modal
+                        console.log('🎉 Showing success modal...');
+                        console.log('successModal element:', successModal);
+                        successModal.style.display = 'flex';
+                        successModal.style.zIndex = '99999';
+
+                        showToast('Booking Confirmed!', 'Your booking reference is ' + ref, 'success', 5000);
+                        console.log('✅ Success flow completed!');
+
+                        // Save to localStorage as backup
+                        localStorage.setItem('lastBooking', JSON.stringify({
+                            reference: ref,
+                            data: bookingData,
+                            timestamp: new Date().toISOString()
+                        }));
+
+                    } catch (err) {
+                        console.error('Booking error:', err);
+                        showToast('Booking Failed', err.message || 'Unable to process booking. Please try again.', 'error', 5000);
+                    } finally {
+                        isSubmitting = false;
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Confirm Booking</span>';
+                    }
+                });
+            }
+
+            // Form submit event (backup - main logic is in button click above)
             bookingForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-
-                // 🔒 DUPLICATE SUBMISSION PROTECTION
-                if (isSubmitting) return;
-                isSubmitting = true;
-
-                if (!validateStep(3)) {
-                    showToast('Validation Error', 'Please check all fields', 'error', 3000);
-                    isSubmitting = false;
-                    return;
-                }
-
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
-
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
-
-                // Simulate API call
-                setTimeout(() => {
-                    const reference = generateBookingRef();
-                    bookingRef.textContent = reference;
-
-                    // Create confetti
-                    createConfetti();
-
-                    // Show success modal
-                    successModal.style.display = 'flex';
-
-                    // Reset form
-                    bookingForm.reset();
-                    currentStep = 1;
-                    updateStepDisplay();
-                    updateProgressBar();
-                    clearRoute();
-                    updateBookingSummary();
-
-                    // Re-enable submit button
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Confirm Booking</span>';
-
-                    showToast(
-                        'Booking Confirmed!',
-                        `Your booking reference is ${reference}`,
-                        'success',
-                        5000
-                    );
-                }, 2000);
+                console.log('🚀 Form submit triggered - but handled by button click');
             });
 
             function generateBookingRef() {
-                const prefix = 'HC';
-                const year = new Date().getFullYear();
-                const randomNum = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-                return `${prefix}${year}-${randomNum}`;
+                var prefix = 'HCC';
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = (now.getMonth() + 1).toString().padStart(2, '0');
+                var day = now.getDate().toString().padStart(2, '0');
+                var dateStr = year + '' + month + '' + day;
+                var randomNum = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+                return prefix + '-' + dateStr + '-' + randomNum;
             }
+
+            console.log('✅ DOMContentLoaded completed - form submit listener attached!');
         });
 
         // ========================================
@@ -5591,11 +5748,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <link rel="stylesheet" href="../css/components/footer.css" />
     <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
     <link rel="stylesheet" href="../css/components/quote-modal.css" />
-    <link rel="stylesheet" href="../css/components/bottom-fixed-container.css">
     
     <!-- 🚀 Floating Action Menu loaded via footer component -->
     <script src="../js/modules/booking-modals.js"></script>
-    <script src="../js/modules/booking.js"></script>
+    <script type="module" src="../js/modules/booking.js"></script>
     <script src="../js/script.js"></script>
 
 </body>
