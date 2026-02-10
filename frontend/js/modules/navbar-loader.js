@@ -161,18 +161,11 @@
       if (userEmailSpan) {
         userEmailSpan.textContent = userEmail;
       }
-      if (dashboardBtn) {
-        dashboardBtn.style.display = "flex";
-      }
 
       // User is logged in - Mobile nav
       if (mobileLoginBtn) {
         mobileLoginBtn.style.display = "none";
         mobileLoginBtn.classList.add("hidden");
-      }
-      if (mobileDashboardBtn) {
-        mobileDashboardBtn.style.display = "flex";
-        mobileDashboardBtn.classList.remove("hidden");
       }
       if (mobileLogoutBtn) {
         mobileLogoutBtn.style.display = "flex";
@@ -190,23 +183,25 @@
       loginBtn.style.display = "inline-block";
       profile.style.display = "none";
       profile.classList.add("hidden");
-      if (dashboardBtn) {
-        dashboardBtn.style.display = "none";
-      }
 
       // Mobile nav
       if (mobileLoginBtn) {
         mobileLoginBtn.style.display = "flex";
         mobileLoginBtn.classList.remove("hidden");
       }
-      if (mobileDashboardBtn) {
-        mobileDashboardBtn.style.display = "none";
-        mobileDashboardBtn.classList.add("hidden");
-      }
       if (mobileLogoutBtn) {
         mobileLogoutBtn.style.display = "none";
         mobileLogoutBtn.classList.add("hidden");
       }
+    }
+
+    // Dashboard button always visible (no login required)
+    if (dashboardBtn) {
+      dashboardBtn.style.display = "flex";
+    }
+    if (mobileDashboardBtn) {
+      mobileDashboardBtn.style.display = "flex";
+      mobileDashboardBtn.classList.remove("hidden");
     }
   }
 

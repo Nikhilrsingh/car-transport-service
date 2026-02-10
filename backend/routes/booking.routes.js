@@ -31,7 +31,7 @@ router.get('/admin/stats', protect, bookingController.getBookingStats);
 router.get('/:id', bookingController.getBookingById);
 
 // Update booking status
-router.patch('/:id/status', protect, bookingController.updateBookingStatus);
+router.patch('/:id/status', bookingController.updateBookingStatus);
 
 // Update booking details
 router.put('/:id', protect, bookingController.updateBooking);

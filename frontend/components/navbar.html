@@ -248,6 +248,12 @@
 
           <!-- Login/Profile Section -->
           <div class="nav-actions">
+            <!-- Dashboard Button (always visible) -->
+            <a href="../pages/dashboard.html" id="dashboardBtn" class="dashboard-btn" data-tooltip="Dashboard">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+
             <!-- Login Button (shown when logged out) -->
             <a href="../pages/login.html" id="loginBtn" class="login-btn" data-tooltip="Login">
               <i class="fas fa-user"></i>
@@ -256,10 +262,6 @@
 
             <!-- Profile Section (shown when logged in) -->
             <div id="profile" class="profile-section hidden">
-              <a href="../pages/dashboard.html" id="dashboardBtn" class="dashboard-btn" data-tooltip="Dashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-              </a>
               <span id="userEmail" class="user-email"></span>
               <a href="#" id="logoutBtn" class="logout-btn" data-tooltip="Logout">
                 <i class="fas fa-sign-out-alt"></i>
@@ -419,8 +421,8 @@
 
     <!-- Mobile Action Buttons -->
     <div class="mobile-nav-actions">
-      <!-- Dashboard Link (shown when logged in) -->
-      <a href="../pages/dashboard.html" id="mobileDashboardBtn" class="mobile-dashboard-btn hidden">
+      <!-- Dashboard Link (always visible) -->
+      <a href="../pages/dashboard.html" id="mobileDashboardBtn" class="mobile-dashboard-btn">
         <i class="fas fa-tachometer-alt"></i>
         <span>Dashboard</span>
       </a>

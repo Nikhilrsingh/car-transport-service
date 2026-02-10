@@ -1,4 +1,5 @@
 import Booking from '../models/booking.model.js';
+import Invoice from '../models/Invoice.model.js';
 import { success, error } from '../utils/response.js';
 
 /**
@@ -39,9 +40,9 @@ export const createBooking = async (req, res) => {
       }
     });
 
-  } catch (error) {
-    console.error('Create booking error:', error);
-    return error(res, 400, error.message || 'Failed to create booking');
+  } catch (err) {
+    console.error('Create booking error:', err);
+    return error(res, 400, err.message || 'Failed to create booking');
   }
 };
 
@@ -84,9 +85,9 @@ export const getAllBookings = async (req, res) => {
       }
     });
 
-  } catch (error) {
-    console.error('Get bookings error:', error);
-    return error(res, 500, error.message || 'Failed to fetch bookings');
+  } catch (err) {
+    console.error('Get bookings error:', err);
+    return error(res, 500, err.message || 'Failed to fetch bookings');
   }
 };
 
@@ -115,9 +116,9 @@ export const getBookingById = async (req, res) => {
 
     return success(res, 200, 'Booking fetched successfully', { booking });
 
-  } catch (error) {
-    console.error('Get booking error:', error);
-    return error(res, 500, error.message || 'Failed to fetch booking');
+  } catch (err) {
+    console.error('Get booking error:', err);
+    return error(res, 500, err.message || 'Failed to fetch booking');
   }
 };
 
@@ -143,9 +144,9 @@ export const getBookingByPhone = async (req, res) => {
 
     return success(res, 200, 'Booking fetched successfully', { booking });
 
-  } catch (error) {
-    console.error('Get booking by phone error:', error);
-    return error(res, 500, error.message || 'Failed to fetch booking');
+  } catch (err) {
+    console.error('Get booking by phone error:', err);
+    return error(res, 500, err.message || 'Failed to fetch booking');
   }
 };
 
@@ -208,6 +209,75 @@ export const updateBookingStatus = async (req, res) => {
       booking.pickedUpAt = new Date();
     } else if (status === 'delivered' && !booking.deliveredAt) {
       booking.deliveredAt = new Date();
+
+      // Auto-generate invoice for delivered booking
+      try {
+        const existingInvoice = await Invoice.findOne({ bookingId: booking._id });
+
+        if (!existingInvoice) {
+          const invoiceNumber = await Invoice.generateInvoiceNumber();
+
+          // Calculate pricing breakdown
+          const basePrice = booking.finalPrice || booking.estimatedPrice || 0;
+          const subtotal = basePrice / 1.18; // Remove 18% GST to get subtotal
+          const transportCharge = subtotal * 0.85; // 85% transport
+          const insurance = subtotal * 0.10; // 10% insurance
+          const loadingUnloading = subtotal * 0.05; // 5% loading/unloading
+
+          // Create invoice
+          const invoice = new Invoice({
+            invoiceNumber,
+            bookingId: booking._id,
+            bookingReference: booking.bookingReference,
+            userId: booking.userId || null,
+            customer: {
+              fullName: booking.fullName,
+              email: booking.email || '',
+              phone: booking.phone,
+              address: {
+                street: booking.pickupLocation || '',
+                city: booking.pickupCity || '',
+                state: '',
+                pincode: ''
+              }
+            },
+            lineItems: [
+              {
+                description: `Vehicle Transport (${booking.vehicleType || 'Vehicle'}) - ${booking.pickupCity} to ${booking.dropCity}`,
+                quantity: 1,
+                unitPrice: transportCharge,
+                amount: transportCharge
+              },
+              {
+                description: 'Vehicle Insurance Coverage',
+                quantity: 1,
+                unitPrice: insurance,
+                amount: insurance
+              },
+              {
+                description: 'Loading & Unloading Charges',
+                quantity: 1,
+                unitPrice: loadingUnloading,
+                amount: loadingUnloading
+              }
+            ],
+            subtotal: subtotal,
+            issueDate: new Date(),
+            dueDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), // 15 days
+            paymentStatus: 'unpaid',
+            notes: 'Thank you for choosing Harihar Car Carriers. Payment is due within 15 days of invoice date.'
+          });
+
+          // Calculate GST (assume same state for demo - intra-state CGST+SGST)
+          invoice.calculateTaxBreakdown('Maharashtra', 'Maharashtra', 18);
+
+          await invoice.save();
+          console.log(`✅ Invoice ${invoiceNumber} auto-generated for booking ${booking.bookingReference}`);
+        }
+      } catch (invoiceError) {
+        console.error('Failed to auto-generate invoice:', invoiceError);
+        // Don't fail the booking update if invoice generation fails
+      }
     } else if (status === 'cancelled') {
       booking.cancelledAt = new Date();
       if (cancellationReason) {
@@ -219,9 +289,9 @@ export const updateBookingStatus = async (req, res) => {
 
     return success(res, 200, 'Booking status updated successfully', { booking });
 
-  } catch (error) {
-    console.error('Update status error:', error);
-    return error(res, 500, error.message || 'Failed to update booking status');
+  } catch (err) {
+    console.error('Update status error:', err);
+    return error(res, 500, err.message || 'Failed to update booking status');
   }
 };
 
@@ -251,9 +321,9 @@ export const updateBooking = async (req, res) => {
 
     return success(res, 200, 'Booking updated successfully', { booking });
 
-  } catch (error) {
-    console.error('Update booking error:', error);
-    return error(res, 500, error.message || 'Failed to update booking');
+  } catch (err) {
+    console.error('Update booking error:', err);
+    return error(res, 500, err.message || 'Failed to update booking');
   }
 };
 
@@ -278,9 +348,9 @@ export const deleteBooking = async (req, res) => {
 
     return success(res, 200, 'Booking cancelled successfully', {});
 
-  } catch (error) {
-    console.error('Delete booking error:', error);
-    return error(res, 500, error.message || 'Failed to delete booking');
+  } catch (err) {
+    console.error('Delete booking error:', err);
+    return error(res, 500, err.message || 'Failed to delete booking');
   }
 };
 
@@ -315,8 +385,8 @@ export const getBookingStats = async (req, res) => {
       }
     });
 
-  } catch (error) {
-    console.error('Get stats error:', error);
-    return error(res, 500, error.message || 'Failed to fetch statistics');
+  } catch (err) {
+    console.error('Get stats error:', err);
+    return error(res, 500, err.message || 'Failed to fetch statistics');
   }
 };
