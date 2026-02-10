@@ -262,6 +262,148 @@
             color: #333;
         }
 
+        /* Invoice Cards */
+        .invoice-card {
+            background: linear-gradient(135deg, #1a1a1a, #252525);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .invoice-card:hover {
+            border-color: #ff6347;
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(255, 99, 71, 0.2);
+        }
+
+        .invoice-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .invoice-number {
+            font-weight: 700;
+            color: #ff6347;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .invoice-date {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .invoice-amount {
+            text-align: right;
+        }
+
+        .amount-label {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .amount-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4caf50;
+        }
+
+        .invoice-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+
+        .invoice-detail {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .invoice-detail span {
+            color: #999;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .invoice-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+
+        .invoice-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-view {
+            background: #ff6347;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #e5533d;
+            transform: translateY(-2px);
+        }
+
+        .btn-download {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .payment-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .payment-paid {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .payment-unpaid {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .payment-partial {
+            background: #fff3cd;
+            color: #856404;
+        }
+
         /* Profile Tab */
         .profile-container {
             max-width: 800px;
@@ -504,6 +646,9 @@
             <button class="dashboard-tab" data-tab="bookings">
                 <i class="fas fa-truck"></i> My Bookings
             </button>
+            <button class="dashboard-tab" data-tab="invoices">
+                <i class="fas fa-file-invoice"></i> My Invoices
+            </button>
             <button class="dashboard-tab" data-tab="profile">
                 <i class="fas fa-user"></i> Profile
             </button>
@@ -571,6 +716,34 @@
                     <i class="fas fa-spinner"></i>
                     <p>Loading your bookings...</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- My Invoices Tab -->
+        <div class="tab-content" id="invoices-tab">
+            <div class="bookings-header">
+                <h2><i class="fas fa-file-invoice"></i> My Invoices & Receipts</h2>
+                <p style="color: #999; margin-top: 10px;">Download and view your billing history</p>
+            </div>
+
+            <div class="bookings-filters" style="margin-bottom: 30px;">
+                <select id="invoiceStatusFilter" class="filter-select">
+                    <option value="all">All Invoices</option>
+                    <option value="paid">Paid</option>
+                    <option value="unpaid">Unpaid</option>
+                    <option value="partial">Partially Paid</option>
+                </select>
+                <input type="text" id="invoiceSearch" class="search-input" placeholder="Search by invoice number or booking ref...">
+            </div>
+
+            <div id="invoicesList" class="bookings-list">
+                <!-- Invoices will be loaded here -->
+            </div>
+
+            <div id="noInvoices" style="display: none; text-align: center; padding: 60px; color: #666;">
+                <i class="fas fa-file-invoice" style="font-size: 4rem; margin-bottom: 20px; opacity: 0.3;"></i>
+                <h3 style="color: #999; margin-bottom: 10px;">No Invoices Yet</h3>
+                <p>Invoices are automatically generated when your bookings are delivered.</p>
             </div>
         </div>
 
@@ -746,6 +919,8 @@
 
             if (tabName === 'bookings') {
                 loadBookings();
+            } else if (tabName === 'invoices') {
+                loadInvoices();
             }
         }
 
@@ -974,6 +1149,123 @@
             showToast('Booking details coming soon!', 'info');
         }
 
+        // Load invoices
+        async function loadInvoices() {
+            try {
+                // Call public API - no authentication required
+                const response = await fetch(`${API_BASE}/invoices?sortBy=createdAt&sortOrder=desc`);
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    const invoices = data.data.invoices;
+                    if (!invoices || invoices.length === 0) {
+                        document.getElementById('noInvoices').style.display = 'block';
+                        document.getElementById('invoicesList').style.display = 'none';
+                    } else {
+                        displayInvoices(invoices);
+                        document.getElementById('noInvoices').style.display = 'none';
+                        document.getElementById('invoicesList').style.display = 'block';
+                    }
+                } else {
+                    document.getElementById('noInvoices').style.display = 'block';
+                    document.getElementById('invoicesList').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Invoices load error:', error);
+                document.getElementById('noInvoices').style.display = 'block';
+                document.getElementById('invoicesList').style.display = 'none';
+            }
+        }
+
+        // Display invoices
+        function displayInvoices(invoices) {
+            const container = document.getElementById('invoicesList');
+            
+            if (!invoices || invoices.length === 0) {
+                document.getElementById('noInvoices').style.display = 'block';
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            document.getElementById('noInvoices').style.display = 'none';
+
+            container.innerHTML = invoices.map(invoice => `
+                <div class="invoice-card">
+                    <div class="payment-badge payment-${invoice.paymentStatus}">
+                        ${invoice.paymentStatus.toUpperCase()}
+                    </div>
+                    <div class="invoice-card-header">
+                        <div>
+                            <div class="invoice-number">${invoice.invoiceNumber}</div>
+                            <div class="invoice-date">
+                                <i class="fas fa-calendar"></i> Issued: ${new Date(invoice.issueDate).toLocaleDateString('en-IN')}
+                            </div>
+                            <div class="invoice-date">
+                                <i class="fas fa-clock"></i> Due: ${new Date(invoice.dueDate).toLocaleDateString('en-IN')}
+                            </div>
+                        </div>
+                        <div class="invoice-amount">
+                            <div class="amount-label">Total Amount</div>
+                            <div class="amount-value">₹${invoice.totalAmount.toLocaleString('en-IN')}</div>
+                        </div>
+                    </div>
+                    <div class="invoice-details-grid">
+                        <div class="invoice-detail">
+                            <span><i class="fas fa-receipt"></i> Booking Ref</span>
+                            ${invoice.bookingReference || 'N/A'}
+                        </div>
+                        <div class="invoice-detail">
+                            <span><i class="fas fa-car"></i> Vehicle</span>
+                            ${invoice.bookingId?.vehicleType || 'N/A'}
+                        </div>
+                        <div class="invoice-detail">
+                            <span><i class="fas fa-route"></i> Route</span>
+                            ${invoice.bookingId?.pickupCity || 'N/A'} → ${invoice.bookingId?.dropCity || 'N/A'}
+                        </div>
+                    </div>
+                    <div class="invoice-actions">
+                        <button class="invoice-btn btn-view" onclick="viewInvoice('${invoice._id}', '${invoice.invoiceNumber}')">
+                            <i class="fas fa-eye"></i> View Invoice
+                        </button>
+                        <button class="invoice-btn btn-download" onclick="downloadInvoice('${invoice._id}', '${invoice.invoiceNumber}')">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // View invoice
+        function viewInvoice(invoiceId, invoiceNumber) {
+            window.location.href = `invoice.html?id=${invoiceId}`;
+        }
+
+        // Download invoice
+        function downloadInvoice(invoiceId, invoiceNumber) {
+            window.location.href = `invoice.html?id=${invoiceId}`;
+            showToast('Opening invoice... Click Download PDF button on the page', 'success');
+        }
+
+        // Filter invoices
+        function filterInvoices() {
+            const searchTerm = document.getElementById('invoiceSearch').value.toLowerCase();
+            const statusFilter = document.getElementById('invoiceStatusFilter').value;
+
+            const cards = document.querySelectorAll('#invoicesList .invoice-card');
+            
+            cards.forEach(card => {
+                const invoiceNumber = card.querySelector('.invoice-number').textContent.toLowerCase();
+                const bookingRef = card.querySelector('.invoice-detail').textContent.toLowerCase();
+                const paymentBadge = card.querySelector('.payment-badge').textContent.toLowerCase();
+                
+                const matchesSearch = invoiceNumber.includes(searchTerm) || bookingRef.includes(searchTerm);
+                const matchesStatus = statusFilter === 'all' || paymentBadge.includes(statusFilter);
+                
+                card.style.display = matchesSearch && matchesStatus ? 'block' : 'none';
+            });
+        }
+
         // Setup event listeners
         function setupEventListeners() {
             // Tab switching
@@ -1004,6 +1296,10 @@
             // Search bookings
             document.getElementById('searchBooking').addEventListener('input', filterBookings);
             document.getElementById('statusFilter').addEventListener('change', filterBookings);
+
+            // Search and filter invoices
+            document.getElementById('invoiceSearch').addEventListener('input', filterInvoices);
+            document.getElementById('invoiceStatusFilter').addEventListener('change', filterInvoices);
 
             // Toggle switches
             document.querySelectorAll('.toggle-switch').forEach(toggle => {

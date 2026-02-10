@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Harihar Car Carriers</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/logo.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- html2pdf.js CDN - Using unpkg as alternative -->
+    <script src="https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .action-buttons {
+            background: #1a1a2e;
+            padding: 15px 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download {
+            background: #ff6347;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #e5533d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+        }
+
+        .btn-print {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .btn-print:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-back {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-back:hover {
+            background: #7f8c8d;
+        }
+
+        /* Invoice Content */
+        .invoice-wrapper {
+            padding: 40px 50px;
+            background: white;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #ff6347;
+            margin-bottom: 30px;
+        }
+
+        .company-info h1 {
+            color: #ff6347;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .company-info p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .invoice-meta {
+            text-align: right;
+        }
+
+        .invoice-meta h2 {
+            font-size: 36px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .invoice-number {
+            font-size: 18px;
+            color: #ff6347;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .invoice-date {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        /* Bill To Section */
+        .bill-to-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .bill-to, .payment-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .bill-to h3, .payment-info h3 {
+            color: #2c3e50;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .bill-to p, .payment-info p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 5px;
+        }
+
+        .customer-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        /* Invoice Table */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .invoice-table thead {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .invoice-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .invoice-table th:last-child,
+        .invoice-table td:last-child {
+            text-align: right;
+        }
+
+        .invoice-table tbody tr {
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .invoice-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .invoice-table td {
+            padding: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .item-description {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        /* Totals Section */
+        .totals-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .totals-table {
+            width: 350px;
+        }
+
+        .totals-table tr {
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .totals-table td {
+            padding: 12px 15px;
+            font-size: 14px;
+        }
+
+        .totals-table td:first-child {
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .totals-table td:last-child {
+            text-align: right;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .total-row {
+            background: #2c3e50;
+            color: white !important;
+            font-size: 18px !important;
+            font-weight: 700 !important;
+        }
+
+        .total-row td {
+            color: white !important;
+            padding: 15px !important;
+        }
+
+        .tax-row td {
+            color: #ff6347 !important;
+        }
+
+        /* Notes Section */
+        .notes-section {
+            background: #fffbea;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        .notes-section h4 {
+            color: #2c3e50;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notes-section p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .invoice-footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        .invoice-footer p {
+            margin-bottom: 5px;
+        }
+
+        .thank-you {
+            color: #ff6347;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Payment Status Badge */
+        .payment-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .status-paid {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-unpaid {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-partial {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 100px 20px;
+            color: white;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #ff6347;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px;
+            border-left: 4px solid #dc3545;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .action-buttons {
+                display: none !important;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .invoice-wrapper {
+                padding: 20px;
+            }
+
+            @page {
+                margin: 1cm;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .invoice-wrapper {
+                padding: 30px 20px;
+            }
+
+            .invoice-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .invoice-meta {
+                text-align: left;
+            }
+
+            .bill-to-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .action-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .invoice-table {
+                font-size: 12px;
+            }
+
+            .invoice-table th,
+            .invoice-table td {
+                padding: 10px 8px;
+            }
+
+            .totals-table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-back" onclick="goBack()">
+                ← Back to Dashboard
+            </button>
+            <button class="btn btn-print" onclick="printInvoice()">
+                🖨️ Print
+            </button>
+            <button class="btn btn-download" onclick="downloadPDF()">
+                📥 Download PDF
+            </button>
+        </div>
+
+        <!-- Invoice Content (This will be converted to PDF) -->
+        <div id="invoice-content" class="invoice-wrapper">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading invoice...</p>
+            </div>
+
+            <div id="invoice-body" style="display: none;">
+                <!-- Invoice Header -->
+                <div class="invoice-header">
+                    <div class="company-info">
+                        <h1>Harihar Car Carriers</h1>
+                        <p>Head Office: Mumbai, Maharashtra, India</p>
+                        <p>Phone: +91-9876543210</p>
+                        <p>Email: info@hariharcarriers.com</p>
+                        <p>GSTIN: <strong id="company-gstin">27XXXXX1234X1ZX</strong></p>
+                    </div>
+                    <div class="invoice-meta">
+                        <h2>INVOICE</h2>
+                        <div class="invoice-number" id="invoice-number">INV-202402-0001</div>
+                        <div class="invoice-date">
+                            <strong>Issue Date:</strong> <span id="issue-date">10 Feb 2026</span><br>
+                            <strong>Due Date:</strong> <span id="due-date">25 Feb 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bill To Section -->
+                <div class="bill-to-section">
+                    <div class="bill-to">
+                        <h3>Bill To</h3>
+                        <p class="customer-name" id="customer-name">Customer Name</p>
+                        <p id="customer-email">customer@example.com</p>
+                        <p id="customer-phone">+91-9876543210</p>
+                        <p id="customer-address">
+                            Street Address<br>
+                            City, State - 400001
+                        </p>
+                    </div>
+                    <div class="payment-info">
+                        <h3>Booking Details</h3>
+                        <p><strong>Booking Ref:</strong> <span id="booking-ref">HCC-20240210-0001</span></p>
+                        <p><strong>Vehicle:</strong> <span id="vehicle-type">Sedan</span></p>
+                        <p><strong>Route:</strong> <span id="route">Mumbai → Delhi</span></p>
+                        <p><strong>Delivered:</strong> <span id="delivered-date">10 Feb 2026</span></p>
+                        <div class="payment-status status-unpaid" id="payment-status">Unpaid</div>
+                    </div>
+                </div>
+
+                <!-- Invoice Table -->
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th style="text-align: center;">Qty</th>
+                            <th style="text-align: right;">Unit Price</th>
+                            <th style="text-align: right;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="line-items">
+                        <!-- Line items will be inserted here -->
+                    </tbody>
+                </table>
+
+                <!-- Totals -->
+                <div class="totals-section">
+                    <table class="totals-table">
+                        <tbody>
+                            <tr>
+                                <td>Subtotal</td>
+                                <td id="subtotal">₹0.00</td>
+                            </tr>
+                            <tr class="tax-row" id="cgst-row" style="display: none;">
+                                <td>CGST (<span id="cgst-rate">9</span>%)</td>
+                                <td id="cgst-amount">₹0.00</td>
+                            </tr>
+                            <tr class="tax-row" id="sgst-row" style="display: none;">
+                                <td>SGST (<span id="sgst-rate">9</span>%)</td>
+                                <td id="sgst-amount">₹0.00</td>
+                            </tr>
+                            <tr class="tax-row" id="igst-row" style="display: none;">
+                                <td>IGST (<span id="igst-rate">18</span>%)</td>
+                                <td id="igst-amount">₹0.00</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td>TOTAL AMOUNT</td>
+                                <td id="total-amount">₹0.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Notes -->
+                <div class="notes-section">
+                    <h4>Payment Terms & Notes</h4>
+                    <p id="invoice-notes">
+                        Thank you for choosing Harihar Car Carriers. Payment is due within 15 days of invoice date.
+                    </p>
+                </div>
+
+                <!-- Footer -->
+                <div class="invoice-footer">
+                    <p class="thank-you">Thank You for Your Business!</p>
+                    <p>This is a computer-generated invoice and does not require a signature.</p>
+                    <p>For any queries, please contact us at info@hariharcarriers.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Base URL
+        const API_BASE_URL = 'http://localhost:3000/api';
+
+        // Get invoice ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const invoiceId = urlParams.get('id');
+        const invoiceNumber = urlParams.get('number');
+
+        // Format currency
+        function formatCurrency(amount) {
+            return '₹' + parseFloat(amount).toLocaleString('en-IN', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+
+        // Load invoice data
+        async function loadInvoice() {
+            try {
+                let url;
+                if (invoiceId) {
+                    url = `${API_BASE_URL}/invoices/${invoiceId}`;
+                } else if (invoiceNumber) {
+                    url = `${API_BASE_URL}/invoices/number/${invoiceNumber}`;
+                } else {
+                    throw new Error('No invoice ID or number provided');
+                }
+
+                const response = await fetch(url);
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message || 'Failed to load invoice');
+                }
+
+                const invoice = result.data.invoice;
+                populateInvoice(invoice);
+
+                // Hide loading, show invoice
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('invoice-body').style.display = 'block';
+
+            } catch (error) {
+                console.error('Load invoice error:', error);
+                document.getElementById('loading').innerHTML = `
+                    <div class="error-message">
+                        <strong>Error:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Populate invoice with data
+        function populateInvoice(invoice) {
+            // Header
+            document.getElementById('invoice-number').textContent = invoice.invoiceNumber;
+            document.getElementById('issue-date').textContent = formatDate(invoice.issueDate);
+            document.getElementById('due-date').textContent = formatDate(invoice.dueDate);
+            document.getElementById('company-gstin').textContent = invoice.company.gstin;
+
+            // Customer details
+            document.getElementById('customer-name').textContent = invoice.customer.fullName;
+            document.getElementById('customer-email').textContent = invoice.customer.email || 'N/A';
+            document.getElementById('customer-phone').textContent = invoice.customer.phone;
+            
+            const address = invoice.customer.address;
+            const addressParts = [];
+            if (address.street) addressParts.push(address.street);
+            if (address.city || address.state || address.pincode) {
+                const cityLine = [address.city, address.state].filter(Boolean).join(', ');
+                if (address.pincode) {
+                    addressParts.push(`${cityLine} - ${address.pincode}`);
+                } else {
+                    addressParts.push(cityLine);
+                }
+            }
+            document.getElementById('customer-address').innerHTML = addressParts.join('<br>') || 'Address not provided';
+
+            // Booking details
+            if (invoice.bookingId) {
+                document.getElementById('booking-ref').textContent = invoice.bookingReference || 'N/A';
+                document.getElementById('vehicle-type').textContent = invoice.bookingId.vehicleType || 'N/A';
+                document.getElementById('route').textContent = 
+                    `${invoice.bookingId.pickupCity || 'N/A'} → ${invoice.bookingId.dropCity || 'N/A'}`;
+                document.getElementById('delivered-date').textContent = 
+                    invoice.bookingId.deliveredAt ? formatDate(invoice.bookingId.deliveredAt) : 'N/A';
+            }
+
+            // Payment status
+            const statusElement = document.getElementById('payment-status');
+            statusElement.textContent = invoice.paymentStatus.toUpperCase();
+            statusElement.className = `payment-status status-${invoice.paymentStatus}`;
+
+            // Line items
+            const lineItemsHtml = invoice.lineItems.map(item => `
+                <tr>
+                    <td class="item-description">${item.description}</td>
+                    <td style="text-align: center;">${item.quantity}</td>
+                    <td style="text-align: right;">${formatCurrency(item.unitPrice)}</td>
+                    <td style="text-align: right;">${formatCurrency(item.amount)}</td>
+                </tr>
+            `).join('');
+            document.getElementById('line-items').innerHTML = lineItemsHtml;
+
+            // Totals
+            document.getElementById('subtotal').textContent = formatCurrency(invoice.subtotal);
+
+            // Tax breakdown (show CGST+SGST or IGST based on what's used)
+            const tax = invoice.taxBreakdown;
+            if (tax.cgst.amount > 0 || tax.sgst.amount > 0) {
+                // Intra-state: Show CGST + SGST
+                document.getElementById('cgst-row').style.display = 'table-row';
+                document.getElementById('sgst-row').style.display = 'table-row';
+                document.getElementById('igst-row').style.display = 'none';
+                
+                document.getElementById('cgst-rate').textContent = tax.cgst.rate;
+                document.getElementById('cgst-amount').textContent = formatCurrency(tax.cgst.amount);
+                document.getElementById('sgst-rate').textContent = tax.sgst.rate;
+                document.getElementById('sgst-amount').textContent = formatCurrency(tax.sgst.amount);
+            } else if (tax.igst.amount > 0) {
+                // Inter-state: Show IGST
+                document.getElementById('igst-row').style.display = 'table-row';
+                document.getElementById('cgst-row').style.display = 'none';
+                document.getElementById('sgst-row').style.display = 'none';
+                
+                document.getElementById('igst-rate').textContent = tax.igst.rate;
+                document.getElementById('igst-amount').textContent = formatCurrency(tax.igst.amount);
+            }
+
+            document.getElementById('total-amount').textContent = formatCurrency(invoice.totalAmount);
+
+            // Notes
+            document.getElementById('invoice-notes').textContent = invoice.notes;
+        }
+
+        // Download PDF
+        window.downloadPDF = function() {
+            // Check if html2pdf is loaded
+            if (typeof html2pdf === 'undefined') {
+                alert('PDF library not loaded. Please refresh the page and try again.');
+                console.error('html2pdf library not found');
+                return;
+            }
+
+            const element = document.getElementById('invoice-content');
+            const invoiceNum = document.getElementById('invoice-number').textContent;
+            
+            const opt = {
+                margin: 0.5,
+                filename: `${invoiceNum}_Harihar_Car_Carriers.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Show brief message
+            const btn = event.target.closest('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Generating PDF...';
+            btn.disabled = true;
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }).catch((error) => {
+                console.error('PDF generation error:', error);
+                alert('Failed to generate PDF. Please try again.');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+        };
+
+        // Print invoice
+        window.printInvoice = function() {
+            window.print();
+        };
+
+        // Go back
+        window.goBack = function() {
+            if (document.referrer && document.referrer.includes('dashboard.html')) {
+                window.history.back();
+            } else {
+                window.location.href = '../pages/dashboard.html';
+            }
+        };
+
+        // Load invoice on page load
+        loadInvoice();
+    </script>
+</body>
+</html>
