@@ -3,6 +3,10 @@
  * Handles form validation, step management, price calculation, and booking summary
  */
 
+import { safeFetch } from '../http.js';
+
+const API_BASE = 'http://localhost:3000/api/bookings';
+
 class BookingManager {
     constructor() {
         this.currentStep = 1;
@@ -32,7 +36,7 @@ class BookingManager {
             dropLocation: (val) => val.trim() !== '',
             pickupDate: (val) => val !== ''
         };
-        
+
         this.init();
     }
 
@@ -40,7 +44,7 @@ class BookingManager {
     autoSaveForm() {
         const form = document.getElementById('bookingForm');
         if (!form) return;
-        
+
         const formData = new FormData(form);
         const data = {
             step: this.currentStep,
@@ -71,8 +75,8 @@ class BookingManager {
     setupEventListeners() {
         // Form input validation
         const validationFields = ['fullName', 'phone', 'email', 'password', 'vehicleType',
-                          'pickupCity', 'dropCity', 'pickupDate'];
-        
+            'pickupCity', 'dropCity', 'pickupDate'];
+
         validationFields.forEach(field => {
             const input = document.getElementById(field);
             if (input) {
@@ -81,7 +85,7 @@ class BookingManager {
                     this.updateBookingSummary();
                     this.saveDraft();
                 });
-                
+
                 input.addEventListener('blur', () => {
                     this.validateField(field, input.value);
                 });
@@ -147,20 +151,20 @@ class BookingManager {
         // Date and time changes
         const pickupDate = document.getElementById('pickupDate');
         const pickupTime = document.getElementById('pickupTime');
-        
+
         if (pickupDate) {
             pickupDate.addEventListener('change', () => this.updateBookingSummary());
         }
-        
+
         if (pickupTime) {
             pickupTime.addEventListener('change', () => this.updateBookingSummary());
         }
 
-        // Form submission
-        const bookingForm = document.getElementById('bookingForm');
-        if (bookingForm) {
-            bookingForm.addEventListener('submit', (e) => this.handleSubmit(e));
-        }
+        // Form submission - DISABLED: Using inline script version instead
+        // const bookingForm = document.getElementById('bookingForm');
+        // if (bookingForm) {
+        //     bookingForm.addEventListener('submit', (e) => this.handleSubmit(e));
+        // }
     }
 
     // Step Management
@@ -174,7 +178,7 @@ class BookingManager {
             this.currentStep++;
             this.updateStepDisplay();
             this.updateProgressBar();
-            
+
             if (this.currentStep === 3) {
                 this.populateReviewSummary();
             }
@@ -205,7 +209,7 @@ class BookingManager {
         document.querySelectorAll('.step').forEach((step, index) => {
             const stepNum = index + 1;
             step.classList.remove('active', 'completed');
-            
+
             if (stepNum < this.currentStep) {
                 step.classList.add('completed');
             } else if (stepNum === this.currentStep) {
@@ -235,7 +239,7 @@ class BookingManager {
         let fields = [];
 
         if (step === 1) {
-            fields = ['fullName', 'phone', 'email', 'password', 'vehicleType'];
+            fields = ['fullName', 'phone', 'email', 'vehicleType'];
         } else if (step === 2) {
             fields = ['pickupCity', 'dropCity', 'pickupDate'];
         }
@@ -300,36 +304,36 @@ class BookingManager {
 
     // Summary Updates
     updateBookingSummary() {
-    const form = document.getElementById('bookingForm');
-    if (!form) return;
-    
-    const formData = new FormData(form);
-    
-    // Personal Info
-    this.updateSummaryField('summaryName', formData.get('fullName'));
-    this.updateSummaryField('summaryPhone', formData.get('phone'));
-    this.updateSummaryField('summaryEmail', formData.get('email'));
+        const form = document.getElementById('bookingForm');
+        if (!form) return;
 
-    // Vehicle Info
-    this.updateSummaryField('summaryVehicleType', this.formatVehicleType(formData.get('vehicleType')));
-    this.updateSummaryField('summaryVehicleModel', formData.get('vehicleModel') || 'Not provided');
-    
-    // Transport Details - prioritize visible city fields
-    const pickup = formData.get('pickupCity') || formData.get('pickupLocation');
-    const drop = formData.get('dropCity') || formData.get('dropLocation');
-    
-    this.updateSummaryField('summaryPickup', pickup, 'Not set');
-    this.updateSummaryField('summaryDrop', drop, 'Not set');
-    this.updateSummaryField('summaryDate', this.formatDate(formData.get('pickupDate')), 'Not selected');
-    this.updateSummaryField('summaryTime', this.formatTime(formData.get('pickupTime')));
-    
-    this.updateDeliveryEstimate(formData.get('pickupDate'));
-}
+        const formData = new FormData(form);
+
+        // Personal Info
+        this.updateSummaryField('summaryName', formData.get('fullName'));
+        this.updateSummaryField('summaryPhone', formData.get('phone'));
+        this.updateSummaryField('summaryEmail', formData.get('email'));
+
+        // Vehicle Info
+        this.updateSummaryField('summaryVehicleType', this.formatVehicleType(formData.get('vehicleType')));
+        this.updateSummaryField('summaryVehicleModel', formData.get('vehicleModel') || 'Not provided');
+
+        // Transport Details - prioritize visible city fields
+        const pickup = formData.get('pickupCity') || formData.get('pickupLocation');
+        const drop = formData.get('dropCity') || formData.get('dropLocation');
+
+        this.updateSummaryField('summaryPickup', pickup, 'Not set');
+        this.updateSummaryField('summaryDrop', drop, 'Not set');
+        this.updateSummaryField('summaryDate', this.formatDate(formData.get('pickupDate')), 'Not selected');
+        this.updateSummaryField('summaryTime', this.formatTime(formData.get('pickupTime')));
+
+        this.updateDeliveryEstimate(formData.get('pickupDate'));
+    }
 
     updateSummaryField(elementId, value, defaultText = 'Not provided') {
         const element = document.getElementById(elementId);
         if (!element) return;
-        
+
         if (value && value.trim() !== '') {
             element.textContent = value;
             element.classList.remove('empty');
@@ -342,47 +346,47 @@ class BookingManager {
     updateDeliveryEstimate(pickupDateStr) {
         const estimateEl = document.getElementById('estimatedDelivery');
         if (!estimateEl || !pickupDateStr) return;
-        
+
         const pickupDate = new Date(pickupDateStr);
         const deliveryDate = new Date(pickupDate);
         const distance = parseFloat(document.getElementById('distanceSlider')?.value || 0);
         const days = Math.ceil(distance / 400) + 1;
         deliveryDate.setDate(deliveryDate.getDate() + days);
-        
-        estimateEl.textContent = deliveryDate.toLocaleDateString('en-IN', { 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric' 
+
+        estimateEl.textContent = deliveryDate.toLocaleDateString('en-IN', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
         });
     }
 
     populateReviewSummary() {
         const reviewContent = document.getElementById('reviewContent');
         if (!reviewContent) return;
-        
+
         const form = document.getElementById('bookingForm');
         const formData = new FormData(form);
-        
+
         let html = '<div style="display: grid; gap: 15px;">';
-        
+
         html += this.createReviewSection('user', 'Personal Information', [
             { label: 'Name', value: formData.get('fullName') },
             { label: 'Phone', value: formData.get('phone') },
             { label: 'Email', value: formData.get('email') }
         ]);
-        
+
         html += this.createReviewSection('car', 'Vehicle Details', [
             { label: 'Type', value: this.formatVehicleType(formData.get('vehicleType')) },
             { label: 'Model', value: formData.get('vehicleModel') || 'Not specified' }
         ]);
-        
+
         html += this.createReviewSection('route', 'Transport Details', [
             { label: 'From', value: formData.get('pickupLocation') },
             { label: 'To', value: formData.get('dropLocation') },
             { label: 'Date', value: this.formatDate(formData.get('pickupDate')) },
             { label: 'Time', value: this.formatTime(formData.get('pickupTime')) }
         ]);
-        
+
         html += '</div>';
         reviewContent.innerHTML = html;
     }
@@ -401,7 +405,7 @@ class BookingManager {
     updatePriceCalculation() {
         const distance = parseFloat(document.getElementById('distanceSlider')?.value || 0);
         const vehicleType = document.getElementById('vehicleType')?.value;
-        
+
         const baseFares = {
             'hatchback': 2000,
             'sedan': 2500,
@@ -410,13 +414,13 @@ class BookingManager {
             'bike': 1500,
             'commercial': 4000
         };
-        
+
         const baseFare = baseFares[vehicleType] || 2000;
         const distanceCharge = distance * 15;
         const subtotal = baseFare + distanceCharge;
         const gst = subtotal * 0.18;
         let total = subtotal + gst;
-        
+
         const isFirstBooking = true;
         if (isFirstBooking && distance > 0) {
             total = total * 0.9;
@@ -426,12 +430,12 @@ class BookingManager {
             const discountBadge = document.getElementById('discountBadge');
             if (discountBadge) discountBadge.style.display = 'none';
         }
-        
+
         this.animateValue('baseFare', baseFare);
         this.animateValue('distanceCharge', distanceCharge);
         this.animateValue('gst', gst);
         this.animateValue('totalPrice', total);
-        
+
         const distanceValue = document.getElementById('distanceValue');
         if (distanceValue) distanceValue.textContent = distance + ' km';
     }
@@ -439,22 +443,22 @@ class BookingManager {
     animateValue(elementId, endValue) {
         const element = document.getElementById(elementId);
         if (!element) return;
-        
+
         const startValue = parseFloat(element.textContent.replace(/[₹,]/g, '')) || 0;
         const duration = 500;
         const startTime = performance.now();
-        
+
         const update = (currentTime) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const currentValue = startValue + (endValue - startValue) * progress;
             element.textContent = '₹ ' + Math.round(currentValue).toLocaleString('en-IN');
-            
+
             if (progress < 1) {
                 requestAnimationFrame(update);
             }
         };
-        
+
         requestAnimationFrame(update);
     }
 
@@ -474,14 +478,14 @@ class BookingManager {
         const textarea = document.getElementById('additionalInfo');
         const counter = document.getElementById('charCount');
         if (!textarea || !counter) return;
-        
+
         const count = textarea.value.length;
         const maxLength = 500;
-        
+
         counter.textContent = count;
         const counterParent = counter.parentElement;
         counterParent.classList.remove('warning', 'danger');
-        
+
         if (count > maxLength * 0.9) {
             counterParent.classList.add('danger');
         } else if (count > maxLength * 0.7) {
@@ -526,7 +530,7 @@ class BookingManager {
     }
 
     // Form Submission
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
 
         if (!this.validateStep(this.currentStep)) {
@@ -540,40 +544,99 @@ class BookingManager {
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
         }
 
-        setTimeout(() => {
-            const reference = this.generateBookingRef();
-            const bookingRef = document.getElementById('bookingRef');
-            if (bookingRef) {
-                bookingRef.textContent = reference;
-            }
-
-          
-            createConfetti();
-
-            const successModal = document.getElementById('successModal');
-            if (successModal) {
-                successModal.style.display = 'flex';
-            }
-
+        try {
+            // Collect form data
             const form = document.getElementById('bookingForm');
-            if (form) {
+            const formData = new FormData(form);
+
+            // Get distance and price from summary
+            const distanceSlider = document.getElementById('distanceSlider');
+            const priceElement = document.getElementById('totalPrice');
+
+            const distance = distanceSlider ? parseFloat(distanceSlider.value) || 0 : 0;
+            const price = priceElement ? parseFloat(priceElement.textContent.replace(/[^0-9.]/g, '')) || 0 : 0;
+
+            const bookingData = {
+                fullName: formData.get('fullName'),
+                phone: formData.get('phone'),
+                vehicleType: formData.get('vehicleType'),
+                vehicleModel: formData.get('vehicleModel') || '',
+                pickupCity: formData.get('pickupCity'),
+                pickupLocation: formData.get('pickupLocation'),
+                dropCity: formData.get('dropCity'),
+                dropLocation: formData.get('dropLocation'),
+                pickupDate: formData.get('pickupDate'),
+                pickupTime: formData.get('pickupTime') || 'Anytime',
+                additionalInfo: formData.get('additionalInfo') || '',
+                estimatedDistance: distance,
+                estimatedPrice: price,
+                finalPrice: price
+            };
+
+            // Make API call
+            const response = await safeFetch(API_BASE, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bookingData)
+            });
+
+            if (!response) {
+                throw new Error('Network error');
+            }
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                // Show booking reference from server
+                const bookingRef = document.getElementById('bookingRef');
+                if (bookingRef && result.data && result.data.booking) {
+                    bookingRef.textContent = result.data.booking.bookingReference;
+                }
+
+                // Store booking ID for potential future use
+                if (result.data && result.data.booking && result.data.booking._id) {
+                    sessionStorage.setItem('lastBookingId', result.data.booking._id);
+                    sessionStorage.setItem('lastBookingRef', result.data.booking.bookingReference);
+                }
+
+                // Show confetti and success modal
+                createConfetti();
+
+                const successModal = document.getElementById('successModal');
+                if (successModal) {
+                    successModal.style.display = 'flex';
+                }
+
+                // Reset form
                 form.reset();
+                localStorage.removeItem(this.DRAFT_KEY);
+
+                this.currentStep = 1;
+                this.updateStepDisplay();
+                this.updateProgressBar();
+                this.updateBookingSummary();
+
+                if (window.clearRoute) {
+                    window.clearRoute();
+                }
+
+                this.showToast('Booking Confirmed!', `Your booking reference is ${result.data.booking.bookingReference}`, 'success', 5000);
+            } else {
+                throw new Error(result.message || 'Failed to create booking');
             }
-            
-            localStorage.removeItem(this.DRAFT_KEY);
 
-            this.currentStep = 1;
-            this.updateStepDisplay();
-            this.updateProgressBar();
-            this.updateBookingSummary();
+        } catch (error) {
+            console.error('Booking submission error:', error);
+            this.showToast('Booking Failed', error.message || 'Unable to process your booking. Please try again.', 'error', 5000);
 
-            if (window.clearRoute) {
-                window.clearRoute();
+            // Re-enable submit button
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i><span>Confirm Booking</span>';
             }
-
-
-            this.showToast('Booking Confirmed!', `Your booking reference is ${reference}`, 'success', 5000);
-        }, 2000);
+        }
     }
 
     generateBookingRef() {
@@ -583,7 +646,7 @@ class BookingManager {
         return `${prefix}${year}-${randomNum}`;
     }
 
-  
+
     showToast(title, message, type = 'success', duration = 5000) {
         if (window.showToast) {
             window.showToast(title, message, type, duration);
@@ -623,9 +686,9 @@ class BookingManager {
 function createConfetti() {
     const container = document.getElementById('confettiContainer');
     if (!container) return;
-    
+
     const colors = ['#ff6347', '#4CAF50', '#2196F3', '#FFC107', '#9C27B0', '#FF9800'];
-    
+
     for (let i = 0; i < 50; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
@@ -634,23 +697,13 @@ function createConfetti() {
         confetti.style.animationDelay = Math.random() * 2 + 's';
         confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
         container.appendChild(confetti);
-        
+
         setTimeout(() => {
             if (confetti.parentNode) {
                 confetti.parentNode.removeChild(confetti);
             }
         }, 4000);
     }
-}
-// PDF and Print functions
-function downloadPDF() {
-    if (window.showToast) {
-        window.showToast('Download', 'PDF generation feature coming soon!', 'info', 3000);
-    }
-}
-
-function printSummary() {
-    window.print();
 }
 
 // Navigation functions (called from HTML onclick)
@@ -815,7 +868,7 @@ function updateStepDisplay() {
 function updateProgressBar() {
     const progress = ((currentStep - 1) / 2) * 100;
     const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressPercentage'); 
+    const progressText = document.getElementById('progressPercentage');
 
     if (progressFill) {
         progressFill.style.width = progress + '%';
@@ -862,15 +915,15 @@ function autoSaveForm() {
 function handleManualSave() {
     const form = document.getElementById('bookingForm');
     const formData = new FormData(form);
-    
+
     const data = {
-        step: window.currentStep, 
+        step: window.currentStep,
         timestamp: new Date().toISOString(),
         isManualSave: true,
         fields: {}
     };
 
-   
+
     for (let [key, value] of formData.entries()) {
         data.fields[key] = value;
     }
@@ -895,7 +948,7 @@ function restoreFormData() {
 
             if (draftModal) {
                 draftModal.style.display = 'flex';
-                
+
                 // --- HANDLE RESUME BUTTON ---
                 if (confirmBtn) {
                     confirmBtn.onclick = () => {
@@ -908,10 +961,10 @@ function restoreFormData() {
                                 if (typeof validateField === 'function') validateField(key, input.value);
                             }
                         });
-                        
+
                         // 2. Sync Steps and UI
                         window.currentStep = data.step || 2; // Usually step 2 if they clicked 'save'
-                        
+
                         // Check if these functions exist before calling to prevent crashes
                         if (typeof updateStepDisplay === 'function') updateStepDisplay();
                         if (typeof updateProgressBar === 'function') updateProgressBar();
@@ -926,8 +979,8 @@ function restoreFormData() {
                 // --- HANDLE DISCARD BUTTON ---
                 if (cancelBtn) {
                     cancelBtn.onclick = () => {
-                        localStorage.removeItem('bookingDraft'); 
-                        draftModal.style.display = 'none'; 
+                        localStorage.removeItem('bookingDraft');
+                        draftModal.style.display = 'none';
                         showToast('Draft Discarded', 'Starting a new booking', 'info');
                     };
                 }
@@ -1357,13 +1410,139 @@ function createConfetti() {
 // PDF & PRINT FUNCTIONS
 // ========================================
 function downloadPDF() {
-    showToast('Download', 'PDF generation feature coming soon!', 'info', 3000);
-    // This would integrate with a PDF library like jsPDF
+    try {
+        const { jsPDF } = window.jspdf;
+        if (!jsPDF) {
+            showToast('Error', 'PDF library not loaded. Please refresh the page.', 'error', 3000);
+            return;
+        }
+
+        const doc = new jsPDF();
+
+        // Header
+        doc.setFillColor(255, 99, 71);
+        doc.rect(0, 0, 210, 35, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(22);
+        doc.text('Hi-Tech Car Transport', 105, 15, { align: 'center' });
+        doc.setFontSize(12);
+        doc.text('Booking Summary', 105, 25, { align: 'center' });
+
+        // Reset text color
+        doc.setTextColor(0, 0, 0);
+        let y = 45;
+
+        // Personal Information
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text('Personal Information', 20, y);
+        y += 8;
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+
+        const name = document.getElementById('summaryName')?.textContent || 'Not provided';
+        const phone = document.getElementById('summaryPhone')?.textContent || 'Not provided';
+        const email = document.getElementById('summaryEmail')?.textContent || 'Not provided';
+
+        doc.text(`Name: ${name}`, 20, y);
+        y += 6;
+        doc.text(`Phone: ${phone}`, 20, y);
+        y += 6;
+        doc.text(`Email: ${email}`, 20, y);
+        y += 12;
+
+        // Vehicle Details
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text('Vehicle Details', 20, y);
+        y += 8;
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+
+        const vehicleType = document.getElementById('summaryVehicleType')?.textContent || 'Not selected';
+        const vehicleModel = document.getElementById('summaryVehicleModel')?.textContent || 'Not provided';
+
+        doc.text(`Vehicle Type: ${vehicleType}`, 20, y);
+        y += 6;
+        doc.text(`Vehicle Model: ${vehicleModel}`, 20, y);
+        y += 12;
+
+        // Transport Details
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text('Transport Details', 20, y);
+        y += 8;
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+
+        const pickup = document.getElementById('summaryPickup')?.textContent || 'Not set';
+        const drop = document.getElementById('summaryDrop')?.textContent || 'Not set';
+        const date = document.getElementById('summaryDate')?.textContent || 'Not selected';
+        const time = document.getElementById('summaryTime')?.textContent || 'Any time';
+        const distance = document.getElementById('distanceValue')?.textContent || '0 km';
+
+        doc.text(`Pickup Location: ${pickup}`, 20, y);
+        y += 6;
+        doc.text(`Drop Location: ${drop}`, 20, y);
+        y += 6;
+        doc.text(`Pickup Date: ${date}`, 20, y);
+        y += 6;
+        doc.text(`Preferred Time: ${time}`, 20, y);
+        y += 6;
+        doc.text(`Distance: ${distance}`, 20, y);
+        y += 12;
+
+        // Price Breakdown
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text('Price Breakdown', 20, y);
+        y += 8;
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+
+        const baseFare = document.getElementById('baseFare')?.textContent || '₹ 0';
+        const distanceCharge = document.getElementById('distanceCharge')?.textContent || '₹ 0';
+        const gst = document.getElementById('gst')?.textContent || '₹ 0';
+        const totalPrice = document.getElementById('totalPrice')?.textContent || '₹ 0';
+
+        doc.text(`Base Fare: ${baseFare}`, 20, y);
+        y += 6;
+        doc.text(`Distance Charge: ${distanceCharge}`, 20, y);
+        y += 6;
+        doc.text(`GST (18%): ${gst}`, 20, y);
+        y += 8;
+
+        doc.setFontSize(12);
+        doc.setFont(undefined, 'bold');
+        doc.text(`Total Amount: ${totalPrice}`, 20, y);
+        y += 15;
+
+        // Footer
+        doc.setFontSize(9);
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor(100, 100, 100);
+        doc.text('Thank you for choosing Hi-Tech Car Transport!', 105, 280, { align: 'center' });
+        doc.text('For queries, contact: support@hitechcartransport.com | +91 1800-123-4567', 105, 285, { align: 'center' });
+
+        // Save PDF
+        const timestamp = new Date().toISOString().slice(0, 10);
+        doc.save(`booking-summary-${timestamp}.pdf`);
+
+        showToast('Success', 'PDF downloaded successfully!', 'success', 3000);
+    } catch (error) {
+        console.error('PDF generation error:', error);
+        showToast('Error', 'Failed to generate PDF. Please try again.', 'error', 3000);
+    }
 }
 
 function printSummary() {
     window.print();
 }
+
+// Expose to window for onclick handlers - MUST happen immediately
+window.downloadPDF = downloadPDF;
+window.printSummary = printSummary;
+console.log('✅ PDF functions exposed to window:', typeof window.downloadPDF, typeof window.printSummary);
 
 // ========================================
 // SAVE & CONTINUE LATER
@@ -2709,8 +2888,9 @@ function calculateRouteWithWaypoints() {
 }
 
 // ========================================
-// DOM CONTENT LOADED - INITIALIZATION
+// DOM CONTENT LOADED - INITIALIZATION (DISABLED - using inline script version)
 // ========================================
+/*
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize map first
     initMap();
@@ -2855,6 +3035,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return `${prefix}${year}-${randomNum}`;
     }
 });
+*/
 
 // ========================================
 // MODAL FUNCTIONS
@@ -3093,10 +3274,8 @@ updatePriceCalculation = function () {
     }
 };
 
-
-
-window.bookingManager = new BookingManager();
-
+// DISABLED: BookingManager instantiation - Using inline script version instead
+// window.bookingManager = new BookingManager();
 
 
 
@@ -3120,4 +3299,5 @@ function prevStep() {
         window.bookingManager.prevStep();
     }
 }
+
 

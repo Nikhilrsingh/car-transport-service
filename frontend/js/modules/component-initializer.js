@@ -210,8 +210,8 @@
       loadScript(jsBasePath + 'bottom-action-bar.js', 'bottom-action-bar-script');
     }
 
-    // Load Scroll Button script
-    if (!document.getElementById('scroll-button-script')) {
+    // Load Scroll Button script (only if not already loaded AND class doesn't exist)
+    if (!document.getElementById('scroll-button-script') && typeof SmartScrollButton === 'undefined') {
       loadScript(jsBasePath + 'scroll-button.js', 'scroll-button-script');
     }
 
