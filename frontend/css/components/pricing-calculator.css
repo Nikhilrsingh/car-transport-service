@@ -810,43 +810,117 @@ section {
     border-color: var(--primary-color);
 }
 
-/* FAQ Section */
+/* FAQ Section – Accordion */
 .calculator-faq {
     padding: 60px 20px;
     background: var(--white);
 }
 
-.faq-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.faq-item {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.faq-item h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: var(--text-color);
+.faq-accordion {
+    max-width: 800px;
+    margin: 2rem auto 0;
     display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.faq-item h3 i {
+.faq-item-accordion {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.faq-item-accordion.is-open {
+    border-color: var(--primary-color);
+    box-shadow: 0 6px 24px rgba(255,107,53,0.18);
+    transform: translateY(-1px);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 1.1rem 1.25rem;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    gap: 1rem;
+}
+
+.faq-question:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.faq-question-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.faq-question-text i {
     color: var(--primary-color);
-    margin-top: 0.2rem;
+    font-size: 1rem;
 }
 
-.faq-item p {
+.faq-icon i {
+    font-size: 0.85rem;
+    color: #888;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.faq-item-accordion.is-open .faq-icon i {
+    transform: rotate(180deg);
+    color: var(--primary-color);
+}
+
+.faq-answer {
+    padding: 0 1.25rem 1.1rem 1.25rem;
+    border-top: 1px solid var(--border-color);
+    animation: faqSlideDown 0.2s ease-out;
+}
+
+.faq-answer p {
+    margin: 0;
     color: #6c757d;
-    line-height: 1.6;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Responsive FAQ */
+@media (max-width: 768px) {
+    .faq-accordion {
+        margin-top: 1.5rem;
+    }
+
+    .faq-question {
+        padding: 0.9rem 1rem;
+        font-size: 0.98rem;
+    }
+
+    .faq-answer {
+        padding: 0 1rem 0.9rem 1rem;
+    }
+}
+
+/* FAQ open animation */
+@keyframes faqSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive Design */
@@ -854,7 +928,7 @@ section {
     .calculator-wrapper {
         grid-template-columns: 1fr;
     }
-    
+
     .price-summary {
         position: static;
     }
@@ -864,38 +938,37 @@ section {
     .calculator-hero {
         height: 280px;
     }
-    
+
     .calculator-hero .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .calculator-hero .hero-subtitle {
         font-size: 1.2rem;
     }
-    
+
     section {
         padding: 40px 0;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .comparison-table-wrapper {
         border-radius: 8px;
     }
-    
+
     .form-row {
         grid-template-columns: 1fr;
     }
-    
+
     .service-options {
         grid-template-columns: 1fr;
     }
-    
+
     .discount-grid,
-    .offers-grid,
-    .faq-grid {
+    .offers-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -911,7 +984,6 @@ section {
         transform: translateY(0);
     }
 }
-
 
 /* ====================================
    PRICING CALCULATOR PAGE - Light Mode Styles
@@ -980,75 +1052,83 @@ body[data-theme="light"] .section-subtitle {
 /* ====================================
    PRICING CALCULATOR PAGE - Dark Mode Fix
    ==================================== */
-   body[data-theme="dark"] {
-    --text-color: #eaeaea;
-    --border-color: #333;
-    --light-color: #1e1e2f;
-    --white: #161625;
-  }
-  
-  /* Plan Comparison Table */
-  body[data-theme="dark"] .comparison-table-wrapper {
-    background: #161625;
-  }
-  
-  body[data-theme="dark"] .comparison-table thead tr {
-    background: linear-gradient(135deg, #1f1f3a 0%, #2a2a4a 100%);
-  }
-  
-  body[data-theme="dark"] .comparison-table th,
-  body[data-theme="dark"] .comparison-table td {
-    color: #eaeaea;
-    border-bottom: 1px solid #333;
-  }
-  
-  body[data-theme="dark"] .feature-column {
-    color: #ffffff;
-  }
-  
-  /* Plan Header */
-  body[data-theme="dark"] .plan-header h3,
-  body[data-theme="dark"] .plan-header .plan-price {
-    color: #ffffff;
-  }
-  
-  body[data-theme="dark"] .plan-header i {
-    color: #ff8c5a;
-  }
-  
-  body[data-theme="dark"] .plan-badge {
-    background: #ff8c5a;
-    color: #000;
-  }
-  
-  /* Cards & Sections */
-  body[data-theme="dark"] .calculator-form,
-  body[data-theme="dark"] .price-summary,
-  body[data-theme="dark"] .discount-card,
-  body[data-theme="dark"] .offer-card,
-  body[data-theme="dark"] .faq-item {
-    background: #161625;
-    color: #eaeaea;
-    border-color: #333;
-  }
-  
-  /* Inputs */
-  body[data-theme="dark"] input,
-  body[data-theme="dark"] select {
-    background: #1f1f3a;
-    color: #ffffff;
-    border-color: #333;
-  }
-  
-  body[data-theme="dark"] input::placeholder {
-    color: #aaa;
-  }
-  
-  /* Muted text */
-  body[data-theme="dark"] .text-muted,
-  body[data-theme="dark"] .section-subtitle,
-  body[data-theme="dark"] .offer-period,
-  body[data-theme="dark"] .summary-note {
-    color: #b5b5b5;
-  }
-  
+body[data-theme="dark"] {
+  --text-color: #eaeaea;
+  --border-color: #333;
+  --light-color: #1e1e2f;
+  --white: #161625;
+}
+
+/* Plan Comparison Table */
+body[data-theme="dark"] .comparison-table-wrapper {
+  background: #161625;
+}
+
+body[data-theme="dark"] .comparison-table thead tr {
+  background: linear-gradient(135deg, #1f1f3a 0%, #2a2a4a 100%);
+}
+
+body[data-theme="dark"] .comparison-table th,
+body[data-theme="dark"] .comparison-table td {
+  color: #eaeaea;
+  border-bottom: 1px solid #333;
+}
+
+body[data-theme="dark"] .feature-column {
+  color: #ffffff;
+}
+
+/* Plan Header */
+body[data-theme="dark"] .plan-header h3,
+body[data-theme="dark"] .plan-header .plan-price {
+  color: #ffffff;
+}
+
+body[data-theme="dark"] .plan-header i {
+  color: #ff8c5a;
+}
+
+body[data-theme="dark"] .plan-badge {
+  background: #ff8c5a;
+  color: #000;
+}
+
+/* Cards & Sections (including FAQ accordion) */
+body[data-theme="dark"] .calculator-form,
+body[data-theme="dark"] .price-summary,
+body[data-theme="dark"] .discount-card,
+body[data-theme="dark"] .offer-card,
+body[data-theme="dark"] .faq-item-accordion {
+  background: #161625;
+  color: #eaeaea;
+  border-color: #333;
+}
+
+/* Inputs */
+body[data-theme="dark"] input,
+body[data-theme="dark"] select {
+  background: #1f1f3a;
+  color: #ffffff;
+  border-color: #333;
+}
+
+body[data-theme="dark"] input::placeholder {
+  color: #aaa;
+}
+
+/* Muted text */
+body[data-theme="dark"] .text-muted,
+body[data-theme="dark"] .section-subtitle,
+body[data-theme="dark"] .offer-period,
+body[data-theme="dark"] .summary-note {
+  color: #b5b5b5;
+}
+
+/* FAQ dark mode specifics */
+body[data-theme="dark"] .faq-answer p {
+  color: #c7c7d6;
+}
+
+body[data-theme="dark"] .faq-icon i {
+  color: #aaa;
+}

@@ -7,6 +7,11 @@ Before starting any contribution, you MUST complete the registration form.
 ⚠️ Pull Requests without registration will be closed.
 ⚠️ Submitted data is confidential and visible only to the Project Admin.
 
+## 🌟 Open Source Participation
+
+| Program | Program Name | Start Date | End Date |
+|--------|--------------|------------|----------|
+| <img src="frontend/assets/images/swoc.png" width="60"/> | **Social Winter of Code (SWOC)** | 1 January 2026 | 1 March 2026 |
 
 
 ## 🧑‍💻 Open Source Contributors Welcome!

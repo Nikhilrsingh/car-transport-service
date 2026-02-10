@@ -112,44 +112,174 @@
         line-height: 1.6;
       }
 
-      .cta-section {
-        background-color: var(--primary-color);
-        color: #6d0a0a;
-        text-align: center;
-        padding: 60px 20px;
-        border-radius: 20px;
-        margin: 100px auto 80px;
+
+      /* Creative Contact Section */
+      .creative-contact-section {
         max-width: 1100px;
+        margin: 80px auto;
+        padding: 60px 40px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 25px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
       }
 
-      .cta-section h2 {
-        font-size: 2rem;
+
+      .creative-contact-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: pulse 15s ease-in-out infinite;
+      }
+
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.1); opacity: 0.8; }
+      }
+
+
+      .contact-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #fff;
+      }
+
+
+      .contact-content h2 {
+        font-size: 2.5rem;
         margin-bottom: 15px;
-        font-weight: 600;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
       }
 
-      .cta-section p {
-        font-size: 1.1rem;
-        margin-bottom: 25px;
+      .contact-content p {
+        font-size: 1.2rem;
+        margin-bottom: 35px;
+        opacity: 0.95;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .cta-section a {
-         background-color: #6d0a0a;
-        color:#fff;
-       
-        padding: 12px 28px;
-        border-radius: 8px;
+
+      .contact-button-wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+
+      .primary-contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #fff;
+        color: #667eea;
+        padding: 16px 35px;
+        border-radius: 50px;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 700;
+        font-size: 1.1rem;
         transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        position: relative;
+        overflow: hidden;
       }
 
-      .cta-section a:hover {
-        background-color: #ff6347;
-        color: var(--primary-color);
+
+      .primary-contact-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(102, 126, 234, 0.1);
+        transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
       }
 
-      
+
+      .primary-contact-btn:hover::before {
+        width: 300px;
+        height: 300px;
+        top: -150px;
+        left: -150px;
+      }
+
+
+      .primary-contact-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+      }
+
+
+      .primary-contact-btn i {
+        transition: transform 0.3s ease;
+      }
+
+
+      .primary-contact-btn:hover i {
+        transform: translateX(5px);
+      }
+
+
+      .feature-badges {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+
+
+      .badge-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #fff;
+        font-size: 0.95rem;
+        opacity: 0.9;
+      }
+
+
+      .badge-item i {
+        font-size: 1.2rem;
+      }
+
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .creative-contact-section {
+          padding: 40px 25px;
+          margin: 60px 20px;
+        }
+
+
+        .contact-content h2 {
+          font-size: 2rem;
+        }
+
+
+        .contact-content p {
+          font-size: 1rem;
+        }
+
+
+        .feature-badges {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+
 
       .back-to-top {
         position: fixed;
@@ -395,7 +525,8 @@
     <!-- Top to Bottom Button -->
     <button class="back-to-bottom" id="backToBottom">
       <i class="fas fa-arrow-down"></i>
-    </button>
+   </button>
+
 
     <!-- 🚀 Floating Action Menu loaded via footer component -->
   </body>
