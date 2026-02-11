@@ -7,24 +7,21 @@
 /* ========================================
    BASE STYLES - Override global body styles
    ======================================== */
-body:has(.pricing-page) {
-    background-color: #1a1a1a !important;
-    color: #ffffff !important;
-}
 
 .pricing-page {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #1a1a1a;
-    color: #ffffff;
+    background: var(--bg); 
+    color: var(--text); 
     min-height: 100vh;
     width: 100%;
 }
+
 
 /* ========================================
    PAGE HEADER
    ======================================== */
 .pricing-page .page-header {
-    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, #f9b289 0%, #f4c493 100%);
     padding: 100px 20px 60px;
     text-align: center;
     position: relative;
@@ -127,13 +124,13 @@ body:has(.pricing-page) {
     align-items: center;
     gap: 10px;
     padding: 10px 20px;
-    background: #2d2d2d;
-    color: #ffffff;
+    background: var(--progress-pill-bg, #f5f5f5);
+    color: var(--text);
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s;
-    border: 1px solid #3d3d3d;
+    border: 1px solid var(--progress-pill-border, #ddd);
     margin-bottom: 30px;
     font-size: 0.9em;
 }
@@ -164,7 +161,7 @@ body:has(.pricing-page) {
 .pricing-page .pricing-toggle h2 {
     font-size: 2em;
     margin-bottom: 20px;
-    color: #ffffff;
+    color: var(--text);
     animation: fadeIn 0.6s ease-out;
 }
 
@@ -172,10 +169,10 @@ body:has(.pricing-page) {
     display: inline-flex;
     align-items: center;
     gap: 15px;
-    background: #2d2d2d;
+    background: var(--progress-pill-bg, #eee);
     padding: 8px;
     border-radius: 50px;
-    border: 1px solid #3d3d3d;
+    border: 1px solid var(--progress-pill-border, #ccc);
     position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -267,10 +264,10 @@ body:has(.pricing-page) {
    PRICING CARD - Enhanced with Flip Animation
    ======================================== */
 .pricing-page .pricing-card {
-    background: #2d2d2d;
+    background: var(--progress-pill-bg, #ffffff);
     border-radius: 20px;
     padding: 40px 30px;
-    border: 2px solid #3d3d3d;
+    border: 2px solid var(--progress-pill-border, #eee);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     display: flex;
@@ -288,7 +285,7 @@ body:has(.pricing-page) {
 /* Popular Card with Glowing Border */
 .pricing-page .pricing-card.popular {
     border-color: #ff6b35;
-    background: linear-gradient(145deg, #2d2d2d 0%, #2a2a2a 100%);
+    background: linear-gradient(145deg, #ffffff 0%, #ffc192f2 100%);
     box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
     position: relative;
     transform: scale(1.03);
@@ -330,13 +327,13 @@ body:has(.pricing-page) {
     width: 80px;
     height: 80px;
     margin: 0 auto 20px;
-    background: linear-gradient(135deg, #3d3d3d 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f9d2c3 100%);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2.5em;
-    border: 2px solid #4d4d4d;
+    border: 2px solid #ff6b35;
     transition: all 0.4s ease;
 }
 
@@ -363,12 +360,12 @@ body:has(.pricing-page) {
     font-weight: 700;
     margin-bottom: 10px;
     text-align: center;
-    color: #ffffff;
+    color: var(--text);
 }
 
 .pricing-page .plan-description {
     text-align: center;
-    color: #c0c0c0;
+    color: var(--color-text-muted, #555);
     margin-bottom: 25px;
     font-size: 0.95em;
     line-height: 1.5;
@@ -504,7 +501,7 @@ body:has(.pricing-page) {
 }
 
 .pricing-page .feature-icon.disabled {
-    background: rgba(128, 128, 128, 0.1);
+    background: rgba(245, 175, 114, 0.1);
 }
 
 .pricing-page .feature-icon.disabled i {
@@ -512,7 +509,7 @@ body:has(.pricing-page) {
 }
 
 .pricing-page .feature-text {
-    color: #e8e8e8;
+    color: var(--color-text-muted, #555);
     font-size: 0.95em;
     line-height: 1.5;
 }
@@ -538,7 +535,7 @@ body:has(.pricing-page) {
     font-weight: 600;
     font-size: 0.95em;
     transition: all 0.3s;
-    border: 2px solid #4d4d4d;
+    border: 2px solid #f78629;
     cursor: pointer;
     position: relative;
     /* Keep CTA tooltips visible (Issue #561) */
@@ -593,7 +590,7 @@ body:has(.pricing-page) {
     flex-direction: column;
     justify-content: space-around;
     margin-top: 80px;
-    background: #2d2d2d;
+    background: var(--progress-pill-bg, #f9f9f9);
     border-radius: 20px;
     padding: 50px 40px;
     border: 1px solid #3d3d3d;
@@ -604,7 +601,7 @@ body:has(.pricing-page) {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 40px;
-    color: #ffffff;
+    color:var(--text);
 }
 
 .pricing-page .comparison-section h2 i {
@@ -623,7 +620,7 @@ body:has(.pricing-page) {
 
 /* Sticky Header on Scroll */
 .pricing-page .comparison-table thead {
-    background: #252525;
+    background: var(--bg);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -634,7 +631,7 @@ body:has(.pricing-page) {
     padding: 20px;
     text-align: center;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text);
     border: 1px solid #3d3d3d;
     font-size: 1.1em;
     transition: all 0.3s ease;
@@ -658,7 +655,7 @@ body:has(.pricing-page) {
 
 .pricing-page .comparison-table th:first-child {
     text-align: left;
-    background: #1a1a1a;
+    
 }
 
 .pricing-page .comparison-table th.popular-col {
@@ -670,15 +667,15 @@ body:has(.pricing-page) {
     padding: 18px 20px;
     border: 1px solid #3d3d3d;
     text-align: center;
-    color: #e8e8e8;
+    color: var(--color-text-muted);
     transition: all 0.3s ease;
 }
 
 .pricing-page .comparison-table td:first-child {
     text-align: left;
     font-weight: 600;
-    color: #ffffff;
-    background: #252525;
+    color: var(--text);
+    
 }
 
 /* Highlight on Hover */
@@ -687,7 +684,7 @@ body:has(.pricing-page) {
 }
 
 .pricing-page .comparison-table tbody tr:hover {
-    background: #323232;
+    background: #f37536bb;
     transform: scale(1.01);
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1);
 }
@@ -784,7 +781,7 @@ body:has(.pricing-page) {
 
 .pricing-page .calculator-header h2 {
     font-size: 2em;
-    color: #ffffff;
+    color: var(--text);
     margin-bottom: 10px;
 }
 
@@ -793,7 +790,7 @@ body:has(.pricing-page) {
 }
 
 .pricing-page .calculator-header p {
-    color: #c0c0c0;
+    color: var(--color-text-muted, #555);
     font-size: 1.05em;
 }
 
@@ -810,7 +807,7 @@ body:has(.pricing-page) {
 }
 
 .pricing-page .form-group label {
-    color: #ffffff;
+    color:var(--text);
     font-weight: 600;
     margin-bottom: 8px;
     font-size: 0.95em;
@@ -824,10 +821,10 @@ body:has(.pricing-page) {
 .pricing-page .form-group input,
 .pricing-page .form-group select {
     padding: 12px 16px;
-    background: #1a1a1a;
-    border: 2px solid #3d3d3d;
+    color: var(--text); 
+    background: var(--bg); 
+    border: 1px solid var(--progress-pill-border);
     border-radius: 10px;
-    color: #ffffff;
     font-size: 1em;
     transition: all 0.3s ease;
 }
@@ -841,7 +838,7 @@ body:has(.pricing-page) {
 
 .pricing-page .form-group select option {
     background: #1a1a1a;
-    color: #ffffff;
+    color: var(--text);
 }
 
 .pricing-page #calculate-price-btn {
@@ -873,7 +870,7 @@ body:has(.pricing-page) {
 .pricing-page .calculator-result {
     display: none;
     padding: 30px;
-    background: #1a1a1a;
+    background: var(--bg);
     border-radius: 15px;
     margin-top: 20px;
     animation: slideDown 0.4s ease-out;
@@ -909,7 +906,7 @@ body:has(.pricing-page) {
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid #3d3d3d;
-    color: #e8e8e8;
+    color: #151414;
 }
 
 .pricing-page .breakdown-total {
@@ -920,7 +917,7 @@ body:has(.pricing-page) {
     border-top: 2px solid #ff6b35;
     font-size: 1.2em;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text);
 }
 
 .pricing-page .total-amount {
@@ -967,22 +964,22 @@ body:has(.pricing-page) {
 /* ========================================
    TESTIMONIALS SECTION
    ======================================== */
-.pricing-page .testimonials-section {
+.pricing-page .testimonial-section {
     margin: 60px 0;
     padding: 50px 40px;
-    background: #2d2d2d;
+    background: var(--progress-pill-bg, #f9f9f9);
     border-radius: 20px;
-    border: 1px solid #3d3d3d;
+    border: 1px solid var(--progress-pill-border, #ddd);
 }
 
-.pricing-page .testimonials-section h2 {
+.pricing-page .testimonial-section h2 {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 40px;
-    color: #ffffff;
+    color: var(--text);
 }
 
-.pricing-page .testimonials-section h2 i {
+.pricing-page .testimonial-section h2 i {
     color: #ff6b35;
 }
 
@@ -1029,7 +1026,7 @@ body:has(.pricing-page) {
 }
 
 .pricing-page .testimonial-info h4 {
-    color: #ffffff;
+    color: var(--text);
     margin-bottom: 5px;
 }
 
@@ -1109,22 +1106,22 @@ body:has(.pricing-page) {
 /* ========================================
    FAQ SECTION
    ======================================== */
-.pricing-page .faq-section {
+.pricing-page .faq-sections {
     margin: 60px 0;
     padding: 50px 40px;
-    background: #2d2d2d;
+    background: var(--progress-pill-bg, #f9f9f9);
     border-radius: 20px;
-    border: 1px solid #3d3d3d;
+    border: 1px solid var(--progress-pill-border, #ddd);
 }
 
-.pricing-page .faq-section h2 {
+.pricing-page .faq-sections h2 {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 40px;
-    color: #ffffff;
+    color: var(--text);
 }
 
-.pricing-page .faq-section h2 i {
+.pricing-page .faq-sections h2 i {
     color: #ff6b35;
 }
 
@@ -1134,7 +1131,7 @@ body:has(.pricing-page) {
 }
 
 .pricing-page .faq-item {
-    background: #252525;
+    background: var(--progress-pill-bg, #ffffff);
     border-radius: 10px;
     margin-bottom: 15px;
     border: 2px solid #3d3d3d;
@@ -1157,7 +1154,7 @@ body:has(.pricing-page) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #ffffff;
+    color: var(--text);
     font-weight: 600;
     font-size: 1.05em;
     user-select: none;
@@ -1196,13 +1193,13 @@ body:has(.pricing-page) {
 }
 
 .pricing-page .faq-answer ul {
-    color: #e8e8e8;
     margin-left: 20px;
     line-height: 1.8;
 }
 
 .pricing-page .faq-answer ul li {
     margin-bottom: 5px;
+
 }
 
 /* ========================================
@@ -1309,8 +1306,8 @@ body:has(.pricing-page) {
     }
 
     .pricing-page .price-calculator,
-    .pricing-page .testimonials-section,
-    .pricing-page .faq-section {
+    .pricing-page .testimonial-section,
+    .pricing-page .faq-sections {
         padding: 30px 20px;
     }
 

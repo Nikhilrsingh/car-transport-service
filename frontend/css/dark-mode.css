@@ -1446,3 +1446,41 @@ body[data-theme="dark"] .reviews-empty-title {
 body[data-theme="dark"] .reviews-empty-text {
     color: #888;
 }
+
+/*Pricing Page*/
+body[data-theme="dark"] .pricing-page {
+    background: #1a1a1a;
+}
+
+body[data-theme="dark"] .pricing-card {
+    background: #2d2d2d;
+    border-color: #3d3d3d;
+}
+
+body[data-theme="dark"] .plan-icon{
+  background: linear-gradient(135deg, #3d3d3d 0%, #2d2d2d 100%);
+  border: 2px solid #4d4d4d;
+}
+
+
+body[data-theme="dark"] .pricing-page .pricing-card.popular {
+  background: linear-gradient(145deg, #2d2d2d 0%, #2a2a2a 100%);
+}
+body[data-theme="dark"] .comparison-table th:first-child,
+body[data-theme="dark"] .comparison-table td:first-child {
+    background: #252525;
+}
+
+body[data-theme="dark"] .pricing-page .comparison-table tbody tr:hover {
+    background: #323232;}
+
+body[data-theme="dark"] .pricing-page .page-header {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);}    
+
+body[data-theme="dark"] .pricing-page .cta-button{
+   border: 2px solid #4d4d4d;
+}
+
+body[data-theme="dark"] .pricing-page .breakdown-item {
+  color: #e8e8e8;
+}
