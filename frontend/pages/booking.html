@@ -1975,7 +1975,8 @@
 
     </style>
 </head>
-
+      <script src="../js/map.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" defer></script>
 <body>
     <div id="scroll-progress"></div>
     <!-- Navbar Component -->
@@ -2000,6 +2001,16 @@
             <div class="booking-container">
                 <!-- Booking Form -->
                 <div class="booking-form-container fade-in">
+                
+                  <h2>Pickup & Drop Location</h2>
+
+                     <div class="location-inputs">
+                         <input id="pickup" type="text" placeholder="Enter pickup location" />
+                            <input id="drop" type="text" placeholder="Enter drop location" />
+                                 </div>
+
+                                 <div id="map"></div>
+
                     <!-- Progress Bar -->
                     <div class="progress-container">
                         <div class="progress-steps">
