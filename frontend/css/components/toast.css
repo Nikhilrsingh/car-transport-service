@@ -1,0 +1,59 @@
+/* Toast Notification Styles */
+
+.review-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(20, 20, 20, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  transform: translateY(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  max-width: 400px;
+}
+
+.review-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.review-toast.success {
+  border-left: 4px solid #34c759;
+}
+
+.review-toast.error {
+  border-left: 4px solid #ff3b30;
+}
+
+.review-toast.warning {
+  border-left: 4px solid #ff9500;
+}
+
+.review-toast.info {
+  border-left: 4px solid #007aff;
+}
+
+[data-theme="light"] .review-toast {
+  background: white;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .review-toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+}

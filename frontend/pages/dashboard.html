@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="../css/components/navbar.css">
     <link rel="stylesheet" href="../css/components/middle-navbar.css">
     <link rel="stylesheet" href="../css/components/loading-indicators.css">
+    <link rel="stylesheet" href="../css/components/star-rating.css">
+    <link rel="stylesheet" href="../css/components/review-card.css">
+    <link rel="stylesheet" href="../css/components/review-modal.css">
+    <link rel="stylesheet" href="../css/components/toast.css">
     <link rel="stylesheet" href="../css/styles.css">
     
     <style>
@@ -649,6 +653,9 @@
             <button class="dashboard-tab" data-tab="invoices">
                 <i class="fas fa-file-invoice"></i> My Invoices
             </button>
+            <button class="dashboard-tab" data-tab="reviews">
+                <i class="fas fa-star"></i> My Reviews
+            </button>
             <button class="dashboard-tab" data-tab="profile">
                 <i class="fas fa-user"></i> Profile
             </button>
@@ -829,6 +836,33 @@
             </div>
         </div>
 
+        <!-- My Reviews Tab -->
+        <div class="tab-content" id="reviews-tab">
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h3 style="color: #ff6347; font-size: 1.8rem;">My Reviews</h3>
+                <p style="color: #999;">Manage your service reviews and see your rating history</p>
+            </div>
+
+            <!-- Reviews List -->
+            <div id="myReviewsList" class="reviews-list">
+                <!-- Reviews will be loaded here -->
+                <div class="reviews-empty" style="padding: 60px 20px; text-align: center;">
+                    <div class="reviews-empty-icon">⭐</div>
+                    <h3 class="reviews-empty-title">Loading your reviews...</h3>
+                </div>
+            </div>
+
+            <!-- Empty state (shown by JS if no reviews) -->
+            <div id="noReviewsMessage" style="display: none; text-align: center; padding: 60px 20px;">
+                <div style="font-size: 64px; opacity: 0.5; margin-bottom: 16px;">📝</div>
+                <h3 style="color: #fff; margin-bottom: 8px;">No reviews yet</h3>
+                <p style="color: #999; margin-bottom: 20px;">Complete a booking to leave your first review</p>
+                <button class="action-btn" onclick="switchTab('bookings')" style="display: inline-block; margin-top: 10px;">
+                    <i class="fas fa-truck"></i> View My Bookings
+                </button>
+            </div>
+        </div>
+
         <!-- Settings Tab -->
         <div class="tab-content" id="settings-tab">
             <div class="settings-section">
@@ -878,8 +912,14 @@
     <script src="../js/modules/navbar-loader.js?v=2"></script>
     <script src="../js/modules/footer-loader.js"></script>
     <script src="../js/script.js"></script>
+    
+    <!-- Review System -->
+    <script type="module" src="../js/components/starRating.js"></script>
+    <script type="module" src="../js/review.js"></script>
+    <script type="module" src="../js/reviewForm.js"></script>
+    <script type="module" src="../js/modules/dashboard-reviews.js"></script>
 
-    <script>
+    <script type="module">
         const API_BASE = 'http://localhost:3000/api';
         let currentUser = null;
 
@@ -1126,6 +1166,13 @@
                             <i class="fas fa-rupee-sign"></i> ₹${booking.finalPrice}
                         </div>
                     </div>
+                    ${booking.status === 'delivered' ? `
+                    <div class="booking-actions" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #333;">
+                        <button class="action-btn" onclick="openReviewModal('${booking._id}'); event.stopPropagation();" style="width: 100%; justify-content: center; background: #28a745;">
+                            <i class="fas fa-star"></i> Leave a Review
+                        </button>
+                    </div>
+                    ` : ''}
                 </div>
             `).join('');
         }
@@ -1465,6 +1512,24 @@
                 toast.remove();
             }, 3000);
         }
+
+        // Initialize Review System
+        import { ReviewFormModal } from '../js/reviewForm.js';
+        import { initDashboardReviews } from '../js/modules/dashboard-reviews.js';
+        
+        window.reviewModal = new ReviewFormModal();
+        window.openReviewModal = (bookingId) => {
+            window.reviewModal.open(bookingId);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const reviewsTab = document.querySelector('[data-tab="reviews"]');
+            if (reviewsTab) {
+                reviewsTab.addEventListener('click', () => {
+                    initDashboardReviews();
+                });
+            }
+        });
     </script>
 </body>
 </html>

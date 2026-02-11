@@ -1376,3 +1376,73 @@ body[data-theme="dark"] .emergency-form textarea {
 body[data-theme="dark"] .emergency-hero .hero-subtitle {
     color: rgba(255, 255, 255, 0.9) !important;
 }
+
+/* ── Customer Reviews Section ────────────────────── */
+body[data-theme="dark"] .customer-reviews-section {
+    background: var(--bg, #0d1117);
+}
+
+body[data-theme="dark"] .featured-reviews-title {
+    color: #fff !important;
+}
+
+body[data-theme="dark"] .write-review-btn {
+    background: linear-gradient(135deg, #ff6347, #ff4500);
+    color: #fff;
+}
+
+body[data-theme="dark"] .view-all-reviews-btn {
+    border-color: #ff6347;
+    color: #ff6347;
+}
+
+body[data-theme="dark"] .view-all-reviews-btn:hover {
+    background: #ff6347;
+    color: #fff;
+}
+
+body[data-theme="dark"] .review-modal-overlay .review-modal {
+    background: #1a1e26;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body[data-theme="dark"] .review-form-input,
+body[data-theme="dark"] .review-form-textarea {
+    background: #252a31;
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+body[data-theme="dark"] .review-form-input::placeholder,
+body[data-theme="dark"] .review-form-textarea::placeholder {
+    color: #888;
+}
+
+body[data-theme="dark"] .review-form-label {
+    color: #ccc;
+}
+
+body[data-theme="dark"] .review-stats-container {
+    background: #1a1e26;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body[data-theme="dark"] .review-stats-number {
+    color: #fff;
+}
+
+body[data-theme="dark"] .review-stats-total {
+    color: #999;
+}
+
+body[data-theme="dark"] .review-stats-bar-container {
+    background: #333;
+}
+
+body[data-theme="dark"] .reviews-empty-title {
+    color: #ccc;
+}
+
+body[data-theme="dark"] .reviews-empty-text {
+    color: #888;
+}

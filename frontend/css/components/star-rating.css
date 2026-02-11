@@ -1,0 +1,135 @@
+/* Star Rating Component Styles */
+
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+
+/* Star icons */
+.star-rating .star {
+  font-size: 20px;
+  color: #ddd;
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+/* Interactive mode (clickable stars) */
+.star-rating.interactive .star {
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  z-index: 1;
+  padding: 4px;
+}
+
+.star-rating.interactive {
+  pointer-events: auto;
+  z-index: 10;
+}
+
+/* Filled star (yellow/gold) */
+.star-rating .star.filled {
+  color: #ffa500;
+}
+
+/* Dark mode star colors */
+[data-theme="dark"] .star-rating .star {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .star-rating .star.filled {
+  color: #ffd700;
+}
+
+/* Hover effect for interactive stars */
+.star-rating.interactive .star:hover,
+.star-rating.interactive .star.hover {
+  color: #ffb84d;
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .star-rating.interactive .star:hover,
+[data-theme="dark"] .star-rating.interactive .star.hover {
+  color: #ffe066;
+  transform: scale(1.1);
+}
+
+/* Size variations */
+.star-rating.size-small .star {
+  font-size: 16px;
+}
+
+.star-rating.size-medium .star {
+  font-size: 20px;
+}
+
+.star-rating.size-large .star {
+  font-size: 28px;
+}
+
+.star-rating.size-xlarge .star {
+  font-size: 36px;
+}
+
+/* Rating text */
+.star-rating-text {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .star-rating-text {
+  color: #aaa;
+}
+
+/* Average rating display */
+.average-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.average-rating-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+[data-theme="dark"] .average-rating-number {
+  color: #fff;
+}
+
+.average-rating-text {
+  font-size: 14px;
+  color: #666;
+}
+
+[data-theme="dark"] .average-rating-text {
+  color: #aaa;
+}
+
+/* Accessibility - focus state for keyboard navigation */
+.star-rating.interactive .star:focus {
+  outline: 2px solid #ff6347;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Animation for rating change */
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.star-rating .star.pulse {
+  animation: starPulse 0.3s ease;
+}
