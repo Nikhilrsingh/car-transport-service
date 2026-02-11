@@ -407,7 +407,7 @@
       isValid = false;
     }
 
-    if (!validateEmail(emailInput.value)) {
+    if (!validateEmail(emailInput.value.trim())) {
       validateField(emailInput, false);
       isValid = false;
     }
@@ -528,6 +528,13 @@
       }
     });
   }
+
+  // Email format validation helper
+  function isValidEmail(email) {
+  // requires username + @ + domain (.com, .in, etc.)
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+ }
 
   // Email suggestion
   function initEmailSuggestion() {
