@@ -59,14 +59,30 @@ function showNoResultsMessage(show) {
         if (!noResultsMsg) {
             noResultsMsg = document.createElement('div');
             noResultsMsg.className = 'no-results-message';
-            noResultsMsg.innerHTML = `
-                <div style="text-align: center; padding: 3rem; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.07);">
-                    <i class="fas fa-search" style="font-size: 3rem; color: #dee2e6; margin-bottom: 1rem;"></i>
-                    <h3 style="color: #6c757d; margin-bottom: 0.5rem;">No pages found</h3>
-                    <p style="color: #adb5bd;">Try searching with different keywords</p>
-                </div>
-            `;
-            document.querySelector('.sitemap-grid').after(noResultsMsg);
+
+            const card = document.createElement('div');
+            card.className = 'no-results-card';
+
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-search no-results-icon';
+
+            const title = document.createElement('h3');
+            title.className = 'no-results-title';
+            title.textContent = 'No pages found';
+
+            const text = document.createElement('p');
+            text.className = 'no-results-text';
+            text.textContent = 'Try searching with different keywords';
+
+            card.appendChild(icon);
+            card.appendChild(title);
+            card.appendChild(text);
+            noResultsMsg.appendChild(card);
+
+            const sitemapGrid = document.querySelector('.sitemap-grid');
+            if (sitemapGrid && sitemapGrid.parentNode) {
+                sitemapGrid.after(noResultsMsg);
+            }
         }
         noResultsMsg.style.display = 'block';
     } else if (noResultsMsg) {
