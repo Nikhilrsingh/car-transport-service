@@ -92,23 +92,30 @@ function showNoResultsMessage(show) {
 
 // Intersection Observer for fade-in animations
 function observeElements() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    // Fallback for browsers without IntersectionObserver support
+    if (!('IntersectionObserver' in window)) {
+        fadeElements.forEach(el => el.classList.add('visible'));
+        return;
+    }
+
     const options = {
         root: null,
         threshold: 0.1,
         rootMargin: '0px'
     };
-    
-    const observer = new IntersectionObserver((entries) => {
+
+    const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
             }
         });
     }, options);
-    
+
     // Observe all fade-in elements
-    const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach(el => observer.observe(el));
 }
 
