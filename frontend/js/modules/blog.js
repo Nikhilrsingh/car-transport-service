@@ -14,6 +14,16 @@ import BLOG_POSTS from '../data/blog-data.js';
   const searchInput = document.getElementById('blogSearch');
   const pillsContainer = document.getElementById('categoryPills');
 
+  // Dynamic Reading Time Helper
+  function calculateReadTime(content) {
+    if (!content) return "1 min read";
+    const div = document.createElement("div");
+    div.innerHTML = content;
+    const text = div.textContent || div.innerText || "";
+    const words = text.split(/\s+/).filter(w => w.length > 0).length;
+    return Math.ceil(words / 200) + " min read";
+  }
+
   // Create Clear Button
   const clearBtn = document.createElement('button');
   clearBtn.className = 'clear-filters-btn';
@@ -131,9 +141,10 @@ import BLOG_POSTS from '../data/blog-data.js';
                     </div>
                     <h3 class="card-title">${post.title}</h3>
                     <div class="card-meta">
-                        <span>${post.date}</span>
-                        <span>•</span>
-                        <span>${post.readtime}</span>
+                        <span><i class="far fa-calendar-alt"></i> ${post.date}</span>
+                        <span class="read-time-badge">
+                            <i class="far fa-clock"></i> ${calculateReadTime(post.contentHTML)}
+                        </span>
                     </div>
                     <p class="card-excerpt">${post.excerpt}</p>
                     <div class="card-actions">

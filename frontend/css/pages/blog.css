@@ -172,6 +172,28 @@ body[data-theme="light"] .blog-search-input {
   overflow: hidden;
 }
 
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.read-time-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 99, 71, 0.08) !important;
+  color: #ff6347 !important;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 99, 71, 0.15);
+}
+
 body[data-theme="light"] .pill {
   border-color: #ddd;
   color: #666;
