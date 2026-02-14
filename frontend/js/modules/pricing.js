@@ -658,48 +658,157 @@
     }
 
     // ========================================
-    // TESTIMONIAL SLIDER
-    // ========================================
-    function initTestimonialSlider() {
-        const sliders = document.querySelectorAll('.testimonial-slider');
-        
-        sliders.forEach(slider => {
-            const track = slider.querySelector('.testimonial-track');
-            const slides = slider.querySelectorAll('.testimonial-slide');
-            const prevBtn = slider.querySelector('.testimonial-prev');
-            const nextBtn = slider.querySelector('.testimonial-next');
-            
-            if (!track || slides.length === 0) return;
+// ENHANCED TESTIMONIAL SLIDER WITH AUTO-PLAY
+// ========================================
+function initTestimonialSlider() {
+    const sliders = document.querySelectorAll('.testimonial-slider');
 
-            let currentSlide = 0;
-            const totalSlides = slides.length;
+    sliders.forEach(slider => {
+        const track = slider.querySelector('.testimonial-track');
+        const slides = slider.querySelectorAll('.testimonial-slide');
+        const prevBtn = slider.closest('.testimonial-section').querySelector('.testimonial-prev');
+        const nextBtn = slider.closest('.testimonial-section').querySelector('.testimonial-next');
+        const dotsContainer = slider.closest('.testimonial-section').querySelector('.testimonial-dots');
 
-            function updateSlider() {
-                const offset = -currentSlide * 100;
-                track.style.transform = `translateX(${offset}%)`;
-                
-                // Update button states
-                prevBtn.disabled = currentSlide === 0;
-                nextBtn.disabled = currentSlide === totalSlides - 1;
+        if (!track || slides.length === 0 || !prevBtn || !nextBtn) return;
+
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let autoplayInterval;
+        const autoplayDelay = 5000; // 5 seconds
+
+        // Create dots
+        if (dotsContainer) {
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'testimonial-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateSlider(smooth = true) {
+            const offset = -currentSlide * 100;
+            track.style.transition = smooth ? 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' : 'none';
+            track.style.transform = `translateX(${offset}%)`;
+
+            // Update button states
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+
+            // Update dots
+            const dots = dotsContainer?.querySelectorAll('.testimonial-dot');
+            if (dots) {
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
             }
 
-            prevBtn.addEventListener('click', () => {
-                if (currentSlide > 0) {
-                    currentSlide--;
-                    updateSlider();
-                }
-            });
+            // Update ARIA attributes
+            prevBtn.setAttribute('aria-disabled', currentSlide === 0);
+            nextBtn.setAttribute('aria-disabled', currentSlide === totalSlides - 1);
+        }
 
-            nextBtn.addEventListener('click', () => {
-                if (currentSlide < totalSlides - 1) {
-                    currentSlide++;
-                    updateSlider();
-                }
-            });
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentSlide = index;
+                updateSlider();
+                resetAutoplay();
+            }
+        }
 
-            updateSlider();
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlider();
+            } else {
+                // Loop back to first slide
+                currentSlide = 0;
+                updateSlider();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlider();
+            }
+        }
+
+        function startAutoplay() {
+            autoplayInterval = setInterval(() => {
+                nextSlide();
+            }, autoplayDelay);
+        }
+
+        function stopAutoplay() {
+            if (autoplayInterval) {
+                clearInterval(autoplayInterval);
+            }
+        }
+
+        function resetAutoplay() {
+            stopAutoplay();
+            startAutoplay();
+        }
+
+        // Event Listeners
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoplay();
         });
-    }
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoplay();
+        });
+
+        // Keyboard navigation
+        slider.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+                resetAutoplay();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+                resetAutoplay();
+            }
+        });
+
+        // Pause on hover
+        slider.addEventListener('mouseenter', stopAutoplay);
+        slider.addEventListener('mouseleave', startAutoplay);
+
+        // Touch/Swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoplay();
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoplay();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchStartX - touchEndX > swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                prevSlide();
+            }
+        }
+
+        // Initialize
+        updateSlider(false);
+        startAutoplay();
+    });
+}
+
 
     // ========================================
     // INITIALIZATION
