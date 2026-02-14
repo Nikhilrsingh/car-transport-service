@@ -4,11 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Our Services | Harihar Car Carriers</title>
-    <meta name="description" content="Explore Harihar Car Carriers services - car transport, bike shipping, door-to-door delivery, and more. Safe and reliable vehicle transportation across India." />
+    <meta
+      name="description"
+      content="Explore Harihar Car Carriers services - car transport, bike shipping, door-to-door delivery, and more. Safe and reliable vehicle transportation across India."
+    />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://nikhilrsingh.github.io/car-transport-service/services.html" />
+    <link
+      rel="canonical"
+      href="https://nikhilrsingh.github.io/car-transport-service/services.html"
+    />
     <base href="./" />
     <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+
+    <!-- Global styles with data-theme="dark" logic -->
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/components/navbar.css" />
     <link rel="stylesheet" href="css/components/middle-navbar.css" />
@@ -21,7 +29,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="css/components/glowing-input.css">
+    <link rel="stylesheet" href="css/components/glowing-input.css" />
     <link rel="stylesheet" href="css/components/star-rating.css" />
     <link rel="stylesheet" href="css/components/review-card.css" />
     <link rel="stylesheet" href="css/components/review-modal.css" />
@@ -32,9 +40,32 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-      /* Footer spacing and styles handled by footer.css */
+      /* ========= Card theme tokens ========= */
+      :root {
+        /* light mode defaults */
+        --service-card-bg: #ffffff;
+        --service-card-text: #111111;
+        --service-card-muted: #555555;
+        --service-card-border: rgba(0, 0, 0, 0.06);
+        --service-card-heading: #ff6347;
 
-      /* ===== Services Page Styling ===== */
+        --service-icon-bg: rgba(255, 99, 71, 0.08);
+        --service-icon-color: #ff6347;
+      }
+
+      /* Dark mode is enabled with body[data-theme="dark"] in your CSS.[file:94] */
+      body[data-theme="dark"] {
+        --service-card-bg: #15171c;
+        --service-card-text: #f5f5f5;
+        --service-card-muted: #c3c3c3;
+        --service-card-border: rgba(255, 255, 255, 0.08);
+        --service-card-heading: #ff8a65;
+
+        --service-icon-bg: rgba(255, 255, 255, 0.08);
+        --service-icon-color: #ffffff;
+      }
+
+      /* ========= Services Page Styling ========= */
       .services-container {
         max-width: 1200px;
         margin: 100px auto 60px;
@@ -48,13 +79,13 @@
 
       .services-header h1 {
         font-size: 2.8rem;
-        color: #ff6347;
+        color: var(--service-card-heading);
         margin-bottom: 10px;
         font-weight: 700;
       }
 
       .services-header p {
-        color: var(--text-muted);
+        color: var(--color-text-muted, var(--service-card-muted));
         font-size: 1.1rem;
         max-width: 700px;
         margin: 0 auto;
@@ -68,13 +99,20 @@
       }
 
       .service-card {
-        background-color: #333333b5;
-        border: 1px solid var(--border-color);
+        /* key line: now driven by variables that change with data-theme="dark" */
+        background-color: var(--service-card-bg);
+        color: var(--service-card-text);
+        border: 1px solid var(--service-card-border);
         border-radius: 20px;
         padding: 40px 30px;
         text-align: center;
         box-shadow: var(--box-shadow);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease,
+          transform 0.3s ease;
       }
 
       .service-card:hover {
@@ -90,8 +128,8 @@
         height: 70px;
         margin-bottom: 20px;
         border-radius: 50%;
-        background-color: var(--primary-light);
-        color: var(--primary-color);
+        background-color: var(--service-icon-bg);
+        color: var(--service-icon-color);
       }
 
       .service-icon svg {
@@ -101,19 +139,18 @@
 
       .service-card h3 {
         font-size: 1.4rem;
-        color: #ff6347;
+        color: var(--service-card-heading);
         margin-bottom: 15px;
         font-weight: 600;
       }
 
       .service-card p {
-        color: var(--text-muted);
+        color: var(--color-text-muted, var(--service-card-muted));
         font-size: 0.97rem;
         line-height: 1.6;
       }
 
-
-      /* Creative Contact Section */
+      /* ========= Creative Contact Section (unchanged) ========= */
       .creative-contact-section {
         max-width: 1100px;
         margin: 80px auto;
@@ -125,24 +162,32 @@
         box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
       }
 
-
       .creative-contact-section::before {
-        content: '';
+        content: "";
         position: absolute;
         top: -50%;
         right: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
         animation: pulse 15s ease-in-out infinite;
       }
 
-
       @keyframes pulse {
-        0%, 100% { transform: scale(1); opacity: 0.5; }
-        50% { transform: scale(1.1); opacity: 0.8; }
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
       }
-
 
       .contact-content {
         position: relative;
@@ -151,12 +196,11 @@
         color: #fff;
       }
 
-
       .contact-content h2 {
         font-size: 2.5rem;
         margin-bottom: 15px;
         font-weight: 700;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       }
 
       .contact-content p {
@@ -168,14 +212,12 @@
         margin-right: auto;
       }
 
-
       .contact-button-wrapper {
         display: flex;
         justify-content: center;
         gap: 20px;
         flex-wrap: wrap;
       }
-
 
       .primary-contact-btn {
         display: inline-flex;
@@ -189,14 +231,13 @@
         font-weight: 700;
         font-size: 1.1rem;
         transition: all 0.3s ease;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
       }
 
-
       .primary-contact-btn::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -207,7 +248,6 @@
         transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
       }
 
-
       .primary-contact-btn:hover::before {
         width: 300px;
         height: 300px;
@@ -215,22 +255,18 @@
         left: -150px;
       }
 
-
       .primary-contact-btn:hover {
         transform: translateY(-5px);
-        box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
       }
-
 
       .primary-contact-btn i {
         transition: transform 0.3s ease;
       }
 
-
       .primary-contact-btn:hover i {
         transform: translateX(5px);
       }
-
 
       .feature-badges {
         display: flex;
@@ -239,7 +275,6 @@
         margin-top: 40px;
         flex-wrap: wrap;
       }
-
 
       .badge-item {
         display: flex;
@@ -250,11 +285,9 @@
         opacity: 0.9;
       }
 
-
       .badge-item i {
         font-size: 1.2rem;
       }
-
 
       /* Responsive adjustments */
       @media (max-width: 768px) {
@@ -263,23 +296,19 @@
           margin: 60px 20px;
         }
 
-
         .contact-content h2 {
           font-size: 2rem;
         }
 
-
         .contact-content p {
           font-size: 1rem;
         }
-
 
         .feature-badges {
           flex-direction: column;
           gap: 15px;
         }
       }
-
 
       .back-to-top {
         position: fixed;
@@ -308,7 +337,6 @@
         background: var(--primary-dark);
       }
 
-      /* Visually hidden but accessible */
       .visually-hidden {
         position: absolute;
         width: 1px;
@@ -320,12 +348,36 @@
         white-space: nowrap;
         border: 0;
       }
+
+body[data-theme="dark"] #services .service-grid > div {
+  /* these are the white boxes in your screenshot */
+  background-color: #15171c !important;
+  color: #f5f5f5 !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* headings inside those boxes */
+body[data-theme="dark"] #services .service-grid > div h3 {
+  color: #ff8a65 !important;
+}
+
+/* paragraph text */
+body[data-theme="dark"] #services .service-grid > div p {
+  color: #c3c3c3 !important;
+}
+
+/* icon circle */
+body[data-theme="dark"] #services .service-grid > div .service-icon {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
     </style>
   </head>
 
   <body>
     <div id="scroll-progress"></div>
-    <!-- Navbar Container - Loaded dynamically -->
     <div id="navbar-container"></div>
 
     <!-- Services Section -->
@@ -425,36 +477,46 @@
     </section>
 
     <!-- Customer Reviews Section -->
-    <section id="reviews" class="customer-reviews-section" style="padding: 60px 20px;">
+    <section
+      id="reviews"
+      class="customer-reviews-section"
+      style="padding: 60px 20px;"
+    >
       <div class="container" style="max-width: 1200px; margin: 0 auto;">
-        <div class="featured-reviews-header fade-in" style="margin-bottom: 32px;">
+        <div
+          class="featured-reviews-header fade-in"
+          style="margin-bottom: 32px;"
+        >
           <div>
             <h2 class="featured-reviews-title">Customer Reviews</h2>
-            <p style="color: #999; margin-top: 8px;">See what our customers say about our service</p>
+            <p style="color: #999; margin-top: 8px;">
+              See what our customers say about our service
+            </p>
           </div>
-          <button id="writeReviewBtnServices" class="write-review-btn">✍️ Write a Review</button>
+          <button id="writeReviewBtnServices" class="write-review-btn">
+            ✍️ Write a Review
+          </button>
         </div>
 
-        <!-- Filters and Stats -->
-        <div class="reviews-controls" style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
-          <!-- Sidebar with Stats -->
+        <div
+          class="reviews-controls"
+          style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;"
+        >
           <div>
-            <div id="servicesReviewStats">
-              <!-- Stats will be loaded here -->
-            </div>
+            <div id="servicesReviewStats"></div>
           </div>
 
-          <!-- Main Reviews Area -->
           <div>
-            <!-- Filter and Sort Controls -->
             <div class="review-filters">
-              <button class="review-filter-btn active" data-rating="all">All Reviews</button>
+              <button class="review-filter-btn active" data-rating="all">
+                All Reviews
+              </button>
               <button class="review-filter-btn" data-rating="5">5 ★</button>
               <button class="review-filter-btn" data-rating="4">4 ★</button>
               <button class="review-filter-btn" data-rating="3">3 ★</button>
               <button class="review-filter-btn" data-rating="2">2 ★</button>
               <button class="review-filter-btn" data-rating="1">1 ★</button>
-              
+
               <div class="review-sort">
                 <select class="review-sort-select" id="reviewSort">
                   <option value="recent">Most Recent</option>
@@ -464,19 +526,21 @@
               </div>
             </div>
 
-            <!-- Reviews List -->
             <div class="reviews-list" id="servicesReviewsList">
-              <!-- Reviews will be loaded here -->
-              <div class="reviews-empty" style="padding: 40px 20px; text-align: center;">
+              <div
+                class="reviews-empty"
+                style="padding: 40px 20px; text-align: center;"
+              >
                 <div class="reviews-empty-icon">⭐</div>
                 <h3 class="reviews-empty-title">Loading reviews...</h3>
               </div>
             </div>
 
-            <!-- Pagination -->
-            <div class="review-pagination" id="reviewPagination" style="display: none;">
-              <!-- Pagination will be rendered here -->
-            </div>
+            <div
+              class="review-pagination"
+              id="reviewPagination"
+              style="display: none;"
+            ></div>
           </div>
         </div>
       </div>
@@ -492,7 +556,6 @@
       <a href="pages/contact.html">Get Free Quote</a>
     </section>
 
-    <!-- Footer -->
     <div id="footer-container"></div>
 
     <script>
@@ -508,26 +571,19 @@
     <script src="js/modules/backtoBottom.js"></script>
     <script src="js/modules/back-to-top-button.js"></script>
     <script src="js/modules/scroll-animations.js"></script>
-    <!-- Component Initializer - Ensures global components (FAB, Chatbot, TOC, etc.) are available -->
     <script src="js/modules/component-initializer.js"></script>
-    
-    <!-- Review System -->
+
     <script type="module" src="js/components/starRating.js"></script>
     <script type="module" src="js/review.js"></script>
     <script type="module" src="js/reviewForm.js"></script>
     <script type="module" src="js/modules/services-reviews.js"></script>
 
-    <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop">
       <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Top to Bottom Button -->
     <button class="back-to-bottom" id="backToBottom">
       <i class="fas fa-arrow-down"></i>
-   </button>
-
-
-    <!-- 🚀 Floating Action Menu loaded via footer component -->
+    </button>
   </body>
 </html>
