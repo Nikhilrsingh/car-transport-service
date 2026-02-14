@@ -118,12 +118,14 @@
   <link rel="stylesheet" href="css/components/rating.css" />
   <link rel="stylesheet" href="css/components/tracking.css" />
   <link rel="stylesheet" href="css/components/navbar.css?v=12" />
+  <link rel="stylesheet" href="css/components/theme-toggle.css" />
   <link rel="stylesheet" href="css/components/middle-navbar.css?v=2" />
   <link rel="stylesheet" href="css/components/footer.css" />
   <link rel="stylesheet" href="css/components/quote-modal.css" />
   <link rel="stylesheet" href="css/components/comparison-widget.css" />
   <link rel="stylesheet" href="css/components/chatbot-modal.css" />
-  <link rel="stylesheet" href="css/components/digital-clock.css" />
+  <!-- Digital clock removed for cleaner header -->
+  <link rel="stylesheet" href="css/components/clock-override.css" />
   <link rel="stylesheet" href="css/components/animations.css" />
   <link rel="stylesheet" href="css/components/region-enhanced.css" />
   <link rel="stylesheet" href="css/components/map-enhancements.css" />
@@ -144,6 +146,9 @@
 
   <!-- Theme Toggle Link (must be in <head>) -->
   <link id="theme-style" rel="stylesheet" href="css/light-mode.css?v=15" />
+
+  <!-- Theme Toggle JavaScript -->
+  <script src="js/modules/themes.js"></script>
 </head>
 
 <body class="neon-theme">
@@ -922,7 +927,7 @@
 
   <!-- Theme & UI enhancements -->
   <script src="js/modules/themes.js"></script>
-  <script src="js/modules/digital-clock.js"></script>
+  <!-- Digital clock script removed -->
   <script src="js/modules/scroll-animations.js"></script>
   <script src="js/modules/glow-inputs.js"></script>
   <script src="js/modules/floating-book-button.js"></script>
@@ -953,6 +958,9 @@
       popup.style.display = "none";
     });
   </script>
+
+  <!-- Theme Toggle Script -->
+  <script src="js/modules/themes.js"></script>
 </body>
 
 </html>

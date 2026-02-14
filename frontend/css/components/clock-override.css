@@ -1,0 +1,18 @@
+/* Digital Clock Override - Hide completely */
+#mac-clock,
+.mac-clock, 
+#clock-full,
+.digital-clock-container,
+.clock-display {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Prevent clock from affecting layout */
+.header *:has(#mac-clock),
+.navbar *:has(#clock-full) {
+  display: none !important;
+}

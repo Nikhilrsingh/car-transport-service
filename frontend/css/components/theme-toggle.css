@@ -1,0 +1,59 @@
+/* ====================================
+   SINGLE ICON THEME TOGGLE
+   Shows ONLY Sun OR Moon at a time
+   ==================================== */
+
+.nav-theme-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.nav-theme-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+}
+
+.nav-theme-btn:hover {
+  background: rgba(255, 99, 71, 0.15);
+  border-color: rgba(255, 99, 71, 0.3);
+  transform: translateY(-1px);
+}
+
+.nav-theme-btn i {
+  font-size: 1.1rem;
+  color: #ffb74d;
+  transition: all 0.3s ease;
+}
+
+.nav-theme-btn:hover i {
+  color: #ff6347;
+  transform: rotate(180deg) scale(1.15);
+}
+
+/* Light mode styling */
+body[data-theme="light"] .nav-theme-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .nav-theme-btn:hover {
+  background: rgba(255, 99, 71, 0.1);
+  border-color: rgba(255, 99, 71, 0.3);
+}
+
+body[data-theme="light"] .nav-theme-btn i {
+  color: #666;
+}
+
+body[data-theme="light"] .nav-theme-btn:hover i {
+  color: #ff6347;
+}

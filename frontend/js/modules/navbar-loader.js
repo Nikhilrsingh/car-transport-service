@@ -55,6 +55,11 @@
       // Initialize navbar functionality after loading
       initializeNavbar();
 
+      // Initialize search functionality if script is loaded
+      if (window.initSearch) {
+        window.initSearch();
+      }
+
       // Set active link
       setActiveLink();
 
@@ -301,8 +306,33 @@
     }
 
     // Close mobile menu when clicking on a link
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link:not([data-mobile-dropdown-btn])');
     mobileNavLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Mobile Accordion Logic
+    const mobileDropdowns = document.querySelectorAll('[data-mobile-dropdown]');
+    mobileDropdowns.forEach(dropdown => {
+      const btn = dropdown.querySelector('[data-mobile-dropdown-btn]');
+      if (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Close other open mobile dropdowns
+          mobileDropdowns.forEach(other => {
+            if (other !== dropdown) other.classList.remove('active');
+          });
+
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+
+    // Close mobile menu when clicking on a nested link
+    const nestedMobileLinks = document.querySelectorAll('.mobile-dropdown-menu a');
+    nestedMobileLinks.forEach(link => {
       link.addEventListener('click', closeMobileMenu);
     });
 
@@ -349,6 +379,51 @@
 
         lastScroll = currentScroll;
       });
+    }
+
+    // Simplified Search Focus Logic
+    // Simplified Search Focus Logic
+    const searchInput = document.getElementById('navbarSearch');
+    const searchBar = document.getElementById('navbarSearchContainer');
+
+    if (searchBar && searchInput) {
+      // Focus input when anywhere in the bar is clicked
+      searchBar.addEventListener('click', () => searchInput.focus());
+
+      // Global shortcut (Ctrl + K or Cmd + K)
+      const handleShortcut = (e) => {
+        // Detect Ctrl+K or Cmd+K
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault(); // Prevent browser default (e.g. browser search)
+          searchInput.focus();
+
+          // Optional: Add a visual flash effect or select text
+          searchInput.select();
+        }
+      };
+
+      // Remove existing listener to prevent duplicates if this runs multiple times
+      document.removeEventListener('keydown', handleShortcut);
+      document.addEventListener('keydown', handleShortcut);
+
+      // Update Kbd text based on OS
+      const kbdSpan = searchBar.querySelector('.search-kbd span');
+      if (kbdSpan) {
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        kbdSpan.textContent = isMac ? '⌘' : 'Ctrl';
+      }
+    }
+
+    // Initialize theme icon based on current theme
+    // This ensures the icon matches the theme when navbar loads
+    const themeIcon = document.getElementById('theme-icon');
+    if (themeIcon) {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      if (savedTheme === 'dark') {
+        themeIcon.className = 'fas fa-moon';
+      } else {
+        themeIcon.className = 'fas fa-sun';
+      }
     }
   }
 

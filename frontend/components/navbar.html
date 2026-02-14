@@ -1,50 +1,40 @@
 <link rel="stylesheet" href="../css/components/navbar.css" />
-<link rel="stylesheet" href="../css/components/middle-navbar.css" />
 <header class="header">
   <div class="navbar-container">
-    <!-- Top Bar -->
-    <div class="upbar">
-      <a href="../pages/tracking.html" class="upbar-btn track-btn" data-tooltip="Track Your Car">
-        <i class="fas fa-location-dot"></i>
-        <span>Track</span>
-      </a>
-      <a href="../pages/emergency-support.html" class="upbar-btn help-btn" data-tooltip="Need Help?">
-        <i class="fas fa-headset"></i>
-        <span>Help</span>
-      </a>
-    </div>
+    <!-- ROW 1: Upbar with Contact Info -->
+    <div class="upbar" id="upbar">
+      <!-- Left: Call & Email -->
+      <div class="upbar-left">
+        <a href="tel:+919372693389" class="upbar-contact-item">
+          <i class="fas fa-phone"></i>
+          <span>Call Us: +91-9372693389</span>
+        </a>
+        <span class="upbar-divider">|</span>
+        <a href="mailto:hariharcarrier@gmail.com" class="upbar-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>Email: hariharcarrier@gmail.com</span>
+        </a>
+      </div>
 
-    <!-- Middle Navbar -->
-    <div class="middle-navbar">
-      <div class="middle-navbar-container">
-        <!-- Left: HCC Logo -->
-        <div class="middle-navbar-left">
-          <img src="../assets/icons/hcc logo.png" alt="HCC Logo" class="middle-navbar-logo" />
-        </div>
+      <!-- Center: Certified Logo -->
+      <div class="upbar-center">
+        <img src="../assets/icons/hcc logo.png" alt="HCC Certified" class="certified-logo" />
+      </div>
 
-        <!-- Center: Company Banner -->
-        <div class="middle-navbar-center">
-          <img src="../assets/icons/HCC.png" alt="Harihar Cargo Carriers" class="middle-navbar-banner" />
-        </div>
-
-        <!-- Right: Contact Info -->
-        <div class="middle-navbar-right">
-          <a href="https://wa.me/9372693389" target="_blank" class="middle-contact-item whatsapp-link">
-            <i class="fab fa-whatsapp"></i>
-            <div class="contact-text">
-              <span class="contact-number">+91-9372693389</span>
-              <span class="contact-number">+91-7972409656</span>
-              <small class="contact-sub">Call / Whatsapp Us</small>
-            </div>
-          </a>
-          <a href="mailto:hariharcarrier@gmail.com" class="middle-contact-item email-link">
-            <i class="fas fa-envelope"></i>
-            <div class="contact-text">
-              <span class="contact-number">hariharcarrier@gmail.com</span>
-              <small class="contact-sub">Email Us</small>
-            </div>
-          </a>
-        </div>
+      <!-- Right: Track, Help & Enquiry CTAs -->
+      <div class="upbar-right">
+        <a href="../pages/tracking.html" class="upbar-btn track-btn">
+          <i class="fas fa-location-dot"></i>
+          <span>Track</span>
+        </a>
+        <a href="../pages/emergency-support.html" class="upbar-btn help-btn">
+          <i class="fas fa-headset"></i>
+          <span>Help</span>
+        </a>
+        <a href="../pages/enquiry.html" class="upbar-btn enquiry-btn">
+          <i class="fas fa-question-circle"></i>
+          <span>Enquiry</span>
+        </a>
       </div>
     </div>
 
@@ -55,11 +45,6 @@
         <img src="../assets/images/left-logo.jpg" alt="Harihar Car Carriers" class="logo-img" />
       </div>
 
-      <div class="nav-theme-toggle">
-        <button id="theme-toggle" aria-label="Toggle theme" class="nav-theme-btn">
-          <i id="theme-icon" class="fas fa-sun"></i>
-        </button>
-      </div>
 
       <!-- Desktop Navigation -->
       <nav class="desktop-nav" aria-label="Main navigation">
@@ -70,12 +55,14 @@
               <span>Home</span>
             </a>
           </li>
+
           <li class="nav-item">
             <a href="../pages/about.html" class="nav-link" data-page="about" data-tooltip="About">
               <i class="fas fa-info-circle"></i>
               <span>About</span>
             </a>
           </li>
+
 
           <!-- Services Dropdown -->
           <li class="nav-item dropdown-nav" data-dropdown>
@@ -167,6 +154,7 @@
 
             <div class="dropdown-menu">
               <ul>
+
                 <li class="nav-item">
                   <a href="../pages/our-network.html" class="nav-link" data-page="network" data-tooltip="Our Network">
                     <i class="fas fa-network-wired"></i>
@@ -222,62 +210,67 @@
           </li>
         </ul>
 
-          <!-- Right Section: Search, Enquiry, Theme Toggle, Login  -->
-           <div class="nav-right-section">
-          <!-- Search Bar  -->
-          <div class="search-container">
-            <div class="search-bar">
-              <input type="text" id="navbarSearch" placeholder="Search services..." aria-label="Search services" />
-              <i class="fas fa-search"></i>
-            </div>
-          </div>
-
-          <!-- Enquiry Button -->
-          <div class="action-nav">
-            <a href="../pages/enquiry.html" class="enquiry-link" data-tooltip="Enquiry">
-              <i class="fas fa-question-circle"></i>
-            </a>
-          </div>
-
-          <!-- Theme Toggle -->
-          <div class="nav-theme-toggle">
-            <button id="theme-toggle" aria-label="Toggle theme" class="nav-theme-btn">
-              <i id="theme-icon" class="fas fa-sun"></i>
-            </button>
-          </div>
-
-          <!-- Login/Profile Section -->
-          <div class="nav-actions">
-            <!-- Dashboard Button (always visible) -->
-            <a href="../pages/dashboard.html" id="dashboardBtn" class="dashboard-btn" data-tooltip="Dashboard">
-              <i class="fas fa-tachometer-alt"></i>
-              <span>Dashboard</span>
-            </a>
-
-            <!-- Login Button (shown when logged out) -->
-            <a href="../pages/login.html" id="loginBtn" class="login-btn" data-tooltip="Login">
-              <i class="fas fa-user"></i>
-              <span>Login</span>
-            </a>
-
-            <!-- Profile Section (shown when logged in) -->
-            <div id="profile" class="profile-section hidden">
-              <span id="userEmail" class="user-email"></span>
-              <a href="#" id="logoutBtn" class="logout-btn" data-tooltip="Logout">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-              </a>
-            </div>
-          </div>
-        </div>
+        </ul>
       </nav>
 
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
+      <!-- Right Section: Search, Enquiry, Theme Toggle, Login  -->
+      <div class="nav-right-section">
+        <!-- Pill-Shaped Search Bar -->
+        <div class="search-bar" id="navbarSearchContainer">
+          <i class="fas fa-search"></i>
+          <input type="text" id="navbarSearch" placeholder="Search..." spellcheck="false" />
+          <div class="search-separator"></div>
+          <kbd class="search-kbd">ctrl k</kbd>
+        </div>
+
+        <!-- Theme Toggle -->
+        <div class="nav-theme-toggle">
+          <button id="theme-toggle" aria-label="Toggle theme" class="nav-theme-btn">
+            <i id="theme-icon" class="fas fa-moon"></i>
+          </button>
+        </div>
+
+        <!-- Login/Profile Section -->
+        <div class="nav-actions">
+          <!-- Dashboard Button (always visible) -->
+          <a href="../pages/dashboard.html" id="dashboardBtn" class="dashboard-btn" data-tooltip="Dashboard">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+
+          <!-- Login Button (shown when logged out) -->
+          <a href="../pages/login.html" id="loginBtn" class="login-btn" data-tooltip="Login">
+            <i class="fas fa-user"></i>
+            <span>Login</span>
+          </a>
+
+          <!-- Profile Section (shown when logged in) -->
+          <div id="profile" class="profile-section hidden">
+            <span id="userEmail" class="user-email"></span>
+            <a href="#" id="logoutBtn" class="logout-btn" data-tooltip="Logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Controls Container -->
+      <div class="mobile-controls-container">
+        <!-- Mobile Theme Toggle -->
+        <div class="nav-theme-toggle mobile-theme-toggle">
+          <button id="mobile-theme-toggle" aria-label="Toggle theme" class="nav-theme-btn">
+            <i id="mobile-theme-icon" class="fas fa-moon"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -295,9 +288,10 @@
 
     <!-- Mobile Search Bar -->
     <div class="mobile-search-container">
-      <div class="mobile-search-bar">
+      <div class="mobile-search-bar" id="mobileSearchContainer">
         <i class="fas fa-search"></i>
-        <input type="text" id="mobileSearch" placeholder="Search services..." aria-label="Search services" />
+        <input type="text" id="mobileSearch" name="mobile_q" placeholder="Search services..." spellcheck="false"
+          autocomplete="new-password" />
       </div>
     </div>
 
@@ -309,141 +303,74 @@
           <span>Home</span>
         </a>
       </li>
+
       <li class="mobile-nav-item">
         <a href="../pages/about.html" class="mobile-nav-link">
           <i class="fas fa-info-circle"></i>
-          <span>About</span>
+          <span>About Us</span>
         </a>
       </li>
-      <li class="mobile-nav-item">
-        <a href="../services.html" class="mobile-nav-link">
+
+      <!-- Mobile Services Accordion -->
+      <li class="mobile-nav-item mobile-dropdown" data-mobile-dropdown>
+        <button class="mobile-nav-link" data-mobile-dropdown-btn>
           <i class="fas fa-truck-moving"></i>
           <span>Services</span>
-        </a>
+          <i class="fas fa-plus toggle-icon"></i>
+        </button>
+        <ul class="mobile-dropdown-menu">
+          <li><a href="../services.html" class="mobile-nav-link">Our Services</a></li>
+          <li><a href="../pages/how-it-works.html" class="mobile-nav-link">How It Works</a></li>
+          <li><a href="../pages/route-weather.html" class="mobile-nav-link">Weather Check</a></li>
+          <li><a href="../pages/vehicle-inspection.html" class="mobile-nav-link">Inspection</a></li>
+          <li><a href="../pages/booking.html" class="mobile-nav-link">Booking</a></li>
+          <li><a href="../pages/pricing.html" class="mobile-nav-link">Pricing</a></li>
+          <li><a href="../pages/tracking.html" class="mobile-nav-link">Track Your Car</a></li>
+          <li><a href="../pages/emergency-support.html" class="mobile-nav-link">Support</a></li>
+        </ul>
       </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/how-it-works.html" class="mobile-nav-link">
-          <i class="fas fa-tasks"></i>
-          <span>How It Works</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/booking.html" class="mobile-nav-link">
-          <i class="fas fa-calendar-check"></i>
-          <span>Booking</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/contributors.html" class="mobile-nav-link">
-          <i class="fas fa-users"></i>
-          <span>Contributors</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/pricing.html" class="mobile-nav-link">
-          <i class="fas fa-tags"></i>
-          <span>Pricing</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/pricing-calculator.html" class="mobile-nav-link">
-          <i class="fas fa-calculator"></i>
-          <span>Pricing Calculator</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/tracking.html" class="mobile-nav-link">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Track Your Car</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/emergency-support.html" class="mobile-nav-link">
-          <i class="fas fa-life-ring"></i>
-          <span>Emergency Support</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/our-network.html" class="mobile-nav-link">
-          <i class="fas fa-network-wired"></i>
-          <span>Our Network</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/gallery.html" class="mobile-nav-link">
-          <i class="fas fa-images"></i>
-          <span>Gallery</span>
-        </a>
-      </li>
+
       <li class="mobile-nav-item">
         <a href="../pages/contact.html" class="mobile-nav-link">
           <i class="fas fa-phone"></i>
           <span>Contact</span>
         </a>
       </li>
+
+      <!-- Mobile More Accordion -->
+      <li class="mobile-nav-item mobile-dropdown" data-mobile-dropdown>
+        <button class="mobile-nav-link" data-mobile-dropdown-btn>
+          <i class="fas fa-layer-group"></i>
+          <span>More</span>
+          <i class="fas fa-plus toggle-icon"></i>
+        </button>
+        <ul class="mobile-dropdown-menu">
+
+          <li><a href="../pages/our-network.html" class="mobile-nav-link">Our Network</a></li>
+          <li><a href="../pages/gallery.html" class="mobile-nav-link">Gallery</a></li>
+          <li><a href="../pages/careers.html" class="mobile-nav-link">Careers</a></li>
+          <li><a href="../pages/faq.html" class="mobile-nav-link">FAQ</a></li>
+          <li><a href="../pages/blog.html" class="mobile-nav-link">Blog</a></li>
+          <li><a href="../pages/Feedback.html" class="mobile-nav-link">Feedback</a></li>
+        </ul>
+      </li>
+
+      <!-- Dashboard Menu Item -->
       <li class="mobile-nav-item">
-        <a href="../pages/careers.html" class="mobile-nav-link">
-          <i class="fas fa-briefcase"></i>
-          <span>Careers</span>
+        <a href="../pages/dashboard.html" class="mobile-nav-link">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
         </a>
       </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/press-media.html" class="mobile-nav-link">
-          <i class="fas fa-newspaper"></i>
-          <span>Press & Media</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/enquiry.html" class="mobile-nav-link">
-          <i class="fas fa-question-circle"></i>
-          <span>Enquiry</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/faq.html" class="mobile-nav-link">
-          <i class="fas fa-question-circle"></i>
-          <span>FAQ</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/blog.html" class="mobile-nav-link">
-          <i class="fas fa-blog"></i>
-          <span>Blog</span>
-        </a>
-      </li>
-      <li class="mobile-nav-item">
-        <a href="../pages/Feedback.html" class="mobile-nav-link">
-          <i class="fas fa-star"></i>
-          <span>Feedback</span>
+
+      <!-- Login Menu Item -->
+      <li class="mobile-nav-item" id="mobileLoginNavItem">
+        <a href="../pages/login.html" class="mobile-nav-link">
+          <i class="fas fa-user"></i>
+          <span>Login</span>
         </a>
       </li>
     </ul>
-
-    <!-- Mobile Action Buttons -->
-    <div class="mobile-nav-actions">
-      <!-- Dashboard Link (always visible) -->
-      <a href="../pages/dashboard.html" id="mobileDashboardBtn" class="mobile-dashboard-btn">
-        <i class="fas fa-tachometer-alt"></i>
-        <span>Dashboard</span>
-      </a>
-      
-      <!-- Login Button (shown when logged out) -->
-      <a href="../pages/login.html" id="mobileLoginBtn" class="mobile-login-btn">
-        <i class="fas fa-user"></i>
-        <span>Login</span>
-      </a>
-      
-      <!-- Logout Button (shown when logged in) -->
-      <a href="#" id="mobileLogoutBtn" class="mobile-logout-btn hidden">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
-      </a>
-      
-      <a href="../pages/booking.html" class="mobile-cta-btn">
-        <i class="fas fa-truck"></i>
-        <span>Book Instantly</span>
-      </a>
-    </div>
 
     <!-- Mobile Contact Info -->
     <div class="mobile-contact-info">
@@ -459,6 +386,15 @@
         <i class="fas fa-clock"></i>
         <span>24/7 Support</span>
       </div>
+    </div>
+
+    <!-- Mobile Action Buttons - Quick Actions -->
+    <div class="mobile-nav-actions">
+      <!-- Book Now CTA -->
+      <a href="../pages/booking.html" class="mobile-cta-btn">
+        <i class="fas fa-truck"></i>
+        <span>Book Instantly</span>
+      </a>
     </div>
   </nav>
 

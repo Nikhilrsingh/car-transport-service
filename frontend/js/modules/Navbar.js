@@ -4,14 +4,14 @@
 function initializeAuth() {
   // Auth state check - runs on every page load
   updateAuthUI();
-  
+
   // Logout button handler
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     // Remove existing listeners to avoid duplicates
     const newLogoutBtn = logoutBtn.cloneNode(true);
     logoutBtn.parentNode.replaceChild(newLogoutBtn, logoutBtn);
-    
+
     newLogoutBtn.addEventListener("click", (e) => {
       e.preventDefault();
       logout();
@@ -29,6 +29,17 @@ if (document.readyState === 'loading') {
 
 // Also expose for manual calling after navbar loads
 window.initializeAuth = initializeAuth;
+
+// Global Search Focus Logic (Ctrl + K)
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    const searchInput = document.getElementById('navbarSearch') || document.getElementById('mobileSearch');
+    if (searchInput) {
+      searchInput.focus();
+    }
+  }
+});
 
 // Function to update auth UI based on login state
 function updateAuthUI() {
@@ -73,22 +84,22 @@ function logout() {
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("userEmail");
   localStorage.removeItem("token");
-  
+
   // Update UI immediately
   updateAuthUI();
-  
+
   // Show notification if available
   if (typeof showNotification === 'function') {
     showNotification("Logged out successfully", "success");
   } else {
     console.log("Logged out successfully");
   }
-  
+
   // Determine correct path for redirect
   const currentPath = window.location.pathname;
   const isInPagesFolder = currentPath.toLowerCase().includes('/pages/');
   const loginPath = isInPagesFolder ? "./login.html" : "./pages/login.html";
-  
+
   // Redirect to login page
   setTimeout(() => {
     window.location.href = loginPath;
@@ -99,4 +110,78 @@ function logout() {
 window.updateAuthUI = updateAuthUI;
 window.logout = logout;
 
-  
+// Mobile Search Handler
+function handleMobileSearch() {
+  // Get search input or create a prompt
+  const query = prompt("Enter search terms:");
+  if (query && query.trim()) {
+    // Redirect to search results or handle search
+    console.log("Searching for:", query);
+    // You can implement actual search functionality here
+    // For now, let's redirect to services page as fallback
+    const currentPath = window.location.pathname;
+    const isInPagesFolder = currentPath.toLowerCase().includes('/pages/');
+    const servicesPath = isInPagesFolder ? "./services.html" : "./services.html";
+    window.location.href = servicesPath;
+  }
+}
+
+// Expose mobile search handler globally
+window.handleMobileSearch = handleMobileSearch;
+
+// Mobile Navigation Scroll Fix
+document.addEventListener('DOMContentLoaded', function () {
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileNavList = document.querySelector('.mobile-nav-list');
+
+  if (mobileNav && mobileNavList) {
+    // Enable smooth scrolling
+    mobileNavList.style.scrollBehavior = 'smooth';
+
+    // Prevent body scroll when mobile nav is open
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+
+    function toggleBodyScroll(disable) {
+      if (disable) {
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+      } else {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+      }
+    }
+
+    // When mobile nav opens
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        if (mobileNav.classList.contains('active')) {
+          mobileNav.classList.remove('active');
+          toggleBodyScroll(false);
+        } else {
+          mobileNav.classList.add('active');
+          toggleBodyScroll(true);
+        }
+      });
+    }
+
+    // When mobile nav closes
+    if (mobileCloseBtn) {
+      mobileCloseBtn.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+        toggleBodyScroll(false);
+      });
+    }
+
+    // Close on overlay click
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('nav-overlay')) {
+        mobileNav.classList.remove('active');
+        toggleBodyScroll(false);
+      }
+    });
+  }
+});
+
