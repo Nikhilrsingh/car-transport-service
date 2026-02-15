@@ -127,8 +127,22 @@
     const post = BLOG_POSTS.find((p) => String(p.id) === String(id));
 
     if (!post) {
-      document.getElementById("post-article").innerHTML =
-        "<h2 style='color: #ff6347;'>Post not found</h2><p>This article does not exist. Post ID: " + id + "</p>";
+      document.getElementById("post-article").innerHTML = `
+        <div class="not-found-container">
+          <div class="not-found-content">
+            <div class="not-found-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h1>Oops! Article Missing</h1>
+            <p>We couldn't find the blog post you're looking for. It might have been moved or doesn't exist anymore.</p>
+            <div class="not-found-actions">
+              <a href="blog.html" class="btn primary glowing-btn">
+                <i class="fas fa-arrow-left"></i> Back to Blog Feed
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
     } else {
       document.getElementById("post-title").textContent = post.title;
       document.getElementById("post-date").textContent = post.date;
