@@ -166,6 +166,30 @@
       setupTableOfContents();
       setupSocialSharing(post);
       setupRelatedPosts(post);
+      setupImageAnimations();
+    }
+
+    function setupImageAnimations() {
+      const images = document.querySelectorAll('.post-article img');
+
+      images.forEach(img => {
+        // If it's already complete (cached)
+        if (img.complete) {
+          img.classList.add('img-loaded');
+        } else {
+          // Hide it initially
+          img.classList.add('img-loading');
+
+          img.onload = () => {
+            img.classList.add('img-loaded');
+          };
+
+          img.onerror = () => {
+            img.classList.remove('img-loading');
+            img.style.opacity = '1'; // Fallback
+          };
+        }
+      });
     }
 
     function setupClapSystem() {
