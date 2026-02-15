@@ -49,17 +49,6 @@ body {
   z-index: 1000;
 }
 
-.upbar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #ff6347, #ff4500, #ff6347, transparent);
-  opacity: 0.8;
-}
-
 .upbar a {
   right: auto;
 }

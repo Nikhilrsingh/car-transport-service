@@ -20,8 +20,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   
   <link id="theme-style" rel="stylesheet" href="../css/light-mode.css" />
+  <link rel="stylesheet" href="../css/dark-mode.css">
   <link rel="stylesheet" href="../css/pages/explore-cities.css">
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   
 </head>
 
@@ -36,6 +37,7 @@
     </div>
   </div>
 
+  <div id="scroll-progress"></div>
   <div id="navbar-container"></div>
 
   <div class="explore-hero">
@@ -104,9 +106,16 @@
         <i class="fas fa-filter"></i> Filters
       </button>
 
+      <section class="network-map-section">
+        <div class="container">
+          <h2 class="map-title">Network Coverage Map</h2>
+          <div id="networkMap" class="network-map"></div>
+        </div>
+      </section>
+
       <div class="region-grid" id="regionGrid" data-items-per-page="12">
         <a href="city.html?city=agra" class="region-card enhanced" data-region="north"><div class="city-thumbnail">🕌</div><div class="city-content"><h4 class="city-name">Agra</h4><span class="region-badge north">North</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 500+ Trips</span><span class="pricing-badge">₹3,999+</span></div></div></a>
-        <a href="city.html?city=delhi" class="region-card enhanced" data-region="north"><div class="city-thumbnail">🏛️</div><div class="city-content"><h4 class="city-name">Delhi</h4><span class="region-badge north">North</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 1200+ Trips</span><span class="pricing-badge">₹4,999+</span></div></div></a>
+        <a class="region-card enhanced" data-region="north" data-city="delhi"><div class="city-thumbnail">🏛️</div><div class="city-content"><h4 class="city-name">Delhi</h4><span class="region-badge north">North</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 1200+ Trips</span><span class="pricing-badge">₹4,999+</span></div></div></a>
         <a href="city.html?city=chandigarh" class="region-card enhanced" data-region="north"><div class="city-thumbnail">🌳</div><div class="city-content"><h4 class="city-name">Chandigarh</h4><span class="region-badge north">North</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 450+ Trips</span><span class="pricing-badge">₹4,499+</span></div></div></a>
         <a href="city.html?city=jaipur" class="region-card enhanced" data-region="north"><div class="city-thumbnail">🏰</div><div class="city-content"><h4 class="city-name">Jaipur</h4><span class="region-badge north">North</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 600+ Trips</span><span class="pricing-badge">₹4,299+</span></div></div></a>
         <a href="city.html?city=lucknow" class="region-card enhanced" data-region="north"><div class="city-thumbnail">🕌</div><div class="city-content"><h4 class="city-name">Lucknow</h4><span class="region-badge north">North</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 550+ Trips</span><span class="pricing-badge">₹4,799+</span></div></div></a>
@@ -157,7 +166,6 @@
         <a href="city.html?city=pune" class="region-card enhanced" data-region="west"><div class="city-thumbnail">🎓</div><div class="city-content"><h4 class="city-name">Pune</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 800+ Trips</span><span class="pricing-badge">₹5,299+</span></div></div></a>
         <a href="city.html?city=ahmedabad" class="region-card enhanced" data-region="west"><div class="city-thumbnail">🪁</div><div class="city-content"><h4 class="city-name">Ahmedabad</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 700+ Trips</span><span class="pricing-badge">₹5,799+</span></div></div></a>
         <a href="city.html?city=surat" class="region-card enhanced" data-region="west"><div class="city-thumbnail">💎</div><div class="city-content"><h4 class="city-name">Surat</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 600+ Trips</span><span class="pricing-badge">₹5,699+</span></div></div></a>
-        <a href="city.html?city=nagpur" class="region-card enhanced" data-region="west"><div class="city-thumbnail">🍊</div><div class="city-content"><h4 class="city-name">Nagpur</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 500+ Trips</span><span class="pricing-badge">₹5,999+</span></div></div></a>
         <a href="city.html?city=thane" class="region-card enhanced" data-region="west"><div class="city-thumbnail">🚉</div><div class="city-content"><h4 class="city-name">Thane</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 550+ Trips</span><span class="pricing-badge">₹5,199+</span></div></div></a>
         <a href="city.html?city=navi_mumbai" class="region-card enhanced" data-region="west"><div class="city-thumbnail">🌉</div><div class="city-content"><h4 class="city-name">Navi Mumbai</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 480+ Trips</span><span class="pricing-badge">₹5,099+</span></div></div></a>
         <a href="city.html?city=nashik" class="region-card enhanced" data-region="west"><div class="city-thumbnail">🍷</div><div class="city-content"><h4 class="city-name">Nashik</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 320+ Trips</span><span class="pricing-badge">₹5,599+</span></div></div></a>
@@ -166,6 +174,7 @@
         <a href="city.html?city=vadodara" class="region-card enhanced" data-region="west"><div class="city-thumbnail">🏭</div><div class="city-content"><h4 class="city-name">Vadodara</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 400+ Trips</span><span class="pricing-badge">₹6,199+</span></div></div></a>
         <a href="city.html?city=gandhinagar" class="region-card enhanced" data-region="west"><div class="city-thumbnail">🍃</div><div class="city-content"><h4 class="city-name">Gandhinagar</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 250+ Trips</span><span class="pricing-badge">₹5,899+</span></div></div></a>
 
+        <a href="city.html?city=nagpur" class="region-card enhanced" data-region="central"><div class="city-thumbnail">🍊</div><div class="city-content"><h4 class="city-name">Nagpur</h4><span class="region-badge west">West</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 500+ Trips</span><span class="pricing-badge">₹5,999+</span></div></div></a> 
         <a href="city.html?city=bhopal" class="region-card enhanced" data-region="central"><div class="city-thumbnail">🐅</div><div class="city-content"><h4 class="city-name">Bhopal</h4><span class="region-badge central">Central</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 450+ Trips</span><span class="pricing-badge">₹5,299+</span></div></div></a>
         <a href="city.html?city=indore" class="region-card enhanced" data-region="central"><div class="city-thumbnail">🏯</div><div class="city-content"><h4 class="city-name">Indore</h4><span class="region-badge central">Central</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 550+ Trips</span><span class="pricing-badge">₹5,599+</span></div></div></a>
         <a href="city.html?city=jabalpur" class="region-card enhanced" data-region="central"><div class="city-thumbnail">🗿</div><div class="city-content"><h4 class="city-name">Jabalpur</h4><span class="region-badge central">Central</span><div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 300+ Trips</span><span class="pricing-badge">₹5,899+</span></div></div></a>
@@ -274,5 +283,36 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
   </script>
+  <script src="../js/script.js"></script>
+  <div id="cityDrawer" class="city-drawer">
+  <button class="drawer-close">×</button>
+
+  <!-- City Context -->
+  <div class="drawer-header">
+    <h2 id="drawerCityName" class="drawer-city-name"></h2>
+    <p id="drawerCityRegion" class="drawer-city-region"></p>
+
+    <span id="drawerCityRole" class="city-role"></span>
+    <p id="drawerRoleDescription" class="role-description"></p>
+  </div>
+
+  <!-- Routes -->
+  <div class="drawer-section">
+    <h3 class="routes-title">Outgoing Routes</h3>
+    <div id="drawerOutgoing" class="routes-list"></div>
+  </div>
+
+  <div class="drawer-section">
+    <h3 class="routes-title">Incoming Routes</h3>
+    <div id="drawerIncoming" class="routes-list"></div>
+  </div>
+</div>
+
+<script src="../js/data/city-network.js"></script>
+<script src="../js/modules/city-interaction.js"></script>
+<script src="../js/modules/city-drawer.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../js/modules/map.js"></script>
+
 </body>
 </html>

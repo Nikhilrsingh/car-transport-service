@@ -1,12 +1,9 @@
-/* explore-cities.css — page‑specific + view layouts */
-
-/* ----- Page basics (keep hero, filters same) ----- */
 body {
   padding-top: 0;
 }
 
 .explore-hero {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: #000000;
   padding: 120px 0 60px;
   text-align: center;
   color: white;
@@ -26,7 +23,6 @@ body {
   margin: 0 auto;
 }
 
-/* Filter box shadow */
 .region-filters-search {
   margin-top: -50px;
   position: relative;
@@ -35,17 +31,6 @@ body {
   box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 }
 
-/* --------------------------------------------------
-   GRID VIEW  (data-view="grid")
-   Default: your original card grid, just with
-   the region badge centered under the city name.
-   -------------------------------------------------- */
-
-.region-grid[data-view="grid"] .region-card {
-  /* rely mostly on existing component styles */
-}
-
-/* Center city name + region badge */
 .region-grid[data-view="grid"] .city-content {
   display: flex;
   flex-direction: column;
@@ -62,20 +47,12 @@ body {
   margin: 0 auto;
 }
 
-/* --------------------------------------------------
-   LIST VIEW  (data-view="list")
-   2 cards per row on desktop
-   1 per row on tablet/mobile
-   -------------------------------------------------- */
-
-/* 2 columns in list view */
 .region-grid[data-view="list"] {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
-/* Card layout in list view */
 .region-grid[data-view="list"] .region-card {
   display: flex;
   align-items: center;
@@ -96,7 +73,6 @@ body {
   border-color: var(--primary-color, #ff6b35);
 }
 
-/* Icon smaller for compact list cards */
 .region-grid[data-view="list"] .city-thumbnail {
   width: 52px;
   height: 52px;
@@ -109,7 +85,6 @@ body {
   flex-shrink: 0;
 }
 
-/* Name + badge on the left */
 .region-grid[data-view="list"] .city-content {
   flex: 1;
   display: flex;
@@ -125,7 +100,6 @@ body {
   margin: 0;
 }
 
-/* Region badge styles reuse your theme colors */
 .region-grid[data-view="list"] .region-badge {
   font-size: 0.7rem;
   font-weight: 700;
@@ -133,7 +107,6 @@ body {
   border-radius: 6px;
 }
 
-/* Stats + price aligned right */
 .region-grid[data-view="list"] .city-stats {
   display: flex;
   flex-direction: column;
@@ -156,7 +129,6 @@ body {
   border-radius: 8px;
 }
 
-/* Tablet + mobile: list view falls back to 1 column */
 @media (max-width: 900px) {
   .region-grid[data-view="list"] {
     grid-template-columns: 1fr;
@@ -181,4 +153,190 @@ body {
     padding-top: 8px;
     border-top: 1px solid #f1f5f9;
   }
+}
+
+.city-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 380px;
+  height: 100%;
+
+  background: var(--bg-primary, #ffffff);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+
+  z-index: 9999;
+  padding: 24px;
+
+  overflow-y: auto;
+}
+
+.city-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: black;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .city-drawer {
+    top: auto;
+    bottom: 0;
+    right: 0;
+
+    width: 100%;
+    height: 65%;
+
+    transform: translateY(100%);
+  }
+
+  .city-drawer.open {
+    transform: translateY(0);
+  }
+}
+
+.drawer-header {
+  margin-bottom: 24px;
+}
+
+.drawer-city-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.drawer-city-region {
+  color: var(--text-secondary, #64748b);
+  margin-bottom: 10px;
+}
+
+.city-role {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.role-hub {
+  background: #e6f7ee;
+  color: #0f8a5f;
+}
+
+.role-transit {
+  background: #fff3e0;
+  color: #b45309;
+}
+
+.role-endpoint {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.role-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.drawer-section {
+  margin-top: 28px;
+}
+
+.routes-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.routes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.route-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f9fafb;
+  font-size: 0.9rem;
+}
+
+.route-item.outgoing {
+  border-left: 4px solid #22c55e;
+}
+
+.route-item.incoming {
+  border-left: 4px solid #3b82f6;
+}
+
+.route-direction {
+  font-weight: 600;
+}
+
+.route-eta {
+  color: var(--text-secondary, #64748b);
+}
+
+.no-routes {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.network-map-section {
+  margin: 60px 0;
+}
+
+.map-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.network-map {
+  width: 100%;
+  height: 420px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.hub-marker {
+  color: #ff6b35;
+  font-size: 18px;
+}
+
+.city-marker {
+  color: #334155;
+  font-size: 14px;
+}
+
+.region-card.active-city {
+  outline: 2px solid #ff5722;
+  transform: scale(1.02);
+  background: rgba(255,87,34,0.05);
+}
+
+.leaflet-marker-icon.active-pin {
+  filter: drop-shadow(0 0 8px #ff6b35);
+  transform: scale(1.2);
+}
+
+.active-pin {
+  transform: scale(1.6);
+  color: #fd0303 !important;
+  filter: drop-shadow(0 0 6px rgba(255,87,34,0.8));
 }

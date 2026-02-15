@@ -941,7 +941,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 7rem;
+    gap: 25rem;
   }
 
   .timeline-content {
@@ -955,13 +955,16 @@ body {
   .timeline-item,
   .timeline-item:nth-child(odd) {
     flex-direction: row;
+    margin-left: 10px; /* SPACE from the line */
+    
+   
   }
 
   .timeline-content,
   .timeline-item:nth-child(odd) .timeline-content {
     text-align: left;
-    margin-left: 80px;
-    margin-right: 0;
+    /* margin-left: 80px;
+    margin-right: 0; */
   }
 
   .timeline-content::after,
@@ -970,6 +973,7 @@ body {
     right: auto;
     border-right: 10px solid #333;
     border-left: none;
+    
   }
 
   .timeline-year {
@@ -985,11 +989,28 @@ body {
   .timeline-item:nth-child(odd) .timeline-tags {
     justify-content: flex-start;
   }
+
+  .timeline-year {
+    width: 60px;
+    height: 60px;
+    font-size: 1rem;
+  }
+
+  
+  .timeline-content {
+    width: calc(100% - 100px);
+    max-width: none;
+    position: relative;
+    margin-left: 0;
+  }
+
+
 }
 
 @media (max-width: 768px) {
   .about-team-flip-card {
     height: 360px;
+    
   }
 
   .about-member-image-wrapper {
@@ -1011,7 +1032,7 @@ body {
   }
 
   .timeline-container {
-    gap: 10rem;
+    gap: 30rem;
   }
 
   .timeline-items {
@@ -1052,11 +1073,18 @@ body {
 
   .timeline-content {
     padding: 20px;
+    width: 250px;
+   
   }
 
   .timeline-achievement h3 {
     font-size: 1.2rem;
   }
+
+  
+
+
+
 }
 
 /* Accessibility – reduced motion */
