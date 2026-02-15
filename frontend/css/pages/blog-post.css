@@ -596,3 +596,36 @@ body.dark .not-found-content h1 {
 body.dark .not-found-content p {
   color: #9ca3af !important;
 }
+
+/* --- Smooth Image Loading Effects --- */
+.img-loading {
+  opacity: 0;
+  filter: blur(10px);
+  transform: scale(1.02);
+  transition: opacity 0.8s ease-out, filter 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.img-loaded {
+  opacity: 1 !important;
+  filter: blur(0) !important;
+  transform: scale(1) !important;
+}
+
+@keyframes imgPlaceholderPulse {
+  0% {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  50% {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.img-placeholder {
+  background-color: rgba(0, 0, 0, 0.05);
+  animation: imgPlaceholderPulse 1.5s infinite ease-in-out;
+}
