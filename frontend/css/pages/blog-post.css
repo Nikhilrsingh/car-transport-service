@@ -168,7 +168,6 @@ body:has(.navbar.scrolled) .reading-progress {
   border-bottom-color: var(--orange-hover);
 }
 
-/* INLINE IMAGES */
 .post-body img {
   width: 100%;
   border-radius: 10px;
@@ -409,4 +408,100 @@ body.dark.blog-post-page .post-body a {
 body.dark.blog-post-page .post-body a:hover {
   color: #ff7b4e !important;
   border-bottom-color: #ff7b4e !important;
+}
+
+/* --- Refined Clap System (Blue Pill beside CTA) --- */
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+  padding-top: 26px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.clap-container {
+  display: flex;
+  align-items: center;
+}
+
+.clap-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 20px;
+  height: 42px;
+  /* Matches the estimated height of other buttons (~42-44px) */
+  box-sizing: border-box;
+  border-radius: 999px;
+  /* Perfect pill shape */
+  border: none;
+  background: linear-gradient(135deg, #00aeef, #0072bc);
+  color: white !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 174, 239, 0.25);
+  outline: none;
+  margin: 0;
+}
+
+.clap-btn i {
+  font-size: 1.1rem;
+}
+
+.clap-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 174, 239, 0.4);
+}
+
+.clap-btn.clicked {
+  transform: scale(0.95);
+}
+
+.clap-count {
+  font-weight: 700;
+}
+
+.clap-msg {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+.particles-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #00aeef;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  animation: explode 0.6s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(-1 * var(--distance)));
+    opacity: 0;
+  }
 }
