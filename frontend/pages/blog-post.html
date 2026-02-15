@@ -73,6 +73,13 @@
         <a href="contact.html" class="btn primary">
           <i class="fas fa-quote-left"></i> Get a Quote
         </a>
+        <div class="clap-container">
+          <button id="clapBtn" class="clap-btn" aria-label="Clap for this post">
+            <i class="fas fa-hands-clapping"></i>
+            <span id="clapCount" class="clap-count"></span>
+            <div id="particlesContainer" class="particles-container"></div>
+          </button>
+        </div>
       </div>
 
       <section class="related-posts" id="relatedPosts">
@@ -141,9 +148,61 @@
       document.getElementById("post-readtime").textContent = `${readingTime} min read`;
 
       setupReadingProgress();
+      setupClapSystem();
       setupTableOfContents();
       setupSocialSharing(post);
       setupRelatedPosts(post);
+    }
+
+    function setupClapSystem() {
+      const clapBtn = document.getElementById("clapBtn");
+      const clapCount = document.getElementById("clapCount");
+      const particlesContainer = document.getElementById("particlesContainer");
+
+      if (!clapBtn || !clapCount) return;
+
+      // Simulated initial count or from local storage
+      let count = parseInt(localStorage.getItem(`claps-${id}`) || "0");
+      clapCount.textContent = count > 0 ? count : "";
+      if (count > 0) clapBtn.classList.add("has-claps");
+
+      clapBtn.addEventListener("click", () => {
+        count++;
+        localStorage.setItem(`claps-${id}`, count);
+        clapCount.textContent = count;
+
+        // Add visual feedback classes
+        clapBtn.classList.add("clicked", "has-claps");
+        setTimeout(() => clapBtn.classList.remove("clicked"), 300);
+
+        // Particle burst
+        createParticles(particlesContainer);
+      });
+    }
+
+    function createParticles(container) {
+      const particleCount = 12;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement("span");
+        particle.className = "particle";
+
+        // Random direction and distance
+        const angle = (i / particleCount) * 360;
+        const distance = 40 + Math.random() * 40;
+        const size = 4 + Math.random() * 6;
+
+        particle.style.setProperty("--angle", `${angle}deg`);
+        particle.style.setProperty("--distance", `${distance}px`);
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+
+        container.appendChild(particle);
+
+        // Remove particle after animation
+        particle.addEventListener("animationend", () => {
+          particle.remove();
+        });
+      }
     }
 
     function setupReadingProgress() {
@@ -242,49 +301,49 @@
       document.getElementById(
         "shareTwitter"
       ).href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
-    document.getElementById(
-      "shareLinkedin"
-    ).href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-    document.getElementById(
-      "shareWhatsapp"
-    ).href = `https://wa.me/?text=${title}%20${url}`;
-    document.getElementById(
-      "shareEmail"
-    ).href = `mailto:?subject=${title}&body=${text}%0A%0A${url}`;
+      document.getElementById(
+        "shareLinkedin"
+      ).href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+      document.getElementById(
+        "shareWhatsapp"
+      ).href = `https://wa.me/?text=${title}%20${url}`;
+      document.getElementById(
+        "shareEmail"
+      ).href = `mailto:?subject=${title}&body=${text}%0A%0A${url}`;
 
-    document
-      .getElementById("copyLink")
-      .addEventListener("click", (e) => {
-        e.preventDefault();
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          const btn = e.currentTarget;
-          const icon = btn.querySelector("i");
-          btn.classList.add("copied");
-          icon.className = "fas fa-check";
-          setTimeout(() => {
-            btn.classList.remove("copied");
-            icon.className = "fas fa-link";
-          }, 2000);
+      document
+        .getElementById("copyLink")
+        .addEventListener("click", (e) => {
+          e.preventDefault();
+          navigator.clipboard.writeText(window.location.href).then(() => {
+            const btn = e.currentTarget;
+            const icon = btn.querySelector("i");
+            btn.classList.add("copied");
+            icon.className = "fas fa-check";
+            setTimeout(() => {
+              btn.classList.remove("copied");
+              icon.className = "fas fa-link";
+            }, 2000);
+          });
         });
-      });
 
-    if (toggle && sidebar) {
-      const hideHint = () => hint && hint.classList.add("hide");
+      if (toggle && sidebar) {
+        const hideHint = () => hint && hint.classList.add("hide");
 
-      toggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        sidebar.classList.toggle("open");
-        hideHint();
-      });
+        toggle.addEventListener("click", (e) => {
+          e.preventDefault();
+          sidebar.classList.toggle("open");
+          hideHint();
+        });
 
-      setTimeout(hideHint, 4000);
+        setTimeout(hideHint, 4000);
 
-      document.addEventListener("click", (e) => {
-        if (!sidebar.contains(e.target)) {
-          sidebar.classList.remove("open");
-        }
-      });
-    }
+        document.addEventListener("click", (e) => {
+          if (!sidebar.contains(e.target)) {
+            sidebar.classList.remove("open");
+          }
+        });
+      }
     }
 
     function setupRelatedPosts(currentPost) {
