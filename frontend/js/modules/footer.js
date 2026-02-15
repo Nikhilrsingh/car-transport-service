@@ -421,7 +421,7 @@
     function cityUrl(slug) {
       return `${BASE_PATH}/pages/city.html?city=${slug}`;
     }
-  
+
     popularCitiesEl.innerHTML = `
       <ul class="footer-links">
         ${cities.map(city => `
@@ -485,7 +485,7 @@
       { slug: "hyderabad", name: "Car Transport in Hyderabad" },
       { slug: "kolkata", name: "Car Transport in Kolkata" }
     ];
-    
+
     // Store default HTML for restoration
     renderCityList(defaultCities, popularCities);
     defaultCitiesHTML = popularCities.innerHTML;
@@ -511,8 +511,8 @@
         popularCities.innerHTML = defaultCitiesHTML;
         searchInput.focus();
       });
-    }      
-    
+    }
+
     // Handle Escape key to clear search
     searchInput.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
@@ -540,72 +540,72 @@
   function initMobileFAB() {
     const miniFabTrigger = document.getElementById("miniFabTrigger");
     const mobileFabActions = document.getElementById("mobileFabActions");
-    
+
     if (!miniFabTrigger || !mobileFabActions) return;
-    
+
     let isOpen = false;
-    
+
     // Toggle mobile FAB
-    miniFabTrigger.addEventListener("click", function(e) {
+    miniFabTrigger.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
-      
+
       if (isOpen) {
         closeMobileFAB();
       } else {
         openMobileFAB();
       }
     });
-    
+
     // Close when clicking outside
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
       if (isOpen && !e.target.closest(".mobile-fab-actions") && !e.target.closest(".mini-fab-trigger")) {
         closeMobileFAB();
       }
     });
-    
+
     // Close on ESC
-    document.addEventListener("keydown", function(e) {
+    document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && isOpen) {
         closeMobileFAB();
       }
     });
-    
+
     function openMobileFAB() {
       isOpen = true;
       miniFabTrigger.classList.add("active");
       miniFabTrigger.setAttribute("aria-expanded", "true");
       mobileFabActions.classList.add("active");
-      
+
       // Update button text
       const span = miniFabTrigger.querySelector("span");
       if (span) span.textContent = "Close";
     }
-    
+
     function closeMobileFAB() {
       isOpen = false;
       miniFabTrigger.classList.remove("active");
       miniFabTrigger.setAttribute("aria-expanded", "false");
       mobileFabActions.classList.remove("active");
-      
+
       // Update button text
       const span = miniFabTrigger.querySelector("span");
       if (span) span.textContent = "More";
     }
-    
+
     // Mobile FAB action handlers
     const mobileFabQuote = document.getElementById("mobileFabQuote");
     const mobileFabBook = document.getElementById("mobileFabBook");
     const mobileFabFeedback = document.getElementById("mobileFabFeedback");
     const mobileFabChat = document.getElementById("mobileFabChat");
-    
+
     if (mobileFabQuote) {
-      mobileFabQuote.addEventListener("click", function() {
+      mobileFabQuote.addEventListener("click", function () {
         closeMobileFAB();
         setTimeout(() => {
           const currentPath = window.location.pathname;
           const isIndexPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || !currentPath.includes('.html');
-          
+
           if (isIndexPage) {
             const quoteSection = document.querySelector('.hero-quote');
             if (quoteSection) {
@@ -621,18 +621,18 @@
         }, 100);
       });
     }
-    
+
     if (mobileFabBook) {
-      mobileFabBook.addEventListener("click", function() {
+      mobileFabBook.addEventListener("click", function () {
         closeMobileFAB();
         setTimeout(() => {
           window.location.href = '../pages/booking.html';
         }, 100);
       });
     }
-    
+
     if (mobileFabFeedback) {
-      mobileFabFeedback.addEventListener("click", function() {
+      mobileFabFeedback.addEventListener("click", function () {
         closeMobileFAB();
         setTimeout(() => {
           const feedbackModal = document.getElementById('feedbackModal');
@@ -642,9 +642,9 @@
         }, 100);
       });
     }
-    
+
     if (mobileFabChat) {
-      mobileFabChat.addEventListener("click", function() {
+      mobileFabChat.addEventListener("click", function () {
         closeMobileFAB();
         setTimeout(() => {
           const chatbotModal = document.getElementById('chatbotModal');
@@ -653,6 +653,68 @@
           }
         }, 100);
       });
+    }
+  }
+
+  function initFooterClock() {
+    const clockElement = document.getElementById('bottomBarClock');
+    if (!clockElement) return;
+
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const day = now.toLocaleDateString('en-US', { weekday: 'short' });
+      const date = now.getDate();
+      const month = now.toLocaleDateString('en-US', { month: 'short' });
+      clockElement.innerHTML = `<span class="clock-time">${time}</span><span class="clock-date">${day} ${date} ${month}</span>`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+
+  function bindFooterEvents(footer) {
+    // Handle Quote clicks (for both button and list link)
+    const quoteTriggers = footer.querySelectorAll('#bottomQuoteBtn, #quoteLink');
+    quoteTriggers.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        handleQuoteNavigation();
+      });
+    });
+
+    // Handle Chatbot click
+    const chatBtn = footer.querySelector('#bottomChatBtn');
+    if (chatBtn) {
+      chatBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const chatbotModal = document.getElementById('chatbot-modal-overlay');
+        if (chatbotModal) {
+          chatbotModal.classList.add('active');
+          chatbotModal.style.display = 'flex';
+          setTimeout(() => {
+            const input = document.getElementById('chatbot-input');
+            if (input) input.focus();
+          }, 300);
+        }
+      });
+    }
+  }
+
+  function handleQuoteNavigation() {
+    const currentPath = window.location.pathname;
+    const isIndexPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || !currentPath.includes('.html');
+    if (isIndexPage) {
+      const quoteSection = document.querySelector('.hero-quote');
+      if (quoteSection) {
+        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          const firstInput = document.getElementById('fromCity');
+          if (firstInput) firstInput.focus();
+        }, 500);
+      }
+    } else {
+      const basePath = currentPath.includes('/pages/') ? '../' : './';
+      window.location.href = basePath + 'index.html#quote';
     }
   }
 
@@ -665,7 +727,7 @@
     setTimeout(() => {
       try {
         stack.removeChild(t);
-      } catch (_) {}
+      } catch (_) { }
     }, 2500);
   }
 
@@ -675,76 +737,24 @@
 
     // Initialize footer search functionality
     initFooterSearch(footer);
-    
-    // Initialize mobile FAB
-    initMobileFAB();
 
-    // IntersectionObserver to toggle in-view state for animations & car
-    try {
-      const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              footer.classList.add("in-view");
-            } else {
-              footer.classList.remove("in-view");
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-      obs.observe(footer);
-    } catch (_) {}
+    // Initialize clock
+    initFooterClock();
 
-    // Accordion: allow only one open at a time
-    const headers = footer.querySelectorAll(
-      ".footer-accordion .accordion-header"
-    );
-    headers.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-        headers.forEach((h) => h.setAttribute("aria-expanded", "false"));
-        if (!expanded) {
-          btn.setAttribute("aria-expanded", "true");
-        }
-      });
-    });
+    // Bind Quote and Chatbot events
+    bindFooterEvents(footer);
 
-    // Footer collapse/expand toggle
+    // Minimal dynamic year update
+    const yearSpan = document.getElementById("current-year");
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Ensure footer is always expanded (no toggles needed for Cursor UI)
     const footerMain = document.getElementById("footer-main");
-    const toggleBtn = footer.querySelector(".footer-toggle");
-
-    function setCollapsed(collapsed) {
-      if (!footerMain) return;
-      if (collapsed) {
-        if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
-        footerMain.style.overflow = "hidden";
-        footerMain.style.maxHeight = "0px";
-      } else {
-        if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
-        footerMain.style.overflow = "hidden";
-        const h = footerMain.scrollHeight;
-        footerMain.style.maxHeight = h + "px";
-        setTimeout(() => {
-          footerMain.style.overflow = "";
-          footerMain.style.maxHeight = "";
-        }, 350);
-      }
-    }
-
     if (footerMain) {
-      footerMain.style.transition = "max-height 0.3s ease";
-    }
-    // Start collapsed on small screens to shorten vertical height
-    try {
-      if (window.innerWidth <= 640) setCollapsed(true);
-    } catch (_) {}
-    
-    if (toggleBtn) {
-      toggleBtn.addEventListener("click", () => {
-        const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
-        setCollapsed(expanded);
-      });
+      footerMain.style.maxHeight = "none";
+      footerMain.style.display = "block";
     }
 
     // Newsletter subscribe micro-toast

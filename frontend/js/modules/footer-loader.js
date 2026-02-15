@@ -22,7 +22,7 @@
     // Fetch footer.html instead of using hardcoded template
     const footerPath = isInPagesFolder ? '../components/footer.html' : './components/footer.html';
     console.log('Footer Loader: Attempting to fetch:', footerPath);
-    
+
     fetch(footerPath)
       .then(response => {
         console.log('Footer Loader: Fetch response status:', response.status);
@@ -48,19 +48,16 @@
         }
 
         console.log('Footer Loader: Loading additional components...');
-        
+
         // Load footer interaction script once
         loadFooterJS(isInPagesFolder);
-        
+
         // Load FAB (Floating Action Menu) script
         loadFABJS(isInPagesFolder);
-        
-        // Load Bottom Action Bar script
-        loadBottomActionBarJS(isInPagesFolder);
-        
+
         // Load Smart Scroll Button script
         loadScrollButtonJS(isInPagesFolder);
-        
+
         console.log('Footer Loader: All components loaded successfully');
       })
       .catch(err => {
@@ -75,17 +72,14 @@
         if (yearSpan) {
           yearSpan.textContent = new Date().getFullYear();
         }
-        loadFooterJS(isInPagesFolder);
-        loadFABJS(isInPagesFolder);
-        loadBottomActionBarJS(isInPagesFolder);
         loadScrollButtonJS(isInPagesFolder);
       });
   }
 
   function loadFooterCSS(isInPagesFolder) {
     const cssBasePath = isInPagesFolder ? '../css/components/' : './css/components/';
-    const cssFiles = ['footer.css', 'scroll-button.css?v=5', 'floating-action-menu.css?v=6', 'bottom-action-bar.css?v=4'];
-    
+    const cssFiles = ['footer.css', 'scroll-button.css?v=5', 'floating-action-menu.css?v=6'];
+
     cssFiles.forEach(cssFile => {
       const cssPath = cssBasePath + cssFile;
       // Check if CSS is already loaded (without version)
@@ -135,7 +129,7 @@
       console.log('FAB script already loaded');
       return;
     }
-    
+
     // Small delay to ensure HTML is in DOM
     setTimeout(() => {
       const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
@@ -143,10 +137,10 @@
       script.src = jsBasePath + 'floating-action-menu.js';
       script.id = 'fab-script';
       console.log('Loading FAB script from:', script.src);
-      script.onload = function() {
+      script.onload = function () {
         console.log('FAB script loaded successfully');
       };
-      script.onerror = function() {
+      script.onerror = function () {
         console.error('Failed to load FAB script from:', script.src);
       };
       document.body.appendChild(script);
@@ -159,7 +153,7 @@
       console.log('Bottom Action Bar script already loaded');
       return;
     }
-    
+
     // Small delay to ensure HTML is in DOM
     setTimeout(() => {
       const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
@@ -167,10 +161,10 @@
       script.src = jsBasePath + 'bottom-action-bar.js';
       script.id = 'bottom-action-bar-script';
       console.log('Loading Bottom Action Bar script from:', script.src);
-      script.onload = function() {
+      script.onload = function () {
         console.log('Bottom Action Bar script loaded successfully');
       };
-      script.onerror = function() {
+      script.onerror = function () {
         console.error('Failed to load Bottom Action Bar script from:', script.src);
       };
       document.body.appendChild(script);
@@ -189,13 +183,13 @@
       button.innerHTML = '<i class="fas fa-arrow-up"></i>';
       document.body.appendChild(button);
     }
-    
+
     const existing = document.getElementById('scroll-button-script');
     if (existing) {
       console.log('Scroll Button script already loaded');
       return;
     }
-    
+
     // Small delay to ensure HTML is in DOM
     setTimeout(() => {
       const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
@@ -203,10 +197,10 @@
       script.src = jsBasePath + 'scroll-button.js?v=4';
       script.id = 'scroll-button-script';
       console.log('Loading Scroll Button script from:', script.src);
-      script.onload = function() {
+      script.onload = function () {
         console.log('Scroll Button script loaded successfully');
       };
-      script.onerror = function() {
+      script.onerror = function () {
         console.error('Failed to load Scroll Button script from:', script.src);
       };
       document.body.appendChild(script);
@@ -214,8 +208,8 @@
   }
 
   // This is the single, correct function for your footer HTML
-function getFooterHTML() {
-  return `<footer class="footer" aria-label="Site footer">
+  function getFooterHTML() {
+    return `<footer class="footer" aria-label="Site footer">
   <div class="footer-accent" aria-hidden="true"></div>
   <button class="footer-toggle" aria-expanded="true" aria-controls="footer-main">
     <span class="toggle-label">Footer</span>
@@ -405,7 +399,7 @@ function getFooterHTML() {
     <i class="fas fa-phone-alt"></i>
   </a>
 </div>`;
-}
+  }
 
   function fixPathsForRootPage(container) {
     // Fix image paths
@@ -424,7 +418,7 @@ function getFooterHTML() {
       if (!currentHref || currentHref.startsWith('#') || currentHref.startsWith('http')) {
         return; // Skip anchors and external links
       }
-      
+
       if (currentHref.startsWith('../pages/')) {
         // Convert ../pages/ to ./pages/ for root pages
         link.setAttribute('href', currentHref.replace(/^\.\.\/pages\//, './pages/'));
@@ -443,28 +437,28 @@ function getFooterHTML() {
   } else {
     loadFooter();
   }
-  
+
   // Also load the component initializer as a safety mechanism
   function loadComponentInitializer() {
     const existing = document.getElementById('component-initializer-script');
     if (existing) return;
-    
+
     const path = window.location.pathname;
     const isInPagesFolder = path.includes('/pages/');
     const jsBasePath = isInPagesFolder ? '../js/modules/' : './js/modules/';
-    
+
     const script = document.createElement('script');
     script.src = jsBasePath + 'component-initializer.js';
     script.id = 'component-initializer-script';
-    script.onload = function() {
+    script.onload = function () {
       console.log('Component Initializer script loaded');
     };
     document.body.appendChild(script);
   }
-  
+
   // Load component initializer after a short delay
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       setTimeout(loadComponentInitializer, 100);
     });
   } else {

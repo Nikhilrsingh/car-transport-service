@@ -17,8 +17,6 @@
 
     // Check if components are already loaded (regardless of footer container)
     const fabContainer = document.querySelector('.fab-container');
-    const bottomBar = document.querySelector('.bottom-action-bar-fixed');
-    const scrollBtn = document.getElementById('smartScrollBtn');
     const chatbotModal = document.getElementById('chatbot-modal-overlay');
 
     const componentsLoaded = {
@@ -115,38 +113,6 @@
     console.log('Component Initializer: FAB component added');
   }
 
-  function addBottomActionBar() {
-    // Check again to prevent duplicates
-    if (document.querySelector('.bottom-action-bar-fixed')) {
-      console.log('Component Initializer: Bottom Action Bar already exists, skipping');
-      return;
-    }
-
-    console.log('Component Initializer: Adding Bottom Action Bar component');
-
-    const bottomBarHTML = `
-      <div class="bottom-action-bar-fixed">
-        <div class="bottom-bar-left">
-          <div class="bottom-bar-clock" id="bottomBarClock"></div>
-          <button class="bottom-bar-chat-icon" id="bottomChatBtn" aria-label="Open Chatbot" title="Chat with us">
-            <i class="fas fa-comments" aria-hidden="true"></i>
-          </button>
-        </div>
-        <a href="https://wa.me/919372693389" class="bottom-action-btn whatsapp" aria-label="Contact via WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <button id="bottomQuoteBtn" class="bottom-action-btn quote" aria-label="Get Quote">
-          Get Quote
-        </button>
-        <a href="tel:+919372693389" class="bottom-action-btn call" aria-label="Call Us">
-          <i class="fas fa-phone-alt"></i>
-        </a>
-      </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', bottomBarHTML);
-    console.log('Component Initializer: Bottom Action Bar added');
-  }
 
   function addScrollButton() {
     // Check again to prevent duplicates

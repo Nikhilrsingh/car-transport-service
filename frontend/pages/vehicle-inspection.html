@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vehicle Inspection Portal | Car Transport Service</title>
-  <meta name="description" content="Document vehicle condition with professional photo inspection before pickup and after delivery" />
+  <meta name="description"
+    content="Document vehicle condition with professional photo inspection before pickup and after delivery" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://nikhilrsingh.github.io/car-transport-service/pages/vehicle-inspection.html" />
   <base href="./" />
@@ -62,23 +63,17 @@
         </div>
 
         <form id="inspection-form" class="inspection-form">
-          
+
           <!-- Basic Information Grid -->
           <div class="form-section">
             <h3 class="section-title">Basic Information</h3>
             <div class="form-grid">
-              
+
               <div class="form-group">
                 <label for="vehicleNumber">
                   <i class="fas fa-car"></i> Vehicle Number
                 </label>
-                <input 
-                  type="text" 
-                  id="vehicleNumber" 
-                  name="vehicleNumber" 
-                  placeholder="e.g., MH12AB1234"
-                  required
-                />
+                <input type="text" id="vehicleNumber" name="vehicleNumber" placeholder="e.g., MH12AB1234" required />
               </div>
 
               <div class="form-group">
@@ -96,37 +91,21 @@
                 <label for="driverName">
                   <i class="fas fa-user"></i> Driver Name
                 </label>
-                <input 
-                  type="text" 
-                  id="driverName" 
-                  name="driverName" 
-                  placeholder="e.g., Rajesh Kumar"
-                />
+                <input type="text" id="driverName" name="driverName" placeholder="e.g., Rajesh Kumar" />
               </div>
 
               <div class="form-group">
                 <label for="customerName">
                   <i class="fas fa-user-tie"></i> Customer Name
                 </label>
-                <input 
-                  type="text" 
-                  id="customerName" 
-                  name="customerName" 
-                  placeholder="e.g., Amit Patel"
-                />
+                <input type="text" id="customerName" name="customerName" placeholder="e.g., Amit Patel" />
               </div>
 
               <div class="form-group">
                 <label for="odometerReading">
                   <i class="fas fa-tachometer-alt"></i> Odometer Reading (km)
                 </label>
-                <input 
-                  type="number" 
-                  id="odometerReading" 
-                  name="odometerReading" 
-                  placeholder="e.g., 25000"
-                  min="0"
-                />
+                <input type="number" id="odometerReading" name="odometerReading" placeholder="e.g., 25000" min="0" />
               </div>
 
               <div class="form-group">
@@ -149,10 +128,11 @@
           <!-- Photo Upload Section -->
           <div class="form-section">
             <h3 class="section-title">Vehicle Photos (6 Required)</h3>
-            <p class="section-description">Upload photos from different angles. Click on uploaded photos to add damage annotations.</p>
-            
+            <p class="section-description">Upload photos from different angles. Click on uploaded photos to add damage
+              annotations.</p>
+
             <div class="photos-grid">
-              
+
               <!-- Front Photo -->
               <div class="photo-slot" data-photo-type="front">
                 <div class="photo-upload-area">
@@ -307,13 +287,9 @@
               <label for="generalNotes">
                 <i class="fas fa-sticky-note"></i> General Observations
               </label>
-              <textarea 
-                id="generalNotes" 
-                name="generalNotes" 
-                rows="4" 
+              <textarea id="generalNotes" name="generalNotes" rows="4"
                 placeholder="Any additional notes about vehicle condition, damages, or special observations..."
-                maxlength="1000"
-              ></textarea>
+                maxlength="1000"></textarea>
               <small class="char-count">0 / 1000</small>
             </div>
           </div>
@@ -404,7 +380,7 @@
       <div class="how-it-works-section">
         <h2><i class="fas fa-lightbulb"></i> How It Works</h2>
         <div class="steps-grid">
-          
+
           <div class="step-card">
             <div class="step-icon">
               <i class="fas fa-camera"></i>
@@ -505,4 +481,3 @@
     <i class="fas fa-arrow-down"></i>
   </button>
 </body>
-
