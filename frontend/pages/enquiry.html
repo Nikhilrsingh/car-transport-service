@@ -33,6 +33,7 @@
 </head>
 
 <body>
+  <div id="scroll-progress"></div>
   <!-- Navbar Container - Loaded dynamically -->
   <div id="navbar-container"></div>
 
@@ -62,8 +63,10 @@
 
   <!-- MAIN CONTAINER -->
   <section class="enquiry-main-container">
-    <!-- ENQUIRY FORM -->
-    <div class="enquiry-form-container">
+    <!-- TOP ROW -->
+    <div class="top-row">
+      <!-- ENQUIRY FORM -->
+      <div class="enquiry-form-container">
       <!-- Progress Indicator -->
       <div class="form-progress">
         <div class="progress-bar">
@@ -74,10 +77,9 @@
 
       <form id="enquiryForm">
         <!-- STEP 1: Basic Information -->
-        <div class="form-step active" data-step="1">
+        <div class="form-step-active" data-step="1">
           <div class="step-header">
             <h3><i class="fas fa-user-circle"></i> Basic Information</h3>
-            <p>Tell us about yourself</p>
           </div>
 
           <div class="form-row">
@@ -101,7 +103,6 @@
               />
               <span class="validation-icon"></span>
               <div class="error-message"></div>
-              <div class="phone-format-hint">Format: 9372693389</div>
             </div>
           </div>
 
@@ -279,8 +280,8 @@
       </form>
     </div>
 
-    <!-- SIDEBAR -->
-    <div class="enquiry-sidebar">
+    <!-- SIDE WIDGETS -->
+    <div class="side-widgets">
       <!-- Operating Hours Widget -->
       <div class="hours-widget">
         <h3><i class="fas fa-clock"></i> Operating Hours</h3>
@@ -292,49 +293,26 @@
           <div class="response-time">
             <i class="fas fa-info-circle"></i> We typically respond within 2 hours
           </div>
-        </div>
-        <div style="color: #999; font-size: 0.9rem; line-height: 1.6;">
-          <p><strong>Mon - Fri:</strong> 8:00 AM - 10:00 PM</p>
-          <p><strong>Saturday:</strong> 9:00 AM - 8:00 PM</p>
-          <p><strong>Sunday:</strong> 9:00 AM - 6:00 PM</p>
-          <p style="color: #4CAF50;"><strong>Emergency:</strong> 24/7 Available</p>
-        </div>
-      </div>
-
-      <!-- FAQ Widget -->
-      <div class="faq-widget">
-        <h3><i class="fas fa-question-circle"></i> Quick FAQs</h3>
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <h4>How long does delivery take?</h4>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Within Maharashtra: 1-2 days, Interstate: 3-5 days, Pan-India: 5-7 days. Express delivery available.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <h4>Is insurance included?</h4>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Yes! All vehicles are fully insured during transit up to current market value.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <h4>What documents do I need?</h4>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>RC book, insurance documents, and valid ID proof. Additional permits for commercial vehicles.</p>
-          </div>
+          <ul class="hours-list">
+          <li>
+            <span class="day">Monday - Friday:</span>
+            <span>9:00 AM - 6:00 PM</span>
+          </li>
+          <li>
+            <span class="day">Saturday:</span>
+            <span>10:00 AM - 4:00 PM</span>
+          </li>
+          <li>
+            <span class="day">Sunday:</span>
+            <span>Closed</span>
+          </li>
+          <li>
+            <span class="day">Holidays:</span>
+            <span>Closed</span>
+          </li>
         </div>
       </div>
+
 
       <!-- Contact Alternatives Widget -->
       <div class="contact-widget">
@@ -369,6 +347,45 @@
             <p>hariharcarcarrier@gmail.com</p>
           </div>
         </a>
+      </div>
+    </div>
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="bottom-row">
+      <!-- FAQ Widget -->
+      <div class="faq-widget">
+        <h3><i class="fas fa-question-circle"></i> Quick FAQs</h3>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>How long does delivery take?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Within Maharashtra: 1-2 days, Interstate: 3-5 days, Pan-India: 5-7 days. Express delivery available.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>Is insurance included?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! All vehicles are fully insured during transit up to current market value.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>What documents do I need?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>RC book, insurance documents, and valid ID proof. Additional permits for commercial vehicles.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Trust Badges -->
@@ -488,7 +505,7 @@
   <button class="back-to-bottom" id="backToBottom">
     <i class="fas fa-arrow-down"></i>
   </button>
-
+<script src="../js/script.js"></script>
   <!-- 🚀 Floating Action Menu loaded via footer component -->
 </body>
 
