@@ -1,4 +1,4 @@
-:root{
+:root {
   --bg: #181818;
   --card: #222;
   --muted: #bbb;
@@ -6,105 +6,166 @@
   --accent-2: #ffac33;
   --surface: #292929;
   --text: #f8f8f8;
-  --glass-shadow: 0 8px 26px rgba(0,0,0,0.32);
+  --glass-shadow: 0 8px 26px rgba(0, 0, 0, 0.32);
 }
 
 /* Page base */
-body{
+body {
   background: var(--bg);
   color: var(--text);
   font-family: "Poppins", sans-serif;
   margin: 0;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.feedback-header{
-  text-align:center;
-  padding:2em 1em 1em 1em;
-}
-.feedback-header h1{
-  color:var(--accent);
-  margin-bottom:0.25em;
-  font-size:clamp(1.6rem,3vw,2.6rem);
-}
-.feedback-header p{
-  color:var(--muted);
-  font-size:1.02rem;
-  margin:0;
+.feedback-header {
+  text-align: center;
+  padding: 2em 1em 1em 1em;
 }
 
-.feedback-form-section{
-  display:flex;
-  justify-content:center;
-  margin:2.2em 0;
-  padding:0 12px;
+.feedback-header h1 {
+  color: var(--accent);
+  margin-bottom: 0.25em;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
 }
 
-.feedback-form{
-  background:var(--card);
-  border-radius:12px;
-  box-shadow:var(--glass-shadow);
-  padding:1.6rem;
-  width:640px;
-  max-width:98vw;
-  color:var(--text);
-}
-.feedback-form label{
-  display:block;
-  margin:0.8em 0 0.28em;
-  font-weight:600;
-  color:var(--text);
-  font-size:0.98rem;
+.feedback-header p {
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin: 0;
 }
 
-.enhanced-header{
-  text-align:center;
-  padding:48px 18px 32px;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:var(--text);
+.feedback-form-section {
+  display: flex;
+  justify-content: center;
+  margin: 2.2em 0;
+  padding: 0 12px;
 }
-.enhanced-header h1{font-size:clamp(1.4rem,3.2vw,2.2rem);margin-bottom:8px}
-.enhanced-header p{opacity:0.9;font-size:1rem}
 
-.feedback-form input,.feedback-form textarea{
-  width:100%;
-  margin-bottom:0.8em;
-  padding:0.72em 0.84em;
-  border-radius:8px;
-  border:1px solid transparent;
-  background:var(--surface);
-  color:var(--text);
-  font-size:1rem;
-  transition:box-shadow 0.18s ease, border-color 0.18s ease;
-  box-sizing:border-box;
+.feedback-form {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--glass-shadow);
+  padding: 1.6rem;
+  width: 640px;
+  max-width: 98vw;
+  color: var(--text);
 }
-.feedback-form textarea{min-height:100px;resize:vertical}
 
-.star-rating{font-size:1.4rem;color:var(--accent-2);margin-bottom:1em;display:inline-flex;gap:6px;align-items:center}
-
-.feedback-form button{
-  background:linear-gradient(135deg,var(--accent),#ff7a50);
-  color:#fff;
-  border:none;
-  font-size:1.03rem;
-  padding:0.72em 1.25em;
-  border-radius:10px;
-  cursor:pointer;
-  transition:transform 0.16s ease, box-shadow 0.16s ease;
-  width:100%;
-  font-weight:600;
+.feedback-form label {
+  display: block;
+  margin: 0.8em 0 0.28em;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.98rem;
 }
-.feedback-form button:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,99,71,0.12)}
-.feedback-form button:disabled{opacity:0.6;cursor:not-allowed}
 
-.feedback-form label.required::after{content:" *";color:var(--accent)}
+.enhanced-header {
+  text-align: center;
+  padding: 180px 20px 80px;
+  /* Increased top padding to clear navbar and bottom for better flow */
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: var(--text);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
 
-.feedback-form input:focus,.feedback-form textarea:focus{outline:none;border-color:rgba(255,99,71,0.95);box-shadow:0 6px 18px rgba(255,99,71,0.08)}
+.enhanced-header h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
 
-.star-rating i{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;cursor:pointer;transition:background 0.14s,transform 0.12s,color 0.12s;color:var(--accent-2)}
-.star-rating i:hover,.star-rating i:focus{background:rgba(255,172,51,0.08);transform:translateY(-3px)}
-.star-rating i.fa-solid{color:var(--accent)}
+.enhanced-header p {
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  margin-bottom: 0.8em;
+  padding: 0.72em 0.84em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+  box-sizing: border-box;
+}
+
+.feedback-form textarea {
+  min-height: 100px;
+  resize: vertical
+}
+
+.star-rating {
+  font-size: 1.4rem;
+  color: var(--accent-2);
+  margin-bottom: 1em;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center
+}
+
+.feedback-form button {
+  background: linear-gradient(135deg, var(--accent), #ff7a50);
+  color: #fff;
+  border: none;
+  font-size: 1.03rem;
+  padding: 0.72em 1.25em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+  width: 100%;
+  font-weight: 600;
+}
+
+.feedback-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.12)
+}
+
+.feedback-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed
+}
+
+.feedback-form label.required::after {
+  content: " *";
+  color: var(--accent)
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: rgba(255, 99, 71, 0.95);
+  box-shadow: 0 6px 18px rgba(255, 99, 71, 0.08)
+}
+
+.star-rating i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.14s, transform 0.12s, color 0.12s;
+  color: var(--accent-2)
+}
+
+.star-rating i:hover,
+.star-rating i:focus {
+  background: rgba(255, 172, 51, 0.08);
+  transform: translateY(-3px)
+}
+
+.star-rating i.fa-solid {
+  color: var(--accent)
+}
 
 /* ============================================
    CAROUSEL SECTION STYLES
@@ -135,7 +196,7 @@ body{
 .testimonial-card {
   background: linear-gradient(145deg, #252525 0%, #1e1e1e 100%);
   border-radius: 20px;
-  box-shadow: 0 15px 50px rgba(0,0,0,0.4), 0 2px 8px rgba(255,99,71,0.15);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(255, 99, 71, 0.15);
   padding: 2.5rem;
   color: var(--text);
   display: flex;
@@ -143,7 +204,7 @@ body{
   align-items: flex-start;
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(255,99,71,0.15);
+  border: 1px solid rgba(255, 99, 71, 0.15);
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
@@ -152,7 +213,7 @@ body{
 
 .testimonial-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 4px 12px rgba(255,99,71,0.25);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(255, 99, 71, 0.25);
 }
 
 .testimonial-images {
@@ -168,7 +229,7 @@ body{
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 6px 20px rgba(255,99,71,0.35);
+  box-shadow: 0 6px 20px rgba(255, 99, 71, 0.35);
   border: 3px solid var(--accent);
   flex-shrink: 0;
 }
@@ -178,8 +239,8 @@ body{
   height: 90px;
   object-fit: cover;
   border-radius: 12px;
-  border: 2px solid rgba(255,99,71,0.25);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  border: 2px solid rgba(255, 99, 71, 0.25);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
   transition: transform 0.3s ease;
 }
 
@@ -201,7 +262,7 @@ body{
   gap: 14px;
   flex-wrap: wrap;
   padding-bottom: 10px;
-  border-bottom: 2px solid rgba(255,99,71,0.2);
+  border-bottom: 2px solid rgba(255, 99, 71, 0.2);
 }
 
 .testimonial-name {
@@ -235,7 +296,7 @@ body{
    COMMENTS SECTION
    ============================================ */
 .comments-section {
-  background: rgba(41,41,41,0.7);
+  background: rgba(41, 41, 41, 0.7);
   border-radius: 12px;
   padding: 1.2rem 1.4rem;
   margin-top: 14px;
@@ -243,7 +304,7 @@ body{
   backdrop-filter: blur(12px);
 }
 
-.comments-section > b {
+.comments-section>b {
   display: block;
   color: var(--accent);
   font-size: 1rem;
@@ -260,13 +321,13 @@ body{
 }
 
 .comment {
-  background: rgba(39,38,38,0.85);
+  background: rgba(39, 38, 38, 0.85);
   padding: 0.8em 1.1em;
   border-radius: 10px;
   color: #ececec;
   font-size: 1rem;
   line-height: 1.6;
-  border-left: 3px solid rgba(255,99,71,0.35);
+  border-left: 3px solid rgba(255, 99, 71, 0.35);
 }
 
 .comment-author {
@@ -287,8 +348,8 @@ body{
   flex: 1;
   padding: 0.7em 1.1em;
   border-radius: 10px;
-  border: 1px solid rgba(255,99,71,0.25);
-  background: rgba(51,51,51,0.85);
+  border: 1px solid rgba(255, 99, 71, 0.25);
+  background: rgba(51, 51, 51, 0.85);
   color: var(--text);
   font-size: 0.98rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -297,14 +358,14 @@ body{
 .comment-form input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(255,99,71,0.15);
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.15);
 }
 
 .comment-form button {
   padding: 0.7em 1.4em;
   border-radius: 10px;
   border: none;
-  background: linear-gradient(135deg,var(--accent),#ff7a50);
+  background: linear-gradient(135deg, var(--accent), #ff7a50);
   color: #fff;
   cursor: pointer;
   font-weight: 700;
@@ -314,7 +375,7 @@ body{
 
 .comment-form button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255,99,71,0.35);
+  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.35);
 }
 
 /* ============================================
@@ -327,7 +388,7 @@ body{
   width: 55px !important;
   height: 55px !important;
   border-radius: 50%;
-  box-shadow: 0 6px 20px rgba(255,99,71,0.3);
+  box-shadow: 0 6px 20px rgba(255, 99, 71, 0.3);
   transition: all 0.3s ease;
 }
 
@@ -335,7 +396,7 @@ body{
 .swiper-button-prev:hover {
   background: linear-gradient(135deg, #ff7a50, var(--accent));
   transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(255,99,71,0.45);
+  box-shadow: 0 8px 25px rgba(255, 99, 71, 0.45);
 }
 
 .swiper-button-next::after,
@@ -354,7 +415,7 @@ body{
 .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
-  background: rgba(255,255,255,0.4) !important;
+  background: rgba(255, 255, 255, 0.4) !important;
   opacity: 1 !important;
   transition: all 0.3s ease;
 }
@@ -459,7 +520,7 @@ body[data-theme="light"] {
 }
 
 body[data-theme="light"] .feedback-header {
-  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+  background: linear-gradient(135deg, #ff8c5a 0%, #ff6b35 100%) !important;
 }
 
 body[data-theme="light"] .feedback-header h1 {
@@ -471,7 +532,7 @@ body[data-theme="light"] .feedback-header p {
 }
 
 body[data-theme="light"] .enhanced-header {
-  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+  background: linear-gradient(135deg, #ff8c5a 0%, #ff6b35 100%) !important;
 }
 
 body[data-theme="light"] .feedback-form {
@@ -504,7 +565,7 @@ body[data-theme="light"] .feedback-form textarea::placeholder {
 body[data-theme="light"] .testimonial-card {
   background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%) !important;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(255, 99, 71, 0.12) !important;
-  border: 1px solid rgba(255,99,71,0.2) !important;
+  border: 1px solid rgba(255, 99, 71, 0.2) !important;
 }
 
 body[data-theme="light"] .testimonial-card:hover {
@@ -520,11 +581,11 @@ body[data-theme="light"] .testimonial-time {
 }
 
 body[data-theme="light"] .testimonial-header {
-  border-bottom-color: rgba(255,99,71,0.25) !important;
+  border-bottom-color: rgba(255, 99, 71, 0.25) !important;
 }
 
 body[data-theme="light"] .comments-section {
-  background: rgba(248,249,250,0.9) !important;
+  background: rgba(248, 249, 250, 0.9) !important;
   border-left-color: var(--accent) !important;
 }
 
@@ -532,7 +593,7 @@ body[data-theme="light"] .comment {
   background: #ffffff !important;
   color: #333 !important;
   border: 1px solid #eee !important;
-  border-left: 3px solid rgba(255,99,71,0.45) !important;
+  border-left: 3px solid rgba(255, 99, 71, 0.45) !important;
 }
 
 body[data-theme="light"] .comment-form input {
@@ -547,5 +608,5 @@ body[data-theme="light"] .comment-form input:focus {
 }
 
 body[data-theme="light"] .swiper-pagination-bullet {
-  background: rgba(0,0,0,0.3) !important;
+  background: rgba(0, 0, 0, 0.3) !important;
 }
