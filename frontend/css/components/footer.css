@@ -3,7 +3,8 @@ footer.footer,
 #footer-container footer.footer,
 #footer-container .footer {
   color: #e0e0e0;
-  padding: 16px 0 0;
+  padding: 120px 0 0;
+  /* Space for road & truck (62px) */
   border-top: 3px solid #ff6347;
   position: relative;
   overflow: hidden;
@@ -19,7 +20,9 @@ footer.footer,
   margin: 0;
 }
 
-#footer-main{
+#footer-main {
+  margin-top: 80px !important;
+  /* Separation from road animation */
   margin-left: 0;
   width: 100%;
   max-width: 100%;
@@ -33,7 +36,8 @@ footer .container {
 /* Footer Content Grid - PERFECT EQUAL SIZES */
 .footer-content.footer-grid {
   max-width: 100%;
-  margin: 0 auto;
+  margin: 60px auto 0;
+  /* Forced space to clear road animation */
   padding: 0 40px 4px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -61,9 +65,11 @@ footer .container {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 360px; /* Fixed equal height */
+  min-height: 320px;
+  /* Reduced from 360px per user request */
   box-sizing: border-box;
-  overflow: hidden; /* Prevent content overflow */
+  overflow: hidden;
+  /* Prevent content overflow */
 }
 
 /* Ensure all cards animate together */
@@ -71,15 +77,19 @@ footer .container {
   opacity: 1;
   transform: translateY(0);
 }
+
 .footer.in-view .footer-card:nth-child(1) {
   transition-delay: 0.05s;
 }
+
 .footer.in-view .footer-card:nth-child(2) {
   transition-delay: 0.15s;
 }
+
 .footer.in-view .footer-card:nth-child(3) {
   transition-delay: 0.25s;
 }
+
 .footer.in-view .footer-card:nth-child(4) {
   transition-delay: 0.35s;
 }
@@ -89,12 +99,10 @@ footer .container {
   position: absolute;
   inset: 0 0 auto 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.12),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.12),
+      transparent);
   opacity: 0.6;
 }
 
@@ -130,6 +138,7 @@ footer .container {
 .accordion-icon {
   transition: transform 0.25s ease;
 }
+
 .footer-accordion .accordion-header[aria-expanded="true"] .accordion-icon {
   transform: rotate(180deg);
 }
@@ -143,7 +152,7 @@ footer .container {
   width: 100%;
 }
 
-.footer-accordion .accordion-header[aria-expanded="true"] + .accordion-panel {
+.footer-accordion .accordion-header[aria-expanded="true"]+.accordion-panel {
   display: flex;
 }
 
@@ -151,18 +160,22 @@ footer .container {
 .accordion-panel.two-col {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px 16px; /* Reduced gap */
+  gap: 8px 16px;
+  /* Reduced gap */
   height: 100%;
   width: 100%;
 }
+
 .accordion-panel.two-col ul {
   padding-right: 0;
   margin: 0;
   width: 100%;
 }
-.accordion-panel.two-col ul + ul {
+
+.accordion-panel.two-col ul+ul {
   border-left: 1px solid rgba(255, 255, 255, 0.08);
-  padding-left: 16px; /* Reduced padding */
+  padding-left: 16px;
+  /* Reduced padding */
 }
 
 /* Desktop: Always show panels and make headers non-clickable */
@@ -173,14 +186,16 @@ footer .container {
     gap: 8px;
     height: 100%;
   }
+
   .footer-accordion .accordion-header {
     cursor: default;
     pointer-events: none;
   }
+
   .footer-accordion .accordion-header .accordion-icon {
     display: none;
   }
-  
+
   .footer-links-card .accordion-header,
   .footer-cities .accordion-header,
   .footer-contact .accordion-header {
@@ -467,7 +482,7 @@ footer .container {
 .cities-search-container {
   position: relative;
   display: flex;
-    justify-content: center;
+  justify-content: center;
   margin-bottom: 15px;
   width: 100%;
 }
@@ -481,8 +496,8 @@ footer .container {
   border-radius: 8px;
   padding: 6px 10px;
   transition: all 0.3s ease;
-      width: 60%;
-    height: 40px;
+  width: 60%;
+  height: 40px;
 }
 
 .cities-search-input:focus-within {
@@ -634,6 +649,7 @@ footer.footer,
 .link-underline {
   position: relative;
 }
+
 .link-underline::after {
   content: "";
   position: absolute;
@@ -644,6 +660,7 @@ footer.footer,
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   transition: width 0.25s ease, left 0.25s ease;
 }
+
 .link-underline:hover::after {
   width: 100%;
   left: 0;
@@ -655,6 +672,7 @@ footer.footer,
   min-height: 0;
   margin-top: 8px;
 }
+
 .toast-stack .toast {
   position: absolute;
   right: 0;
@@ -668,11 +686,13 @@ footer.footer,
   animation: toastIn 220ms ease both;
   font-size: 0.85rem;
 }
+
 @keyframes toastIn {
   from {
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -689,14 +709,15 @@ footer.footer,
 }
 
 .footer-bottom-content {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-wrap: nowrap;
+  /* Keep items in one line */
+  gap: 20px;
   font-size: 0.8rem;
   color: var(--muted);
 }
@@ -704,6 +725,7 @@ footer.footer,
 .footer-bottom-links {
   display: flex;
   gap: 15px;
+  flex: 1;
 }
 
 .footer-bottom-links a {
@@ -711,6 +733,7 @@ footer.footer,
   text-decoration: none;
   transition: color 0.2s;
   font-size: 0.8rem;
+  white-space: nowrap;
 }
 
 .footer-bottom-links a:hover {
@@ -719,23 +742,29 @@ footer.footer,
 
 .payment-methods {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
+  justify-content: flex-end;
+  flex: 1;
 }
 
 .payment-methods i {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--muted);
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.2s;
 }
 
 .payment-methods i:hover {
   color: var(--accent);
+  transform: translateY(-2px);
 }
 
 .copyright {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  text-align: center;
+  flex: 1;
+  white-space: nowrap;
 }
 
 /* Road & Car Animation */
@@ -758,13 +787,11 @@ footer.footer,
   left: 0;
   width: 100%;
   height: 2px;
-  background: repeating-linear-gradient(
-    90deg,
-    #fff,
-    #fff 20px,
-    transparent 20px,
-    transparent 40px
-  );
+  background: repeating-linear-gradient(90deg,
+      #fff,
+      #fff 20px,
+      transparent 20px,
+      transparent 40px);
   transform: translateY(-50%);
 }
 
@@ -791,6 +818,7 @@ footer.footer,
   0% {
     transform: translateX(-70px);
   }
+
   100% {
     transform: translateX(200vw);
   }
@@ -801,16 +829,19 @@ footer.footer,
 }
 
 @keyframes bob {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-3px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .car-carrier-animation,
   .moving-car-carrier {
     animation: none !important;
@@ -1050,18 +1081,18 @@ footer.footer,
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  
+
   .footer-card {
     min-height: auto;
     height: auto;
   }
-  
+
   .footer-bottom-content {
     flex-direction: column;
     text-align: center;
     gap: 6px;
   }
-  
+
   .cities-search-results {
     position: fixed;
     top: 50%;
@@ -1071,11 +1102,12 @@ footer.footer,
     max-height: 60vh;
     z-index: 1000;
   }
-  
+
   .mini-sticky-footer {
     display: flex;
   }
 }
+
 .site-footer {
   background: var(--footer-bg, #0f1113);
   color: #fff;
@@ -1240,22 +1272,52 @@ body[data-theme="light"] .search-clear:hover {
 }
 
 
-.popular-cities ul.footer-links li:nth-child(1) { animation-delay: 0.05s; }
-.popular-cities ul.footer-links li:nth-child(2) { animation-delay: 0.1s; }
-.popular-cities ul.footer-links li:nth-child(3) { animation-delay: 0.15s; }
-.popular-cities ul.footer-links li:nth-child(4) { animation-delay: 0.2s; }
-.popular-cities ul.footer-links li:nth-child(5) { animation-delay: 0.25s; }
-.popular-cities ul.footer-links li:nth-child(6) { animation-delay: 0.3s; }
-.popular-cities ul.footer-links li:nth-child(7) { animation-delay: 0.35s; }
-.popular-cities ul.footer-links li:nth-child(8) { animation-delay: 0.4s; }
-.popular-cities ul.footer-links li:nth-child(9) { animation-delay: 0.45s; }
-.popular-cities ul.footer-links li:nth-child(10) { animation-delay: 0.5s; }
+.popular-cities ul.footer-links li:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.popular-cities ul.footer-links li:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.popular-cities ul.footer-links li:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.popular-cities ul.footer-links li:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.popular-cities ul.footer-links li:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.popular-cities ul.footer-links li:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.popular-cities ul.footer-links li:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+.popular-cities ul.footer-links li:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+.popular-cities ul.footer-links li:nth-child(9) {
+  animation-delay: 0.45s;
+}
+
+.popular-cities ul.footer-links li:nth-child(10) {
+  animation-delay: 0.5s;
+}
 
 @keyframes fadeInCity {
   from {
     opacity: 0;
     transform: translateY(-5px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1365,7 +1427,8 @@ body[data-theme="light"] .search-clear:hover {
   padding: 4px;
   transition: color 0.2s ease, background 0.2s ease;
   flex-shrink: 0;
-  display: none; /* Hidden by default */
+  display: none;
+  /* Hidden by default */
   align-items: center;
   justify-content: center;
   width: 20px;
@@ -1388,11 +1451,12 @@ body[data-theme="light"] .search-clear:hover {
   .cities-search-input {
     width: 100% !important;
   }
-  
+
   .cities-search-container {
     justify-content: stretch;
   }
 }
+
 .copyright {
   text-align: center;
   width: 100%;
