@@ -7,7 +7,7 @@
   <title>Our Blog | Harihar Car Carriers</title>
   <base href="./" />
   <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
-  
+
   <!-- Core Styles -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/components/navbar.css" />
@@ -16,15 +16,20 @@
   <link rel="stylesheet" href="../css/components/footer.css" />
   <link rel="stylesheet" href="../css/components/back-to-top-button.css" />
   <link rel="stylesheet" href="../css/components/floating-button.css" />
-  
+
   <!-- New Blog Styles -->
   <link rel="stylesheet" href="../css/pages/blog.css">
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
-      /* Temporary overrides until fully migrated */
-      body { background-color: #1a1a1a; color: white; margin: 0; font-family: "Poppins", sans-serif; }
+    /* Temporary overrides until fully migrated */
+    body {
+      background-color: #1a1a1a;
+      color: white;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+    }
   </style>
 </head>
 
@@ -35,29 +40,32 @@
 
   <!-- HERO -->
   <section class="blog-hero">
-    <h1>Our Blog</h1>
-    <p>Explore updates, transport tips, and expert insights from Harihar Car Carriers.</p>
-  </section>
+    <div class="hero-content">
+      <h1>Our Blog</h1>
+      <p>Explore updates, transport tips, and expert insights from Harihar Car Carriers.</p>
+    </div>
 
-  <!-- UNIFIED HEADER CONTROLS (New Design) -->
-  <div class="blog-controls-header">
+    <!-- UNIFIED HEADER CONTROLS (Inside Hero Now) -->
+    <div class="blog-controls-header">
       <!-- Search Bar -->
       <div class="search-bar-container">
-          <input type="text" id="blogSearch" class="blog-search-input" placeholder="Search for tips, guides, or news..." autocomplete="off">
-          <button class="search-icon-btn"><i class="fas fa-search"></i></button>
+        <input type="text" id="blogSearch" class="blog-search-input" placeholder="Search for tips, guides, or news..."
+          autocomplete="off">
+        <button class="search-icon-btn"><i class="fas fa-search"></i></button>
       </div>
 
       <!-- Pill Categories -->
       <div class="category-pills" id="categoryPills">
-          <!-- Populated by JS -->
+        <!-- Populated by JS -->
       </div>
-  </div>
+    </div>
+  </section>
 
   <!-- MAIN GRID (No Sidebar) -->
   <main class="blog-main">
-      <div class="blog-grid" id="blog-grid">
-          <!-- Cards injected by JS -->
-      </div>
+    <div class="blog-grid" id="blog-grid">
+      <!-- Cards injected by JS -->
+    </div>
   </main>
 
   <!-- FOOTER -->
@@ -66,7 +74,7 @@
   <!-- SCRIPTS -->
   <!-- 1. Data Source -->
   <script type="module" src="../js/data/blog-data.js"></script>
-  
+
   <!-- 2. Logic -->
   <script type="module" src="../js/modules/blog.js"></script>
 
@@ -80,4 +88,5 @@
   <script src="../js/modules/search.js"></script>
 
 </body>
+
 </html>

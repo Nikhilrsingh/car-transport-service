@@ -45,44 +45,81 @@ body[data-theme="dark"] {
   --blog-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* 2. BASE LAYOUT */
-.blog-hero {
-  text-align: center;
-  padding: 80px 20px 40px;
-  /* Reduced top padding slightly for better spacing */
-  background: linear-gradient(135deg, rgba(255, 99, 71, 0.15), rgba(0, 0, 0, 0));
+/* Base body styling so all sections inherit colors */
+body {
+  background: var(--blog-bg);
+  color: var(--blog-text);
 }
 
-body[data-theme="light"] .blog-hero {
-  background: linear-gradient(135deg, rgba(255, 99, 71, 0.08), rgba(255, 255, 255, 0));
+/* 2. BASE LAYOUT */
+.blog-hero {
+  position: relative;
+  padding: 180px 20px 120px !important;
+  /* Increased bottom padding for more space */
+  background: linear-gradient(135deg, #ff8c5a 0%, #ff6b35 100%) !important;
+  text-align: center !important;
+  color: white !important;
+  overflow: hidden;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.blog-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.15)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;
+  background-size: cover;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.blog-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin-bottom: 30px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 15px;
 }
 
 .blog-hero h1 {
-  font-size: 3rem;
-  background: linear-gradient(135deg, #ff6347, #ff4500);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1px;
+  font-size: clamp(2.2rem, 5vw, 3.2rem) !important;
+  font-weight: 600 !important;
+  color: white !important;
+  margin-bottom: 0;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  text-shadow: none !important;
 }
 
 .blog-hero p {
-  color: var(--blog-muted);
-  font-size: 1.1rem;
-  max-width: 700px;
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-size: 1.15rem;
+  max-width: 600px;
   margin: 0 auto;
 }
 
 /* 3. CONTROLS HEADER */
 .blog-controls-header {
+  position: relative;
+  z-index: 2;
+  width: 100%;
   max-width: 1200px;
-  margin: 40px auto 60px;
-  /* Increased bottom margin for breathing room */
+  margin: 10px auto 0;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 35px;
-  /* Increased gap between search and pills */
+  gap: 25px;
   align-items: center;
 }
 
@@ -95,25 +132,19 @@ body[data-theme="light"] .blog-hero {
 
 .blog-search-input {
   width: 100%;
-  padding: 20px 60px 20px 30px;
-  /* Larger padding for "perfect" feel */
+  padding: 18px 60px 18px 30px;
   border-radius: 50px;
-  border: 1px solid transparent;
-  background: var(--blog-input-bg);
-  color: var(--blog-input-text);
-  font-size: 1.15rem;
+  border: none !important;
+  background: white !important;
+  color: #333 !important;
+  font-size: 1.1rem;
   transition: all 0.3s ease;
-  box-shadow: var(--blog-shadow);
-}
-
-body[data-theme="light"] .blog-search-input {
-  border: 1px solid #e0e0e0;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15) !important;
 }
 
 .blog-search-input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.25);
-  border-color: var(--orange);
+  box-shadow: 0 8px 30px rgba(255, 107, 53, 0.25) !important;
 }
 
 .search-icon-btn {
@@ -156,20 +187,20 @@ body[data-theme="light"] .blog-search-input {
 .pill {
   padding: 10px 24px;
   border-radius: 50px;
-  background: transparent;
-  /* Transparent by default */
-  color: var(--blog-muted);
-  font-size: 1rem;
-  font-weight: 600;
+  background: white !important;
+  color: #333 !important;
+  font-size: 0.95rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid var(--blog-muted);
-  /* Outline border */
+  border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   gap: 10px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* Better visibility */
 }
 
 .card-meta {
@@ -267,7 +298,8 @@ body[data-theme="light"] .pill {
 
 /* 4. BLOG GRID - CENTERED */
 .blog-main {
-  padding: 0 20px 60px;
+  padding: 80px 20px 100px;
+  /* Increased top padding significantly for extra space */
   max-width: 1400px;
   margin: auto;
 }
@@ -281,26 +313,29 @@ body[data-theme="light"] .pill {
 
 /* CARD STYLES */
 .card {
-  background: var(--blog-card-bg);
+  background: rgba(255, 107, 53, 0.05) !important;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: var(--blog-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   position: relative;
   width: 380px;
   max-width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 107, 53, 0.1);
+  border-left: 6px solid #ff6347;
 }
 
 body[data-theme="light"] .card {
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #fffafa !important;
+  border-color: rgba(255, 107, 53, 0.15);
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(255, 107, 53, 0.15);
+  border-color: #ff6347;
 }
 
 /* BOOKMARK BUTTON */
@@ -418,6 +453,7 @@ body[data-theme="light"] .card {
   color: var(--blog-muted);
   line-height: 1.6;
   display: -webkit-box;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
