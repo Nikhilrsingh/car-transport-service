@@ -123,6 +123,7 @@
   <link rel="stylesheet" href="css/components/review-stats.css" />
   <link rel="stylesheet" href="css/components/toast.css" />
   <link rel="stylesheet" href="css/pages/reviews.css" />
+  <link rel="stylesheet" href="css/components/feedback.css" />
   <link rel="stylesheet" href="css/components/navbar.css?v=12" />
   <link rel="stylesheet" href="css/components/middle-navbar.css?v=2" />
   <link rel="stylesheet" href="css/components/footer.css" />
@@ -551,32 +552,184 @@
 
 
   <!-- Customer Reviews Section -->
-  <section class="customer-reviews-section" id="customer-reviews">
-    <div class="container">
-      <div class="featured-reviews-header fade-in">
-        <div>
-          <h2 class="featured-reviews-title">What Our Customers Say</h2>
-          <p style="color: #999; margin-top: 8px;">Real experiences from real customers</p>
+  <section class="premium-reviews-section" id="customer-reviews">
+    <div class="reviews-container">
+      <!-- Rating Summary (Left) -->
+      <div class="rating-summary">
+        <h2 class="reviews-title">What Our Customers Say</h2>
+        <p class="reviews-subtitle">Real experiences from real customers</p>
+        
+        <div class="rating-overview">
+          <div class="overall-rating">
+            <div class="rating-number">4.5</div>
+            <div class="rating-max">/5.0</div>
+          </div>
+          <div class="stars-display">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
         </div>
-        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-          <button id="writeReviewBtn" class="write-review-btn">✍️ Write a Review</button>
-          <a href="services.html#reviews" class="view-all-reviews-btn">View All Reviews</a>
+
+        <div class="review-count">Based on 12 reviews</div>
+
+        <!-- Rating Breakdown -->
+        <div class="rating-breakdown">
+          <div class="rating-bar">
+            <span class="rating-label">
+              <i class="fas fa-star"></i> 5
+            </span>
+            <div class="bar-container">
+              <div class="bar-fill" style="width: 58%"></div>
+            </div>
+            <span class="rating-percentage">58% (7)</span>
+          </div>
+          
+          <div class="rating-bar">
+            <span class="rating-label">
+              <i class="fas fa-star"></i> 4
+            </span>
+            <div class="bar-container">
+              <div class="bar-fill" style="width: 33%"></div>
+            </div>
+            <span class="rating-percentage">33% (4)</span>
+          </div>
+          
+          <div class="rating-bar">
+            <span class="rating-label">
+              <i class="fas fa-star"></i> 3
+            </span>
+            <div class="bar-container">
+              <div class="bar-fill" style="width: 8%"></div>
+            </div>
+            <span class="rating-percentage">8% (1)</span>
+          </div>
+          
+          <div class="rating-bar">
+            <span class="rating-label">
+              <i class="fas fa-star"></i> 2
+            </span>
+            <div class="bar-container">
+              <div class="bar-fill" style="width: 0%"></div>
+            </div>
+            <span class="rating-percentage">0% (0)</span>
+          </div>
+          
+          <div class="rating-bar">
+            <span class="rating-label">
+              <i class="fas fa-star"></i> 1
+            </span>
+            <div class="bar-container">
+              <div class="bar-fill" style="width: 0%"></div>
+            </div>
+            <span class="rating-percentage">0% (0)</span>
+          </div>
         </div>
+
+        <button class="cta-button">Write a Review</button>
+        <button class="cta-button secondary">View All Reviews</button>
       </div>
 
-      <!-- Review Stats & Featured Reviews Grid -->
-      <div class="reviews-grid fade-in" style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-top: 32px;">
-        <!-- Stats Sidebar -->
-        <div id="homeReviewStats">
-          <!-- Stats will be loaded here -->
+      <!-- Review Cards (Right) -->
+      <div class="review-cards-container">
+        <!-- Review Card 1 -->
+        <div class="premium-review-card">
+          <div class="card-header">
+            <div class="reviewer-info">
+              <img src="assets/images/gallery-1.jpg" alt="Rahul Sharma" class="reviewer-avatar">
+              <div class="reviewer-meta">
+                <h3 class="reviewer-name">Rahul Sharma</h3>
+                <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+              </div>
+            </div>
+            <span class="review-date">1 week ago</span>
+          </div>
+          
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span class="rating-text">5.0</span>
+          </div>
+
+          <h4 class="review-title">Excellent Service!</h4>
+          
+          <div class="review-content">
+            <p>The car transport service was exceptional. My vehicle arrived on time and in perfect condition. Highly recommend Harihar Carriers!</p>
+          </div>
+
+          <div class="review-footer">
+            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
+          </div>
         </div>
 
-        <!-- Featured Reviews -->
-        <div class="featured-reviews-list" id="homeFeaturedReviews">
-          <!-- Top reviews will be loaded here -->
-          <div class="reviews-empty" style="padding: 40px 20px; text-align: center;">
-            <div class="reviews-empty-icon">⭐</div>
-            <h3 class="reviews-empty-title">Loading reviews...</h3>
+        <!-- Review Card 2 -->
+        <div class="premium-review-card">
+          <div class="card-header">
+            <div class="reviewer-info">
+              <img src="assets/images/gallery-3.jpg" alt="Priya Patel" class="reviewer-avatar">
+              <div class="reviewer-meta">
+                <h3 class="reviewer-name">Priya Patel</h3>
+                <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+              </div>
+            </div>
+            <span class="review-date">1 week ago</span>
+          </div>
+          
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span class="rating-text">4.0</span>
+          </div>
+
+          <h4 class="review-title">Great Experience</h4>
+          
+          <div class="review-content">
+            <p>Good service with timely delivery. The pickup and drop-off were smooth. Would recommend to others looking for vehicle transport.</p>
+          </div>
+
+          <div class="review-footer">
+            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
+          </div>
+        </div>
+
+        <!-- Review Card 3 -->
+        <div class="premium-review-card">
+          <div class="card-header">
+            <div class="reviewer-info">
+              <img src="assets/images/gallery-5.jpg" alt="Amit Kumar" class="reviewer-avatar">
+              <div class="reviewer-meta">
+                <h3 class="reviewer-name">Amit Kumar</h3>
+                <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+              </div>
+            </div>
+            <span class="review-date">2 weeks ago</span>
+          </div>
+          
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span class="rating-text">5.0</span>
+          </div>
+
+          <h4 class="review-title">Professional & Reliable</h4>
+          
+          <div class="review-content">
+            <p>Excellent attention to detail. The team was professional, courteous, and kept me informed throughout the entire process. Exceeded expectations!</p>
+          </div>
+
+          <div class="review-footer">
+            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
           </div>
         </div>
       </div>

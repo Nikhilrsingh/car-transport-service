@@ -267,48 +267,55 @@ export function createReviewCardHTML(review, options = {}) {
   const displayComment = shouldTruncate ? review.comment.substring(0, truncateLength) + '...' : review.comment;
 
   return `
-    <div class="review-card" data-review-id="${review._id}">
-      <div class="review-header">
-        <div class="review-avatar-placeholder">${initials}</div>
-        <div class="review-header-content">
-          <div class="review-author">
-            <h4 class="review-author-name">${review.user?.name || 'Anonymous'}</h4>
-            ${review.isVerified ? '<span class="review-verified-badge"><span class="icon">✓</span> Verified</span>' : ''}
+    <div class="premium-review-card" data-review-id="${review._id}">
+      <div class="card-header">
+        <div class="reviewer-info">
+          <div class="review-avatar-placeholder">${initials}</div>
+          <div class="reviewer-meta">
+            <h3 class="reviewer-name">${review.user?.name || 'Anonymous'}</h3>
+            ${review.isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
           </div>
-          <div class="review-date">${timeAgo}</div>
         </div>
+        <span class="review-date">${timeAgo}</span>
       </div>
       
       <div class="review-rating">
-        <div class="star-rating size-small">
-          ${Array.from(
+        ${Array.from(
     { length: 5 },
-    (_, i) => `<span class="star ${i < review.rating ? 'filled' : ''}">${i < review.rating ? '★' : '☆'}</span>`
+    (_, i) => `<i class="fas fa-star" style="color: ${i < review.rating ? '#ffac33' : 'rgba(255,255,255,0.2)'}"></i>`
   ).join('')}
-        </div>
-        <span class="review-rating-number">${review.rating}.0</span>
+        <span class="rating-text">${review.rating}.0</span>
       </div>
       
-      ${review.title ? `<h5 class="review-title">${review.title}</h5>` : ''}
+      ${review.title ? `<h4 class="review-title">${review.title}</h4>` : ''}
       
-      <p class="review-comment ${shouldTruncate ? 'truncated' : ''}" data-full-comment="${review.comment}">
-        ${displayComment}
-      </p>
-      ${shouldTruncate ? '<a href="#" class="review-read-more">Read more</a>' : ''}
-      
+      <div class="review-content">
+        <p class="review-comment ${shouldTruncate ? 'truncated' : ''}" data-full-comment="${review.comment}">
+          ${displayComment}
+        </p>
+        ${shouldTruncate ? '<a href="#" class="review-read-more">Read more</a>' : ''}
+        <div class="review-loader">
+          <div class="loader-line"></div>
+          <div class="loader-line"></div>
+          <div class="loader-line short"></div>
+        </div>
+      </div>
+
       ${showActions
       ? `
         <div class="review-footer">
-          <div class="review-helpful">
-            ${review.helpfulCount > 0 ? `👍 ${review.helpfulCount} helpful` : ''}
-          </div>
+          <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
           <div class="review-actions">
             <button class="review-action-btn edit-review-btn" data-review-id="${review._id}">✏️ Edit</button>
             <button class="review-action-btn delete delete-review-btn" data-review-id="${review._id}">🗑️ Delete</button>
           </div>
         </div>
       `
-      : ''
+      : `
+        <div class="review-footer">
+          <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
+        </div>
+      `
     }
     </div>
   `;
