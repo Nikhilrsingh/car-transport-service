@@ -514,10 +514,46 @@
       faqItems.forEach(function (item) {
         var question = item.querySelector('.faq-question');
         if (!question) return;
-        question.addEventListener('click', function () {
+
+        // Make the question element accessible as a button
+        question.setAttribute('role', 'button');
+        question.setAttribute('tabindex', '0');
+        question.setAttribute(
+          'aria-expanded',
+          item.classList.contains('active') ? 'true' : 'false'
+        );
+
+        function toggleItem() {
           var isActive = item.classList.contains('active');
-          faqItems.forEach(function (other) { other.classList.remove('active'); });
-          if (!isActive) item.classList.add('active');
+
+          // Collapse all items and update aria-expanded
+          faqItems.forEach(function (other) {
+            other.classList.remove('active');
+            var otherQuestion = other.querySelector('.faq-question');
+            if (otherQuestion) {
+              otherQuestion.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Expand this item if it was not active
+          if (!isActive) {
+            item.classList.add('active');
+            question.setAttribute('aria-expanded', 'true');
+          }
+        }
+
+        // Mouse interaction
+        question.addEventListener('click', function () {
+          toggleItem();
+        });
+
+        // Keyboard interaction (Enter/Space)
+        question.addEventListener('keydown', function (event) {
+          var key = event.key || event.code;
+          if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
+            event.preventDefault();
+            toggleItem();
+          }
         });
       });
     });
