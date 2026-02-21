@@ -84,6 +84,7 @@
 
     // Initialize
     async function init() {
+         setupFAQs();
         // Load cities first before setting up autocomplete
         await loadCities();
         console.log('Cities loaded:', state.cities.length); // Debug log
@@ -92,7 +93,7 @@
         loadSavedData();
         updateOperatingHours();
         updateEnquiryStats();
-        setupFAQs();
+       
         
         // Set minimum date for pickup
         const dateInput = document.getElementById('pickupDate');
