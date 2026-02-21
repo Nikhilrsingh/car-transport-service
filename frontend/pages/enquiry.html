@@ -506,44 +506,7 @@
   <button class="back-to-bottom" id="backToBottom">
     <i class="fas fa-arrow-down"></i>
   </button>
-<script src="../js/script.js"></script>
-  <!-- FAQ Accordion -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var faqItems = document.querySelectorAll('.faq-widget .faq-item');
-      faqItems.forEach(function (item) {
-        var question = item.querySelector('.faq-question');
-        if (!question) return;
-
-        // Make the question element accessible as a button
-        question.setAttribute('role', 'button');
-        question.setAttribute('tabindex', '0');
-        question.setAttribute(
-          'aria-expanded',
-          item.classList.contains('active') ? 'true' : 'false'
-        );
-
-        function toggleItem() {
-          var isActive = item.classList.contains('active');
-
-          // Collapse all items and update aria-expanded
-          faqItems.forEach(function (other) {
-            other.classList.remove('active');
-            var otherQuestion = other.querySelector('.faq-question');
-            if (otherQuestion) {
-              otherQuestion.setAttribute('aria-expanded', 'false');
-            }
-          });
-
-          // Expand this item if it was not active
-          if (!isActive) {
-            item.classList.add('active');
-            question.setAttribute('aria-expanded', 'true');
-          }
-        }
-
-        // Mouse interaction
-  <!-- 🚀 Floating Action Menu loaded via footer component -->
+  <script src="../js/script.js"></script>
 </body>
 
 </html>
