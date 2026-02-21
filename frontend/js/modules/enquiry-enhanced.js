@@ -92,7 +92,7 @@
         setupEventListeners();
         loadSavedData();
         updateOperatingHours();
-        updateEnquiryStats();
+       
        
         
         // Set minimum date for pickup
@@ -1105,40 +1105,6 @@
         `;
     }
 
-    // Update Enquiry Stats
-    function updateEnquiryStats() {
-        // Simulate stats counter
-        const statNumbers = document.querySelectorAll('.stat-number');
-        
-        if (statNumbers.length > 0) {
-            const stats = [245, 2, 98]; // Enquiries this month, Response time (hours), Satisfaction
-            
-            statNumbers.forEach((element, index) => {
-                animateCounter(element, 0, stats[index], 2000);
-            });
-        }
-    }
-
-    // Counter Animation
-    function animateCounter(element, start, end, duration) {
-        const range = end - start;
-        const increment = range / (duration / 16);
-        let current = start;
-
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= end) {
-                current = end;
-                clearInterval(timer);
-            }
-            
-            if (element.parentElement.querySelector('.stat-label').textContent.includes('%')) {
-                element.textContent = Math.round(current) + '%';
-            } else {
-                element.textContent = Math.round(current);
-            }
-        }, 16);
-    }
 
     // Setup FAQs
     function setupFAQs() {
