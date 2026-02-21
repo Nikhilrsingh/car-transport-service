@@ -526,7 +526,7 @@
     display: block;
     width: 80%;
     max-width: 250px;
-    padding: 12px;
+    padding: 0;
     background: linear-gradient(135deg, #3d3d3d 0%, #2d2d2d 100%);
     color: white;
     text-align: center;
@@ -545,7 +545,17 @@
     margin-right: auto;
 }
 
-.pricing-page .cta-button::before {
+/* Inner clip layer: contains the ripple so it can't overflow the button
+   while keeping overflow:visible on the <a> for the tooltip ::after (Issue #561) */
+.pricing-page .cta-button .btn-ripple-clip {
+    display: block;
+    padding: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pricing-page .cta-button .btn-ripple-clip::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -556,11 +566,9 @@
     background: rgba(255, 255, 255, 0.1);
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
-    /* Keep ripple contained even though the button allows overflow for tooltips */
-    clip-path: inset(0 round 10px);
 }
 
-.pricing-page .cta-button:hover::before {
+.pricing-page .cta-button:hover .btn-ripple-clip::before {
     width: 300px;
     height: 300px;
 }
