@@ -545,7 +545,7 @@
     margin-right: auto;
 }
 
-/* Inner clip layer: contains the ripple so it can't overflow the button
+/* Inner clip layer: contains the ripple so it can't overflow the button (Issue #1044)
    while keeping overflow:visible on the <a> for the tooltip ::after (Issue #561) */
 .pricing-page .cta-button .btn-ripple-clip {
     display: block;
