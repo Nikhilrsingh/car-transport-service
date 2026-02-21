@@ -543,21 +543,6 @@
         }
 
         // Mouse interaction
-        question.addEventListener('click', function () {
-          toggleItem();
-        });
-
-        // Keyboard interaction (Enter/Space)
-        question.addEventListener('keydown', function (event) {
-          var key = event.key || event.code;
-          if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
-            event.preventDefault();
-            toggleItem();
-          }
-        });
-      });
-    });
-  </script>
   <!-- 🚀 Floating Action Menu loaded via footer component -->
 </body>
 
