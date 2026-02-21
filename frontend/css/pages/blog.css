@@ -239,6 +239,22 @@ body[data-theme="light"] .pill {
   box-shadow: 0 5px 15px rgba(255, 99, 71, 0.15);
 }
 
+/*
+ * Fix #1050: Global button::before dark gradient in styles.css becomes
+ * visible on hover because .pill:hover sets a near-transparent background.
+ * Suppress the pseudo-element and enforce an opaque white background
+ * specifically for pills inside the orange blog hero.
+ */
+.blog-hero .pill::before {
+  display: none !important;
+}
+
+.blog-hero .pill:hover {
+  background: white !important;
+  color: #e8521a !important;
+  border-color: white !important;
+}
+
 /* Active State */
 .pill.active {
   background: linear-gradient(135deg, #ff6347, #ff4500);
