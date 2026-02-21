@@ -1104,15 +1104,18 @@ body[data-theme="dark"] .faq-item-accordion {
   border-color: #333;
 }
 
-/* Inputs */
-body[data-theme="dark"] input,
-body[data-theme="dark"] select {
+/* Inputs — scoped to calculator page sections to avoid overriding navbar search bar */
+body[data-theme="dark"] .price-calculator input,
+body[data-theme="dark"] .price-calculator select,
+body[data-theme="dark"] .plan-comparison input,
+body[data-theme="dark"] .plan-comparison select {
   background: #1f1f3a;
   color: #ffffff;
   border-color: #333;
 }
 
-body[data-theme="dark"] input::placeholder {
+body[data-theme="dark"] .price-calculator input::placeholder,
+body[data-theme="dark"] .plan-comparison input::placeholder {
   color: #aaa;
 }
 
