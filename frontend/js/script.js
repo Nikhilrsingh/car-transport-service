@@ -558,7 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!counters.length) return;
 
   const animateCounter = (el) => {
-    const target = parseInt(el.getAttribute("data-target"), 10);
+    const target = parseInt(el.getAttribute("data-target"), 10) || 0; 
     const duration = 3000;
     const startTime = performance.now();
 
