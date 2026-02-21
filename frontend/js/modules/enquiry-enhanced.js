@@ -157,15 +157,6 @@
                 btn.addEventListener('click', () => previousStep());
             });
         }
-
-        // FAQ toggle
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.closest('.faq-item');
-                faqItem.classList.toggle('active');
-            });
-        });
     }
 
     // Field Validation
@@ -1150,9 +1141,25 @@
 
     // Setup FAQs
     function setupFAQs() {
-        // FAQ data is already in HTML, just need to set up interactions
-        const faqItems = document.querySelectorAll('.faq-item');
-        
+        const faqItems = document.querySelectorAll('.faq-widget .faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            if (!question) return;
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all items first (accordion behaviour)
+                faqItems.forEach(other => other.classList.remove('active'));
+
+                // Re-open only if it was closed before this click
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
         // Auto-expand first FAQ
         if (faqItems.length > 0) {
             faqItems[0].classList.add('active');
