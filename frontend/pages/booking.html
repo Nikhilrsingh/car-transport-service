@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Vehicle Transport - Harihar Car Carriers</title>
-     <base href="./" />
-  <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+    <base href="./" />
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Navbar CSS -->
@@ -40,7 +40,6 @@
     <!-- Lottie Animation -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <link rel="stylesheet" href="../css/components/glowing-input.css">
-
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -237,7 +236,8 @@
         .form-step.active {
             display: flex;
             flex-direction: column;
-            align-items: stretch;   /* ✅ DEFAULT & CORRECT */
+            align-items: stretch;
+            /* ✅ DEFAULT & CORRECT */
             animation: slideIn 0.4s ease;
         }
 
@@ -461,8 +461,10 @@
 
 
         .booking-nav-btn {
-            flex: 1;                 /* 🔥 equal width buttons */
-            height: 52px;            /* 🔥 same as screenshot */
+            flex: 1;
+            /* 🔥 equal width buttons */
+            height: 52px;
+            /* 🔥 same as screenshot */
             border-radius: 12px;
 
             font-family: "Poppins", sans-serif;
@@ -1581,7 +1583,8 @@
 
             /* FORCE addons to take full width */
             .addon-services {
-                grid-column: 1 / -1;      /* 🔥 THIS IS THE KEY */
+                grid-column: 1 / -1;
+                /* 🔥 THIS IS THE KEY */
                 width: 100%;
                 max-width: 720px;
 
@@ -1640,343 +1643,349 @@
             animation: shake 0.5s ease-in-out;
         }
 
-    /* ========================================
+        /* ========================================
    ADD-ON SERVICES - MODERN CARD DESIGN
    ======================================== */
 
-.addon-services {
-    width: 100%;
-    margin: 30px 0;
-}
+        .addon-services {
+            width: 100%;
+            margin: 30px 0;
+        }
 
-.addon-services h4 {
-    color: #ff6347;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+        .addon-services h4 {
+            color: #ff6347;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.addon-services h4 i {
-    font-size: 1.3rem;
-}
+        .addon-services h4 i {
+            font-size: 1.3rem;
+        }
 
-/* Grid Layout */
-.addon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px;
-}
+        /* Grid Layout */
+        .addon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
 
-/* Card Container */
-.addon-card {
-    background: #1a1a1a;
-    border: 2px solid #444;
-    border-radius: 12px;
-    padding: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    user-select: none;
-}
+        /* Card Container */
+        .addon-card {
+            background: #1a1a1a;
+            border: 2px solid #444;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            user-select: none;
+        }
 
-.addon-card:hover {
-    border-color: #ff6347;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(255, 99, 71, 0.2);
-    background: #222;
-}
+        .addon-card:hover {
+            border-color: #ff6347;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(255, 99, 71, 0.2);
+            background: #222;
+        }
 
-/* Hide the default checkbox */
-.addon-checkbox {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    width: 0;
-    height: 0;
-}
+        /* Hide the default checkbox */
+        .addon-checkbox {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            width: 0;
+            height: 0;
+        }
 
-/* Custom Checkbox in Top-Right */
-.addon-checkmark {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 24px;
-    height: 24px;
-    border: 2px solid #666;
-    border-radius: 6px;
-    background: #2b2b2b;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-}
+        /* Custom Checkbox in Top-Right */
+        .addon-checkmark {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #666;
+            border-radius: 6px;
+            background: #2b2b2b;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
 
-.addon-checkmark::after {
-    content: "\f00c";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    color: white;
-    font-size: 12px;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
+        .addon-checkmark::after {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
 
-/* Checked State */
-.addon-checkbox:checked ~ .addon-checkmark {
-    background: #4CAF50;
-    border-color: #4CAF50;
-    box-shadow: 0 0 12px rgba(76, 175, 80, 0.4);
-}
+        /* Checked State */
+        .addon-checkbox:checked~.addon-checkmark {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            box-shadow: 0 0 12px rgba(76, 175, 80, 0.4);
+        }
 
-.addon-checkbox:checked ~ .addon-checkmark::after {
-    opacity: 1;
-    transform: scale(1);
-}
+        .addon-checkbox:checked~.addon-checkmark::after {
+            opacity: 1;
+            transform: scale(1);
+        }
 
-/* Selected Card State */
-.addon-card:has(.addon-checkbox:checked) {
-    border-color: #4CAF50;
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.08), rgba(76, 175, 80, 0.04));
-    box-shadow: 0 4px 16px rgba(76, 175, 80, 0.25);
-}
+        /* Selected Card State */
+        .addon-card:has(.addon-checkbox:checked) {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.08), rgba(76, 175, 80, 0.04));
+            box-shadow: 0 4px 16px rgba(76, 175, 80, 0.25);
+        }
 
-.addon-card:has(.addon-checkbox:checked)::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(180deg, #4CAF50, #45a049);
-    border-radius: 12px 0 0 12px;
-}
+        .addon-card:has(.addon-checkbox:checked)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #4CAF50, #45a049);
+            border-radius: 12px 0 0 12px;
+        }
 
-/* Icon Container */
-.addon-icon-wrapper {
-    min-width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 99, 71, 0.1);
-    border-radius: 10px;
-    color: #ff6347;
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
+        /* Icon Container */
+        .addon-icon-wrapper {
+            min-width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 99, 71, 0.1);
+            border-radius: 10px;
+            color: #ff6347;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
 
-.addon-card:hover .addon-icon-wrapper {
-    transform: scale(1.1);
-    background: rgba(255, 99, 71, 0.15);
-}
+        .addon-card:hover .addon-icon-wrapper {
+            transform: scale(1.1);
+            background: rgba(255, 99, 71, 0.15);
+        }
 
-.addon-card:has(.addon-checkbox:checked) .addon-icon-wrapper {
-    background: rgba(76, 175, 80, 0.1);
-    color: #4CAF50;
-}
+        .addon-card:has(.addon-checkbox:checked) .addon-icon-wrapper {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
 
-/* Content Section */
-.addon-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding-right: 35px; /* Space for checkbox */
-}
+        /* Content Section */
+        .addon-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-right: 35px;
+            /* Space for checkbox */
+        }
 
-.addon-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    flex-wrap: wrap;
-}
+        .addon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
 
-.addon-name {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #fff;
-    margin: 0;
-    line-height: 1.3;
-    flex: 1;
-}
+        .addon-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+            line-height: 1.3;
+            flex: 1;
+        }
 
-.addon-price {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #ff6347;
-    white-space: nowrap;
-    background: rgba(255, 99, 71, 0.1);
-    padding: 4px 12px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
+        .addon-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ff6347;
+            white-space: nowrap;
+            background: rgba(255, 99, 71, 0.1);
+            padding: 4px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
 
-.addon-card:has(.addon-checkbox:checked) .addon-price {
-    color: #4CAF50;
-    background: rgba(76, 175, 80, 0.1);
-}
+        .addon-card:has(.addon-checkbox:checked) .addon-price {
+            color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
 
-.addon-desc {
-    font-size: 0.85rem;
-    color: #999;
-    line-height: 1.4;
-    margin: 0;
-}
+        .addon-desc {
+            font-size: 0.85rem;
+            color: #999;
+            line-height: 1.4;
+            margin: 0;
+        }
 
-/* Focus State for Accessibility */
-.addon-checkbox:focus ~ .addon-checkmark {
-    outline: 3px solid #ff6347;
-    outline-offset: 2px;
-}
+        /* Focus State for Accessibility */
+        .addon-checkbox:focus~.addon-checkmark {
+            outline: 3px solid #ff6347;
+            outline-offset: 2px;
+        }
 
-/* Animation on Select */
-@keyframes cardSelectPulse {
-    0%, 100% { transform: scale(1) translateY(0); }
-    50% { transform: scale(1.02) translateY(-3px); }
-}
+        /* Animation on Select */
+        @keyframes cardSelectPulse {
 
-.addon-card:has(.addon-checkbox:checked) {
-    animation: cardSelectPulse 0.4s ease;
-}
+            0%,
+            100% {
+                transform: scale(1) translateY(0);
+            }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .addon-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+            50% {
+                transform: scale(1.02) translateY(-3px);
+            }
+        }
 
-@media (max-width: 768px) {
-    .addon-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .addon-card {
-        padding: 16px;
-    }
-    
-    .addon-icon-wrapper {
-        min-width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-    }
-    
-    .addon-name {
-        font-size: 1rem;
-    }
-    
-    .addon-price {
-        font-size: 1rem;
-        padding: 3px 10px;
-    }
-    
-    .addon-desc {
-        font-size: 0.8rem;
-    }
-    
-    .addon-checkmark {
-        top: 16px;
-        right: 16px;
-        width: 22px;
-        height: 22px;
-    }
-    
-    .addon-checkmark::after {
-        font-size: 11px;
-    }
-}
+        .addon-card:has(.addon-checkbox:checked) {
+            animation: cardSelectPulse 0.4s ease;
+        }
 
-@media (max-width: 480px) {
-    .addon-content {
-        padding-right: 30px;
-    }
-    
-    .addon-header {
-        flex-direction: column;
-        gap: 6px;
-    }
-    
-    .addon-price {
-        align-self: flex-start;
-    }
-}
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .addon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
 
-.form-group {
-    position: relative;
-    margin-bottom: 20px;
-}
+        @media (max-width: 768px) {
+            .addon-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
 
-.autocomplete-wrapper {
-    position: relative;
-    z-index: 1;
-}
+            .addon-card {
+                padding: 16px;
+            }
 
-.form-group input:not(:focus)::placeholder {
-    opacity: 0.4;
-    transition: opacity 0.3s ease;
-}
+            .addon-icon-wrapper {
+                min-width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
 
-.form-group input:focus::placeholder {
-    opacity: 0.6;
-}
+            .addon-name {
+                font-size: 1rem;
+            }
 
-.form-group:has(+ .form-group input:focus) input::placeholder {
-    opacity: 0.2;
-}
+            .addon-price {
+                font-size: 1rem;
+                padding: 3px 10px;
+            }
 
-.form-group input:focus {
-    border-color: #ff6347;
-    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
-    background: #2a2a2a;
-    z-index: 10;
-    position: relative;
-}
+            .addon-desc {
+                font-size: 0.8rem;
+            }
 
-.form-group input:not(:focus) {
-    background: #1a1a1a;
-    border-color: #444;
-}
+            .addon-checkmark {
+                top: 16px;
+                right: 16px;
+                width: 22px;
+                height: 22px;
+            }
 
-.autocomplete-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #2a2a2a;
-    border: 1px solid #ff6347;
-    border-top: none;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    display: none;
-}
+            .addon-checkmark::after {
+                font-size: 11px;
+            }
+        }
 
-.autocomplete-dropdown.show {
-    display: block;
-}
+        @media (max-width: 480px) {
+            .addon-content {
+                padding-right: 30px;
+            }
 
-.form-row {
-    display: grid;
-    gap: 20px;
-    margin-bottom: 20px;
-}
+            .addon-header {
+                flex-direction: column;
+                gap: 6px;
+            }
 
+            .addon-price {
+                align-self: flex-start;
+            }
+        }
 
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .autocomplete-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group input:not(:focus)::placeholder {
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-group input:focus::placeholder {
+            opacity: 0.6;
+        }
+
+        .form-group:has(+ .form-group input:focus) input::placeholder {
+            opacity: 0.2;
+        }
+
+        .form-group input:focus {
+            border-color: #ff6347;
+            box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+            background: #2a2a2a;
+            z-index: 10;
+            position: relative;
+        }
+
+        .form-group input:not(:focus) {
+            background: #1a1a1a;
+            border-color: #444;
+        }
+
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #2a2a2a;
+            border: 1px solid #ff6347;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .autocomplete-dropdown.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
-      <script src="../js/map.js"></script>
-    
+<script src="../js/map.js"></script>
+
 <body>
     <div id="scroll-progress"></div>
     <!-- Navbar Component -->
@@ -2001,15 +2010,15 @@
             <div class="booking-container">
                 <!-- Booking Form -->
                 <div class="booking-form-container fade-in">
-                
-                  <h2>Pickup & Drop Location</h2>
 
-                     <div class="location-inputs">
-                         <input id="pickup" type="text" placeholder="Enter pickup location" />
-                            <input id="drop" type="text" placeholder="Enter drop location" />
-                                 </div>
+                    <h2>Pickup & Drop Location</h2>
 
-                                
+                    <div class="location-inputs">
+                        <input id="pickup" type="text" placeholder="Enter pickup location" />
+                        <input id="drop" type="text" placeholder="Enter drop location" />
+                    </div>
+
+
 
                     <!-- Progress Bar -->
                     <div class="progress-container">
@@ -2044,346 +2053,322 @@
 
                     <form class="booking-form" id="bookingForm">
 
-                            <!-- Step 1: Personal & Vehicle Details -->
-                            <div class="form-step active" data-step="1">
+                        <!-- Step 1: Personal & Vehicle Details -->
+                        <div class="form-step active" data-step="1">
 
-                                <div class="step-header">
-                                    <h3><i class="fas fa-user-circle"></i> Personal & Vehicle Information</h3>
-                                    <p>Tell us about yourself and your vehicle</p>
-                                </div>
-
-                                <!-- ===== ROW 1 : NAME + PHONE ===== -->
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
-                                        <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
-                                        <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                        <div class="error-message" id="nameError">Please enter your full name</div>
-                                    </div>
-
-                                    <div class="form-group phone-group">
-                                        <label><i class="fas fa-phone"></i> Phone Number *</label>
-                                        <div class="phone-row">
-                                            <select class="country-code">
-                                                <option value="+91">+91 (India)</option>
-                                            </select>
-                                            <div class="phone-input-box">
-                                                <input type="tel" id="phone" name="phone" placeholder="92345 75818" required />
-                                                <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="error-message" id="phoneError">
-                                            Please enter a valid 10-digit Indian phone number
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- ===== ROW 2 : EMAIL ===== -->
-                                <div class="form-row">
-                                    <div class="form-group full-width">
-                                        <label for="email">
-                                            <i class="fas fa-envelope"></i> Email Address *
-                                        </label>
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            name="email"
-                                            required
-                                            placeholder="Enter your email"
-                                        >
-                                        <span class="validation-icon">
-                                            <i class="fas fa-check-circle"></i>
-                                        </span>
-                                        <div class="error-message" id="emailError">
-                                            Please enter a valid email address
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- ===== ROW 3 : VEHICLE ===== -->
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type *</label>
-                                        <select id="vehicleType" name="vehicleType" required>
-                                            <option value="">Select Vehicle Type</option>
-                                            <option value="hatchback">Hatchback</option>
-                                            <option value="sedan">Sedan</option>
-                                            <option value="suv">SUV</option>
-                                            <option value="luxury">Luxury Car</option>
-                                            <option value="bike">Motorcycle</option>
-                                            <option value="commercial">Commercial Vehicle</option>
-                                        </select>
-                                        <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                        <div class="error-message" id="vehicleError">Please select vehicle type</div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="vehicleModel"><i class="fas fa-cog"></i> Vehicle Model</label>
-                                        <input type="text" id="vehicleModel" name="vehicleModel" placeholder="e.g., Hyundai Creta">
-                                    </div>
-                                </div>
-
-                                <!-- ===== ADD-ONS (OUTSIDE GRID) ===== -->
-<div class="addon-services">
-    <h4><i class="fas fa-plus-circle"></i> Add-on Services (Optional)</h4>
-
-    <div class="addon-grid">
-        <!-- Interior Cleaning -->
-        <label class="addon-card">
-            <input 
-                type="checkbox" 
-                class="addon-checkbox" 
-                data-addon="cleaning" 
-                data-price="500"
-                onchange="updateAddonPrice()"
-            >
-            <div class="addon-checkmark"></div>
-            <div class="addon-icon-wrapper">
-                <i class="fas fa-spray-can"></i>
-            </div>
-            <div class="addon-content">
-                <div class="addon-header">
-                    <h5 class="addon-name">Interior Cleaning</h5>
-                    <span class="addon-price">₹500</span>
-                </div>
-                <p class="addon-desc">Deep cleaning of vehicle interior</p>
-            </div>
-        </label>
-
-        <!-- Premium Detailing -->
-        <label class="addon-card">
-            <input 
-                type="checkbox" 
-                class="addon-checkbox" 
-                data-addon="detailing" 
-                data-price="1500"
-                onchange="updateAddonPrice()"
-            >
-            <div class="addon-checkmark"></div>
-            <div class="addon-icon-wrapper">
-                <i class="fas fa-star"></i>
-            </div>
-            <div class="addon-content">
-                <div class="addon-header">
-                    <h5 class="addon-name">Premium Detailing</h5>
-                    <span class="addon-price">₹1,500</span>
-                </div>
-                <p class="addon-desc">Complete exterior & interior detailing</p>
-            </div>
-        </label>
-
-        <!-- Extra Insurance -->
-        <label class="addon-card">
-            <input 
-                type="checkbox" 
-                class="addon-checkbox" 
-                data-addon="insurance" 
-                data-price="800"
-                onchange="updateAddonPrice()"
-            >
-            <div class="addon-checkmark"></div>
-            <div class="addon-icon-wrapper">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <div class="addon-content">
-                <div class="addon-header">
-                    <h5 class="addon-name">Extra Insurance</h5>
-                    <span class="addon-price">₹800</span>
-                </div>
-                <p class="addon-desc">Additional coverage up to ₹5 lakhs</p>
-            </div>
-        </label>
-
-        <!-- Express Delivery -->
-        <label class="addon-card">
-            <input 
-                type="checkbox" 
-                class="addon-checkbox" 
-                data-addon="express" 
-                data-price="2000"
-                onchange="updateAddonPrice()"
-            >
-            <div class="addon-checkmark"></div>
-            <div class="addon-icon-wrapper">
-                <i class="fas fa-bolt"></i>
-            </div>
-            <div class="addon-content">
-                <div class="addon-header">
-                    <h5 class="addon-name">Express Delivery</h5>
-                    <span class="addon-price">₹2,000</span>
-                </div>
-                <p class="addon-desc">Priority delivery – 30% faster</p>
-            </div>
-        </label>
-    </div>
-</div>
-
-
-                                <!-- ===== NAVIGATION (AFTER ADD-ONS) ===== -->
-                                <div class="form-navigation">
-                                    <button type="button" class="booking-nav-btn booking-btn-prev" disabled>
-                                        <i class="fas fa-arrow-left"></i> Previous
-                                    </button>
-                                    <button type="button" class="booking-nav-btn booking-btn-next" onclick="nextStep()">
-                                        Next <i class="fas fa-arrow-right"></i>
-                                    </button>
-                                </div>
-
-                            </div>
-                        </form>
-
-
-                        <!-- Step 2: Location & Schedule -->
-                        <div class="form-step" data-step="2">
                             <div class="step-header">
-                                <h3><i class="fas fa-map-marked-alt"></i> Location & Schedule</h3>
-                                <p>Set your pickup and delivery details</p>
+                                <h3><i class="fas fa-user-circle"></i> Personal & Vehicle Information</h3>
+                                <p>Tell us about yourself and your vehicle</p>
                             </div>
 
-                            <!-- Location Information -->
-                            <div class="form-group">
-                                <label for="pickupCity"><i class="fas fa-map-marker-alt"></i> Pickup City *</label>
-                                <div class="autocomplete-wrapper">
-                                    <input type="text" id="pickupCity" name="pickupCity" required
-                                        placeholder="Start typing city name..." autocomplete="off">
-                                    <div class="autocomplete-dropdown" id="pickupCityDropdown"></div>
-                                </div>
-                                <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                <div class="error-message" id="pickupError">Please select pickup city</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="dropCity"><i class="fas fa-flag-checkered"></i> Drop City *</label>
-                                <div class="autocomplete-wrapper">
-                                    <input type="text" id="dropCity" name="dropCity" required
-                                        placeholder="Start typing city name..." autocomplete="off">
-                                    <div class="autocomplete-dropdown" id="dropCityDropdown"></div>
-                                </div>
-                                <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                <div class="error-message" id="dropError">Please select drop city</div>
-                            </div>
-
-                            <!-- Hidden fields for full addresses (optional) -->
-                            <input type="hidden" id="pickupLocation" name="pickupLocation">
-                            <input type="hidden" id="dropLocation" name="dropLocation">
-
-                            <!-- Date & Time -->
-                            <div class="date-time-row">
+                            <!-- ===== ROW 1 : NAME + PHONE ===== -->
+                            <div class="form-row">
                                 <div class="form-group">
-                                    <label for="pickupDate"><i class="fas fa-calendar"></i> Preferred Pickup Date
-                                        *</label>
-                                    <input type="date" id="pickupDate" name="pickupDate" required>
+                                    <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
+                                    <input type="text" id="fullName" name="fullName" required
+                                        placeholder="Enter your full name">
                                     <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="dateError">Please select pickup date</div>
-                                    <div class="date-warning" id="dateWarning"></div>
+                                    <div class="error-message" id="nameError">Please enter your full name</div>
                                 </div>
+
+                                <div class="form-group phone-group">
+                                    <label><i class="fas fa-phone"></i> Phone Number *</label>
+                                    <div class="phone-row">
+                                        <select class="country-code">
+                                            <option value="+91">+91 (India)</option>
+                                        </select>
+                                        <div class="phone-input-box">
+                                            <input type="tel" id="phone" name="phone" placeholder="92345 75818"
+                                                required />
+                                            <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="error-message" id="phoneError">
+                                        Please enter a valid 10-digit Indian phone number
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ===== ROW 2 : EMAIL ===== -->
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label for="email">
+                                        <i class="fas fa-envelope"></i> Email Address *
+                                    </label>
+                                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                                    <span class="validation-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                    <div class="error-message" id="emailError">
+                                        Please enter a valid email address
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ===== ROW 3 : VEHICLE ===== -->
+                            <div class="form-row">
                                 <div class="form-group">
-                                    <label for="pickupTime"><i class="fas fa-clock"></i> Preferred Time</label>
-                                    <select id="pickupTime" name="pickupTime">
-                                        <option value="any">Any Time</option>
-                                        <option value="morning">Morning (8 AM - 12 PM)</option>
-                                        <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-                                        <option value="evening">Evening (5 PM - 8 PM)</option>
+                                    <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type *</label>
+                                    <select id="vehicleType" name="vehicleType" required>
+                                        <option value="">Select Vehicle Type</option>
+                                        <option value="hatchback">Hatchback</option>
+                                        <option value="sedan">Sedan</option>
+                                        <option value="suv">SUV</option>
+                                        <option value="luxury">Luxury Car</option>
+                                        <option value="bike">Motorcycle</option>
+                                        <option value="commercial">Commercial Vehicle</option>
                                     </select>
+                                    <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                    <div class="error-message" id="vehicleError">Please select vehicle type</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vehicleModel"><i class="fas fa-cog"></i> Vehicle Model</label>
+                                    <input type="text" id="vehicleModel" name="vehicleModel"
+                                        placeholder="e.g., Hyundai Creta">
                                 </div>
                             </div>
 
-                            <!-- Route Optimization with Waypoints -->
-                            <div class="waypoints-section">
-                                <div class="waypoints-header">
-                                    <h4><i class="fas fa-map-signs"></i> Add Stops Along the Way</h4>
-                                    <button type="button" class="add-waypoint-btn" onclick="addWaypoint()">
-                                        <i class="fas fa-plus"></i> Add Stop
-                                    </button>
-                                </div>
-                                <p style="color: #999; font-size: 0.9rem; margin-bottom: 15px;">
-                                    Add intermediate stops for vehicle pickup or drop-off along your route
-                                </p>
-                                <div class="waypoints-list" id="waypointsList">
-                                    <!-- Waypoints will be added dynamically -->
-                                </div>
-                                <button type="button" class="optimize-route-btn" id="optimizeRouteBtn"
-                                    onclick="optimizeRoute()" style="display: none;">
-                                    <i class="fas fa-route"></i> Optimize Route Order
-                                </button>
-                                <div class="optimization-result" id="optimizationResult">
-                                    <h5><i class="fas fa-check-circle"></i> Route Optimized!</h5>
-                                    <div class="optimization-stats">
-                                        <div><i class="fas fa-road"></i> Distance Saved: <strong id="distanceSaved">0
-                                                km</strong></div>
-                                        <div><i class="fas fa-clock"></i> Time Saved: <strong id="timeSaved">0
-                                                mins</strong></div>
-                                    </div>
+                            <!-- ===== ADD-ONS (OUTSIDE GRID) ===== -->
+                            <div class="addon-services">
+                                <h4><i class="fas fa-plus-circle"></i> Add-on Services (Optional)</h4>
+
+                                <div class="addon-grid">
+                                    <!-- Interior Cleaning -->
+                                    <label class="addon-card">
+                                        <input type="checkbox" class="addon-checkbox" data-addon="cleaning"
+                                            data-price="500" onchange="updateAddonPrice()">
+                                        <div class="addon-checkmark"></div>
+                                        <div class="addon-icon-wrapper">
+                                            <i class="fas fa-spray-can"></i>
+                                        </div>
+                                        <div class="addon-content">
+                                            <div class="addon-header">
+                                                <h5 class="addon-name">Interior Cleaning</h5>
+                                                <span class="addon-price">₹500</span>
+                                            </div>
+                                            <p class="addon-desc">Deep cleaning of vehicle interior</p>
+                                        </div>
+                                    </label>
+
+                                    <!-- Premium Detailing -->
+                                    <label class="addon-card">
+                                        <input type="checkbox" class="addon-checkbox" data-addon="detailing"
+                                            data-price="1500" onchange="updateAddonPrice()">
+                                        <div class="addon-checkmark"></div>
+                                        <div class="addon-icon-wrapper">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="addon-content">
+                                            <div class="addon-header">
+                                                <h5 class="addon-name">Premium Detailing</h5>
+                                                <span class="addon-price">₹1,500</span>
+                                            </div>
+                                            <p class="addon-desc">Complete exterior & interior detailing</p>
+                                        </div>
+                                    </label>
+
+                                    <!-- Extra Insurance -->
+                                    <label class="addon-card">
+                                        <input type="checkbox" class="addon-checkbox" data-addon="insurance"
+                                            data-price="800" onchange="updateAddonPrice()">
+                                        <div class="addon-checkmark"></div>
+                                        <div class="addon-icon-wrapper">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div class="addon-content">
+                                            <div class="addon-header">
+                                                <h5 class="addon-name">Extra Insurance</h5>
+                                                <span class="addon-price">₹800</span>
+                                            </div>
+                                            <p class="addon-desc">Additional coverage up to ₹5 lakhs</p>
+                                        </div>
+                                    </label>
+
+                                    <!-- Express Delivery -->
+                                    <label class="addon-card">
+                                        <input type="checkbox" class="addon-checkbox" data-addon="express"
+                                            data-price="2000" onchange="updateAddonPrice()">
+                                        <div class="addon-checkmark"></div>
+                                        <div class="addon-icon-wrapper">
+                                            <i class="fas fa-bolt"></i>
+                                        </div>
+                                        <div class="addon-content">
+                                            <div class="addon-header">
+                                                <h5 class="addon-name">Express Delivery</h5>
+                                                <span class="addon-price">₹2,000</span>
+                                            </div>
+                                            <p class="addon-desc">Priority delivery – 30% faster</p>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
 
-                            <!-- Weather Forecast -->
-                            <div class="weather-section" id="weatherSection" style="display: none;">
-                                <div class="weather-header">
-                                    <i class="fas fa-cloud-sun" style="font-size: 1.5rem;"></i>
-                                    <h4>Weather Forecast</h4>
-                                </div>
-                                <div class="weather-grid" id="weatherGrid">
-                                    <div class="weather-loading">
-                                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #ff6347;"></i>
-                                        <p>Loading weather data...</p>
-                                    </div>
-                                </div>
-                            </div>
 
+                            <!-- ===== NAVIGATION (AFTER ADD-ONS) ===== -->
                             <div class="form-navigation">
-                                <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()">
+                                <button type="button" class="booking-nav-btn booking-btn-prev" disabled>
                                     <i class="fas fa-arrow-left"></i> Previous
-                                </button>
-                                <button type="button" class="save-later-btn" onclick="openSaveEmailModal()">
-                                    <i class="fas fa-save"></i> Save & Continue Later
                                 </button>
                                 <button type="button" class="booking-nav-btn booking-btn-next" onclick="nextStep()">
                                     Next <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
+
+                        </div>
+                    </form>
+
+
+                    <!-- Step 2: Location & Schedule -->
+                    <div class="form-step" data-step="2">
+                        <div class="step-header">
+                            <h3><i class="fas fa-map-marked-alt"></i> Location & Schedule</h3>
+                            <p>Set your pickup and delivery details</p>
                         </div>
 
-                        <!-- Step 3: Review & Confirm -->
-                        <div class="form-step" data-step="3">
-                            <div class="step-header">
-                                <h3><i class="fas fa-clipboard-check"></i> Review & Confirm</h3>
-                                <p>Verify your booking details before confirmation</p>
+                        <!-- Location Information -->
+                        <div class="form-group">
+                            <label for="pickupCity"><i class="fas fa-map-marker-alt"></i> Pickup City *</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="pickupCity" name="pickupCity" required
+                                    placeholder="Start typing city name..." autocomplete="off">
+                                <div class="autocomplete-dropdown" id="pickupCityDropdown"></div>
                             </div>
+                            <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                            <div class="error-message" id="pickupError">Please select pickup city</div>
+                        </div>
 
-                            <!-- Additional Information -->
+                        <div class="form-group">
+                            <label for="dropCity"><i class="fas fa-flag-checkered"></i> Drop City *</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="dropCity" name="dropCity" required
+                                    placeholder="Start typing city name..." autocomplete="off">
+                                <div class="autocomplete-dropdown" id="dropCityDropdown"></div>
+                            </div>
+                            <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                            <div class="error-message" id="dropError">Please select drop city</div>
+                        </div>
+
+                        <!-- Hidden fields for full addresses (optional) -->
+                        <input type="hidden" id="pickupLocation" name="pickupLocation">
+                        <input type="hidden" id="dropLocation" name="dropLocation">
+
+                        <!-- Date & Time -->
+                        <div class="date-time-row">
                             <div class="form-group">
-                                <label for="additionalInfo"><i class="fas fa-comment"></i> Additional
-                                    Information</label>
-                                <textarea id="additionalInfo" name="additionalInfo"
-                                    placeholder="Any special requirements or instructions..." rows="4"
-                                    maxlength="500"></textarea>
-                                <div class="character-counter">
-                                    <span id="charCount">0</span> / 500 characters
-                                </div>
+                                <label for="pickupDate"><i class="fas fa-calendar"></i> Preferred Pickup Date
+                                    *</label>
+                                <input type="date" id="pickupDate" name="pickupDate" required>
+                                <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                <div class="error-message" id="dateError">Please select pickup date</div>
+                                <div class="date-warning" id="dateWarning"></div>
                             </div>
-
-                            <!-- Review Summary -->
-                            <div class="review-summary">
-                                <h4 style="color: #ff6347; margin-bottom: 15px;">
-                                    <i class="fas fa-eye"></i> Booking Summary
-                                </h4>
-                                <div id="reviewContent"
-                                    style="background: #1a1a1a; padding: 20px; border-radius: 10px;">
-                                    <!-- Summary will be populated dynamically -->
-                                </div>
-                            </div>
-
-                            <div class="form-navigation">
-                                <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()">
-                                    <i class="fas fa-arrow-left"></i> Previous
-                                </button>
-                                <button type="submit" class="booking-submit-btn" id="submitBtn">
-                                    <i class="fas fa-paper-plane"></i>
-                                    <span>Confirm Booking</span>
-                                </button>
+                            <div class="form-group">
+                                <label for="pickupTime"><i class="fas fa-clock"></i> Preferred Time</label>
+                                <select id="pickupTime" name="pickupTime">
+                                    <option value="any">Any Time</option>
+                                    <option value="morning">Morning (8 AM - 12 PM)</option>
+                                    <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                                    <option value="evening">Evening (5 PM - 8 PM)</option>
+                                </select>
                             </div>
                         </div>
+
+                        <!-- Route Optimization with Waypoints -->
+                        <div class="waypoints-section">
+                            <div class="waypoints-header">
+                                <h4><i class="fas fa-map-signs"></i> Add Stops Along the Way</h4>
+                                <button type="button" class="add-waypoint-btn" onclick="addWaypoint()">
+                                    <i class="fas fa-plus"></i> Add Stop
+                                </button>
+                            </div>
+                            <p style="color: #999; font-size: 0.9rem; margin-bottom: 15px;">
+                                Add intermediate stops for vehicle pickup or drop-off along your route
+                            </p>
+                            <div class="waypoints-list" id="waypointsList">
+                                <!-- Waypoints will be added dynamically -->
+                            </div>
+                            <button type="button" class="optimize-route-btn" id="optimizeRouteBtn"
+                                onclick="optimizeRoute()" style="display: none;">
+                                <i class="fas fa-route"></i> Optimize Route Order
+                            </button>
+                            <div class="optimization-result" id="optimizationResult">
+                                <h5><i class="fas fa-check-circle"></i> Route Optimized!</h5>
+                                <div class="optimization-stats">
+                                    <div><i class="fas fa-road"></i> Distance Saved: <strong id="distanceSaved">0
+                                            km</strong></div>
+                                    <div><i class="fas fa-clock"></i> Time Saved: <strong id="timeSaved">0
+                                            mins</strong></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Weather Forecast -->
+                        <div class="weather-section" id="weatherSection" style="display: none;">
+                            <div class="weather-header">
+                                <i class="fas fa-cloud-sun" style="font-size: 1.5rem;"></i>
+                                <h4>Weather Forecast</h4>
+                            </div>
+                            <div class="weather-grid" id="weatherGrid">
+                                <div class="weather-loading">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #ff6347;"></i>
+                                    <p>Loading weather data...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="save-later-btn" onclick="openSaveEmailModal()">
+                                <i class="fas fa-save"></i> Save & Continue Later
+                            </button>
+                            <button type="button" class="booking-nav-btn booking-btn-next" onclick="nextStep()">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Review & Confirm -->
+                    <div class="form-step" data-step="3">
+                        <div class="step-header">
+                            <h3><i class="fas fa-clipboard-check"></i> Review & Confirm</h3>
+                            <p>Verify your booking details before confirmation</p>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="form-group">
+                            <label for="additionalInfo"><i class="fas fa-comment"></i> Additional
+                                Information</label>
+                            <textarea id="additionalInfo" name="additionalInfo"
+                                placeholder="Any special requirements or instructions..." rows="4"
+                                maxlength="500"></textarea>
+                            <div class="character-counter">
+                                <span id="charCount">0</span> / 500 characters
+                            </div>
+                        </div>
+
+                        <!-- Review Summary -->
+                        <div class="review-summary">
+                            <h4 style="color: #ff6347; margin-bottom: 15px;">
+                                <i class="fas fa-eye"></i> Booking Summary
+                            </h4>
+                            <div id="reviewContent" style="background: #1a1a1a; padding: 20px; border-radius: 10px;">
+                                <!-- Summary will be populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="submit" class="booking-submit-btn" id="submitBtn">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Confirm Booking</span>
+                            </button>
+                        </div>
+                    </div>
                     </form>
                 </div>
 
@@ -2705,10 +2690,12 @@
                 A confirmation email has been sent to your registered email address.
                 Our team will contact you within 24 hours.
             </p>
-            
-            <div style="margin: 15px 0; padding: 15px; background: rgba(255, 99, 71, 0.1); border-radius: 10px; border-left: 3px solid #ff6347;">
+
+            <div
+                style="margin: 15px 0; padding: 15px; background: rgba(255, 99, 71, 0.1); border-radius: 10px; border-left: 3px solid #ff6347;">
                 <p style="font-size: 0.85rem; margin: 0; color: #ddd;">
-                    <i class="fas fa-info-circle"></i> <strong>Important:</strong> Save your booking reference number for tracking and future reference.
+                    <i class="fas fa-info-circle"></i> <strong>Important:</strong> Save your booking reference number
+                    for tracking and future reference.
                 </p>
             </div>
 
@@ -2746,7 +2733,8 @@
         <div class="save-email-content">
             <h3><i class="fas fa-envelope"></i> Save & Continue Later</h3>
             <p>Enter your email to receive a link to continue this booking later.</p>
-            <input type="email" class="save-email-input" id="saveEmail" name="saveEmail" placeholder="your.email@example.com" />
+            <input type="email" class="save-email-input" id="saveEmail" name="saveEmail"
+                placeholder="your.email@example.com" />
             <div class="save-email-actions">
                 <button class="btn-send-link" onclick="sendSaveLink()">
                     <i class="fas fa-paper-plane"></i> Send Link
@@ -2815,7 +2803,8 @@
 
             <div class="form-group">
                 <label for="newPickupDate"><i class="fas fa-calendar"></i> New Pickup Date</label>
-                <input type="date" id="newPickupDate" name="newPickupDate" class="save-email-input" style="margin-bottom: 15px;">
+                <input type="date" id="newPickupDate" name="newPickupDate" class="save-email-input"
+                    style="margin-bottom: 15px;">
             </div>
 
             <div class="form-group">
@@ -2933,17 +2922,20 @@
 
             <div class="form-group">
                 <label for="transferName"><i class="fas fa-user"></i> Recipient Name</label>
-                <input type="text" id="transferName" name="transferName" class="save-email-input" placeholder="Enter full name">
+                <input type="text" id="transferName" name="transferName" class="save-email-input"
+                    placeholder="Enter full name">
             </div>
 
             <div class="form-group">
                 <label for="transferEmail"><i class="fas fa-envelope"></i> Recipient Email</label>
-                <input type="email" id="transferEmail" name="transferEmail" class="save-email-input" placeholder="Enter email address">
+                <input type="email" id="transferEmail" name="transferEmail" class="save-email-input"
+                    placeholder="Enter email address">
             </div>
 
             <div class="form-group">
                 <label for="transferPhone"><i class="fas fa-phone"></i> Recipient Phone</label>
-                <input type="tel" id="transferPhone" name="transferPhone" class="save-email-input" placeholder="Enter 10-digit phone number">
+                <input type="tel" id="transferPhone" name="transferPhone" class="save-email-input"
+                    placeholder="Enter 10-digit phone number">
             </div>
 
             <div class="fee-structure">
@@ -3831,7 +3823,7 @@
                 doc.setTextColor(100, 100, 100);
                 doc.text('Thank you for choosing Hi-Tech Car Transport!', 105, 280, { align: 'center' });
 
-                doc.save('booking-summary-' + new Date().toISOString().slice(0,10) + '.pdf');
+                doc.save('booking-summary-' + new Date().toISOString().slice(0, 10) + '.pdf');
                 if (typeof showToast === 'function') showToast('Success', 'PDF downloaded!', 'success', 3000);
             } catch (err) {
                 console.error('PDF error:', err);
@@ -5191,7 +5183,7 @@
         // ========================================
         document.addEventListener('DOMContentLoaded', function () {
             console.log('🔵 DOMContentLoaded started in booking.html inline script');
-            
+
             // Initialize map first
             initMap();
 
@@ -5205,7 +5197,7 @@
             const submitBtn = document.getElementById('submitBtn');
             const successModal = document.getElementById('successModal');
             const bookingRef = document.getElementById('bookingRef');
-            
+
             console.log('📋 Elements found:', {
                 form: !!bookingForm,
                 btn: !!submitBtn,
@@ -5233,7 +5225,7 @@
 
             // Add input event listeners for real-time validation
             const validationFields = ['fullName', 'phone', 'email', 'vehicleType',
-                          'pickupLocation', 'dropLocation', 'pickupDate'];
+                'pickupLocation', 'dropLocation', 'pickupDate'];
 
             validationFields.forEach(field => {
                 const input = document.getElementById(field);
@@ -5306,10 +5298,10 @@
 
             // Direct click handler on button - THIS IS THE MAIN HANDLER
             if (submitBtn) {
-                submitBtn.addEventListener('click', async function(e) {
+                submitBtn.addEventListener('click', async function (e) {
                     e.preventDefault();
                     console.log('🔘 Submit button clicked!');
-                    
+
                     // 🔒 DUPLICATE SUBMISSION PROTECTION
                     if (isSubmitting) {
                         console.log('⚠️ Already submitting, skipping...');
@@ -5347,7 +5339,7 @@
                         console.log('📦 Booking data:', bookingData);
 
                         // Mark all 3 steps as completed
-                        document.querySelectorAll('.step').forEach(function(step) {
+                        document.querySelectorAll('.step').forEach(function (step) {
                             step.classList.remove('active');
                             step.classList.add('completed');
                         });
@@ -5670,84 +5662,84 @@
 
 
         // Add-on Services Handler
-function updateAddonPrice() {
-    let totalAddonPrice = 0;
-    const checkedAddons = document.querySelectorAll('.addon-checkbox:checked');
-    
-    checkedAddons.forEach(addon => {
-        totalAddonPrice += parseInt(addon.dataset.price);
-    });
-    
-    // Update your price breakdown
-    const addonPriceElement = document.querySelector('.price-item.addons .price-value');
-    if (addonPriceElement) {
-        addonPriceElement.textContent = `₹${totalAddonPrice}`;
-    }
-    
-    // Recalculate total price
-    calculateTotalPrice();
-    
-    console.log('Selected Add-ons Total:', totalAddonPrice);
-}
+        function updateAddonPrice() {
+            let totalAddonPrice = 0;
+            const checkedAddons = document.querySelectorAll('.addon-checkbox:checked');
 
-// If you have a total price calculation function, update it
-function calculateTotalPrice() {
-    const baseFare = parseInt(document.querySelector('.base-fare-value')?.textContent.replace(/[^0-9]/g, '') || 0);
-    const distanceCharge = parseInt(document.querySelector('.distance-charge-value')?.textContent.replace(/[^0-9]/g, '') || 0);
-    const gst = parseInt(document.querySelector('.gst-value')?.textContent.replace(/[^0-9]/g, '') || 0);
-    
-    let addonTotal = 0;
-    document.querySelectorAll('.addon-checkbox:checked').forEach(addon => {
-        addonTotal += parseInt(addon.dataset.price);
-    });
-    
-    const totalAmount = baseFare + distanceCharge + gst + addonTotal;
-    
-    const totalElement = document.querySelector('.price-item.total .price-value');
-    if (totalElement) {
-        totalElement.textContent = `₹${totalAmount}`;
-    }
-}
+            checkedAddons.forEach(addon => {
+                totalAddonPrice += parseInt(addon.dataset.price);
+            });
 
-// Enhanced focus management for city inputs
-function initCityInputFocusManagement() {
-    const pickupInput = document.getElementById('pickupCity');
-    const dropInput = document.getElementById('dropCity');
-    
-    if (!pickupInput || !dropInput) return;
-    
-    // Handle focus events
-    pickupInput.addEventListener('focus', function() {
-        this.parentElement.parentElement.style.zIndex = '10';
-        if (dropInput && !dropInput.value) {
-            dropInput.placeholder = 'Destination';
+            // Update your price breakdown
+            const addonPriceElement = document.querySelector('.price-item.addons .price-value');
+            if (addonPriceElement) {
+                addonPriceElement.textContent = `₹${totalAddonPrice}`;
+            }
+
+            // Recalculate total price
+            calculateTotalPrice();
+
+            console.log('Selected Add-ons Total:', totalAddonPrice);
         }
-    });
-    
-    pickupInput.addEventListener('blur', function() {
-        this.parentElement.parentElement.style.zIndex = '1';
-        if (dropInput && !dropInput.value) {
-            dropInput.placeholder = 'Start typing city name...';
+
+        // If you have a total price calculation function, update it
+        function calculateTotalPrice() {
+            const baseFare = parseInt(document.querySelector('.base-fare-value')?.textContent.replace(/[^0-9]/g, '') || 0);
+            const distanceCharge = parseInt(document.querySelector('.distance-charge-value')?.textContent.replace(/[^0-9]/g, '') || 0);
+            const gst = parseInt(document.querySelector('.gst-value')?.textContent.replace(/[^0-9]/g, '') || 0);
+
+            let addonTotal = 0;
+            document.querySelectorAll('.addon-checkbox:checked').forEach(addon => {
+                addonTotal += parseInt(addon.dataset.price);
+            });
+
+            const totalAmount = baseFare + distanceCharge + gst + addonTotal;
+
+            const totalElement = document.querySelector('.price-item.total .price-value');
+            if (totalElement) {
+                totalElement.textContent = `₹${totalAmount}`;
+            }
         }
-    });
-    
-    dropInput.addEventListener('focus', function() {
-        this.parentElement.parentElement.style.zIndex = '10';
-        if (pickupInput && !pickupInput.value) {
-            pickupInput.placeholder = 'Origin';
+
+        // Enhanced focus management for city inputs
+        function initCityInputFocusManagement() {
+            const pickupInput = document.getElementById('pickupCity');
+            const dropInput = document.getElementById('dropCity');
+
+            if (!pickupInput || !dropInput) return;
+
+            // Handle focus events
+            pickupInput.addEventListener('focus', function () {
+                this.parentElement.parentElement.style.zIndex = '10';
+                if (dropInput && !dropInput.value) {
+                    dropInput.placeholder = 'Destination';
+                }
+            });
+
+            pickupInput.addEventListener('blur', function () {
+                this.parentElement.parentElement.style.zIndex = '1';
+                if (dropInput && !dropInput.value) {
+                    dropInput.placeholder = 'Start typing city name...';
+                }
+            });
+
+            dropInput.addEventListener('focus', function () {
+                this.parentElement.parentElement.style.zIndex = '10';
+                if (pickupInput && !pickupInput.value) {
+                    pickupInput.placeholder = 'Origin';
+                }
+            });
+
+            dropInput.addEventListener('blur', function () {
+                this.parentElement.parentElement.style.zIndex = '1';
+                if (pickupInput && !pickupInput.value) {
+                    pickupInput.placeholder = 'Start typing city name...';
+                }
+            });
         }
-    });
-    
-    dropInput.addEventListener('blur', function() {
-        this.parentElement.parentElement.style.zIndex = '1';
-        if (pickupInput && !pickupInput.value) {
-            pickupInput.placeholder = 'Start typing city name...';
-        }
-    });
-}
-document.addEventListener('DOMContentLoaded', function() {
-    initCityInputFocusManagement();
-});
+        document.addEventListener('DOMContentLoaded', function () {
+            initCityInputFocusManagement();
+        });
 
 
     </script>
@@ -5759,10 +5751,12 @@ document.addEventListener('DOMContentLoaded', function() {
     <link rel="stylesheet" href="../css/components/footer.css" />
     <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
     <link rel="stylesheet" href="../css/components/quote-modal.css" />
-    
+
     <!-- 🚀 Floating Action Menu loaded via footer component -->
     <script src="../js/modules/booking-modals.js"></script>
     <script type="module" src="../js/modules/booking.js"></script>
+    <script src="../js/modules/themes.js"></script>
+     <script src="../js/modules/theme-switcher.js"></script>
     <script src="../js/script.js"></script>
 
 </body>
