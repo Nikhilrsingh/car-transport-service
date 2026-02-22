@@ -45,20 +45,19 @@
       service-related questions. We're here to help!
     </p>
     <div class="enquiry-stats">
-      <div class="stat-item">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Enquiries This Month</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Avg Response Time (Hours)</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">0</span>
-        <span class="stat-label">%</span>
-        <span class="stat-label">Customer Satisfaction</span>
-      </div>
-    </div>
+  <div class="stat-item">
+    <span class="stat-number" data-target="245">0</span>
+    <span class="stat-label">Enquiries This Month</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" data-target="120">0</span>
+    <span class="stat-label">Avg Response Time (Minutes)</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" data-target="98">0</span>
+    <span class="stat-label">Customer Satisfaction Percent</span>
+  </div>
+</div>
   </section>
 
   <!-- MAIN CONTAINER -->
@@ -97,7 +96,7 @@
                 id="phone"
                 name="phone"
                 required
-                maxlength="10"
+                maxlength="11"
                 inputmode="numeric"
                 placeholder="Enter 10-digit number"
               />
@@ -506,44 +505,7 @@
   <button class="back-to-bottom" id="backToBottom">
     <i class="fas fa-arrow-down"></i>
   </button>
-<script src="../js/script.js"></script>
-  <!-- FAQ Accordion -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var faqItems = document.querySelectorAll('.faq-widget .faq-item');
-      faqItems.forEach(function (item) {
-        var question = item.querySelector('.faq-question');
-        if (!question) return;
-
-        // Make the question element accessible as a button
-        question.setAttribute('role', 'button');
-        question.setAttribute('tabindex', '0');
-        question.setAttribute(
-          'aria-expanded',
-          item.classList.contains('active') ? 'true' : 'false'
-        );
-
-        function toggleItem() {
-          var isActive = item.classList.contains('active');
-
-          // Collapse all items and update aria-expanded
-          faqItems.forEach(function (other) {
-            other.classList.remove('active');
-            var otherQuestion = other.querySelector('.faq-question');
-            if (otherQuestion) {
-              otherQuestion.setAttribute('aria-expanded', 'false');
-            }
-          });
-
-          // Expand this item if it was not active
-          if (!isActive) {
-            item.classList.add('active');
-            question.setAttribute('aria-expanded', 'true');
-          }
-        }
-
-        // Mouse interaction
-  <!-- 🚀 Floating Action Menu loaded via footer component -->
+  <script src="../js/script.js"></script>
 </body>
 
 </html>
