@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Car Transport Service</title>
+    <link rel="stylesheet" href="../css/components/navbar.css" />
+    <link rel="stylesheet" href="../css/components/middle-navbar.css" />
     <link rel="stylesheet" href="../css/components/loading-indicators.css" />
     <!-- <link rel="stylesheet" href="../css/styles.css" /> -->
     <link rel="stylesheet" href="../css/components/glowing-input.css" />
@@ -13,6 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       crossorigin="anonymous"
     />
+    <link id="theme-style" rel="stylesheet" href="../css/light-mode.css" />
 
     <link rel="stylesheet" href="../css/pages/city.css">
 
@@ -31,14 +34,6 @@
         font-family: Arial, sans-serif;
         background: #f7f7f7;
         margin: 0;
-        padding: 0;
-      }
-
-      header {
-        text-align: center;
-        background: #000;
-        color: #fff;
-        padding: 1rem 0;
       }
 
       .city-container {
@@ -132,9 +127,7 @@
   </head>
 
   <body>
-    <header>
-      <h2>Car Transport Service 🚗</h2>
-    </header>
+    <div id="navbar-container"></div>
 
     <main class="city-container">
       <img id="cityImage" src="" alt="City Image" />
@@ -261,6 +254,7 @@
       href="../css/components/bottom-fixed-container.css"
     />
 
+    <script src="../js/modules/navbar-loader.js?v=2"></script>
     <script src="../js/modules/modal.js"></script>
     <script src="../js/modules/quote-modal.js"></script>
     <script src="../js/modules/footer-loader.js"></script>
