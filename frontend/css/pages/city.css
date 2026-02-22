@@ -6,7 +6,24 @@
         padding: 0;
       }
 
-      header,
+      .navbar-container {
+        background: #000;
+        color: #fff;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar-container a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 0.75rem;
+      }
+
+      .navbar-container a:hover {
+        text-decoration: underline;
+      }
       footer {
         text-align: center;
         background: #000;
