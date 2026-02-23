@@ -1,5 +1,5 @@
 // Enhanced Enquiry Form Module
-(function() {
+(function () {
     'use strict';
 
     // Configuration
@@ -9,11 +9,11 @@
         maxFiles: 5,
         charLimit: 500,
         blackoutDates: [
-            '2025-12-25', // Christmas
-            '2025-01-01', // New Year
-            '2025-01-26', // Republic Day
-            '2025-08-15', // Independence Day
-            '2025-10-02'  // Gandhi Jayanti
+            '12-25', // Christmas
+            '01-01', // New Year
+            '01-26', // Republic Day
+            '08-15', // Independence Day
+            '10-02'  // Gandhi Jayanti
         ],
         emailDomains: [
             'gmail.com',
@@ -50,8 +50,79 @@
         cities: [],
         uploadedFiles: [],
         autoSaveTimer: null,
-        estimatedPrice: 0
+        estimatedPrice: 0,
+        dynamicHolidays: [] // Stores fetched holidays from API
     };
+
+    /**
+     * Fetches real-time holidays from Nager.Date API
+     */
+    async function fetchDynamicHolidays() {
+        const year = new Date().getFullYear();
+        const nextYear = year + 1;
+
+        const fetchYearHolidays = async (y) => {
+            try {
+                const response = await fetch(`https://date.nager.at/api/v3/PublicHolidays/IN/${y}`);
+                if (response.ok) {
+                    const holidays = await response.json();
+                    return holidays.map(h => h.date.substring(5)); // Extract MM-DD
+                }
+            } catch (e) {
+                console.warn(`Failed to fetch holidays for ${y}:`, e);
+            }
+            return [];
+        };
+
+        const [holidaysThisYear, holidaysNextYear] = await Promise.all([
+            fetchYearHolidays(year),
+            fetchYearHolidays(nextYear)
+        ]);
+
+        // Merge and unique
+        state.dynamicHolidays = [...new Set([...holidaysThisYear, ...holidaysNextYear])];
+
+        if (state.dynamicHolidays.length > 0) {
+            console.log('✅ Real-time holidays loaded:', state.dynamicHolidays.length, 'dates');
+            // Re-initialize calendar if holidays change
+            setupYearAgnosticCalendar();
+        }
+    }
+
+    /**
+     * Setup Flatpickr for a premium, real-time calendar experience
+     */
+    function setupYearAgnosticCalendar() {
+        const dateInput = document.getElementById('pickupDate');
+        if (!dateInput || typeof flatpickr === 'undefined') return;
+
+        // Combine hardcoded and dynamic holidays
+        const allHolidays = [...new Set([...CONFIG.blackoutDates, ...state.dynamicHolidays])];
+
+        flatpickr("#pickupDate", {
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            disable: [
+                function (date) {
+                    // Visually disable holidays
+                    const monthDay = date.toISOString().substring(5, 10);
+                    return allHolidays.includes(monthDay);
+                }
+            ],
+            onChange: function (selectedDates, dateStr) {
+                validateDate();
+            },
+            onDayCreate: function (dObj, dStr, fp, dayElem) {
+                if (dayElem.dateObj) {
+                    const dateStr = dayElem.dateObj.toISOString().substring(5, 10);
+                    if (allHolidays.includes(dateStr)) {
+                        dayElem.classList.add('holiday-date');
+                        dayElem.title = "Public Holiday - Service may be limited";
+                    }
+                }
+            }
+        });
+    }
 
     // Load cities data
     async function loadCities() {
@@ -84,20 +155,22 @@
 
     // Initialize
     async function init() {
-         setupFAQs();
-        // Load cities first before setting up autocomplete
-        await loadCities();
-        console.log('Cities loaded:', state.cities.length); // Debug log
-        
+        setupFAQs();
+
+        // Load cities and holidays
+        await Promise.all([
+            loadCities(),
+            fetchDynamicHolidays()
+        ]);
+
         setupEventListeners();
         loadSavedData();
         updateOperatingHours();
-       
-       
-        
-        // Set minimum date for pickup
+        setupYearAgnosticCalendar();
+
+        // Native fallbacks if flatpickr fails
         const dateInput = document.getElementById('pickupDate');
-        if (dateInput) {
+        if (dateInput && !dateInput._flatpickr) {
             const today = new Date().toISOString().split('T')[0];
             dateInput.setAttribute('min', today);
         }
@@ -108,7 +181,7 @@
         const form = document.getElementById('enquiryForm');
         if (form) {
             form.addEventListener('submit', handleSubmit);
-            
+
             // Real-time validation
             const inputs = form.querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
@@ -197,7 +270,7 @@
 
             case 'phone':
                 const cleaned = value.replace(/\D/g, '');
-                
+
                 // Reject repeating digits (0000000000, 9999999999)
                 if (!cleaned) {
                     isValid = false;
@@ -267,15 +340,15 @@
     function checkEmailTypo() {
         const emailInput = document.getElementById('email');
         const suggestionElement = emailInput.parentElement.querySelector('.email-suggestion');
-        
+
         if (!emailInput || !suggestionElement) return;
 
         const email = emailInput.value.trim();
         const parts = email.split('@');
-        
+
         if (parts.length === 2) {
             const domain = parts[1].toLowerCase();
-            
+
             // Common typos
             const typos = {
                 'gmial.com': 'gmail.com',
@@ -308,14 +381,14 @@
     function updateCharCounter() {
         const messageInput = document.getElementById('message');
         const counterElement = document.querySelector('.char-counter');
-        
+
         if (!messageInput || !counterElement) return;
 
         const length = messageInput.value.length;
         const limit = CONFIG.charLimit;
-        
+
         counterElement.textContent = `${length}/${limit} characters`;
-        
+
         // Update styling based on length
         counterElement.classList.remove('warning', 'danger');
         if (length > limit * 0.8) {
@@ -331,12 +404,22 @@
     function validateDate() {
         const dateInput = document.getElementById('pickupDate');
         const warningElement = document.getElementById('dateWarning');
-        
+
         if (!dateInput) return;
 
-        const selectedDate = dateInput.value;
-        
-        if (CONFIG.blackoutDates.includes(selectedDate)) {
+        const selectedDate = dateInput.value; // YYYY-MM-DD
+        if (!selectedDate) return;
+
+        // Combine hardcoded and dynamic holidays
+        const allHolidays = [...new Set([...CONFIG.blackoutDates, ...state.dynamicHolidays])];
+
+        // Extract MM-DD for year-agnostic holiday check
+        const parts = selectedDate.split('-');
+        if (parts.length < 3) return;
+
+        const monthDay = `${parts[1]}-${parts[2]}`;
+
+        if (allHolidays.includes(monthDay)) {
             if (warningElement) {
                 warningElement.innerHTML = '<i class="fas fa-exclamation-triangle"></i> This is a holiday. Service may be limited.';
                 warningElement.classList.add('show');
@@ -352,7 +435,7 @@
     function setupCityAutocomplete(inputId) {
         const input = document.getElementById(inputId);
         const dropdown = document.getElementById(inputId + 'Dropdown');
-        
+
         if (!input || !dropdown) {
             console.warn(`Autocomplete setup failed for ${inputId}`);
             return;
@@ -360,9 +443,9 @@
 
         console.log(`Setting up autocomplete for ${inputId}`); // Debug log
 
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function () {
             const query = this.value.toLowerCase().trim();
-            
+
             // Show dropdown even with 1 character
             if (query.length < 1) {
                 dropdown.classList.remove('show');
@@ -377,7 +460,7 @@
                 return;
             }
 
-            const filtered = state.cities.filter(city => 
+            const filtered = state.cities.filter(city =>
                 city.name.toLowerCase().includes(query) ||
                 city.slug.toLowerCase().includes(query)
             ).slice(0, 10);
@@ -388,12 +471,12 @@
                         <strong>${highlightMatch(city.name, query)}</strong>
                     </div>
                 `).join('');
-                
+
                 dropdown.classList.add('show');
 
                 // Add click handlers
                 dropdown.querySelectorAll('.autocomplete-item').forEach(item => {
-                    item.addEventListener('click', function() {
+                    item.addEventListener('click', function () {
                         input.value = this.dataset.value;
                         dropdown.classList.remove('show');
                         validateField(input);
@@ -407,7 +490,7 @@
         });
 
         // Show all cities on focus (optional: show top 10 when clicking the input)
-        input.addEventListener('focus', function() {
+        input.addEventListener('focus', function () {
             if (this.value.trim().length === 0 && state.cities && state.cities.length > 0) {
                 // Show first 10 cities when clicking empty field
                 const topCities = state.cities.slice(0, 10);
@@ -416,12 +499,12 @@
                         <strong>${city.name}</strong>
                     </div>
                 `).join('');
-                
+
                 dropdown.classList.add('show');
 
                 // Add click handlers
                 dropdown.querySelectorAll('.autocomplete-item').forEach(item => {
-                    item.addEventListener('click', function() {
+                    item.addEventListener('click', function () {
                         input.value = this.dataset.value;
                         dropdown.classList.remove('show');
                         validateField(input);
@@ -432,7 +515,7 @@
         });
 
         // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!input.contains(e.target) && !dropdown.contains(e.target)) {
                 dropdown.classList.remove('show');
             }
@@ -443,12 +526,12 @@
     function highlightMatch(text, query) {
         const index = text.toLowerCase().indexOf(query.toLowerCase());
         if (index === -1) return text;
-        
-        return text.substring(0, index) + 
-               '<span style="color: #ff6347">' + 
-               text.substring(index, index + query.length) + 
-               '</span>' + 
-               text.substring(index + query.length);
+
+        return text.substring(0, index) +
+            '<span style="color: #ff6347">' +
+            text.substring(index, index + query.length) +
+            '</span>' +
+            text.substring(index + query.length);
     }
 
     // File Upload
@@ -463,7 +546,7 @@
         uploadArea.addEventListener('click', () => fileInput.click());
 
         // File selection
-        fileInput.addEventListener('change', function() {
+        fileInput.addEventListener('change', function () {
             handleFiles(this.files);
         });
 
@@ -511,7 +594,7 @@
 
             // Create preview
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const previewItem = document.createElement('div');
                 previewItem.className = 'file-preview-item';
                 previewItem.innerHTML = `
@@ -522,7 +605,7 @@
                 `;
 
                 // Remove button
-                previewItem.querySelector('.file-remove-btn').addEventListener('click', function(e) {
+                previewItem.querySelector('.file-remove-btn').addEventListener('click', function (e) {
                     e.stopPropagation();
                     const index = state.uploadedFiles.indexOf(file);
                     if (index > -1) {
@@ -564,7 +647,7 @@
         });
 
         const percentage = Math.round((filledFields / requiredFields.length) * 100);
-        
+
         const progressFill = document.querySelector('.progress-fill');
         const progressText = document.querySelector('.progress-text');
 
@@ -643,7 +726,7 @@
         // Simple distance estimation (this would be more accurate with actual API)
         const baseDistance = 500; // km
         const pricePerKm = 10;
-        
+
         const vehicleConfig = CONFIG.vehicleTypes.find(v => v.value === vehicleType);
         const basePrice = vehicleConfig ? vehicleConfig.basePrice : 5000;
 
@@ -673,7 +756,7 @@
         });
 
         localStorage.setItem('enquiryFormData', JSON.stringify(data));
-        
+
         showAutoSaveIndicator();
     }
 
@@ -683,7 +766,7 @@
 
         try {
             const data = JSON.parse(savedData);
-            
+
             Object.keys(data).forEach(key => {
                 const field = document.getElementById(key) || document.querySelector(`[name="${key}"]`);
                 if (field) {
@@ -707,7 +790,7 @@
         if (!indicator) return;
 
         indicator.classList.add('show');
-        
+
         setTimeout(() => {
             indicator.classList.remove('show');
         }, 2000);
@@ -828,7 +911,7 @@
     function downloadEnquiryPDF(referenceNumber) {
         // Get stored form data
         const data = state.submittedData || {};
-        
+
         if (!data || Object.keys(data).length === 0) {
             showToast('Error', 'Form data not found', 'error');
             return;
@@ -938,10 +1021,10 @@
                 </div>
 
                 <div class="timestamp">
-                    Generated on: ${new Date().toLocaleString('en-IN', { 
-                        dateStyle: 'full', 
-                        timeStyle: 'short' 
-                    })}
+                    Generated on: ${new Date().toLocaleString('en-IN', {
+            dateStyle: 'full',
+            timeStyle: 'short'
+        })}
                 </div>
 
                 <div class="section">
@@ -1065,7 +1148,7 @@
     // Share Enquiry
     function shareEnquiry(referenceNumber) {
         const message = `My enquiry reference: ${referenceNumber}\nTrack status: ${window.location.origin}/tracking.html`;
-        
+
         if (navigator.share) {
             navigator.share({
                 title: 'Enquiry Reference',
@@ -1149,7 +1232,7 @@
     function showToast(title, message, type = 'info') {
         const toast = document.createElement('div');
         toast.className = 'toast';
-        
+
         const icons = {
             success: 'fa-check-circle',
             error: 'fa-exclamation-circle',
