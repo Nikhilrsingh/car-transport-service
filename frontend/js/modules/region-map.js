@@ -105,17 +105,29 @@ function initRegionMap() {
       maxZoom: 19
     }).addTo(map);
 
-    // Force map to recalculate size and fit India bounds multiple times
+    // Robust size invalidation
     const invalidate = () => {
       if (map) {
         map.invalidateSize();
-        map.fitBounds(indiaBounds, { padding: [20, 20] });
+        // If map bounds are very small or center is 0,0, refit
+        const center = map.getCenter();
+        if (center.lat === 22.5 && center.lng === 78.9 || Math.abs(center.lat) < 0.1) {
+          map.fitBounds(indiaBounds, { padding: [20, 20] });
+        }
       }
     };
+
+    // Use ResizeObserver for more reliable size management
+    if (window.ResizeObserver) {
+      new ResizeObserver(() => {
+        if (map) map.invalidateSize();
+      }).observe(mapContainer);
+    }
 
     setTimeout(invalidate, 100);
     setTimeout(invalidate, 500);
     setTimeout(invalidate, 1000);
+    setTimeout(invalidate, 2000);
 
     // Add city markers
     addCityMarkers();

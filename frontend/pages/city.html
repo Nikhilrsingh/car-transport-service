@@ -1,247 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Car Transport Service</title>
-    <link rel="stylesheet" href="../css/components/navbar.css" />
-    <link rel="stylesheet" href="../css/components/middle-navbar.css" />
-    <link rel="stylesheet" href="../css/components/loading-indicators.css" />
-    <!-- <link rel="stylesheet" href="../css/styles.css" /> -->
-    <link rel="stylesheet" href="../css/components/glowing-input.css" />
-    <link rel="stylesheet" href="../css/styles.css">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      crossorigin="anonymous"
-    />
-    <link id="theme-style" rel="stylesheet" href="../css/light-mode.css" />
 
-    <link rel="stylesheet" href="../css/pages/city.css">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Transport Service</title>
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/middle-navbar.css" />
+  <link rel="stylesheet" href="../css/components/loading-indicators.css" />
+  <!-- <link rel="stylesheet" href="../css/styles.css" /> -->
+  <link rel="stylesheet" href="../css/components/glowing-input.css" />
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" />
+  <link id="theme-style" rel="stylesheet" href="../css/light-mode.css" />
 
-    <!-- Basic meta -->
-    <meta
-      name="description"
-      content="Car Transport Service - Reliable car shipping across India."
-    />
-    <meta
-      name="keywords"
-      content="car transport, vehicle transport, car movers India"
-    />
+  <link rel="stylesheet" href="../css/pages/city.css">
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #f7f7f7;
-        margin: 0;
-      }
+  <!-- Basic meta -->
+  <meta name="description" content="Car Transport Service - Reliable car shipping across India." />
+  <meta name="keywords" content="car transport, vehicle transport, car movers India" />
 
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body[data-theme="dark"] {
+      background: #020617;
+      color: #f9fafb;
+    }
+
+    .city-container {
+      max-width: 1000px;
+      margin: 4rem auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    body[data-theme="dark"] .city-container {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .city-container img {
+      width: 50%;
+      max-height: 450px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      flex: 1;
+    }
+
+    .description h1 {
+      text-align: left;
+      margin-top: 0;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 1.5rem;
+    }
+
+    body[data-theme="dark"] .description h1 {
+      color: #fff;
+    }
+
+    .description p {
+      text-align: left;
+      font-size: 1.2rem;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    body[data-theme="dark"] .description p {
+      color: #9ca3af;
+    }
+
+    @media screen and (max-width: 768px) {
       .city-container {
-        max-width: 900px;
-        margin: 2rem auto;
-        background: #fff;
-        border-radius: 8px;
-        padding: 2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        margin: 1rem;
+        padding: 1.5rem;
       }
 
       .city-container img {
-        width: 50%;
-        max-height: 400px;
-        object-fit: cover;
-        border-radius: 6px;
-      }
-      .description {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-      }
-      .description h1 {
-        text-align: center;
-        margin-top: 1rem;
-        color: #333;
+        width: 100%;
       }
 
+      .description h1,
       .description p {
         text-align: center;
-        font-size: 1.1rem;
-        color: #555;
-        line-height: 1.6;
       }
-      @media screen and (max-width: 670px) {
-        .city-container {
-          flex-direction: column;
-        }
-        .city-container img {
-          width: 80%;
-        }
-      }
-      /* Calculator */
-      .card {
-        background: #fff;
-        padding: 25px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        margin: 30px auto;
-        max-width: 900px;
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        flex-direction: column;
-      }
-      .card h3 {
-        text-align: center;
-        font-size: 2rem;
-        font-weight: bold;
-      }
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      input,
-      select {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-      .btn button{
-        margin: 10px auto;
-        padding: 10px 12px;
-        border-radius: 10px;
-        border: 2px soslid rgba(0, 0, 0, 0.1);
-        outline: none;
-        font-size: 23px;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-      }
-    </style>
-  </head>
+    }
+  </style>
+</head>
 
-  <body>
-    <div id="navbar-container"></div>
+<body>
+  <div id="navbar-container"></div>
 
-    <main class="city-container">
-      <img id="cityImage" src="" alt="City Image" />
-      <div class="description">
-        <h1 id="cityTitle">Loading...</h1>
-        <p id="cityDescription">Please wait while we load city details.</p>
-      </div>
-    </main>
-    <!-- Calculator -->
-    <section class="card">
-      <h3>Instant Price Calculator</h3>
+  <main class="city-container">
+    <img id="cityImage" src="" alt="City Image" />
+    <div class="description">
+      <h1 id="cityTitle">Loading...</h1>
+      <p id="cityDescription">Please wait while we load city details.</p>
+    </div>
+  </main>
+  <!-- Calculator removed as per user request (redundant) -->
 
-      <div class="grid-2">
-        <div class="form-group">
-          <label>Pickup City</label><input id="myCity" name="pickup" />
-        </div>
-        <div class="form-group"><label>Drop City</label><input /></div>
-        <div class="form-group">
-          <label>Car Type</label
-          ><select>
-            <option value="">--Please choose an option--</option>
-            <option>Hatchback</option>
-            <option>Sedan</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Transport Type</label
-          ><select>
-            <option>Open</option>
-            <option>Closed</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Distance (km)</label
-          ><input type="number" placeholder="Enter Distance" />
-        </div>
-        <div class="form-group">
-          <label>Add-ons</label>
-          <div class="div">
-            <input type="checkbox" /> Door Pickup &nbsp;
-            <input type="checkbox" /> Insurance
-          </div>
-        </div>
-      </div>
-      <div class="btn">
-        <button type="submit">Submit</button>
-      </div>
-    </section>
+  <!-- Footer injected dynamically by footer-loader.js -->
+  <div id="footer-container"></div>
 
-    <!-- Footer injected dynamically by footer-loader.js -->
-    <div id="footer-container"></div>
+  <script>
+    // --- Fetch city from URL ---
+    const params = new URLSearchParams(window.location.search);
+    const citySlug = params.get("city");
 
-    <script>
-      // --- Fetch city from URL ---
-      const params = new URLSearchParams(window.location.search);
-      const citySlug = params.get("city");
-
-      // --- Load data ---
-      fetch("../assets/data/cities.json")
-        .then((res) => res.json())
-        .then((cities) => {
-          const city = cities.find((c) => c.slug === citySlug);
-          if (city) {
-            document.title = city.name + " | Car Transport Service";
-            document.getElementById("cityTitle").textContent = city.name;
-            document.getElementById("cityDescription").textContent =
-              city.description;
-            document.getElementById("cityImage").src = "../" + city.image;
-
-            // form validation
-            document.getElementById("myCity").value = city.name;  
-            
-            const drop=document.querySelector('div.form-group:nth-child(2) input').value.trim();
-            const distance=document.querySelector('input[type="number"]').value.trim();
-            let errors=[];
-
- 
-            if(drop==='') errors.push('Drop city is required');
-            if(distance==='' || distance<=0) errors.push('Valid distance is required');
-
-
-            // if(errors.length>0){alert(errors.join("")); 
-            
-            // alert('Form submitted successfully!'); 
-          } else {
-            document.getElementById("cityTitle").textContent = "City Not Found";
-            document.getElementById("cityDescription").textContent =
-              "Sorry, the requested city could not be found.";
-            document.getElementById("cityImage").style.display = "none";
-          }
-        })
-        .catch(() => {
-          document.getElementById("cityTitle").textContent =
-            "Error Loading City Data";
+    // --- Load data ---
+    fetch("../assets/data/cities.json")
+      .then((res) => res.json())
+      .then((cities) => {
+        const city = cities.find((c) => c.slug === citySlug);
+        if (city) {
+          document.title = city.name + " | Car Transport Service";
+          document.getElementById("cityTitle").textContent = city.name;
           document.getElementById("cityDescription").textContent =
-            "Please try again later.";
-        });
-    </script>
+            city.description;
 
-    <!-- 🌟 Bottom Fixed Action Bar -->
-    <link rel="stylesheet" href="../css/components/footer.css" />
-    <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
-    <link rel="stylesheet" href="../css/components/quote-modal.css" />
-    <link
-      rel="stylesheet"
-      href="../css/components/bottom-fixed-container.css"
-    />
+          // Use specialized city image if available, else generic logo
+          const cityMap = {
+            'delhi': 'assets/images/cities/delhi.png',
+            'mumbai': 'assets/images/cities/mumbai.png',
+            'bangalore': 'assets/images/cities/bangalore.png',
+            'chennai': 'assets/images/cities/Chennai.JPG',
+            'hyderabad': 'assets/images/cities/Hyderabad.jpg',
+            'kolkata': 'assets/images/cities/Kolkata.jpg',
+            'agra': 'assets/images/cities/agra.png',
+            'jaipur': 'assets/images/cities/jaipur.png',
+            'vadodara': 'assets/images/cities/vadodara.png',
+            'indore': 'assets/images/cities/indore.png',
+            'surat': 'assets/images/cities/surat.png'
+          };
 
-    <script src="../js/modules/navbar-loader.js?v=2"></script>
-    <script src="../js/modules/modal.js"></script>
-    <script src="../js/modules/quote-modal.js"></script>
-    <script src="../js/modules/footer-loader.js"></script>
-    <script src="../js/modules/themes.js"></script>
-    <!-- Component Initializer - Ensures global components (FAB, Chatbot, etc.) are available -->
-    <script src="../js/modules/component-initializer.js"></script>
-  </body>
+          const imagePath = cityMap[citySlug] || city.image;
+          document.getElementById("cityImage").src = "../" + imagePath.replace(/^\//, '');
+        } else {
+          document.getElementById("cityTitle").textContent = "City Not Found";
+          document.getElementById("cityDescription").textContent =
+            "Sorry, the requested city could not be found.";
+          document.getElementById("cityImage").style.display = "none";
+        }
+      })
+      .catch(() => {
+        document.getElementById("cityTitle").textContent =
+          "Error Loading City Data";
+        document.getElementById("cityDescription").textContent =
+          "Please try again later.";
+      });
+  </script>
+
+  <!-- 🌟 Bottom Fixed Action Bar -->
+  <link rel="stylesheet" href="../css/components/footer.css" />
+  <link rel="stylesheet" href="../css/components/sticky-quote-button.css" />
+  <link rel="stylesheet" href="../css/components/quote-modal.css" />
+  <link rel="stylesheet" href="../css/components/bottom-fixed-container.css" />
+
+  <script src="../js/modules/navbar-loader.js?v=2"></script>
+  <script src="../js/modules/modal.js"></script>
+  <script src="../js/modules/quote-modal.js"></script>
+  <script src="../js/modules/footer-loader.js"></script>
+  <script src="../js/modules/themes.js"></script>
+  <!-- Component Initializer - Ensures global components (FAB, Chatbot, etc.) are available -->
+  <script src="../js/modules/component-initializer.js"></script>
+</body>
+
 </html>

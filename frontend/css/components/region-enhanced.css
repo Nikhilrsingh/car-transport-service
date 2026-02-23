@@ -200,6 +200,15 @@ body[data-theme="dark"] .region-header .section-subtitle {
   margin-bottom: 40px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease 0.2s both;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="dark"] .popular-cities-section {
+  background: rgba(17, 20, 22, 0.7) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
 }
 
 .popular-cities-title {
@@ -212,6 +221,10 @@ body[data-theme="dark"] .region-header .section-subtitle {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+body[data-theme="dark"] .popular-cities-title {
+  color: #fff !important;
 }
 
 .popular-cities-title i {
@@ -249,6 +262,18 @@ body[data-theme="dark"] .region-header .section-subtitle {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="dark"] .popular-city-card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff !important;
+}
+
+body[data-theme="dark"] .popular-city-card:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--region-primary);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .popular-city-card::before {
@@ -309,6 +334,10 @@ body[data-theme="dark"] .region-header .section-subtitle {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 8px;
+}
+
+body[data-theme="dark"] .popular-city-info h4 {
+  color: #fff !important;
 }
 
 .city-badge {
