@@ -1949,6 +1949,91 @@ body[data-theme="dark"] .bottom-sheet {
   box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.8);
 }
 
+/* =========================================
+   DARK MODE OVERRIDES - CITY GRID & SEARCH
+   ========================================= */
+
+body[data-theme="dark"] .region-card.enhanced {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+body[data-theme="dark"] .region-card.enhanced .city-name {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .region-card.enhanced .stat-item {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+body[data-theme="dark"] .city-thumbnail {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+body[data-theme="dark"] .region-filters-search {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .region-search {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .region-search::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+body[data-theme="dark"] .search-suggestions {
+  background: #1a1c20 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="dark"] .suggestion-item {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+body[data-theme="dark"] .suggestion-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body[data-theme="dark"] .filter-tab {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body[data-theme="dark"] .filter-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+body[data-theme="dark"] .city-counter {
+  background: rgba(255, 107, 53, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+body[data-theme="dark"] .view-toggle {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body[data-theme="dark"] .view-btn {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+body[data-theme="dark"] .view-btn.active {
+  background: var(--region-white);
+  color: var(--region-dark);
+}
+
 body[data-theme="dark"] .bottom-sheet-header {
   background: #111416;
   border-bottom-color: rgba(255, 255, 255, 0.1);
