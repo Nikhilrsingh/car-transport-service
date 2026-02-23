@@ -1503,3 +1503,76 @@ body[data-theme="dark"] .cities-count {
 body[data-theme="dark"] .cities-count span {
   color: #ff6b35 !important;
 }
+
+/* =========================================
+   HERO SECTION - INTEGRATED DARK THEME
+   ========================================= */
+
+/* Match Hero Section Background to Global Theme (#0f1115) */
+body[data-theme="dark"] .hero {
+  background: #0f1115 !important;
+}
+
+body[data-theme="dark"] .hero-overlay {
+  background: rgba(15, 17, 21, 0.7) !important;
+  /* Subtle overlay */
+}
+
+/* Main hero card override - Subtle Integrated Glass */
+body[data-theme="dark"] .hero-main {
+  background: rgba(255, 255, 255, 0.03) !important;
+  /* Very subtle light tint for glass */
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(15px) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Remove Aggressive Glows */
+body[data-theme="dark"] .hero-main::before,
+body[data-theme="dark"] .hero-main::after {
+  display: none !important;
+}
+
+/* Text Colors - Clean & Integrated */
+body[data-theme="dark"] .title-line {
+  color: #ffffff !important;
+  text-shadow: none !important;
+  /* Remove shadows for cleaner look */
+}
+
+body[data-theme="dark"] .hero-description {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Benefit Cards - Subtle Theme */
+body[data-theme="dark"] .hero-benefits .benefit {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body[data-theme="dark"] .hero-benefits .benefit span {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 500 !important;
+}
+
+/* Stat Blocks - Subtle Theme */
+body[data-theme="dark"] .stat {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: none !important;
+}
+
+/* Quote Card - Matched to Pricing Plan Style */
+body[data-theme="dark"] .quote-card {
+  background: #1a1c20 !important;
+  /* Slightly lighter than bg for depth */
+  border: 1px solid rgba(255, 99, 71, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4) !important;
+}
+
+body[data-theme="dark"] .quote-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
