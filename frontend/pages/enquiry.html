@@ -8,7 +8,8 @@
   <base href="./" />
   <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
   <link rel="icon" type="image/png" href="classic-car.png" />
-  <link rel="stylesheet" href="../css/components/navbar.css" />    <link rel="stylesheet" href="../css/components/middle-navbar.css" />  <!-- Loading Indicators CSS -->
+  <link rel="stylesheet" href="../css/components/navbar.css" />
+  <link rel="stylesheet" href="../css/components/middle-navbar.css" /> <!-- Loading Indicators CSS -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/components/loading-indicators.css" />
   <link rel="stylesheet" href="../css/components/floating-call-button.css" />
@@ -25,11 +26,15 @@
   <link rel="stylesheet" href="../css/components/glowing-input.css">
   <link rel="stylesheet" href="../css/pages/enquiry.css">
 
+  <!-- Flatpickr for Real-time Calendar -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_orange.css">
+
 
   <!-- Lottie Animation -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-  
+
 </head>
 
 <body>
@@ -45,19 +50,19 @@
       service-related questions. We're here to help!
     </p>
     <div class="enquiry-stats">
-  <div class="stat-item">
-    <span class="stat-number" data-target="245">0</span>
-    <span class="stat-label">Enquiries This Month</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number" data-target="120">0</span>
-    <span class="stat-label">Avg Response Time (Minutes)</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number" data-target="98">0</span>
-    <span class="stat-label">Customer Satisfaction Percent</span>
-  </div>
-</div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="245">0</span>
+        <span class="stat-label">Enquiries This Month</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="120">0</span>
+        <span class="stat-label">Avg Response Time (Minutes)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="98">0</span>
+        <span class="stat-label">Customer Satisfaction Percent</span>
+      </div>
+    </div>
   </section>
 
   <!-- MAIN CONTAINER -->
@@ -66,289 +71,282 @@
     <div class="top-row">
       <!-- ENQUIRY FORM -->
       <div class="enquiry-form-container">
-      <!-- Progress Indicator -->
-      <div class="form-progress">
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
-        </div>
-        <span class="progress-text">0% Complete</span>
-      </div>
-
-      <form id="enquiryForm">
-        <!-- STEP 1: Basic Information -->
-        <div class="form-step-active" data-step="1">
-          <div class="step-header">
-            <h3><i class="fas fa-user-circle"></i> Basic Information</h3>
+        <!-- Progress Indicator -->
+        <div class="form-progress">
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
           </div>
+          <span class="progress-text">0% Complete</span>
+        </div>
 
-          <div class="form-row">
+        <form id="enquiryForm">
+          <!-- STEP 1: Basic Information -->
+          <div class="form-step-active" data-step="1">
+            <div class="step-header">
+              <h3><i class="fas fa-user-circle"></i> Basic Information</h3>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name"><i class="fas fa-user"></i> Full Name *</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required />
+                <span class="validation-icon"></span>
+                <div class="error-message"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
+                <input type="text" id="phone" name="phone" required maxlength="11" inputmode="numeric"
+                  placeholder="Enter 10-digit number" />
+                <span class="validation-icon"></span>
+                <div class="error-message"></div>
+              </div>
+            </div>
+
             <div class="form-group">
-              <label for="name"><i class="fas fa-user"></i> Full Name *</label>
-              <input type="text" id="name" name="name" placeholder="Enter your name" required />
+              <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
               <span class="validation-icon"></span>
               <div class="error-message"></div>
+              <div class="email-suggestion"></div>
             </div>
 
-            <div class="form-group">
-              <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
-              <input
-                type="text"
-                id="phone"
-                name="phone"
-                required
-                maxlength="11"
-                inputmode="numeric"
-                placeholder="Enter 10-digit number"
-              />
+            <div class="form-navigation">
+              <button type="button" class="enquiry-btn btn-prev" disabled>
+                <i class="fas fa-arrow-left"></i> Previous
+              </button>
+              <button type="button" class="enquiry-btn btn-next">
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Enquiry Details -->
+          <div class="form-step" data-step="2">
+            <div class="step-header">
+              <h3><i class="fas fa-clipboard-list"></i> Enquiry Details</h3>
+              <p>Provide details about your requirement</p>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="enquiryType"><i class="fas fa-question-circle"></i> Enquiry Type *</label>
+                <select id="enquiryType" name="enquiryType" required>
+                  <option value="">Select Type</option>
+                  <option value="quote">Get Quote</option>
+                  <option value="booking">Booking Inquiry</option>
+                  <option value="support">Customer Support</option>
+                  <option value="tracking">Track Shipment</option>
+                  <option value="complaint">Complaint/Feedback</option>
+                  <option value="partnership">Partnership/Business</option>
+                  <option value="other">Other</option>
+                </select>
+                <span class="validation-icon"></span>
+                <div class="error-message"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
+                <select id="vehicleType" name="vehicleType">
+                  <option value="">Select Vehicle</option>
+                  <option value="hatchback">Hatchback</option>
+                  <option value="sedan">Sedan</option>
+                  <option value="suv">SUV</option>
+                  <option value="luxury">Luxury Car</option>
+                  <option value="bike">Motorcycle</option>
+                  <option value="commercial">Commercial Vehicle</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pickupCity"><i class="fas fa-map-marker-alt"></i> Pickup City</label>
+                <div class="autocomplete-wrapper">
+                  <input type="text" id="pickupCity" name="pickupCity" placeholder="Start typing city name..."
+                    autocomplete="off" />
+                  <div class="autocomplete-dropdown" id="pickupCityDropdown"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="dropCity"><i class="fas fa-flag-checkered"></i> Drop City</label>
+                <div class="autocomplete-wrapper">
+                  <input type="text" id="dropCity" name="dropCity" placeholder="Start typing city name..."
+                    autocomplete="off" />
+                  <div class="autocomplete-dropdown" id="dropCityDropdown"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pickupDate"><i class="fas fa-calendar"></i> Preferred Pickup Date</label>
+                <input type="date" id="pickupDate" name="pickupDate" />
+                <div class="date-warning" id="dateWarning"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="urgency"><i class="fas fa-bolt"></i> Urgency Level</label>
+                <select id="urgency" name="urgency">
+                  <option value="normal">Normal</option>
+                  <option value="urgent">Urgent</option>
+                  <option value="express">Express</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="message"><i class="fas fa-comment-alt"></i> Message / Requirements *</label>
+              <textarea id="message" name="message" placeholder="Tell us about your requirements..." maxlength="500"
+                required></textarea>
               <span class="validation-icon"></span>
               <div class="error-message"></div>
+              <div class="char-counter">0/500 characters</div>
+            </div>
+
+            <div class="form-navigation">
+              <button type="button" class="enquiry-btn btn-prev">
+                <i class="fas fa-arrow-left"></i> Previous
+              </button>
+              <button type="button" class="enquiry-btn btn-next">
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
-            <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
-            <span class="validation-icon"></span>
-            <div class="error-message"></div>
-            <div class="email-suggestion"></div>
-          </div>
-
-          <div class="form-navigation">
-            <button type="button" class="enquiry-btn btn-prev" disabled>
-              <i class="fas fa-arrow-left"></i> Previous
-            </button>
-            <button type="button" class="enquiry-btn btn-next">
-              Next <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- STEP 2: Enquiry Details -->
-        <div class="form-step" data-step="2">
-          <div class="step-header">
-            <h3><i class="fas fa-clipboard-list"></i> Enquiry Details</h3>
-            <p>Provide details about your requirement</p>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="enquiryType"><i class="fas fa-question-circle"></i> Enquiry Type *</label>
-              <select id="enquiryType" name="enquiryType" required>
-                <option value="">Select Type</option>
-                <option value="quote">Get Quote</option>
-                <option value="booking">Booking Inquiry</option>
-                <option value="support">Customer Support</option>
-                <option value="tracking">Track Shipment</option>
-                <option value="complaint">Complaint/Feedback</option>
-                <option value="partnership">Partnership/Business</option>
-                <option value="other">Other</option>
-              </select>
-              <span class="validation-icon"></span>
-              <div class="error-message"></div>
+          <!-- STEP 3: Additional Information -->
+          <div class="form-step" data-step="3">
+            <div class="step-header">
+              <h3><i class="fas fa-paperclip"></i> Additional Information</h3>
+              <p>Upload documents and set preferences (Optional)</p>
             </div>
 
-            <div class="form-group">
-              <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type</label>
-              <select id="vehicleType" name="vehicleType">
-                <option value="">Select Vehicle</option>
-                <option value="hatchback">Hatchback</option>
-                <option value="sedan">Sedan</option>
-                <option value="suv">SUV</option>
-                <option value="luxury">Luxury Car</option>
-                <option value="bike">Motorcycle</option>
-                <option value="commercial">Commercial Vehicle</option>
-              </select>
+            <div class="form-group full-width">
+              <label><i class="fas fa-cloud-upload-alt"></i> Upload Documents (Optional)</label>
+              <div class="file-upload-area">
+                <input type="file" id="fileUpload" accept="image/*" multiple>
+                <div class="upload-icon">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                  <h4>Drag & Drop Images Here</h4>
+                  <p>or click to browse (Max 5MB per file, up to 5 files)</p>
+                  <p style="font-size: 0.8rem; margin-top: 5px;">Accepted: RC Book, Insurance, Vehicle Photos</p>
+                </div>
+              </div>
+              <div class="file-preview-container"></div>
             </div>
-          </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="pickupCity"><i class="fas fa-map-marker-alt"></i> Pickup City</label>
-              <div class="autocomplete-wrapper">
-                <input type="text" id="pickupCity" name="pickupCity" placeholder="Start typing city name..."
-                  autocomplete="off" />
-                <div class="autocomplete-dropdown" id="pickupCityDropdown"></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactMethod"><i class="fas fa-phone-volume"></i> Preferred Contact Method</label>
+                <select id="contactMethod" name="contactMethod">
+                  <option value="phone">Phone Call</option>
+                  <option value="email">Email</option>
+                  <option value="whatsapp">WhatsApp</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="callbackTime"><i class="fas fa-clock"></i> Best Time to Call</label>
+                <select id="callbackTime" name="callbackTime">
+                  <option value="any">Any Time</option>
+                  <option value="morning">Morning (9 AM - 12 PM)</option>
+                  <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                  <option value="evening">Evening (5 PM - 8 PM)</option>
+                </select>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="dropCity"><i class="fas fa-flag-checkered"></i> Drop City</label>
-              <div class="autocomplete-wrapper">
-                <input type="text" id="dropCity" name="dropCity" placeholder="Start typing city name..."
-                  autocomplete="off" />
-                <div class="autocomplete-dropdown" id="dropCityDropdown"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="pickupDate"><i class="fas fa-calendar"></i> Preferred Pickup Date</label>
-              <input type="date" id="pickupDate" name="pickupDate" />
-              <div class="date-warning" id="dateWarning"></div>
+            <div class="form-group full-width">
+              <label for="vehicleValue"><i class="fas fa-rupee-sign"></i> Approximate Vehicle Value (for
+                insurance)</label>
+              <input type="number" id="vehicleValue" name="vehicleValue" placeholder="e.g., 500000" min="0" />
             </div>
 
-            <div class="form-group">
-              <label for="urgency"><i class="fas fa-bolt"></i> Urgency Level</label>
-              <select id="urgency" name="urgency">
-                <option value="normal">Normal</option>
-                <option value="urgent">Urgent</option>
-                <option value="express">Express</option>
-              </select>
+            <div class="form-navigation">
+              <button type="button" class="enquiry-btn btn-prev">
+                <i class="fas fa-arrow-left"></i> Previous
+              </button>
+              <button type="submit" class="enquiry-btn btn-submit">
+                <i class="fas fa-paper-plane"></i> Submit Enquiry
+              </button>
             </div>
           </div>
-
-          <div class="form-group full-width">
-            <label for="message"><i class="fas fa-comment-alt"></i> Message / Requirements *</label>
-            <textarea id="message" name="message" placeholder="Tell us about your requirements..." maxlength="500"
-              required></textarea>
-            <span class="validation-icon"></span>
-            <div class="error-message"></div>
-            <div class="char-counter">0/500 characters</div>
-          </div>
-
-          <div class="form-navigation">
-            <button type="button" class="enquiry-btn btn-prev">
-              <i class="fas fa-arrow-left"></i> Previous
-            </button>
-            <button type="button" class="enquiry-btn btn-next">
-              Next <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- STEP 3: Additional Information -->
-        <div class="form-step" data-step="3">
-          <div class="step-header">
-            <h3><i class="fas fa-paperclip"></i> Additional Information</h3>
-            <p>Upload documents and set preferences (Optional)</p>
-          </div>
-
-          <div class="form-group full-width">
-            <label><i class="fas fa-cloud-upload-alt"></i> Upload Documents (Optional)</label>
-            <div class="file-upload-area">
-              <input type="file" id="fileUpload" accept="image/*" multiple>
-              <div class="upload-icon">
-                <i class="fas fa-cloud-upload-alt"></i>
-              </div>
-              <div class="upload-text">
-                <h4>Drag & Drop Images Here</h4>
-                <p>or click to browse (Max 5MB per file, up to 5 files)</p>
-                <p style="font-size: 0.8rem; margin-top: 5px;">Accepted: RC Book, Insurance, Vehicle Photos</p>
-              </div>
-            </div>
-            <div class="file-preview-container"></div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="contactMethod"><i class="fas fa-phone-volume"></i> Preferred Contact Method</label>
-              <select id="contactMethod" name="contactMethod">
-                <option value="phone">Phone Call</option>
-                <option value="email">Email</option>
-                <option value="whatsapp">WhatsApp</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="callbackTime"><i class="fas fa-clock"></i> Best Time to Call</label>
-              <select id="callbackTime" name="callbackTime">
-                <option value="any">Any Time</option>
-                <option value="morning">Morning (9 AM - 12 PM)</option>
-                <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-                <option value="evening">Evening (5 PM - 8 PM)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group full-width">
-            <label for="vehicleValue"><i class="fas fa-rupee-sign"></i> Approximate Vehicle Value (for
-              insurance)</label>
-            <input type="number" id="vehicleValue" name="vehicleValue" placeholder="e.g., 500000" min="0" />
-          </div>
-
-          <div class="form-navigation">
-            <button type="button" class="enquiry-btn btn-prev">
-              <i class="fas fa-arrow-left"></i> Previous
-            </button>
-            <button type="submit" class="enquiry-btn btn-submit">
-              <i class="fas fa-paper-plane"></i> Submit Enquiry
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <!-- SIDE WIDGETS -->
-    <div class="side-widgets">
-      <!-- Operating Hours Widget -->
-      <div class="hours-widget">
-        <h3><i class="fas fa-clock"></i> Operating Hours</h3>
-        <div class="current-status">
-          <div class="status-badge open">
-            <span class="status-indicator"></span>
-            Open Now
-          </div>
-          <div class="response-time">
-            <i class="fas fa-info-circle"></i> We typically respond within 2 hours
-          </div>
-          <ul class="hours-list">
-          <li>
-            <span class="day">Monday - Friday:</span>
-            <span>9:00 AM - 6:00 PM</span>
-          </li>
-          <li>
-            <span class="day">Saturday:</span>
-            <span>10:00 AM - 4:00 PM</span>
-          </li>
-          <li>
-            <span class="day">Sunday:</span>
-            <span>Closed</span>
-          </li>
-          <li>
-            <span class="day">Holidays:</span>
-            <span>Closed</span>
-          </li>
-          </ul>
-        </div>
+        </form>
       </div>
 
+      <!-- SIDE WIDGETS -->
+      <div class="side-widgets">
+        <!-- Operating Hours Widget -->
+        <div class="hours-widget">
+          <h3><i class="fas fa-clock"></i> Operating Hours</h3>
+          <div class="current-status">
+            <div class="status-badge open">
+              <span class="status-indicator"></span>
+              Open Now
+            </div>
+            <div class="response-time">
+              <i class="fas fa-info-circle"></i> We typically respond within 2 hours
+            </div>
+            <ul class="hours-list">
+              <li>
+                <span class="day">Monday - Friday:</span>
+                <span>9:00 AM - 6:00 PM</span>
+              </li>
+              <li>
+                <span class="day">Saturday:</span>
+                <span>10:00 AM - 4:00 PM</span>
+              </li>
+              <li>
+                <span class="day">Sunday:</span>
+                <span>Closed</span>
+              </li>
+              <li>
+                <span class="day">Holidays:</span>
+                <span>Closed</span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-      <!-- Contact Alternatives Widget -->
-      <div class="contact-widget">
-        <h3><i class="fas fa-comments"></i> Contact Us</h3>
 
-        <a href="tel:+919372693389" class="contact-option">
-          <div class="contact-icon">
-            <i class="fas fa-phone"></i>
-          </div>
-          <div class="contact-info">
-            <h4>Call Us</h4>
-            <p>+919372693389</p>
-          </div>
-        </a>
+        <!-- Contact Alternatives Widget -->
+        <div class="contact-widget">
+          <h3><i class="fas fa-comments"></i> Contact Us</h3>
 
-        <a href="https://wa.me/919372693389" target="_blank" class="contact-option">
-          <div class="contact-icon" style="background: #25D366;">
-            <i class="fab fa-whatsapp"></i>
-          </div>
-          <div class="contact-info">
-            <h4>WhatsApp</h4>
-            <p>Chat with us instantly</p>
-          </div>
-        </a>
+          <a href="tel:+919372693389" class="contact-option">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-info">
+              <h4>Call Us</h4>
+              <p>+919372693389</p>
+            </div>
+          </a>
 
-        <a href="mailto:hariharcarcarrier@gmail.com" class="contact-option">
-          <div class="contact-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <div class="contact-info">
-            <h4>Email</h4>
-            <p>hariharcarcarrier@gmail.com</p>
-          </div>
-        </a>
+          <a href="https://wa.me/919372693389" target="_blank" class="contact-option">
+            <div class="contact-icon" style="background: #25D366;">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="contact-info">
+              <h4>WhatsApp</h4>
+              <p>Chat with us instantly</p>
+            </div>
+          </a>
+
+          <a href="mailto:hariharcarcarrier@gmail.com" class="contact-option">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <h4>Email</h4>
+              <p>hariharcarcarrier@gmail.com</p>
+            </div>
+          </a>
+        </div>
       </div>
-    </div>
     </div>
 
     <!-- BOTTOM ROW -->
@@ -495,6 +493,9 @@
   <script src="../js/modules/back-to-top-button.js"></script>
   <script src="../js/modules/backtoBottom.js"></script>
   <script src="../js/modules/enquiry-enhanced.js"></script>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop">

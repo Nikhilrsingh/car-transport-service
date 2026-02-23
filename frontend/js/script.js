@@ -187,7 +187,31 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 2000);
     });
   }
+
+  // Initialize Coming Soon Handler for all dead links
+  initComingSoonHandler();
 });
+
+/**
+ * Intercepts all clicks on href="#" and shows a "Coming Soon" notification
+ */
+function initComingSoonHandler() {
+  document.addEventListener('click', function (e) {
+    const anchor = e.target.closest('a');
+    if (anchor && anchor.getAttribute('href') === '#') {
+      e.preventDefault();
+
+      const featureName = anchor.getAttribute('aria-label') ||
+        anchor.innerText.trim() ||
+        "This feature";
+
+      showContactToast(
+        "Coming Soon",
+        `${featureName} is currently in development. Stay tuned!`
+      );
+    }
+  });
+}
 
 
 // ================= INPUT ANIMATIONS =================
@@ -558,7 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!counters.length) return;
 
   const animateCounter = (el) => {
-    const target = parseInt(el.getAttribute("data-target"), 10) || 0; 
+    const target = parseInt(el.getAttribute("data-target"), 10) || 0;
     const duration = 3000;
     const startTime = performance.now();
 
