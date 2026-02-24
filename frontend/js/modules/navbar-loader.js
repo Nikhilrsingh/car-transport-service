@@ -55,6 +55,9 @@
       // Initialize navbar functionality after loading
       initializeNavbar();
 
+      // Initialize Search functionality
+      initializeSearch(isInPagesFolder);
+
       // Set active link
       setActiveLink();
 
@@ -447,6 +450,101 @@
   // Expose auth functions globally for other scripts to use
   window.updateAuthUI = updateAuthUI;
   window.handleLogout = handleLogout;
+
+  /**
+   * Initialize search functionality for desktop and mobile
+   */
+  function initializeSearch(isInPages) {
+    const desktopSearch = document.getElementById('navbarSearch');
+    const mobileSearch = document.getElementById('mobileSearch');
+
+    if (desktopSearch) setupSearch(desktopSearch, isInPages);
+    if (mobileSearch) setupSearch(mobileSearch, isInPages);
+  }
+
+  function setupSearch(input, isInPages) {
+    // Check if dropdown already exists, if not create it
+    let dropdown = input.parentElement.querySelector('.search-results-dropdown');
+    if (!dropdown) {
+      dropdown = document.createElement('div');
+      dropdown.className = 'search-results-dropdown';
+      input.parentElement.appendChild(dropdown);
+    }
+
+    // Search Data - Mapping of site content
+    const searchData = [
+      { title: 'Home', url: 'index.html', keywords: ['home', 'main', 'landing'] },
+      { title: 'About Us', url: 'pages/about.html', keywords: ['about', 'company', 'who we are', 'team'] },
+      { title: 'Services', url: 'services.html', keywords: ['services', 'what we do', 'offerings'] },
+      { title: 'Car Transport', url: 'services.html', keywords: ['car transport', 'vehicle shipping', 'auto transport'] },
+      { title: 'Bike Transport', url: 'services.html', keywords: ['bike transport', 'motorcycle shipping', 'two wheeler'] },
+      { title: 'Booking', url: 'pages/booking.html', keywords: ['booking', 'book now', 'reserve', 'schedule'] },
+      { title: 'Pricing', url: 'pages/pricing.html', keywords: ['pricing', 'rates', 'cost', 'quote', 'price'] },
+      { title: 'Track Your Car', url: 'pages/tracking.html', keywords: ['track', 'tracking', 'locate', 'find car'] },
+      { title: 'Popular Cities', url: 'pages/city.html', keywords: ['city', 'location', 'agra', 'delhi', 'mumbai', 'popular'] },
+      { title: 'Enquiry', url: 'pages/enquiry.html', keywords: ['enquiry', 'inquiry', 'ask', 'question'] },
+      { title: 'Contact', url: 'pages/contact.html', keywords: ['contact', 'reach us', 'phone'] },
+      { title: 'Feedback', url: 'pages/Feedback.html', keywords: ['feedback', 'rating', 'review'] }
+    ];
+
+    // Adjust URLs based on depth
+    const processedData = searchData.map(item => {
+      let finalUrl = item.url;
+      if (isInPages) {
+        if (!finalUrl.startsWith('pages/')) {
+          finalUrl = '../' + finalUrl;
+        } else {
+          finalUrl = './' + finalUrl.replace('pages/', '');
+        }
+      } else {
+        finalUrl = './' + finalUrl;
+      }
+      return { ...item, url: finalUrl };
+    });
+
+    input.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      if (query.length < 2) {
+        dropdown.style.display = 'none';
+        return;
+      }
+
+      const filtered = processedData.filter(item =>
+        item.title.toLowerCase().includes(query) ||
+        item.keywords.some(k => k.includes(query))
+      ).slice(0, 6);
+
+      if (filtered.length > 0) {
+        dropdown.innerHTML = filtered.map(item => `
+          <a href="${item.url}" class="search-result-item">
+            <i class="fas fa-search"></i>
+            <span>${item.title}</span>
+          </a>
+        `).join('');
+        dropdown.style.display = 'block';
+      } else {
+        dropdown.innerHTML = '<div class="search-no-results">No results found</div>';
+        dropdown.style.display = 'block';
+      }
+    });
+
+    // UX: Hide results on click outside
+    document.addEventListener('click', (e) => {
+      if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+
+    // UX: Handle Enter key for the first result
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const activeItem = dropdown.querySelector('.search-result-item');
+        if (activeItem) {
+          window.location.href = activeItem.getAttribute('href');
+        }
+      }
+    });
+  }
 
   // Load navbar when DOM is ready
   if (document.readyState === 'loading') {
