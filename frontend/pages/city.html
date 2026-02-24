@@ -5,175 +5,225 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Car Transport Service</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap">
+
   <link rel="stylesheet" href="../css/components/navbar.css" />
   <link rel="stylesheet" href="../css/components/middle-navbar.css" />
   <link rel="stylesheet" href="../css/components/loading-indicators.css" />
-  <!-- <link rel="stylesheet" href="../css/styles.css" /> -->
   <link rel="stylesheet" href="../css/components/glowing-input.css" />
   <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    crossorigin="anonymous" />
   <link id="theme-style" rel="stylesheet" href="../css/light-mode.css" />
-
   <link rel="stylesheet" href="../css/pages/city.css">
-
-  <!-- Basic meta -->
-  <meta name="description" content="Car Transport Service - Reliable car shipping across India." />
-  <meta name="keywords" content="car transport, vehicle transport, car movers India" />
-
+  <!-- 🎨 SUPER-NUCLEAR Style Overrides to kill ANY orange background -->
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      transition: background 0.3s ease, color 0.3s ease;
+    /* Targeting ALL possible containers and pseudo-elements */
+    html,
+    body,
+    main,
+    .city-page-layout,
+    .city-hero,
+    html::before,
+    html::after,
+    body::before,
+    body::after,
+    main::before,
+    main::after {
+      background: #f3f4f7 !important;
+      background-color: #f3f4f7 !important;
+      background-image: none !important;
     }
 
-    body[data-theme="dark"] {
-      background: #020617;
-      color: #f9fafb;
+    body.city-page-layout[data-theme="dark"],
+    body.city-page-layout[data-theme="dark"] main,
+    body.city-page-layout[data-theme="dark"] .city-hero {
+      background: #0a0c10 !important;
+      background-color: #0a0c10 !important;
     }
 
-    .city-container {
-      max-width: 1000px;
-      margin: 4rem auto;
-      background: #fff;
-      border-radius: 20px;
-      padding: 3rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 3rem;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
+    /* Force the card background and remove any inheritance */
+    body.city-page-layout[data-theme="dark"] .city-glass-card {
+      background: rgba(15, 18, 26, 0.9) !important;
     }
 
-    body[data-theme="dark"] .city-container {
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    /* Transition for city rotation */
+    .city-details,
+    .city-image-container {
+      transition: opacity 0.4s ease-in-out;
     }
 
-    .city-container img {
-      width: 50%;
-      max-height: 450px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .description {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      flex: 1;
-    }
-
-    .description h1 {
-      text-align: left;
-      margin-top: 0;
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #111827;
-      margin-bottom: 1.5rem;
-    }
-
-    body[data-theme="dark"] .description h1 {
-      color: #fff;
-    }
-
-    .description p {
-      text-align: left;
-      font-size: 1.2rem;
-      color: #4b5563;
-      line-height: 1.8;
-    }
-
-    body[data-theme="dark"] .description p {
-      color: #9ca3af;
-    }
-
-    @media screen and (max-width: 768px) {
-      .city-container {
-        flex-direction: column;
-        margin: 1rem;
-        padding: 1.5rem;
-      }
-
-      .city-container img {
-        width: 100%;
-      }
-
-      .description h1,
-      .description p {
-        text-align: center;
-      }
+    .rotating {
+      opacity: 0;
     }
   </style>
+
+  <script src="../js/modules/themes.js"></script>
 </head>
 
-<body>
+<body class="city-page-layout neon-theme">
+  <div id="scroll-progress"></div>
   <div id="navbar-container"></div>
 
-  <main class="city-container">
-    <img id="cityImage" src="" alt="City Image" />
-    <div class="description">
-      <h1 id="cityTitle">Loading...</h1>
-      <p id="cityDescription">Please wait while we load city details.</p>
+  <main class="city-hero">
+    <div id="city-card" class="city-glass-card no-image">
+      <div class="city-image-container">
+        <div class="image-overlay"></div>
+        <img id="cityImage" src="../assets/images/cities/default.jpg" alt="City Image" class="city-img"
+          onerror="handleImageError()">
+      </div>
+
+      <div class="city-details">
+        <div class="city-badge">Premium Service</div>
+        <h1 id="cityTitle" class="glow-text">Loading...</h1>
+        <div class="city-divider"></div>
+        <p id="cityDescription" class="city-desc">
+          Picking the best service route for you...
+        </p>
+
+        <div class="city-features">
+          <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>Fully Insured</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-truck"></i>
+            <span>Doorstep Delivery</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-clock"></i>
+            <span>24/7 Tracking</span>
+          </div>
+        </div>
+
+        <div class="city-actions">
+          <button class="cta-primary-btn" id="getQuoteBtnHeader">
+            <i class="fas fa-file-invoice-dollar"></i>
+            Get Free Quote
+          </button>
+          <button class="cta-secondary-btn" id="bookNowBtnHeader">
+            <i class="fas fa-calendar-check"></i>
+            Book Now
+          </button>
+        </div>
+      </div>
     </div>
   </main>
-  <!-- Calculator removed as per user request (redundant) -->
 
-  <!-- Footer injected dynamically by footer-loader.js -->
   <div id="footer-container"></div>
 
   <script>
-    // --- Fetch city from URL ---
-    const params = new URLSearchParams(window.location.search);
-    const citySlug = params.get("city");
+    let allCities = [];
+    let currentRotationIndex = 0;
+    let rotationInterval;
 
-    // --- Load data ---
-    fetch("../assets/data/cities.json")
-      .then((res) => res.json())
-      .then((cities) => {
-        const city = cities.find((c) => c.slug === citySlug);
-        if (city) {
-          document.title = city.name + " | Car Transport Service";
-          document.getElementById("cityTitle").textContent = city.name;
-          document.getElementById("cityDescription").textContent =
-            city.description;
+    // --- Action Button Handlers ---
+    const getQuoteBtn = document.getElementById('getQuoteBtnHeader');
+    const bookNowBtn = document.getElementById('bookNowBtnHeader');
 
-          // Use specialized city image if available, else generic logo
-          const cityMap = {
-            'delhi': 'assets/images/cities/delhi.png',
-            'mumbai': 'assets/images/cities/mumbai.png',
-            'bangalore': 'assets/images/cities/bangalore.png',
-            'chennai': 'assets/images/cities/Chennai.JPG',
-            'hyderabad': 'assets/images/cities/Hyderabad.jpg',
-            'kolkata': 'assets/images/cities/Kolkata.jpg',
-            'agra': 'assets/images/cities/agra.png',
-            'jaipur': 'assets/images/cities/jaipur.png',
-            'vadodara': 'assets/images/cities/vadodara.png',
-            'indore': 'assets/images/cities/indore.png',
-            'surat': 'assets/images/cities/surat.png'
-          };
-
-          const imagePath = cityMap[citySlug] || city.image;
-          document.getElementById("cityImage").src = "../" + imagePath.replace(/^\//, '');
-        } else {
-          document.getElementById("cityTitle").textContent = "City Not Found";
-          document.getElementById("cityDescription").textContent =
-            "Sorry, the requested city could not be found.";
-          document.getElementById("cityImage").style.display = "none";
-        }
-      })
-      .catch(() => {
-        document.getElementById("cityTitle").textContent =
-          "Error Loading City Data";
-        document.getElementById("cityDescription").textContent =
-          "Please try again later.";
+    if (getQuoteBtn) {
+      getQuoteBtn.addEventListener('click', () => {
+        window.location.href = './pricing-calculator.html';
       });
+    }
+
+    if (bookNowBtn) {
+      bookNowBtn.addEventListener('click', () => {
+        // citySlug is no longer used for booking URL, as rotation is primary
+        window.location.href = `./booking.html`;
+      });
+    }
+
+    async function initializeCityPage() {
+      try {
+        const response = await fetch('../assets/data/cities.json');
+        allCities = await response.json();
+
+        // Start rotation logic immediately as requested (every 2 sec)
+        startCityRotation();
+      } catch (error) {
+        console.error('Initialization error:', error);
+        showGeneralError();
+      }
+    }
+
+    function startCityRotation() {
+      if (rotationInterval) clearInterval(rotationInterval);
+
+      // Update once immediately
+      showNextCity();
+
+      // Rotate EVERY 2 seconds as requested
+      rotationInterval = setInterval(showNextCity, 2000);
+    }
+
+    function showNextCity() {
+      if (!allCities || allCities.length === 0) return;
+
+      const city = allCities[currentRotationIndex];
+      const details = document.querySelector('.city-details');
+      const imgContainer = document.querySelector('.city-image-container');
+
+      // Add fade out
+      details.classList.add('rotating');
+      imgContainer.classList.add('rotating');
+
+      setTimeout(() => {
+        updateCityPage(city);
+
+        // Peek at next city for next tick
+        currentRotationIndex = (currentRotationIndex + 1) % allCities.length;
+
+        // Fade in
+        details.classList.remove('rotating');
+        imgContainer.classList.remove('rotating');
+      }, 400);
+    }
+
+    function updateCityPage(data) {
+      document.title = data.name + " | Car Transport Service";
+      document.getElementById('cityTitle').textContent = data.name;
+      document.getElementById('cityDescription').textContent = data.description;
+
+      const imgEl = document.getElementById('cityImage');
+      const cardEl = document.getElementById('city-card');
+
+      // Optimized Image Mapping
+      const cityImageMap = {
+        'agra': 'agra.png', 'ahmedabad': 'ahmedabad.png', 'bangalore': 'bangalore.png',
+        'chennai': 'chennai.png', 'delhi': 'delhi.png', 'gurgaon': 'gurgaon.png',
+        'hyderabad': 'hyderabad.png', 'indore': 'indore.png', 'jaipur': 'jaipur.png',
+        'kolkata': 'kolkata.png', 'lucknow': 'lucknow.png', 'mumbai': 'mumbai.png',
+        'nagpur': 'nagpur.png', 'pune': 'pune.png', 'surat': 'surat.png',
+        'vadodara': 'vadodara.png'
+      };
+
+      const cityFile = cityImageMap[data.slug.toLowerCase()];
+      if (cityFile) {
+        imgEl.style.display = 'block';
+        imgEl.src = `../assets/images/cities/${cityFile}`;
+        cardEl.classList.remove('no-image');
+      } else {
+        handleImageError();
+      }
+    }
+
+    function handleImageError() {
+      const imgEl = document.getElementById('cityImage');
+      const cardEl = document.getElementById('city-card');
+      cardEl.classList.add('no-image');
+      if (imgEl) imgEl.style.display = 'none';
+    }
+
+    function showGeneralError() {
+      document.getElementById("cityTitle").textContent = "Service Available";
+      document.getElementById("cityDescription").textContent = "We serve all of India! Choose your city or get a quote now.";
+      handleImageError();
+    }
+
+    // Start everything
+    initializeCityPage();
   </script>
 
   <!-- 🌟 Bottom Fixed Action Bar -->

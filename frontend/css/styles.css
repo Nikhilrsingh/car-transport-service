@@ -1087,32 +1087,9 @@ body.neon-theme.light {
 }
 
 /* ------------------------------
-   GLOBAL APPLY
+   GLOBAL APPLY (Removed to avoid leaks)
 ------------------------------ */
-body.neon-theme {
-  background: var(--bg-main);
-  color: var(--text-primary);
-  transition: 0.3s ease;
-}
-
-/* SURFACES */
-body.neon-theme .card,
-body.neon-theme .service-box,
-body.neon-theme .feature-box,
-body.neon-theme .hero-content,
-body.neon-theme .about-box {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-soft);
-  box-shadow: var(--glow-purple);
-}
-
-/* HEADINGS */
-body.neon-theme h1,
-body.neon-theme h2,
-body.neon-theme h3 {
-  color: var(--text-primary);
-  text-shadow: var(--glow-purple);
-}
+/* body.neon-theme { background: var(--bg-main); color: var(--text-primary); transition: 0.3s ease; } */
 
 /* BUTTONS */
 body.neon-theme button:not(.nav-link):not([data-dropdown-btn]):not(.cta-btn):not(.mobile-cta-btn),
