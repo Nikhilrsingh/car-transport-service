@@ -1,4 +1,4 @@
-(function() {
+(function () {
   const ITEMS_PER_PAGE = 6;
   const LOAD_MORE_THRESHOLD = 12;
   let currentPage = 1;
@@ -10,7 +10,7 @@
 
   function initPagination() {
     if (isInitialized) return;
-    
+
     const regionContainer = document.getElementById('region-container');
     if (!regionContainer) {
       setTimeout(initPagination, 500);
@@ -34,7 +34,7 @@
 
   function setupPagination() {
     if (isInitialized) return;
-    
+
     const regionGrid = document.querySelector('#region-container .region-grid');
     if (!regionGrid) {
       console.log('Region grid not found');
@@ -44,7 +44,7 @@
     // Get ALL region cards regardless of their display state
     allCards = Array.from(regionGrid.querySelectorAll('.region-card'));
     console.log('Total cards found:', allCards.length);
-    
+
     if (allCards.length === 0) {
       console.log('No cards found, retrying...');
       setTimeout(setupPagination, 500);
@@ -54,11 +54,11 @@
     isInitialized = true;
     console.log('Pagination initialized successfully');
     console.log('All card cities:', allCards.map(c => c.querySelector('.city-name')?.textContent));
-    
+
     removeAllOldButtons();
     addControls();
     setupFilterListeners();
-    
+
     // Don't hide cards initially - let the render function handle it
     renderCards();
   }
@@ -111,31 +111,31 @@
       console.log('Region section not found');
       return;
     }
-    
+
     if (document.getElementById('paginationWrapper')) {
       console.log('Pagination wrapper already exists');
       return;
     }
 
     const controlsHTML = `
-      <div id="paginationWrapper" style="text-align: center; margin: 40px 0; padding: 20px; background: var(--bg-primary, #fff); border-radius: 12px;">
-        <div style="margin-bottom: 20px; font-size: 1rem; color: var(--text-secondary, #666); font-weight: 500;">
-          Showing <strong id="pageInfo" style="color: var(--primary-color, #0056b3);">1-6</strong> of <strong id="totalCities" style="color: var(--primary-color, #0056b3);">0</strong> cities
+      <div id="paginationWrapper" class="pagination-wrapper">
+        <div class="pagination-info">
+          Showing <strong id="pageInfo">1-6</strong> of <strong id="totalCities">0</strong> cities
         </div>
         
-        <div id="loadMoreSection" style="display: block;">
-          <button id="loadMoreBtnNew" style="padding: 14px 32px; background: linear-gradient(135deg, #ff6b35, #ff8c42); color: white; border: none; border-radius: 50px; cursor: pointer; font-size: 1.05rem; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(255,107,53,0.35); text-transform: uppercase; letter-spacing: 0.5px;">
+        <div id="loadMoreSection" class="load-more-section">
+          <button id="loadMoreBtnNew" class="load-more-btn-v2">
             <i class="fas fa-plus-circle"></i> Load More Cities
           </button>
         </div>
 
-        <div id="paginationSection" style="display: none;">
-          <div style="display: flex; gap: 12px; justify-content: center; align-items: center; flex-wrap: wrap;">
-            <button id="prevPage" style="padding: 12px 24px; background: var(--primary-color, #0056b3); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 500; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,86,179,0.25);" disabled>
+        <div id="paginationSection" class="pagination-section">
+          <div class="pagination-controls">
+            <button id="prevPage" class="pagination-nav-btn" disabled>
               <i class="fas fa-chevron-left"></i> Previous
             </button>
-            <div id="pageNumbers" style="display: flex; gap: 8px; align-items: center;"></div>
-            <button id="nextPage" style="padding: 12px 24px; background: var(--primary-color, #0056b3); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 500; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,86,179,0.25);">
+            <div id="pageNumbers" class="page-numbers-container"></div>
+            <button id="nextPage" class="pagination-nav-btn">
               Next <i class="fas fa-chevron-right"></i>
             </button>
           </div>
@@ -149,19 +149,19 @@
     const loadMoreBtn = document.getElementById('loadMoreBtnNew');
     if (loadMoreBtn) {
       console.log('Load More button found, attaching listener');
-      loadMoreBtn.addEventListener('click', function(e) {
+      loadMoreBtn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         console.log('🔥 Load More button CLICKED!');
         handleLoadMore();
       });
-      
-      loadMoreBtn.addEventListener('mouseenter', function() {
+
+      loadMoreBtn.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-3px) scale(1.02)';
         this.style.boxShadow = '0 6px 20px rgba(255,107,53,0.45)';
       });
-      
-      loadMoreBtn.addEventListener('mouseleave', function() {
+
+      loadMoreBtn.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0) scale(1)';
         this.style.boxShadow = '0 4px 15px rgba(255,107,53,0.35)';
       });
@@ -191,28 +191,28 @@
     console.log('📊 BEFORE Load More:');
     console.log('  - currentLoadedCount:', currentLoadedCount);
     console.log('  - Total cards:', allCards.length);
-    
+
     currentLoadedCount += ITEMS_PER_PAGE;
-    
+
     console.log('📊 AFTER Load More:');
     console.log('  - NEW currentLoadedCount:', currentLoadedCount);
-    
+
     const filteredCards = getFilteredCards();
     console.log('  - Filtered cards:', filteredCards.length);
-    
+
     if (currentLoadedCount >= LOAD_MORE_THRESHOLD) {
       usePagination = true;
       currentPage = 1;
       console.log('  - ✅ Switching to PAGINATION mode');
     }
-    
+
     renderCards();
   }
 
   function setupFilterListeners() {
     const filterTabs = document.querySelectorAll('#region-container .filter-tab');
     console.log('Filter tabs found:', filterTabs.length);
-    
+
     filterTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         filterTabs.forEach(t => t.classList.remove('active'));
@@ -245,17 +245,17 @@
   function getFilteredCards() {
     const searchInput = document.querySelector('#region-container .region-search');
     const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
-    
+
     const filtered = allCards.filter(card => {
       const region = card.dataset.region || '';
       const name = card.querySelector('.city-name')?.textContent.toLowerCase() || '';
-      
+
       const matchesFilter = (currentFilter === 'all') || (region === currentFilter);
       const matchesSearch = !searchTerm || name.includes(searchTerm);
-      
+
       return matchesFilter && matchesSearch;
     });
-    
+
     console.log('Filtered card cities:', filtered.map(c => c.querySelector('.city-name')?.textContent));
     return filtered;
   }
@@ -271,12 +271,12 @@
     console.log('  - Total filtered cards:', filteredCards.length);
     console.log('  - Pagination mode:', usePagination);
     console.log('  - Current loaded count:', currentLoadedCount);
-    
+
     // Hide ALL cards first
     allCards.forEach(card => {
       card.style.display = 'none';
     });
-    
+
     let cardsToShow;
     let startIndex, endIndex;
 
@@ -291,10 +291,10 @@
       cardsToShow = filteredCards.slice(0, endIndex);
       console.log('  - Load More: showing 0 to', endIndex, 'from', filteredCards.length, 'total');
     }
-    
+
     console.log('  - Cards to show:', cardsToShow.length);
     console.log('  - Showing cities:', cardsToShow.map(c => c.querySelector('.city-name')?.textContent));
-    
+
     // Show the selected cards with animation
     cardsToShow.forEach((card, index) => {
       card.style.display = 'block';
@@ -333,7 +333,7 @@
     } else {
       if (loadMoreSection) loadMoreSection.style.display = 'block';
       if (paginationSection) paginationSection.style.display = 'none';
-      
+
       if (loadMoreBtn) {
         if (currentLoadedCount >= filteredCards.length) {
           console.log('  - Hiding Load More (all cards shown)');
@@ -366,42 +366,17 @@
 
     if (pageNumbers) {
       pageNumbers.innerHTML = '';
-      
+
       for (let i = 1; i <= totalPages; i++) {
         if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
           const pageBtn = document.createElement('button');
           pageBtn.textContent = i;
-          pageBtn.style.cssText = `
-            padding: 10px 16px;
-            border: 2px solid var(--primary-color, #0056b3);
-            background: ${i === currentPage ? 'var(--primary-color, #0056b3)' : 'white'};
-            color: ${i === currentPage ? 'white' : 'var(--primary-color, #0056b3)'};
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: ${i === currentPage ? '700' : '500'};
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            min-width: 40px;
-          `;
-          
+          pageBtn.className = 'pagination-page-btn' + (i === currentPage ? ' active' : '');
+
           pageBtn.addEventListener('click', () => {
             currentPage = i;
             renderCards();
             scrollToCityGrid();
-          });
-
-          pageBtn.addEventListener('mouseenter', () => {
-            if (i !== currentPage) {
-              pageBtn.style.background = 'var(--primary-color, #0056b3)';
-              pageBtn.style.color = 'white';
-            }
-          });
-
-          pageBtn.addEventListener('mouseleave', () => {
-            if (i !== currentPage) {
-              pageBtn.style.background = 'white';
-              pageBtn.style.color = 'var(--primary-color, #0056b3)';
-            }
           });
 
           pageNumbers.appendChild(pageBtn);

@@ -2,7 +2,8 @@
 
 /* Base layout offsets for fixed header stack */
 body {
-  padding-top: 170px; /* Upbar (40px) + Middle navbar + Main navbar */
+  padding-top: 170px;
+  /* Upbar (40px) + Middle navbar + Main navbar */
   font-family: "Poppins", sans-serif;
 }
 
@@ -14,7 +15,8 @@ body {
 
 @media (max-width: 768px) {
   body {
-    padding-top: 180px; /* Account for wrapped middle navbar */
+    padding-top: 180px;
+    /* Account for wrapped middle navbar */
   }
 }
 
@@ -96,12 +98,10 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
   transition: left 0.5s ease;
 }
 
@@ -146,8 +146,15 @@ body {
 }
 
 @keyframes pulse-icon {
-  0%, 100% { transform: scale(1.1); }
-  50% { transform: scale(1.2); }
+
+  0%,
+  100% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 /* Tooltip for upbar buttons */
@@ -234,7 +241,8 @@ body {
   justify-content: space-between;
   padding: 12px 10px;
   position: fixed;
-  top: 120px; /* below upbar + middle navbar */
+  top: 120px;
+  /* below upbar + middle navbar */
   left: 0;
   right: 0;
   gap: 30px;
@@ -411,6 +419,7 @@ body {
 
 /* Hide desktop tooltips on large screens where text is visible */
 @media (min-width: 1201px) {
+
   .nav-link::after,
   .enquiry-link::after,
   .blog-link::after,
@@ -449,8 +458,23 @@ body {
 .search-bar:focus-within {
   background: #444444 !important;
   border-color: #ff6a3d !important;
-  box-shadow: 0 0 10px rgba(255, 106, 61, 0.35) !important;
-  width: 220px;
+  box-shadow: 0 0 15px rgba(255, 106, 61, 0.45) !important;
+  width: 250px;
+  animation: search-pulse 2s infinite ease-in-out;
+}
+
+@keyframes search-pulse {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 106, 61, 0.45);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(255, 106, 61, 0.65);
+  }
+
+  100% {
+    box-shadow: 0 0 15px rgba(255, 106, 61, 0.45);
+  }
 }
 
 .search-bar input {
@@ -488,29 +512,48 @@ body {
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(43, 43, 43, 0.98);
-  border: 1px solid rgba(255, 99, 71, 0.3);
-  border-radius: 8px;
-  margin-top: 8px;
-  max-height: 300px;
+  background: rgba(30, 32, 40, 0.98);
+  border: 1px solid rgba(255, 99, 71, 0.2);
+  border-radius: 12px;
+  margin-top: 10px;
+  max-height: 400px;
   overflow-y: auto;
   display: none;
   z-index: 1000;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 8px;
 }
 
-.search-results-dropdown::-webkit-scrollbar {
-  width: 6px;
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
 }
 
-.search-results-dropdown::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+.search-result-item i {
+  color: #ff6347;
+  font-size: 0.9rem;
+  opacity: 0.7;
 }
 
-.search-results-dropdown::-webkit-scrollbar-thumb {
-  background: rgba(255, 99, 71, 0.5);
-  border-radius: 3px;
+.search-result-item:hover {
+  background: rgba(255, 99, 71, 0.15);
+  transform: translateX(5px);
+}
+
+.search-no-results {
+  padding: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
 }
 
 /* Enquiry floating icon */
@@ -722,7 +765,7 @@ body {
   top: calc(100% + 1rem);
   border-radius: 8px;
   padding: 1rem;
-  width: 200px;
+  width: 250px;
   color: white;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   font-size: 0.9rem;
@@ -755,8 +798,8 @@ body {
   z-index: 10001;
 }
 
-.dropdown-nav.active > .nav-link,
-.dropdown-nav.active > [data-dropdown-btn] {
+.dropdown-nav.active>.nav-link,
+.dropdown-nav.active>[data-dropdown-btn] {
   color: #ff6347;
   background: rgba(43, 43, 43, 0.95);
   transform: translateY(-2px);
@@ -1082,7 +1125,8 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
-  z-index: 900; /* below navbar so it never steals clicks */
+  z-index: 900;
+  /* below navbar so it never steals clicks */
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -1173,10 +1217,12 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
 
 /* Pulse animation for theme toggle */
 @keyframes theme-pulse {
+
   0%,
   100% {
     box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15);
   }
+
   50% {
     box-shadow: 0 8px 20px rgba(255, 99, 71, 0.6), 0 4px 8px rgba(0, 0, 0, 0.15),
       0 0 0 8px rgba(255, 99, 71, 0.1);
@@ -1234,8 +1280,9 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
 /* ========= CUSTOM THEME TOGGLE LOGIC ========= */
 /* Desktop: use right-side theme toggle, hide logo-side one */
 @media (min-width: 913px) {
+
   /* Theme toggle directly under .navbar (after logo) */
-  .navbar > .nav-theme-toggle {
+  .navbar>.nav-theme-toggle {
     display: none;
   }
 
@@ -1250,8 +1297,9 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
 
 /* Mobile / Tablet: use logo-side toggle, hide right-side one */
 @media (max-width: 912px) {
+
   /* Theme toggle near logo visible */
-  .navbar > .nav-theme-toggle {
+  .navbar>.nav-theme-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1279,8 +1327,8 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
 
 /* Active icons color overrides */
 .nav-link.active i,
-.dropdown-nav.active > .nav-link i,
-.dropdown-nav.active > [data-dropdown-btn] i,
+.dropdown-nav.active>.nav-link i,
+.dropdown-nav.active>[data-dropdown-btn] i,
 .mobile-nav-link.active i {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
@@ -1294,6 +1342,7 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
   .navbar {
     padding: 16px 40px !important;
   }
+
   .nav-list {
     gap: 14px !important;
   }
@@ -1616,14 +1665,14 @@ body[data-theme="light"] .nav-link:hover i {
   color: #ff6347 !important;
 }
 
-body[data-theme="light"] .dropdown-nav.active > .nav-link,
-body[data-theme="light"] .dropdown-nav.active > [data-dropdown-btn] {
+body[data-theme="light"] .dropdown-nav.active>.nav-link,
+body[data-theme="light"] .dropdown-nav.active>[data-dropdown-btn] {
   background: rgba(255, 99, 71, 0.15) !important;
   color: #ff6347 !important;
 }
 
-body[data-theme="light"] .dropdown-nav.active > .nav-link i,
-body[data-theme="light"] .dropdown-nav.active > [data-dropdown-btn] i {
+body[data-theme="light"] .dropdown-nav.active>.nav-link i,
+body[data-theme="light"] .dropdown-nav.active>[data-dropdown-btn] i {
   color: #ff6347 !important;
   -webkit-text-fill-color: #ff6347 !important;
 }
