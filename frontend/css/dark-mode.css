@@ -1578,3 +1578,36 @@ body[data-theme="dark"] .quote-card {
 body[data-theme="dark"] .quote-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
+
+/* Sitemap Dark Mode Overrides */
+body[data-theme="dark"] .sitemap-section {
+    background: linear-gradient(135deg, #0f1115 0%, #1a1a1a 100%) !important;
+}
+
+body[data-theme="dark"] .sitemap-category, 
+body[data-theme="dark"] .sitemap-quick-actions {
+    background: #1e2227 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+body[data-theme="dark"] .section-title h1,
+body[data-theme="dark"] .sitemap-category h2,
+body[data-theme="dark"] .sitemap-quick-actions h3 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .sitemap-links li a {
+    color: #c0c0c0 !important;
+}
+
+body[data-theme="dark"] .sitemap-links li a:hover {
+    background: rgba(255, 107, 53, 0.1) !important;
+    color: #ff6b35 !important;
+}
+
+body[data-theme="dark"] .sitemap-search-input {
+    background: #1a1a1a !important;
+    border-color: #333 !important;
+    color: #ffffff !important;
+}
