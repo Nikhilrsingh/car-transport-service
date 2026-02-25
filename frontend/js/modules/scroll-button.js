@@ -21,9 +21,11 @@ if (typeof SmartScrollButton === 'undefined') {
 
             console.log('SmartScrollButton: Initializing...');
 
-            // Check if page is already loaded (body has 'loaded' class)
-            // Also consider page loaded if document.readyState is 'complete'
-            if (document.body.classList.contains('loaded') || document.readyState === 'complete') {
+            // Activation logic:
+            // Check if page/body is already marked as loaded
+            if (document.body.classList.contains('loaded') ||
+                document.readyState === 'complete' ||
+                document.readyState === 'interactive') {
                 isPageLoaded = true;
                 button.classList.add(LOADED_CLASS);
             }
