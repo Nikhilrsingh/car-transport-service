@@ -322,7 +322,7 @@ function getFooterHTML() {
   </div>
 
   <div class="mini-sticky-footer" role="region" aria-label="Quick contact bar">
-    <a href="tel:+91XXXXXXXXXX" class="mini-call">
+    <a href="tel:+919372693389" class="mini-call">
       <i class="fas fa-phone"></i>
       <span>Call</span>
     </a>
@@ -330,51 +330,30 @@ function getFooterHTML() {
       <i class="fas fa-bolt"></i>
       <span>Quote</span>
     </a>
-    <button class="mini-up" aria-controls="footer-main" aria-expanded="false">
-      <i class="fas fa-chevron-up"></i>
-      <span>Open</span>
+    <button class="mini-fab-trigger" id="miniFabTrigger" aria-label="Open actions menu" aria-expanded="false">
+      <i class="fas fa-plus"></i>
+      <span>More</span>
     </button>
   </div>
 </footer>
 
-<!-- 🚀 Modern Floating Action Menu (FAB) -->
-<div class="fab-container">
-  <button class="fab-main" id="fabMain" aria-label="Open actions menu" aria-expanded="false">
-    <i class="fas fa-plus fab-icon"></i>
+<!-- Mobile FAB Actions (shown when mini-fab-trigger is clicked) -->
+<div class="mobile-fab-actions" id="mobileFabActions">
+  <button class="mobile-fab-btn" id="mobileFabQuote" data-tooltip="Get Quote">
+    <i class="fas fa-file-invoice-dollar"></i>
   </button>
-
-  <!-- Action Buttons (hidden by default) -->
-  <div class="fab-actions" id="fabActions">
-    <!-- Get Quote -->
-    <button class="fab-action-btn" id="fabQuoteBtn" data-tooltip="Get Quote">
-      <i class="fas fa-file-invoice-dollar"></i>
-    </button>
-
-    <!-- Book Now -->
-    <button class="fab-action-btn" id="fabBookBtn" data-tooltip="Book Now">
-      <i class="fas fa-calendar-check"></i>
-    </button>
-
-    <!-- WhatsApp -->
-    <a href="https://wa.me/919372693389" class="fab-action-btn" data-tooltip="WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Call -->
-    <a href="tel:+919372693389" class="fab-action-btn" data-tooltip="Call Us">
-      <i class="fas fa-phone"></i>
-    </a>
-
-    <!-- Feedback -->
-    <button class="fab-action-btn" id="fabFeedbackBtn" data-tooltip="Feedback">
-      <i class="fas fa-star"></i>
-    </button>
-
-    <!-- Chatbot -->
-    <button class="fab-action-btn" id="fabChatBtn" data-tooltip="Chat">
-      <i class="fas fa-comments"></i>
-    </button>
-  </div>
+  <button class="mobile-fab-btn" id="mobileFabBook" data-tooltip="Book Now">
+    <i class="fas fa-calendar-check"></i>
+  </button>
+  <a href="https://wa.me/919372693389" class="mobile-fab-btn" data-tooltip="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <button class="mobile-fab-btn" id="mobileFabFeedback" data-tooltip="Feedback">
+    <i class="fas fa-star"></i>
+  </button>
+  <button class="mobile-fab-btn" id="mobileFabChat" data-tooltip="Chat">
+    <i class="fas fa-comments"></i>
+  </button>
 </div>
 
 <!-- Bottom Action Bar (desktop only) -->

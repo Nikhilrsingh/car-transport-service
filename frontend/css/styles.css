@@ -6220,3 +6220,11 @@ section:last-of-type {
     width: 100%;
   }
 }
+
+/* Hide legacy scroll buttons (replaced by Smart Scroll Button) */
+#backToTop,
+#backToBottom {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
