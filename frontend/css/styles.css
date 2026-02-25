@@ -6,6 +6,10 @@
   --primary-color: #ff6347;
   --text-color: #333;
   --background-light: #ffffff;
+  --input-bg: #fff;
+  --input-border: #ccc;
+  --input-text: #333;
+  --calendar-icon-filter: none;
 }
 
 .content-wrapper {
@@ -545,6 +549,12 @@ header.sticky {
 
   /* Card images */
   --img-card-default: brightness(0.7) contrast(1.15);
+
+  /* Form UI */
+  --input-bg: #1a1a1a;
+  --input-border: #444;
+  --input-text: #ffffff;
+  --calendar-icon-filter: invert(1);
 }
 
 /* ------------------------------------------------------------
@@ -6209,4 +6219,12 @@ section:last-of-type {
     min-width: auto;
     width: 100%;
   }
+}
+
+/* Hide legacy scroll buttons (replaced by Smart Scroll Button) */
+#backToTop,
+#backToBottom {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }

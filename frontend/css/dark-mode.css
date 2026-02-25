@@ -20,10 +20,18 @@
   --step-label: #bdbdbd;
   --progress-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
 
-  /* Pill / percentage variables */
-  --progress-pill-bg: rgba(255, 255, 255, 0.03);
   --progress-pill-border: rgba(255, 255, 255, 0.06);
   --step-number-color: #ffffff;
+
+  /* Card / component variables (Dark theme) */
+  --card-bg: #1a1a1a;
+  --card-hover-bg: #222222;
+  --card-border: #444444;
+  --text-muted: #999999;
+  --button-bg: #444444;
+  --button-hover-bg: #555555;
+  --input-bg: #1a1a1a;
+  --input-border: #444444;
 }
 
 /* Dark Mode Color Palette Override */
@@ -36,6 +44,8 @@ body[data-theme="dark"] {
   --color-gray-400: #555555;
   background: var(--bg);
   color: var(--text);
+  color-scheme: dark;
+  --calendar-icon-filter: invert(1);
 }
 
 /* Footer */
