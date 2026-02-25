@@ -123,7 +123,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: #444;
+            background: var(--input-border, #444);
             z-index: 0;
         }
 
@@ -146,8 +146,8 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: #444;
-            border: 3px solid #444;
+            background: var(--input-bg, #444);
+            border: 3px solid var(--input-border, #444);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -644,10 +644,10 @@
 
         /* Booking Summary Sidebar */
         .booking-summary {
-            background: #2b2b2b;
+            background: var(--card-bg, #2b2b2b);
             padding: 25px;
             border-radius: 20px;
-            border: 1px solid #444;
+            border: 1px solid var(--card-border, #444);
             position: sticky;
             top: 20px;
             max-height: calc(100vh - 40px);
@@ -660,7 +660,7 @@
             gap: 10px;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #444;
+            border-bottom: 2px solid var(--card-border, #444);
         }
 
         .summary-header h3 {
@@ -673,7 +673,7 @@
         }
 
         .summary-section h4 {
-            color: #ccc;
+            color: var(--text-muted, #ccc);
             font-size: 0.9rem;
             margin-bottom: 10px;
             text-transform: uppercase;
@@ -684,7 +684,7 @@
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--card-border, #333);
         }
 
         .summary-item:last-child {
@@ -692,12 +692,12 @@
         }
 
         .summary-label {
-            color: #999;
+            color: var(--text-muted, #999);
             font-size: 0.9rem;
         }
 
         .summary-value {
-            color: white;
+            color: var(--text, white);
             font-weight: 500;
             text-align: right;
         }
@@ -708,7 +708,7 @@
         }
 
         .price-calculator {
-            background: #1a1a1a;
+            background: var(--card-bg-soft, #1a1a1a);
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 20px;
@@ -730,12 +730,12 @@
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
-            color: #ccc;
+            color: var(--text, #ccc);
             font-size: 0.9rem;
         }
 
         .price-item.total {
-            border-top: 2px solid #444;
+            border-top: 2px solid var(--card-border, #444);
             margin-top: 10px;
             padding-top: 15px;
             font-size: 1.2rem;
@@ -751,7 +751,7 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 8px;
-            color: #ccc;
+            color: var(--text-muted, #ccc);
             font-size: 0.85rem;
         }
 
@@ -759,7 +759,7 @@
             width: 100%;
             height: 6px;
             border-radius: 5px;
-            background: #444;
+            background: var(--card-border, #444);
             outline: none;
             -webkit-appearance: none;
             appearance: none;
@@ -836,12 +836,12 @@
         }
 
         .btn-download {
-            background: #444;
+            background: var(--button-bg, #444);
             color: white;
         }
 
         .btn-download:hover {
-            background: #555;
+            background: var(--button-hover-bg, #555);
         }
 
         .btn-print {
@@ -856,7 +856,7 @@
         }
 
         .delivery-estimate {
-            background: #333;
+            background: var(--card-bg, #333);
             padding: 15px;
             border-radius: 10px;
             margin-top: 15px;
@@ -864,7 +864,7 @@
         }
 
         .delivery-estimate .label {
-            color: #999;
+            color: var(--text-muted, #999);
             font-size: 0.85rem;
             margin-bottom: 5px;
         }
@@ -876,7 +876,7 @@
         }
 
         .distance-estimate {
-            background: #333;
+            background: var(--card-bg, #333);
             padding: 15px;
             border-radius: 10px;
             margin-top: 15px;
@@ -884,7 +884,7 @@
         }
 
         .distance-estimate .label {
-            color: #999;
+            color: var(--text-muted, #999);
             font-size: 0.85rem;
             margin-bottom: 5px;
         }
@@ -896,7 +896,7 @@
         }
 
         .distance-estimate .time {
-            color: #ccc;
+            color: var(--text-muted, #ccc);
             font-size: 0.9rem;
             margin-top: 5px;
         }
@@ -905,7 +905,7 @@
             display: inline-block;
             width: 14px;
             height: 14px;
-            border: 2px solid #444;
+            border: 2px solid var(--card-border, #444);
             border-top-color: #ff6347;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
@@ -927,8 +927,8 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: #1a1a1a;
-            border: 2px solid #444;
+            background: var(--card-bg, #1a1a1a);
+            border: 2px solid var(--card-border, #444);
             border-top: none;
             border-radius: 0 0 10px 10px;
             max-height: 250px;
@@ -946,8 +946,8 @@
             padding: 12px 15px;
             cursor: pointer;
             transition: all 0.2s ease;
-            color: #ccc;
-            border-bottom: 1px solid #333;
+            color: var(--text, #ccc);
+            border-bottom: 1px solid var(--card-border, #333);
         }
 
         .autocomplete-item:last-child {
@@ -960,24 +960,16 @@
             color: white;
         }
 
-        .autocomplete-item strong {
-            color: #ff6347;
-        }
-
-        .autocomplete-item:hover strong {
-            color: white;
-        }
-
         /* Map Container */
         .map-section {
             margin-top: 40px;
         }
 
         .map-container-wrapper {
-            background: #2b2b2b;
+            background: var(--card-bg, #2b2b2b);
             padding: 30px;
             border-radius: 20px;
-            border: 1px solid #444;
+            border: 1px solid var(--card-border, #444);
         }
 
         .map-header {
@@ -986,7 +978,7 @@
 
         .map-header h3 {
             font-size: 1.5rem;
-            color: white;
+            color: var(--text, white);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -994,7 +986,7 @@
         }
 
         .map-header p {
-            color: #ccc;
+            color: var(--text-muted, #ccc);
             font-size: 0.9rem;
         }
 
@@ -1002,7 +994,7 @@
             height: 500px;
             width: 100%;
             border-radius: 15px;
-            border: 2px solid #444;
+            border: 2px solid var(--card-border, #444);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
         }
@@ -1019,7 +1011,7 @@
         }
 
         .map-control-btn {
-            background: #444;
+            background: var(--button-bg, #444);
             color: white;
             border: none;
             padding: 10px 20px;
@@ -1034,15 +1026,11 @@
         }
 
         .map-control-btn:hover {
-            background: #ff6347;
-        }
-
-        .map-control-btn.active {
-            background: #ff6347;
+            background: var(--primary-color, #ff6347);
         }
 
         .route-info {
-            background: #333;
+            background: var(--card-bg, #333);
             padding: 15px;
             border-radius: 10px;
             margin-top: 15px;
@@ -1072,124 +1060,89 @@
         }
 
         .route-detail-item label {
-            color: #999;
+            color: var(--text-muted, #999);
             font-size: 0.85rem;
             display: block;
             margin-bottom: 5px;
         }
 
         .route-detail-item span {
-            color: white;
+            color: var(--text, white);
             font-size: 1.1rem;
             font-weight: 600;
         }
 
         /* Leaflet Custom Styles */
         .leaflet-popup-content-wrapper {
-            background: #2b2b2b;
-            color: white;
+            background: var(--card-bg, #2b2b2b);
+            color: var(--text, white);
             border-radius: 10px;
         }
 
         .leaflet-popup-tip {
-            background: #2b2b2b;
+            background: var(--card-bg, #2b2b2b);
         }
 
         .leaflet-control-geocoder {
-            background: #2b2b2b;
-            border: 2px solid #444;
-        }
-
-        .leaflet-control-geocoder input {
-            background: #1a1a1a;
-            color: white;
-            border: 1px solid #444;
+            background: var(--card-bg, #2b2b2b);
+            border: 2px solid var(--card-border, #444);
         }
 
         .leaflet-routing-container {
-            background: #2b2b2b;
-            color: white;
+            background: var(--card-bg, #2b2b2b);
+            color: var(--text, white);
         }
 
-        /* Map Container */
-        .map-container-wrapper {
-            background: #2b2b2b;
-            padding: 30px;
+        /* Weather Section */
+        .weather-section {
+            background: var(--card-bg, #2b2b2b);
+            padding: 25px;
             border-radius: 20px;
-            border: 1px solid #444;
+            border: 1px solid var(--card-border, #444);
+            margin-top: 20px;
         }
 
-        .map-header {
+        .weather-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 20px;
+            color: #ff6347;
         }
 
-        .map-header h3 {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .weather-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
-        .map-header p {
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-
-        #map {
-            height: 500px;
-            width: 100%;
+        .weather-card {
+            background: var(--card-hover-bg, #1a1a1a);
+            padding: 20px;
             border-radius: 15px;
-            border: 2px solid #444;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--card-border, #444);
             transition: all 0.3s ease;
         }
 
-        #map:hover {
-            box-shadow: 0 15px 40px rgba(255, 99, 71, 0.2);
+        .weather-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.2);
         }
 
-        .map-controls {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
+        .weather-temp {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text, white);
+            margin-bottom: 5px;
         }
 
-        .map-control-btn {
-            background: #444;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: "Poppins", sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .map-control-btn:hover {
-            background: #ff6347;
-        }
-
-        .map-control-btn.active {
-            background: #ff6347;
-        }
-
-        .route-info {
-            background: #333;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            display: none;
-        }
-
-        .route-info.show {
-            display: block;
+        /* Waypoints Section */
+        .waypoints-section {
+            background: var(--card-bg, #2b2b2b);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--card-border, #444);
+            margin-bottom: 20px;
         }
 
         .route-info h4 {
@@ -1211,14 +1164,14 @@
         }
 
         .route-detail-item label {
-            color: #999;
+            color: var(--text-muted, #999);
             font-size: 0.85rem;
             display: block;
             margin-bottom: 5px;
         }
 
         .route-detail-item span {
-            color: white;
+            color: var(--text, white);
             font-size: 1.1rem;
             font-weight: 600;
         }
@@ -1238,7 +1191,7 @@
         }
 
         .modal-content {
-            background: #2b2b2b;
+            background: var(--card-bg, #2b2b2b);
             padding: 50px 40px;
             border-radius: 20px;
             text-align: center;
@@ -1343,7 +1296,7 @@
         }
 
         .booking-reference {
-            background: #1a1a1a;
+            background: var(--card-bg-soft, #1a1a1a);
             padding: 15px;
             border-radius: 10px;
             margin: 20px 0;
@@ -1676,8 +1629,8 @@
 
         /* Card Container */
         .addon-card {
-            background: #1a1a1a;
-            border: 2px solid #444;
+            background: var(--card-bg, #1a1a1a);
+            border: 2px solid var(--card-border, #444);
             border-radius: 12px;
             padding: 20px;
             cursor: pointer;
@@ -1693,7 +1646,7 @@
             border-color: #ff6347;
             transform: translateY(-2px);
             box-shadow: 0 4px 16px rgba(255, 99, 71, 0.2);
-            background: #222;
+            background: var(--card-hover-bg, #222);
         }
 
         /* Hide the default checkbox */
@@ -1712,9 +1665,9 @@
             right: 20px;
             width: 24px;
             height: 24px;
-            border: 2px solid #666;
+            border: 2px solid var(--input-border, #666);
             border-radius: 6px;
-            background: #2b2b2b;
+            background: var(--card-bg, #2b2b2b);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -1820,9 +1773,13 @@
             font-weight: 700;
             color: #ff6347;
             white-space: nowrap;
-            background: rgba(255, 99, 71, 0.1);
-            padding: 4px 12px;
-            border-radius: 6px;
+        }
+
+        .weather-card {
+            background: var(--card-hover-bg, #1a1a1a);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--card-border, #444);
             transition: all 0.3s ease;
         }
 
