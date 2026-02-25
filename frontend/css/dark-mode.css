@@ -36,6 +36,8 @@ body[data-theme="dark"] {
   --color-gray-400: #555555;
   background: var(--bg);
   color: var(--text);
+  color-scheme: dark;
+  --calendar-icon-filter: invert(1);
 }
 
 /* Footer */
