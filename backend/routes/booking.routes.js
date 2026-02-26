@@ -1,6 +1,6 @@
 import express from 'express';
 import * as bookingController from '../controllers/booking.controller.js';
-import protect from '../middleware/auth.middleware.js';
+import protect, { admin } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 
@@ -25,13 +25,13 @@ router.get('/email/:email', bookingController.getBookingByEmail);
 router.get('/', protect, bookingController.getAllBookings);
 
 // Get booking statistics (admin only)
-router.get('/admin/stats', protect, bookingController.getBookingStats);
+router.get('/admin/stats', protect, admin, bookingController.getBookingStats);
 
 // Get single booking by ID or reference
-router.get('/:id', bookingController.getBookingById);
+router.get('/:id', protect, bookingController.getBookingById);
 
 // Update booking status
-router.patch('/:id/status', bookingController.updateBookingStatus);
+router.patch('/:id/status', protect, admin, bookingController.updateBookingStatus);
 
 // Update booking details
 router.put('/:id', protect, bookingController.updateBooking);
