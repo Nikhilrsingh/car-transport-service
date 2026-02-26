@@ -6,43 +6,57 @@ import { success, error } from '../utils/response.js';
  * Create a new booking
  */
 export const createBooking = async (req, res) => {
-  try {
-    // Generate unique booking reference
-    const bookingReference = await Booking.generateBookingReference();
+  let attempts = 0;
+  const maxAttempts = 3;
 
-    // Extract user ID from authenticated user (if logged in)
-    const userId = req.user ? req.user._id : null;
+  while (attempts < maxAttempts) {
+    try {
+      // Generate booking reference (Synchronous now)
+      const bookingReference = Booking.generateBookingReference();
 
-    // Create booking with all form data
-    const booking = await Booking.create({
-      bookingReference,
-      userId,
-      ...req.body
-    });
+      // Extract user ID from authenticated user (if logged in)
+      const userId = req.user ? req.user._id : null;
 
-    return success(res, 201, 'Booking created successfully', {
-      booking: {
-        _id: booking._id,
-        bookingReference: booking.bookingReference,
-        fullName: booking.fullName,
-        phone: booking.phone,
-        vehicleType: booking.vehicleType,
-        vehicleModel: booking.vehicleModel,
-        pickupCity: booking.pickupCity,
-        pickupLocation: booking.pickupLocation,
-        dropCity: booking.dropCity,
-        dropLocation: booking.dropLocation,
-        pickupDate: booking.pickupDate,
-        pickupTime: booking.pickupTime,
-        estimatedPrice: booking.estimatedPrice,
-        status: booking.status,
-        createdAt: booking.createdAt
+      // Create booking with all form data
+      const booking = await Booking.create({
+        bookingReference,
+        userId,
+        ...req.body
+      });
+
+      return success(res, 201, 'Booking created successfully', {
+        booking: {
+          _id: booking._id,
+          bookingReference: booking.bookingReference,
+          fullName: booking.fullName,
+          phone: booking.phone,
+          vehicleType: booking.vehicleType,
+          vehicleModel: booking.vehicleModel,
+          pickupCity: booking.pickupCity,
+          pickupLocation: booking.pickupLocation,
+          dropCity: booking.dropCity,
+          dropLocation: booking.dropLocation,
+          pickupDate: booking.pickupDate,
+          pickupTime: booking.pickupTime,
+          estimatedPrice: booking.estimatedPrice,
+          status: booking.status,
+          createdAt: booking.createdAt
+        }
+      });
+
+    } catch (err) {
+      // If duplicate key error on bookingReference, retry
+      if (err.code === 11000 && (err.message.includes('bookingReference') || (err.keyPattern && err.keyPattern.bookingReference))) {
+        attempts++;
+        if (attempts < maxAttempts) {
+          console.warn(`Booking reference collision detected. Retrying... (Attempt ${attempts + 1})`);
+          continue;
+        }
       }
-    });
 
-  } catch (err) {
-    console.error('Create booking error:', err);
-    return error(res, 400, err.message || 'Failed to create booking');
+      console.error('Create booking error:', err);
+      return error(res, 400, err.message || 'Failed to create booking');
+    }
   }
 };
 

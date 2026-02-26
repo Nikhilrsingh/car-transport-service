@@ -89,22 +89,22 @@
         </button>
 
         <div class="fab-actions" id="fabActions">
-          <button class="fab-action-btn" id="fabQuoteBtn" data-tooltip="Get Quote">
+          <button class="fab-action-btn" id="fabQuoteBtn" data-tooltip="Get Quote" aria-label="Get Quote">
             <i class="fas fa-file-invoice-dollar"></i>
           </button>
-          <button class="fab-action-btn" id="fabBookBtn" data-tooltip="Book Now">
+          <button class="fab-action-btn" id="fabBookBtn" data-tooltip="Book Now" aria-label="Book Now">
             <i class="fas fa-calendar-check"></i>
           </button>
-          <a href="https://wa.me/919372693389" class="fab-action-btn" data-tooltip="WhatsApp">
+          <a href="https://wa.me/919372693389" class="fab-action-btn" data-tooltip="WhatsApp" aria-label="Contact on WhatsApp">
             <i class="fab fa-whatsapp"></i>
           </a>
-          <a href="tel:+919372693389" class="fab-action-btn" data-tooltip="Call Us">
+          <a href="tel:+919372693389" class="fab-action-btn" data-tooltip="Call Us" aria-label="Call Us">
             <i class="fas fa-phone"></i>
           </a>
-          <button class="fab-action-btn" id="fabFeedbackBtn" data-tooltip="Feedback">
+          <button class="fab-action-btn" id="fabFeedbackBtn" data-tooltip="Feedback" aria-label="Give Feedback">
             <i class="fas fa-star"></i>
           </button>
-          <button class="fab-action-btn" id="fabChatBtn" data-tooltip="Chat">
+          <button class="fab-action-btn" id="fabChatBtn" data-tooltip="Chat" aria-label="Chat with us">
             <i class="fas fa-comments"></i>
           </button>
         </div>

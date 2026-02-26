@@ -738,6 +738,54 @@
   <script src="../js/modules/component-initializer.js"></script>
 
   <script>
+    // Reliability Layer & High-Res Landmark Hydrator
+    async function hydrateCityLandmarks() {
+      try {
+        const response = await fetch('../assets/data/cities.json');
+        const citiesData = await response.json();
+        const cityMap = new Map(citiesData.map(c => [c.slug, c]));
+
+        document.querySelectorAll('.region-card').forEach(card => {
+          const url = new URL(card.href);
+          const slug = url.searchParams.get('city');
+          const city = cityMap.get(slug);
+          const img = card.querySelector('img');
+
+          if (city && img) {
+            // Priority 1: High-Res External URL
+            if (city.external_url) {
+              const originalSrc = img.src;
+              img.src = city.external_url;
+
+              // Priority 2: Local Specific Landmark (Fallback)
+              // Priority 3: Regional Master (Final Fallback)
+              img.onerror = () => {
+                img.src = city.image.startsWith('/') ? `..${city.image}` : city.image;
+                img.onerror = () => {
+                  const region = card.dataset.region || 'north';
+                  img.src = `../assets/images/fallbacks/${region}-india.jpg`;
+                  img.onerror = null;
+                };
+              };
+            }
+          }
+        });
+      } catch (error) {
+        console.error('Failed to hydrate landmarks:', error);
+      }
+    }
+
+    // Reliability Layer: Fallback to Regional Master Images
+    function handleRegionError(img) {
+      const card = img.closest('.region-card');
+      const region = card ? card.dataset.region : 'north';
+      img.src = `../assets/images/fallbacks/${region}-india.jpg`;
+      img.onerror = null; // Prevent infinite loop
+    }
+
+    document.addEventListener('DOMContentLoaded', hydrateCityLandmarks);
+  </script>
+  <script>
     // Fade out preloader
     window.addEventListener("load", () => {
       const preloader = document.getElementById("preloader");

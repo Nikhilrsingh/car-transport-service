@@ -131,28 +131,18 @@ bookingSchema.index({ userId: 1 });
 bookingSchema.index({ status: 1 });
 bookingSchema.index({ createdAt: -1 });
 
-// Method to generate booking reference (format: HCC-YYYYMMDD-XXXX)
-bookingSchema.statics.generateBookingReference = async function () {
+// Method to generate booking reference (format: HCC-YYYYMMDD-XXXXXX)
+bookingSchema.statics.generateBookingReference = function () {
   const prefix = 'HCC';
   const now = new Date();
   const year = now.getFullYear();
   const month = (now.getMonth() + 1).toString().padStart(2, '0');
   const day = now.getDate().toString().padStart(2, '0');
   const dateStr = `${year}${month}${day}`;
-  let reference;
-  let isUnique = false;
 
-  while (!isUnique) {
-    const randomNum = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-    reference = `${prefix}-${dateStr}-${randomNum}`;
-
-    const existing = await this.findOne({ bookingReference: reference });
-    if (!existing) {
-      isUnique = true;
-    }
-  }
-
-  return reference;
+  // Increase entropy to 6 random digits (1 million possibilities per day)
+  const randomNum = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+  return `${prefix}-${dateStr}-${randomNum}`;
 };
 
 const Booking = mongoose.model('Booking', bookingSchema);
