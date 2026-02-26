@@ -10,7 +10,7 @@ const indiaBounds = [
 ];
 
 // City data with coordinates
-const cities = [
+const mapCities = [
   // North India
   { id: 'delhi', name: 'Delhi', lat: 28.6139, lng: 77.2090, region: 'north', major: true, transports: '1000+', price: '₹4,999' },
   { id: 'jaipur', name: 'Jaipur', lat: 26.9124, lng: 75.7873, region: 'north', major: false, transports: '600+', price: '₹4,299' },
@@ -188,7 +188,7 @@ function lightenColor(color, percent) {
 function addCityMarkers() {
   markers = [];
 
-  cities.forEach(city => {
+  mapCities.forEach(city => {
     const marker = L.marker([city.lat, city.lng], {
       icon: createCustomIcon(city)
     });
@@ -332,7 +332,7 @@ function initLegendInteractions() {
         highlightRegionMarkers(region);
 
         // Zoom to region
-        const regionCities = cities.filter(c => c.region === region);
+        const regionCities = mapCities.filter(c => c.region === region);
         if (regionCities.length > 0) {
           const bounds = L.latLngBounds(regionCities.map(c => [c.lat, c.lng]));
           map.fitBounds(bounds, { padding: [50, 50] });
