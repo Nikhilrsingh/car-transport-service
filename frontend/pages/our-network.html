@@ -327,6 +327,48 @@
 
 
     <script>
+        // High-Res Landmark Hydrator for Regional Offices
+        async function hydrateOfficeLandmarks() {
+            try {
+                const response = await fetch('../assets/data/cities.json');
+                const citiesData = await response.json();
+
+                // Helper to find city by name-match
+                const findCity = (name) => {
+                    const searchName = name.toLowerCase().replace(' office', '').trim();
+                    return citiesData.find(c => c.slug.includes(searchName) || searchName.includes(c.slug));
+                };
+
+                document.querySelectorAll('.office-card').forEach(card => {
+                    const title = card.querySelector('h3').textContent;
+                    const city = findCity(title);
+                    const img = card.querySelector('.office-city-img');
+
+                    if (city && img) {
+                        // Priority 1: High-Res External URL
+                        if (city.external_url) {
+                            img.src = city.external_url;
+
+                            // Priority 2: Local Specific Landmark (Fallback)
+                            // Priority 3: Regional Master (Final Fallback)
+                            img.onerror = () => {
+                                img.src = city.image.startsWith('/') ? `..${city.image}` : city.image;
+                                img.onerror = () => {
+                                    const region = city.region || 'north';
+                                    img.src = `../assets/images/fallbacks/${region}-india.jpg`;
+                                    img.onerror = null;
+                                };
+                            };
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Failed to hydrate office landmarks:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', hydrateOfficeLandmarks);
+
         async function openMapForCity(query) {
             const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`;
 

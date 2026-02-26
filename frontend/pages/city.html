@@ -189,21 +189,35 @@
       const imgEl = document.getElementById('cityImage');
       const cardEl = document.getElementById('city-card');
 
-      // Optimized Image Mapping
-      const cityImageMap = {
-        'agra': 'agra.png', 'ahmedabad': 'ahmedabad.png', 'bangalore': 'bangalore.png',
-        'chennai': 'chennai.png', 'delhi': 'delhi.png', 'gurgaon': 'gurgaon.png',
-        'hyderabad': 'hyderabad.png', 'indore': 'indore.png', 'jaipur': 'jaipur.png',
-        'kolkata': 'kolkata.png', 'lucknow': 'lucknow.png', 'mumbai': 'mumbai.png',
-        'nagpur': 'nagpur.png', 'pune': 'pune.png', 'surat': 'surat.png',
-        'vadodara': 'vadodara.png'
-      };
+      if (!imgEl) return;
 
-      const cityFile = cityImageMap[data.slug.toLowerCase()];
-      if (cityFile) {
+      // Priority 1: High-Res External URL
+      if (data.external_url) {
         imgEl.style.display = 'block';
-        imgEl.src = `../assets/images/cities/${cityFile}`;
+        imgEl.src = data.external_url;
         cardEl.classList.remove('no-image');
+
+        // Priority 2: Local Specific Landmark (Fallback)
+        // Priority 3: Regional Master (Final Fallback)
+        imgEl.onerror = () => {
+          imgEl.src = data.image.startsWith('/') ? `..${data.image}` : data.image;
+          imgEl.onerror = () => {
+            const region = data.region || 'north';
+            imgEl.src = `../assets/images/fallbacks/${region}-india.jpg`;
+            imgEl.onerror = () => {
+              handleImageError();
+            };
+          };
+        };
+      } else if (data.image) {
+        imgEl.style.display = 'block';
+        imgEl.src = data.image.startsWith('/') ? `..${data.image}` : data.image;
+        cardEl.classList.remove('no-image');
+        imgEl.onerror = () => {
+          const region = data.region || 'north';
+          imgEl.src = `../assets/images/fallbacks/${region}-india.jpg`;
+          imgEl.onerror = () => handleImageError();
+        };
       } else {
         handleImageError();
       }
