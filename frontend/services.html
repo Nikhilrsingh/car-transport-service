@@ -1,575 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Services | Harihar Car Carriers</title>
-    <meta
-      name="description"
-      content="Explore Harihar Car Carriers services - car transport, bike shipping, door-to-door delivery, and more. Safe and reliable vehicle transportation across India."
-    />
-    <meta name="robots" content="index, follow" />
-    <link
-      rel="canonical"
-      href="https://nikhilrsingh.github.io/car-transport-service/services.html"
-    />
-    <base href="./" />
-    <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
 
-    <!-- Global styles with data-theme="dark" logic -->
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/components/navbar.css" />
-    <link rel="stylesheet" href="css/components/middle-navbar.css" />
-    <link rel="stylesheet" href="css/components/loading-indicators.css" />
-    <link rel="stylesheet" href="css/components/footer.css" />
-    <link rel="stylesheet" href="css/components/backtoBottom.css" />
-    <link rel="stylesheet" href="css/components/back-to-top-button.css" />
-    <link rel="stylesheet" href="css/components/animations.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="css/components/glowing-input.css" />
-    <link rel="stylesheet" href="css/components/star-rating.css" />
-    <link rel="stylesheet" href="css/components/review-card.css" />
-    <link rel="stylesheet" href="css/components/review-modal.css" />
-    <link rel="stylesheet" href="css/components/review-stats.css" />
-    <link rel="stylesheet" href="css/components/toast.css" />
-    <link rel="stylesheet" href="css/pages/reviews.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services | Harihar Car Carriers</title>
+  <meta name="description"
+    content="Explore Harihar Car Carriers services - car transport, bike shipping, door-to-door delivery, and more. Safe and reliable vehicle transportation across India." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nikhilrsingh.github.io/car-transport-service/services.html" />
+  <base href="./" />
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Global styles with data-theme="dark" logic -->
+  <link rel="stylesheet" href="css/styles.css" />
 
-    <style>
-      /* ========= Card theme tokens ========= */
-      :root {
-        /* light mode defaults */
-        --service-card-bg: #ffffff;
-        --service-card-text: #111111;
-        --service-card-muted: #555555;
-        --service-card-border: rgba(0, 0, 0, 0.06);
-        --service-card-heading: #ff6347;
+  <!-- 🌟 Preloader & Theme Meta-Component (Prevents FOUC) -->
+  <link rel="stylesheet" href="css/components/preloader-meta.css">
+  <script src="js/modules/preloader-meta.js"></script>
 
-        --service-icon-bg: rgba(255, 99, 71, 0.08);
-        --service-icon-color: #ff6347;
-      }
+  <link rel="stylesheet" href="css/components/navbar.css" />
+  <link rel="stylesheet" href="css/components/middle-navbar.css" />
+  <link rel="stylesheet" href="css/components/loading-indicators.css" />
+  <link rel="stylesheet" href="css/components/footer.css" />
+  <link rel="stylesheet" href="css/components/backtoBottom.css" />
+  <link rel="stylesheet" href="css/components/back-to-top-button.css" />
+  <link rel="stylesheet" href="css/components/animations.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/components/glowing-input.css" />
+  <link rel="stylesheet" href="css/components/star-rating.css" />
+  <link rel="stylesheet" href="css/components/review-card.css" />
+  <link rel="stylesheet" href="css/components/review-modal.css" />
+  <link rel="stylesheet" href="css/components/review-stats.css" />
+  <link rel="stylesheet" href="css/components/toast.css" />
+  <link rel="stylesheet" href="css/pages/reviews.css" />
 
-      /* Dark mode is enabled with body[data-theme="dark"] in your CSS.[file:94] */
-      body[data-theme="dark"] {
-        --service-card-bg: #15171c;
-        --service-card-text: #f5f5f5;
-        --service-card-muted: #c3c3c3;
-        --service-card-border: rgba(255, 255, 255, 0.08);
-        --service-card-heading: #ff8a65;
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-        --service-icon-bg: rgba(255, 255, 255, 0.08);
-        --service-icon-color: #ffffff;
-      }
+  <style>
+    /* ========= Card theme tokens ========= */
+    :root {
+      /* light mode defaults */
+      --service-card-bg: #ffffff;
+      --service-card-text: #111111;
+      --service-card-muted: #555555;
+      --service-card-border: rgba(0, 0, 0, 0.06);
+      --service-card-heading: #ff6347;
 
-      /* ========= Services Page Styling ========= */
-      .services-container {
-        max-width: 1200px;
-        margin: 100px auto 60px;
-        padding: 0 20px;
-      }
+      --service-icon-bg: rgba(255, 99, 71, 0.08);
+      --service-icon-color: #ff6347;
+    }
 
-      .services-header {
-        text-align: center;
-        margin-bottom: 60px;
-      }
+    /* Dark mode is enabled with body[data-theme="dark"] in your CSS.[file:94] */
+    body[data-theme="dark"] {
+      --service-card-bg: #15171c;
+      --service-card-text: #f5f5f5;
+      --service-card-muted: #c3c3c3;
+      --service-card-border: rgba(255, 255, 255, 0.08);
+      --service-card-heading: #ff8a65;
 
-      .services-header h1,
-      .services-header h2 {
-        font-size: 2.8rem;
-        color: var(--service-card-heading);
-        margin-bottom: 10px;
-        font-weight: 700;
-      }
+      --service-icon-bg: rgba(255, 255, 255, 0.08);
+      --service-icon-color: #ffffff;
+    }
 
-      .services-header p {
-        color:var(--service-card-muted);
-        font-size: 1.1rem;
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.6;
-      }
+    /* ========= Services Page Styling ========= */
+    .services-container {
+      max-width: 1200px;
+      margin: 100px auto 60px;
+      padding: 0 20px;
+    }
 
-      .service-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 35px;
-      }
+    .services-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
 
-      .service-card {
-        /* key line: now driven by variables that change with data-theme="dark" */
-        background-color: var(--service-card-bg);
-        color: var(--service-card-text);
-        border: 1px solid var(--service-card-border);
-        border-radius: 20px;
-        padding: 40px 30px;
-        text-align: center;
-        box-shadow: var(--box-shadow);
-        transition: all 0.3s ease;
-          
-      }
+    .services-header h1 {
+      font-size: 2.8rem;
+      color: var(--service-card-heading);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
 
-      .service-card:hover {
-        transform: translateY(-10px);
-        box-shadow: var(--hover-shadow);
-      }
+    .services-header p {
+      color: var(--color-text-muted, var(--service-card-muted));
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
 
-      .service-icon {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 70px;
-        height: 70px;
-        margin-bottom: 20px;
-        border-radius: 50%;
-        background-color: var(--service-icon-bg);
-        color: var(--service-icon-color);
-      }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 35px;
+    }
 
-      .service-icon svg {
-        width: 35px;
-        height: 35px;
-      }
+    .service-card {
+      /* key line: now driven by variables that change with data-theme="dark" */
+      background-color: var(--service-card-bg);
+      color: var(--service-card-text);
+      border: 1px solid var(--service-card-border);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: var(--box-shadow);
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+    }
 
-      .service-card h3 {
-        font-size: 1.4rem;
-        color: var(--service-card-heading);
-        margin-bottom: 15px;
-        font-weight: 600;
-      }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--hover-shadow);
+    }
 
+    .service-icon {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 70px;
+      height: 70px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      background-color: var(--service-icon-bg);
+      color: var(--service-icon-color);
+    }
 
-body[data-theme="dark"] .service-grid .service-card p,
-body[data-theme="dark"] .service-highlights-section .service-card p {
-    color: #ffffff !important;
-    opacity: 1 !important;
-    filter: none !important;
-}
+    .service-icon svg {
+      width: 35px;
+      height: 35px;
+    }
 
+    .service-card h3 {
+      font-size: 1.4rem;
+      color: var(--service-card-heading);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
 
-body[data-theme="dark"] .services-header h1,
-body[data-theme="dark"] .services-header h2,
-body[data-theme="dark"] .service-card h3 {
-    color: #ff8a65 !important;
-}
+    .service-card p {
+      color: var(--color-text-muted, var(--service-card-muted));
+      font-size: 0.97rem;
+      line-height: 1.6;
+    }
 
+    /* ========= Creative Contact Section (unchanged) ========= */
+    .creative-contact-section {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 25px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+    }
 
-.services-header h1,
-.services-header h2 {
-    color: #ff6347;
-    font-weight: 700;
-}
-
-      /* ========= Creative Contact Section (unchanged) ========= */
-      .creative-contact-section {
-        max-width: 1100px;
-        margin: 80px auto;
-        padding: 60px 40px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 25px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
-      }
-
-      .creative-contact-section::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        right: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(
-          circle,
+    .creative-contact-section::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle,
           rgba(255, 255, 255, 0.1) 0%,
-          transparent 70%
-        );
-        animation: pulse 15s ease-in-out infinite;
+          transparent 70%);
+      animation: pulse 15s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.5;
       }
 
-.service-highlights-section h2 {
-    color: var(--service-card-heading); 
-    margin-bottom: 20px;
-}
-
-
-body[data-theme="dark"] .service-highlights-section .service-card {
-    background-color: var(--service-card-bg) !important;
-    color: var(--service-card-text) !important;
-    border: 1px solid var(--service-card-border) !important;
-}
-
-body[data-theme="dark"] .service-highlights-section .service-icon {
-    background-color: var(--service-icon-bg) !important;
-    color: var(--service-icon-color) !important;
-}
-
-body[data-theme="dark"] .service-highlights-section h3 {
-    color: var(--service-card-heading) !important; 
-}
-
-
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.5;
-        }
-        50% {
-          transform: scale(1.1);
-          opacity: 0.8;
-        }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
       }
+    }
 
-      .contact-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        color: #fff;
+    .contact-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+    }
+
+    .contact-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-content p {
+      font-size: 1.2rem;
+      margin-bottom: 35px;
+      opacity: 0.95;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-button-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .primary-contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #fff;
+      color: #667eea;
+      padding: 16px 35px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .primary-contact-btn::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(102, 126, 234, 0.1);
+      transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
+    }
+
+    .primary-contact-btn:hover::before {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      left: -150px;
+    }
+
+    .primary-contact-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .primary-contact-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    .primary-contact-btn:hover i {
+      transform: translateX(5px);
+    }
+
+    .feature-badges {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .badge-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .badge-item i {
+      font-size: 1.2rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .creative-contact-section {
+        padding: 40px 25px;
+        margin: 60px 20px;
       }
 
       .contact-content h2 {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        font-weight: 700;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        font-size: 2rem;
       }
 
       .contact-content p {
-        font-size: 1.2rem;
-        margin-bottom: 35px;
-        opacity: 0.95;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .contact-button-wrapper {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .primary-contact-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background-color: #fff;
-        color: #667eea;
-        padding: 16px 35px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .primary-contact-btn::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(102, 126, 234, 0.1);
-        transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
-      }
-
-      .primary-contact-btn:hover::before {
-        width: 300px;
-        height: 300px;
-        top: -150px;
-        left: -150px;
-      }
-
-      .primary-contact-btn:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
-      }
-
-      .primary-contact-btn i {
-        transition: transform 0.3s ease;
-      }
-
-      .primary-contact-btn:hover i {
-        transform: translateX(5px);
+        font-size: 1rem;
       }
 
       .feature-badges {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-top: 40px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 15px;
       }
+    }
 
-      .badge-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: #fff;
-        font-size: 0.95rem;
-        opacity: 0.9;
-      }
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 18px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
 
-      .badge-item i {
-        font-size: 1.2rem;
-      }
+    .back-to-top.visible {
+      display: flex;
+    }
 
-      /* Responsive adjustments */
-      @media (max-width: 768px) {
-        .creative-contact-section {
-          padding: 40px 25px;
-          margin: 60px 20px;
-        }
+    .back-to-top:hover {
+      background: var(--primary-dark);
+    }
 
-        .contact-content h2 {
-          font-size: 2rem;
-        }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
 
-        .contact-content p {
-          font-size: 1rem;
-        }
+    body[data-theme="dark"] #services .service-grid>div {
+      /* these are the white boxes in your screenshot */
+      background-color: #15171c !important;
+      color: #f5f5f5 !important;
+      border-radius: 20px !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
 
-        .feature-badges {
-          flex-direction: column;
-          gap: 15px;
-        }
-      }
+    /* headings inside those boxes */
+    body[data-theme="dark"] #services .service-grid>div h3 {
+      color: #ff8a65 !important;
+    }
 
-      .back-to-top {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background: var(--primary-color);
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
-        cursor: pointer;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        z-index: 999;
-      }
+    /* paragraph text */
+    body[data-theme="dark"] #services .service-grid>div p {
+      color: #c3c3c3 !important;
+    }
 
-      .back-to-top.visible {
-        display: flex;
-      }
+    /* icon circle */
+    body[data-theme="dark"] #services .service-grid>div .service-icon {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      color: #ffffff !important;
+    }
+  </style>
+</head>
 
-      .back-to-top:hover {
-        background: var(--primary-dark);
-      }
+<body>
+  <div id="scroll-progress"></div>
+  <div id="navbar-container"></div>
 
-      .visually-hidden {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-      }
-
-body[data-theme="dark"] #services .service-grid > div {
-  /* these are the white boxes in your screenshot */
-  background-color: #15171c !important;
-  color: #f5f5f5 !important;
-  border-radius: 20px !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-/* headings inside those boxes */
-body[data-theme="dark"] #services .service-grid > div h3 {
-  color: #ff8a65 !important;
-}
-
-/* paragraph text */
-body[data-theme="dark"] #services .service-grid > div p {
-  color: #c3c3c3 !important;
-}
-
-/* icon circle */
-body[data-theme="dark"] #services .service-grid > div .service-icon {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
-}
-
-    </style>
-  </head>
-
-  <body>
-    <div id="scroll-progress"></div>
-    <div id="navbar-container"></div>
-
-    <!-- Services Section -->
-    <section id="services" class="services-container">
-      <div class="services-header fade-in">
-        <h1>Our Premium Services</h1>
-        <p>
-          Comprehensive vehicle transportation solutions tailored to your needs
-          — safe, insured, and on time.
-        </p>
-      </div>
-
-      <div class="service-grid">
-        <div class="service-card fade-in">
-          <div class="service-icon"><i data-lucide="truck"></i></div>
-          <h3>Door-to-Door Transport</h3>
-          <p>
-            Enjoy complete convenience with pickup from your home and delivery
-            to your destination.
-            <strong>Flexible scheduling</strong>, no hidden costs, and seamless
-            end-to-end coordination.
-          </p>
-        </div>
-
-        <div class="service-card fade-in">
-          <div class="service-icon"><i data-lucide="map-pin"></i></div>
-          <h3>Nationwide Coverage</h3>
-          <p>
-            Transport your vehicle anywhere across India through our trusted
-            network of carriers. Get real-time tracking and guaranteed on-time
-            delivery to over <strong>500 cities</strong>.
-          </p>
-        </div>
-
-        <div class="service-card fade-in">
-          <div class="service-icon"><i data-lucide="shield-check"></i></div>
-          <h3>Safe & Secure Transport</h3>
-          <p>
-            Safety first — we use advanced equipment, secure carriers, and full
-            <strong>insurance coverage</strong>
-            to ensure your vehicle reaches its destination without a scratch.
-          </p>
-        </div>
-
-        <div class="service-card fade-in">
-          <div class="service-icon"><i data-lucide="star"></i></div>
-          <h3>Luxury Car Transport</h3>
-          <p>
-            Exclusive handling for premium cars with
-            <strong>climate-controlled carriers</strong> and
-            <em>white-glove care</em>. Perfect for luxury and high-value
-            vehicles.
-          </p>
-        </div>
-
-        <div class="service-card fade-in">
-          <div class="service-icon"><i data-lucide="bike"></i></div>
-          <h3>Bike Transportation</h3>
-          <p>
-            Safe and affordable bike transport with specialized carriers and
-            secure mounts. Designed to handle scooters, superbikes, and more —
-            starting at ₹2,000.
-          </p>
-        </div>
-
-        <div class="service-card fade-in">
-          <div class="service-icon"><i data-lucide="briefcase"></i></div>
-          <h3>Commercial Vehicle Transport</h3>
-          <p>
-            Tailored logistics for business fleets and heavy vehicles.
-            <strong>Bulk discounts</strong>, custom scheduling, and nationwide
-            service for your enterprise needs.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Service Stats -->
-    <section id="stats" class="service-stats">
-      <h2 class="visually-hidden">Our Statistics</h2>
-      <div class="stat-item">
-        <div class="stat-number" data-target="5000">0</div>
-        <div class="stat-label">Vehicles Transported</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="50">0</div>
-        <div class="stat-label">Cities Covered</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="12">0</div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="98">0</div>
-        <div class="stat-label">% Satisfaction</div>
-      </div>
-    </section>
-
-    <!-- Customer Reviews Section -->
-   <section id="service-highlights" class="service-highlights-section" style="padding: 80px 20px;">
-  <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+  <!-- Services Section -->
+  <section id="services" class="services-container">
     <div class="services-header fade-in">
-      <h2>Why Choose Our Transport Service?</h2>
-      <p>We combine advanced technology with professional handling to ensure the highest standards in vehicle logistics.</p>
+      <h1>Our Premium Services</h1>
+      <p>
+        Comprehensive vehicle transportation solutions tailored to your needs
+        — safe, insured, and on time.
+      </p>
     </div>
 
     <div class="service-grid">
       <div class="service-card fade-in">
-        <div class="service-icon"><i data-lucide="clock"></i></div>
-        <h3>24/7 Support</h3>
-        <p>Our dedicated support team is available around the clock to assist you with bookings and queries.</p>
+        <div class="service-icon"><i data-lucide="truck"></i></div>
+        <h3>Door-to-Door Transport</h3>
+        <p>
+          Enjoy complete convenience with pickup from your home and delivery
+          to your destination.
+          <strong>Flexible scheduling</strong>, no hidden costs, and seamless
+          end-to-end coordination.
+        </p>
       </div>
 
       <div class="service-card fade-in">
-        <div class="service-icon"><i data-lucide="navigation"></i></div>
-        <h3>GPS Live Tracking</h3>
-        <p>Stay updated with real-time location tracking of your vehicle throughout its journey.</p>
+        <div class="service-icon"><i data-lucide="map-pin"></i></div>
+        <h3>Nationwide Coverage</h3>
+        <p>
+          Transport your vehicle anywhere across India through our trusted
+          network of carriers. Get real-time tracking and guaranteed on-time
+          delivery to over <strong>500 cities</strong>.
+        </p>
       </div>
 
       <div class="service-card fade-in">
-        <div class="service-icon"><i data-lucide="award"></i></div>
-        <h3>Certified Professionals</h3>
-        <p>Our drivers and handlers are highly trained and background-checked for your peace of mind.</p>
+        <div class="service-icon"><i data-lucide="shield-check"></i></div>
+        <h3>Safe & Secure Transport</h3>
+        <p>
+          Safety first — we use advanced equipment, secure carriers, and full
+          <strong>insurance coverage</strong>
+          to ensure your vehicle reaches its destination without a scratch.
+        </p>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon"><i data-lucide="star"></i></div>
+        <h3>Luxury Car Transport</h3>
+        <p>
+          Exclusive handling for premium cars with
+          <strong>climate-controlled carriers</strong> and
+          <em>white-glove care</em>. Perfect for luxury and high-value
+          vehicles.
+        </p>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon"><i data-lucide="bike"></i></div>
+        <h3>Bike Transportation</h3>
+        <p>
+          Safe and affordable bike transport with specialized carriers and
+          secure mounts. Designed to handle scooters, superbikes, and more —
+          starting at ₹2,000.
+        </p>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon"><i data-lucide="briefcase"></i></div>
+        <h3>Commercial Vehicle Transport</h3>
+        <p>
+          Tailored logistics for business fleets and heavy vehicles.
+          <strong>Bulk discounts</strong>, custom scheduling, and nationwide
+          service for your enterprise needs.
+        </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-    
+  <!-- Service Stats -->
+  <section id="stats" class="service-stats">
+    <h2 class="visually-hidden">Our Statistics</h2>
+    <div class="stat-item">
+      <div class="stat-number" data-target="5000">0</div>
+      <div class="stat-label">Vehicles Transported</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="50">0</div>
+      <div class="stat-label">Cities Covered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="12">0</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="98">0</div>
+      <div class="stat-label">% Satisfaction</div>
+    </div>
+  </section>
 
-    <div id="footer-container"></div>
+  <!-- Customer Reviews Section -->
+  <section id="reviews" class="customer-reviews-section" style="padding: 60px 20px;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+      <div class="featured-reviews-header fade-in" style="margin-bottom: 32px;">
+        <div>
+          <h2 class="featured-reviews-title">Customer Reviews</h2>
+          <p style="color: #999; margin-top: 8px;">
+            See what our customers say about our service
+          </p>
+        </div>
+        <button id="writeReviewBtnServices" class="write-review-btn">
+          ✍️ Write a Review
+        </button>
+      </div>
 
-    <script>
-      lucide.createIcons();
-    </script>
+      <div class="reviews-controls" style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
+        <div>
+          <div id="servicesReviewStats"></div>
+        </div>
 
-    <script src="js/modules/search.js"></script>
-    <script src="js/modules/navbar-loader.js?v=2"></script>
-    <script src="js/modules/footer-loader.js"></script>
-    <script src="js/modules/themes.js"></script>
-    <script src="js/modules/Services.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/modules/backtoBottom.js"></script>
-    <script src="js/modules/back-to-top-button.js"></script>
-    <script src="js/modules/scroll-animations.js"></script>
-    <script src="js/modules/component-initializer.js"></script>
+        <div>
+          <div class="review-filters">
+            <button class="review-filter-btn active" data-rating="all">
+              All Reviews
+            </button>
+            <button class="review-filter-btn" data-rating="5">5 ★</button>
+            <button class="review-filter-btn" data-rating="4">4 ★</button>
+            <button class="review-filter-btn" data-rating="3">3 ★</button>
+            <button class="review-filter-btn" data-rating="2">2 ★</button>
+            <button class="review-filter-btn" data-rating="1">1 ★</button>
 
-    
-   
+            <div class="review-sort">
+              <select class="review-sort-select" id="reviewSort">
+                <option value="recent">Most Recent</option>
+                <option value="highest">Highest Rated</option>
+                <option value="helpful">Most Helpful</option>
+              </select>
+            </div>
+          </div>
 
-    <button class="back-to-top" id="backToTop">
-      <i class="fas fa-chevron-up"></i>
-    </button>
+          <div class="reviews-list" id="servicesReviewsList">
+            <div class="reviews-empty" style="padding: 40px 20px; text-align: center;">
+              <div class="reviews-empty-icon">⭐</div>
+              <h3 class="reviews-empty-title">Loading reviews...</h3>
+            </div>
+          </div>
 
-    <button class="back-to-bottom" id="backToBottom">
-      <i class="fas fa-arrow-down"></i>
-    </button>
-  </body>
+          <div class="review-pagination" id="reviewPagination" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="cta" class="cta-section ">
+    <h2>Get a Free Quote Instantly</h2>
+    <p>
+      Quick & accurate vehicle transport pricing in 30 seconds — anywhere in
+      India.
+    </p>
+    <a href="pages/contact.html">Get Free Quote</a>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <script src="js/modules/search.js"></script>
+  <script src="js/modules/navbar-loader.js?v=2"></script>
+  <script src="js/modules/footer-loader.js"></script>
+  <script src="js/modules/themes.js"></script>
+  <script src="js/modules/Services.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/modules/backtoBottom.js"></script>
+  <script src="js/modules/back-to-top-button.js"></script>
+  <script src="js/modules/scroll-animations.js"></script>
+  <script src="js/modules/component-initializer.js"></script>
+
+  <script type="module" src="js/components/starRating.js"></script>
+  <script type="module" src="js/review.js"></script>
+  <script type="module" src="js/reviewForm.js"></script>
+  <script type="module" src="js/modules/services-reviews.js"></script>
+
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <button class="back-to-bottom" id="backToBottom">
+    <i class="fas fa-arrow-down"></i>
+  </button>
+</body>
+
 </html>
