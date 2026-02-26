@@ -5,12 +5,27 @@
 
 import { getAllReviews, getReviewStats, createReviewStatsHTML, createReviewCardHTML } from '../review.js';
 import { openReviewModal } from '../reviewForm.js';
+import { handleHelpfulClick } from '../review.js';
 
 let currentPage = 1;
 let currentRating = 'all';
 let currentSort = 'recent';
 const reviewsPerPage = 10;
 
+
+
+
+function attachHelpfulListeners() {
+  const helpfulBtns = document.querySelectorAll('.helpful-btn');
+  helpfulBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const card = btn.closest('.premium-review-card');
+      const reviewId = card.getAttribute('data-review-id');
+      handleHelpfulClick(reviewId, btn);
+    });
+  });
+}
 // Load review stats
 async function loadReviewStats() {
   try {
@@ -74,6 +89,7 @@ async function loadReviews() {
 
     // Add read more functionality
     attachReadMoreListeners();
+    attachHelpfulListeners();
 
     // Render pagination
     renderPagination(response.data.pagination);
