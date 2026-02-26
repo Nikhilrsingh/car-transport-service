@@ -21,6 +21,7 @@
   --progress-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
 
   --progress-pill-border: rgba(255, 255, 255, 0.06);
+  --progress-pill-bg: rgba(255, 255, 255, 0.03);
   --step-number-color: #ffffff;
 
   /* Card / component variables (Dark theme) */
@@ -1498,6 +1499,107 @@ body[data-theme="dark"] .pricing-page .cta-button {
 
 body[data-theme="dark"] .pricing-page .breakdown-item {
   color: #e8e8e8;
+}
+
+/* Pricing Page Components */
+body[data-theme="dark"] .pricing-page .pricing-card {
+  background: #1a1e26 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body[data-theme="dark"] .pricing-page .pricing-card.popular {
+  background: linear-gradient(145deg, #1e222b 0%, #171a21 100%) !important;
+  border-color: #ff6b35 !important;
+}
+
+body[data-theme="dark"] .pricing-page .price-calculator {
+  background: linear-gradient(135deg, #1a1e26 0%, #111418 100%) !important;
+  border-color: rgba(255, 107, 53, 0.3) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+body[data-theme="dark"] .pricing-page .calculator-header h2,
+body[data-theme="dark"] .pricing-page .calculator-header p {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .pricing-page .form-group label {
+  color: #c0c0c0 !important;
+}
+
+body[data-theme="dark"] .pricing-page .testimonial-section h2 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .pricing-page .testimonial-card {
+  background: #1a1e26 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body[data-theme="dark"] .pricing-page .testimonial-info h4 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .pricing-page .testimonial-text {
+  color: #c0c0c0 !important;
+}
+
+body[data-theme="dark"] .pricing-page .testimonial-avatar {
+  background: #252a31 !important;
+  color: #ff6b35 !important;
+  border-color: #ff6b35 !important;
+}
+
+body[data-theme="dark"] .pricing-page .faq-sections h2 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .pricing-page .faq-item {
+  background: #1a1e26 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body[data-theme="dark"] .pricing-page .faq-question span {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .pricing-page .faq-answer {
+  border-top-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+body[data-theme="dark"] .pricing-page .faq-answer p,
+body[data-theme="dark"] .pricing-page .faq-answer li {
+  color: #c0c0c0 !important;
+}
+
+body[data-theme="dark"] .pricing-page .comparison-section {
+  background: #1a1e26 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body[data-theme="dark"] .pricing-page .comparison-section h2 {
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .pricing-page .comparison-table th {
+  background: #252a31 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body[data-theme="dark"] .pricing-page .comparison-table td {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  color: #c0c0c0 !important;
+}
+
+body[data-theme="dark"] .pricing-page .comparison-table th:first-child,
+body[data-theme="dark"] .pricing-page .comparison-table td:first-child {
+  background: #1e222b !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="dark"] .pricing-page .comparison-table tbody tr:hover {
+  background: rgba(255, 107, 53, 0.1) !important;
 }
 
 /* Region Section Enhancements */
