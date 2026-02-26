@@ -44,6 +44,39 @@
   letter-spacing: -0.5px;
 }
 
+#reviews .review-filter-btn {
+    padding: 10px 24px;
+    border-radius: 50px; 
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    background: var(--service-icon-bg, rgba(0, 0, 0, 0.05));
+    color: var(--service-card-text, #111111);
+    border: 1.5px solid var(--service-card-border, rgba(0, 0, 0, 0.1));
+}
+
+
+#reviews .review-filter-btn:hover {
+    background: var(--service-icon-bg);
+    border-color: #ff6347;
+}
+
+#reviews .review-filter-btn.active {
+    background-color: #ff6347 !important;
+    color: white !important;
+    border-color: #ff6347 !important;
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+}
+
+
+body[data-theme="dark"] #reviews .review-filter-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    color: #f5f5f5;
+}
+
 [data-theme="light"] .featured-reviews-title {
   color: #222;
 }
@@ -54,7 +87,7 @@
   align-items: center;
   gap: 0.6rem;
   padding: 0.9rem 1.8rem;
-  background: linear-gradient(135deg, #ff6b35, #ff8a50);
+  background: linear-gradient(135deg, #ff6b35, #ff8a50) !important;
   color: #fff;
   border: none;
   border-radius: 12px;
@@ -76,30 +109,7 @@
   transform: translateY(-1px);
 }
 
-/* View All Reviews link */
-.view-all-reviews-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.9rem 1.8rem;
-  border: 2px solid #ff6b35;
-  color: #ff6b35;
-  background: transparent;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.15);
-  letter-spacing: 0.3px;
-  white-space: nowrap;
-  cursor: pointer;
-}
 
-.view-all-reviews-btn:hover {
-  background: rgba(255, 107, 53, 0.1);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.25);
-}
 
 /* Light mode specific */
 [data-theme="light"] .customer-reviews-section {
@@ -243,3 +253,17 @@
     page-break-inside: avoid;
   }
 }
+
+
+body[data-theme="dark"] .review-sort-select {
+    background-color: #15171c !important; 
+    color: #f5f5f5 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+
+body[data-theme="dark"] .review-sort-select option {
+    background-color: #15171c;
+    color: #f5f5f5;
+}
+
