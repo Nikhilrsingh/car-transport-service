@@ -257,6 +257,39 @@ export function getUserInitials(name) {
   return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
 }
 
+/**
+ * Handle "Helpful" button clicks with Toggle support
+ * Increments or decrements count and persists to localStorage
+ */
+export function handleHelpfulClick(reviewId, btnElement) {
+  const reviews = JSON.parse(localStorage.getItem('cargo_customer_reviews') || '[]');
+  const index = reviews.findIndex((r) => r._id === reviewId);
+
+  if (index !== -1) {
+    const isRemoving = btnElement.classList.contains('voted');
+
+    if (isRemoving) {
+     
+      reviews[index].helpfulCount = Math.max(0, (reviews[index].helpfulCount || 1) - 1);
+      btnElement.classList.remove('voted');
+      btnElement.style.color = ''; 
+      showToast('Vote removed');
+    } else {
+      
+      reviews[index].helpfulCount = (reviews[index].helpfulCount || 0) + 1;
+      btnElement.classList.add('voted');
+      btnElement.style.color = '#ff6347'; 
+      showToast('Thanks for your feedback!');
+    }
+    
+   
+    localStorage.setItem('cargo_customer_reviews', JSON.stringify(reviews));
+
+   
+    const countText = reviews[index].helpfulCount > 0 ? `(${reviews[index].helpfulCount})` : '';
+    btnElement.innerHTML = `<i class="fas fa-thumbs-up"></i> Helpful ${countText}`;
+  }
+}
 /** Create review card HTML */
 export function createReviewCardHTML(review, options = {}) {
   const showActions = options.showActions || false;
@@ -290,16 +323,11 @@ export function createReviewCardHTML(review, options = {}) {
       ${review.title ? `<h4 class="review-title">${review.title}</h4>` : ''}
       
       <div class="review-content">
-        <p class="review-comment ${shouldTruncate ? 'truncated' : ''}" data-full-comment="${review.comment}">
-          ${displayComment}
-        </p>
-        ${shouldTruncate ? '<a href="#" class="review-read-more">Read more</a>' : ''}
-        <div class="review-loader">
-          <div class="loader-line"></div>
-          <div class="loader-line"></div>
-          <div class="loader-line short"></div>
-        </div>
-      </div>
+  <p class="review-comment ${shouldTruncate ? 'truncated' : ''}" data-full-comment="${review.comment}">
+    ${displayComment}
+  </p>
+  ${shouldTruncate ? '<a href="#" class="review-read-more">Read more</a>' : ''}
+</div>
 
       ${showActions
       ? `
@@ -312,9 +340,10 @@ export function createReviewCardHTML(review, options = {}) {
         </div>
       `
       : `
-        <div class="review-footer">
-          <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
-        </div>
+       <button class="helpful-btn">
+  <i class="fas fa-thumbs-up"></i> 
+  Helpful ${review.helpfulCount > 0 ? `(${review.helpfulCount})` : ''}
+</button>
       `
     }
     </div>
