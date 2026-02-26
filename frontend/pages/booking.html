@@ -3176,6 +3176,22 @@
         }
 
         function restoreFormData() {
+            // Priority 1: Check for Quick Quote data in sessionStorage (auto-populate without prompt)
+            const sessionData = sessionStorage.getItem('bookingDraft');
+            if (sessionData) {
+                try {
+                    const data = JSON.parse(sessionData);
+                    console.log('Found Quick Quote data, auto-populating...', data);
+                    applyRestoredData(data);
+                    // Clear sessionStorage once it's been used to auto-populate the form
+                    sessionStorage.removeItem('bookingDraft');
+                    return;
+                } catch (e) {
+                    console.error('Error parsing session data:', e);
+                }
+            }
+
+            // Priority 2: Check for manually saved drafts in localStorage (requires prompt)
             const savedData = localStorage.getItem('bookingDraft');
             if (!savedData) return;
 
@@ -3193,90 +3209,7 @@
 
                 // Ask user if they want to restore
                 if (confirm(`Found a draft booking from ${formatTimeAgo(savedTime)}. Would you like to continue where you left off?`)) {
-                    // Restore form fields
-                    Object.keys(data.fields).forEach(key => {
-                        const input = document.getElementById(key);
-                        if (input) {
-                            input.value = data.fields[key];
-                            // Trigger validation
-                            validateField(key, data.fields[key]);
-                        }
-                    });
-
-                    // Restore step
-                    currentStep = data.step || 1;
-                    updateStepDisplay();
-                    updateProgressBar();
-
-                    // Restore coordinates and map
-                    // Wait for map to be fully initialized
-                    const restoreMapData = () => {
-                        console.log('Restoring map data...', data);
-
-                        if (data.pickupCoords) {
-                            pickupCoords = data.pickupCoords;
-                            console.log('Restoring pickup coords:', pickupCoords);
-                            setPickupLocation(pickupCoords[0], pickupCoords[1], data.fields.pickupLocation || data.fields.pickupCity || 'Saved location');
-                        } else if (data.fields.pickupCity) {
-                            // Try to get coordinates from city name
-                            const pickupCity = data.fields.pickupCity;
-                            console.log('Getting pickup coords for city:', pickupCity);
-                            const pickupCoord = cityCoordinates[pickupCity];
-                            if (pickupCoord) {
-                                console.log('Found pickup coords:', pickupCoord);
-                                pickupCoords = pickupCoord;
-                                setPickupLocation(pickupCoord[0], pickupCoord[1], pickupCity);
-                            }
-                        }
-
-                        if (data.dropCoords) {
-                            dropCoords = data.dropCoords;
-                            console.log('Restoring drop coords:', dropCoords);
-                            setDropLocation(dropCoords[0], dropCoords[1], data.fields.dropLocation || data.fields.dropCity || 'Saved location');
-                        } else if (data.fields.dropCity) {
-                            // Try to get coordinates from city name
-                            const dropCity = data.fields.dropCity;
-                            console.log('Getting drop coords for city:', dropCity);
-                            const dropCoord = cityCoordinates[dropCity];
-                            if (dropCoord) {
-                                console.log('Found drop coords:', dropCoord);
-                                dropCoords = dropCoord;
-                                setDropLocation(dropCoord[0], dropCoord[1], dropCity);
-                            }
-                        }
-
-                        // Calculate route if both coordinates are available
-                        setTimeout(() => {
-                            if (pickupCoords && dropCoords) {
-                                console.log('Calculating route with coords:', pickupCoords, dropCoords);
-                                calculateRoute();
-                            } else {
-                                console.log('Cannot calculate route. Pickup:', pickupCoords, 'Drop:', dropCoords);
-                            }
-                        }, 1500);
-                    };
-
-                    // Ensure map is initialized before restoring markers
-                    if (map && map._loaded) {
-                        console.log('Map is ready, restoring data immediately');
-                        setTimeout(restoreMapData, 500);
-                    } else {
-                        console.log('Map not ready, waiting 2 seconds');
-                        setTimeout(() => {
-                            if (map) {
-                                console.log('Map ready after wait');
-                                restoreMapData();
-                            } else {
-                                console.error('Map still not initialized');
-                            }
-                        }, 2000);
-                    }
-
-                    // Update summary
-                    updateBookingSummary();
-                    calculateDistanceEstimate();
-
-                    showToast('Restored', 'Your draft booking has been restored', 'success', 3000);
+                    applyRestoredData(data);
                 } else {
                     localStorage.removeItem('bookingDraft');
                 }
@@ -3284,6 +3217,98 @@
                 console.error('Error restoring form data:', e);
                 localStorage.removeItem('bookingDraft');
             }
+        }
+
+        /**
+         * Helper function to apply restored data to form and map
+         */
+        function applyRestoredData(data) {
+            if (!data || !data.fields) return;
+
+            // Restore form fields
+            Object.keys(data.fields).forEach(key => {
+                const input = document.getElementById(key);
+                if (input) {
+                    input.value = data.fields[key];
+                    // Trigger validation
+                    validateField(key, data.fields[key]);
+                }
+            });
+
+            // Restore step
+            currentStep = data.step || 1;
+            updateStepDisplay();
+            updateProgressBar();
+
+            // Restore coordinates and map
+            // Wait for map to be fully initialized
+            const restoreMapData = () => {
+                console.log('Restoring map data...', data);
+
+                if (data.pickupCoords) {
+                    pickupCoords = data.pickupCoords;
+                    console.log('Restoring pickup coords:', pickupCoords);
+                    setPickupLocation(pickupCoords[0], pickupCoords[1], data.fields.pickupLocation || data.fields.pickupCity || 'Saved location');
+                } else if (data.fields.pickupCity) {
+                    // Try to get coordinates from city name
+                    const pickupCity = data.fields.pickupCity;
+                    console.log('Getting pickup coords for city:', pickupCity);
+                    const pickupCoord = cityCoordinates[pickupCity];
+                    if (pickupCoord) {
+                        console.log('Found pickup coords:', pickupCoord);
+                        pickupCoords = pickupCoord;
+                        setPickupLocation(pickupCoord[0], pickupCoord[1], pickupCity);
+                    }
+                }
+
+                if (data.dropCoords) {
+                    dropCoords = data.dropCoords;
+                    console.log('Restoring drop coords:', dropCoords);
+                    setDropLocation(dropCoords[0], dropCoords[1], data.fields.dropLocation || data.fields.dropCity || 'Saved location');
+                } else if (data.fields.dropCity) {
+                    // Try to get coordinates from city name
+                    const dropCity = data.fields.dropCity;
+                    console.log('Getting drop coords for city:', dropCity);
+                    const dropCoord = cityCoordinates[dropCity];
+                    if (dropCoord) {
+                        console.log('Found drop coords:', dropCoord);
+                        dropCoords = dropCoord;
+                        setDropLocation(dropCoord[0], dropCoord[1], dropCity);
+                    }
+                }
+
+                // Calculate route if both coordinates are available
+                setTimeout(() => {
+                    if (pickupCoords && dropCoords) {
+                        console.log('Calculating route with coords:', pickupCoords, dropCoords);
+                        calculateRoute();
+                    } else {
+                        console.log('Cannot calculate route. Pickup:', pickupCoords, 'Drop:', dropCoords);
+                    }
+                }, 1500);
+            };
+
+            // Ensure map is initialized before restoring markers
+            if (map && map._loaded) {
+                console.log('Map is ready, restoring data immediately');
+                setTimeout(restoreMapData, 500);
+            } else {
+                console.log('Map not ready, waiting 2 seconds');
+                setTimeout(() => {
+                    if (map) {
+                        console.log('Map ready after wait');
+                        restoreMapData();
+                    } else {
+                        console.error('Map still not initialized');
+                    }
+                }, 2000);
+            }
+
+            // Update summary
+            updateBookingSummary();
+            calculateDistanceEstimate();
+
+            showToast('Restored', 'Your booking details have been auto-populated', 'success', 3000);
         }
 
         function formatTimeAgo(date) {
@@ -5342,6 +5367,10 @@
 
                         showToast('Booking Confirmed!', 'Your booking reference is ' + ref, 'success', 5000);
                         console.log('✅ Success flow completed!');
+
+                        // Clear draft data from both storage options
+                        sessionStorage.removeItem('bookingDraft');
+                        localStorage.removeItem('bookingDraft');
 
                         // Save to localStorage as backup
                         localStorage.setItem('lastBooking', JSON.stringify({
