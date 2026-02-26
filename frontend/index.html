@@ -617,6 +617,9 @@
             </div>
             <span class="rating-percentage">0% (0)</span>
           </div>
+          <button id="writeReviewBtnServices" class="write-review-btn">
+            <i data-lucide="pen-line"></i> Write a Review
+          </button>
         </div>
 
         <button class="cta-button">Write a Review</button>
@@ -657,16 +660,24 @@
           <div class="review-footer">
             <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
           </div>
-        </div>
 
-        <!-- Review Card 2 -->
-        <div class="premium-review-card">
-          <div class="card-header">
-            <div class="reviewer-info">
-              <img src="assets/images/gallery-3.jpg" alt="Priya Patel" class="reviewer-avatar">
-              <div class="reviewer-meta">
-                <h3 class="reviewer-name">Priya Patel</h3>
-                <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          <div>
+            <div class="review-filters">
+              <button class="review-filter-btn active" data-rating="all">
+                All Reviews
+              </button>
+              <button class="review-filter-btn" data-rating="5">5 ★</button>
+              <button class="review-filter-btn" data-rating="4">4 ★</button>
+              <button class="review-filter-btn" data-rating="3">3 ★</button>
+              <button class="review-filter-btn" data-rating="2">2 ★</button>
+              <button class="review-filter-btn" data-rating="1">1 ★</button>
+
+              <div class="review-sort">
+                <select class="review-sort-select" id="reviewSort">
+                  <option value="recent">Most Recent</option>
+                  <option value="highest">Highest Rated</option>
+                  <option value="helpful">Most Helpful</option>
+                </select>
               </div>
             </div>
             <span class="review-date">1 week ago</span>
@@ -688,19 +699,13 @@
               for vehicle transport.</p>
           </div>
 
-          <div class="review-footer">
-            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
-          </div>
-        </div>
-
-        <!-- Review Card 3 -->
-        <div class="premium-review-card">
-          <div class="card-header">
-            <div class="reviewer-info">
-              <img src="assets/images/gallery-5.jpg" alt="Amit Kumar" class="reviewer-avatar">
-              <div class="reviewer-meta">
-                <h3 class="reviewer-name">Amit Kumar</h3>
-                <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+            <div class="reviews-list" id="servicesReviewsList">
+              <div
+                class="reviews-empty"
+                style="padding: 40px 20px; text-align: center;"
+              >
+                <div class="reviews-empty-icon">⭐</div>
+                <h3 class="reviews-empty-title">Loading reviews...</h3>
               </div>
             </div>
             <span class="review-date">2 weeks ago</span>
@@ -727,8 +732,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
   <!-- Keep testimonials for fallback -->
   <section class="testimonials-section" id="testimonials" style="display: none;">
@@ -1082,10 +1086,13 @@
   </script>
 
   <!-- Review System -->
+    <script>
+  lucide.createIcons();
+</script>
   <script type="module" src="js/components/starRating.js"></script>
   <script type="module" src="js/review.js"></script>
   <script type="module" src="js/reviewForm.js"></script>
-  <script type="module" src="js/modules/home-reviews.js"></script>
+  <script type="module" src="js/modules/services-reviews.js"></script>
 
   <!-- Core modules -->
   <script src="js/modules/auto-slider.js"></script>
@@ -1108,7 +1115,7 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="js/modules/region-map.js?v=5"></script>
+  <script src="js/modules/region-map.js"></script>
   <script src="js/modules/region-enhancements.js"></script>
   <script src="js/modules/region-pagination.js"></script>
 
