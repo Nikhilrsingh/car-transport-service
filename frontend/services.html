@@ -77,7 +77,8 @@
         margin-bottom: 60px;
       }
 
-      .services-header h1 {
+      .services-header h1,
+      .services-header h2 {
         font-size: 2.8rem;
         color: var(--service-card-heading);
         margin-bottom: 10px;
@@ -85,7 +86,7 @@
       }
 
       .services-header p {
-        color: var(--color-text-muted, var(--service-card-muted));
+        color:var(--service-card-muted);
         font-size: 1.1rem;
         max-width: 700px;
         margin: 0 auto;
@@ -107,12 +108,8 @@
         padding: 40px 30px;
         text-align: center;
         box-shadow: var(--box-shadow);
-        transition:
-          background-color 0.3s ease,
-          color 0.3s ease,
-          border-color 0.3s ease,
-          box-shadow 0.3s ease,
-          transform 0.3s ease;
+        transition: all 0.3s ease;
+          
       }
 
       .service-card:hover {
@@ -144,11 +141,27 @@
         font-weight: 600;
       }
 
-      .service-card p {
-        color: var(--color-text-muted, var(--service-card-muted));
-        font-size: 0.97rem;
-        line-height: 1.6;
-      }
+
+body[data-theme="dark"] .service-grid .service-card p,
+body[data-theme="dark"] .service-highlights-section .service-card p {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+
+body[data-theme="dark"] .services-header h1,
+body[data-theme="dark"] .services-header h2,
+body[data-theme="dark"] .service-card h3 {
+    color: #ff8a65 !important;
+}
+
+
+.services-header h1,
+.services-header h2 {
+    color: #ff6347;
+    font-weight: 700;
+}
 
       /* ========= Creative Contact Section (unchanged) ========= */
       .creative-contact-section {
@@ -176,6 +189,29 @@
         );
         animation: pulse 15s ease-in-out infinite;
       }
+
+.service-highlights-section h2 {
+    color: var(--service-card-heading); 
+    margin-bottom: 20px;
+}
+
+
+body[data-theme="dark"] .service-highlights-section .service-card {
+    background-color: var(--service-card-bg) !important;
+    color: var(--service-card-text) !important;
+    border: 1px solid var(--service-card-border) !important;
+}
+
+body[data-theme="dark"] .service-highlights-section .service-icon {
+    background-color: var(--service-icon-bg) !important;
+    color: var(--service-icon-color) !important;
+}
+
+body[data-theme="dark"] .service-highlights-section h3 {
+    color: var(--service-card-heading) !important; 
+}
+
+
 
       @keyframes pulse {
         0%,
@@ -477,84 +513,36 @@ body[data-theme="dark"] #services .service-grid > div .service-icon {
     </section>
 
     <!-- Customer Reviews Section -->
-    <section
-      id="reviews"
-      class="customer-reviews-section"
-      style="padding: 60px 20px;"
-    >
-      <div class="container" style="max-width: 1200px; margin: 0 auto;">
-        <div
-          class="featured-reviews-header fade-in"
-          style="margin-bottom: 32px;"
-        >
-          <div>
-            <h2 class="featured-reviews-title">Customer Reviews</h2>
-            <p style="color: #999; margin-top: 8px;">
-              See what our customers say about our service
-            </p>
-          </div>
-          <button id="writeReviewBtnServices" class="write-review-btn">
-            ✍️ Write a Review
-          </button>
-        </div>
+   <section id="service-highlights" class="service-highlights-section" style="padding: 80px 20px;">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <div class="services-header fade-in">
+      <h2>Why Choose Our Transport Service?</h2>
+      <p>We combine advanced technology with professional handling to ensure the highest standards in vehicle logistics.</p>
+    </div>
 
-        <div
-          class="reviews-controls"
-          style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;"
-        >
-          <div>
-            <div id="servicesReviewStats"></div>
-          </div>
-
-          <div>
-            <div class="review-filters">
-              <button class="review-filter-btn active" data-rating="all">
-                All Reviews
-              </button>
-              <button class="review-filter-btn" data-rating="5">5 ★</button>
-              <button class="review-filter-btn" data-rating="4">4 ★</button>
-              <button class="review-filter-btn" data-rating="3">3 ★</button>
-              <button class="review-filter-btn" data-rating="2">2 ★</button>
-              <button class="review-filter-btn" data-rating="1">1 ★</button>
-
-              <div class="review-sort">
-                <select class="review-sort-select" id="reviewSort">
-                  <option value="recent">Most Recent</option>
-                  <option value="highest">Highest Rated</option>
-                  <option value="helpful">Most Helpful</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="reviews-list" id="servicesReviewsList">
-              <div
-                class="reviews-empty"
-                style="padding: 40px 20px; text-align: center;"
-              >
-                <div class="reviews-empty-icon">⭐</div>
-                <h3 class="reviews-empty-title">Loading reviews...</h3>
-              </div>
-            </div>
-
-            <div
-              class="review-pagination"
-              id="reviewPagination"
-              style="display: none;"
-            ></div>
-          </div>
-        </div>
+    <div class="service-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon"><i data-lucide="clock"></i></div>
+        <h3>24/7 Support</h3>
+        <p>Our dedicated support team is available around the clock to assist you with bookings and queries.</p>
       </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section id="cta" class="cta-section ">
-      <h2>Get a Free Quote Instantly</h2>
-      <p>
-        Quick & accurate vehicle transport pricing in 30 seconds — anywhere in
-        India.
-      </p>
-      <a href="pages/contact.html">Get Free Quote</a>
-    </section>
+      <div class="service-card fade-in">
+        <div class="service-icon"><i data-lucide="navigation"></i></div>
+        <h3>GPS Live Tracking</h3>
+        <p>Stay updated with real-time location tracking of your vehicle throughout its journey.</p>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon"><i data-lucide="award"></i></div>
+        <h3>Certified Professionals</h3>
+        <p>Our drivers and handlers are highly trained and background-checked for your peace of mind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
 
     <div id="footer-container"></div>
 
@@ -573,10 +561,8 @@ body[data-theme="dark"] #services .service-grid > div .service-icon {
     <script src="js/modules/scroll-animations.js"></script>
     <script src="js/modules/component-initializer.js"></script>
 
-    <script type="module" src="js/components/starRating.js"></script>
-    <script type="module" src="js/review.js"></script>
-    <script type="module" src="js/reviewForm.js"></script>
-    <script type="module" src="js/modules/services-reviews.js"></script>
+    
+   
 
     <button class="back-to-top" id="backToTop">
       <i class="fas fa-chevron-up"></i>
