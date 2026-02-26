@@ -340,8 +340,9 @@ body[data-theme="dark"] .form-group.floating-label input:focus,
 body[data-theme="dark"] .form-group.floating-label input:not(:placeholder-shown),
 body[data-theme="dark"] .form-group.floating-label select:focus,
 body[data-theme="dark"] .form-group.floating-label select:not([value=""]) {
-  background: rgba(255, 99, 71, 0.1) !important;
+  background: rgba(255, 99, 71, 0.15) !important;
   border-color: #ff6b35 !important;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.3) !important;
 }
 
 body[data-theme="dark"] .form-group.floating-label input:focus~label,
