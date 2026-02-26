@@ -213,7 +213,7 @@
             }
         };
 
-        localStorage.setItem('bookingDraft', JSON.stringify(bookingDraft));
+        sessionStorage.setItem('bookingDraft', JSON.stringify(bookingDraft));
 
         showNotification('Redirecting to secure booking page...', 'success');
 
