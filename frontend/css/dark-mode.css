@@ -35,6 +35,10 @@
   --input-border: #444444;
 }
 
+
+body[data-theme="dark"] {
+   --small-dot-fill: #ffffff; 
+}
 /* Dark Mode Color Palette Override */
 body[data-theme="dark"] {
   --color-text-primary: #ffffff;

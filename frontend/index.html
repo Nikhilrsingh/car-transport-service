@@ -9,7 +9,7 @@
   <base href="./" />
   <!-- Google Verifiacation meta url-->
   <meta name="google-site-verification" content="1qe3cEZmpUpCyhVnz2i2MsffDnyvi18DSo9KUl86Hjk" />
-
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <!-- SEO Meta Tags -->
   <meta name="description"
     content="Harihar Car Carriers offers safe, reliable, and affordable car transport services across India. Door-to-door delivery, real-time tracking, and insured transportation for your vehicle." />
@@ -158,6 +158,18 @@
 </head>
 
 <body class="neon-theme">
+  <div class="cursor">
+  <div class="cursor__ball cursor__ball--big">
+    <svg height="30" width="30">
+      <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
+    </svg>
+  </div>
+  <div class="cursor__ball cursor__ball--small">
+    <svg height="10" width="10">
+      <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
+    </svg>
+  </div>
+</div>
 
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
@@ -1098,7 +1110,7 @@
   <script src="js/modules/auto-slider.js"></script>
   <script src="js/modules/navbar-loader.js?v=2"></script>
   <script src="js/modules/footer-loader.js"></script>
-  <script src="js/script.js"></script>
+  <script type="module" src="js/script.js"></script>
   <script src="js/modules/hero-animations.js"></script>
   <script src="js/modules/Services.js"></script>
   <script src="js/modules/tracking.js"></script>

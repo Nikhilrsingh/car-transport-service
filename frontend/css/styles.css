@@ -12,6 +12,41 @@
   --calendar-icon-filter: none;
 }
 
+html, body, * {
+  cursor: none !important;
+}
+
+.cursor {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10001; 
+}
+
+.cursor__ball {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+
+.cursor__ball--big circle {
+  fill: #ff6b35 !important;
+  stroke: none;
+}
+
+
+:root { --small-dot-fill: #000000; }
+body[data-theme="dark"], body.neon-theme { --small-dot-fill: #ffffff; }
+
+.cursor__ball--small circle {
+  fill: var(--small-dot-fill);
+  stroke: none;
+  transition: fill 0.3s ease;
+}
+
 .content-wrapper {
   max-width: var(--content-max-width);
   margin-left: auto;
@@ -6111,3 +6146,14 @@ body::-webkit-scrollbar-thumb:hover {
     ) !important;
 }
 
+
+
+/* frontend/css/styles.css */
+
+/* Variables for the small dot */
+:root {
+  /* Default: Light Mode (Small dot is black) */
+  --small-dot-color: #000000; 
+}
+
+/* Dark Mode: (Small dot is white) */

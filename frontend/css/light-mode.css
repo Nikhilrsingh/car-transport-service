@@ -39,8 +39,13 @@
   --button-hover-bg: #d0d0d0;
   --input-bg: #ffffff;
   --input-border: #cccccc;
+
 }
 
+body[data-theme="light"] {
+  
+  --small-dot-fill: #000000; 
+}
 /* Light Mode Color Palette Override */
 body[data-theme="light"] {
   --color-text-primary: #000000;

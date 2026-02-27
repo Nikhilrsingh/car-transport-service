@@ -2,7 +2,7 @@
 const FORM_STORAGE_KEY = "bookingFormData";
 const STEP_STORAGE_KEY = "bookingFormStep";
 const TOTAL_STEPS = 3;
-
+import { initCustomCursor } from './modules/custom-cursor.js';
 // ================= PHONE VALIDATION UTILITY =================
 /**
  * Validates Indian mobile phone numbers
@@ -72,6 +72,8 @@ function showContactToast(title, message) {
 
 // ================= CONTACT FORM =================
 document.addEventListener("DOMContentLoaded", function () {
+  
+  initCustomCursor();
   const contactForm = document.getElementById("contactForm");
 
   if (contactForm) {
