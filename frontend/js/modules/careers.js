@@ -581,7 +581,8 @@ function animateOnScroll() {
   );
 
   elements.forEach((element) => {
-    element.style.opacity = '0';
+    element.style.opacity = '1';
+    element.style.transform = 'translateY(0)';
     observer.observe(element);
   });
 }
