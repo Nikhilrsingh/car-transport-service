@@ -907,7 +907,7 @@
     <div id="footer-container"></div>
 
     <!-- Scripts -->
-    <script src="../js/modules/loading-state-manager.js"></script>
+   <script src="../js/modules/loading-state-manager.js"></script>
     <script src="../js/modules/page-navigation-loader.js"></script>
     <script src="../js/modules/navbar-loader.js?v=2"></script>
     <script src="../js/modules/footer-loader.js"></script>
@@ -915,78 +915,76 @@
     
     <!-- Review System -->
     <script type="module" src="../js/components/starRating.js"></script>
-    <script type="module" src="../js/review.js"></script>
-    <script type="module" src="../js/reviewForm.js"></script>
+   <script type="module" src="../js/review.js"></script>
     <script type="module" src="../js/modules/dashboard-reviews.js"></script>
 
     <script type="module">
         const API_BASE = 'http://localhost:3000/api';
         let currentUser = null;
 
-        // Check authentication on page load
-        document.addEventListener('DOMContentLoaded', async function() {
-            const token = localStorage.getItem('token');
+        // 2. GLOBAL TAB SWITCHING logic
+        // Attached to window so the HTML onclick="switchTab()" attributes can find it
+        window.switchTab = function(tabName) {
+            console.log("Switching to tab:", tabName);
             
-            // Show demo notice if not logged in
-            if (!token) {
-                document.getElementById('demoNotice').style.display = 'block';
-            }
-            
-            // TEMPORARY: Allow access without login for testing
-            // TODO: Re-enable authentication when login system is fully implemented
-            // if (!token) {
-            //     showToast('Please login to access dashboard', 'error');
-            //     setTimeout(() => window.location.href = 'login.html', 2000);
-            //     return;
-            // }
-
-            await loadUserProfile();
-            await loadBookings();
-            setupEventListeners();
-        });
-
-        // Tab switching
-        function switchTab(tabName) {
+            // UI Updates: Toggle active classes on tab buttons
             document.querySelectorAll('.dashboard-tab').forEach(tab => {
-                tab.classList.remove('active');
+                tab.classList.toggle('active', tab.dataset.tab === tabName);
             });
+            
+            // UI Updates: Toggle active classes on content sections
             document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
+                content.classList.toggle('active', content.id === `${tabName}-tab`);
             });
 
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-            document.getElementById(`${tabName}-tab`).classList.add('active');
-
+            // Data Loading: Only load data when the specific tab is opened
             if (tabName === 'bookings') {
                 loadBookings();
             } else if (tabName === 'invoices') {
                 loadInvoices();
             }
-        }
+        };
 
-        // Load user profile
+        // 3. Initialize Review System
+        window.reviewModal = new ReviewFormModal();
+        window.openReviewModal = (bookingId) => {
+            window.reviewModal.open(bookingId);
+        };
+
+        // 4. Page Initialization
+        document.addEventListener('DOMContentLoaded', async function() {
+            const token = localStorage.getItem('token');
+            
+            // Show demo notice if not logged in
+            if (!token) {
+                const demoNotice = document.getElementById('demoNotice');
+                if (demoNotice) demoNotice.style.display = 'block';
+            }
+
+            // Initial data load
+            await loadUserProfile();
+            await loadBookings();
+            
+            // Setup listeners for forms and search inputs
+            setupEventListeners();
+        });
+
+        // --- CORE FUNCTIONS ---
+
         async function loadUserProfile() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                currentUser = { 
+                    name: 'Demo User', 
+                    email: 'demo@example.com', 
+                    phone: '+91-9876543210',
+                    address: { street: '123 Demo St', city: 'Mumbai', state: 'MH', pincode: '400001' },
+                     profilePicture: 'https://via.placeholder.com/120'
+                };
+                displayUserProfile(currentUser);
+                return;
+            }
             try {
-                const token = localStorage.getItem('token');
-                
-                // If no token, show demo user data
-                if (!token) {
-                    currentUser = {
-                        name: 'Demo User',
-                        email: 'demo@example.com',
-                        phone: '+91-9876543210',
-                        address: {
-                            street: '123 Demo Street',
-                            city: 'Mumbai',
-                            state: 'Maharashtra',
-                            pincode: '400001'
-                        },
-                        profilePicture: 'https://via.placeholder.com/120'
-                    };
-                    displayUserProfile(currentUser);
-                    return;
-                }
-                
                 const response = await fetch(`${API_BASE}/profile`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -1015,22 +1013,30 @@
 
         // Display user profile
         function displayUserProfile(user) {
-            document.getElementById('userName').textContent = user.name || 'User';
-            document.getElementById('profileName').textContent = user.name || 'User';
-            document.getElementById('profileEmail').textContent = user.email || '';
-            document.getElementById('name').value = user.name || '';
-            document.getElementById('email').value = user.email || '';
-            document.getElementById('phone').value = user.phone || '';
-            
+            const elements = {
+                userName: 'textContent',
+                profileName: 'textContent',
+                profileEmail: 'textContent',
+                name: 'value',
+                email: 'value',
+                phone: 'value'
+            };
+
+            Object.entries(elements).forEach(([id, prop]) => {
+                const el = document.getElementById(id);
+                if (el) el[prop] = user[id] || user.name || '';
+            });
+
             if (user.address) {
-                document.getElementById('street').value = user.address.street || '';
-                document.getElementById('city').value = user.address.city || '';
-                document.getElementById('state').value = user.address.state || '';
-                document.getElementById('pincode').value = user.address.pincode || '';
+                ['street', 'city', 'state', 'pincode'].forEach(key => {
+                    const el = document.getElementById(key);
+                    if (el) el.value = user.address[key] || '';
+                });
             }
 
-            if (user.profilePicture) {
-                document.getElementById('profilePic').src = user.profilePicture;
+            const profilePic = document.getElementById('profilePic');
+            if (profilePic && user.profilePicture) {
+                profilePic.src = user.profilePicture;
             }
         }
 
@@ -1515,21 +1521,13 @@
 
         // Initialize Review System
         import { ReviewFormModal } from '../js/reviewForm.js';
-        import { initDashboardReviews } from '../js/modules/dashboard-reviews.js';
+        
         
         window.reviewModal = new ReviewFormModal();
         window.openReviewModal = (bookingId) => {
             window.reviewModal.open(bookingId);
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const reviewsTab = document.querySelector('[data-tab="reviews"]');
-            if (reviewsTab) {
-                reviewsTab.addEventListener('click', () => {
-                    initDashboardReviews();
-                });
-            }
-        });
     </script>
 </body>
 </html>
