@@ -13,7 +13,7 @@ class EnhancedGallery {
     this.startX = 0;
     this.startY = 0;
     this.currentRotation = 0;
-    
+
     console.log('Enhanced Gallery initializing...');
     this.init();
   }
@@ -55,7 +55,7 @@ class EnhancedGallery {
     });
 
     this.filteredImages = [...this.images];
-    
+
     // Add click handlers
     galleryItems.forEach((item, index) => {
       item.addEventListener('click', () => this.openLightbox(index));
@@ -73,19 +73,12 @@ class EnhancedGallery {
 
     // Check if browser supports CSS Grid masonry
     const supportsMasonry = CSS.supports('grid-template-rows', 'masonry');
-    
-    if (!supportsMasonry) {
-      // Apply fallback layout
-      const items = grid.querySelectorAll('.enhanced-gallery-item');
-      items.forEach((item, index) => {
-        const pattern = index % 3;
-        if (pattern === 1) {
-          item.style.gridRowEnd = 'span 2';
-        } else {
-          item.style.gridRowEnd = 'span 1';
-        }
-      });
-    }
+
+    // Apply fallback layout (Simple and stable)
+    const items = grid.querySelectorAll('.enhanced-gallery-item');
+    items.forEach((item) => {
+      item.style.gridRow = 'auto';
+    });
   }
 
   /* ========================================
@@ -93,12 +86,12 @@ class EnhancedGallery {
      ======================================== */
   setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    
+
     filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
         this.applyFilter(filter);
-        
+
         // Update active state
         filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -112,12 +105,12 @@ class EnhancedGallery {
   applyFilter(filter) {
     this.currentFilter = filter;
     const items = document.querySelectorAll('.enhanced-gallery-item');
-    
+
     let visibleCount = 0;
     items.forEach((item, index) => {
       const category = item.dataset.category;
       const shouldShow = filter === 'all' || category === filter;
-      
+
       if (shouldShow) {
         item.style.display = 'block';
         setTimeout(() => {
@@ -146,13 +139,13 @@ class EnhancedGallery {
 
   updateFilterCounts() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    
+
     filterButtons.forEach(btn => {
       const filter = btn.dataset.filter;
-      const count = filter === 'all' 
-        ? this.images.length 
+      const count = filter === 'all'
+        ? this.images.length
         : this.images.filter(img => img.category === filter).length;
-      
+
       const countSpan = btn.querySelector('.filter-count');
       if (countSpan) {
         countSpan.textContent = count;
@@ -178,7 +171,7 @@ class EnhancedGallery {
 
   searchImages(query) {
     const items = document.querySelectorAll('.enhanced-gallery-item');
-    
+
     if (!query) {
       this.applyFilter(this.currentFilter);
       return;
@@ -190,11 +183,11 @@ class EnhancedGallery {
       const description = (item.dataset.description || '').toLowerCase();
       const tags = (item.dataset.tags || '').toLowerCase();
       const location = (item.dataset.location || '').toLowerCase();
-      
-      const matches = title.includes(query) || 
-                     description.includes(query) || 
-                     tags.includes(query) ||
-                     location.includes(query);
+
+      const matches = title.includes(query) ||
+        description.includes(query) ||
+        tags.includes(query) ||
+        location.includes(query);
 
       if (matches) {
         item.style.display = 'block';
@@ -218,11 +211,11 @@ class EnhancedGallery {
       const description = img.description.toLowerCase();
       const tags = img.tags.join(',').toLowerCase();
       const location = img.location.toLowerCase();
-      
-      return title.includes(query) || 
-             description.includes(query) || 
-             tags.includes(query) ||
-             location.includes(query);
+
+      return title.includes(query) ||
+        description.includes(query) ||
+        tags.includes(query) ||
+        location.includes(query);
     });
   }
 
@@ -259,13 +252,13 @@ class EnhancedGallery {
     const tempImg = new Image();
     tempImg.onload = () => {
       img.src = src;
-      
+
       // Remove blur effect
       img.style.filter = 'blur(0)';
       img.style.transform = 'scale(1)';
       img.classList.remove('lazy-loading');
       img.classList.add('lazy-loaded');
-      
+
       // Remove loading spinner
       const spinner = img.parentElement.querySelector('.loading-spinner');
       if (spinner) {
@@ -295,7 +288,7 @@ class EnhancedGallery {
     // Navigation buttons
     const prevBtn = lightbox.querySelector('.lightbox-prev');
     const nextBtn = lightbox.querySelector('.lightbox-next');
-    
+
     if (prevBtn) {
       prevBtn.addEventListener('click', () => this.navigateLightbox(-1));
     }
@@ -307,7 +300,7 @@ class EnhancedGallery {
     const zoomInBtn = lightbox.querySelector('.zoom-in');
     const zoomOutBtn = lightbox.querySelector('.zoom-out');
     const zoomResetBtn = lightbox.querySelector('.zoom-reset');
-    
+
     if (zoomInBtn) {
       zoomInBtn.addEventListener('click', () => this.zoomImage(0.2));
     }
@@ -368,10 +361,10 @@ class EnhancedGallery {
 
     document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
-      
+
       const deltaX = e.pageX - startX;
       const deltaY = e.pageY - startY;
-      
+
       const wrapper = img.parentElement;
       if (wrapper) {
         wrapper.scrollLeft = scrollLeft - deltaX;
@@ -396,10 +389,10 @@ class EnhancedGallery {
     // Find the correct index in filtered images
     const clickedImage = this.images[index];
     const filteredIndex = this.filteredImages.findIndex(img => img.index === clickedImage.index);
-    
+
     this.currentImageIndex = filteredIndex >= 0 ? filteredIndex : 0;
     const imageData = this.filteredImages[this.currentImageIndex];
-    
+
     if (!imageData) return;
 
     // Update image
@@ -415,7 +408,7 @@ class EnhancedGallery {
     // Update caption
     const titleEl = lightbox.querySelector('.lightbox-caption h3');
     const descEl = lightbox.querySelector('.lightbox-caption p');
-    
+
     if (titleEl) titleEl.textContent = imageData.title;
     if (descEl) descEl.textContent = imageData.description;
 
@@ -423,7 +416,7 @@ class EnhancedGallery {
     const dateEl = lightbox.querySelector('.meta-date');
     const locationEl = lightbox.querySelector('.meta-location');
     const categoryEl = lightbox.querySelector('.meta-category');
-    
+
     if (dateEl && imageData.date) dateEl.textContent = imageData.date;
     if (locationEl && imageData.location) locationEl.textContent = imageData.location;
     if (categoryEl && imageData.category) {
@@ -445,7 +438,7 @@ class EnhancedGallery {
   updateImageCounter() {
     const currentEl = document.querySelector('.lightbox-counter .current-image');
     const totalEl = document.querySelector('.lightbox-counter .total-images');
-    
+
     if (currentEl) {
       currentEl.textContent = this.currentImageIndex + 1;
     }
@@ -459,7 +452,7 @@ class EnhancedGallery {
     if (lightbox) {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
-      
+
       // Exit fullscreen if active
       if (document.fullscreenElement) {
         document.exitFullscreen();
@@ -469,7 +462,7 @@ class EnhancedGallery {
 
   navigateLightbox(direction) {
     this.currentImageIndex += direction;
-    
+
     if (this.currentImageIndex < 0) {
       this.currentImageIndex = this.filteredImages.length - 1;
     } else if (this.currentImageIndex >= this.filteredImages.length) {
@@ -483,7 +476,7 @@ class EnhancedGallery {
     const lightboxImg = document.querySelector('.lightbox-image');
     if (lightboxImg) {
       lightboxImg.style.opacity = '0';
-      
+
       setTimeout(() => {
         lightboxImg.src = imageData.src;
         lightboxImg.alt = imageData.title;
@@ -497,7 +490,7 @@ class EnhancedGallery {
     // Update caption
     const titleEl = document.querySelector('.lightbox-caption h3');
     const descEl = document.querySelector('.lightbox-caption p');
-    
+
     if (titleEl) titleEl.textContent = imageData.title;
     if (descEl) descEl.textContent = imageData.description;
 
@@ -505,7 +498,7 @@ class EnhancedGallery {
     const dateEl = document.querySelector('.meta-date');
     const locationEl = document.querySelector('.meta-location');
     const categoryEl = document.querySelector('.meta-category');
-    
+
     if (dateEl && imageData.date) dateEl.textContent = imageData.date;
     if (locationEl && imageData.location) locationEl.textContent = imageData.location;
     if (categoryEl && imageData.category) {
@@ -522,7 +515,7 @@ class EnhancedGallery {
   zoomImage(delta) {
     this.currentZoom = Math.max(1, Math.min(3, this.currentZoom + delta));
     const lightboxImg = document.querySelector('.lightbox-image');
-    
+
     if (lightboxImg) {
       lightboxImg.style.transform = `scale(${this.currentZoom})`;
       lightboxImg.style.cursor = this.currentZoom > 1 ? 'grab' : 'default';
@@ -532,11 +525,11 @@ class EnhancedGallery {
   resetZoom() {
     this.currentZoom = 1;
     const lightboxImg = document.querySelector('.lightbox-image');
-    
+
     if (lightboxImg) {
       lightboxImg.style.transform = 'scale(1)';
       lightboxImg.style.cursor = 'default';
-      
+
       const wrapper = lightboxImg.parentElement;
       if (wrapper) {
         wrapper.scrollLeft = 0;
@@ -547,19 +540,19 @@ class EnhancedGallery {
 
   toggleFullscreen() {
     const lightbox = document.getElementById('enhancedLightbox');
-    
+
     if (!document.fullscreenElement) {
       lightbox.requestFullscreen().catch(err => {
         console.log('Fullscreen error:', err);
       });
-      
+
       const fullscreenBtn = lightbox.querySelector('.lightbox-fullscreen i');
       if (fullscreenBtn) {
         fullscreenBtn.className = 'fas fa-compress';
       }
     } else {
       document.exitFullscreen();
-      
+
       const fullscreenBtn = lightbox.querySelector('.lightbox-fullscreen i');
       if (fullscreenBtn) {
         fullscreenBtn.className = 'fas fa-expand';
@@ -578,7 +571,7 @@ class EnhancedGallery {
       thumb.src = img.thumbnail;
       thumb.alt = img.title;
       thumb.className = 'lightbox-thumbnail';
-      
+
       if (index === this.currentImageIndex) {
         thumb.classList.add('active');
       }
@@ -587,7 +580,7 @@ class EnhancedGallery {
         this.currentImageIndex = index;
         this.navigateLightbox(0); // Refresh without changing index
       });
-      
+
       thumbnailsContainer.appendChild(thumb);
     });
 
@@ -611,7 +604,7 @@ class EnhancedGallery {
 
     let shareUrl = '';
 
-    switch(platform) {
+    switch (platform) {
       case 'facebook':
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         break;
@@ -668,7 +661,7 @@ class EnhancedGallery {
       const lightbox = document.getElementById('enhancedLightbox');
       if (!lightbox || !lightbox.classList.contains('active')) return;
 
-      switch(e.key) {
+      switch (e.key) {
         case 'Escape':
           this.closeLightbox();
           break;
@@ -776,7 +769,7 @@ class EnhancedGallery {
      ======================================== */
   setup360View() {
     const view360Containers = document.querySelectorAll('.view-360-container');
-    
+
     view360Containers.forEach(container => {
       const images = JSON.parse(container.dataset.images || '[]');
       if (images.length === 0) return;
@@ -825,7 +818,7 @@ class EnhancedGallery {
 
         const deltaX = e.pageX - startX;
         const sensitivity = 10;
-        
+
         if (Math.abs(deltaX) > sensitivity) {
           const direction = deltaX > 0 ? 1 : -1;
           currentFrame = (currentFrame + direction + images.length) % images.length;
@@ -845,7 +838,7 @@ class EnhancedGallery {
 
       if (playBtn) {
         playBtn.innerHTML = '<i class="fas fa-play"></i>';
-        
+
         playBtn.addEventListener('click', () => {
           if (isAutoRotating) {
             stopAutoRotate();
@@ -864,11 +857,11 @@ class EnhancedGallery {
      ======================================== */
   setupBeforeAfter() {
     const beforeAfterContainers = document.querySelectorAll('.before-after-slider');
-    
+
     beforeAfterContainers.forEach(container => {
       const handle = container.querySelector('.slider-handle');
       const afterImage = container.querySelector('.after-image');
-      
+
       if (!handle || !afterImage) return;
 
       let isDragging = false;
@@ -877,7 +870,7 @@ class EnhancedGallery {
         const rect = container.getBoundingClientRect();
         const position = Math.max(0, Math.min(x - rect.left, rect.width));
         const percentage = (position / rect.width) * 100;
-        
+
         handle.style.left = `${percentage}%`;
         afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
       };
@@ -906,21 +899,21 @@ class EnhancedGallery {
      ======================================== */
   setupCarousel() {
     const carousels = document.querySelectorAll('.journey-carousel');
-    
+
     carousels.forEach(carousel => {
       const track = carousel.querySelector('.carousel-track');
       const slides = carousel.querySelectorAll('.carousel-slide');
       const prevBtn = carousel.querySelector('.carousel-prev');
       const nextBtn = carousel.querySelector('.carousel-next');
       const indicators = carousel.querySelectorAll('.carousel-indicator');
-      
+
       let currentSlide = 0;
       let autoPlayInterval;
 
       const updateCarousel = (index) => {
         currentSlide = index;
         const offset = -currentSlide * 100;
-        
+
         if (track) {
           track.style.transform = `translateX(${offset}%)`;
         }
