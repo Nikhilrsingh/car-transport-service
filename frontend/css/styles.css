@@ -6062,3 +6062,52 @@ section:last-of-type {
   visibility: hidden !important;
   pointer-events: none !important;
 }
+
+
+/* ============================================================
+   GLOBAL THEME-ADAPTIVE SCROLLBAR
+============================================================ */
+body::-webkit-scrollbar {
+    width: 14px;              
+    height: 14px;            
+    background-color: transparent !important;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: transparent !important;
+    margin: 5px;            
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 100px !important;
+    background-color: var(--primary-color, #ff6347) !important;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2) 2px,
+        transparent 2px,
+        transparent 4px
+    ) !important;
+
+    border: 3px solid transparent !important;
+    background-clip: content-box !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #ff4500 !important; 
+    box-shadow: 0 0 15px rgba(255, 99, 71, 0.4) !important;
+}
+
+
+[data-theme="dark"] body::-webkit-scrollbar-thumb {
+   background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.15) 2px,
+        transparent 2px,
+        transparent 4px
+    ) !important;
+}
+
