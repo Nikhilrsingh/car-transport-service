@@ -261,55 +261,64 @@
     // MOBILE COMPARISON CARDS
     // ========================================
     function initMobileComparison() {
-        if (window.innerWidth > 768) return;
-
         const comparisonSection = document.querySelector('.pricing-page .comparison-section');
         if (!comparisonSection) return;
 
-        const tableWrapper = comparisonSection.querySelector('.pricing-page .comparison-table-wrapper');
+        const tableWrapper = comparisonSection.querySelector('.pricing-page-comparison-table-wrapper') || 
+                             comparisonSection.querySelector('.comparison-table-wrapper');
         if (!tableWrapper) return;
 
-        // Create mobile cards from table data
-        const table = tableWrapper.querySelector('.pricing-page .comparison-table');
-        const headers = Array.from(table.querySelectorAll('thead th')).slice(1);
-        const rows = table.querySelectorAll('tbody tr');
+        // Check if we are on a small screen
+        if (window.innerWidth <= 768) {
+            // Only create if it doesn't already exist
+            if (!comparisonSection.querySelector('.comparison-mobile-container')) {
+                const table = tableWrapper.querySelector('.comparison-table');
+                const headers = Array.from(table.querySelectorAll('thead th')).slice(1);
+                const rows = table.querySelectorAll('tbody tr');
 
-        const mobileContainer = document.createElement('div');
-        mobileContainer.className = 'comparison-mobile-container';
+                const mobileContainer = document.createElement('div');
+                mobileContainer.className = 'comparison-mobile-container';
 
-        headers.forEach((header, planIndex) => {
-            const card = document.createElement('div');
-            card.className = 'comparison-mobile-card';
-            card.innerHTML = `
-                <div class="comparison-mobile-header">
-                    <h3>${header.textContent}</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="comparison-mobile-content">
-                    ${Array.from(rows).map(row => {
-                        const cells = row.querySelectorAll('td');
-                        return `
-                            <div class="comparison-mobile-item">
-                                <span class="comparison-mobile-label">${cells[0].textContent}</span>
-                                <span class="comparison-mobile-value">${cells[planIndex + 1].innerHTML}</span>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
+                headers.forEach((header, planIndex) => {
+                    const card = document.createElement('div');
+                    card.className = 'comparison-mobile-card';
+                    card.innerHTML = `
+                        <div class="comparison-mobile-header">
+                            <h3>${header.textContent}</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="comparison-mobile-content">
+                            ${Array.from(rows).map(row => {
+                                const cells = row.querySelectorAll('td');
+                                return `
+                                    <div class="comparison-mobile-item">
+                                        <span class="comparison-mobile-label">${cells[0].textContent}</span>
+                                        <span class="comparison-mobile-value">${cells[planIndex + 1].innerHTML}</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
 
-            // Add click handler for expand/collapse
-            const cardHeader = card.querySelector('.comparison-mobile-header');
-            cardHeader.addEventListener('click', function () {
-                card.classList.toggle('expanded');
-            });
+                    const cardHeader = card.querySelector('.comparison-mobile-header');
+                    cardHeader.addEventListener('click', function () {
+                        card.classList.toggle('expanded');
+                    });
 
-            mobileContainer.appendChild(card);
-        });
+                    mobileContainer.appendChild(card);
+                });
 
-        // Replace table with mobile cards
-        tableWrapper.style.display = 'none';
-        comparisonSection.appendChild(mobileContainer);
+                tableWrapper.style.display = 'none';
+                comparisonSection.appendChild(mobileContainer);
+            }
+        } else {
+            // Screen is large: Remove mobile cards and show table again
+            const mobileContainer = comparisonSection.querySelector('.comparison-mobile-container');
+            if (mobileContainer) {
+                mobileContainer.remove();
+            }
+            tableWrapper.style.display = 'block';
+        }
     }
 
     // ========================================
@@ -843,9 +852,7 @@ function initTestimonialSlider() {
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
-                if (window.innerWidth <= 768) {
-                    initMobileComparison();
-                }
+                initMobileComparison(); 
             }, 250);
         });
 
