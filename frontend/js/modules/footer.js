@@ -421,7 +421,7 @@
     function cityUrl(slug) {
       return `${BASE_PATH}/pages/city.html?city=${slug}`;
     }
-  
+
     popularCitiesEl.innerHTML = `
       <ul class="footer-links">
         ${cities.map(city => `
@@ -485,7 +485,7 @@
       { slug: "hyderabad", name: "Car Transport in Hyderabad" },
       { slug: "kolkata", name: "Car Transport in Kolkata" }
     ];
-    
+
     // Store default HTML for restoration
     renderCityList(defaultCities, popularCities);
     defaultCitiesHTML = popularCities.innerHTML;
@@ -511,8 +511,8 @@
         popularCities.innerHTML = defaultCitiesHTML;
         searchInput.focus();
       });
-    }      
-    
+    }
+
     // Handle Escape key to clear search
     searchInput.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
@@ -540,72 +540,72 @@
   function initMobileFAB() {
     const miniFabTrigger = document.getElementById("miniFabTrigger");
     const mobileFabActions = document.getElementById("mobileFabActions");
-    
+
     if (!miniFabTrigger || !mobileFabActions) return;
-    
+
     let isOpen = false;
-    
+
     // Toggle mobile FAB
-    miniFabTrigger.addEventListener("click", function(e) {
+    miniFabTrigger.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
-      
+
       if (isOpen) {
         closeMobileFAB();
       } else {
         openMobileFAB();
       }
     });
-    
+
     // Close when clicking outside
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
       if (isOpen && !e.target.closest(".mobile-fab-actions") && !e.target.closest(".mini-fab-trigger")) {
         closeMobileFAB();
       }
     });
-    
+
     // Close on ESC
-    document.addEventListener("keydown", function(e) {
+    document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && isOpen) {
         closeMobileFAB();
       }
     });
-    
+
     function openMobileFAB() {
       isOpen = true;
       miniFabTrigger.classList.add("active");
       miniFabTrigger.setAttribute("aria-expanded", "true");
       mobileFabActions.classList.add("active");
-      
+
       // Update button text
       const span = miniFabTrigger.querySelector("span");
       if (span) span.textContent = "Close";
     }
-    
+
     function closeMobileFAB() {
       isOpen = false;
       miniFabTrigger.classList.remove("active");
       miniFabTrigger.setAttribute("aria-expanded", "false");
       mobileFabActions.classList.remove("active");
-      
+
       // Update button text
       const span = miniFabTrigger.querySelector("span");
       if (span) span.textContent = "More";
     }
-    
+
     // Mobile FAB action handlers
     const mobileFabQuote = document.getElementById("mobileFabQuote");
     const mobileFabBook = document.getElementById("mobileFabBook");
     const mobileFabFeedback = document.getElementById("mobileFabFeedback");
     const mobileFabChat = document.getElementById("mobileFabChat");
-    
+
     if (mobileFabQuote) {
-      mobileFabQuote.addEventListener("click", function() {
+      mobileFabQuote.addEventListener("click", function () {
         closeMobileFAB();
         setTimeout(() => {
           const currentPath = window.location.pathname;
           const isIndexPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || !currentPath.includes('.html');
-          
+
           if (isIndexPage) {
             const quoteSection = document.querySelector('.hero-quote');
             if (quoteSection) {
@@ -621,18 +621,18 @@
         }, 100);
       });
     }
-    
+
     if (mobileFabBook) {
-      mobileFabBook.addEventListener("click", function() {
+      mobileFabBook.addEventListener("click", function () {
         closeMobileFAB();
         setTimeout(() => {
           window.location.href = '../pages/booking.html';
         }, 100);
       });
     }
-    
+
     if (mobileFabFeedback) {
-      mobileFabFeedback.addEventListener("click", function() {
+      mobileFabFeedback.addEventListener("click", function () {
         closeMobileFAB();
         setTimeout(() => {
           const feedbackModal = document.getElementById('feedbackModal');
@@ -642,9 +642,9 @@
         }, 100);
       });
     }
-    
+
     if (mobileFabChat) {
-      mobileFabChat.addEventListener("click", function() {
+      mobileFabChat.addEventListener("click", function () {
         closeMobileFAB();
         setTimeout(() => {
           const chatbotModal = document.getElementById('chatbotModal');
@@ -665,7 +665,7 @@
     setTimeout(() => {
       try {
         stack.removeChild(t);
-      } catch (_) {}
+      } catch (_) { }
     }, 2500);
   }
 
@@ -675,7 +675,7 @@
 
     // Initialize footer search functionality
     initFooterSearch(footer);
-    
+
     // Initialize mobile FAB
     initMobileFAB();
 
@@ -694,7 +694,7 @@
         { threshold: 0.2 }
       );
       obs.observe(footer);
-    } catch (_) {}
+    } catch (_) { }
 
     // Accordion: allow only one open at a time
     const headers = footer.querySelectorAll(
@@ -706,6 +706,15 @@
         headers.forEach((h) => h.setAttribute("aria-expanded", "false"));
         if (!expanded) {
           btn.setAttribute("aria-expanded", "true");
+        }
+
+        // If footer is expanded, ensure its max-height is cleared to accommodate dynamic content
+        if (toggleBtn && toggleBtn.getAttribute("aria-expanded") === "true") {
+          if (footerMain) {
+            footerMain.style.maxHeight = "none";
+            footerMain.style.height = "auto";
+            footerMain.style.overflow = "visible";
+          }
         }
       });
     });
@@ -726,8 +735,8 @@
         const h = footerMain.scrollHeight;
         footerMain.style.maxHeight = h + "px";
         setTimeout(() => {
-          footerMain.style.overflow = "";
-          footerMain.style.maxHeight = "";
+          footerMain.style.overflow = "visible";
+          footerMain.style.maxHeight = "none";
         }, 350);
       }
     }
@@ -735,15 +744,25 @@
     if (footerMain) {
       footerMain.style.transition = "max-height 0.3s ease";
     }
-    // Start collapsed on small screens to shorten vertical height
-    try {
-      if (window.innerWidth <= 640) setCollapsed(true);
-    } catch (_) {}
-    
+    // Start expanded on all screens for better UX and SEO visibility
+    if (footerMain) {
+      footerMain.style.maxHeight = "none";
+      footerMain.style.overflow = "visible";
+      footerMain.style.opacity = "1";
+      footerMain.style.display = "block";
+    }
+    if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
+
     if (toggleBtn) {
       toggleBtn.addEventListener("click", () => {
         const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
         setCollapsed(expanded);
+
+        // Update label text based on state
+        const label = toggleBtn.querySelector('.toggle-label');
+        if (label) {
+          label.textContent = expanded ? "Show Footer" : "Hide Footer";
+        }
       });
     }
 
