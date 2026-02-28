@@ -112,6 +112,7 @@
   </script>
 
   <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+  <link rel="manifest" href="manifest.json" />
 
   <!-- Component CSS -->
   <link rel="stylesheet" href="css/components/testimonial.css" />
@@ -699,40 +700,37 @@
               for vehicle transport.</p>
           </div>
 
-            <div class="reviews-list" id="servicesReviewsList">
-              <div
-                class="reviews-empty"
-                style="padding: 40px 20px; text-align: center;"
-              >
-                <div class="reviews-empty-icon">⭐</div>
-                <h3 class="reviews-empty-title">Loading reviews...</h3>
-              </div>
+          <div class="reviews-list" id="servicesReviewsList">
+            <div class="reviews-empty" style="padding: 40px 20px; text-align: center;">
+              <div class="reviews-empty-icon">⭐</div>
+              <h3 class="reviews-empty-title">Loading reviews...</h3>
             </div>
-            <span class="review-date">2 weeks ago</span>
           </div>
+          <span class="review-date">2 weeks ago</span>
+        </div>
 
-          <div class="review-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <span class="rating-text">5.0</span>
-          </div>
+        <div class="review-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <span class="rating-text">5.0</span>
+        </div>
 
-          <h4 class="review-title">Professional & Reliable</h4>
+        <h4 class="review-title">Professional & Reliable</h4>
 
-          <div class="review-content">
-            <p>Excellent attention to detail. The team was professional, courteous, and kept me informed throughout the
-              entire process. Exceeded expectations!</p>
-          </div>
+        <div class="review-content">
+          <p>Excellent attention to detail. The team was professional, courteous, and kept me informed throughout the
+            entire process. Exceeded expectations!</p>
+        </div>
 
-          <div class="review-footer">
-            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
-          </div>
+        <div class="review-footer">
+          <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
   <!-- Keep testimonials for fallback -->
   <section class="testimonials-section" id="testimonials" style="display: none;">
@@ -1086,9 +1084,9 @@
   </script>
 
   <!-- Review System -->
-    <script>
-  lucide.createIcons();
-</script>
+  <script>
+    lucide.createIcons();
+  </script>
   <script type="module" src="js/components/starRating.js"></script>
   <script type="module" src="js/review.js"></script>
   <script type="module" src="js/reviewForm.js"></script>
@@ -1152,6 +1150,13 @@
       popup.style.display = "none";
     });
   </script>
+
+  <!-- PWA Install Button -->
+  <button id="installAppBtn" aria-label="Install App">
+    <i class="fas fa-download"></i>
+    <span>Install App</span>
+  </button>
+
 </body>
 
 </html>
