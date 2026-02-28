@@ -27,11 +27,19 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #0a0a0a;
-            color: #fff;
-            min-height: 100vh;
-        }
+        font-family: 'Poppins', sans-serif;
+        background: var(--bg, #0a0a0a); 
+        color: var(--text, #fff);       
+        min-height: 100vh;
+        transition: background 0.3s ease;
+    }
+    
+    
+    .stat-card, .booking-card, .invoice-card, .settings-section {
+        background: var(--card-bg, #1a1a1a) !important;
+        color: var(--text, #fff);
+        border: 1px solid var(--card-border, #333);
+    }
 
         .dashboard-container {
             max-width: 1400px;
@@ -124,10 +132,8 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
             padding: 30px;
             border-radius: 15px;
-            border: 1px solid #333;
             transition: all 0.3s ease;
         }
 
@@ -210,10 +216,8 @@
         }
 
         .booking-card {
-            background: #1a1a1a;
             padding: 25px;
             border-radius: 12px;
-            border: 1px solid #333;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -300,10 +304,8 @@
 
         /* Invoice Cards */
         .invoice-card {
-            background: linear-gradient(135deg, #1a1a1a, #252525);
             padding: 25px;
             border-radius: 12px;
-            border: 1px solid #333;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
@@ -451,7 +453,6 @@
             gap: 30px;
             margin-bottom: 40px;
             padding: 30px;
-            background: #1a1a1a;
             border-radius: 15px;
         }
 
@@ -1434,6 +1435,30 @@
                     showToast('Setting updated', 'success');
                 });
             });
+            const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        // Sync toggle state with current theme on load
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        darkModeToggle.classList.toggle('active', currentTheme === 'dark');
+
+        darkModeToggle.addEventListener('click', () => {
+            darkModeToggle.classList.toggle('active');
+            const newTheme = darkModeToggle.classList.contains('active') ? 'dark' : 'light';
+            
+            // Trigger the global themes.js applyTheme logic if available
+            // or manually toggle the body attribute
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update the CSS link manually if themes.js isn't catching it
+            const themeLink = document.getElementById('theme-style');
+            if (themeLink) {
+                themeLink.href = newTheme === 'dark' ? '../css/dark-mode.css' : '../css/light-mode.css';
+            }
+            
+            showToast(`Switched to ${newTheme} mode`, 'success');
+        });
+    }
         }
 
         // Update profile

@@ -6068,46 +6068,87 @@ section:last-of-type {
    GLOBAL THEME-ADAPTIVE SCROLLBAR
 ============================================================ */
 body::-webkit-scrollbar {
-    width: 14px;              
-    height: 14px;            
-    background-color: transparent !important;
+  width: 14px;
+  height: 14px;
+  background-color: transparent !important;
 }
 
 body::-webkit-scrollbar-track {
-    background-color: transparent !important;
-    margin: 5px;            
+  background-color: transparent !important;
+  margin: 5px;
 }
 
 body::-webkit-scrollbar-thumb {
-    border-radius: 100px !important;
-    background-color: var(--primary-color, #ff6347) !important;
-    background-image: repeating-linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.2),
-        rgba(255, 255, 255, 0.2) 2px,
-        transparent 2px,
-        transparent 4px
-    ) !important;
+  border-radius: 100px !important;
+  background-color: var(--primary-color, #ff6347) !important;
+  background-image: repeating-linear-gradient(45deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.2) 2px,
+      transparent 2px,
+      transparent 4px) !important;
 
-    border: 3px solid transparent !important;
-    background-clip: content-box !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+  border: 3px solid transparent !important;
+  background-clip: content-box !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
 }
 
 
 body::-webkit-scrollbar-thumb:hover {
-    background-color: #ff4500 !important; 
-    box-shadow: 0 0 15px rgba(255, 99, 71, 0.4) !important;
+  background-color: #ff4500 !important;
+  box-shadow: 0 0 15px rgba(255, 99, 71, 0.4) !important;
 }
 
 
 [data-theme="dark"] body::-webkit-scrollbar-thumb {
-   background-image: repeating-linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.15),
-        rgba(255, 255, 255, 0.15) 2px,
-        transparent 2px,
-        transparent 4px
-    ) !important;
+  background-image: repeating-linear-gradient(45deg,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.15) 2px,
+      transparent 2px,
+      transparent 4px) !important;
 }
 
+/* ============================================================
+   PWA INSTALL BUTTON
+============================================================ */
+#installAppBtn {
+  position: fixed;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color, #ff6347);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+  z-index: 10001;
+  /* Must be > 9999 for cookie banner and > 9998 for bottom bar */
+  border: none;
+  cursor: pointer;
+  animation: slideUpFade 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#installAppBtn i {
+  font-size: 1.2rem;
+}
+
+#installAppBtn:hover {
+  background-color: #ff4500;
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5);
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
