@@ -66,6 +66,7 @@
 
       // Ensure digital clock exists on pages that don't include it directly
       ensureClock(base);
+
     } catch (err) {
       console.error('Navbar load error:', err);
 
@@ -75,6 +76,9 @@
         console.log(`Retrying navbar load (${retryCount}/${MAX_RETRIES})...`);
         setTimeout(loadNavbar, RETRY_DELAY);
       }
+    } finally {
+      // Initialize Notification Manager - always run regardless of navbar success
+      ensureNotificationManager(base);
     }
   }
 
@@ -447,6 +451,24 @@
       link.href = `${basePath}/css/components/middle-navbar.css`;
       document.head.appendChild(link);
     }
+  }
+
+  /**
+   * Ensure NotificationManager script is loaded and initialized
+   */
+  function ensureNotificationManager(basePath) {
+    const scriptId = 'notification-manager-script';
+    if (document.getElementById(scriptId)) return;
+
+    const script = document.createElement('script');
+    script.id = scriptId;
+    script.src = `${basePath}/js/modules/notification-manager.js`;
+    script.onload = () => {
+      if (window.NotificationManager) {
+        window.notificationManager = new window.NotificationManager();
+      }
+    };
+    document.head.appendChild(script);
   }
 
   // Expose auth functions globally for other scripts to use

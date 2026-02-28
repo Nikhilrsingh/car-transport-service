@@ -623,6 +623,11 @@ class BookingManager {
                     window.clearRoute();
                 }
 
+                // Trigger tab notification for multitasking users
+                if (window.notificationManager) {
+                    window.notificationManager.notify('Booking Confirmed');
+                }
+
                 this.showToast('Booking Confirmed!', `Your booking reference is ${result.data.booking.bookingReference}`, 'success', 5000);
             } else {
                 throw new Error(result.message || 'Failed to create booking');
