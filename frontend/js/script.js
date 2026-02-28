@@ -614,3 +614,269 @@ document.addEventListener("DOMContentLoaded", () => {
   counters.forEach((counter) => observer.observe(counter));
 });
 
+// ================= PWA SETUP =================
+let deferredPrompt;
+let pwaHideTimeout;
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    let swPath = 'service-worker.js';
+    if (window.location.pathname.includes('/pages/')) {
+      swPath = '../' + swPath;
+    }
+
+    // Register the service worker
+    navigator.serviceWorker.register(swPath)
+      .then(registration => {
+        console.log('ServiceWorker registered:', registration.scope);
+      })
+      .catch(error => {
+        console.log('ServiceWorker registration failed:', error);
+      });
+  });
+}
+
+function createPWAFloatingBanner() {
+  if (document.getElementById('custom-pwa-prompt')) return;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .custom-pwa-prompt {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 380px;
+      max-width: calc(100% - 48px);
+      background: #11131c;
+      border: 1px solid #2a2d3d;
+      border-radius: 16px;
+      padding: 20px;
+      color: #fff;
+      z-index: 999999;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transform: translateY(150%);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+      pointer-events: none;
+    }
+    .custom-pwa-prompt.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .pwa-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .pwa-app-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pwa-app-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #1e2133;
+    }
+    .pwa-titles h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .pwa-titles p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: #9ba1b0;
+    }
+    .pwa-close-btn {
+      background: transparent;
+      border: none;
+      color: #6c7185;
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .pwa-close-btn:hover {
+      color: #fff;
+    }
+    .pwa-desc {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #d1d5db;
+      margin: 0 0 16px;
+    }
+    .pwa-badges {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .pwa-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1e2133;
+      border: 1px solid #2a2d3d;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #d1d5db;
+      white-space: nowrap;
+    }
+    .pwa-badge i.fa-bolt { color: #ff8a00; }
+    .pwa-badge i.fa-mobile-alt { color: #ff8a00; }
+    .pwa-badge i.fa-bell { color: #ecc94b; }
+    .pwa-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .pwa-install-action-btn {
+      flex: 1;
+      background: #7a5af8;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .pwa-install-action-btn:hover {
+      background: #6246d8;
+    }
+    .pwa-not-now-action-btn {
+      background: transparent;
+      color: #9ba1b0;
+      border: 1px solid #2a2d3d;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pwa-not-now-action-btn:hover {
+      color: #fff;
+      background: #2a2d3d;
+    }
+    @media (max-width: 480px) {
+      .custom-pwa-prompt {
+        right: 16px;
+        left: 16px;
+        width: auto;
+        bottom: 16px;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  let iconPath = 'assets/icons/favicon.png';
+  if (window.location.pathname.includes('/pages/')) {
+    iconPath = '../' + iconPath;
+  }
+
+  const prompt = document.createElement('div');
+  prompt.id = 'custom-pwa-prompt';
+  prompt.className = 'custom-pwa-prompt';
+  prompt.innerHTML = `
+    <div class="pwa-header-top">
+      <div class="pwa-app-info">
+        <img src="${iconPath}" alt="App Icon" class="pwa-app-icon" onerror="this.src='https://via.placeholder.com/48/1e2133/ffffff?text=HCC'">
+        <div class="pwa-titles">
+          <h3>Install App</h3>
+          <p>Harihar Car Carriers</p>
+        </div>
+      </div>
+      <button class="pwa-close-btn" aria-label="Close" onclick="dismissPWAPrompt()">&times;</button>
+    </div>
+    <div class="pwa-desc">
+      Get instant access with offline support, push notifications, and a native app experience.
+    </div>
+    <div class="pwa-badges">
+      <span class="pwa-badge"><i class="fas fa-bolt"></i> Instant Load</span>
+      <span class="pwa-badge"><i class="fas fa-mobile-alt"></i> Works Offline</span>
+      <span class="pwa-badge"><i class="fas fa-bell"></i> Notifications</span>
+    </div>
+    <div class="pwa-actions">
+      <button class="pwa-install-action-btn" onclick="installPWA()">
+        <i class="fas fa-download"></i> Install App
+      </button>
+      <button class="pwa-not-now-action-btn" onclick="dismissPWAPrompt()">Not now</button>
+    </div>
+  `;
+
+  // Pause auto-hide on hover
+  prompt.addEventListener('mouseenter', () => {
+    if (pwaHideTimeout) clearTimeout(pwaHideTimeout);
+  });
+  prompt.addEventListener('mouseleave', () => {
+    pwaHideTimeout = setTimeout(dismissPWAPrompt, 5000);
+  });
+
+  document.body.appendChild(prompt);
+}
+
+// Handle the install prompt for PWA
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent the mini-infobar from appearing on mobile
+  e.preventDefault();
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+
+  createPWAFloatingBanner();
+
+  const promptEl = document.getElementById('custom-pwa-prompt');
+  if (promptEl) {
+    setTimeout(() => {
+      promptEl.classList.add('show');
+
+      // Auto disappearing feature after 5 sec
+      if (pwaHideTimeout) clearTimeout(pwaHideTimeout);
+      pwaHideTimeout = setTimeout(() => {
+        dismissPWAPrompt();
+      }, 5000);
+    }, 500);
+  }
+});
+
+function installPWA() {
+  if (!deferredPrompt) return;
+
+  // Show the install prompt
+  deferredPrompt.prompt();
+
+  // Wait for the user to respond to the prompt
+  deferredPrompt.userChoice.then((choiceResult) => {
+    if (choiceResult.outcome === 'accepted') {
+      console.log('User accepted the install prompt');
+      dismissPWAPrompt();
+    } else {
+      console.log('User dismissed the install prompt');
+    }
+    // Clear the deferred prompt variable
+    deferredPrompt = null;
+  });
+}
+
+window.dismissPWAPrompt = function () {
+  const promptEl = document.getElementById('custom-pwa-prompt');
+  if (promptEl) {
+    promptEl.classList.remove('show');
+  }
+};
+
+window.installPWA = installPWA;

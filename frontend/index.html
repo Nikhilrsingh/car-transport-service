@@ -112,6 +112,7 @@
   </script>
 
   <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+  <link rel="manifest" href="manifest.json" />
 
   <!-- Component CSS -->
   <link rel="stylesheet" href="css/components/testimonial.css" />
@@ -463,97 +464,6 @@
     </div>
   </section>
 
-  <!-- Pricing CTA -->
-  <section id="pricing-plans" class="pricing-cta-section fade-in">
-    <div class="section-inner">
-      <div class="pricing-cta-layout">
-
-        <!-- Left: existing CTA card/content -->
-        <div class="pricing-cta-content">
-          <h3>Compare Our Pricing Plans</h3>
-          <p>
-            Transparent pricing for every transportation need. Choose the perfect
-            plan that fits your budget and requirements.
-          </p>
-          <a href="pages/pricing.html" class="cta-btn primary" data-tooltip="View and compare pricing plans">
-            <i class="fas fa-tags"></i>
-            <span>View Pricing Plans</span>
-          </a>
-        </div>
-
-        <!-- Right: visual filler (map / route / tracking) -->
-        <div class="pricing-cta-visual" aria-hidden="true">
-          <div class="tracking-preview">
-            <div class="tracking-top">
-              <span class="tracking-badge">
-                <i class="fas fa-satellite-dish"></i>
-                Live Tracking Preview
-              </span>
-              <span class="tracking-status">
-                <span class="status-dot"></span>
-                Updates enabled
-              </span>
-            </div>
-
-            <div class="tracking-route">
-              <div class="route-row">
-                <i class="fas fa-map-marker-alt"></i>
-                <div>
-                  <div class="route-label">Pickup</div>
-                  <div class="route-value">Delhi</div>
-                </div>
-              </div>
-
-              <div class="route-line">
-                <span class="route-dots"></span>
-                <i class="fas fa-truck-moving route-truck"></i>
-              </div>
-
-              <div class="route-row">
-                <i class="fas fa-flag-checkered"></i>
-                <div>
-                  <div class="route-label">Drop</div>
-                  <div class="route-value">Mumbai</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="tracking-steps">
-              <span class="step-chip done"><i class="fas fa-check"></i> Booked</span>
-              <span class="step-chip done"><i class="fas fa-check"></i> Picked up</span>
-              <span class="step-chip active"><i class="fas fa-route"></i> In transit</span>
-              <span class="step-chip"><i class="fas fa-box"></i> Delivered</span>
-            </div>
-
-            <div class="tracking-metrics">
-              <div class="metric">
-                <div class="metric-label">ETA</div>
-                <div class="metric-value">3–5 days</div>
-              </div>
-              <div class="metric">
-                <div class="metric-label">Distance</div>
-                <div class="metric-value">1,240 km</div>
-              </div>
-              <div class="metric">
-                <div class="metric-label">Coverage</div>
-                <div class="metric-value">Pan-India</div>
-              </div>
-            </div>
-
-            <div class="tracking-foot">
-              <span class="track-id"><i class="fas fa-hashtag"></i> CT-24819</span>
-              <span class="track-note"><i class="fas fa-bell"></i> SMS + Email alerts</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-    </div>
-  </section>
-
-
   <!-- Customer Reviews Section -->
   <section class="premium-reviews-section" id="customer-reviews">
     <div class="reviews-container">
@@ -711,40 +621,37 @@
               for vehicle transport.</p>
           </div>
 
-            <div class="reviews-list" id="servicesReviewsList">
-              <div
-                class="reviews-empty"
-                style="padding: 40px 20px; text-align: center;"
-              >
-                <div class="reviews-empty-icon">⭐</div>
-                <h3 class="reviews-empty-title">Loading reviews...</h3>
-              </div>
+          <div class="reviews-list" id="servicesReviewsList">
+            <div class="reviews-empty" style="padding: 40px 20px; text-align: center;">
+              <div class="reviews-empty-icon">⭐</div>
+              <h3 class="reviews-empty-title">Loading reviews...</h3>
             </div>
-            <span class="review-date">2 weeks ago</span>
           </div>
+          <span class="review-date">2 weeks ago</span>
+        </div>
 
-          <div class="review-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <span class="rating-text">5.0</span>
-          </div>
+        <div class="review-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <span class="rating-text">5.0</span>
+        </div>
 
-          <h4 class="review-title">Professional & Reliable</h4>
+        <h4 class="review-title">Professional & Reliable</h4>
 
-          <div class="review-content">
-            <p>Excellent attention to detail. The team was professional, courteous, and kept me informed throughout the
-              entire process. Exceeded expectations!</p>
-          </div>
+        <div class="review-content">
+          <p>Excellent attention to detail. The team was professional, courteous, and kept me informed throughout the
+            entire process. Exceeded expectations!</p>
+        </div>
 
-          <div class="review-footer">
-            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
-          </div>
+        <div class="review-footer">
+          <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful</button>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
   <!-- Keep testimonials for fallback -->
   <section class="testimonials-section" id="testimonials" style="display: none;">
@@ -1098,9 +1005,9 @@
   </script>
 
   <!-- Review System -->
-    <script>
-  lucide.createIcons();
-</script>
+  <script>
+    lucide.createIcons();
+  </script>
   <script type="module" src="js/components/starRating.js"></script>
   <script type="module" src="js/review.js"></script>
   <script type="module" src="js/reviewForm.js"></script>
@@ -1164,6 +1071,13 @@
       popup.style.display = "none";
     });
   </script>
+
+  <!-- PWA Install Button -->
+  <button id="installAppBtn" aria-label="Install App">
+    <i class="fas fa-download"></i>
+    <span>Install App</span>
+  </button>
+
 </body>
 
 </html>
