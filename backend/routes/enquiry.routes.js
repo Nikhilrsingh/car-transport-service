@@ -1,18 +1,19 @@
 import express from "express";
 import {
-    createEnquiry,
-    getEnquiryByReference,
-    getAllEnquiries,
-    getEnquiryById,
-    updateEnquiryStatus,
-    toggleEnquirySeenStatus,
-    getEnquiryStats,
-    deleteEnquiry,
-  } from "../controllers/enquiry.controller.js";
+  createEnquiry,
+  getEnquiryByReference,
+  getAllEnquiries,
+  getEnquiryById,
+  updateEnquiryStatus,
+  toggleEnquirySeenStatus,
+  getEnquiryStats,
+  deleteEnquiry,
+} from "../controllers/enquiry.controller.js";
+import { rateLimiter } from "../middleware/rate-limiter.js";
 
 const router = express.Router();
 // Submit enquiry
-router.post("/", createEnquiry);
+router.post("/", rateLimiter(60000, 3), createEnquiry);
 
 // Track enquiry using reference number
 router.get("/track/:reference", getEnquiryByReference);
