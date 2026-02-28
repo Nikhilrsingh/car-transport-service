@@ -180,6 +180,7 @@
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("userEmail");
         localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
       }
 
       // Desktop nav
@@ -216,6 +217,7 @@
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userEmail");
     localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
 
     // Update UI immediately
     updateAuthUI();

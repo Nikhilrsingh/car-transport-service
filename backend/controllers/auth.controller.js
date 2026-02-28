@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.model.js";
-import { generateToken } from "../utils/jwt.js";
+import { generateToken, generateRefreshToken } from "../utils/jwt.js";
+import jwt from "jsonwebtoken";
 import { success, error } from "../utils/response.js";
 import {
   isEmailValid,
@@ -40,6 +41,7 @@ export const register = async (req, res) => {
 
     success(res, 201, "User registered", {
       token: generateToken(user._id),
+      refreshToken: generateRefreshToken(user._id),
       user: { id: user._id, email: user.email },
     });
   } catch (err) {
@@ -65,6 +67,7 @@ export const login = async (req, res) => {
 
     success(res, 200, "Login successful", {
       token: generateToken(user._id),
+      refreshToken: generateRefreshToken(user._id),
       user: { id: user._id, email: user.email },
     });
   } catch (err) {
@@ -72,40 +75,61 @@ export const login = async (req, res) => {
   }
 };
 
+/* ================= REFRESH TOKEN ================= */
+export const refreshToken = async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      return error(res, 401, "Refresh token required");
+    }
+
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET || "refreshsecret", (err, decoded) => {
+      if (err) {
+        return error(res, 403, "Invalid or expired refresh token");
+      }
+
+      const newToken = generateToken(decoded.id);
+      success(res, 200, "Token refreshed", { token: newToken });
+    });
+  } catch (err) {
+    error(res, 500, err.message);
+  }
+};
 
 /* ================= LOGOUT ================= */
 export const logout = async (req, res) => {
-    try {
-      // Clear the cookie
-      res.clearCookie("token", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-      });
-  
-      // Respond success
-      return success(res, 200, "Logout successful");
-    } catch (err) {
-      return error(res, 500, err.message);
-    }
-  };
+  try {
+    // Clear the cookie
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    // Respond success
+    return success(res, 200, "Logout successful");
+  } catch (err) {
+    return error(res, 500, err.message);
+  }
+};
 
 /* ================= GOOGLE LOGIN ================= */
 export const googleLogin = (req, res) => {
-    try {
-      const user = req.user;
-      const token = generateToken(user._id);
-  
-      // Send token + user data to client
-      success(res, 200, "Google login successful", {
-        token,
-        user: { id: user._id, email: user.email, name: user.name },
-      });
-    } catch (err) {
-      error(res, 500, err.message);
-    }
-  };
-  
-  /* ================= GET ALL USERS ================= */
+  try {
+    const user = req.user;
+    const token = generateToken(user._id);
+
+    // Send token + user data to client
+    success(res, 200, "Google login successful", {
+      token,
+      user: { id: user._id, email: user.email, name: user.name },
+    });
+  } catch (err) {
+    error(res, 500, err.message);
+  }
+};
+
+/* ================= GET ALL USERS ================= */
 export const getAllUsers = async (req, res) => {
   try {
     const { page = 1, limit = 10, search = "" } = req.query;

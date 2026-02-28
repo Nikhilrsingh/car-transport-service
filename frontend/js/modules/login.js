@@ -17,7 +17,7 @@ function loadRememberedUser() {
     if (rememberMe && rememberedEmail) {
         const emailInput = document.querySelector('#login-form input[type="email"]');
         const rememberCheckbox = document.getElementById('remember');
-        
+
         if (emailInput) emailInput.value = rememberedEmail;
         if (rememberCheckbox) rememberCheckbox.checked = true;
     }
@@ -48,7 +48,7 @@ function saveRememberMe(email, remember) {
 function togglePassword(inputId, button) {
     const input = document.getElementById(inputId);
     const eyeIcon = button.querySelector('.eye-icon');
-    
+
     if (input.type === 'password') {
         input.type = 'text';
         eyeIcon.textContent = '👁️‍🗨️';
@@ -71,7 +71,7 @@ function togglePassword(inputId, button) {
 function checkPasswordStrength(password) {
     const strengthFill = document.getElementById('strength-fill');
     const strengthText = document.getElementById('strength-text');
-    
+
     if (!strengthFill || !strengthText) return;
 
     // Calculate strength score
@@ -153,7 +153,7 @@ function switchTab(tab) {
  */
 function handleLogin(event) {
     event.preventDefault();
-    
+
     const form = event.target;
     const email = form.querySelector('input[type="email"]').value;
     const password = form.querySelector('input[type="password"]').value;
@@ -176,7 +176,7 @@ function handleLogin(event) {
 
     // Simulate authentication (replace with actual API call)
     showNotification('Logging in...', 'info');
-    
+
     // TODO: Replace with actual authentication API call
     setTimeout(() => {
         // Mock successful login
@@ -185,12 +185,13 @@ function handleLogin(event) {
             name: 'User',
             loginTime: new Date().toISOString()
         };
-        
+
         // Save user session
         sessionStorage.setItem('currentUser', JSON.stringify(mockUser));
-        
+        localStorage.setItem('refreshToken', 'mock-refresh-token'); // Store refresh token
+
         showNotification('Login successful! Redirecting...', 'success');
-        
+
         // Redirect to dashboard or home page
         setTimeout(() => {
             window.location.href = '../index.html';
@@ -204,7 +205,7 @@ function handleLogin(event) {
  */
 function handleSignup(event) {
     event.preventDefault();
-    
+
     const form = event.target;
     const firstName = form.querySelectorAll('input[type="text"]')[0].value;
     const lastName = form.querySelectorAll('input[type="text"]')[1].value;
@@ -247,7 +248,7 @@ function handleSignup(event) {
 
     // Simulate signup (replace with actual API call)
     showNotification('Creating account...', 'info');
-    
+
     // TODO: Replace with actual signup API call
     setTimeout(() => {
         const newUser = {
@@ -257,10 +258,10 @@ function handleSignup(event) {
             phone: phone,
             createdAt: new Date().toISOString()
         };
-        
+
         // Mock email verification
         showNotification('Account created! Please check your email for verification.', 'success');
-        
+
         // Switch to login tab after successful signup
         setTimeout(() => {
             switchTab('login');
@@ -281,7 +282,7 @@ function handleSignup(event) {
  */
 function handleSocialLogin(provider) {
     showNotification(`Initiating ${provider} login...`, 'info');
-    
+
     // TODO: Implement actual OAuth flows
     if (provider === 'google') {
         // Google OAuth implementation
@@ -306,16 +307,16 @@ function handleSocialLogin(provider) {
  */
 function handleForgotPassword() {
     const email = prompt('Enter your email address to reset password:');
-    
+
     if (!email) return;
-    
+
     if (!isValidEmail(email)) {
         showNotification('Please enter a valid email address', 'error');
         return;
     }
-    
+
     showNotification('Sending password reset link...', 'info');
-    
+
     // TODO: Implement actual password reset API
     setTimeout(() => {
         showNotification('Password reset link sent to your email!', 'success');
@@ -355,18 +356,18 @@ function showNotification(message, type = 'info') {
     // Remove existing notifications
     const existing = document.querySelector('.auth-notification');
     if (existing) existing.remove();
-    
+
     // Create notification element
     const notification = document.createElement('div');
     notification.className = `auth-notification ${type}`;
     notification.textContent = message;
-    
+
     // Add to page
     document.body.appendChild(notification);
-    
+
     // Trigger animation
     setTimeout(() => notification.classList.add('show'), 10);
-    
+
     // Auto remove after 4 seconds
     setTimeout(() => {
         notification.classList.remove('show');
@@ -388,27 +389,27 @@ function goBack() {
 /**
  * Initialize login page functionality
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Load remembered user if exists
     loadRememberedUser();
-    
+
     // Add forgot password link handler
     const forgotLink = document.querySelector('.forgot-link');
     if (forgotLink) {
-        forgotLink.addEventListener('click', function(e) {
+        forgotLink.addEventListener('click', function (e) {
             e.preventDefault();
             handleForgotPassword();
         });
     }
-    
+
     // Focus first input on page load
     const firstInput = document.querySelector('#login-form input[type="email"]');
     if (firstInput) {
         setTimeout(() => firstInput.focus(), 500);
     }
-    
+
     // Add keyboard shortcuts
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         // Alt+L to switch to login tab
         if (e.altKey && e.key === 'l') {
             e.preventDefault();
