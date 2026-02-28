@@ -851,6 +851,10 @@
                 previewContainer.innerHTML = '';
             }
 
+            // Clear validation states
+            form.querySelectorAll('.valid, .error').forEach(el => el.classList.remove('valid', 'error'));
+            form.querySelectorAll('.validation-icon').forEach(el => el.innerHTML = '');
+
             // Reset progress
             updateProgress();
 
