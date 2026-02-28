@@ -34,10 +34,19 @@ export const register = async (req, res) => {
 
     const hashed = await bcrypt.hash(password, 12);
 
+    // Normalize phone number to +91XXXXXXXXXX
+    let normalizedPhone = phone.replace(/\D/g, ""); // remove non-digits
+    if (normalizedPhone.length === 10) {
+      normalizedPhone = `+91${normalizedPhone}`;
+    } else if (normalizedPhone.length === 12 && normalizedPhone.startsWith("91")) {
+      normalizedPhone = `+${normalizedPhone}`;
+    }
+
     const user = await User.create({
       name: name.trim(),
       email,
       password: hashed,
+      phone: normalizedPhone,
     });
 
     success(res, 201, "User registered", {
@@ -79,37 +88,37 @@ export const login = async (req, res) => {
 
 /* ================= LOGOUT ================= */
 export const logout = async (req, res) => {
-    try {
-      // Clear the cookie
-      res.clearCookie("token", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-      });
-  
-      // Respond success
-      return success(res, 200, "Logout successful");
-    } catch (err) {
-      return error(res, 500, err.message);
-    }
-  };
+  try {
+    // Clear the cookie
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    // Respond success
+    return success(res, 200, "Logout successful");
+  } catch (err) {
+    return error(res, 500, err.message);
+  }
+};
 
 /* ================= GOOGLE LOGIN ================= */
 export const googleLogin = (req, res) => {
-    try {
-      const user = req.user;
-      const token = generateToken(user._id);
-  
-      // Send token + user data to client
-      success(res, 200, "Google login successful", {
-        token,
-        user: { id: user._id, email: user.email, name: user.name },
-      });
-    } catch (err) {
-      error(res, 500, err.message);
-    }
-  };
-  
-  /* ================= GET ALL USERS ================= */
+  try {
+    const user = req.user;
+    const token = generateToken(user._id);
+
+    // Send token + user data to client
+    success(res, 200, "Google login successful", {
+      token,
+      user: { id: user._id, email: user.email, name: user.name },
+    });
+  } catch (err) {
+    error(res, 500, err.message);
+  }
+};
+
+/* ================= GET ALL USERS ================= */
 export const getAllUsers = async (req, res) => {
   try {
     const { page = 1, limit = 10, search = "" } = req.query;

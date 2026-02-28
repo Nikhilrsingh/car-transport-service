@@ -31,7 +31,7 @@ function validateIndianPhone(phone) {
 
   return {
     isValid: true,
-    message: "Valid phone number"
+    message: ""
   };
 }
 
@@ -70,98 +70,97 @@ function showContactToast(title, message) {
   }, 4000);
 }
 
+// ================= PHONE INPUT GLOBAL HANDLER =================
+document.addEventListener("DOMContentLoaded", function () {
+  const allSplitPhones = document.querySelectorAll('#splitPhone');
+
+  allSplitPhones.forEach(splitPhoneInput => {
+    const inputGrid = splitPhoneInput.closest('.phone-input-grid');
+    if (!inputGrid) return;
+
+    // Create error message if it doesn't exist
+    let phoneErrorMsg = inputGrid.parentElement.querySelector('.phone-error-message');
+    if (!phoneErrorMsg) {
+      phoneErrorMsg = document.createElement('div');
+      phoneErrorMsg.className = 'phone-error-message';
+      inputGrid.parentElement.appendChild(phoneErrorMsg);
+    }
+
+    // Create success icon if it doesn't exist
+    let phoneSuccessIcon = splitPhoneInput.parentElement.querySelector('.phone-success-icon');
+    if (!phoneSuccessIcon) {
+      phoneSuccessIcon = document.createElement('i');
+      phoneSuccessIcon.className = 'fas fa-check-circle phone-success-icon';
+      splitPhoneInput.parentElement.style.position = 'relative';
+      splitPhoneInput.parentElement.appendChild(phoneSuccessIcon);
+    }
+
+    // Real-time phone validation
+    splitPhoneInput.addEventListener("input", function (e) {
+      let value = e.target.value.replace(/\D/g, "");
+      if (value.length > 10) value = value.substring(0, 10);
+      e.target.value = value;
+
+      const validation = validateIndianPhone(e.target.value);
+
+      if (e.target.value.length === 0) {
+        e.target.classList.remove('error', 'success', 'shake');
+        phoneErrorMsg.classList.remove('show');
+        phoneSuccessIcon.classList.remove('show');
+      } else if (validation.isValid) {
+        e.target.classList.remove('error', 'shake');
+        e.target.classList.add('success');
+        phoneErrorMsg.classList.remove('show');
+        phoneSuccessIcon.classList.add('show');
+      } else {
+        e.target.classList.remove('success');
+        e.target.classList.add('error');
+        phoneErrorMsg.textContent = validation.message;
+        phoneErrorMsg.classList.add('show');
+        phoneSuccessIcon.classList.remove('show');
+      }
+    });
+
+    // Shake on invalid keypress
+    splitPhoneInput.addEventListener("keypress", function (e) {
+      if (!/[0-9]/.test(String.fromCharCode(e.which))) {
+        e.preventDefault();
+        splitPhoneInput.classList.add('shake');
+        setTimeout(() => splitPhoneInput.classList.remove('shake'), 500);
+      }
+    });
+  });
+});
+
 // ================= CONTACT FORM =================
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contactForm");
 
   if (contactForm) {
-    const phoneInput = contactForm.querySelector('input[type="tel"]');
-    let phoneErrorMsg = null;
-    let phoneSuccessIcon = null;
-
-    // Create error message and success icon elements if they don't exist
-    if (phoneInput) {
-      const inputGroup = phoneInput.closest('.input-group');
-      if (inputGroup) {
-        // Create error message
-        phoneErrorMsg = document.createElement('div');
-        phoneErrorMsg.className = 'phone-error-message';
-        inputGroup.appendChild(phoneErrorMsg);
-
-        // Create success icon
-        phoneSuccessIcon = document.createElement('i');
-        phoneSuccessIcon.className = 'fas fa-check-circle phone-success-icon';
-        inputGroup.style.position = 'relative';
-        inputGroup.appendChild(phoneSuccessIcon);
-      }
-
-      // Real-time phone validation
-      phoneInput.addEventListener("input", function (e) {
-        let value = e.target.value.replace(/\D/g, "");
-
-        // Limit to 10 digits
-        if (value.length > 10) {
-          value = value.substring(0, 10);
-        }
-
-        // Format with spaces every 5 digits
-        if (value.length > 0) {
-          value = value.match(/.{1,5}/g).join(" ");
-        }
-        e.target.value = value;
-
-        // Validate the phone number
-        const validation = validateIndianPhone(e.target.value);
-
-        if (e.target.value.replace(/\D/g, "").length === 0) {
-          // Empty input - reset to neutral state
-          e.target.classList.remove('error', 'success', 'shake');
-          if (phoneErrorMsg) phoneErrorMsg.classList.remove('show');
-          if (phoneSuccessIcon) phoneSuccessIcon.classList.remove('show');
-        } else if (validation.isValid) {
-          // Valid phone number
-          e.target.classList.remove('error', 'shake');
-          e.target.classList.add('success');
-          if (phoneErrorMsg) phoneErrorMsg.classList.remove('show');
-          if (phoneSuccessIcon) phoneSuccessIcon.classList.add('show');
-        } else {
-          // Invalid phone number
-          e.target.classList.remove('success');
-          e.target.classList.add('error');
-          if (phoneErrorMsg) {
-            phoneErrorMsg.textContent = validation.message;
-            phoneErrorMsg.classList.add('show');
-          }
-          if (phoneSuccessIcon) phoneSuccessIcon.classList.remove('show');
-        }
-      });
-
-      // Trigger shake animation on non-numeric input
-      phoneInput.addEventListener("keypress", function (e) {
-        const char = String.fromCharCode(e.which);
-        if (!/[0-9]/.test(char)) {
-          e.preventDefault();
-          phoneInput.classList.add('shake');
-          setTimeout(() => phoneInput.classList.remove('shake'), 500);
-        }
-      });
-    }
-
     contactForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
       const name = contactForm.querySelector('input[type="text"]').value;
-      const phone = phoneInput.value;
+      const splitPhoneInput = contactForm.querySelector('#splitPhone');
+      const countryCodeSelect = contactForm.querySelector('#countryCode');
+      const phoneErrorMsg = contactForm.parentElement.querySelector('.phone-error-message');
+      const phoneSuccessIcon = splitPhoneInput?.parentElement.querySelector('.phone-success-icon');
+
+      if (!splitPhoneInput || !countryCodeSelect) return;
+
+      const phoneDigits = splitPhoneInput.value;
+      const prefix = countryCodeSelect.value;
+      const fullPhone = prefix + phoneDigits;
 
       // Validate phone before submission
-      const validation = validateIndianPhone(phone);
+      const validation = validateIndianPhone(phoneDigits);
       if (!validation.isValid) {
-        phoneInput.classList.add('error', 'shake');
+        splitPhoneInput.classList.add('error', 'shake');
         if (phoneErrorMsg) {
           phoneErrorMsg.textContent = validation.message;
           phoneErrorMsg.classList.add('show');
         }
-        setTimeout(() => phoneInput.classList.remove('shake'), 500);
+        setTimeout(() => splitPhoneInput.classList.remove('shake'), 500);
         return; // Prevent form submission
       }
 
@@ -175,11 +174,11 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         showContactToast(
           "Request Received",
-          `Thank you ${name}! Your request has been received. We'll contact you at ${phone}.`
+          `Thank you ${name}! Your request has been received. We'll contact you at ${fullPhone}.`
         );
 
         contactForm.reset();
-        phoneInput.classList.remove('error', 'success');
+        splitPhoneInput.classList.remove('error', 'success');
         if (phoneErrorMsg) phoneErrorMsg.classList.remove('show');
         if (phoneSuccessIcon) phoneSuccessIcon.classList.remove('show');
         submitBtn.innerHTML = originalText;

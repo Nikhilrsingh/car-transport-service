@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +10,18 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="../css/styles.css">
-    
+
     <link rel="stylesheet" href="../css/pages/login.css">
     <link rel="stylesheet" href="../css/components/login.css">
+    <link rel="stylesheet" href="../css/components/phone-split.css">
 
     <style>
         /* --- GLOBAL LAYOUT --- */
-        html { height: 100%; }
+        html {
+            height: 100%;
+        }
 
         body {
             min-height: 100vh;
@@ -27,11 +31,11 @@
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            
+
             /* BACKGROUND FIX: 'fixed' prevents the gradient from breaking/partitioning */
             background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-            background-attachment: fixed; 
-            
+            background-attachment: fixed;
+
             color: #ffffff;
             transition: background 0.5s ease, color 0.3s ease;
         }
@@ -49,7 +53,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             padding-top: 100px;
             padding-bottom: 50px;
             width: 100%;
@@ -71,27 +75,32 @@
             text-align: center;
             flex-shrink: 0;
         }
-        
+
         .logo {
-            width: 80px; 
+            width: 80px;
             height: 80px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             border: 2px solid var(--primary-brand);
             border-radius: 50%;
-            padding: 5px; 
+            padding: 5px;
             margin: 0 auto 10px;
             box-shadow: 0 0 20px rgba(255, 99, 71, 0.2);
         }
-        
-        .logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
 
         .brand-name {
             font-size: 1.5rem;
             font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             color: #ffffff;
         }
-        
+
         /* Light Mode Brand Name */
         body[data-theme="light"] .brand-name {
             color: #333333;
@@ -103,20 +112,20 @@
             background: rgba(13, 25, 48, 0.75);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             width: 100%;
             box-sizing: border-box;
             transition: background 0.3s ease, border-color 0.3s ease;
         }
-        
+
         body[data-theme="light"] .auth-card {
             background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             color: #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         /* --- INPUT FIELDS & PADDING FIX --- */
@@ -129,11 +138,11 @@
             width: 100%;
             height: 50px;
             /* PADDING FIX: 55px padding forces text to start AFTER the icon */
-            padding: 0 20px 0 55px !important; 
+            padding: 0 20px 0 55px !important;
             border-radius: 10px;
             box-sizing: border-box;
             font-size: 1rem;
-            
+
             /* Dark Mode Default */
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid #555;
@@ -142,29 +151,31 @@
 
         /* AUTOFILL FIX: Keeps background correct when browser fills password */
         input:-webkit-autofill,
-        input:-webkit-autofill:hover, 
-        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
         input:-webkit-autofill:active {
-            -webkit-box-shadow: 0 0 0 30px #1a1a2e inset !important; /* Dark Bg match */
+            -webkit-box-shadow: 0 0 0 30px #1a1a2e inset !important;
+            /* Dark Bg match */
             -webkit-text-fill-color: white !important;
             transition: background-color 5000s ease-in-out 0s;
         }
 
         /* Light Mode Input & Autofill */
-        body[data-theme="light"] .form-control { 
-            background: #ffffff; 
-            border: 1px solid #ccc; 
-            color: #333 !important; 
+        body[data-theme="light"] .form-control {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            color: #333 !important;
         }
 
         body[data-theme="light"] input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 30px #ffffff inset !important; /* White Bg match */
+            -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+            /* White Bg match */
             -webkit-text-fill-color: #333 !important;
         }
 
         .input-icon {
             position: absolute;
-            left: 20px; 
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 1.1rem;
@@ -172,9 +183,11 @@
             pointer-events: none;
             z-index: 2;
         }
-        
-        body[data-theme="light"] .input-icon { color: #888; }
-        
+
+        body[data-theme="light"] .input-icon {
+            color: #888;
+        }
+
         .password-toggle {
             position: absolute;
             right: 20px;
@@ -186,11 +199,15 @@
             cursor: pointer;
             z-index: 2;
         }
-        
-        body[data-theme="light"] .password-toggle { color: #888; }
-        
+
+        body[data-theme="light"] .password-toggle {
+            color: #888;
+        }
+
         /* Hide Placeholders */
-        input::placeholder { opacity: 0; }
+        input::placeholder {
+            opacity: 0;
+        }
 
         /* --- TEXT COLORS --- */
         body[data-theme="dark"] .form-header h2,
@@ -202,8 +219,11 @@
         body[data-theme="dark"] .form-footer a {
             color: #ffffff !important;
         }
-        
-        body[data-theme="light"] .form-header h2 { color: #333; }
+
+        body[data-theme="light"] .form-header h2 {
+            color: #333;
+        }
+
         body[data-theme="light"] .form-header p,
         body[data-theme="light"] label,
         body[data-theme="light"] .checkbox-wrapper label,
@@ -214,42 +234,91 @@
 
         /* --- NAV BUTTONS --- */
         .nav-controls {
-            position: absolute; top: 20px; left: 20px; right: 20px;
-            display: flex; justify-content: space-between; z-index: 100;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
         }
+
         .nav-btn {
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid var(--primary-brand);
             color: var(--primary-brand);
-            padding: 8px 16px; border-radius: 30px;
-            cursor: pointer; backdrop-filter: blur(5px);
-            transition: all 0.3s; display: flex; align-items: center; gap: 8px;
-            text-decoration: none; font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
         }
-        .nav-btn:hover { background: var(--primary-brand); color: white; }
-        
+
+        .nav-btn:hover {
+            background: var(--primary-brand);
+            color: white;
+        }
+
         body[data-theme="light"] .nav-btn {
             background: rgba(255, 255, 255, 0.6);
             color: var(--primary-brand);
         }
 
         /* --- COMPONENTS --- */
-        :root { --primary-brand: #ff6347; }
-        .tab-btn { color: #aaa; }
-        .tab-btn.active { color: var(--primary-brand); background: rgba(255, 99, 71, 0.1); border: 1px solid var(--primary-brand); }
-        .submit-btn { background: linear-gradient(90deg, #ff6347, #ff4500); border: none; color: white; box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4); }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6); }
+        :root {
+            --primary-brand: #ff6347;
+        }
 
-        .particles { pointer-events: none; position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; }
-        .particle { background: rgba(255, 99, 71, 0.3) !important; }
+        .tab-btn {
+            color: #aaa;
+        }
 
+        .tab-btn.active {
+            color: var(--primary-brand);
+            background: rgba(255, 99, 71, 0.1);
+            border: 1px solid var(--primary-brand);
+        }
+
+        .submit-btn {
+            background: linear-gradient(90deg, #ff6347, #ff4500);
+            border: none;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6);
+        }
+
+        .particles {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .particle {
+            background: rgba(255, 99, 71, 0.3) !important;
+        }
     </style>
 </head>
+
 <body data-theme="dark">
 
     <div class="particles">
-        <div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
     <div class="nav-controls">
@@ -294,7 +363,8 @@
                             <div class="input-wrapper">
                                 <input type="password" id="login-pass" class="form-control" placeholder="" required>
                                 <span class="input-icon"><i class="fas fa-lock"></i></span>
-                                <button type="button" class="password-toggle" onclick="togglePassword('login-pass', this)">
+                                <button type="button" class="password-toggle"
+                                    onclick="togglePassword('login-pass', this)">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
@@ -331,6 +401,26 @@
                             <div class="input-wrapper">
                                 <input type="email" class="form-control" placeholder="" required>
                                 <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <div class="phone-input-grid">
+                                <div class="input-wrapper">
+                                    <select id="signup-country-code" class="form-control" required
+                                        style="padding-left: 55px !important;">
+                                        <option value="+91">+91 (IN)</option>
+                                        <option value="+1">+1 (US)</option>
+                                        <option value="+44">+44 (UK)</option>
+                                        <option value="+971">+971 (UAE)</option>
+                                    </select>
+                                    <span class="input-icon"><i class="fas fa-globe"></i></span>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="tel" id="signup-phone" class="form-control"
+                                        placeholder="10-digit number" required maxlength="10">
+                                    <span class="input-icon"><i class="fas fa-phone"></i></span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -378,7 +468,7 @@
             const body = document.body;
             const icon = document.querySelector('.nav-controls button i');
             const currentTheme = body.getAttribute('data-theme');
-            
+
             if (currentTheme === 'dark' || !currentTheme) {
                 // Switch to Light
                 body.setAttribute('data-theme', 'light');
@@ -397,7 +487,7 @@
             const savedTheme = localStorage.getItem('theme') || 'dark';
             document.body.setAttribute('data-theme', savedTheme);
             const icon = document.querySelector('.nav-controls button i');
-            if(savedTheme === 'light') {
+            if (savedTheme === 'light') {
                 icon.className = 'fas fa-sun';
             } else {
                 icon.className = 'fas fa-moon';
@@ -409,4 +499,5 @@
         function handleSignup(e) { e.preventDefault(); alert('Signup functionality coming soon!'); }
     </script>
 </body>
+
 </html>

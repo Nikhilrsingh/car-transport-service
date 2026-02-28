@@ -33,7 +33,16 @@ export const updateProfile = async (req, res) => {
     const updateData = {};
 
     if (name !== undefined) updateData.name = name.trim();
-    if (phone !== undefined) updateData.phone = phone;
+    if (phone !== undefined) {
+      // Normalize phone number to +91XXXXXXXXXX
+      let normalizedPhone = phone.replace(/\D/g, "");
+      if (normalizedPhone.length === 10) {
+        normalizedPhone = `+91${normalizedPhone}`;
+      } else if (normalizedPhone.length === 12 && normalizedPhone.startsWith("91")) {
+        normalizedPhone = `+${normalizedPhone}`;
+      }
+      updateData.phone = normalizedPhone;
+    }
     if (address !== undefined) updateData.address = address;
     if (profilePicture !== undefined) updateData.profilePicture = profilePicture;
 

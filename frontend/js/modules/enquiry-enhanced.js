@@ -195,11 +195,7 @@
                 emailInput.addEventListener('input', checkEmailTypo);
             }
 
-            // Phone formatting
-            const phoneInput = document.getElementById('phone');
-            if (phoneInput) {
-                phoneInput.addEventListener('input', formatPhoneNumber);
-            }
+            // Phone formatting handled globally by script.js (#splitPhone)
 
             // Character counter
             const messageInput = document.getElementById('message');
@@ -268,7 +264,7 @@
                 }
                 break;
 
-            case 'phone':
+            case 'splitPhone':
                 const cleaned = value.replace(/\D/g, '');
 
                 // Reject repeating digits (0000000000, 9999999999)
@@ -828,6 +824,9 @@
         });
 
         // Add uploaded files info
+        if (data.countryCode && data.splitPhone) {
+            data.phone = `${data.countryCode}${data.splitPhone}`;
+        }
         data.attachments = state.uploadedFiles.map(f => f.name);
 
         // Simulate API call

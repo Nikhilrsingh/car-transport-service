@@ -245,7 +245,7 @@
     if (!form) return;
 
     const nameInput = document.getElementById('name');
-    const phoneInput = document.getElementById('phone');
+    const phoneInput = document.getElementById('splitPhone');
     const emailInput = document.getElementById('email');
     const vehicleSelect = document.getElementById('vehicle');
     const serviceSelect = document.getElementById('service');
@@ -262,18 +262,7 @@
       });
     }
 
-    // Phone validation
-    if (phoneInput) {
-      phoneInput.addEventListener('input', function () {
-        // Allow only numbers
-        this.value = this.value.replace(/[^0-9]/g, '');
-        validateField(this, validatePhone(this.value));
-      });
-
-      phoneInput.addEventListener('blur', function () {
-        validateField(this, validatePhone(this.value));
-      });
-    }
+    // Phone validation handled globally by script.js (#splitPhone)
 
     // Email validation
     if (emailInput) {
@@ -389,7 +378,7 @@
   function validateForm() {
     const form = document.getElementById('contactForm');
     const nameInput = document.getElementById('name');
-    const phoneInput = document.getElementById('phone');
+    const phoneInput = document.getElementById('splitPhone');
     const emailInput = document.getElementById('email');
     const vehicleSelect = document.getElementById('vehicle');
     const serviceSelect = document.getElementById('service');
@@ -531,10 +520,10 @@
 
   // Email format validation helper
   function isValidEmail(email) {
-  // requires username + @ + domain (.com, .in, etc.)
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
-  return emailRegex.test(email);
- }
+    // requires username + @ + domain (.com, .in, etc.)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  }
 
   // Email suggestion
   function initEmailSuggestion() {
