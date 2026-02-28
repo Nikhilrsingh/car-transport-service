@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="../css/components/contact.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/components/glowing-input.css">
+  <link rel="stylesheet" href="../css/components/phone-split.css">
   <link rel="stylesheet" href="../css/pages/contact.css">
   <link rel="stylesheet" href="../css/components/floating-button.css">
 </head>
@@ -78,9 +79,22 @@
               </div>
               <div class="input-group">
                 <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit number" maxlength="10"
-                  inputmode="numeric" autocomplete="tel" />
-                <span class="error-message"></span>
+                <div class="phone-input-grid">
+                  <div class="input-wrapper">
+                    <select id="countryCode" class="form-control" required style="padding-left: 55px !important;">
+                      <option value="+91">+91 (IN)</option>
+                      <option value="+1">+1 (US)</option>
+                      <option value="+44">+44 (UK)</option>
+                      <option value="+971">+971 (UAE)</option>
+                    </select>
+                    <span class="input-icon"><i class="fas fa-globe"></i></span>
+                  </div>
+                  <div class="input-wrapper">
+                    <input type="tel" id="splitPhone" class="form-control" placeholder="10-digit number" required
+                      maxlength="10" inputmode="numeric" autocomplete="tel" />
+                    <span class="input-icon"><i class="fas fa-phone"></i></span>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="input-group">

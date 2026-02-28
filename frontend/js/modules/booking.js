@@ -464,12 +464,9 @@ class BookingManager {
 
     // Utilities
     formatPhoneNumber(e) {
-        let value = e.target.value.replace(/[^\d+]/g, '');
-        if (value.length > 0) {
-            value = value.substring(0, 12);
-            if (value.length > 5) {
-                value = value.substring(0, 5) + ' ' + value.substring(5);
-            }
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 10) {
+            value = value.substring(0, 10);
         }
         e.target.value = value;
     }
@@ -611,6 +608,10 @@ class BookingManager {
 
                 // Reset form
                 form.reset();
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i><span>Confirm Booking</span>';
+                }
                 localStorage.removeItem(this.DRAFT_KEY);
 
                 this.currentStep = 1;

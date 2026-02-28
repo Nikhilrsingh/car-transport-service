@@ -174,6 +174,11 @@ function handleLogin(event) {
     // Save remember me preference
     saveRememberMe(email, rememberMe);
 
+    const submitBtn = event.target.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Logging in...</span>';
+
     // Simulate authentication (replace with actual API call)
     showNotification('Logging in...', 'info');
 
@@ -188,9 +193,13 @@ function handleLogin(event) {
 
         // Save user session
         sessionStorage.setItem('currentUser', JSON.stringify(mockUser));
-        localStorage.setItem('refreshToken', 'mock-refresh-token'); // Store refresh token
 
         showNotification('Login successful! Redirecting...', 'success');
+
+        // Reset form and button
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
 
         // Redirect to dashboard or home page
         setTimeout(() => {
@@ -210,13 +219,15 @@ function handleSignup(event) {
     const firstName = form.querySelectorAll('input[type="text"]')[0].value;
     const lastName = form.querySelectorAll('input[type="text"]')[1].value;
     const email = form.querySelector('input[type="email"]').value;
-    const phone = form.querySelector('input[type="tel"]').value;
+    const phoneDigits = document.getElementById('signup-phone').value;
+    const countryCode = document.getElementById('signup-country-code').value;
+    const phone = countryCode + phoneDigits;
     const password = document.getElementById('signup-password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
     const termsAccepted = document.getElementById('terms').checked;
 
     // Validation checks
-    if (!firstName || !lastName || !email || !phone || !password || !confirmPassword) {
+    if (!firstName || !lastName || !email || !phoneDigits || !password || !confirmPassword) {
         showNotification('Please fill in all required fields', 'error');
         return;
     }
@@ -231,8 +242,8 @@ function handleSignup(event) {
         return;
     }
 
-    if (!isValidPhone(phone)) {
-        showNotification('Please enter a valid 10-digit phone number', 'error');
+    if (!isValidPhone(phoneDigits)) {
+        showNotification('Please enter a valid 10-digit mobile number', 'error');
         return;
     }
 
@@ -247,6 +258,11 @@ function handleSignup(event) {
     }
 
     // Simulate signup (replace with actual API call)
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Creating Account...</span>';
+
     showNotification('Creating account...', 'info');
 
     // TODO: Replace with actual signup API call
@@ -261,6 +277,11 @@ function handleSignup(event) {
 
         // Mock email verification
         showNotification('Account created! Please check your email for verification.', 'success');
+
+        // Reset form and button
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
 
         // Switch to login tab after successful signup
         setTimeout(() => {
@@ -343,8 +364,8 @@ function isValidEmail(email) {
  * @returns {boolean}
  */
 function isValidPhone(phone) {
-    const phoneRegex = /^[0-9]{10}$/;
-    return phoneRegex.test(phone.replace(/[\s-]/g, ''));
+    const phoneRegex = /^[6-9]\d{9}$/;
+    return phoneRegex.test(phone.replace(/\D/g, ''));
 }
 
 /**

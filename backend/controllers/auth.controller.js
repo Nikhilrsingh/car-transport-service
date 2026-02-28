@@ -12,7 +12,9 @@ import {
 /* ================= REGISTER ================= */
 export const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    let { name, email, password } = req.body;
+
+    if (email) email = email.toLowerCase();
 
     if (!name || !email || !password)
       return error(res, 400, "All fields required");
@@ -33,10 +35,19 @@ export const register = async (req, res) => {
 
     const hashed = await bcrypt.hash(password, 12);
 
+    // Normalize phone number to +91XXXXXXXXXX
+    let normalizedPhone = phone.replace(/\D/g, ""); // remove non-digits
+    if (normalizedPhone.length === 10) {
+      normalizedPhone = `+91${normalizedPhone}`;
+    } else if (normalizedPhone.length === 12 && normalizedPhone.startsWith("91")) {
+      normalizedPhone = `+${normalizedPhone}`;
+    }
+
     const user = await User.create({
       name: name.trim(),
       email,
       password: hashed,
+      phone: normalizedPhone,
     });
 
     success(res, 201, "User registered", {
@@ -52,7 +63,9 @@ export const register = async (req, res) => {
 /* ================= LOGIN ================= */
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+
+    if (email) email = email.toLowerCase();
 
     if (!email || !password)
       return error(res, 400, "Email & password required");
