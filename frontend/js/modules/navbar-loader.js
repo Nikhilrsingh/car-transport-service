@@ -180,6 +180,7 @@
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("userEmail");
         localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
       }
 
       // Desktop nav
