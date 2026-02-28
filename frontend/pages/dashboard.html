@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="../css/components/review-modal.css">
     <link rel="stylesheet" href="../css/components/toast.css">
     <link rel="stylesheet" href="../css/styles.css">
-    
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -103,8 +104,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Overview Tab */
@@ -180,7 +188,8 @@
             flex-wrap: wrap;
         }
 
-        .search-input, .filter-select {
+        .search-input,
+        .filter-select {
             padding: 12px 20px;
             background: #1a1a1a;
             border: 1px solid #333;
@@ -234,12 +243,35 @@
             font-weight: 600;
         }
 
-        .status-pending { background: #ff6347; color: white; }
-        .status-confirmed { background: #4caf50; color: white; }
-        .status-picked_up { background: #2196f3; color: white; }
-        .status-in_transit { background: #ff9800; color: white; }
-        .status-delivered { background: #4caf50; color: white; }
-        .status-cancelled { background: #666; color: white; }
+        .status-pending {
+            background: #ff6347;
+            color: white;
+        }
+
+        .status-confirmed {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-picked_up {
+            background: #2196f3;
+            color: white;
+        }
+
+        .status-in_transit {
+            background: #ff9800;
+            color: white;
+        }
+
+        .status-delivered {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-cancelled {
+            background: #666;
+            color: white;
+        }
 
         .booking-details {
             display: grid;
@@ -579,8 +611,13 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateX(400px); }
-            to { transform: translateX(0); }
+            from {
+                transform: translateX(400px);
+            }
+
+            to {
+                transform: translateX(0);
+            }
         }
 
         .loading {
@@ -595,8 +632,13 @@
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 768px) {
@@ -624,6 +666,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <div id="navbar-container"></div>
@@ -631,9 +674,11 @@
     <!-- Dashboard Container -->
     <div class="dashboard-container">
         <!-- Demo Mode Notice (shown when not logged in) -->
-        <div id="demoNotice" style="background: rgba(255, 99, 71, 0.1); border: 2px solid #ff6347; border-radius: 10px; padding: 15px; margin-bottom: 30px; display: none;">
+        <div id="demoNotice"
+            style="background: rgba(255, 99, 71, 0.1); border: 2px solid #ff6347; border-radius: 10px; padding: 15px; margin-bottom: 30px; display: none;">
             <p style="margin: 0; color: #ff6347; font-weight: 600;">
-                <i class="fas fa-info-circle"></i> Demo Mode: You're viewing sample data. Login to see your actual data and make changes.
+                <i class="fas fa-info-circle"></i> Demo Mode: You're viewing sample data. Login to see your actual data
+                and make changes.
             </p>
         </div>
 
@@ -740,7 +785,8 @@
                     <option value="unpaid">Unpaid</option>
                     <option value="partial">Partially Paid</option>
                 </select>
-                <input type="text" id="invoiceSearch" class="search-input" placeholder="Search by invoice number or booking ref...">
+                <input type="text" id="invoiceSearch" class="search-input"
+                    placeholder="Search by invoice number or booking ref...">
             </div>
 
             <div id="invoicesList" class="bookings-list">
@@ -818,7 +864,8 @@
                     <form id="passwordForm">
                         <div class="form-group">
                             <label>Current Password</label>
-                            <input type="password" class="form-input" id="oldPassword" placeholder="Enter current password">
+                            <input type="password" class="form-input" id="oldPassword"
+                                placeholder="Enter current password">
                         </div>
                         <div class="form-group">
                             <label>New Password</label>
@@ -826,7 +873,8 @@
                         </div>
                         <div class="form-group">
                             <label>Confirm New Password</label>
-                            <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password">
+                            <input type="password" class="form-input" id="confirmPassword"
+                                placeholder="Confirm new password">
                         </div>
                         <button type="submit" class="submit-btn">
                             <i class="fas fa-lock"></i> Change Password
@@ -857,7 +905,8 @@
                 <div style="font-size: 64px; opacity: 0.5; margin-bottom: 16px;">📝</div>
                 <h3 style="color: #fff; margin-bottom: 8px;">No reviews yet</h3>
                 <p style="color: #999; margin-bottom: 20px;">Complete a booking to leave your first review</p>
-                <button class="action-btn" onclick="switchTab('bookings')" style="display: inline-block; margin-top: 10px;">
+                <button class="action-btn" onclick="switchTab('bookings')"
+                    style="display: inline-block; margin-top: 10px;">
                     <i class="fas fa-truck"></i> View My Bookings
                 </button>
             </div>
@@ -907,15 +956,15 @@
     <div id="footer-container"></div>
 
     <!-- Scripts -->
-   <script src="../js/modules/loading-state-manager.js"></script>
+    <script src="../js/modules/loading-state-manager.js"></script>
     <script src="../js/modules/page-navigation-loader.js"></script>
     <script src="../js/modules/navbar-loader.js?v=2"></script>
     <script src="../js/modules/footer-loader.js"></script>
     <script src="../js/script.js"></script>
-    
+
     <!-- Review System -->
     <script type="module" src="../js/components/starRating.js"></script>
-   <script type="module" src="../js/review.js"></script>
+    <script type="module" src="../js/review.js"></script>
     <script type="module" src="../js/modules/dashboard-reviews.js"></script>
 
     <script type="module">
@@ -924,14 +973,14 @@
 
         // 2. GLOBAL TAB SWITCHING logic
         // Attached to window so the HTML onclick="switchTab()" attributes can find it
-        window.switchTab = function(tabName) {
+        window.switchTab = function (tabName) {
             console.log("Switching to tab:", tabName);
-            
+
             // UI Updates: Toggle active classes on tab buttons
             document.querySelectorAll('.dashboard-tab').forEach(tab => {
                 tab.classList.toggle('active', tab.dataset.tab === tabName);
             });
-            
+
             // UI Updates: Toggle active classes on content sections
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.toggle('active', content.id === `${tabName}-tab`);
@@ -952,9 +1001,9 @@
         };
 
         // 4. Page Initialization
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', async function () {
             const token = localStorage.getItem('token');
-            
+
             // Show demo notice if not logged in
             if (!token) {
                 const demoNotice = document.getElementById('demoNotice');
@@ -964,7 +1013,7 @@
             // Initial data load
             await loadUserProfile();
             await loadBookings();
-            
+
             // Setup listeners for forms and search inputs
             setupEventListeners();
         });
@@ -974,12 +1023,12 @@
         async function loadUserProfile() {
             const token = localStorage.getItem('token');
             if (!token) {
-                currentUser = { 
-                    name: 'Demo User', 
-                    email: 'demo@example.com', 
+                currentUser = {
+                    name: 'Demo User',
+                    email: 'demo@example.com',
                     phone: '+91-9876543210',
                     address: { street: '123 Demo St', city: 'Mumbai', state: 'MH', pincode: '400001' },
-                     profilePicture: 'https://via.placeholder.com/120'
+                    profilePicture: 'https://via.placeholder.com/120'
                 };
                 displayUserProfile(currentUser);
                 return;
@@ -991,6 +1040,12 @@
                     }
                 });
 
+                if (response.status === 401) {
+                    alert('Your session has expired. Please log in again.');
+                    window.handleLogout();
+                    return;
+                }
+
                 const data = await response.json();
 
                 if (response.ok && data.success) {
@@ -1001,6 +1056,12 @@
                 }
             } catch (error) {
                 console.error('Profile load error:', error);
+
+                // Show helpful message for connection errors
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    alert('Connection lost. Showing demo data while offline.');
+                }
+
                 // Show demo data on error
                 currentUser = {
                     name: 'Demo User',
@@ -1044,7 +1105,7 @@
         async function loadBookings() {
             try {
                 const token = localStorage.getItem('token');
-                
+
                 // If no token, show demo bookings
                 if (!token) {
                     const demoBookings = [
@@ -1086,12 +1147,18 @@
                     updateStats(demoBookings);
                     return;
                 }
-                
+
                 const response = await fetch(`${API_BASE}/bookings`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+
+                if (response.status === 401) {
+                    alert('Your session has expired. Please log in again.');
+                    window.handleLogout();
+                    return;
+                }
 
                 const data = await response.json();
 
@@ -1112,6 +1179,12 @@
                 }
             } catch (error) {
                 console.error('Bookings load error:', error);
+
+                // Show helpful message for connection errors
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    alert('Connection lost. Search may be unavailable.');
+                }
+
                 // Show demo data on error
                 const demoBookings = [
                     {
@@ -1134,7 +1207,7 @@
         // Display bookings
         function displayBookings(bookings) {
             const container = document.getElementById('bookingsList');
-            
+
             if (!bookings || bookings.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
@@ -1233,7 +1306,7 @@
         // Display invoices
         function displayInvoices(invoices) {
             const container = document.getElementById('invoicesList');
-            
+
             if (!invoices || invoices.length === 0) {
                 document.getElementById('noInvoices').style.display = 'block';
                 container.style.display = 'none';
@@ -1306,15 +1379,15 @@
             const statusFilter = document.getElementById('invoiceStatusFilter').value;
 
             const cards = document.querySelectorAll('#invoicesList .invoice-card');
-            
+
             cards.forEach(card => {
                 const invoiceNumber = card.querySelector('.invoice-number').textContent.toLowerCase();
                 const bookingRef = card.querySelector('.invoice-detail').textContent.toLowerCase();
                 const paymentBadge = card.querySelector('.payment-badge').textContent.toLowerCase();
-                
+
                 const matchesSearch = invoiceNumber.includes(searchTerm) || bookingRef.includes(searchTerm);
                 const matchesStatus = statusFilter === 'all' || paymentBadge.includes(statusFilter);
-                
+
                 card.style.display = matchesSearch && matchesStatus ? 'block' : 'none';
             });
         }
@@ -1367,13 +1440,13 @@
         async function updateProfile() {
             try {
                 const token = localStorage.getItem('token');
-                
+
                 // If no token, show info message
                 if (!token) {
                     showToast('Login required to update profile', 'error');
                     return;
                 }
-                
+
                 const profileData = {
                     name: document.getElementById('name').value,
                     phone: document.getElementById('phone').value,
@@ -1393,6 +1466,12 @@
                     },
                     body: JSON.stringify(profileData)
                 });
+
+                if (response.status === 401) {
+                    alert('Your session has expired. Please log in again.');
+                    window.handleLogout();
+                    return;
+                }
 
                 const data = await response.json();
 
@@ -1422,7 +1501,7 @@
                 }
 
                 const token = localStorage.getItem('token');
-                
+
                 // If no token, show info message
                 if (!token) {
                     showToast('Login required to change password', 'error');
@@ -1457,7 +1536,7 @@
 
             try {
                 const token = localStorage.getItem('token');
-                
+
                 // If no token, show info message
                 if (!token) {
                     showToast('Login required to upload picture', 'error');
@@ -1473,6 +1552,12 @@
                     },
                     body: formData
                 });
+
+                if (response.status === 401) {
+                    alert('Your session has expired. Please log in again.');
+                    window.handleLogout();
+                    return;
+                }
 
                 const data = await response.json();
 
@@ -1492,15 +1577,15 @@
         function filterBookings() {
             const searchTerm = document.getElementById('searchBooking').value.toLowerCase();
             const statusFilter = document.getElementById('statusFilter').value;
-            
+
             const cards = document.querySelectorAll('.booking-card');
             cards.forEach(card => {
                 const bookingId = card.querySelector('.booking-id').textContent.toLowerCase();
                 const status = card.querySelector('.status-badge').classList[1].replace('status-', '');
-                
+
                 const matchesSearch = bookingId.includes(searchTerm);
                 const matchesStatus = !statusFilter || status === statusFilter;
-                
+
                 card.style.display = (matchesSearch && matchesStatus) ? 'block' : 'none';
             });
         }
@@ -1511,9 +1596,9 @@
             toast.className = 'toast';
             toast.style.background = type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#ff6347';
             toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i> ${message}`;
-            
+
             document.body.appendChild(toast);
-            
+
             setTimeout(() => {
                 toast.remove();
             }, 3000);
@@ -1521,8 +1606,8 @@
 
         // Initialize Review System
         import { ReviewFormModal } from '../js/reviewForm.js';
-        
-        
+
+
         window.reviewModal = new ReviewFormModal();
         window.openReviewModal = (bookingId) => {
             window.reviewModal.open(bookingId);
@@ -1530,4 +1615,5 @@
 
     </script>
 </body>
+
 </html>
