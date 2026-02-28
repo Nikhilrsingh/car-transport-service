@@ -27,19 +27,22 @@
         }
 
         body {
-        font-family: 'Poppins', sans-serif;
-        background: var(--bg, #0a0a0a); 
-        color: var(--text, #fff);       
-        min-height: 100vh;
-        transition: background 0.3s ease;
-    }
-    
-    
-    .stat-card, .booking-card, .invoice-card, .settings-section {
-        background: var(--card-bg, #1a1a1a) !important;
-        color: var(--text, #fff);
-        border: 1px solid var(--card-border, #333);
-    }
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg, #0a0a0a);
+            color: var(--text, #fff);
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+
+
+        .stat-card,
+        .booking-card,
+        .invoice-card,
+        .settings-section {
+            background: var(--card-bg, #1a1a1a) !important;
+            color: var(--text, #fff);
+            border: 1px solid var(--card-border, #333);
+        }
 
         .dashboard-container {
             max-width: 1400px;
@@ -1022,6 +1025,9 @@
         window.switchTab = function (tabName) {
             console.log("Switching to tab:", tabName);
 
+            // Persist the tab selection
+            localStorage.setItem('lastDashboardTab', tabName);
+
             // UI Updates: Toggle active classes on tab buttons
             document.querySelectorAll('.dashboard-tab').forEach(tab => {
                 tab.classList.toggle('active', tab.dataset.tab === tabName);
@@ -1056,9 +1062,19 @@
                 if (demoNotice) demoNotice.style.display = 'block';
             }
 
+            // Restore last viewed tab or default to overview
+            const lastTab = localStorage.getItem('lastDashboardTab') || 'overview';
+            window.switchTab(lastTab);
+
             // Initial data load
             await loadUserProfile();
-            await loadBookings();
+
+            // Note: loadBookings() and loadInvoices() are now handled by switchTab()
+            // but we still call loadBookings here if overview is the starting tab 
+            // to ensure the summary stats are populated
+            if (lastTab === 'overview') {
+                await loadBookings();
+            }
 
             // Setup listeners for forms and search inputs
             setupEventListeners();
@@ -1481,29 +1497,29 @@
                 });
             });
             const darkModeToggle = document.getElementById('darkModeToggle');
-    if (darkModeToggle) {
-        // Sync toggle state with current theme on load
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        darkModeToggle.classList.toggle('active', currentTheme === 'dark');
+            if (darkModeToggle) {
+                // Sync toggle state with current theme on load
+                const currentTheme = localStorage.getItem('theme') || 'light';
+                darkModeToggle.classList.toggle('active', currentTheme === 'dark');
 
-        darkModeToggle.addEventListener('click', () => {
-            darkModeToggle.classList.toggle('active');
-            const newTheme = darkModeToggle.classList.contains('active') ? 'dark' : 'light';
-            
-            // Trigger the global themes.js applyTheme logic if available
-            // or manually toggle the body attribute
-            document.body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            // Update the CSS link manually if themes.js isn't catching it
-            const themeLink = document.getElementById('theme-style');
-            if (themeLink) {
-                themeLink.href = newTheme === 'dark' ? '../css/dark-mode.css' : '../css/light-mode.css';
+                darkModeToggle.addEventListener('click', () => {
+                    darkModeToggle.classList.toggle('active');
+                    const newTheme = darkModeToggle.classList.contains('active') ? 'dark' : 'light';
+
+                    // Trigger the global themes.js applyTheme logic if available
+                    // or manually toggle the body attribute
+                    document.body.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+
+                    // Update the CSS link manually if themes.js isn't catching it
+                    const themeLink = document.getElementById('theme-style');
+                    if (themeLink) {
+                        themeLink.href = newTheme === 'dark' ? '../css/dark-mode.css' : '../css/light-mode.css';
+                    }
+
+                    showToast(`Switched to ${newTheme} mode`, 'success');
+                });
             }
-            
-            showToast(`Switched to ${newTheme} mode`, 'success');
-        });
-    }
         }
 
         // Update profile
