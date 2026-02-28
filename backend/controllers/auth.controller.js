@@ -11,7 +11,9 @@ import {
 /* ================= REGISTER ================= */
 export const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    let { name, email, password } = req.body;
+
+    if (email) email = email.toLowerCase();
 
     if (!name || !email || !password)
       return error(res, 400, "All fields required");
@@ -50,7 +52,9 @@ export const register = async (req, res) => {
 /* ================= LOGIN ================= */
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+
+    if (email) email = email.toLowerCase();
 
     if (!email || !password)
       return error(res, 400, "Email & password required");
