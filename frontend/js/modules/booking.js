@@ -608,6 +608,10 @@ class BookingManager {
 
                 // Reset form
                 form.reset();
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i><span>Confirm Booking</span>';
+                }
                 localStorage.removeItem(this.DRAFT_KEY);
 
                 this.currentStep = 1;

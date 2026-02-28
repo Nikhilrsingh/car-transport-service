@@ -174,6 +174,11 @@ function handleLogin(event) {
     // Save remember me preference
     saveRememberMe(email, rememberMe);
 
+    const submitBtn = event.target.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Logging in...</span>';
+
     // Simulate authentication (replace with actual API call)
     showNotification('Logging in...', 'info');
 
@@ -190,6 +195,11 @@ function handleLogin(event) {
         sessionStorage.setItem('currentUser', JSON.stringify(mockUser));
 
         showNotification('Login successful! Redirecting...', 'success');
+
+        // Reset form and button
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
 
         // Redirect to dashboard or home page
         setTimeout(() => {
@@ -248,6 +258,11 @@ function handleSignup(event) {
     }
 
     // Simulate signup (replace with actual API call)
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Creating Account...</span>';
+
     showNotification('Creating account...', 'info');
 
     // TODO: Replace with actual signup API call
@@ -262,6 +277,11 @@ function handleSignup(event) {
 
         // Mock email verification
         showNotification('Account created! Please check your email for verification.', 'success');
+
+        // Reset form and button
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
 
         // Switch to login tab after successful signup
         setTimeout(() => {

@@ -615,6 +615,10 @@
       // Reset form
       form.reset();
 
+      // Clear validation states
+      form.querySelectorAll('.success, .error').forEach(el => el.classList.remove('success', 'error'));
+      form.querySelectorAll('.success-icon, .error-icon').forEach(el => el.remove());
+
       // Reset button
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
