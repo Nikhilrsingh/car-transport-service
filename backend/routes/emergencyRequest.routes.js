@@ -9,12 +9,13 @@ import {
   getEmergencyStats,
   deleteEmergencyRequest,
 } from "../controllers/emergencyRequest.controller.js";
+import { rateLimiter } from "../middleware/rate-limiter.js";
 
 const router = express.Router();
 
 
 // Submit emergency request
-router.post("/", createEmergencyRequest);
+router.post("/", rateLimiter(60000, 3), createEmergencyRequest);
 
 // Track emergency using reference number
 router.get("/track/:reference", getEmergencyRequestByReference);
