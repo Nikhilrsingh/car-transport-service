@@ -36,6 +36,7 @@
     const fabMain = document.getElementById('fabMain');
     const fabActions = document.getElementById('fabActions');
     const fabContainer = document.querySelector('.fab-container');
+    const fabInstallBtn = document.getElementById('fabInstallBtn');
     const fabQuoteBtn = document.getElementById('fabQuoteBtn');
     const fabBookBtn = document.getElementById('fabBookBtn');
     const fabChatBtn = document.getElementById('fabChatBtn');
@@ -97,6 +98,13 @@
     });
 
     // Action button handlers
+    if (fabInstallBtn) {
+      fabInstallBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        handleInstallClick();
+      });
+    }
+
     if (fabQuoteBtn) {
       fabQuoteBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -166,6 +174,21 @@
         // If we are on booking.html or any other page, redirect to home with hash
         window.location.href = '../index.html#quote';
       }
+    }
+
+    function handleInstallClick() {
+      console.log('Install App button clicked');
+      closeFAB();
+
+      setTimeout(() => {
+        // Show the PWA install prompt
+        if (window.showPWAPrompt) {
+          window.showPWAPrompt();
+        } else {
+          console.log('showPWAPrompt not available yet');
+          alert('App installation is not available on this device or browser.');
+        }
+      }, 100);
     }
 
     function handleBookClick() {

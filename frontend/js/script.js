@@ -615,6 +615,16 @@ document.addEventListener("DOMContentLoaded", () => {
 let deferredPrompt;
 let pwaHideTimeout;
 
+// Create PWA prompt early so it's ready when user clicks install button
+if ('serviceWorker' in navigator) {
+  // Create the prompt structure early
+  setTimeout(() => {
+    if (!document.getElementById('custom-pwa-prompt')) {
+      createPWAFloatingBanner();
+    }
+  }, 2000);
+}
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     let swPath = 'service-worker.js';
@@ -816,6 +826,64 @@ function createPWAFloatingBanner() {
       color: #fff;
       background: #2a2d3d;
     }
+
+    /* ========== LIGHT THEME SUPPORT ========== */
+    body[data-theme="light"] .custom-pwa-prompt {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: #333;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    body[data-theme="light"] .custom-pwa-prompt.minimized {
+      background: #ff6347;
+      border: 3px solid rgba(255, 99, 71, 0.2);
+      box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
+    }
+    body[data-theme="light"] .custom-pwa-prompt.minimized:hover {
+      background: #ff4500;
+    }
+    body[data-theme="light"] .pwa-app-icon {
+      background: #f5f5f5;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    body[data-theme="light"] .pwa-titles h3 {
+      color: #1a1a1a;
+    }
+    body[data-theme="light"] .pwa-titles p {
+      color: #666;
+    }
+    body[data-theme="light"] .pwa-close-btn {
+      color: #999;
+    }
+    body[data-theme="light"] .pwa-close-btn:hover {
+      color: #333;
+    }
+    body[data-theme="light"] .pwa-desc {
+      color: #555;
+    }
+    body[data-theme="light"] .pwa-badge {
+      background: #f9f9f9;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: #333;
+    }
+    body[data-theme="light"] .pwa-install-action-btn {
+      background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%);
+      color: #fff;
+    }
+    body[data-theme="light"] .pwa-install-action-btn:hover {
+      background: linear-gradient(135deg, #ff4500 0%, #ff2800 100%);
+    }
+    body[data-theme="light"] .pwa-not-now-action-btn {
+      background: transparent;
+      color: #666;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    body[data-theme="light"] .pwa-not-now-action-btn:hover {
+      color: #333;
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+
     @media (max-width: 480px) {
       .custom-pwa-prompt {
         right: 16px;
@@ -907,8 +975,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   if (isStandalone) return;
 
+  // Create the PWA prompt but don't auto-show it
+  // User can trigger it via the FAB Install button
   createPWAFloatingBanner();
 
+  // Auto-show disabled - prompt will be triggered from FAB menu
+  /*
   const promptEl = document.getElementById('custom-pwa-prompt');
   if (promptEl) {
     setTimeout(() => {
@@ -921,6 +993,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
       }, 5000);
     }, 500);
   }
+  */
 });
 
 function installPWA() {
@@ -970,6 +1043,40 @@ window.hidePWAPrompt = function () {
   if (promptEl) {
     promptEl.classList.remove('show');
     promptEl.classList.remove('minimized');
+  }
+};
+
+window.showPWAPrompt = function () {
+  // Function to trigger PWA prompt from FAB button
+  console.log('showPWAPrompt called');
+
+  // Check if prompt element exists
+  let promptEl = document.getElementById('custom-pwa-prompt');
+
+  if (!promptEl) {
+    // Create the prompt if it doesn't exist
+    console.log('Creating PWA prompt');
+    createPWAFloatingBanner();
+    promptEl = document.getElementById('custom-pwa-prompt');
+  }
+
+  if (promptEl) {
+    // Show the prompt
+    console.log('Showing PWA prompt');
+    promptEl.classList.add('show');
+    promptEl.classList.remove('minimized');
+
+    // Set auto-minimize after 8 seconds
+    if (pwaHideTimeout) clearTimeout(pwaHideTimeout);
+    pwaHideTimeout = setTimeout(minimizePWAPrompt, 8000);
+  } else {
+    console.log('PWA prompt element not available');
+    // Fallback: try direct install if deferredPrompt is available
+    if (deferredPrompt) {
+      installPWA();
+    } else {
+      alert('App installation is not available on this device or browser.');
+    }
   }
 };
 
