@@ -1,5 +1,6 @@
 import express from "express";
 import upload from "../middleware/upload.js";
+import { rateLimiter } from "../middleware/rate-limiter.js";
 import {
   submitContact,
   getAllContacts,
@@ -14,6 +15,7 @@ const router = express.Router();
 
 router.post(
   "/",
+  rateLimiter(60000, 3),
   upload.array("images", 5), // field name = images
   submitContact
 );
