@@ -631,6 +631,17 @@ if ('serviceWorker' in navigator) {
         console.log('ServiceWorker registration failed:', error);
       });
   });
+
+  // Check if already installed
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+    console.log('App is already installed/running in standalone mode');
+  }
+
+  // Handle appinstalled event
+  window.addEventListener('appinstalled', (evt) => {
+    console.log('PWA was installed');
+    hidePWAPrompt();
+  });
 }
 
 function createPWAFloatingBanner() {
@@ -640,7 +651,7 @@ function createPWAFloatingBanner() {
   style.textContent = `
     .custom-pwa-prompt {
       position: fixed;
-      bottom: 24px;
+      bottom: 110px;
       right: 24px;
       width: 380px;
       max-width: calc(100% - 48px);
@@ -654,13 +665,48 @@ function createPWAFloatingBanner() {
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       transform: translateY(150%);
       opacity: 0;
-      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
       pointer-events: none;
+      overflow: hidden;
     }
     .custom-pwa-prompt.show {
       transform: translateY(0);
       opacity: 1;
       pointer-events: auto;
+    }
+    .custom-pwa-prompt.minimized {
+      width: 60px;
+      height: 60px;
+      padding: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #7a5af8;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 25px rgba(122, 90, 248, 0.4);
+    }
+    .custom-pwa-prompt.minimized:hover {
+      transform: scale(1.1);
+      background: #6246d8;
+    }
+    .pwa-mini-icon {
+      display: none;
+      font-size: 24px;
+      color: #fff;
+      animation: pwa-bounce 2s infinite;
+    }
+    .custom-pwa-prompt.minimized .pwa-mini-icon {
+      display: block;
+    }
+    .custom-pwa-prompt.minimized .pwa-content-wrapper {
+      display: none;
+    }
+    @keyframes pwa-bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-6px);}
+      60% {transform: translateY(-3px);}
     }
     .pwa-header-top {
       display: flex;
@@ -775,7 +821,13 @@ function createPWAFloatingBanner() {
         right: 16px;
         left: 16px;
         width: auto;
-        bottom: 16px;
+        bottom: 100px;
+      }
+      .custom-pwa-prompt.minimized {
+        width: 56px;
+        height: 56px;
+        left: auto;
+        right: 16px;
       }
     }
   `;
@@ -790,29 +842,34 @@ function createPWAFloatingBanner() {
   prompt.id = 'custom-pwa-prompt';
   prompt.className = 'custom-pwa-prompt';
   prompt.innerHTML = `
-    <div class="pwa-header-top">
-      <div class="pwa-app-info">
-        <img src="${iconPath}" alt="App Icon" class="pwa-app-icon" onerror="this.src='https://via.placeholder.com/48/1e2133/ffffff?text=HCC'">
-        <div class="pwa-titles">
-          <h3>Install App</h3>
-          <p>Harihar Car Carriers</p>
+    <div class="pwa-mini-icon">
+      <i class="fas fa-download"></i>
+    </div>
+    <div class="pwa-content-wrapper">
+      <div class="pwa-header-top">
+        <div class="pwa-app-info">
+          <img src="${iconPath}" alt="App Icon" class="pwa-app-icon" onerror="this.src='https://via.placeholder.com/48/1e2133/ffffff?text=HCC'">
+          <div class="pwa-titles">
+            <h3>Install App</h3>
+            <p>Harihar Car Carriers</p>
+          </div>
         </div>
+        <button class="pwa-close-btn" aria-label="Close" onclick="event.stopPropagation(); dismissPWAPrompt()">&times;</button>
       </div>
-      <button class="pwa-close-btn" aria-label="Close" onclick="dismissPWAPrompt()">&times;</button>
-    </div>
-    <div class="pwa-desc">
-      Get instant access with offline support, push notifications, and a native app experience.
-    </div>
-    <div class="pwa-badges">
-      <span class="pwa-badge"><i class="fas fa-bolt"></i> Instant Load</span>
-      <span class="pwa-badge"><i class="fas fa-mobile-alt"></i> Works Offline</span>
-      <span class="pwa-badge"><i class="fas fa-bell"></i> Notifications</span>
-    </div>
-    <div class="pwa-actions">
-      <button class="pwa-install-action-btn" onclick="installPWA()">
-        <i class="fas fa-download"></i> Install App
-      </button>
-      <button class="pwa-not-now-action-btn" onclick="dismissPWAPrompt()">Not now</button>
+      <div class="pwa-desc">
+        Get instant access with offline support, push notifications, and a native app experience.
+      </div>
+      <div class="pwa-badges">
+        <span class="pwa-badge"><i class="fas fa-bolt"></i> Instant Load</span>
+        <span class="pwa-badge"><i class="fas fa-mobile-alt"></i> Works Offline</span>
+        <span class="pwa-badge"><i class="fas fa-bell"></i> Notifications</span>
+      </div>
+      <div class="pwa-actions">
+        <button class="pwa-install-action-btn" onclick="installPWA()">
+          <i class="fas fa-download"></i> Install App
+        </button>
+        <button class="pwa-not-now-action-btn" onclick="event.stopPropagation(); dismissPWAPrompt()">Not now</button>
+      </div>
     </div>
   `;
 
@@ -821,7 +878,19 @@ function createPWAFloatingBanner() {
     if (pwaHideTimeout) clearTimeout(pwaHideTimeout);
   });
   prompt.addEventListener('mouseleave', () => {
-    pwaHideTimeout = setTimeout(dismissPWAPrompt, 5000);
+    if (!prompt.classList.contains('minimized')) {
+      pwaHideTimeout = setTimeout(minimizePWAPrompt, 5000);
+    }
+  });
+
+  // Restore on click if minimized
+  prompt.addEventListener('click', (e) => {
+    // Ignore clicks on buttons to prevent immediate re-opening when clicking 'Not now' or 'X'
+    if (e.target.closest('button')) return;
+
+    if (prompt.classList.contains('minimized')) {
+      restorePWAPrompt();
+    }
   });
 
   document.body.appendChild(prompt);
@@ -834,6 +903,10 @@ window.addEventListener('beforeinstallprompt', (e) => {
   // Stash the event so it can be triggered later.
   deferredPrompt = e;
 
+  // Prevent showing if already installed/standalone
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if (isStandalone) return;
+
   createPWAFloatingBanner();
 
   const promptEl = document.getElementById('custom-pwa-prompt');
@@ -844,7 +917,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
       // Auto disappearing feature after 5 sec
       if (pwaHideTimeout) clearTimeout(pwaHideTimeout);
       pwaHideTimeout = setTimeout(() => {
-        dismissPWAPrompt();
+        minimizePWAPrompt();
       }, 5000);
     }, 500);
   }
@@ -860,7 +933,7 @@ function installPWA() {
   deferredPrompt.userChoice.then((choiceResult) => {
     if (choiceResult.outcome === 'accepted') {
       console.log('User accepted the install prompt');
-      dismissPWAPrompt();
+      hidePWAPrompt();
     } else {
       console.log('User dismissed the install prompt');
     }
@@ -869,10 +942,34 @@ function installPWA() {
   });
 }
 
+window.minimizePWAPrompt = function () {
+  const promptEl = document.getElementById('custom-pwa-prompt');
+  if (promptEl && promptEl.classList.contains('show')) {
+    promptEl.classList.add('minimized');
+  }
+};
+
+window.restorePWAPrompt = function () {
+  const promptEl = document.getElementById('custom-pwa-prompt');
+  if (promptEl) {
+    promptEl.classList.remove('minimized');
+    // Set auto-minimize again after 5 seconds as requested
+    if (pwaHideTimeout) clearTimeout(pwaHideTimeout);
+    pwaHideTimeout = setTimeout(minimizePWAPrompt, 5000);
+  }
+};
+
 window.dismissPWAPrompt = function () {
+  if (pwaHideTimeout) clearTimeout(pwaHideTimeout);
+  minimizePWAPrompt();
+};
+
+window.hidePWAPrompt = function () {
+  // Actually hide it (e.g. after successful installation)
   const promptEl = document.getElementById('custom-pwa-prompt');
   if (promptEl) {
     promptEl.classList.remove('show');
+    promptEl.classList.remove('minimized');
   }
 };
 
