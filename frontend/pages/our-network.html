@@ -50,6 +50,44 @@
         .office-card {
             will-change: auto;
         }
+
+        /* Hide cards initially */
+        .office-card.hidden {
+            display: none;
+        }
+
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .load-more-btn {
+            background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%);
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
+        }
+
+        .load-more-btn:active {
+            transform: translateY(0);
+        }
+
+        .load-more-btn.hidden {
+            display: none;
+        }
     </style>
 
 </head>
@@ -135,6 +173,13 @@
             <div class="offices-grid" id="dynamic-offices-grid" style="display: none;">
 
             </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-container" id="load-more-container" style="display: none;">
+                <button class="load-more-btn" id="load-more-btn" onclick="loadMoreOffices()">
+                    <i class="fas fa-chevron-down"></i> Load More Offices
+                </button>
+            </div>
         </div>
     </section>
 
@@ -194,6 +239,7 @@
         async function generateDynamicOfficeCards() {
             const loadingEl = document.getElementById('offices-loading');
             const gridEl = document.getElementById('dynamic-offices-grid');
+            const loadMoreContainer = document.getElementById('load-more-container');
             
             try {
                 const response = await fetch('../assets/data/cities.json');
@@ -223,8 +269,11 @@
                     const phoneBase = '98765 4' + String(3210 + (index % 100)).padStart(4, '0');
                     const animationDelay = (index % 6) + 1;
 
+                    // Add 'hidden' class to cards after the first 6
+                    const hiddenClass = index >= 6 ? ' hidden' : '';
+
                     return `
-                        <div class="office-card fade-in fade-in-delay-${animationDelay}" data-city-slug="${city.slug}">
+                        <div class="office-card${hiddenClass} fade-in fade-in-delay-${animationDelay}" data-city-slug="${city.slug}">
                             <div class="office-header">
                                 <div class="office-icon">
                                     <img class="office-city-img" 
@@ -266,12 +315,17 @@
                 loadingEl.style.display = 'none';
                 gridEl.style.display = 'grid';
 
+                // Show Load More button if there are more than 6 offices
+                if (citiesData.length > 6) {
+                    loadMoreContainer.style.display = 'block';
+                }
+
                 // Trigger scroll animations
                 if (typeof observeElements === 'function') {
                     observeElements();
                 }
 
-                console.log(`✅ Successfully generated ${citiesData.length} office cards from cities.json`);
+                console.log(`✅ Successfully generated ${citiesData.length} office cards (showing first 6)`);
                 
                 // Initialize search functionality after cards are loaded
                 // (handled by region-search.js for the region section)
@@ -282,6 +336,27 @@
                     <p style="margin-top: 20px; color: #ff6b35;">Failed to load offices. Please refresh the page.</p>
                 `;
             }
+        }
+
+        // Load More Offices Function
+        function loadMoreOffices() {
+            const hiddenCards = document.querySelectorAll('.office-card.hidden');
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            
+            // Show all hidden cards
+            hiddenCards.forEach(card => {
+                card.classList.remove('hidden');
+            });
+
+            // Hide the Load More button
+            loadMoreBtn.classList.add('hidden');
+
+            // Trigger scroll animations for newly revealed cards
+            if (typeof observeElements === 'function') {
+                observeElements();
+            }
+
+            console.log(`✅ Loaded ${hiddenCards.length} more offices`);
         }
 
         // Image error handler with fallback logic (same as city.html)
