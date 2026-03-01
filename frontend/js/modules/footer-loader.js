@@ -217,11 +217,6 @@
   function getFooterHTML() {
     return `<footer class="footer" aria-label="Site footer">
   <div class="footer-accent" aria-hidden="true"></div>
-  <button class="footer-toggle" aria-expanded="true" aria-controls="footer-main">
-    <span class="toggle-label">Footer Settings</span>
-    <i class="fas fa-chevron-down"></i>
-  </button>
-
   <div id="footer-main" class="container">
     <div class="footer-content footer-grid">
 
