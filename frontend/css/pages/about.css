@@ -106,115 +106,11 @@ body {
 }
 
 
-/* About Section */
-.about {
-  padding: 100px 0;
-}
 
-
-
-.section-title {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-divider {
-  width: 100%;
-  height: 2px;
-  background-color: #444;
-  margin: 50px 0;
-}
-
-
-.section-title h2 {
-  font-size: 3.5rem;
-  margin-bottom: 25px;
-  text-shadow: 0 5x 15px rgba(0, 0, 0, 0.4);
-  color: #fff;
-  transition: all 0.3s ease-in-out;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.section-title p {
-  color: #ccc;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-  line-height: 1.8;
-  /* increased from default line-height */
-  margin-bottom: 18px;
-}
-
-.about-content {
-  color: coral;
-  display: flex;
-  align-items: center;
-  gap: 50px;
-}
-
-.about-text {
-  flex: 1;
-}
-
-.about-text h3 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #ff6347;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.about-text p {
-  margin-bottom: 20px;
-  color: rgb(233, 79, 22);
-}
-
-.about-image {
-  flex: 1;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: inset 1px 1px 20px 30px rgba(0, 0, 0, 0.3);
-  /* box-shadow: 0 15px 30px 10px rgba(0, 0, 0, 0.3); */
-  background: radial-gradient(rgba(255, 255, 255, 0.512), rgba(246, 246, 81, 0.216), rgb(15, 15, 15));
-  transition: all 0.4s ease;
-
-}
-
-.about-image:hover {
-
-  transform: scale(1.05);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-.about-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.about {
-  background: linear-gradient(to bottom, #2b2b2b, #242424);
-}
-
-.about-text p {
-  color: var(--text-soft);
-  font-size: 1.05rem;
-  line-height: 1.9;
-}
-
-.about-text h3 {
-  color: var(--accent);
-  text-shadow: 0 0 15px rgba(255, 99, 71, 0.3);
-}
-
-.about-image {
-  border-radius: 50%;
-  backdrop-filter: blur(6px);
-  border: 2px solid rgba(255, 99, 71, 0.2);
-}
-
-.about-image img {
-  filter: brightness(1.05) contrast(1.05);
+/* About Elite Overrides - Clean Registry */
+.about-elite {
+  position: relative;
+  z-index: 10;
 }
 
 .about-team-flip-card {

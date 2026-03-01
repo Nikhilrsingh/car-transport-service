@@ -30,16 +30,16 @@ class AboutPageAnimations {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed', 'animate');
-          
+
           // Handle specific animations
           if (entry.target.classList.contains('stat-circle-item')) {
             this.animateStatCircle(entry.target);
           }
-          
+
           if (entry.target.classList.contains('infographic-item')) {
             this.animateInfographic(entry.target);
           }
-          
+
           if (entry.target.classList.contains('timeline-item')) {
             this.animateTimelineItem(entry.target);
           }
@@ -70,7 +70,7 @@ class AboutPageAnimations {
    */
   setupFlipCards() {
     const flipCards = document.querySelectorAll('.about-team-flip-card');
-    
+
     flipCards.forEach((card, index) => {
       // Animate skill bars on card hover or when in viewport
       card.addEventListener('mouseenter', () => {
@@ -99,14 +99,14 @@ class AboutPageAnimations {
    */
   animateSkillBars(card) {
     if (card.classList.contains('skills-animated')) return;
-    
+
     const skillBars = card.querySelectorAll('.about-skill-progress-bar');
     skillBars.forEach((bar, index) => {
       setTimeout(() => {
         bar.style.width = bar.getAttribute('data-skill-level') + '%';
       }, index * 100);
     });
-    
+
     card.classList.add('skills-animated');
   }
 
@@ -115,19 +115,19 @@ class AboutPageAnimations {
    */
   setupStatsCounter() {
     const statItems = document.querySelectorAll('.stat-circle-item');
-    
+
     statItems.forEach(item => {
       const targetElement = item.querySelector('.stat-number');
       const target = parseInt(targetElement.getAttribute('data-target'));
       const suffix = targetElement.getAttribute('data-suffix') || '';
       const prefix = targetElement.getAttribute('data-prefix') || '';
-      
+
       // Calculate circle progress
       const maxValue = parseInt(targetElement.getAttribute('data-max')) || 100;
       const percentage = (target / maxValue) * 100;
       const circumference = 565.48;
       const offset = circumference - (percentage / 100) * circumference;
-      
+
       item.style.setProperty('--progress-offset', offset);
     });
   }
@@ -144,7 +144,7 @@ class AboutPageAnimations {
     const steps = 60;
     const stepValue = target / steps;
     const stepDuration = duration / steps;
-    
+
     let current = 0;
     const counter = setInterval(() => {
       current += stepValue;
@@ -161,7 +161,7 @@ class AboutPageAnimations {
    */
   setupTimelineAnimations() {
     const timelineItems = document.querySelectorAll('.timeline-item');
-    
+
     timelineItems.forEach((item, index) => {
       item.style.transitionDelay = `${index * 0.2}s`;
     });
@@ -183,17 +183,17 @@ class AboutPageAnimations {
    */
   setupValueCards() {
     const valueCards = document.querySelectorAll('.value-card');
-    
+
     valueCards.forEach(card => {
       const icon = card.querySelector('.value-icon-morph');
-      
+
       if (icon) {
         // Add hover effect with rotation variations
         card.addEventListener('mouseenter', () => {
           const randomRotation = Math.random() * 360;
           icon.style.transform = `rotate(${randomRotation}deg)`;
         });
-        
+
         card.addEventListener('mouseleave', () => {
           icon.style.transform = 'rotate(0deg)';
         });
@@ -206,7 +206,7 @@ class AboutPageAnimations {
    */
   setupInfographics() {
     const infographicItems = document.querySelectorAll('.infographic-item');
-    
+
     infographicItems.forEach(item => {
       const bar = item.querySelector('.infographic-bar-fill');
       if (bar) {
@@ -223,7 +223,7 @@ class AboutPageAnimations {
     const bar = item.querySelector('.infographic-bar-fill');
     if (bar) {
       const percentage = bar.getAttribute('data-percentage');
-      
+
       // Animate percentage counter
       const counter = bar.querySelector('.percentage-value');
       if (counter) {
@@ -233,7 +233,7 @@ class AboutPageAnimations {
         const steps = 50;
         const stepValue = target / steps;
         const stepDuration = duration / steps;
-        
+
         const interval = setInterval(() => {
           current += stepValue;
           if (current >= target) {
@@ -296,16 +296,18 @@ const AboutAnimationUtils = {
   /**
    * Add parallax effect to hero section
    */
-  setupParallax() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const parallax = scrolled * 0.5;
-      hero.style.transform = `translateY(${parallax}px)`;
-    });
-  },
+  /*
+    setupParallax() {
+      const hero = document.querySelector('.hero');
+      if (!hero) return;
+  
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.5;
+        hero.style.transform = `translateY(${parallax}px)`;
+      });
+    },
+  */
 
   /**
    * Add confetti effect on milestone hover
@@ -313,7 +315,7 @@ const AboutAnimationUtils = {
   addConfettiEffect(element) {
     const colors = ['#ff6347', '#ff4500', '#fff', '#ffa500'];
     const confettiCount = 20;
-    
+
     for (let i = 0; i < confettiCount; i++) {
       const confetti = document.createElement('div');
       confetti.style.position = 'absolute';
@@ -325,9 +327,9 @@ const AboutAnimationUtils = {
       confetti.style.borderRadius = '50%';
       confetti.style.pointerEvents = 'none';
       confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-      
+
       element.appendChild(confetti);
-      
+
       setTimeout(() => confetti.remove(), 5000);
     }
   }
@@ -337,11 +339,11 @@ const AboutAnimationUtils = {
 document.addEventListener('DOMContentLoaded', () => {
   const aboutPage = new AboutPageAnimations();
   AboutAnimationUtils.addPulseAnimation();
-  
+
   // Add confetti on milestone markers hover
   const milestoneMarkers = document.querySelectorAll('.milestone-marker');
   milestoneMarkers.forEach(marker => {
-    marker.addEventListener('mouseenter', function() {
+    marker.addEventListener('mouseenter', function () {
       AboutAnimationUtils.addConfettiEffect(this.parentElement);
     });
   });
@@ -356,8 +358,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let percentage = bar.dataset.percentage || 0;
     percentage = Math.min(100, Math.max(0, percentage));
 
-    bar.style.setProperty("--bar-width", percentage+"%");
-    label.textContent = percentage+"%";
+    bar.style.setProperty("--bar-width", percentage + "%");
+    label.textContent = percentage + "%";
   });
 });
 
