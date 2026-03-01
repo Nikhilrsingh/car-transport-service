@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.model.js";
-import { generateToken } from "../utils/jwt.js";
+import { generateToken, generateRefreshToken } from "../utils/jwt.js";
+import jwt from "jsonwebtoken";
 import { success, error } from "../utils/response.js";
 import {
   isEmailValid,
@@ -51,6 +52,7 @@ export const register = async (req, res) => {
 
     success(res, 201, "User registered", {
       token: generateToken(user._id),
+      refreshToken: generateRefreshToken(user._id),
       user: { id: user._id, email: user.email },
     });
   } catch (err) {
@@ -78,6 +80,7 @@ export const login = async (req, res) => {
 
     success(res, 200, "Login successful", {
       token: generateToken(user._id),
+      refreshToken: generateRefreshToken(user._id),
       user: { id: user._id, email: user.email },
     });
   } catch (err) {
@@ -85,6 +88,27 @@ export const login = async (req, res) => {
   }
 };
 
+/* ================= REFRESH TOKEN ================= */
+export const refreshToken = async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      return error(res, 401, "Refresh token required");
+    }
+
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET || "refreshsecret", (err, decoded) => {
+      if (err) {
+        return error(res, 403, "Invalid or expired refresh token");
+      }
+
+      const newToken = generateToken(decoded.id);
+      success(res, 200, "Token refreshed", { token: newToken });
+    });
+  } catch (err) {
+    error(res, 500, err.message);
+  }
+};
 
 /* ================= LOGOUT ================= */
 export const logout = async (req, res) => {
