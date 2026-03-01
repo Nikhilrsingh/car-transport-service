@@ -272,6 +272,9 @@
                 }
 
                 console.log(`✅ Successfully generated ${citiesData.length} office cards from cities.json`);
+                
+                // Initialize search functionality after cards are loaded
+                // (handled by region-search.js for the region section)
             } catch (error) {
                 console.error('Failed to generate office cards:', error);
                 loadingEl.innerHTML = `
@@ -337,6 +340,9 @@
     <!-- Map Modules -->
     <script src="../js/modules/region-loader.js"></script>
     <script src="../js/modules/region-map.js"></script>
+    <script src="../js/modules/region-search.js?v=3"></script>
+    <script src="../js/modules/region-enhancements.js"></script>
+    <script src="../js/modules/region-pagination.js"></script>
     <script src="../js/script.js"></script>
 
 
