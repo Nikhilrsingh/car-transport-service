@@ -594,10 +594,25 @@
     }
 
     // Mobile FAB action handlers
+    const mobileFabInstall = document.getElementById("mobileFabInstall");
     const mobileFabQuote = document.getElementById("mobileFabQuote");
     const mobileFabBook = document.getElementById("mobileFabBook");
     const mobileFabFeedback = document.getElementById("mobileFabFeedback");
     const mobileFabChat = document.getElementById("mobileFabChat");
+
+    if (mobileFabInstall) {
+      mobileFabInstall.addEventListener("click", function () {
+        closeMobileFAB();
+        setTimeout(() => {
+          // Show the PWA install prompt
+          if (window.showPWAPrompt) {
+            window.showPWAPrompt();
+          } else {
+            alert('App installation is not available on this device or browser.');
+          }
+        }, 100);
+      });
+    }
 
     if (mobileFabQuote) {
       mobileFabQuote.addEventListener("click", function () {
@@ -696,33 +711,33 @@
       obs.observe(footer);
     } catch (_) { }
 
-  const footerMain = document.getElementById("footer-main");
-const footerBottom = document.querySelector(".footer-bottom");
+    const footerMain = document.getElementById("footer-main");
+    const footerBottom = document.querySelector(".footer-bottom");
 
-function handleFooterResponsiveUI() {
-  if (!footerMain) return;
+    function handleFooterResponsiveUI() {
+      if (!footerMain) return;
 
-  const isSmallScreen = window.innerWidth <= 768;
+      const isSmallScreen = window.innerWidth <= 768;
 
-  if (isSmallScreen) {
-  
-    footerMain.style.display = "none";
-  } else {
-    
-    footerMain.style.display = "block";
-    footerMain.style.maxHeight = "none";
-    footerMain.style.opacity = "1";
-  }
+      if (isSmallScreen) {
 
-  
-  if (footerBottom) {
-  footerBottom.style.display = "block"; 
-  }
-}
+        footerMain.style.display = "none";
+      } else {
+
+        footerMain.style.display = "block";
+        footerMain.style.maxHeight = "none";
+        footerMain.style.opacity = "1";
+      }
 
 
-handleFooterResponsiveUI();
-window.addEventListener("resize", handleFooterResponsiveUI);    
+      if (footerBottom) {
+        footerBottom.style.display = "block";
+      }
+    }
+
+
+    handleFooterResponsiveUI();
+    window.addEventListener("resize", handleFooterResponsiveUI);
 
     // Newsletter subscribe micro-toast
     const form = footer.querySelector("#footerNewsletter");

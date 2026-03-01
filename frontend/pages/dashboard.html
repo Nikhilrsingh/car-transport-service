@@ -7,6 +7,11 @@
     <title>My Dashboard - Harihar Car Carriers</title>
     <base href="./" />
     <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
+    
+    <!-- Theme System -->
+    <link rel="stylesheet" href="../css/components/preloader-meta.css">
+    <script src="../js/modules/preloader-meta.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/components/navbar.css">
     <link rel="stylesheet" href="../css/components/middle-navbar.css">
@@ -1009,6 +1014,7 @@
     <script src="../js/modules/page-navigation-loader.js"></script>
     <script src="../js/modules/navbar-loader.js?v=2"></script>
     <script src="../js/modules/footer-loader.js"></script>
+    <script src="../js/modules/themes.js"></script>
     <script src="../js/script.js"></script>
 
     <!-- Review System -->
@@ -1499,22 +1505,20 @@
             const darkModeToggle = document.getElementById('darkModeToggle');
             if (darkModeToggle) {
                 // Sync toggle state with current theme on load
-                const currentTheme = localStorage.getItem('theme') || 'light';
+                const currentTheme = localStorage.getItem('theme') || 'dark';
                 darkModeToggle.classList.toggle('active', currentTheme === 'dark');
 
                 darkModeToggle.addEventListener('click', () => {
                     darkModeToggle.classList.toggle('active');
                     const newTheme = darkModeToggle.classList.contains('active') ? 'dark' : 'light';
 
-                    // Trigger the global themes.js applyTheme logic if available
-                    // or manually toggle the body attribute
-                    document.body.setAttribute('data-theme', newTheme);
-                    localStorage.setItem('theme', newTheme);
-
-                    // Update the CSS link manually if themes.js isn't catching it
-                    const themeLink = document.getElementById('theme-style');
-                    if (themeLink) {
-                        themeLink.href = newTheme === 'dark' ? '../css/dark-mode.css' : '../css/light-mode.css';
+                    // Use the global theme system
+                    if (typeof applyTheme === 'function') {
+                        applyTheme(newTheme);
+                    } else {
+                        // Fallback if themes.js not loaded
+                        document.body.setAttribute('data-theme', newTheme);
+                        localStorage.setItem('theme', newTheme);
                     }
 
                     showToast(`Switched to ${newTheme} mode`, 'success');

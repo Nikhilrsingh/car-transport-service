@@ -517,3 +517,29 @@
     justify-content: space-between;
   }
 }
+
+
+.review-card {
+    background: var(--card-bg, #ffffff);
+    color: var(--text-main, #333333);
+    border: 1px solid var(--border-color, #eeeeee);
+    transition: all 0.3s ease;
+}
+
+
+.neon-theme .review-card,
+.dark-mode .review-card {
+    --card-bg: #1a1a1a;
+    --text-main: #e0e0e0;
+    --border-color: #333333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+.neon-theme .review-card .reviewer-name {
+    color: var(--primary-color, #ff6b35);
+}
+
+.neon-theme .review-card .review-text {
+    color: #bbbbbb;
+}
