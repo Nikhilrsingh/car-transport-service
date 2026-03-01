@@ -242,7 +242,6 @@ body {
   padding: 12px 10px;
   position: fixed;
   top: 120px;
-  /* below upbar + middle navbar */
   left: 0;
   right: 0;
   gap: 30px;
@@ -250,16 +249,18 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-  transition: top 0.3s ease;
+  transition: all 0.3s ease;
   z-index: 1100;
   height: 80px;
   border: none;
   overflow: visible;
 }
 
-/* When scrolled, main navbar moves to top */
+/* Main navbar remains stable */
+/* Main navbar scrolls to top */
 .navbar.scrolled {
   top: 0;
+  border-bottom: 1px solid rgba(255, 99, 71, 0.2);
 }
 
 /* Logo Styles */

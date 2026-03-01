@@ -170,20 +170,17 @@ body[data-theme="dark"] .contact-sub {
 /* ===============================
    Scrolled State
 ================================ */
+/* Stabilize scrolled state - no shrinking */
 .middle-navbar.scrolled {
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
-}
-
-.middle-navbar.scrolled .middle-navbar-logo,
-.middle-navbar.scrolled .middle-navbar-banner {
-  height: 48px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 768px) {
   .middle-navbar {
-    top: 32px; /* Below smaller upbar */
+    top: 32px;
+    /* Below smaller upbar */
   }
-  
+
   .middle-navbar-container {
     flex-wrap: wrap;
     padding: 6px 10px;
@@ -223,16 +220,16 @@ body[data-theme="dark"] .contact-sub {
   .middle-navbar-banner:hover {
     transform: scale(1.15);
   }
-  
+
   /* Contact info mobile */
   .middle-contact-item {
     padding: 0 4px;
   }
-  
+
   .middle-contact-item i {
     font-size: 1.1rem;
   }
-  
+
   .contact-text {
     display: none;
   }
