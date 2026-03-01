@@ -44,7 +44,7 @@ body[data-theme="dark"] .map-controls {
   width: 40px;
   height: 40px;
   border: none;
-  background: linear-gradient(135deg, var(--region-primary, #ff6b35), var(--region-secondary, #ff9b6b));
+  background: linear-gradient(135deg, #ff6347, #ff4500);
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -54,6 +54,7 @@ body[data-theme="dark"] .map-controls {
   transition: all 0.3s ease;
   font-size: 1rem;
   box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .map-control-btn:hover {
@@ -65,12 +66,35 @@ body[data-theme="dark"] .map-controls {
   transform: translateY(0) scale(0.95);
 }
 
+/* Light theme specific styling for better visibility */
+body[data-theme="light"] .map-control-btn {
+  background: linear-gradient(135deg, #ff6347, #ff4500);
+  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.4), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .map-control-btn:hover {
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.6), 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark theme specific styling */
+body[data-theme="dark"] .map-control-btn {
+  background: linear-gradient(135deg, #ff6347, #ff4500);
+  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body[data-theme="dark"] .map-control-btn:hover {
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.5);
+}
+
 .map-layout-container {
   display: flex;
   gap: 20px;
-  align-items: flex-start;
+  align-items: stretch;
   width: 100%;
-  height: 700px;
+  height: 640px !important;
+  min-height: 640px !important;
   padding: 30px;
   border-radius: 24px;
   background: #ffffff;
@@ -94,7 +118,7 @@ body[data-theme="dark"] .map-layout-container {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   background: #f0f0f0;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  height: 600px;
+  height: 100%;
   box-sizing: border-box;
 }
 
@@ -285,6 +309,8 @@ body[data-theme="dark"] .leaflet-container {
   overflow: auto;
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
+  height: 100%;
+  justify-content: flex-start;
 }
 
 body[data-theme="dark"] .map-legend {
@@ -294,6 +320,18 @@ body[data-theme="dark"] .map-legend {
   /* Brighter border to contrast against BG */
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(12px);
+}
+
+body[data-theme="dark"] .legend-item {
+  color: #c0c0c0;
+}
+
+body[data-theme="dark"] .stat-item {
+  color: #c0c0c0;
+}
+
+body[data-theme="dark"] .stat-item strong {
+  color: #ffffff;
 }
 
 .legend-title {

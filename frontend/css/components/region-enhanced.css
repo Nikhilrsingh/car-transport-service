@@ -1687,9 +1687,10 @@ body[data-theme="dark"] .pricing-badge {
 /* Main Layout Container */
 .map-layout-container {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   align-items: stretch;
-  min-height: 450px;
+  min-height: 640px;
+  height: 640px;
 }
 
 /* Map Container */
@@ -1698,15 +1699,15 @@ body[data-theme="dark"] .pricing-badge {
   position: relative;
   border-radius: 15px;
   overflow: hidden;
-  min-height: 450px;
-  height: 450px;
+  min-height: 100%;
+  height: 100%;
   background: #e5e3df;
 }
 
 /* Leaflet Map */
 #leafletMap {
   width: 100%;
-  height: 450px;
+  height: 100%;
   background: #e5e3df;
 }
 
