@@ -1,48 +1,77 @@
 // Region Section Visual Enhancements and Mobile Features
 
-function initRegionEnhancements() {
-  initViewToggle();
-  initCityCounter();
-  initBottomSheet();
-  initMobileSwipe();
-  initStickySearch();
-}
-
 // Grid/List View Toggle
 function initViewToggle() {
   const viewBtns = document.querySelectorAll('.view-btn');
-  const regionGrid = document.getElementById('regionGrid');
+  let regionGrid = document.getElementById('regionGrid');
 
-  if (!viewBtns.length || !regionGrid) return;
+  // If grid doesn't exist yet, wait for region section to load
+  if (!regionGrid) {
+    console.log('Region grid not found, waiting for region section to load...');
+    document.addEventListener('regionSectionLoaded', initViewToggle);
+    return;
+  }
+
+  if (!viewBtns.length) {
+    console.log('View buttons not found');
+    return;
+  }
+
+  console.log('✅ Initializing view toggle with', viewBtns.length, 'buttons');
 
   viewBtns.forEach(btn => {
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Get view type
+      const viewType = this.getAttribute('data-view');
+      console.log('View toggle clicked:', viewType);
+
+      // Refresh grid reference in case it was reloaded
+      regionGrid = document.getElementById('regionGrid');
+      if (!regionGrid) {
+        console.error('Region grid element not found');
+        return;
+      }
+
       // Remove active class from all buttons
       viewBtns.forEach(b => b.classList.remove('active'));
 
       // Add active class to clicked button
       this.classList.add('active');
 
-      // Get view type
-      const viewType = this.getAttribute('data-view');
-
-      // Toggle grid class
+      // Toggle list-view class on grid
       if (viewType === 'list') {
         regionGrid.classList.add('list-view');
+        console.log('✅ Switched to LIST view');
       } else {
         regionGrid.classList.remove('list-view');
+        console.log('✅ Switched to GRID view');
       }
 
-      // Store preference
+      // Store preference in localStorage
       localStorage.setItem('regionViewPreference', viewType);
+
+      // Dispatch event for other modules
+      document.dispatchEvent(new CustomEvent('viewChanged', { detail: { view: viewType } }));
     });
   });
 
-  // Load saved preference
+  // Load saved preference on initial load
   const savedView = localStorage.getItem('regionViewPreference');
   if (savedView === 'list') {
     const listBtn = document.querySelector('.view-btn[data-view="list"]');
-    if (listBtn) listBtn.click();
+    if (listBtn) {
+      console.log('Loading saved preference: list view');
+      setTimeout(() => listBtn.click(), 100);
+    }
+  } else {
+    // Ensure grid view is active by default
+    const gridBtn = document.querySelector('.view-btn[data-view="grid"]');
+    if (gridBtn && !gridBtn.classList.contains('active')) {
+      gridBtn.classList.add('active');
+    }
   }
 }
 
@@ -299,7 +328,16 @@ function initStickySearch() {
 
 // Initialize all enhancements
 function initAllEnhancements() {
-  initRegionEnhancements();
+  console.log('🎨 Initializing region enhancements...');
+
+  // Call all enhancement functions
+  initViewToggle();
+  initCityCounter();
+  initBottomSheet();
+  initMobileSwipe();
+  initStickySearch();
+
+  console.log('✅ All enhancements initialized');
 }
 
 // Initialize on DOM load or when region section is loaded
