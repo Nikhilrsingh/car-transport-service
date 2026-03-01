@@ -67,8 +67,41 @@
           <div style="font-weight: 600; color: var(--text-primary);" id="userName">Admin User</div>
           <div style="font-size: 0.85rem; color: var(--text-muted);" id="userEmail">admin@carcarrier.com</div>
         </div>
-        <div class="user-avatar">
+        <div class="user-avatar" id="userAvatarBtn" style="cursor: pointer; position: relative;">
           <i class="fas fa-user"></i>
+          <!-- User Menu Dropdown -->
+          <div id="userMenu" class="user-menu" style="
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+          ">
+            <div style="padding: 12px 0;">
+              <button onclick="handleLogout()" style="
+                width: 100%;
+                padding: 10px 20px;
+                border: none;
+                background: none;
+                color: var(--text-primary);
+                text-align: left;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-family: inherit;
+                font-size: 0.95rem;
+              " onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='none'">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -178,36 +211,120 @@
 <script src="../js/uiHelper.js"></script>
 <script src="../js/dashboard.js"></script>
 
-  <!-- <script>
-    // Sidebar toggle functionality
-    document.getElementById('menuToggle').addEventListener('click', function() {
-      const sidebar = document.getElementById('sidebar');
-      const mainContent = document.getElementById('mainContent');
-      
-      sidebar.classList.toggle('visible');
-      sidebar.classList.toggle('hidden');
-      mainContent.classList.toggle('expanded');
-    });
-
-    // Load user info from localStorage
-    document.addEventListener('DOMContentLoaded', function() {
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      if (user.name) {
-        document.getElementById('userName').textContent = user.name;
-      }
-      if (user.email) {
-        document.getElementById('userEmail').textContent = user.email;
-      }
-    });
-
-    // Logout function
-    function handleLogout() {
-      if (confirm('Are you sure you want to logout?')) {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('user');
-        window.location.href = 'login.html';
-      }
+<script>
+  // ========== Authentication & Authorization ==========
+  
+  // Check if user is authenticated
+  function checkAuthentication() {
+    const authToken = localStorage.getItem('authToken');
+    const userData = localStorage.getItem('userData');
+    
+    if (!authToken || !userData) {
+      console.warn('[Dashboard] No active session. Redirecting to login...');
+      window.location.href = '../../frontend/pages/login.html';
+      return false;
     }
-  </script> -->
+    return true;
+  }
+  
+  // Load user data from localStorage
+  function loadUserData() {
+    try {
+      const userData = JSON.parse(localStorage.getItem('userData'));
+      if (userData) {
+        document.getElementById('userName').textContent = userData.name || 'User';
+        document.getElementById('userEmail').textContent = userData.email || 'user@example.com';
+      }
+    } catch (e) {
+      console.error('[Dashboard] Error loading user data:', e);
+    }
+  }
+  
+  // Logout handler
+  function handleLogout() {
+    console.log('[Dashboard] Logging out...');
+    
+    // Show confirmation
+    if (!confirm('Are you sure you want to logout?')) {
+      return;
+    }
+    
+    // Show logout overlay
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      font-family: 'Poppins', sans-serif;
+    `;
+    
+    overlay.innerHTML = `
+      <div style="text-align: center; color: white;">
+        <div style="font-size: 3rem; margin-bottom: 20px;">
+          <i class="fas fa-sign-out-alt" style="color: #ff6b6b;"></i>
+        </div>
+        <h2 style="margin: 0 0 10px 0; font-size: 1.5rem;">Logging Out</h2>
+        <p style="margin: 0; opacity: 0.8;">See you next time!</p>
+      </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // Clear authentication data
+    setTimeout(() => {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userData');
+      console.log('[Dashboard] Session cleared');
+      
+      // Redirect to login
+      window.location.href = '../../frontend/pages/login.html';
+    }, 1500);
+  }
+  
+  // Toggle user menu
+  function toggleUserMenu() {
+    const userMenu = document.getElementById('userMenu');
+    if (userMenu.style.display === 'none') {
+      userMenu.style.display = 'block';
+    } else {
+      userMenu.style.display = 'none';
+    }
+  }
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const userAvatarBtn = document.getElementById('userAvatarBtn');
+    const userMenu = document.getElementById('userMenu');
+    
+    if (!userAvatarBtn.contains(e.target)) {
+      userMenu.style.display = 'none';
+    }
+  });
+  
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('[Dashboard] Initializing...');
+    
+    // Check authentication first
+    if (!checkAuthentication()) {
+      return;
+    }
+    
+    // Load user data
+    loadUserData();
+    
+    // Add click handler to user avatar
+    document.getElementById('userAvatarBtn').addEventListener('click', toggleUserMenu);
+    
+    console.log('[Dashboard] ✓ Initialized successfully');
+  });
+</script>
 </body>
 </html>

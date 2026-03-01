@@ -8,6 +8,9 @@
     <meta name="description" content="Login to your Harihar Car Carriers account.">
     <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
 
+    <!-- Route Guard - Smart Redirect for Authenticated Users (Must load first) -->
+    <script src="../js/modules/route-guard.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -494,9 +497,87 @@
             }
         });
 
-        // Mock Handlers
-        function handleLogin(e) { e.preventDefault(); alert('Login functionality coming soon!'); }
-        function handleSignup(e) { e.preventDefault(); alert('Signup functionality coming soon!'); }
+        // Mock Handlers with Auth Token Saving
+        function handleLogin(e) { 
+            e.preventDefault(); 
+            
+            // Get form values
+            const email = document.querySelector('[name="email"]')?.value || 'user@example.com';
+            const password = document.querySelector('[name="password"]')?.value || '';
+            
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Show loading state
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Logging in...';
+            btn.disabled = true;
+            
+            // Simulate API call (remove this when connecting to real backend)
+            setTimeout(() => {
+                // Save auth token and user data to localStorage
+                const mockToken = 'jwt_' + Math.random().toString(36).substr(2, 9);
+                const userData = {
+                    email: email,
+                    name: email.split('@')[0],
+                    role: 'user',
+                    loginTime: new Date().toISOString()
+                };
+                
+                localStorage.setItem('authToken', mockToken);
+                localStorage.setItem('userData', JSON.stringify(userData));
+                
+                console.log('[Login] Authentication successful');
+                console.log('[Login] Redirecting to dashboard...');
+                
+                // Redirect to dashboard
+                window.location.href = '../../admin/html/dashboard.html';
+            }, 1000);
+        }
+        
+        function handleSignup(e) { 
+            e.preventDefault(); 
+            
+            // Get form values
+            const name = document.querySelector('[name="name"]')?.value || document.getElementById('signup-name')?.value || '';
+            const email = document.querySelector('[name="email"]')?.value || document.getElementById('signup-email')?.value || '';
+            const password = document.querySelector('[name="password"]')?.value || document.getElementById('signup-password')?.value || '';
+            
+            if (!name || !email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Show loading state
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Creating Account...';
+            btn.disabled = true;
+            
+            // Simulate API call (remove this when connecting to real backend)
+            setTimeout(() => {
+                // Save auth token and user data to localStorage
+                const mockToken = 'jwt_' + Math.random().toString(36).substr(2, 9);
+                const userData = {
+                    email: email,
+                    name: name,
+                    role: 'user',
+                    loginTime: new Date().toISOString()
+                };
+                
+                localStorage.setItem('authToken', mockToken);
+                localStorage.setItem('userData', JSON.stringify(userData));
+                
+                console.log('[Signup] Account created successfully');
+                console.log('[Signup] Redirecting to dashboard...');
+                
+                // Redirect to dashboard
+                window.location.href = '../../admin/html/dashboard.html';
+            }, 1000);
+        }
     </script>
 </body>
 
