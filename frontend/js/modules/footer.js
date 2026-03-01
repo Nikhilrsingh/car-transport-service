@@ -696,75 +696,33 @@
       obs.observe(footer);
     } catch (_) { }
 
-    // Accordion: allow only one open at a time
-    const headers = footer.querySelectorAll(
-      ".footer-accordion .accordion-header"
-    );
-    headers.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-        headers.forEach((h) => h.setAttribute("aria-expanded", "false"));
-        if (!expanded) {
-          btn.setAttribute("aria-expanded", "true");
-        }
+  const footerMain = document.getElementById("footer-main");
+const footerBottom = document.querySelector(".footer-bottom");
 
-        // If footer is expanded, ensure its max-height is cleared to accommodate dynamic content
-        if (toggleBtn && toggleBtn.getAttribute("aria-expanded") === "true") {
-          if (footerMain) {
-            footerMain.style.maxHeight = "none";
-            footerMain.style.height = "auto";
-            footerMain.style.overflow = "visible";
-          }
-        }
-      });
-    });
+function handleFooterResponsiveUI() {
+  if (!footerMain) return;
 
-    // Footer collapse/expand toggle
-    const footerMain = document.getElementById("footer-main");
-    const toggleBtn = footer.querySelector(".footer-toggle");
+  const isSmallScreen = window.innerWidth <= 768;
 
-    function setCollapsed(collapsed) {
-      if (!footerMain) return;
-      if (collapsed) {
-        if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
-        footerMain.style.overflow = "hidden";
-        footerMain.style.maxHeight = "0px";
-      } else {
-        if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
-        footerMain.style.overflow = "hidden";
-        const h = footerMain.scrollHeight;
-        footerMain.style.maxHeight = h + "px";
-        setTimeout(() => {
-          footerMain.style.overflow = "visible";
-          footerMain.style.maxHeight = "none";
-        }, 350);
-      }
-    }
+  if (isSmallScreen) {
+  
+    footerMain.style.display = "none";
+  } else {
+    
+    footerMain.style.display = "block";
+    footerMain.style.maxHeight = "none";
+    footerMain.style.opacity = "1";
+  }
 
-    if (footerMain) {
-      footerMain.style.transition = "max-height 0.3s ease";
-    }
-    // Start expanded on all screens for better UX and SEO visibility
-    if (footerMain) {
-      footerMain.style.maxHeight = "none";
-      footerMain.style.overflow = "visible";
-      footerMain.style.opacity = "1";
-      footerMain.style.display = "block";
-    }
-    if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
+  
+  if (footerBottom) {
+  footerBottom.style.display = "block"; 
+  }
+}
 
-    if (toggleBtn) {
-      toggleBtn.addEventListener("click", () => {
-        const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
-        setCollapsed(expanded);
 
-        // Update label text based on state
-        const label = toggleBtn.querySelector('.toggle-label');
-        if (label) {
-          label.textContent = expanded ? "Show Footer" : "Hide Footer";
-        }
-      });
-    }
+handleFooterResponsiveUI();
+window.addEventListener("resize", handleFooterResponsiveUI);    
 
     // Newsletter subscribe micro-toast
     const form = footer.querySelector("#footerNewsletter");
