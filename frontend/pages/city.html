@@ -144,48 +144,29 @@
         const response = await fetch('../assets/data/cities.json');
         allCities = await response.json();
 
-        // Start rotation logic immediately as requested (every 2 sec)
-        startCityRotation();
+        // Get city from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const citySlug = urlParams.get('city');
+
+        let cityToDisplay = allCities[0]; // Default to first city
+
+        if (citySlug) {
+          const foundCity = allCities.find(c => c.slug === citySlug);
+          if (foundCity) {
+            cityToDisplay = foundCity;
+          }
+        }
+
+        // Display the city once and stop
+        updateCityPage(cityToDisplay);
       } catch (error) {
         console.error('Initialization error:', error);
         showGeneralError();
       }
     }
 
-    function startCityRotation() {
-      if (rotationInterval) clearInterval(rotationInterval);
-
-      // Update once immediately
-      showNextCity();
-
-      // Rotate EVERY 2 seconds as requested
-      rotationInterval = setInterval(showNextCity, 2000);
-    }
-
-    function showNextCity() {
-      if (!allCities || allCities.length === 0) return;
-
-      const city = allCities[currentRotationIndex];
-      const details = document.querySelector('.city-details');
-      const imgContainer = document.querySelector('.city-image-container');
-
-      // Add fade out
-      details.classList.add('rotating');
-      imgContainer.classList.add('rotating');
-
-      setTimeout(() => {
-        updateCityPage(city);
-
-        // Peek at next city for next tick
-        currentRotationIndex = (currentRotationIndex + 1) % allCities.length;
-
-        // Fade in
-        details.classList.remove('rotating');
-        imgContainer.classList.remove('rotating');
-      }, 400);
-    }
-
     function updateCityPage(data) {
+      if (!data) return;
       document.title = data.name + " | Car Transport Service";
       document.getElementById('cityTitle').textContent = data.name;
       document.getElementById('cityDescription').textContent = data.description;
