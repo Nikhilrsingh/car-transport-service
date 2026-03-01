@@ -494,6 +494,11 @@ section {
   .offices-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -514,6 +519,24 @@ section {
     grid-template-columns: 1fr;
   }
 
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 2rem;
+  }
+
+  .network-stats .stat-item {
+    padding: 30px 20px;
+  }
+
+  .stat-number {
+    font-size: clamp(2.5rem, 8vw, 3rem);
+  }
+
+  .network-stats .stat-label {
+    font-size: 0.9rem;
+  }
+
   .contact-buttons {
     flex-direction: column;
     align-items: stretch;
@@ -522,6 +545,24 @@ section {
   .contact-btn {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .network-stats {
+    padding: 3rem 0;
+  }
+
+  .stats-grid {
+    gap: 15px;
+  }
+
+  .network-stats .stat-item {
+    padding: 25px 15px;
+  }
+
+  .stat-number {
+    font-size: clamp(2rem, 10vw, 2.5rem);
   }
 }
 
