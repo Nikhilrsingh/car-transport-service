@@ -1,13 +1,15 @@
 import express from "express";
-import { register, login, logout, getAllUsers } from "../controllers/auth.controller.js";
+import { register, login, logout, getAllUsers, refreshToken } from "../controllers/auth.controller.js";
 import passport from "passport";
 import { generateToken } from "../utils/jwt.js";
 import protect, { admin } from "../middleware/auth.middleware.js";
+import { rateLimiter } from "../middleware/rate-limiter.js";
 
 const router = express.Router();
 
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", rateLimiter(60000, 5), register);
+router.post("/login", rateLimiter(60000, 5), login);
+router.post("/refresh-token", refreshToken);
 router.post("/logout", logout);
 
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
