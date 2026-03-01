@@ -245,8 +245,9 @@
                 const response = await fetch('../assets/data/cities.json');
                 const citiesData = await response.json();
 
-                // Generate office cards HTML with direct image loading
-                const cardsHTML = citiesData.map((city, index) => {
+                // Generate office cards HTML with direct image loading (limit to 12 cards total)
+                const limitedCitiesData = citiesData.slice(0, 12);
+                const cardsHTML = limitedCitiesData.map((city, index) => {
                     const cityName = city.name.replace('Car Transport in ', '');
                     
                     const regionTaglines = {
@@ -316,7 +317,7 @@
                 gridEl.style.display = 'grid';
 
                 // Show Load More button if there are more than 6 offices
-                if (citiesData.length > 6) {
+                if (limitedCitiesData.length > 6) {
                     loadMoreContainer.style.display = 'block';
                 }
 
@@ -325,7 +326,7 @@
                     observeElements();
                 }
 
-                console.log(`✅ Successfully generated ${citiesData.length} office cards (showing first 6)`);
+                console.log(`✅ Successfully generated ${limitedCitiesData.length} office cards (showing first 6)`);
                 
                 // Initialize search functionality after cards are loaded
                 // (handled by region-search.js for the region section)
