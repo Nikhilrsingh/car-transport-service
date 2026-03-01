@@ -1506,3 +1506,22 @@ body[data-theme="light"] .search-clear:hover {
   font-size: 0.8rem;
   color: var(--muted, #ccc);
 }
+
+
+@media (max-width: 768px) {
+  
+  #footer-main {
+    display: none !important;
+  }
+  
+  
+  .footer-toggle {
+    display: none !important;
+  }
+
+  
+  footer.footer {
+    padding-top: 60px !important;
+    padding-bottom: 80px !important; 
+  }
+}
