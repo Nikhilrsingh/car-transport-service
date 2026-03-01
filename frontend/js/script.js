@@ -816,6 +816,64 @@ function createPWAFloatingBanner() {
       color: #fff;
       background: #2a2d3d;
     }
+
+    /* ========== LIGHT THEME SUPPORT ========== */
+    body[data-theme="light"] .custom-pwa-prompt {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: #333;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    body[data-theme="light"] .custom-pwa-prompt.minimized {
+      background: #ff6347;
+      border: 3px solid rgba(255, 99, 71, 0.2);
+      box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
+    }
+    body[data-theme="light"] .custom-pwa-prompt.minimized:hover {
+      background: #ff4500;
+    }
+    body[data-theme="light"] .pwa-app-icon {
+      background: #f5f5f5;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    body[data-theme="light"] .pwa-titles h3 {
+      color: #1a1a1a;
+    }
+    body[data-theme="light"] .pwa-titles p {
+      color: #666;
+    }
+    body[data-theme="light"] .pwa-close-btn {
+      color: #999;
+    }
+    body[data-theme="light"] .pwa-close-btn:hover {
+      color: #333;
+    }
+    body[data-theme="light"] .pwa-desc {
+      color: #555;
+    }
+    body[data-theme="light"] .pwa-badge {
+      background: #f9f9f9;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: #333;
+    }
+    body[data-theme="light"] .pwa-install-action-btn {
+      background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%);
+      color: #fff;
+    }
+    body[data-theme="light"] .pwa-install-action-btn:hover {
+      background: linear-gradient(135deg, #ff4500 0%, #ff2800 100%);
+    }
+    body[data-theme="light"] .pwa-not-now-action-btn {
+      background: transparent;
+      color: #666;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    body[data-theme="light"] .pwa-not-now-action-btn:hover {
+      color: #333;
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+
     @media (max-width: 480px) {
       .custom-pwa-prompt {
         right: 16px;
