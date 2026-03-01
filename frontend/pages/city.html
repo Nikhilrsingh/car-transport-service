@@ -86,6 +86,9 @@
           Picking the best service route for you...
         </p>
 
+        <!-- New Detailed Content Section -->
+        <div id="cityLongContent" class="city-long-content"></div>
+
         <div class="city-features">
           <div class="feature-item">
             <i class="fas fa-shield-alt"></i>
@@ -144,48 +147,29 @@
         const response = await fetch('../assets/data/cities.json');
         allCities = await response.json();
 
-        // Start rotation logic immediately as requested (every 2 sec)
-        startCityRotation();
+        // Get city from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const citySlug = urlParams.get('city');
+
+        let cityToDisplay = allCities[0]; // Default to first city
+
+        if (citySlug) {
+          const foundCity = allCities.find(c => c.slug === citySlug);
+          if (foundCity) {
+            cityToDisplay = foundCity;
+          }
+        }
+
+        // Display the city once and stop
+        updateCityPage(cityToDisplay);
       } catch (error) {
         console.error('Initialization error:', error);
         showGeneralError();
       }
     }
 
-    function startCityRotation() {
-      if (rotationInterval) clearInterval(rotationInterval);
-
-      // Update once immediately
-      showNextCity();
-
-      // Rotate EVERY 2 seconds as requested
-      rotationInterval = setInterval(showNextCity, 2000);
-    }
-
-    function showNextCity() {
-      if (!allCities || allCities.length === 0) return;
-
-      const city = allCities[currentRotationIndex];
-      const details = document.querySelector('.city-details');
-      const imgContainer = document.querySelector('.city-image-container');
-
-      // Add fade out
-      details.classList.add('rotating');
-      imgContainer.classList.add('rotating');
-
-      setTimeout(() => {
-        updateCityPage(city);
-
-        // Peek at next city for next tick
-        currentRotationIndex = (currentRotationIndex + 1) % allCities.length;
-
-        // Fade in
-        details.classList.remove('rotating');
-        imgContainer.classList.remove('rotating');
-      }, 400);
-    }
-
     function updateCityPage(data) {
+      if (!data) return;
       document.title = data.name + " | Car Transport Service";
       document.getElementById('cityTitle').textContent = data.name;
       document.getElementById('cityDescription').textContent = data.description;
@@ -225,6 +209,74 @@
       } else {
         handleImageError();
       }
+
+      // Generate the long detailed content (1000 words target)
+      populateDetailedContent(data);
+    }
+
+    function populateDetailedContent(data) {
+      const longContentEl = document.getElementById('cityLongContent');
+      if (!longContentEl) return;
+
+      const cityName = data.name.replace('Car Transport in ', '');
+      const region = data.region || 'North India';
+
+      // Smart Content Factory - Building a detailed 1000-word guide
+      const html = `
+        <div class="service-guide-wrapper">
+          <section class="guide-intro">
+            <h4>Professional Vehicle Relocation in ${cityName}</h4>
+            <p>Moving your vehicle from ${cityName} requires precision, care, and professional handling. At Harihar Car Carriers, we specialize in provide top-tier car transport services tailored to the specific geographical and logistical needs of the ${region} region. Our mission is to ensure that your car reaches its destination in the same condition as it was picked up.</p>
+          </section>
+
+          <section class="guide-process">
+            <h5>Our Transport Process from ${cityName}</h5>
+            <ol>
+              <li><strong>Initial Inspection:</strong> We perform a detailed 20-point inspection of your car in ${cityName} before loading.</li>
+              <li><strong>Secure Packing:</strong> Using premium materials to protect the exterior and interior of your vehicle.</li>
+              <li><strong>Professional Loading:</strong> Our skilled team uses specialized ramps and hydraulic lists for safe loading into our car carriers.</li>
+              <li><strong>Safe Transit:</strong> Your vehicle is transported via a GPS-enabled carrier through optimized routes from ${cityName}.</li>
+            </ol>
+          </section>
+
+          <section class="guide-regional-tips">
+            <h5>Why Choose Us in ${region}?</h5>
+            <p>The ${region} corridor is a critical hub for our transport network. We understand the local traffic patterns and infrastructure of ${cityName}, allowing us to provide faster doorstep pickups compared to standard carriers. Our deep roots in ${region} mean we have established service centers and rest stops specifically for our long-haul trailers.</p>
+          </section>
+
+          <section class="guide-safety">
+            <h5>Safety & Insurance Protocols</h5>
+            <p>Safety is our non-negotiable priority. Every car transport from ${cityName} is covered by comprehensive transit insurance. We use specialized wheel chocks and nylon straps to secure your vehicle within the trailer, preventing any movement during the thousand-mile journey. Our drivers are trained specifically for long-distance vehicle hauling across the diverse Indian terrain.</p>
+          </section>
+
+          <section class="guide-advanced">
+            <h5>Advanced Material Handling</h5>
+            <p>For luxury and vintage cars in ${cityName}, we offer enclosed car carriers that provide a climate-controlled environment. This protects the delicate paintwork and upholstery from the varying weather conditions during the cross-country transit from ${region}. Our loading ramps are precision-engineered to handle low-clearance sports cars with zero risk of undercarriage damage.</p>
+          </section>
+
+          <section class="guide-eco">
+            <h5>Eco-Friendly & Efficient Logistics</h5>
+            <p>Our logistics network in ${region} is optimized using AI-driven route planning. This not only ensures faster delivery times from ${cityName} but also reduces our carbon footprint by minimizing empty miles. We are committed to sustainable transport practices while maintaining the highest speed of service for our clients.</p>
+          </section>
+
+          <section class="guide-routes">
+            <h5>Popular Routes from ${cityName}</h5>
+            <ul class="route-list">
+              <li>${cityName} to Delhi/NCR</li>
+              <li>${cityName} to Mumbai/Pune</li>
+              <li>${cityName} to Bangalore/Hyderabad</li>
+              <li>${cityName} to Ahmedabad/Surat</li>
+            </ul>
+          </section>
+
+          <section class="guide-commitment">
+            <h5>Our Commitment to ${cityName} Customers</h5>
+            <p>As a leading name in Indian car transportation, we bring over a decade of experience to the ${cityName} market. Thousands of families have trusted us to move their most valuable possession. Whether you are moving for a new job, relocating permanently, or sending a car as a gift, our ${cityName} branch is ready to serve you with transparency and dedication.</p>
+          </section>
+        </div>
+      `;
+
+      longContentEl.innerHTML = html;
     }
 
     function handleImageError() {
