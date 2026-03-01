@@ -3246,7 +3246,7 @@ html {
 
 .form-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .form-header h3 {
@@ -3283,14 +3283,15 @@ html {
 .input-group input,
 .input-group select {
   width: 100%;
-  padding: 1rem 1rem 1rem 3rem;
+  padding: 12px 15px;
   background: #fff;
   border: 2px solid #ddd;
   border-radius: 10px;
-  color: #000;
+  color: #111;
   font-family: "Poppins", sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
+  height: 50px;
 }
 
 .input-group input:focus,
@@ -3298,7 +3299,6 @@ html {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
-  background: #fff;
 }
 
 .input-group input::placeholder {
