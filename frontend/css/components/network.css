@@ -342,15 +342,26 @@ section {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
   margin-top: 3rem;
 }
 
-.stat-item {
+.network-stats .stat-item {
   text-align: center;
-  padding: 32px 20px;
+  padding: 40px 20px;
   border-radius: 20px;
+  position: relative;
+  opacity: 1 !important;
+  transform: none !important;
+
+  /* Reset region-enhanced.css overrides */
+  grid-column: auto;
+  grid-row: auto;
+  justify-self: auto;
+  display: block;
+  white-space: normal;
+  font-size: inherit;
 
   /* Glassmorphism */
   background: rgba(255, 255, 255, 0.12);
@@ -360,7 +371,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 
-  transition: all 0.35s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 .stat-item:hover {
