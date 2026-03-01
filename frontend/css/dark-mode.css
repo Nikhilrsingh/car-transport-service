@@ -139,6 +139,7 @@ body[data-theme="dark"] .cta-form-box .form-header p {
   color: #ff6b35 !important;
 }
 
+body[data-theme="dark"] .cta-form-box .input-group,
 body[data-theme="dark"] .contact-form-container .input-group {
   display: block !important;
   background: transparent !important;
@@ -153,6 +154,9 @@ body[data-theme="dark"] .cta-form-box .input-group:focus-within i {
   color: #ff6b35 !important;
 }
 
+body[data-theme="dark"] .cta-form-box .input-group input,
+body[data-theme="dark"] .cta-form-box .input-group select,
+body[data-theme="dark"] .cta-form-box .input-group textarea,
 body[data-theme="dark"] .contact-form-container .input-group input,
 body[data-theme="dark"] .contact-form-container .input-group select,
 body[data-theme="dark"] .contact-form-container .input-group textarea {
@@ -162,6 +166,14 @@ body[data-theme="dark"] .contact-form-container .input-group textarea {
   outline: none !important;
   padding: 8px 10px !important;
   width: 100% !important;
+}
+
+body[data-theme="dark"] .cta-form-box .input-group input:focus,
+body[data-theme="dark"] .cta-form-box .input-group select:focus,
+body[data-theme="dark"] .contact-form-container .input-group input:focus {
+  background: #2a2a2a !important;
+  border-color: #ff6b35 !important;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2) !important;
 }
 
 body[data-theme="dark"] .cta-form-box .input-group input::placeholder {
@@ -186,9 +198,10 @@ body[data-theme="dark"] .cta-form-box .input-group select option {
 
 body[data-theme="dark"] .cta-form-box .input-group input:-webkit-autofill,
 body[data-theme="dark"] .cta-form-box .input-group input:-webkit-autofill:hover,
-body[data-theme="dark"] .cta-form-box .input-group input:-webkit-autofill:focus {
+body[data-theme="dark"] .cta-form-box .input-group input:-webkit-autofill:focus,
+body[data-theme="dark"] .contact-form-container .input-group input:-webkit-autofill {
   -webkit-text-fill-color: #ffffff !important;
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px #222 inset !important;
   transition: background-color 5000s ease-in-out 0s !important;
 }
 
