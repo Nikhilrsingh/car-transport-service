@@ -1213,10 +1213,7 @@
             });
         });
 
-        // Auto-expand first FAQ
-        if (faqItems.length > 0) {
-            faqItems[0].classList.add('active');
-        }
+        // All FAQs closed by default - open on click
     }
 
     // Loading Overlay
