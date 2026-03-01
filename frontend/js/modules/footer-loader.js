@@ -334,6 +334,9 @@
 
 <!-- Mobile FAB Actions (shown when mini-fab-trigger is clicked) -->
 <div class="mobile-fab-actions" id="mobileFabActions">
+  <button class="mobile-fab-btn" id="mobileFabInstall" data-tooltip="Install App" aria-label="Install App">
+    <i class="fas fa-download"></i>
+  </button>
   <button class="mobile-fab-btn" id="mobileFabQuote" data-tooltip="Get Quote" aria-label="Get Quote">
     <i class="fas fa-file-invoice-dollar"></i>
   </button>
