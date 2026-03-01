@@ -67,10 +67,10 @@ body[data-theme="dark"] .map-controls {
 
 .map-layout-container {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   align-items: stretch;
   width: 100%;
-  min-height: 500px;
+  min-height: 550px;
   padding: 30px;
   border-radius: 24px;
   background: #ffffff;
@@ -86,13 +86,13 @@ body[data-theme="dark"] .map-layout-container {
 
 /* Map Container */
 .map-container {
-  flex: 2;
+  flex: 3;
   position: relative;
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  min-height: 480px;
-  height: 480px;
+  min-height: 550px;
+  height: 550px;
   background: #f0f0f0;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -281,8 +281,10 @@ body[data-theme="dark"] .leaflet-container {
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  overflow: hidden;
+  overflow: auto;
   border: 1px solid rgba(0, 0, 0, 0.05);
+  height: 100%;
+  min-height: 550px;
 }
 
 body[data-theme="dark"] .map-legend {
