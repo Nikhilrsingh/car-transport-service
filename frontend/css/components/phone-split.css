@@ -1,14 +1,14 @@
-/* 
+/*
    Professional Split Phone UI Component
    Harihar Car Carriers Design System
 */
 
 .phone-input-grid {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 10px;
-    width: 100%;
-    margin-bottom: 20px;
+    display: grid !important;
+    grid-template-columns: 90px 1fr !important;
+    gap: 6px !important;
+    width: 100% !important;
+    margin-top: 2px !important;
 }
 
 .phone-input-grid .input-group,
@@ -18,7 +18,8 @@
 
 .phone-input-grid select,
 .phone-input-grid input {
-    height: 50px !important;
+    height: 52px !important;
+    border-radius: 12px !important;
 }
 
 .phone-input-grid select {
@@ -52,4 +53,19 @@
     .phone-input-grid {
         grid-template-columns: 100px 1fr;
     }
+}
+
+.input-wrapper {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.input-wrapper select,
+.input-wrapper input {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    height: 52px !important;
+    width: 100% !important;
+    text-indent: 0px !important;
 }

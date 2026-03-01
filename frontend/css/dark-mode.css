@@ -139,10 +139,10 @@ body[data-theme="dark"] .cta-form-box .form-header p {
   color: #ff6b35 !important;
 }
 
-body[data-theme="dark"] .cta-form-box .input-group {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 8px !important;
+body[data-theme="dark"] .contact-form-container .input-group {
+  display: block !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 body[data-theme="dark"] .cta-form-box .input-group i {
@@ -153,12 +153,15 @@ body[data-theme="dark"] .cta-form-box .input-group:focus-within i {
   color: #ff6b35 !important;
 }
 
-body[data-theme="dark"] .cta-form-box .input-group input,
-body[data-theme="dark"] .cta-form-box .input-group select {
-  background: transparent !important;
+body[data-theme="dark"] .contact-form-container .input-group input,
+body[data-theme="dark"] .contact-form-container .input-group select,
+body[data-theme="dark"] .contact-form-container .input-group textarea {
+  background: #222 !important;
   color: #ffffff !important;
-  border: none !important;
+  border: 1px solid #444 !important;
   outline: none !important;
+  padding: 8px 10px !important;
+  width: 100% !important;
 }
 
 body[data-theme="dark"] .cta-form-box .input-group input::placeholder {
@@ -1692,33 +1695,33 @@ body[data-theme="dark"] .quote-header {
 
 /* Sitemap Dark Mode Overrides */
 body[data-theme="dark"] .sitemap-section {
-    background: linear-gradient(135deg, #0f1115 0%, #1a1a1a 100%) !important;
+  background: linear-gradient(135deg, #0f1115 0%, #1a1a1a 100%) !important;
 }
 
-body[data-theme="dark"] .sitemap-category, 
+body[data-theme="dark"] .sitemap-category,
 body[data-theme="dark"] .sitemap-quick-actions {
-    background: #1e2227 !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  background: #1e2227 !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
 body[data-theme="dark"] .section-title h1,
 body[data-theme="dark"] .sitemap-category h2,
 body[data-theme="dark"] .sitemap-quick-actions h3 {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body[data-theme="dark"] .sitemap-links li a {
-    color: #c0c0c0 !important;
+  color: #c0c0c0 !important;
 }
 
 body[data-theme="dark"] .sitemap-links li a:hover {
-    background: rgba(255, 107, 53, 0.1) !important;
-    color: #ff6b35 !important;
+  background: rgba(255, 107, 53, 0.1) !important;
+  color: #ff6b35 !important;
 }
 
 body[data-theme="dark"] .sitemap-search-input {
-    background: #1a1a1a !important;
-    border-color: #333 !important;
-    color: #ffffff !important;
+  background: #1a1a1a !important;
+  border-color: #333 !important;
+  color: #ffffff !important;
 }

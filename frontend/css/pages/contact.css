@@ -193,13 +193,14 @@ body {
 
 /* Contact Form */
 .contact-form-container {
-  background: #2b2b2b;
-  padding: 30px;
-  /* Reduced from 40px */
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  border: 1px solid #444;
+  background: #1a1a1a;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #333;
   position: relative;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 .contact-form-container::before {
@@ -233,46 +234,45 @@ body {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  /* Reduced from 20px */
+  gap: 5px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  /* Reduced from 20px */
+  gap: 10px;
 }
 
 .input-group {
-  position: relative;
-}
-
-.input-group.full-width {
-  grid-column: 1 / -1;
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 5px !important;
 }
 
 .input-group label {
-  display: block;
-  margin-bottom: 6px;
-  /* Reduced from 8px */
-  color: #ccc;
-  font-weight: 500;
-  font-size: 0.95rem;
+  display: block !important;
+  margin-bottom: 2px !important;
+  color: #eee !important;
+  font-weight: 500 !important;
+  font-size: 0.82rem !important;
+  text-align: left !important;
+}
+
+.full-width {
+  grid-column: 1 / -1 !important;
 }
 
 .input-group input,
 .input-group select,
 .input-group textarea {
-  width: 100%;
-  padding: 12px;
-  /* Reduced from 15px */
-  background: #1a1a1a;
-  border: 2px solid #444;
-  border-radius: 10px;
-  color: white;
+  width: 100% !important;
+  padding: 6px 10px !important;
+  background: #222 !important;
+  border: 1px solid #444 !important;
+  border-radius: 5px !important;
+  color: white !important;
   font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.88rem !important;
   transition: all 0.3s ease;
 }
 
@@ -507,6 +507,17 @@ body {
   color: white;
 }
 
+.form-header {
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.form-header h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1px;
+  color: #fff;
+}
+
 .contact-cta p {
   max-width: 600px;
   margin: 0 auto 30px;
@@ -682,7 +693,8 @@ body {
   text-align: right;
   color: #888;
   font-size: 0.8rem;
-  margin-top: 4px;
+  margin-top: 2px;
+  font-weight: 500;
 }
 
 /* Email Suggestion */
@@ -764,14 +776,20 @@ body {
 
 /* File Upload */
 .file-upload-area {
-  border: 2px dashed #444;
+  border: 2px dashed #ff6b35;
   border-radius: 10px;
-  padding: 30px;
-  /* Reduced from 40px */
+  padding: 10px;
   text-align: center;
-  cursor: pointer;
+  background: rgba(255, 107, 53, 0.05);
   transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  width: 100%;
 }
 
 .file-upload-area:hover {

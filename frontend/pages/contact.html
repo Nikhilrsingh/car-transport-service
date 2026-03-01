@@ -71,36 +71,34 @@
             <p class="response-time"><i class="fas fa-clock"></i> We typically respond within 2 hours</p>
           </div>
           <form class="contact-form" id="contactForm">
+            <div class="input-group full-width">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required />
+              <span class="error-message"></span>
+            </div>
             <div class="form-row">
-              <div class="input-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required />
-                <span class="error-message"></span>
-              </div>
               <div class="input-group">
                 <label for="phone">Phone Number *</label>
                 <div class="phone-input-grid">
                   <div class="input-wrapper">
-                    <select id="countryCode" class="form-control" required style="padding-left: 55px !important;">
+                    <select id="countryCode" class="form-control" required>
                       <option value="+91">+91 (IN)</option>
                       <option value="+1">+1 (US)</option>
                       <option value="+44">+44 (UK)</option>
                       <option value="+971">+971 (UAE)</option>
                     </select>
-                    <span class="input-icon"><i class="fas fa-globe"></i></span>
                   </div>
                   <div class="input-wrapper">
                     <input type="tel" id="splitPhone" class="form-control" placeholder="10-digit number" required
                       maxlength="10" inputmode="numeric" autocomplete="tel" />
-                    <span class="input-icon"><i class="fas fa-phone"></i></span>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="input-group">
-              <label for="email">Email Address *</label>
-              <input type="email" id="email" name="email" required />
-              <span class="error-message"></span>
+              <div class="input-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required />
+                <span class="error-message"></span>
+              </div>
             </div>
             <div class="form-row">
               <div class="input-group">
