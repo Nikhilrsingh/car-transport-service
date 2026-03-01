@@ -10,6 +10,8 @@
 
     <!-- Route Guard - Smart Redirect for Authenticated Users (Must load first) -->
     <script src="../js/modules/route-guard.js"></script>
+    <!-- Input Trim Guard - Auto-remove whitespace from email/password (Issue #1157) -->
+    <script src="../js/modules/input-trim-guard.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -444,6 +446,50 @@
     </div>
 
     <script>
+        // ========== Auto-Trim Input Fields (Issue #1157) ==========
+        // Automatically remove leading/trailing whitespace from email & password
+        const trimmedFields = new Set();
+        
+        function initializeInputTrimming() {
+            const emailInputs = document.querySelectorAll('input[type="email"]');
+            const passwordInputs = document.querySelectorAll('input[type="password"]');
+            const telInputs = document.querySelectorAll('input[type="tel"]');
+            
+            // Combine all sensitive fields that should be trimmed
+            const allTrimmedInputs = [...emailInputs, ...passwordInputs, ...telInputs];
+            
+            allTrimmedInputs.forEach(input => {
+                // Real-time trimming as user types
+                input.addEventListener('input', (e) => {
+                    const originalValue = e.target.value;
+                    const trimmedValue = originalValue.trim();
+                    
+                    // Only update if whitespace was actually removed
+                    if (originalValue !== trimmedValue) {
+                        e.target.value = trimmedValue;
+                        trimmedFields.add(input);
+                        console.log('[Input Trim] Auto-trimmed whitespace:', {
+                            fieldType: input.type,
+                            originalLength: originalValue.length,
+                            trimmedLength: trimmedValue.length
+                        });
+                    }
+                });
+                
+                // Also trim on blur (when user leaves field)
+                input.addEventListener('blur', (e) => {
+                    e.target.value = e.target.value.trim();
+                });
+            });
+        }
+        
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeInputTrimming);
+        } else {
+            initializeInputTrimming();
+        }
+
         // Tab Switching
         function switchTab(tab) {
             document.querySelectorAll('.form-content').forEach(el => el.classList.remove('active'));
@@ -501,9 +547,9 @@
         function handleLogin(e) { 
             e.preventDefault(); 
             
-            // Get form values
-            const email = document.querySelector('[name="email"]')?.value || 'user@example.com';
-            const password = document.querySelector('[name="password"]')?.value || '';
+            // Get form values and TRIM them (safeguard for any missed whitespace)
+            let email = (document.querySelector('#login-form input[type="email"]')?.value || '').trim();
+            let password = (document.querySelector('#login-form input[type="password"]')?.value || '').trim();
             
             if (!email || !password) {
                 alert('Please fill in all fields');
@@ -531,6 +577,7 @@
                 localStorage.setItem('userData', JSON.stringify(userData));
                 
                 console.log('[Login] Authentication successful');
+                console.log('[Login] Email (trimmed):', email);
                 console.log('[Login] Redirecting to dashboard...');
                 
                 // Redirect to dashboard
@@ -541,10 +588,10 @@
         function handleSignup(e) { 
             e.preventDefault(); 
             
-            // Get form values
-            const name = document.querySelector('[name="name"]')?.value || document.getElementById('signup-name')?.value || '';
-            const email = document.querySelector('[name="email"]')?.value || document.getElementById('signup-email')?.value || '';
-            const password = document.querySelector('[name="password"]')?.value || document.getElementById('signup-password')?.value || '';
+            // Get form values and TRIM them (safeguard for any missed whitespace)
+            let name = (document.querySelector('#signup-form input[type="text"]')?.value || '').trim();
+            let email = (document.querySelector('#signup-form input[type="email"]')?.value || '').trim();
+            let password = (document.querySelector('#signup-form input[type="password"]')?.value || '').trim();
             
             if (!name || !email || !password) {
                 alert('Please fill in all fields');
@@ -572,6 +619,7 @@
                 localStorage.setItem('userData', JSON.stringify(userData));
                 
                 console.log('[Signup] Account created successfully');
+                console.log('[Signup] Email (trimmed):', email);
                 console.log('[Signup] Redirecting to dashboard...');
                 
                 // Redirect to dashboard
