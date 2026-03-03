@@ -157,6 +157,9 @@
   <!-- 🌟 Preloader & Theme Meta-Component (Prevents FOUC) -->
   <link rel="stylesheet" href="css/components/preloader-meta.css">
   <script src="js/modules/preloader-meta.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="./css/components/modern-reviews.css" />
+
 </head>
 
 <body class="neon-theme">
@@ -453,89 +456,8 @@
     </div>
   </section>
 
-  <!-- Customer Reviews Section -->
-  <section
-      id="reviews"
-      class="customer-reviews-section"
-      style="padding: 60px 20px;"
-    >
-      <div class="container" style="max-width: 1200px; margin: 0 auto;">
-        <div
-          class="featured-reviews-header fade-in"
-          style="margin-bottom: 32px;"
-        >
-          <div>
-            <h2 class="featured-reviews-title">Customer Reviews</h2>
-            <p style="color: #999; margin-top: 8px;">
-              See what our customers say about our service
-            </p>
-           </div>
-          <button id="writeReviewBtnServices" class="write-review-btn">
-            <i data-lucide="pen-line"></i> Write a Review
-          </button>
-        </div>
-         <div
-          class="reviews-controls"
-          style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;"
-        >
-          <div>
-            <div id="servicesReviewStats"></div>
-          </div>
-          <div>
-            <div class="review-filters">
-              <button class="review-filter-btn active" data-rating="all">
-                All Reviews
-              </button>
-              <button class="review-filter-btn" data-rating="5">5 ★</button>
-              <button class="review-filter-btn" data-rating="4">4 ★</button>
-              <button class="review-filter-btn" data-rating="3">3 ★</button>
-              <button class="review-filter-btn" data-rating="2">2 ★</button>
-              <button class="review-filter-btn" data-rating="1">1 ★</button>
+<div id="reviews-widget-container"></div>
 
-              <div class="review-sort">
-                <select class="review-sort-select" id="reviewSort">
-                  <option value="recent">Most Recent</option>
-                  <option value="highest">Highest Rated</option>
-                  <option value="helpful">Most Helpful</option>
-                </select>
-              </div>
-            </div>
-            <div class="reviews-list" id="servicesReviewsList">
-              <div
-                class="reviews-empty"
-                style="padding: 40px 20px; text-align: center;"
-              >
-                <div class="reviews-empty-icon">⭐</div>
-                <h3 class="reviews-empty-title">Loading reviews...</h3>
-              </div>
-            </div>
-            <div
-              class="review-pagination"
-              id="reviewPagination"
-              style="display: none;"
-            ></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Keep testimonials for fallback -->
-  <section class="testimonials-section" id="testimonials" style="display: none;">
-    <div class="container">
-      <div class="section-title fade-in">
-        <h2>Customer Testimonials</h2>
-        <p>
-          Don't just take our word for it. Read genuine reviews from our
-          satisfied customers.
-        </p>
-      </div>
-      <div class="testimonial-slider">
-        <div class="slider-container" id="sliderContainer">
-          <!-- testimonial cards via JS -->
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Contact CTA Section -->
   <section id="contact" class="contact-cta">
@@ -622,65 +544,6 @@
   <section id="presence">
     <div id="region-container"></div>
   </section>
-
-  <!-- 💬 Feedback Modal -->
-  <div id="feedbackModal" class="feedback-modal">
-    <div class="feedback-modal-content">
-      <span id="closeFeedback" class="close-feedback">&times;</span>
-
-      <!-- Header -->
-      <div class="feedback-header">
-        <h2>💬 Your Feedback Matters</h2>
-        <p>Help us improve your car transport experience</p>
-      </div>
-
-      <form id="feedbackForm">
-        <!-- Name -->
-        <div class="feedback-input">
-          <label for="name">
-            <i class="fas fa-user"></i> Name
-          </label>
-          <input type="text" id="name" name="name" placeholder="Enter your name" required />
-        </div>
-
-        <!-- Email -->
-        <div class="feedback-input">
-          <label for="email">
-            <i class="fas fa-envelope"></i> Email
-          </label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required />
-        </div>
-
-        <!-- Rating -->
-        <div class="rating-title">
-          <p>How was your experience?</p>
-        </div>
-        <div class="feedback-stars" id="starContainer">
-          <i class="far fa-star star" data-value="1"></i>
-          <i class="far fa-star star" data-value="2"></i>
-          <i class="far fa-star star" data-value="3"></i>
-          <i class="far fa-star star" data-value="4"></i>
-          <i class="far fa-star star" data-value="5"></i>
-        </div>
-
-        <!-- Feedback Text -->
-        <div class="feedback-input">
-          <label for="feedbackText">
-            <i class="fas fa-comment-dots"></i> Your Feedback
-          </label>
-          <textarea id="feedbackText" name="feedbackText" rows="4"
-            placeholder="Tell us what you liked or what we can improve..." required></textarea>
-        </div>
-
-        <!-- Submit -->
-        <button type="submit">
-          <i class="fas fa-paper-plane"></i>
-          Submit Feedback
-        </button>
-      </form>
-    </div>
-  </div>
-
 
   <!-- Footer Section -->
   <div id="footer-container"></div>
@@ -880,10 +743,10 @@
   <script>
     lucide.createIcons();
   </script>
-  <script type="module" src="js/components/starRating.js"></script>
+  <!-- <script type="module" src="js/components/starRating.js"></script>
   <script type="module" src="js/review.js"></script>
   <script type="module" src="js/reviewForm.js"></script>
-  <script type="module" src="js/modules/services-reviews.js"></script>
+  <script type="module" src="js/modules/services-reviews.js"></script> -->
 
   <!-- Core modules -->
   <script src="js/modules/auto-slider.js"></script>
@@ -898,7 +761,7 @@
   <script src="js/modules/quote-modal.js"></script>
   <script src="js/modules/comparison-widget.js"></script>
   <script src="js/modules/chatbot-modal.js"></script>
-  <script src="js/modules/feedback-modal.js"></script>
+  <script src="../js/modules/component-initializer.js"></script>
   <script src="js/modules/testimonial.js"></script>
   <script src="js/modules/rating.js"></script>
   <script src="js/modules/region-loader.js"></script>
@@ -922,6 +785,11 @@
   <script src="js/modules/floating-chatbot-button.js"></script>
   <script src="js/modules/sticky-toc.js"></script>
   <script src="js/modules/keyboard-section-navigation.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./js/modules/reviews-loader.js"></script>
+  <script src="./js/reviews-data.js"></script>
+  <script src="../js/modules/search.js"></script>
+
 
   <!-- Cookie popup script -->
   <script>
