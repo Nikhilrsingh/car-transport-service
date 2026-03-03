@@ -1,0 +1,526 @@
+:root {
+        --brand-color: #e05c2b; /* Modern terracotta/orange */
+        --brand-hover: #c94e22;
+        --surface: #ffffff;
+        --bg-light: #f8fafc;
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --border-color: #e2e8f0;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+        --shadow-md: 0 10px 40px -10px rgba(0,0,0,0.1);
+        --radius: 12px;
+      }
+
+      /* =========================================
+   TRUE DARK MODE (Kills all white boxes & matches background)
+========================================= */
+[data-theme="dark"] .modern-card,
+[data-theme="dark"] .reviews-controls {
+  background: var(--bg, #121212) !important; /* Blends directly into your page background */
+  border: 1px solid var(--color-gray-400, #555555) !important; 
+  box-shadow: none !important;
+}
+
+/* Fix text colors using your DevTools variables */
+[data-theme="dark"] .mc-name,
+[data-theme="dark"] #servicesReviewStats h2 { 
+  color: var(--color-text-primary, #ffffff) !important; 
+}
+
+[data-theme="dark"] .mc-date,
+[data-theme="dark"] .mc-body,
+[data-theme="dark"] #servicesReviewStats p { 
+  color: var(--color-text-muted, #c0c0c0) !important; 
+}
+
+/* Make the owner reply box clean and dark */
+[data-theme="dark"] .mc-comment-item {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-left: 2px solid #e05c2b !important;
+  color: var(--color-text-secondary, #f0f0f0) !important;
+}
+
+/* KILL THE WHITE INPUT BOXES */
+[data-theme="dark"] .mc-comment-form input,
+[data-theme="dark"] .mc-comment-form textarea {
+  background: #1a1a1a !important;
+  color: var(--color-text-primary, #ffffff) !important;
+  border: 1px solid var(--color-gray-400, #555555) !important;
+}
+
+[data-theme="dark"] .mc-comment-form input::placeholder {
+  color: var(--color-text-muted, #888888) !important;
+}
+
+[data-theme="dark"] .mc-comments-wrapper{
+  background: #1a1a1a !important;
+  border: 1px solid var(--color-gray-400, #555555) !important;
+}
+
+[data-theme="dark"] .mc-comment-item:last-child {
+  background: transparent !important;
+}
+
+/* Fix the filter buttons */
+[data-theme="dark"] .review-filter-btn {
+  background: transparent !important;
+  color: var(--color-text-muted, #c0c0c0) !important;
+  border: 1px solid var(--color-gray-400, #555555) !important;
+}
+
+[data-theme="dark"] .review-filter-btn.active{
+  background: #e05c2b !important; 
+  color: #ffffff !important;
+  border-color: #e05c2b !important;
+}
+
+[data-theme="dark"] .secondary-action-btn {
+    background: transparent !important;
+    color: var(--color-text-primary, #ffffff) !important;
+    border: 1px solid var(--color-gray-400, #555555) !important;
+}
+
+[data-theme="dark"] .secondary-action-btn:hover {
+    color: #e05c2b !important;
+    border: 1px solid #e05c2b !important;
+}
+
+
+      body {
+        background-color: var(--bg-light);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        color: var(--text-main);
+      }
+
+      /* Form Enhancements */
+      .feedback-header {
+        text-align: center;
+        margin: 3rem 0 1rem;
+      }
+      .feedback-header h1 {
+        font-size: 2.2rem;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+      }
+      .feedback-form-section {
+        max-width: 600px;
+        margin: 0 auto 4rem auto;
+        padding: 0 1rem;
+      }
+      .feedback-form {
+        background: var(--surface);
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        border: 1px solid rgba(0,0,0,0.05);
+      }
+      .feedback-form label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--text-main);
+        margin-bottom: -0.5rem;
+      }
+      .feedback-form input, .feedback-form textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1.5px solid var(--border-color);
+        border-radius: var(--radius);
+        font-size: 1rem;
+        background: var(--bg-light);
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+      .feedback-form input:focus, .feedback-form textarea:focus {
+        outline: none;
+        border-color: var(--brand-color);
+        background: var(--surface);
+        box-shadow: 0 0 0 4px rgba(224, 92, 43, 0.15);
+      }
+      .feedback-form textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .star-rating {
+        display: flex;
+        gap: 8px;
+        font-size: 1.8rem;
+        color: #cbd5e1;
+      }
+      .star-rating i.fa-solid {
+        color: #fbbf24; /* Rich Gold */
+      }
+      .star-rating i:hover {
+        transform: scale(1.1);
+      }
+      /* Primary Action Button */
+      .primary-action-btn {
+        background: var(--brand-color);
+        color: white;
+        padding: 14px 30px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(224, 92, 43, 0.3);
+      }
+      .primary-action-btn:hover {
+        background: var(--brand-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(224, 92, 43, 0.4);
+      }
+
+      /* Modal UI Theme */
+      .custom-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      .custom-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .custom-modal-content {
+        background: var(--surface);
+        width: 90%;
+        max-width: 550px;
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: translateY(30px) scale(0.95);
+        transition: all 0.3s ease;
+      }
+      .custom-modal-overlay.active .custom-modal-content {
+        transform: translateY(0) scale(1);
+      }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border-color);
+        background: var(--bg-light);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .modal-header h2 { margin: 0; font-size: 1.3rem; }
+      .close-modal-btn {
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        line-height: 1;
+      }
+      .close-modal-btn:hover { color: var(--brand-color); }
+      
+      .feedback-form {
+        padding: 1.5rem 2rem 2rem;
+        box-shadow: none;
+        border: none;
+      }
+      .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+      .cancel-btn {
+        background: transparent;
+        color: var(--text-muted);
+        border: none;
+        padding: 10px 20px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .cancel-btn:hover { color: var(--text-main); }
+      .submit-btn {
+        background: var(--brand-color);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .submit-btn:hover { background: var(--brand-hover); }
+
+      /* Stats & Filters Section */
+      .customer-reviews-section {
+        max-width: 1000px;
+        margin: 45px auto 2rem;
+        padding: 0 1rem;
+      }
+      .featured-reviews-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1rem;
+        flex-wrap: wrap; /* Allows wrapping on small screens */
+        gap: 1.5rem;
+      }
+      
+      .header-action-group {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      /* Secondary Button (Google Reviews) */
+      .secondary-action-btn {
+        background: #fff;
+        color: var(--text-main);
+        border: 1px solid var(--border-color);
+        padding: 12px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1rem;
+      }
+      .secondary-action-btn:hover {
+        border-color: var(--brand-color);
+        color: var(--brand-color);
+        background: var(--bg-light);
+      }
+      
+      /* Ensure Primary Button matches sizing */
+      .primary-action-btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+
+      /* Mobile Layout adjustments */
+      @media(max-width: 768px) {
+        .featured-reviews-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .header-action-group {
+          width: 100%;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+      }
+      .reviews-controls {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        background: var(--surface);
+        padding: 1.5rem;
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        display: none;
+      }
+      @media(max-width: 768px) {
+        .reviews-controls { flex-direction: column; text-align: center; }
+        .featured-reviews-header { flex-direction: column; gap: 1rem; text-align: center; }
+      }
+      .review-stats-box {
+        text-align: center;
+        padding-right: 2rem;
+        border-right: 1px solid var(--border-color);
+      }
+      @media(max-width: 768px) { .review-stats-box { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; } }
+      .review-stats-box h2 {
+        font-size: 3.5rem;
+        margin: 0;
+        color: var(--text-main);
+        line-height: 1;
+      }
+      .review-stats-box p { color: var(--text-muted); margin: 0; font-size: 0.9rem; }
+      .review-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .review-filter-btn {
+        background: var(--bg-light);
+        border: 1px solid var(--border-color);
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text-muted);
+        transition: all 0.2s;
+      }
+      .review-filter-btn:hover { background: #e2e8f0; }
+      .review-filter-btn.active {
+        background: var(--brand-color);
+        color: white;
+        border-color: var(--brand-color);
+      }
+
+            /* Modern Review Cards */
+      .testimonials-carousel-section {
+        max-width: 950px; /* Reduced width to fix empty side spaces */
+        margin: 1rem auto 3rem; /* Reduced top margin to pull it closer to the header */
+        padding: 0 1rem;
+        overflow: hidden; /* Ensures absolutely nothing peeks from the sides */
+      }
+
+
+      .modern-card {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        border: 1px solid rgba(0,0,0,0.03);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        min-height: 250px;
+      }
+      .mc-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .mc-avatar {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: var(--shadow-sm);
+      }
+      .mc-info { flex-grow: 1; }
+      .mc-name { margin: 0 0 4px 0; font-size: 1.1rem; color: var(--text-main); }
+      .mc-stars i { color: #fbbf24; font-size: 0.9rem; }
+      .mc-date { font-size: 0.85rem; color: var(--text-muted); }
+      
+      .mc-body { font-size: 1.05rem; line-height: 1.6; color: #475569; font-style: italic; }
+      .mc-product {
+        margin-top: 1rem;
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: var(--radius);
+      }
+      
+      /* Card Comments */
+      .mc-comments-wrapper {
+        background: var(--bg-light);
+        border-radius: var(--radius);
+        padding: 1.2rem;
+        margin-top: auto;
+      }
+      .mc-comment-item {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .mc-comment-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+      .mc-comment-item strong { color: var(--brand-color); }
+      .mc-comment-form {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .mc-comment-form input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 0.9rem;
+        outline: none;
+      }
+      .mc-comment-form input:focus { border-color: var(--brand-color); }
+      .mc-comment-form button {
+        background: var(--brand-color);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .mc-comment-form button:hover { background: var(--brand-hover); transform: scale(1.05); }
+      
+      /* Flex container for the right side of the header */
+      .mc-header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+        margin-left: auto; /* Pushes this block all the way to the right */
+      }
+      
+      .edit-btn {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        color: var(--text-muted);
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+      }
+      .edit-btn:hover { background: var(--text-main); color: white; border-color: var(--text-main); }
+
+            /* Force Action Row Styles */
+      .mc-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px dashed var(--border-color);
+        width: 100%;
+      }
+      
+      button.edit-btn {
+        position: relative !important; /* Overrides any absolute positioning */
+        top: auto !important;
+        right: auto !important;
+        background: transparent !important;
+        border: 1px solid var(--border-color) !important;
+        color: var(--text-muted) !important;
+        padding: 6px 14px !important;
+        border-radius: 20px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        font-size: 0.85rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        font-weight: 600 !important;
+      }
+      
+      button.edit-btn:hover { 
+        background: var(--bg-light) !important; 
+        color: var(--brand-color) !important; 
+        border-color: var(--brand-color) !important; 
+      }
