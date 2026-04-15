@@ -11,7 +11,9 @@ Before starting any contribution, you MUST complete the registration form.
 
 | Program | Program Name | Start Date | End Date |
 |--------|--------------|------------|----------|
-| <img src="frontend/assets/images/swoc.png" width="60"/> | **Social Winter of Code (SWOC)** | 1 January 2026 | 1 March 2026 |
+| <img src="frontend/assets/images/nsoc.png" width="60"/> | **Nexus Spring of Code (NSOC)** | April 2026 | Present 2026 |
+| <img src="frontend/assets/images/swoc.png" width="60"/> | **Social Winter of Code (SWOC)** | January 2026 | March 2026 |
+| <img src="frontend/assets/images/wocs.png" width="60"/> | **Winter of Code Social (WOCS)** | November 2025 | January 2026 |
 
 
 ## 🧑‍💻 Open Source Contributors Welcome!
