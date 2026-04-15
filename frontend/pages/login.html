@@ -214,6 +214,18 @@
             opacity: 0;
         }
 
+        /* Hide icon and adjust padding when user starts typing */
+        input.form-control.has-value {
+            padding-left: 20px !important;
+            transition: padding 0.2s ease-in-out;
+        }
+
+        input.form-control.has-value + .input-icon {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+        }
+
         /* --- TEXT COLORS --- */
         body[data-theme="dark"] .form-header h2,
         body[data-theme="dark"] .form-header p,
@@ -449,21 +461,21 @@
         // ========== Auto-Trim Input Fields (Issue #1157) ==========
         // Automatically remove leading/trailing whitespace from email & password
         const trimmedFields = new Set();
-        
+
         function initializeInputTrimming() {
             const emailInputs = document.querySelectorAll('input[type="email"]');
             const passwordInputs = document.querySelectorAll('input[type="password"]');
             const telInputs = document.querySelectorAll('input[type="tel"]');
-            
+
             // Combine all sensitive fields that should be trimmed
             const allTrimmedInputs = [...emailInputs, ...passwordInputs, ...telInputs];
-            
+
             allTrimmedInputs.forEach(input => {
                 // Real-time trimming as user types
                 input.addEventListener('input', (e) => {
                     const originalValue = e.target.value;
                     const trimmedValue = originalValue.trim();
-                    
+
                     // Only update if whitespace was actually removed
                     if (originalValue !== trimmedValue) {
                         e.target.value = trimmedValue;
@@ -475,14 +487,14 @@
                         });
                     }
                 });
-                
+
                 // Also trim on blur (when user leaves field)
                 input.addEventListener('blur', (e) => {
                     e.target.value = e.target.value.trim();
                 });
             });
         }
-        
+
         // Initialize on DOM ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initializeInputTrimming);
@@ -544,24 +556,24 @@
         });
 
         // Mock Handlers with Auth Token Saving
-        function handleLogin(e) { 
-            e.preventDefault(); 
-            
+        function handleLogin(e) {
+            e.preventDefault();
+
             // Get form values and TRIM them (safeguard for any missed whitespace)
             let email = (document.querySelector('#login-form input[type="email"]')?.value || '').trim();
             let password = (document.querySelector('#login-form input[type="password"]')?.value || '').trim();
-            
+
             if (!email || !password) {
                 alert('Please fill in all fields');
                 return;
             }
-            
+
             // Show loading state
             const btn = event.target.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
             btn.textContent = 'Logging in...';
             btn.disabled = true;
-            
+
             // Simulate API call (remove this when connecting to real backend)
             setTimeout(() => {
                 // Save auth token and user data to localStorage
@@ -572,38 +584,38 @@
                     role: 'user',
                     loginTime: new Date().toISOString()
                 };
-                
+
                 localStorage.setItem('authToken', mockToken);
                 localStorage.setItem('userData', JSON.stringify(userData));
-                
+
                 console.log('[Login] Authentication successful');
                 console.log('[Login] Email (trimmed):', email);
                 console.log('[Login] Redirecting to dashboard...');
-                
+
                 // Redirect to dashboard
                 window.location.href = '../../admin/html/dashboard.html';
             }, 1000);
         }
-        
-        function handleSignup(e) { 
-            e.preventDefault(); 
-            
+
+        function handleSignup(e) {
+            e.preventDefault();
+
             // Get form values and TRIM them (safeguard for any missed whitespace)
             let name = (document.querySelector('#signup-form input[type="text"]')?.value || '').trim();
             let email = (document.querySelector('#signup-form input[type="email"]')?.value || '').trim();
             let password = (document.querySelector('#signup-form input[type="password"]')?.value || '').trim();
-            
+
             if (!name || !email || !password) {
                 alert('Please fill in all fields');
                 return;
             }
-            
+
             // Show loading state
             const btn = event.target.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
             btn.textContent = 'Creating Account...';
             btn.disabled = true;
-            
+
             // Simulate API call (remove this when connecting to real backend)
             setTimeout(() => {
                 // Save auth token and user data to localStorage
@@ -614,17 +626,48 @@
                     role: 'user',
                     loginTime: new Date().toISOString()
                 };
-                
+
                 localStorage.setItem('authToken', mockToken);
                 localStorage.setItem('userData', JSON.stringify(userData));
-                
+
                 console.log('[Signup] Account created successfully');
                 console.log('[Signup] Email (trimmed):', email);
                 console.log('[Signup] Redirecting to dashboard...');
-                
+
                 // Redirect to dashboard
                 window.location.href = '../../admin/html/dashboard.html';
             }, 1000);
+        }
+
+        // ========== Dynamic Icon Visibility Toggle ==========
+        function initializeIconToggle() {
+            const inputs = document.querySelectorAll('input.form-control');
+            inputs.forEach(input => {
+                const toggleInputState = () => {
+                    if (input.value.length > 0) {
+                        input.classList.add('has-value');
+                    } else {
+                        input.classList.remove('has-value');
+                    }
+                };
+                
+                input.addEventListener('input', toggleInputState);
+                input.addEventListener('change', toggleInputState);
+                
+                // Set initial state
+                toggleInputState();
+                
+                // Timeout to catch autofill changes from browsers
+                setTimeout(toggleInputState, 100);
+                setTimeout(toggleInputState, 500);
+            });
+        }
+
+        // Initialize toggle logic
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeIconToggle);
+        } else {
+            initializeIconToggle();
         }
     </script>
 </body>
