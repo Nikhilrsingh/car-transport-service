@@ -11,8 +11,11 @@ export const protect = async (req, res, next) => {
     const token = header.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+    // Support both string IDs and object IDs (from Google Auth)
+    const userId = typeof decoded.id === "object" ? decoded.id._id : decoded.id;
+
     // Fetch full user from DB to get the latest role/isAdmin status
-    const user = await User.findById(decoded.id).select("-password");
+    const user = await User.findById(userId).select("-password");
     if (!user) return res.sendStatus(401);
 
     req.user = user;

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authenticating... | Harihar Car Carriers</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: "Poppins", sans-serif;
+        background: #f6f6f6;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Successfully authenticated! Redirecting...</h2>
+    <script>
+      window.onload = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get("token");
+
+        if (token) {
+          localStorage.setItem("token", token);
+          localStorage.setItem("authToken", token);
+          localStorage.setItem("isLoggedIn", "true");
+
+          try {
+            const base64Url = token.split(".")[1];
+            let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+            // Add padding to prevent atob DOMException
+            const pad = base64.length % 4;
+            if (pad) {
+              if (pad === 1) {
+                base64 += "A==";
+              } else {
+                base64 += new Array(5 - pad).join("=");
+              }
+            }
+
+            const jsonPayload = decodeURIComponent(
+              atob(base64)
+                .split("")
+                .map(function (c) {
+                  return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                })
+                .join(""),
+            );
+            const decoded = JSON.parse(jsonPayload);
+
+            if (decoded && decoded.id) {
+              const userData = {
+                email: decoded.id.email,
+                name: decoded.id.name,
+                role: decoded.id.isAdmin ? "admin" : "user",
+                loginTime: new Date().toISOString(),
+              };
+              localStorage.setItem("userData", JSON.stringify(userData));
+              localStorage.setItem("userEmail", decoded.id.email);
+            }
+          } catch (e) {
+            // Token decoding failed
+          }
+
+          // Redirect to the user dashboard
+          window.location.href = "pages/dashboard.html";
+        } else {
+          alert("Authentication failed.");
+          window.location.href = "pages/login.html";
+        }
+      };
+    </script>
+  </body>
+</html>
