@@ -61,7 +61,7 @@ To ensure a smooth PR approval, please include the following clips/screenshots:
 ![alt text](<Screenshot 2026-04-17 003959.png>)
 
 <!-- Video Demo Player -->
-https://github.com/nikhilrsingh/car-transport-service/raw/google_auth/20260418-1758-28.7478801.mp4
+https://github.com/siddhi070306/car-transport-service/raw/google_auth/20260418-1758-28.7478801.mp4
 
 ### 🛠️ Manual Testing Steps:
 1. Clear `localStorage` in browser.
