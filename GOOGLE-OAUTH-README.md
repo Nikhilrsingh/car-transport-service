@@ -60,7 +60,8 @@ To ensure a smooth PR approval, please include the following clips/screenshots:
 
 ![alt text](<Screenshot 2026-04-17 003959.png>)
 
-<video controls src="20260418-1758-28.7478801.mp4" title="Demo of auth"></video>
+<!-- Video Demo (Click the image to play the MP4) -->
+[![Demo of Auth](image.png)](20260418-1758-28.7478801.mp4)
 
 ### 🛠️ Manual Testing Steps:
 1. Clear `localStorage` in browser.
