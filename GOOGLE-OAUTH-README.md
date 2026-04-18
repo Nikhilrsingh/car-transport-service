@@ -56,6 +56,11 @@ To ensure a smooth PR approval, please include the following clips/screenshots:
 2. **Theme Toggle Visuals**: Screenshots showing the Google Button in both **Light Mode** (Dark text on white) and **Dark Mode** (White button with Google branding).
 3. **Responsive Check**: A screenshot of the login page on a mobile viewport (Chrome DevTools Mobile view) showing the Google button.
 4. **Console Logs**: A screenshot of the browser console after logout and login showing "Logged out successfully" and the session initialization (ensure no red error logs).
+![alt text](image.png)
+
+![alt text](<Screenshot 2026-04-17 003959.png>)
+
+<video controls src="20260418-1758-28.7478801.mp4" title="Demo of auth"></video>
 
 ### 🛠️ Manual Testing Steps:
 1. Clear `localStorage` in browser.
