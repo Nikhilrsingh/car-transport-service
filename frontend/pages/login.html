@@ -108,7 +108,7 @@
 
         /* Light Mode Brand Name */
         body[data-theme="light"] .brand-name {
-            color: #333333;
+            color: #1a1a1a;
             text-shadow: none;
         }
 
@@ -129,7 +129,7 @@
         body[data-theme="light"] .auth-card {
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 0, 0, 0.1);
-            color: #333;
+            color: #1a1a1a;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -169,7 +169,7 @@
         body[data-theme="light"] .form-control {
             background: #ffffff;
             border: 1px solid #ccc;
-            color: #333 !important;
+            color: #1a1a1a !important;
         }
 
         body[data-theme="light"] input:-webkit-autofill {
@@ -238,7 +238,7 @@
         }
 
         body[data-theme="light"] .form-header h2 {
-            color: #333;
+            color: #1a1a1a;
         }
 
         body[data-theme="light"] .form-header p,
@@ -311,6 +311,44 @@
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6);
+        }
+
+        .google-btn {
+            margin-top: 15px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #555;
+            color: #ffffff;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .google-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.05);
+            border-color: #777;
+        }
+
+        body[data-theme="light"] .google-btn {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            color: #333;
+        }
+
+        body[data-theme="light"] .google-btn:hover {
+            background: #f7f7f7;
+            border-color: #aaa;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .particles {
@@ -395,6 +433,12 @@
                         </div>
                         <button type="submit" class="submit-btn">Login</button>
                     </form>
+
+                    <button type="button" class="google-btn" onclick="window.location.href='http://localhost:3000/api/auth/google'">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+
                     <div class="form-footer">
                         Don't have an account? <a href="#" onclick="switchTab('signup')">Sign Up</a>
                     </div>
@@ -449,6 +493,12 @@
                         </div>
                         <button type="submit" class="submit-btn" style="margin-top: 15px;">Create Account</button>
                     </form>
+
+                    <button type="button" class="google-btn" onclick="window.location.href='http://localhost:3000/api/auth/google'">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+
                     <div class="form-footer">
                         Already have an account? <a href="#" onclick="switchTab('login')">Login</a>
                     </div>
@@ -480,11 +530,6 @@
                     if (originalValue !== trimmedValue) {
                         e.target.value = trimmedValue;
                         trimmedFields.add(input);
-                        console.log('[Input Trim] Auto-trimmed whitespace:', {
-                            fieldType: input.type,
-                            originalLength: originalValue.length,
-                            trimmedLength: trimmedValue.length
-                        });
                     }
                 });
 
@@ -588,12 +633,8 @@
                 localStorage.setItem('authToken', mockToken);
                 localStorage.setItem('userData', JSON.stringify(userData));
 
-                console.log('[Login] Authentication successful');
-                console.log('[Login] Email (trimmed):', email);
-                console.log('[Login] Redirecting to dashboard...');
-
                 // Redirect to dashboard
-                window.location.href = '../../admin/html/dashboard.html';
+                window.location.href = 'dashboard.html';
             }, 1000);
         }
 
@@ -630,12 +671,8 @@
                 localStorage.setItem('authToken', mockToken);
                 localStorage.setItem('userData', JSON.stringify(userData));
 
-                console.log('[Signup] Account created successfully');
-                console.log('[Signup] Email (trimmed):', email);
-                console.log('[Signup] Redirecting to dashboard...');
-
                 // Redirect to dashboard
-                window.location.href = '../../admin/html/dashboard.html';
+                window.location.href = 'dashboard.html';
             }, 1000);
         }
 

@@ -48,6 +48,11 @@ const userSchema = new mongoose.Schema(
     },
 
     googleId: String,
+    username: {
+      type: String,
+      sparse: true,
+      unique: true
+    }
   },
   { timestamps: true }
 );

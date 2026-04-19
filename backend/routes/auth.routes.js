@@ -18,9 +18,14 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-
-    const token = generateToken(req.user);
-    res.redirect(`/auth-callback.html?token=${token}`);
+    const token = generateToken({
+      _id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      isAdmin: req.user.isAdmin
+    });
+    const clientUrl = process.env.CLIENT_URL || 'http://127.0.0.1:5500';
+    res.redirect(`${clientUrl}/frontend/auth-callback.html?token=${token}`);
   }
 );
 router.get("/users", protect, admin, getAllUsers);

@@ -12,7 +12,7 @@ import {
 /* ================= REGISTER ================= */
 export const register = async (req, res) => {
   try {
-    let { name, email, password } = req.body;
+    let { name, email, password, phone } = req.body;
 
     if (email) email = email.toLowerCase();
 

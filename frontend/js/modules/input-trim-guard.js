@@ -5,8 +5,6 @@
  */
 
 function initializeInputTrimmingGuard() {
-  console.log('[Input Trim Guard] Initializing...');
-
   /**
    * Apply trimming to a specific form or all forms with email/password
    * @param {Element} container - Form element or document
@@ -42,13 +40,6 @@ function initializeInputTrimmingGuard() {
     // Only update if whitespace was actually removed
     if (originalValue !== trimmedValue && originalValue.length > trimmedValue.length) {
       e.target.value = trimmedValue;
-      console.log('[Input Trim] Auto-trimmed whitespace:', {
-        fieldType: e.target.type,
-        field: e.target.placeholder || e.target.name || 'unknown',
-        removedChars: originalValue.length - trimmedValue.length,
-        hasLeadingSpace: originalValue[0] === ' ',
-        hasTrailingSpace: originalValue[originalValue.length - 1] === ' '
-      });
     }
   };
 
@@ -60,24 +51,19 @@ function initializeInputTrimmingGuard() {
   };
 
   /**
-   * Warn user if they paste text with surrounding spaces
+   * Handle warn user if they paste text with surrounding spaces
    */
   const handleSpaceKey = (e) => {
-    // Warn if user tries to paste at start (space is rarely needed at beginning)
-    if (e.key === ' ' && e.target.value.length === 0) {
-      console.warn('[Input Trim] User typed space at beginning of field');
-    }
+    // Logic for space key handled if needed, currently just prevents leading space if desired
   };
 
   // Initialize on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       trimInputFields();
-      console.log('[Input Trim Guard] ✓ Initialized successfully');
     });
   } else {
     trimInputFields();
-    console.log('[Input Trim Guard] ✓ Initialized successfully');
   }
 
   // Support dynamic forms (if new forms are added)
@@ -104,9 +90,6 @@ function initializeInputTrimmingGuard() {
       subtree: true
     });
   };
-
-  // Optional: Observe for dynamically added forms
-  // observeNewForms();
 
   // Expose function globally for manual use on specific forms
   window.applyInputTrimming = trimInputFields;

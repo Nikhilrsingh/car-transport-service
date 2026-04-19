@@ -598,12 +598,8 @@
     }
 
     function continueWithGoogle() {
-      alert("Redirecting to Google Sign-In...");
-
-      // Simulate Google auth and redirect
-      setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 1500);
+      // Redirect to the backend Google Auth route
+      window.location.href = 'http://localhost:3000/api/auth/google';
     }
 
     // Handle browser back button navigation
