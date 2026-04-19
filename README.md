@@ -1,11 +1,10 @@
-## 🚨 Mandatory Contributor Registration
+## 🚨 Contributor Registration
 
-Before starting any contribution, you MUST complete the registration form.
+Before starting any contribution, you can complete the registration form if you want.
 
 👉 Registration Form: https://forms.gle/2aVtenoaHg65qi4G7
 
-⚠️ Pull Requests without registration will be closed.
-⚠️ Submitted data is confidential and visible only to the Project Admin.
+⚠️ Submitted data is confidential and visible only to the Project Admin for future opportunities.
 
 ## 🌟 Open Source Participation
 
