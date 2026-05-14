@@ -42,29 +42,29 @@
 
         <div class="faq-header fade-in">
             <div class="faq-search-container">
-                <input type="text" id="faqSearch" class="faq-search-input" placeholder="Search FAQs...">
-                <i class="fas fa-search faq-search-icon"></i>
+                <input type="text" id="faqSearch" class="faq-search-input" placeholder="Search FAQs..." aria-label="Search frequently asked questions">
+                <i class="fas fa-search faq-search-icon" aria-hidden="true"></i>
             </div>
 
-            <div class="faq-categories">
-                <button class="faq-category-btn active" data-category="all">
-                    <i class="fas fa-th"></i>
+            <div class="faq-categories" role="tablist" aria-label="FAQ Categories">
+                <button class="faq-category-btn active" data-category="all" role="tab" aria-selected="true">
+                    <i class="fas fa-th" aria-hidden="true"></i>
                     <span>All</span>
                 </button>
-                <button class="faq-category-btn" data-category="delivery">
-                    <i class="fas fa-shipping-fast"></i>
+                <button class="faq-category-btn" data-category="delivery" role="tab" aria-selected="false">
+                    <i class="fas fa-shipping-fast" aria-hidden="true"></i>
                     <span>Delivery</span>
                 </button>
-                <button class="faq-category-btn" data-category="insurance">
-                    <i class="fas fa-shield-alt"></i>
+                <button class="faq-category-btn" data-category="insurance" role="tab" aria-selected="false">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
                     <span>Insurance</span>
                 </button>
-                <button class="faq-category-btn" data-category="service">
-                    <i class="fas fa-concierge-bell"></i>
+                <button class="faq-category-btn" data-category="service" role="tab" aria-selected="false">
+                    <i class="fas fa-concierge-bell" aria-hidden="true"></i>
                     <span>Service</span>
                 </button>
-                <button class="faq-category-btn" data-category="documents">
-                    <i class="fas fa-file-alt"></i>
+                <button class="faq-category-btn" data-category="documents" role="tab" aria-selected="false">
+                    <i class="fas fa-file-alt" aria-hidden="true"></i>
                     <span>Documents</span>
                 </button>
             </div>
@@ -88,11 +88,11 @@
                         <div class="faq-rating">
                             <span>Was this helpful?</span>
                             <div class="faq-rating-buttons">
-                                <button class="rating-btn" data-rating="yes">
-                                    <i class="fas fa-thumbs-up"></i><span>Yes</span>
+                                <button class="rating-btn" data-rating="yes" aria-label="Helpful">
+                                    <i class="fas fa-thumbs-up" aria-hidden="true"></i><span>Yes</span>
                                 </button>
-                                <button class="rating-btn" data-rating="no">
-                                    <i class="fas fa-thumbs-down"></i><span>No</span>
+                                <button class="rating-btn" data-rating="no" aria-label="Not helpful">
+                                    <i class="fas fa-thumbs-down" aria-hidden="true"></i><span>No</span>
                                 </button>
                             </div>
                         </div>
@@ -535,13 +535,13 @@
     <script src="../js/modules/themes.js"></script>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
     <!-- Top to Bottom Button -->
-    <button class="back-to-bottom" id="backToBottom">
-        <i class="fas fa-arrow-down"></i>
+    <button class="back-to-bottom" id="backToBottom" aria-label="Go to bottom">
+        <i class="fas fa-arrow-down" aria-hidden="true"></i>
     </button>
     <script src="../js/modules/glow-inputs.js"></script>
     <script src="../js/script.js"></script>
