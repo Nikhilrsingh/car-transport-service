@@ -1,13 +1,18 @@
 import VehicleInspection from "../models/vehicleInspection.model.js";
 import cloudinary from "../config/cloudinary.js";
 import streamifier from "streamifier";
+import { success, error } from "../utils/response.js";
 
+/**
+ * Upload an in-memory file buffer to Cloudinary.
+ * Returns a Promise that resolves with the upload result object.
+ */
 const uploadToCloudinary = (buffer, folder) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       { folder },
-      (error, result) => {
-        if (error) reject(error);
+      (err, result) => {
+        if (err) reject(err);
         else resolve(result);
       }
     );
@@ -16,12 +21,13 @@ const uploadToCloudinary = (buffer, folder) => {
   });
 };
 
-// CREATE INSPECTION
+/**
+ * @desc    Create a new vehicle inspection record with photo uploads
+ * @route   POST /api/inspections
+ * @access  Admin / Driver
+ */
 export const createInspection = async (req, res, next) => {
   try {
-    console.log("BODY:", req.body);
-    console.log("FILES:", req.files);
-
     const {
       vehicleNumber,
       inspectionType,
@@ -30,10 +36,10 @@ export const createInspection = async (req, res, next) => {
       generalNotes,
       odometerReading,
       fuelLevel,
-      annotations, // JSON string with annotations for each photo
+      annotations, // JSON string with per-photo annotation data
     } = req.body;
 
-    // Parse annotations if provided
+    // Parse annotations if provided — fail silently on malformed JSON
     let parsedAnnotations = {};
     if (annotations) {
       try {
@@ -73,17 +79,17 @@ export const createInspection = async (req, res, next) => {
       fuelLevel,
     });
 
-    res.status(201).json({
-      success: true,
-      message: "Inspection created successfully",
-      data: inspection,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 201, "Inspection created successfully", inspection);
+  } catch (err) {
+    next(err);
   }
 };
 
-// GET ALL INSPECTIONS
+/**
+ * @desc    Get all inspections with optional filters and pagination
+ * @route   GET /api/inspections
+ * @access  Admin
+ */
 export const getAllInspections = async (req, res, next) => {
   try {
     const { inspectionType, vehicleNumber, limit = 50, page = 1 } = req.query;
@@ -101,8 +107,7 @@ export const getAllInspections = async (req, res, next) => {
 
     const total = await VehicleInspection.countDocuments(filter);
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Inspections fetched successfully", {
       data: inspections,
       pagination: {
         total,
@@ -110,12 +115,16 @@ export const getAllInspections = async (req, res, next) => {
         pages: Math.ceil(total / Number(limit)),
       },
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 
-// GET INSPECTION BY ID
+/**
+ * @desc    Get a single inspection by MongoDB ID
+ * @route   GET /api/inspections/:id
+ * @access  Admin
+ */
 export const getInspectionById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -123,22 +132,20 @@ export const getInspectionById = async (req, res, next) => {
     const inspection = await VehicleInspection.findById(id);
 
     if (!inspection) {
-      return res.status(404).json({
-        success: false,
-        message: "Inspection not found",
-      });
+      return error(res, 404, "Inspection not found");
     }
 
-    res.status(200).json({
-      success: true,
-      data: inspection,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Inspection fetched successfully", inspection);
+  } catch (err) {
+    next(err);
   }
 };
 
-// GET INSPECTIONS BY VEHICLE NUMBER
+/**
+ * @desc    Get all inspections for a given vehicle number
+ * @route   GET /api/inspections/vehicle/:vehicleNumber
+ * @access  Admin
+ */
 export const getInspectionsByVehicle = async (req, res, next) => {
   try {
     const { vehicleNumber } = req.params;
@@ -147,17 +154,20 @@ export const getInspectionsByVehicle = async (req, res, next) => {
       vehicleNumber: vehicleNumber.toUpperCase(),
     }).sort({ createdAt: -1 });
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Inspections fetched successfully", {
       count: inspections.length,
       data: inspections,
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 
-// DELETE INSPECTION
+/**
+ * @desc    Delete an inspection and its associated Cloudinary photos
+ * @route   DELETE /api/inspections/:id
+ * @access  Admin
+ */
 export const deleteInspection = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -165,37 +175,35 @@ export const deleteInspection = async (req, res, next) => {
     const inspection = await VehicleInspection.findById(id);
 
     if (!inspection) {
-      return res.status(404).json({
-        success: false,
-        message: "Inspection not found",
-      });
+      return error(res, 404, "Inspection not found");
     }
 
-    // Delete photos from Cloudinary
+    // Delete photos from Cloudinary before removing the DB record
     const photoTypes = ["front", "rear", "leftSide", "rightSide", "interior", "dashboard"];
 
     for (const type of photoTypes) {
       if (inspection.photos[type]?.public_id) {
         try {
           await cloudinary.uploader.destroy(inspection.photos[type].public_id);
-        } catch (error) {
-          console.error(`Failed to delete ${type} photo from Cloudinary:`, error);
+        } catch (cloudErr) {
+          console.error(`Failed to delete ${type} photo from Cloudinary:`, cloudErr);
         }
       }
     }
 
     await VehicleInspection.findByIdAndDelete(id);
 
-    res.status(200).json({
-      success: true,
-      message: "Inspection deleted successfully",
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Inspection deleted successfully");
+  } catch (err) {
+    next(err);
   }
 };
 
-// GET INSPECTION STATS
+/**
+ * @desc    Get inspection statistics
+ * @route   GET /api/inspections/stats
+ * @access  Admin
+ */
 export const getInspectionStats = async (req, res, next) => {
   try {
     const total = await VehicleInspection.countDocuments();
@@ -207,16 +215,13 @@ export const getInspectionStats = async (req, res, next) => {
       .limit(10)
       .select("vehicleNumber inspectionType createdAt");
 
-    res.status(200).json({
-      success: true,
-      data: {
-        total,
-        pickupCount,
-        deliveryCount,
-        recent: recentInspections,
-      },
+    return success(res, 200, "Inspection stats fetched successfully", {
+      total,
+      pickupCount,
+      deliveryCount,
+      recent: recentInspections,
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
