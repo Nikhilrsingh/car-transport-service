@@ -68,7 +68,7 @@
         <div class="contact-form-container fade-in">
           <div class="form-header">
             <h3>Send Us a Message</h3>
-            <p class="response-time"><i class="fas fa-clock"></i> We typically respond within 2 hours</p>
+            <p class="response-time"><i class="fas fa-clock" aria-hidden="true"></i> We typically respond within 2 hours</p>
           </div>
           <form class="contact-form" id="contactForm">
             <div class="input-group full-width">
@@ -81,7 +81,7 @@
                 <label for="phone">Phone Number *</label>
                 <div class="phone-input-grid">
                   <div class="input-wrapper">
-                    <select id="countryCode" class="form-control" required>
+                    <select id="countryCode" class="form-control" required aria-label="Country code">
                       <option value="+91">+91 (IN)</option>
                       <option value="+1">+1 (US)</option>
                       <option value="+44">+44 (UK)</option>
@@ -140,7 +140,7 @@
               <div class="file-upload-area">
                 <input type="file" id="fileUpload" accept="image/*" multiple>
                 <div class="upload-icon">
-                  <i class="fas fa-cloud-upload-alt"></i>
+                  <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
                 </div>
                 <div class="upload-text">
                   <h4>Drag & Drop Images Here</h4>
@@ -149,8 +149,8 @@
               </div>
               <div class="file-preview-container"></div>
             </div>
-            <div class="form-success-message">
-              <i class="fas fa-check-circle"></i>
+            <div class="form-success-message" role="alert">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
               <span>Message sent successfully!</span>
             </div>
             <div class="typing-indicator">
@@ -161,9 +161,9 @@
                 <div class="typing-dot"></div>
               </div>
             </div>
-            <button type="submit" class="submit-btn">
+            <button type="submit" class="submit-btn" aria-label="Send message">
               <span>Send Message</span>
-              <i class="fas fa-paper-plane"></i>
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
             </button>
           </form>
         </div>
@@ -295,23 +295,23 @@
               <div class="social-links">
                 <a href="https://www.facebook.com/share/1AqYDsoLQR/?mibextid=wwXIfr" target="_blank" rel="noopener"
                   class="social-link facebook" aria-label="Facebook">
-                  <i class="fab fa-facebook-f"></i>
+                  <i class="fab fa-facebook-f" aria-hidden="true"></i>
                 </a>
                 <a href="https://x.com/nikhil_r_singh" target="_blank" rel="noopener" class="social-link twitter"
                   aria-label="Twitter">
-                  <i class="fab fa-twitter"></i>
+                  <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
                 <a href="https://www.instagram.com/rrajput.nikhill?igsh=bzFvamV1b29vaDQ3&utm_source=qr" target="_blank"
                   rel="noopener" class="social-link instagram" aria-label="Instagram">
-                  <i class="fab fa-instagram"></i>
+                  <i class="fab fa-instagram" aria-hidden="true"></i>
                 </a>
                 <a href="https://www.linkedin.com/in/nikhilsingh2903" target="_blank" rel="noopener"
                   class="social-link linkedin" aria-label="LinkedIn">
-                  <i class="fab fa-linkedin-in"></i>
+                  <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                 </a>
                 <a href="https://youtube.com/@rajeshparmar-pf7xd?si=5--aN11gOoEA-eYt" target="_blank" rel="noopener"
                   class="social-link youtube" aria-label="YouTube">
-                  <i class="fab fa-youtube"></i>
+                  <i class="fab fa-youtube" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
@@ -384,12 +384,12 @@
   <script src="../js/modules/contact-enhanced.js"></script>
   <script src="../js/script.js"></script>
 
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
   </button>
 
-  <button class="back-to-bottom" id="backToBottom">
-    <i class="fas fa-arrow-down"></i>
+  <button class="back-to-bottom" id="backToBottom" aria-label="Go to bottom">
+    <i class="fas fa-arrow-down" aria-hidden="true"></i>
   </button>
 
   <link rel="stylesheet" href="../css/components/footer.css" />

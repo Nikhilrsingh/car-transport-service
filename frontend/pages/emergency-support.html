@@ -39,12 +39,12 @@
             <h1 class="hero-title">Emergency Support</h1>
             <p class="hero-subtitle">We're Here to Help - Anytime, Anywhere</p>
             <div class="hero-actions">
-                <a href="tel:+919372693389" class="emergency-call-btn">
-                    <i class="fas fa-phone-alt"></i>
+                <a href="tel:+919372693389" class="emergency-call-btn" aria-label="Call emergency support at +919372693389">
+                    <i class="fas fa-phone-alt" aria-hidden="true"></i>
                     Call Now: +919372693389
                 </a>
-                <button class="live-chat-btn" onclick="openLiveChat()">
-                    <i class="fas fa-comments"></i>
+                <button class="live-chat-btn" onclick="openLiveChat()" aria-label="Start live chat with support">
+                    <i class="fas fa-comments" aria-hidden="true"></i>
                     Start Live Chat
                 </button>
             </div>
@@ -159,8 +159,8 @@
                         </div>
                     </div>
 
-                    <button class="start-chat-btn" onclick="openLiveChat()">
-                        <i class="fas fa-comments"></i>
+                    <button class="start-chat-btn" onclick="openLiveChat()" aria-label="Start chat now">
+                        <i class="fas fa-comments" aria-hidden="true"></i>
                         Start Chat Now
                     </button>
                 </div>
@@ -250,8 +250,8 @@
                         <label for="smsUpdates">Send me SMS updates about this emergency</label>
                     </div>
 
-                    <button type="submit" class="submit-emergency-btn">
-                        <i class="fas fa-paper-plane"></i>
+                    <button type="submit" class="submit-emergency-btn" aria-label="Submit emergency request">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
                         Submit Emergency Request
                     </button>
                 </form>
@@ -718,9 +718,9 @@
     <!-- Live Chat Widget (Hidden by default) -->
     <div id="liveChatWidget" class="chat-widget">
         <div class="chat-widget-header">
-            <h4><i class="fas fa-comments"></i> Live Support Chat</h4>
-            <button class="close-chat-btn" onclick="closeLiveChat()">
-                <i class="fas fa-times"></i>
+            <h4><i class="fas fa-comments" aria-hidden="true"></i> Live Support Chat</h4>
+            <button class="close-chat-btn" onclick="closeLiveChat()" aria-label="Close live chat">
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
         </div>
         <div class="chat-widget-body">
