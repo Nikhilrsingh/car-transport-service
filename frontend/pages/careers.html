@@ -136,20 +136,20 @@
       </p>
 
       <!-- Job Filters -->
-      <div class="job-filters">
-        <button class="filter-btn active" data-category="all">
+      <div class="job-filters" role="tablist" aria-label="Job categories">
+        <button class="filter-btn active" data-category="all" role="tab" aria-selected="true">
           All Positions
         </button>
-        <button class="filter-btn" data-category="driver">
+        <button class="filter-btn" data-category="driver" role="tab" aria-selected="false">
           Driver Positions
         </button>
-        <button class="filter-btn" data-category="office">
+        <button class="filter-btn" data-category="office" role="tab" aria-selected="false">
           Office Positions
         </button>
-        <button class="filter-btn" data-category="internship">
+        <button class="filter-btn" data-category="internship" role="tab" aria-selected="false">
           Internships
         </button>
-        <button class="filter-btn" data-category="saved">
+        <button class="filter-btn" data-category="saved" role="tab" aria-selected="false">
           Saved Jobs
         </button>
       </div>
@@ -1178,10 +1178,10 @@
   </section>
 
   <!-- Application Modal -->
-  <div id="applicationModal" class="modal">
+  <div id="applicationModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-content">
-      <span class="close" onclick="closeApplicationModal()">&times;</span>
-      <h2>Job Application</h2>
+      <span class="close" onclick="closeApplicationModal()" aria-label="Close modal">&times;</span>
+      <h2 id="modalTitle">Job Application</h2>
       <p class="modal-subtitle">Position: <span id="positionName"></span></p>
 
       <form id="applicationForm" class="application-form">
@@ -1297,10 +1297,10 @@
   </div>
 
   <!-- Franchise Modal -->
-  <div id="franchiseModal" class="modal">
+  <div id="franchiseModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="franchiseModalTitle">
     <div class="modal-content">
-      <span class="close" onclick="closeFranchiseModal()">&times;</span>
-      <h2>Franchise Information Request</h2>
+      <span class="close" onclick="closeFranchiseModal()" aria-label="Close modal">&times;</span>
+      <h2 id="franchiseModalTitle">Franchise Information Request</h2>
       <p class="modal-subtitle">
         Tell us about your interest in becoming a franchise partner
       </p>
