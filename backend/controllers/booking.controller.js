@@ -3,9 +3,10 @@ import Invoice from '../models/Invoice.model.js';
 import { success, error } from '../utils/response.js';
 
 /**
- * Create a new booking
+ * Create a new booking.
+ * Retries up to 3 times if a bookingReference collision (duplicate key) occurs.
  */
-export const createBooking = async (req, res) => {
+export const createBooking = async (req, res, next) => {
   let attempts = 0;
   const maxAttempts = 3;
 
@@ -45,8 +46,12 @@ export const createBooking = async (req, res) => {
       });
 
     } catch (err) {
-      // If duplicate key error on bookingReference, retry
-      if (err.code === 11000 && (err.message.includes('bookingReference') || (err.keyPattern && err.keyPattern.bookingReference))) {
+      // Retry only on duplicate bookingReference — all other errors propagate
+      if (
+        err.code === 11000 &&
+        (err.message.includes('bookingReference') ||
+          (err.keyPattern && err.keyPattern.bookingReference))
+      ) {
         attempts++;
         if (attempts < maxAttempts) {
           console.warn(`Booking reference collision detected. Retrying... (Attempt ${attempts + 1})`);
@@ -54,16 +59,16 @@ export const createBooking = async (req, res) => {
         }
       }
 
-      console.error('Create booking error:', err);
-      return error(res, 400, err.message || 'Failed to create booking');
+      // Forward to global error handler for all non-retry errors
+      return next(err);
     }
   }
 };
 
 /**
- * Get all bookings (with optional filters)
+ * Get all bookings (with optional filters and pagination).
  */
-export const getAllBookings = async (req, res) => {
+export const getAllBookings = async (req, res, next) => {
   try {
     const { status, phone, bookingReference, page = 1, limit = 10 } = req.query;
 
@@ -100,15 +105,14 @@ export const getAllBookings = async (req, res) => {
     });
 
   } catch (err) {
-    console.error('Get bookings error:', err);
-    return error(res, 500, err.message || 'Failed to fetch bookings');
+    next(err);
   }
 };
 
 /**
- * Get single booking by ID or booking reference
+ * Get single booking by MongoDB ID or booking reference.
  */
-export const getBookingById = async (req, res) => {
+export const getBookingById = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -131,15 +135,14 @@ export const getBookingById = async (req, res) => {
     return success(res, 200, 'Booking fetched successfully', { booking });
 
   } catch (err) {
-    console.error('Get booking error:', err);
-    return error(res, 500, err.message || 'Failed to fetch booking');
+    next(err);
   }
 };
 
 /**
- * Get booking by phone number (for guest users to track)
+ * Get booking by phone number and reference (guest tracking).
  */
-export const getBookingByPhone = async (req, res) => {
+export const getBookingByPhone = async (req, res, next) => {
   try {
     const { phone, bookingReference } = req.query;
 
@@ -159,15 +162,14 @@ export const getBookingByPhone = async (req, res) => {
     return success(res, 200, 'Booking fetched successfully', { booking });
 
   } catch (err) {
-    console.error('Get booking by phone error:', err);
-    return error(res, 500, err.message || 'Failed to fetch booking');
+    next(err);
   }
 };
 
 /**
- * Get bookings by customer email
+ * Get bookings by customer email.
  */
-export const getBookingByEmail = async (req, res) => {
+export const getBookingByEmail = async (req, res, next) => {
   try {
     const { email } = req.params;
 
@@ -186,15 +188,14 @@ export const getBookingByEmail = async (req, res) => {
     return success(res, 200, 'Bookings fetched successfully', { bookings });
 
   } catch (err) {
-    console.error('Get booking by email error:', err);
-    return error(res, 500, err.message || 'Failed to fetch bookings');
+    next(err);
   }
 };
 
 /**
- * Update booking status
+ * Update booking status (and auto-generate invoice on delivery).
  */
-export const updateBookingStatus = async (req, res) => {
+export const updateBookingStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { status, cancellationReason } = req.body;
@@ -289,8 +290,8 @@ export const updateBookingStatus = async (req, res) => {
           console.log(`✅ Invoice ${invoiceNumber} auto-generated for booking ${booking.bookingReference}`);
         }
       } catch (invoiceError) {
+        // Invoice generation failure must not roll back the booking status update
         console.error('Failed to auto-generate invoice:', invoiceError);
-        // Don't fail the booking update if invoice generation fails
       }
     } else if (status === 'cancelled') {
       booking.cancelledAt = new Date();
@@ -304,15 +305,14 @@ export const updateBookingStatus = async (req, res) => {
     return success(res, 200, 'Booking status updated successfully', { booking });
 
   } catch (err) {
-    console.error('Update status error:', err);
-    return error(res, 500, err.message || 'Failed to update booking status');
+    next(err);
   }
 };
 
 /**
- * Update booking details
+ * Update booking details (protected fields are stripped before update).
  */
-export const updateBooking = async (req, res) => {
+export const updateBooking = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updates = req.body;
@@ -336,15 +336,14 @@ export const updateBooking = async (req, res) => {
     return success(res, 200, 'Booking updated successfully', { booking });
 
   } catch (err) {
-    console.error('Update booking error:', err);
-    return error(res, 500, err.message || 'Failed to update booking');
+    next(err);
   }
 };
 
 /**
- * Delete booking (soft delete by setting status to cancelled)
+ * Soft-delete a booking by setting its status to cancelled.
  */
-export const deleteBooking = async (req, res) => {
+export const deleteBooking = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -363,15 +362,14 @@ export const deleteBooking = async (req, res) => {
     return success(res, 200, 'Booking cancelled successfully', {});
 
   } catch (err) {
-    console.error('Delete booking error:', err);
-    return error(res, 500, err.message || 'Failed to delete booking');
+    next(err);
   }
 };
 
 /**
- * Get booking statistics (admin only)
+ * Get booking statistics (admin only).
  */
-export const getBookingStats = async (req, res) => {
+export const getBookingStats = async (req, res, next) => {
   try {
     const totalBookings = await Booking.countDocuments();
     const pendingBookings = await Booking.countDocuments({ status: 'pending' });
@@ -400,7 +398,6 @@ export const getBookingStats = async (req, res) => {
     });
 
   } catch (err) {
-    console.error('Get stats error:', err);
-    return error(res, 500, err.message || 'Failed to fetch statistics');
+    next(err);
   }
 };

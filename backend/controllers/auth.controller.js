@@ -10,7 +10,7 @@ import {
 } from "../utils/validators.js";
 
 /* ================= REGISTER ================= */
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     let { name, email, password, phone } = req.body;
 
@@ -56,12 +56,12 @@ export const register = async (req, res) => {
       user: { id: user._id, email: user.email },
     });
   } catch (err) {
-    error(res, 500, err.message);
+    next(err);
   }
 };
 
 /* ================= LOGIN ================= */
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   try {
     let { email, password } = req.body;
 
@@ -84,12 +84,12 @@ export const login = async (req, res) => {
       user: { id: user._id, email: user.email },
     });
   } catch (err) {
-    error(res, 500, err.message);
+    next(err);
   }
 };
 
 /* ================= REFRESH TOKEN ================= */
-export const refreshToken = async (req, res) => {
+export const refreshToken = async (req, res, next) => {
   try {
     const { refreshToken } = req.body;
 
@@ -106,12 +106,12 @@ export const refreshToken = async (req, res) => {
       success(res, 200, "Token refreshed", { token: newToken });
     });
   } catch (err) {
-    error(res, 500, err.message);
+    next(err);
   }
 };
 
 /* ================= LOGOUT ================= */
-export const logout = async (req, res) => {
+export const logout = async (req, res, next) => {
   try {
     // Clear the cookie
     res.clearCookie("token", {
@@ -122,12 +122,12 @@ export const logout = async (req, res) => {
     // Respond success
     return success(res, 200, "Logout successful");
   } catch (err) {
-    return error(res, 500, err.message);
+    next(err);
   }
 };
 
 /* ================= GOOGLE LOGIN ================= */
-export const googleLogin = (req, res) => {
+export const googleLogin = (req, res, next) => {
   try {
     const user = req.user;
     const token = generateToken(user._id);
@@ -138,12 +138,12 @@ export const googleLogin = (req, res) => {
       user: { id: user._id, email: user.email, name: user.name },
     });
   } catch (err) {
-    error(res, 500, err.message);
+    next(err);
   }
 };
 
 /* ================= GET ALL USERS ================= */
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (req, res, next) => {
   try {
     const { page = 1, limit = 10, search = "" } = req.query;
 
@@ -169,7 +169,6 @@ export const getAllUsers = async (req, res) => {
       users,
     });
   } catch (err) {
-    error(res, 500, err.message);
+    next(err);
   }
 };
-
