@@ -80,11 +80,11 @@
           </label>
           <div class="input-with-voice">
             <input type="text" id="trackingId" placeholder="Enter your tracking ID or speak it" required />
-            <button type="button" class="voice-search-btn" id="voiceSearchBtn" title="Voice Search">
-              <i class="fas fa-microphone"></i>
+            <button type="button" class="voice-search-btn" id="voiceSearchBtn" aria-label="Start voice search">
+              <i class="fas fa-microphone" aria-hidden="true"></i>
             </button>
           </div>
-          <div class="voice-status" id="voiceStatus">
+          <div class="voice-status" id="voiceStatus" aria-live="polite">
             <div class="voice-indicator">
               <span class="pulse-dot"></span>
               <span class="status-text">Ready for voice input</span>
@@ -136,8 +136,8 @@
             <p id="displayLocation">-</p>
           </div>
           <div class="info-item">
-            <h3><i class="fas fa-tasks"></i> Status</h3>
-            <p><span class="status-badge" id="displayStatus">-</span></p>
+            <h3><i class="fas fa-tasks" aria-hidden="true"></i> Status</h3>
+            <p><span class="status-badge" id="displayStatus" aria-live="polite">-</span></p>
           </div>
           <div class="info-item">
             <h3><i class="fas fa-calendar-check"></i> Estimated Delivery</h3>
@@ -297,13 +297,13 @@
   <script src="../js/modules/backtoBottom.js"></script>
   <script src="../js/script.js"></script>
   <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
   </button>
 
   <!-- Top to Bottom Button -->
-  <button class="back-to-bottom" id="backToBottom">
-    <i class="fas fa-arrow-down"></i>
+  <button class="back-to-bottom" id="backToBottom" aria-label="Go to bottom">
+    <i class="fas fa-arrow-down" aria-hidden="true"></i>
   </button>
 
   <!-- 🌟 Bottom Fixed Action Bar -->

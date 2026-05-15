@@ -58,7 +58,7 @@
                 <h1><i class="fas fa-tags"></i> Pricing & Plans</h1>
                 <p class="subtitle">Choose the perfect plan for your vehicle transportation needs</p>
                 <div class="breadcrumb">
-                    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
                     <span>/</span>
                     <span>Pricing</span>
                 </div>
@@ -69,12 +69,12 @@
             <!-- Pricing Toggle -->
             <div class="pricing-toggle">
                 <h2>Transparent Pricing for Every Need</h2>
-                <div class="toggle-container">
-                    <div class="toggle-option active" data-plan="local">
-                        <i class="fas fa-city"></i> Local (Under 500km)
+                <div class="toggle-container" role="tablist">
+                    <div class="toggle-option active" data-plan="local" role="tab" aria-selected="true" tabindex="0">
+                        <i class="fas fa-city" aria-hidden="true"></i> Local (Under 500km)
                     </div>
-                    <div class="toggle-option" data-plan="interstate">
-                        <i class="fas fa-road"></i> Interstate (500km+)
+                    <div class="toggle-option" data-plan="interstate" role="tab" aria-selected="false" tabindex="0">
+                        <i class="fas fa-road" aria-hidden="true"></i> Interstate (500km+)
                         <span class="save-badge">Save 15%</span>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                 <!-- Basic Plan -->
                 <div class="pricing-card">
                     <div class="plan-icon">
-                        <i class="fas fa-car"></i>
+                        <i class="fas fa-car" aria-hidden="true"></i>
                     </div>
                     <h3 class="plan-name">Basic</h3>
                     <p class="plan-description">Perfect for small vehicles and budget-conscious customers</p>
@@ -144,8 +144,8 @@
                         </li>
                     </ul>
 
-                    <a href="booking.html" class="cta-button" data-tooltip="Select Basic Plan">
-                        <span class="btn-ripple-clip"><i class="fas fa-shopping-cart"></i> Choose Basic</span>
+                    <a href="booking.html" class="cta-button" aria-label="Select Basic Plan">
+                        <span class="btn-ripple-clip"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Choose Basic</span>
                     </a>
                 </div>
 
@@ -214,8 +214,8 @@
                         </li>
                     </ul>
 
-                    <a href="booking.html" class="cta-button" data-tooltip="Select Standard Plan">
-                        <span class="btn-ripple-clip"><i class="fas fa-rocket"></i> Choose Standard</span>
+                    <a href="booking.html" class="cta-button" aria-label="Select Standard Plan">
+                        <span class="btn-ripple-clip"><i class="fas fa-rocket" aria-hidden="true"></i> Choose Standard</span>
                     </a>
                 </div>
 
@@ -281,8 +281,8 @@
                         </li>
                     </ul>
 
-                    <a href="booking.html" class="cta-button" data-tooltip="Select Premium Plan">
-                        <span class="btn-ripple-clip"><i class="fas fa-crown"></i> Choose Premium</span>
+                    <a href="booking.html" class="cta-button" aria-label="Select Premium Plan">
+                        <span class="btn-ripple-clip"><i class="fas fa-crown" aria-hidden="true"></i> Choose Premium</span>
                     </a>
                 </div>
             </div>
@@ -296,9 +296,9 @@
                 <div class="calculator-form">
                     <div class="form-group">
                         <label for="calc-distance">
-                            <i class="fas fa-road"></i> Distance (km)
+                            <i class="fas fa-road" aria-hidden="true"></i> Distance (km)
                         </label>
-                        <input type="number" id="calc-distance" placeholder="Enter distance" min="1" />
+                        <input type="number" id="calc-distance" placeholder="Enter distance" min="1" aria-required="true" />
                     </div>
                     <div class="form-group">
                         <label for="calc-vehicle">
@@ -316,7 +316,7 @@
                         <i class="fas fa-calculator"></i> Calculate
                     </button>
                 </div>
-                <div class="calculator-result"></div>
+                <div class="calculator-result" aria-live="polite"></div>
             </div>
 
             <!-- Testimonials Section with Slideshow -->
@@ -408,7 +408,7 @@
                 <!-- Slider Controls -->
                 <div class="testimonial-controls">
                     <button class="testimonial-prev" aria-label="Previous testimonial">
-                        <i class="fas fa-chevron-left"></i>
+                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
                     </button>
                     <div class="testimonial-dots"></div>
                     <button class="testimonial-next" aria-label="Next testimonial">
@@ -536,48 +536,48 @@
                     <table class="comparison-table">
                         <thead>
                             <tr>
-                                <th>Features</th>
-                                <th>Basic</th>
-                                <th class="popular-col">Standard</th>
-                                <th>Premium</th>
+                                <th scope="col">Features</th>
+                                <th scope="col">Basic</th>
+                                <th scope="col" class="popular-col">Standard</th>
+                                <th scope="col">Premium</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><i class="fas fa-shield-alt"></i> Insurance Coverage</td>
+                                <th scope="row"><i class="fas fa-shield-alt" aria-hidden="true"></i> Insurance Coverage</th>
                                 <td>₹50,000</td>
                                 <td>₹2,00,000</td>
                                 <td>₹10,00,000</td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-truck"></i> Transport Type</td>
+                                <th scope="row"><i class="fas fa-truck" aria-hidden="true"></i> Transport Type</th>
                                 <td>Open Carrier</td>
                                 <td>Open/Covered</td>
                                 <td>Covered Only</td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-clock"></i> Delivery Time</td>
+                                <th scope="row"><i class="fas fa-clock" aria-hidden="true"></i> Delivery Time</th>
                                 <td>5-7 days</td>
                                 <td>3-5 days</td>
                                 <td>2-3 days</td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-map-marker-alt"></i> GPS Tracking</td>
-                                <td><i class="fas fa-times cross-icon"></i></td>
-                                <td><i class="fas fa-check check-icon"></i></td>
-                                <td><i class="fas fa-check check-icon"></i></td>
+                                <th scope="row"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> GPS Tracking</th>
+                                <td><i class="fas fa-times cross-icon" aria-label="Not included"></i></td>
+                                <td><i class="fas fa-check check-icon" aria-label="Included"></i></td>
+                                <td><i class="fas fa-check check-icon" aria-label="Included"></i></td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-headset"></i> Customer Support</td>
+                                <th scope="row"><i class="fas fa-headset" aria-hidden="true"></i> Customer Support</th>
                                 <td>Email/Phone</td>
                                 <td>24/7 Support</td>
                                 <td>VIP Priority</td>
                             </tr>
                             <tr>
-                                <td><i class="fas fa-user-tie"></i> Dedicated Manager</td>
-                                <td><i class="fas fa-times cross-icon"></i></td>
-                                <td><i class="fas fa-times cross-icon"></i></td>
-                                <td><i class="fas fa-check check-icon"></i></td>
+                                <th scope="row"><i class="fas fa-user-tie" aria-hidden="true"></i> Dedicated Manager</th>
+                                <td><i class="fas fa-times cross-icon" aria-label="Not included"></i></td>
+                                <td><i class="fas fa-times cross-icon" aria-label="Not included"></i></td>
+                                <td><i class="fas fa-check check-icon" aria-label="Included"></i></td>
                             </tr>
                         </tbody>
                     </table>
