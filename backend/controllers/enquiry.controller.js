@@ -1,11 +1,21 @@
 import Enquiry from "../models/enquiry.model.js";
 import { sendEnquiryEmail } from "../utils/sendEmail.js";
+import { success, error } from "../utils/response.js";
 
+/**
+ * Generate a time-based enquiry reference number.
+ * Prefixed with ENQ so it is human-readable in emails/admin dashboards.
+ */
 const generateReferenceNumber = () => {
   return `ENQ${Date.now()}`;
 };
 
-export const createEnquiry = async (req, res) => {
+/**
+ * @desc    Submit a new enquiry
+ * @route   POST /api/enquiries
+ * @access  Public
+ */
+export const createEnquiry = async (req, res, next) => {
   try {
     const referenceNumber = generateReferenceNumber();
 
@@ -13,14 +23,14 @@ export const createEnquiry = async (req, res) => {
     const enquiry = await Enquiry.create({
       referenceNumber,
       ...req.body,
-      documents: req.files?.map(file => ({
+      documents: req.files?.map((file) => ({
         filename: file.originalname,
         path: file.path,
         size: file.size,
-      })) || []
+      })) || [],
     });
 
-    // Send email (non-blocking, without attachments)
+    // Fire-and-forget email — failure must not affect the HTTP response
     sendEnquiryEmail({
       subject: `📨 New Enquiry: ${referenceNumber}`,
       html: `
@@ -32,65 +42,48 @@ export const createEnquiry = async (req, res) => {
         <p><strong>Message:</strong></p>
         <p>${enquiry.message || "N/A"}</p>
         <p><strong>Documents:</strong> ${enquiry.documents.length}</p>
-      `
-    }).catch(err => console.error("Enquiry email failed:", err.message));
+      `,
+    }).catch((err) => console.error("Enquiry email failed:", err.message));
 
-    res.status(201).json({
-      success: true,
-      message: "Enquiry submitted successfully",
-      referenceNumber
-    });
-
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
-
-
-export const getEnquiryByReference = async (req, res) => {
-  try {
-    const enquiry = await Enquiry.findOne({
-      referenceNumber: req.params.reference
-    });
-
-    if (!enquiry) {
-      return res.status(404).json({
-        success: false,
-        message: "Enquiry not found"
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: enquiry
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
+    return success(res, 201, "Enquiry submitted successfully", { referenceNumber });
+  } catch (err) {
+    next(err);
   }
 };
 
 /**
- * @desc    Get all enquiries (Admin dashboard)
- * @route   GET /api/enquiry
+ * @desc    Track a single enquiry by reference number
+ * @route   GET /api/enquiries/track/:reference
+ * @access  Public
+ */
+export const getEnquiryByReference = async (req, res, next) => {
+  try {
+    const enquiry = await Enquiry.findOne({
+      referenceNumber: req.params.reference,
+    });
+
+    if (!enquiry) {
+      return error(res, 404, "Enquiry not found");
+    }
+
+    return success(res, 200, "Enquiry fetched successfully", enquiry);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * @desc    Get all enquiries (admin dashboard)
+ * @route   GET /api/enquiries
  * @access  Admin (future)
  */
-export const getAllEnquiries = async (req, res) => {
+export const getAllEnquiries = async (req, res, next) => {
   try {
-    const {
-      page = 1,
-      limit = 10,
-      search = "",
-    } = req.query;
+    const { page = 1, limit = 10, search = "" } = req.query;
 
     const query = {};
 
-    // 🔍 Search by reference, name, email, phone
+    // Search by reference, name, email, or phone
     if (search) {
       query.$or = [
         { referenceNumber: { $regex: search, $options: "i" } },
@@ -107,53 +100,52 @@ export const getAllEnquiries = async (req, res) => {
       .skip((page - 1) * limit)
       .limit(Number(limit));
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Enquiries fetched successfully", {
       total,
       page: Number(page),
       limit: Number(limit),
       data: enquiries,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+  } catch (err) {
+    next(err);
   }
 };
 
-export const getEnquiryById = async (req, res) => {
+/**
+ * @desc    Get a single enquiry by MongoDB ID
+ * @route   GET /api/enquiries/:id
+ * @access  Admin (future)
+ */
+export const getEnquiryById = async (req, res, next) => {
   try {
     const enquiry = await Enquiry.findById(req.params.id);
 
     if (!enquiry) {
-      return res.status(404).json({
-        success: false,
-        message: "Enquiry not found",
-      });
+      return error(res, 404, "Enquiry not found");
     }
 
-    res.status(200).json({
-      success: true,
-      data: enquiry,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return success(res, 200, "Enquiry fetched successfully", enquiry);
+  } catch (err) {
+    next(err);
   }
 };
-export const updateEnquiryStatus = async (req, res) => {
+
+/**
+ * @desc    Update enquiry status
+ * @route   PATCH /api/enquiries/:id/status
+ * @access  Admin (future)
+ */
+export const updateEnquiryStatus = async (req, res, next) => {
   try {
     const { status } = req.body;
     const allowed = ["new", "in-progress", "resolved"];
 
+    if (!status) {
+      return error(res, 400, "Status is required");
+    }
+
     if (!allowed.includes(status)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid status value",
-      });
+      return error(res, 400, "Invalid status value");
     }
 
     const enquiry = await Enquiry.findByIdAndUpdate(
@@ -163,51 +155,43 @@ export const updateEnquiryStatus = async (req, res) => {
     );
 
     if (!enquiry) {
-      return res.status(404).json({
-        success: false,
-        message: "Enquiry not found",
-      });
+      return error(res, 404, "Enquiry not found");
     }
 
-    res.status(200).json({
-      success: true,
-      message: "Status updated successfully",
-      data: enquiry,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return success(res, 200, "Status updated successfully", enquiry);
+  } catch (err) {
+    next(err);
   }
 };
-export const toggleEnquirySeenStatus = async (req, res) => {
+
+/**
+ * @desc    Toggle the seen/unseen status of an enquiry
+ * @route   PATCH /api/enquiries/:id/seen
+ * @access  Admin (future)
+ */
+export const toggleEnquirySeenStatus = async (req, res, next) => {
   try {
     const enquiry = await Enquiry.findById(req.params.id);
 
     if (!enquiry) {
-      return res.status(404).json({
-        success: false,
-        message: "Enquiry not found",
-      });
+      return error(res, 404, "Enquiry not found");
     }
 
     enquiry.isSeen = !enquiry.isSeen;
     await enquiry.save();
 
-    res.status(200).json({
-      success: true,
-      message: "Seen status updated",
-      data: enquiry,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return success(res, 200, "Seen status updated", enquiry);
+  } catch (err) {
+    next(err);
   }
 };
-export const getEnquiryStats = async (req, res) => {
+
+/**
+ * @desc    Get enquiry statistics grouped by status
+ * @route   GET /api/enquiries/stats
+ * @access  Admin (future)
+ */
+export const getEnquiryStats = async (req, res, next) => {
   try {
     const total = await Enquiry.countDocuments();
 
@@ -215,37 +199,30 @@ export const getEnquiryStats = async (req, res) => {
       { $group: { _id: "$status", count: { $sum: 1 } } },
     ]);
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Enquiry stats fetched successfully", {
       total,
       byStatus,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+  } catch (err) {
+    next(err);
   }
 };
-export const deleteEnquiry = async (req, res) => {
+
+/**
+ * @desc    Delete an enquiry by ID
+ * @route   DELETE /api/enquiries/:id
+ * @access  Admin (future)
+ */
+export const deleteEnquiry = async (req, res, next) => {
   try {
     const enquiry = await Enquiry.findByIdAndDelete(req.params.id);
 
     if (!enquiry) {
-      return res.status(404).json({
-        success: false,
-        message: "Enquiry not found",
-      });
+      return error(res, 404, "Enquiry not found");
     }
 
-    res.status(200).json({
-      success: true,
-      message: "Enquiry deleted successfully",
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return success(res, 200, "Enquiry deleted successfully");
+  } catch (err) {
+    next(err);
   }
 };
