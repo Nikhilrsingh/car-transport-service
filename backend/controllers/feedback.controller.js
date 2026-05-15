@@ -1,13 +1,18 @@
 import Feedback from "../models/feedback.model.js";
 import cloudinary from "../config/cloudinary.js";
 import streamifier from "streamifier";
+import { success, error } from "../utils/response.js";
 
+/**
+ * Upload an in-memory file buffer to Cloudinary.
+ * Returns a Promise that resolves with the upload result object.
+ */
 const uploadToCloudinary = (buffer, folder) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       { folder },
-      (error, result) => {
-        if (error) reject(error);
+      (err, result) => {
+        if (err) reject(err);
         else resolve(result);
       }
     );
@@ -16,12 +21,13 @@ const uploadToCloudinary = (buffer, folder) => {
   });
 };
 
-// CREATE FEEDBACK
+/**
+ * @desc    Submit a new feedback entry (with optional image uploads)
+ * @route   POST /api/feedbacks
+ * @access  Public
+ */
 export const createFeedback = async (req, res, next) => {
   try {
-    console.log("BODY:", req.body); // Check what's in body
-    console.log("FILES:", req.files);
-
     const { username, stars, message } = req.body;
 
     let profilePicData, productImageData;
@@ -45,51 +51,31 @@ export const createFeedback = async (req, res, next) => {
       stars,
       message,
       profilePic: profilePicData
-        ? {
-            url: profilePicData.secure_url,
-            public_id: profilePicData.public_id,
-          }
+        ? { url: profilePicData.secure_url, public_id: profilePicData.public_id }
         : undefined,
       productImage: productImageData
-        ? {
-            url: productImageData.secure_url,
-            public_id: productImageData.public_id,
-          }
+        ? { url: productImageData.secure_url, public_id: productImageData.public_id }
         : undefined,
     });
 
-    res.status(201).json({
-      success: true,
-      message: "Feedback submitted",
-      data: feedback,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 201, "Feedback submitted", feedback);
+  } catch (err) {
+    next(err);
   }
 };
 
-
-
-
-// GET ALL FEEDBACKS
 /**
- * @desc    Get all feedbacks (Admin dashboard)
- * @route   GET /api/feedback
+ * @desc    Get all feedbacks (admin dashboard)
+ * @route   GET /api/feedbacks
  * @access  Admin (future)
  */
 export const getAllFeedbacks = async (req, res, next) => {
   try {
-    const {
-      page = 1,
-      limit = 10,
-      search = "",
-      status,
-      stars,
-    } = req.query;
+    const { page = 1, limit = 10, search = "", status, stars } = req.query;
 
     const query = {};
 
-    // 🔍 Search by username or message
+    // Search by username or message
     if (search) {
       query.$or = [
         { username: { $regex: search, $options: "i" } },
@@ -97,15 +83,8 @@ export const getAllFeedbacks = async (req, res, next) => {
       ];
     }
 
-    // ⭐ Filter by stars
-    if (stars) {
-      query.stars = Number(stars);
-    }
-
-    // 📌 Filter by status (pending, approved, rejected, etc.)
-    if (status) {
-      query.status = status;
-    }
+    if (stars) query.stars = Number(stars);
+    if (status) query.status = status;
 
     const total = await Feedback.countDocuments(query);
 
@@ -114,50 +93,53 @@ export const getAllFeedbacks = async (req, res, next) => {
       .skip((page - 1) * limit)
       .limit(Number(limit));
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Feedbacks fetched successfully", {
       total,
       page: Number(page),
       limit: Number(limit),
       data: feedbacks,
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 
-
-// UPDATE STATUS
+/**
+ * @desc    Update feedback status (approve / reject / pending)
+ * @route   PATCH /api/feedbacks/:id/status
+ * @access  Admin (future)
+ */
 export const updateFeedbackStatus = async (req, res, next) => {
   try {
     const { status } = req.body;
 
     const feedback = await Feedback.findById(req.params.id);
     if (!feedback) {
-      return res.status(404).json({ success: false, message: "Not found" });
+      return error(res, 404, "Feedback not found");
     }
 
     feedback.status = status || feedback.status;
     await feedback.save();
 
-    res.json({
-      success: true,
-      message: "Status updated",
-      data: feedback,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Status updated", feedback);
+  } catch (err) {
+    next(err);
   }
 };
 
-// DELETE FEEDBACK + CLOUDINARY CLEANUP
+/**
+ * @desc    Delete a feedback entry and its Cloudinary images
+ * @route   DELETE /api/feedbacks/:id
+ * @access  Admin (future)
+ */
 export const deleteFeedback = async (req, res, next) => {
   try {
     const feedback = await Feedback.findById(req.params.id);
     if (!feedback) {
-      return res.status(404).json({ success: false, message: "Not found" });
+      return error(res, 404, "Feedback not found");
     }
 
+    // Clean up Cloudinary assets before removing the DB document
     if (feedback.profilePic?.public_id) {
       await cloudinary.uploader.destroy(String(feedback.profilePic.public_id));
     }
@@ -168,53 +150,53 @@ export const deleteFeedback = async (req, res, next) => {
 
     await feedback.deleteOne();
 
-    res.json({ success: true, message: "Feedback deleted" });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Feedback deleted");
+  } catch (err) {
+    next(err);
   }
 };
 
-
-
-
-
+/**
+ * @desc    Get a single feedback by ID
+ * @route   GET /api/feedbacks/:id
+ * @access  Admin (future)
+ */
 export const getFeedbackById = async (req, res, next) => {
   try {
     const feedback = await Feedback.findById(req.params.id);
 
     if (!feedback) {
-      return res.status(404).json({
-        success: false,
-        message: "Feedback not found",
-      });
+      return error(res, 404, "Feedback not found");
     }
 
-    res.status(200).json({
-      success: true,
-      data: feedback,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Feedback fetched successfully", feedback);
+  } catch (err) {
+    next(err);
   }
 };
 
+/**
+ * @desc    Get all approved feedbacks for public display
+ * @route   GET /api/feedbacks/public
+ * @access  Public
+ */
 export const getPublicFeedbacks = async (req, res, next) => {
   try {
-    const feedbacks = await Feedback.find({
-      status: "approved",
-    })
+    const feedbacks = await Feedback.find({ status: "approved" })
       .sort({ createdAt: -1 })
       .select("username stars message profilePic productImage");
 
-    res.status(200).json({
-      success: true,
-      data: feedbacks,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Public feedbacks fetched successfully", feedbacks);
+  } catch (err) {
+    next(err);
   }
 };
 
+/**
+ * @desc    Get feedback statistics grouped by status and star rating
+ * @route   GET /api/feedbacks/stats
+ * @access  Admin (future)
+ */
 export const getFeedbackStats = async (req, res, next) => {
   try {
     const total = await Feedback.countDocuments();
@@ -227,40 +209,43 @@ export const getFeedbackStats = async (req, res, next) => {
       { $group: { _id: "$stars", count: { $sum: 1 } } },
     ]);
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Feedback stats fetched successfully", {
       total,
       byStatus,
       byStars,
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
+
+/**
+ * @desc    Toggle the featured flag on a feedback entry
+ * @route   PATCH /api/feedbacks/:id/featured
+ * @access  Admin (future)
+ */
 export const toggleFeaturedFeedback = async (req, res, next) => {
   try {
     const feedback = await Feedback.findById(req.params.id);
 
     if (!feedback) {
-      return res.status(404).json({
-        success: false,
-        message: "Feedback not found",
-      });
+      return error(res, 404, "Feedback not found");
     }
 
     feedback.isFeatured = !feedback.isFeatured;
     await feedback.save();
 
-    res.status(200).json({
-      success: true,
-      message: "Featured status updated",
-      data: feedback,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Featured status updated", feedback);
+  } catch (err) {
+    next(err);
   }
 };
 
+/**
+ * @desc    Get the average star rating for approved feedbacks
+ * @route   GET /api/feedbacks/average-rating
+ * @access  Public
+ */
 export const getAverageRating = async (req, res, next) => {
   try {
     const result = await Feedback.aggregate([
@@ -274,11 +259,8 @@ export const getAverageRating = async (req, res, next) => {
       },
     ]);
 
-    res.status(200).json({
-      success: true,
-      data: result[0] || { avgRating: 0, totalRatings: 0 },
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Average rating fetched", result[0] || { avgRating: 0, totalRatings: 0 });
+  } catch (err) {
+    next(err);
   }
 };

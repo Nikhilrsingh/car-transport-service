@@ -16,7 +16,7 @@ export const register = async (req, res, next) => {
 
     if (email) email = email.toLowerCase();
 
-    if (!name || !email || !password)
+    if (!name || !email || !password || !phone)
       return error(res, 400, "All fields required");
 
     if (!isEmailValid(email))
@@ -28,6 +28,10 @@ export const register = async (req, res, next) => {
         400,
         "Password must have 8 chars, uppercase, number & symbol"
       );
+
+    // Validate phone before normalization so the user gets a clear error message
+    if (!isValidPhone(phone))
+      return error(res, 400, "Invalid phone number — must be a valid 10-digit Indian mobile number");
 
     const exists = await User.findOne({ email });
     if (exists)
