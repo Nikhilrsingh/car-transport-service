@@ -64,7 +64,7 @@
 
     // Redirect after 1 second
     setTimeout(() => {
-      window.location.href = '../../admin/html/dashboard.html';
+      window.location.href = '../pages/dashboard.html';
     }, 1000);
   };
 

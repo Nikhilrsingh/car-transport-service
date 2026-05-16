@@ -3,11 +3,11 @@ import Booking from '../models/booking.model.js';
 import { success, error } from '../utils/response.js';
 
 /**
- * Create a new invoice for a completed booking
- * POST /api/invoices
- * @protected
+ * @desc    Create a new invoice for a completed booking
+ * @route   POST /api/invoices
+ * @access  Private (admin)
  */
-export const createInvoice = async (req, res) => {
+export const createInvoice = async (req, res, next) => {
   try {
     const {
       bookingId,
@@ -31,26 +31,23 @@ export const createInvoice = async (req, res) => {
       return error(res, 404, 'Booking not found');
     }
 
-    // Check if booking is delivered (invoice should only be generated for completed bookings)
+    // Invoice should only be generated for completed (delivered) bookings
     if (booking.status !== 'delivered') {
       return error(res, 400, 'Invoice can only be generated for delivered bookings');
     }
 
-    // Check if invoice already exists for this booking
+    // Prevent duplicate invoices for the same booking
     const existingInvoice = await Invoice.findOne({ bookingId });
     if (existingInvoice) {
       return error(res, 400, 'Invoice already exists for this booking');
     }
 
-    // Generate unique invoice number
     const invoiceNumber = await Invoice.generateInvoiceNumber();
 
-    // Calculate due date (15 days from issue date)
     const issueDate = new Date();
     const dueDate = new Date(issueDate);
     dueDate.setDate(dueDate.getDate() + 15);
 
-    // Create invoice object
     const invoiceData = {
       invoiceNumber,
       bookingId: booking._id,
@@ -64,42 +61,35 @@ export const createInvoice = async (req, res) => {
           street: booking.pickupLocation || '',
           city: booking.pickupCity || '',
           state: customerState || '',
-          pincode: ''
-        }
+          pincode: '',
+        },
       },
       lineItems,
       subtotal,
       issueDate,
       dueDate,
       paymentMethod: paymentMethod || '',
-      notes: notes || 'Thank you for choosing Harihar Car Carriers. Payment is due within 15 days of invoice date.'
+      notes: notes || 'Thank you for choosing Harihar Car Carriers. Payment is due within 15 days of invoice date.',
     };
 
-    // Create invoice
     const invoice = new Invoice(invoiceData);
-
-    // Calculate tax breakdown (CGST+SGST for intra-state, IGST for inter-state)
     invoice.calculateTaxBreakdown(customerState, companyState, gstRate);
-
-    // Save invoice
     await invoice.save();
 
-    // Populate booking reference
     await invoice.populate('bookingId');
 
     return success(res, 201, 'Invoice created successfully', { invoice });
   } catch (err) {
-    console.error('Create invoice error:', err);
-    return error(res, 500, err.message || 'Failed to create invoice');
+    next(err);
   }
 };
 
 /**
- * Get all invoices (with pagination and filters)
- * GET /api/invoices
- * @protected (admin only)
+ * @desc    Get all invoices with pagination and filters
+ * @route   GET /api/invoices
+ * @access  Private (admin)
  */
-export const getAllInvoices = async (req, res) => {
+export const getAllInvoices = async (req, res, next) => {
   try {
     const {
       page = 1,
@@ -110,17 +100,11 @@ export const getAllInvoices = async (req, res) => {
     } = req.query;
 
     const query = {};
+    if (paymentStatus) query.paymentStatus = paymentStatus;
 
-    // Filter by payment status
-    if (paymentStatus) {
-      query.paymentStatus = paymentStatus;
-    }
-
-    // Calculate pagination
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const sort = { [sortBy]: sortOrder === 'desc' ? -1 : 1 };
 
-    // Fetch invoices
     const invoices = await Invoice.find(query)
       .populate('bookingId', 'bookingReference vehicleType pickupCity dropCity')
       .populate('userId', 'fullName email phone')
@@ -128,7 +112,6 @@ export const getAllInvoices = async (req, res) => {
       .skip(skip)
       .limit(parseInt(limit));
 
-    // Get total count
     const total = await Invoice.countDocuments(query);
 
     return success(res, 200, 'Invoices fetched successfully', {
@@ -137,21 +120,20 @@ export const getAllInvoices = async (req, res) => {
         currentPage: parseInt(page),
         totalPages: Math.ceil(total / parseInt(limit)),
         totalInvoices: total,
-        hasMore: skip + invoices.length < total
-      }
+        hasMore: skip + invoices.length < total,
+      },
     });
   } catch (err) {
-    console.error('Get all invoices error:', err);
-    return error(res, 500, err.message || 'Failed to fetch invoices');
+    next(err);
   }
 };
 
 /**
- * Get invoice by ID
- * GET /api/invoices/:id
- * @public (for viewing/downloading PDF)
+ * @desc    Get invoice by MongoDB ID
+ * @route   GET /api/invoices/:id
+ * @access  Public (view / download PDF)
  */
-export const getInvoiceById = async (req, res) => {
+export const getInvoiceById = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -165,17 +147,16 @@ export const getInvoiceById = async (req, res) => {
 
     return success(res, 200, 'Invoice fetched successfully', { invoice });
   } catch (err) {
-    console.error('Get invoice by ID error:', err);
-    return error(res, 500, err.message || 'Failed to fetch invoice');
+    next(err);
   }
 };
 
 /**
- * Get invoice by invoice number
- * GET /api/invoices/number/:invoiceNumber
- * @public
+ * @desc    Get invoice by invoice number
+ * @route   GET /api/invoices/number/:invoiceNumber
+ * @access  Public
  */
-export const getInvoiceByNumber = async (req, res) => {
+export const getInvoiceByNumber = async (req, res, next) => {
   try {
     const { invoiceNumber } = req.params;
 
@@ -189,17 +170,16 @@ export const getInvoiceByNumber = async (req, res) => {
 
     return success(res, 200, 'Invoice fetched successfully', { invoice });
   } catch (err) {
-    console.error('Get invoice by number error:', err);
-    return error(res, 500, err.message || 'Failed to fetch invoice');
+    next(err);
   }
 };
 
 /**
- * Get all invoices for the logged-in user (My Invoices)
- * GET /api/invoices/my-invoices
- * @protected
+ * @desc    Get all invoices for the currently authenticated user
+ * @route   GET /api/invoices/my-invoices
+ * @access  Private
  */
-export const getMyInvoices = async (req, res) => {
+export const getMyInvoices = async (req, res, next) => {
   try {
     const userId = req.user?._id;
 
@@ -216,24 +196,17 @@ export const getMyInvoices = async (req, res) => {
     } = req.query;
 
     const query = { userId };
+    if (paymentStatus) query.paymentStatus = paymentStatus;
 
-    // Filter by payment status
-    if (paymentStatus) {
-      query.paymentStatus = paymentStatus;
-    }
-
-    // Calculate pagination
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const sort = { [sortBy]: sortOrder === 'desc' ? -1 : 1 };
 
-    // Fetch user's invoices
     const invoices = await Invoice.find(query)
       .populate('bookingId', 'bookingReference vehicleType pickupCity dropCity deliveredAt')
       .sort(sort)
       .skip(skip)
       .limit(parseInt(limit));
 
-    // Get total count
     const total = await Invoice.countDocuments(query);
 
     return success(res, 200, 'Invoices fetched successfully', {
@@ -242,21 +215,20 @@ export const getMyInvoices = async (req, res) => {
         currentPage: parseInt(page),
         totalPages: Math.ceil(total / parseInt(limit)),
         totalInvoices: total,
-        hasMore: skip + invoices.length < total
-      }
+        hasMore: skip + invoices.length < total,
+      },
     });
   } catch (err) {
-    console.error('Get my invoices error:', err);
-    return error(res, 500, err.message || 'Failed to fetch invoices');
+    next(err);
   }
 };
 
 /**
- * Get invoice by booking ID
- * GET /api/invoices/booking/:bookingId
- * @protected
+ * @desc    Get the invoice associated with a specific booking ID
+ * @route   GET /api/invoices/booking/:bookingId
+ * @access  Private
  */
-export const getInvoiceByBooking = async (req, res) => {
+export const getInvoiceByBooking = async (req, res, next) => {
   try {
     const { bookingId } = req.params;
 
@@ -270,17 +242,16 @@ export const getInvoiceByBooking = async (req, res) => {
 
     return success(res, 200, 'Invoice fetched successfully', { invoice });
   } catch (err) {
-    console.error('Get invoice by booking error:', err);
-    return error(res, 500, err.message || 'Failed to fetch invoice');
+    next(err);
   }
 };
 
 /**
- * Update invoice payment status
- * PUT /api/invoices/:id/payment
- * @protected (admin only)
+ * @desc    Update invoice payment status
+ * @route   PUT /api/invoices/:id/payment
+ * @access  Private (admin)
  */
-export const updatePaymentStatus = async (req, res) => {
+export const updatePaymentStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { paymentStatus, paymentMethod, paidAmount } = req.body;
@@ -299,16 +270,11 @@ export const updatePaymentStatus = async (req, res) => {
       return error(res, 404, 'Invoice not found');
     }
 
-    // Update payment fields
     invoice.paymentStatus = paymentStatus;
-    if (paymentMethod) {
-      invoice.paymentMethod = paymentMethod;
-    }
-    if (paidAmount !== undefined) {
-      invoice.paidAmount = paidAmount;
-    }
+    if (paymentMethod) invoice.paymentMethod = paymentMethod;
+    if (paidAmount !== undefined) invoice.paidAmount = paidAmount;
 
-    // Auto-update payment status based on paid amount
+    // Automatically derive status from paid amount when a paidAmount is supplied
     if (invoice.paidAmount >= invoice.totalAmount) {
       invoice.paymentStatus = 'paid';
     } else if (invoice.paidAmount > 0 && invoice.paidAmount < invoice.totalAmount) {
@@ -321,22 +287,21 @@ export const updatePaymentStatus = async (req, res) => {
 
     return success(res, 200, 'Payment status updated successfully', { invoice });
   } catch (err) {
-    console.error('Update payment status error:', err);
-    return error(res, 500, err.message || 'Failed to update payment status');
+    next(err);
   }
 };
 
 /**
- * Update invoice details
- * PUT /api/invoices/:id
- * @protected (admin only)
+ * @desc    Update invoice details (protected fields are stripped)
+ * @route   PUT /api/invoices/:id
+ * @access  Private (admin)
  */
-export const updateInvoice = async (req, res) => {
+export const updateInvoice = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updates = req.body;
 
-    // Prevent updating certain fields
+    // Prevent updating immutable fields
     delete updates.invoiceNumber;
     delete updates.bookingId;
     delete updates.bookingReference;
@@ -355,17 +320,16 @@ export const updateInvoice = async (req, res) => {
 
     return success(res, 200, 'Invoice updated successfully', { invoice });
   } catch (err) {
-    console.error('Update invoice error:', err);
-    return error(res, 500, err.message || 'Failed to update invoice');
+    next(err);
   }
 };
 
 /**
- * Delete invoice
- * DELETE /api/invoices/:id
- * @protected (admin only)
+ * @desc    Delete an invoice
+ * @route   DELETE /api/invoices/:id
+ * @access  Private (admin)
  */
-export const deleteInvoice = async (req, res) => {
+export const deleteInvoice = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -377,7 +341,6 @@ export const deleteInvoice = async (req, res) => {
 
     return success(res, 200, 'Invoice deleted successfully', { invoice });
   } catch (err) {
-    console.error('Delete invoice error:', err);
-    return error(res, 500, err.message || 'Failed to delete invoice');
+    next(err);
   }
 };

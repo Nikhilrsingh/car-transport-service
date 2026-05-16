@@ -2,6 +2,7 @@ import "dotenv/config.js";
 
 import { notFound, errorHandler } from "./middleware/error.middleware.js";
 import express from "express";
+import rateLimit from "express-rate-limit";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
@@ -18,9 +19,23 @@ import profileRoutes from "./routes/profile.routes.js";
 import invoiceRoutes from "./routes/invoice.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
 
-connectDB();
+if (process.env.NODE_ENV !== "test") {
+  connectDB();
+}
 
 const app = express();
+
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per window
+  message: { message: "Too many requests from this IP, please try again after 15 minutes" }
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // Limit each IP to 10 requests per window for auth routes
+  message: { message: "Too many authentication attempts, please try again later" }
+});
 
 app.use(
   cors({
@@ -29,6 +44,7 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(globalLimiter);
 app.use(
   session({
     name: "session",
@@ -55,7 +71,7 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/feedbacks", feedbackRoutes);
 app.use("/api/enquiries", enquiryRoutes);
@@ -66,8 +82,18 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/invoices", invoiceRoutes);
 app.use("/api/reviews", reviewRoutes);
 
+// ── Global error handling ────────────────────────────────────────────────────
+// These two middlewares MUST be registered after all route definitions.
+// • notFound  — catches any request that fell through every route and
+//               forwards a 404 error to errorHandler via next(err).
+// • errorHandler — receives errors forwarded via next(err) from controllers
+//               and returns a consistent JSON response shape to the client.
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+if (process.env.NODE_ENV !== "test") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+export default app;

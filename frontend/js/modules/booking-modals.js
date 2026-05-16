@@ -42,6 +42,10 @@ function confirmReschedule() {
     const newDate = document.getElementById('newPickupDate').value;
     const newTime = document.getElementById('newPickupTime').value;
     
+    if (!newDate || !newTime) {
+    showToast('Error', 'Please select both date and time', 'error', 3000);
+    return;
+    }
     if (!newDate) {
         showToast('Error', 'Please select a new pickup date', 'error', 3000);
         return;
