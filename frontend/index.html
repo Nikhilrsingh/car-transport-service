@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -114,51 +114,17 @@
   <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
   <link rel="manifest" href="manifest.json" />
 
-  <!-- Component CSS -->
-  <link rel="stylesheet" href="css/components/testimonial.css" />
-  <link rel="stylesheet" href="css/components/rating.css" />
-  <link rel="stylesheet" href="css/components/tracking.css" />
-  <link rel="stylesheet" href="css/components/star-rating.css" />
-  <link rel="stylesheet" href="css/components/review-card.css" />
-  <link rel="stylesheet" href="css/components/review-modal.css" />
-  <link rel="stylesheet" href="css/components/review-stats.css" />
-  <link rel="stylesheet" href="css/components/toast.css" />
-  <link rel="stylesheet" href="css/pages/reviews.css" />
-  <link rel="stylesheet" href="css/components/feedback.css" />
-  <link rel="stylesheet" href="css/components/navbar.css?v=12" />
-  <link rel="stylesheet" href="css/components/middle-navbar.css?v=2" />
-  <link rel="stylesheet" href="css/components/footer.css" />
-  <link rel="stylesheet" href="css/components/quote-modal.css" />
-  <link rel="stylesheet" href="css/components/comparison-widget.css" />
-  <link rel="stylesheet" href="css/components/chatbot-modal.css" />
-  <link rel="stylesheet" href="css/components/digital-clock.css" />
-  <link rel="stylesheet" href="css/components/animations.css" />
-  <link rel="stylesheet" href="css/components/region-enhanced.css" />
-  <link rel="stylesheet" href="css/components/map-enhancements.css" />
-  <link rel="stylesheet" href="css/components/loading-indicators.css" />
-  <link rel="stylesheet" href="css/components/floating-action-menu.css?v=6" />
-  <link rel="stylesheet" href="css/components/floating-button.css" />
-  <link rel="stylesheet" href="css/components/floating-call-button.css" />
-  <link rel="stylesheet" href="css/components/floating-whatsapp-button.css" />
-  <link rel="stylesheet" href="css/components/floating-chatbot-button.css" />
+  <!-- Core & Component CSS (Consolidated) -->
+  <link rel="stylesheet" href="css/core.css" />
+  
+  <!-- External CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <link rel="stylesheet" href="css/styles.css?v=14" />
-  <link rel="stylesheet" href="css/components/floating-feedback-button.css?v=2" />
-  <link rel="stylesheet" href="css/components/sticky-quote-button.css?v=2" />
-  <link rel="stylesheet" href="css/components/glowing-input.css" />
-  <link rel="stylesheet" href="css/components/phone-split.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <!-- Theme Toggle Link (must be in <head>) -->
   <link id="theme-style" rel="stylesheet" href="css/light-mode.css?v=15" />
-
-  <!-- 🌟 Preloader & Theme Meta-Component (Prevents FOUC) -->
-  <link rel="stylesheet" href="css/components/preloader-meta.css">
-  <script src="js/modules/preloader-meta.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<link rel="stylesheet" href="./css/components/modern-reviews.css" />
 
 </head>
 
@@ -173,13 +139,13 @@
   <!--  Automated Image Slider Section & features -->
   <section id="features" class="slider-feature-grid">
     <div class="feature-box left-top fade-in">
-      <span role="img" aria-label="Car icon" class="feature-emoji">🚗</span>
+      <span role="img" aria-label="Car icon" class="feature-emoji">ðŸš—</span>
       <h3>Fast Delivery</h3>
       <p>We ensure timely and safe transport of your vehicle.</p>
     </div>
 
     <div class="feature-box left-bottom fade-in">
-      <span role="img" aria-label="Money bag icon" class="feature-emoji">💰</span>
+      <span role="img" aria-label="Money bag icon" class="feature-emoji">ðŸ’°</span>
       <h3>Affordable Rates</h3>
       <p>Budget-friendly prices with no hidden charges.</p>
     </div>
@@ -227,12 +193,12 @@
     </div>
 
     <div class="feature-box right-top fade-in">
-      <span role="img" aria-label="Shield icon" class="feature-emoji">🛡️</span>
+      <span role="img" aria-label="Shield icon" class="feature-emoji">ðŸ›¡ï¸</span>
       <h3>Full Insurance</h3>
       <p>Your vehicle is fully insured during transport.</p>
     </div>
     <div class="feature-box right-bottom fade-in">
-      <span role="img" aria-label="Delivery truck icon" class="feature-emoji">🚚</span>
+      <span role="img" aria-label="Delivery truck icon" class="feature-emoji">ðŸšš</span>
       <h3>Door-to-Door Service</h3>
       <p>We pick up and deliver your vehicle safely.</p>
     </div>
@@ -431,7 +397,7 @@
 
                     <div class="result-price">
                       <span class="label">Estimated Cost</span>
-                      <span class="amount" id="resultAmount">₹0</span>
+                      <span class="amount" id="resultAmount">â‚¹0</span>
                     </div>
 
                     <div class="result-actions">
@@ -551,7 +517,7 @@
   <div id="footer-container"></div>
 
   <!-- Car emoji element -->
-  <div id="car" class="car" role="img" aria-label="Animated racing car">🏎️</div>
+  <div id="car" class="car" role="img" aria-label="Animated racing car">ðŸŽï¸</div>
 
   <!-- Cookie Popup (single instance) -->
   <div id="cookie-popup" class="cookie-popup">
@@ -565,255 +531,14 @@
     </div>
   </div>
 
-  <!-- Scripts: single consolidated block -->
-  <!-- Loading & navigation -->
-  <script src="js/modules/loading-state-manager.js"></script>
-  <script src="js/modules/page-navigation-loader.js"></script>
+  <!-- Scripts: Consolidated Entry Point -->
+  <!-- External CDNs -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-  <script>
-    let cities = [];
-
-    const nextBtn = document.getElementById("step1Next");
-    nextBtn.disabled = true;
-
-    fetch("/frontend/assets/data/cities.json")
-      .then(res => res.json())
-      .then(data => {
-        cities = data.map(c =>
-          c.name.replace("Car Transport in ", "")
-        );
-
-        // Setup autocompletes after cities are loaded
-        setupAutocomplete("fromCity", "fromCityDropdown");
-        setupAutocomplete("toCity", "toCityDropdown");
-      });
-
-    function isValidCity(value) {
-      return cities.some(
-        city => city.toLowerCase() === value.toLowerCase()
-      );
-    }
-
-    function updateNextButton() {
-      const fromCity = document.getElementById("fromCity").value;
-      const toCity = document.getElementById("toCity").value;
-
-      nextBtn.disabled = !(isValidCity(fromCity) && isValidCity(toCity));
-    }
-
-    function setupAutocomplete(inputId, dropdownId) {
-      const input = document.getElementById(inputId);
-      const dropdown = document.getElementById(dropdownId);
-
-      input.addEventListener("input", () => {
-        const value = input.value.toLowerCase();
-        dropdown.innerHTML = "";
-
-        if (!value) {
-          updateNextButton();
-          return;
-        }
-
-        const matches = cities.filter(city =>
-          city.toLowerCase().startsWith(value)
-        );
-
-        matches.forEach(city => {
-          const div = document.createElement("div");
-          div.textContent = city;
-
-          div.addEventListener("mousedown", () => {
-            input.value = city;
-            dropdown.innerHTML = "";
-            updateNextButton();
-          });
-
-          dropdown.appendChild(div);
-        });
-
-        updateNextButton();
-      });
-
-      input.addEventListener("blur", () => {
-        if (input.value && !isValidCity(input.value)) {
-          input.value = "";
-          alert("Service not available in this city");
-        } else {
-          updateNextButton();
-        }
-      });
-    }
-  </script>
-
-
-  <!-- Enhanced Preloader Logic -->
-  <script>
-    (function () {
-      const preloader = document.getElementById("preloader");
-      let preloaderHidden = false;
-      let hideTimeout = null;
-
-      function hidePreloader() {
-        if (preloaderHidden || !preloader) return;
-        preloaderHidden = true;
-
-        // Clear any existing timeout
-        if (hideTimeout) {
-          clearTimeout(hideTimeout);
-        }
-
-        preloader.classList.add("fade-out");
-        setTimeout(() => {
-          if (preloader) {
-            preloader.style.display = "none";
-          }
-        }, 800);
-      }
-
-      function shouldShowPreloader() {
-        // Don't show preloader if page is loaded from cache (back/forward navigation)
-        if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
-          return false;
-        }
-
-        // Don't show preloader if page is already loaded
-        if (document.readyState === 'complete') {
-          return false;
-        }
-
-        // Don't show preloader if coming from same origin (internal navigation)
-        if (document.referrer && new URL(document.referrer).origin === window.location.origin) {
-          const referrerPath = new URL(document.referrer).pathname;
-          // If coming from login page, don't show preloader
-          if (referrerPath.includes('login.html')) {
-            return false;
-          }
-        }
-
-        return true;
-      }
-
-      // Check if we should show preloader at all
-      if (!shouldShowPreloader()) {
-        hidePreloader();
-        return;
-      }
-
-      // Handle page visibility changes (tab switching)
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && document.readyState === 'complete') {
-          hidePreloader();
-        }
-      });
-
-      // Handle browser back/forward navigation
-      window.addEventListener('pageshow', (event) => {
-        if (event.persisted || document.readyState === 'complete') {
-          // Page was loaded from cache
-          hidePreloader();
-        }
-      });
-
-      // Hide on window load (ideal case)
-      window.addEventListener("load", () => {
-        hideTimeout = setTimeout(hidePreloader, 300);
-      });
-
-      // Hide when DOM is ready if page is already complete
-      document.addEventListener("DOMContentLoaded", () => {
-        if (document.readyState === 'complete') {
-          hideTimeout = setTimeout(hidePreloader, 100);
-        } else {
-          hideTimeout = setTimeout(hidePreloader, 2000);
-        }
-      });
-
-      // Fallback: hide after 4 seconds max to prevent infinite loading
-      setTimeout(hidePreloader, 4000);
-
-      // Handle navigation away from page
-      window.addEventListener('beforeunload', () => {
-        if (hideTimeout) {
-          clearTimeout(hideTimeout);
-        }
-      });
-
-    })();
-  </script>
-
-  <!-- Review System -->
-  <script>
-    lucide.createIcons();
-  </script>
-  <!-- <script type="module" src="js/components/starRating.js"></script>
-  <script type="module" src="js/review.js"></script>
-  <script type="module" src="js/reviewForm.js"></script>
-  <script type="module" src="js/modules/services-reviews.js"></script> -->
-
-  <!-- Core modules -->
-  <script src="js/modules/auto-slider.js"></script>
-  <script src="js/modules/navbar-loader.js?v=2"></script>
-  <script src="js/modules/footer-loader.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/modules/hero-animations.js"></script>
-  <script src="js/modules/Services.js"></script>
-  <script src="js/modules/tracking.js"></script>
-  <script src="js/modules/search.js"></script>
-  <script src="js/modules/modal.js"></script>
-  <script src="js/modules/quote-modal.js"></script>
-  <script src="js/modules/comparison-widget.js"></script>
-  <script src="js/modules/chatbot-modal.js"></script>
-  <script src="js/modules/component-initializer.js"></script>
-  <script src="js/modules/testimonial.js"></script>
-  <script src="js/modules/rating.js"></script>
-  <script src="js/modules/region-loader.js"></script>
-  <script src="js/modules/region-search.js?v=3"></script>
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="js/modules/region-map.js"></script>
-  <script src="js/modules/region-enhancements.js"></script>
-  <script src="js/modules/region-pagination.js"></script>
-
-  <!-- Theme & UI enhancements -->
-  <script src="js/modules/themes.js"></script>
-  <script src="js/modules/digital-clock.js"></script>
-  <script src="js/modules/scroll-animations.js"></script>
-  <script src="js/modules/glow-inputs.js"></script>
-  <script src="js/modules/floating-book-button.js"></script>
-  <script src="js/modules/floating-call-button.js"></script>
-  <script src="js/modules/floating-whatsapp-button.js"></script>
-  <script src="js/modules/sticky-quote-button.js"></script>
-  <script src="js/modules/floating-chatbot-button.js"></script>
-  <script src="js/modules/sticky-toc.js"></script>
-  <script src="js/modules/keyboard-section-navigation.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="./js/modules/reviews-loader.js"></script>
-  <script src="./js/reviews-data.js"></script>
-  <script src="js/modules/search.js"></script>
-
-
-  <!-- Cookie popup script -->
-  <script>
-    const popup = document.getElementById("cookie-popup");
-    const acceptBtn = document.getElementById("accept-cookie");
-    const rejectBtn = document.getElementById("reject-cookie");
-
-    if (!localStorage.getItem("cookieDecision")) {
-      popup.style.display = "flex";
-    }
-
-    acceptBtn.addEventListener("click", () => {
-      localStorage.setItem("cookieDecision", "accepted");
-      popup.style.display = "none";
-    });
-
-    rejectBtn.addEventListener("click", () => {
-      localStorage.setItem("cookieDecision", "rejected");
-      popup.style.display = "none";
-    });
-  </script>
-
+  <!-- Main Application Entry Point (ES6 Module) -->
+  <script type="module" src="js/main.js"></script>
   <!-- PWA Install Button -->
   <button id="installAppBtn" aria-label="Install App">
     <i class="fas fa-download"></i>
@@ -823,3 +548,4 @@
 </body>
 
 </html>
+
