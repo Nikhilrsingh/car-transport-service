@@ -4,9 +4,11 @@ import { success, error } from "../utils/response.js";
 import { isStrongPassword } from "../utils/validators.js";
 
 /**
- * Get current user profile
+ * @desc    Get current user's profile
+ * @route   GET /api/profile
+ * @access  Private
  */
-export const getProfile = async (req, res) => {
+export const getProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
 
@@ -16,20 +18,21 @@ export const getProfile = async (req, res) => {
 
     return success(res, 200, "Profile fetched successfully", { user });
   } catch (err) {
-    console.error("Get profile error:", err);
-    return error(res, 500, err.message || "Failed to fetch profile");
+    next(err);
   }
 };
 
 /**
- * Update user profile
+ * @desc    Update current user's profile details
+ * @route   PUT /api/profile
+ * @access  Private
  */
-export const updateProfile = async (req, res) => {
+export const updateProfile = async (req, res, next) => {
   try {
     const userId = req.user._id;
     const { name, phone, address, profilePicture } = req.body;
 
-    // Build update object
+    // Build update object — only include fields that were provided
     const updateData = {};
 
     if (name !== undefined) updateData.name = name.trim();
@@ -46,7 +49,6 @@ export const updateProfile = async (req, res) => {
     if (address !== undefined) updateData.address = address;
     if (profilePicture !== undefined) updateData.profilePicture = profilePicture;
 
-    // Update user
     const user = await User.findByIdAndUpdate(
       userId,
       updateData,
@@ -59,22 +61,22 @@ export const updateProfile = async (req, res) => {
 
     return success(res, 200, "Profile updated successfully", { user });
   } catch (err) {
-    console.error("Update profile error:", err);
-
-    // Handle validation errors
-    if (err.name === 'ValidationError') {
-      const messages = Object.values(err.errors).map(e => e.message);
-      return error(res, 400, messages.join(', '));
+    // Surface Mongoose validation errors as 400 so the client gets useful feedback
+    if (err.name === "ValidationError") {
+      const messages = Object.values(err.errors).map((e) => e.message);
+      return error(res, 400, messages.join(", "));
     }
 
-    return error(res, 500, err.message || "Failed to update profile");
+    next(err);
   }
 };
 
 /**
- * Change user password
+ * @desc    Change the current user's password
+ * @route   PUT /api/profile/password
+ * @access  Private
  */
-export const changePassword = async (req, res) => {
+export const changePassword = async (req, res, next) => {
   try {
     const userId = req.user._id;
     const { oldPassword, newPassword } = req.body;
@@ -84,14 +86,10 @@ export const changePassword = async (req, res) => {
     }
 
     if (!isStrongPassword(newPassword)) {
-      return error(
-        res,
-        400,
-        "Password must have 8 chars, uppercase, number & symbol"
-      );
+      return error(res, 400, "Password must have 8 chars, uppercase, number & symbol");
     }
 
-    // Get user with password
+    // Fetch user with password field (hidden by default via select: false)
     const user = await User.findById(userId).select("+password");
 
     if (!user) {
@@ -104,22 +102,18 @@ export const changePassword = async (req, res) => {
       return error(res, 401, "Current password is incorrect");
     }
 
-    // Check if new password is same as old
+    // Prevent reusing the same password
     const isSameAsOld = await bcrypt.compare(newPassword, user.password);
     if (isSameAsOld) {
       return error(res, 400, "New password must be different from current password");
     }
 
-    // Hash new password
-    const hashedPassword = await bcrypt.hash(newPassword, 12);
-
-    // Update password
-    user.password = hashedPassword;
+    // Hash and persist the new password
+    user.password = await bcrypt.hash(newPassword, 12);
     await user.save();
 
     return success(res, 200, "Password changed successfully", {});
   } catch (err) {
-    console.error("Change password error:", err);
-    return error(res, 500, err.message || "Failed to change password");
+    next(err);
   }
 };

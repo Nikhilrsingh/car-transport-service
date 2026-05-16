@@ -82,6 +82,12 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/invoices", invoiceRoutes);
 app.use("/api/reviews", reviewRoutes);
 
+// ── Global error handling ────────────────────────────────────────────────────
+// These two middlewares MUST be registered after all route definitions.
+// • notFound  — catches any request that fell through every route and
+//               forwards a 404 error to errorHandler via next(err).
+// • errorHandler — receives errors forwarded via next(err) from controllers
+//               and returns a consistent JSON response shape to the client.
 app.use(notFound);
 app.use(errorHandler);
 

@@ -36,7 +36,7 @@
 
   <div class="explore-hero">
     <div class="container">
-      <h1>Explore Our Network</h1>
+      <h2>Explore Our Network</h2>
       <p>Seamless vehicle transport services across 63+ cities in India. Find your city below to get started.</p>
     </div>
   </div>
@@ -48,51 +48,51 @@
         <div class="region-search-container">
           <input type="text" id="regionSearch" class="region-search"
             placeholder="Search for a city (e.g., Delhi, Mumbai, Bangalore)..." aria-label="Search cities">
-          <i class="fas fa-search search-icon"></i>
+          <i class="fas fa-search search-icon" aria-hidden="true"></i>
         </div>
         <div class="search-suggestions" id="searchSuggestions"></div>
 
         <div class="filter-controls-wrapper">
           <div class="region-filter-tabs">
             <button class="filter-tab active" data-filter="all">
-              <i class="fas fa-globe"></i> All Cities
+              <i class="fas fa-globe" aria-hidden="true"></i> All Cities
             </button>
             <button class="filter-tab" data-filter="north">
-              <i class="fas fa-mountain"></i> North India
+              <i class="fas fa-mountain" aria-hidden="true"></i> North India
             </button>
             <button class="filter-tab" data-filter="south">
-              <i class="fas fa-umbrella-beach"></i> South India
+              <i class="fas fa-umbrella-beach" aria-hidden="true"></i> South India
             </button>
             <button class="filter-tab" data-filter="east">
-              <i class="fas fa-sun"></i> East India
+              <i class="fas fa-sun" aria-hidden="true"></i> East India
             </button>
             <button class="filter-tab" data-filter="west">
-              <i class="fas fa-water"></i> West India
+              <i class="fas fa-water" aria-hidden="true"></i> West India
             </button>
             <button class="filter-tab" data-filter="central">
-              <i class="fas fa-map-pin"></i> Central India
+              <i class="fas fa-map-pin" aria-hidden="true"></i> Central India
             </button>
           </div>
 
           <div class="view-controls">
             <div class="city-counter">
-              <i class="fas fa-map-marker-alt"></i>
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
               <span id="cityCounter">Showing 63 cities</span>
             </div>
             <div class="view-toggle">
-              <button class="view-btn active" data-view="grid" title="Grid View">
-                <i class="fas fa-th"></i>
+              <button class="view-btn active" data-view="grid" title="Grid View" aria-label="Switch to grid view">
+                <i class="fas fa-th" aria-hidden="true"></i>
               </button>
-              <button class="view-btn" data-view="list" title="List View">
-                <i class="fas fa-list"></i>
+              <button class="view-btn" data-view="list" title="List View" aria-label="Switch to list view">
+                <i class="fas fa-list" aria-hidden="true"></i>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <button class="mobile-filter-btn" id="mobileFilterBtn">
-        <i class="fas fa-filter"></i> Filters
+      <button class="mobile-filter-btn" id="mobileFilterBtn" aria-label="Open filters">
+        <i class="fas fa-filter" aria-hidden="true"></i> Filters
       </button>
 
       <div class="region-grid" id="regionGrid" data-items-per-page="12">
@@ -100,8 +100,8 @@
           <div class="city-thumbnail"><img loading="lazy" src="../assets/images/cities/agra.png" alt="Agra Landmark">
           </div>
           <div class="city-content">
-            <h4 class="city-name">Agra</h4><span class="region-badge north">North</span>
-            <div class="city-stats"><span class="stat-item"><i class="fas fa-truck"></i> 500+ Trips</span><span
+            <h3 class="city-name">Agra</h3><span class="region-badge north">North</span>
+            <div class="city-stats"><span class="stat-item"><i class="fas fa-truck" aria-hidden="true"></i> 500+ Trips</span><span
                 class="pricing-badge">₹3,999+</span></div>
           </div>
         </a>
@@ -680,15 +680,15 @@
       <div class="bottom-sheet-overlay" id="bottomSheetOverlay"></div>
       <div class="bottom-sheet" id="bottomSheet">
         <div class="bottom-sheet-header">
-          <h3><i class="fas fa-filter"></i> Filter Cities</h3>
-          <button class="bottom-sheet-close" id="bottomSheetClose">
-            <i class="fas fa-times"></i>
+          <h3><i class="fas fa-filter" aria-hidden="true"></i> Filter Cities</h3>
+          <button class="bottom-sheet-close" id="bottomSheetClose" aria-label="Close filters">
+            <i class="fas fa-times" aria-hidden="true"></i>
           </button>
         </div>
         <div class="bottom-sheet-content">
           <div class="mobile-search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" id="mobileSearch" placeholder="Search cities..." class="mobile-search-input" />
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input type="text" id="mobileSearch" placeholder="Search cities..." class="mobile-search-input" aria-label="Search cities mobile" />
           </div>
           <div class="mobile-filter-options">
             <h4>Select Region</h4>
@@ -712,12 +712,12 @@
 
   <div id="footer-container"></div>
 
-  <button class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
+  <button class="back-to-top" id="backToTop" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
   </button>
 
-  <button class="back-to-bottom" id="backToBottom">
-    <i class="fas fa-arrow-down"></i>
+  <button class="back-to-bottom" id="backToBottom" aria-label="Scroll to bottom">
+    <i class="fas fa-arrow-down" aria-hidden="true"></i>
   </button>
 
   <script src="../js/modules/loading-state-manager.js"></script>
