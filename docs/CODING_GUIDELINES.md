@@ -552,6 +552,7 @@ const sanitizeInput = (input) => {
 const user = await User.findOne({ email: sanitizeInput(email) });
 
 // Hash passwords
+import bcrypt from "bcryptjs";
 const hashedPassword = await bcrypt.hash(password, 12);
 
 // Use environment variables
