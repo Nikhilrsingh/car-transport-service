@@ -1,87 +1,82 @@
 import EmergencyRequest from "../models/emergencyRequest.model.js";
 import { sendEmergencyEmail } from "../utils/sendEmail.js";
+import { success, error } from "../utils/response.js";
+import crypto from "crypto";
 
-import crypto from "crypto"; // For generating unique reference numbers
-
+/**
+ * Generate a UUID-based reference number for emergency requests.
+ * Using crypto.randomUUID ensures global uniqueness even under high load.
+ */
 const generateReferenceNumber = () => {
-  return `EMG-${crypto.randomUUID()}`; // Fixed the function to generate a unique reference number using UUID
+  return `EMG-${crypto.randomUUID()}`;
 };
 
-
-export const createEmergencyRequest = async (req, res) => {
+/**
+ * @desc    Submit a new emergency request
+ * @route   POST /api/emergencies
+ * @access  Public
+ */
+export const createEmergencyRequest = async (req, res, next) => {
   try {
     const referenceNumber = generateReferenceNumber();
 
     const emergencyRequest = await EmergencyRequest.create({
       referenceNumber,
-      ...req.body
+      ...req.body,
     });
 
-   // 🔥 NON-BLOCKING EMAIL (won't break API)
-sendEmergencyEmail({
-  subject: "🚨 New Emergency Request Received",
-  html: `
-    <h2>New Emergency Request</h2>
-    <p><strong>Reference Number:</strong> ${referenceNumber}</p>
-    <p><strong>Name:</strong> ${req.body.fullName || "N/A"}</p>
-    <p><strong>Email:</strong> ${req.body.emailAddress || "N/A"}</p>
-    <p><strong>Phone:</strong> ${req.body.phoneNumber || "N/A"}</p>
-    <p><strong>Urgency:</strong> ${req.body.urgencyLevel || "N/A"}</p>
-    <p><strong>Issue Type:</strong> ${req.body.issueType || "N/A"}</p>
-    <p><strong>Location:</strong> ${req.body.currentLocation || "N/A"}</p>
-    <p><strong>Description:</strong></p>
-    <p>${req.body.issueDescription || "N/A"}</p>
-  `
-}).catch((error) => {
-  console.error("Emergency email failed but request saved:", error.message);
-});
-
-// ✅ API RESPONSE (always sent)
-res.status(201).json({
-  success: true,
-  message: "Emergency request submitted successfully",
-  referenceNumber
-});
-
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
-
-export const getEmergencyRequestByReference = async (req, res) => {
-  try {
-    const request = await EmergencyRequest.findOne({
-      referenceNumber: req.params.reference
+    // Fire-and-forget email — failure must not affect the HTTP response
+    sendEmergencyEmail({
+      subject: "🚨 New Emergency Request Received",
+      html: `
+        <h2>New Emergency Request</h2>
+        <p><strong>Reference Number:</strong> ${referenceNumber}</p>
+        <p><strong>Name:</strong> ${req.body.fullName || "N/A"}</p>
+        <p><strong>Email:</strong> ${req.body.emailAddress || "N/A"}</p>
+        <p><strong>Phone:</strong> ${req.body.phoneNumber || "N/A"}</p>
+        <p><strong>Urgency:</strong> ${req.body.urgencyLevel || "N/A"}</p>
+        <p><strong>Issue Type:</strong> ${req.body.issueType || "N/A"}</p>
+        <p><strong>Location:</strong> ${req.body.currentLocation || "N/A"}</p>
+        <p><strong>Description:</strong></p>
+        <p>${req.body.issueDescription || "N/A"}</p>
+      `,
+    }).catch((err) => {
+      console.error("Emergency email failed but request saved:", err.message);
     });
 
-    if (!request) {
-      return res.status(404).json({
-        success: false,
-        message: "Emergency request not found"
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: request
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
+    return success(res, 201, "Emergency request submitted successfully", { referenceNumber });
+  } catch (err) {
+    next(err);
   }
 };
 
 /**
- * @desc    Get all emergency requests (Admin dashboard)
- * @route   GET /api/emergency
+ * @desc    Track a single emergency request by reference number
+ * @route   GET /api/emergencies/track/:reference
+ * @access  Public
+ */
+export const getEmergencyRequestByReference = async (req, res, next) => {
+  try {
+    const request = await EmergencyRequest.findOne({
+      referenceNumber: req.params.reference,
+    });
+
+    if (!request) {
+      return error(res, 404, "Emergency request not found");
+    }
+
+    return success(res, 200, "Emergency request fetched successfully", request);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * @desc    Get all emergency requests (admin dashboard)
+ * @route   GET /api/emergencies
  * @access  Admin (future)
  */
-export const getAllEmergencyRequests = async (req, res) => {
+export const getAllEmergencyRequests = async (req, res, next) => {
   try {
     const {
       page = 1,
@@ -93,7 +88,7 @@ export const getAllEmergencyRequests = async (req, res) => {
 
     const query = {};
 
-    // 🔍 Search by name, email, phone, reference, location
+    // Search by name, email, phone, reference, or location
     if (search) {
       query.$or = [
         { fullName: { $regex: search, $options: "i" } },
@@ -104,15 +99,8 @@ export const getAllEmergencyRequests = async (req, res) => {
       ];
     }
 
-    // 🚨 Filter by urgency
-    if (urgency) {
-      query.urgencyLevel = urgency;
-    }
-
-    // 🛠 Filter by issue type
-    if (issueType) {
-      query.issueType = issueType;
-    }
+    if (urgency) query.urgencyLevel = urgency;
+    if (issueType) query.issueType = issueType;
 
     const total = await EmergencyRequest.countDocuments(query);
 
@@ -121,56 +109,52 @@ export const getAllEmergencyRequests = async (req, res) => {
       .skip((page - 1) * limit)
       .limit(Number(limit));
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Emergency requests fetched successfully", {
       total,
       page: Number(page),
       limit: Number(limit),
       data: requests,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+  } catch (err) {
+    next(err);
   }
 };
 
-
-export const getEmergencyRequestById = async (req, res) => {
+/**
+ * @desc    Get a single emergency request by MongoDB ID
+ * @route   GET /api/emergencies/:id
+ * @access  Admin (future)
+ */
+export const getEmergencyRequestById = async (req, res, next) => {
   try {
     const request = await EmergencyRequest.findById(req.params.id);
 
     if (!request) {
-      return res.status(404).json({
-        success: false,
-        message: "Emergency request not found",
-      });
+      return error(res, 404, "Emergency request not found");
     }
 
-    res.status(200).json({
-      success: true,
-      data: request,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return success(res, 200, "Emergency request fetched successfully", request);
+  } catch (err) {
+    next(err);
   }
 };
 
-
-export const updateEmergencyStatus = async (req, res) => {
+/**
+ * @desc    Update emergency request status
+ * @route   PATCH /api/emergencies/:id/status
+ * @access  Admin (future)
+ */
+export const updateEmergencyStatus = async (req, res, next) => {
   try {
     const { status } = req.body;
     const allowed = ["new", "in-progress", "resolved"];
 
+    if (!status) {
+      return error(res, 400, "Status is required");
+    }
+
     if (!allowed.includes(status)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid status value",
-      });
+      return error(res, 400, "Invalid status value");
     }
 
     const request = await EmergencyRequest.findByIdAndUpdate(
@@ -180,51 +164,43 @@ export const updateEmergencyStatus = async (req, res) => {
     );
 
     if (!request) {
-      return res.status(404).json({
-        success: false,
-        message: "Emergency request not found",
-      });
+      return error(res, 404, "Emergency request not found");
     }
 
-    res.status(200).json({
-      success: true,
-      message: "Status updated successfully",
-      data: request,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return success(res, 200, "Status updated successfully", request);
+  } catch (err) {
+    next(err);
   }
 };
-export const toggleSeenStatus = async (req, res) => {
+
+/**
+ * @desc    Toggle the seen/unseen status of an emergency request
+ * @route   PATCH /api/emergencies/:id/seen
+ * @access  Admin (future)
+ */
+export const toggleSeenStatus = async (req, res, next) => {
   try {
     const request = await EmergencyRequest.findById(req.params.id);
 
     if (!request) {
-      return res.status(404).json({
-        success: false,
-        message: "Emergency request not found",
-      });
+      return error(res, 404, "Emergency request not found");
     }
 
     request.isSeen = !request.isSeen;
     await request.save();
 
-    res.status(200).json({
-      success: true,
-      message: "Seen status updated",
-      data: request,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return success(res, 200, "Seen status updated", request);
+  } catch (err) {
+    next(err);
   }
 };
-export const getEmergencyStats = async (req, res) => {
+
+/**
+ * @desc    Get emergency request statistics
+ * @route   GET /api/emergencies/stats
+ * @access  Admin (future)
+ */
+export const getEmergencyStats = async (req, res, next) => {
   try {
     const total = await EmergencyRequest.countDocuments();
 
@@ -236,40 +212,31 @@ export const getEmergencyStats = async (req, res) => {
       { $group: { _id: "$urgencyLevel", count: { $sum: 1 } } },
     ]);
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Emergency stats fetched successfully", {
       total,
       byStatus,
       byUrgency,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+  } catch (err) {
+    next(err);
   }
 };
 
-export const deleteEmergencyRequest = async (req, res) => {
+/**
+ * @desc    Delete an emergency request by ID
+ * @route   DELETE /api/emergencies/:id
+ * @access  Admin (future)
+ */
+export const deleteEmergencyRequest = async (req, res, next) => {
   try {
     const request = await EmergencyRequest.findByIdAndDelete(req.params.id);
 
     if (!request) {
-      return res.status(404).json({
-        success: false,
-        message: "Emergency request not found",
-      });
+      return error(res, 404, "Emergency request not found");
     }
 
-    res.status(200).json({
-      success: true,
-      message: "Emergency request deleted",
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return success(res, 200, "Emergency request deleted successfully");
+  } catch (err) {
+    next(err);
   }
 };
-

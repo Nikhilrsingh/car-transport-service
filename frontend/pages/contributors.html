@@ -75,13 +75,13 @@
         </div>
 
         <div class="search-contributor">
-          <input type="text" id="searchInput" placeholder="Search contributor..." />
-          <select id="sortBy" class="filter-select">
+          <input type="text" id="searchInput" placeholder="Search contributor..." aria-label="Search contributors" />
+          <select id="sortBy" class="filter-select" aria-label="Sort by">
             <option value="contributions">Most Contributions</option>
             <option value="alphabetical">Alphabetical</option>
             <option value="recent">Recent Activity</option>
           </select>
-          <select id="filterLevel" class="filter-select">
+          <select id="filterLevel" class="filter-select" aria-label="Filter by league">
             <option value="all">All Contributors</option>
             <option value="top10">Top 10</option>
             <option value="gold">🥇 Gold League</option>
@@ -98,10 +98,10 @@
         <div id="contributorsList" class="contributors-grid"></div>
 
         <div id="controls">
-          <button id="prevPage">⬅️ Prev</button>
+          <button id="prevPage" aria-label="Previous page">⬅️ Prev</button>
           <span>Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
-          <button id="nextPage">Next ➡️</button>
-          <button id="refreshData" title="Refresh data">🔄 Refresh</button>
+          <button id="nextPage" aria-label="Next page">Next ➡️</button>
+          <button id="refreshData" title="Refresh data" aria-label="Refresh data">🔄 Refresh</button>
         </div>
 
         <div id="activityTimeline" class="timeline-container">
@@ -151,9 +151,9 @@
     </section>
   </main>
 
-  <div id="contributorModal" class="contributor-modal">
+  <div id="contributorModal" class="contributor-modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
     <div class="modal-content">
-      <span class="modal-close">&times;</span>
+      <span class="modal-close" aria-label="Close modal">&times;</span>
       <div class="modal-header">
         <img id="modalAvatar" class="modal-avatar" src="" alt="">
         <div class="modal-info">

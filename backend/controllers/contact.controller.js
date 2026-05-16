@@ -2,16 +2,18 @@ import Contact from "../models/contact.model.js";
 import { sendContactEmail } from "../utils/sendEmail.js";
 import cloudinary from "../config/cloudinary.js";
 import streamifier from "streamifier";
+import { success, error } from "../utils/response.js";
 
 /**
- * Upload file buffer to Cloudinary
+ * Upload file buffer to Cloudinary.
+ * Returns a Promise that resolves with the Cloudinary upload result.
  */
 const uploadToCloudinary = (buffer, folder) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       { folder },
-      (error, result) => {
-        if (error) reject(error);
+      (err, result) => {
+        if (err) reject(err);
         else resolve(result);
       }
     );
@@ -21,21 +23,20 @@ const uploadToCloudinary = (buffer, folder) => {
 };
 
 /**
- * @desc    Submit contact form with Cloudinary file uploads
+ * @desc    Submit contact form with optional Cloudinary file uploads
  * @route   POST /api/contact
  * @access  Public
  */
 export const submitContact = async (req, res, next) => {
   try {
-    let { 
-      name = "", 
-      phone = "", 
-      email = "", 
-      vehicle = "", 
-      service = "", 
-      message = "" 
+    let {
+      name = "",
+      phone = "",
+      email = "",
+      vehicle = "",
+      service = "",
+      message = "",
     } = req.body || {};
-
 
     // Trim & normalize input
     name = name?.trim();
@@ -44,10 +45,7 @@ export const submitContact = async (req, res, next) => {
 
     // Validate required fields
     if (!name || !phone || !email || !vehicle || !service || !message) {
-      return res.status(400).json({
-        success: false,
-        message: "All required fields must be filled",
-      });
+      return error(res, 400, "All required fields must be filled");
     }
 
     // Handle file uploads to Cloudinary
@@ -60,8 +58,9 @@ export const submitContact = async (req, res, next) => {
             url: uploaded.secure_url,
             publicId: uploaded.public_id,
           });
-        } catch (err) {
-          console.error("Failed to upload file:", err.message);
+        } catch (uploadErr) {
+          // Log individual file failures but don't abort the whole submission
+          console.error("Failed to upload file:", uploadErr.message);
         }
       }
     }
@@ -77,45 +76,40 @@ export const submitContact = async (req, res, next) => {
       images,
     });
 
-    // Non-blocking email notification
-    // Build HTML for images
-let imagesHtml = "";
-if (contact.images && contact.images.length > 0) {
-  imagesHtml = contact.images
-    .map(
-      (img) =>
-        `<p><strong>Image:</strong><br><img src="${img.url}" alt="Contact Image" style="max-width:300px;"/></p>`
-    )
-    .join("");
-}
+    // Build HTML for images (non-blocking email notification)
+    let imagesHtml = "";
+    if (contact.images && contact.images.length > 0) {
+      imagesHtml = contact.images
+        .map(
+          (img) =>
+            `<p><strong>Image:</strong><br><img src="${img.url}" alt="Contact Image" style="max-width:300px;"/></p>`
+        )
+        .join("");
+    }
 
-// Send email
-sendContactEmail({
-  subject: "📩 New Contact Form Submission",
-  html: `
-    <h2>New Contact Received</h2>
-    <p><strong>Name:</strong> ${contact.name}</p>
-    <p><strong>Email:</strong> ${contact.email}</p>
-    <p><strong>Phone:</strong> ${contact.phone}</p>
-    <p><strong>Vehicle:</strong> ${contact.vehicle}</p>
-    <p><strong>Service:</strong> ${contact.service}</p>
-    <p><strong>Message:</strong> ${contact.message}</p>
-    ${imagesHtml} <!-- Insert uploaded images here -->
-  `,
-}).catch((err) => {
-  console.error("Email failed but contact saved:", err.message);
-});
-
-
-    return res.status(201).json({
-      success: true,
-      message: "Message sent successfully",
-      data: contact,
+    // Fire-and-forget — email failure must not affect the HTTP response
+    sendContactEmail({
+      subject: "📩 New Contact Form Submission",
+      html: `
+        <h2>New Contact Received</h2>
+        <p><strong>Name:</strong> ${contact.name}</p>
+        <p><strong>Email:</strong> ${contact.email}</p>
+        <p><strong>Phone:</strong> ${contact.phone}</p>
+        <p><strong>Vehicle:</strong> ${contact.vehicle}</p>
+        <p><strong>Service:</strong> ${contact.service}</p>
+        <p><strong>Message:</strong> ${contact.message}</p>
+        ${imagesHtml}
+      `,
+    }).catch((emailErr) => {
+      console.error("Email failed but contact saved:", emailErr.message);
     });
-  } catch (error) {
-    next(error);
+
+    return success(res, 201, "Message sent successfully", contact);
+  } catch (err) {
+    next(err);
   }
 };
+
 /**
  * @desc    Get all contact messages (with pagination, search & filter)
  * @route   GET /api/contact
@@ -133,7 +127,7 @@ export const getAllContacts = async (req, res, next) => {
 
     const query = {};
 
-    // Search by name, email, phone, vehicle
+    // Search by name, email, phone, or vehicle
     if (search) {
       query.$or = [
         { name: { $regex: search, $options: "i" } },
@@ -143,15 +137,8 @@ export const getAllContacts = async (req, res, next) => {
       ];
     }
 
-    // Filter by status
-    if (status) {
-      query.status = status;
-    }
-
-    // Filter by service
-    if (service) {
-      query.service = service;
-    }
+    if (status) query.status = status;
+    if (service) query.service = service;
 
     const total = await Contact.countDocuments(query);
 
@@ -161,18 +148,16 @@ export const getAllContacts = async (req, res, next) => {
       .limit(Number(limit))
       .select("-__v");
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Contacts fetched successfully", {
       total,
       page: Number(page),
       limit: Number(limit),
       data: contacts,
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
-
 
 /**
  * @desc    Update contact status
@@ -185,17 +170,11 @@ export const updateContactStatus = async (req, res, next) => {
     const allowedStatus = ["new", "in-progress", "resolved"];
 
     if (!status) {
-      return res.status(400).json({
-        success: false,
-        message: "Status is required",
-      });
+      return error(res, 400, "Status is required");
     }
 
     if (!allowedStatus.includes(status)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid status value",
-      });
+      return error(res, 400, "Invalid status value");
     }
 
     const contact = await Contact.findByIdAndUpdate(
@@ -205,85 +184,80 @@ export const updateContactStatus = async (req, res, next) => {
     );
 
     if (!contact) {
-      return res.status(404).json({
-        success: false,
-        message: "Contact message not found",
-      });
+      return error(res, 404, "Contact message not found");
     }
 
-    res.status(200).json({
-      success: true,
-      message: "Contact status updated",
-      data: contact,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Contact status updated", contact);
+  } catch (err) {
+    next(err);
   }
 };
 
-
+/**
+ * @desc    Get a single contact by ID
+ * @route   GET /api/contact/:id
+ * @access  Admin (future)
+ */
 export const getContactById = async (req, res, next) => {
   try {
     const contact = await Contact.findById(req.params.id).select("-__v");
 
     if (!contact) {
-      return res.status(404).json({
-        success: false,
-        message: "Contact not found",
-      });
+      return error(res, 404, "Contact not found");
     }
 
-    res.status(200).json({
-      success: true,
-      data: contact,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Contact fetched successfully", contact);
+  } catch (err) {
+    next(err);
   }
 };
 
+/**
+ * @desc    Delete a contact by ID
+ * @route   DELETE /api/contact/:id
+ * @access  Admin (future)
+ */
 export const deleteContact = async (req, res, next) => {
   try {
     const contact = await Contact.findByIdAndDelete(req.params.id);
 
     if (!contact) {
-      return res.status(404).json({
-        success: false,
-        message: "Contact not found",
-      });
+      return error(res, 404, "Contact not found");
     }
 
-    res.status(200).json({
-      success: true,
-      message: "Contact deleted successfully",
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Contact deleted successfully");
+  } catch (err) {
+    next(err);
   }
 };
+
+/**
+ * @desc    Toggle read/unread status for a contact
+ * @route   PATCH /api/contact/:id/read
+ * @access  Admin (future)
+ */
 export const toggleReadStatus = async (req, res, next) => {
   try {
     const contact = await Contact.findById(req.params.id);
 
     if (!contact) {
-      return res.status(404).json({
-        success: false,
-        message: "Contact not found",
-      });
+      return error(res, 404, "Contact not found");
     }
 
     contact.isRead = !contact.isRead;
     await contact.save();
 
-    res.status(200).json({
-      success: true,
-      message: "Read status updated",
-      data: contact,
-    });
-  } catch (error) {
-    next(error);
+    return success(res, 200, "Read status updated", contact);
+  } catch (err) {
+    next(err);
   }
 };
+
+/**
+ * @desc    Get contact statistics grouped by status
+ * @route   GET /api/contact/stats
+ * @access  Admin (future)
+ */
 export const getContactStats = async (req, res, next) => {
   try {
     const stats = await Contact.aggregate([
@@ -297,12 +271,11 @@ export const getContactStats = async (req, res, next) => {
 
     const total = await Contact.countDocuments();
 
-    res.status(200).json({
-      success: true,
+    return success(res, 200, "Contact stats fetched successfully", {
       total,
       stats,
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };

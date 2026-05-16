@@ -3,11 +3,11 @@ import Booking from '../models/booking.model.js';
 import { success, error } from '../utils/response.js';
 
 /**
- * @desc    Create a new review
+ * @desc    Create a new review for a completed booking
  * @route   POST /api/reviews
  * @access  Private
  */
-export const createReview = async (req, res) => {
+export const createReview = async (req, res, next) => {
   try {
     const { bookingId, rating, title, comment } = req.body;
     const userId = req.user._id;
@@ -17,42 +17,39 @@ export const createReview = async (req, res) => {
       return error(res, 400, 'Booking ID, rating, and comment are required');
     }
 
-    // Check if booking exists and belongs to user
+    // Check if booking exists and belongs to this user
     const booking = await Booking.findOne({ _id: bookingId, customerId: userId });
     if (!booking) {
       return error(res, 404, 'Booking not found or does not belong to you');
     }
 
-    // Check if booking is completed
+    // Only allow reviews on completed (delivered) bookings
     if (booking.status !== 'delivered') {
       return error(res, 400, 'You can only review completed bookings');
     }
 
-    // Check if user already reviewed this booking
+    // Prevent duplicate reviews for the same booking
     const existingReview = await Review.findOne({ user: userId, booking: bookingId });
     if (existingReview) {
       return error(res, 400, 'You have already reviewed this booking');
     }
 
-    // Create review
     const review = await Review.create({
       user: userId,
       booking: bookingId,
       rating: Number(rating),
       title: title || '',
       comment,
-      isVerified: true, // Verified because booking exists
+      isVerified: true, // Verified because we confirmed the booking exists
       status: 'approved',
     });
 
-    // Populate user data
     await review.populate('user', 'name email profilePicture');
     await review.populate('booking', 'bookingReference');
 
     return success(res, 201, 'Review created successfully', review);
   } catch (err) {
-    console.error('Create review error:', err);
-    return error(res, 500, err.message || 'Failed to create review');
+    next(err);
   }
 };
 
@@ -61,22 +58,16 @@ export const createReview = async (req, res) => {
  * @route   GET /api/reviews
  * @access  Public
  */
-export const getAllReviews = async (req, res) => {
+export const getAllReviews = async (req, res, next) => {
   try {
     const { page = 1, limit = 10, rating, sort = 'recent' } = req.query;
 
-    // Build query
     const query = { status: 'approved' };
-    if (rating) {
-      query.rating = Number(rating);
-    }
+    if (rating) query.rating = Number(rating);
 
     // Determine sort order
     let sortOption;
     switch (sort) {
-      case 'recent':
-        sortOption = { createdAt: -1 };
-        break;
       case 'highest':
         sortOption = { rating: -1, createdAt: -1 };
         break;
@@ -89,7 +80,6 @@ export const getAllReviews = async (req, res) => {
 
     const skip = (Number(page) - 1) * Number(limit);
 
-    // Get reviews with pagination
     const reviews = await Review.find(query)
       .populate('user', 'name profilePicture')
       .sort(sortOption)
@@ -97,7 +87,6 @@ export const getAllReviews = async (req, res) => {
       .skip(skip)
       .lean();
 
-    // Get total count
     const total = await Review.countDocuments(query);
 
     return success(res, 200, 'Reviews fetched successfully', {
@@ -110,17 +99,16 @@ export const getAllReviews = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error('Get reviews error:', err);
-    return error(res, 500, err.message || 'Failed to fetch reviews');
+    next(err);
   }
 };
 
 /**
- * @desc    Get review statistics
+ * @desc    Get review statistics (average rating and rating breakdown)
  * @route   GET /api/reviews/stats
  * @access  Public
  */
-export const getReviewStats = async (req, res) => {
+export const getReviewStats = async (req, res, next) => {
   try {
     const reviews = await Review.find({ status: 'approved' });
 
@@ -128,21 +116,13 @@ export const getReviewStats = async (req, res) => {
       return success(res, 200, 'No reviews yet', {
         averageRating: 0,
         totalReviews: 0,
-        ratingBreakdown: {
-          5: 0,
-          4: 0,
-          3: 0,
-          2: 0,
-          1: 0,
-        },
+        ratingBreakdown: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 },
       });
     }
 
-    // Calculate average rating
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = (totalRating / reviews.length).toFixed(1);
 
-    // Calculate rating breakdown
     const ratingBreakdown = {
       5: reviews.filter((r) => r.rating === 5).length,
       4: reviews.filter((r) => r.rating === 4).length,
@@ -157,17 +137,16 @@ export const getReviewStats = async (req, res) => {
       ratingBreakdown,
     });
   } catch (err) {
-    console.error('Get review stats error:', err);
-    return error(res, 500, err.message || 'Failed to fetch review stats');
+    next(err);
   }
 };
 
 /**
- * @desc    Get current user's reviews
+ * @desc    Get current user's own reviews
  * @route   GET /api/reviews/my-reviews
  * @access  Private
  */
-export const getMyReviews = async (req, res) => {
+export const getMyReviews = async (req, res, next) => {
   try {
     const userId = req.user._id;
 
@@ -178,40 +157,37 @@ export const getMyReviews = async (req, res) => {
 
     return success(res, 200, 'Your reviews fetched successfully', reviews);
   } catch (err) {
-    console.error('Get my reviews error:', err);
-    return error(res, 500, err.message || 'Failed to fetch your reviews');
+    next(err);
   }
 };
 
 /**
- * @desc    Update a review
+ * @desc    Update a review (owner only, within 7 days of posting)
  * @route   PUT /api/reviews/:id
  * @access  Private
  */
-export const updateReview = async (req, res) => {
+export const updateReview = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { rating, title, comment } = req.body;
     const userId = req.user._id;
 
-    // Find review
     const review = await Review.findById(id);
     if (!review) {
       return error(res, 404, 'Review not found');
     }
 
-    // Check ownership
+    // Only the review author can edit
     if (review.user.toString() !== userId.toString()) {
       return error(res, 403, 'You can only edit your own reviews');
     }
 
-    // Check if editable (within 7 days)
+    // Enforce 7-day edit window
     const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     if (review.createdAt < sevenDaysAgo) {
       return error(res, 400, 'Reviews can only be edited within 7 days of posting');
     }
 
-    // Update fields
     if (rating) review.rating = Number(rating);
     if (title !== undefined) review.title = title;
     if (comment) review.comment = comment;
@@ -223,28 +199,26 @@ export const updateReview = async (req, res) => {
 
     return success(res, 200, 'Review updated successfully', review);
   } catch (err) {
-    console.error('Update review error:', err);
-    return error(res, 500, err.message || 'Failed to update review');
+    next(err);
   }
 };
 
 /**
- * @desc    Delete a review
+ * @desc    Delete a review (owner only)
  * @route   DELETE /api/reviews/:id
  * @access  Private
  */
-export const deleteReview = async (req, res) => {
+export const deleteReview = async (req, res, next) => {
   try {
     const { id } = req.params;
     const userId = req.user._id;
 
-    // Find review
     const review = await Review.findById(id);
     if (!review) {
       return error(res, 404, 'Review not found');
     }
 
-    // Check ownership
+    // Only the review author can delete
     if (review.user.toString() !== userId.toString()) {
       return error(res, 403, 'You can only delete your own reviews');
     }
@@ -253,41 +227,36 @@ export const deleteReview = async (req, res) => {
 
     return success(res, 200, 'Review deleted successfully', {});
   } catch (err) {
-    console.error('Delete review error:', err);
-    return error(res, 500, err.message || 'Failed to delete review');
+    next(err);
   }
 };
 
 /**
- * @desc    Check if user can review a booking
+ * @desc    Check if a user is eligible to review a booking
  * @route   GET /api/reviews/check/:bookingId
  * @access  Private
  */
-export const checkReviewEligibility = async (req, res) => {
+export const checkReviewEligibility = async (req, res, next) => {
   try {
     const { bookingId } = req.params;
     const userId = req.user._id;
 
-    // Check if booking exists and belongs to user
     const booking = await Booking.findOne({ _id: bookingId, customerId: userId });
     if (!booking) {
-      return success(res, 200, 'Eligible check', { canReview: false, reason: 'Booking not found' });
+      return success(res, 200, 'Eligibility check', { canReview: false, reason: 'Booking not found' });
     }
 
-    // Check if booking is completed
     if (booking.status !== 'delivered') {
-      return success(res, 200, 'Eligible check', { canReview: false, reason: 'Booking not completed' });
+      return success(res, 200, 'Eligibility check', { canReview: false, reason: 'Booking not completed' });
     }
 
-    // Check if already reviewed
     const existingReview = await Review.findOne({ user: userId, booking: bookingId });
     if (existingReview) {
-      return success(res, 200, 'Eligible check', { canReview: false, reason: 'Already reviewed', review: existingReview });
+      return success(res, 200, 'Eligibility check', { canReview: false, reason: 'Already reviewed', review: existingReview });
     }
 
-    return success(res, 200, 'Eligible check', { canReview: true });
+    return success(res, 200, 'Eligibility check', { canReview: true });
   } catch (err) {
-    console.error('Check review eligibility error:', err);
-    return error(res, 500, err.message || 'Failed to check eligibility');
+    next(err);
   }
 };

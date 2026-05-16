@@ -1985,24 +1985,24 @@
                             <div class="progress-line">
                                 <div class="progress-line-fill" id="progressFill"></div>
                             </div>
-                            <div class="step active" data-step="1">
+                            <div class="step active" data-step="1" aria-current="step">
                                 <div class="step-circle">
                                     <span class="step-number">1</span>
-                                    <i class="fas fa-check"></i>
+                                    <i class="fas fa-check" aria-hidden="true"></i>
                                 </div>
                                 <div class="step-label">Details</div>
                             </div>
                             <div class="step" data-step="2">
                                 <div class="step-circle">
                                     <span class="step-number">2</span>
-                                    <i class="fas fa-check"></i>
+                                    <i class="fas fa-check" aria-hidden="true"></i>
                                 </div>
                                 <div class="step-label">Review</div>
                             </div>
                             <div class="step" data-step="3">
                                 <div class="step-circle">
                                     <span class="step-number">3</span>
-                                    <i class="fas fa-check"></i>
+                                    <i class="fas fa-check" aria-hidden="true"></i>
                                 </div>
                                 <div class="step-label">Confirm</div>
                             </div>
@@ -2016,33 +2016,33 @@
                         <div class="form-step active" data-step="1">
 
                             <div class="step-header">
-                                <h3><i class="fas fa-user-circle"></i> Personal & Vehicle Information</h3>
+                                <h3><i class="fas fa-user-circle" aria-hidden="true"></i> Personal & Vehicle Information</h3>
                                 <p>Tell us about yourself and your vehicle</p>
                             </div>
 
                             <!-- ===== ROW 1 : NAME + PHONE ===== -->
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
+                                    <label for="fullName"><i class="fas fa-user" aria-hidden="true"></i> Full Name *</label>
                                     <input type="text" id="fullName" name="fullName" required
-                                        placeholder="Enter your full name">
-                                    <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="nameError">Please enter your full name</div>
+                                        placeholder="Enter your full name" aria-required="true">
+                                    <span class="validation-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                                    <div class="error-message" id="nameError" role="alert">Please enter your full name</div>
                                 </div>
 
                                 <div class="form-group phone-group">
-                                    <label><i class="fas fa-phone"></i> Phone Number *</label>
+                                    <label for="phone"><i class="fas fa-phone" aria-hidden="true"></i> Phone Number *</label>
                                     <div class="phone-row">
-                                        <select class="country-code">
+                                        <select class="country-code" aria-label="Country code">
                                             <option value="+91">+91 (India)</option>
                                         </select>
                                         <div class="phone-input-box">
                                             <input type="tel" id="phone" name="phone" placeholder="92345 75818"
-                                                required />
-                                            <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
+                                                required aria-required="true" />
+                                            <span class="validation-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
                                         </div>
                                     </div>
-                                    <div class="error-message" id="phoneError">
+                                    <div class="error-message" id="phoneError" role="alert">
                                         Please enter a valid 10-digit Indian phone number
                                     </div>
                                 </div>
@@ -2052,13 +2052,13 @@
                             <div class="form-row">
                                 <div class="form-group full-width">
                                     <label for="email">
-                                        <i class="fas fa-envelope"></i> Email Address *
+                                        <i class="fas fa-envelope" aria-hidden="true"></i> Email Address *
                                     </label>
-                                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                                    <input type="email" id="email" name="email" required placeholder="Enter your email" aria-required="true">
                                     <span class="validation-icon">
-                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-check-circle" aria-hidden="true"></i>
                                     </span>
-                                    <div class="error-message" id="emailError">
+                                    <div class="error-message" id="emailError" role="alert">
                                         Please enter a valid email address
                                     </div>
                                 </div>
@@ -2067,8 +2067,8 @@
                             <!-- ===== ROW 3 : VEHICLE ===== -->
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="vehicleType"><i class="fas fa-car"></i> Vehicle Type *</label>
-                                    <select id="vehicleType" name="vehicleType" required>
+                                    <label for="vehicleType"><i class="fas fa-car" aria-hidden="true"></i> Vehicle Type *</label>
+                                    <select id="vehicleType" name="vehicleType" required aria-required="true">
                                         <option value="">Select Vehicle Type</option>
                                         <option value="hatchback">Hatchback</option>
                                         <option value="sedan">Sedan</option>
@@ -2077,12 +2077,12 @@
                                         <option value="bike">Motorcycle</option>
                                         <option value="commercial">Commercial Vehicle</option>
                                     </select>
-                                    <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="error-message" id="vehicleError">Please select vehicle type</div>
+                                    <span class="validation-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                                    <div class="error-message" id="vehicleError" role="alert">Please select vehicle type</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="vehicleModel"><i class="fas fa-cog"></i> Vehicle Model</label>
+                                    <label for="vehicleModel"><i class="fas fa-cog" aria-hidden="true"></i> Vehicle Model</label>
                                     <input type="text" id="vehicleModel" name="vehicleModel"
                                         placeholder="e.g., Hyundai Creta">
                                 </div>
@@ -2090,16 +2090,16 @@
 
                             <!-- ===== ADD-ONS (OUTSIDE GRID) ===== -->
                             <div class="addon-services">
-                                <h4><i class="fas fa-plus-circle"></i> Add-on Services (Optional)</h4>
+                                <h4><i class="fas fa-plus-circle" aria-hidden="true"></i> Add-on Services (Optional)</h4>
 
                                 <div class="addon-grid">
                                     <!-- Interior Cleaning -->
-                                    <label class="addon-card">
+                                    <label class="addon-card" aria-label="Add interior cleaning for 500 rupees">
                                         <input type="checkbox" class="addon-checkbox" data-addon="cleaning"
                                             data-price="500" onchange="updateAddonPrice()">
-                                        <div class="addon-checkmark"></div>
+                                        <div class="addon-checkmark" aria-hidden="true"></div>
                                         <div class="addon-icon-wrapper">
-                                            <i class="fas fa-spray-can"></i>
+                                            <i class="fas fa-spray-can" aria-hidden="true"></i>
                                         </div>
                                         <div class="addon-content">
                                             <div class="addon-header">
@@ -2187,25 +2187,25 @@
 
                         <!-- Location Information -->
                         <div class="form-group">
-                            <label for="pickupCity"><i class="fas fa-map-marker-alt"></i> Pickup City *</label>
+                            <label for="pickupCity"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Pickup City *</label>
                             <div class="autocomplete-wrapper">
                                 <input type="text" id="pickupCity" name="pickupCity" required
-                                    placeholder="Start typing city name..." autocomplete="off">
+                                    placeholder="Start typing city name..." autocomplete="off" aria-required="true">
                                 <div class="autocomplete-dropdown" id="pickupCityDropdown"></div>
                             </div>
-                            <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                            <div class="error-message" id="pickupError">Please select pickup city</div>
+                            <span class="validation-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                            <div class="error-message" id="pickupError" role="alert">Please select pickup city</div>
                         </div>
 
                         <div class="form-group">
-                            <label for="dropCity"><i class="fas fa-flag-checkered"></i> Drop City *</label>
+                            <label for="dropCity"><i class="fas fa-flag-checkered" aria-hidden="true"></i> Drop City *</label>
                             <div class="autocomplete-wrapper">
                                 <input type="text" id="dropCity" name="dropCity" required
-                                    placeholder="Start typing city name..." autocomplete="off">
+                                    placeholder="Start typing city name..." autocomplete="off" aria-required="true">
                                 <div class="autocomplete-dropdown" id="dropCityDropdown"></div>
                             </div>
-                            <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                            <div class="error-message" id="dropError">Please select drop city</div>
+                            <span class="validation-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                            <div class="error-message" id="dropError" role="alert">Please select drop city</div>
                         </div>
 
                         <!-- Hidden fields for full addresses (optional) -->
@@ -2215,16 +2215,16 @@
                         <!-- Date & Time -->
                         <div class="date-time-row">
                             <div class="form-group">
-                                <label for="pickupDate"><i class="fas fa-calendar"></i> Preferred Pickup Date
+                                <label for="pickupDate"><i class="fas fa-calendar" aria-hidden="true"></i> Preferred Pickup Date
                                     *</label>
-                                <input type="date" id="pickupDate" name="pickupDate" required>
-                                <span class="validation-icon"><i class="fas fa-check-circle"></i></span>
-                                <div class="error-message" id="dateError">Please select pickup date</div>
-                                <div class="date-warning" id="dateWarning"></div>
+                                <input type="date" id="pickupDate" name="pickupDate" required aria-required="true">
+                                <span class="validation-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                                <div class="error-message" id="dateError" role="alert">Please select pickup date</div>
+                                <div class="date-warning" id="dateWarning" role="alert"></div>
                             </div>
                             <div class="form-group">
-                                <label for="pickupTime"><i class="fas fa-clock"></i> Preferred Time</label>
-                                <select id="pickupTime" name="pickupTime">
+                                <label for="pickupTime"><i class="fas fa-clock" aria-hidden="true"></i> Preferred Time</label>
+                                <select id="pickupTime" name="pickupTime" aria-label="Preferred pickup time">
                                     <option value="any">Any Time</option>
                                     <option value="morning">Morning (8 AM - 12 PM)</option>
                                     <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
@@ -2236,9 +2236,9 @@
                         <!-- Route Optimization with Waypoints -->
                         <div class="waypoints-section">
                             <div class="waypoints-header">
-                                <h4><i class="fas fa-map-signs"></i> Add Stops Along the Way</h4>
-                                <button type="button" class="add-waypoint-btn" onclick="addWaypoint()">
-                                    <i class="fas fa-plus"></i> Add Stop
+                                <h4><i class="fas fa-map-signs" aria-hidden="true"></i> Add Stops Along the Way</h4>
+                                <button type="button" class="add-waypoint-btn" onclick="addWaypoint()" aria-label="Add a stop">
+                                    <i class="fas fa-plus" aria-hidden="true"></i> Add Stop
                                 </button>
                             </div>
                             <p style="color: #999; font-size: 0.9rem; margin-bottom: 15px;">
@@ -2248,15 +2248,15 @@
                                 <!-- Waypoints will be added dynamically -->
                             </div>
                             <button type="button" class="optimize-route-btn" id="optimizeRouteBtn"
-                                onclick="optimizeRoute()" style="display: none;">
-                                <i class="fas fa-route"></i> Optimize Route Order
+                                onclick="optimizeRoute()" style="display: none;" aria-label="Optimize route order">
+                                <i class="fas fa-route" aria-hidden="true"></i> Optimize Route Order
                             </button>
-                            <div class="optimization-result" id="optimizationResult">
-                                <h5><i class="fas fa-check-circle"></i> Route Optimized!</h5>
+                            <div class="optimization-result" id="optimizationResult" role="status">
+                                <h5><i class="fas fa-check-circle" aria-hidden="true"></i> Route Optimized!</h5>
                                 <div class="optimization-stats">
-                                    <div><i class="fas fa-road"></i> Distance Saved: <strong id="distanceSaved">0
+                                    <div><i class="fas fa-road" aria-hidden="true"></i> Distance Saved: <strong id="distanceSaved">0
                                             km</strong></div>
-                                    <div><i class="fas fa-clock"></i> Time Saved: <strong id="timeSaved">0
+                                    <div><i class="fas fa-clock" aria-hidden="true"></i> Time Saved: <strong id="timeSaved">0
                                             mins</strong></div>
                                 </div>
                             </div>
@@ -2277,14 +2277,14 @@
                         </div>
 
                         <div class="form-navigation">
-                            <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()">
-                                <i class="fas fa-arrow-left"></i> Previous
+                            <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()" aria-label="Previous step">
+                                <i class="fas fa-arrow-left" aria-hidden="true"></i> Previous
                             </button>
-                            <button type="button" class="save-later-btn" onclick="openSaveEmailModal()">
-                                <i class="fas fa-save"></i> Save & Continue Later
+                            <button type="button" class="save-later-btn" onclick="openSaveEmailModal()" aria-label="Save and continue later">
+                                <i class="fas fa-save" aria-hidden="true"></i> Save & Continue Later
                             </button>
-                            <button type="button" class="booking-nav-btn booking-btn-next" onclick="nextStep()">
-                                Next <i class="fas fa-arrow-right"></i>
+                            <button type="button" class="booking-nav-btn booking-btn-next" onclick="nextStep()" aria-label="Next step">
+                                Next <i class="fas fa-arrow-right" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -2298,13 +2298,13 @@
 
                         <!-- Additional Information -->
                         <div class="form-group">
-                            <label for="additionalInfo"><i class="fas fa-comment"></i> Additional
+                            <label for="additionalInfo"><i class="fas fa-comment" aria-hidden="true"></i> Additional
                                 Information</label>
                             <textarea id="additionalInfo" name="additionalInfo"
                                 placeholder="Any special requirements or instructions..." rows="4"
-                                maxlength="500"></textarea>
-                            <div class="character-counter">
-                                <span id="charCount">0</span> / 500 characters
+                                maxlength="500" aria-describedby="charCount"></textarea>
+                            <div class="character-counter" id="charCounter">
+                                <span id="charCount" aria-live="polite">0</span> / 500 characters
                             </div>
                         </div>
 
@@ -2319,11 +2319,11 @@
                         </div>
 
                         <div class="form-navigation">
-                            <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()">
-                                <i class="fas fa-arrow-left"></i> Previous
+                            <button type="button" class="booking-nav-btn booking-btn-prev" onclick="prevStep()" aria-label="Previous step">
+                                <i class="fas fa-arrow-left" aria-hidden="true"></i> Previous
                             </button>
-                            <button type="submit" class="booking-submit-btn" id="submitBtn">
-                                <i class="fas fa-paper-plane"></i>
+                            <button type="submit" class="booking-submit-btn" id="submitBtn" aria-label="Confirm booking">
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
                                 <span>Confirm Booking</span>
                             </button>
                         </div>
