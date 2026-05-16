@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
     "supertest": "^7.0.0"
   },
   "jest": {
