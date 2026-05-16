@@ -18,7 +18,9 @@ import profileRoutes from "./routes/profile.routes.js";
 import invoiceRoutes from "./routes/invoice.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
 
-connectDB();
+if (process.env.NODE_ENV !== "test") {
+  connectDB();
+}
 
 const app = express();
 
@@ -69,5 +71,9 @@ app.use("/api/reviews", reviewRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+if (process.env.NODE_ENV !== "test") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+export default app;
