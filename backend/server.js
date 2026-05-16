@@ -2,6 +2,7 @@ import "dotenv/config.js";
 
 import { notFound, errorHandler } from "./middleware/error.middleware.js";
 import express from "express";
+import rateLimit from "express-rate-limit";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
@@ -24,6 +25,18 @@ if (process.env.NODE_ENV !== "test") {
 
 const app = express();
 
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per window
+  message: { message: "Too many requests from this IP, please try again after 15 minutes" }
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // Limit each IP to 10 requests per window for auth routes
+  message: { message: "Too many authentication attempts, please try again later" }
+});
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://127.0.0.1:5500",
@@ -31,6 +44,7 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(globalLimiter);
 app.use(
   session({
     name: "session",
@@ -57,7 +71,7 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/feedbacks", feedbackRoutes);
 app.use("/api/enquiries", enquiryRoutes);
