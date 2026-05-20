@@ -628,6 +628,10 @@
 
         if (!fromCity || !toCity) {
             distanceValue.textContent = '---';
+            // Dispatch empty event to reset visualizer
+            document.dispatchEvent(new CustomEvent('routeDetailsUpdated', {
+                detail: { from: '', to: '', distance: 0 }
+            }));
             return;
         }
 
@@ -635,6 +639,10 @@
         if (fromCity.toLowerCase() === toCity.toLowerCase()) {
             distanceValue.textContent = 'Same city!';
             distanceValue.style.color = '#ef4444';
+            // Dispatch empty event to reset visualizer
+            document.dispatchEvent(new CustomEvent('routeDetailsUpdated', {
+                detail: { from: '', to: '', distance: 0 }
+            }));
             return;
         }
 
@@ -648,6 +656,15 @@
             distanceValue.textContent = `--- km`;
             distanceValue.style.color = '#fbbf24';
         }
+
+        // Dispatch custom event for route visualizer
+        document.dispatchEvent(new CustomEvent('routeDetailsUpdated', {
+            detail: {
+                from: fromCity,
+                to: toCity,
+                distance: distance || 0
+            }
+        }));
     }
 
     /**
@@ -822,6 +839,11 @@
         selectedToCity = '';
         currentQuoteData = null;
         goToStep(1);
+
+        // Dispatch empty event to reset visualizer
+        document.dispatchEvent(new CustomEvent('routeDetailsUpdated', {
+            detail: { from: '', to: '', distance: 0 }
+        }));
     }
 
     /**
