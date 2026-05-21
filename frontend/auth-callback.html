@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/enhancements.css?v=1" />
     <title>Authenticating... | Harihar Car Carriers</title>
     <style>
       body {
@@ -14,11 +15,13 @@
         background: #f6f6f6;
       }
     </style>
-  </head>
+    <link rel="stylesheet" href="../css/components/color-fix.css">
+</head>
   <body>
-    <h2>Successfully authenticated! Redirecting...</h2>
+    <h2 id="auth-status">Verifying authentication...</h2>
     <script>
       window.onload = () => {
+        const statusEl = document.getElementById('auth-status');
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get("token");
 
@@ -61,14 +64,17 @@
               localStorage.setItem("userEmail", decoded.id.email);
             }
           } catch (e) {
-            // Token decoding failed
+            // Token decoding failed — still redirect, token is valid from server
           }
 
+          statusEl.textContent = "Successfully authenticated! Redirecting...";
           // Redirect to the user dashboard
           window.location.href = "pages/dashboard.html";
         } else {
-          alert("Authentication failed.");
-          window.location.href = "pages/login.html";
+          statusEl.textContent = "Authentication failed. Please try again.";
+          setTimeout(() => {
+            window.location.href = "pages/login.html";
+          }, 2000);
         }
       };
     </script>

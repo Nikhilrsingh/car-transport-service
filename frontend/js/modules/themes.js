@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Detect if we are inside /pages/ (e.g. /pages/pricing.html) or at root
   const isSubPage = window.location.pathname.includes("/pages/");
 
-  // Resolve correct CSS paths based on current location
-  const LIGHT = isSubPage ? "../css/light-mode.css" : "./css/light-mode.css";
-  const DARK = isSubPage ? "../css/dark-mode.css" : "./css/dark-mode.css";
+  // Resolve correct CSS paths based on current location with cache-busting parameter
+  const THEME_VERSION = "25"; // Increment this to force reload theme CSS
+  const LIGHT = (isSubPage ? "../css/light-mode.css" : "./css/light-mode.css") + `?v=${THEME_VERSION}`;
+  const DARK = (isSubPage ? "../css/dark-mode.css" : "./css/dark-mode.css") + `?v=${THEME_VERSION}`;
 
   // Ensure there is a <link id="theme-style"> tag
   let themeLink = document.getElementById("theme-style");

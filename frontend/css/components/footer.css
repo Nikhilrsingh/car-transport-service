@@ -633,6 +633,7 @@ footer.footer,
   --card-border: var(--footer-card-border, rgba(255, 255, 255, 0.18));
   --muted: var(--footer-muted, rgba(208, 208, 208, 0.9));
   --heading: var(--footer-heading, var(--footer-text, #ffffff));
+  --text: var(--footer-text, #d0d0d0);
   --accent: var(--accent, #ff6b46);
   --accent-2: var(--accent-2, #ff8a66);
   --highlight: var(--footer-highlight, #fff5f0);
@@ -1182,135 +1183,299 @@ footer.footer,
 
 /* ====================================
    FOOTER - Light Mode Styles
+   COMPREHENSIVE FIX: Resets all footer-scoped CSS variables
+   so every element that uses var(--heading), var(--muted),
+   var(--highlight), var(--card), var(--text) etc. renders
+   correctly on white/light backgrounds.
    ==================================== */
+
+/* ── STEP 1: Override the footer-scoped CSS variables ───── */
 body[data-theme="light"] footer.footer,
 body[data-theme="light"] #footer-container footer.footer,
 body[data-theme="light"] #footer-container .footer {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%) !important;
-  color: #333 !important;
+  background: linear-gradient(135deg, #fdf6f0 0%, #f5ebe2 50%, #fdf6f0 100%) !important;
+  color: #2A1A10 !important;
+
+  /* Reset ALL scoped vars to light values */
+  --card:             #ffffff !important;
+  --card-border:      rgba(200, 140, 100, 0.18) !important;
+  --muted:            #7A5C4F !important;
+  --heading:          #1A0A00 !important;
+  --text:             #3A2010 !important;
+  --highlight:        #1A0A00 !important;
+  --accent:           #FF6B35 !important;
+  --accent-2:         #FF8C42 !important;
+  /* Explicitly set the fallback vars used in the footer scoped block */
+  --footer-bg:        linear-gradient(135deg, #fdf6f0 0%, #f5ebe2 50%, #fdf6f0 100%) !important;
+  --footer-text:      #3A2010 !important;
+  --footer-heading:   #1A0A00 !important;
+  --footer-muted:     #7A5C4F !important;
+  --footer-highlight: #1A0A00 !important;
+  --footer-card:      #ffffff !important;
+  --footer-card-border: rgba(200, 140, 100, 0.18) !important;
 }
 
+/* ── STEP 2: Footer cards ────────────────────────────────── */
 body[data-theme="light"] .footer-card {
   background: #ffffff !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(200, 140, 100, 0.18) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
 }
 
-body[data-theme="light"] .footer-heading,
+/* ── STEP 3: Headings & brand ────────────────────────────── */
+body[data-theme="light"] .footer-heading {
+  color: #1A0A00 !important;
+}
+
 body[data-theme="light"] .footer-brand {
-  color: #1a1a1a !important;
+  color: #FF6B35 !important;
 }
 
+/* ── STEP 4: Body text / about paragraph ─────────────────── */
 body[data-theme="light"] .footer-about p,
 body[data-theme="light"] .footer-card p {
-  color: #555 !important;
+  color: #5A3A28 !important;
 }
 
+/* ── STEP 5: Footer links ────────────────────────────────── */
 body[data-theme="light"] .footer-links a,
-body[data-theme="light"] .footer-links li a {
-  color: #444 !important;
+body[data-theme="light"] .footer-links li a,
+body[data-theme="light"] .footer-links li {
+  color: #3A2010 !important;
 }
 
-body[data-theme="light"] .footer-links a:hover {
-  color: #ff6347 !important;
+body[data-theme="light"] .footer-links a:hover,
+body[data-theme="light"] .footer-links li a:hover {
+  color: #FF6B35 !important;
 }
 
+/* ── STEP 6: Link icons (e.g. Home, About icons) ─────────── */
+body[data-theme="light"] .footer-links i,
+body[data-theme="light"] .footer-links .fa,
+body[data-theme="light"] .footer-links .fas,
+body[data-theme="light"] .footer-links .fab {
+  color: #7A5C4F !important;
+}
+
+body[data-theme="light"] .footer-links a:hover i,
+body[data-theme="light"] .footer-links a:hover .fa,
+body[data-theme="light"] .footer-links a:hover .fas {
+  color: #FF6B35 !important;
+}
+
+/* ── STEP 7: Contact info ────────────────────────────────── */
+body[data-theme="light"] .contact-info,
 body[data-theme="light"] .contact-info li,
 body[data-theme="light"] .contact-info span,
 body[data-theme="light"] .contact-info a {
-  color: #444 !important;
+  color: #3A2010 !important;
 }
 
-body[data-theme="light"] .contact-info i {
-  color: #ff6347 !important;
+body[data-theme="light"] .contact-info a:hover {
+  color: #FF6B35 !important;
 }
 
+body[data-theme="light"] .contact-info i,
+body[data-theme="light"] .contact-info .fa,
+body[data-theme="light"] .contact-info .fas {
+  color: #FF6B35 !important;
+}
 
+/* ── STEP 8: CTA button ("Get Instant Quote →") ──────────── */
+body[data-theme="light"] .cta-primary {
+  background: linear-gradient(90deg, #FF6B35, #FF8C42) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.30) !important;
+}
+
+body[data-theme="light"] .cta-primary:hover {
+  box-shadow: 0 10px 24px rgba(255, 107, 53, 0.45) !important;
+}
+
+/* ── STEP 9: Newsletter "Subscribe for updates" text ─────── */
+body[data-theme="light"] .newsletter-form p,
+body[data-theme="light"] .newsletter-animated + p,
+body[data-theme="light"] .footer-card .newsletter-form > p {
+  color: #7A5C4F !important;
+}
+
+/* ── STEP 10: Newsletter email input ────────────────────── */
+body[data-theme="light"] .newsletter-animated input,
+body[data-theme="light"] .newsletter-form input,
+body[data-theme="light"] .footer input[type="email"] {
+  background: #F8F0EA !important;
+  color: #1A0A00 !important;
+  border: 1.5px solid rgba(200, 140, 100, 0.30) !important;
+}
+
+body[data-theme="light"] .newsletter-animated input::placeholder,
+body[data-theme="light"] .newsletter-form input::placeholder,
+body[data-theme="light"] .footer input[type="email"]::placeholder {
+  color: #9A7060 !important;
+}
+
+body[data-theme="light"] .newsletter-animated input:focus,
+body[data-theme="light"] .footer input[type="email"]:focus {
+  border-color: #FF6B35 !important;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.14) !important;
+  background: #ffffff !important;
+}
+
+/* ── STEP 11: Newsletter send button ────────────────────── */
+body[data-theme="light"] .newsletter-animated button,
+body[data-theme="light"] .newsletter-form button {
+  background: linear-gradient(135deg, #FF6B35, #E55A25) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.30) !important;
+}
+
+body[data-theme="light"] .newsletter-animated button:hover,
+body[data-theme="light"] .newsletter-form button:hover {
+  box-shadow: 0 6px 18px rgba(255, 107, 53, 0.45) !important;
+}
+
+/* ── STEP 12: Cities search box ─────────────────────────── */
+body[data-theme="light"] .cities-search-input {
+  background: #F8F0EA !important;
+  border: 1.5px solid rgba(200, 140, 100, 0.30) !important;
+}
+
+body[data-theme="light"] .cities-search-input:focus-within {
+  background: #ffffff !important;
+  border-color: #FF6B35 !important;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.14) !important;
+}
+
+body[data-theme="light"] .cities-search-input input {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .cities-search-input input::placeholder {
+  color: #9A7060 !important;
+}
+
+body[data-theme="light"] .cities-search-input i.fa-search {
+  color: #9A7060 !important;
+}
+
+/* ── STEP 13: Cities search clear btn ───────────────────── */
+body[data-theme="light"] .search-clear {
+  color: #9A7060 !important;
+}
+
+body[data-theme="light"] .search-clear:hover {
+  color: #FF6B35 !important;
+}
+
+/* ── STEP 14: Cities search results dropdown ────────────── */
+body[data-theme="light"] .cities-search-results {
+  background: #ffffff !important;
+  border: 1px solid rgba(200, 140, 100, 0.22) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09) !important;
+}
+
+body[data-theme="light"] .city-search-item {
+  color: #3A2010 !important;
+  border-bottom: 1px solid rgba(200, 140, 100, 0.10) !important;
+}
+
+body[data-theme="light"] .city-search-item:hover {
+  background-color: rgba(255, 107, 53, 0.07) !important;
+  color: #FF6B35 !important;
+}
+
+/* ── STEP 15: "Show All Cities →" link ──────────────────── */
+body[data-theme="light"] .show-all-cities {
+  border-top: 1px solid rgba(200, 140, 100, 0.14) !important;
+}
+
+body[data-theme="light"] .all-cities-btn {
+  background: rgba(255, 107, 53, 0.07) !important;
+  color: #CC4A15 !important;
+  border: 1px solid rgba(255, 107, 53, 0.28) !important;
+}
+
+body[data-theme="light"] .all-cities-btn:hover {
+  background: #FF6B35 !important;
+  color: #ffffff !important;
+  border-color: #FF6B35 !important;
+}
+
+/* ── STEP 16: Cities list items (popular-cities) ─────────── */
+body[data-theme="light"] .popular-cities ul.footer-links li a,
+body[data-theme="light"] .popular-cities .footer-links li a {
+  color: #3A2010 !important;
+}
+
+body[data-theme="light"] .popular-cities ul.footer-links li a:hover {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .popular-cities .footer-links li i {
+  color: #7A5C4F !important;
+}
+
+/* ── STEP 17: Social links ──────────────────────────────── */
+body[data-theme="light"] .footer .social-links a {
+  background: rgba(255, 107, 53, 0.09) !important;
+  border: 1.5px solid rgba(255, 107, 53, 0.25) !important;
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .footer .social-links a:hover {
+  background: #FF6B35 !important;
+  color: #ffffff !important;
+  border-color: #FF6B35 !important;
+  box-shadow: 0 4px 14px rgba(255, 107, 53, 0.35) !important;
+}
+
+/* ── STEP 18: Footer bottom bar ─────────────────────────── */
 body[data-theme="light"] .footer-bottom {
-  background: rgba(0, 0, 0, 0.03) !important;
-  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  background: rgba(200, 140, 100, 0.06) !important;
+  border-top: 1px solid rgba(200, 141, 102, 0.18) !important;
 }
 
 body[data-theme="light"] .footer-bottom-content,
 body[data-theme="light"] .copyright,
 body[data-theme="light"] .footer-bottom-links a {
-  color: #555 !important;
+  color: #7A5C4F !important;
 }
 
 body[data-theme="light"] .footer-bottom-links a:hover {
-  color: #ff6347 !important;
+  color: #FF6B35 !important;
 }
 
 body[data-theme="light"] .payment-methods i {
-  color: #666 !important;
+  color: #9A7060 !important;
 }
 
-body[data-theme="light"] .newsletter-animated input,
-body[data-theme="light"] .newsletter-form input,
-body[data-theme="light"] .footer input[type="email"] {
-  background: #ffffff !important;
-  color: #333 !important;
-  border: 1px solid rgba(0, 0, 0, 0.15) !important;
-}
-
-body[data-theme="light"] .newsletter-animated input::placeholder,
-body[data-theme="light"] .newsletter-form input::placeholder {
-  color: #888 !important;
-}
-
-body[data-theme="light"] .newsletter-animated button,
-body[data-theme="light"] .newsletter-form button {
-  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
-  color: #ffffff !important;
-}
-
-body[data-theme="light"] .footer-road {
-  background: linear-gradient(to bottom, #ddd 0%, #ccc 100%) !important;
-}
-
+/* ── STEP 19: Accordion (mobile footer) ─────────────────── */
 body[data-theme="light"] .accordion-header {
-  color: #333 !important;
-  background: #f8f9fa !important;
+  color: #1A0A00 !important;
+  background: #F8F0EA !important;
 }
 
 body[data-theme="light"] .accordion-icon {
-  color: #666 !important;
+  color: #7A5C4F !important;
 }
 
 body[data-theme="light"] .accordion-content {
   background: #ffffff !important;
-  color: #555 !important;
+  color: #5A3A28 !important;
 }
 
-body[data-theme="light"] .cities-search-input {
+/* ── STEP 20: Road animation ────────────────────────────── */
+body[data-theme="light"] .footer-road {
+  background: linear-gradient(to bottom, #ddd 0%, #ccc 100%) !important;
+}
+
+/* ── STEP 21: Toast in footer ───────────────────────────── */
+body[data-theme="light"] .toast-stack .toast {
   background: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.15) !important;
-}
-
-body[data-theme="light"] .cities-search-input:focus-within {
-  border-color: #ff6347 !important;
-  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.15) !important;
-}
-
-body[data-theme="light"] .cities-search-input input {
-  color: #333 !important;
-}
-
-body[data-theme="light"] .cities-search-input input::placeholder {
-  color: #888 !important;
-}
-
-body[data-theme="light"] .cities-search-input i.fa-search {
-  color: #666 !important;
-}
-
-body[data-theme="light"] .search-clear {
-  color: #666 !important;
-}
-
-body[data-theme="light"] .search-clear:hover {
-  color: #ff6347 !important;
-  background: rgba(255, 99, 71, 0.1) !important;
+  color: #1A0A00 !important;
+  border: 1px solid rgba(200, 140, 100, 0.20) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10) !important;
 }
 
 

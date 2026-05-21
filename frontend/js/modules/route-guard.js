@@ -26,7 +26,9 @@
   const isAuthenticated = () => {
     const token = getAuthToken();
     const userData = getUserData();
-    return !!(token && userData);
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    // All three must be present to be considered authenticated
+    return !!(token && userData && isLoggedIn);
   };
 
   // Redirect to dashboard

@@ -12,8 +12,9 @@
   const isInPagesFolder = path.toLowerCase().includes('/pages/');
   const base = isInPagesFolder ? '..' : '.';
 
-  const LIGHT_PATH = `${base}/css/light-mode.css`;
-  const DARK_PATH = `${base}/css/dark-mode.css`;
+  const THEME_VERSION = "25"; // Cache-busting version
+  const LIGHT_PATH = `${base}/css/light-mode.css?v=${THEME_VERSION}`;
+  const DARK_PATH = `${base}/css/dark-mode.css?v=${THEME_VERSION}`;
 
   /**
    * Applies the selected theme to the DOM

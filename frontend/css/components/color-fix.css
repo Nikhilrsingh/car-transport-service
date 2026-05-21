@@ -1,0 +1,1064 @@
+/* ============================================================
+   HARIHAR CARGO CARRIERS — COLOR CONTRAST MASTER FIX
+   Fixes all invisible text / background conflicts in both
+   Light Mode and Dark Mode.  Load AFTER all other CSS sheets.
+   ============================================================ */
+
+/* ────────────────────────────────────────────────────────────
+   1. UPBAR — Light Mode
+   Problem: navbar.css overrides light-mode.css orange gradient
+   with a near-white background, but keeps white text → invisible
+   Fix: Restore orange gradient + white text in light mode
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .upbar,
+html[data-theme="light"] .upbar {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 60%, #E55A25 100%) !important;
+  border-bottom: none !important;
+  box-shadow: 0 2px 14px rgba(255,107,53,0.30) !important;
+}
+
+body[data-theme="light"] .upbar *,
+html[data-theme="light"] .upbar * {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .upbar-btn {
+  color: rgba(255,255,255,0.92) !important;
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+}
+
+body[data-theme="light"] .upbar-btn i {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .track-btn:hover,
+body[data-theme="light"] .help-btn:hover {
+  background: rgba(255,255,255,0.25) !important;
+  border-color: rgba(255,255,255,0.55) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .track-btn:hover i,
+body[data-theme="light"] .help-btn:hover i {
+  color: #ffffff !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   2. NAVBAR MAIN BAR — Light Mode
+   Problem: navbar.css sets white bg but keeps hardcoded
+   white text → nav-links invisible on white background
+   Fix: Ensure nav-link text is properly dark in light mode
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .navbar {
+  background: rgba(255,252,248,0.98) !important;
+  box-shadow: 0 4px 24px rgba(150,80,40,0.09) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+body[data-theme="light"] .nav-link {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .nav-link i {
+  color: #5A3020 !important;
+}
+
+body[data-theme="light"] .nav-link:hover {
+  color: #FF6B35 !important;
+  background: rgba(255,107,53,0.09) !important;
+}
+
+body[data-theme="light"] .nav-link:hover i {
+  color: #FF6B35 !important;
+}
+
+/* Active state keeps orange */
+body[data-theme="light"] .nav-link.active {
+  background: linear-gradient(135deg, #FF6B35, #E55A25) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .nav-link.active i {
+  color: #ffffff !important;
+}
+
+/* Dropdown btn text */
+body[data-theme="light"] .nav-link[data-dropdown-btn],
+body[data-theme="light"] button.nav-link[data-dropdown-btn] {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .nav-link[data-dropdown-btn] i,
+body[data-theme="light"] button.nav-link[data-dropdown-btn] i {
+  color: #5A3020 !important;
+}
+
+body[data-theme="light"] .nav-link[data-dropdown-btn]:hover,
+body[data-theme="light"] button.nav-link[data-dropdown-btn]:hover {
+  color: #FF6B35 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   3. SEARCH BAR — Light Mode
+   Problem: input placeholder is #f0f0f0 (near-white) on
+   near-white background → completely invisible
+   Fix: proper dark placeholder + input text
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .search-bar {
+  background: #F0E8E0 !important;
+  border: 1.5px solid rgba(200,120,80,0.30) !important;
+}
+
+body[data-theme="light"] .search-bar input {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .search-bar input::placeholder {
+  color: #8A6050 !important;
+  opacity: 1 !important;
+}
+
+body[data-theme="light"] .search-bar i {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .search-bar:focus-within {
+  background: #FFFFFF !important;
+  border-color: #FF6B35 !important;
+  box-shadow: 0 0 0 3px rgba(255,107,53,0.15) !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   4. LOGIN / LOGOUT / DASHBOARD BUTTONS — Light Mode
+   Problem: color: white on white background = invisible
+   Fix: dark text with orange accent
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .login-btn {
+  color: #FF6B35 !important;
+  border: 2px solid rgba(255,107,53,0.45) !important;
+  background: rgba(255,107,53,0.07) !important;
+}
+
+body[data-theme="light"] .login-btn i {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .login-btn:hover {
+  background: #FF6B35 !important;
+  color: #ffffff !important;
+  border-color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .login-btn:hover i {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .dashboard-btn {
+  background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(229,90,37,0.15)) !important;
+  border-color: rgba(255,107,53,0.55) !important;
+  color: #CC4A15 !important;
+}
+
+body[data-theme="light"] .dashboard-btn i {
+  color: #CC4A15 !important;
+}
+
+body[data-theme="light"] .dashboard-btn:hover {
+  background: linear-gradient(135deg, #FF6B35, #E55A25) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+}
+
+body[data-theme="light"] .dashboard-btn:hover i {
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .logout-btn {
+  color: #CC4A15 !important;
+  border-color: rgba(255,107,53,0.40) !important;
+}
+
+body[data-theme="light"] .logout-btn i {
+  color: #CC4A15 !important;
+}
+
+body[data-theme="light"] .logout-btn:hover {
+  background: rgba(255,107,53,0.12) !important;
+  color: #FF6B35 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   5. USER EMAIL — Light Mode
+   Problem: hardcoded color: white → invisible on white navbar
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .user-email {
+  color: #4A2A10 !important;
+  font-weight: 600 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   6. HAMBURGER / MENU BARS — Light Mode
+   Problem: hardcoded white bars on white background
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .menu-bar {
+  background: #1A0A00 !important;
+}
+
+body[data-theme="light"] .mobile-menu-btn:hover .menu-bar {
+  background: #FF6B35 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   7. NAV THEME TOGGLE BUTTON — Light Mode
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .nav-theme-btn {
+  background: rgba(255,107,53,0.09) !important;
+  border: 1.5px solid rgba(255,107,53,0.25) !important;
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .nav-theme-btn i {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .nav-theme-btn:hover {
+  background: #FF6B35 !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .nav-theme-btn:hover i {
+  color: #ffffff !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   8. ACTION NAV ICONS (Enquiry, Settings) — Light Mode
+   Problem: icons use rgb(255,99,71) which is fine, but
+   background behind them is now white so we need to
+   ensure the container is distinct
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .action-nav i {
+  color: #FF6B35 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   9. MIDDLE NAVBAR — Light Mode
+   Problem: dark background from base CSS + white text from
+   middle-navbar overrides = visible, but the text in the
+   phone / email section needs proper contrast
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .middle-navbar-container {
+  background: linear-gradient(135deg, rgba(255,252,248,0.99), rgba(255,240,228,0.96)) !important;
+  border-bottom: 1px solid rgba(200,140,100,0.14) !important;
+}
+
+body[data-theme="light"] .middle-navbar-container a,
+body[data-theme="light"] .middle-navbar-container span,
+body[data-theme="light"] .middle-navbar-container small,
+body[data-theme="light"] .middle-navbar-container .contact-number,
+body[data-theme="light"] .middle-navbar-container .contact-sub {
+  color: #2A1A10 !important;
+}
+
+body[data-theme="light"] .middle-navbar-container .whatsapp-link,
+body[data-theme="light"] .middle-navbar-container .whatsapp-link .contact-number,
+body[data-theme="light"] .middle-navbar-container .whatsapp-link .contact-sub,
+body[data-theme="light"] .middle-navbar-container .whatsapp-link i {
+  color: #16a34a !important;
+}
+
+body[data-theme="light"] .middle-navbar-container .email-link,
+body[data-theme="light"] .middle-navbar-container .email-link .contact-number,
+body[data-theme="light"] .middle-navbar-container .email-link .contact-sub,
+body[data-theme="light"] .middle-navbar-container .email-link i {
+  color: #CC4A15 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   10. DROPDOWN MENU — Light Mode
+   Problem: dark bg with white text, even in light mode
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .dropdown-menu {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(200,140,100,0.18) !important;
+  box-shadow: 0 8px 32px rgba(150,80,40,0.14) !important;
+}
+
+body[data-theme="light"] .dropdown-menu a,
+body[data-theme="light"] .dropdown-menu .nav-link {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .dropdown-menu a:hover,
+body[data-theme="light"] .dropdown-menu .nav-link:hover {
+  background: rgba(255,107,53,0.09) !important;
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .dropdown-menu .nav-link i {
+  color: #5A3020 !important;
+}
+
+body[data-theme="light"] .dropdown-menu .nav-link:hover i {
+  color: #FF6B35 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   11. MOBILE NAV — Light Mode
+   Problem: dark gradient bg, white text, fine in dark mode
+   but needs proper adaptation for light mode
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .mobile-nav {
+  background: #FFFFFF !important;
+}
+
+body[data-theme="light"] .mobile-nav-header {
+  background: rgba(255,252,248,0.99) !important;
+  border-bottom: 1.5px solid rgba(200,140,100,0.16) !important;
+}
+
+body[data-theme="light"] .mobile-logo {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .mobile-close-btn {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .mobile-close-btn:hover {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .mobile-nav-item {
+  border-bottom: 1px solid rgba(200,140,100,0.12) !important;
+}
+
+body[data-theme="light"] .mobile-nav-link {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .mobile-nav-link i {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .mobile-nav-link:hover,
+body[data-theme="light"] .mobile-nav-link.active {
+  background: rgba(255,107,53,0.08) !important;
+  color: #FF6B35 !important;
+  padding-left: 30px !important;
+}
+
+body[data-theme="light"] .mobile-nav-actions {
+  border-top: 1.5px solid rgba(200,140,100,0.14) !important;
+}
+
+body[data-theme="light"] .mobile-search-bar {
+  background: #F0E8E0 !important;
+  border: 1.5px solid rgba(200,120,80,0.22) !important;
+}
+
+body[data-theme="light"] .mobile-search-bar input {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .mobile-search-bar input::placeholder {
+  color: #8A6050 !important;
+}
+
+body[data-theme="light"] .mobile-login-btn {
+  color: #FF6B35 !important;
+  border-color: rgba(255,107,53,0.35) !important;
+}
+
+body[data-theme="light"] .mobile-contact-info {
+  background: rgba(255,244,234,0.90) !important;
+  border-top: 1.5px solid rgba(200,140,100,0.14) !important;
+}
+
+body[data-theme="light"] .mobile-contact-info .contact-item {
+  color: #2A1A10 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   12. SEARCH RESULTS DROPDOWN — Light Mode
+   Problem: hardcoded rgba(30,32,40,0.98) dark bg + white text
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .search-results-dropdown {
+  background: rgba(255,252,248,0.99) !important;
+  border: 1px solid rgba(200,140,100,0.20) !important;
+  box-shadow: 0 15px 40px rgba(150,80,40,0.14) !important;
+}
+
+body[data-theme="light"] .search-result-item {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .search-result-item:hover {
+  background: rgba(255,107,53,0.09) !important;
+}
+
+body[data-theme="light"] .search-result-item i {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .search-no-results {
+  color: #8A6050 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   13. DARK MODE — Text visibility fixes
+   Problem: Some sections use #A08070 muted text on near-black
+   bg which passes contrast, but section title subtitles and
+   card p text were barely readable
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="dark"] .section-title p,
+html[data-theme="dark"] .section-title p {
+  color: #C4A898 !important;  /* brighter muted, passes WCAG AA */
+}
+
+body[data-theme="dark"] .card p,
+html[data-theme="dark"] .card p,
+body[data-theme="dark"] .feature-box p,
+html[data-theme="dark"] .feature-box p,
+body[data-theme="dark"] .review-card .review-text,
+html[data-theme="dark"] .review-card .review-text {
+  color: #C4A898 !important;
+}
+
+body[data-theme="dark"] .hero-description,
+html[data-theme="dark"] .hero-description,
+body[data-theme="dark"] .hero-sub-title,
+html[data-theme="dark"] .hero-sub-title {
+  color: #C4A898 !important;
+}
+
+/* Muted stat labels should still be readable */
+body[data-theme="dark"] .stat-label,
+html[data-theme="dark"] .stat-label {
+  color: #B89888 !important;
+}
+
+/* CTA text paragraph */
+body[data-theme="dark"] .cta-text p,
+html[data-theme="dark"] .cta-text p,
+body[data-theme="dark"] .form-header p,
+html[data-theme="dark"] .form-header p,
+body[data-theme="dark"] .quote-header p,
+html[data-theme="dark"] .quote-header p {
+  color: #C4A898 !important;
+}
+
+/* FAQ answer text */
+body[data-theme="dark"] .faq-answer,
+html[data-theme="dark"] .faq-answer {
+  color: #C4A898 !important;
+}
+
+/* Bottom action bar inactive labels */
+body[data-theme="dark"] .bottom-action-btn,
+html[data-theme="dark"] .bottom-action-btn {
+  color: #C4A898 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   14. DARK MODE — Dark navbar nav-links in dark mode
+   Problem: navbar.css hardcodes .nav-link { color: white }
+   which is fine in dark mode. But ensure active state is
+   clearly visible with gradient bg + white text
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="dark"] .nav-link {
+  color: rgba(250,240,230,0.90) !important;
+}
+
+body[data-theme="dark"] .nav-link i {
+  color: rgba(250,240,230,0.70) !important;
+}
+
+body[data-theme="dark"] .nav-link:hover {
+  color: #FF8C42 !important;
+  background: rgba(255,107,53,0.10) !important;
+}
+
+body[data-theme="dark"] .nav-link:hover i {
+  color: #FF8C42 !important;
+}
+
+body[data-theme="dark"] .user-email {
+  color: rgba(250,240,230,0.90) !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   15. DARK MODE — Search bar placeholder visibility
+   Problem: placeholder #6A4A3A is too dark on near-black bg
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="dark"] .search-bar input::placeholder,
+html[data-theme="dark"] .search-bar input::placeholder {
+  color: #9A7060 !important;
+  opacity: 1 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   16. DARK MODE — Dashboard / Logout button text
+   Problem: hardcoded white text but can become invisible
+   on very dark backgrounds
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="dark"] .dashboard-btn,
+html[data-theme="dark"] .dashboard-btn {
+  color: #FF8C42 !important;
+}
+
+body[data-theme="dark"] .dashboard-btn i {
+  color: #FF8C42 !important;
+}
+
+body[data-theme="dark"] .logout-btn {
+  color: rgba(250,240,230,0.85) !important;
+}
+
+body[data-theme="dark"] .logout-btn i {
+  color: rgba(250,240,230,0.75) !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   17. BOTTOM CLOCK BAR — Light Mode
+   Problem: clock text colour in light mode uses default
+   which can be washed out
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .bottom-bar-clock {
+  background: rgba(255,252,248,0.99) !important;
+  border-top: 1px solid rgba(200,140,100,0.14) !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock .clock-time {
+  color: #FF6B35 !important;
+  font-weight: 700 !important;
+}
+
+body[data-theme="light"] .bottom-bar-clock .clock-date {
+  color: #7A5C4F !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   18. TOOLTIP TEXT — both modes
+   Problem: tooltips always use dark bg + white text.
+   In light mode they look out-of-place; keep them consistent
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .upbar-btn::after,
+body[data-theme="light"] .nav-link::after {
+  background: rgba(26,10,0,0.92) !important;
+  color: #FAF0E6 !important;
+  border: 1px solid rgba(255,107,53,0.35) !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   19. MOBILE DASHBOARD / LOGOUT BUTTONS — Light Mode
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .mobile-dashboard-btn {
+  background: linear-gradient(135deg, rgba(255,107,53,0.14), rgba(229,90,37,0.14)) !important;
+  border-color: rgba(255,107,53,0.50) !important;
+  color: #CC4A15 !important;
+}
+
+body[data-theme="light"] .mobile-dashboard-btn i {
+  color: #CC4A15 !important;
+}
+
+body[data-theme="light"] .mobile-logout-btn {
+  color: #FF6B35 !important;
+  border-color: rgba(255,107,53,0.35) !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   20. BOTTOM ACTION BAR — Light Mode
+   Problem: inactive icon labels barely visible
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .bottom-action-btn {
+  color: #7A5C4F !important;
+}
+
+body[data-theme="light"] .bottom-action-btn .btn-label {
+  color: #7A5C4F !important;
+}
+
+body[data-theme="light"] .bottom-action-btn i {
+  color: #7A5C4F !important;
+}
+
+body[data-theme="light"] .bottom-action-btn.primary-action {
+  background: linear-gradient(135deg, #FF8C42, #FF6B35) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .bottom-action-btn.primary-action i,
+body[data-theme="light"] .bottom-action-btn.primary-action .btn-label {
+  color: #ffffff !important;
+}
+
+/* ============================================================
+   PART 2 — TARGETED BUG FIXES (follow-up pass)
+   Fixes: autocomplete dropdown, footer contact card,
+   dark navbar visibility, Google review btn, Install App btn
+   ============================================================ */
+
+/* ────────────────────────────────────────────────────────────
+   21. AUTOCOMPLETE DROPDOWN — Light Mode
+   Problem: enquiry.css & quote-modal.css hardcode
+   background:#1a1a1a (nearly black) — fine in dark, broken in
+   light. White text on near-black shows in light mode context.
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .autocomplete-dropdown,
+html[data-theme="light"] .autocomplete-dropdown {
+  background: #FFFFFF !important;
+  border: 2px solid rgba(255,107,53,0.50) !important;
+  box-shadow: 0 8px 28px rgba(150,80,40,0.16) !important;
+}
+
+body[data-theme="light"] .autocomplete-item,
+html[data-theme="light"] .autocomplete-item {
+  color: #1A0A00 !important;
+  border-bottom: 1px solid rgba(200,140,100,0.12) !important;
+}
+
+body[data-theme="light"] .autocomplete-item:hover,
+body[data-theme="light"] .autocomplete-item.active,
+html[data-theme="light"] .autocomplete-item:hover,
+html[data-theme="light"] .autocomplete-item.active {
+  background: rgba(255,107,53,0.10) !important;
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .autocomplete-item strong,
+html[data-theme="light"] .autocomplete-item strong {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .autocomplete-item:hover strong,
+html[data-theme="light"] .autocomplete-item:hover strong {
+  color: #CC4A15 !important;
+}
+
+body[data-theme="light"] .autocomplete-item i,
+html[data-theme="light"] .autocomplete-item i {
+  color: #FF6B35 !important;
+  opacity: 0.80 !important;
+}
+
+/* Dark mode autocomplete — improve readability */
+body[data-theme="dark"] .autocomplete-dropdown,
+html[data-theme="dark"] .autocomplete-dropdown {
+  background: #1C1208 !important;
+  border: 2px solid rgba(255,107,53,0.35) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.65) !important;
+}
+
+body[data-theme="dark"] .autocomplete-item,
+html[data-theme="dark"] .autocomplete-item {
+  color: rgba(250,240,230,0.88) !important;
+  border-bottom: 1px solid rgba(255,107,53,0.10) !important;
+}
+
+body[data-theme="dark"] .autocomplete-item:hover,
+body[data-theme="dark"] .autocomplete-item.active,
+html[data-theme="dark"] .autocomplete-item:hover,
+html[data-theme="dark"] .autocomplete-item.active {
+  background: rgba(255,107,53,0.18) !important;
+  color: #FF8C42 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   22. FOOTER — Light Mode full contrast fix
+   Problem: the 4th card (Contact) inherits --text / --highlight
+   variables that resolve to white/near-white values set for
+   the dark footer, making contact text nearly invisible.
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .footer-card,
+html[data-theme="light"] .footer-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(200,140,100,0.14) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04) !important;
+}
+
+/* Contact info text */
+body[data-theme="light"] .contact-info li,
+html[data-theme="light"] .contact-info li {
+  color: #3A2010 !important;
+}
+
+body[data-theme="light"] .contact-info a,
+html[data-theme="light"] .contact-info a {
+  color: #3A2010 !important;
+}
+
+body[data-theme="light"] .contact-info a:hover,
+html[data-theme="light"] .contact-info a:hover {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .contact-info span,
+html[data-theme="light"] .contact-info span {
+  color: #3A2010 !important;
+}
+
+body[data-theme="light"] .contact-info i,
+html[data-theme="light"] .contact-info i {
+  color: #FF6B35 !important;
+}
+
+/* Newsletter / email input in footer */
+body[data-theme="light"] .newsletter-animated input,
+body[data-theme="light"] .newsletter-form input,
+body[data-theme="light"] .footer input[type="email"],
+html[data-theme="light"] .newsletter-animated input,
+html[data-theme="light"] .newsletter-form input,
+html[data-theme="light"] .footer input[type="email"] {
+  background: #F8F2EE !important;
+  border: 1.5px solid rgba(200,140,100,0.25) !important;
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .newsletter-animated input::placeholder,
+body[data-theme="light"] .newsletter-form input::placeholder,
+html[data-theme="light"] .newsletter-animated input::placeholder,
+html[data-theme="light"] .newsletter-form input::placeholder {
+  color: #8A6050 !important;
+}
+
+/* Cities search in footer */
+body[data-theme="light"] .cities-search-input input,
+html[data-theme="light"] .cities-search-input input {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .cities-search-input input::placeholder,
+html[data-theme="light"] .cities-search-input input::placeholder {
+  color: #8A6050 !important;
+}
+
+/* footer-cta button */
+body[data-theme="light"] .footer-cta a,
+body[data-theme="light"] .footer-cta button,
+html[data-theme="light"] .footer-cta a,
+html[data-theme="light"] .footer-cta button {
+  color: #CC4A15 !important;
+  border-color: rgba(255,107,53,0.40) !important;
+  background: rgba(255,107,53,0.07) !important;
+}
+
+body[data-theme="light"] .footer-cta a:hover,
+body[data-theme="light"] .footer-cta button:hover,
+html[data-theme="light"] .footer-cta a:hover,
+html[data-theme="light"] .footer-cta button:hover {
+  background: #FF6B35 !important;
+  color: #ffffff !important;
+}
+
+/* Highlight variable elements (show all cities, etc.) */
+body[data-theme="light"] footer .footer-card [style*="highlight"],
+body[data-theme="light"] .show-all-cities,
+body[data-theme="light"] .see-all-cities,
+body[data-theme="light"] .footer-show-more,
+html[data-theme="light"] .show-all-cities,
+html[data-theme="light"] .see-all-cities {
+  color: #FF6B35 !important;
+}
+
+/* Footer cities list text */
+body[data-theme="light"] .footer-links a,
+body[data-theme="light"] .footer-links li a,
+html[data-theme="light"] .footer-links a,
+html[data-theme="light"] .footer-links li a {
+  color: #3A2010 !important;
+}
+
+body[data-theme="light"] .footer-links a:hover,
+html[data-theme="light"] .footer-links a:hover {
+  color: #FF6B35 !important;
+}
+
+/* Footer about paragraph */
+body[data-theme="light"] .footer-about p,
+html[data-theme="light"] .footer-about p {
+  color: #5A3A28 !important;
+}
+
+/* Footer headings */
+body[data-theme="light"] .footer-heading,
+html[data-theme="light"] .footer-heading {
+  color: #1A0A00 !important;
+}
+
+/* Footer brand text */
+body[data-theme="light"] .footer-brand,
+html[data-theme="light"] .footer-brand {
+  color: #FF6B35 !important;
+}
+
+/* Footer bottom copyright */
+body[data-theme="light"] .footer-bottom,
+html[data-theme="light"] .footer-bottom {
+  background: rgba(200,140,100,0.06) !important;
+  border-top: 1px solid rgba(200,140,100,0.18) !important;
+}
+
+body[data-theme="light"] .copyright,
+body[data-theme="light"] .footer-bottom-content,
+body[data-theme="light"] .footer-bottom-links a,
+html[data-theme="light"] .copyright,
+html[data-theme="light"] .footer-bottom-content,
+html[data-theme="light"] .footer-bottom-links a {
+  color: #7A5C4F !important;
+}
+
+/* Footer social links */
+body[data-theme="light"] .footer .social-links a,
+html[data-theme="light"] .footer .social-links a {
+  background: rgba(255,107,53,0.09) !important;
+  border: 1.5px solid rgba(255,107,53,0.22) !important;
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .footer .social-links a:hover,
+html[data-theme="light"] .footer .social-links a:hover {
+  background: #FF6B35 !important;
+  color: #ffffff !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   23. DARK MODE NAVBAR — visibility when over dark sections
+   Problem: in dark mode the navbar bg is very close in colour
+   to the dark feature boxes / slider bg so nav links disappear.
+   The dark mode navbar needs a stronger, more opaque background.
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="dark"] .navbar,
+html[data-theme="dark"] .navbar {
+  background: rgba(10,6,3,0.96) !important;
+  border-bottom: 1px solid rgba(255,107,53,0.14) !important;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.70), 0 0 1px rgba(255,107,53,0.12) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+}
+
+/* Ensure nav links have strong enough contrast in dark mode */
+body[data-theme="dark"] .nav-link span,
+html[data-theme="dark"] .nav-link span {
+  color: rgba(250,240,230,0.90) !important;
+}
+
+body[data-theme="dark"] .nav-link i,
+html[data-theme="dark"] .nav-link i {
+  color: rgba(250,240,230,0.75) !important;
+}
+
+/* Middle navbar dark mode — stronger background */
+body[data-theme="dark"] .middle-navbar-container,
+html[data-theme="dark"] .middle-navbar-container {
+  background: rgba(5,3,1,0.99) !important;
+  border-bottom: 1px solid rgba(255,107,53,0.10) !important;
+}
+
+/* Upbar dark mode */
+body[data-theme="dark"] .upbar,
+html[data-theme="dark"] .upbar {
+  background: linear-gradient(135deg, rgba(255,107,53,0.20) 0%, rgba(229,90,37,0.14) 100%) !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   24. "READ ALL REVIEWS ON GOOGLE" BUTTON — Both Modes
+   Problem: secondary-action-btn has bg:#fff + border:#e2e8f0
+   which is near-invisible in light mode (white on white) and
+   the dark mode override makes it transparent with grey text.
+   ──────────────────────────────────────────────────────────── */
+
+/* Light mode — clean outlined button */
+body[data-theme="light"] .secondary-action-btn,
+html[data-theme="light"] .secondary-action-btn {
+  background: #FFFFFF !important;
+  color: #1A0A00 !important;
+  border: 2px solid rgba(200,140,100,0.40) !important;
+  box-shadow: 0 2px 10px rgba(150,80,40,0.12) !important;
+}
+
+body[data-theme="light"] .secondary-action-btn:hover,
+html[data-theme="light"] .secondary-action-btn:hover {
+  border-color: #FF6B35 !important;
+  color: #FF6B35 !important;
+  background: rgba(255,107,53,0.05) !important;
+  box-shadow: 0 4px 16px rgba(255,107,53,0.18) !important;
+}
+
+/* Dark mode — solid readable styling */
+body[data-theme="dark"] .secondary-action-btn,
+html[data-theme="dark"] .secondary-action-btn {
+  background: rgba(255,107,53,0.08) !important;
+  color: rgba(250,240,230,0.90) !important;
+  border: 2px solid rgba(255,107,53,0.35) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme="dark"] .secondary-action-btn:hover,
+html[data-theme="dark"] .secondary-action-btn:hover {
+  background: rgba(255,107,53,0.18) !important;
+  color: #FF8C42 !important;
+  border-color: #FF8C42 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   25. INSTALL APP BUTTON (#installAppBtn) — Both Modes
+   Problem: bare button with no class or styling → uses browser
+   default which looks out of place / nearly invisible
+   ──────────────────────────────────────────────────────────── */
+#installAppBtn {
+  position: fixed !important;
+  bottom: 70px !important;
+  left: 20px !important;
+  z-index: 9990 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 18px !important;
+  border-radius: 999px !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  font-family: 'Poppins', sans-serif !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  border: 2px solid rgba(255,107,53,0.50) !important;
+  background: linear-gradient(135deg, rgba(255,140,66,0.14), rgba(255,107,53,0.10)) !important;
+  color: #FF6B35 !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 14px rgba(255,107,53,0.18) !important;
+}
+
+#installAppBtn i {
+  color: #FF6B35 !important;
+  font-size: 0.9rem !important;
+}
+
+#installAppBtn:hover {
+  background: linear-gradient(135deg, #FF8C42, #FF6B35) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px rgba(255,107,53,0.38) !important;
+}
+
+#installAppBtn:hover i {
+  color: #ffffff !important;
+}
+
+/* Dark mode override for installAppBtn */
+body[data-theme="dark"] #installAppBtn,
+html[data-theme="dark"] #installAppBtn {
+  background: rgba(255,107,53,0.12) !important;
+  border-color: rgba(255,107,53,0.38) !important;
+  color: #FF8C42 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.45), 0 0 15px rgba(255,107,53,0.12) !important;
+}
+
+body[data-theme="dark"] #installAppBtn i,
+html[data-theme="dark"] #installAppBtn i {
+  color: #FF8C42 !important;
+}
+
+body[data-theme="dark"] #installAppBtn:hover,
+html[data-theme="dark"] #installAppBtn:hover {
+  background: linear-gradient(135deg, #FF8C42, #FF6B35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 28px rgba(255,107,53,0.45) !important;
+}
+
+body[data-theme="dark"] #installAppBtn:hover i,
+html[data-theme="dark"] #installAppBtn:hover i {
+  color: #ffffff !important;
+}
+
+/* Light mode override for installAppBtn */
+body[data-theme="light"] #installAppBtn,
+html[data-theme="light"] #installAppBtn {
+  background: rgba(255,107,53,0.09) !important;
+  border-color: rgba(255,107,53,0.42) !important;
+  color: #CC4A15 !important;
+  box-shadow: 0 4px 14px rgba(150,80,40,0.14) !important;
+}
+
+body[data-theme="light"] #installAppBtn i,
+html[data-theme="light"] #installAppBtn i {
+  color: #CC4A15 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   26. REVIEW SECTION HEADER / CONTROLS AREA — Both Modes
+   Problem: The reviews-controls area (containing the two
+   action buttons) may not have enough contrast in light mode
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .reviews-controls,
+html[data-theme="light"] .reviews-controls {
+  background: transparent !important;
+}
+
+/* Verified Reviews heading in light mode */
+body[data-theme="light"] .reviews-section h1,
+body[data-theme="light"] .reviews-section h2,
+body[data-theme="light"] #servicesReviewStats h2,
+html[data-theme="light"] .reviews-section h1,
+html[data-theme="light"] .reviews-section h2,
+html[data-theme="light"] #servicesReviewStats h2 {
+  color: #1A0A00 !important;
+}
+
+body[data-theme="light"] .reviews-section p,
+body[data-theme="light"] #servicesReviewStats p,
+html[data-theme="light"] .reviews-section p,
+html[data-theme="light"] #servicesReviewStats p {
+  color: #5A3A28 !important;
+}
+
+/* Review card in dark mode — fix card bg contrast */
+body[data-theme="dark"] .modern-card,
+html[data-theme="dark"] .modern-card {
+  background: #120B06 !important;
+  border: 1px solid rgba(255,107,53,0.14) !important;
+}
+
+body[data-theme="dark"] .mc-name,
+html[data-theme="dark"] .mc-name {
+  color: #FAF0E6 !important;
+}
+
+body[data-theme="dark"] .mc-body,
+html[data-theme="dark"] .mc-body {
+  color: #D0B8A8 !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+   27. FAB ACTION BUTTONS — Light Mode
+   Problem: fab-action-btn hardcodes bg:#fff which is OK but
+   icon color may be invisible
+   ──────────────────────────────────────────────────────────── */
+body[data-theme="light"] .fab-action-btn,
+html[data-theme="light"] .fab-action-btn {
+  background: #FFFFFF !important;
+  border: 2px solid rgba(255,107,53,0.25) !important;
+  box-shadow: 0 4px 16px rgba(150,80,40,0.16) !important;
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .fab-action-btn i,
+html[data-theme="light"] .fab-action-btn i {
+  color: #FF6B35 !important;
+}
+
+body[data-theme="light"] .fab-action-btn:hover,
+html[data-theme="light"] .fab-action-btn:hover {
+  background: #FF6B35 !important;
+  border-color: #FF6B35 !important;
+  color: #ffffff !important;
+}
+
+body[data-theme="light"] .fab-action-btn:hover i,
+html[data-theme="light"] .fab-action-btn:hover i {
+  color: #ffffff !important;
+}
+

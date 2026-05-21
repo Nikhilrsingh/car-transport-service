@@ -1,4 +1,4 @@
-const CACHE_NAME = 'harihar-pwa-cache-v3';
+const CACHE_NAME = 'harihar-pwa-cache-v8';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -56,9 +56,11 @@ self.addEventListener('activate', (event) => {
             return Promise.all(
                 cacheNames.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name))
             );
+        }).then(() => {
+            console.log('🧹 Old caches purged, taking control immediately...');
+            return self.clients.claim();
         })
     );
-    self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
@@ -67,10 +69,43 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
+    const url = new URL(event.request.url);
+    const isNavigation = event.request.mode === 'navigate';
+    const isAsset = url.pathname.endsWith('.html') || url.pathname.endsWith('.css') || url.pathname.endsWith('.js');
+
+    // Use Network-First strategy for pages, styles, and scripts to avoid cache-stale issues
+    if (isNavigation || isAsset) {
+        event.respondWith(
+            fetch(event.request)
+                .then((response) => {
+                    if (response && response.status === 200 && response.type === 'basic') {
+                        const responseToCache = response.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+                    return response;
+                })
+                .catch(() => {
+                    console.log('📶 Offline: Serving from Cache for', event.request.url);
+                    return caches.match(event.request).then((cachedResponse) => {
+                        if (cachedResponse) {
+                            return cachedResponse;
+                        }
+                        if (isNavigation) {
+                            return caches.match('./index.html');
+                        }
+                    });
+                })
+        );
+        return;
+    }
+
+    // Default Cache-First / Stale-While-Revalidate for images and other media assets
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             if (cachedResponse) {
-                // Option to fetch in background to keep cache fresh (stale-while-revalidate)
+                // Fetch in background to update cache (stale-while-revalidate)
                 fetch(event.request).then((response) => {
                     if (response && response.status === 200 && response.type === 'basic') {
                         caches.open(CACHE_NAME).then((cache) => cache.put(event.request, response));
@@ -80,22 +115,14 @@ self.addEventListener('fetch', (event) => {
             }
 
             return fetch(event.request).then((response) => {
-                // Dynamically cache other resources like JS, CSS, images when visited
                 if (!response || response.status !== 200 || response.type !== 'basic') {
                     return response;
                 }
-
                 const responseToCache = response.clone();
                 caches.open(CACHE_NAME).then((cache) => {
                     cache.put(event.request, responseToCache);
                 });
-
                 return response;
-            }).catch(() => {
-                if (event.request.headers.get('accept').includes('text/html')) {
-                    // Fallback to index if a page isn't available
-                    return caches.match('./index.html');
-                }
             });
         })
     );

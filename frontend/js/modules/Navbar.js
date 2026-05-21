@@ -127,6 +127,8 @@ function updateAuthUI() {
   const loginBtn = document.getElementById("loginBtn");
   const profile = document.getElementById("profile");
   const userEmailSpan = document.getElementById("userEmail");
+  const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+  const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
 
   if (!loginBtn || !profile) return;
 
@@ -135,20 +137,27 @@ function updateAuthUI() {
   const userEmail = localStorage.getItem("userEmail");
 
   if (token && isLoggedIn && userEmail) {
+    // Logged in state
     loginBtn.style.display = "none";
     profile.style.display = "flex";
     profile.classList.remove("hidden");
     if (userEmailSpan) userEmailSpan.textContent = userEmail;
+    // Mobile
+    if (mobileLoginBtn) mobileLoginBtn.classList.add("hidden");
+    if (mobileLogoutBtn) mobileLogoutBtn.classList.remove("hidden");
   } else {
     // Clean up stale auth data
-    if (!token || !isLoggedIn) {
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("userEmail");
-      localStorage.removeItem("token");
-    }
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
+    localStorage.removeItem("authToken");
     loginBtn.style.display = "inline-block";
     profile.style.display = "none";
     profile.classList.add("hidden");
+    // Mobile
+    if (mobileLoginBtn) mobileLoginBtn.classList.remove("hidden");
+    if (mobileLogoutBtn) mobileLogoutBtn.classList.add("hidden");
   }
 }
 
@@ -156,6 +165,8 @@ function logoutUser() {
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("userEmail");
   localStorage.removeItem("token");
+  localStorage.removeItem("userData");
+  localStorage.removeItem("authToken");
 
   updateAuthUI();
 

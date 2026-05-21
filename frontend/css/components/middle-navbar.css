@@ -133,9 +133,11 @@
 }
 
 /* WhatsApp & Email Icons */
-.whatsapp-link i,
+.whatsapp-link i {
+  color: #25d366; /* Elegant WhatsApp green */
+}
 .email-link i {
-  color: #ff0000;
+  color: var(--accent, #ff6b3d); /* Premium brand accent orange */
 }
 
 /* ===============================

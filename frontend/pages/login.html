@@ -7,7 +7,7 @@
     <title>Login | Harihar Car Carriers</title>
     <meta name="description" content="Login to your Harihar Car Carriers account.">
     <link rel="icon" type="image/png" href="../assets/icons/favicon.png" />
-
+    <link rel="stylesheet" href="../css/enhancements.css?v=1" />
     <!-- Route Guard - Smart Redirect for Authenticated Users (Must load first) -->
     <script src="../js/modules/route-guard.js"></script>
     <!-- Input Trim Guard - Auto-remove whitespace from email/password (Issue #1157) -->
@@ -365,6 +365,7 @@
             background: rgba(255, 99, 71, 0.3) !important;
         }
     </style>
+  <link rel="stylesheet" href="../css/components/color-fix.css">
 </head>
 
 <body data-theme="dark">
@@ -604,7 +605,6 @@
         function handleLogin(e) {
             e.preventDefault();
 
-            // Get form values and TRIM them (safeguard for any missed whitespace)
             let email = (document.querySelector('#login-form input[type="email"]')?.value || '').trim();
             let password = (document.querySelector('#login-form input[type="password"]')?.value || '').trim();
 
@@ -613,35 +613,33 @@
                 return;
             }
 
-            // Show loading state
-            const btn = event.target.querySelector('button[type="submit"]');
-            const originalText = btn.textContent;
+            const btn = e.target.querySelector('button[type="submit"]');
             btn.textContent = 'Logging in...';
             btn.disabled = true;
 
-            // Simulate API call (remove this when connecting to real backend)
             setTimeout(() => {
-                // Save auth token and user data to localStorage
                 const mockToken = 'jwt_' + Math.random().toString(36).substr(2, 9);
-                const userData = {
+
+                // Save all required keys (token, authToken, Navbar.js keys, route-guard keys)
+                localStorage.setItem('token', mockToken);
+                localStorage.setItem('authToken', mockToken);
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userData', JSON.stringify({
                     email: email,
                     name: email.split('@')[0],
                     role: 'user',
                     loginTime: new Date().toISOString()
-                };
+                }));
 
-                localStorage.setItem('authToken', mockToken);
-                localStorage.setItem('userData', JSON.stringify(userData));
-
-                // Redirect to dashboard
-                window.location.href = 'dashboard.html';
+                showToast('Login successful! Redirecting...');
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
             }, 1000);
         }
 
         function handleSignup(e) {
             e.preventDefault();
 
-            // Get form values and TRIM them (safeguard for any missed whitespace)
             let name = (document.querySelector('#signup-form input[type="text"]')?.value || '').trim();
             let email = (document.querySelector('#signup-form input[type="email"]')?.value || '').trim();
             let password = (document.querySelector('#signup-form input[type="password"]')?.value || '').trim();
@@ -651,28 +649,27 @@
                 return;
             }
 
-            // Show loading state
-            const btn = event.target.querySelector('button[type="submit"]');
-            const originalText = btn.textContent;
+            const btn = e.target.querySelector('button[type="submit"]');
             btn.textContent = 'Creating Account...';
             btn.disabled = true;
 
-            // Simulate API call (remove this when connecting to real backend)
             setTimeout(() => {
-                // Save auth token and user data to localStorage
                 const mockToken = 'jwt_' + Math.random().toString(36).substr(2, 9);
-                const userData = {
+
+                // Save all required keys (token, authToken, Navbar.js keys, route-guard keys)
+                localStorage.setItem('token', mockToken);
+                localStorage.setItem('authToken', mockToken);
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userData', JSON.stringify({
                     email: email,
                     name: name,
                     role: 'user',
                     loginTime: new Date().toISOString()
-                };
+                }));
 
-                localStorage.setItem('authToken', mockToken);
-                localStorage.setItem('userData', JSON.stringify(userData));
-
-                // Redirect to dashboard
-                window.location.href = 'dashboard.html';
+                showToast('Account created! Redirecting...');
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
             }, 1000);
         }
 
@@ -705,6 +702,35 @@
             document.addEventListener('DOMContentLoaded', initializeIconToggle);
         } else {
             initializeIconToggle();
+        }
+
+        // ========== Toast Notification ==========
+        function showToast(message, type = 'success') {
+            const existing = document.querySelector('.login-toast');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.className = 'login-toast';
+            toast.style.cssText = `
+                position:fixed; bottom:30px; left:50%;
+                transform:translateX(-50%) translateY(80px);
+                background:${type === 'success' ? 'rgba(46,204,113,0.95)' : 'rgba(231,76,60,0.95)'};
+                color:white; padding:14px 28px; border-radius:12px;
+                font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:500;
+                z-index:99999; box-shadow:0 8px 30px rgba(0,0,0,0.3);
+                transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),opacity 0.35s ease;
+                opacity:0; display:flex; align-items:center; gap:10px; white-space:nowrap;
+            `;
+            toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.style.transform = 'translateX(-50%) translateY(0)';
+                toast.style.opacity = '1';
+            });
+            setTimeout(() => {
+                toast.style.transform = 'translateX(-50%) translateY(80px)';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 2500);
         }
     </script>
 </body>
