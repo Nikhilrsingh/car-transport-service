@@ -1,0 +1,376 @@
+/* Interactive Route & Distance Visualizer Styles */
+
+/* Layout Alignment for Quote Parent Container */
+.hero-quote {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+}
+
+@media (max-width: 1200px) {
+  .hero-quote {
+    align-items: center !important;
+  }
+}
+
+/* Main Container */
+.route-visualizer-container {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin-top: 25px;
+  border-radius: 20px;
+  padding: 16px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              margin 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.route-visualizer-container.active {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 550px;
+  overflow: visible;
+  padding: 16px;
+}
+
+/* Dark Theme Glassmorphism */
+body[data-theme="dark"] .route-visualizer-container {
+  background: linear-gradient(135deg, rgba(20, 24, 33, 0.75), rgba(15, 18, 25, 0.5));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Light Theme Glassmorphism */
+body[data-theme="light"] .route-visualizer-container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(245, 247, 250, 0.6));
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Header */
+.visualizer-header {
+  margin-bottom: 12px;
+}
+
+.visualizer-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body[data-theme="dark"] .visualizer-header h4 {
+  color: #ffffff;
+}
+
+body[data-theme="light"] .visualizer-header h4 {
+  color: #1e293b;
+}
+
+.visualizer-header h4 i {
+  color: #ff6b35;
+}
+
+/* Leaflet Map */
+.route-map-leaflet {
+  width: 100%;
+  height: 280px;
+  border-radius: 14px;
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+body[data-theme="dark"] .route-map-leaflet {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme="light"] .route-map-leaflet {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Details Overlay Panel */
+.route-details-card {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  z-index: 1000;
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+body[data-theme="dark"] .route-details-card {
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+body[data-theme="light"] .route-details-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.route-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-item i {
+  font-size: 1.15rem;
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.12);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-item div {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+body[data-theme="dark"] .detail-label {
+  color: #94a3b8;
+}
+
+body[data-theme="light"] .detail-label {
+  color: #64748b;
+}
+
+.detail-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+body[data-theme="dark"] .detail-value {
+  color: #f8fafc;
+}
+
+body[data-theme="light"] .detail-value {
+  color: #0f172a;
+}
+
+/* Transit Badges */
+.transit-badges {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.transit-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+body[data-theme="dark"] .transit-badge {
+  background: rgba(255, 107, 53, 0.12);
+  color: #ff9b6b;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+body[data-theme="light"] .transit-badge {
+  background: rgba(255, 107, 53, 0.08);
+  color: #e0531c;
+  border: 1px solid rgba(255, 107, 53, 0.15);
+}
+
+/* Custom Marker Styling */
+.custom-pin-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pin-ring {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.pin-center {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* Pickup Pin (Green) */
+.pickup-pin {
+  background: #10b981;
+  border: 2.5px solid white;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+}
+
+/* Drop Pin (Red) */
+.drop-pin {
+  background: #ef4444;
+  border: 2.5px solid white;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+}
+
+/* Animated Transit Truck Marker */
+.animated-transit-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff6b35;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 0 12px rgba(255, 107, 53, 0.7);
+  animation: transit-pulsing 1.2s infinite alternate ease-in-out;
+  transition: transform 0.1s linear;
+}
+
+.animated-transit-marker i {
+  font-size: 11px;
+}
+
+@keyframes transit-pulsing {
+  0% {
+    box-shadow: 0 0 4px rgba(255, 107, 53, 0.4);
+    transform: scale(0.95);
+  }
+  100% {
+    box-shadow: 0 0 16px rgba(255, 107, 53, 0.9);
+    transform: scale(1.1);
+  }
+}
+
+/* Leaflet Layout Overrides */
+#route-map .leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+#route-map .leaflet-bar a {
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+  font-size: 14px !important;
+  border: none !important;
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  color: white !important;
+}
+
+body[data-theme="light"] #route-map .leaflet-bar a {
+  background-color: white !important;
+  color: #1e293b !important;
+}
+
+#route-map .leaflet-control-zoom-in {
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body[data-theme="light"] #route-map .leaflet-control-zoom-in {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+#route-map .leaflet-control-zoom-out {
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+}
+
+#route-map .leaflet-bar {
+  border-radius: 6px !important;
+  overflow: hidden;
+  border: none !important;
+}
+
+.route-map-leaflet .leaflet-control-attribution {
+  font-size: 8px !important;
+  background: rgba(15, 23, 42, 0.7) !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+
+body[data-theme="light"] .route-map-leaflet .leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.7) !important;
+  color: #64748b !important;
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+  .route-visualizer-container {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .route-visualizer-container {
+    padding: 12px;
+  }
+  .route-map-leaflet {
+    height: 260px;
+  }
+  .route-details-card {
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+    padding: 8px 12px;
+  }
+  .detail-item i {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  .detail-value {
+    font-size: 0.8rem;
+  }
+  .transit-badges {
+    display: none; /* Hide on very small screens to fit map overlay */
+  }
+}

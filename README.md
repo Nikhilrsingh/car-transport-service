@@ -1,6 +1,6 @@
 ## 🚨 Contributor Registration
 
-Before starting any contribution, you can complete the registration form if you want.
+Before starting any contribution, you can complete the registration form if you want its not compulsory.
 
 👉 Registration Form: https://forms.gle/2aVtenoaHg65qi4G7
 
