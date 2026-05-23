@@ -2642,7 +2642,7 @@
 
             <div class="booking-reference">
                 <div class="label">Booking Reference Number</div>
-                <div class="ref-number" id="bookingRef">HC2024-001</div>
+                <div class="ref-number" id="bookingRef">--</div>
             </div>
 
             <p style="font-size: 0.9rem; color: #999;">
@@ -2713,6 +2713,19 @@
                 <button class="close-modal-btn" onclick="closeManageBooking()">
                     <i class="fas fa-times"></i>
                 </button>
+            </div>
+
+            <div class="form-group">
+                <label for="manageBookingRef"><i class="fas fa-ticket-alt"></i> Booking Reference</label>
+                <input type="text" id="manageBookingRef" class="save-email-input" placeholder="HC-20260523-A3F71234">
+                <div class="save-email-actions" style="margin-top: 10px;">
+                    <button class="btn-send-link" onclick="lookupManageBooking()">
+                        <i class="fas fa-search"></i> Find Booking
+                    </button>
+                </div>
+                <p id="manageBookingStatus" style="margin: 8px 0 0; color: #bbb; font-size: 0.88rem;">
+                    Enter your booking reference to load booking details.
+                </p>
             </div>
 
             <div class="booking-actions-grid">
@@ -5343,13 +5356,18 @@
                             console.log('📡 API response:', result);
 
                             if (response.ok && result.success) {
-                                ref = result.data.booking.bookingReference;
+                                ref = (result.data && result.data.booking && result.data.booking.bookingReference) || '';
                             } else {
                                 console.log('⚠️ API failed, using local ref');
                                 ref = generateBookingRef();
                             }
                         } catch (networkErr) {
                             console.warn('Backend not available, using local reference:', networkErr.message);
+                            ref = generateBookingRef();
+                        }
+
+                        // Safety fallback: never allow stale/static or duplicate references.
+                        if (!ref || ref === 'HC2024-001' || localStorage.getItem('booking_' + ref)) {
                             ref = generateBookingRef();
                         }
 
@@ -5373,12 +5391,21 @@
                         sessionStorage.removeItem('bookingDraft');
                         localStorage.removeItem('bookingDraft');
 
-                        // Save to localStorage as backup
+                        // Save booking by reference for manage-booking lookups
+                        var createdAt = new Date().toISOString();
+                        var bookingRecord = Object.assign({}, bookingData, {
+                            ref: ref,
+                            createdAt: createdAt,
+                            status: 'confirmed'
+                        });
+
+                        localStorage.setItem('booking_' + ref, JSON.stringify(bookingRecord));
                         localStorage.setItem('lastBooking', JSON.stringify({
                             reference: ref,
                             data: bookingData,
-                            timestamp: new Date().toISOString()
+                            timestamp: createdAt
                         }));
+                        sessionStorage.setItem('lastBookingRef', ref);
 
                     } catch (err) {
                         console.error('Booking error:', err);
@@ -5398,14 +5425,22 @@
             });
 
             function generateBookingRef() {
-                var prefix = 'HCC';
                 var now = new Date();
                 var year = now.getFullYear();
                 var month = (now.getMonth() + 1).toString().padStart(2, '0');
                 var day = now.getDate().toString().padStart(2, '0');
-                var dateStr = year + '' + month + '' + day;
-                var randomNum = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-                return prefix + '-' + dateStr + '-' + randomNum;
+                var dateStr = '' + year + month + day;
+                var ref = '';
+                var attempts = 0;
+
+                do {
+                    var random = Math.random().toString(36).substring(2, 6).toUpperCase();
+                    var timestampTail = Date.now().toString().slice(-4);
+                    ref = 'HC-' + dateStr + '-' + random + timestampTail;
+                    attempts++;
+                } while (localStorage.getItem('booking_' + ref) && attempts < 5);
+
+                return ref;
             }
 
             console.log('✅ DOMContentLoaded completed - form submit listener attached!');
@@ -5756,3 +5791,4 @@
 </body>
 
 </html>
+
