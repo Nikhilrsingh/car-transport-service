@@ -2,10 +2,123 @@
 // BOOKING MODALS MANAGEMENT
 // ============================================
 
+let activeManagedBooking = null;
+
+function normalizeBookingRef(reference) {
+    return (reference || '').trim().toUpperCase();
+}
+
+function setManageBookingStatus(message, tone = 'info') {
+    const statusEl = document.getElementById('manageBookingStatus');
+    if (!statusEl) return;
+
+    statusEl.textContent = message;
+    if (tone === 'success') {
+        statusEl.style.color = '#4CAF50';
+    } else if (tone === 'error') {
+        statusEl.style.color = '#ff6347';
+    } else {
+        statusEl.style.color = '#bbb';
+    }
+}
+
+function getStoredBookingByRef(reference) {
+    const normalizedRef = normalizeBookingRef(reference);
+    if (!normalizedRef) return null;
+
+    const raw = localStorage.getItem('booking_' + normalizedRef);
+    if (!raw) return null;
+
+    try {
+        const booking = JSON.parse(raw);
+        return booking && typeof booking === 'object' ? booking : null;
+    } catch (err) {
+        console.error('Invalid booking data for reference:', normalizedRef, err);
+        return null;
+    }
+}
+
+function applyBookingToForm(booking) {
+    if (!booking) return;
+
+    const fieldMap = {
+        fullName: 'fullName',
+        phone: 'phone',
+        email: 'email',
+        vehicleType: 'vehicleType',
+        vehicleModel: 'vehicleModel',
+        pickupCity: 'pickupCity',
+        pickupLocation: 'pickupLocation',
+        dropCity: 'dropCity',
+        dropLocation: 'dropLocation',
+        pickupDate: 'pickupDate',
+        pickupTime: 'pickupTime',
+        additionalInfo: 'additionalInfo'
+    };
+
+    Object.keys(fieldMap).forEach((key) => {
+        const input = document.getElementById(fieldMap[key]);
+        if (input && booking[key] != null) {
+            input.value = booking[key];
+        }
+    });
+
+    if (typeof updateBookingSummary === 'function') updateBookingSummary();
+    if (typeof updatePriceCalculation === 'function') updatePriceCalculation();
+}
+
+function ensureManagedBookingLoaded() {
+    if (activeManagedBooking && activeManagedBooking.ref) return true;
+
+    const refInput = document.getElementById('manageBookingRef');
+    if (!refInput || !refInput.value.trim()) {
+        showToast('Reference Required', 'Please enter your booking reference first', 'error', 3000);
+        setManageBookingStatus('Booking reference is required to manage a booking.', 'error');
+        return false;
+    }
+
+    return lookupManageBooking(true);
+}
+
+function persistManagedBookingPatch(patch) {
+    if (!activeManagedBooking || !activeManagedBooking.ref) return;
+
+    activeManagedBooking = Object.assign({}, activeManagedBooking, patch, {
+        updatedAt: new Date().toISOString()
+    });
+    localStorage.setItem('booking_' + activeManagedBooking.ref, JSON.stringify(activeManagedBooking));
+    localStorage.setItem('lastBooking', JSON.stringify({
+        reference: activeManagedBooking.ref,
+        data: activeManagedBooking,
+        timestamp: activeManagedBooking.updatedAt
+    }));
+}
+
 // ========================================
 // BOOKING MANAGEMENT FUNCTIONS
 // ========================================
 function openManageBooking() {
+    const refInput = document.getElementById('manageBookingRef');
+    if (refInput && !refInput.value) {
+        const fromSession = sessionStorage.getItem('lastBookingRef');
+        const fromLastBooking = (() => {
+            try {
+                const lastBookingRaw = localStorage.getItem('lastBooking');
+                return lastBookingRaw ? JSON.parse(lastBookingRaw).reference : '';
+            } catch (_) {
+                return '';
+            }
+        })();
+
+        refInput.value = normalizeBookingRef(fromSession || fromLastBooking || '');
+    }
+
+    if (refInput && refInput.value.trim()) {
+        lookupManageBooking(true);
+    } else {
+        setManageBookingStatus('Enter your booking reference to load booking details.', 'info');
+    }
+
     document.getElementById('manageBookingModal').classList.add('show');
 }
 
@@ -13,7 +126,42 @@ function closeManageBooking() {
     document.getElementById('manageBookingModal').classList.remove('show');
 }
 
+function lookupManageBooking(silent = false) {
+    const refInput = document.getElementById('manageBookingRef');
+    if (!refInput) return false;
+
+    const normalizedRef = normalizeBookingRef(refInput.value);
+    refInput.value = normalizedRef;
+
+    if (!normalizedRef) {
+        if (!silent) {
+            showToast('Reference Required', 'Please enter your booking reference', 'error', 3000);
+        }
+        setManageBookingStatus('Booking reference is required to manage a booking.', 'error');
+        return false;
+    }
+
+    const booking = getStoredBookingByRef(normalizedRef);
+    if (!booking) {
+        activeManagedBooking = null;
+        if (!silent) {
+            showToast('Not Found', `No booking found for ${normalizedRef}`, 'error', 3000);
+        }
+        setManageBookingStatus(`No booking found for ${normalizedRef}.`, 'error');
+        return false;
+    }
+
+    activeManagedBooking = Object.assign({}, booking, { ref: normalizedRef });
+    applyBookingToForm(activeManagedBooking);
+    setManageBookingStatus(`Booking ${normalizedRef} loaded successfully.`, 'success');
+    if (!silent) {
+        showToast('Booking Loaded', `Booking ${normalizedRef} is ready to manage`, 'success', 3000);
+    }
+    return true;
+}
+
 function editBooking() {
+    if (!ensureManagedBookingLoaded()) return;
     closeManageBooking();
     showToast('Edit Mode', 'You can now edit your booking details', 'info', 3000);
     // Enable all form fields
@@ -25,6 +173,7 @@ function editBooking() {
 // RESCHEDULE FUNCTIONS
 // ========================================
 function openRescheduleModal() {
+    if (!ensureManagedBookingLoaded()) return;
     closeManageBooking();
     document.getElementById('rescheduleModal').classList.add('show');
     
@@ -67,6 +216,7 @@ function confirmReschedule() {
     // Update the form
     document.getElementById('pickupDate').value = newDate;
     document.getElementById('pickupTime').value = newTime;
+    persistManagedBookingPatch({ pickupDate: newDate, pickupTime: newTime });
     
     closeRescheduleModal();
     showToast('Rescheduled', message, 'success', 4000);
@@ -78,6 +228,7 @@ function confirmReschedule() {
 // CANCEL BOOKING FUNCTIONS
 // ========================================
 function openCancelModal() {
+    if (!ensureManagedBookingLoaded()) return;
     closeManageBooking();
     document.getElementById('cancelModal').classList.add('show');
 }
@@ -105,6 +256,11 @@ function confirmCancellation() {
     else if (hoursDiff > 24) refundPercentage = 50;
     
     closeCancelModal();
+    persistManagedBookingPatch({
+        status: 'cancelled',
+        cancellationReason: reason.trim(),
+        cancelledAt: new Date().toISOString()
+    });
     
     // Clear form and localStorage
     document.getElementById('bookingForm').reset();
@@ -128,6 +284,7 @@ function confirmCancellation() {
 // TRANSFER BOOKING FUNCTIONS
 // ========================================
 function openTransferModal() {
+    if (!ensureManagedBookingLoaded()) return;
     closeManageBooking();
     document.getElementById('transferModal').classList.add('show');
 }
@@ -157,6 +314,13 @@ function confirmTransfer() {
     }
     
     closeTransferModal();
+    persistManagedBookingPatch({
+        transferredTo: {
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim()
+        }
+    });
     showToast(
         'Transfer Initiated',
         `Booking transfer to ${name} initiated. They will receive confirmation via email and SMS.`,
@@ -169,6 +333,7 @@ function confirmTransfer() {
 // UPGRADE/DOWNGRADE FUNCTIONS
 // ========================================
 function openUpgradeModal() {
+    if (!ensureManagedBookingLoaded()) return;
     closeManageBooking();
     const currentType = document.getElementById('vehicleType').value;
     document.getElementById('currentVehicleType').textContent = formatVehicleType(currentType);
@@ -234,6 +399,7 @@ function confirmVehicleChange() {
     
     // Update the vehicle type
     document.getElementById('vehicleType').value = newType;
+    persistManagedBookingPatch({ vehicleType: newType });
     
     closeUpgradeModal();
     showToast('Vehicle Updated', 'Vehicle type changed successfully', 'success', 3000);
@@ -243,6 +409,7 @@ function confirmVehicleChange() {
 }
 
 function openAddonsModal() {
+    if (!ensureManagedBookingLoaded()) return;
     closeManageBooking();
     showToast('Add Services', 'Select add-on services from Step 1', 'info', 3000);
     currentStep = 1;
@@ -404,6 +571,7 @@ document.addEventListener('click', startAbandonmentTimer);
 if (typeof window !== 'undefined') {
     window.openManageBooking = openManageBooking;
     window.closeManageBooking = closeManageBooking;
+    window.lookupManageBooking = lookupManageBooking;
     window.editBooking = editBooking;
     window.openRescheduleModal = openRescheduleModal;
     window.closeRescheduleModal = closeRescheduleModal;
