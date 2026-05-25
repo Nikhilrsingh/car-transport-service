@@ -284,7 +284,11 @@ export const updateBookingStatus = async (req, res, next) => {
           });
 
           // Calculate GST (assume same state for demo - intra-state CGST+SGST)
-          invoice.calculateTaxBreakdown('Maharashtra', 'Maharashtra', 18);
+          invoice.calculateTaxBreakdown(
+               booking.customerState || 'Maharashtra',
+               'Maharashtra',
+               18
+             );
 
           await invoice.save();
           console.log(`✅ Invoice ${invoiceNumber} auto-generated for booking ${booking.bookingReference}`);
