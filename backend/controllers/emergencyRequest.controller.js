@@ -106,8 +106,8 @@ export const getAllEmergencyRequests = async (req, res, next) => {
 
     const requests = await EmergencyRequest.find(query)
       .sort({ createdAt: -1 })
-      .skip((page - 1) * limit)
-      .limit(Number(limit));
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .limit(parseInt(limit));
 
     return success(res, 200, "Emergency requests fetched successfully", {
       total,

@@ -90,8 +90,8 @@ export const getAllFeedbacks = async (req, res, next) => {
 
     const feedbacks = await Feedback.find(query)
       .sort({ createdAt: -1 })
-      .skip((page - 1) * limit)
-      .limit(Number(limit));
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .limit(parseInt(limit));
 
     return success(res, 200, "Feedbacks fetched successfully", {
       total,
