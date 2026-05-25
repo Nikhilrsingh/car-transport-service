@@ -101,14 +101,12 @@ export const refreshToken = async (req, res, next) => {
       return error(res, 401, "Refresh token required");
     }
 
-    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET || "refreshsecret", (err, decoded) => {
-      if (err) {
-        return error(res, 403, "Invalid or expired refresh token");
-      }
-
-      const newToken = generateToken(decoded.id);
-      success(res, 200, "Token refreshed", { token: newToken });
-    });
+    const decoded = jwt.verify(
+        refreshToken,
+        process.env.JWT_REFRESH_SECRET || 'refreshsecret'
+     );
+    const newToken = generateToken(decoded.id);
+     return success(res, 200, 'Token refreshed', { token: newToken });
   } catch (err) {
     next(err);
   }
