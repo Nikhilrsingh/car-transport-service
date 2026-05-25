@@ -20,6 +20,7 @@ export const rateLimiter = (windowMs = 60000, maxRequests = 5) => {
 
     // Window has passed, reset the counter
     if (now > data.resetTime) {
+      rateLimitStore.delete(ip);
       rateLimitStore.set(ip, { count: 1, resetTime: now + windowMs });
       return next();
     }
