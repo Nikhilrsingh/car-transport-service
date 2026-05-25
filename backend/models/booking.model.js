@@ -22,6 +22,14 @@ const bookingSchema = new mongoose.Schema({
     match: [/^[6-9]\d{9}$/, 'Please provide a valid 10-digit Indian phone number']
   },
 
+  email: {
+    type: String,
+    lowercase: true,
+    trim: true,
+    match: [/^\S+@\S+\.\S+$/, 'Invalid email format'],
+    default: ''
+  },
+
   // Vehicle Information
   vehicleType: {
     type: String,
