@@ -148,9 +148,23 @@ body[data-theme="dark"] .middle-navbar {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
 }
 
+body.dark-mode .middle-navbar-left,
+body[data-theme="dark"] .middle-navbar-left {
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.92));
+  border: 1px solid rgba(255, 107, 61, 0.24);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
 body.dark-mode .middle-navbar-logo,
+body[data-theme="dark"] .middle-navbar-logo {
+  filter: none;
+}
+
 body.dark-mode .middle-navbar-banner,
-body[data-theme="dark"] .middle-navbar-logo,
 body[data-theme="dark"] .middle-navbar-banner {
   filter: brightness(0.95);
 }
@@ -214,6 +228,12 @@ body[data-theme="dark"] .contact-sub {
   .middle-navbar-banner {
     height: 30px;
     transform: scale(1.1);
+  }
+
+  body.dark-mode .middle-navbar-left,
+  body[data-theme="dark"] .middle-navbar-left {
+    padding: 3px 8px;
+    border-radius: 12px;
   }
 
   /* Disable excessive hover zoom on mobile */
