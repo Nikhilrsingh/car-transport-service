@@ -11,13 +11,45 @@
         --radius: 12px;
       }
 
+      body[data-theme="dark"] {
+        --surface: #101318;
+        --bg-light: #0f1115;
+        --text-main: #f8fafc;
+        --text-muted: #cbd5e1;
+        --border-color: #2d333d;
+        background-color: var(--bg-light) !important;
+        color: var(--text-main) !important;
+      }
+
       /* =========================================
    TRUE DARK MODE (Kills all white boxes & matches background)
 ========================================= */
+[data-theme="dark"] #reviews-widget-container,
+[data-theme="dark"] .customer-reviews-section,
+[data-theme="dark"] .testimonials-carousel-section {
+  background: var(--bg-light) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .featured-reviews-header {
+  background: transparent !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .featured-reviews-header h2,
+[data-theme="dark"] .header-text-group h2 {
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .featured-reviews-header p,
+[data-theme="dark"] .header-text-group p {
+  color: var(--text-muted) !important;
+}
+
 [data-theme="dark"] .modern-card,
 [data-theme="dark"] .reviews-controls {
-  background: var(--bg, #121212) !important; /* Blends directly into your page background */
-  border: 1px solid var(--color-gray-400, #555555) !important; 
+  background: var(--surface) !important; /* Blends directly into your page background */
+  border: 1px solid var(--border-color, #555555) !important; 
   box-shadow: none !important;
 }
 

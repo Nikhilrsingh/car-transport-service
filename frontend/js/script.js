@@ -83,8 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!phoneErrorMsg) {
       phoneErrorMsg = document.createElement('div');
       phoneErrorMsg.className = 'phone-error-message';
-      inputGrid.parentElement.appendChild(phoneErrorMsg);
     }
+    inputGrid.insertAdjacentElement('afterend', phoneErrorMsg);
 
     // Create success icon if it doesn't exist
     let phoneSuccessIcon = splitPhoneInput.parentElement.querySelector('.phone-success-icon');
