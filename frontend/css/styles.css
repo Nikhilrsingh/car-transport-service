@@ -6152,3 +6152,25 @@ body::-webkit-scrollbar-thumb:hover {
     transform: translate(-50%, 0);
   }
 }
+
+/* Date validation error messages */
+.date-error {
+  display: none;
+  color: #e53e3e;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  padding: 4px 8px;
+  background: #fff5f5;
+  border-left: 3px solid #e53e3e;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Highlight invalid date inputs */
+input[type="date"].is-invalid {
+  border: 2px solid #e53e3e;
+  background-color: #fff5f5;
+}
+
+input[type="date"].is-valid {
+  border: 2px solid #38a169;
+}
