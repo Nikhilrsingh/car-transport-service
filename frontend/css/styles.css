@@ -6152,3 +6152,187 @@ body::-webkit-scrollbar-thumb:hover {
     transform: translate(-50%, 0);
   }
 }
+
+
+/* =============================================
+   MOBILE RESPONSIVENESS FIXES
+   ============================================= */
+@media (max-width: 768px) {
+
+  html, body {
+    overflow-x: hidden;
+  }
+
+  body {
+    padding-bottom: 70px;
+  }
+
+  /* Hero title */
+  .hero-title,
+  .hero-title .title-line,
+  .title-line.highlight {
+    font-size: 2.7rem !important;
+    line-height: 1.05 !important;
+    text-align: center;
+  }
+
+  /* Center subtitle pills */
+  .hero-sub-title,
+  .hero-benefits {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  /* Route pin fix */
+  .hero-main .route-pins {
+    right: 8px;
+    transform: scale(0.8);
+  }  
+
+  /* Cookie popup */
+.cookie-popup,
+.cookie-banner {
+  width: calc(100% - 20px) !important;
+  max-width: 340px !important;
+
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+
+  bottom: 80px !important;
+
+  padding: 12px !important;
+  border-radius: 16px !important;
+
+  font-size: 0.85rem !important;
+}
+
+  /* Map toolbar fix */
+.network-controls,
+.map-controls,
+.map-toolbar {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  padding: 10px !important;
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+
+  flex-wrap: nowrap !important;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .map-layout-container {
+    padding: 8px !important;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .hero-main {
+    padding: 12px !important;
+  }
+
+  .hero-description {
+    margin-top: 10px !important;
+    line-height: 1.5 !important;
+  }
+
+  .quote-card,
+  .hero-quote {
+    padding: 14px !important;
+  }
+
+  section {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  #smartScrollBtn {
+  right: 10px !important;
+  bottom: 80px !important;
+  transform: scale(0.9);
+   }
+}
+
+@media (max-width: 768px) {
+
+  /* Fix tooltip going off screen */
+  .scroll-button::after,
+#smartScrollBtn::after,
+[data-tooltip]::after {
+  bottom: 70px !important;
+  right: -5px !important;
+
+  left: auto !important;
+  transform: none !important;
+
+  white-space: nowrap !important;
+}
+
+  /* Bigger heading */
+  .hero-title,
+  .hero-title .title-line,
+  .title-line.highlight {
+    font-size: 3.5rem !important;
+    line-height: 1.02 !important;
+  }
+
+  /* Orange fade only at TOP and till RIGHT edge */
+  .hero-main {
+    overflow: hidden !important; 
+    background-image: linear-gradient(
+      90deg,
+      rgba(255,102,0,0.10) 0%,
+      rgba(255,102,0,0.06) 45%,
+      rgba(255,102,0,0.03) 100%
+    ) !important;
+
+    background-size: 100% 17% !important;
+    background-repeat: no-repeat !important;
+    background-position: top !important;
+  }
+
+  .hero-main::before {
+    display: none !important;
+  }
+  
+}
+
+@media (max-width: 768px) {
+
+  .middle-navbar-banner {
+    position: relative;
+    right: -20px;
+    top: 5px;
+  }
+
+}
+/* Date validation error messages */
+.date-error {
+  display: none;
+  color: #e53e3e;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  padding: 4px 8px;
+  background: #fff5f5;
+  border-left: 3px solid #e53e3e;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Highlight invalid date inputs */
+input[type="date"].is-invalid {
+  border: 2px solid #e53e3e;
+  background-color: #fff5f5;
+}
+
+input[type="date"].is-valid {
+  border: 2px solid #38a169;
+}
