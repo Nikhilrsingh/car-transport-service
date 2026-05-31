@@ -83,8 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!phoneErrorMsg) {
       phoneErrorMsg = document.createElement('div');
       phoneErrorMsg.className = 'phone-error-message';
-      inputGrid.parentElement.appendChild(phoneErrorMsg);
     }
+    inputGrid.insertAdjacentElement('afterend', phoneErrorMsg);
 
     // Create success icon if it doesn't exist
     let phoneSuccessIcon = splitPhoneInput.parentElement.querySelector('.phone-success-icon');
@@ -1081,3 +1081,127 @@ window.showPWAPrompt = function () {
 };
 
 window.installPWA = installPWA;
+
+// ================= BOOKING DATE VALIDATION =================
+/**
+ * Returns today's date as YYYY-MM-DD string (required for input min attr).
+ */
+function getTodayString() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm   = String(today.getMonth() + 1).padStart(2, "0");
+  const dd   = String(today.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+/**
+ * Returns tomorrow's date as YYYY-MM-DD string.
+ */
+function getTomorrowString() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const yyyy = tomorrow.getFullYear();
+  const mm   = String(tomorrow.getMonth() + 1).padStart(2, "0");
+  const dd   = String(tomorrow.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+/**
+ * Show/clear inline error for a field.
+ */
+function setDateError(errorElId, message) {
+  const el = document.getElementById(errorElId);
+  if (!el) return;
+  el.textContent = message;
+  el.style.display = message ? "block" : "none";
+}
+
+/**
+ * Initialize booking form date validation.
+ */
+function initBookingDateValidation() {
+  const pickupInput = document.getElementById("pickup-date");
+  const returnInput = document.getElementById("return-date");
+  const bookingForm = document.getElementById("quickQuoteForm");
+
+  if (!pickupInput || !returnInput) return;
+
+  pickupInput.min = getTodayString();
+
+  pickupInput.addEventListener("change", () => {
+    const pickupVal = pickupInput.value;
+    setDateError("pickup-date-error", "");
+
+    if (!pickupVal) {
+      returnInput.min = getTomorrowString();
+      return;
+    }
+
+    const pickupDate = new Date(pickupVal);
+    pickupDate.setDate(pickupDate.getDate() + 1);
+
+    const minReturn = pickupDate.toISOString().split("T")[0];
+    returnInput.min = minReturn;
+
+    if (returnInput.value && returnInput.value <= pickupVal) {
+      returnInput.value = "";
+      setDateError(
+        "return-date-error",
+        "Return date has been cleared — it must be after the pickup date."
+      );
+    }
+  });
+
+  returnInput.addEventListener("change", () => {
+    const pickupVal = pickupInput.value;
+    const returnVal = returnInput.value;
+
+    if (pickupVal && returnVal && returnVal <= pickupVal) {
+      setDateError(
+        "return-date-error",
+        "⚠️ Return date must be after the pickup date."
+      );
+      returnInput.value = "";
+    } else {
+      setDateError("return-date-error", "");
+    }
+  });
+
+  if (bookingForm) {
+    bookingForm.addEventListener("submit", (e) => {
+      let isValid = true;
+      const today = getTodayString();
+
+      if (!pickupInput.value) {
+        setDateError("pickup-date-error", "⚠️ Please select a pickup date.");
+        isValid = false;
+      } else if (pickupInput.value < today) {
+        setDateError("pickup-date-error", "⚠️ Pickup date cannot be in the past.");
+        isValid = false;
+      } else {
+        setDateError("pickup-date-error", "");
+      }
+
+      if (!returnInput.value) {
+        setDateError("return-date-error", "⚠️ Please select a return date.");
+        isValid = false;
+      } else if (returnInput.value <= pickupInput.value) {
+        setDateError(
+          "return-date-error",
+          "⚠️ Return date must be after the pickup date."
+        );
+        isValid = false;
+      } else {
+        setDateError("return-date-error", "");
+      }
+
+      if (!isValid) {
+        e.preventDefault();
+        const firstError = bookingForm.querySelector(".date-error[style*='block']");
+        firstError?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", initBookingDateValidation);

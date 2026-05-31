@@ -48,6 +48,26 @@
     box-shadow: 0 0 10px rgba(0, 204, 102, 0.2) !important;
 }
 
+#contactForm .phone-error-message {
+    position: static !important;
+    display: block;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 0;
+    margin: 0 !important;
+    line-height: 1.35;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    overflow: hidden;
+}
+
+#contactForm .phone-error-message.show {
+    max-height: 3.5em;
+    margin: 6px 0 12px !important;
+}
+
 /* Responsive adjustment */
 @media (max-width: 480px) {
     .phone-input-grid {
