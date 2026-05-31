@@ -291,18 +291,20 @@ footer .container {
 }
 
 /* Updated code for both FontAwesome and SVG icons */
-.social-links a i, 
+.social-links a i,
 .social-links a svg {
   font-size: 18px;
-  transition: color 0.3s ease, fill 0.3s ease, transform 0.55s ease; /* Added fill and transition */
+  transition: color 0.3s ease, fill 0.3s ease, transform 0.55s ease;
+  /* Added fill and transition */
 }
 
 .social-links a:hover i,
 .social-links a:hover svg {
   transform: rotate(360deg);
   color: #ff7b00;
-  fill: #ff7b00; 
+  fill: #ff7b00;
 }
+
 .social-links a:hover {
   transform: translateY(-3px);
 }
@@ -466,8 +468,9 @@ footer .container {
 .newsletter-animated button {
   width: 36px;
   height: 36px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
@@ -1509,19 +1512,19 @@ body[data-theme="light"] .search-clear:hover {
 
 
 @media (max-width: 768px) {
-  
+
   #footer-main {
     display: none !important;
   }
-  
-  
+
+
   .footer-toggle {
     display: none !important;
   }
 
-  
+
   footer.footer {
     padding-top: 60px !important;
-    padding-bottom: 80px !important; 
+    padding-bottom: 80px !important;
   }
 }
