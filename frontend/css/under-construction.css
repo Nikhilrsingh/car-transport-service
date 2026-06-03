@@ -1,0 +1,598 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #0b0c10;
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.08), transparent 40%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.card-container {
+    background: rgba(20, 21, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 60px;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    width: 90%;
+    max-width: 1100px;
+}
+
+.animation-panel {
+    width: 460px;
+    height: 280px;
+    background: linear-gradient(180deg, #131520 0%, #1c1f2e 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+}
+
+.road-surface {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.lane-lines {
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    background: repeating-linear-gradient(90deg,
+            transparent,
+            transparent 20px,
+            rgba(255, 255, 255, 0.3) 20px,
+            rgba(255, 255, 255, 0.3) 40px);
+    animation: moveRoad 3s linear infinite;
+    opacity: 0.5;
+}
+
+.truck-assembly {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 120px;
+    animation: truckIdle 1.5s ease-in-out infinite alternate;
+    z-index: 10;
+}
+
+.trailer-bed {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    width: 240px;
+    height: 12px;
+    background: #333645;
+    border-radius: 4px;
+    border-bottom: 3px solid #1a1c24;
+}
+
+.covered-car {
+    position: absolute;
+    bottom: 12px;
+    left: 30px;
+    width: 160px;
+    height: 55px;
+    border-radius: 50px 90px 10px 10px / 40px 60px 10px 10px;
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    box-shadow:
+        inset -5px -10px 20px rgba(0, 0, 0, 0.3),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.4),
+        0 0 30px rgba(139, 92, 246, 0.4);
+    z-index: 2;
+    overflow: hidden;
+}
+
+.cloth-highlight {
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    width: 80px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: rotate(-5deg);
+    filter: blur(4px);
+    z-index: 3;
+}
+
+.tail-light-glow {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 20px;
+    height: 15px;
+    background: rgba(239, 68, 68, 0.7);
+    border-radius: 50%;
+    filter: blur(8px);
+    animation: jitterGlow 1.8s infinite;
+}
+
+.car-headlight-glow {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    width: 25px;
+    height: 20px;
+    background: rgba(253, 230, 138, 0.6);
+    border-radius: 50%;
+    filter: blur(10px);
+    animation: jitterGlow 2.1s infinite reverse;
+}
+
+.truck-cab {
+    position: absolute;
+    bottom: 12px;
+    right: 15px;
+    width: 75px;
+    height: 75px;
+    background: linear-gradient(180deg, #2a2d3e 0%, #1f2231 100%);
+    border-radius: 12px 24px 4px 4px;
+    border-left: 2px solid #14151e;
+}
+
+.window {
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    width: 35px;
+    height: 28px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-radius: 4px 14px 4px 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 5px 5px 10px rgba(255, 255, 255, 0.05);
+}
+
+.truck-headlight {
+    position: absolute;
+    bottom: 12px;
+    right: -2px;
+    width: 6px;
+    height: 14px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 15px 0 25px 8px rgba(253, 230, 138, 0.4);
+    animation: pulseBeam 2s infinite alternate ease-in-out;
+}
+
+.wheel {
+    position: absolute;
+    bottom: 0;
+    width: 28px;
+    height: 28px;
+    background: #0b0c10;
+    border: 4px solid #474b5c;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hubcap {
+    width: 10px;
+    height: 10px;
+    background: #94a3b8;
+    border-radius: 50%;
+}
+
+.w-1 {
+    left: 20px;
+}
+
+.w-2 {
+    left: 65px;
+}
+
+.w-3 {
+    right: 105px;
+}
+
+.w-4 {
+    right: 25px;
+}
+
+.crane-assembly {
+    position: absolute;
+    top: 0;
+    left: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: craneMove 4s ease-in-out infinite alternate;
+    z-index: 15;
+}
+
+.crane-line {
+    width: 2px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.crane-hook {
+    width: 20px;
+    height: 24px;
+    border: 3px solid #f59e0b;
+    border-top: none;
+    border-left: none;
+    border-radius: 0 0 50% 12px;
+    transform: rotate(45deg);
+    position: relative;
+    top: -4px;
+    left: 2px;
+}
+
+.laser-beam {
+    position: absolute;
+    top: 15px;
+    left: -25px;
+    width: 60px;
+    height: 110px;
+    background: linear-gradient(to bottom, rgba(6, 182, 212, 0.6) 0%, rgba(6, 182, 212, 0.05) 90%, rgba(6, 182, 212, 0.9) 100%);
+    clip-path: polygon(45% 0, 55% 0, 100% 100%, 0% 100%);
+    transform-origin: top center;
+    animation: sweepScanner 2.5s infinite ease-in-out alternate;
+    pointer-events: none;
+    border-bottom: 2px solid #06b6d4;
+}
+
+.barricade {
+    position: absolute;
+    bottom: 30px;
+    width: 44px;
+    height: 14px;
+    background: repeating-linear-gradient(45deg, #f97316, #f97316 6px, #292524 6px, #292524 12px);
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 20;
+}
+
+.barricade::before,
+.barricade::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    width: 4px;
+    height: 6px;
+    background: #52525b;
+}
+
+.barricade::before {
+    left: 4px;
+}
+
+.barricade::after {
+    right: 4px;
+}
+
+.caution-light {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #fbbf24;
+    border-radius: 50%;
+    animation: cautionBlink 1s infinite alternate;
+}
+
+.left-barricade {
+    left: 25px;
+}
+
+.right-barricade {
+    right: 25px;
+}
+
+.passing-sign {
+    position: absolute;
+    bottom: 50px;
+    right: -100px;
+    display: flex;
+    gap: 6px;
+    background: #111116;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 2px solid #2a2a35;
+    animation: passSign 7s linear infinite;
+    z-index: 1;
+}
+
+.passing-sign::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 20px;
+    background: #3f3f46;
+}
+
+.neon-arrow {
+    width: 12px;
+    height: 12px;
+    border-top: 3px solid #22d3ee;
+    border-right: 3px solid #22d3ee;
+    transform: rotate(45deg);
+    animation: arrowGlow 1.5s infinite alternate;
+}
+
+.neon-arrow:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.neon-arrow:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.text-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    background: linear-gradient(to right, #ffffff, #c4b5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    color: #9ca3af;
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.action-buttons a,
+.action-buttons button {
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-primary {
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+.footer-tip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+@keyframes truckIdle {
+    0% {
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        transform: translate(-50%, 2px);
+    }
+}
+
+@keyframes craneMove {
+    0% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(15px);
+    }
+}
+
+@keyframes moveRoad {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-40px);
+    }
+}
+
+@keyframes jitterGlow {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    30% {
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+
+    60% {
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+
+    80% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pulseBeam {
+    0% {
+        box-shadow: 10px 0 20px 5px rgba(253, 230, 138, 0.3);
+        opacity: 0.8;
+    }
+
+    100% {
+        box-shadow: 25px 0 40px 12px rgba(253, 230, 138, 0.6);
+        opacity: 1;
+    }
+}
+
+@keyframes sweepScanner {
+    0% {
+        transform: rotate(-65deg);
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(-25deg);
+        opacity: 0.3;
+    }
+}
+
+@keyframes cautionBlink {
+
+    0%,
+    40% {
+        box-shadow: 0 0 15px 4px rgba(251, 191, 36, 0.8);
+        background: #fde047;
+    }
+
+    60%,
+    100% {
+        box-shadow: none;
+        background: #b45309;
+    }
+}
+
+@keyframes passSign {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-600px);
+        opacity: 0;
+    }
+}
+
+@keyframes arrowGlow {
+    0% {
+        border-color: #164e63;
+        box-shadow: none;
+    }
+
+    100% {
+        border-color: #22d3ee;
+        filter: drop-shadow(0 0 8px #22d3ee);
+    }
+}
+
+@media (max-width: 950px) {
+    .card-container {
+        flex-direction: column;
+        padding: 40px;
+        text-align: center;
+    }
+
+    .text-panel {
+        align-items: center;
+    }
+
+    .title {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .animation-panel {
+        width: 100%;
+        height: 220px;
+    }
+
+    .truck-assembly {
+        transform: translateX(-50%) scale(0.8);
+        transform-origin: bottom center;
+    }
+
+    @keyframes truckIdle {
+        0% {
+            transform: translate(-50%, 0) scale(0.8);
+        }
+
+        100% {
+            transform: translate(-50%, 2px) scale(0.8);
+        }
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .action-buttons a,
+    .action-buttons button {
+        width: 100%;
+    }
+}
