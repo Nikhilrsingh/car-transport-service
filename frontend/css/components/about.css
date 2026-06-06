@@ -1426,8 +1426,7 @@ body {
 /* ================================
    RESPONSIVE DESIGN
    ================================= */
-
-@media (max-width: 992px) {
+@media (max-width: 1500px) {
   .about-team-flip-card {
     height: 380px;
   }
@@ -1437,9 +1436,8 @@ body {
     gap: 40px;
   }
 
-  /* Timeline Mobile Refactor */
   .timeline-container {
-    padding-left: 60px;
+    padding-left: 80px;
     padding-right: 20px;
   }
 
@@ -1450,52 +1448,67 @@ body {
 
   .timeline-item,
   .timeline-item:nth-child(odd) {
-    flex-direction: row;
-    margin-bottom: 60px;
-    opacity: 1;
-    /* Ensure visibility for testing */
-    transform: translateY(0);
-    width: 100%;
+    flex-direction: row !important;
+    margin-bottom: 40px !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    width: 100% !important;
+    position: relative !important;
+    min-height: auto !important;
   }
 
   .timeline-content,
-  .timeline-item:nth-child(odd) .timeline-content {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    text-align: left;
-    max-width: none;
+  .timeline-item:nth-child(odd) .timeline-content,
+  body[data-theme="light"] .timeline-content,
+  body[data-theme="light"] .timeline-item:nth-child(odd) .timeline-content {
+    position: relative !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: left !important;
+    max-width: none !important;
+    left: auto !important;
+    right: auto !important;
+    flex: unset !important;
   }
 
   .timeline-content::after,
   .timeline-item:nth-child(odd) .timeline-content::after {
-    left: -15px;
-    right: auto;
-    border-right: 15px solid #333;
-    border-left: none;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
+    left: -15px !important;
+    right: auto !important;
+    border-right: 15px solid #333 !important;
+    border-left: none !important;
+    border-top: 10px solid transparent !important;
+    border-bottom: 10px solid transparent !important;
+  }
+
+  body[data-theme="light"] .timeline-content::after,
+  body[data-theme="light"] .timeline-item:nth-child(odd) .timeline-content::after {
+    left: -15px !important;
+    right: auto !important;
+    border-right: 15px solid #ffffff !important;
+    border-left: none !important;
+    border-top: 10px solid transparent !important;
+    border-bottom: 10px solid transparent !important;
   }
 
   .timeline-year {
-    left: -45px;
-    /* Position relative to .timeline-content but aligned with line */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 60px;
-    height: 60px;
-    font-size: 1rem;
-    border-width: 3px;
-    position: absolute;
+    position: absolute !important;
+    left: -65px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 55px !important;
+    height: 55px !important;
+    font-size: 0.9rem !important;
+    border-width: 3px !important;
   }
 
   .timeline-item:hover .timeline-year {
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.1) !important;
   }
 
   .timeline-tags,
   .timeline-item:nth-child(odd) .timeline-tags {
-    justify-content: flex-start;
+    justify-content: flex-start !important;
   }
 }
 
@@ -2036,17 +2049,15 @@ body[data-theme="light"] .hero.has-bg-image .hero-btn:hover {
 
 body[data-theme="light"] .timeline-content {
   flex: 1;
-  position: absolute;
+  position: absolute;   /* this stays for desktop */
   width: 40%;
   margin: 0 30px;
   padding: 30px;
   border-radius: 16px;
   background: #ffffff;
-  /* white card in light mode */
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
   color: #111111;
-  /* base text */
   transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
 }
 

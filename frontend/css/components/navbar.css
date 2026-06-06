@@ -479,11 +479,11 @@ body {
   }
 }
 
-.search-bar input {
-  background: transparent;
+.search-bar #navbarSearch {
+  background: transparent !important;
   border: none;
   outline: none;
-  color: #ffffff !important;
+  color: #010101 !important;
   padding: 4px 8px;
   font-size: 0.9rem !important;
   width: 100%;
@@ -564,6 +564,13 @@ body {
   border-radius: 50%;
 }
 
+.action-nav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
 .action-nav i {
   font-size: 1.4rem !important;
   color: rgb(255, 99, 71) !important;
@@ -593,7 +600,7 @@ body {
 }
 
 .login-btn {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
@@ -1024,8 +1031,13 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
   flex-shrink: 0;
 }
 
+.mobile-search-container #mobileSearch {
+  background: transparent !important;
+}
+
 .mobile-search-bar {
   display: flex;
+  justify-content: end;
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1040,7 +1052,7 @@ button.nav-link[data-dropdown-btn] i.fa-caret-down {
   outline: none;
   color: white;
   font-size: 0.85rem;
-  width: 100%;
+  width: 95%;
   font-weight: 400;
 }
 
@@ -1811,4 +1823,37 @@ body[data-theme="light"] .nav-theme-btn i {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.mobile-nav {
+  /* Use dynamic viewport height to account for mobile browser UI bars */
+  height: 100dvh !important;
+}
+
+.mobile-contact-info {
+  /* Add extra padding at the bottom to ensure it clears the screen edge */
+  padding-bottom: calc(25px + env(safe-area-inset-bottom)) !important;
+}
+
+/* 2. Fix Dark Mode Text Visibility for specific buttons */
+/* Forces white text when the theme is NOT light mode */
+body:not([data-theme="light"]) .mobile-close-btn,
+body:not([data-theme="light"]) .mobile-login-btn,
+body:not([data-theme="light"]) .mobile-dashboard-btn,
+/* Catch-all for standard buttons if reused in mobile view */
+body:not([data-theme="light"]) .login-btn,
+body:not([data-theme="light"]) .dashboard-btn {
+  color: #ffffff !important;
+}
+
+/* Ensure the 'x' icon also stays white */
+body:not([data-theme="light"]) .mobile-close-btn i,
+body:not([data-theme="light"]) .mobile-close-btn::before {
+  color: #ffffff !important;
+}
+
+/* Keep your existing hover color (brand orange) intact */
+body:not([data-theme="light"]) .mobile-close-btn:hover,
+body:not([data-theme="light"]) .mobile-close-btn:hover i {
+  color: #ff6347 !important;
 }
