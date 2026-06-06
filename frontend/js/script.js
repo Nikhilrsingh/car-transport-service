@@ -1197,6 +1197,7 @@ function initBookingDateValidation() {
 
       if (!isValid) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         const firstError = bookingForm.querySelector(".date-error[style*='block']");
         firstError?.scrollIntoView({ behavior: "smooth", block: "center" });
       }
