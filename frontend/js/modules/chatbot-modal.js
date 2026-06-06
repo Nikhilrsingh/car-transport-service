@@ -1,5 +1,5 @@
 /* ====================================
-   SMART CHATBOT MODAL MODULE (AI-Powered)
+   SMART CHATBOT MODAL MODULE
    ==================================== */
 
 /**
@@ -24,206 +24,371 @@ const ChatbotBrain = (function () {
         ]
     };
 
-    // Context Memory (The "Short-term Memory")
-    let context = {
-        lastIntent: null,
-        data: {} // Stores extracted entities like { from: 'Delhi', to: 'Mumbai' }
-    };
+    // ✅ Single source of truth for default context shape
+    function DEFAULT_CONTEXT() {
+        return {
+            lastIntent: null,
+            data: {
+                from: null,
+                to: null,
+                vehicle: null,
+                unsupported_source: null,
+                unsupported_destination: null
+            }
+        };
+    }
 
-    // 1. INTENT RECOGNITION ENGINE
-    // Rules: [Keywords] -> Intent
+    let context = DEFAULT_CONTEXT();
+
+    // INTENT RECOGNITION ENGINE
     const INTENTS = [
         {
             id: 'PRICE',
-            keywords: ['price', 'cost', 'much', 'rate', 'quote', 'charge', 'expensive', 'cheap', 'how much', 'pricing', 'estimate', 'fee', 'afford', 'budget', 'fare', 'charges', 'rates', 'money', 'rupees', 'pay'],
+            keywords: [
+                'price', 'cost', 'much', 'rate', 'quote', 'charge', 'expensive',
+                'cheap', 'how much', 'pricing', 'estimate', 'fee', 'afford', 'budget',
+                'fare', 'charges', 'rates', 'money', 'rupees', 'pay'
+            ],
             response: (ctx) => {
+                // Unsupported source takes priority
+                if (ctx.data.unsupported_source) {
+                    return `Sorry! Our pickup service is not available in <b>${ctx.data.unsupported_source}</b>. 😔<br><br>
+We currently serve:<br>
+<b>Mumbai, Delhi, Bangalore, Chennai, Kolkata, Hyderabad, Pune, Ahmedabad, Jaipur, Surat, Chandigarh and Lucknow</b>.<br><br>
+Please enter a supported city to continue.`;
+                }
+
+                if (ctx.data.unsupported_destination) {
+                    return `Sorry! Our delivery service is not available in <b>${ctx.data.unsupported_destination}</b>. 😔<br><br>
+We currently serve:<br>
+<b>Mumbai, Delhi, Bangalore, Chennai, Kolkata, Hyderabad, Pune, Ahmedabad, Jaipur, Surat, Chandigarh and Lucknow</b>.<br><br>
+Please enter a supported destination city.`;
+                }
+
+                // All three pieces of info collected
                 if (ctx.data.vehicle && ctx.data.from && ctx.data.to) {
-                    return `A rough estimate for shipping a <b>${ctx.data.vehicle}</b> from <b>${ctx.data.from}</b> to <b>${ctx.data.to}</b> would be around <b>₹${calculateMockPrice(ctx.data.from, ctx.data.to)}</b>. <br><br>Would you like to book this now?`;
+                    return `A rough estimate for shipping a <b>${ctx.data.vehicle}</b> from <b>${ctx.data.from}</b> to <b>${ctx.data.to}</b> would be around <b>₹${calculateMockPrice(ctx.data.from, ctx.data.to)}</b>.<br><br>Would you like to book this now?`;
                 }
+
+                // Have route but no vehicle
                 if (!ctx.data.vehicle && ctx.data.from && ctx.data.to) {
-                    return `Great! I can help with pricing from <b>${ctx.data.from}</b> to <b>${ctx.data.to}</b>. <br><br>What type of vehicle are you shipping? 🚗<br>- Sedan/Hatchback<br>- SUV<br>- Bike/Motorcycle`;
+                    return `Great! I can help with pricing from <b>${ctx.data.from}</b> to <b>${ctx.data.to}</b>.<br><br>What type of vehicle are you shipping? 🚗<br>- Sedan / Hatchback<br>- SUV<br>- Bike / Motorcycle`;
                 }
-                if (!ctx.data.vehicle) return "I can give you a quote! What type of vehicle are you shipping? (e.g., Sedan, SUV, Bike)";
-                if (!ctx.data.from) return "Where are you shipping from?";
-                if (!ctx.data.to) return `Shipping from ${ctx.data.from} to where?`;
+
+                // Have vehicle and source, need destination
+                if (ctx.data.vehicle && ctx.data.from && !ctx.data.to) {
+                    return `Got it! Shipping a <b>${ctx.data.vehicle}</b> from <b>${ctx.data.from}</b>. Where are you shipping <b>to</b>?`;
+                }
+
+                // Have vehicle, need source
+                if (ctx.data.vehicle && !ctx.data.from) {
+                    return `Sure! Shipping a <b>${ctx.data.vehicle}</b>. Which city are you shipping <b>from</b>?`;
+                }
+
+                // Have source only
+                if (ctx.data.from && !ctx.data.to) {
+                    return `Shipping from <b>${ctx.data.from}</b> — great! Which city are you shipping <b>to</b>?`;
+                }
+
+                // Nothing collected yet — ask for vehicle first
+                if (!ctx.data.vehicle) {
+                    return "I can give you a quote! What type of vehicle are you shipping? (e.g., Sedan, SUV, Bike)";
+                }
+
                 return "I can help with pricing. Could you tell me the pickup and drop-off cities?";
             }
         },
         {
             id: 'TRACKING',
-            keywords: ['track', 'status', 'where is', 'location', 'order', 'tracking', 'find', 'monitor', 'follow', 'shipment'],
-            response: ["You can track your order using the 'Track Order' link in the menu. Do you have a tracking ID?", "Please enter your 10-digit Tracking ID to get live status.", "I can help you track! What's your tracking number?"]
+            keywords: [
+                'track', 'status', 'where is', 'location', 'tracking',
+                'find', 'monitor', 'follow', 'shipment'
+            ],
+            response: [
+                "You can track your order using the 'Track Order' link in the menu. Do you have a tracking ID?",
+                "Please enter your 10-digit Tracking ID to get live status.",
+                "I can help you track! What's your tracking number?"
+            ]
         },
         {
             id: 'SERVICES',
-            keywords: ['service', 'offer', 'types', 'method', 'open', 'enclosed', 'what do you', 'provide', 'available', 'which car', 'what kind', 'options', 'transport type'],
-            response: ["We offer <b>Open Carrier</b> (standard), <b>Enclosed Carrier</b> (for luxury cars), and <b>Bike Transport</b>. We also provide full door-to-door insurance coverage.", "Our services include door-to-door transport, enclosed carriers for luxury vehicles, and complete insurance. What are you looking to ship?"]
+            keywords: [
+                'service', 'offer', 'types', 'method', 'open', 'enclosed',
+                'what do you', 'provide', 'available', 'which car', 'what kind',
+                'options', 'transport type'
+            ],
+            response: [
+                "We offer <b>Open Carrier</b> (standard), <b>Enclosed Carrier</b> (for luxury cars), and <b>Bike Transport</b>. We also provide full door-to-door insurance coverage.",
+                "Our services include door-to-door transport, enclosed carriers for luxury vehicles, and complete insurance. What are you looking to ship?"
+            ]
         },
         {
             id: 'TIME',
-            keywords: ['long', 'days', 'time', 'duration', 'when', 'fast', 'quick', 'urgent', 'take', 'delivery time', 'how many', 'arrive'],
-            response: ["Typically, it takes <b>3-5 days</b> for domestic transport. Expedited shipping can take 24-48 hours within neighboring states.", "Standard delivery is 3-5 days. Need it faster? We offer expedited shipping too!"]
+            keywords: [
+                'long', 'days', 'duration', 'fast', 'quick', 'urgent',
+                'take', 'delivery time', 'how many', 'arrive', 'how long'
+            ],
+            response: [
+                "Typically, it takes <b>3-5 days</b> for domestic transport. Expedited shipping can take 24-48 hours within neighboring states.",
+                "Standard delivery is 3-5 days. Need it faster? We offer expedited shipping too!"
+            ]
         },
         {
             id: 'SAFETY',
-            keywords: ['safe', 'damage', 'insurance', 'secure', 'trust', 'scratch', 'protect', 'reliable', 'careful', 'break'],
-            response: ["Safety is our #1 priority. 🛡️ We provide comprehensive insurance coverage and use soft-tie straps to prevent any scratches. Your vehicle is in safe hands!", "Your car's safety is guaranteed! We use professional carriers, soft-tie straps, and provide full insurance coverage."]
+            keywords: [
+                'safe', 'damage', 'insurance', 'secure', 'trust',
+                'scratch', 'protect', 'reliable', 'careful', 'break'
+            ],
+            response: [
+                "Safety is our #1 priority. 🛡️ We provide comprehensive insurance coverage and use soft-tie straps to prevent any scratches. Your vehicle is in safe hands!",
+                "Your car's safety is guaranteed! We use professional carriers, soft-tie straps, and provide full insurance coverage."
+            ]
         },
         {
             id: 'CONTACT',
-            keywords: ['number', 'call', 'phone', 'email', 'talk', 'human', 'support', 'contact', 'reach', 'speak', 'agent', 'help'],
-            response: ["You can call our support team 24/7 at <b>+91-9876543210</b> or email us at <b>support@cargotransport.com</b>.", "Need to talk to someone? Call us at <b>+91-9876543210</b> - we're available 24/7!"]
+            keywords: [
+                'number', 'call', 'phone', 'email', 'talk', 'human',
+                'support', 'contact', 'reach', 'speak', 'agent'
+            ],
+            response: [
+                "You can call our support team 24/7 at <b>+91-9876543210</b> or email us at <b>support@hariharcarTransport.com</b>.",
+                "Need to talk to someone? Call us at <b>+91-9876543210</b> — we're available 24/7!"
+            ]
         },
         {
             id: 'BOOKING',
-            keywords: ['book', 'reserve', 'order', 'schedule', 'hire', 'want to ship', 'need transport', 'arrange'],
-            response: ["Great! You can start a booking by clicking the 'Get Quote' button on the top right. Need help with the form?", "Ready to book? Click 'Get Quote' and I'll guide you through it!"]
+            keywords: [
+                'book', 'reserve', 'schedule', 'hire', 'want to ship',
+                'need transport', 'arrange', 'start'
+            ],
+            response: [
+                "Great! You can start a booking by clicking the <b>'Get Quote'</b> button on the top right. Need help with the form?",
+                "Ready to book? Click <b>'Get Quote'</b> and I'll guide you through it!"
+            ]
         },
         {
             id: 'GREETING',
-            keywords: ['hello', 'hi', 'hii', 'hey', 'start', 'good morning', 'good evening', 'hola', 'namaste', 'greetings', 'sup', 'yo'],
-            response: ["Hello! 👋 How can I help you transport your vehicle today?", "Hi there! Ready to get moving?", "Hey! Need help shipping your car?"]
+            keywords: [
+                'hello', 'hii', 'hey', 'good morning', 'good evening',
+                'hola', 'namaste', 'greetings', 'sup', 'yo'
+            ],
+            response: [
+                "Hello! 👋 How can I help you transport your vehicle today?",
+                "Hi there! Ready to get moving? 🚛",
+                "Hey! Need help shipping your car or bike?"
+            ]
         },
         {
             id: 'THANKS',
-            keywords: ['thank', 'thanks', 'cool', 'good', 'bye', 'ok', 'great', 'awesome', 'perfect', 'appreciate'],
-            response: ["You're welcome! 🚛 Drive safe!", "Glad I could help!", "Have a great day!", "Anytime! Feel free to ask if you need anything else!"]
+            keywords: [
+                'thank', 'thanks', 'bye', 'great', 'awesome',
+                'perfect', 'appreciate', 'wonderful', 'superb'
+            ],
+            response: [
+                "You're welcome! 🚛 Drive safe!",
+                "Glad I could help!",
+                "Have a great day!",
+                "Anytime! Feel free to ask if you need anything else!"
+            ]
         }
     ];
 
     /**
      * Main Processing Function
-     * @param {string} message - User's raw text
-     * @returns {object} { text: "Response HTML", intent: "ID" }
      */
     function process(message) {
         const cleanMsg = message.toLowerCase().trim();
 
-        // Helper: Check if keyword matches (with word boundary for short words)
+        // Word-boundary aware keyword matcher
         function matchesKeyword(msg, keyword) {
             if (keyword.length <= 3) {
-                // For short words like "hi", use word boundaries
-                const regex = new RegExp(`\\b${keyword}\\b`, 'i');
-                return regex.test(msg);
+                return new RegExp(`\\b${keyword}\\b`, 'i').test(msg);
             }
             return msg.includes(keyword);
         }
 
-        // 2. Determine Intent
+        // Detect intent
         let matchedIntent = INTENTS.find(intent =>
             intent.keywords.some(k => matchesKeyword(cleanMsg, k))
         );
 
-        // If new intent detected and it's not PRICE, reset context
+        // Switching to a completely different intent — full reset
         if (matchedIntent && matchedIntent.id !== 'PRICE' && matchedIntent.id !== context.lastIntent) {
-            context.data = {};
+            context = DEFAULT_CONTEXT();
         }
 
-        // 1. Extract Entities (only for PRICE intent)
+        // PRICE flow: extract entities from the message
         if (matchedIntent && matchedIntent.id === 'PRICE') {
             extractEntities(cleanMsg);
         }
 
-        // Fallback: Check context (Follow-up logic)
+        // No intent matched but we're mid-PRICE conversation — treat as follow-up
         if (!matchedIntent && context.lastIntent === 'PRICE') {
-            // If user just typed a city or car name to complete the quote
+            // If stuck on an unsupported source, allow the user to correct it
+            if (context.data.unsupported_source && !context.data.from) {
+                context.data.unsupported_source = null;
+            }
+            // If stuck on an unsupported destination, allow the user to correct it
+            if (context.data.unsupported_destination && !context.data.to) {
+                context.data.unsupported_destination = null;
+            }
+
             extractEntities(cleanMsg);
-            if (context.data.vehicle || context.data.from || context.data.to) {
+
+            // Only re-trigger PRICE intent if we actually extracted something useful
+            const hasUsefulData = context.data.vehicle || context.data.from ||
+                                  context.data.to || context.data.unsupported_source ||
+                                  context.data.unsupported_destination;
+            if (hasUsefulData) {
                 matchedIntent = INTENTS.find(i => i.id === 'PRICE');
             }
         }
 
-        // Default or Match
         if (matchedIntent) {
             context.lastIntent = matchedIntent.id;
 
-            // Handle dynamic response (function) or static array
-            let responseText = "";
-            if (typeof matchedIntent.response === 'function') {
-                responseText = matchedIntent.response(context);
-            } else {
-                responseText = matchedIntent.response[Math.floor(Math.random() * matchedIntent.response.length)];
-            }
+            const responseText = typeof matchedIntent.response === 'function'
+                ? matchedIntent.response(context)
+                : matchedIntent.response[Math.floor(Math.random() * matchedIntent.response.length)];
 
             return { text: responseText, intent: matchedIntent.id };
-        } else {
-            return {
-                text: "I'm mostly trained on shipping logistics. 🚚 Could you ask about <b>pricing</b>, <b>tracking</b>, or our <b>services</b>?",
-                intent: 'UNKNOWN'
-            };
+        }
+
+        return {
+            text: "I'm mostly trained on shipping logistics. 🚚 Could you ask about <b>pricing</b>, <b>tracking</b>, or our <b>services</b>?",
+            intent: 'UNKNOWN'
+        };
+    }
+
+    /**
+     * Entity Extraction
+     * Extracts cities and vehicle types. Detects unsupported cities when applicable.
+     */
+    function extractEntities(msg) {
+        // Skip quick-reply trigger phrases
+        const quickReplies = [
+            "check shipping price",
+            "track my order",
+            "is it safe",
+            "check price"   // covers the button's data-message
+        ];
+        if (quickReplies.includes(msg.trim().toLowerCase())) return;
+
+        let foundSupportedCity = false;
+
+        // --- Extract supported cities ---
+        KNOWLEDGE.cities.forEach(city => {
+            if (msg.includes(city)) {
+                foundSupportedCity = true;
+
+                if (!context.data.from) {
+                    context.data.from = capitalize(city);
+                    context.data.unsupported_source = null;       // ✅ Clear stale error
+                } else if (!context.data.to && context.data.from.toLowerCase() !== city) {
+                    context.data.to = capitalize(city);
+                    context.data.unsupported_destination = null;  // ✅ Clear stale error
+                }
+            }
+        });
+
+        // --- Extract vehicle types ---
+        KNOWLEDGE.vehicles.forEach(vehicle => {
+            if (msg.includes(vehicle)) {
+                context.data.vehicle = capitalize(vehicle);
+            }
+        });
+
+        // --- Detect unsupported city (only when we still need a city) ---
+        const expectingSource = !context.data.from;
+        const expectingDestination = context.data.from && !context.data.to;
+        const expectingCity = expectingSource || expectingDestination;
+
+        // If we already found a supported city, or we don't need a city, stop here
+        if (!expectingCity || foundSupportedCity) return;
+
+        const ignoreWords = new Set([
+            "from", "to", "price", "cost", "quote", "shipping", "transport",
+            "vehicle", "car", "bike", "suv", "sedan", "hatchback", "motorcycle",
+            "scooter", "luxury", "please", "help", "yes", "no", "ok", "okay",
+            "need", "check", "track", "order", "status", "safe", "safety",
+            "insurance", "service", "services", "book", "booking", "my", "is",
+            "it", "what", "where", "when", "how", "much", "do", "can", "i",
+            "want", "get", "give", "tell", "send", "show", "and", "the",
+            "for", "are", "was", "but", "not", "this", "that", "with", "jeep"
+        ]);
+
+        const words = msg
+            .toLowerCase()
+            .replace(/[^a-z\s]/g, '')
+            .split(/\s+/)
+            .filter(Boolean);
+
+        const candidate = words.find(word =>
+            word.length > 2 &&
+            !ignoreWords.has(word) &&
+            !KNOWLEDGE.vehicles.includes(word) &&
+            !KNOWLEDGE.cities.includes(word)
+        );
+
+        if (!candidate) return;
+
+        if (expectingSource) {
+            context.data.unsupported_source = capitalize(candidate);
+        } else if (expectingDestination) {
+            context.data.unsupported_destination = capitalize(candidate);
         }
     }
 
     /**
-     * Helper: Entity Extraction
-     * Looks for known cities and vehicle types in the message
-     */
-    function extractEntities(msg) {
-        // Find Cities
-        KNOWLEDGE.cities.forEach(city => {
-            if (msg.includes(city)) {
-                if (!context.data.from) context.data.from = capitalize(city);
-                else if (context.data.from.toLowerCase() !== city) context.data.to = capitalize(city);
-            }
-        });
-
-        // Find Vehicles
-        KNOWLEDGE.vehicles.forEach(vehicle => {
-            if (msg.includes(vehicle)) context.data.vehicle = capitalize(vehicle);
-        });
-    }
-
-    /**
-     * Helper: Mock Pricing Logic
+     * Mock Pricing — consistent but varied per route
      */
     function calculateMockPrice(from, to) {
         const base = 3000;
-        // Simple hash to make the price consistent but "random"
         const hash = (from.length + to.length) * 500;
-        return base + hash + (context.data.vehicle === 'Suv' ? 2000 : 0);
+        const vehicleExtra = context.data.vehicle === 'Suv' ? 2000
+            : context.data.vehicle === 'Luxury' ? 5000
+            : context.data.vehicle === 'Jeep' ? 3000
+            : 0;
+        return base + hash + vehicleExtra;
     }
 
     function capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    // Export Public API
+    // Public API
     return {
         process,
         getContext: () => context,
-        resetContext: () => { context = { lastIntent: null, data: {} }; }
+        resetContext: () => { context = DEFAULT_CONTEXT(); }
     };
 
 })();
 
-// Export to window (Critical for integration)
+// Expose globally
 window.ChatbotBrain = ChatbotBrain;
 
 
+/* ====================================
+   CHATBOT MODAL UI
+   ==================================== */
 (function () {
     'use strict';
 
-    // Greeting message
-    const greetingMessage = "Hello 👋 Welcome to Harihar Car Transport! I'm your AI Assistant. You can ask me about <b>pricing</b>, <b>tracking</b>, or our <b>services</b>.";
+    const greetingMessage = "Hello 👋 Welcome to <b>Harihar Car Transport</b>! I'm your AI Assistant.<br>Ask me about <b>pricing</b>, <b>tracking</b>, or our <b>services</b>.";
 
-    /**
-     * Initialize Chatbot Modal
-     */
     function initChatbotModal() {
         if (document.getElementById('chatbot-modal-overlay')) return;
 
-        // Ensure Brain is loaded
-        // NOTE: Since we merged the files, this should always be true.
         if (typeof window.ChatbotBrain === 'undefined') {
             console.error("ChatbotBrain CRITICAL FAILURE: Logic not loaded.");
             return;
         }
 
-        // Create modal HTML
         const modalHTML = `
             <div class="chatbot-modal-overlay" id="chatbot-modal-overlay">
                 <div class="chatbot-modal">
-                    <!-- Modal Header -->
+                    <!-- Header -->
                     <div class="chatbot-modal-header">
                         <div class="chatbot-header-content">
                             <div class="chatbot-avatar pulse-online">
@@ -233,7 +398,7 @@ window.ChatbotBrain = ChatbotBrain;
                                 <h3>Smart Assistant</h3>
                                 <span class="chatbot-status">
                                     <span class="status-dot"></span>
-                                    Online & Ready
+                                    Online &amp; Ready
                                 </span>
                             </div>
                         </div>
@@ -242,7 +407,7 @@ window.ChatbotBrain = ChatbotBrain;
                         </button>
                     </div>
 
-                    <!-- Messages Area -->
+                    <!-- Messages -->
                     <div class="chatbot-messages-container">
                         <div class="chatbot-messages" id="chatbot-messages">
                             <div class="message bot-message initial">
@@ -252,29 +417,24 @@ window.ChatbotBrain = ChatbotBrain;
                                 <span class="message-time">Just now</span>
                             </div>
                         </div>
-                        <!-- Typing Indicator (Hidden by default) -->
                         <div class="typing-indicator" id="typingIndicator" style="display: none;">
                             <span></span><span></span><span></span>
                         </div>
                     </div>
 
-                    <!-- Input Area -->
+                    <!-- Input -->
                     <div class="chatbot-input-area">
                         <form class="chatbot-form" id="chatbotForm">
                             <div class="chatbot-input-wrapper">
-                                <input 
-                                    type="text" 
-                                    id="chatbot-input" 
-                                    class="chatbot-input" 
-                                    placeholder="Type your message..." 
+                                <input
+                                    type="text"
+                                    id="chatbot-input"
+                                    class="chatbot-input"
+                                    placeholder="Type your message..."
                                     aria-label="Message input"
                                     autocomplete="off"
                                 />
-                                <button 
-                                    type="submit" 
-                                    class="chatbot-send-btn" 
-                                    aria-label="Send message"
-                                >
+                                <button type="submit" class="chatbot-send-btn" aria-label="Send message">
                                     <i class="fas fa-paper-plane"></i>
                                 </button>
                             </div>
@@ -291,18 +451,15 @@ window.ChatbotBrain = ChatbotBrain;
 
         document.body.insertAdjacentHTML('beforeend', modalHTML);
         setupEventListeners();
-        console.log("Chatbot V2: Fully Loaded & Integrated.");
+        console.log("Chatbot: Fully Loaded.");
     }
 
-    /**
-     * Setup Event Listeners
-     */
     function setupEventListeners() {
-        const closeBtn = document.getElementById('chatbotModalClose');
-        const form = document.getElementById('chatbotForm');
-        const input = document.getElementById('chatbot-input');
-        const quickReplies = document.querySelectorAll('.quick-reply');
-        const overlay = document.getElementById('chatbot-modal-overlay');
+        const closeBtn  = document.getElementById('chatbotModalClose');
+        const form      = document.getElementById('chatbotForm');
+        const input     = document.getElementById('chatbot-input');
+        const overlay   = document.getElementById('chatbot-modal-overlay');
+        const quickBtns = document.querySelectorAll('.quick-reply');
 
         if (closeBtn) closeBtn.addEventListener('click', closeChatbotModal);
 
@@ -322,13 +479,12 @@ window.ChatbotBrain = ChatbotBrain;
             });
         }
 
-        quickReplies.forEach(button => {
-            button.addEventListener('click', function () {
-                const message = this.getAttribute('data-message');
-                // If it's a quick reply, we can skip typing it into the input
-                // and just send it directly for better UX
-                addUserMessage(message, document.getElementById('chatbot-messages'));
-                processBotResponse(message);
+        quickBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const msg = this.getAttribute('data-message');
+                const container = document.getElementById('chatbot-messages');
+                addUserMessage(msg, container);
+                processBotResponse(msg);
             });
         });
 
@@ -339,104 +495,75 @@ window.ChatbotBrain = ChatbotBrain;
         }
     }
 
-    /**
-     * Send Message Logic
-     */
     function sendMessage() {
-        const input = document.getElementById('chatbot-input');
-        const messagesContainer = document.getElementById('chatbot-messages');
+        const input     = document.getElementById('chatbot-input');
+        const container = document.getElementById('chatbot-messages');
 
-        if (!input || !input.value.trim() || !messagesContainer) return;
+        if (!input || !input.value.trim() || !container) return;
 
         const message = input.value.trim();
-
-        // 1. Add User Message
-        addUserMessage(message, messagesContainer);
-
-        // 2. Clear Input
+        addUserMessage(message, container);
         input.value = '';
         input.focus();
-
-        // 3. Process Response
         processBotResponse(message);
     }
 
     function addUserMessage(message, container) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message user-message slide-in-right';
-        const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const div = document.createElement('div');
+        div.className = 'message user-message slide-in-right';
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        messageDiv.innerHTML = `
-            <div class="message-content">
-                <p>${escapeHTML(message)}</p>
-            </div>
-            <span class="message-time">${timeNow}</span>
+        div.innerHTML = `
+            <div class="message-content"><p>${escapeHTML(message)}</p></div>
+            <span class="message-time">${time}</span>
         `;
 
-        // Remove greeting if it's the very first interaction
+        // Remove greeting on first real interaction
         const initial = container.querySelector('.initial');
         if (initial) initial.remove();
 
-        container.appendChild(messageDiv);
+        container.appendChild(div);
         scrollToBottom(container);
     }
 
-    /**
-     * Process Bot Response with "Network Delay" Simulation
-     */
     function processBotResponse(userMessage) {
-        const messagesContainer = document.getElementById('chatbot-messages');
-        const typingIndicator = document.getElementById('typingIndicator');
-        const sendBtn = document.querySelector('.chatbot-send-btn');
+        const container = document.getElementById('chatbot-messages');
+        const typing    = document.getElementById('typingIndicator');
+        const sendBtn   = document.querySelector('.chatbot-send-btn');
 
         if (sendBtn) sendBtn.disabled = true;
+        if (typing)  { typing.style.display = 'flex'; scrollToBottom(container); }
 
-        // Show Typing Indicator
-        if (typingIndicator) {
-            typingIndicator.style.display = 'flex';
-            scrollToBottom(messagesContainer);
-        }
-
-        // Simulate thinking time (random between 600ms and 1200ms)
         const thinkTime = Math.floor(Math.random() * 600) + 600;
 
         setTimeout(() => {
-            // Hide Typing Indicator
-            if (typingIndicator) typingIndicator.style.display = 'none';
+            if (typing) typing.style.display = 'none';
 
-            // Get Result from Brain
             const result = window.ChatbotBrain.process(userMessage);
-
-            // Add Bot Message
-            addBotMessage(messagesContainer, result.text);
+            addBotMessage(container, result.text);
 
             if (sendBtn) sendBtn.disabled = false;
-
         }, thinkTime);
     }
 
     function addBotMessage(container, htmlContent) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message bot-message slide-in-left';
-        const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const div = document.createElement('div');
+        div.className = 'message bot-message slide-in-left';
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        messageDiv.innerHTML = `
-            <div class="message-content">
-                <p>${htmlContent}</p>
-            </div>
-            <span class="message-time">${timeNow}</span>
+        div.innerHTML = `
+            <div class="message-content"><p>${htmlContent}</p></div>
+            <span class="message-time">${time}</span>
         `;
 
-        container.appendChild(messageDiv);
-        playSound();
+        container.appendChild(div);
         scrollToBottom(container);
     }
 
     function scrollToBottom(container) {
         if (container && container.parentElement) {
             setTimeout(() => {
-                const scrollContainer = container.parentElement;
-                scrollContainer.scrollTop = scrollContainer.scrollHeight;
+                container.parentElement.scrollTop = container.parentElement.scrollHeight;
             }, 100);
         }
     }
@@ -449,25 +576,13 @@ window.ChatbotBrain = ChatbotBrain;
         }
     }
 
-    function playSound() {
-        // Simple "pop" sound can be added here if audio assets exist
-        // const audio = new Audio('assets/sounds/pop.mp3');
-        // audio.play().catch(e => console.log("Audio play failed interaction"));
-    }
-
     function escapeHTML(text) {
-        return text.replace(/[&<>"']/g, function (m) {
-            return {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            }[m];
-        });
+        return text.replace(/[&<>"']/g, m => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;',
+            '"': '&quot;', "'": '&#039;'
+        }[m]));
     }
 
-    // Initialize on load
     function initialize() {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initChatbotModal);
@@ -476,10 +591,7 @@ window.ChatbotBrain = ChatbotBrain;
         }
     }
 
-    window.chatbotModal = {
-        close: closeChatbotModal,
-        init: initialize
-    };
-
+    window.chatbotModal = { close: closeChatbotModal, init: initialize };
     initialize();
+
 })();
