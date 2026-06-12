@@ -43,8 +43,9 @@ body[data-theme="dark"] {
   --color-gray-200: #d2c4c4;
   --color-gray-300: #6e6c6c;
   --color-gray-400: #555555;
-  background: var(--bg);
-  color: var(--text);
+  background-color: var(--bg, #0f1115) !important;
+  background: var(--bg, #0f1115) !important;
+  color: var(--text, #ffffff) !important;
   color-scheme: dark;
   --calendar-icon-filter: invert(1);
 }
