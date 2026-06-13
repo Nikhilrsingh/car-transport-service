@@ -36,10 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function applyTheme(theme) {
     console.log("🎨 themes.js: Applying theme:", theme);
+    const isDark = theme === "dark";
 
-    if (theme === "dark") {
+    document.body.classList.remove("light", "dark");
+    document.documentElement.classList.remove("light", "dark");
+
+    if (isDark) {
       themeLink.setAttribute("href", DARK);
       document.body.setAttribute("data-theme", "dark");
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.body.classList.add("dark");
+      document.documentElement.classList.add("dark");
       const iconEl = document.getElementById("theme-icon");
       const mobileIcon = document.getElementById("mobile-theme-icon");
       if (iconEl) iconEl.className = "fas fa-moon";
@@ -47,6 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       themeLink.setAttribute("href", LIGHT);
       document.body.setAttribute("data-theme", "light");
+      document.documentElement.setAttribute("data-theme", "light");
+      document.body.classList.add("light");
+      document.documentElement.classList.add("light");
       const iconEl = document.getElementById("theme-icon");
       const mobileIcon = document.getElementById("mobile-theme-icon");
       if (iconEl) iconEl.className = "fas fa-sun";

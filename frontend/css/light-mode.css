@@ -46,6 +46,9 @@ body[data-theme="light"] {
   --color-text-primary: #000000;
   --color-text-secondary: #c78a70;
   --color-text-muted: #b46e52;
+  background-color: var(--bg, #ffffff) !important;
+  background: var(--bg, #ffffff) !important;
+  color: var(--text, #111111) !important;
   color-scheme: light;
   --calendar-icon-filter: none;
 }
