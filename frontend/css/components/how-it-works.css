@@ -495,9 +495,8 @@ section {
 }
 
 .checklist-items li {
-    padding: 10px 0;
+    padding: 12px 0;
     display: flex;
-    align-items: center;
     gap: 12px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -507,8 +506,10 @@ section {
 }
 
 .checklist-items input[type="checkbox"] {
-    width: 18px;
+    width: 20px;
     height: 20px;
+    min-width: 20px;
+    flex-shrink: 0;
     cursor: pointer;
     accent-color: var(--success-color);
 }
@@ -516,10 +517,14 @@ section {
 .checklist-items label {
     color: #666;
     cursor: pointer;
-    flex: none;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    flex: 1;
+    text-align: left;
 }
 
-.checklist-items input[type="checkbox"]:checked + label {
+.checklist-items input[type="checkbox"]:checked+label {
     color: var(--success-color);
     text-decoration: line-through;
 }
@@ -724,6 +729,7 @@ section {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -738,9 +744,10 @@ section {
 }
 
 @media (max-width: 768px) {
+
     /* Step 1: Adjust the container to make room for the line on the left */
     .step-item {
-        padding-left: 50px; 
+        padding-left: 50px;
         padding-top: 0;
         margin-bottom: 40px;
         text-align: left;
@@ -748,10 +755,10 @@ section {
 
     /* Step 2: Reposition the vertical line to the left */
     .step-item::before {
-        display: block !important; 
-        left: 20px; 
-        top: 40px; 
-        bottom: -40px; 
+        display: block !important;
+        left: 20px;
+        top: 40px;
+        bottom: -40px;
         width: 2px;
         background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
     }
@@ -760,7 +767,7 @@ section {
     .step-number {
         left: 0;
         top: 0;
-        transform: none; 
+        transform: none;
         width: 42px;
         height: 42px;
         font-size: 1.2rem;
@@ -791,65 +798,65 @@ section {
    ==================================== */
 body[data-theme="light"] .how-hero,
 body[data-theme="light"] .how-it-works-hero {
-  background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
+    background: linear-gradient(135deg, #ff6347 0%, #ff8c00 100%) !important;
 }
 
 body[data-theme="light"] .steps-section,
 body[data-theme="light"] .process-section {
-  background: #f8f9fa !important;
+    background: #f8f9fa !important;
 }
 
 body[data-theme="light"] .step-card,
 body[data-theme="light"] .process-card {
-  background: #ffffff !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
 body[data-theme="light"] .step-card h3,
 body[data-theme="light"] .process-card h3 {
-  color: #1a1a1a !important;
+    color: #1a1a1a !important;
 }
 
 body[data-theme="light"] .step-card p,
 body[data-theme="light"] .process-card p {
-  color: #555 !important;
+    color: #555 !important;
 }
 
 body[data-theme="light"] .step-number {
-  background: linear-gradient(135deg, #ff6347, #ff4500) !important;
-  color: #ffffff !important;
+    background: linear-gradient(135deg, #ff6347, #ff4500) !important;
+    color: #ffffff !important;
 }
 
 body[data-theme="light"] .timeline-section {
-  background: #ffffff !important;
+    background: #ffffff !important;
 }
 
 body[data-theme="light"] .timeline-item {
-  background: #f8f9fa !important;
+    background: #f8f9fa !important;
 }
 
 body[data-theme="light"] .timeline-item h3 {
-  color: #1a1a1a !important;
+    color: #1a1a1a !important;
 }
 
 body[data-theme="light"] .timeline-item p {
-  color: #555 !important;
+    color: #555 !important;
 }
 
 body[data-theme="light"] .section-title {
-  color: #1a1a1a !important;
+    color: #1a1a1a !important;
 }
 
 body[data-theme="light"] .section-subtitle {
-  color: #555 !important;
+    color: #555 !important;
 }
 
 /* Tablet and Mobile (up to 1024px) */
 @media (max-width: 1024px) {
     .how-it-works-hero {
-        height: auto !important; 
-        min-height: 400px;      
+        height: auto !important;
+        min-height: 400px;
         padding: 120px 20px 80px !important;
         display: flex;
         align-items: center;
@@ -857,7 +864,7 @@ body[data-theme="light"] .section-subtitle {
     }
 
     .hero-content {
-        max-width: 90%;          
+        max-width: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -865,16 +872,15 @@ body[data-theme="light"] .section-subtitle {
     }
 
     .hero-title {
-        font-size: 2.8rem !important; 
+        font-size: 2.8rem !important;
         line-height: 1.2;
         margin-bottom: 20px;
     }
 
     .hero-subtitle {
         font-size: 1.3rem !important;
-        max-width: 600px;        
+        max-width: 600px;
         margin-left: auto;
         margin-right: auto;
     }
 }
-
