@@ -1661,3 +1661,7 @@ body[data-theme="dark"] .procedure-steps-list li {
     border-bottom-color: var(--color-dark-border, #2d2d2d) !important;
     color: var(--color-dark-text-secondary, #f0f0f0) !important;
 }
+/* Emergency Procedures - Dark Theme */
+body[data-theme="dark"] .procedure-steps-list li strong {
+    color: #ffffff !important;
+}
