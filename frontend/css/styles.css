@@ -1352,6 +1352,10 @@ small {
 strong {
   font-weight: var(--weight-bold);
 }
+/* Dark mode strong text */
+[data-theme="dark"] strong {
+  color: #ffffff;
+}
 
 /* General Reset */
 * {
