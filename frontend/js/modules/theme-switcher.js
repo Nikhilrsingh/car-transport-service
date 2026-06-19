@@ -27,16 +27,26 @@
       return;
     }
 
-    if (theme === "dark") {
+    const isDark = theme === "dark";
+    document.body.classList.remove("light", "dark");
+    document.documentElement.classList.remove("light", "dark");
+
+    if (isDark) {
       themeLink.setAttribute("href", DARK_PATH);
       document.body.setAttribute("data-theme", "dark");
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.body.classList.add("dark");
+      document.documentElement.classList.add("dark");
       if (themeIcon) themeIcon.className = "fas fa-moon";
     } else {
       themeLink.setAttribute("href", LIGHT_PATH);
       document.body.setAttribute("data-theme", "light");
+      document.documentElement.setAttribute("data-theme", "light");
+      document.body.classList.add("light");
+      document.documentElement.classList.add("light");
       if (themeIcon) themeIcon.className = "fas fa-sun";
     }
-    
+
     localStorage.setItem("theme", theme);
   }
 
