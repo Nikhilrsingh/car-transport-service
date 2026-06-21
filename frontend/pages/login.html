@@ -220,7 +220,7 @@
             transition: padding 0.2s ease-in-out;
         }
 
-        input.form-control.has-value + .input-icon {
+        input.form-control.has-value+.input-icon {
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
@@ -364,6 +364,36 @@
         .particle {
             background: rgba(255, 99, 71, 0.3) !important;
         }
+
+        /* ── Password Strength Indicator ── */
+        .strength-seg {
+            flex: 1;
+            height: 5px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            transition: background 0.3s;
+        }
+
+        #strength-bar-container {
+            margin-top: 10px;
+            display: none;
+        }
+
+        #strength-label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        #strength-tip {
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        body[data-theme="light"] .strength-seg {
+            background: #e5e7eb;
+        }
+
+        /* ── End Password Strength Indicator ── */
     </style>
 </head>
 
@@ -434,7 +464,8 @@
                         <button type="submit" class="submit-btn">Login</button>
                     </form>
 
-                    <button type="button" class="google-btn" onclick="window.location.href='http://localhost:3000/api/auth/google'">
+                    <button type="button" class="google-btn"
+                        onclick="window.location.href='http://localhost:3000/api/auth/google'">
                         <i class="fab fa-google"></i>
                         Continue with Google
                     </button>
@@ -487,14 +518,31 @@
                         <div class="form-group">
                             <label>Password</label>
                             <div class="input-wrapper">
-                                <input type="password" class="form-control" placeholder="" required>
+                                <input type="password" id="signup-password" class="form-control" placeholder=""
+                                    required>
                                 <span class="input-icon"><i class="fas fa-lock"></i></span>
                             </div>
+                            <!-- ── Password Strength Indicator ── -->
+                            <div id="strength-bar-container">
+                                <div style="display: flex; gap: 4px; margin-bottom: 5px;">
+                                    <div class="strength-seg" id="seg1"></div>
+                                    <div class="strength-seg" id="seg2"></div>
+                                    <div class="strength-seg" id="seg3"></div>
+                                    <div class="strength-seg" id="seg4"></div>
+                                    <div class="strength-seg" id="seg5"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span id="strength-label"></span>
+                                    <span id="strength-tip"></span>
+                                </div>
+                            </div>
+                            <!-- ── End Password Strength Indicator ── -->
                         </div>
                         <button type="submit" class="submit-btn" style="margin-top: 15px;">Create Account</button>
                     </form>
 
-                    <button type="button" class="google-btn" onclick="window.location.href='http://localhost:3000/api/auth/google'">
+                    <button type="button" class="google-btn"
+                        onclick="window.location.href='http://localhost:3000/api/auth/google'">
                         <i class="fab fa-google"></i>
                         Continue with Google
                     </button>
@@ -509,7 +557,6 @@
 
     <script>
         // ========== Auto-Trim Input Fields (Issue #1157) ==========
-        // Automatically remove leading/trailing whitespace from email & password
         const trimmedFields = new Set();
 
         function initializeInputTrimming() {
@@ -517,30 +564,24 @@
             const passwordInputs = document.querySelectorAll('input[type="password"]');
             const telInputs = document.querySelectorAll('input[type="tel"]');
 
-            // Combine all sensitive fields that should be trimmed
             const allTrimmedInputs = [...emailInputs, ...passwordInputs, ...telInputs];
 
             allTrimmedInputs.forEach(input => {
-                // Real-time trimming as user types
                 input.addEventListener('input', (e) => {
                     const originalValue = e.target.value;
                     const trimmedValue = originalValue.trim();
-
-                    // Only update if whitespace was actually removed
                     if (originalValue !== trimmedValue) {
                         e.target.value = trimmedValue;
                         trimmedFields.add(input);
                     }
                 });
 
-                // Also trim on blur (when user leaves field)
                 input.addEventListener('blur', (e) => {
                     e.target.value = e.target.value.trim();
                 });
             });
         }
 
-        // Initialize on DOM ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initializeInputTrimming);
         } else {
@@ -576,12 +617,10 @@
             const currentTheme = body.getAttribute('data-theme');
 
             if (currentTheme === 'dark' || !currentTheme) {
-                // Switch to Light
                 body.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
                 icon.className = 'fas fa-sun';
             } else {
-                // Switch to Dark
                 body.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
                 icon.className = 'fas fa-moon';
@@ -600,11 +639,10 @@
             }
         });
 
-        // Mock Handlers with Auth Token Saving
+        // Mock Handlers
         function handleLogin(e) {
             e.preventDefault();
 
-            // Get form values and TRIM them (safeguard for any missed whitespace)
             let email = (document.querySelector('#login-form input[type="email"]')?.value || '').trim();
             let password = (document.querySelector('#login-form input[type="password"]')?.value || '').trim();
 
@@ -613,15 +651,12 @@
                 return;
             }
 
-            // Show loading state
             const btn = event.target.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
             btn.textContent = 'Logging in...';
             btn.disabled = true;
 
-            // Simulate API call (remove this when connecting to real backend)
             setTimeout(() => {
-                // Save auth token and user data to localStorage
                 const mockToken = 'jwt_' + Math.random().toString(36).substr(2, 9);
                 const userData = {
                     email: email,
@@ -632,8 +667,6 @@
 
                 localStorage.setItem('authToken', mockToken);
                 localStorage.setItem('userData', JSON.stringify(userData));
-
-                // Redirect to dashboard
                 window.location.href = 'dashboard.html';
             }, 1000);
         }
@@ -641,7 +674,6 @@
         function handleSignup(e) {
             e.preventDefault();
 
-            // Get form values and TRIM them (safeguard for any missed whitespace)
             let name = (document.querySelector('#signup-form input[type="text"]')?.value || '').trim();
             let email = (document.querySelector('#signup-form input[type="email"]')?.value || '').trim();
             let password = (document.querySelector('#signup-form input[type="password"]')?.value || '').trim();
@@ -651,15 +683,11 @@
                 return;
             }
 
-            // Show loading state
             const btn = event.target.querySelector('button[type="submit"]');
-            const originalText = btn.textContent;
             btn.textContent = 'Creating Account...';
             btn.disabled = true;
 
-            // Simulate API call (remove this when connecting to real backend)
             setTimeout(() => {
-                // Save auth token and user data to localStorage
                 const mockToken = 'jwt_' + Math.random().toString(36).substr(2, 9);
                 const userData = {
                     email: email,
@@ -670,8 +698,6 @@
 
                 localStorage.setItem('authToken', mockToken);
                 localStorage.setItem('userData', JSON.stringify(userData));
-
-                // Redirect to dashboard
                 window.location.href = 'dashboard.html';
             }, 1000);
         }
@@ -687,25 +713,60 @@
                         input.classList.remove('has-value');
                     }
                 };
-                
+
                 input.addEventListener('input', toggleInputState);
                 input.addEventListener('change', toggleInputState);
-                
-                // Set initial state
                 toggleInputState();
-                
-                // Timeout to catch autofill changes from browsers
                 setTimeout(toggleInputState, 100);
                 setTimeout(toggleInputState, 500);
             });
         }
 
-        // Initialize toggle logic
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initializeIconToggle);
         } else {
             initializeIconToggle();
         }
+
+        // ── Password Strength Indicator ──
+        const signupPwd = document.getElementById('signup-password');
+        const strengthBox = document.getElementById('strength-bar-container');
+        const strengthLabel = document.getElementById('strength-label');
+        const strengthTip = document.getElementById('strength-tip');
+        const segs = document.querySelectorAll('.strength-seg');
+
+        const strengthColors = ['', '#ef4444', '#f97316', '#eab308', '#22c55e', '#16a34a'];
+        const strengthLabels = ['', 'Weak', 'Fair', 'Medium', 'Strong', 'Very Strong'];
+        const strengthTips = [
+            '',
+            'Add uppercase, numbers & symbols',
+            'Add numbers & symbols',
+            'Almost there — try a symbol',
+            'Great password! 🎉',
+            'Excellent! 🔒'
+        ];
+
+        signupPwd.addEventListener('input', function () {
+            const v = this.value;
+            if (!v) { strengthBox.style.display = 'none'; return; }
+            strengthBox.style.display = 'block';
+
+            let score = 0;
+            if (v.length >= 8) score++;
+            if (v.length >= 12) score++;
+            if (/[A-Z]/.test(v)) score++;
+            if (/[0-9]/.test(v)) score++;
+            if (/[^A-Za-z0-9]/.test(v)) score++;
+            score = Math.max(1, score);
+
+            segs.forEach((s, i) => {
+                s.style.background = i < score ? strengthColors[score] : 'rgba(255,255,255,0.15)';
+            });
+            strengthLabel.textContent = strengthLabels[score];
+            strengthLabel.style.color = strengthColors[score];
+            strengthTip.textContent = strengthTips[score];
+        });
+        // ── End Password Strength Indicator ──
     </script>
 </body>
 
