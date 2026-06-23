@@ -121,7 +121,7 @@ car-transport-service/
 
 > Add screenshots of your website here for contributors to see
 
-![](assets/images/bmw2.jpeg)  
+![](frontend/assets/images/bmw2.jpeg)
 
 ---
 
