@@ -231,7 +231,7 @@
       color: '#fff',
       fontSize: '14px',
       transition: 'transform 0.3s ease',
-      transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)'
+      transform: isCollapsed ? 'rotate(0deg)' : 'rotate(180deg)'
     });
     toggleTab.appendChild(arrow);
 
@@ -402,10 +402,10 @@
 
       if (collapsed) {
         wrapper.style.transform = 'translateX(calc(100% - 32px))';
-        arrow.style.transform = 'rotate(180deg)';
+        arrow.style.transform = 'rotate(0deg)';
       } else {
         wrapper.style.transform = 'translateX(0)';
-        arrow.style.transform = 'rotate(0deg)';
+        arrow.style.transform = 'rotate(180deg)';
       }
     }
 
