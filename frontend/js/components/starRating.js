@@ -68,21 +68,21 @@ export class StarRating {
     this.container.addEventListener('click', (e) => {
       const star = e.target.closest('.star');
       if (!star) return;
-      const rating = parseInt(star.getAttribute('data-rating'));
+      const rating = parseInt(star.getAttribute('data-rating', 10));
       if (rating) this.setRating(rating);
     });
 
     this.container.addEventListener('mouseenter', (e) => {
       const star = e.target.closest('.star');
       if (!star) return;
-      const rating = parseInt(star.getAttribute('data-rating'));
+      const rating = parseInt(star.getAttribute('data-rating', 10));
       if (rating) this.highlightStars(rating);
     }, true);
 
     this.container.addEventListener('mouseover', (e) => {
       const star = e.target.closest('.star');
       if (!star) return;
-      const rating = parseInt(star.getAttribute('data-rating'));
+      const rating = parseInt(star.getAttribute('data-rating', 10));
       if (rating) this.highlightStars(rating);
     });
 
@@ -91,7 +91,7 @@ export class StarRating {
       if (!star) return;
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        const rating = parseInt(star.getAttribute('data-rating'));
+        const rating = parseInt(star.getAttribute('data-rating', 10));
         if (rating) this.setRating(rating);
       }
     });
