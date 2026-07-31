@@ -494,8 +494,8 @@ async function updateDistance() {
         const zone2 = toVal[0];
 
         // Use PIN values for deterministic sub-variance
-        const pin1 = parseInt(fromVal);
-        const pin2 = parseInt(toVal);
+        const pin1 = parseInt(fromVal, 10);
+        const pin2 = parseInt(toVal, 10);
         const subVariance = Math.abs(pin1 - pin2) % 100;
 
         let distance;
@@ -506,7 +506,7 @@ async function updateDistance() {
             distance = 100 + (Math.abs(pin1 - pin2) % 400);
         } else {
             // Interzone (Different regions)
-            const zoneDiff = Math.abs(parseInt(zone1) - parseInt(zone2));
+            const zoneDiff = Math.abs(parseInt(zone1, 10) - parseInt(zone2, 10));
             distance = 400 + (zoneDiff * 350) + subVariance;
         }
 
