@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return response.text();
       })
       .then(html => {
-        regionContainer.innerHTML = html;
+        regionContainer.textContent = html;
 
         // Fix all paths (links and images)
         fixSectionPaths(regionContainer, isInPagesFolder);
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch(error => {
         console.error('Error loading region section:', error);
-        regionContainer.innerHTML = '<p style="text-align: center; padding: 40px;">Unable to load city listings. Please refresh the page.</p>';
+        regionContainer.textContent = '<p style="text-align: center; padding: 40px;">Unable to load city listings. Please refresh the page.</p>';
       });
   }
 
