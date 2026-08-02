@@ -36,7 +36,7 @@
     const savedRating = localStorage.getItem(STORAGE_KEY);
     
     if (savedRating) {
-      const rating = parseInt(savedRating);
+      const rating = parseInt(savedRating, 10);
       updateStars(stars, rating);
       showFeedback(feedbackElement, rating);
       showMessage(messageElement, `You previously rated us ${rating} star${rating > 1 ? 's' : ''}!`, 'info');
@@ -68,8 +68,8 @@
     ratingContainer.addEventListener('mouseleave', () => {
       const savedRating = localStorage.getItem(STORAGE_KEY);
       if (savedRating) {
-        updateStars(stars, parseInt(savedRating));
-        showFeedback(feedbackElement, parseInt(savedRating));
+        updateStars(stars, parseInt(savedRating, 10));
+        showFeedback(feedbackElement, parseInt(savedRating, 10));
       } else {
         updateStars(stars, 0);
         feedbackElement.textContent = '';
@@ -134,7 +134,7 @@
     const timestamp = localStorage.getItem(STORAGE_KEY + '_timestamp');
     
     return {
-      rating: rating ? parseInt(rating) : null,
+      rating: rating ? parseInt(rating, 10) : null,
       timestamp: timestamp || null
     };
   }
