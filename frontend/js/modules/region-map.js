@@ -334,7 +334,7 @@ function initLegendInteractions() {
         // Zoom to region
         const regionCities = mapCities.filter(c => c.region === region);
         if (regionCities.length > 0) {
-          const bounds = L.latLngBounds(regionCities.map(c => [c.lat, c.lng]));
+          const bounds = L.latLngBounds((regionCities ?? []).map(c => [c.lat, c.lng]));
           map.fitBounds(bounds, { padding: [50, 50] });
         }
       }

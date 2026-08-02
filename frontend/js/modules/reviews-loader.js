@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ];
 
   // 2. INJECT THE HTML (With Google Review Link updated)
-  container.innerHTML = `
+  container.textContent = `
     <section id="reviews" class="customer-reviews-section">
       <div class="container">
         <div class="featured-reviews-header fade-in">
