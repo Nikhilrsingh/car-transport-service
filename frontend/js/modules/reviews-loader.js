@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ${t.comments && t.comments.length > 0 ? `
             <div class="mc-comments-wrapper">
               <div class="mc-comments-list">
-                ${t.comments.map(c => `<div class="mc-comment-item"><strong>${c.name}:</strong> ${c.text}</div>`).join("")}
+                ${t.(comments ?? []).map(c => `<div class="mc-comment-item"><strong>${c.name}:</strong> ${c.text}</div>`).join("")}
               </div>
             </div>` : ''}
         </div>

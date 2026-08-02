@@ -80,7 +80,7 @@ function initRegionMap() {
 
   try {
     // Initialize Leaflet map centered on India
-    map = L.map('leafletMap', {
+    map = (L ?? []).map('leafletMap', {
       center: [22.5, 78.9],
       zoom: 5,
       minZoom: 4,
