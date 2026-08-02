@@ -99,7 +99,7 @@ function loadBookings() {
           <td>${booking.date}</td>
           <td>
             <span class="status-badge status-${booking.status}">
-              ${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+              ${booking.status[0].toUpperCase() + booking.status.slice(1)}
             </span>
           </td>
           <td><strong>${booking.price}</strong></td>

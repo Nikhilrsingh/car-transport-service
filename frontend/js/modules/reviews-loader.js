@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
 
   // 3. THE LOGIC
-  let userReviews = JSON.parse(localStorage.getItem("testimonials")) || [];
+  let userReviews = (() => { try { return JSON.parse(localStorage.getItem("testimonials")) } catch { return null } })() || [];
   let allTestimonials = [...defaultTestimonials, ...userReviews];
   let testimonials = [...allTestimonials];
   let swiper;
