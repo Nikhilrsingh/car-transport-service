@@ -196,7 +196,7 @@ function addCityMarkers() {
     const popupContent = `
       <div class="city-popup">
         <h4>${city.name}</h4>
-        <span class="region-badge ${city.region}">${city.region.charAt(0).toUpperCase() + city.region.slice(1)} India</span>
+        <span class="region-badge ${city.region}">${city.region[0].toUpperCase() + city.region.slice(1)} India</span>
         <p style="margin: 8px 0; font-size: 0.85rem; color: #666;">
           <i class="fas fa-truck-moving"></i> ${city.transports} transports<br>
           <strong>From ${city.price}</strong>
