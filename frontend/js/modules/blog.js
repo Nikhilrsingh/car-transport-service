@@ -57,7 +57,7 @@ import BLOG_POSTS from '../data/blog-data.js';
   function renderPills() {
     if (!pillsContainer) return;
 
-    const categories = ['all', ...new Set(BLOG_POSTS.map(post => post.category))];
+    const categories = ['all', ...new Set((BLOG_POSTS ?? []).map(post => post.category))];
 
     pillsContainer.innerHTML = categories.map(cat => {
       // Calculate count
