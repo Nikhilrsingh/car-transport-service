@@ -513,7 +513,7 @@ window.ChatbotBrain = ChatbotBrain;
         div.className = 'message user-message slide-in-right';
         const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        div.innerHTML = `
+        div.textContent = `
             <div class="message-content"><p>${escapeHTML(message)}</p></div>
             <span class="message-time">${time}</span>
         `;
