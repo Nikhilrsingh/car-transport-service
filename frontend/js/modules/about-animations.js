@@ -118,12 +118,12 @@ class AboutPageAnimations {
 
     statItems.forEach(item => {
       const targetElement = item.querySelector('.stat-number');
-      const target = parseInt(targetElement.getAttribute('data-target'));
+      const target = parseInt(targetElement.getAttribute('data-target', 10));
       const suffix = targetElement.getAttribute('data-suffix') || '';
       const prefix = targetElement.getAttribute('data-prefix') || '';
 
       // Calculate circle progress
-      const maxValue = parseInt(targetElement.getAttribute('data-max')) || 100;
+      const maxValue = parseInt(targetElement.getAttribute('data-max', 10)) || 100;
       const percentage = (target / maxValue) * 100;
       const circumference = 565.48;
       const offset = circumference - (percentage / 100) * circumference;
@@ -137,7 +137,7 @@ class AboutPageAnimations {
    */
   animateStatCircle(item) {
     const targetElement = item.querySelector('.stat-number');
-    const target = parseInt(targetElement.getAttribute('data-target'));
+    const target = parseInt(targetElement.getAttribute('data-target', 10));
     const suffix = targetElement.getAttribute('data-suffix') || '';
     const prefix = targetElement.getAttribute('data-prefix') || '';
     const duration = 2000; // 2 seconds
@@ -228,7 +228,7 @@ class AboutPageAnimations {
       const counter = bar.querySelector('.percentage-value');
       if (counter) {
         let current = 0;
-        const target = parseInt(percentage);
+        const target = parseInt(percentage, 10);
         const duration = 2000;
         const steps = 50;
         const stepValue = target / steps;
