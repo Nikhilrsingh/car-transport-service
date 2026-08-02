@@ -353,7 +353,7 @@ Please enter a supported destination city.`;
     }
 
     function capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
+        return str[0].toUpperCase() + str.slice(1);
     }
 
     // Public API
