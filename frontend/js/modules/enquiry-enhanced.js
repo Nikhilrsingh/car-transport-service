@@ -66,7 +66,7 @@
                 const response = await fetch(`https://date.nager.at/api/v3/PublicHolidays/IN/${y}`);
                 if (response.ok) {
                     const holidays = await response.json();
-                    return holidays.map(h => h.date.substring(5)); // Extract MM-DD
+                    return (holidays ?? []).map(h => h.date.substring(5)); // Extract MM-DD
                 }
             } catch (e) {
                 console.warn(`Failed to fetch holidays for ${y}:`, e);
