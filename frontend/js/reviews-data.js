@@ -90,13 +90,13 @@
 
       function renderTestimonials() {
         const wrapper = document.getElementById("swiperWrapper");
-        wrapper.innerHTML = "";
+        wrapper.textContent = "";
         
         testimonials.forEach((t, i) => {
           const slide = document.createElement('div');
           slide.className = 'swiper-slide';
           
-          slide.innerHTML = `
+          slide.textContent = `
             <div class="modern-card" data-index="${i}">
               <div class="mc-header">
                 <img src="${t.pic}" alt="${t.name}" class="mc-avatar">
@@ -183,7 +183,7 @@
 
         let avg = total > 0 ? (allTestimonials.reduce((acc, t) => acc + t.stars, 0) / total).toFixed(1) : 0;
 
-        statsContainer.innerHTML = `
+        statsContainer.textContent = `
           <div class="review-stats-box">
             <h2>${avg}</h2>
             <p>Based on ${total} reviews</p>
