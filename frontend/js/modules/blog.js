@@ -256,7 +256,7 @@ import BLOG_POSTS from '../data/blog-data.js';
   }
 
   function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return str[0].toUpperCase() + str.slice(1);
   }
 
   // Run
