@@ -444,7 +444,7 @@ function nextStep() {
   const currentStep = document.querySelector(".form-step.active");
   if (!currentStep) return;
 
-  const stepNumber = parseInt(currentStep.dataset.step);
+  const stepNumber = parseInt(currentStep.dataset.step, 10);
   if (!validateStep(stepNumber)) return;
 
   currentStep.classList.remove("active");
@@ -464,7 +464,7 @@ function prevStep() {
   const currentStep = document.querySelector(".form-step.active");
   if (!currentStep) return;
 
-  const stepNumber = parseInt(currentStep.dataset.step);
+  const stepNumber = parseInt(currentStep.dataset.step, 10);
 
   currentStep.classList.remove("active");
 
@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let stepToActivate = 1;
   const savedStep = localStorage.getItem(STEP_STORAGE_KEY);
-  if (savedStep) stepToActivate = parseInt(savedStep);
+  if (savedStep) stepToActivate = parseInt(savedStep, 10);
 
   document.querySelectorAll(".form-step").forEach(step =>
     step.classList.remove("active")
@@ -581,7 +581,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!counters.length) return;
 
   const animateCounter = (el) => {
-    const target = parseInt(el.getAttribute("data-target"), 10) || 0;
+    const target = parseInt(el.getAttribute("data-target", 10), 10) || 0;
     const duration = 3000;
     const startTime = performance.now();
 
