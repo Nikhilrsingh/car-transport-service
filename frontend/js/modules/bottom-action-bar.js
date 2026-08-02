@@ -62,7 +62,7 @@
       const dateStr = `${day} ${date} ${month}`;
 
       // Update clock HTML
-      clockElement.innerHTML = `
+      clockElement.textContent = `
         <span class="clock-time">${time}</span>
         <span class="clock-date">${dateStr}</span>
       `;
