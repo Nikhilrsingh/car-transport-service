@@ -407,7 +407,7 @@
     // Bind delete buttons
     els.annotationList.querySelectorAll('.btn-delete-annotation').forEach(btn => {
       btn.addEventListener('click', () => {
-        const index = parseInt(btn.dataset.index);
+        const index = parseInt(btn.dataset.index, 10);
         deleteAnnotation(index);
       });
     });
