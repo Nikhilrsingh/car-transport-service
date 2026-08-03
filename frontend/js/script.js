@@ -444,7 +444,7 @@ function nextStep() {
   const currentStep = document.querySelector(".form-step.active");
   if (!currentStep) return;
 
-  const stepNumber = parseInt(currentStep.dataset.step);
+  const stepNumber = parseInt(currentStep.dataset.step, 10);
   if (!validateStep(stepNumber)) return;
 
   currentStep.classList.remove("active");

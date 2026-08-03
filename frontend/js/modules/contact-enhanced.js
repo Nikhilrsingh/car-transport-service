@@ -724,7 +724,7 @@
   function parseTime(timeStr) {
     if (!timeStr) return 0;
     const parts = timeStr.split(':');
-    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+    return parseInt(parts[0], 10) * 60 + parseInt(parts[1]);
   }
 
   function checkDayMatch(dayRange, currentDay) {
