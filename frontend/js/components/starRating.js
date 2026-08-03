@@ -68,7 +68,7 @@ export class StarRating {
     this.container.addEventListener('click', (e) => {
       const star = e.target.closest('.star');
       if (!star) return;
-      const rating = parseInt(star.getAttribute('data-rating'));
+      const rating = parseInt(star.getAttribute('data-rating', 10));
       if (rating) this.setRating(rating);
     });
 
