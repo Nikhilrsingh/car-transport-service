@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function formatDisplayDate(dateStr) {
     const d = new Date(dateStr);
-    if (isNaN(d)) return dateStr.split(' ')[0]; 
+    if (Number.isNaN(d)) return dateStr.split(' ')[0]; 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
   }
