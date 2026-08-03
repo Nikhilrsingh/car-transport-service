@@ -273,7 +273,7 @@ function initEmergencyAnimations() {
     // Highlight critical hotline card
     const urgentCard = document.querySelector('.hotline-card.urgent');
     if (urgentCard) {
-        setInterval(() => {
+        clearInterval(window.__interval); window.__interval = setInterval(() => {
             urgentCard.style.borderColor = urgentCard.style.borderColor === 'rgb(220, 53, 69)' ? '#ff6b35' : '#dc3545';
         }, 1000);
     }
