@@ -69,7 +69,7 @@ function initRegionMap() {
   // Check if Leaflet is loaded
   if (typeof L === 'undefined') {
     console.error('Leaflet library not loaded');
-    mapContainer.innerHTML = '<p style="text-align: center; padding: 100px 20px; color: #666;">Map loading failed. Please refresh the page.</p>';
+    mapContainer.textContent = '<p style="text-align: center; padding: 100px 20px; color: #666;">Map loading failed. Please refresh the page.</p>';
     return;
   }
 
