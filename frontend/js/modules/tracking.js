@@ -109,7 +109,7 @@ function simulateStatusUpdate(trackingId) {
     if (!data || data.status === 'Delivered') return;
     
     // Simulate random distance decrease
-    const currentDistance = parseInt(data.distance);
+    const currentDistance = parseInt(data.distance, 10);
     if (currentDistance > 0) {
         const newDistance = Math.max(0, currentDistance - Math.floor(Math.random() * 20 + 10));
         data.distance = newDistance + ' km';
