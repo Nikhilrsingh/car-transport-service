@@ -122,7 +122,7 @@ function initCityCounter() {
   });
 
   // Update periodically (for dynamic changes and pagination)
-  setInterval(updateCounter, 1000);
+  clearInterval(window.__interval); window.__interval = setInterval(updateCounter, 1000);
 }
 
 // Mobile Bottom Sheet Filter Panel
