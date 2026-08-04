@@ -1958,7 +1958,7 @@ function calculateRoute() {
         const route = e.routes[0];
         const distance = (route.summary.totalDistance / 1000).toFixed(2);
         const time = (route.summary.totalTime / 3600).toFixed(1);
-        const cost = Math.round(distance * 15); // ₹15 per km estimate
+        const cost = Math.round(distance * 15 + Number.EPSILON); // ₹15 per km estimate
 
         estimatedDistance = parseFloat(distance);
         estimatedDuration = parseFloat(time);
