@@ -139,7 +139,7 @@ function startCountdown(etaDate, elementId) {
     if (!countdownElement) return;
     
     function updateCountdown() {
-        const now = new Date().getTime();
+        const now = Date.now();
         const eta = new Date(etaDate).getTime();
         const distance = eta - now;
         
