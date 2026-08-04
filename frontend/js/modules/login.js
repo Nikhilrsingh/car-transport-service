@@ -186,7 +186,7 @@ function handleLogin(event) {
     setTimeout(() => {
         // Mock successful login
         const mockUser = {
-            email: email,
+            email,
             name: 'User',
             loginTime: new Date().toISOString()
         };
