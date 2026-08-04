@@ -70,7 +70,7 @@
 
     // Update immediately and then every second
     updateClock();
-    setInterval(updateClock, 1000);
+    clearInterval(window.__interval); window.__interval = setInterval(updateClock, 1000);
     console.log('Bottom Action Bar: Clock initialized');
   }
 
