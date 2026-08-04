@@ -36,7 +36,7 @@
     const savedRating = localStorage.getItem(STORAGE_KEY);
     
     if (savedRating) {
-      const rating = parseInt(savedRating);
+      const rating = parseInt(savedRating, 10);
       updateStars(stars, rating);
       showFeedback(feedbackElement, rating);
       showMessage(messageElement, `You previously rated us ${rating} star${rating > 1 ? 's' : ''}!`, 'info');
