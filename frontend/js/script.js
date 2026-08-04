@@ -643,7 +643,7 @@ if ('serviceWorker' in navigator) {
   });
 
   // Check if already installed
-  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone ) {
     console.log('App is already installed/running in standalone mode');
   }
 
