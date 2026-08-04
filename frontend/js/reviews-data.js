@@ -64,7 +64,7 @@
       ];
 
 
-      let userReviews = JSON.parse(localStorage.getItem("testimonials")) || [];
+      let userReviews = (JSON.parse(localStorage.getItem("testimonials") ?? "null") ?? null) || [];
       let allTestimonials = [...defaultTestimonials, ...userReviews];
       let testimonials = [...allTestimonials];
       let swiper;
