@@ -118,7 +118,7 @@ class AboutPageAnimations {
 
     statItems.forEach(item => {
       const targetElement = item.querySelector('.stat-number');
-      const target = parseInt(targetElement.getAttribute('data-target'));
+      const target = parseInt(targetElement.getAttribute('data-target', 10));
       const suffix = targetElement.getAttribute('data-suffix') || '';
       const prefix = targetElement.getAttribute('data-prefix') || '';
 
