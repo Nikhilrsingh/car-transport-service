@@ -221,7 +221,7 @@ export async function deleteReview(reviewId) {
  * Get own reviews (submitted from this browser)
  */
 export async function getMyReviews() {
-  const reviews = getStoredReviews().filter((r) => r.isOwn === true);
+  const reviews = getStoredReviews().filter((r) => r.isOwn );
   return { success: true, data: reviews };
 }
 
