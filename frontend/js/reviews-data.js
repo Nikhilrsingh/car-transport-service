@@ -90,7 +90,7 @@
 
       function renderTestimonials() {
         const wrapper = document.getElementById("swiperWrapper");
-        wrapper.innerHTML = "";
+        wrapper.textContent = "";
         
         testimonials.forEach((t, i) => {
           const slide = document.createElement('div');
