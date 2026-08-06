@@ -494,7 +494,7 @@ async function updateDistance() {
         const zone2 = toVal[0];
 
         // Use PIN values for deterministic sub-variance
-        const pin1 = parseInt(fromVal);
+        const pin1 = parseInt(fromVal, 10);
         const pin2 = parseInt(toVal);
         const subVariance = Math.abs(pin1 - pin2) % 100;
 
