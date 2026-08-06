@@ -38,7 +38,7 @@
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               statNumbers.forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-target'));
+                const target = parseInt(stat.getAttribute('data-target', 10));
                 animateValue(stat, 0, target, 2000);
               });
               statsObserver.unobserve(entry.target);
