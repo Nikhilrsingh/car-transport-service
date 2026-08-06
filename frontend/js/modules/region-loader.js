@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return response.text();
       })
       .then(html => {
-        regionContainer.innerHTML = html;
+        regionContainer.textContent = html;
 
         // Fix all paths (links and images)
         fixSectionPaths(regionContainer, isInPagesFolder);
