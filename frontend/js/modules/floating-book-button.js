@@ -28,7 +28,7 @@ const FloatingBookButton = (() => {
         const button = document.createElement('button');
         button.id = BUTTON_ID;
         button.className = BUTTON_CLASS;
-        button.innerHTML = '<i class="fas fa-calendar-check"></i>';
+        button.textContent = '<i class="fas fa-calendar-check"></i>';
         button.setAttribute('aria-label', 'Book Now');
         button.setAttribute('title', 'Click to book a vehicle');
 
