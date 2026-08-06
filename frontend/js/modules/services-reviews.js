@@ -177,7 +177,7 @@ function renderPagination(pagination) {
   // Attach pagination click events
   paginationContainer.querySelectorAll('.review-pagination-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const page = parseInt(btn.getAttribute('data-page'));
+      const page = parseInt(btn.getAttribute('data-page', 10));
       if (page && !btn.disabled) {
         currentPage = page;
         loadReviews();
