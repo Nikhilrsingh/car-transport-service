@@ -429,3 +429,5 @@ console.log('%cThis script has been loaded ' + window.contributeScriptLoadCount 
     }
 
 })();
+
+.catch(err => console.error("Promise.all failed:", err));
