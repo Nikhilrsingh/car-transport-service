@@ -181,7 +181,7 @@ import BLOG_POSTS from '../data/blog-data.js';
     e.preventDefault();
 
     const btn = e.currentTarget;
-    const id = parseInt(btn.dataset.id);
+    const id = parseInt(btn.dataset.id, 10);
     const icon = btn.querySelector('i');
 
     if (bookmarkedPosts.includes(id)) {
