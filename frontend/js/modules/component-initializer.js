@@ -162,7 +162,7 @@
     button.id = 'smartScrollBtn';
     button.setAttribute('aria-label', 'Scroll');
     button.setAttribute('data-tooltip', 'Back to Top');
-    button.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    button.textContent = '<i class="fas fa-arrow-up"></i>';
     document.body.appendChild(button);
     console.log('Component Initializer: Scroll Button added');
   }
