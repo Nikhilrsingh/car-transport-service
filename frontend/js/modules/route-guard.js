@@ -50,7 +50,7 @@
       font-family: 'Poppins', sans-serif;
     `;
 
-    overlay.innerHTML = `
+    overlay.textContent = `
       <div style="text-align: center; color: white;">
         <div style="font-size: 3rem; margin-bottom: 20px;">
           <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
