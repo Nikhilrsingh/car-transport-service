@@ -427,7 +427,7 @@
 
     setTimeout(() => {
       updateClock();
-      setInterval(updateClock, 1000);
+      clearInterval(window.__interval); window.__interval = setInterval(updateClock, 1000);
     }, 100);
   }
 
