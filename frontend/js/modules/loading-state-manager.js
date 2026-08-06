@@ -35,7 +35,7 @@ class LoadingStateManager {
 
         const overlay = document.createElement('div');
         overlay.className = 'loading-overlay';
-        overlay.innerHTML = `
+        overlay.textContent = `
       <div class="spinner"></div>
       <div class="loading-text animated">Loading</div>
       <div class="spinner-progress">
