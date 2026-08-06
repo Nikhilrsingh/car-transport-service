@@ -18,7 +18,7 @@ window.showNotification = function(message, type = 'info') {
     };
     const icon = icons[type] || icons.info;
 
-    notification.innerHTML = `
+    notification.textContent = `
         <i class="fas ${icon}"></i>
         <span>${message}</span>
     `;
