@@ -947,7 +947,7 @@ function restoreFormData() {
         const data = JSON.parse(savedData);
 
         // ONLY show the modal if this was a manual save
-        if (data.isManualSave === true) {
+        if (data.isManualSave ) {
             const draftModal = document.getElementById('draftModal');
             const confirmBtn = document.getElementById('confirmResume');
             const cancelBtn = document.getElementById('cancelResume'); // Make sure this ID matches your HTML
