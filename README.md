@@ -217,13 +217,13 @@ Thanks to all wonderful contributors ❤️
 ✅ Service Information Pages  
 
 🚧 Coming Soon:
-- ✅ Mobile Responsive Design
-- ✅ Contact & Booking Form
-- ✅ Google Maps Pickup & Drop Integration
-- ✅ Smooth Scroll & Basic Animations
-- ✅ Customer Testimonials Section
-- ✅ Footer Redesign
-- ✅ Theme Optimization & Accessibility
+- ⬜ Mobile Responsive Design
+- ⬜ Contact & Booking Form
+- ⬜ Google Maps Pickup & Drop Integration
+- ⬜ Smooth Scroll & Basic Animations
+- ⬜ Customer Testimonials Section
+- ⬜ Footer Redesign
+- ⬜ Theme Optimization & Accessibility
 
 ✨ Open for Suggestions!
 
